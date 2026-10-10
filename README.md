@@ -12,11 +12,12 @@ Career, toolkit, an interactive map of where I have worked, my GitHub projects a
 | `src/index.template.html` | Page layout and fixed text |
 | `src/build.py` | Career stages and project list, map rendering |
 | `src/cities.json` | Cities on the map and what I did there |
-| `src/config.json` | Photos and the Formspree form ID |
+| `src/config.json` | Photos, the Formspree form ID and the Google Analytics measurement ID |
+| `privacidad.html` | Privacy and cookie policy (ES/EN) |
 | `src/make_map.py` | Writes `src/map.json` (not committed, it is already inside `index.html`): Natural Earth 1:110m countries in Equal Earth projection |
 | `assets/` | CSS, JavaScript, favicon, font (Inter Tight, SIL Open Font License) |
 
-There are no external requests on page load: the font is self-hosted and there is no analytics or cookies. The contact form posts to [Formspree](https://formspree.io), only when someone sends a message.
+The font is self-hosted. Google Analytics 4 is loaded only after the visitor accepts it in the cookie banner (`assets/consent.js`, Consent Mode with everything denied by default); rejecting or withdrawing consent loads nothing and deletes the `_ga` cookies. The contact form posts to [Formspree](https://formspree.io), only when someone sends a message. Details in the [privacy and cookie policy](https://inigogonzalezgarcia.github.io/privacidad.html).
 
 ## Customisation and contact
 
