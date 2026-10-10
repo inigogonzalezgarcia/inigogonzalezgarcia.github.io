@@ -1,7 +1,28 @@
 {
   "formspree_id": "xwlvognp",
-  "hero_photos": [],
-  "about_photo": null,
+  "hero_photos": [
+    {
+      "src": "assets/img/hero-hudson.jpg",
+      "alt": "Río Hudson y el skyline de Manhattan",
+      "pos": "50% 50%",
+      "caption_es": "Río Hudson, Nueva York",
+      "caption_en": "Hudson River, New York"
+    },
+    {
+      "src": "assets/img/hero-wtc.jpg",
+      "alt": "Lower Manhattan al atardecer",
+      "pos": "50% 40%",
+      "caption_es": "Lower Manhattan, Nueva York",
+      "caption_en": "Lower Manhattan, New York"
+    }
+  ],
+  "about_photo": {
+    "src": "assets/img/about.jpg",
+    "alt": "Iñigo González",
+    "pos": "50% 40%",
+    "caption_es": "Nueva York",
+    "caption_en": "New York"
+  },
   "stage_photos": {},
   "ga4_id": "G-D7XS5T8L5L"
 }
