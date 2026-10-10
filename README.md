@@ -13,10 +13,10 @@ Career, toolkit, an interactive map of where I have worked, my GitHub projects a
 | `src/build.py` | Career stages and project list, map rendering |
 | `src/cities.json` | Cities on the map and what I did there |
 | `src/config.json` | Photos and the Formspree form ID |
-| `src/map.json`, `src/make_map.py` | World map: Natural Earth 1:110m countries in Equal Earth projection |
-| `assets/` | CSS, JavaScript, favicon, fonts (Inter Tight and JetBrains Mono, SIL Open Font License) |
+| `src/make_map.py` | Writes `src/map.json` (not committed, it is already inside `index.html`): Natural Earth 1:110m countries in Equal Earth projection |
+| `assets/` | CSS, JavaScript, favicon, font (Inter Tight, SIL Open Font License) |
 
-There are no external requests on page load: fonts are self-hosted and there is no analytics or cookies. The contact form posts to [Formspree](https://formspree.io), only when someone sends a message.
+There are no external requests on page load: the font is self-hosted and there is no analytics or cookies. The contact form posts to [Formspree](https://formspree.io), only when someone sends a message.
 
 ## Customisation and contact
 
