@@ -44,7 +44,7 @@
   var media = $("#heroMedia"), hero = $(".hero");
   slides.forEach(function (s, i) {
     var img = new Image();
-    img.src = s.src; img.alt = s.alt || ""; if (i === 0) img.className = "on"; else img.loading = "lazy";
+    img.src = s.src; img.alt = s.alt || ""; if (i === 0) img.className = "on";
     if (s.pos) img.style.objectPosition = s.pos;
     media.appendChild(img);
   });
@@ -76,6 +76,8 @@
     if (S.about.pos) im.style.objectPosition = S.about.pos;
     ap.insertBefore(im, ap.firstChild);
     var ini = $(".initials", ap); if (ini) ini.remove();
+    var cap = $(".cap", ap);
+    if (cap && S.about.caption_es) cap.innerHTML = '<span class="es"></span><span class="en"></span>', cap.firstChild.textContent = S.about.caption_es, cap.lastChild.textContent = S.about.caption_en || S.about.caption_es;
   }
 
   /* ---------- reveal + counters ---------- */
