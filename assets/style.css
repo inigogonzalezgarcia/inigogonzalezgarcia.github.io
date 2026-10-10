@@ -1,5 +1,4 @@
-@font-face{font-family:"Inter Tight";src:url("fonts/InterTight.woff") format("woff");font-weight:100 900;font-display:swap}
-@font-face{font-family:"JetBrains Mono";src:url("fonts/JetBrainsMono.woff") format("woff");font-weight:100 800;font-display:swap}
+@font-face{font-family:"Inter Tight";src:url("InterTight.woff") format("woff");font-weight:400 800;font-display:swap}
 
 :root{
   --ink:#0e1a24;
@@ -13,7 +12,7 @@
   --on-ink:#f2eee6;
   --on-ink-muted:#a9b3bb;
   --sans:"Inter Tight",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --pad:clamp(16px,4vw,56px);
   --max:1280px;
 }
