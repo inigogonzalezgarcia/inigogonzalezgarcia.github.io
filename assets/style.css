@@ -232,3 +232,40 @@ footer a{color:var(--on-ink)}
 .pin.major text,.pin.sel text,#map.zoomed .pin text{opacity:1}
 #map .pin:hover text,#map .pin:focus text{opacity:1}
 @media (max-width:639px){.map-box svg{aspect-ratio:4/3}.map-ctl{top:auto;bottom:10px;right:10px;flex-direction:row}.map-ctl button{width:38px;height:38px}.map-hint{display:none}}
+
+/* Cookie banner */
+.cc{position:fixed;z-index:80;left:16px;right:16px;bottom:16px;max-width:560px;background:var(--paper);color:var(--ink);border:1px solid var(--line);box-shadow:0 18px 50px rgba(14,26,36,.28);padding:22px 22px 20px}
+.cc[hidden]{display:none}
+.cc-k{color:var(--muted);margin:0 0 8px}
+.cc-t{font-size:24px;letter-spacing:-.01em;margin:0 0 8px}
+.cc-x{margin:0 0 10px;font-size:15px}
+.cc-p{font-size:14px}
+.cc-b{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.cc-btn{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;background:transparent;border:1px solid var(--ink);color:var(--ink);padding:13px 10px;cursor:pointer}
+.cc-btn:hover{background:var(--paper-2)}
+.cc-btn.full{grid-column:1/-1;background:var(--ink);color:var(--on-ink)}
+.cc-btn.full:hover{background:var(--ink-2)}
+.cc-b .cc-btn:only-child{grid-column:1/-1;background:var(--ink);color:var(--on-ink)}
+.cc-s{margin-top:14px;border-top:1px solid var(--line)}
+.cc-row{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.cc-row p{margin:2px 0 0;font-size:13px;color:var(--muted)}
+.cc-on{color:var(--muted);white-space:nowrap}
+.cc-sw{position:relative;width:46px;height:26px;flex:none}
+.cc-sw input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+.cc-sw span{position:absolute;inset:0;background:var(--line);border-radius:13px;transition:background .2s;pointer-events:none}
+.cc-sw span::after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .2s}
+.cc-sw input:checked+span{background:var(--accent)}
+.cc-sw input:checked+span::after{transform:translateX(20px)}
+.cc-sw input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+.linkbtn{background:none;border:0;padding:0;font:inherit;color:var(--on-ink);text-decoration:underline;cursor:pointer}
+
+/* Policy page */
+.policy{padding:120px 0 80px}
+.policy .wrap{max-width:860px}
+.policy h1{font-size:clamp(36px,6vw,64px);line-height:1;letter-spacing:-.03em;text-transform:uppercase;margin:12px 0 24px}
+.policy h2{font-size:22px;margin:40px 0 10px}
+.policy table{width:100%;border-collapse:collapse;font-size:15px;margin:10px 0}
+.policy th,.policy td{text-align:left;border-bottom:1px solid var(--line);padding:10px 8px 10px 0;vertical-align:top}
+.policy th{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:400}
+.policy .tbl{overflow-x:auto}
+@media (max-width:420px){.brand-name small{display:none}.head-actions{gap:12px}}
