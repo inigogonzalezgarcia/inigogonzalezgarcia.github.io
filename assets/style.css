@@ -62,7 +62,7 @@ html[lang=es] .en, html[lang=en] .es{display:none!important}
 /* Hero */
 .hero{position:relative;min-height:100svh;background:var(--ink);color:var(--on-ink);overflow:hidden;display:flex;align-items:flex-end}
 .hero-media{position:absolute;inset:0}
-.hero-media img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s}
+.hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s}
 .hero-media img.on{opacity:1}
 .hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,26,36,.55) 0%,rgba(14,26,36,.05) 35%,rgba(14,26,36,.75) 75%,rgba(14,26,36,.95) 100%)}
 .hero-grid{position:absolute;inset:0;opacity:.18;background-image:linear-gradient(var(--on-ink-muted) 1px,transparent 1px),linear-gradient(90deg,var(--on-ink-muted) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 70% 30%,#000 0%,transparent 70%)}
@@ -74,7 +74,7 @@ html[lang=es] .en, html[lang=en] .es{display:none!important}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:22px 30px;align-items:center}
 .btn{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#fff;text-decoration:none;font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;padding:15px 22px;border:0;cursor:pointer}
 .btn:hover{background:var(--accent-ink)}
-.slider-ctl{position:absolute;right:var(--pad);top:96px;display:none;align-items:center;gap:14px;font-family:var(--mono);font-size:13px;letter-spacing:.1em}
+.slider-ctl{position:absolute;z-index:3;right:var(--pad);top:96px;display:none;align-items:center;gap:14px;font-family:var(--mono);font-size:13px;letter-spacing:.1em}
 .hero.has-photos.multi .slider-ctl{display:flex}
 .round{width:48px;height:48px;border-radius:50%;border:1px solid rgba(242,238,230,.6);background:rgba(14,26,36,.25);color:var(--on-ink);cursor:pointer;font-size:18px}
 .round:hover{background:rgba(14,26,36,.6)}
@@ -269,3 +269,4 @@ footer a{color:var(--on-ink)}
 .policy th{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:400}
 .policy .tbl{overflow-x:auto}
 @media (max-width:420px){.brand-name small{display:none}.head-actions{gap:12px}}
+@media (max-width:639px){.slider-ctl{top:80px;gap:10px}.slider-ctl .round{width:40px;height:40px;font-size:16px}.hero.has-photos.multi .hero-inner{padding-top:150px}}
