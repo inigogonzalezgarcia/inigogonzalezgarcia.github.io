@@ -128,7 +128,26 @@ PROJECTS = f'''      <div class="proj-group reveal">
 M = json.loads((ROOT / "map.json").read_text())
 HIT = {"ESP", "GBR", "FRA", "PRT", "USA", "BEL", "ITA", "TUR", "NLD"}
 CITIES = json.loads((ROOT / "cities.json").read_text())
-paths = "".join(f'<path class="land{" hit" if iso in HIT else ""}" d="{d}"/>' for iso, d in M["paths"])
+def rel(d):
+    """Absolute M/L path -> relative path in tenths of a pixel (about half the size)."""
+    out = []
+    for ring in d.split("Z"):
+        if not ring:
+            continue
+        pts = [tuple(round(float(v) * 10) for v in p.split(",")) for p in ring[1:].split("L")]
+        x0, y0 = pts[0]
+        s, px, py = [], x0, y0
+        for x, y in pts[1:]:
+            dx, dy = x - px, y - py
+            if dx or dy:
+                s.append(f"{dx/10:g}{'' if dy < 0 else ','}{dy/10:g}")
+            px, py = x, y
+        if s:
+            out.append(f"M{x0/10:g},{y0/10:g}l" + " ".join(s) + "z")
+    return "".join(out)
+
+
+paths = "".join(f'<path class="land{" hit" if iso in HIT else ""}" d="{rel(d)}"/>' for iso, d in M["paths"])
 mx, my = M["cities"]["madrid"]
 routes, pins = [], []
 for c in CITIES:
