@@ -176,6 +176,6 @@ out = (tpl.replace("{{STAGES}}", "\n".join(stage_html(s) for s in STAGES))
 assert "{{" not in out
 (SITE / "index.html").write_text(out)
 data = {"cities": {c["id"]: c for c in CITIES}, "hero": CONF["hero_photos"], "about": CONF.get("about_photo"),
-        "formspree": bool(CONF.get("formspree_id"))}
+        "formspree": bool(CONF.get("formspree_id")), "ga4": CONF.get("ga4_id", "")}
 (SITE / "assets" / "data.js").write_text("window.SITE=" + json.dumps(data, ensure_ascii=False, separators=(",", ":")) + ";\n")
 print("ok", len(out) // 1024, "KB")
