@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Sharing GPUs between teams with Kueue and KAI Scheduler · Iñigo González" data-title-es="Repartir GPU entre equipos con Kueue y KAI Scheduler · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sharing GPUs between teams with Kueue and KAI Scheduler · Iñigo González</title>
+<meta name="description" content="One quota agreement in a TOML file, rendered into both schedulers and tested on kind.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/15-multi-tenant-gpu-scheduling.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sharing GPUs between teams with Kueue and KAI Scheduler · Iñigo González">
+<meta property="og:description" content="One quota agreement in a TOML file, rendered into both schedulers and tested on kind.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/15-multi-tenant-gpu-scheduling.html">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+
+</head>
+<body>
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header" id="top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a><a href="../store.html"><span class="es">Store ↗</span><span class="en">Store ↗</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../links.html"><span class="label">05</span><span class="es">Links</span><span class="en">Links</span></a><a href="../store.html"><span class="label">06</span><span class="es">Store ↗</span><span class="en">Store ↗</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="mailto:inigogonzalezgarcia@yahoo.es">Email ↗</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 15</p>
+    <h1><span class="es">Repartir GPU entre equipos con Kueue y KAI Scheduler</span><span class="en">Sharing GPUs between teams with Kueue and KAI Scheduler</span></h1>
+    <p class="lede"><span class="es">Un acuerdo de cuotas en un fichero TOML, traducido a los dos planificadores y probado en kind.</span><span class="en">One quota agreement in a TOML file, rendered into both schedulers and tested on kind.</span></p><p class="label post-meta"><span class="es">Laboratorio GPU</span><span class="en">GPU lab</span> · <span class="es">5 oct 2026</span><span class="en">5 Oct 2026</span> · <span class="es">2 min</span><span class="en">2 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>Por qué este laboratorio</h2>
+<p>Un laboratorio para aprender. Cuando varios equipos comparten un clúster de GPU, lo difícil es el acuerdo: qué tiene garantizado cada uno, quién puede pedir prestado y qué pasa cuando el dueño lo quiere de vuelta.</p>
+<h2>Qué he hecho</h2>
+<ul><li><code>tenancy.toml</code> con tres equipos: training (16 garantizadas, 8 prestables), research (8 + 8) e inference (8 que nunca presta).</li><li><code>python -m tenancy render</code> lo convierte en ClusterQueues de Kueue dentro de una cohort y en Queues de KAI Scheduler. La CI falla si los manifiestos no coinciden con el fichero.</li><li>Un clúster kind con 4 workers × 8 GPU simuladas por el fake-gpu-operator de Run:ai, más KubeVirt.</li></ul>
+<h2>Cómo se prueba</h2>
+<p>Kueue, 22 comprobaciones: préstamo, recuperación, prioridad dentro del equipo y admisión todo o nada. KAI, 19: dos pods compartiendo una GPU a 0,5 cada uno, exceso de cuota, recuperación y gang scheduling. KubeVirt, 5: una VM arranca con emulación QEMU y la ResourceQuota del equipo rechaza una segunda.</p>
+<h2>Qué aprendí</h2>
+<p>Tres rondas de arreglos tras la primera CI, explicadas en docs/decisions.md: el uso de las colas se informa con retraso, el motivo de la preemption está en una condición y las GPU fraccionarias se pasan como texto.</p>
+<h2>Sin probar todavía</h2>
+<p>GPU reales, Kueue y KAI juntos, fair sharing, planificación por topología y KubeVirt con GPU.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>Why this lab</h2>
+<p>A learning lab. When several teams share a GPU cluster, the hard part is the agreement: who is guaranteed what, who can borrow, and what happens when the owner wants it back.</p>
+<h2>What I built</h2>
+<ul><li><code>tenancy.toml</code> with three teams: training (16 guaranteed, 8 can be borrowed), research (8 + 8) and inference (8, never lent).</li><li><code>python -m tenancy render</code> turns it into Kueue ClusterQueues in a cohort and KAI Scheduler Queues. CI fails if the manifests drift from the file.</li><li>A kind cluster with 4 workers × 8 GPUs simulated by Run:ai&#x27;s fake-gpu-operator, plus KubeVirt.</li></ul>
+<h2>How it is tested</h2>
+<p>Kueue, 22 checks: borrowing, reclaim, priority within a team and all-or-nothing admission. KAI, 19 checks: two pods sharing one GPU at 0.5 each, over-quota, reclaim and gang scheduling. KubeVirt, 5 checks: a VM boots with QEMU emulation and the team&#x27;s ResourceQuota rejects a second one.</p>
+<h2>What I learned</h2>
+<p>Three rounds of fixes after the first CI run, written up in docs/decisions.md: queue usage is reported with a delay, the preemption reason is in a condition, and fractional GPUs are passed as text.</p>
+<h2>Not tested yet</h2>
+<p>Real GPUs, Kueue and KAI together, fair sharing, topology-aware scheduling and KubeVirt with GPUs.</p>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
+      <p class="repo-name">15-multi-tenant-gpu-scheduling</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/15-multi-tenant-gpu-scheduling" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="14-slurm-gpu-ops.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Un clúster Slurm real en Docker Compose, con health checks de GPU</span><span class="en">A real Slurm cluster in Docker Compose, with GPU health checks</span></span></a>
+    <a class="post-nav-link next" href="16-gitops-gpu-fleet.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Promocionar versiones del GPU Operator de staging a prod con Flux</span><span class="en">Promoting GPU Operator releases from staging to prod with Flux</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><span class="es">Hecha a mano y publicada con GitHub Pages ·</span><span class="en">Hand-built and published with GitHub Pages ·</span> <a href="https://github.com/inigogonzalezgarcia/inigogonzalezgarcia.github.io"><span class="es">código</span><span class="en">source</span></a></span>
+    <span><a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

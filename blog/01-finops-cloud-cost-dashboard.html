@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Catching cloud cost drift before the invoice does · Iñigo González" data-title-es="Ver la deriva del gasto cloud antes que la factura · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catching cloud cost drift before the invoice does · Iñigo González</title>
+<meta name="description" content="A small Streamlit dashboard for AWS and Azure spend that flags the week that looks wrong.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/01-finops-cloud-cost-dashboard.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Catching cloud cost drift before the invoice does · Iñigo González">
+<meta property="og:description" content="A small Streamlit dashboard for AWS and Azure spend that flags the week that looks wrong.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/01-finops-cloud-cost-dashboard.html">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+
+</head>
+<body>
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header" id="top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a><a href="../store.html"><span class="es">Store ↗</span><span class="en">Store ↗</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../links.html"><span class="label">05</span><span class="es">Links</span><span class="en">Links</span></a><a href="../store.html"><span class="label">06</span><span class="es">Store ↗</span><span class="en">Store ↗</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="mailto:inigogonzalezgarcia@yahoo.es">Email ↗</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 01</p>
+    <h1><span class="es">Ver la deriva del gasto cloud antes que la factura</span><span class="en">Catching cloud cost drift before the invoice does</span></h1>
+    <p class="lede"><span class="es">Un panel pequeño en Streamlit para el gasto de AWS y Azure que señala la semana que no cuadra.</span><span class="en">A small Streamlit dashboard for AWS and Azure spend that flags the week that looks wrong.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span> · <span class="es">3 sept 2026</span><span class="en">3 Sep 2026</span> · <span class="es">2 min</span><span class="en">2 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>El problema</h2>
+<p>El gasto cloud casi nunca se dispara de un día para otro. Se desvía poco a poco: un entorno de pruebas encendido todo el fin de semana, un servicio que se escala y nunca se vuelve a bajar. Cuando llega la factura, el dinero ya se ha gastado.</p>
+<p>Quería una vista que respondiera rápido a tres preguntas: cuánto gastamos y dónde, si esta semana es distinta de la anterior y si hay algo claramente fuera de lugar.</p>
+<h2>Qué he hecho</h2>
+<ul><li>Una vista única del gasto diario en AWS y Azure, con filtros por proveedor, entorno y departamento.</li><li>Un KPI semanal: los últimos 7 días frente a los 7 anteriores.</li><li>Una alerta de anomalía con causa probable y acción sugerida, como el apagado automático de instancias de desarrollo ociosas.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python, pandas, Plotly y Streamlit. <code>data_generator.py</code> crea 90 días de facturación ficticia para 10 servicios, 4 departamentos y 3 entornos, e inyecta un pico en EC2 / Development la última semana para que la detección tenga algo que encontrar.</p>
+<h2>Siguientes pasos</h2>
+<p>La detección se basa en reglas y apunta a ese escenario inyectado. Lo siguiente: una línea base estadística por servicio, importar exportaciones CSV reales de Cost Explorer y Azure Cost Management, y umbrales de presupuesto por departamento.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>The problem</h2>
+<p>Cloud costs rarely explode overnight. They drift: a test environment left running over a weekend, a service scaled up and never scaled down. By the time the monthly invoice arrives, the money is already spent.</p>
+<p>I wanted a view that answers three questions fast: how much are we spending and where, is this week different from last week, and is anything clearly out of line.</p>
+<h2>What I built</h2>
+<ul><li>A consolidated view of daily spend across AWS and Azure, with filters by provider, environment and department.</li><li>A weekly KPI: the last 7 days against the previous 7.</li><li>An anomaly alert with a probable cause and a suggested action, such as auto-shutdown for idle development instances.</li></ul>
+<h2>How it is built</h2>
+<p>Python, pandas, Plotly and Streamlit. <code>data_generator.py</code> creates 90 days of synthetic billing for 10 services, 4 departments and 3 environments, and injects a spike into EC2 / Development in the last week so the detection has something to find.</p>
+<h2>What&#x27;s next</h2>
+<p>The detection is rule-based and aimed at that injected scenario. The next steps are a statistical baseline per service, importing real Cost Explorer and Azure Cost Management CSV exports, and budget thresholds per department.</p>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
+      <p class="repo-name">01-finops-cloud-cost-dashboard</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/01-finops-cloud-cost-dashboard" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <span></span>
+    <a class="post-nav-link next" href="02-intune-compliance-report.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Un informe de cumplimiento de Intune que se puede enseñar a dirección</span><span class="en">An Intune compliance report you can hand to a manager</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><span class="es">Hecha a mano y publicada con GitHub Pages ·</span><span class="en">Hand-built and published with GitHub Pages ·</span> <a href="https://github.com/inigogonzalezgarcia/inigogonzalezgarcia.github.io"><span class="es">código</span><span class="en">source</span></a></span>
+    <span><a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
