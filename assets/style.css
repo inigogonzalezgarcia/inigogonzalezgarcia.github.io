@@ -270,3 +270,55 @@ footer a{color:var(--on-ink)}
 .policy .tbl{overflow-x:auto}
 @media (max-width:420px){.brand-name small{display:none}.head-actions{gap:12px}}
 @media (max-width:639px){.slider-ctl{top:80px;gap:10px}.slider-ctl .round{width:40px;height:40px;font-size:16px}.hero.has-photos.multi .hero-inner{padding-top:150px}}
+
+/* v2: top nav, inner pages, blog, links */
+.top-nav{display:none;gap:26px;font-size:12px}
+.top-nav a{text-decoration:none;opacity:.85;padding:6px 0;border-bottom:1px solid transparent}
+.top-nav a:hover,.top-nav a[aria-current=page]{opacity:1;border-bottom-color:currentColor}
+@media (min-width:1100px){.top-nav{display:flex}.head-actions .menu-btn,.head-actions .sep{display:none}}
+.page-hero{background:var(--ink);color:var(--on-ink);padding:clamp(140px,18vw,210px) 0 clamp(56px,8vw,96px)}
+.page-hero .kicker{color:#e7a571}
+.page-hero .kicker a{color:inherit}
+.page-hero h1{font-size:clamp(40px,7vw,104px);line-height:.95;letter-spacing:-.035em;font-weight:800;margin:0 0 24px;text-transform:uppercase;max-width:16ch}
+.page-hero .lede{color:#d9dee2;margin:0}
+.page-hero.soon{min-height:72svh;display:flex;align-items:flex-end}
+.post-meta{color:var(--on-ink-muted);margin:26px 0 0}
+.cards{display:grid;grid-template-columns:1fr;gap:44px 32px}
+@media (min-width:720px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1080px){.cards{grid-template-columns:repeat(3,1fr)}}
+.card h3{font-size:clamp(21px,2vw,25px);line-height:1.15;letter-spacing:-.01em;margin:8px 0 10px}
+.card h3 a{text-decoration:none}
+.card h3 a:hover{color:var(--accent)}
+.card p.muted{margin:0 0 16px;font-size:16px}
+.card-meta{color:var(--accent);margin:16px 0 0;font-size:11px}
+.card-thumb{display:flex;flex-direction:column;justify-content:space-between;aspect-ratio:16/10;padding:20px;background:var(--ink);color:var(--on-ink);text-decoration:none;position:relative;overflow:hidden}
+.card-thumb::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(169,179,187,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(169,179,187,.12) 1px,transparent 1px);background-size:32px 32px}
+.cat-cloud .card-thumb{background:var(--ink-2)}
+.cat-gpu .card-thumb{background:#2a1d14}
+.card-n{font-size:clamp(64px,7vw,96px);font-weight:800;letter-spacing:-.04em;line-height:1;position:relative;z-index:1}
+.card-cat{position:relative;z-index:1;color:#e7a571;font-size:11px;align-self:flex-end}
+.card-thumb:hover .card-n{color:#e7a571}
+.post-grid{display:grid;grid-template-columns:1fr;gap:48px}
+@media (min-width:980px){.post-grid{grid-template-columns:minmax(0,1fr) 300px;gap:80px}}
+.prose{max-width:68ch;font-size:18px}
+.prose h2{font-size:clamp(24px,2.6vw,32px);letter-spacing:-.02em;line-height:1.1;margin:44px 0 14px;text-transform:uppercase}
+.prose h2:first-child{margin-top:0}
+.prose ul{padding-left:1.2em}
+.prose li{margin:6px 0}
+.prose code,.repo-name{font-family:var(--mono);font-size:.88em;background:var(--paper-2);padding:1px 5px}
+.post-aside{align-self:start;position:sticky;top:100px;border-top:2px solid var(--ink);padding-top:18px}
+.repo-name{display:inline-block;margin:6px 0 18px;word-break:break-all}
+.small{font-size:14px}
+.post-nav{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:72px;padding-top:28px;border-top:1px solid var(--line)}
+.post-nav-link{display:flex;flex-direction:column;gap:6px;text-decoration:none;font-weight:700;line-height:1.25}
+.post-nav-link:hover{color:var(--accent)}
+.post-nav-link.next{text-align:right}
+.now-grid{display:grid;grid-template-columns:1fr;gap:28px}
+@media (min-width:960px){.now-grid{grid-template-columns:1fr 1.25fr;gap:72px}}
+.about-top{padding-top:clamp(140px,16vw,190px)}
+.cta-band .btn{margin-top:8px}
+.links-list{max-width:640px;display:flex;flex-direction:column;gap:14px}
+.link-btn{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 22px;border:1px solid var(--ink);text-decoration:none;font-weight:700;font-size:18px;background:var(--paper);transition:background .2s,color .2s}
+.link-btn:hover{background:var(--ink);color:var(--on-ink)}
+.links-section{padding-top:56px}
+.post-hero h1{font-size:clamp(34px,4.8vw,68px);max-width:20ch}

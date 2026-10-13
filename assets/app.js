@@ -13,7 +13,7 @@
   };
   function applyLang(l) {
     root.lang = l;
-    document.title = T[l].title;
+    document.title = root.getAttribute("data-title-" + l) || T[l].title;
     $$(".lang-btn [data-l]").forEach(function (s) { s.classList.toggle("on", s.getAttribute("data-l") === l); });
     try { localStorage.setItem("lang", l); } catch (e) {}
     renderCity(currentCity);
@@ -42,16 +42,17 @@
   /* ---------- hero slider ---------- */
   var slides = S.hero || [], idx = 0, timer;
   var media = $("#heroMedia"), hero = $(".hero");
-  slides.forEach(function (s, i) {
+  if (media) slides.forEach(function (s, i) {
     var img = new Image();
     img.src = s.src; img.alt = s.alt || ""; if (i === 0) img.className = "on";
     if (s.pos) img.style.objectPosition = s.pos;
     media.appendChild(img);
   });
-  if (slides.length) hero.classList.add("has-photos");
-  if (slides.length > 1) hero.classList.add("multi");
+  if (media && slides.length) hero.classList.add("has-photos");
+  if (media && slides.length > 1) hero.classList.add("multi");
   function pad(n) { return (n < 10 ? "0" : "") + n; }
   function setCaption() {
+    if (!media) return;
     var s = slides[idx];
     $("#heroCaption").textContent = s ? (s["caption_" + lang()] || "") : "";
     $("#slideCount").textContent = pad(idx + 1) + " / " + pad(Math.max(slides.length, 1));
@@ -65,12 +66,14 @@
     setCaption();
   }
   function auto() { clearInterval(timer); if (slides.length > 1 && !matchMedia("(prefers-reduced-motion: reduce)").matches) timer = setInterval(function () { go(1); }, 7000); }
-  $("#prevSlide").addEventListener("click", function () { go(-1); auto(); });
-  $("#nextSlide").addEventListener("click", function () { go(1); auto(); });
-  auto();
+  if (media) {
+    $("#prevSlide").addEventListener("click", function () { go(-1); auto(); });
+    $("#nextSlide").addEventListener("click", function () { go(1); auto(); });
+    auto();
+  }
 
   /* ---------- about photo ---------- */
-  if (S.about) {
+  if (S.about && $("#aboutPhoto")) {
     var ap = $("#aboutPhoto"), im = new Image();
     im.src = S.about.src; im.alt = S.about.alt || "Iñigo González"; im.loading = "lazy";
     if (S.about.pos) im.style.objectPosition = S.about.pos;
@@ -105,9 +108,32 @@
     $$(".reveal").forEach(function (el) { io.observe(el); });
   } else { $$(".reveal").forEach(function (el) { el.classList.add("in"); }); }
 
+  function finish() {
+  /* ---------- contact form ---------- */
+  var form = $("#contactForm"), status = $("#formStatus");
+  if (form) form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var l = lang(), d = new FormData(form);
+    var name = (d.get("name") || "").trim(), email = (d.get("email") || "").trim(), msg = (d.get("message") || "").trim();
+    if (!name || !msg || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { status.className = "form-status err"; status.textContent = T[l].missing; return; }
+    if (!S.formspree) {
+      location.href = "mailto:inigogonzalezgarcia@yahoo.es?subject=" + encodeURIComponent("Web · " + name) + "&body=" + encodeURIComponent(msg + "\n\n" + name + " · " + email);
+      return;
+    }
+    status.className = "form-status"; status.textContent = T[l].sending;
+    fetch(form.action, { method: "POST", body: d, headers: { Accept: "application/json" } })
+      .then(function (r) { if (!r.ok) throw 0; form.reset(); status.className = "form-status ok"; status.textContent = T[l].ok; })
+      .catch(function () { status.className = "form-status err"; status.textContent = T[l].err; });
+  });
+
+  var y = $("#year"); if (y) y.textContent = new Date().getFullYear();
+  applyLang(lang());
+  }
+
   /* ---------- map ---------- */
   var svg = $("#map"), FULL = [0, 0, 1000, 487], HOME = [180, 20, 460, 259];
   var vb = HOME.slice(), currentCity = "madrid", filter = "all";
+  if (!svg) { finish(); return; }
   function ratio() { var b = svg.getBoundingClientRect(); return b.width ? b.height / b.width : HOME[3] / HOME[2]; }
   function setVB(v) {
     var R = ratio(), w = Math.min(Math.max(v[2], 60), FULL[2], FULL[3] / R), h = w * R;
@@ -161,7 +187,7 @@
   }, { passive: false });
 
   function renderCity(id) {
-    var c = S.cities[id]; if (!c) return;
+    var c = S.cities[id]; if (!c || !svg) return;
     currentCity = id;
     var l = lang();
     var kind = { base: { es: "Base", en: "Base" }, onsite: { es: "En persona", en: "In person" }, team: { es: "Equipo coordinado", en: "Team coordinated" } }[c.kind][l];
@@ -194,24 +220,8 @@
   $$("[data-filter]").forEach(function (a) { a.addEventListener("click", function () { setFilter(a.getAttribute("data-filter")); }); });
   home();
   window.addEventListener("resize", function () { setVB(vb); });
+  var f0 = null; try { f0 = new URLSearchParams(location.search).get("f"); } catch (e) {}
+  if (f0 && /^s[1-5]$/.test(f0)) setFilter(f0);
 
-  /* ---------- contact form ---------- */
-  var form = $("#contactForm"), status = $("#formStatus");
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    var l = lang(), d = new FormData(form);
-    var name = (d.get("name") || "").trim(), email = (d.get("email") || "").trim(), msg = (d.get("message") || "").trim();
-    if (!name || !msg || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { status.className = "form-status err"; status.textContent = T[l].missing; return; }
-    if (!S.formspree) {
-      location.href = "mailto:inigogonzalezgarcia@yahoo.es?subject=" + encodeURIComponent("Web · " + name) + "&body=" + encodeURIComponent(msg + "\n\n" + name + " · " + email);
-      return;
-    }
-    status.className = "form-status"; status.textContent = T[l].sending;
-    fetch(form.action, { method: "POST", body: d, headers: { Accept: "application/json" } })
-      .then(function (r) { if (!r.ok) throw 0; form.reset(); status.className = "form-status ok"; status.textContent = T[l].ok; })
-      .catch(function () { status.className = "form-status err"; status.textContent = T[l].err; });
-  });
-
-  var y = $("#year"); if (y) y.textContent = new Date().getFullYear();
-  applyLang(lang());
+  finish();
 })();
