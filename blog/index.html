@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Blog · Iñigo González" data-title-es="Blog · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blog · Iñigo González</title>
+<meta name="description" content="How I built each of my GitHub projects: IT Ops tools and cloud, SRE and GPU labs.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Blog · Iñigo González">
+<meta property="og:description" content="How I built each of my GitHub projects: IT Ops tools and cloud, SRE and GPU labs.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+
+</head>
+<body>
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header" id="top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a><a href="../store.html"><span class="es">Store ↗</span><span class="en">Store ↗</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../links.html"><span class="label">05</span><span class="es">Links</span><span class="en">Links</span></a><a href="../store.html"><span class="label">06</span><span class="es">Store ↗</span><span class="en">Store ↗</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="mailto:inigogonzalezgarcia@yahoo.es">Email ↗</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero">
+  <div class="wrap">
+    <p class="label kicker">Blog · <span class="es">Aprendiendo en público</span><span class="en">Learning in public</span></p>
+    <h1><span class="es">Cómo lo<br>construí.</span><span class="en">How I<br>built it.</span></h1>
+    <p class="lede"><span class="es">Una historia por cada proyecto de GitHub: el problema, lo que hice, lo que aprendí y lo que falta por probar. Todo con datos ficticios.</span><span class="en">One story per GitHub project: the problem, what I built, what I learned and what is still untested. All with synthetic data.</span></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="cards">
+      <article class="card reveal cat-gpu">
+        <a class="card-thumb" href="../blog/16-gitops-gpu-fleet.html" tabindex="-1" aria-hidden="true"><span class="card-n">16</span><span class="card-cat label"><span class="es">Laboratorio GPU</span><span class="en">GPU lab</span></span></a>
+        <p class="label card-meta"><span class="es">Laboratorio GPU</span><span class="en">GPU lab</span> · <span class="es">9 oct 2026</span><span class="en">9 Oct 2026</span></p>
+        <h3><a href="../blog/16-gitops-gpu-fleet.html"><span class="es">Promocionar versiones del GPU Operator de staging a prod con Flux</span><span class="en">Promoting GPU Operator releases from staging to prod with Flux</span></a></h3>
+        <p class="muted"><span class="es">Un fichero define versiones y clústeres; Git y Flux hacen el resto, con una puerta antes de producción.</span><span class="en">One file defines releases and clusters; Git and Flux do the rest, with a gate before production.</span></p>
+        <a class="arrow-link" href="../blog/16-gitops-gpu-fleet.html"><span class="es">Leer el artículo</span><span class="en">Read the story</span> →</a>
+      </article>
+      <article class="card reveal cat-gpu">
+        <a class="card-thumb" href="../blog/15-multi-tenant-gpu-scheduling.html" tabindex="-1" aria-hidden="true"><span class="card-n">15</span><span class="card-cat label"><span class="es">Laboratorio GPU</span><span class="en">GPU lab</span></span></a>
+        <p class="label card-meta"><span class="es">Laboratorio GPU</span><span class="en">GPU lab</span> · <span class="es">5 oct 2026</span><span class="en">5 Oct 2026</span></p>
+        <h3><a href="../blog/15-multi-tenant-gpu-scheduling.html"><span class="es">Repartir GPU entre equipos con Kueue y KAI Scheduler</span><span class="en">Sharing GPUs between teams with Kueue and KAI Scheduler</span></a></h3>
+        <p class="muted"><span class="es">Un acuerdo de cuotas en un fichero TOML, traducido a los dos planificadores y probado en kind.</span><span class="en">One quota agreement in a TOML file, rendered into both schedulers and tested on kind.</span></p>
+        <a class="arrow-link" href="../blog/15-multi-tenant-gpu-scheduling.html"><span class="es">Leer el artículo</span><span class="en">Read the story</span> →</a>
+      </article>
+      <article class="card reveal cat-gpu">
+        <a class="card-thumb" href="../blog/14-slurm-gpu-ops.html" tabindex="-1" aria-hidden="true"><span class="card-n">14</span><span class="card-cat label"><span class="es">Laboratorio GPU</span><span class="en">GPU lab</span></span></a>
+        <p class="label card-meta"><span class="es">Laboratorio GPU</span><span class="en">GPU lab</span> · <span class="es">4 oct 2026</span><span class="en">4 Oct 2026</span></p>
+        <h3><a href="../blog/14-slurm-gpu-ops.html"><span class="es">Un clúster Slurm real en Docker Compose, con health checks de GPU</span><span class="en">A real Slurm cluster in Docker Compose, with GPU health checks</span></a></h3>
+        <p class="muted"><span class="es">Drain, requeue y validate, y cuatro iteraciones de CI para que funcionen los cgroups v2.</span><span class="en">Drain, requeue and validate, and four CI iterations to get cgroups v2 working.</span></p>
+        <a class="arrow-link" href="../blog/14-slurm-gpu-ops.html"><span class="es">Leer el artículo</span><span class="en">Read the story</span> →</a>
+      </article>
+      <article class="card reveal cat-gpu">
+        <a class="card-thumb" href="../blog/13-cluster-acceptance-burnin.html" tabindex="-1" aria-hidden="true"><span class="card-n">13</span><span class="card-cat label"><span class="es">Laboratorio GPU</span><span class="en">GPU lab</span></span></a>
+        <p class="label card-meta"><span class="es">Laboratorio GPU</span><span class="en">GPU lab</span> · <span class="es">4 oct 2026</span><span class="en">4 Oct 2026</span></p>
+        <h3><a href="../blog/13-cluster-acceptance-burnin.html"><span class="es">Del handover a la firma: aceptar un clúster de GPU nuevo</span><span class="en">From handover to sign-off: accepting a new GPU cluster</span></a></h3>
+        <p class="muted"><span class="es">Inventario, diagnósticos, pruebas NCCL y un burn-in de 72 horas, con un informe que el cliente puede firmar.</span><span class="en">Inventory, diagnostics, NCCL tests and a 72-hour burn-in, ending in a report a customer can sign.</span></p>
+        <a class="arrow-link" href="../blog/13-cluster-acceptance-burnin.html"><span class="es">Leer el artículo</span><span class="en">Read the story</span> →</a>
+      </article>
+      <article class="card reveal cat-gpu">
+        <a class="card-thumb" href="../blog/12-gpu-goodput-mtbi.html" tabindex="-1" aria-hidden="true"><span class="card-n">12</span><span class="card-cat label"><span class="es">Laboratorio GPU</span><span class="en">GPU lab</span></span></a>
+        <p class="label card-meta"><span class="es">Laboratorio GPU</span><span class="en">GPU lab</span> · <span class="es">2 oct 2026</span><span class="en">2 Oct 2026</span></p>
+        <h3><a href="../blog/12-gpu-goodput-mtbi.html"><span class="es">¿Adónde van las GPU-horas? Un simulador de goodput</span><span class="en">Where do the GPU-hours go? A goodput simulator</span></a></h3>
+        <p class="muted"><span class="es">Un entrenamiento de 1.024 GPU simulado con fallos, para ver cuánto valen los checkpoints, los spares y la detección rápida.</span><span class="en">A 1,024-GPU training job, simulated with failures, to see what checkpoints, spares and fast detection are worth.</span></p>
+        <a class="arrow-link" href="../blog/12-gpu-goodput-mtbi.html"><span class="es">Leer el artículo</span><span class="en">Read the story</span> →</a>
+      </article>
+      <article class="card reveal cat-gpu">
+        <a class="card-thumb" href="../blog/11-gpu-fleet-lifecycle.html" tabindex="-1" aria-hidden="true"><span class="card-n">11</span><span class="card-cat label"><span class="es">Laboratorio GPU</span><span class="en">GPU lab</span></span></a>
+        <p class="label card-meta"><span class="es">Laboratorio GPU</span><span class="en">GPU lab</span> · <span class="es">2 oct 2026</span><span class="en">2 Oct 2026</span></p>
+        <h3><a href="../blog/11-gpu-fleet-lifecycle.html"><span class="es">Desplegar un driver de GPU por la flota: canary, aprobación y rollback</span><span class="en">Rolling a GPU driver across a fleet: canary, approval, rollback</span></a></h3>
+        <p class="muted"><span class="es">Un controlador en Go que actualiza nodos por lotes y da marcha atrás solo cuando algo falla.</span><span class="en">A Go controller that upgrades nodes in batches and backs out on its own when something breaks.</span></p>
+        <a class="arrow-link" href="../blog/11-gpu-fleet-lifecycle.html"><span class="es">Leer el artículo</span><span class="en">Read the story</span> →</a>
+      </article>
+      <article class="card reveal cat-gpu">
+        <a class="card-thumb" href="../blog/10-gpu-fleet-observability.html" tabindex="-1" aria-hidden="true"><span class="card-n">10</span><span class="card-cat label"><span class="es">Laboratorio GPU</span><span class="en">GPU lab</span></span></a>
+        <p class="label card-meta"><span class="es">Laboratorio GPU</span><span class="en">GPU lab</span> · <span class="es">1 oct 2026</span><span class="en">1 Oct 2026</span></p>
+        <h3><a href="../blog/10-gpu-fleet-observability.html"><span class="es">Observabilidad de una flota de GPU: alertas que dicen qué hacer</span><span class="en">Observability for a GPU fleet: alerts that say what to do</span></a></h3>
+        <p class="muted"><span class="es">Recording rules, alertas con runbook, rutas de Alertmanager y un dashboard de Grafana sobre métricas DCGM.</span><span class="en">Recording rules, alerts with runbooks, Alertmanager routing and a Grafana dashboard on DCGM metrics.</span></p>
+        <a class="arrow-link" href="../blog/10-gpu-fleet-observability.html"><span class="es">Leer el artículo</span><span class="en">Read the story</span> →</a>
+      </article>
+      <article class="card reveal cat-gpu">
+        <a class="card-thumb" href="../blog/09-gpu-node-remediation.html" tabindex="-1" aria-hidden="true"><span class="card-n">09</span><span class="card-cat label"><span class="es">Laboratorio GPU</span><span class="en">GPU lab</span></span></a>
+        <p class="label card-meta"><span class="es">Laboratorio GPU</span><span class="en">GPU lab</span> · <span class="es">1 oct 2026</span><span class="en">1 Oct 2026</span></p>
+        <h3><a href="../blog/09-gpu-node-remediation.html"><span class="es">Un controlador de Kubernetes que drena, repara o pone en cuarentena nodos GPU</span><span class="en">Teaching a Kubernetes controller to drain, repair or quarantine GPU nodes</span></a></h3>
+        <p class="muted"><span class="es">Primer laboratorio de GPU: los XID, el ECC y la temperatura llevan cada nodo por una máquina de estados.</span><span class="en">First GPU lab: XID errors, ECC and temperature drive each node through a state machine.</span></p>
+        <a class="arrow-link" href="../blog/09-gpu-node-remediation.html"><span class="es">Leer el artículo</span><span class="en">Read the story</span> →</a>
+      </article>
+      <article class="card reveal cat-cloud">
+        <a class="card-thumb" href="../blog/08-edge-health-slo-monitor.html" tabindex="-1" aria-hidden="true"><span class="card-n">08</span><span class="card-cat label"><span class="es">Laboratorio cloud y SRE</span><span class="en">Cloud & SRE lab</span></span></a>
+        <p class="label card-meta"><span class="es">Laboratorio cloud y SRE</span><span class="en">Cloud & SRE lab</span> · <span class="es">1 oct 2026</span><span class="en">1 Oct 2026</span></p>
+        <h3><a href="../blog/08-edge-health-slo-monitor.html"><span class="es">SLO y alertas por burn rate para el edge, en Python sin dependencias</span><span class="en">SLOs and burn-rate alerts for the edge, in plain Python</span></a></h3>
+        <p class="muted"><span class="es">Sondas DNS, TLS, HTTP y TCP, un presupuesto de error y un postmortem ficticio.</span><span class="en">DNS, TLS, HTTP and TCP probes, an error budget and a fictional postmortem.</span></p>
+        <a class="arrow-link" href="../blog/08-edge-health-slo-monitor.html"><span class="es">Leer el artículo</span><span class="en">Read the story</span> →</a>
+      </article>
+      <article class="card reveal cat-cloud">
+        <a class="card-thumb" href="../blog/07-aws-private-connectivity.html" tabindex="-1" aria-hidden="true"><span class="card-n">07</span><span class="card-cat label"><span class="es">Laboratorio cloud y SRE</span><span class="en">Cloud & SRE lab</span></span></a>
+        <p class="label card-meta"><span class="es">Laboratorio cloud y SRE</span><span class="en">Cloud & SRE lab</span> · <span class="es">1 oct 2026</span><span class="en">1 Oct 2026</span></p>
+        <h3><a href="../blog/07-aws-private-connectivity.html"><span class="es">Conectividad privada en AWS con Terraform, y el fallo que pilló la CI</span><span class="en">Private connectivity on AWS with Terraform, and the bug CI caught</span></a></h3>
+        <p class="muted"><span class="es">PrivateLink, DNS privado y endpoints de SSM en cinco módulos, probados sin cuenta de AWS.</span><span class="en">PrivateLink, private DNS and SSM endpoints in five modules, tested without an AWS account.</span></p>
+        <a class="arrow-link" href="../blog/07-aws-private-connectivity.html"><span class="es">Leer el artículo</span><span class="en">Read the story</span> →</a>
+      </article>
+      <article class="card reveal cat-cloud">
+        <a class="card-thumb" href="../blog/06-kubernetes-ingress-lab.html" tabindex="-1" aria-hidden="true"><span class="card-n">06</span><span class="card-cat label"><span class="es">Laboratorio cloud y SRE</span><span class="en">Cloud & SRE lab</span></span></a>
+        <p class="label card-meta"><span class="es">Laboratorio cloud y SRE</span><span class="en">Cloud & SRE lab</span> · <span class="es">1 oct 2026</span><span class="en">1 Oct 2026</span></p>
+        <h3><a href="../blog/06-kubernetes-ingress-lab.html"><span class="es">Un laboratorio de ingress en Kubernetes que la CI construye desde cero</span><span class="en">A Kubernetes ingress lab built from zero in every CI run</span></a></h3>
+        <p class="muted"><span class="es">Cilium, Envoy Gateway, cert-manager y external-dns sobre kind, con nueve pruebas de punta a punta.</span><span class="en">Cilium, Envoy Gateway, cert-manager and external-dns on kind, with nine end-to-end checks.</span></p>
+        <a class="arrow-link" href="../blog/06-kubernetes-ingress-lab.html"><span class="es">Leer el artículo</span><span class="en">Read the story</span> →</a>
+      </article>
+      <article class="card reveal cat-tools">
+        <a class="card-thumb" href="../blog/05-it-ops-console.html" tabindex="-1" aria-hidden="true"><span class="card-n">05</span><span class="card-cat label"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span></span></a>
+        <p class="label card-meta"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span> · <span class="es">30 sept 2026</span><span class="en">30 Sep 2026</span></p>
+        <h3><a href="../blog/05-it-ops-console.html"><span class="es">Rehacer desde cero una consola de operaciones IT de sede</span><span class="en">Rebuilding an on-site IT operations console from scratch</span></a></h3>
+        <p class="muted"><span class="es">Activos, garantías, checklists de salas, altas y bajas, turnos y salud de servicios en una app Flask.</span><span class="en">Assets, warranties, room checklists, joiners and leavers, shifts and service health in one Flask app.</span></p>
+        <a class="arrow-link" href="../blog/05-it-ops-console.html"><span class="es">Leer el artículo</span><span class="en">Read the story</span> →</a>
+      </article>
+      <article class="card reveal cat-tools">
+        <a class="card-thumb" href="../blog/04-itsm-kpi-dashboard.html" tabindex="-1" aria-hidden="true"><span class="card-n">04</span><span class="card-cat label"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span></span></a>
+        <p class="label card-meta"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span> · <span class="es">30 sept 2026</span><span class="en">30 Sep 2026</span></p>
+        <h3><a href="../blog/04-itsm-kpi-dashboard.html"><span class="es">KPIs de service desk a partir de una exportación de tickets</span><span class="en">Service desk KPIs from a plain ticket export</span></a></h3>
+        <p class="muted"><span class="es">SLA por prioridad y por equipo, tiempo de resolución, tendencia semanal y los tickets abiertos ya fuera de SLA.</span><span class="en">SLA by priority and team, time to resolve, weekly trend and the open tickets already out of SLA.</span></p>
+        <a class="arrow-link" href="../blog/04-itsm-kpi-dashboard.html"><span class="es">Leer el artículo</span><span class="en">Read the story</span> →</a>
+      </article>
+      <article class="card reveal cat-tools">
+        <a class="card-thumb" href="../blog/03-entra-id-hygiene-audit.html" tabindex="-1" aria-hidden="true"><span class="card-n">03</span><span class="card-cat label"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span></span></a>
+        <p class="label card-meta"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span> · <span class="es">30 sept 2026</span><span class="en">30 Sep 2026</span></p>
+        <h3><a href="../blog/03-entra-id-hygiene-audit.html"><span class="es">Auditar la higiene de Entra ID: huecos de MFA y cuentas olvidadas</span><span class="en">Auditing Entra ID hygiene: MFA gaps and forgotten accounts</span></a></h3>
+        <p class="muted"><span class="es">Administradores sin MFA, miembros inactivos e invitados obsoletos, en una sola pasada.</span><span class="en">Admins without MFA, inactive members and stale guests, found in one pass.</span></p>
+        <a class="arrow-link" href="../blog/03-entra-id-hygiene-audit.html"><span class="es">Leer el artículo</span><span class="en">Read the story</span> →</a>
+      </article>
+      <article class="card reveal cat-tools">
+        <a class="card-thumb" href="../blog/02-intune-compliance-report.html" tabindex="-1" aria-hidden="true"><span class="card-n">02</span><span class="card-cat label"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span></span></a>
+        <p class="label card-meta"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span> · <span class="es">30 sept 2026</span><span class="en">30 Sep 2026</span></p>
+        <h3><a href="../blog/02-intune-compliance-report.html"><span class="es">Un informe de cumplimiento de Intune que se puede enseñar a dirección</span><span class="en">An Intune compliance report you can hand to a manager</span></a></h3>
+        <p class="muted"><span class="es">PowerShell saca los dispositivos de Microsoft Graph y Python los convierte en un informe y una lista de acciones.</span><span class="en">PowerShell pulls the devices from Microsoft Graph, Python turns them into a report and an action list.</span></p>
+        <a class="arrow-link" href="../blog/02-intune-compliance-report.html"><span class="es">Leer el artículo</span><span class="en">Read the story</span> →</a>
+      </article>
+      <article class="card reveal cat-tools">
+        <a class="card-thumb" href="../blog/01-finops-cloud-cost-dashboard.html" tabindex="-1" aria-hidden="true"><span class="card-n">01</span><span class="card-cat label"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span></span></a>
+        <p class="label card-meta"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span> · <span class="es">3 sept 2026</span><span class="en">3 Sep 2026</span></p>
+        <h3><a href="../blog/01-finops-cloud-cost-dashboard.html"><span class="es">Ver la deriva del gasto cloud antes que la factura</span><span class="en">Catching cloud cost drift before the invoice does</span></a></h3>
+        <p class="muted"><span class="es">Un panel pequeño en Streamlit para el gasto de AWS y Azure que señala la semana que no cuadra.</span><span class="en">A small Streamlit dashboard for AWS and Azure spend that flags the week that looks wrong.</span></p>
+        <a class="arrow-link" href="../blog/01-finops-cloud-cost-dashboard.html"><span class="es">Leer el artículo</span><span class="en">Read the story</span> →</a>
+      </article>
+    </div>
+    <p class="note reveal"><span class="es">Los laboratorios 06–16 son eso: laboratorios. No tengo experiencia en producción con flotas de GPU; los hago para aprender el problema y lo digo en cada artículo.</span><span class="en">Labs 06–16 are just that: labs. I don't have production GPU fleet experience; I build them to learn the problem, and every story says so.</span></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><span class="es">Hecha a mano y publicada con GitHub Pages ·</span><span class="en">Hand-built and published with GitHub Pages ·</span> <a href="https://github.com/inigogonzalezgarcia/inigogonzalezgarcia.github.io"><span class="es">código</span><span class="en">source</span></a></span>
+    <span><a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

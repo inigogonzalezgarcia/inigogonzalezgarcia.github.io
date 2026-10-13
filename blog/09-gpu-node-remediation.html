@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Teaching a Kubernetes controller to drain, repair or quarantine GPU nodes · Iñigo González" data-title-es="Un controlador de Kubernetes que drena, repara o pone en cuarentena nodos GPU · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Teaching a Kubernetes controller to drain, repair or quarantine GPU nodes · Iñigo González</title>
+<meta name="description" content="First GPU lab: XID errors, ECC and temperature drive each node through a state machine.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/09-gpu-node-remediation.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Teaching a Kubernetes controller to drain, repair or quarantine GPU nodes · Iñigo González">
+<meta property="og:description" content="First GPU lab: XID errors, ECC and temperature drive each node through a state machine.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/09-gpu-node-remediation.html">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+
+</head>
+<body>
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header" id="top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a><a href="../store.html"><span class="es">Store ↗</span><span class="en">Store ↗</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../links.html"><span class="label">05</span><span class="es">Links</span><span class="en">Links</span></a><a href="../store.html"><span class="label">06</span><span class="es">Store ↗</span><span class="en">Store ↗</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="mailto:inigogonzalezgarcia@yahoo.es">Email ↗</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 09</p>
+    <h1><span class="es">Un controlador de Kubernetes que drena, repara o pone en cuarentena nodos GPU</span><span class="en">Teaching a Kubernetes controller to drain, repair or quarantine GPU nodes</span></h1>
+    <p class="lede"><span class="es">Primer laboratorio de GPU: los XID, el ECC y la temperatura llevan cada nodo por una máquina de estados.</span><span class="en">First GPU lab: XID errors, ECC and temperature drive each node through a state machine.</span></p><p class="label post-meta"><span class="es">Laboratorio GPU</span><span class="en">GPU lab</span> · <span class="es">1 oct 2026</span><span class="en">1 Oct 2026</span> · <span class="es">2 min</span><span class="en">2 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>Por qué este laboratorio</h2>
+<p>No tengo experiencia en producción con flotas de GPU. Este es el primero de una serie de laboratorios para aprender cómo se operan en el día a día, y cada README lo dice. No he pagado máquinas con GPU.</p>
+<h2>Qué he hecho</h2>
+<p>Un controlador de Kubernetes en Go (solo librería estándar, sin client-go) que lee métricas DCGM (errores XID, ECC de doble bit, row remapping, temperatura) y lleva cada nodo por Healthy → Draining → Repairing → Validating → Healthy, o a Cordoned por temperatura, o a Quarantined.</p>
+<ul><li>El estado vive en anotaciones del nodo, con un presupuesto de nodos en remediación (max-unavailable).</li><li>Las evicciones respetan los PodDisruptionBudget y la validación es un Job fijado al nodo con todas sus GPU.</li><li>Regla de reincidencia, modo dry-run, eventos y métricas de Prometheus.</li><li>La política de XID se basa en la documentación de NVIDIA (docs/xid-policy.md).</li></ul>
+<h2>Cómo se prueba</h2>
+<p>Un simulador <code>gpu-sim</code> hace de dcgm-exporter. La CI pasa tests unitarios, shellcheck y una prueba de punta a punta en kind con 8 escenarios (28 comprobaciones), en verde a la primera. Hay además un modo <code>gpuremediate check</code> que usa nvidia-smi en una GPU real.</p>
+<h2>Sin probar todavía</h2>
+<p>Una GPU real: ni un dcgm-exporter real ni el modo check en una máquina con GPU.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>Why this lab</h2>
+<p>I don&#x27;t have production experience with GPU fleets. This is the first of a series of labs to learn how they are operated day to day, and every README says so. No paid GPU machines were used.</p>
+<h2>What I built</h2>
+<p>A Kubernetes controller in Go (standard library only, no client-go) that reads DCGM metrics (XID errors, double-bit ECC, row remapping, temperature) and moves each node through Healthy → Draining → Repairing → Validating → Healthy, or to Cordoned for thermal issues, or Quarantined.</p>
+<ul><li>State is kept in node annotations, with a budget of nodes in remediation (max-unavailable).</li><li>Evictions respect PodDisruptionBudgets, and validation runs as a Job pinned to the node with all its GPUs.</li><li>A repeat-offender rule, dry-run mode, events and Prometheus metrics.</li><li>The XID policy is based on NVIDIA&#x27;s documentation (docs/xid-policy.md).</li></ul>
+<h2>How it is tested</h2>
+<p>A <code>gpu-sim</code> simulator stands in for dcgm-exporter. CI runs unit tests, shellcheck and an end-to-end test on kind with 8 scenarios (28 checks), green on the first run. There is also a <code>gpuremediate check</code> mode that uses nvidia-smi on a real GPU.</p>
+<h2>Not tested yet</h2>
+<p>A real GPU: neither a real dcgm-exporter nor the check mode on a machine with one.</p>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
+      <p class="repo-name">09-gpu-node-remediation</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/09-gpu-node-remediation" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="08-edge-health-slo-monitor.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">SLO y alertas por burn rate para el edge, en Python sin dependencias</span><span class="en">SLOs and burn-rate alerts for the edge, in plain Python</span></span></a>
+    <a class="post-nav-link next" href="10-gpu-fleet-observability.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Observabilidad de una flota de GPU: alertas que dicen qué hacer</span><span class="en">Observability for a GPU fleet: alerts that say what to do</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><span class="es">Hecha a mano y publicada con GitHub Pages ·</span><span class="en">Hand-built and published with GitHub Pages ·</span> <a href="https://github.com/inigogonzalezgarcia/inigogonzalezgarcia.github.io"><span class="es">código</span><span class="en">source</span></a></span>
+    <span><a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

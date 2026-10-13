@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="From handover to sign-off: accepting a new GPU cluster · Iñigo González" data-title-es="Del handover a la firma: aceptar un clúster de GPU nuevo · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>From handover to sign-off: accepting a new GPU cluster · Iñigo González</title>
+<meta name="description" content="Inventory, diagnostics, NCCL tests and a 72-hour burn-in, ending in a report a customer can sign.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/13-cluster-acceptance-burnin.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="From handover to sign-off: accepting a new GPU cluster · Iñigo González">
+<meta property="og:description" content="Inventory, diagnostics, NCCL tests and a 72-hour burn-in, ending in a report a customer can sign.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/13-cluster-acceptance-burnin.html">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+
+</head>
+<body>
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header" id="top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a><a href="../store.html"><span class="es">Store ↗</span><span class="en">Store ↗</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../links.html"><span class="label">05</span><span class="es">Links</span><span class="en">Links</span></a><a href="../store.html"><span class="label">06</span><span class="es">Store ↗</span><span class="en">Store ↗</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="mailto:inigogonzalezgarcia@yahoo.es">Email ↗</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 13</p>
+    <h1><span class="es">Del handover a la firma: aceptar un clúster de GPU nuevo</span><span class="en">From handover to sign-off: accepting a new GPU cluster</span></h1>
+    <p class="lede"><span class="es">Inventario, diagnósticos, pruebas NCCL y un burn-in de 72 horas, con un informe que el cliente puede firmar.</span><span class="en">Inventory, diagnostics, NCCL tests and a 72-hour burn-in, ending in a report a customer can sign.</span></p><p class="label post-meta"><span class="es">Laboratorio GPU</span><span class="en">GPU lab</span> · <span class="es">4 oct 2026</span><span class="en">4 Oct 2026</span> · <span class="es">2 min</span><span class="en">2 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>Por qué este laboratorio</h2>
+<p>Un laboratorio para aprender. Aceptar hardware es algo que conozco de operaciones IT; aquí quería ver cómo es con un clúster de GPU.</p>
+<h2>Qué he hecho</h2>
+<p>Un proceso que pasa por inventario (GPU, driver, VBIOS, puertos InfiniBand) → <code>dcgmi diag -r 3</code> → nccl-tests por nodo → por rack → burn-in de 72 horas → un trabajo de burn-in de todo el clúster medido con las reglas del laboratorio 12.</p>
+<ul><li>Un nodo se para en su primer fallo, y cada fallo tiene disposición (RMA, firmware, fabric, instalaciones, investigar, recoger evidencia), responsable y siguiente paso.</li><li>Los criterios están en criteria.toml, y las claves desconocidas son error.</li><li>Una segunda ronda sustituye la evidencia de la primera.</li><li>Salidas: report.md y report.html para el cliente (veredicto, rejilla rack × nodo, lista de pendientes, criterios y tabla de firmas), punch-list.csv y result.json.</li></ul>
+<h2>El ejemplo</h2>
+<p>Un clúster ficticio de 4 racks × 8 nodos × 8 GPU con 8 defectos. La ronda 1 acaba NO LISTO con 144 de 256 GPU. Tras la ronda 2 queda LISTO con 248, y un nodo sigue esperando un RMA.</p>
+<h2>Cómo se prueba</h2>
+<p>25 tests y un job de CI que corre las dos rondas y exige NO LISTO y después LISTO.</p>
+<h2>Sin probar todavía</h2>
+<p>Salidas reales de dcgmi diag y nccl-tests. Los parsers siguen el formato general y solo se prueban con muestras.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>Why this lab</h2>
+<p>A learning lab. Accepting hardware is something I know from IT operations; here I wanted to see what it looks like for a GPU cluster.</p>
+<h2>What I built</h2>
+<p>A pipeline that runs inventory (GPU, driver, VBIOS, InfiniBand ports) → <code>dcgmi diag -r 3</code> → nccl-tests per node → per rack → a 72-hour burn-in → a whole-cluster burn-in job scored with lab 12&#x27;s rules.</p>
+<ul><li>A node stops at its first failure, and every failure gets a disposition (RMA, firmware, fabric, facility, investigate, collect evidence), an owner and a next step.</li><li>Criteria live in criteria.toml, and unknown keys are errors.</li><li>A second round replaces the evidence of the first.</li><li>Outputs: report.md and report.html for the customer (verdict, rack × node grid, punch list, criteria and a signature table), punch-list.csv and result.json.</li></ul>
+<h2>The example</h2>
+<p>A fictional cluster with 4 racks × 8 nodes × 8 GPUs and 8 defects. Round 1 ends NOT READY with 144 of 256 GPUs. After round 2 it is READY with 248, and one node is still waiting on an RMA.</p>
+<h2>How it is tested</h2>
+<p>25 tests, and a CI job that runs both rounds and requires NOT READY and then READY.</p>
+<h2>Not tested yet</h2>
+<p>Real dcgmi diag and nccl-tests output. The parsers follow the general format and are only tested with samples.</p>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
+      <p class="repo-name">13-cluster-acceptance-burnin</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/13-cluster-acceptance-burnin" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="12-gpu-goodput-mtbi.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">¿Adónde van las GPU-horas? Un simulador de goodput</span><span class="en">Where do the GPU-hours go? A goodput simulator</span></span></a>
+    <a class="post-nav-link next" href="14-slurm-gpu-ops.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Un clúster Slurm real en Docker Compose, con health checks de GPU</span><span class="en">A real Slurm cluster in Docker Compose, with GPU health checks</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><span class="es">Hecha a mano y publicada con GitHub Pages ·</span><span class="en">Hand-built and published with GitHub Pages ·</span> <a href="https://github.com/inigogonzalezgarcia/inigogonzalezgarcia.github.io"><span class="es">código</span><span class="en">source</span></a></span>
+    <span><a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

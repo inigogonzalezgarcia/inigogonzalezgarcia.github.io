@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="SLOs and burn-rate alerts for the edge, in plain Python · Iñigo González" data-title-es="SLO y alertas por burn rate para el edge, en Python sin dependencias · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SLOs and burn-rate alerts for the edge, in plain Python · Iñigo González</title>
+<meta name="description" content="DNS, TLS, HTTP and TCP probes, an error budget and a fictional postmortem.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/08-edge-health-slo-monitor.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SLOs and burn-rate alerts for the edge, in plain Python · Iñigo González">
+<meta property="og:description" content="DNS, TLS, HTTP and TCP probes, an error budget and a fictional postmortem.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/08-edge-health-slo-monitor.html">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+
+</head>
+<body>
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header" id="top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a><a href="../store.html"><span class="es">Store ↗</span><span class="en">Store ↗</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../links.html"><span class="label">05</span><span class="es">Links</span><span class="en">Links</span></a><a href="../store.html"><span class="label">06</span><span class="es">Store ↗</span><span class="en">Store ↗</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="mailto:inigogonzalezgarcia@yahoo.es">Email ↗</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 08</p>
+    <h1><span class="es">SLO y alertas por burn rate para el edge, en Python sin dependencias</span><span class="en">SLOs and burn-rate alerts for the edge, in plain Python</span></h1>
+    <p class="lede"><span class="es">Sondas DNS, TLS, HTTP y TCP, un presupuesto de error y un postmortem ficticio.</span><span class="en">DNS, TLS, HTTP and TCP probes, an error budget and a fictional postmortem.</span></p><p class="label post-meta"><span class="es">Laboratorio cloud y SRE</span><span class="en">Cloud & SRE lab</span> · <span class="es">1 oct 2026</span><span class="en">1 Oct 2026</span> · <span class="es">2 min</span><span class="en">2 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>Por qué este laboratorio</h2>
+<p>Un laboratorio para aprender cómo deciden los equipos SRE cuándo despertar a alguien: no con cada fallo, sino cuando el presupuesto de error se consume demasiado rápido.</p>
+<h2>Qué he hecho</h2>
+<ul><li>Sondas DNS, TLS, HTTP y TCP.</li><li>Un SLO con presupuesto de error y alertas multiventana por burn rate, con un mínimo de sondas malas antes de avisar.</li><li>Exportación a Elasticsearch (ECS) y Prometheus, un webhook firmado y un informe HTML.</li><li>Una plantilla de postmortem y un postmortem ficticio: un registro DNS perdido en una migración de zona.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python 3.11, solo librería estándar, 14 tests.</p>
+<h2>Sin probar todavía</h2>
+<p>El envío a un Elasticsearch real, las units de systemd y el webhook contra un n8n real.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>Why this lab</h2>
+<p>A learning lab on how SRE teams decide when to wake someone up: not on every failed check, but when the error budget is burning too fast.</p>
+<h2>What I built</h2>
+<ul><li>DNS, TLS, HTTP and TCP probes.</li><li>An SLO with an error budget and multi-window burn-rate alerts, with a minimum number of bad probes before firing.</li><li>Export to Elasticsearch (ECS) and Prometheus, a signed webhook and an HTML report.</li><li>A postmortem template and a fictional postmortem: a DNS record lost during a zone migration.</li></ul>
+<h2>How it is built</h2>
+<p>Python 3.11, standard library only, 14 tests.</p>
+<h2>Not tested yet</h2>
+<p>Sending to a real Elasticsearch, the systemd units and the webhook against a real n8n.</p>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
+      <p class="repo-name">08-edge-health-slo-monitor</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/08-edge-health-slo-monitor" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="07-aws-private-connectivity.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Conectividad privada en AWS con Terraform, y el fallo que pilló la CI</span><span class="en">Private connectivity on AWS with Terraform, and the bug CI caught</span></span></a>
+    <a class="post-nav-link next" href="09-gpu-node-remediation.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Un controlador de Kubernetes que drena, repara o pone en cuarentena nodos GPU</span><span class="en">Teaching a Kubernetes controller to drain, repair or quarantine GPU nodes</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><span class="es">Hecha a mano y publicada con GitHub Pages ·</span><span class="en">Hand-built and published with GitHub Pages ·</span> <a href="https://github.com/inigogonzalezgarcia/inigogonzalezgarcia.github.io"><span class="es">código</span><span class="en">source</span></a></span>
+    <span><a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
