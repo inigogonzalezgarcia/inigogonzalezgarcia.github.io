@@ -1,4 +1,4 @@
-"""Build index.html and assets/data.js from src/. Run: python3 src/build.py"""
+"""Build every page (index, journey, blog, about, links, store) and assets/data.js from src/. Run: python3 src/build.py"""
 import json, html, math, pathlib
 
 ROOT = pathlib.Path(__file__).parent
@@ -78,51 +78,10 @@ def stage_html(s):
           <p>{bi(*s["p"])}</p>
           <p class="muted">{bi(*s["p2"])}</p>
           <ul class="chips">{chips}</ul>
-          <a class="arrow-link" href="#mapa" data-filter="{s["key"]}">{bi("Ver en el mapa", "See on the map")} →</a>
+          <a class="arrow-link" href="index.html?f={s["key"]}#mapa">{bi("Ver en el mapa", "See on the map")} →</a>
         </div>
       </article>'''
 
-# ---------------------------------------------------------------- projects
-GH = "https://github.com/inigogonzalezgarcia/"
-TOOLS = [
-    ("01", "01-finops-cloud-cost-dashboard", "FinOps Cloud Cost Dashboard", "Desviaciones y anomalías de coste en AWS y Azure", "Cloud cost drift and anomalies across AWS and Azure"),
-    ("02", "02-intune-compliance-report", "Intune Device Compliance Report", "Cumplimiento de dispositivos visible para IT y dirección", "Endpoint compliance visibility for IT and management"),
-    ("03", "03-entra-id-hygiene-audit", "Entra ID Identity Hygiene Audit", "Cuentas inactivas, invitados antiguos y usuarios sin MFA", "Inactive accounts, stale guests and users without MFA"),
-    ("04", "04-itsm-kpi-dashboard", "ITSM Service Desk KPI Dashboard", "MTTR, SLA y backlog del service desk", "MTTR, SLA and backlog tracking for service desks"),
-    ("05", "05-it-ops-console", "IT Ops Console", "Una vista para las operaciones IT de una sede, con MFA", "One view for on-site IT operations, with MFA"),
-]
-LABS = [
-    ("06", "06-kubernetes-ingress-lab", "Kubernetes Ingress Lab", "Cilium, Envoy Gateway y external-dns", "Cilium, Envoy Gateway and external-dns"),
-    ("07", "07-aws-private-connectivity", "AWS Private Connectivity", "PrivateLink y DNS privado con Terraform", "PrivateLink and private DNS with Terraform"),
-    ("08", "08-edge-health-slo-monitor", "Edge Health & SLO Monitor", "SLO, presupuesto de error y alertas por burn rate", "SLOs, error budgets and burn-rate alerts"),
-    ("09", "09-gpu-node-remediation", "GPU Node Remediation", "Controlador de Kubernetes que drena, repara o pone en cuarentena nodos GPU", "Kubernetes controller that drains, repairs or quarantines GPU nodes"),
-    ("10", "10-gpu-fleet-observability", "GPU Fleet Observability", "Métricas DCGM, alertas con runbook y Grafana", "DCGM metrics, alerts with runbooks and Grafana"),
-    ("11", "11-gpu-fleet-lifecycle", "GPU Fleet Lifecycle", "Rollouts de drivers con canary, aprobación y rollback", "Driver rollouts with canary, approval and rollback"),
-    ("12", "12-gpu-goodput-mtbi", "GPU Goodput & MTBI", "Simulador de fiabilidad de un entrenamiento de 1.024 GPU", "Reliability simulator for a 1,024-GPU training job"),
-    ("13", "13-cluster-acceptance-burnin", "Cluster Acceptance & Burn-in", "Del handover a la firma del cliente de un clúster GPU", "From handover to customer sign-off of a GPU cluster"),
-    ("14", "14-slurm-gpu-ops", "Slurm GPU Operations", "Health checks, drain y requeue en un clúster Slurm", "Health checks, drain and requeue on a Slurm cluster"),
-    ("15", "15-multi-tenant-gpu-scheduling", "Multi-tenant GPU Scheduling", "Cuotas entre equipos con Kueue y KAI Scheduler", "Team quotas with Kueue and KAI Scheduler"),
-    ("16", "16-gitops-gpu-fleet", "GitOps GPU Fleet", "GPU Operator promocionado con Flux de staging a prod", "GPU Operator promoted with Flux from staging to prod"),
-]
-
-def plist(items):
-    out = []
-    for n, slug, t, es, en in items:
-        out.append(f'<li><a href="{GH}{slug}" target="_blank" rel="noopener"><span class="n">{n}</span><span class="t">{html.escape(t)}<span class="d">{bi(html.escape(es), html.escape(en))}</span></span><span class="go">↗</span></a></li>')
-    return "\n".join(out)
-
-PROJECTS = f'''      <div class="proj-group reveal">
-        <p class="label muted">01 — 05</p>
-        <h3>{bi("Herramientas de IT Ops", "IT Ops tools")}</h3>
-        <p class="muted">{bi("Python, PowerShell y Microsoft Graph para problemas del día a día: cumplimiento, identidad, costes y service desk.", "Python, PowerShell and Microsoft Graph for everyday problems: compliance, identity, cost and service desk.")}</p>
-        <ul class="proj-list">{plist(TOOLS)}</ul>
-      </div>
-      <div class="proj-group reveal">
-        <p class="label muted">06 — 16</p>
-        <h3>{bi("Laboratorios: cloud, SRE y GPU", "Labs: cloud, SRE and GPU")}</h3>
-        <p class="muted">{bi("Kubernetes, Terraform, SLO y operación de clústeres GPU, con CI que lo prueba todo de punta a punta.", "Kubernetes, Terraform, SLOs and GPU cluster operations, with CI that tests everything end to end.")}</p>
-        <ul class="proj-list">{plist(LABS)}</ul>
-      </div>'''
 
 # ---------------------------------------------------------------- map
 M = json.loads((ROOT / "map.json").read_text())
@@ -167,15 +126,183 @@ MAP = f'''      <svg id="map" viewBox="0 0 1000 487" role="img" aria-label="Mapa
         <g id="mapLayer">{paths}<g id="routes">{"".join(routes)}</g><g id="pins">{"".join(pins)}</g></g>
       </svg>'''
 
-# ---------------------------------------------------------------- assemble
-tpl = (ROOT / "index.template.html").read_text()
-out = (tpl.replace("{{STAGES}}", "\n".join(stage_html(s) for s in STAGES))
-          .replace("{{PROJECTS}}", PROJECTS)
-          .replace("{{MAP}}", MAP)
-          .replace("{{FORM_ACTION}}", f'https://formspree.io/f/{CONF["formspree_id"]}' if CONF.get("formspree_id") else "mailto:inigogonzalezgarcia@yahoo.es"))
-assert "{{" not in out
-(SITE / "index.html").write_text(out)
+
+# ---------------------------------------------------------------- pages
+import sys
+sys.path.insert(0, str(ROOT))
+from pages import layout, page_hero, card, md, minutes, fdate, soon, bi as bi2, MAIL, LINKEDIN, GITHUB, LINKTREE
+from posts import POSTS, CATS
+
+SEC = {p.stem: p.read_text() for p in (ROOT / "sections").glob("*.html")}
+FORM = f'https://formspree.io/f/{CONF["formspree_id"]}' if CONF.get("formspree_id") else f"mailto:{MAIL}"
+STAGES_HTML = "\n".join(stage_html(s) for s in STAGES)
+POSTS_SORTED = sorted(POSTS, key=lambda p: (p["date"], p["n"]), reverse=True)
+DESC = "Iñigo González: IT Site Leader in Madrid. 11+ years in IT operations, Modern Workplace and infrastructure across financial services, healthcare, manufacturing and luxury retail."
+
+def write(path, s):
+    assert "{{" not in s, path
+    f = SITE / path
+    f.parent.mkdir(parents=True, exist_ok=True)
+    f.write_text(s)
+    return len(s)
+
+sizes = {}
+
+# home
+latest = "\n".join(card(p, CATS, "") for p in POSTS_SORTED[:3])
+home_body = "\n\n".join([
+    SEC["hero"], SEC["welcome"],
+    f'''<section class="section" id="historias" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="numbers-head reveal">
+      <div>
+        <p class="label kicker">Blog</p>
+        <h2 class="h2">{bi("Últimas<br>historias.", "Latest<br>stories.")}</h2>
+      </div>
+      <a class="arrow-link" href="blog/">{bi("Todas las historias", "All stories")} →</a>
+    </div>
+    <div class="cards">
+{latest}
+    </div>
+  </div>
+</section>''',
+    SEC["map"].replace("{{MAP}}", MAP),
+    f'''<section class="section dark cta-band">
+  <div class="wrap welcome reveal">
+    <div>
+      <p class="label kicker">{bi("Contacto", "Contact")}</p>
+      <h2 class="h2 sm">{bi("Hablemos.", "Let's talk.")}</h2>
+    </div>
+    <div>
+      <p class="lede">{bi("Proyectos, ideas o una de mis herramientas adaptada a tu entorno.", "Projects, ideas, or one of my tools adapted to your environment.")}</p>
+      <a class="btn" href="about.html#contacto">{bi("Escríbeme", "Get in touch")} →</a>
+    </div>
+  </div>
+</section>'''])
+sizes["index.html"] = write("index.html", layout(R="", path="", active="", home=True,
+    title_en="Iñigo González · IT Operations & Infrastructure", title_es="Iñigo González · Operaciones IT e Infraestructura",
+    desc=DESC, body=home_body))
+
+# journey
+journey_body = page_hero(bi("El viaje · 2015 — 2026", "The journey · 2015 — 2026"),
+    bi("Once años.<br>Cinco etapas.", "Eleven years.<br>Five stages."),
+    bi("De una consultora tecnológica a la sede de Madrid de una firma de servicios financieros, con la misma idea: que la tecnología funcione y no se note.",
+       "From a technology consultancy to the Madrid site of a financial services firm, with the same idea throughout: technology that works and that people don't have to think about.")) \
+    + "\n\n" + SEC["numbers"] + "\n\n" + SEC["stages"].replace("{{STAGES}}", STAGES_HTML) + "\n\n" + SEC["toolkit"]
+sizes["journey.html"] = write("journey.html", layout(R="", path="journey.html", active="journey",
+    title_en="Journey · Iñigo González", title_es="Viaje · Iñigo González",
+    desc="Eleven years in IT operations in five stages: consulting, luxury retail, healthcare software, manufacturing and financial services.", body=journey_body))
+
+# blog index
+cards = "\n".join(card(p, CATS, "../") for p in POSTS_SORTED)
+blog_body = page_hero("Blog · " + bi("Aprendiendo en público", "Learning in public"),
+    bi("Cómo lo<br>construí.", "How I<br>built it."),
+    bi("Una historia por cada proyecto de GitHub: el problema, lo que hice, lo que aprendí y lo que falta por probar. Todo con datos ficticios.",
+       "One story per GitHub project: the problem, what I built, what I learned and what is still untested. All with synthetic data.")) + f'''
+
+<section class="section">
+  <div class="wrap">
+    <div class="cards">
+{cards}
+    </div>
+    <p class="note reveal">{bi("Los laboratorios 06–16 son eso: laboratorios. No tengo experiencia en producción con flotas de GPU; los hago para aprender el problema y lo digo en cada artículo.", "Labs 06–16 are just that: labs. I don't have production GPU fleet experience; I build them to learn the problem, and every story says so.")}</p>
+  </div>
+</section>'''
+sizes["blog/index.html"] = write("blog/index.html", layout(R="../", path="blog/", active="blog",
+    title_en="Blog · Iñigo González", title_es="Blog · Iñigo González",
+    desc="How I built each of my GitHub projects: IT Ops tools and cloud, SRE and GPU labs.", body=blog_body))
+
+# posts
+order = sorted(POSTS, key=lambda p: p["n"])
+for i, p in enumerate(order):
+    c = CATS[p["cat"]]
+    prev = order[i - 1] if i > 0 else None
+    nxt = order[i + 1] if i + 1 < len(order) else None
+    def nav_link(q, label_es, label_en, cls):
+        if not q: return "<span></span>"
+        return f'<a class="post-nav-link {cls}" href="{q["repo"]}.html"><span class="label muted">{bi(label_es, label_en)}</span><span>{bi(html.escape(q["title_es"]), html.escape(q["title_en"]))}</span></a>'
+    meta = f'{bi(*c)} · {fdate(p["date"])} · {bi(str(minutes(p["es"])) + " min", str(minutes(p["en"])) + " min read")}'
+    body = page_hero(f'<a href="./">Blog</a> · {p["n"]}', bi(html.escape(p["title_es"]), html.escape(p["title_en"])),
+                     bi(html.escape(p["dek_es"]), html.escape(p["dek_en"])), f'<p class="label post-meta">{meta}</p>').replace('class="page-hero"', 'class="page-hero post-hero"', 1) + f'''
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+{md(p["es"])}
+      </div>
+      <div class="en" lang="en">
+{md(p["en"])}
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted">{bi("El repositorio", "The repository")}</p>
+      <p class="repo-name">{p["repo"]}</p>
+      <a class="btn" href="{GITHUB}/{p["repo"]}" target="_blank" rel="noopener">{bi("Ver en GitHub", "View on GitHub")} ↗</a>
+      <p class="muted small">{bi("Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.", "Synthetic data. No employer code, data or systems.")}</p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    {nav_link(prev, "Anterior", "Previous", "prev")}
+    {nav_link(nxt, "Siguiente", "Next", "next")}
+  </div>
+</section>'''
+    sizes[f"blog/{p['repo']}.html"] = write(f"blog/{p['repo']}.html", layout(R="../", path=f"blog/{p['repo']}.html", active="blog",
+        title_en=f'{p["title_en"]} · Iñigo González', title_es=f'{p["title_es"]} · Iñigo González',
+        desc=p["dek_en"], body=body, og_type="article"))
+
+# about
+now = f'''<section class="section">
+  <div class="wrap now-grid">
+    <div class="reveal">
+      <p class="label kicker">{bi("Ahora · octubre 2026", "Now · October 2026")}</p>
+      <h2 class="h2 sm">{bi("En qué estoy.", "What I'm up to.")}</h2>
+    </div>
+    <dl class="spec reveal">
+      <div class="spec-row"><dt class="label">{bi("Trabajo", "Work")}</dt><dd>{bi("IT Site Leader en Madrid, en servicios financieros.", "IT Site Leader in Madrid, in financial services.")}</dd></div>
+      <div class="spec-row"><dt class="label">{bi("Construyendo", "Building")}</dt><dd>{bi("Nuevos repos sobre Modern Workplace e infraestructura: Teams Rooms, co-management MECM + Intune, Active Directory.", "New repos on Modern Workplace and infrastructure: Teams Rooms, MECM + Intune co-management, Active Directory.")}</dd></div>
+      <div class="spec-row"><dt class="label">{bi("Aprendiendo", "Learning")}</dt><dd>{bi("Kubernetes, SRE y operación de clústeres GPU, en laboratorios abiertos.", "Kubernetes, SRE and GPU cluster operations, in open labs.")}</dd></div>
+      <div class="spec-row"><dt class="label">{bi("Idiomas", "Languages")}</dt><dd>{bi("Español nativo, inglés a diario y francés en progreso.", "Native Spanish, English every day and French in progress.")}</dd></div>
+    </dl>
+  </div>
+</section>'''
+about_body = SEC["about"].replace('class="section dark" id="sobre-mi"', 'class="section dark about-top" id="sobre-mi"') \
+    + "\n\n" + now + "\n\n" + SEC["contact"].replace("{{FORM_ACTION}}", FORM)
+sizes["about.html"] = write("about.html", layout(R="", path="about.html", active="about",
+    title_en="About · Iñigo González", title_es="Sobre mí · Iñigo González",
+    desc="About Iñigo González, IT Site Leader in Madrid, and how to get in touch.", body=about_body))
+
+# links
+LINKS = [
+    ("blog/", bi("Blog: cómo construí cada proyecto", "Blog: how I built each project"), ""),
+    ("journey.html", bi("El viaje: once años en cinco etapas", "The journey: eleven years in five stages"), ""),
+    (LINKEDIN, "LinkedIn", "ext"),
+    (GITHUB, "GitHub", "ext"),
+    (f"mailto:{MAIL}", "Email", "ext"),
+    ("about.html#contacto", bi("Formulario de contacto", "Contact form"), ""),
+    (LINKTREE, "Linktree", "ext"),
+]
+TGT = ' target="_blank" rel="me noopener"'
+links_html = "\n".join(
+    f'      <a class="link-btn reveal" href="{h}"{TGT if x == "ext" and h.startswith("http") else ""}><span>{t}</span><span aria-hidden="true">{"↗" if x else "→"}</span></a>'
+    for h, t, x in LINKS)
+links_body = page_hero("Links", bi("Todo, en un sitio.", "Everything, in one place."), "") + f'''
+
+<section class="section links-section">
+  <div class="wrap links-list">
+{links_html}
+  </div>
+</section>'''
+sizes["links.html"] = write("links.html", layout(R="", path="links.html", active="links",
+    title_en="Links · Iñigo González", title_es="Links · Iñigo González",
+    desc="Blog, journey, LinkedIn, GitHub and contact for Iñigo González.", body=links_body))
+
+# store (under construction)
+sizes["store.html"] = write("store.html", layout(R="", path="store.html", active="store",
+    title_en="Store · Iñigo González", title_es="Store · Iñigo González",
+    desc="Coming soon.", body=soon("Store", "Store", "")))
+
 data = {"cities": {c["id"]: c for c in CITIES}, "hero": CONF["hero_photos"], "about": CONF.get("about_photo"),
         "formspree": bool(CONF.get("formspree_id")), "ga4": CONF.get("ga4_id", "")}
 (SITE / "assets" / "data.js").write_text("window.SITE=" + json.dumps(data, ensure_ascii=False, separators=(",", ":")) + ";\n")
-print("ok", len(out) // 1024, "KB")
+print("ok", len(sizes), "pages,", sum(sizes.values()) // 1024, "KB")
