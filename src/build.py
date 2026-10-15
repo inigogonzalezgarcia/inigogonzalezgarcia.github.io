@@ -70,7 +70,7 @@ def stage_html(s):
           {visual_img}
           <div class="years"><span>{yrs}</span><span class="tag">{bi(*s["sector"])}</span></div>
           {'' if img else f'<div class="stage-n" aria-hidden="true">{s["n"]}</div>'}
-          <div class="years"><span>{where}</span></div>
+          {'' if img else f'<div class="years"><span>{where}</span></div>'}
         </div>
         <div class="stage-body">
           <p class="label">{bi("Etapa", "Stage")} {s["n"]} · {yrs}{live}</p>
