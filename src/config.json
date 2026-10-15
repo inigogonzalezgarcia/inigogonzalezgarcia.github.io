@@ -23,6 +23,67 @@
     "caption_es": "Nueva York",
     "caption_en": "New York"
   },
-  "stage_photos": {},
-  "ga4_id": "G-D7XS5T8L5L"
+  "stage_photos": {
+    "s1": {
+      "src": "assets/img/stage-s1.webp",
+      "alt": "Madrid · Gran Vía",
+      "place_es": "Madrid · Gran Vía",
+      "place_en": "Madrid · Gran Vía",
+      "author": "Nan Palmero",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Madrid_Gran_Via_Metropolis_(28895522813).jpg"
+    },
+    "s2": {
+      "src": "assets/img/stage-s2.webp",
+      "alt": "Paris",
+      "place_es": "París",
+      "place_en": "Paris",
+      "author": "Guilhem Vellut",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Fondation_Louis_Vuitton_roof_@_Mare_Saint-James_@_Bois_de_Boulogne_@_Paris_(28303477171).jpg"
+    },
+    "s3": {
+      "src": "assets/img/stage-s3.webp",
+      "alt": "Kansas City, Missouri",
+      "place_es": "Kansas City, Misuri",
+      "place_en": "Kansas City, Missouri",
+      "author": "Brian Hillegas",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Downtown_Kansas_City,_Missouri_from_Liberty_Memorial.jpg"
+    },
+    "s4": {
+      "src": "assets/img/stage-s4.webp",
+      "alt": "Milan",
+      "place_es": "Milán",
+      "place_en": "Milan",
+      "author": "Angelino1975",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Milano_-_grattacieli_Porta_Nuova.jpg"
+    },
+    "s5": {
+      "src": "assets/img/stage-s5.webp",
+      "alt": "London",
+      "place_es": "Londres · Broadgate",
+      "place_en": "London · Broadgate",
+      "author": "Robert Lamb",
+      "license": "CC BY-SA 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Broadgate_Circle_-_geograph.org.uk_-_5746404.jpg"
+    }
+  },
+  "ga4_id": "G-D7XS5T8L5L",
+  "journey_photo": {
+    "src": "assets/img/journey.webp",
+    "alt": "Data center aisle",
+    "place_es": "Centro de datos",
+    "place_en": "Data center",
+    "author": "Robert Scoble",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Microsoft_Bing_Maps%27_datacenter_-_Flickr_-_Robert_Scoble.jpg"
+  }
 }
