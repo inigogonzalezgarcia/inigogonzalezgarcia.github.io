@@ -593,4 +593,84 @@ Una iteración de CI: el plan de rollout se aplicaba antes que los objetos NVIDI
 
 ## Sin probar todavía
 GPU y NIC reales, el upgrade controller del propio GPU Operator, Argo CD y `flux bootstrap`."""),
+
+dict(n="17", repo="17-teams-rooms-fleet-health", date="2026-10-15", cat="tools",
+ title_en="Which meeting rooms will fail today, and in what order to fix them", title_es="Qué salas de reuniones van a fallar hoy y en qué orden arreglarlas",
+ dek_en="Teams Rooms health from Microsoft Graph, a room register and today's bookings, turned into a morning walk-round.",
+ dek_es="La salud de Teams Rooms desde Microsoft Graph, un registro de salas y las reservas del día, convertidos en la ronda de primera hora.",
+ en="""## The problem
+The Teams admin center shows the health of every room, one device at a time. What the engineer on site needs at 08:00 is a short list: the boardroom with a meeting in 30 minutes first, the small room that is free all day last, and the first thing to try for each problem.
+
+## What I built
+- `scripts/Export-TeamsRoomsHealth.ps1` reads devices and their health from Microsoft Graph (`/teamwork/devices`, read-only).
+- A readiness state per room: Not ready (offline, Teams sign-in failed, camera, microphone, speaker or main display down), At risk (no calendar on the console, stale heartbeat, outdated software, second display or HDMI ingest down) or Ready.
+- `morning_check.md`, ordered by readiness, priority room and next meeting, with a first step for each issue. Also `report.html`, `actions.csv` with serial numbers for the ticket, and a daily trend.
+- A housekeeping list: firmware that drifted from the rest of the model and devices nobody added to the room register.
+
+## How it is built
+Python with the standard library only, plus PowerShell for the Graph exports. The demo is a made-up company with 25 devices in three offices and faults placed on purpose. 14 tests. A short runbook explains the morning routine.
+
+## What I learned
+Most of the value is in the order of the list, not in the detection. And an offline console should show one issue, not five: everything else about it is noise until it is back.
+
+## Not tested yet
+The PowerShell scripts against a real tenant. The `/teamwork/devices` API is in Graph beta, so the parser treats anything missing as unknown instead of failing.""",
+ es="""## El problema
+El Teams admin center enseña la salud de cada sala, de dispositivo en dispositivo. Lo que necesita el técnico a las 8:00 es una lista corta: primero la sala de Consejo con reunión en 30 minutos, al final la sala pequeña que está libre todo el día, y lo primero que hay que probar en cada problema.
+
+## Qué he hecho
+- `scripts/Export-TeamsRoomsHealth.ps1` lee los dispositivos y su salud desde Microsoft Graph (`/teamwork/devices`, solo lectura).
+- Un estado por sala: No lista (sin conexión, fallo de inicio de sesión en Teams, cámara, micrófono, altavoz o pantalla principal caídos), En riesgo (sin calendario en la consola, sin latido reciente, software desactualizado, segunda pantalla o entrada HDMI caídas) o Lista.
+- `morning_check.md`, ordenado por estado, sala prioritaria y próxima reunión, con un primer paso para cada problema. Además `report.html`, `actions.csv` con números de serie para el ticket y una tendencia diaria.
+- Una lista de mantenimiento: firmware que se ha quedado distinto al resto del modelo y dispositivos que nadie dio de alta en el registro de salas.
+
+## Cómo está hecho
+Python solo con la librería estándar y PowerShell para las exportaciones de Graph. La demo es una empresa inventada con 25 dispositivos en tres oficinas y fallos puestos a propósito. 14 tests. Un runbook corto explica la rutina de primera hora.
+
+## Qué aprendí
+Casi todo el valor está en el orden de la lista, no en la detección. Y una consola sin conexión debe mostrar un problema, no cinco: lo demás es ruido hasta que vuelva.
+
+## Sin probar todavía
+Los scripts de PowerShell contra un tenant real. La API `/teamwork/devices` está en la beta de Graph, así que el parser trata lo que falte como desconocido en lugar de fallar."""),
+
+dict(n="18", repo="18-mecm-intune-comanagement-tracker", date="2026-10-15", cat="tools",
+ title_en="A go/no-go for the next co-management slider move", title_es="Un go/no-go para el siguiente paso del slider de co-management",
+ dek_en="MECM and Intune joined in one report: real co-management state, workload authority against the plan and Windows 11 waves.",
+ dek_es="MECM e Intune en un solo informe: estado real de co-management, autoridad por workload frente al plan y olas de Windows 11.",
+ en="""## The problem
+In a co-management and Windows 11 migration, every status meeting asks the same things: how many devices are really co-managed, what breaks if we move a workload to Intune for everyone, and will the next wave finish on time. The answers sit in two consoles that do not share a report.
+
+## What I built
+- A read-only SQL query for the MECM side (reporting views: client health, OS build, collections) and a PowerShell export for Intune (`managedDevices` with `configurationManagerClientEnabledFeatures`).
+- A join by device name with five states: co-managed, MECM only (not enrolled), enrolled outside co-management, in MECM without client, Intune only.
+- For each co-managed device, the workload authority the plan expects against what Intune reports.
+- Progress per Windows 11 wave and hardware that blocks the upgrade.
+- `gates.md`: for every workload on Pilot, GO or NO-GO against limits agreed in `plan.json`, ready to paste into the change request.
+
+## How it is built
+Python with the standard library only. The demo is a made-up company with 260 devices halfway through the migration; the gates say NO-GO because only 91.9 % of devices are co-managed and one pilot device has not picked up the change. 14 tests and a playbook for running it alongside a change board.
+
+## What I learned
+From the Windows 11 migration I led: most of the effort is not the upgrade, it is finding the devices that are not where the plan says they are. Agreeing the gates before the CAB, not during it, saves the longest discussions.
+
+## Not tested yet
+The SQL query against a real site database and the PowerShell export against a real tenant.""",
+ es="""## El problema
+En una migración a co-management y Windows 11, cada reunión de seguimiento pregunta lo mismo: cuántos equipos están de verdad co-gestionados, qué se rompe si pasamos un workload a Intune para todos y si la siguiente ola va a acabar a tiempo. Las respuestas están en dos consolas que no comparten informe.
+
+## Qué he hecho
+- Una consulta SQL de solo lectura para MECM (vistas de informes: salud del cliente, build del SO, colecciones) y una exportación en PowerShell para Intune (`managedDevices` con `configurationManagerClientEnabledFeatures`).
+- Un cruce por nombre de equipo con cinco estados: co-gestionado, solo MECM (sin inscribir), inscrito fuera de co-management, en MECM sin cliente y solo Intune.
+- Para cada equipo co-gestionado, la autoridad por workload que espera el plan frente a la que informa Intune.
+- El avance de cada ola de Windows 11 y el hardware que impide la actualización.
+- `gates.md`: para cada workload en Pilot, GO o NO-GO frente a límites acordados en `plan.json`, listo para pegar en la petición de cambio.
+
+## Cómo está hecho
+Python solo con la librería estándar. La demo es una empresa inventada con 260 equipos a mitad de migración; los gates dicen NO-GO porque solo el 91,9 % de los equipos está co-gestionado y un equipo del piloto no ha recogido el cambio. 14 tests y un playbook para usarlo junto al comité de cambios.
+
+## Qué aprendí
+De la migración a Windows 11 que lideré: casi todo el esfuerzo no está en la actualización, sino en encontrar los equipos que no están donde dice el plan. Acordar los gates antes del CAB, y no durante, ahorra las discusiones más largas.
+
+## Sin probar todavía
+La consulta SQL contra una base de datos de sitio real y la exportación de PowerShell contra un tenant real."""),
 ]
