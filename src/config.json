@@ -85,5 +85,6 @@
     "license": "CC BY 2.0",
     "license_url": "https://creativecommons.org/licenses/by/2.0",
     "source": "https://commons.wikimedia.org/wiki/File:Microsoft_Bing_Maps%27_datacenter_-_Flickr_-_Robert_Scoble.jpg"
-  }
+  },
+  "turnstile_sitekey": "0x4AAAAAAFXb-FidzxrxelHX"
 }
