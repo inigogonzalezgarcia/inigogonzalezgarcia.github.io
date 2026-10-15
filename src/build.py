@@ -62,13 +62,14 @@ def stage_html(s):
     where = bi(s["where"], s.get("where_en", s["where"]))
     live = f'<span class="live label"><span class="dot"></span>{bi("En curso", "Current")}</span>' if s.get("live") else ""
     img = CONF["stage_photos"].get(s["key"])
-    visual_img = f'<img src="{img["src"]}" alt="{html.escape(img.get("alt",""))}" loading="lazy">' if img else ""
+    visual_img = (f'<img src="{img["src"]}" alt="{html.escape(img.get("alt",""))}" loading="lazy" width="600" height="450">'
+                  f'<span class="photo-place label">{bi(html.escape(img["place_es"]), html.escape(img["place_en"]))}</span>') if img else ""
     chips = "".join(f"<li>{html.escape(c)}</li>" for c in s["chips"])
     return f'''      <article class="stage reveal" id="etapa-{s["key"]}">
         <div class="stage-visual{' photo' if img else ''}">
           {visual_img}
           <div class="years"><span>{yrs}</span><span class="tag">{bi(*s["sector"])}</span></div>
-          <div class="stage-n" aria-hidden="true">{s["n"]}</div>
+          {'' if img else f'<div class="stage-n" aria-hidden="true">{s["n"]}</div>'}
           <div class="years"><span>{where}</span></div>
         </div>
         <div class="stage-body">
@@ -184,11 +185,27 @@ sizes["index.html"] = write("index.html", layout(R="", path="", active="", home=
     desc=DESC, body=home_body))
 
 # journey
+JP = CONF.get("journey_photo")
+def credit(ph):
+    return (f'<li>{bi(html.escape(ph["place_es"]), html.escape(ph["place_en"]))}: <a href="{ph["source"]}" target="_blank" rel="noopener">'
+            f'{html.escape(ph["author"])}</a>, <a href="{ph["license_url"]}" target="_blank" rel="noopener">{ph["license"]}</a></li>')
+CREDITS = "".join(credit(p) for p in ([JP] if JP else []) + [CONF["stage_photos"][k] for k in sorted(CONF["stage_photos"])])
 journey_body = page_hero(bi("El viaje · 2015 — 2026", "The journey · 2015 — 2026"),
     bi("Once años.<br>Cinco etapas.", "Eleven years.<br>Five stages."),
     bi("De una consultora tecnológica a la sede de Madrid de una firma de servicios financieros, con la misma idea: que la tecnología funcione y no se note.",
        "From a technology consultancy to the Madrid site of a financial services firm, with the same idea throughout: technology that works and that people don't have to think about.")) \
-    + "\n\n" + SEC["numbers"] + "\n\n" + SEC["stages"].replace("{{STAGES}}", STAGES_HTML) + "\n\n" + SEC["toolkit"]
+    + "\n\n" + SEC["numbers"].replace(' style="padding-top:0"', '') + "\n\n" + SEC["stages"].replace("{{STAGES}}", STAGES_HTML) + "\n\n" + SEC["toolkit"] \
+    + f'''
+
+<section class="credits">
+  <div class="wrap">
+    <p class="label muted">{bi("Fotografías", "Photo credits")}</p>
+    <ul>{CREDITS}</ul>
+    <p class="muted">{bi("Imágenes de Wikimedia Commons, recortadas y comprimidas para la web.", "Images from Wikimedia Commons, cropped and compressed for the web.")}</p>
+  </div>
+</section>'''
+if JP:
+    journey_body = journey_body.replace('<section class="page-hero">', f'<section class="page-hero has-bg" style="background-image:url({JP["src"]})">', 1)
 sizes["journey.html"] = write("journey.html", layout(R="", path="journey.html", active="journey",
     title_en="Journey · Iñigo González", title_es="Viaje · Iñigo González",
     desc="Eleven years in IT operations in five stages: consulting, luxury retail, healthcare software, manufacturing and financial services.", body=journey_body))
