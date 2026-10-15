@@ -136,6 +136,10 @@ from posts import POSTS, CATS
 
 SEC = {p.stem: p.read_text() for p in (ROOT / "sections").glob("*.html")}
 FORM = f'https://formspree.io/f/{CONF["formspree_id"]}' if CONF.get("formspree_id") else f"mailto:{MAIL}"
+TS = CONF.get("turnstile_sitekey", "")
+CAPTCHA = (f'<div class="cf-turnstile" data-sitekey="{TS}" data-theme="light" data-size="flexible" data-language="auto" '
+           f'data-callback="tsOk" data-expired-callback="tsExpired" data-error-callback="tsExpired"></div>') if TS else ""
+CAPTCHA_JS = '<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>' if TS else ""
 STAGES_HTML = "\n".join(stage_html(s) for s in STAGES)
 POSTS_SORTED = sorted(POSTS, key=lambda p: (p["date"], p["n"]), reverse=True)
 DESC = "Iñigo González: IT Site Leader in Madrid. 11+ years in IT operations, Modern Workplace and infrastructure across financial services, healthcare, manufacturing and luxury retail."
@@ -284,7 +288,7 @@ now = f'''<section class="section">
   </div>
 </section>'''
 about_body = SEC["about"].replace('class="section dark" id="sobre-mi"', 'class="section dark about-top" id="sobre-mi"') \
-    + "\n\n" + now + "\n\n" + SEC["contact"].replace("{{FORM_ACTION}}", FORM)
+    + "\n\n" + now + "\n\n" + SEC["contact"].replace("{{FORM_ACTION}}", FORM).replace("{{CAPTCHA}}", CAPTCHA).replace("{{CAPTCHA_JS}}", CAPTCHA_JS)
 sizes["about.html"] = write("about.html", layout(R="", path="about.html", active="about",
     title_en="About · Iñigo González", title_es="Sobre mí · Iñigo González",
     desc="About Iñigo González, IT Site Leader in Madrid, and how to get in touch.", body=about_body))
@@ -295,7 +299,6 @@ LINKS = [
     ("journey.html", bi("El viaje: once años en cinco etapas", "The journey: eleven years in five stages"), ""),
     (LINKEDIN, "LinkedIn", "ext"),
     (GITHUB, "GitHub", "ext"),
-    (f"mailto:{MAIL}", "Email", "ext"),
     ("about.html#contacto", bi("Formulario de contacto", "Contact form"), ""),
     (LINKTREE, "Linktree", "ext"),
 ]
