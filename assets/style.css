@@ -322,3 +322,14 @@ footer a{color:var(--on-ink)}
 .link-btn:hover{background:var(--ink);color:var(--on-ink)}
 .links-section{padding-top:56px}
 .post-hero h1{font-size:clamp(34px,4.8vw,68px);max-width:20ch}
+.stage-visual img{z-index:0}
+.stage-visual.photo::before{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(14,26,36,.8) 0%,rgba(14,26,36,.35) 22%,transparent 42%)}
+.stage-visual.photo::after{z-index:0;background:linear-gradient(180deg,transparent 45%,rgba(14,26,36,.85))}
+.stage-visual.photo{justify-content:space-between}
+.stage-visual .photo-place{position:absolute;right:22px;bottom:52px;z-index:1;color:#f2eee6;font-size:11px;opacity:.9}
+.page-hero.has-bg{position:relative;background-color:var(--ink);background-position:center;background-size:cover;background-repeat:no-repeat}
+.page-hero.has-bg::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,26,36,.92) 0%,rgba(14,26,36,.7) 55%,rgba(14,26,36,.45) 100%)}
+.page-hero.has-bg .wrap{position:relative}
+.credits{padding:36px 0 48px;border-top:1px solid var(--line);font-size:13px}
+.credits ul{list-style:none;margin:10px 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 22px}
+.credits a{color:inherit}
