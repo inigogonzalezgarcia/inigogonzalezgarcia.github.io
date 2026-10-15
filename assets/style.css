@@ -326,7 +326,7 @@ footer a{color:var(--on-ink)}
 .stage-visual.photo::before{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(14,26,36,.8) 0%,rgba(14,26,36,.35) 22%,transparent 42%)}
 .stage-visual.photo::after{z-index:0;background:linear-gradient(180deg,transparent 45%,rgba(14,26,36,.85))}
 .stage-visual.photo{justify-content:space-between}
-.stage-visual .photo-place{position:absolute;right:22px;bottom:52px;z-index:1;color:#f2eee6;font-size:11px;opacity:.9}
+.stage-visual .photo-place{position:absolute;right:22px;bottom:22px;z-index:1;color:#f2eee6;font-size:11px;opacity:.9}
 .page-hero.has-bg{position:relative;background-color:var(--ink);background-position:center;background-size:cover;background-repeat:no-repeat}
 .page-hero.has-bg::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,26,36,.92) 0%,rgba(14,26,36,.7) 55%,rgba(14,26,36,.45) 100%)}
 .page-hero.has-bg .wrap{position:relative}
