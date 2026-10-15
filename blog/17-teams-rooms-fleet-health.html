@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Which meeting rooms will fail today, and in what order to fix them · Iñigo González" data-title-es="Qué salas de reuniones van a fallar hoy y en qué orden arreglarlas · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Which meeting rooms will fail today, and in what order to fix them · Iñigo González</title>
+<meta name="description" content="Teams Rooms health from Microsoft Graph, a room register and today&#x27;s bookings, turned into a morning walk-round.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/17-teams-rooms-fleet-health.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Which meeting rooms will fail today, and in what order to fix them · Iñigo González">
+<meta property="og:description" content="Teams Rooms health from Microsoft Graph, a room register and today&#x27;s bookings, turned into a morning walk-round.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/17-teams-rooms-fleet-health.html">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+
+</head>
+<body>
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header" id="top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a><a href="../store.html"><span class="es">Store ↗</span><span class="en">Store ↗</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../links.html"><span class="label">05</span><span class="es">Links</span><span class="en">Links</span></a><a href="../store.html"><span class="label">06</span><span class="es">Store ↗</span><span class="en">Store ↗</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 17</p>
+    <h1><span class="es">Qué salas de reuniones van a fallar hoy y en qué orden arreglarlas</span><span class="en">Which meeting rooms will fail today, and in what order to fix them</span></h1>
+    <p class="lede"><span class="es">La salud de Teams Rooms desde Microsoft Graph, un registro de salas y las reservas del día, convertidos en la ronda de primera hora.</span><span class="en">Teams Rooms health from Microsoft Graph, a room register and today&#x27;s bookings, turned into a morning walk-round.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span> · <span class="es">15 oct 2026</span><span class="en">15 Oct 2026</span> · <span class="es">2 min</span><span class="en">2 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>El problema</h2>
+<p>El Teams admin center enseña la salud de cada sala, de dispositivo en dispositivo. Lo que necesita el técnico a las 8:00 es una lista corta: primero la sala de Consejo con reunión en 30 minutos, al final la sala pequeña que está libre todo el día, y lo primero que hay que probar en cada problema.</p>
+<h2>Qué he hecho</h2>
+<ul><li><code>scripts/Export-TeamsRoomsHealth.ps1</code> lee los dispositivos y su salud desde Microsoft Graph (<code>/teamwork/devices</code>, solo lectura).</li><li>Un estado por sala: No lista (sin conexión, fallo de inicio de sesión en Teams, cámara, micrófono, altavoz o pantalla principal caídos), En riesgo (sin calendario en la consola, sin latido reciente, software desactualizado, segunda pantalla o entrada HDMI caídas) o Lista.</li><li><code>morning_check.md</code>, ordenado por estado, sala prioritaria y próxima reunión, con un primer paso para cada problema. Además <code>report.html</code>, <code>actions.csv</code> con números de serie para el ticket y una tendencia diaria.</li><li>Una lista de mantenimiento: firmware que se ha quedado distinto al resto del modelo y dispositivos que nadie dio de alta en el registro de salas.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python solo con la librería estándar y PowerShell para las exportaciones de Graph. La demo es una empresa inventada con 25 dispositivos en tres oficinas y fallos puestos a propósito. 14 tests. Un runbook corto explica la rutina de primera hora.</p>
+<h2>Qué aprendí</h2>
+<p>Casi todo el valor está en el orden de la lista, no en la detección. Y una consola sin conexión debe mostrar un problema, no cinco: lo demás es ruido hasta que vuelva.</p>
+<h2>Sin probar todavía</h2>
+<p>Los scripts de PowerShell contra un tenant real. La API <code>/teamwork/devices</code> está en la beta de Graph, así que el parser trata lo que falte como desconocido en lugar de fallar.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>The problem</h2>
+<p>The Teams admin center shows the health of every room, one device at a time. What the engineer on site needs at 08:00 is a short list: the boardroom with a meeting in 30 minutes first, the small room that is free all day last, and the first thing to try for each problem.</p>
+<h2>What I built</h2>
+<ul><li><code>scripts/Export-TeamsRoomsHealth.ps1</code> reads devices and their health from Microsoft Graph (<code>/teamwork/devices</code>, read-only).</li><li>A readiness state per room: Not ready (offline, Teams sign-in failed, camera, microphone, speaker or main display down), At risk (no calendar on the console, stale heartbeat, outdated software, second display or HDMI ingest down) or Ready.</li><li><code>morning_check.md</code>, ordered by readiness, priority room and next meeting, with a first step for each issue. Also <code>report.html</code>, <code>actions.csv</code> with serial numbers for the ticket, and a daily trend.</li><li>A housekeeping list: firmware that drifted from the rest of the model and devices nobody added to the room register.</li></ul>
+<h2>How it is built</h2>
+<p>Python with the standard library only, plus PowerShell for the Graph exports. The demo is a made-up company with 25 devices in three offices and faults placed on purpose. 14 tests. A short runbook explains the morning routine.</p>
+<h2>What I learned</h2>
+<p>Most of the value is in the order of the list, not in the detection. And an offline console should show one issue, not five: everything else about it is noise until it is back.</p>
+<h2>Not tested yet</h2>
+<p>The PowerShell scripts against a real tenant. The <code>/teamwork/devices</code> API is in Graph beta, so the parser treats anything missing as unknown instead of failing.</p>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
+      <p class="repo-name">17-teams-rooms-fleet-health</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/17-teams-rooms-fleet-health" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="16-gitops-gpu-fleet.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Promocionar versiones del GPU Operator de staging a prod con Flux</span><span class="en">Promoting GPU Operator releases from staging to prod with Flux</span></span></a>
+    <a class="post-nav-link next" href="18-mecm-intune-comanagement-tracker.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Un go/no-go para el siguiente paso del slider de co-management</span><span class="en">A go/no-go for the next co-management slider move</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><span class="es">Hecha a mano y publicada con GitHub Pages ·</span><span class="en">Hand-built and published with GitHub Pages ·</span> <a href="https://github.com/inigogonzalezgarcia/inigogonzalezgarcia.github.io"><span class="es">código</span><span class="en">source</span></a></span>
+    <span><a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
