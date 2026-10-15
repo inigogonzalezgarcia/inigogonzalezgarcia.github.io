@@ -82,7 +82,7 @@ def layout(*, R, path, active, title_en, title_es, desc, body, home=False, og_ty
   <div class="menu-foot label">
     <a href="{LINKEDIN}" rel="me noopener" target="_blank">LinkedIn ↗</a>
     <a href="{GITHUB}" rel="me noopener" target="_blank">GitHub ↗</a>
-    <a href="mailto:{MAIL}">Email ↗</a>
+    <a href="{R}about.html#contacto">{bi("Contacto", "Contact")} →</a>
   </div>
 </div>
 
