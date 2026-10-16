@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Which SSO app will break next, and which one nobody is watching · Iñigo González" data-title-es="Qué app con SSO va a fallar la próxima y cuál no vigila nadie · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Which SSO app will break next, and which one nobody is watching · Iñigo González</title>
+<meta name="description" content="Enterprise apps and app registrations in Entra ID: certificates and secrets about to expire, owners, MFA coverage, risky permissions and SCIM.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/20-entra-sso-app-audit.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Which SSO app will break next, and which one nobody is watching · Iñigo González">
+<meta property="og:description" content="Enterprise apps and app registrations in Entra ID: certificates and secrets about to expire, owners, MFA coverage, risky permissions and SCIM.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/20-entra-sso-app-audit.html">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+
+</head>
+<body>
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header" id="top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a><a href="../store.html"><span class="es">Store ↗</span><span class="en">Store ↗</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../links.html"><span class="label">05</span><span class="es">Links</span><span class="en">Links</span></a><a href="../store.html"><span class="label">06</span><span class="es">Store ↗</span><span class="en">Store ↗</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 20</p>
+    <h1><span class="es">Qué app con SSO va a fallar la próxima y cuál no vigila nadie</span><span class="en">Which SSO app will break next, and which one nobody is watching</span></h1>
+    <p class="lede"><span class="es">Aplicaciones empresariales y registros de aplicaciones en Entra ID: certificados y secretos a punto de caducar, propietarios, cobertura de MFA, permisos de riesgo y SCIM.</span><span class="en">Enterprise apps and app registrations in Entra ID: certificates and secrets about to expire, owners, MFA coverage, risky permissions and SCIM.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span> · <span class="es">16 oct 2026</span><span class="en">16 Oct 2026</span> · <span class="es">2 min</span><span class="en">2 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>El problema</h2>
+<p>El inicio de sesión único concentra el acceso en un sitio, pero los detalles están repartidos en cientos de aplicaciones empresariales. Los problemas se repiten: caduca un certificado de firma SAML y una aplicación SaaS deja de aceptar inicios de sesión a las 9:00, caduca un secreto y falla un proceso nocturno, una aplicación no tiene propietario, cualquier usuario puede abrirla, se excluyó de la política de MFA &quot;de momento&quot;, un proceso desatendido puede escribir en todo el directorio o el aprovisionamiento está en cuarentena y las bajas siguen teniendo cuenta en la aplicación.</p>
+<h2>Qué he hecho</h2>
+<ul><li><code>scripts/Export-EntraAppInventory.ps1</code>: una exportación de solo lectura con Microsoft Graph de las entidades de servicio, los registros de aplicaciones (solo las fechas de secretos y certificados, nunca su valor) y las políticas de acceso condicional.</li><li>Comprobaciones en seis áreas: credenciales, propietarios, acceso (asignación obligatoria y cobertura de MFA), permisos (permisos de aplicación, consentimiento para toda la organización, editores sin verificar, URI de redirección), aprovisionamiento SCIM y aplicaciones sin uso.</li><li><code>review.md</code> para la revisión mensual de accesos, <code>renewals.csv</code> como calendario de renovaciones con propietarios, <code>findings.csv</code> y <code>report.html</code>.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python solo con la librería estándar y PowerShell para Graph. La demo es un tenant inventado con 21 aplicaciones empresariales y fallos puestos a propósito. 15 tests. Un runbook que incluye cómo renovar un certificado SAML sin corte.</p>
+<h2>Qué aprendí</h2>
+<p>De integrar aplicaciones SaaS en Entra ID: lo difícil no es configurar el SSO, sino quién renueva el certificado dos años después. Un secreto caducado mientras la aplicación sigue iniciando sesión es urgente; uno caducado que ya se sustituyó por otro nuevo es solo limpieza.</p>
+<h2>Sin probar todavía</h2>
+<p>La exportación contra un tenant real. El informe de actividad de inicio de sesión está en la beta de Graph. El aprovisionamiento SCIM y los detalles finos de OIDC son las partes que aún estoy aprendiendo, así que esas comprobaciones son sencillas a propósito.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>The problem</h2>
+<p>Single sign-on puts access in one place, but the details are spread over hundreds of enterprise apps. The same problems come back: a SAML signing certificate expires and a SaaS app stops accepting logons at 09:00, a client secret expires and a nightly job fails, an app has no owner, every user can open it, it was excluded from the MFA policy &quot;for now&quot;, a daemon can write to the whole directory, or provisioning is in quarantine and leavers keep their account in the app.</p>
+<h2>What I built</h2>
+<ul><li><code>scripts/Export-EntraAppInventory.ps1</code>: a read-only Microsoft Graph export of service principals, app registrations (only the dates of secrets and certificates, never the values) and Conditional Access policies.</li><li>Checks in six areas: credentials, ownership, access (assignment required and MFA coverage), permissions (application permissions, tenant-wide consent, unverified publishers, redirect URIs), SCIM provisioning and unused apps.</li><li><code>review.md</code> for the monthly access review, <code>renewals.csv</code> as a renewal calendar with owners, <code>findings.csv</code> and <code>report.html</code>.</li></ul>
+<h2>How it is built</h2>
+<p>Python with the standard library only, plus PowerShell for Graph. The demo is a made-up tenant with 21 enterprise apps and faults placed on purpose. 15 tests. A runbook that includes renewing a SAML certificate without an outage.</p>
+<h2>What I learned</h2>
+<p>From integrating SaaS apps in Entra ID: the hard part is not the SSO setup, it is who renews the certificate two years later. A secret expired while the app still signs in is urgent; an expired secret already replaced by a newer one is just clean-up.</p>
+<h2>Not tested yet</h2>
+<p>The export against a real tenant. The sign-in activity report is in Graph beta. SCIM provisioning and the finer points of OIDC are the parts I am still learning, so those checks are deliberately simple.</p>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
+      <p class="repo-name">20-entra-sso-app-audit</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/20-entra-sso-app-audit" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="19-ad-infra-health-check.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Un chequeo de los lunes para Active Directory</span><span class="en">A Monday-morning health check for Active Directory</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><span class="es">Hecha a mano y publicada con GitHub Pages ·</span><span class="en">Hand-built and published with GitHub Pages ·</span> <a href="https://github.com/inigogonzalezgarcia/inigogonzalezgarcia.github.io"><span class="es">código</span><span class="en">source</span></a></span>
+    <span><a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
