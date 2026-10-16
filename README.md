@@ -30,7 +30,7 @@ The font is self-hosted. Google Analytics 4 is loaded only after the visitor acc
 
 Want a site like this, or to talk about IT operations? Get in touch:
 
-- Email: [inigogonzalezgarcia@yahoo.es](mailto:inigogonzalezgarcia@yahoo.es)
+- Website (contact form): [inigogonzalezgarcia.github.io](https://inigogonzalezgarcia.github.io/about.html#contacto)
 - LinkedIn: [linkedin.com/in/igonzalez93](https://www.linkedin.com/in/igonzalez93)
 
 ## License
