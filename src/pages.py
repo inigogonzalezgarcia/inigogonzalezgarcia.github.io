@@ -15,10 +15,9 @@ NAV = [  # key, href (relative to site root), es, en
     ("map", "index.html#mapa", "Mapa", "Map"),
     ("blog", "blog/", "Blog", "Blog"),
     ("about", "about.html", "Sobre mí", "About"),
-    ("advisory", "asesoria.html", "Asesoría", "Advisory"),
+    ("store", "store.html", "Store", "Store"),
     ("resources", "recursos.html", "Recursos", "Resources"),
     ("links", "links.html", "Links", "Links"),
-    ("store", "store.html", "Store ↗", "Store ↗"),
 ]
 
 LANG_JS = ("document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')"
@@ -96,7 +95,7 @@ def layout(*, R, path, active, title_en, title_es, desc, body, home=False, og_ty
   <div class="wrap">
     <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
     <span>{bi("Hecha a mano y publicada con GitHub Pages ·", "Hand-built and published with GitHub Pages ·")} <a href="{GITHUB}/inigogonzalezgarcia.github.io">{bi("código", "source")}</a></span>
-    <span><a href="{R}privacidad.html">{bi("Privacidad y cookies", "Privacy and cookies")}</a> · <button class="linkbtn" type="button" data-cookie-settings>{bi("Preferencias de cookies", "Cookie settings")}</button></span>
+    <span><a href="{R}aviso-legal.html">{bi("Aviso legal", "Legal notice")}</a> · <a href="{R}privacidad.html">{bi("Privacidad y cookies", "Privacy and cookies")}</a> · <a href="{R}condiciones.html">{bi("Condiciones", "Terms")}</a> · <button class="linkbtn" type="button" data-cookie-settings>{bi("Preferencias de cookies", "Cookie settings")}</button></span>
     <a href="#top">{bi("Volver arriba ↑", "Back to top ↑")}</a>
   </div>
 </footer>
