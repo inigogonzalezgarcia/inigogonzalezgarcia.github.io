@@ -8,8 +8,8 @@
 
   /* ---------- language ---------- */
   var T = {
-    es: { title: "Iñigo González · Operaciones IT e Infraestructura", sending: "Enviando…", ok: "Gracias. Te responderé lo antes posible.", err: "No se ha podido enviar. Vuelve a intentarlo en unos minutos o escríbeme por LinkedIn.", missing: "Rellena nombre, un email válido y el mensaje.", captcha: "Completa la verificación antes de enviar.", nmissing: "Rellena tu nombre, un email válido y marca la casilla.", nok: "¡Hecho! Te enviaré las 33 ideas por email en las próximas 24 horas. Si no las ves, revisa Promociones y Spam." },
-    en: { title: "Iñigo González · IT Operations & Infrastructure", sending: "Sending…", ok: "Thank you. I'll get back to you soon.", err: "It couldn't be sent. Please try again in a few minutes or message me on LinkedIn.", missing: "Please fill in your name, a valid email and a message.", captcha: "Please complete the check before sending.", nmissing: "Please fill in your name and a valid email, and tick the box.", nok: "Done! I’ll email you the 33 ideas within 24 hours. If you can’t see them, check your Promotions and Spam folders." }
+    es: { title: "Iñigo González · Operaciones IT e Infraestructura", sending: "Enviando…", ok: "Gracias. Te responderé lo antes posible.", err: "No se ha podido enviar. Vuelve a intentarlo en unos minutos o escríbeme por LinkedIn.", missing: "Rellena nombre, un email válido y el mensaje.", captcha: "Completa la verificación antes de enviar.", nmissing: "Rellena tu nombre, un email válido y marca la casilla.", nok: "¡Hecho! Te enviaré las 33 ideas por email en las próximas 24 horas. Si no las ves, revisa Promociones y Spam.", nbrevo: "¡Casi está! Te he enviado un email para confirmar tu suscripción. En cuanto confirmes, te llegan las 33 ideas. Si no lo ves, revisa Promociones y Spam.", nconf: "¡Suscripción confirmada! Las 33 ideas van de camino a tu email." },
+    en: { title: "Iñigo González · IT Operations & Infrastructure", sending: "Sending…", ok: "Thank you. I'll get back to you soon.", err: "It couldn't be sent. Please try again in a few minutes or message me on LinkedIn.", missing: "Please fill in your name, a valid email and a message.", captcha: "Please complete the check before sending.", nmissing: "Please fill in your name and a valid email, and tick the box.", nok: "Done! I’ll email you the 33 ideas within 24 hours. If you can’t see them, check your Promotions and Spam folders.", nbrevo: "Almost there! I’ve sent you an email to confirm your subscription. Once you confirm, the 33 ideas will arrive. If you can’t see it, check Promotions and Spam.", nconf: "Subscription confirmed! The 33 ideas are on their way to your inbox." }
   };
   function applyLang(l) {
     root.lang = l;
@@ -113,26 +113,49 @@
   var tsBtns = [];
   window.tsOk = function () { tsBtns.forEach(function (b) { b.disabled = false; }); };
   window.tsExpired = function () { tsBtns.forEach(function (b) { b.disabled = true; }); };
+  var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   [["#contactForm", "#formStatus"], ["#newsForm", "#newsStatus"]].forEach(function (pair) {
     var form = $(pair[0]), status = $(pair[1]);
     if (!form) return;
     var news = form.getAttribute("data-kind") === "news";
+    var brevo = form.getAttribute("data-provider") === "brevo";
     var ts = $(".cf-turnstile", form), sendBtn = $('button[type="submit"]', form);
     if (ts && sendBtn) { sendBtn.disabled = true; tsBtns.push(sendBtn); }
+    if (news && /[?&]confirmado=1/.test(location.search)) {
+      status.className = "form-status ok"; status.textContent = T[lang()].nconf;
+      setTimeout(function () { form.scrollIntoView({ behavior: "smooth", block: "center" }); }, 300);
+    }
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var l = lang(), d = new FormData(form), t = T[l];
-      var name = (d.get("name") || "").trim(), email = (d.get("email") || "").trim();
-      var okFields = name && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && (news ? d.get("newsletter_consent") : (d.get("message") || "").trim());
-      if (!okFields) { status.className = "form-status err"; status.textContent = news ? t.nmissing : t.missing; return; }
-      if (!S.formspree) { status.className = "form-status err"; status.textContent = t.err; return; }
+      var done = function () { form.reset(); status.className = "form-status ok"; status.textContent = news ? (brevo ? t.nbrevo : t.nok) : t.ok; };
+      var fail = function () { status.className = "form-status err"; status.textContent = t.err; };
+      var reset = function () { if (ts && window.turnstile) { window.turnstile.reset(ts); sendBtn.disabled = true; } };
+      if (news) {
+        var nm = (d.get("NOMBRE") || "").trim(), em = (d.get("EMAIL") || "").trim(), ok = $("#n-consent", form);
+        if (!nm || !emailRe.test(em) || !(ok && ok.checked)) { status.className = "form-status err"; status.textContent = t.nmissing; return; }
+        if (ts && !d.get("cf-turnstile-response")) { status.className = "form-status err"; status.textContent = t.captcha; return; }
+        if ((d.get("email_address_check") || "") !== "") { done(); return; }
+        status.className = "form-status"; status.textContent = t.sending;
+        if (brevo) {
+          var body = new URLSearchParams();
+          body.set("NOMBRE", nm); body.set("EMAIL", em); body.set("IDIOMA", l);
+          body.set("email_address_check", ""); body.set("locale", l); body.set("html_type", "simple");
+          fetch(form.action, { method: "POST", mode: "no-cors", body: body }).then(done, fail).then(reset);
+        } else {
+          d.set("lang", l);
+          fetch(form.action, { method: "POST", body: d, headers: { Accept: "application/json" } })
+            .then(function (r) { if (!r.ok) throw 0; done(); }).catch(fail).then(reset);
+        }
+        return;
+      }
+      var name = (d.get("name") || "").trim(), email = (d.get("email") || "").trim(), msg = (d.get("message") || "").trim();
+      if (!name || !msg || !emailRe.test(email)) { status.className = "form-status err"; status.textContent = t.missing; return; }
+      if (!S.formspree) { fail(); return; }
       if (ts && !d.get("cf-turnstile-response")) { status.className = "form-status err"; status.textContent = t.captcha; return; }
-      if (news) d.set("lang", l);
       status.className = "form-status"; status.textContent = t.sending;
       fetch(form.action, { method: "POST", body: d, headers: { Accept: "application/json" } })
-        .then(function (r) { if (!r.ok) throw 0; form.reset(); status.className = "form-status ok"; status.textContent = news ? t.nok : t.ok; })
-        .catch(function () { status.className = "form-status err"; status.textContent = t.err; })
-        .then(function () { if (ts && window.turnstile) { window.turnstile.reset(ts); sendBtn.disabled = true; } });
+        .then(function (r) { if (!r.ok) throw 0; done(); }).catch(fail).then(reset);
     });
   });
 
