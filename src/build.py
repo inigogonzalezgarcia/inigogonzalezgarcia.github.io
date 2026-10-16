@@ -1,4 +1,4 @@
-"""Build every page (index, journey, blog, about, links, store) and assets/data.js from src/. Run: python3 src/build.py"""
+"""Build every page (index, journey, blog, about, store, resources, links, legal) and assets/data.js from src/. Run: python3 src/build.py"""
 import json, html, math, pathlib
 
 ROOT = pathlib.Path(__file__).parent
@@ -179,8 +179,8 @@ home_body = "\n\n".join([
       <h2 class="h2 sm">{bi("Estrategia profesional IT.", "IT career strategy.")}</h2>
     </div>
     <div>
-      <p class="lede">{bi("Un programa de pago para perfiles IT: genera oportunidades con visibilidad, posicionamiento y networking, y no solo enviando currículums.", "A paid programme for IT professionals: create opportunities through visibility, positioning and networking, not just by sending CVs.")}</p>
-      <a class="arrow-link" href="asesoria.html">{bi("Ver el programa", "See the programme")} →</a>
+      <p class="lede">{bi("Servicios para perfiles IT: genera oportunidades con visibilidad, posicionamiento y networking, y no solo enviando currículums.", "Services for IT professionals: create opportunities through visibility, positioning and networking, not just by sending CVs.")}</p>
+      <a class="arrow-link" href="store.html">{bi("Ver los servicios", "See the services")} →</a>
     </div>
   </div>
 </section>''',
@@ -305,12 +305,71 @@ sizes["about.html"] = write("about.html", layout(R="", path="about.html", active
     title_en="About · Iñigo González", title_es="Sobre mí · Iñigo González",
     desc="About Iñigo González, IT Site Leader in Madrid, and how to get in touch.", body=about_body))
 
-# advisory (IGG-ICS · IT · Tech Career, Lab & Strategy)
+# store (IGG-ICS · IT · Tech Career, Lab & Strategy): service catalogue, no prices or checkout yet
 BOOK = CONF.get("booking_url", "")
 if BOOK:
-    book_btn = f'<a class="btn" href="{BOOK}" target="_blank" rel="noopener">{bi("Reserva una llamada", "Book a call")} ↗</a>'
+    book_btn = f'<a class="btn" href="{BOOK}" target="_blank" rel="noopener">{bi("Reserva una llamada gratuita", "Book a free call")} ↗</a>'
+    book_link = lambda es, en: f'<a class="arrow-link" href="{BOOK}" target="_blank" rel="noopener">{bi(es, en)} ↗</a>'
 else:
     book_btn = f'<a class="btn" href="about.html#contacto">{bi("Pide información", "Ask for details")} →</a>'
+    book_link = lambda es, en: f'<a class="arrow-link" href="about.html#contacto">{bi(es, en)} →</a>'
+
+PROBLEMS = [
+    ("Tu CV no pasa el primer filtro", "Your CV doesn't get past the first filter",
+     "Los ATS y los reclutadores deciden en segundos. Si tu CV no explica tu stack y tus resultados, ni llega a un técnico.",
+     "ATS software and recruiters decide in seconds. If your CV doesn't explain your stack and your results, it never reaches an engineer."),
+    ("Tu LinkedIn no te trae oportunidades", "LinkedIn isn't bringing you opportunities",
+     "Un perfil genérico no aparece en las búsquedas de los reclutadores tech, y nadie te escribe.",
+     "A generic profile doesn't show up in tech recruiters' searches, so nobody gets in touch."),
+    ("Envías candidaturas y no pasa nada", "You apply and nothing happens",
+     "Sin una estrategia, sin networking y sin el mercado oculto, todo depende de las ofertas publicadas y de la suerte.",
+     "Without a strategy, networking or the hidden job market, everything depends on advertised roles and luck."),
+]
+problem_cards = "\n".join(
+    f'      <div class="etm-item reveal"><p class="label muted">{i:02d}</p><h3>{bi(es, en)}</h3><p>{bi(des, den)}</p></div>'
+    for i, (es, en, des, den) in enumerate(PROBLEMS, 1))
+
+SERVICES = [
+    {"id": "revision", "tag": ("Para empezar", "To get started"),
+     "name": ("Revisión exprés · CV + LinkedIn IT", "Express review · CV + LinkedIn for IT"),
+     "fmt": ("Por escrito, sin llamada · entrega en 5 días laborables", "Written, no call · delivered in 5 working days"),
+     "items": [("Revisión de tu CV pensando en los filtros ATS y en reclutadores de IT", "A review of your CV with ATS filters and IT recruiters in mind"),
+               ("Revisión de tu perfil de LinkedIn: titular, extracto, experiencia y aptitudes", "A review of your LinkedIn profile: headline, about, experience and skills"),
+               ("Informe con los cambios ordenados por prioridad", "A report with the changes in order of priority"),
+               ("Una ronda de dudas por email", "One round of questions by email")],
+     "for": ("Si tienes poco tiempo y quieres un CV y un perfil que funcionen ya.", "If you're short on time and want a CV and a profile that work now.")},
+    {"id": "diagnostico", "tag": ("El más pedido", "Most popular"),
+     "name": ("Diagnóstico 360º IT", "IT 360º diagnosis"),
+     "fmt": ("Videollamada de 60 min · resumen por escrito en 48 h", "60-min video call · written summary within 48 h"),
+     "items": [("Análisis de tu perfil, tu CV, tu LinkedIn y tu objetivo", "A look at your profile, CV, LinkedIn and goal"),
+               ("Hacia dónde ir: operaciones, cloud, ciberseguridad, gestión…", "Where to go next: operations, cloud, security, management…"),
+               ("Qué pide hoy el mercado para ese paso", "What the market asks for that step today"),
+               ("Plan de acción de 30 días por escrito", "A written 30-day action plan")],
+     "for": ("Si no tienes claro el siguiente paso o llevas tiempo sin respuestas.", "If your next step isn't clear or you've had no replies for a while.")},
+    {"id": "plan", "tag": ("Más completo", "Most complete"),
+     "name": ("Plan Acción IT · 4 semanas", "IT Action Plan · 4 weeks"),
+     "fmt": ("4 videollamadas de 45 min · dudas por email", "4 × 45-min video calls · questions by email"),
+     "items": [("El Diagnóstico 360º IT", "The IT 360º diagnosis"),
+               ("La Revisión exprés de CV + LinkedIn completa", "The full CV + LinkedIn express review"),
+               ("Estrategia de búsqueda, networking y mercado oculto", "Job search strategy, networking and the hidden job market"),
+               ("Preparación de entrevistas con una simulación, en español o en inglés", "Interview preparation with a mock interview, in Spanish or English")],
+     "for": ("Si buscas activamente y quieres hacerlo con método y acompañamiento.", "If you're actively looking and want a method and someone alongside you.")},
+]
+def svc_card(s):
+    lis = "".join(f"<li>{bi(es, en)}</li>" for es, en in s["items"])
+    return f'''      <article class="svc reveal" id="{s["id"]}">
+        <p class="label svc-tag">{bi(*s["tag"])}</p>
+        <h3>{bi(*s["name"])}</h3>
+        <p class="label muted svc-fmt">{bi(*s["fmt"])}</p>
+        <ul>{lis}</ul>
+        <p class="svc-for">{bi(*s["for"])}</p>
+        <div class="svc-foot">
+          <span class="label svc-price">{bi("Precio: muy pronto", "Price: coming soon")}</span>
+          {book_link("Pregunta por este servicio", "Ask about this service")}
+        </div>
+      </article>'''
+svc_cards = "\n".join(svc_card(s) for s in SERVICES)
+
 ETM_AREAS = [
     ("Estrategia profesional", "Career strategy",
      "Dónde estás y hacia dónde ir (operaciones, cloud, ciberseguridad, gestión…) y qué pasos tienen sentido con el mercado actual y la IA.",
@@ -334,46 +393,129 @@ ETM_AREAS = [
 etm_cards = "\n".join(
     f'      <div class="etm-item reveal"><p class="label muted">{i:02d}</p><h3>{bi(es, en)}</h3><p>{bi(des, den)}</p></div>'
     for i, (es, en, des, den) in enumerate(ETM_AREAS, 1))
-advisory_body = page_hero("IGG-ICS · IT · Tech Career, Lab &amp; Strategy",
+
+STEPS = [
+    ("Llamada gratuita", "Free call", "30 minutos para hablar de tu situación y tu objetivo, sin compromiso.", "30 minutes to talk about where you are and your goal, no strings attached."),
+    ("Eliges el servicio", "Pick a service", "Te digo cuál encaja contigo, o si de momento no necesitas ninguno.", "I tell you which one fits, or whether you don't need one yet."),
+    ("Trabajamos", "We work on it", "Me envías tu material o hacemos las sesiones online, en español o en inglés.", "You send me your material or we do the sessions online, in Spanish or English."),
+    ("Plan y seguimiento", "Plan and follow-up", "Te llevas un plan por escrito y resolvemos las dudas que surjan.", "You leave with a written plan and we sort out any questions that come up."),
+]
+steps_html = "\n".join(
+    f'      <div class="spec-row"><dt class="label">{i:02d} · {bi(es, en)}</dt><dd>{bi(des, den)}</dd></div>'
+    for i, (es, en, des, den) in enumerate(STEPS, 1))
+
+FAQ = [
+    ("¿Cuánto cuestan los servicios?", "How much do the services cost?",
+     "Publicaré los precios cuando abra la contratación online, muy pronto. Mientras tanto, pregúntame en la llamada gratuita.",
+     "I'll publish the prices when online booking opens, very soon. In the meantime, ask me on the free call."),
+    ("¿La primera llamada es gratis?", "Is the first call free?",
+     "Sí. Son 30 minutos para conocernos y ver si puedo ayudarte. No tienes que contratar nada después.",
+     "Yes. It's 30 minutes to meet and see whether I can help. You don't have to buy anything afterwards."),
+    ("¿Para quién es?", "Who is it for?",
+     "Para perfiles IT: soporte, sistemas, operaciones, workplace, infraestructura, cloud, ciberseguridad o gestión de equipos y servicios, desde junior hasta senior.",
+     "For IT professionals: support, systems, operations, workplace, infrastructure, cloud, security or team and service management, from junior to senior."),
+    ("¿Es online? ¿En qué idioma?", "Is it online? In which language?",
+     "Todo es online, por videollamada o por escrito, en español o en inglés.",
+     "Everything is online, by video call or in writing, in Spanish or English."),
+    ("¿Me garantizas un trabajo?", "Can you guarantee me a job?",
+     "No. Nadie puede garantizarlo. Trabajamos todo lo que depende de ti para que lleguen más y mejores oportunidades.",
+     "No. Nobody can. We work on everything that depends on you, so that more and better opportunities come your way."),
+    ("¿Qué pasa con mi CV y lo que te cuente?", "What happens to my CV and what I tell you?",
+     "Es confidencial y solo lo uso para prestarte el servicio. Más detalles en la política de privacidad.",
+     "It's confidential and I only use it to provide the service. More details in the privacy policy."),
+]
+faq_html = "\n".join(
+    f'      <details class="faq-item"><summary>{bi(q_es, q_en)}</summary><p>{bi(a_es, a_en)}</p></details>'
+    for q_es, q_en, a_es, a_en in FAQ)
+
+store_body = page_hero("Store · IGG-ICS · IT · Tech Career, Lab &amp; Strategy",
     bi("Tu carrera en IT,<br>con estrategia.", "Your IT career,<br>with a strategy."),
-    bi("Un programa de estrategia profesional para perfiles IT y tecnológicos, donde te ayudo a generar oportunidades laborales a través de visibilidad, posicionamiento y networking.",
-       "A career strategy programme for IT and tech professionals, where I help you create job opportunities through visibility, positioning and networking."),
-    f'<p style="margin-top:30px">{book_btn}</p>') + f'''
+    bi("Servicios de estrategia profesional para perfiles IT y tecnológicos: te ayudo a generar oportunidades con visibilidad, posicionamiento y networking, y no solo enviando currículums.",
+       "Career strategy services for IT and tech professionals: I help you create opportunities through visibility, positioning and networking, not just by sending CVs."),
+    f'''<div class="hero-ctas" style="margin-top:34px">
+      <a class="btn" href="#servicios">{bi("Ver servicios", "See services")} ↓</a>
+      {book_link("Llamada gratuita de 30 min", "Free 30-min call")}
+    </div>''') + f'''
 
 <section class="section">
-  <div class="wrap welcome reveal">
-    <div>
-      <p class="label kicker">{bi("Por qué", "Why")}</p>
-      <h2 class="h2 sm">{bi("Dejar de enviar currículums.", "Stop just sending CVs.")}</h2>
+  <div class="wrap">
+    <div class="numbers-head reveal">
+      <div>
+        <p class="label kicker">{bi("¿Te suena?", "Sound familiar?")}</p>
+        <h2 class="h2 sm">{bi("Lo que frena a muchos perfiles IT.", "What holds many IT professionals back.")}</h2>
+      </div>
     </div>
-    <div>
-      <p class="lede">{bi("IGG-ICS nace con el objetivo de enseñar a profesionales IT a dejar de depender únicamente de enviar currículums y empezar a construir una estrategia profesional que genere oportunidades.",
-                          "IGG-ICS was created to help IT professionals stop relying only on sending CVs and start building a career strategy that creates opportunities.")}</p>
+    <div class="etm-grid">
+{problem_cards}
     </div>
   </div>
 </section>
 
-<section class="section" style="background:var(--paper-2)">
+<section class="section" id="servicios" style="background:var(--paper-2)">
   <div class="wrap">
-    <p class="label kicker">{bi("Qué trabajamos", "What we work on")}</p>
+    <div class="numbers-head reveal">
+      <div>
+        <p class="label kicker">{bi("Servicios", "Services")}</p>
+        <h2 class="h2 sm">{bi("Elige por dónde empezar.", "Choose where to start.")}</h2>
+      </div>
+    </div>
+    <p class="notice reveal">{bi("La contratación online abrirá muy pronto. Si te interesa algún servicio, reserva una llamada gratuita o <a href='recursos.html'>apúntate a la newsletter</a> y te aviso.",
+                                 "Online booking opens very soon. If a service interests you, book a free call or <a href='recursos.html'>join the newsletter</a> and I'll let you know.")}</p>
+    <div class="svc-grid">
+{svc_cards}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="numbers-head reveal">
+      <div>
+        <p class="label kicker">{bi("Qué trabajamos", "What we work on")}</p>
+        <h2 class="h2 sm">{bi("Más que buscar empleo.", "More than a job search.")}</h2>
+      </div>
+    </div>
     <div class="etm-grid">
 {etm_cards}
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section" style="background:var(--paper-2)">
   <div class="wrap now-grid">
     <div class="reveal">
       <p class="label kicker">{bi("Cómo funciona", "How it works")}</p>
       <h2 class="h2 sm">{bi("Paso a paso.", "Step by step.")}</h2>
     </div>
     <dl class="spec etm-spec reveal">
-      <div class="spec-row"><dt class="label">01 · {bi("Primera llamada", "First call")}</dt><dd>{bi("Hablamos de tu situación, tus objetivos y si el programa encaja contigo.", "We talk about where you are, your goals and whether the programme is a good fit.")}</dd></div>
-      <div class="spec-row"><dt class="label">02 · {bi("Plan", "Plan")}</dt><dd>{bi("Te propongo un plan a medida con las áreas que más te van a ayudar.", "I propose a tailored plan with the areas that will help you most.")}</dd></div>
-      <div class="spec-row"><dt class="label">03 · {bi("Sesiones y seguimiento", "Sessions and follow-up")}</dt><dd>{bi("Sesiones online con tareas entre una y otra, y seguimiento de los avances.", "Online sessions with work in between, and follow-up on your progress.")}</dd></div>
-      <div class="spec-row"><dt class="label">{bi("Formato", "Format")}</dt><dd>{bi("Online, en español o en inglés. Servicio de pago; el precio depende del plan y te lo indico en la primera llamada.", "Online, in Spanish or English. Paid service; the price depends on the plan and I share it on the first call.")}</dd></div>
+{steps_html}
     </dl>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap welcome reveal">
+    <div>
+      <p class="label kicker">{bi("Próximamente", "Coming soon")}</p>
+      <h2 class="h2 sm">{bi("Taller en grupo.", "Group workshop.")}</h2>
+    </div>
+    <div>
+      <p class="lede">{bi("Un taller corto y práctico para perfiles IT, en directo y en grupo reducido. Si te apuntas a la newsletter <em>Tech Career Lab</em>, serás de los primeros en saber la fecha.",
+                          "A short, hands-on workshop for IT professionals, live and in a small group. Join the <em>Tech Career Lab</em> newsletter and you'll be among the first to hear the date.")}</p>
+      <a class="arrow-link" href="recursos.html">{bi("Apúntate y te aviso", "Sign up and I'll let you know")} →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--paper-2)">
+  <div class="wrap now-grid">
+    <div class="reveal">
+      <p class="label kicker">FAQ</p>
+      <h2 class="h2 sm">{bi("Preguntas frecuentes.", "Questions.")}</h2>
+    </div>
+    <div class="faq reveal">
+{faq_html}
+    </div>
   </div>
 </section>
 
@@ -386,13 +528,31 @@ advisory_body = page_hero("IGG-ICS · IT · Tech Career, Lab &amp; Strategy",
     <div>
       <p class="lede">{bi("Más que buscar empleo, trabajamos en construir carreras profesionales en IT con estrategia.", "More than looking for a job, we build IT careers with a strategy.")}</p>
       {book_btn}
-      <p class="muted small" style="margin-top:22px">{bi("Ningún programa puede garantizar una oferta de trabajo. Lo que sí trabajamos es todo lo que depende de ti para que lleguen más y mejores oportunidades.", "No programme can guarantee a job offer. What we do work on is everything that depends on you, so that more and better opportunities come your way.")}</p>
+      <p class="muted small" style="margin-top:22px">{bi("Ningún servicio puede garantizar una oferta de trabajo. Lo que sí trabajamos es todo lo que depende de ti para que lleguen más y mejores oportunidades. Consulta las <a href='condiciones.html'>condiciones</a>.", "No service can guarantee a job offer. What we do work on is everything that depends on you, so that more and better opportunities come your way. See the <a href='condiciones.html'>terms</a>.")}</p>
     </div>
   </div>
 </section>'''
-sizes["asesoria.html"] = write("asesoria.html", layout(R="", path="asesoria.html", active="advisory",
-    title_en="IGG-ICS · IT career strategy · Iñigo González", title_es="IGG-ICS · Estrategia profesional IT · Iñigo González",
-    desc="IGG-ICS (IT · Tech Career, Lab & Strategy): a paid career strategy programme for IT professionals on visibility, LinkedIn, personal brand, networking, CVs and interviews.", body=advisory_body))
+sizes["store.html"] = write("store.html", layout(R="", path="store.html", active="store",
+    title_en="Store · IGG-ICS IT career services · Iñigo González", title_es="Store · Servicios IGG-ICS para perfiles IT · Iñigo González",
+    desc="IGG-ICS career services for IT professionals: CV and LinkedIn review, IT 360º diagnosis and a 4-week action plan. Online, in Spanish or English.", body=store_body))
+
+# old advisory URL: keep it working (newsletters link to it) and send visitors to the store
+sizes["asesoria.html"] = write("asesoria.html", '''<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IGG-ICS · Store · Iñigo González</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/store.html">
+<meta http-equiv="refresh" content="0; url=store.html">
+<script>location.replace("store.html" + location.search + location.hash);</script>
+</head>
+<body>
+<p><a href="store.html">IGG-ICS → Store</a></p>
+</body>
+</html>
+''')
 
 # resources: lead magnet "33 ideas" + newsletter signup (Formspree for now; full text goes by email, not on the site)
 RES_BLOCKS = [
@@ -450,8 +610,8 @@ resources_body = page_hero(bi("Recursos gratuitos · Tech Career Lab", "Free res
       <h2 class="h2 sm">{bi("¿Quieres ir más rápido?", "Want to move faster?")}</h2>
     </div>
     <div>
-      <p class="lede">{bi("Si prefieres trabajarlo conmigo, paso a paso y con un plan a tu medida, échale un vistazo al programa.", "If you'd rather work on it with me, step by step and with a plan built for you, take a look at the programme.")}</p>
-      <a class="btn" href="asesoria.html">{bi("Ver el programa", "See the programme")} →</a>
+      <p class="lede">{bi("Si prefieres trabajarlo conmigo, paso a paso y con un plan a tu medida, échale un vistazo a los servicios.", "If you'd rather work on it with me, step by step and with a plan built for you, take a look at the services.")}</p>
+      <a class="btn" href="store.html">{bi("Ver los servicios", "See the services")} →</a>
     </div>
   </div>
 </section>
@@ -464,7 +624,7 @@ sizes["recursos.html"] = write("recursos.html", layout(R="", path="recursos.html
 LINKS = [
     ("blog/", bi("Blog: cómo construí cada proyecto", "Blog: how I built each project"), ""),
     ("journey.html", bi("El viaje: once años en cinco etapas", "The journey: eleven years in five stages"), ""),
-    ("asesoria.html", bi("IGG-ICS: estrategia profesional para perfiles IT", "IGG-ICS: career strategy for IT professionals"), ""),
+    ("store.html", bi("Store · IGG-ICS: servicios para perfiles IT", "Store · IGG-ICS: services for IT professionals"), ""),
     ("recursos.html", bi("Gratis: 33 ideas para que te encuentren si trabajas en IT", "Free: 33 ideas to get found if you work in IT"), ""),
     (LINKEDIN, "LinkedIn", "ext"),
     (GITHUB, "GitHub", "ext"),
@@ -486,10 +646,10 @@ sizes["links.html"] = write("links.html", layout(R="", path="links.html", active
     title_en="Links · Iñigo González", title_es="Links · Iñigo González",
     desc="Blog, journey, LinkedIn, GitHub and contact for Iñigo González.", body=links_body))
 
-# store (under construction)
-sizes["store.html"] = write("store.html", layout(R="", path="store.html", active="store",
-    title_en="Store · Iñigo González", title_es="Store · Iñigo González",
-    desc="Coming soon.", body=soon("Store", "Store", "")))
+# legal pages (legal notice, terms); privacidad.html stays hand-written
+import legal
+for path, kw in legal.PAGES.items():
+    sizes[path] = write(path, legal.shell(path=path, **kw))
 
 data = {"cities": {c["id"]: c for c in CITIES}, "hero": CONF["hero_photos"], "about": CONF.get("about_photo"),
         "formspree": bool(CONF.get("formspree_id")), "ga4": CONF.get("ga4_id", "")}
