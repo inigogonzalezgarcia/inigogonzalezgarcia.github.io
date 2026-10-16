@@ -406,17 +406,16 @@ RES_BLOCKS = [
 res_cards = "\n".join(
     f'      <div class="etm-item reveal"><p class="label muted">{n} {bi("ideas", "ideas")}</p><h3>{bi(es, en)}</h3></div>'
     for es, en, n in RES_BLOCKS)
-news_form = f'''<form class="reveal" id="newsForm" action="{FORM}" method="POST" novalidate data-kind="news">
-      <input type="hidden" name="_subject" value="Newsletter · 33 ideas IT">
-      <input type="hidden" name="form" value="newsletter-33-ideas">
-      <div class="field"><label class="label" for="n-name">{bi("Nombre", "Name")}</label><input id="n-name" name="name" autocomplete="given-name" required></div>
-      <div class="field"><label class="label" for="n-email">Email</label><input id="n-email" name="email" type="email" autocomplete="email" required></div>
-      <label class="check"><input type="checkbox" name="newsletter_consent" value="yes" required> <span>{bi("Quiero recibir las 33 ideas y la newsletter <em>Tech Career Lab</em> (cada dos semanas) con consejos para perfiles IT. Puedo darme de baja cuando quiera.", "I want to receive the 33 ideas and the <em>Tech Career Lab</em> newsletter (every two weeks) with tips for IT professionals. I can unsubscribe at any time.")}</span></label>
-      <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+NEWS_ACTION = CONF.get("brevo_form") or FORM
+news_form = f'''<form class="reveal" id="newsForm" action="{NEWS_ACTION}" method="POST" novalidate data-kind="news" data-provider="{'brevo' if CONF.get('brevo_form') else 'formspree'}">
+      <div class="field"><label class="label" for="n-name">{bi("Nombre", "Name")}</label><input id="n-name" name="NOMBRE" autocomplete="given-name" required></div>
+      <div class="field"><label class="label" for="n-email">Email</label><input id="n-email" name="EMAIL" type="email" autocomplete="email" required></div>
+      <label class="check"><input type="checkbox" id="n-consent" required> <span>{bi("Quiero recibir las 33 ideas y la newsletter <em>Tech Career Lab</em> (cada dos semanas) con consejos para perfiles IT. Puedo darme de baja cuando quiera.", "I want to receive the 33 ideas and the <em>Tech Career Lab</em> newsletter (every two weeks) with tips for IT professionals. I can unsubscribe at any time.")}</span></label>
+      <input class="hp" type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true">
       {CAPTCHA}
       <div><button class="btn" type="submit">{bi("Quiero mis 33 ideas", "Send me the 33 ideas")} ↗</button></div>
       <p class="form-status" id="newsStatus" role="status"></p>
-      <p class="privacy">{bi("Tus datos llegan a mi email a través de Formspree y solo los uso para enviarte las ideas y la newsletter. Más información en la <a href='privacidad.html'>política de privacidad</a>.", "Your details reach my email through Formspree and I only use them to send you the ideas and the newsletter. More in the <a href='privacidad.html'>privacy policy</a>.")}</p>
+      <p class="privacy">{bi("Te enviaré un email para confirmar tu suscripción (doble confirmación). La newsletter se gestiona con Brevo y solo uso tus datos para enviarte las ideas y la newsletter. Más información en la <a href='privacidad.html'>política de privacidad</a>.", "I'll email you to confirm your subscription (double opt-in). The newsletter runs on Brevo and I only use your details to send you the ideas and the newsletter. More in the <a href='privacidad.html'>privacy policy</a>.")}</p>
     </form>'''
 resources_body = page_hero(bi("Recursos gratuitos · Tech Career Lab", "Free resources · Tech Career Lab"),
     bi("33 ideas para que te encuentren<br>si trabajas en IT.", "33 ideas to get found<br>if you work in IT."),
