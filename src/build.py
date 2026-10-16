@@ -172,6 +172,18 @@ home_body = "\n\n".join([
   </div>
 </section>''',
     SEC["map"].replace("{{MAP}}", MAP),
+    f'''<section class="section">
+  <div class="wrap welcome reveal">
+    <div>
+      <p class="label kicker">IGG-ETM</p>
+      <h2 class="h2 sm">{bi("Estrategia profesional.", "Career strategy.")}</h2>
+    </div>
+    <div>
+      <p class="lede">{bi("Un programa de pago para generar oportunidades laborales con visibilidad, posicionamiento y networking, y no solo enviando currículums.", "A paid programme to create job opportunities through visibility, positioning and networking, not just by sending CVs.")}</p>
+      <a class="arrow-link" href="asesoria.html">{bi("Ver el programa", "See the programme")} →</a>
+    </div>
+  </div>
+</section>''',
     f'''<section class="section dark cta-band">
   <div class="wrap welcome reveal">
     <div>
@@ -293,10 +305,100 @@ sizes["about.html"] = write("about.html", layout(R="", path="about.html", active
     title_en="About · Iñigo González", title_es="Sobre mí · Iñigo González",
     desc="About Iñigo González, IT Site Leader in Madrid, and how to get in touch.", body=about_body))
 
+# advisory (IGG-ETM)
+BOOK = CONF.get("booking_url", "")
+if BOOK:
+    book_btn = f'<a class="btn" href="{BOOK}" target="_blank" rel="noopener">{bi("Reserva una llamada", "Book a call")} ↗</a>'
+else:
+    book_btn = f'<a class="btn" href="about.html#contacto">{bi("Pide información", "Ask for details")} →</a>'
+ETM_AREAS = [
+    ("Estrategia profesional", "Career strategy",
+     "Dónde estás, a dónde quieres llegar y qué pasos tienen sentido en el mercado actual.",
+     "Where you are, where you want to go and which steps make sense in today's market."),
+    ("LinkedIn y visibilidad", "LinkedIn and visibility",
+     "Un perfil que explica lo que haces y contenido que hace que te encuentren.",
+     "A profile that explains what you do and content that gets you found."),
+    ("Marca personal", "Personal brand",
+     "Qué te diferencia y cómo contarlo de forma coherente en todos tus canales.",
+     "What sets you apart and how to tell it consistently across your channels."),
+    ("Networking y mercado oculto", "Networking and the hidden job market",
+     "Cómo llegar a las personas que deciden, antes de que la oferta se publique.",
+     "How to reach the people who decide, before the role is advertised."),
+    ("CV, entrevistas y procesos", "CV, interviews and hiring processes",
+     "Un CV adaptado a cada oferta y preparación real para cada fase del proceso.",
+     "A CV tailored to each role and real preparation for each stage of the process."),
+    ("Posicionamiento a largo plazo", "Long-term positioning",
+     "Un plan para seguir generando oportunidades, no solo para encontrar el siguiente trabajo.",
+     "A plan to keep creating opportunities, not just to find the next job."),
+]
+etm_cards = "\n".join(
+    f'      <div class="etm-item reveal"><p class="label muted">{i:02d}</p><h3>{bi(es, en)}</h3><p>{bi(des, den)}</p></div>'
+    for i, (es, en, des, den) in enumerate(ETM_AREAS, 1))
+advisory_body = page_hero(bi("IGG-ETM · Programa de estrategia profesional", "IGG-ETM · Career strategy programme"),
+    bi("Más que buscar empleo,<br>construir carrera.", "More than a job search:<br>a career with a strategy."),
+    bi("Un programa de estrategia profesional donde ayudo a profesionales a generar oportunidades laborales a través de visibilidad, posicionamiento y networking.",
+       "A career strategy programme where I help professionals create job opportunities through visibility, positioning and networking."),
+    f'<p style="margin-top:30px">{book_btn}</p>') + f'''
+
+<section class="section">
+  <div class="wrap welcome reveal">
+    <div>
+      <p class="label kicker">{bi("Por qué", "Why")}</p>
+      <h2 class="h2 sm">{bi("Dejar de enviar currículums.", "Stop just sending CVs.")}</h2>
+    </div>
+    <div>
+      <p class="lede">{bi("IGG-ETM nace con el objetivo de enseñar a las personas a dejar de depender únicamente de enviar currículums y empezar a construir una estrategia profesional que genere oportunidades.",
+                          "IGG-ETM was created to help people stop relying only on sending CVs and start building a career strategy that creates opportunities.")}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--paper-2)">
+  <div class="wrap">
+    <p class="label kicker">{bi("Qué trabajamos", "What we work on")}</p>
+    <div class="etm-grid">
+{etm_cards}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap now-grid">
+    <div class="reveal">
+      <p class="label kicker">{bi("Cómo funciona", "How it works")}</p>
+      <h2 class="h2 sm">{bi("Paso a paso.", "Step by step.")}</h2>
+    </div>
+    <dl class="spec etm-spec reveal">
+      <div class="spec-row"><dt class="label">01 · {bi("Primera llamada", "First call")}</dt><dd>{bi("Hablamos de tu situación, tus objetivos y si el programa encaja contigo.", "We talk about where you are, your goals and whether the programme is a good fit.")}</dd></div>
+      <div class="spec-row"><dt class="label">02 · {bi("Plan", "Plan")}</dt><dd>{bi("Te propongo un plan a medida con las áreas que más te van a ayudar.", "I propose a tailored plan with the areas that will help you most.")}</dd></div>
+      <div class="spec-row"><dt class="label">03 · {bi("Sesiones y seguimiento", "Sessions and follow-up")}</dt><dd>{bi("Sesiones online con tareas entre una y otra, y seguimiento de los avances.", "Online sessions with work in between, and follow-up on your progress.")}</dd></div>
+      <div class="spec-row"><dt class="label">{bi("Formato", "Format")}</dt><dd>{bi("Online, en español o en inglés. Servicio de pago; el precio depende del plan y te lo indico en la primera llamada.", "Online, in Spanish or English. Paid service; the price depends on the plan and I share it on the first call.")}</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="section dark cta-band">
+  <div class="wrap welcome reveal">
+    <div>
+      <p class="label kicker">IGG-ETM</p>
+      <h2 class="h2 sm">{bi("¿Hablamos?", "Shall we talk?")}</h2>
+    </div>
+    <div>
+      <p class="lede">{bi("Más que buscar empleo, trabajamos en construir carreras profesionales con estrategia.", "More than looking for a job, we build careers with a strategy.")}</p>
+      {book_btn}
+      <p class="muted small" style="margin-top:22px">{bi("Ningún programa puede garantizar una oferta de trabajo. Lo que sí trabajamos es todo lo que depende de ti para que lleguen más y mejores oportunidades.", "No programme can guarantee a job offer. What we do work on is everything that depends on you, so that more and better opportunities come your way.")}</p>
+    </div>
+  </div>
+</section>'''
+sizes["asesoria.html"] = write("asesoria.html", layout(R="", path="asesoria.html", active="advisory",
+    title_en="IGG-ETM · Career strategy · Iñigo González", title_es="IGG-ETM · Estrategia profesional · Iñigo González",
+    desc="IGG-ETM: a paid career strategy programme on visibility, LinkedIn, personal brand, networking, CVs and interviews.", body=advisory_body))
+
 # links
 LINKS = [
     ("blog/", bi("Blog: cómo construí cada proyecto", "Blog: how I built each project"), ""),
     ("journey.html", bi("El viaje: once años en cinco etapas", "The journey: eleven years in five stages"), ""),
+    ("asesoria.html", bi("IGG-ETM: programa de estrategia profesional", "IGG-ETM: career strategy programme"), ""),
     (LINKEDIN, "LinkedIn", "ext"),
     (GITHUB, "GitHub", "ext"),
     ("about.html#contacto", bi("Formulario de contacto", "Contact form"), ""),
