@@ -215,6 +215,8 @@ form{display:grid;gap:20px}
 .field textarea{min-height:140px;resize:vertical}
 .field input:focus,.field textarea:focus{outline:none;border-bottom:2px solid var(--accent)}
 .hp{position:absolute;left:-5000px}
+.check{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.5;cursor:pointer}
+.check input{width:18px;height:18px;margin-top:3px;flex:none;accent-color:var(--accent)}
 .form-status{min-height:1.5em;font-size:15px}
 .form-status.ok{color:#2d7a4b}
 .form-status.err{color:#a3341c}

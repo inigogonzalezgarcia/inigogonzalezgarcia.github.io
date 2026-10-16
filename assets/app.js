@@ -8,8 +8,8 @@
 
   /* ---------- language ---------- */
   var T = {
-    es: { title: "Iñigo González · Operaciones IT e Infraestructura", sending: "Enviando…", ok: "Gracias. Te responderé lo antes posible.", err: "No se ha podido enviar. Vuelve a intentarlo en unos minutos o escríbeme por LinkedIn.", missing: "Rellena nombre, un email válido y el mensaje.", captcha: "Completa la verificación antes de enviar." },
-    en: { title: "Iñigo González · IT Operations & Infrastructure", sending: "Sending…", ok: "Thank you. I'll get back to you soon.", err: "It couldn't be sent. Please try again in a few minutes or message me on LinkedIn.", missing: "Please fill in your name, a valid email and a message.", captcha: "Please complete the check before sending." }
+    es: { title: "Iñigo González · Operaciones IT e Infraestructura", sending: "Enviando…", ok: "Gracias. Te responderé lo antes posible.", err: "No se ha podido enviar. Vuelve a intentarlo en unos minutos o escríbeme por LinkedIn.", missing: "Rellena nombre, un email válido y el mensaje.", captcha: "Completa la verificación antes de enviar.", nmissing: "Rellena tu nombre, un email válido y marca la casilla.", nok: "¡Hecho! Te enviaré las 31 ideas por email en las próximas 24 horas. Si no las ves, revisa Promociones y Spam." },
+    en: { title: "Iñigo González · IT Operations & Infrastructure", sending: "Sending…", ok: "Thank you. I'll get back to you soon.", err: "It couldn't be sent. Please try again in a few minutes or message me on LinkedIn.", missing: "Please fill in your name, a valid email and a message.", captcha: "Please complete the check before sending.", nmissing: "Please fill in your name and a valid email, and tick the box.", nok: "Done! I’ll email you the 31 ideas within 24 hours. If you can’t see them, check your Promotions and Spam folders." }
   };
   function applyLang(l) {
     root.lang = l;
@@ -109,26 +109,31 @@
   } else { $$(".reveal").forEach(function (el) { el.classList.add("in"); }); }
 
   function finish() {
-  /* ---------- contact form ---------- */
-  var form = $("#contactForm"), status = $("#formStatus");
-  var ts = form && $(".cf-turnstile", form), sendBtn = form && $('button[type="submit"]', form);
-  if (ts && sendBtn) {
-    sendBtn.disabled = true;
-    window.tsOk = function () { sendBtn.disabled = false; };
-    window.tsExpired = function () { sendBtn.disabled = true; };
-  }
-  if (form) form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    var l = lang(), d = new FormData(form);
-    var name = (d.get("name") || "").trim(), email = (d.get("email") || "").trim(), msg = (d.get("message") || "").trim();
-    if (!name || !msg || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { status.className = "form-status err"; status.textContent = T[l].missing; return; }
-    if (!S.formspree) { status.className = "form-status err"; status.textContent = T[l].err; return; }
-    if (ts && !d.get("cf-turnstile-response")) { status.className = "form-status err"; status.textContent = T[l].captcha; return; }
-    status.className = "form-status"; status.textContent = T[l].sending;
-    fetch(form.action, { method: "POST", body: d, headers: { Accept: "application/json" } })
-      .then(function (r) { if (!r.ok) throw 0; form.reset(); status.className = "form-status ok"; status.textContent = T[l].ok; })
-      .catch(function () { status.className = "form-status err"; status.textContent = T[l].err; })
-      .then(function () { if (ts && window.turnstile) { window.turnstile.reset(ts); sendBtn.disabled = true; } });
+  /* ---------- forms (contact + newsletter) ---------- */
+  var tsBtns = [];
+  window.tsOk = function () { tsBtns.forEach(function (b) { b.disabled = false; }); };
+  window.tsExpired = function () { tsBtns.forEach(function (b) { b.disabled = true; }); };
+  [["#contactForm", "#formStatus"], ["#newsForm", "#newsStatus"]].forEach(function (pair) {
+    var form = $(pair[0]), status = $(pair[1]);
+    if (!form) return;
+    var news = form.getAttribute("data-kind") === "news";
+    var ts = $(".cf-turnstile", form), sendBtn = $('button[type="submit"]', form);
+    if (ts && sendBtn) { sendBtn.disabled = true; tsBtns.push(sendBtn); }
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var l = lang(), d = new FormData(form), t = T[l];
+      var name = (d.get("name") || "").trim(), email = (d.get("email") || "").trim();
+      var okFields = name && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && (news ? d.get("newsletter_consent") : (d.get("message") || "").trim());
+      if (!okFields) { status.className = "form-status err"; status.textContent = news ? t.nmissing : t.missing; return; }
+      if (!S.formspree) { status.className = "form-status err"; status.textContent = t.err; return; }
+      if (ts && !d.get("cf-turnstile-response")) { status.className = "form-status err"; status.textContent = t.captcha; return; }
+      if (news) d.set("lang", l);
+      status.className = "form-status"; status.textContent = t.sending;
+      fetch(form.action, { method: "POST", body: d, headers: { Accept: "application/json" } })
+        .then(function (r) { if (!r.ok) throw 0; form.reset(); status.className = "form-status ok"; status.textContent = news ? t.nok : t.ok; })
+        .catch(function () { status.className = "form-status err"; status.textContent = t.err; })
+        .then(function () { if (ts && window.turnstile) { window.turnstile.reset(ts); sendBtn.disabled = true; } });
+    });
   });
 
   var y = $("#year"); if (y) y.textContent = new Date().getFullYear();
