@@ -95,7 +95,7 @@ def layout(*, R, path, active, title_en, title_es, desc, body, home=False, og_ty
   <div class="wrap">
     <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
     <span>{bi("Hecha a mano y publicada con GitHub Pages ·", "Hand-built and published with GitHub Pages ·")} <a href="{GITHUB}/inigogonzalezgarcia.github.io">{bi("código", "source")}</a></span>
-    <span><a href="{R}aviso-legal.html">{bi("Aviso legal", "Legal notice")}</a> · <a href="{R}privacidad.html">{bi("Privacidad y cookies", "Privacy and cookies")}</a> · <a href="{R}condiciones.html">{bi("Condiciones", "Terms")}</a> · <button class="linkbtn" type="button" data-cookie-settings>{bi("Preferencias de cookies", "Cookie settings")}</button></span>
+    <span><a href="{R}aviso-legal.html">{bi("Aviso legal", "Legal notice")}</a> · <a href="{R}privacidad.html">{bi("Privacidad y cookies", "Privacy and cookies")}</a> · <a href="{R}condiciones.html">{bi("Condiciones", "Terms")}</a> · <a href="{R}recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings>{bi("Preferencias de cookies", "Cookie settings")}</button></span>
     <a href="#top">{bi("Volver arriba ↑", "Back to top ↑")}</a>
   </div>
 </footer>

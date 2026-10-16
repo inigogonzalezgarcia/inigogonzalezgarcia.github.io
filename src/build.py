@@ -171,6 +171,18 @@ home_body = "\n\n".join([
     </div>
   </div>
 </section>''',
+    f'''<section class="section news-band">
+  <div class="wrap welcome reveal">
+    <div>
+      <p class="label kicker">Tech Career Lab · newsletter</p>
+      <h2 class="h2 sm">{bi("33 ideas gratis.", "33 free ideas.")}</h2>
+    </div>
+    <div>
+      <p class="lede">{bi("33 ideas para que te encuentren si trabajas en IT y, después, una idea práctica cada dos semanas en tu email. Sin spam y te das de baja cuando quieras.", "33 ideas to get found if you work in IT, then one practical idea in your inbox every two weeks. No spam, unsubscribe any time.")}</p>
+      <a class="btn" href="recursos.html">{bi("Quiero las 33 ideas", "Send me the 33 ideas")} →</a>
+    </div>
+  </div>
+</section>''',
     SEC["map"].replace("{{MAP}}", MAP),
     f'''<section class="section">
   <div class="wrap welcome reveal">
@@ -266,6 +278,11 @@ for i, p in enumerate(order):
       </div>
       <div class="en" lang="en">
 {md(p["en"])}
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t">{bi("¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.", "Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.")}</p>
+        <a class="btn" href="../recursos.html">{bi("Apúntate y llévate las 33 ideas", "Sign up and get the 33 ideas")} →</a>
       </div>
     </article>
     <aside class="post-aside">
