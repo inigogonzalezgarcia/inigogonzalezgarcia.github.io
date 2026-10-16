@@ -335,3 +335,10 @@ footer a{color:var(--on-ink)}
 .credits a{color:inherit}
 .cf-turnstile{margin:6px 0 18px;min-height:65px}
 #contactForm .btn:disabled{opacity:.45;cursor:not-allowed}
+.etm-grid{display:grid;grid-template-columns:1fr;gap:1px;background:rgba(14,26,36,.15);border:1px solid rgba(14,26,36,.15)}
+.etm-item{background:var(--paper-2);padding:26px 24px}
+.etm-item h3{font-size:20px;line-height:1.2;margin:10px 0 8px}
+.etm-item p{margin:0}
+@media (min-width:700px){.etm-grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1050px){.etm-grid{grid-template-columns:repeat(3,1fr)}}
+.etm-spec{border-top-color:rgba(14,26,36,.2)}.etm-spec .spec-row{border-bottom-color:rgba(14,26,36,.2)}
