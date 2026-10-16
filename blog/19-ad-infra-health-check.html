@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="A Monday-morning health check for Active Directory · Iñigo González" data-title-es="Un chequeo de los lunes para Active Directory · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A Monday-morning health check for Active Directory · Iñigo González</title>
+<meta name="description" content="Domain controllers, replication, DHCP, Group Policy and admin accounts from one read-only export, ordered by what to fix today.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/19-ad-infra-health-check.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Monday-morning health check for Active Directory · Iñigo González">
+<meta property="og:description" content="Domain controllers, replication, DHCP, Group Policy and admin accounts from one read-only export, ordered by what to fix today.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/19-ad-infra-health-check.html">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+
+</head>
+<body>
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header" id="top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a><a href="../store.html"><span class="es">Store ↗</span><span class="en">Store ↗</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../links.html"><span class="label">05</span><span class="es">Links</span><span class="en">Links</span></a><a href="../store.html"><span class="label">06</span><span class="es">Store ↗</span><span class="en">Store ↗</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 19</p>
+    <h1><span class="es">Un chequeo de los lunes para Active Directory</span><span class="en">A Monday-morning health check for Active Directory</span></h1>
+    <p class="lede"><span class="es">Controladores de dominio, replicación, DHCP, directivas de grupo y cuentas de administrador desde una exportación de solo lectura, ordenados por lo que hay que arreglar hoy.</span><span class="en">Domain controllers, replication, DHCP, Group Policy and admin accounts from one read-only export, ordered by what to fix today.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span> · <span class="es">16 oct 2026</span><span class="en">16 Oct 2026</span> · <span class="es">2 min</span><span class="en">2 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>El problema</h2>
+<p><code>dcdiag</code> y <code>repadmin</code> te lo cuentan todo, de controlador en controlador. La mayoría de problemas de Active Directory avisan antes: un reloj que se desvía, DFSR parado después de parchear, un enlace de replicación fallando en silencio durante semanas, un ámbito de DHCP lleno la semana que llegan las incorporaciones, una cuenta de administrador que nadie usa desde la primavera. El lunes a primera hora quieres una página con lo que hay que arreglar hoy.</p>
+<h2>Qué he hecho</h2>
+<ul><li><code>scripts/Export-ADHealth.ps1</code>: una exportación de solo lectura con los módulos estándar de RSAT (dominio y bosque, cada DC, metadatos de replicación, ámbitos y conmutación de DHCP, vínculos de GPO, grupos privilegiados, cuentas inactivas, líneas NO_CLIENT_SITE). Si una sección falla, el resto se exporta igual.</li><li>Seis áreas de comprobaciones: controladores de dominio, replicación (con el riesgo de tombstone), DHCP, directivas de grupo, acceso privilegiado (incluida la antigüedad de la contraseña de krbtgt) e higiene del directorio.</li><li><code>health_check.md</code> con Arreglar hoy / Planificar esta semana / Limpieza, <code>findings.csv</code> con el primer paso de cada hallazgo y <code>report.html</code>.</li><li>Comparación con la ejecución de la semana anterior: qué es nuevo y qué se ha resuelto.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python solo con la librería estándar y PowerShell. La demo es un dominio inventado con seis DC en cuatro sedes y fallos puestos a propósito. 15 tests. Un runbook corto para el chequeo semanal.</p>
+<h2>Qué aprendí</h2>
+<p>Un DC que no responde debe dar un hallazgo, no diez. Y casi todo el valor está en el orden de la lista: qué hay que arreglar antes de las 9:00 y qué puede ir a un cambio.</p>
+<h2>Sin probar todavía</h2>
+<p>La exportación de PowerShell contra un dominio real. El desfase del reloj se lee de la salida de <code>w32tm</code>, que cambia de idioma en servidores que no están en inglés.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>The problem</h2>
+<p><code>dcdiag</code> and <code>repadmin</code> tell you everything, one domain controller at a time. Most Active Directory problems give a warning first: a clock drifting, DFSR stopped after patching, a replication link failing quietly for weeks, a DHCP scope full the week new joiners arrive, an admin account nobody has used since spring. On Monday morning you want one page with what to fix today.</p>
+<h2>What I built</h2>
+<ul><li><code>scripts/Export-ADHealth.ps1</code>: one read-only export with the standard RSAT modules (domain and forest, every DC, replication metadata, DHCP scopes and failover, GPO links, privileged groups, inactive accounts, NO_CLIENT_SITE lines). If one section fails, the rest is still exported.</li><li>Six areas of checks: domain controllers, replication (with the tombstone risk), DHCP, Group Policy, privileged access (including the krbtgt password age) and directory hygiene.</li><li><code>health_check.md</code> with Fix today / Plan this week / Housekeeping, <code>findings.csv</code> with the first step for each finding and <code>report.html</code>.</li><li>Comparison with last week&#x27;s run: what is new and what was resolved.</li></ul>
+<h2>How it is built</h2>
+<p>Python with the standard library only, plus PowerShell. The demo is a made-up domain with six DCs in four sites and faults placed on purpose. 15 tests. A short runbook for the weekly check.</p>
+<h2>What I learned</h2>
+<p>An unreachable DC should give one finding, not ten. And most of the value is in the order of the list: what has to be fixed before 09:00 and what can go to a change.</p>
+<h2>Not tested yet</h2>
+<p>The PowerShell export against a real domain. The clock offset is read from <code>w32tm</code> output, which is localised on non-English servers.</p>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
+      <p class="repo-name">19-ad-infra-health-check</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/19-ad-infra-health-check" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="18-mecm-intune-comanagement-tracker.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Un go/no-go para el siguiente paso del slider de co-management</span><span class="en">A go/no-go for the next co-management slider move</span></span></a>
+    <a class="post-nav-link next" href="20-entra-sso-app-audit.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Qué app con SSO va a fallar la próxima y cuál no vigila nadie</span><span class="en">Which SSO app will break next, and which one nobody is watching</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><span class="es">Hecha a mano y publicada con GitHub Pages ·</span><span class="en">Hand-built and published with GitHub Pages ·</span> <a href="https://github.com/inigogonzalezgarcia/inigogonzalezgarcia.github.io"><span class="es">código</span><span class="en">source</span></a></span>
+    <span><a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
