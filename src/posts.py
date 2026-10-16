@@ -673,4 +673,80 @@ De la migración a Windows 11 que lideré: casi todo el esfuerzo no está en la 
 
 ## Sin probar todavía
 La consulta SQL contra una base de datos de sitio real y la exportación de PowerShell contra un tenant real."""),
+
+dict(n="19", repo="19-ad-infra-health-check", date="2026-10-16", cat="tools",
+ title_en="A Monday-morning health check for Active Directory", title_es="Un chequeo de los lunes para Active Directory",
+ dek_en="Domain controllers, replication, DHCP, Group Policy and admin accounts from one read-only export, ordered by what to fix today.",
+ dek_es="Controladores de dominio, replicación, DHCP, directivas de grupo y cuentas de administrador desde una exportación de solo lectura, ordenados por lo que hay que arreglar hoy.",
+ en="""## The problem
+`dcdiag` and `repadmin` tell you everything, one domain controller at a time. Most Active Directory problems give a warning first: a clock drifting, DFSR stopped after patching, a replication link failing quietly for weeks, a DHCP scope full the week new joiners arrive, an admin account nobody has used since spring. On Monday morning you want one page with what to fix today.
+
+## What I built
+- `scripts/Export-ADHealth.ps1`: one read-only export with the standard RSAT modules (domain and forest, every DC, replication metadata, DHCP scopes and failover, GPO links, privileged groups, inactive accounts, NO_CLIENT_SITE lines). If one section fails, the rest is still exported.
+- Six areas of checks: domain controllers, replication (with the tombstone risk), DHCP, Group Policy, privileged access (including the krbtgt password age) and directory hygiene.
+- `health_check.md` with Fix today / Plan this week / Housekeeping, `findings.csv` with the first step for each finding and `report.html`.
+- Comparison with last week's run: what is new and what was resolved.
+
+## How it is built
+Python with the standard library only, plus PowerShell. The demo is a made-up domain with six DCs in four sites and faults placed on purpose. 15 tests. A short runbook for the weekly check.
+
+## What I learned
+An unreachable DC should give one finding, not ten. And most of the value is in the order of the list: what has to be fixed before 09:00 and what can go to a change.
+
+## Not tested yet
+The PowerShell export against a real domain. The clock offset is read from `w32tm` output, which is localised on non-English servers.""",
+ es="""## El problema
+`dcdiag` y `repadmin` te lo cuentan todo, de controlador en controlador. La mayoría de problemas de Active Directory avisan antes: un reloj que se desvía, DFSR parado después de parchear, un enlace de replicación fallando en silencio durante semanas, un ámbito de DHCP lleno la semana que llegan las incorporaciones, una cuenta de administrador que nadie usa desde la primavera. El lunes a primera hora quieres una página con lo que hay que arreglar hoy.
+
+## Qué he hecho
+- `scripts/Export-ADHealth.ps1`: una exportación de solo lectura con los módulos estándar de RSAT (dominio y bosque, cada DC, metadatos de replicación, ámbitos y conmutación de DHCP, vínculos de GPO, grupos privilegiados, cuentas inactivas, líneas NO_CLIENT_SITE). Si una sección falla, el resto se exporta igual.
+- Seis áreas de comprobaciones: controladores de dominio, replicación (con el riesgo de tombstone), DHCP, directivas de grupo, acceso privilegiado (incluida la antigüedad de la contraseña de krbtgt) e higiene del directorio.
+- `health_check.md` con Arreglar hoy / Planificar esta semana / Limpieza, `findings.csv` con el primer paso de cada hallazgo y `report.html`.
+- Comparación con la ejecución de la semana anterior: qué es nuevo y qué se ha resuelto.
+
+## Cómo está hecho
+Python solo con la librería estándar y PowerShell. La demo es un dominio inventado con seis DC en cuatro sedes y fallos puestos a propósito. 15 tests. Un runbook corto para el chequeo semanal.
+
+## Qué aprendí
+Un DC que no responde debe dar un hallazgo, no diez. Y casi todo el valor está en el orden de la lista: qué hay que arreglar antes de las 9:00 y qué puede ir a un cambio.
+
+## Sin probar todavía
+La exportación de PowerShell contra un dominio real. El desfase del reloj se lee de la salida de `w32tm`, que cambia de idioma en servidores que no están en inglés."""),
+
+dict(n="20", repo="20-entra-sso-app-audit", date="2026-10-16", cat="tools",
+ title_en="Which SSO app will break next, and which one nobody is watching", title_es="Qué app con SSO va a fallar la próxima y cuál no vigila nadie",
+ dek_en="Enterprise apps and app registrations in Entra ID: certificates and secrets about to expire, owners, MFA coverage, risky permissions and SCIM.",
+ dek_es="Aplicaciones empresariales y registros de aplicaciones en Entra ID: certificados y secretos a punto de caducar, propietarios, cobertura de MFA, permisos de riesgo y SCIM.",
+ en="""## The problem
+Single sign-on puts access in one place, but the details are spread over hundreds of enterprise apps. The same problems come back: a SAML signing certificate expires and a SaaS app stops accepting logons at 09:00, a client secret expires and a nightly job fails, an app has no owner, every user can open it, it was excluded from the MFA policy "for now", a daemon can write to the whole directory, or provisioning is in quarantine and leavers keep their account in the app.
+
+## What I built
+- `scripts/Export-EntraAppInventory.ps1`: a read-only Microsoft Graph export of service principals, app registrations (only the dates of secrets and certificates, never the values) and Conditional Access policies.
+- Checks in six areas: credentials, ownership, access (assignment required and MFA coverage), permissions (application permissions, tenant-wide consent, unverified publishers, redirect URIs), SCIM provisioning and unused apps.
+- `review.md` for the monthly access review, `renewals.csv` as a renewal calendar with owners, `findings.csv` and `report.html`.
+
+## How it is built
+Python with the standard library only, plus PowerShell for Graph. The demo is a made-up tenant with 21 enterprise apps and faults placed on purpose. 15 tests. A runbook that includes renewing a SAML certificate without an outage.
+
+## What I learned
+From integrating SaaS apps in Entra ID: the hard part is not the SSO setup, it is who renews the certificate two years later. A secret expired while the app still signs in is urgent; an expired secret already replaced by a newer one is just clean-up.
+
+## Not tested yet
+The export against a real tenant. The sign-in activity report is in Graph beta. SCIM provisioning and the finer points of OIDC are the parts I am still learning, so those checks are deliberately simple.""",
+ es="""## El problema
+El inicio de sesión único concentra el acceso en un sitio, pero los detalles están repartidos en cientos de aplicaciones empresariales. Los problemas se repiten: caduca un certificado de firma SAML y una aplicación SaaS deja de aceptar inicios de sesión a las 9:00, caduca un secreto y falla un proceso nocturno, una aplicación no tiene propietario, cualquier usuario puede abrirla, se excluyó de la política de MFA "de momento", un proceso desatendido puede escribir en todo el directorio o el aprovisionamiento está en cuarentena y las bajas siguen teniendo cuenta en la aplicación.
+
+## Qué he hecho
+- `scripts/Export-EntraAppInventory.ps1`: una exportación de solo lectura con Microsoft Graph de las entidades de servicio, los registros de aplicaciones (solo las fechas de secretos y certificados, nunca su valor) y las políticas de acceso condicional.
+- Comprobaciones en seis áreas: credenciales, propietarios, acceso (asignación obligatoria y cobertura de MFA), permisos (permisos de aplicación, consentimiento para toda la organización, editores sin verificar, URI de redirección), aprovisionamiento SCIM y aplicaciones sin uso.
+- `review.md` para la revisión mensual de accesos, `renewals.csv` como calendario de renovaciones con propietarios, `findings.csv` y `report.html`.
+
+## Cómo está hecho
+Python solo con la librería estándar y PowerShell para Graph. La demo es un tenant inventado con 21 aplicaciones empresariales y fallos puestos a propósito. 15 tests. Un runbook que incluye cómo renovar un certificado SAML sin corte.
+
+## Qué aprendí
+De integrar aplicaciones SaaS en Entra ID: lo difícil no es configurar el SSO, sino quién renueva el certificado dos años después. Un secreto caducado mientras la aplicación sigue iniciando sesión es urgente; uno caducado que ya se sustituyó por otro nuevo es solo limpieza.
+
+## Sin probar todavía
+La exportación contra un tenant real. El informe de actividad de inicio de sesión está en la beta de Graph. El aprovisionamiento SCIM y los detalles finos de OIDC son las partes que aún estoy aprendiendo, así que esas comprobaciones son sencillas a propósito."""),
 ]
