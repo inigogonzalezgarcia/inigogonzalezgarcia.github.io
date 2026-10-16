@@ -365,3 +365,7 @@ footer a{color:var(--on-ink)}
 .policy .note{border-left:3px solid var(--accent);background:var(--paper-2);padding:12px 16px}
 .policy ol li,.policy ul li{margin:6px 0}
 .etm-spec .spec-row dt{color:var(--muted)}
+.news-box{margin-top:48px;border-top:3px solid var(--accent);background:var(--paper-2);padding:24px 24px 26px}
+.news-box .kicker{margin:0 0 8px}
+.news-box-t{font-size:18px;margin:0 0 18px}
+.news-band{background:var(--paper)}
