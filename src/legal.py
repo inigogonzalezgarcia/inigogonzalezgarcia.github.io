@@ -55,7 +55,7 @@ def shell(*, path, title_es, title_en, desc, es, en):
 <footer>
   <div class="wrap">
     <span>© 2026 Iñigo González · Madrid</span>
-    <span><a href="aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a></span>
+    <span><a href="aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="recursos.html">Newsletter</a></span>
     <a href="./"><span class="es">Volver a la web</span><span class="en">Back to the site</span></a>
   </div>
 </footer>
