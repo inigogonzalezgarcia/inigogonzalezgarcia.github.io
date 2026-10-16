@@ -394,42 +394,42 @@ sizes["asesoria.html"] = write("asesoria.html", layout(R="", path="asesoria.html
     title_en="IGG-ICS · IT career strategy · Iñigo González", title_es="IGG-ICS · Estrategia profesional IT · Iñigo González",
     desc="IGG-ICS (IT · Tech Career, Lab & Strategy): a paid career strategy programme for IT professionals on visibility, LinkedIn, personal brand, networking, CVs and interviews.", body=advisory_body))
 
-# resources: lead magnet "31 ideas" + newsletter signup (Formspree for now; full text goes by email, not on the site)
+# resources: lead magnet "33 ideas" + newsletter signup (Formspree for now; full text goes by email, not on the site)
 RES_BLOCKS = [
     ("Tu perfil de LinkedIn", "Your LinkedIn profile", 7),
     ("Contenido y visibilidad", "Content and visibility", 5),
     ("Demuéstralo con proyectos", "Show it with projects", 6),
     ("Networking y mercado oculto", "Networking and the hidden job market", 5),
     ("CV, entrevistas y procesos", "CV, interviews and hiring processes", 6),
-    ("A largo plazo", "The long game", 2),
+    ("A largo plazo", "The long game", 4),
 ]
 res_cards = "\n".join(
     f'      <div class="etm-item reveal"><p class="label muted">{n} {bi("ideas", "ideas")}</p><h3>{bi(es, en)}</h3></div>'
     for es, en, n in RES_BLOCKS)
 news_form = f'''<form class="reveal" id="newsForm" action="{FORM}" method="POST" novalidate data-kind="news">
-      <input type="hidden" name="_subject" value="Newsletter · 31 ideas IT">
-      <input type="hidden" name="form" value="newsletter-31-ideas">
+      <input type="hidden" name="_subject" value="Newsletter · 33 ideas IT">
+      <input type="hidden" name="form" value="newsletter-33-ideas">
       <div class="field"><label class="label" for="n-name">{bi("Nombre", "Name")}</label><input id="n-name" name="name" autocomplete="given-name" required></div>
       <div class="field"><label class="label" for="n-email">Email</label><input id="n-email" name="email" type="email" autocomplete="email" required></div>
-      <label class="check"><input type="checkbox" name="newsletter_consent" value="yes" required> <span>{bi("Quiero recibir las 31 ideas y la newsletter <em>Tech Career Lab</em> (cada dos semanas) con consejos para perfiles IT. Puedo darme de baja cuando quiera.", "I want to receive the 31 ideas and the <em>Tech Career Lab</em> newsletter (every two weeks) with tips for IT professionals. I can unsubscribe at any time.")}</span></label>
+      <label class="check"><input type="checkbox" name="newsletter_consent" value="yes" required> <span>{bi("Quiero recibir las 33 ideas y la newsletter <em>Tech Career Lab</em> (cada dos semanas) con consejos para perfiles IT. Puedo darme de baja cuando quiera.", "I want to receive the 33 ideas and the <em>Tech Career Lab</em> newsletter (every two weeks) with tips for IT professionals. I can unsubscribe at any time.")}</span></label>
       <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
       {CAPTCHA}
-      <div><button class="btn" type="submit">{bi("Quiero mis 31 ideas", "Send me the 31 ideas")} ↗</button></div>
+      <div><button class="btn" type="submit">{bi("Quiero mis 33 ideas", "Send me the 33 ideas")} ↗</button></div>
       <p class="form-status" id="newsStatus" role="status"></p>
       <p class="privacy">{bi("Tus datos llegan a mi email a través de Formspree y solo los uso para enviarte las ideas y la newsletter. Más información en la <a href='privacidad.html'>política de privacidad</a>.", "Your details reach my email through Formspree and I only use them to send you the ideas and the newsletter. More in the <a href='privacidad.html'>privacy policy</a>.")}</p>
     </form>'''
 resources_body = page_hero(bi("Recursos gratuitos · Tech Career Lab", "Free resources · Tech Career Lab"),
-    bi("31 ideas para que te encuentren<br>si trabajas en IT.", "31 ideas to get found<br>if you work in IT."),
-    bi("Si buscas trabajo en IT o quieres empezar a construir tu marca profesional, estas 31 ideas te ayudan a ganar visibilidad, demostrar lo que sabes hacer y que más empresas te tengan en su radar.",
-       "If you are looking for an IT job or want to start building your professional brand, these 31 ideas help you get seen, show what you can do and get on more companies' radar.")) + f'''
+    bi("33 ideas para que te encuentren<br>si trabajas en IT.", "33 ideas to get found<br>if you work in IT."),
+    bi("Si buscas trabajo en IT o quieres empezar a construir tu marca profesional, estas 33 ideas te ayudan a ganar visibilidad, demostrar lo que sabes hacer y que más empresas te tengan en su radar.",
+       "If you are looking for an IT job or want to start building your professional brand, these 33 ideas help you get seen, show what you can do and get on more companies' radar.")) + f'''
 
 <section class="section">
   <div class="wrap contact">
     <div class="reveal">
       <p class="label kicker">{bi("Te las envío por email", "Delivered by email")}</p>
       <h2 class="h2 sm">{bi("Recíbelas gratis.", "Get them free.")}</h2>
-      <p class="lede muted">{bi("Déjame tu nombre y tu email y te mando las 31 ideas, con enlaces a ejemplos reales en esta web. Después recibirás la newsletter <em>Tech Career Lab</em>: LinkedIn, proyectos, networking y procesos de selección para perfiles IT.",
-                                "Leave your name and email and I'll send you the 31 ideas, with links to real examples on this site. After that you'll get the <em>Tech Career Lab</em> newsletter: LinkedIn, projects, networking and hiring processes for IT professionals.")}</p>
+      <p class="lede muted">{bi("Déjame tu nombre y tu email y te mando las 33 ideas, con enlaces a ejemplos reales en esta web. Después recibirás la newsletter <em>Tech Career Lab</em>: LinkedIn, proyectos, networking y procesos de selección para perfiles IT.",
+                                "Leave your name and email and I'll send you the 33 ideas, with links to real examples on this site. After that you'll get the <em>Tech Career Lab</em> newsletter: LinkedIn, projects, networking and hiring processes for IT professionals.")}</p>
     </div>
     {news_form}
   </div>
@@ -458,15 +458,15 @@ resources_body = page_hero(bi("Recursos gratuitos · Tech Career Lab", "Free res
 </section>
 {CAPTCHA_JS}'''
 sizes["recursos.html"] = write("recursos.html", layout(R="", path="recursos.html", active="resources",
-    title_en="31 ideas to get found in IT · Iñigo González", title_es="31 ideas para que te encuentren en IT · Iñigo González",
-    desc="Free resource: 31 ideas for IT professionals to get found on LinkedIn, show their work with projects, network and get through hiring processes. Plus the Tech Career Lab newsletter.", body=resources_body))
+    title_en="33 ideas to get found in IT · Iñigo González", title_es="33 ideas para que te encuentren en IT · Iñigo González",
+    desc="Free resource: 33 ideas for IT professionals to get found on LinkedIn, show their work with projects, network and get through hiring processes. Plus the Tech Career Lab newsletter.", body=resources_body))
 
 # links
 LINKS = [
     ("blog/", bi("Blog: cómo construí cada proyecto", "Blog: how I built each project"), ""),
     ("journey.html", bi("El viaje: once años en cinco etapas", "The journey: eleven years in five stages"), ""),
     ("asesoria.html", bi("IGG-ICS: estrategia profesional para perfiles IT", "IGG-ICS: career strategy for IT professionals"), ""),
-    ("recursos.html", bi("Gratis: 31 ideas para que te encuentren si trabajas en IT", "Free: 31 ideas to get found if you work in IT"), ""),
+    ("recursos.html", bi("Gratis: 33 ideas para que te encuentren si trabajas en IT", "Free: 33 ideas to get found if you work in IT"), ""),
     (LINKEDIN, "LinkedIn", "ext"),
     (GITHUB, "GitHub", "ext"),
     ("about.html#contacto", bi("Formulario de contacto", "Contact form"), ""),
