@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Sharing GPUs between teams with Kueue and KAI Scheduler · Iñigo González</title>
 <meta name="description" content="One quota agreement in a TOML file, rendered into both schedulers and tested on kind.">
 <meta name="author" content="Iñigo González">
@@ -15,7 +23,7 @@
 <meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/15-multi-tenant-gpu-scheduling.html">
 <link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="../assets/style.css">
-<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+<script src="../assets/boot.js"></script>
 
 </head>
 <body>
@@ -43,8 +51,8 @@
   </div>
   <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
-    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
-    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
     <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
   </div>
 </div>
@@ -63,27 +71,29 @@
     <article class="prose">
       <div class="es" lang="es">
 <h2>Por qué este laboratorio</h2>
-<p>Un laboratorio para aprender. Cuando varios equipos comparten un clúster de GPU, lo difícil es el acuerdo: qué tiene garantizado cada uno, quién puede pedir prestado y qué pasa cuando el dueño lo quiere de vuelta.</p>
+<p>Se apoya en la gestión de capacidad y en los acuerdos de SLA y OLA entre equipos que comparten la misma infraestructura. Cuando varios equipos comparten un clúster de GPU, la clave es el acuerdo: quién tiene qué garantizado, quién puede pedir prestado y qué pasa cuando el dueño lo quiere de vuelta.</p>
 <h2>Qué he hecho</h2>
 <ul><li><code>tenancy.toml</code> con tres equipos: training (16 garantizadas, 8 prestables), research (8 + 8) e inference (8 que nunca presta).</li><li><code>python -m tenancy render</code> lo convierte en ClusterQueues de Kueue dentro de una cohort y en Queues de KAI Scheduler. La CI falla si los manifiestos no coinciden con el fichero.</li><li>Un clúster kind con 4 workers × 8 GPU simuladas por el fake-gpu-operator de Run:ai, más KubeVirt.</li></ul>
 <h2>Cómo se prueba</h2>
 <p>Kueue, 22 comprobaciones: préstamo, recuperación, prioridad dentro del equipo y admisión todo o nada. KAI, 19: dos pods compartiendo una GPU a 0,5 cada uno, exceso de cuota, recuperación y gang scheduling. KubeVirt, 5: una VM arranca con emulación QEMU y la ResourceQuota del equipo rechaza una segunda.</p>
 <h2>Qué aprendí</h2>
 <p>Tres rondas de arreglos tras la primera CI, explicadas en docs/decisions.md: el uso de las colas se informa con retraso, el motivo de la preemption está en una condición y las GPU fraccionarias se pasan como texto.</p>
-<h2>Sin probar todavía</h2>
-<p>GPU reales, Kueue y KAI juntos, fair sharing, planificación por topología y KubeVirt con GPU.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Describir tus equipos y cuotas en <code>tenancy.toml</code> y generar los manifiestos para Kueue o KAI Scheduler.</li><li>Añadir fair sharing y planificación según topología a medida que crece el clúster.</li><li>Revisar el acuerdo con los equipos cada trimestre.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
       </div>
       <div class="en" lang="en">
 <h2>Why this lab</h2>
-<p>A learning lab. When several teams share a GPU cluster, the hard part is the agreement: who is guaranteed what, who can borrow, and what happens when the owner wants it back.</p>
+<p>Builds on capacity management and on SLA and OLA agreements between teams that share the same infrastructure. When several teams share a GPU cluster, the key is the agreement: who is guaranteed what, who can borrow, and what happens when the owner wants it back.</p>
 <h2>What I built</h2>
 <ul><li><code>tenancy.toml</code> with three teams: training (16 guaranteed, 8 can be borrowed), research (8 + 8) and inference (8, never lent).</li><li><code>python -m tenancy render</code> turns it into Kueue ClusterQueues in a cohort and KAI Scheduler Queues. CI fails if the manifests drift from the file.</li><li>A kind cluster with 4 workers × 8 GPUs simulated by Run:ai&#x27;s fake-gpu-operator, plus KubeVirt.</li></ul>
 <h2>How it is tested</h2>
 <p>Kueue, 22 checks: borrowing, reclaim, priority within a team and all-or-nothing admission. KAI, 19 checks: two pods sharing one GPU at 0.5 each, over-quota, reclaim and gang scheduling. KubeVirt, 5 checks: a VM boots with QEMU emulation and the team&#x27;s ResourceQuota rejects a second one.</p>
 <h2>What I learned</h2>
 <p>Three rounds of fixes after the first CI run, written up in docs/decisions.md: queue usage is reported with a delay, the preemption reason is in a condition, and fractional GPUs are passed as text.</p>
-<h2>Not tested yet</h2>
-<p>Real GPUs, Kueue and KAI together, fair sharing, topology-aware scheduling and KubeVirt with GPUs.</p>
+<h2>Next steps</h2>
+<ul><li>Describe your teams and quotas in <code>tenancy.toml</code> and render the manifests for Kueue or KAI Scheduler.</li><li>Add fair sharing and topology-aware scheduling as the cluster grows.</li><li>Review the agreement with the teams every quarter.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
@@ -94,7 +104,7 @@
     <aside class="post-aside">
       <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
       <p class="repo-name">15-multi-tenant-gpu-scheduling</p>
-      <a class="btn" href="https://github.com/inigogonzalezgarcia/15-multi-tenant-gpu-scheduling" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/15-multi-tenant-gpu-scheduling" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
       <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
     </aside>
   </div>

@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>SLOs and burn-rate alerts for the edge, in plain Python · Iñigo González</title>
 <meta name="description" content="DNS, TLS, HTTP and TCP probes, an error budget and a fictional postmortem.">
 <meta name="author" content="Iñigo González">
@@ -15,7 +23,7 @@
 <meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/08-edge-health-slo-monitor.html">
 <link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="../assets/style.css">
-<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+<script src="../assets/boot.js"></script>
 
 </head>
 <body>
@@ -43,8 +51,8 @@
   </div>
   <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
-    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
-    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
     <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
   </div>
 </div>
@@ -63,23 +71,25 @@
     <article class="prose">
       <div class="es" lang="es">
 <h2>Por qué este laboratorio</h2>
-<p>Un laboratorio para aprender cómo deciden los equipos SRE cuándo despertar a alguien: no con cada fallo, sino cuando el presupuesto de error se consume demasiado rápido.</p>
+<p>Viene de años de monitorización y respuesta a alertas con herramientas como Grafana, SolarWinds y el stack de Elastic. Este laboratorio aplica el enfoque SRE al edge: despertar a alguien cuando el presupuesto de error se consume demasiado rápido, no en cada comprobación fallida.</p>
 <h2>Qué he hecho</h2>
 <ul><li>Sondas DNS, TLS, HTTP y TCP.</li><li>Un SLO con presupuesto de error y alertas multiventana por burn rate, con un mínimo de sondas malas antes de avisar.</li><li>Exportación a Elasticsearch (ECS) y Prometheus, un webhook firmado y un informe HTML.</li><li>Una plantilla de postmortem y un postmortem ficticio: un registro DNS perdido en una migración de zona.</li></ul>
 <h2>Cómo está hecho</h2>
 <p>Python 3.11, solo librería estándar, 14 tests.</p>
-<h2>Sin probar todavía</h2>
-<p>El envío a un Elasticsearch real, las units de systemd y el webhook contra un n8n real.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Enviar los resultados a tu Elasticsearch o Prometheus.</li><li>Instalar las units de systemd en una VM pequeña cerca de tus usuarios.</li><li>Conectar el webhook firmado a n8n, Teams o Slack, y acordar los SLO con los responsables del servicio.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
       </div>
       <div class="en" lang="en">
 <h2>Why this lab</h2>
-<p>A learning lab on how SRE teams decide when to wake someone up: not on every failed check, but when the error budget is burning too fast.</p>
+<p>Comes from years of monitoring and alert response with tools such as Grafana, SolarWinds and the Elastic stack. This lab applies the SRE approach to the edge: wake someone up when the error budget is burning too fast, not on every failed check.</p>
 <h2>What I built</h2>
 <ul><li>DNS, TLS, HTTP and TCP probes.</li><li>An SLO with an error budget and multi-window burn-rate alerts, with a minimum number of bad probes before firing.</li><li>Export to Elasticsearch (ECS) and Prometheus, a signed webhook and an HTML report.</li><li>A postmortem template and a fictional postmortem: a DNS record lost during a zone migration.</li></ul>
 <h2>How it is built</h2>
 <p>Python 3.11, standard library only, 14 tests.</p>
-<h2>Not tested yet</h2>
-<p>Sending to a real Elasticsearch, the systemd units and the webhook against a real n8n.</p>
+<h2>Next steps</h2>
+<ul><li>Send the results to your Elasticsearch or Prometheus.</li><li>Install the systemd units on a small VM close to your users.</li><li>Connect the signed webhook to n8n, Teams or Slack, and agree the SLOs with the service owners.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
@@ -90,7 +100,7 @@
     <aside class="post-aside">
       <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
       <p class="repo-name">08-edge-health-slo-monitor</p>
-      <a class="btn" href="https://github.com/inigogonzalezgarcia/08-edge-health-slo-monitor" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/08-edge-health-slo-monitor" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
       <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
     </aside>
   </div>

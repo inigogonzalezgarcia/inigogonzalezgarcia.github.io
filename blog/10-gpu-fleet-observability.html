@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Observability for a GPU fleet: alerts that say what to do · Iñigo González</title>
 <meta name="description" content="Recording rules, alerts with runbooks, Alertmanager routing and a Grafana dashboard on DCGM metrics.">
 <meta name="author" content="Iñigo González">
@@ -15,7 +23,7 @@
 <meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/10-gpu-fleet-observability.html">
 <link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="../assets/style.css">
-<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+<script src="../assets/boot.js"></script>
 
 </head>
 <body>
@@ -43,8 +51,8 @@
   </div>
   <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
-    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
-    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
     <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
   </div>
 </div>
@@ -63,27 +71,29 @@
     <article class="prose">
       <div class="es" lang="es">
 <h2>Por qué este laboratorio</h2>
-<p>Un laboratorio para aprender, sin experiencia de GPU en producción detrás. La pregunta: qué métricas de GPU merecen una alerta y a quién le tiene que llegar.</p>
+<p>Se apoya en años de monitorización y cuadros de Grafana. Aquí las métricas vienen de NVIDIA DCGM, y la pregunta es cuáles merecen una alerta y quién debe recibirla.</p>
 <h2>Qué he hecho</h2>
 <ul><li>Un simulador en Go de 4 nodos × 8 GPU que usa los nombres y etiquetas de métricas de dcgm-exporter, pod y namespace incluidos, con inyección de fallos.</li><li>17 recording rules y 10 alertas, cada una con su runbook (docs/alerts.md) y una etiqueta <code>action</code>: drain, quarantine o cordon.</li><li>Alertmanager con rutas a guardia, ticket y equipo, e inhibiciones para que una GPU rota no avise además de &quot;GPU ociosa&quot; al equipo.</li><li>Un dashboard de Grafana generado por script y <code>fleetreport</code> con GPU-horas y GPU-horas ociosas por namespace.</li></ul>
 <h2>Cómo se prueba</h2>
 <p>7 casos de <code>promtool test rules</code>, tests en Go, comprobaciones de configuración, shellcheck y una prueba de punta a punta con Docker Compose (Prometheus, Alertmanager, Grafana): 32 comprobaciones, en verde a la primera.</p>
 <h2>Qué aprendí</h2>
 <p>La comprobación de energía frente a potencia daba falsos fallos con una sola muestra por el jitter del scrape. Ahora usa 1 minuto sobre 2 minutos de datos.</p>
-<h2>Sin probar todavía</h2>
-<p>Un dcgm-exporter real.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Cambiar el simulador por dcgm-exporter en tus nodos.</li><li>Importar el cuadro de Grafana y las recording rules.</li><li>Enrutar las alertas de Alertmanager a tus herramientas de guardia y de tickets.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
       </div>
       <div class="en" lang="en">
 <h2>Why this lab</h2>
-<p>A learning lab, with no production GPU experience behind it. The question: which GPU metrics deserve an alert, and who should get it?</p>
+<p>Builds on years of monitoring and Grafana dashboards. Here the metrics come from NVIDIA DCGM, and the question is which ones deserve an alert and who should get it.</p>
 <h2>What I built</h2>
 <ul><li>A Go simulator with 4 nodes × 8 GPUs that uses dcgm-exporter&#x27;s metric names and labels, pod and namespace included, plus fault injection.</li><li>17 recording rules and 10 alerts, each with a runbook (docs/alerts.md) and an <code>action</code> label: drain, quarantine or cordon.</li><li>Alertmanager with pager, ticket and team routes, and inhibitions so a broken GPU doesn&#x27;t also alert the team about an &quot;idle GPU&quot;.</li><li>A Grafana dashboard generated by a script, and <code>fleetreport</code> with GPU-hours and idle GPU-hours per namespace.</li></ul>
 <h2>How it is tested</h2>
 <p>7 <code>promtool test rules</code> cases, Go tests, config checks, shellcheck and an end-to-end run with Docker Compose (Prometheus, Alertmanager, Grafana): 32 checks, green on the first run.</p>
 <h2>What I learned</h2>
 <p>The energy-versus-power check gave false failures with a single sample because of scrape jitter. It now uses 1 minute of rate over 2 minutes of data.</p>
-<h2>Not tested yet</h2>
-<p>A real dcgm-exporter.</p>
+<h2>Next steps</h2>
+<ul><li>Replace the simulator with dcgm-exporter on your nodes.</li><li>Import the Grafana dashboard and the recording rules.</li><li>Route the alerts in Alertmanager to your on-call and ticketing tools.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
@@ -94,7 +104,7 @@
     <aside class="post-aside">
       <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
       <p class="repo-name">10-gpu-fleet-observability</p>
-      <a class="btn" href="https://github.com/inigogonzalezgarcia/10-gpu-fleet-observability" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/10-gpu-fleet-observability" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
       <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
     </aside>
   </div>
