@@ -1,0 +1,29 @@
+# Social preview cards (assets/og/*.png, 1200x630) and the Apple touch icon, drawn by src/make_og.py.
+# Runs when a post, the card script or the font changes, and commits the images if any changed.
+name: OG images
+on:
+  push:
+    branches: [main]
+    paths: ["src/posts.py", "src/make_og.py", "assets/InterTight.woff", ".github/workflows/og-images.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: og-images
+jobs:
+  og:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pillow==12.2.0
+      - run: python src/make_og.py
+      - name: Commit images if they changed
+        run: |
+          git add assets/og assets/apple-touch-icon.png
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898099+github-actions[bot]@users.noreply.github.com"
+          git commit -m "OG images: regenerate social preview cards"
+          git push
