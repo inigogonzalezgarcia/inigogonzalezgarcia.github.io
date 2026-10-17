@@ -28,7 +28,10 @@
   "name_en": "London",
   "es": "Servicios financieros · trabajo en la oficina de Londres, junto a los equipos de tecnología del grupo.",
   "en": "Financial services · work at the London office alongside the group's technology teams.",
-  "label": "l"
+  "label": "l",
+  "hq": [
+   "s5"
+  ]
  },
  {
   "id": "paris",
@@ -42,7 +45,10 @@
   "name_en": "Paris",
   "es": "Lujo · oficinas y service desk central. Servicios financieros · oficina de París, incluidas sus salas de Teams Rooms.",
   "en": "Luxury · offices and the central service desk. Financial services · Paris office, including its Teams Rooms.",
-  "ly": 10
+  "ly": 10,
+  "hq": [
+   "s2"
+  ]
  },
  {
   "id": "lisbon",
@@ -67,7 +73,10 @@
   "name_es": "Kansas City",
   "name_en": "Kansas City",
   "es": "Software sanitario · sede central de la compañía y proyectos de Norteamérica.",
-  "en": "Healthcare software · company headquarters and North America projects."
+  "en": "Healthcare software · company headquarters and North America projects.",
+  "hq": [
+   "s3"
+  ]
  },
  {
   "id": "brussels",
@@ -99,14 +108,14 @@
  {
   "id": "amsterdam",
   "short": "Amsterdam",
-  "kind": "team",
+  "kind": "onsite",
   "stages": [
    "s5"
   ],
   "name_es": "Ámsterdam",
   "name_en": "Amsterdam",
-  "es": "Servicios financieros · coordinación con el equipo de IT de Ámsterdam.",
-  "en": "Financial services · coordination with the Amsterdam IT team.",
+  "es": "Servicios financieros · trabajo en la oficina de Ámsterdam, junto a su equipo IT.",
+  "en": "Financial services · work at the Amsterdam office, alongside its IT team.",
   "ly": -4
  },
  {
@@ -119,7 +128,10 @@
   "name_es": "Milán",
   "name_en": "Milan",
   "es": "Industria · equipo y presupuesto de IT de Milán.",
-  "en": "Manufacturing · Milan IT team and budget."
+  "en": "Manufacturing · Milan IT team and budget.",
+  "hq": [
+   "s4"
+  ]
  },
  {
   "id": "istanbul",
@@ -134,5 +146,131 @@
   "en": "Manufacturing · Istanbul IT team.",
   "label": "l",
   "ly": -6
+ },
+ {
+  "id": "copenhagen",
+  "short": "Copenhagen",
+  "kind": "onsite",
+  "stages": [
+   "s5"
+  ],
+  "name_es": "Copenhague",
+  "name_en": "Copenhagen",
+  "es": "Servicios financieros · trabajo en la oficina de Copenhague.",
+  "en": "Financial services · work at the Copenhagen office.",
+  "label": "r",
+  "ly": 3
+ },
+ {
+  "id": "frankfurt",
+  "short": "Frankfurt",
+  "kind": "onsite",
+  "stages": [
+   "s5"
+  ],
+  "name_es": "Fráncfort",
+  "name_en": "Frankfurt",
+  "es": "Servicios financieros · trabajo en la oficina de Fráncfort.",
+  "en": "Financial services · work at the Frankfurt office.",
+  "label": "r",
+  "ly": 8
+ },
+ {
+  "id": "bergen",
+  "short": "Bergen",
+  "kind": "onsite",
+  "stages": [
+   "s5"
+  ],
+  "name_es": "Bergen",
+  "name_en": "Bergen",
+  "es": "Servicios financieros · trabajo en la oficina de Bergen.",
+  "en": "Financial services · work at the Bergen office.",
+  "label": "r",
+  "ly": 3
+ },
+ {
+  "id": "geneva",
+  "short": "Geneva",
+  "kind": "onsite",
+  "stages": [
+   "s5"
+  ],
+  "name_es": "Ginebra",
+  "name_en": "Geneva",
+  "es": "Servicios financieros · trabajo en la oficina de Ginebra.",
+  "en": "Financial services · work at the Geneva office.",
+  "label": "r",
+  "ly": 6
+ },
+ {
+  "id": "dubai",
+  "short": "Dubai",
+  "kind": "onsite",
+  "stages": [
+   "s5"
+  ],
+  "name_es": "Dubái",
+  "name_en": "Dubai",
+  "es": "Servicios financieros · trabajo en la oficina de Dubái.",
+  "en": "Financial services · work at the Dubai office.",
+  "label": "r",
+  "ly": 3
+ },
+ {
+  "id": "newyork",
+  "short": "New York",
+  "kind": "onsite",
+  "stages": [
+   "s5"
+  ],
+  "name_es": "Nueva York",
+  "name_en": "New York",
+  "es": "Servicios financieros · trabajo en la oficina de Nueva York.",
+  "en": "Financial services · work at the New York office.",
+  "label": "l",
+  "ly": 3
+ },
+ {
+  "id": "singapore",
+  "short": "Singapore",
+  "kind": "onsite",
+  "stages": [
+   "s5"
+  ],
+  "name_es": "Singapur",
+  "name_en": "Singapore",
+  "es": "Servicios financieros · trabajo en la oficina de Singapur.",
+  "en": "Financial services · work at the Singapore office.",
+  "label": "r",
+  "ly": 3
+ },
+ {
+  "id": "tokyo",
+  "short": "Tokyo",
+  "kind": "onsite",
+  "stages": [
+   "s5"
+  ],
+  "name_es": "Tokio",
+  "name_en": "Tokyo",
+  "es": "Servicios financieros · trabajo en la oficina de Tokio.",
+  "en": "Financial services · work at the Tokyo office.",
+  "label": "r",
+  "ly": 3
+ },
+ {
+  "id": "manila",
+  "short": "Manila",
+  "kind": "onsite",
+  "stages": [
+   "s5"
+  ],
+  "name_es": "Manila",
+  "name_en": "Manila",
+  "es": "Servicios financieros · trabajo en la oficina de Manila.",
+  "en": "Financial services · work at the Manila office.",
+  "label": "r",
+  "ly": 3
  }
 ]

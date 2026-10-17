@@ -20,7 +20,7 @@ STAGES = [
              "This is where I learned the basics you never forget: document, escalate in time and never leave a user without an answer."),
          chips=["Windows", "LAN / WiFi", "SQL Server", "Office 365", "POS · ICG · HIOPOS", "CashDro"]),
     dict(n="02", key="s2", company=("Grupo de lujo internacional", "International luxury group"), years="2016 — 2018",
-         where="Madrid · París · Lisboa", where_en="Madrid · Paris · Lisbon",
+         where="París · Madrid · Lisboa", where_en="Paris · Madrid · Lisbon",
          sector=("Lujo · retail", "Luxury retail"),
          role=("IT Support / Systems Engineer", "IT Support / Systems Engineer"),
          p=("Soporte IT para oficinas y tiendas de marcas del grupo en España y Portugal, con base en Madrid y trabajo en las oficinas de París y Lisboa. Altas de usuarios (red, correo, AS400), licencias de Office 365 con el service desk central de París, Mac y Adobe, impresoras de tienda y una app Android de notas de gastos.",
@@ -47,7 +47,7 @@ STAGES = [
              "My first time deciding what to spend on and why, not just how to fix things."),
          chips=["VMware", "Citrix", "Veeam", "SQL", "VPN · LAN/WAN/WiFi", "JAMF Pro", "SAP support", "IT budget"]),
     dict(n="05", key="s5", company=("Servicios financieros", "Financial services"), years=("2021 — hoy", "2021 — now"), live=True,
-         where="Madrid · Londres · París", where_en="Madrid · London · Paris",
+         where="Madrid · Londres · París · Ámsterdam · Copenhague · Fráncfort · Bergen · Ginebra · Dubái · Nueva York · Singapur · Tokio · Manila", where_en="Madrid · London · Paris · Amsterdam · Copenhagen · Frankfurt · Bergen · Geneva · Dubai · New York · Singapore · Tokyo · Manila",
          sector=("Finanzas", "Finance"),
          role=("IT Site Leader, Senior Engineer · Infra & EUC", "IT Site Leader, Senior Engineer · Infra & EUC"),
          p=("Llevo la sede de Madrid: operaciones IT para trading floor y usuarios corporativos en un entorno regulado. Intune, Autopilot, Defender y Entra ID con Conditional Access; SCCM con OSD y empaquetado; redes Cisco, salas de comunicaciones y racks; pruebas de DR/BCP y proveedores. Lideré la migración a Windows 11 de las oficinas de Madrid.",
@@ -86,7 +86,21 @@ def stage_html(s):
 
 # ---------------------------------------------------------------- map
 M = json.loads((ROOT / "map.json").read_text())
-HIT = {"ESP", "GBR", "FRA", "PRT", "USA", "BEL", "ITA", "TUR", "NLD"}
+# countries per stage: WORKED = where I worked (dark), PRESENCE = where the company had clients or offices (light).
+# Stage 3 presence: Cerner subsidiaries in its 2019 10-K (Exhibit 21) plus its Middle East clients (Saudi Arabia, Qatar).
+WORKED = {
+    "s1": {"ESP"},
+    "s2": {"FRA", "ESP", "PRT"},
+    "s3": {"USA", "ESP", "BEL"},
+    "s4": {"ITA", "ESP", "TUR"},
+    "s5": {"GBR", "ESP", "FRA", "NLD", "DNK", "DEU", "NOR", "CHE", "ARE", "USA", "SGP", "JPN", "PHL"},
+}
+PRESENCE = {
+    "s3": {"AUS", "AUT", "BEL", "BRA", "CAN", "CHL", "EGY", "FIN", "FRA", "DEU", "IND", "IRL", "MYS", "MEX", "NLD",
+           "NOR", "PRT", "ROU", "ESP", "SWE", "ARE", "GBR", "USA", "SAU", "QAT"},
+}
+def _stages(iso, table):
+    return " ".join(k for k in sorted(table) if iso in table[k])
 CITIES = json.loads((ROOT / "cities.json").read_text())
 def rel(d):
     """Absolute M/L path -> relative path in tenths of a pixel (about half the size)."""
@@ -107,7 +121,12 @@ def rel(d):
     return "".join(out)
 
 
-paths = "".join(f'<path class="land{" hit" if iso in HIT else ""}" d="{rel(d)}"/>' for iso, d in M["paths"])
+def _land(iso, d):
+    w, pr = _stages(iso, WORKED), _stages(iso, PRESENCE)
+    cls = "land" + (" hit" if w else " pres" if pr else "")
+    attrs = (f' data-w="{w}"' if w else "") + (f' data-p="{pr}"' if pr else "")
+    return f'<path class="{cls}"{attrs} d="{rel(d)}"/>'
+paths = "".join(_land(iso, d) for iso, d in M["paths"])
 mx, my = M["cities"]["madrid"]
 routes, pins = [], []
 for c in CITIES:
@@ -121,8 +140,9 @@ for c in CITIES:
     lx = 6 if c.get("label", "r") == "r" else -6
     anchor = "start" if lx > 0 else "end"
     ly = c.get("ly", 3)
+    hq = f' data-hq="{" ".join(c["hq"])}"' if c.get("hq") else ""
     major = " major" if c["id"] in ("madrid", "kansas", "istanbul") else ""
-    pins.append(f'<g class="pin {c["kind"]}{major}" data-id="{c["id"]}" data-s="{" ".join(c["stages"])}" data-x="{x:.1f}" data-y="{y:.1f}" transform="translate({x:.1f} {y:.1f})" tabindex="0" role="button" aria-label="{html.escape(c["name_es"])} / {html.escape(c["name_en"])}"><circle class="halo" r="7"/><circle class="core" r="3"/><text class="es" x="{lx}" y="{ly}" text-anchor="{anchor}">{html.escape(c["name_es"])}</text><text class="en" x="{lx}" y="{ly}" text-anchor="{anchor}">{html.escape(c["name_en"])}</text></g>')
+    pins.append(f'<g class="pin {c["kind"]}{major}" data-id="{c["id"]}" data-s="{" ".join(c["stages"])}"{hq} data-x="{x:.1f}" data-y="{y:.1f}" transform="translate({x:.1f} {y:.1f})" tabindex="0" role="button" aria-label="{html.escape(c["name_es"])} / {html.escape(c["name_en"])}"><circle class="halo" r="7"/><circle class="core" r="3"/><text class="es" x="{lx}" y="{ly}" text-anchor="{anchor}">{html.escape(c["name_es"])}</text><text class="en" x="{lx}" y="{ly}" text-anchor="{anchor}">{html.escape(c["name_en"])}</text></g>')
 MAP = f'''      <svg id="map" viewBox="0 0 1000 487" role="img" aria-label="Mapa / Map">
         <g id="mapLayer">{paths}<g id="routes">{"".join(routes)}</g><g id="pins">{"".join(pins)}</g></g>
       </svg>'''
