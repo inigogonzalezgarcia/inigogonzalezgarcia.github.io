@@ -2,7 +2,7 @@
 import html, re, datetime
 
 SITE_URL = "https://inigogonzalezgarcia.github.io/"
-MAIL = "inigogonzalezgarcia@yahoo.es"
+MAIL = "inigogonzalezgarcia@outlook.es"
 LINKEDIN = "https://www.linkedin.com/in/igonzalez93"
 GITHUB = "https://github.com/inigogonzalezgarcia"
 LINKTREE = "https://linktr.ee/inigogonzalezgarcia"
