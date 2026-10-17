@@ -1,5 +1,5 @@
 """Shared layout and page bodies. Imported by build.py."""
-import html, re, datetime
+import html, re, datetime, json
 
 SITE_URL = "https://inigogonzalezgarcia.github.io/"
 MAIL = "inigogonzalezgarcia@outlook.es"
@@ -47,13 +47,39 @@ SEC_HEAD = f'''<!-- Security: GitHub Pages cannot send custom HTTP headers, so o
 <meta http-equiv="Content-Security-Policy" content="{CSP}">
 <meta name="referrer" content="strict-origin-when-cross-origin">'''
 
-LDJSON = ('{"@context":"https://schema.org","@type":"Person","name":"Iñigo González","jobTitle":"IT Site Leader, Senior Engineer",'
-          '"address":{"@type":"PostalAddress","addressLocality":"Madrid","addressCountry":"ES"},"url":"https://inigogonzalezgarcia.github.io/",'
-          '"sameAs":["https://www.linkedin.com/in/igonzalez93","https://github.com/inigogonzalezgarcia","https://linktr.ee/inigogonzalezgarcia"]}')
+# Structured data (schema.org JSON-LD). One Person node, referenced by @id from every page, so search engines tie the
+# blog posts, the site and the profiles (sameAs) to the same person. No employer names (GDPR choice for the site).
+PERSON_ID = SITE_URL + "#person"
+PERSON = {
+    "@type": "Person", "@id": PERSON_ID, "name": "Iñigo González", "alternateName": "Iñigo González García",
+    "jobTitle": "IT Site Leader, Senior Engineer", "url": SITE_URL, "image": SITE_URL + "assets/img/about.jpg",
+    "description": "IT Site Leader in Madrid with 11+ years in IT operations, Modern Workplace and infrastructure.",
+    "address": {"@type": "PostalAddress", "addressLocality": "Madrid", "addressCountry": "ES"},
+    "knowsLanguage": ["es", "en"],
+    "knowsAbout": ["IT operations", "Modern Workplace", "IT infrastructure", "Microsoft Intune", "Microsoft Entra ID",
+                   "Active Directory", "Microsoft 365", "Jamf Pro", "Microsoft Teams Rooms", "Windows 11 migration",
+                   "PowerShell", "Citrix", "VMware", "Microsoft Azure", "AWS", "Kubernetes"],
+    "sameAs": [LINKEDIN, GITHUB, LINKTREE],
+}
+PERSON_REF = {"@type": "Person", "@id": PERSON_ID, "name": "Iñigo González", "url": SITE_URL}
+WEBSITE = {"@type": "WebSite", "@id": SITE_URL + "#website", "url": SITE_URL, "name": "Iñigo González",
+           "inLanguage": ["en", "es"], "publisher": PERSON_REF}
+
+def crumbs(*items):
+    """BreadcrumbList from (name, path) pairs, paths relative to SITE_URL."""
+    return {"@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": i, "name": n, "item": SITE_URL + p} for i, (n, p) in enumerate(items, 1)]}
+
+def ld_tag(nodes):
+    if not nodes: return ""
+    data = json.dumps({"@context": "https://schema.org", "@graph": nodes}, ensure_ascii=False, separators=(",", ":"))
+    return '<script type="application/ld+json">' + data.replace("</", "<\\/") + "</script>"
+
+OG_DEFAULT = "assets/og/site.png"
 
 CUR = ' aria-current="page"'
 
-def layout(*, R, path, active, title_en, title_es, desc, body, home=False, og_type="website"):
+def layout(*, R, path, active, title_en, title_es, desc, body, home=False, og_type="website", og_image=OG_DEFAULT, ld=None, robots=None):
     t_en = html.escape(title_en); t_es = html.escape(title_es)
     nav_top = "".join(
         f'<a href="{R}{h}"{CUR if k == active else ""}>{bi(es, en)}</a>'
@@ -70,16 +96,25 @@ def layout(*, R, path, active, title_en, title_es, desc, body, home=False, og_ty
 <meta name="description" content="{html.escape(desc)}">
 <meta name="author" content="Iñigo González">
 <meta name="theme-color" content="#0e1a24">
-<link rel="canonical" href="{SITE_URL}{path}">
+{f'<meta name="robots" content="{robots}">' if robots else f'<link rel="canonical" href="{SITE_URL}{path}">'}
 <link rel="icon" href="{R}assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{R}assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
 <meta property="og:type" content="{og_type}">
 <meta property="og:title" content="{t_en}">
 <meta property="og:description" content="{html.escape(desc)}">
 <meta property="og:url" content="{SITE_URL}{path}">
+<meta property="og:image" content="{SITE_URL}{og_image}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{t_en}">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="{R}assets/InterTight.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="{R}assets/style.css">
 <script src="{R}assets/boot.js"></script>
-{f'<script type="application/ld+json">{LDJSON}</script>' if home else ''}
+{ld_tag(ld)}
 </head>
 <body id="top">
 <a class="skip" href="#main">{bi("Saltar al contenido", "Skip to content")}</a>

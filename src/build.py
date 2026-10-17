@@ -151,8 +151,10 @@ MAP = f'''      <svg id="map" viewBox="0 0 1000 487" role="img" aria-label="Mapa
 # ---------------------------------------------------------------- pages
 import sys
 sys.path.insert(0, str(ROOT))
-from pages import layout, page_hero, card, md, minutes, fdate, soon, bi as bi2, MAIL, LINKEDIN, GITHUB, LINKTREE, SEC_HEAD
+from pages import PERSON, PERSON_ID, PERSON_REF, WEBSITE, SITE_URL, crumbs, layout, page_hero, card, md, minutes, fdate, soon, bi as bi2, MAIL, LINKEDIN, GITHUB, LINKTREE, SEC_HEAD
 from posts import POSTS, CATS
+import make_og
+OG = make_og.build(SITE, POSTS, CATS, only_missing=True)  # social preview cards, one per post (CI makes the real ones)
 
 SEC = {p.stem: p.read_text() for p in (ROOT / "sections").glob("*.html")}
 FORM = f'https://formspree.io/f/{CONF["formspree_id"]}' if CONF.get("formspree_id") else f"mailto:{MAIL}"
@@ -246,7 +248,7 @@ home_body = "\n\n".join([
 </section>'''])
 sizes["index.html"] = write("index.html", layout(R="", path="", active="", home=True,
     title_en="Iñigo González · IT Operations & Infrastructure", title_es="Iñigo González · Operaciones IT e Infraestructura",
-    desc=DESC, body=home_body))
+    desc=DESC, body=home_body, ld=[PERSON, WEBSITE]))
 
 # journey
 JP = CONF.get("journey_photo")
@@ -272,7 +274,8 @@ if JP:
     journey_body = journey_body.replace('<section class="page-hero">', '<section class="page-hero has-bg bg-journey">', 1)
 sizes["journey.html"] = write("journey.html", layout(R="", path="journey.html", active="journey",
     title_en="Journey · Iñigo González", title_es="Viaje · Iñigo González",
-    desc="Eleven years in IT operations in five stages: consulting, luxury retail, healthcare software, manufacturing and financial services.", body=journey_body))
+    desc="Eleven years in IT operations in five stages: consulting, luxury retail, healthcare software, manufacturing and financial services.", body=journey_body,
+    ld=[crumbs(("Home", ""), ("Journey", "journey.html"))]))
 
 # blog index
 cards = "\n".join(card(p, CATS, "../") for p in POSTS_SORTED)
@@ -291,7 +294,11 @@ blog_body = page_hero("Blog · " + bi("Labs y herramientas", "Labs & tools"),
 </section>'''
 sizes["blog/index.html"] = write("blog/index.html", layout(R="../", path="blog/", active="blog",
     title_en="Blog · Iñigo González", title_es="Blog · Iñigo González",
-    desc="How I built each of my GitHub projects: IT Ops tools and cloud, SRE and GPU labs.", body=blog_body))
+    desc="How I built each of my GitHub projects: IT Ops tools and cloud, SRE and GPU labs.", body=blog_body,
+    ld=[{"@type": "Blog", "@id": SITE_URL + "blog/#blog", "url": SITE_URL + "blog/", "name": "Labs & tools · Iñigo González",
+         "inLanguage": "en", "author": PERSON_REF,
+         "blogPost": [{"@type": "BlogPosting", "headline": q["title_en"], "url": f'{SITE_URL}blog/{q["repo"]}.html', "datePublished": q["date"]} for q in POSTS_SORTED]},
+        crumbs(("Home", ""), ("Blog", "blog/"))]))
 
 # posts
 order = sorted(POSTS, key=lambda p: p["n"])
@@ -337,7 +344,13 @@ for i, p in enumerate(order):
 </section>'''
     sizes[f"blog/{p['repo']}.html"] = write(f"blog/{p['repo']}.html", layout(R="../", path=f"blog/{p['repo']}.html", active="blog",
         title_en=f'{p["title_en"]} · Iñigo González', title_es=f'{p["title_es"]} · Iñigo González',
-        desc=p["dek_en"], body=body, og_type="article"))
+        desc=p["dek_en"], body=body, og_type="article", og_image=OG[p["repo"]],
+        ld=[{"@type": "BlogPosting", "headline": p["title_en"], "alternativeHeadline": p["title_es"], "description": p["dek_en"],
+             "datePublished": p["date"], "dateModified": p["date"], "inLanguage": "en", "image": SITE_URL + OG[p["repo"]],
+             "url": f'{SITE_URL}blog/{p["repo"]}.html', "mainEntityOfPage": f'{SITE_URL}blog/{p["repo"]}.html',
+             "author": PERSON_REF, "publisher": PERSON_REF, "isPartOf": {"@id": SITE_URL + "blog/#blog"},
+             "articleSection": c[1]},
+            crumbs(("Home", ""), ("Blog", "blog/"), (p["title_en"], f'blog/{p["repo"]}.html'))]))
 
 # about
 now = f'''<section class="section">
@@ -358,7 +371,8 @@ about_body = SEC["about"].replace('class="section dark" id="sobre-mi"', 'class="
     + "\n\n" + now + "\n\n" + SEC["contact"].replace("{{FORM_ACTION}}", FORM).replace("{{CAPTCHA}}", CAPTCHA).replace("{{CAPTCHA_JS}}", CAPTCHA_JS)
 sizes["about.html"] = write("about.html", layout(R="", path="about.html", active="about",
     title_en="About · Iñigo González", title_es="Sobre mí · Iñigo González",
-    desc="About Iñigo González, IT Site Leader in Madrid, and how to get in touch.", body=about_body))
+    desc="About Iñigo González, IT Site Leader in Madrid, and how to get in touch.", body=about_body,
+    ld=[{"@type": "ProfilePage", "url": SITE_URL + "about.html", "mainEntity": PERSON}, crumbs(("Home", ""), ("About", "about.html"))]))
 
 # store (IGG-ICS · IT · Tech Career, Lab & Strategy): service catalogue, no prices or checkout yet
 BOOK = CONF.get("booking_url", "")
@@ -589,7 +603,8 @@ store_body = page_hero("Store · IGG-ICS · IT · Tech Career, Lab &amp; Strateg
 </section>'''
 sizes["store.html"] = write("store.html", layout(R="", path="store.html", active="store",
     title_en="Store · IGG-ICS IT career services · Iñigo González", title_es="Store · Servicios IGG-ICS para perfiles IT · Iñigo González",
-    desc="IGG-ICS career services for IT professionals: CV and LinkedIn review, IT 360º diagnosis and a 4-week action plan. Online, in Spanish or English.", body=store_body))
+    desc="IGG-ICS career services for IT professionals: CV and LinkedIn review, IT 360º diagnosis and a 4-week action plan. Online, in Spanish or English.", body=store_body,
+    ld=[crumbs(("Home", ""), ("Store", "store.html"))]))
 
 # old advisory URL: keep it working (newsletters link to it) and send visitors to the store
 sizes["asesoria.html"] = write("asesoria.html", '''<!doctype html>
@@ -674,7 +689,8 @@ resources_body = page_hero(bi("Recursos gratuitos · Tech Career Lab", "Free res
 {CAPTCHA_JS}'''
 sizes["recursos.html"] = write("recursos.html", layout(R="", path="recursos.html", active="resources",
     title_en="33 ideas to get found in IT · Iñigo González", title_es="33 ideas para que te encuentren en IT · Iñigo González",
-    desc="Free resource: 33 ideas for IT professionals to get found on LinkedIn, show their work with projects, network and get through hiring processes. Plus the Tech Career Lab newsletter.", body=resources_body))
+    desc="Free resource: 33 ideas for IT professionals to get found on LinkedIn, show their work with projects, network and get through hiring processes. Plus the Tech Career Lab newsletter.", body=resources_body,
+    ld=[crumbs(("Home", ""), ("Resources", "recursos.html"))]))
 
 # links
 LINKS = [
@@ -700,12 +716,43 @@ links_body = page_hero("Links", bi("Todo, en un sitio.", "Everything, in one pla
 </section>'''
 sizes["links.html"] = write("links.html", layout(R="", path="links.html", active="links",
     title_en="Links · Iñigo González", title_es="Links · Iñigo González",
-    desc="Blog, journey, LinkedIn, GitHub and contact for Iñigo González.", body=links_body))
+    desc="Blog, journey, LinkedIn, GitHub and contact for Iñigo González.", body=links_body,
+    ld=[crumbs(("Home", ""), ("Links", "links.html"))]))
 
 # legal pages (legal notice, terms); privacidad.html stays hand-written
 import legal
 for path, kw in legal.PAGES.items():
     sizes[path] = write(path, legal.shell(path=path, **kw))
+
+# 404: GitHub Pages serves /404.html for any missing URL, at that URL, so every link is root-absolute (R="/")
+nf_latest = "\n".join(f'      <a class="link-btn" href="/blog/{q["repo"]}.html"><span>{html.escape(q["title_en"])}</span><span aria-hidden="true">→</span></a>' for q in POSTS_SORTED[:3])
+nf_body = page_hero("404", bi("Esta página<br>no existe.", "This page<br>doesn't exist."),
+    bi("Puede que el enlace sea antiguo o tenga una errata. Estos caminos sí funcionan:", "The link may be old or have a typo. These ones work:")) + f'''
+
+<section class="section links-section">
+  <div class="wrap links-list">
+      <a class="link-btn" href="/"><span>{bi("Inicio", "Home")}</span><span aria-hidden="true">→</span></a>
+      <a class="link-btn" href="/blog/"><span>{bi("Blog: labs y herramientas", "Blog: labs & tools")}</span><span aria-hidden="true">→</span></a>
+{nf_latest}
+      <a class="link-btn" href="/about.html#contacto"><span>{bi("Contacto", "Contact")}</span><span aria-hidden="true">→</span></a>
+  </div>
+</section>'''
+sizes["404.html"] = write("404.html", layout(R="/", path="404.html", active="", title_en="Page not found · Iñigo González",
+    title_es="Página no encontrada · Iñigo González", desc="This page doesn't exist.", body=nf_body, robots="noindex"))
+
+# sitemap.xml + robots.txt: every indexable page (not noindex, not redirects); lastmod = post date, or the newest
+# post date for pages that list posts, so the file only changes when content does
+NOINDEX = {"404.html", "asesoria.html", "privacidad.html"} | set(legal.PAGES)
+newest = max(q["date"] for q in POSTS)
+post_date = {f'blog/{q["repo"]}.html': q["date"] for q in POSTS}
+urls = []
+for rel in sorted(sizes, key=lambda r: (r != "index.html", r.startswith("blog/"), r)):
+    if rel in NOINDEX: continue
+    loc = SITE_URL + ("" if rel == "index.html" else rel.replace("index.html", ""))
+    urls.append(f"  <url><loc>{loc}</loc><lastmod>{post_date.get(rel, newest)}</lastmod></url>")
+(SITE / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+                                  + "\n".join(urls) + "\n</urlset>\n")
+(SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /src/\n\nSitemap: {SITE_URL}sitemap.xml\n")
 
 data = {"cities": {c["id"]: c for c in CITIES}, "hero": CONF["hero_photos"], "about": CONF.get("about_photo"),
         "formspree": bool(CONF.get("formspree_id")), "ga4": CONF.get("ga4_id", "")}
