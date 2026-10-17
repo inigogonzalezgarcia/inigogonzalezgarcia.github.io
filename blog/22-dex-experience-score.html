@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="A 0-10 experience score for every laptop, learning in public · Iñigo González" data-title-es="Una nota de 0 a 10 para la experiencia de cada portátil, aprendiendo en público · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A 0-10 experience score for every laptop, learning in public · Iñigo González</title>
+<meta name="description" content="A lab that turns endpoint telemetry into a score per device, site and department, and ranks the five fixes that would raise it most.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/22-dex-experience-score.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A 0-10 experience score for every laptop, learning in public · Iñigo González">
+<meta property="og:description" content="A lab that turns endpoint telemetry into a score per device, site and department, and ranks the five fixes that would raise it most.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/22-dex-experience-score.html">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+
+</head>
+<body>
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header" id="top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 22</p>
+    <h1><span class="es">Una nota de 0 a 10 para la experiencia de cada portátil, aprendiendo en público</span><span class="en">A 0-10 experience score for every laptop, learning in public</span></h1>
+    <p class="lede"><span class="es">Un laboratorio que convierte la telemetría de los equipos en una nota por dispositivo, sede y departamento, y ordena los cinco arreglos que más la subirían.</span><span class="en">A lab that turns endpoint telemetry into a score per device, site and department, and ranks the five fixes that would raise it most.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span> · <span class="es">17 oct 2026</span><span class="en">17 Oct 2026</span> · <span class="es">2 min</span><span class="en">2 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>Por qué este laboratorio</h2>
+<p>Es un laboratorio para aprender. Quería entender cómo funcionan las notas de experiencia digital del empleado (DEX). Se inspira en las descripciones públicas de herramientas como Nexthink, pero no tengo experiencia práctica con esos productos; el modelo, los umbrales y los pesos son míos.</p>
+<h2>El problema</h2>
+<p>Quien haya dado soporte presencial a usuarios de Windows lo sabe: los tickets muestran una parte de los problemas. La gente convive semanas con un portátil lento o una aplicación que se cierra, deja de avisar y solo dice &quot;IT va lento&quot;. Una actualización mensual añade 40 segundos a cada inicio de sesión, un complemento de Outlook falla en veinte portátiles, el wifi de una planta es débil, las baterías mueren en mitad de una reunión. La telemetría de los equipos lo ve todo.</p>
+<h2>Qué he hecho</h2>
+<ul><li>Un recolector de solo lectura en PowerShell: tiempos de arranque e inicio de sesión, cierres y bloqueos de aplicaciones, pantallazos azules, cortes y señal de wifi, latencia, fallos de VPN, batería y disco.</li><li>Una nota por dispositivo a partir de cinco categorías (rendimiento, estabilidad, red y colaboración, hardware y una encuesta opcional), con topes para pantallazos azules y categorías muy malas. Los datos que faltan se dejan fuera, nunca cuentan como cero.</li><li>Los arreglos ordenados por cuánto subiría la nota de la flota si el problema desapareciera, la tendencia de 6 semanas por sede, <code>review.md</code> para el responsable del servicio y <code>report.html</code> con gráficos SVG.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python solo con la librería estándar y PowerShell. La demo es una empresa inventada con 120 equipos en tres ciudades y seis semanas de datos; encuentra los cinco problemas puestos a propósito, empezando por pantallazos azules en un modelo de portátil tras actualizar un driver. 15 tests.</p>
+<h2>Qué aprendí</h2>
+<p>Explicar la nota importa más que el número: cada punto perdido tiene que llevar a una causa y a un arreglo. Y la telemetría ligada a una persona es un dato personal, así que hay que informar por sede y departamento y hablar antes con el DPO.</p>
+<h2>Sin probar todavía</h2>
+<p>El recolector contra equipos reales, los umbrales contra datos reales y los datos de Intune Endpoint Analytics o de una herramienta RMM.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>Why this lab</h2>
+<p>This is a learning lab. I wanted to understand how digital employee experience (DEX) scores work. It is inspired by public descriptions of tools like Nexthink, but I have no hands-on experience with those products; the model, thresholds and weights are my own.</p>
+<h2>The problem</h2>
+<p>Anyone who has supported Windows users on site knows it: tickets show a fraction of the problems. People live with a slow laptop or a crashing app for weeks, stop reporting and just say &quot;IT is slow&quot;. A monthly update adds 40 seconds to every logon, an Outlook add-in crashes on twenty laptops, the Wi-Fi on one floor is weak, batteries die in meetings. Endpoint telemetry sees all of it.</p>
+<h2>What I built</h2>
+<ul><li>A read-only PowerShell collector: boot and logon times, app crashes and hangs, blue screens, Wi-Fi drops and signal, latency, VPN failures, battery and disk.</li><li>A score per device from five categories (performance, stability, network and collaboration, hardware, optional survey), with caps for blue screens and very poor categories. Missing data is left out, never scored as zero.</li><li>Top fixes ranked by how much the fleet score would rise if the problem were gone, a 6-week trend by site, <code>review.md</code> for the service owner and <code>report.html</code> with inline SVG charts.</li></ul>
+<h2>How it is built</h2>
+<p>Python with the standard library only, plus PowerShell. The demo is a made-up company with 120 devices in three cities and six weeks of data; it finds the five problems placed on purpose, led by blue screens on one laptop model after a driver update. 15 tests.</p>
+<h2>What I learned</h2>
+<p>Explaining the score matters more than the number: every point lost has to point to a cause and a fix. And telemetry linked to a person is personal data, so report by site and department and talk to the DPO first.</p>
+<h2>Not tested yet</h2>
+<p>The collector against real devices, the thresholds against real data and data from Intune Endpoint Analytics or an RMM tool.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
+      <p class="repo-name">22-dex-experience-score</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/22-dex-experience-score" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="21-apple-fleet-audit.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Una revisión semanal para una flota Apple en Jamf Pro</span><span class="en">A weekly review for a Jamf Pro Apple fleet</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><span class="es">Hecha a mano y publicada con GitHub Pages ·</span><span class="en">Hand-built and published with GitHub Pages ·</span> <a href="https://github.com/inigogonzalezgarcia/inigogonzalezgarcia.github.io"><span class="es">código</span><span class="en">source</span></a></span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
