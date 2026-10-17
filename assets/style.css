@@ -369,3 +369,6 @@ footer a{color:var(--on-ink)}
 .news-box .kicker{margin:0 0 8px}
 .news-box-t{font-size:18px;margin:0 0 18px}
 .news-band{background:var(--paper)}
+/* utilities that replace former inline style="" attributes (the CSP has no 'unsafe-inline' for styles); !important keeps the precedence the inline styles had */
+.u-paper2{background:var(--paper-2)!important}.u-mt34{margin-top:34px!important}.u-mt22{margin-top:22px!important}.u-pt0{padding-top:0!important}.u-nounder{text-decoration:none!important}.u-mono12{font-family:var(--mono)!important;font-size:12px!important}.u-m0f15{margin:0!important;font-size:15px!important}.u-accent-ink{color:var(--accent-ink)!important}
+.page-hero.has-bg.bg-journey{background-image:url("img/journey.webp")}

@@ -80,7 +80,12 @@
     ap.insertBefore(im, ap.firstChild);
     var ini = $(".initials", ap); if (ini) ini.remove();
     var cap = $(".cap", ap);
-    if (cap && S.about.caption_es) cap.innerHTML = '<span class="es"></span><span class="en"></span>', cap.firstChild.textContent = S.about.caption_es, cap.lastChild.textContent = S.about.caption_en || S.about.caption_es;
+    if (cap && S.about.caption_es) {
+      var ce = document.createElement("span"), cn = document.createElement("span");
+      ce.className = "es"; ce.textContent = S.about.caption_es;
+      cn.className = "en"; cn.textContent = S.about.caption_en || S.about.caption_es;
+      cap.replaceChildren(ce, cn);
+    }
   }
 
   /* ---------- reveal + counters ---------- */
@@ -224,10 +229,11 @@
     currentCity = id;
     var l = lang();
     var kind = { base: { es: "Base", en: "Base" }, onsite: { es: "En persona", en: "In person" }, team: { es: "Equipo coordinado", en: "Team coordinated" } }[c.kind][l];
-    $("#cityCard").innerHTML = '<p class="label muted"></p><h3></h3><p></p>';
-    $("#cityCard .label").textContent = kind;
-    $("#cityCard h3").textContent = c["name_" + l];
-    $("#cityCard p:last-child").textContent = c[l];
+    var k = document.createElement("p"), h = document.createElement("h3"), d = document.createElement("p");
+    k.className = "label muted"; k.textContent = kind;
+    h.textContent = c["name_" + l];
+    d.textContent = c[l];
+    $("#cityCard").replaceChildren(k, h, d);
     $$("#pins .pin", svg).forEach(function (g) { g.classList.toggle("sel", g.getAttribute("data-id") === id); });
   }
   $$("#pins .pin", svg).forEach(function (g) {
