@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>33 ideas to get found in IT · Iñigo González</title>
 <meta name="description" content="Free resource: 33 ideas for IT professionals to get found on LinkedIn, show their work with projects, network and get through hiring processes. Plus the Tech Career Lab newsletter.">
 <meta name="author" content="Iñigo González">
@@ -15,7 +23,7 @@
 <meta property="og:url" content="https://inigogonzalezgarcia.github.io/recursos.html">
 <link rel="preload" href="assets/InterTight.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="assets/style.css">
-<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+<script src="assets/boot.js"></script>
 
 </head>
 <body>
@@ -43,8 +51,8 @@
   </div>
   <nav aria-label="Menu"><a href="journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
-    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
-    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
     <a href="about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
   </div>
 </div>
@@ -78,7 +86,7 @@
   </div>
 </section>
 
-<section class="section" style="background:var(--paper-2)">
+<section class="section u-paper2">
   <div class="wrap">
     <p class="label kicker"><span class="es">Qué incluye</span><span class="en">What's inside</span></p>
     <div class="etm-grid">

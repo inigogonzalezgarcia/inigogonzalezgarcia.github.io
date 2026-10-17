@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>About · Iñigo González</title>
 <meta name="description" content="About Iñigo González, IT Site Leader in Madrid, and how to get in touch.">
 <meta name="author" content="Iñigo González">
@@ -15,7 +23,7 @@
 <meta property="og:url" content="https://inigogonzalezgarcia.github.io/about.html">
 <link rel="preload" href="assets/InterTight.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="assets/style.css">
-<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+<script src="assets/boot.js"></script>
 
 </head>
 <body>
@@ -43,8 +51,8 @@
   </div>
   <nav aria-label="Menu"><a href="journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
-    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
-    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
     <a href="about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
   </div>
 </div>
@@ -66,7 +74,7 @@
         <div><dt class="label">Base</dt><dd>Madrid</dd></div>
         <div><dt class="label"><span class="es">Ahora</span><span class="en">Now</span></dt><dd>IT Site Leader</dd></div>
       </dl>
-      <a class="arrow-link" href="https://www.linkedin.com/in/igonzalez93" target="_blank" rel="me noopener"><span class="es">Perfil completo en LinkedIn</span><span class="en">Full profile on LinkedIn</span> ↗</a>
+      <a class="arrow-link" href="https://www.linkedin.com/in/igonzalez93" target="_blank" rel="me noopener noreferrer"><span class="es">Perfil completo en LinkedIn</span><span class="en">Full profile on LinkedIn</span> ↗</a>
     </div>
   </div>
 </section>
@@ -81,7 +89,7 @@
     <dl class="spec reveal">
       <div class="spec-row"><dt class="label"><span class="es">Trabajo</span><span class="en">Work</span></dt><dd><span class="es">IT Site Leader en Madrid, en servicios financieros.</span><span class="en">IT Site Leader in Madrid, in financial services.</span></dd></div>
       <div class="spec-row"><dt class="label"><span class="es">Construyendo</span><span class="en">Building</span></dt><dd><span class="es">Nuevos repos sobre Modern Workplace e infraestructura: Teams Rooms, co-management MECM + Intune, Active Directory.</span><span class="en">New repos on Modern Workplace and infrastructure: Teams Rooms, MECM + Intune co-management, Active Directory.</span></dd></div>
-      <div class="spec-row"><dt class="label"><span class="es">Aprendiendo</span><span class="en">Learning</span></dt><dd><span class="es">Kubernetes, SRE y operación de clústeres GPU, en laboratorios abiertos.</span><span class="en">Kubernetes, SRE and GPU cluster operations, in open labs.</span></dd></div>
+      <div class="spec-row"><dt class="label"><span class="es">Labs</span><span class="en">Labs</span></dt><dd><span class="es">Kubernetes, SRE y operación de clústeres GPU, en laboratorios abiertos.</span><span class="en">Kubernetes, SRE and GPU cluster operations, in open labs.</span></dd></div>
       <div class="spec-row"><dt class="label"><span class="es">Idiomas</span><span class="en">Languages</span></dt><dd><span class="es">Español nativo, inglés a diario y francés en progreso.</span><span class="en">Native Spanish, English every day and French in progress.</span></dd></div>
     </dl>
   </div>
@@ -94,9 +102,9 @@
       <h2 class="h2"><span class="es">Hablemos.</span><span class="en">Let's talk.</span></h2>
       <p class="lede muted"><span class="es">Proyectos, ideas, una de mis herramientas adaptada a tu entorno o simplemente saludar.</span><span class="en">Projects, ideas, one of my tools adapted to your environment, or just to say hello.</span></p>
       <div class="socials label">
-        <a class="arrow-link" href="https://www.linkedin.com/in/igonzalez93" target="_blank" rel="me noopener">LinkedIn ↗</a>
-        <a class="arrow-link" href="https://github.com/inigogonzalezgarcia" target="_blank" rel="me noopener">GitHub ↗</a>
-        <a class="arrow-link" href="https://linktr.ee/inigogonzalezgarcia" target="_blank" rel="me noopener">Linktree ↗</a>
+        <a class="arrow-link" href="https://www.linkedin.com/in/igonzalez93" target="_blank" rel="me noopener noreferrer">LinkedIn ↗</a>
+        <a class="arrow-link" href="https://github.com/inigogonzalezgarcia" target="_blank" rel="me noopener noreferrer">GitHub ↗</a>
+        <a class="arrow-link" href="https://linktr.ee/inigogonzalezgarcia" target="_blank" rel="me noopener noreferrer">Linktree ↗</a>
       </div>
     </div>
     <form class="reveal" id="contactForm" action="https://formspree.io/f/xwlvognp" method="POST" novalidate>
