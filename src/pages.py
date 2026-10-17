@@ -81,10 +81,10 @@ def layout(*, R, path, active, title_en, title_es, desc, body, home=False, og_ty
 <script src="{R}assets/boot.js"></script>
 {f'<script type="application/ld+json">{LDJSON}</script>' if home else ''}
 </head>
-<body>
+<body id="top">
 <a class="skip" href="#main">{bi("Saltar al contenido", "Skip to content")}</a>
 
-<header class="site-header" id="top">
+<header class="site-header">
   <div class="wrap">
     <a class="brand" href="{R}index.html" aria-label="Iñigo González">
       <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
@@ -119,7 +119,6 @@ def layout(*, R, path, active, title_en, title_es, desc, body, home=False, og_ty
 <footer>
   <div class="wrap">
     <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
-    <span>{bi("Hecha a mano y publicada con GitHub Pages ·", "Hand-built and published with GitHub Pages ·")} <a href="{GITHUB}/inigogonzalezgarcia.github.io">{bi("código", "source")}</a></span>
     <span><a href="{R}aviso-legal.html">{bi("Aviso legal", "Legal notice")}</a> · <a href="{R}privacidad.html">{bi("Privacidad y cookies", "Privacy and cookies")}</a> · <a href="{R}condiciones.html">{bi("Condiciones", "Terms")}</a> · <a href="{R}recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings>{bi("Preferencias de cookies", "Cookie settings")}</button></span>
     <a href="#top">{bi("Volver arriba ↑", "Back to top ↑")}</a>
   </div>
