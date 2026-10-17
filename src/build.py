@@ -289,7 +289,7 @@ blog_body = page_hero("Blog · " + bi("Labs y herramientas", "Labs & tools"),
     <div class="cards">
 {cards}
     </div>
-    <p class="note reveal">{bi("Los laboratorios 06–16 son eso: laboratorios. No tengo experiencia en producción con flotas de GPU; los hago para aprender el problema y lo digo en cada artículo.", "Labs 06–16 are just that: labs. I don't have production GPU fleet experience; I build them to learn the problem, and every story says so.")}</p>
+    <p class="note reveal">{bi("Los laboratorios 06–16 llevan a la nube y a las flotas de GPU lo que hago en operaciones IT: validar hardware, monitorizar y gestionar releases y capacidad. Todos se reproducen en un portátil con datos simulados, y cada artículo termina con los siguientes pasos para llevarlo a un entorno real.", "Labs 06–16 take what I do in IT operations (hardware validation, monitoring, release and capacity management) to the cloud and to GPU fleets. Each one runs on a laptop with simulated data, and every story ends with the next steps to take it to a real environment.")}</p>
   </div>
 </section>'''
 sizes["blog/index.html"] = write("blog/index.html", layout(R="../", path="blog/", active="blog",
