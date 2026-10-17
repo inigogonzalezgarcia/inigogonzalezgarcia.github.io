@@ -749,4 +749,84 @@ De integrar aplicaciones SaaS en Entra ID: lo difícil no es configurar el SSO, 
 
 ## Sin probar todavía
 La exportación contra un tenant real. El informe de actividad de inicio de sesión está en la beta de Graph. El aprovisionamiento SCIM y los detalles finos de OIDC son las partes que aún estoy aprendiendo, así que esas comprobaciones son sencillas a propósito."""),
+
+dict(n="21", repo="21-apple-fleet-audit", date="2026-10-17", cat="tools",
+ title_en="A weekly review for a Jamf Pro Apple fleet", title_es="Una revisión semanal para una flota Apple en Jamf Pro",
+ dek_en="Push certificate and tokens, OS currency, FileVault, SIP, bootstrap token, passcodes, stale devices and full disks, with the executives' devices first.",
+ dek_es="Certificado push y tokens, versiones de sistema, FileVault, SIP, bootstrap token, códigos de acceso, equipos que no se conectan y discos llenos, con los dispositivos de dirección primero.",
+ en="""## The problem
+Jamf Pro shows every detail of every Mac, iPhone and iPad, but the weekly questions are spread over smart groups, settings pages and Apple's portals. The same problems come back: the APNs push certificate expires and no device gets a command (or someone creates a new one instead of renewing it and every device has to re-enroll), the ADE token expires and new laptops come out of the box unmanaged, a Mac has FileVault on but no recovery key in Jamf Pro, an Apple silicon Mac has no bootstrap token and updates never install, an iPhone has no passcode, a laptop has not checked in for two months, and the CEO's iPad has a full disk the evening before the board meeting.
+
+## What I built
+- A read-only Jamf Pro API exporter (an API client with read privileges only; the secret comes from an environment variable).
+- Checks in seven areas: platform tokens (APNs, ADE, Apps and Books), OS currency, Mac security, mobile security, enrollment, hardware (storage and warranty) and VIP devices, whose findings go up one level and get their own section.
+- `review.md` for the weekly meeting with a token calendar, `device_actions.csv` as a work list per device, `findings.csv` and `report.html`.
+
+## How it is built
+Python with the standard library only. The demo is a made-up fleet of 40 devices (18 Macs, 14 iPhones, 8 iPads) with three VIP users and faults placed on purpose. 17 tests. A runbook for the weekly review and for renewing the APNs certificate and the ADE and VPP tokens without surprises.
+
+## What I learned
+From managing MacBooks, iPhones and iPads with Jamf Pro and supporting VIP users and board meetings: the expensive mistakes are not on one device, they are the certificate or token that stops the whole fleet. And a value Jamf Pro did not collect should skip the check, not raise a false alarm.
+
+## Not tested yet
+The exporter against a real Jamf Pro instance (only against fixtures written from the API documentation), reading the APNs expiry through the API and Apple Business Manager data as Jamf Pro returns it.""",
+ es="""## El problema
+Jamf Pro muestra cada detalle de cada Mac, iPhone y iPad, pero las preguntas de cada semana están repartidas entre grupos inteligentes, páginas de ajustes y los portales de Apple. Los problemas se repiten: caduca el certificado push de APNs y ningún dispositivo recibe órdenes (o alguien crea uno nuevo en lugar de renovarlo y toca volver a inscribirlos todos), caduca el token de ADE y los portátiles nuevos salen de la caja sin gestionar, un Mac tiene FileVault activado pero sin clave de recuperación en Jamf Pro, un Mac con Apple silicon no tiene bootstrap token y las actualizaciones nunca se instalan, un iPhone no tiene código, un portátil lleva dos meses sin conectarse y el iPad del CEO tiene el disco lleno la tarde antes del consejo.
+
+## Qué he hecho
+- Un exportador de solo lectura con la API de Jamf Pro (un cliente de API con permisos solo de lectura; el secreto se lee de una variable de entorno).
+- Comprobaciones en siete áreas: tokens de la plataforma (APNs, ADE, Apps and Books), versiones de sistema, seguridad del Mac, seguridad del móvil, inscripción, hardware (almacenamiento y garantía) y dispositivos VIP, cuyos hallazgos suben un nivel y tienen su propia sección.
+- `review.md` para la reunión semanal con un calendario de tokens, `device_actions.csv` como lista de trabajo por dispositivo, `findings.csv` y `report.html`.
+
+## Cómo está hecho
+Python solo con la librería estándar. La demo es una flota inventada de 40 dispositivos (18 Mac, 14 iPhone, 8 iPad) con tres usuarios VIP y fallos puestos a propósito. 17 tests. Un runbook para la revisión semanal y para renovar el certificado de APNs y los tokens de ADE y VPP sin sustos.
+
+## Qué aprendí
+De gestionar MacBooks, iPhones e iPads con Jamf Pro y dar soporte a usuarios VIP y reuniones de consejo: los errores caros no están en un dispositivo, sino en el certificado o el token que para toda la flota. Y un dato que Jamf Pro no ha recogido debe saltarse la comprobación, no dar una falsa alarma.
+
+## Sin probar todavía
+El exportador contra un Jamf Pro real (solo contra datos de prueba escritos a partir de la documentación de la API), la lectura de la caducidad de APNs por API y los datos de Apple Business Manager tal y como los devuelve Jamf Pro."""),
+
+dict(n="22", repo="22-dex-experience-score", date="2026-10-17", cat="tools",
+ title_en="A 0-10 experience score for every laptop, learning in public", title_es="Una nota de 0 a 10 para la experiencia de cada portátil, aprendiendo en público",
+ dek_en="A lab that turns endpoint telemetry into a score per device, site and department, and ranks the five fixes that would raise it most.",
+ dek_es="Un laboratorio que convierte la telemetría de los equipos en una nota por dispositivo, sede y departamento, y ordena los cinco arreglos que más la subirían.",
+ en="""## Why this lab
+This is a learning lab. I wanted to understand how digital employee experience (DEX) scores work. It is inspired by public descriptions of tools like Nexthink, but I have no hands-on experience with those products; the model, thresholds and weights are my own.
+
+## The problem
+Anyone who has supported Windows users on site knows it: tickets show a fraction of the problems. People live with a slow laptop or a crashing app for weeks, stop reporting and just say "IT is slow". A monthly update adds 40 seconds to every logon, an Outlook add-in crashes on twenty laptops, the Wi-Fi on one floor is weak, batteries die in meetings. Endpoint telemetry sees all of it.
+
+## What I built
+- A read-only PowerShell collector: boot and logon times, app crashes and hangs, blue screens, Wi-Fi drops and signal, latency, VPN failures, battery and disk.
+- A score per device from five categories (performance, stability, network and collaboration, hardware, optional survey), with caps for blue screens and very poor categories. Missing data is left out, never scored as zero.
+- Top fixes ranked by how much the fleet score would rise if the problem were gone, a 6-week trend by site, `review.md` for the service owner and `report.html` with inline SVG charts.
+
+## How it is built
+Python with the standard library only, plus PowerShell. The demo is a made-up company with 120 devices in three cities and six weeks of data; it finds the five problems placed on purpose, led by blue screens on one laptop model after a driver update. 15 tests.
+
+## What I learned
+Explaining the score matters more than the number: every point lost has to point to a cause and a fix. And telemetry linked to a person is personal data, so report by site and department and talk to the DPO first.
+
+## Not tested yet
+The collector against real devices, the thresholds against real data and data from Intune Endpoint Analytics or an RMM tool.""",
+ es="""## Por qué este laboratorio
+Es un laboratorio para aprender. Quería entender cómo funcionan las notas de experiencia digital del empleado (DEX). Se inspira en las descripciones públicas de herramientas como Nexthink, pero no tengo experiencia práctica con esos productos; el modelo, los umbrales y los pesos son míos.
+
+## El problema
+Quien haya dado soporte presencial a usuarios de Windows lo sabe: los tickets muestran una parte de los problemas. La gente convive semanas con un portátil lento o una aplicación que se cierra, deja de avisar y solo dice "IT va lento". Una actualización mensual añade 40 segundos a cada inicio de sesión, un complemento de Outlook falla en veinte portátiles, el wifi de una planta es débil, las baterías mueren en mitad de una reunión. La telemetría de los equipos lo ve todo.
+
+## Qué he hecho
+- Un recolector de solo lectura en PowerShell: tiempos de arranque e inicio de sesión, cierres y bloqueos de aplicaciones, pantallazos azules, cortes y señal de wifi, latencia, fallos de VPN, batería y disco.
+- Una nota por dispositivo a partir de cinco categorías (rendimiento, estabilidad, red y colaboración, hardware y una encuesta opcional), con topes para pantallazos azules y categorías muy malas. Los datos que faltan se dejan fuera, nunca cuentan como cero.
+- Los arreglos ordenados por cuánto subiría la nota de la flota si el problema desapareciera, la tendencia de 6 semanas por sede, `review.md` para el responsable del servicio y `report.html` con gráficos SVG.
+
+## Cómo está hecho
+Python solo con la librería estándar y PowerShell. La demo es una empresa inventada con 120 equipos en tres ciudades y seis semanas de datos; encuentra los cinco problemas puestos a propósito, empezando por pantallazos azules en un modelo de portátil tras actualizar un driver. 15 tests.
+
+## Qué aprendí
+Explicar la nota importa más que el número: cada punto perdido tiene que llevar a una causa y a un arreglo. Y la telemetría ligada a una persona es un dato personal, así que hay que informar por sede y departamento y hablar antes con el DPO.
+
+## Sin probar todavía
+El recolector contra equipos reales, los umbrales contra datos reales y los datos de Intune Endpoint Analytics o de una herramienta RMM."""),
 ]
