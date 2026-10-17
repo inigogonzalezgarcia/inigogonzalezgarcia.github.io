@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>A real Slurm cluster in Docker Compose, with GPU health checks · Iñigo González</title>
 <meta name="description" content="Drain, requeue and validate, and four CI iterations to get cgroups v2 working.">
 <meta name="author" content="Iñigo González">
@@ -15,7 +23,7 @@
 <meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/14-slurm-gpu-ops.html">
 <link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="../assets/style.css">
-<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+<script src="../assets/boot.js"></script>
 
 </head>
 <body>
@@ -43,8 +51,8 @@
   </div>
   <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
-    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
-    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
     <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
   </div>
 </div>
@@ -63,27 +71,29 @@
     <article class="prose">
       <div class="es" lang="es">
 <h2>Por qué este laboratorio</h2>
-<p>Un laboratorio para aprender. Muchos clústeres de GPU usan Slurm y no Kubernetes, así que quería la misma política de XID del laboratorio 09 funcionando en un Slurm real.</p>
+<p>Se apoya en la administración de servidores Linux (Red Hat). Muchos clústeres de GPU usan Slurm en lugar de Kubernetes, así que este laboratorio lleva la política XID del laboratorio 09 a un Slurm real.</p>
 <h2>Qué he hecho</h2>
 <ul><li>Slurm 23.11 con paquetes de Ubuntu 24.04 en Docker Compose: MariaDB, slurmdbd, slurmctld y 4 nodos con 4 GPU simuladas cada uno.</li><li><code>gpuops health</code> como HealthCheckProgram cada 10 segundos: cordon (drenar y dejar que acaben los trabajos), drain (drenar y reencolar) o cuarentena. Nunca reactiva un nodo y respeta el motivo de un drain puesto por una persona.</li><li><code>gpuops validate</code>: reserva de mantenimiento, resume, burn-in en todas las GPU y después libera o vuelve a drenar.</li><li>Un entrenamiento de dos nodos con checkpoints en almacenamiento compartido que se cuelga, en lugar de fallar, ante un XID de hardware.</li><li><code>gpuops events</code> une sacct, el log del trabajo y el del health check en el formato de eventos del laboratorio 12.</li></ul>
 <h2>Cómo se prueba</h2>
 <p>CI: 36 comprobaciones en unos 7 minutos. El XID 79 drena el nodo en 2 segundos y reencola el trabajo; el trabajo termina sus 150 pasos; sacct muestra REQUEUED, REQUEUED, COMPLETED. Los ficheros reales de esa ejecución se guardan como fixtures.</p>
 <h2>Qué aprendí</h2>
 <p>Hicieron falta cuatro iteraciones de CI para que funcionaran los cgroups v2 sin systemd, y el reencolado tardaba entre 60 y 80 segundos. Las dos cosas están en docs/design.md.</p>
-<h2>Sin probar todavía</h2>
-<p>GPU reales, aislamiento por cgroups y NHC.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>En nodos reales, cambiar la fuente de salud a <code>nvidia-smi</code> y el log del kernel.</li><li>Activar el aislamiento por cgroups de las GPU.</li><li>Ejecutar NHC (Node Health Check) junto al chequeo de salud de GPU.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
       </div>
       <div class="en" lang="en">
 <h2>Why this lab</h2>
-<p>A learning lab. Many GPU clusters run Slurm rather than Kubernetes, so I wanted the same XID policy from lab 09 working in a real Slurm.</p>
+<p>Builds on running Linux (Red Hat) servers. Many GPU clusters run Slurm rather than Kubernetes, so this lab brings the XID policy from lab 09 to a real Slurm cluster.</p>
 <h2>What I built</h2>
 <ul><li>Slurm 23.11 from Ubuntu 24.04 packages in Docker Compose: MariaDB, slurmdbd, slurmctld and 4 nodes with 4 simulated GPUs each.</li><li><code>gpuops health</code> as the HealthCheckProgram every 10 seconds: cordon (drain and let jobs finish), drain (drain and requeue) or quarantine. It never resumes a node and respects a drain reason set by a human.</li><li><code>gpuops validate</code>: a maintenance reservation, resume, a burn-in on every GPU, then release or drain again.</li><li>A two-node training job with checkpoints on shared storage that hangs, rather than fails, on a hardware XID.</li><li><code>gpuops events</code> joins sacct, the job log and the health-check log into lab 12&#x27;s event format.</li></ul>
 <h2>How it is tested</h2>
 <p>CI: 36 checks in about 7 minutes. XID 79 drains the node in 2 seconds and requeues the job; the job finishes its 150 steps; sacct shows REQUEUED, REQUEUED, COMPLETED. The real files from that run are kept as fixtures.</p>
 <h2>What I learned</h2>
 <p>It took four CI iterations to get cgroups v2 working without systemd, and the requeue delay was 60 to 80 seconds. Both are written up in docs/design.md.</p>
-<h2>Not tested yet</h2>
-<p>Real GPUs, cgroup isolation and NHC.</p>
+<h2>Next steps</h2>
+<ul><li>On real nodes, switch the health source to <code>nvidia-smi</code> and the kernel log.</li><li>Enable cgroup isolation for the GPUs.</li><li>Run NHC (Node Health Check) alongside the GPU health check.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
@@ -94,7 +104,7 @@
     <aside class="post-aside">
       <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
       <p class="repo-name">14-slurm-gpu-ops</p>
-      <a class="btn" href="https://github.com/inigogonzalezgarcia/14-slurm-gpu-ops" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/14-slurm-gpu-ops" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
       <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
     </aside>
   </div>

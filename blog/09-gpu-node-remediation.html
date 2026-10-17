@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Teaching a Kubernetes controller to drain, repair or quarantine GPU nodes · Iñigo González</title>
 <meta name="description" content="First GPU lab: XID errors, ECC and temperature drive each node through a state machine.">
 <meta name="author" content="Iñigo González">
@@ -15,7 +23,7 @@
 <meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/09-gpu-node-remediation.html">
 <link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="../assets/style.css">
-<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+<script src="../assets/boot.js"></script>
 
 </head>
 <body>
@@ -43,8 +51,8 @@
   </div>
   <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
-    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
-    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
     <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
   </div>
 </div>
@@ -63,25 +71,27 @@
     <article class="prose">
       <div class="es" lang="es">
 <h2>Por qué este laboratorio</h2>
-<p>No tengo experiencia en producción con flotas de GPU. Este es el primero de una serie de laboratorios para aprender cómo se operan en el día a día, y cada README lo dice. No he pagado máquinas con GPU.</p>
+<p>Viene de la operación de hardware: validar y certificar servidores, y automatizar la detección y la reparación de fallos de hardware. Es el primero de una serie de laboratorios que lleva eso a las flotas de GPU. Funciona con GPU simuladas, así que cualquiera puede reproducirlo en un portátil.</p>
 <h2>Qué he hecho</h2>
 <p>Un controlador de Kubernetes en Go (solo librería estándar, sin client-go) que lee métricas DCGM (errores XID, ECC de doble bit, row remapping, temperatura) y lleva cada nodo por Healthy → Draining → Repairing → Validating → Healthy, o a Cordoned por temperatura, o a Quarantined.</p>
 <ul><li>El estado vive en anotaciones del nodo, con un presupuesto de nodos en remediación (max-unavailable).</li><li>Las evicciones respetan los PodDisruptionBudget y la validación es un Job fijado al nodo con todas sus GPU.</li><li>Regla de reincidencia, modo dry-run, eventos y métricas de Prometheus.</li><li>La política de XID se basa en la documentación de NVIDIA (docs/xid-policy.md).</li></ul>
 <h2>Cómo se prueba</h2>
 <p>Un simulador <code>gpu-sim</code> hace de dcgm-exporter. La CI pasa tests unitarios, shellcheck y una prueba de punta a punta en kind con 8 escenarios (28 comprobaciones), en verde a la primera. Hay además un modo <code>gpuremediate check</code> que usa nvidia-smi en una GPU real.</p>
-<h2>Sin probar todavía</h2>
-<p>Una GPU real: ni un dcgm-exporter real ni el modo check en una máquina con GPU.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>En un clúster con GPU, desplegar dcgm-exporter en lugar del simulador.</li><li>Empezar en modo dry-run y fijar el presupuesto de nodos en reparación (max-unavailable).</li><li><code>gpuremediate check</code> funciona en cualquier máquina con <code>nvidia-smi</code>, también en un puesto Windows.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
       </div>
       <div class="en" lang="en">
 <h2>Why this lab</h2>
-<p>I don&#x27;t have production experience with GPU fleets. This is the first of a series of labs to learn how they are operated day to day, and every README says so. No paid GPU machines were used.</p>
+<p>Comes from hardware operations: validating and certifying servers, and automating the detection and remediation of hardware failures. This is the first of a series of labs that applies that to GPU fleets. It runs on simulated GPUs, so anyone can reproduce it on a laptop.</p>
 <h2>What I built</h2>
 <p>A Kubernetes controller in Go (standard library only, no client-go) that reads DCGM metrics (XID errors, double-bit ECC, row remapping, temperature) and moves each node through Healthy → Draining → Repairing → Validating → Healthy, or to Cordoned for thermal issues, or Quarantined.</p>
 <ul><li>State is kept in node annotations, with a budget of nodes in remediation (max-unavailable).</li><li>Evictions respect PodDisruptionBudgets, and validation runs as a Job pinned to the node with all its GPUs.</li><li>A repeat-offender rule, dry-run mode, events and Prometheus metrics.</li><li>The XID policy is based on NVIDIA&#x27;s documentation (docs/xid-policy.md).</li></ul>
 <h2>How it is tested</h2>
 <p>A <code>gpu-sim</code> simulator stands in for dcgm-exporter. CI runs unit tests, shellcheck and an end-to-end test on kind with 8 scenarios (28 checks), green on the first run. There is also a <code>gpuremediate check</code> mode that uses nvidia-smi on a real GPU.</p>
-<h2>Not tested yet</h2>
-<p>A real GPU: neither a real dcgm-exporter nor the check mode on a machine with one.</p>
+<h2>Next steps</h2>
+<ul><li>On a cluster with GPUs, deploy dcgm-exporter instead of the simulator.</li><li>Start in dry-run mode and set the budget of nodes in remediation (max-unavailable).</li><li><code>gpuremediate check</code> runs on any machine with <code>nvidia-smi</code>, including a Windows workstation.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
@@ -92,7 +102,7 @@
     <aside class="post-aside">
       <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
       <p class="repo-name">09-gpu-node-remediation</p>
-      <a class="btn" href="https://github.com/inigogonzalezgarcia/09-gpu-node-remediation" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/09-gpu-node-remediation" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
       <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
     </aside>
   </div>

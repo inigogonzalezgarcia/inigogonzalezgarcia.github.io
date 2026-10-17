@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>From handover to sign-off: accepting a new GPU cluster · Iñigo González</title>
 <meta name="description" content="Inventory, diagnostics, NCCL tests and a 72-hour burn-in, ending in a report a customer can sign.">
 <meta name="author" content="Iñigo González">
@@ -15,7 +23,7 @@
 <meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/13-cluster-acceptance-burnin.html">
 <link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="../assets/style.css">
-<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+<script src="../assets/boot.js"></script>
 
 </head>
 <body>
@@ -43,8 +51,8 @@
   </div>
   <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
-    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
-    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
     <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
   </div>
 </div>
@@ -63,7 +71,7 @@
     <article class="prose">
       <div class="es" lang="es">
 <h2>Por qué este laboratorio</h2>
-<p>Un laboratorio para aprender. Aceptar hardware es algo que conozco de operaciones IT; aquí quería ver cómo es con un clúster de GPU.</p>
+<p>Aceptar hardware nuevo y llevar revisiones de puesta en producción y aceptación del servicio forman parte de mi trabajo en operaciones IT. Este laboratorio aplica la misma disciplina a un clúster de GPU, de la entrega a la firma del cliente.</p>
 <h2>Qué he hecho</h2>
 <p>Un proceso que pasa por inventario (GPU, driver, VBIOS, puertos InfiniBand) → <code>dcgmi diag -r 3</code> → nccl-tests por nodo → por rack → burn-in de 72 horas → un trabajo de burn-in de todo el clúster medido con las reglas del laboratorio 12.</p>
 <ul><li>Un nodo se para en su primer fallo, y cada fallo tiene disposición (RMA, firmware, fabric, instalaciones, investigar, recoger evidencia), responsable y siguiente paso.</li><li>Los criterios están en criteria.toml, y las claves desconocidas son error.</li><li>Una segunda ronda sustituye la evidencia de la primera.</li><li>Salidas: report.md y report.html para el cliente (veredicto, rejilla rack × nodo, lista de pendientes, criterios y tabla de firmas), punch-list.csv y result.json.</li></ul>
@@ -71,12 +79,13 @@
 <p>Un clúster ficticio de 4 racks × 8 nodos × 8 GPU con 8 defectos. La ronda 1 acaba NO LISTO con 144 de 256 GPU. Tras la ronda 2 queda LISTO con 248, y un nodo sigue esperando un RMA.</p>
 <h2>Cómo se prueba</h2>
 <p>25 tests y un job de CI que corre las dos rondas y exige NO LISTO y después LISTO.</p>
-<h2>Sin probar todavía</h2>
-<p>Salidas reales de dcgmi diag y nccl-tests. Los parsers siguen el formato general y solo se prueban con muestras.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Escribir tus criterios de aceptación en <code>criteria.toml</code>.</li><li>Recoger la salida real de <code>dcgmi diag</code> y nccl-tests con los comandos que imprime <code>accept plan</code>.</li><li>Entregar al cliente el informe HTML y la punch list para la firma.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
       </div>
       <div class="en" lang="en">
 <h2>Why this lab</h2>
-<p>A learning lab. Accepting hardware is something I know from IT operations; here I wanted to see what it looks like for a GPU cluster.</p>
+<p>Accepting new hardware and running go-live and service-acceptance reviews are part of my IT operations work. This lab applies the same discipline to a GPU cluster, from handover to the customer&#x27;s signature.</p>
 <h2>What I built</h2>
 <p>A pipeline that runs inventory (GPU, driver, VBIOS, InfiniBand ports) → <code>dcgmi diag -r 3</code> → nccl-tests per node → per rack → a 72-hour burn-in → a whole-cluster burn-in job scored with lab 12&#x27;s rules.</p>
 <ul><li>A node stops at its first failure, and every failure gets a disposition (RMA, firmware, fabric, facility, investigate, collect evidence), an owner and a next step.</li><li>Criteria live in criteria.toml, and unknown keys are errors.</li><li>A second round replaces the evidence of the first.</li><li>Outputs: report.md and report.html for the customer (verdict, rack × node grid, punch list, criteria and a signature table), punch-list.csv and result.json.</li></ul>
@@ -84,8 +93,9 @@
 <p>A fictional cluster with 4 racks × 8 nodes × 8 GPUs and 8 defects. Round 1 ends NOT READY with 144 of 256 GPUs. After round 2 it is READY with 248, and one node is still waiting on an RMA.</p>
 <h2>How it is tested</h2>
 <p>25 tests, and a CI job that runs both rounds and requires NOT READY and then READY.</p>
-<h2>Not tested yet</h2>
-<p>Real dcgmi diag and nccl-tests output. The parsers follow the general format and are only tested with samples.</p>
+<h2>Next steps</h2>
+<ul><li>Write your acceptance criteria in <code>criteria.toml</code>.</li><li>Collect the real <code>dcgmi diag</code> and nccl-tests output with the commands that <code>accept plan</code> prints.</li><li>Hand the HTML report and the punch list to the customer for sign-off.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
@@ -96,7 +106,7 @@
     <aside class="post-aside">
       <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
       <p class="repo-name">13-cluster-acceptance-burnin</p>
-      <a class="btn" href="https://github.com/inigogonzalezgarcia/13-cluster-acceptance-burnin" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/13-cluster-acceptance-burnin" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
       <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
     </aside>
   </div>

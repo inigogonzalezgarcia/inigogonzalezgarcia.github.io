@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Rebuilding an on-site IT operations console from scratch · Iñigo González</title>
 <meta name="description" content="Assets, warranties, room checklists, joiners and leavers, shifts and service health in one Flask app.">
 <meta name="author" content="Iñigo González">
@@ -15,7 +23,7 @@
 <meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/05-it-ops-console.html">
 <link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="../assets/style.css">
-<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+<script src="../assets/boot.js"></script>
 
 </head>
 <body>
@@ -43,8 +51,8 @@
   </div>
   <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
-    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
-    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
     <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
   </div>
 </div>
@@ -69,8 +77,9 @@
 <p>El acceso es solo por invitación: el primer administrador se crea con <code>bootstrap-admin</code>, las cuentas se activan con un código de 6 caracteres por email y desde entonces cada inicio de sesión pide app autenticadora (TOTP).</p>
 <h2>Cómo está hecho</h2>
 <p>Flask y SQLite, con PowerShell por CIM/WinRM para las consultas remotas. ARCHITECTURE.md, docs/decisions.md (lecciones de PowerShell y WMI) y docs/security.md explican las decisiones. Dieciséis tests.</p>
-<h2>Sin probar todavía</h2>
-<p>LDAP, SMTP, PowerShell remoto y los códigos QR no se han probado contra un entorno real, y el README lo dice.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Conectar LDAP para el inicio de sesión y SMTP para los emails de activación.</li><li>Activar PowerShell remoto (WinRM) para las consultas en vivo a los equipos.</li><li>Cargar tu inventario de activos y tus planos, y adaptar los checklists de salas a tu oficina.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
       </div>
       <div class="en" lang="en">
 <h2>The problem</h2>
@@ -80,8 +89,9 @@
 <p>Access is invite-only: the first admin is created with <code>bootstrap-admin</code>, accounts are activated with a 6-character code sent by email, and every sign-in after that needs an authenticator app (TOTP).</p>
 <h2>How it is built</h2>
 <p>Flask and SQLite, with PowerShell over CIM/WinRM for remote queries. ARCHITECTURE.md, docs/decisions.md (PowerShell and WMI lessons) and docs/security.md explain the choices. Sixteen tests.</p>
-<h2>Not tested yet</h2>
-<p>LDAP, SMTP, remote PowerShell and QR codes have not been run against a real environment, and the README says so.</p>
+<h2>Next steps</h2>
+<ul><li>Connect LDAP for sign-in and SMTP for the activation emails.</li><li>Enable remote PowerShell (WinRM) for the live device queries.</li><li>Load your asset inventory and floor plans, and adapt the room checklists to your site.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
@@ -92,7 +102,7 @@
     <aside class="post-aside">
       <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
       <p class="repo-name">05-it-ops-console</p>
-      <a class="btn" href="https://github.com/inigogonzalezgarcia/05-it-ops-console" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/05-it-ops-console" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
       <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
     </aside>
   </div>

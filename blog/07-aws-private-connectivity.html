@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Private connectivity on AWS with Terraform, and the bug CI caught · Iñigo González</title>
 <meta name="description" content="PrivateLink, private DNS and SSM endpoints in five modules, tested without an AWS account.">
 <meta name="author" content="Iñigo González">
@@ -15,7 +23,7 @@
 <meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/07-aws-private-connectivity.html">
 <link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="../assets/style.css">
-<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+<script src="../assets/boot.js"></script>
 
 </head>
 <body>
@@ -43,8 +51,8 @@
   </div>
   <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
-    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
-    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
     <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
   </div>
 </div>
@@ -63,7 +71,7 @@
     <article class="prose">
       <div class="es" lang="es">
 <h2>Por qué este laboratorio</h2>
-<p>Un laboratorio para aprender un patrón que veo mucho en entornos híbridos: llegar a un servicio de forma privada, sin internet gateway ni NAT.</p>
+<p>Viene de operar un entorno híbrido con AWS y Azure, donde una necesidad habitual es llegar a un servicio de forma privada, sin internet gateway y sin NAT. Este laboratorio construye ese patrón de principio a fin con Terraform.</p>
 <h2>Qué he hecho</h2>
 <p>Cinco módulos de Terraform:</p>
 <ul><li>Una VPC privada con flow logs.</li><li>Un NLB interno con un endpoint service que exige aceptación y principals explícitos.</li><li>Un interface endpoint con un security group estrecho.</li><li>Una zona privada de Route 53 con alias y logs de consultas.</li><li>Endpoints de SSM y S3, más un laboratorio con dos instancias de prueba (IMDSv2, sin IP pública, Session Manager).</li></ul>
@@ -71,12 +79,13 @@
 <p><code>terraform test</code> con el proveedor de AWS simulado (5 tests) y un pipeline de GitHub Actions con fmt, validate, test y tfsec, todo en verde. Tener el laboratorio encendido cuesta unos 0,11 $ la hora.</p>
 <h2>Qué aprendí</h2>
 <p>La CI con Terraform encontró un fallo real que OpenTofu no marcó: un <code>for_each</code> sobre IDs que no se conocen en el plan. Está corregido y explicado en docs/decisions.md.</p>
-<h2>Sin probar todavía</h2>
-<p><code>apply</code> en una cuenta real de AWS.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Ejecutar <code>terraform apply</code> en una cuenta de AWS de pruebas (el laboratorio cuesta unos 0,11 $ por hora).</li><li>Conectar tus VPC, los principals permitidos y tu zona DNS privada.</li><li>Mantener las comprobaciones de CI (fmt, validate, test, tfsec) en tu pipeline.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
       </div>
       <div class="en" lang="en">
 <h2>Why this lab</h2>
-<p>A learning lab on a pattern I see a lot in hybrid environments: reaching a service privately, with no internet gateway and no NAT.</p>
+<p>Comes from operating a hybrid AWS and Azure environment, where a common need is reaching a service privately, with no internet gateway and no NAT. This lab builds that pattern end to end with Terraform.</p>
 <h2>What I built</h2>
 <p>Five Terraform modules:</p>
 <ul><li>A private VPC with flow logs.</li><li>An internal NLB with an endpoint service that requires acceptance and explicit principals.</li><li>An interface endpoint with a narrow security group.</li><li>A private Route 53 zone with an alias and query logs.</li><li>SSM and S3 endpoints, plus a lab with two test instances (IMDSv2, no public IP, Session Manager).</li></ul>
@@ -84,8 +93,9 @@
 <p><code>terraform test</code> with a mocked AWS provider (5 tests) and a GitHub Actions pipeline with fmt, validate, test and tfsec, all green. The estimated cost of running the lab is about $0.11 an hour.</p>
 <h2>What I learned</h2>
 <p>Running CI with Terraform caught a real bug that OpenTofu didn&#x27;t flag: a <code>for_each</code> over IDs that are unknown at plan time. It is fixed and written up in docs/decisions.md.</p>
-<h2>Not tested yet</h2>
-<p><code>apply</code> against a real AWS account.</p>
+<h2>Next steps</h2>
+<ul><li>Run <code>terraform apply</code> in a sandbox AWS account (the lab costs around $0.11 per hour).</li><li>Plug in your own VPCs, allowed principals and private DNS zone.</li><li>Keep the CI checks (fmt, validate, test, tfsec) in your pipeline.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
@@ -96,7 +106,7 @@
     <aside class="post-aside">
       <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
       <p class="repo-name">07-aws-private-connectivity</p>
-      <a class="btn" href="https://github.com/inigogonzalezgarcia/07-aws-private-connectivity" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/07-aws-private-connectivity" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
       <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
     </aside>
   </div>

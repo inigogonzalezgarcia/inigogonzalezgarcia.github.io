@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Promoting GPU Operator releases from staging to prod with Flux · Iñigo González</title>
 <meta name="description" content="One file defines releases and clusters; Git and Flux do the rest, with a gate before production.">
 <meta name="author" content="Iñigo González">
@@ -15,7 +23,7 @@
 <meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/16-gitops-gpu-fleet.html">
 <link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="../assets/style.css">
-<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+<script src="../assets/boot.js"></script>
 
 </head>
 <body>
@@ -43,8 +51,8 @@
   </div>
   <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
-    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
-    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
     <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
   </div>
 </div>
@@ -63,27 +71,29 @@
     <article class="prose">
       <div class="es" lang="es">
 <h2>Por qué este laboratorio</h2>
-<p>Un laboratorio que une varios de los anteriores: cómo actualizar el software de GPU en una flota de clústeres sin hacerlo a mano.</p>
+<p>Se apoya en Git, pipelines de CI/CD y gestión de releases, y une varios laboratorios anteriores: cómo actualizar el software de GPU en una flota de clústeres desde Git, con una puerta antes de producción.</p>
 <h2>Qué he hecho</h2>
 <ul><li><code>fleet.toml</code> define versiones (GPU Operator, Network Operator y driver, más una versión que falla a propósito) y clústeres con pools de GPU.</li><li>Las olas van staging → prod H100 → prod A100, con una pausa tras el canary.</li><li><code>python -m fleet render</code> escribe la carpeta de cada clúster y Flux la aplica en tres pasos: operators → config → lifecycle. El paso lifecycle es el controlador del laboratorio 11, con su plan generado desde el mismo fichero.</li><li><code>fleet start / promote / approve</code> editan una línea cada uno, <code>fleet gate</code> revisa los clústeres vivos antes de promocionar y aprobar producción es un commit.</li></ul>
 <h2>Cómo se prueba</h2>
 <p>CI: 21 tests unitarios; un paso de validación que renderiza los charts de Helm reales de NGC en cada versión y los comprueba contra los esquemas de CRD de esa versión exacta (detecta un <code>nodeSelecter</code> mal escrito); y una prueba de punta a punta de 20 minutos con Gitea y dos clústeres kind, 29 comprobaciones, incluida la deriva corregida por Flux y una versión mala parada en staging.</p>
 <h2>Qué aprendí</h2>
 <p>Una iteración de CI: el plan de rollout se aplicaba antes que los objetos NVIDIADriver, así que lifecycle ahora depende de config. También encontré una diferencia en el CRD NVIDIADriver entre dos versiones del GPU Operator.</p>
-<h2>Sin probar todavía</h2>
-<p>GPU y NIC reales, el upgrade controller del propio GPU Operator, Argo CD y <code>flux bootstrap</code>.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Describir tus clústeres y releases en <code>fleet.toml</code>.</li><li>Instalar Flux en cada clúster (o usar Argo CD, la misma estructura sirve).</li><li>Mantener la puerta antes de producción como comprobación obligatoria en tu repositorio.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
       </div>
       <div class="en" lang="en">
 <h2>Why this lab</h2>
-<p>A learning lab that ties several earlier ones together: how do you upgrade the GPU software stack across a fleet of clusters without doing it by hand?</p>
+<p>Builds on Git, CI/CD pipelines and release management, and ties several earlier labs together: how to upgrade the GPU software stack across a fleet of clusters from Git, with a gate before production.</p>
 <h2>What I built</h2>
 <ul><li><code>fleet.toml</code> defines releases (GPU Operator, Network Operator and driver versions, plus one release that fails on purpose) and clusters with GPU pools.</li><li>Waves go staging → prod H100 → prod A100, with a pause after the canary.</li><li><code>python -m fleet render</code> writes each cluster&#x27;s folder, and Flux applies it in three steps: operators → config → lifecycle. The lifecycle step is lab 11&#x27;s controller, with its rollout plan generated from the same file.</li><li><code>fleet start / promote / approve</code> each edit one line, <code>fleet gate</code> checks the live clusters before promoting, and approving prod is a commit.</li></ul>
 <h2>How it is tested</h2>
 <p>CI: 21 unit tests; a validate step that renders the real NGC Helm charts at every version and checks them against the CRD schemas of that exact version (it catches a misspelt <code>nodeSelecter</code>); and a 20-minute end-to-end run with Gitea and two kind clusters, 29 checks, including drift corrected by Flux and a bad release stopped in staging.</p>
 <h2>What I learned</h2>
 <p>One CI iteration: the rollout plan was applied before the NVIDIADriver objects, so lifecycle now depends on config. I also found a difference in the NVIDIADriver CRD between two GPU Operator versions.</p>
-<h2>Not tested yet</h2>
-<p>Real GPUs and NICs, the GPU Operator&#x27;s own upgrade controller, Argo CD and <code>flux bootstrap</code>.</p>
+<h2>Next steps</h2>
+<ul><li>Describe your clusters and releases in <code>fleet.toml</code>.</li><li>Bootstrap Flux on each cluster (or use Argo CD, the same structure works).</li><li>Keep the gate before production as a required check in your repository.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
@@ -94,7 +104,7 @@
     <aside class="post-aside">
       <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
       <p class="repo-name">16-gitops-gpu-fleet</p>
-      <a class="btn" href="https://github.com/inigogonzalezgarcia/16-gitops-gpu-fleet" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/16-gitops-gpu-fleet" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
       <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
     </aside>
   </div>

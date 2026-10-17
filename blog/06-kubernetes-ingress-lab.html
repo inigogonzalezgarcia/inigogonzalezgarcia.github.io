@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>A Kubernetes ingress lab built from zero in every CI run · Iñigo González</title>
 <meta name="description" content="Cilium, Envoy Gateway, cert-manager and external-dns on kind, with nine end-to-end checks.">
 <meta name="author" content="Iñigo González">
@@ -15,7 +23,7 @@
 <meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/06-kubernetes-ingress-lab.html">
 <link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="../assets/style.css">
-<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+<script src="../assets/boot.js"></script>
 
 </head>
 <body>
@@ -43,8 +51,8 @@
   </div>
   <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
-    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
-    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
     <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
   </div>
 </div>
@@ -63,23 +71,25 @@
     <article class="prose">
       <div class="es" lang="es">
 <h2>Por qué este laboratorio</h2>
-<p>Es un laboratorio para aprender, no experiencia en producción. Quería entender cómo entra hoy el tráfico en un clúster de Kubernetes: Gateway API en lugar del Ingress clásico, red con eBPF, y certificados y DNS gestionados por controladores.</p>
+<p>Viene de trabajar con plataformas de contenedores como Red Hat OpenShift y Kubernetes en local. En este laboratorio profundizo en cómo entra hoy el tráfico en un clúster: Gateway API en lugar del Ingress clásico, red con eBPF, y certificados y DNS gestionados por controladores.</p>
 <h2>Qué he hecho</h2>
 <ul><li>kind sin CNI ni kube-proxy, sustituidos por Cilium (LB IPAM, anuncios L2, una política L7 y Hubble).</li><li>Envoy Gateway con Gateway API: redirección, TLS y limitación de peticiones.</li><li>cert-manager con una CA del laboratorio y un certificado wildcard.</li><li>external-dns escribiendo en BIND por RFC 2136 con TSIG y registros TXT de propiedad.</li><li>Denegación por defecto en el namespace de las apps y lista blanca L7 (<code>/env</code> devuelve 403), sin forma de saltarse el gateway.</li></ul>
 <h2>Cómo se prueba</h2>
 <p>Un workflow de GitHub Actions construye el clúster desde cero y pasa nueve pruebas de punta a punta. Ha salido en verde en las cuatro últimas ejecuciones.</p>
 <h2>Siguientes pasos</h2>
-<p>El plan incluye una contribución open source, documentación o una good first issue, en alguno de estos proyectos.</p>
+<ul><li>Cambiar kind por tu clúster y BIND por tu proveedor de DNS en external-dns.</li><li>Cambiar la CA del laboratorio por ACME o tu PKI interna en cert-manager.</li><li>Contribuir de vuelta: documentación o una good first issue en alguno de estos proyectos es mi siguiente paso.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
       </div>
       <div class="en" lang="en">
 <h2>Why this lab</h2>
-<p>This is a learning lab, not production experience. I wanted to understand how traffic gets into a Kubernetes cluster today: Gateway API instead of the old Ingress, eBPF networking, certificates and DNS handled by controllers.</p>
+<p>Comes from working with container platforms such as Red Hat OpenShift and Kubernetes on premises. In this lab I go deeper into how traffic gets into a cluster today: Gateway API instead of the classic Ingress, eBPF networking, and certificates and DNS handled by controllers.</p>
 <h2>What I built</h2>
 <ul><li>kind with no CNI and no kube-proxy, replaced by Cilium (LB IPAM, L2 announcements, an L7 policy and Hubble).</li><li>Envoy Gateway with Gateway API: redirect, TLS and rate limiting.</li><li>cert-manager with a lab CA and a wildcard certificate.</li><li>external-dns writing to BIND over RFC 2136 with TSIG, using TXT ownership records.</li><li>Default deny in the apps namespace and an L7 allow-list (<code>/env</code> returns 403), with no way around the gateway.</li></ul>
 <h2>How it is tested</h2>
 <p>A GitHub Actions workflow builds the cluster from scratch and runs nine end-to-end tests. It has been green in the last four runs.</p>
-<h2>What&#x27;s next</h2>
-<p>The plan includes an open source contribution, docs or a good first issue, in one of these projects.</p>
+<h2>Next steps</h2>
+<ul><li>Replace kind with your own cluster and BIND with your DNS provider in external-dns.</li><li>Swap the lab CA for ACME or your internal PKI in cert-manager.</li><li>Contribute back: docs or a good first issue in one of these projects is the next step on my side.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
@@ -90,7 +100,7 @@
     <aside class="post-aside">
       <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
       <p class="repo-name">06-kubernetes-ingress-lab</p>
-      <a class="btn" href="https://github.com/inigogonzalezgarcia/06-kubernetes-ingress-lab" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/06-kubernetes-ingress-lab" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
       <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
     </aside>
   </div>

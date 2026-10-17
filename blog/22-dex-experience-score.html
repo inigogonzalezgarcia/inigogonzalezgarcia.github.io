@@ -1,21 +1,29 @@
 <!doctype html>
-<html lang="en" class="no-js inner" data-title-en="A 0-10 experience score for every laptop, learning in public · Iñigo González" data-title-es="Una nota de 0 a 10 para la experiencia de cada portátil, aprendiendo en público · Iñigo González">
+<html lang="en" class="no-js inner" data-title-en="A 0-10 experience score for every laptop · Iñigo González" data-title-es="Una nota de 0 a 10 para la experiencia de cada portátil · Iñigo González">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>A 0-10 experience score for every laptop, learning in public · Iñigo González</title>
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>A 0-10 experience score for every laptop · Iñigo González</title>
 <meta name="description" content="A lab that turns endpoint telemetry into a score per device, site and department, and ranks the five fixes that would raise it most.">
 <meta name="author" content="Iñigo González">
 <meta name="theme-color" content="#0e1a24">
 <link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/22-dex-experience-score.html">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
-<meta property="og:title" content="A 0-10 experience score for every laptop, learning in public · Iñigo González">
+<meta property="og:title" content="A 0-10 experience score for every laptop · Iñigo González">
 <meta property="og:description" content="A lab that turns endpoint telemetry into a score per device, site and department, and ranks the five fixes that would raise it most.">
 <meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/22-dex-experience-score.html">
 <link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="../assets/style.css">
-<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+<script src="../assets/boot.js"></script>
 
 </head>
 <body>
@@ -43,8 +51,8 @@
   </div>
   <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
-    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
-    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
     <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
   </div>
 </div>
@@ -53,7 +61,7 @@
 <section class="page-hero post-hero">
   <div class="wrap">
     <p class="label kicker"><a href="./">Blog</a> · 22</p>
-    <h1><span class="es">Una nota de 0 a 10 para la experiencia de cada portátil, aprendiendo en público</span><span class="en">A 0-10 experience score for every laptop, learning in public</span></h1>
+    <h1><span class="es">Una nota de 0 a 10 para la experiencia de cada portátil</span><span class="en">A 0-10 experience score for every laptop</span></h1>
     <p class="lede"><span class="es">Un laboratorio que convierte la telemetría de los equipos en una nota por dispositivo, sede y departamento, y ordena los cinco arreglos que más la subirían.</span><span class="en">A lab that turns endpoint telemetry into a score per device, site and department, and ranks the five fixes that would raise it most.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span> · <span class="es">17 oct 2026</span><span class="en">17 Oct 2026</span> · <span class="es">2 min</span><span class="en">2 min read</span></p>
   </div>
 </section>
@@ -63,7 +71,7 @@
     <article class="prose">
       <div class="es" lang="es">
 <h2>Por qué este laboratorio</h2>
-<p>Es un laboratorio para aprender. Quería entender cómo funcionan las notas de experiencia digital del empleado (DEX). Se inspira en las descripciones públicas de herramientas como Nexthink, pero no tengo experiencia práctica con esos productos; el modelo, los umbrales y los pesos son míos.</p>
+<p>Viene de años dando soporte presencial a usuarios de Windows y a dirección. Se inspira en las descripciones públicas de herramientas de experiencia digital del empleado (DEX) como Nexthink; el modelo, los umbrales y los pesos son míos y están explicados en el repositorio.</p>
 <h2>El problema</h2>
 <p>Quien haya dado soporte presencial a usuarios de Windows lo sabe: los tickets muestran una parte de los problemas. La gente convive semanas con un portátil lento o una aplicación que se cierra, deja de avisar y solo dice &quot;IT va lento&quot;. Una actualización mensual añade 40 segundos a cada inicio de sesión, un complemento de Outlook falla en veinte portátiles, el wifi de una planta es débil, las baterías mueren en mitad de una reunión. La telemetría de los equipos lo ve todo.</p>
 <h2>Qué he hecho</h2>
@@ -72,12 +80,13 @@
 <p>Python solo con la librería estándar y PowerShell. La demo es una empresa inventada con 120 equipos en tres ciudades y seis semanas de datos; encuentra los cinco problemas puestos a propósito, empezando por pantallazos azules en un modelo de portátil tras actualizar un driver. 15 tests.</p>
 <h2>Qué aprendí</h2>
 <p>Explicar la nota importa más que el número: cada punto perdido tiene que llevar a una causa y a un arreglo. Y la telemetría ligada a una persona es un dato personal, así que hay que informar por sede y departamento y hablar antes con el DPO.</p>
-<h2>Sin probar todavía</h2>
-<p>El recolector contra equipos reales, los umbrales contra datos reales y los datos de Intune Endpoint Analytics o de una herramienta RMM.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Desplegar el recolector con un script de corrección de Intune o tu herramienta RMM.</li><li>Ajustar los umbrales tras unas semanas de datos reales.</li><li>Hablar antes con tu delegado de protección de datos e informar por sede y departamento.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
       </div>
       <div class="en" lang="en">
 <h2>Why this lab</h2>
-<p>This is a learning lab. I wanted to understand how digital employee experience (DEX) scores work. It is inspired by public descriptions of tools like Nexthink, but I have no hands-on experience with those products; the model, thresholds and weights are my own.</p>
+<p>Comes from years of supporting Windows users and executives on site. It is inspired by the public descriptions of digital employee experience (DEX) tools such as Nexthink; the model, thresholds and weights are my own and are explained in the repository.</p>
 <h2>The problem</h2>
 <p>Anyone who has supported Windows users on site knows it: tickets show a fraction of the problems. People live with a slow laptop or a crashing app for weeks, stop reporting and just say &quot;IT is slow&quot;. A monthly update adds 40 seconds to every logon, an Outlook add-in crashes on twenty laptops, the Wi-Fi on one floor is weak, batteries die in meetings. Endpoint telemetry sees all of it.</p>
 <h2>What I built</h2>
@@ -86,8 +95,9 @@
 <p>Python with the standard library only, plus PowerShell. The demo is a made-up company with 120 devices in three cities and six weeks of data; it finds the five problems placed on purpose, led by blue screens on one laptop model after a driver update. 15 tests.</p>
 <h2>What I learned</h2>
 <p>Explaining the score matters more than the number: every point lost has to point to a cause and a fix. And telemetry linked to a person is personal data, so report by site and department and talk to the DPO first.</p>
-<h2>Not tested yet</h2>
-<p>The collector against real devices, the thresholds against real data and data from Intune Endpoint Analytics or an RMM tool.</p>
+<h2>Next steps</h2>
+<ul><li>Deploy the collector through an Intune remediation script or your RMM tool.</li><li>Tune the thresholds after a few weeks of real data.</li><li>Talk to your data protection officer first, and report by site and department.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
@@ -98,7 +108,7 @@
     <aside class="post-aside">
       <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
       <p class="repo-name">22-dex-experience-score</p>
-      <a class="btn" href="https://github.com/inigogonzalezgarcia/22-dex-experience-score" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/22-dex-experience-score" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
       <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
     </aside>
   </div>

@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Which meeting rooms will fail today, and in what order to fix them · Iñigo González</title>
 <meta name="description" content="Teams Rooms health from Microsoft Graph, a room register and today&#x27;s bookings, turned into a morning walk-round.">
 <meta name="author" content="Iñigo González">
@@ -15,7 +23,7 @@
 <meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/17-teams-rooms-fleet-health.html">
 <link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="../assets/style.css">
-<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+<script src="../assets/boot.js"></script>
 
 </head>
 <body>
@@ -43,8 +51,8 @@
   </div>
   <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
-    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
-    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
     <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
   </div>
 </div>
@@ -70,8 +78,9 @@
 <p>Python solo con la librería estándar y PowerShell para las exportaciones de Graph. La demo es una empresa inventada con 25 dispositivos en tres oficinas y fallos puestos a propósito. 14 tests. Un runbook corto explica la rutina de primera hora.</p>
 <h2>Qué aprendí</h2>
 <p>Casi todo el valor está en el orden de la lista, no en la detección. Y una consola sin conexión debe mostrar un problema, no cinco: lo demás es ruido hasta que vuelva.</p>
-<h2>Sin probar todavía</h2>
-<p>Los scripts de PowerShell contra un tenant real. La API <code>/teamwork/devices</code> está en la beta de Graph, así que el parser trata lo que falte como desconocido en lugar de fallar.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Ejecutar la exportación de PowerShell contra tu tenant (la API <code>/teamwork/devices</code> está en la beta de Graph).</li><li>Completar el registro de salas con tus salas y su prioridad.</li><li>Ejecutarlo cada mañana antes de las primeras reuniones.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
       </div>
       <div class="en" lang="en">
 <h2>The problem</h2>
@@ -82,8 +91,9 @@
 <p>Python with the standard library only, plus PowerShell for the Graph exports. The demo is a made-up company with 25 devices in three offices and faults placed on purpose. 14 tests. A short runbook explains the morning routine.</p>
 <h2>What I learned</h2>
 <p>Most of the value is in the order of the list, not in the detection. And an offline console should show one issue, not five: everything else about it is noise until it is back.</p>
-<h2>Not tested yet</h2>
-<p>The PowerShell scripts against a real tenant. The <code>/teamwork/devices</code> API is in Graph beta, so the parser treats anything missing as unknown instead of failing.</p>
+<h2>Next steps</h2>
+<ul><li>Run the PowerShell export against your tenant (the <code>/teamwork/devices</code> API is in Graph beta).</li><li>Fill in the room register with your rooms and their priority.</li><li>Run it every morning before the first meetings.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
@@ -94,7 +104,7 @@
     <aside class="post-aside">
       <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
       <p class="repo-name">17-teams-rooms-fleet-health</p>
-      <a class="btn" href="https://github.com/inigogonzalezgarcia/17-teams-rooms-fleet-health" target="_blank" rel="noopener"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/17-teams-rooms-fleet-health" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
       <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
     </aside>
   </div>
