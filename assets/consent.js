@@ -32,7 +32,8 @@
   function read() {
     try {
       var c = JSON.parse(localStorage.getItem(KEY) || "null");
-      if (c && Date.now() - c.ts < MAX_AGE) return c;
+      // only trust a well-formed record: { analytics: boolean, ts: number }
+      if (c && typeof c === "object" && typeof c.analytics === "boolean" && typeof c.ts === "number" && Date.now() - c.ts < MAX_AGE) return { analytics: c.analytics, ts: c.ts };
     } catch (e) {}
     return null;
   }
@@ -88,15 +89,25 @@
     }
     var checked = c ? c.analytics : false;
     box.setAttribute("aria-label", t.title);
-    box.innerHTML =
-      '<p class="label cc-k"></p><h2 class="cc-t"></h2><p class="cc-x"></p>' +
-      '<a class="cc-p" href="privacidad.html"></a>' +
-      (showSettings ?
-        '<div class="cc-s"><div class="cc-row"><div><strong class="n1"></strong><p class="d1"></p></div><span class="label cc-on a1"></span></div>' +
-        '<div class="cc-row"><div><strong class="n2"></strong><p class="d2"></p></div><label class="cc-sw"><input type="checkbox" id="ccA"' + (checked ? " checked" : "") + '><span></span></label></div></div>' +
-        '<div class="cc-b"><button class="cc-btn" data-a="save"></button></div>'
-        :
-        '<div class="cc-b"><button class="cc-btn" data-a="reject"></button><button class="cc-btn" data-a="config"></button><button class="cc-btn full" data-a="accept"></button></div>');
+    // build the banner with DOM nodes (no innerHTML)
+    var el = function (tag, cls, attrs) {
+      var n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (attrs) Object.keys(attrs).forEach(function (k) { n.setAttribute(k, attrs[k]); });
+      for (var i = 3; i < arguments.length; i++) n.appendChild(arguments[i]);
+      return n;
+    };
+    var kids = [el("p", "label cc-k"), el("h2", "cc-t"), el("p", "cc-x"), el("a", "cc-p", { href: "privacidad.html" })];
+    if (showSettings) {
+      var cb = el("input", null, { type: "checkbox", id: "ccA" }); cb.checked = !!checked;
+      kids.push(el("div", "cc-s", null,
+        el("div", "cc-row", null, el("div", null, null, el("strong", "n1"), el("p", "d1")), el("span", "label cc-on a1")),
+        el("div", "cc-row", null, el("div", null, null, el("strong", "n2"), el("p", "d2")), el("label", "cc-sw", null, cb, el("span")))));
+      kids.push(el("div", "cc-b", null, el("button", "cc-btn", { "data-a": "save" })));
+    } else {
+      kids.push(el("div", "cc-b", null, el("button", "cc-btn", { "data-a": "reject" }), el("button", "cc-btn", { "data-a": "config" }), el("button", "cc-btn full", { "data-a": "accept" })));
+    }
+    box.replaceChildren.apply(box, kids);
     box.querySelector(".cc-k").textContent = t.kicker;
     box.querySelector(".cc-t").textContent = t.title;
     box.querySelector(".cc-x").textContent = t.text;
