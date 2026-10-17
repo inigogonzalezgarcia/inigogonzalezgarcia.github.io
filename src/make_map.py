@@ -24,7 +24,8 @@ def P(lon, lat):
 
 CITIES = {"madrid": (-3.70, 40.42), "london": (-0.13, 51.51), "paris": (2.35, 48.86), "lisbon": (-9.14, 38.72),
           "kansas": (-94.58, 39.10), "brussels": (4.35, 50.85), "ghent": (3.72, 51.05),
-          "amsterdam": (4.90, 52.37), "milan": (9.19, 45.46), "istanbul": (28.98, 41.01)}
+          "amsterdam": (4.90, 52.37), "milan": (9.19, 45.46), "istanbul": (28.98, 41.01),
+          "copenhagen": (12.57, 55.68), "frankfurt": (8.68, 50.11), "bergen": (5.32, 60.39), "geneva": (6.14, 46.20), "dubai": (55.27, 25.20), "newyork": (-74.01, 40.71), "singapore": (103.82, 1.35), "tokyo": (139.69, 35.69), "manila": (120.98, 14.60)}
 
 g = json.load(open(sys.argv[1]))
 paths = []
