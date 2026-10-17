@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Store · IGG-ICS IT career services · Iñigo González</title>
 <meta name="description" content="IGG-ICS career services for IT professionals: CV and LinkedIn review, IT 360º diagnosis and a 4-week action plan. Online, in Spanish or English.">
 <meta name="author" content="Iñigo González">
@@ -15,7 +23,7 @@
 <meta property="og:url" content="https://inigogonzalezgarcia.github.io/store.html">
 <link rel="preload" href="assets/InterTight.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="assets/style.css">
-<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+<script src="assets/boot.js"></script>
 
 </head>
 <body>
@@ -43,8 +51,8 @@
   </div>
   <nav aria-label="Menu"><a href="journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
-    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
-    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
     <a href="about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
   </div>
 </div>
@@ -54,9 +62,9 @@
   <div class="wrap">
     <p class="label kicker">Store · IGG-ICS · IT · Tech Career, Lab &amp; Strategy</p>
     <h1><span class="es">Tu carrera en IT,<br>con estrategia.</span><span class="en">Your IT career,<br>with a strategy.</span></h1>
-    <p class="lede"><span class="es">Servicios de estrategia profesional para perfiles IT y tecnológicos: te ayudo a generar oportunidades con visibilidad, posicionamiento y networking, y no solo enviando currículums.</span><span class="en">Career strategy services for IT and tech professionals: I help you create opportunities through visibility, positioning and networking, not just by sending CVs.</span></p><div class="hero-ctas" style="margin-top:34px">
+    <p class="lede"><span class="es">Servicios de estrategia profesional para perfiles IT y tecnológicos: te ayudo a generar oportunidades con visibilidad, posicionamiento y networking, y no solo enviando currículums.</span><span class="en">Career strategy services for IT and tech professionals: I help you create opportunities through visibility, positioning and networking, not just by sending CVs.</span></p><div class="hero-ctas u-mt34">
       <a class="btn" href="#servicios"><span class="es">Ver servicios</span><span class="en">See services</span> ↓</a>
-      <a class="arrow-link" href="https://calendly.com/inigogonzalezgarcia/30min" target="_blank" rel="noopener"><span class="es">Llamada gratuita de 30 min</span><span class="en">Free 30-min call</span> ↗</a>
+      <a class="arrow-link" href="https://calendly.com/inigogonzalezgarcia/30min" target="_blank" rel="noopener noreferrer"><span class="es">Llamada gratuita de 30 min</span><span class="en">Free 30-min call</span> ↗</a>
     </div>
   </div>
 </section>
@@ -77,7 +85,7 @@
   </div>
 </section>
 
-<section class="section" id="servicios" style="background:var(--paper-2)">
+<section class="section u-paper2" id="servicios">
   <div class="wrap">
     <div class="numbers-head reveal">
       <div>
@@ -95,7 +103,7 @@
         <p class="svc-for"><span class="es">Si tienes poco tiempo y quieres un CV y un perfil que funcionen ya.</span><span class="en">If you're short on time and want a CV and a profile that work now.</span></p>
         <div class="svc-foot">
           <span class="label svc-price"><span class="es">Precio: muy pronto</span><span class="en">Price: coming soon</span></span>
-          <a class="arrow-link" href="https://calendly.com/inigogonzalezgarcia/30min" target="_blank" rel="noopener"><span class="es">Pregunta por este servicio</span><span class="en">Ask about this service</span> ↗</a>
+          <a class="arrow-link" href="https://calendly.com/inigogonzalezgarcia/30min" target="_blank" rel="noopener noreferrer"><span class="es">Pregunta por este servicio</span><span class="en">Ask about this service</span> ↗</a>
         </div>
       </article>
       <article class="svc reveal" id="diagnostico">
@@ -106,7 +114,7 @@
         <p class="svc-for"><span class="es">Si no tienes claro el siguiente paso o llevas tiempo sin respuestas.</span><span class="en">If your next step isn't clear or you've had no replies for a while.</span></p>
         <div class="svc-foot">
           <span class="label svc-price"><span class="es">Precio: muy pronto</span><span class="en">Price: coming soon</span></span>
-          <a class="arrow-link" href="https://calendly.com/inigogonzalezgarcia/30min" target="_blank" rel="noopener"><span class="es">Pregunta por este servicio</span><span class="en">Ask about this service</span> ↗</a>
+          <a class="arrow-link" href="https://calendly.com/inigogonzalezgarcia/30min" target="_blank" rel="noopener noreferrer"><span class="es">Pregunta por este servicio</span><span class="en">Ask about this service</span> ↗</a>
         </div>
       </article>
       <article class="svc reveal" id="plan">
@@ -117,7 +125,7 @@
         <p class="svc-for"><span class="es">Si buscas activamente y quieres hacerlo con método y acompañamiento.</span><span class="en">If you're actively looking and want a method and someone alongside you.</span></p>
         <div class="svc-foot">
           <span class="label svc-price"><span class="es">Precio: muy pronto</span><span class="en">Price: coming soon</span></span>
-          <a class="arrow-link" href="https://calendly.com/inigogonzalezgarcia/30min" target="_blank" rel="noopener"><span class="es">Pregunta por este servicio</span><span class="en">Ask about this service</span> ↗</a>
+          <a class="arrow-link" href="https://calendly.com/inigogonzalezgarcia/30min" target="_blank" rel="noopener noreferrer"><span class="es">Pregunta por este servicio</span><span class="en">Ask about this service</span> ↗</a>
         </div>
       </article>
     </div>
@@ -143,7 +151,7 @@
   </div>
 </section>
 
-<section class="section" style="background:var(--paper-2)">
+<section class="section u-paper2">
   <div class="wrap now-grid">
     <div class="reveal">
       <p class="label kicker"><span class="es">Cómo funciona</span><span class="en">How it works</span></p>
@@ -171,7 +179,7 @@
   </div>
 </section>
 
-<section class="section" style="background:var(--paper-2)">
+<section class="section u-paper2">
   <div class="wrap now-grid">
     <div class="reveal">
       <p class="label kicker">FAQ</p>
@@ -196,8 +204,8 @@
     </div>
     <div>
       <p class="lede"><span class="es">Más que buscar empleo, trabajamos en construir carreras profesionales en IT con estrategia.</span><span class="en">More than looking for a job, we build IT careers with a strategy.</span></p>
-      <a class="btn" href="https://calendly.com/inigogonzalezgarcia/30min" target="_blank" rel="noopener"><span class="es">Reserva una llamada gratuita</span><span class="en">Book a free call</span> ↗</a>
-      <p class="muted small" style="margin-top:22px"><span class="es">Ningún servicio puede garantizar una oferta de trabajo. Lo que sí trabajamos es todo lo que depende de ti para que lleguen más y mejores oportunidades. Consulta las <a href='condiciones.html'>condiciones</a>.</span><span class="en">No service can guarantee a job offer. What we do work on is everything that depends on you, so that more and better opportunities come your way. See the <a href='condiciones.html'>terms</a>.</span></p>
+      <a class="btn" href="https://calendly.com/inigogonzalezgarcia/30min" target="_blank" rel="noopener noreferrer"><span class="es">Reserva una llamada gratuita</span><span class="en">Book a free call</span> ↗</a>
+      <p class="muted small u-mt22"><span class="es">Ningún servicio puede garantizar una oferta de trabajo. Lo que sí trabajamos es todo lo que depende de ti para que lleguen más y mejores oportunidades. Consulta las <a href='condiciones.html'>condiciones</a>.</span><span class="en">No service can guarantee a job offer. What we do work on is everything that depends on you, so that more and better opportunities come your way. See the <a href='condiciones.html'>terms</a>.</span></p>
     </div>
   </div>
 </section>

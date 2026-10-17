@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Journey · Iñigo González</title>
 <meta name="description" content="Eleven years in IT operations in five stages: consulting, luxury retail, healthcare software, manufacturing and financial services.">
 <meta name="author" content="Iñigo González">
@@ -15,7 +23,7 @@
 <meta property="og:url" content="https://inigogonzalezgarcia.github.io/journey.html">
 <link rel="preload" href="assets/InterTight.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="assets/style.css">
-<script>document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+<script src="assets/boot.js"></script>
 
 </head>
 <body>
@@ -43,14 +51,14 @@
   </div>
   <nav aria-label="Menu"><a href="journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="about.html"><span class="label">04</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
-    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener" target="_blank">LinkedIn ↗</a>
-    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener" target="_blank">GitHub ↗</a>
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
     <a href="about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
   </div>
 </div>
 
 <main id="main">
-<section class="page-hero has-bg" style="background-image:url(assets/img/journey.webp)">
+<section class="page-hero has-bg bg-journey">
   <div class="wrap">
     <p class="label kicker"><span class="es">El viaje · 2015 — 2026</span><span class="en">The journey · 2015 — 2026</span></p>
     <h1><span class="es">Once años.<br>Cinco etapas.</span><span class="en">Eleven years.<br>Five stages.</span></h1>
@@ -83,7 +91,7 @@
 </section>
 
 
-<section class="section" id="trayectoria" style="background:var(--paper-2)">
+<section class="section u-paper2" id="trayectoria">
   <div class="wrap">
     <div class="reveal">
       <p class="label kicker"><span class="es">La trayectoria</span><span class="en">The career</span></p>
@@ -205,7 +213,7 @@
 <section class="credits">
   <div class="wrap">
     <p class="label muted"><span class="es">Fotografías</span><span class="en">Photo credits</span></p>
-    <ul><li><span class="es">Centro de datos</span><span class="en">Data center</span>: <a href="https://commons.wikimedia.org/wiki/File:Microsoft_Bing_Maps%27_datacenter_-_Flickr_-_Robert_Scoble.jpg" target="_blank" rel="noopener">Robert Scoble</a>, <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener">CC BY 2.0</a></li><li><span class="es">Madrid · Gran Vía</span><span class="en">Madrid · Gran Vía</span>: <a href="https://commons.wikimedia.org/wiki/File:Madrid_Gran_Via_Metropolis_(28895522813).jpg" target="_blank" rel="noopener">Nan Palmero</a>, <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener">CC BY 2.0</a></li><li><span class="es">París</span><span class="en">Paris</span>: <a href="https://commons.wikimedia.org/wiki/File:Fondation_Louis_Vuitton_roof_@_Mare_Saint-James_@_Bois_de_Boulogne_@_Paris_(28303477171).jpg" target="_blank" rel="noopener">Guilhem Vellut</a>, <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener">CC BY 2.0</a></li><li><span class="es">Kansas City, Misuri</span><span class="en">Kansas City, Missouri</span>: <a href="https://commons.wikimedia.org/wiki/File:Downtown_Kansas_City,_Missouri_from_Liberty_Memorial.jpg" target="_blank" rel="noopener">Brian Hillegas</a>, <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener">CC BY 2.0</a></li><li><span class="es">Milán</span><span class="en">Milan</span>: <a href="https://commons.wikimedia.org/wiki/File:Milano_-_grattacieli_Porta_Nuova.jpg" target="_blank" rel="noopener">Angelino1975</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></li><li><span class="es">Londres · Broadgate</span><span class="en">London · Broadgate</span>: <a href="https://commons.wikimedia.org/wiki/File:Broadgate_Circle_-_geograph.org.uk_-_5746404.jpg" target="_blank" rel="noopener">Robert Lamb</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0" target="_blank" rel="noopener">CC BY-SA 2.0</a></li></ul>
+    <ul><li><span class="es">Centro de datos</span><span class="en">Data center</span>: <a href="https://commons.wikimedia.org/wiki/File:Microsoft_Bing_Maps%27_datacenter_-_Flickr_-_Robert_Scoble.jpg" target="_blank" rel="noopener noreferrer">Robert Scoble</a>, <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener noreferrer">CC BY 2.0</a></li><li><span class="es">Madrid · Gran Vía</span><span class="en">Madrid · Gran Vía</span>: <a href="https://commons.wikimedia.org/wiki/File:Madrid_Gran_Via_Metropolis_(28895522813).jpg" target="_blank" rel="noopener noreferrer">Nan Palmero</a>, <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener noreferrer">CC BY 2.0</a></li><li><span class="es">París</span><span class="en">Paris</span>: <a href="https://commons.wikimedia.org/wiki/File:Fondation_Louis_Vuitton_roof_@_Mare_Saint-James_@_Bois_de_Boulogne_@_Paris_(28303477171).jpg" target="_blank" rel="noopener noreferrer">Guilhem Vellut</a>, <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener noreferrer">CC BY 2.0</a></li><li><span class="es">Kansas City, Misuri</span><span class="en">Kansas City, Missouri</span>: <a href="https://commons.wikimedia.org/wiki/File:Downtown_Kansas_City,_Missouri_from_Liberty_Memorial.jpg" target="_blank" rel="noopener noreferrer">Brian Hillegas</a>, <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener noreferrer">CC BY 2.0</a></li><li><span class="es">Milán</span><span class="en">Milan</span>: <a href="https://commons.wikimedia.org/wiki/File:Milano_-_grattacieli_Porta_Nuova.jpg" target="_blank" rel="noopener noreferrer">Angelino1975</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></li><li><span class="es">Londres · Broadgate</span><span class="en">London · Broadgate</span>: <a href="https://commons.wikimedia.org/wiki/File:Broadgate_Circle_-_geograph.org.uk_-_5746404.jpg" target="_blank" rel="noopener noreferrer">Robert Lamb</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0" target="_blank" rel="noopener noreferrer">CC BY-SA 2.0</a></li></ul>
     <p class="muted"><span class="es">Imágenes de Wikimedia Commons, recortadas y comprimidas para la web.</span><span class="en">Images from Wikimedia Commons, cropped and compressed for the web.</span></p>
   </div>
 </section>

@@ -1,8 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-title-es="Privacidad y cookies · Iñigo González" data-title-en="Privacy and cookies · Iñigo González">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- sec:start (written by src/build.py from pages.SEC_HEAD) -->
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- sec:end -->
 <title>Privacidad y cookies · Iñigo González</title>
 <meta name="description" content="Política de privacidad y cookies de inigogonzalezgarcia.github.io / Privacy and cookie policy.">
 <meta name="theme-color" content="#0e1a24">
@@ -10,7 +20,7 @@
 <link rel="canonical" href="https://inigogonzalezgarcia.github.io/privacidad.html">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/style.css">
-<script>(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();</script>
+<script src="assets/boot.js"></script>
 </head>
 <body>
 <header class="site-header solid">
@@ -20,7 +30,7 @@
       <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
     </a>
     <div class="head-actions">
-      <a class="menu-btn" href="./" style="text-decoration:none"><span class="es">← Volver</span><span class="en">← Back</span></a>
+      <a class="menu-btn u-nounder" href="./"><span class="es">← Volver</span><span class="en">← Back</span></a>
       <span class="sep" aria-hidden="true"></span>
       <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
     </div>
@@ -37,7 +47,7 @@
   <p class="lede">Esta es una web personal. Recojo los mínimos datos posibles y solo los uso para lo que se explica aquí.</p>
 
   <h2>Quién es el responsable</h2>
-  <p>Iñigo González, Madrid (España). Contacto: <a href="mailto:inigogonzalezgarcia@yahoo.es">inigogonzalezgarcia@yahoo.es</a>.</p>
+  <p>Iñigo González, Madrid (España). Contacto: <span class="eml" data-e="c2Uub29oYXlAYWljcmFnemVsYXpub2dvZ2luaQ==">inigogonzalezgarcia [at] yahoo [dot] es</span>.</p>
 
   <h2>Qué datos se tratan y para qué</h2>
   <div class="tbl"><table>
@@ -59,7 +69,7 @@
     <tr><td><code>_ga</code></td><td>Analítica (Google), solo con consentimiento</td><td>Distinguir visitantes de forma anónima</td><td>2 años</td></tr>
     <tr><td><code>_ga_&lt;ID&gt;</code></td><td>Analítica (Google), solo con consentimiento</td><td>Mantener el estado de la sesión</td><td>2 años</td></tr>
   </table></div>
-  <p>Si no aceptas la analítica, el código de Google Analytics no se carga y no se instala ninguna de sus cookies. Puedes cambiar tu elección en cualquier momento: <button class="linkbtn" type="button" data-cookie-settings style="color:var(--accent-ink)">preferencias de cookies</button>. Si retiras el consentimiento, se borran las cookies <code>_ga</code> de esta web.</p>
+  <p>Si no aceptas la analítica, el código de Google Analytics no se carga y no se instala ninguna de sus cookies. Puedes cambiar tu elección en cualquier momento: <button class="linkbtn u-accent-ink" type="button" data-cookie-settings>preferencias de cookies</button>. Si retiras el consentimiento, se borran las cookies <code>_ga</code> de esta web.</p>
 
   <h2>Quién más interviene</h2>
   <ul>
@@ -76,7 +86,7 @@
   <p>La contratación online de los servicios de la <a href="store.html">Store</a> todavía no está abierta. Antes de abrirla, ampliaré esta política con los datos de clientes, la facturación y la pasarela de pago. Las condiciones están en <a href="condiciones.html">condiciones de contratación</a>.</p>
 
   <h2>Tus derechos</h2>
-  <p>Puedes pedir acceso, rectificación, supresión, oposición, limitación o portabilidad de tus datos, y retirar tu consentimiento cuando quieras, escribiendo a <a href="mailto:inigogonzalezgarcia@yahoo.es">inigogonzalezgarcia@yahoo.es</a>. Si crees que no se han respetado tus derechos, puedes reclamar ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" rel="noopener" target="_blank">aepd.es</a>).</p>
+  <p>Puedes pedir acceso, rectificación, supresión, oposición, limitación o portabilidad de tus datos, y retirar tu consentimiento cuando quieras, escribiendo a <span class="eml" data-e="c2Uub29oYXlAYWljcmFnemVsYXpub2dvZ2luaQ==">inigogonzalezgarcia [at] yahoo [dot] es</span>. Si crees que no se han respetado tus derechos, puedes reclamar ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" rel="noopener noreferrer" target="_blank">aepd.es</a>).</p>
 </div>
 
 <!-- ===================== EN ===================== -->
@@ -86,7 +96,7 @@
   <p class="lede">This is a personal website. I collect as little data as possible and only use it for what is explained here.</p>
 
   <h2>Who is responsible</h2>
-  <p>Iñigo González, Madrid (Spain). Contact: <a href="mailto:inigogonzalezgarcia@yahoo.es">inigogonzalezgarcia@yahoo.es</a>.</p>
+  <p>Iñigo González, Madrid (Spain). Contact: <span class="eml" data-e="c2Uub29oYXlAYWljcmFnemVsYXpub2dvZ2luaQ==">inigogonzalezgarcia [at] yahoo [dot] es</span>.</p>
 
   <h2>What data is processed and why</h2>
   <div class="tbl"><table>
@@ -108,7 +118,7 @@
     <tr><td><code>_ga</code></td><td>Analytics (Google), only with consent</td><td>Tell visitors apart anonymously</td><td>2 years</td></tr>
     <tr><td><code>_ga_&lt;ID&gt;</code></td><td>Analytics (Google), only with consent</td><td>Keep the session state</td><td>2 years</td></tr>
   </table></div>
-  <p>If you don't accept analytics, the Google Analytics code is not loaded and none of its cookies are set. You can change your choice at any time: <button class="linkbtn" type="button" data-cookie-settings style="color:var(--accent-ink)">cookie settings</button>. If you withdraw consent, this site's <code>_ga</code> cookies are deleted.</p>
+  <p>If you don't accept analytics, the Google Analytics code is not loaded and none of its cookies are set. You can change your choice at any time: <button class="linkbtn u-accent-ink" type="button" data-cookie-settings>cookie settings</button>. If you withdraw consent, this site's <code>_ga</code> cookies are deleted.</p>
 
   <h2>Who else is involved</h2>
   <ul>
@@ -125,7 +135,7 @@
   <p>Online booking for the services in the <a href="store.html">Store</a> isn't open yet. Before it opens, I'll extend this policy to cover client data, invoicing and the payment provider. The terms are in the <a href="condiciones.html">terms of service</a>.</p>
 
   <h2>Your rights</h2>
-  <p>You can ask for access, rectification, erasure, objection, restriction or portability of your data, and withdraw your consent at any time, by writing to <a href="mailto:inigogonzalezgarcia@yahoo.es">inigogonzalezgarcia@yahoo.es</a>. If you think your rights have not been respected, you can complain to the Spanish Data Protection Agency (<a href="https://www.aepd.es" rel="noopener" target="_blank">aepd.es</a>).</p>
+  <p>You can ask for access, rectification, erasure, objection, restriction or portability of your data, and withdraw your consent at any time, by writing to <span class="eml" data-e="c2Uub29oYXlAYWljcmFnemVsYXpub2dvZ2luaQ==">inigogonzalezgarcia [at] yahoo [dot] es</span>. If you think your rights have not been respected, you can complain to the Spanish Data Protection Agency (<a href="https://www.aepd.es" rel="noopener noreferrer" target="_blank">aepd.es</a>).</p>
 </div>
 
   </div>
@@ -140,11 +150,7 @@
 </footer>
 
 <script src="assets/data.js"></script>
-<script>
-(function(){var r=document.documentElement,b=document.getElementById('langBtn');
-function set(l){r.lang=l;document.title=l==='en'?'Privacy and cookies · Iñigo González':'Privacidad y cookies · Iñigo González';[].forEach.call(b.querySelectorAll('[data-l]'),function(s){s.classList.toggle('on',s.getAttribute('data-l')===l)});try{localStorage.setItem('lang',l)}catch(e){}}
-b.addEventListener('click',function(){set(r.lang==='en'?'es':'en')});set(r.lang==='en'?'en':'es');})();
-</script>
+<script src="assets/legal.js"></script>
 <script src="assets/consent.js"></script>
 </body>
 </html>
