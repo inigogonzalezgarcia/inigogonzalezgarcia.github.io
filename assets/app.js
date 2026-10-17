@@ -192,12 +192,13 @@
   }
   $("#zIn").addEventListener("click", function () { zoom(0.7); });
   $("#zOut").addEventListener("click", function () { zoom(1 / 0.7); });
-  function home() { if (svg.getBoundingClientRect().width < 640) setVB([225, 20, 370, 278]); else setVB(HOME); }
+  function home() { fitTo($$("#pins .pin", svg).map(function (g) { return g.getAttribute("data-id"); })); }
   $("#zReset").addEventListener("click", home);
-  $("#zEu").addEventListener("click", function () { fitTo(["madrid", "lisbon", "london", "amsterdam", "istanbul", "milan"]); });
-  function fitTo(ids) {
+  $("#zEu").addEventListener("click", function () { fitTo(["madrid", "lisbon", "london", "amsterdam", "istanbul", "milan", "bergen", "copenhagen", "frankfurt", "geneva"]); });
+  function fitTo(ids, extra) {
     var xs = [], ys = [];
     ids.forEach(function (id) { var g = $('#pins .pin[data-id="' + id + '"]', svg); if (g) { xs.push(+g.getAttribute("data-x")); ys.push(+g.getAttribute("data-y")); } });
+    (extra || []).forEach(function (p) { xs.push(p[0]); ys.push(p[1]); });
     if (!xs.length) return;
     var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs), y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
     var r = ratio(), w = Math.max(x1 - x0 + 90, (y1 - y0 + 50) / r, 90), h = w * r;
@@ -244,12 +245,25 @@
   function setFilter(f) {
     filter = f;
     $$(".map-tabs button").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-f") === f ? "true" : "false"); });
+    var has = function (el, a) { return (" " + (el.getAttribute(a) || "") + " ").indexOf(" " + f + " ") >= 0; };
     $$("#pins .pin, #routes .route", svg).forEach(function (g) {
-      var on = f === "all" || (" " + g.getAttribute("data-s") + " ").indexOf(" " + f + " ") >= 0;
+      var on = f === "all" || has(g, "data-s");
       g.style.opacity = on ? "" : "0.12";
+      if (g.classList.contains("pin")) g.classList.toggle("hq", f !== "all" && has(g, "data-hq"));
+    });
+    // countries: dark where I worked, light where the company had clients or offices
+    $$("path.land", svg).forEach(function (l) {
+      var w = f === "all" ? l.hasAttribute("data-w") : has(l, "data-w");
+      var p = !w && (f === "all" ? l.hasAttribute("data-p") : has(l, "data-p"));
+      l.classList.toggle("hit", w);
+      l.classList.toggle("pres", p);
     });
     if (f === "all") home();
-    else fitTo($$("#pins .pin", svg).filter(function (g) { return (" " + g.getAttribute("data-s") + " ").indexOf(" " + f + " ") >= 0; }).map(function (g) { return g.getAttribute("data-id"); }));
+    else {
+      // a stage with company presence worldwide opens on the whole map, so every shaded country is in view
+      var wide = $$("path.land", svg).some(function (l) { return has(l, "data-p"); }) ? [[60, 70], [960, 430]] : [];
+      fitTo($$("#pins .pin", svg).filter(function (g) { return has(g, "data-s"); }).map(function (g) { return g.getAttribute("data-id"); }), wide);
+    }
     if (f !== "all") {
       var first = $$("#pins .pin", svg).filter(function (g) { return g.getAttribute("data-id") !== "madrid" && (" " + g.getAttribute("data-s") + " ").indexOf(" " + f + " ") >= 0; })[0];
       renderCity(first ? first.getAttribute("data-id") : "madrid");
