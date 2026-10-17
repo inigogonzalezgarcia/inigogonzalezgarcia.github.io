@@ -20,8 +20,32 @@ NAV = [  # key, href (relative to site root), es, en
     ("links", "links.html", "Links", "Links"),
 ]
 
-LANG_JS = ("document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')"
-           "||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();")
+# Security headers that a static GitHub Pages site can set through <meta>. Shared by every page (pages.py, legal.py,
+# build.py, and privacidad.html through its sec:start/sec:end markers). Every external origin below is used by the site:
+# Google Analytics 4 (loaded by consent.js only after the visitor accepts), Cloudflare Turnstile (contact and newsletter
+# forms), Formspree (contact form) and Brevo (newsletter form). GA4 needs the *.google-analytics.com wildcard because it
+# sends hits to regional hosts (region1.google-analytics.com, ...), as Google documents for CSP.
+CSP = "; ".join([
+    "default-src 'self'",
+    "script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com",
+    "style-src 'self'",
+    "img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com",
+    "font-src 'self'",
+    "connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com",
+    "frame-src https://challenges.cloudflare.com",
+    "form-action 'self' https://formspree.io https://b6aad168.sibforms.com",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "upgrade-insecure-requests",
+])
+SEC_HEAD = f'''<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="{CSP}">
+<meta name="referrer" content="strict-origin-when-cross-origin">'''
 
 LDJSON = ('{"@context":"https://schema.org","@type":"Person","name":"Iñigo González","jobTitle":"IT Site Leader, Senior Engineer",'
           '"address":{"@type":"PostalAddress","addressLocality":"Madrid","addressCountry":"ES"},"url":"https://inigogonzalezgarcia.github.io/",'
@@ -41,6 +65,7 @@ def layout(*, R, path, active, title_en, title_es, desc, body, home=False, og_ty
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+{SEC_HEAD}
 <title>{t_en}</title>
 <meta name="description" content="{html.escape(desc)}">
 <meta name="author" content="Iñigo González">
@@ -53,7 +78,7 @@ def layout(*, R, path, active, title_en, title_es, desc, body, home=False, og_ty
 <meta property="og:url" content="{SITE_URL}{path}">
 <link rel="preload" href="{R}assets/InterTight.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="{R}assets/style.css">
-<script>{LANG_JS}</script>
+<script src="{R}assets/boot.js"></script>
 {f'<script type="application/ld+json">{LDJSON}</script>' if home else ''}
 </head>
 <body>
@@ -164,7 +189,7 @@ def soon(kicker_es, kicker_en, R):
                      bi("Aún lo estoy construyendo.", "Still building this."),
                      bi("Esta sección puede tardar unos días. Mientras tanto, el blog y el viaje ya están abiertos.",
                         "This section may take a few days. In the meantime, the blog and the journey are already open."),
-                     f'''<div class="hero-ctas" style="margin-top:34px">
+                     f'''<div class="hero-ctas u-mt34">
       <a class="btn" href="{R}blog/">{bi("Ir al blog", "Go to the blog")} →</a>
       <a class="arrow-link" href="{R}journey.html">{bi("Ver el viaje", "See the journey")}</a>
     </div>''').replace('class="page-hero"', 'class="page-hero soon"')

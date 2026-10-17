@@ -1,17 +1,27 @@
 """Legal pages (legal notice, terms). Same shell as the hand-written privacidad.html. Imported by build.py."""
-from pages import MAIL
+import base64
+from pages import MAIL, SEC_HEAD
 
 UPDATED_ES = "16 de octubre de 2026"
 UPDATED_EN = "16 October 2026"
 SITE = "https://inigogonzalezgarcia.github.io"
-M = f'<a href="mailto:{MAIL}">{MAIL}</a>'
+def mail_tag(addr=MAIL, link=True):
+    """Email shown without the address in the HTML (against harvesting bots). assets/legal.js turns it into a mailto link;
+    without JavaScript the reader sees "user [at] domain [dot] tld"."""
+    user, dom = addr.split("@")
+    enc = base64.b64encode(addr[::-1].encode()).decode()
+    return f'<span class="eml" data-e="{enc}"{"" if link else " data-plain"}>{user} [at] {dom.replace(".", " [dot] ")}</span>'
+
+M = mail_tag()
+MT = mail_tag(link=False)  # same address shown as plain text, where the page had no link
 
 def shell(*, path, title_es, title_en, desc, es, en):
     return f'''<!doctype html>
-<html lang="en">
+<html lang="en" data-title-es="{title_es} · Iñigo González" data-title-en="{title_en} · Iñigo González">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+{SEC_HEAD}
 <title>{title_es} · Iñigo González</title>
 <meta name="description" content="{desc}">
 <meta name="theme-color" content="#0e1a24">
@@ -19,7 +29,7 @@ def shell(*, path, title_es, title_en, desc, es, en):
 <link rel="canonical" href="{SITE}/{path}">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/style.css">
-<script>(function(){{var l;try{{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}}catch(e){{}}if(l!=='es'&&l!=='en'){{l='en'}}document.documentElement.lang=l}})();</script>
+<script src="assets/boot.js"></script>
 </head>
 <body>
 <header class="site-header solid">
@@ -29,7 +39,7 @@ def shell(*, path, title_es, title_en, desc, es, en):
       <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
     </a>
     <div class="head-actions">
-      <a class="menu-btn" href="./" style="text-decoration:none"><span class="es">← Volver</span><span class="en">← Back</span></a>
+      <a class="menu-btn u-nounder" href="./"><span class="es">← Volver</span><span class="en">← Back</span></a>
       <span class="sep" aria-hidden="true"></span>
       <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
     </div>
@@ -61,11 +71,7 @@ def shell(*, path, title_es, title_en, desc, es, en):
 </footer>
 
 <script src="assets/data.js"></script>
-<script>
-(function(){{var r=document.documentElement,b=document.getElementById('langBtn');
-function set(l){{r.lang=l;document.title=l==='en'?'{title_en} · Iñigo González':'{title_es} · Iñigo González';[].forEach.call(b.querySelectorAll('[data-l]'),function(s){{s.classList.toggle('on',s.getAttribute('data-l')===l)}});try{{localStorage.setItem('lang',l)}}catch(e){{}}}}
-b.addEventListener('click',function(){{set(r.lang==='en'?'es':'en')}});set(r.lang==='en'?'en':'es');}})();
-</script>
+<script src="assets/legal.js"></script>
 <script src="assets/consent.js"></script>
 </body>
 </html>
@@ -213,7 +219,7 @@ COND_ES = f'''  <p class="label kicker">Condiciones · Versión preliminar · {U
 
   <h2>Formulario de desistimiento</h2>
   <p>Solo si quieres desistir del contrato. Cópialo, rellénalo y envíamelo por email.</p>
-  <p class="note">A la atención de Iñigo González, {MAIL}:<br>
+  <p class="note">A la atención de Iñigo González, {MT}:<br>
   Por la presente le comunico que desisto de mi contrato de prestación del siguiente servicio: […]<br>
   Contratado el: […]<br>
   Nombre del consumidor: […]<br>
@@ -287,7 +293,7 @@ COND_EN = f'''  <p class="label kicker">Terms · Preliminary version · {UPDATED
 
   <h2>Withdrawal form</h2>
   <p>Only if you wish to withdraw from the contract. Copy it, fill it in and email it to me.</p>
-  <p class="note">To Iñigo González, {MAIL}:<br>
+  <p class="note">To Iñigo González, {MT}:<br>
   I hereby give notice that I withdraw from my contract for the provision of the following service: […]<br>
   Booked on: […]<br>
   Name of consumer: […]<br>

@@ -131,7 +131,7 @@ MAP = f'''      <svg id="map" viewBox="0 0 1000 487" role="img" aria-label="Mapa
 # ---------------------------------------------------------------- pages
 import sys
 sys.path.insert(0, str(ROOT))
-from pages import layout, page_hero, card, md, minutes, fdate, soon, bi as bi2, MAIL, LINKEDIN, GITHUB, LINKTREE
+from pages import layout, page_hero, card, md, minutes, fdate, soon, bi as bi2, MAIL, LINKEDIN, GITHUB, LINKTREE, SEC_HEAD
 from posts import POSTS, CATS
 
 SEC = {p.stem: p.read_text() for p in (ROOT / "sections").glob("*.html")}
@@ -144,8 +144,24 @@ STAGES_HTML = "\n".join(stage_html(s) for s in STAGES)
 POSTS_SORTED = sorted(POSTS, key=lambda p: (p["date"], p["n"]), reverse=True)
 DESC = "Iñigo González: IT Site Leader in Madrid. 11+ years in IT operations, Modern Workplace and infrastructure across financial services, healthcare, manufacturing and luxury retail."
 
+import re as _re
+_BLANK = _re.compile(r'<a\b[^>]*\btarget="_blank"[^>]*>')
+
+def safe_rel(s):
+    """Every link that opens a new tab gets rel="noopener noreferrer" (other rel values such as "me" are kept)."""
+    def fix(m):
+        t = m.group(0)
+        r = _re.search(r'\brel="([^"]*)"', t)
+        vals = r.group(1).split() if r else []
+        for v in ("noopener", "noreferrer"):
+            if v not in vals: vals.append(v)
+        rel = f'rel="{" ".join(vals)}"'
+        return t.replace(r.group(0), rel) if r else t.replace("<a ", f"<a {rel} ", 1)
+    return _BLANK.sub(fix, s)
+
 def write(path, s):
     assert "{{" not in s, path
+    s = safe_rel(s)
     f = SITE / path
     f.parent.mkdir(parents=True, exist_ok=True)
     f.write_text(s)
@@ -157,7 +173,7 @@ sizes = {}
 latest = "\n".join(card(p, CATS, "") for p in POSTS_SORTED[:3])
 home_body = "\n\n".join([
     SEC["hero"], SEC["welcome"],
-    f'''<section class="section" id="historias" style="background:var(--paper-2)">
+    f'''<section class="section u-paper2" id="historias">
   <div class="wrap">
     <div class="numbers-head reveal">
       <div>
@@ -222,7 +238,7 @@ journey_body = page_hero(bi("El viaje · 2015 — 2026", "The journey · 2015 �
     bi("Once años.<br>Cinco etapas.", "Eleven years.<br>Five stages."),
     bi("De una consultora tecnológica a la sede de Madrid de una firma de servicios financieros, con la misma idea: que la tecnología funcione y no se note.",
        "From a technology consultancy to the Madrid site of a financial services firm, with the same idea throughout: technology that works and that people don't have to think about.")) \
-    + "\n\n" + SEC["numbers"].replace(' style="padding-top:0"', '') + "\n\n" + SEC["stages"].replace("{{STAGES}}", STAGES_HTML) + "\n\n" + SEC["toolkit"] \
+    + "\n\n" + SEC["numbers"].replace(' u-pt0"', '"') + "\n\n" + SEC["stages"].replace("{{STAGES}}", STAGES_HTML) + "\n\n" + SEC["toolkit"] \
     + f'''
 
 <section class="credits">
@@ -233,17 +249,17 @@ journey_body = page_hero(bi("El viaje · 2015 — 2026", "The journey · 2015 �
   </div>
 </section>'''
 if JP:
-    journey_body = journey_body.replace('<section class="page-hero">', f'<section class="page-hero has-bg" style="background-image:url({JP["src"]})">', 1)
+    journey_body = journey_body.replace('<section class="page-hero">', '<section class="page-hero has-bg bg-journey">', 1)
 sizes["journey.html"] = write("journey.html", layout(R="", path="journey.html", active="journey",
     title_en="Journey · Iñigo González", title_es="Viaje · Iñigo González",
     desc="Eleven years in IT operations in five stages: consulting, luxury retail, healthcare software, manufacturing and financial services.", body=journey_body))
 
 # blog index
 cards = "\n".join(card(p, CATS, "../") for p in POSTS_SORTED)
-blog_body = page_hero("Blog · " + bi("Aprendiendo en público", "Learning in public"),
+blog_body = page_hero("Blog · " + bi("Labs y herramientas", "Labs & tools"),
     bi("Cómo lo<br>construí.", "How I<br>built it."),
-    bi("Una historia por cada proyecto de GitHub: el problema, lo que hice, lo que aprendí y lo que falta por probar. Todo con datos ficticios.",
-       "One story per GitHub project: the problem, what I built, what I learned and what is still untested. All with synthetic data.")) + f'''
+    bi("Una historia por cada proyecto de GitHub: el problema, lo que hice, lo que aprendí y los siguientes pasos. Todo con datos ficticios.",
+       "One story per GitHub project: the problem, what I built, what I learned and the next steps. All with synthetic data.")) + f'''
 
 <section class="section">
   <div class="wrap">
@@ -275,9 +291,11 @@ for i, p in enumerate(order):
     <article class="prose">
       <div class="es" lang="es">
 {md(p["es"])}
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
       </div>
       <div class="en" lang="en">
 {md(p["en"])}
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
@@ -311,7 +329,7 @@ now = f'''<section class="section">
     <dl class="spec reveal">
       <div class="spec-row"><dt class="label">{bi("Trabajo", "Work")}</dt><dd>{bi("IT Site Leader en Madrid, en servicios financieros.", "IT Site Leader in Madrid, in financial services.")}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Construyendo", "Building")}</dt><dd>{bi("Nuevos repos sobre Modern Workplace e infraestructura: Teams Rooms, co-management MECM + Intune, Active Directory.", "New repos on Modern Workplace and infrastructure: Teams Rooms, MECM + Intune co-management, Active Directory.")}</dd></div>
-      <div class="spec-row"><dt class="label">{bi("Aprendiendo", "Learning")}</dt><dd>{bi("Kubernetes, SRE y operación de clústeres GPU, en laboratorios abiertos.", "Kubernetes, SRE and GPU cluster operations, in open labs.")}</dd></div>
+      <div class="spec-row"><dt class="label">{bi("Labs", "Labs")}</dt><dd>{bi("Kubernetes, SRE y operación de clústeres GPU, en laboratorios abiertos.", "Kubernetes, SRE and GPU cluster operations, in open labs.")}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Idiomas", "Languages")}</dt><dd>{bi("Español nativo, inglés a diario y francés en progreso.", "Native Spanish, English every day and French in progress.")}</dd></div>
     </dl>
   </div>
@@ -449,7 +467,7 @@ store_body = page_hero("Store · IGG-ICS · IT · Tech Career, Lab &amp; Strateg
     bi("Tu carrera en IT,<br>con estrategia.", "Your IT career,<br>with a strategy."),
     bi("Servicios de estrategia profesional para perfiles IT y tecnológicos: te ayudo a generar oportunidades con visibilidad, posicionamiento y networking, y no solo enviando currículums.",
        "Career strategy services for IT and tech professionals: I help you create opportunities through visibility, positioning and networking, not just by sending CVs."),
-    f'''<div class="hero-ctas" style="margin-top:34px">
+    f'''<div class="hero-ctas u-mt34">
       <a class="btn" href="#servicios">{bi("Ver servicios", "See services")} ↓</a>
       {book_link("Llamada gratuita de 30 min", "Free 30-min call")}
     </div>''') + f'''
@@ -468,7 +486,7 @@ store_body = page_hero("Store · IGG-ICS · IT · Tech Career, Lab &amp; Strateg
   </div>
 </section>
 
-<section class="section" id="servicios" style="background:var(--paper-2)">
+<section class="section u-paper2" id="servicios">
   <div class="wrap">
     <div class="numbers-head reveal">
       <div>
@@ -498,7 +516,7 @@ store_body = page_hero("Store · IGG-ICS · IT · Tech Career, Lab &amp; Strateg
   </div>
 </section>
 
-<section class="section" style="background:var(--paper-2)">
+<section class="section u-paper2">
   <div class="wrap now-grid">
     <div class="reveal">
       <p class="label kicker">{bi("Cómo funciona", "How it works")}</p>
@@ -524,7 +542,7 @@ store_body = page_hero("Store · IGG-ICS · IT · Tech Career, Lab &amp; Strateg
   </div>
 </section>
 
-<section class="section" style="background:var(--paper-2)">
+<section class="section u-paper2">
   <div class="wrap now-grid">
     <div class="reveal">
       <p class="label kicker">FAQ</p>
@@ -545,7 +563,7 @@ store_body = page_hero("Store · IGG-ICS · IT · Tech Career, Lab &amp; Strateg
     <div>
       <p class="lede">{bi("Más que buscar empleo, trabajamos en construir carreras profesionales en IT con estrategia.", "More than looking for a job, we build IT careers with a strategy.")}</p>
       {book_btn}
-      <p class="muted small" style="margin-top:22px">{bi("Ningún servicio puede garantizar una oferta de trabajo. Lo que sí trabajamos es todo lo que depende de ti para que lleguen más y mejores oportunidades. Consulta las <a href='condiciones.html'>condiciones</a>.", "No service can guarantee a job offer. What we do work on is everything that depends on you, so that more and better opportunities come your way. See the <a href='condiciones.html'>terms</a>.")}</p>
+      <p class="muted small u-mt22">{bi("Ningún servicio puede garantizar una oferta de trabajo. Lo que sí trabajamos es todo lo que depende de ti para que lleguen más y mejores oportunidades. Consulta las <a href='condiciones.html'>condiciones</a>.", "No service can guarantee a job offer. What we do work on is everything that depends on you, so that more and better opportunities come your way. See the <a href='condiciones.html'>terms</a>.")}</p>
     </div>
   </div>
 </section>'''
@@ -559,17 +577,18 @@ sizes["asesoria.html"] = write("asesoria.html", '''<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEC-->
 <title>IGG-ICS · Store · Iñigo González</title>
 <meta name="robots" content="noindex">
 <link rel="canonical" href="https://inigogonzalezgarcia.github.io/store.html">
 <meta http-equiv="refresh" content="0; url=store.html">
-<script>location.replace("store.html" + location.search + location.hash);</script>
+<script src="assets/redirect.js"></script>
 </head>
 <body>
 <p><a href="store.html">IGG-ICS → Store</a></p>
 </body>
 </html>
-''')
+'''.replace("<!--SEC-->", SEC_HEAD))
 
 # resources: lead magnet "33 ideas" + newsletter signup (Formspree for now; full text goes by email, not on the site)
 RES_BLOCKS = [
@@ -611,7 +630,7 @@ resources_body = page_hero(bi("Recursos gratuitos · Tech Career Lab", "Free res
   </div>
 </section>
 
-<section class="section" style="background:var(--paper-2)">
+<section class="section u-paper2">
   <div class="wrap">
     <p class="label kicker">{bi("Qué incluye", "What's inside")}</p>
     <div class="etm-grid">
@@ -671,4 +690,34 @@ for path, kw in legal.PAGES.items():
 data = {"cities": {c["id"]: c for c in CITIES}, "hero": CONF["hero_photos"], "about": CONF.get("about_photo"),
         "formspree": bool(CONF.get("formspree_id")), "ga4": CONF.get("ga4_id", "")}
 (SITE / "assets" / "data.js").write_text("window.SITE=" + json.dumps(data, ensure_ascii=False, separators=(",", ":")) + ";\n")
-print("ok", len(sizes), "pages,", sum(sizes.values()) // 1024, "KB")
+
+# privacidad.html is hand-written: keep its security <meta> block and new-tab links in sync with the rest of the site
+pv = SITE / "privacidad.html"
+pt = pv.read_text()
+pt = _re.sub(r"(<!-- sec:start[^>]*-->\n).*?(<!-- sec:end -->)", lambda m: m.group(1) + SEC_HEAD + "\n" + m.group(2), pt, count=1, flags=_re.S)
+pv.write_text(safe_rel(pt))
+
+# security checks on everything that is served
+problems = []
+for f in sorted(SITE.rglob("*.html")):
+    rel = f.relative_to(SITE).as_posix()
+    if rel.startswith("src/"): continue
+    t = f.read_text()
+    head = t.split("</head>")[0]
+    if 'http-equiv="Content-Security-Policy"' not in head: problems.append(f"{rel}: no CSP")
+    elif head.find("<script") != -1 and head.find("<script") < head.find("Content-Security-Policy"): problems.append(f"{rel}: script before CSP")
+    if 'name="referrer"' not in head: problems.append(f"{rel}: no referrer policy")
+    for sc in _re.findall(r"<script(?![^>]*\bsrc=)([^>]*)>", t):
+        if 'type="application/ld+json"' not in sc: problems.append(f"{rel}: inline script")
+    if _re.search(r'<[a-zA-Z][^>]*\sstyle="', t): problems.append(f"{rel}: inline style attribute")
+    if _re.search(r"<style\b", t): problems.append(f"{rel}: <style> block")
+    if _re.search(r'<[a-zA-Z][^>]*\son[a-z]+="', t): problems.append(f"{rel}: inline event handler")
+    if "javascript:" in t: problems.append(f"{rel}: javascript: URL")
+    for a in _BLANK.findall(t):
+        if not ("noopener" in a and "noreferrer" in a): problems.append(f"{rel}: target=_blank without noopener noreferrer")
+    if MAIL in t: problems.append(f"{rel}: email address in plain text")
+for f in list(SITE.rglob("*.html")) + list((SITE / "assets").glob("*.js")) + list((SITE / "assets").glob("*.css")):
+    if "xkeysib-" in f.read_text(errors="ignore"): problems.append(f"{f.relative_to(SITE)}: Brevo API key")
+if problems:
+    raise SystemExit("security check failed:\n  " + "\n  ".join(problems))
+print("ok", len(sizes), "pages,", sum(sizes.values()) // 1024, "KB · security checks passed")

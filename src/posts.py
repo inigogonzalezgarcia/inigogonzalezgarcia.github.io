@@ -12,7 +12,9 @@ dict(n="01", repo="01-finops-cloud-cost-dashboard", date="2026-09-03", cat="tool
  title_en="Catching cloud cost drift before the invoice does", title_es="Ver la deriva del gasto cloud antes que la factura",
  dek_en="A small Streamlit dashboard for AWS and Azure spend that flags the week that looks wrong.",
  dek_es="Un panel pequeño en Streamlit para el gasto de AWS y Azure que señala la semana que no cuadra.",
- en="""## The problem
+ en="""
+
+## The problem
 Cloud costs rarely explode overnight. They drift: a test environment left running over a weekend, a service scaled up and never scaled down. By the time the monthly invoice arrives, the money is already spent.
 
 I wanted a view that answers three questions fast: how much are we spending and where, is this week different from last week, and is anything clearly out of line.
@@ -25,9 +27,13 @@ I wanted a view that answers three questions fast: how much are we spending and 
 ## How it is built
 Python, pandas, Plotly and Streamlit. `data_generator.py` creates 90 days of synthetic billing for 10 services, 4 departments and 3 environments, and injects a spike into EC2 / Development in the last week so the detection has something to find.
 
-## What's next
-The detection is rule-based and aimed at that injected scenario. The next steps are a statistical baseline per service, importing real Cost Explorer and Azure Cost Management CSV exports, and budget thresholds per department.""",
- es="""## El problema
+## Next steps
+- Import the CSV exports from AWS Cost Explorer and Azure Cost Management instead of the synthetic data.
+- Add a statistical baseline per service, so each service is compared with its own history.
+- Set budget thresholds per department.""",
+ es="""
+
+## El problema
 El gasto cloud casi nunca se dispara de un día para otro. Se desvía poco a poco: un entorno de pruebas encendido todo el fin de semana, un servicio que se escala y nunca se vuelve a bajar. Cuando llega la factura, el dinero ya se ha gastado.
 
 Quería una vista que respondiera rápido a tres preguntas: cuánto gastamos y dónde, si esta semana es distinta de la anterior y si hay algo claramente fuera de lugar.
@@ -41,13 +47,17 @@ Quería una vista que respondiera rápido a tres preguntas: cuánto gastamos y d
 Python, pandas, Plotly y Streamlit. `data_generator.py` crea 90 días de facturación ficticia para 10 servicios, 4 departamentos y 3 entornos, e inyecta un pico en EC2 / Development la última semana para que la detección tenga algo que encontrar.
 
 ## Siguientes pasos
-La detección se basa en reglas y apunta a ese escenario inyectado. Lo siguiente: una línea base estadística por servicio, importar exportaciones CSV reales de Cost Explorer y Azure Cost Management, y umbrales de presupuesto por departamento."""),
+- Importar las exportaciones CSV de AWS Cost Explorer y Azure Cost Management en lugar de los datos ficticios.
+- Añadir una línea base estadística por servicio, para comparar cada servicio con su propio histórico.
+- Fijar umbrales de presupuesto por departamento."""),
 
 dict(n="02", repo="02-intune-compliance-report", date="2026-09-30", cat="tools",
  title_en="An Intune compliance report you can hand to a manager", title_es="Un informe de cumplimiento de Intune que se puede enseñar a dirección",
  dek_en="PowerShell pulls the devices from Microsoft Graph, Python turns them into a report and an action list.",
  dek_es="PowerShell saca los dispositivos de Microsoft Graph y Python los convierte en un informe y una lista de acciones.",
- en="""## The problem
+ en="""
+
+## The problem
 The Intune portal tells you a device is non-compliant. It doesn't give you a one-page answer to "how are we doing, by OS, and which machines do I chase this week?".
 
 ## What I built
@@ -59,8 +69,15 @@ The Intune portal tells you a device is non-compliant. It doesn't give you a one
 Python with no third-party packages plus PowerShell, which is the split I use for anything Microsoft. `generate_sample_data.py` creates a fictional fleet so the repo runs without a tenant. Seven tests cover the logic.
 
 ## What I learned
-Keeping the export and the analysis apart pays off: the PowerShell side only needs read access, and the Python side can be tested with fake data.""",
- es="""## El problema
+Keeping the export and the analysis apart pays off: the PowerShell side only needs read access, and the Python side can be tested with fake data.
+
+## Next steps
+- Create an app registration with read-only Intune permissions in Microsoft Graph.
+- Run `Export-IntuneDevices.ps1` and point the report at the export.
+- Schedule it weekly and send the action list to the team that chases devices.""",
+ es="""
+
+## El problema
 El portal de Intune te dice que un equipo no cumple. No te da en una página la respuesta a "cómo vamos, por sistema operativo, y a qué equipos hay que perseguir esta semana".
 
 ## Qué he hecho
@@ -72,13 +89,20 @@ El portal de Intune te dice que un equipo no cumple. No te da en una página la 
 Python sin paquetes de terceros y PowerShell, el reparto que uso para todo lo de Microsoft. `generate_sample_data.py` crea una flota ficticia para que el repo funcione sin tenant. Siete tests cubren la lógica.
 
 ## Qué aprendí
-Separar la exportación del análisis compensa: la parte de PowerShell solo necesita permisos de lectura y la de Python se prueba con datos falsos."""),
+Separar la exportación del análisis compensa: la parte de PowerShell solo necesita permisos de lectura y la de Python se prueba con datos falsos.
+
+## Siguientes pasos
+- Crear un registro de aplicación con permisos de solo lectura de Intune en Microsoft Graph.
+- Ejecutar `Export-IntuneDevices.ps1` y generar el informe a partir de la exportación.
+- Programarlo cada semana y enviar la lista de acciones al equipo que persigue los equipos."""),
 
 dict(n="03", repo="03-entra-id-hygiene-audit", date="2026-09-30", cat="tools",
  title_en="Auditing Entra ID hygiene: MFA gaps and forgotten accounts", title_es="Auditar la higiene de Entra ID: huecos de MFA y cuentas olvidadas",
  dek_en="Admins without MFA, inactive members and stale guests, found in one pass.",
  dek_es="Administradores sin MFA, miembros inactivos e invitados obsoletos, en una sola pasada.",
- en="""## The problem
+ en="""
+
+## The problem
 Identity debt builds up quietly: an admin who never registered MFA, a leaver whose account is still enabled, guests invited for a project that ended a year ago.
 
 ## What I built
@@ -92,8 +116,15 @@ An audit that flags four things:
 `scripts/Export-EntraUsers.ps1` reads users, their `signInActivity` and the MFA registration report through Microsoft Graph, with `User.Read.All` and `AuditLog.Read.All`. Sign-in activity needs Entra ID P1 or P2, and the README says so. Python does the analysis and the report. Seven tests.
 
 ## What I learned
-Most of the work is deciding what "inactive" and "stale" mean and writing it down, so the report can be defended when someone asks why their account is on it.""",
- es="""## El problema
+Most of the work is deciding what "inactive" and "stale" mean and writing it down, so the report can be defended when someone asks why their account is on it.
+
+## Next steps
+- Grant read-only Graph permissions (`User.Read.All`, `AuditLog.Read.All`) on a tenant with Entra ID P1 or P2.
+- Agree with security what "inactive" and "stale" mean in your organisation and set those thresholds.
+- Run it monthly and keep each report as evidence for access reviews.""",
+ es="""
+
+## El problema
 La deuda de identidad crece sin hacer ruido: un administrador que nunca registró MFA, una baja cuya cuenta sigue activa, invitados de un proyecto que acabó hace un año.
 
 ## Qué he hecho
@@ -107,13 +138,20 @@ Una auditoría que señala cuatro cosas:
 `scripts/Export-EntraUsers.ps1` lee los usuarios, su `signInActivity` y el informe de registro de MFA por Microsoft Graph, con `User.Read.All` y `AuditLog.Read.All`. La actividad de inicio de sesión requiere Entra ID P1 o P2, y el README lo dice. Python hace el análisis y el informe. Siete tests.
 
 ## Qué aprendí
-Casi todo el trabajo está en decidir qué significa "inactivo" y "obsoleto" y dejarlo escrito, para poder defender el informe cuando alguien pregunte por qué sale su cuenta."""),
+Casi todo el trabajo está en decidir qué significa "inactivo" y "obsoleto" y dejarlo escrito, para poder defender el informe cuando alguien pregunte por qué sale su cuenta.
+
+## Siguientes pasos
+- Dar permisos de solo lectura en Graph (`User.Read.All`, `AuditLog.Read.All`) en un tenant con Entra ID P1 o P2.
+- Acordar con seguridad qué significan "inactivo" y "obsoleto" en tu organización y fijar esos umbrales.
+- Ejecutarlo cada mes y guardar cada informe como evidencia para las revisiones de acceso."""),
 
 dict(n="04", repo="04-itsm-kpi-dashboard", date="2026-09-30", cat="tools",
  title_en="Service desk KPIs from a plain ticket export", title_es="KPIs de service desk a partir de una exportación de tickets",
  dek_en="SLA by priority and team, time to resolve, weekly trend and the open tickets already out of SLA.",
  dek_es="SLA por prioridad y por equipo, tiempo de resolución, tendencia semanal y los tickets abiertos ya fuera de SLA.",
- en="""## The problem
+ en="""
+
+## The problem
 Every service desk tool has dashboards, but the monthly review usually starts from a CSV export and a spreadsheet. I wanted the same numbers, every time, from that export.
 
 ## What I built
@@ -127,8 +165,15 @@ A report that reads a ServiceNow-style CSV (number, opened, resolved, priority, 
 Python, standard library only. The default SLA targets are P1 4 h, P2 8 h, P3 24 h and P4 72 h, and `--sla` changes them. Six tests.
 
 ## What I learned
-The median tells a different story from the mean: a few very long tickets move the mean a lot, and the median shows what most users actually live with.""",
- es="""## El problema
+The median tells a different story from the mean: a few very long tickets move the mean a lot, and the median shows what most users actually live with.
+
+## Next steps
+- Export your tickets to CSV from ServiceNow or any other tool and map the columns.
+- Set your own SLA targets per priority with `--sla`.
+- Use the same report every month so the numbers are comparable.""",
+ es="""
+
+## El problema
 Todas las herramientas de service desk tienen paneles, pero la revisión mensual suele empezar con una exportación CSV y una hoja de cálculo. Quería los mismos números, siempre igual, desde esa exportación.
 
 ## Qué he hecho
@@ -142,13 +187,20 @@ Un informe que lee un CSV tipo ServiceNow (número, apertura, resolución, prior
 Python, solo librería estándar. Los objetivos por defecto son P1 4 h, P2 8 h, P3 24 h y P4 72 h, y `--sla` los cambia. Seis tests.
 
 ## Qué aprendí
-La mediana cuenta otra historia que la media: unos pocos tickets muy largos mueven mucho la media, y la mediana enseña lo que vive la mayoría de usuarios."""),
+La mediana cuenta otra historia que la media: unos pocos tickets muy largos mueven mucho la media, y la mediana enseña lo que vive la mayoría de usuarios.
+
+## Siguientes pasos
+- Exportar tus tickets a CSV desde ServiceNow o cualquier otra herramienta y mapear las columnas.
+- Fijar tus objetivos de SLA por prioridad con `--sla`.
+- Usar el mismo informe cada mes para que las cifras se puedan comparar."""),
 
 dict(n="05", repo="05-it-ops-console", date="2026-09-30", cat="tools",
  title_en="Rebuilding an on-site IT operations console from scratch", title_es="Rehacer desde cero una consola de operaciones IT de sede",
  dek_en="Assets, warranties, room checklists, joiners and leavers, shifts and service health in one Flask app.",
  dek_es="Activos, garantías, checklists de salas, altas y bajas, turnos y salud de servicios en una app Flask.",
- en="""## The problem
+ en="""
+
+## The problem
 Running a site means keeping a lot of small things in your head: which machines are offline, which warranties expire, which rooms were checked this morning, who starts on Monday. I wanted all of it in one place, built from scratch and anonymised.
 
 ## What I built
@@ -161,9 +213,13 @@ Access is invite-only: the first admin is created with `bootstrap-admin`, accoun
 ## How it is built
 Flask and SQLite, with PowerShell over CIM/WinRM for remote queries. ARCHITECTURE.md, docs/decisions.md (PowerShell and WMI lessons) and docs/security.md explain the choices. Sixteen tests.
 
-## Not tested yet
-LDAP, SMTP, remote PowerShell and QR codes have not been run against a real environment, and the README says so.""",
- es="""## El problema
+## Next steps
+- Connect LDAP for sign-in and SMTP for the activation emails.
+- Enable remote PowerShell (WinRM) for the live device queries.
+- Load your asset inventory and floor plans, and adapt the room checklists to your site.""",
+ es="""
+
+## El problema
 Llevar una sede es tener muchas cosas pequeñas en la cabeza: qué equipos están offline, qué garantías caducan, qué salas se han revisado esta mañana, quién empieza el lunes. Lo quería todo en un sitio, hecho desde cero y anonimizado.
 
 ## Qué he hecho
@@ -176,15 +232,19 @@ El acceso es solo por invitación: el primer administrador se crea con `bootstra
 ## Cómo está hecho
 Flask y SQLite, con PowerShell por CIM/WinRM para las consultas remotas. ARCHITECTURE.md, docs/decisions.md (lecciones de PowerShell y WMI) y docs/security.md explican las decisiones. Dieciséis tests.
 
-## Sin probar todavía
-LDAP, SMTP, PowerShell remoto y los códigos QR no se han probado contra un entorno real, y el README lo dice."""),
+## Siguientes pasos
+- Conectar LDAP para el inicio de sesión y SMTP para los emails de activación.
+- Activar PowerShell remoto (WinRM) para las consultas en vivo a los equipos.
+- Cargar tu inventario de activos y tus planos, y adaptar los checklists de salas a tu oficina."""),
 
 dict(n="06", repo="06-kubernetes-ingress-lab", date="2026-10-01", cat="cloud",
  title_en="A Kubernetes ingress lab built from zero in every CI run", title_es="Un laboratorio de ingress en Kubernetes que la CI construye desde cero",
  dek_en="Cilium, Envoy Gateway, cert-manager and external-dns on kind, with nine end-to-end checks.",
  dek_es="Cilium, Envoy Gateway, cert-manager y external-dns sobre kind, con nueve pruebas de punta a punta.",
- en="""## Why this lab
-This is a learning lab, not production experience. I wanted to understand how traffic gets into a Kubernetes cluster today: Gateway API instead of the old Ingress, eBPF networking, certificates and DNS handled by controllers.
+ en="""
+
+## Why this lab
+Comes from working with container platforms such as Red Hat OpenShift and Kubernetes on premises. In this lab I go deeper into how traffic gets into a cluster today: Gateway API instead of the classic Ingress, eBPF networking, and certificates and DNS handled by controllers.
 
 ## What I built
 - kind with no CNI and no kube-proxy, replaced by Cilium (LB IPAM, L2 announcements, an L7 policy and Hubble).
@@ -196,10 +256,14 @@ This is a learning lab, not production experience. I wanted to understand how tr
 ## How it is tested
 A GitHub Actions workflow builds the cluster from scratch and runs nine end-to-end tests. It has been green in the last four runs.
 
-## What's next
-The plan includes an open source contribution, docs or a good first issue, in one of these projects.""",
- es="""## Por qué este laboratorio
-Es un laboratorio para aprender, no experiencia en producción. Quería entender cómo entra hoy el tráfico en un clúster de Kubernetes: Gateway API en lugar del Ingress clásico, red con eBPF, y certificados y DNS gestionados por controladores.
+## Next steps
+- Replace kind with your own cluster and BIND with your DNS provider in external-dns.
+- Swap the lab CA for ACME or your internal PKI in cert-manager.
+- Contribute back: docs or a good first issue in one of these projects is the next step on my side.""",
+ es="""
+
+## Por qué este laboratorio
+Viene de trabajar con plataformas de contenedores como Red Hat OpenShift y Kubernetes en local. En este laboratorio profundizo en cómo entra hoy el tráfico en un clúster: Gateway API en lugar del Ingress clásico, red con eBPF, y certificados y DNS gestionados por controladores.
 
 ## Qué he hecho
 - kind sin CNI ni kube-proxy, sustituidos por Cilium (LB IPAM, anuncios L2, una política L7 y Hubble).
@@ -212,14 +276,18 @@ Es un laboratorio para aprender, no experiencia en producción. Quería entender
 Un workflow de GitHub Actions construye el clúster desde cero y pasa nueve pruebas de punta a punta. Ha salido en verde en las cuatro últimas ejecuciones.
 
 ## Siguientes pasos
-El plan incluye una contribución open source, documentación o una good first issue, en alguno de estos proyectos."""),
+- Cambiar kind por tu clúster y BIND por tu proveedor de DNS en external-dns.
+- Cambiar la CA del laboratorio por ACME o tu PKI interna en cert-manager.
+- Contribuir de vuelta: documentación o una good first issue en alguno de estos proyectos es mi siguiente paso."""),
 
 dict(n="07", repo="07-aws-private-connectivity", date="2026-10-01", cat="cloud",
  title_en="Private connectivity on AWS with Terraform, and the bug CI caught", title_es="Conectividad privada en AWS con Terraform, y el fallo que pilló la CI",
  dek_en="PrivateLink, private DNS and SSM endpoints in five modules, tested without an AWS account.",
  dek_es="PrivateLink, DNS privado y endpoints de SSM en cinco módulos, probados sin cuenta de AWS.",
- en="""## Why this lab
-A learning lab on a pattern I see a lot in hybrid environments: reaching a service privately, with no internet gateway and no NAT.
+ en="""
+
+## Why this lab
+Comes from operating a hybrid AWS and Azure environment, where a common need is reaching a service privately, with no internet gateway and no NAT. This lab builds that pattern end to end with Terraform.
 
 ## What I built
 Five Terraform modules:
@@ -235,10 +303,14 @@ Five Terraform modules:
 ## What I learned
 Running CI with Terraform caught a real bug that OpenTofu didn't flag: a `for_each` over IDs that are unknown at plan time. It is fixed and written up in docs/decisions.md.
 
-## Not tested yet
-`apply` against a real AWS account.""",
- es="""## Por qué este laboratorio
-Un laboratorio para aprender un patrón que veo mucho en entornos híbridos: llegar a un servicio de forma privada, sin internet gateway ni NAT.
+## Next steps
+- Run `terraform apply` in a sandbox AWS account (the lab costs around $0.11 per hour).
+- Plug in your own VPCs, allowed principals and private DNS zone.
+- Keep the CI checks (fmt, validate, test, tfsec) in your pipeline.""",
+ es="""
+
+## Por qué este laboratorio
+Viene de operar un entorno híbrido con AWS y Azure, donde una necesidad habitual es llegar a un servicio de forma privada, sin internet gateway y sin NAT. Este laboratorio construye ese patrón de principio a fin con Terraform.
 
 ## Qué he hecho
 Cinco módulos de Terraform:
@@ -254,15 +326,19 @@ Cinco módulos de Terraform:
 ## Qué aprendí
 La CI con Terraform encontró un fallo real que OpenTofu no marcó: un `for_each` sobre IDs que no se conocen en el plan. Está corregido y explicado en docs/decisions.md.
 
-## Sin probar todavía
-`apply` en una cuenta real de AWS."""),
+## Siguientes pasos
+- Ejecutar `terraform apply` en una cuenta de AWS de pruebas (el laboratorio cuesta unos 0,11 $ por hora).
+- Conectar tus VPC, los principals permitidos y tu zona DNS privada.
+- Mantener las comprobaciones de CI (fmt, validate, test, tfsec) en tu pipeline."""),
 
 dict(n="08", repo="08-edge-health-slo-monitor", date="2026-10-01", cat="cloud",
  title_en="SLOs and burn-rate alerts for the edge, in plain Python", title_es="SLO y alertas por burn rate para el edge, en Python sin dependencias",
  dek_en="DNS, TLS, HTTP and TCP probes, an error budget and a fictional postmortem.",
  dek_es="Sondas DNS, TLS, HTTP y TCP, un presupuesto de error y un postmortem ficticio.",
- en="""## Why this lab
-A learning lab on how SRE teams decide when to wake someone up: not on every failed check, but when the error budget is burning too fast.
+ en="""
+
+## Why this lab
+Comes from years of monitoring and alert response with tools such as Grafana, SolarWinds and the Elastic stack. This lab applies the SRE approach to the edge: wake someone up when the error budget is burning too fast, not on every failed check.
 
 ## What I built
 - DNS, TLS, HTTP and TCP probes.
@@ -273,10 +349,14 @@ A learning lab on how SRE teams decide when to wake someone up: not on every fai
 ## How it is built
 Python 3.11, standard library only, 14 tests.
 
-## Not tested yet
-Sending to a real Elasticsearch, the systemd units and the webhook against a real n8n.""",
- es="""## Por qué este laboratorio
-Un laboratorio para aprender cómo deciden los equipos SRE cuándo despertar a alguien: no con cada fallo, sino cuando el presupuesto de error se consume demasiado rápido.
+## Next steps
+- Send the results to your Elasticsearch or Prometheus.
+- Install the systemd units on a small VM close to your users.
+- Connect the signed webhook to n8n, Teams or Slack, and agree the SLOs with the service owners.""",
+ es="""
+
+## Por qué este laboratorio
+Viene de años de monitorización y respuesta a alertas con herramientas como Grafana, SolarWinds y el stack de Elastic. Este laboratorio aplica el enfoque SRE al edge: despertar a alguien cuando el presupuesto de error se consume demasiado rápido, no en cada comprobación fallida.
 
 ## Qué he hecho
 - Sondas DNS, TLS, HTTP y TCP.
@@ -287,15 +367,19 @@ Un laboratorio para aprender cómo deciden los equipos SRE cuándo despertar a a
 ## Cómo está hecho
 Python 3.11, solo librería estándar, 14 tests.
 
-## Sin probar todavía
-El envío a un Elasticsearch real, las units de systemd y el webhook contra un n8n real."""),
+## Siguientes pasos
+- Enviar los resultados a tu Elasticsearch o Prometheus.
+- Instalar las units de systemd en una VM pequeña cerca de tus usuarios.
+- Conectar el webhook firmado a n8n, Teams o Slack, y acordar los SLO con los responsables del servicio."""),
 
 dict(n="09", repo="09-gpu-node-remediation", date="2026-10-01", cat="gpu",
  title_en="Teaching a Kubernetes controller to drain, repair or quarantine GPU nodes", title_es="Un controlador de Kubernetes que drena, repara o pone en cuarentena nodos GPU",
  dek_en="First GPU lab: XID errors, ECC and temperature drive each node through a state machine.",
  dek_es="Primer laboratorio de GPU: los XID, el ECC y la temperatura llevan cada nodo por una máquina de estados.",
- en="""## Why this lab
-I don't have production experience with GPU fleets. This is the first of a series of labs to learn how they are operated day to day, and every README says so. No paid GPU machines were used.
+ en="""
+
+## Why this lab
+Comes from hardware operations: validating and certifying servers, and automating the detection and remediation of hardware failures. This is the first of a series of labs that applies that to GPU fleets. It runs on simulated GPUs, so anyone can reproduce it on a laptop.
 
 ## What I built
 A Kubernetes controller in Go (standard library only, no client-go) that reads DCGM metrics (XID errors, double-bit ECC, row remapping, temperature) and moves each node through Healthy → Draining → Repairing → Validating → Healthy, or to Cordoned for thermal issues, or Quarantined.
@@ -307,10 +391,14 @@ A Kubernetes controller in Go (standard library only, no client-go) that reads D
 ## How it is tested
 A `gpu-sim` simulator stands in for dcgm-exporter. CI runs unit tests, shellcheck and an end-to-end test on kind with 8 scenarios (28 checks), green on the first run. There is also a `gpuremediate check` mode that uses nvidia-smi on a real GPU.
 
-## Not tested yet
-A real GPU: neither a real dcgm-exporter nor the check mode on a machine with one.""",
- es="""## Por qué este laboratorio
-No tengo experiencia en producción con flotas de GPU. Este es el primero de una serie de laboratorios para aprender cómo se operan en el día a día, y cada README lo dice. No he pagado máquinas con GPU.
+## Next steps
+- On a cluster with GPUs, deploy dcgm-exporter instead of the simulator.
+- Start in dry-run mode and set the budget of nodes in remediation (max-unavailable).
+- `gpuremediate check` runs on any machine with `nvidia-smi`, including a Windows workstation.""",
+ es="""
+
+## Por qué este laboratorio
+Viene de la operación de hardware: validar y certificar servidores, y automatizar la detección y la reparación de fallos de hardware. Es el primero de una serie de laboratorios que lleva eso a las flotas de GPU. Funciona con GPU simuladas, así que cualquiera puede reproducirlo en un portátil.
 
 ## Qué he hecho
 Un controlador de Kubernetes en Go (solo librería estándar, sin client-go) que lee métricas DCGM (errores XID, ECC de doble bit, row remapping, temperatura) y lleva cada nodo por Healthy → Draining → Repairing → Validating → Healthy, o a Cordoned por temperatura, o a Quarantined.
@@ -322,15 +410,19 @@ Un controlador de Kubernetes en Go (solo librería estándar, sin client-go) que
 ## Cómo se prueba
 Un simulador `gpu-sim` hace de dcgm-exporter. La CI pasa tests unitarios, shellcheck y una prueba de punta a punta en kind con 8 escenarios (28 comprobaciones), en verde a la primera. Hay además un modo `gpuremediate check` que usa nvidia-smi en una GPU real.
 
-## Sin probar todavía
-Una GPU real: ni un dcgm-exporter real ni el modo check en una máquina con GPU."""),
+## Siguientes pasos
+- En un clúster con GPU, desplegar dcgm-exporter en lugar del simulador.
+- Empezar en modo dry-run y fijar el presupuesto de nodos en reparación (max-unavailable).
+- `gpuremediate check` funciona en cualquier máquina con `nvidia-smi`, también en un puesto Windows."""),
 
 dict(n="10", repo="10-gpu-fleet-observability", date="2026-10-01", cat="gpu",
  title_en="Observability for a GPU fleet: alerts that say what to do", title_es="Observabilidad de una flota de GPU: alertas que dicen qué hacer",
  dek_en="Recording rules, alerts with runbooks, Alertmanager routing and a Grafana dashboard on DCGM metrics.",
  dek_es="Recording rules, alertas con runbook, rutas de Alertmanager y un dashboard de Grafana sobre métricas DCGM.",
- en="""## Why this lab
-A learning lab, with no production GPU experience behind it. The question: which GPU metrics deserve an alert, and who should get it?
+ en="""
+
+## Why this lab
+Builds on years of monitoring and Grafana dashboards. Here the metrics come from NVIDIA DCGM, and the question is which ones deserve an alert and who should get it.
 
 ## What I built
 - A Go simulator with 4 nodes × 8 GPUs that uses dcgm-exporter's metric names and labels, pod and namespace included, plus fault injection.
@@ -344,10 +436,14 @@ A learning lab, with no production GPU experience behind it. The question: which
 ## What I learned
 The energy-versus-power check gave false failures with a single sample because of scrape jitter. It now uses 1 minute of rate over 2 minutes of data.
 
-## Not tested yet
-A real dcgm-exporter.""",
- es="""## Por qué este laboratorio
-Un laboratorio para aprender, sin experiencia de GPU en producción detrás. La pregunta: qué métricas de GPU merecen una alerta y a quién le tiene que llegar.
+## Next steps
+- Replace the simulator with dcgm-exporter on your nodes.
+- Import the Grafana dashboard and the recording rules.
+- Route the alerts in Alertmanager to your on-call and ticketing tools.""",
+ es="""
+
+## Por qué este laboratorio
+Se apoya en años de monitorización y cuadros de Grafana. Aquí las métricas vienen de NVIDIA DCGM, y la pregunta es cuáles merecen una alerta y quién debe recibirla.
 
 ## Qué he hecho
 - Un simulador en Go de 4 nodos × 8 GPU que usa los nombres y etiquetas de métricas de dcgm-exporter, pod y namespace incluidos, con inyección de fallos.
@@ -361,15 +457,19 @@ Un laboratorio para aprender, sin experiencia de GPU en producción detrás. La 
 ## Qué aprendí
 La comprobación de energía frente a potencia daba falsos fallos con una sola muestra por el jitter del scrape. Ahora usa 1 minuto sobre 2 minutos de datos.
 
-## Sin probar todavía
-Un dcgm-exporter real."""),
+## Siguientes pasos
+- Cambiar el simulador por dcgm-exporter en tus nodos.
+- Importar el cuadro de Grafana y las recording rules.
+- Enrutar las alertas de Alertmanager a tus herramientas de guardia y de tickets."""),
 
 dict(n="11", repo="11-gpu-fleet-lifecycle", date="2026-10-02", cat="gpu",
  title_en="Rolling a GPU driver across a fleet: canary, approval, rollback", title_es="Desplegar un driver de GPU por la flota: canary, aprobación y rollback",
  dek_en="A Go controller that upgrades nodes in batches and backs out on its own when something breaks.",
  dek_es="Un controlador en Go que actualiza nodos por lotes y da marcha atrás solo cuando algo falla.",
- en="""## Why this lab
-A learning lab on day-2 operations, without real GPUs. The README says that in production you would use the GPU Operator's own upgrade controller; this is about understanding what it has to get right.
+ en="""
+
+## Why this lab
+Builds on release management: planning, testing, rollback and validation after each release, applied to rolling a GPU driver across a fleet. In production the GPU Operator's own upgrade controller does this job; the lab shows what it has to get right.
 
 ## What I built
 A Go controller (standard library only) that rolls a driver version across the fleet:
@@ -381,10 +481,14 @@ A Go controller (standard library only) that rolls a driver version across the f
 ## How it is tested
 The plan lives in a validated ConfigMap where unknown fields are errors. CI runs 12 controller unit tests, shellcheck and an end-to-end test on kind with 4 workers: 26 checks, green on the first run, including a closed window, a bad driver stopped at the canary and an XID during the soak with rollback.
 
-## Not tested yet
-Real GPUs and real drivers.""",
- es="""## Por qué este laboratorio
-Un laboratorio sobre operaciones del día 2, sin GPU reales. El README dice que en producción se usaría el upgrade controller del propio GPU Operator; esto va de entender qué tiene que hacer bien.
+## Next steps
+- Use the lab to rehearse your rollout policy: canary, approval, batches and rollback.
+- Apply the same policy with the GPU Operator's upgrade controller on your clusters.
+- Reuse the quarantine label from lab 09, so a node that fails twice is taken out of service.""",
+ es="""
+
+## Por qué este laboratorio
+Se apoya en la gestión de releases: planificación, pruebas, vuelta atrás y validación después de cada despliegue, aplicadas a actualizar el driver de GPU en toda una flota. En producción lo hace el controlador de actualización del propio GPU Operator; el laboratorio enseña lo que tiene que hacer bien.
 
 ## Qué he hecho
 Un controlador en Go (solo librería estándar) que despliega una versión de driver por la flota:
@@ -396,15 +500,19 @@ Un controlador en Go (solo librería estándar) que despliega una versión de dr
 ## Cómo se prueba
 El plan vive en un ConfigMap validado donde los campos desconocidos son error. La CI pasa 12 tests unitarios del controlador, shellcheck y una prueba de punta a punta en kind con 4 workers: 26 comprobaciones, en verde a la primera, con ventana cerrada, un driver malo parado en el canary y un XID en el soak con rollback.
 
-## Sin probar todavía
-GPU y drivers reales."""),
+## Siguientes pasos
+- Usar el laboratorio para ensayar tu política de despliegue: canary, aprobación, lotes y vuelta atrás.
+- Aplicar la misma política con el controlador de actualización del GPU Operator en tus clústeres.
+- Reutilizar la etiqueta de cuarentena del laboratorio 09, para que un nodo que falla dos veces salga de servicio."""),
 
 dict(n="12", repo="12-gpu-goodput-mtbi", date="2026-10-02", cat="gpu",
  title_en="Where do the GPU-hours go? A goodput simulator", title_es="¿Adónde van las GPU-horas? Un simulador de goodput",
  dek_en="A 1,024-GPU training job, simulated with failures, to see what checkpoints, spares and fast detection are worth.",
  dek_es="Un entrenamiento de 1.024 GPU simulado con fallos, para ver cuánto valen los checkpoints, los spares y la detección rápida.",
- en="""## Why this lab
-A learning lab. In a large training job, failures are normal; what matters is how much useful work survives them. I wanted to put numbers on that.
+ en="""
+
+## Why this lab
+Builds on availability and capacity management and on post-incident reviews. In a large training job failures are normal; what matters is how much useful work survives them, and this lab puts numbers on it.
 
 ## What I built
 - A discrete-event simulator of a 1,024-GPU job (128 nodes) with spares, failure causes with their own detection time, and repairs.
@@ -417,10 +525,14 @@ Seven scenarios, 20 seeds each: baseline 79.6 %, Daly's interval 85.1 %, asynchr
 ## How it is tested
 34 unit tests on Python 3.11 to 3.13, and a CI job that regenerates docs/results.md and fails if it changes.
 
-## Not tested yet
-Logs from a real cluster.""",
- es="""## Por qué este laboratorio
-Un laboratorio para aprender. En un entrenamiento grande los fallos son normales; lo que importa es cuánto trabajo útil sobrevive. Quería ponerle números.
+## Next steps
+- Export your own job events in the documented JSONL format to see where your GPU-hours go.
+- Use the Young and Daly formulas to tune the checkpoint interval.
+- Track goodput as an SLO with an error budget.""",
+ es="""
+
+## Por qué este laboratorio
+Se apoya en la gestión de disponibilidad y capacidad y en las revisiones post-incidente. En un entrenamiento grande los fallos son normales; lo que importa es cuánto trabajo útil sobrevive a ellos, y este laboratorio le pone números.
 
 ## Qué he hecho
 - Un simulador de eventos discretos de un trabajo de 1.024 GPU (128 nodos) con spares, causas de fallo con su propio tiempo de detección y reparaciones.
@@ -433,15 +545,19 @@ Siete escenarios con 20 semillas cada uno: base 79,6 %, intervalo de Daly 85,1 %
 ## Cómo se prueba
 34 tests unitarios en Python 3.11 a 3.13 y un job de CI que regenera docs/results.md y falla si cambia.
 
-## Sin probar todavía
-Logs de un clúster real."""),
+## Siguientes pasos
+- Exportar los eventos de tus trabajos en el formato JSONL documentado para ver adónde van tus GPU-horas.
+- Usar las fórmulas de Young y Daly para ajustar el intervalo de checkpoints.
+- Seguir el goodput como un SLO con presupuesto de error."""),
 
 dict(n="13", repo="13-cluster-acceptance-burnin", date="2026-10-04", cat="gpu",
  title_en="From handover to sign-off: accepting a new GPU cluster", title_es="Del handover a la firma: aceptar un clúster de GPU nuevo",
  dek_en="Inventory, diagnostics, NCCL tests and a 72-hour burn-in, ending in a report a customer can sign.",
  dek_es="Inventario, diagnósticos, pruebas NCCL y un burn-in de 72 horas, con un informe que el cliente puede firmar.",
- en="""## Why this lab
-A learning lab. Accepting hardware is something I know from IT operations; here I wanted to see what it looks like for a GPU cluster.
+ en="""
+
+## Why this lab
+Accepting new hardware and running go-live and service-acceptance reviews are part of my IT operations work. This lab applies the same discipline to a GPU cluster, from handover to the customer's signature.
 
 ## What I built
 A pipeline that runs inventory (GPU, driver, VBIOS, InfiniBand ports) → `dcgmi diag -r 3` → nccl-tests per node → per rack → a 72-hour burn-in → a whole-cluster burn-in job scored with lab 12's rules.
@@ -456,10 +572,14 @@ A fictional cluster with 4 racks × 8 nodes × 8 GPUs and 8 defects. Round 1 end
 ## How it is tested
 25 tests, and a CI job that runs both rounds and requires NOT READY and then READY.
 
-## Not tested yet
-Real dcgmi diag and nccl-tests output. The parsers follow the general format and are only tested with samples.""",
- es="""## Por qué este laboratorio
-Un laboratorio para aprender. Aceptar hardware es algo que conozco de operaciones IT; aquí quería ver cómo es con un clúster de GPU.
+## Next steps
+- Write your acceptance criteria in `criteria.toml`.
+- Collect the real `dcgmi diag` and nccl-tests output with the commands that `accept plan` prints.
+- Hand the HTML report and the punch list to the customer for sign-off.""",
+ es="""
+
+## Por qué este laboratorio
+Aceptar hardware nuevo y llevar revisiones de puesta en producción y aceptación del servicio forman parte de mi trabajo en operaciones IT. Este laboratorio aplica la misma disciplina a un clúster de GPU, de la entrega a la firma del cliente.
 
 ## Qué he hecho
 Un proceso que pasa por inventario (GPU, driver, VBIOS, puertos InfiniBand) → `dcgmi diag -r 3` → nccl-tests por nodo → por rack → burn-in de 72 horas → un trabajo de burn-in de todo el clúster medido con las reglas del laboratorio 12.
@@ -474,15 +594,19 @@ Un clúster ficticio de 4 racks × 8 nodos × 8 GPU con 8 defectos. La ronda 1 a
 ## Cómo se prueba
 25 tests y un job de CI que corre las dos rondas y exige NO LISTO y después LISTO.
 
-## Sin probar todavía
-Salidas reales de dcgmi diag y nccl-tests. Los parsers siguen el formato general y solo se prueban con muestras."""),
+## Siguientes pasos
+- Escribir tus criterios de aceptación en `criteria.toml`.
+- Recoger la salida real de `dcgmi diag` y nccl-tests con los comandos que imprime `accept plan`.
+- Entregar al cliente el informe HTML y la punch list para la firma."""),
 
 dict(n="14", repo="14-slurm-gpu-ops", date="2026-10-04", cat="gpu",
  title_en="A real Slurm cluster in Docker Compose, with GPU health checks", title_es="Un clúster Slurm real en Docker Compose, con health checks de GPU",
  dek_en="Drain, requeue and validate, and four CI iterations to get cgroups v2 working.",
  dek_es="Drain, requeue y validate, y cuatro iteraciones de CI para que funcionen los cgroups v2.",
- en="""## Why this lab
-A learning lab. Many GPU clusters run Slurm rather than Kubernetes, so I wanted the same XID policy from lab 09 working in a real Slurm.
+ en="""
+
+## Why this lab
+Builds on running Linux (Red Hat) servers. Many GPU clusters run Slurm rather than Kubernetes, so this lab brings the XID policy from lab 09 to a real Slurm cluster.
 
 ## What I built
 - Slurm 23.11 from Ubuntu 24.04 packages in Docker Compose: MariaDB, slurmdbd, slurmctld and 4 nodes with 4 simulated GPUs each.
@@ -497,10 +621,14 @@ CI: 36 checks in about 7 minutes. XID 79 drains the node in 2 seconds and requeu
 ## What I learned
 It took four CI iterations to get cgroups v2 working without systemd, and the requeue delay was 60 to 80 seconds. Both are written up in docs/design.md.
 
-## Not tested yet
-Real GPUs, cgroup isolation and NHC.""",
- es="""## Por qué este laboratorio
-Un laboratorio para aprender. Muchos clústeres de GPU usan Slurm y no Kubernetes, así que quería la misma política de XID del laboratorio 09 funcionando en un Slurm real.
+## Next steps
+- On real nodes, switch the health source to `nvidia-smi` and the kernel log.
+- Enable cgroup isolation for the GPUs.
+- Run NHC (Node Health Check) alongside the GPU health check.""",
+ es="""
+
+## Por qué este laboratorio
+Se apoya en la administración de servidores Linux (Red Hat). Muchos clústeres de GPU usan Slurm en lugar de Kubernetes, así que este laboratorio lleva la política XID del laboratorio 09 a un Slurm real.
 
 ## Qué he hecho
 - Slurm 23.11 con paquetes de Ubuntu 24.04 en Docker Compose: MariaDB, slurmdbd, slurmctld y 4 nodos con 4 GPU simuladas cada uno.
@@ -515,15 +643,19 @@ CI: 36 comprobaciones en unos 7 minutos. El XID 79 drena el nodo en 2 segundos y
 ## Qué aprendí
 Hicieron falta cuatro iteraciones de CI para que funcionaran los cgroups v2 sin systemd, y el reencolado tardaba entre 60 y 80 segundos. Las dos cosas están en docs/design.md.
 
-## Sin probar todavía
-GPU reales, aislamiento por cgroups y NHC."""),
+## Siguientes pasos
+- En nodos reales, cambiar la fuente de salud a `nvidia-smi` y el log del kernel.
+- Activar el aislamiento por cgroups de las GPU.
+- Ejecutar NHC (Node Health Check) junto al chequeo de salud de GPU."""),
 
 dict(n="15", repo="15-multi-tenant-gpu-scheduling", date="2026-10-05", cat="gpu",
  title_en="Sharing GPUs between teams with Kueue and KAI Scheduler", title_es="Repartir GPU entre equipos con Kueue y KAI Scheduler",
  dek_en="One quota agreement in a TOML file, rendered into both schedulers and tested on kind.",
  dek_es="Un acuerdo de cuotas en un fichero TOML, traducido a los dos planificadores y probado en kind.",
- en="""## Why this lab
-A learning lab. When several teams share a GPU cluster, the hard part is the agreement: who is guaranteed what, who can borrow, and what happens when the owner wants it back.
+ en="""
+
+## Why this lab
+Builds on capacity management and on SLA and OLA agreements between teams that share the same infrastructure. When several teams share a GPU cluster, the key is the agreement: who is guaranteed what, who can borrow, and what happens when the owner wants it back.
 
 ## What I built
 - `tenancy.toml` with three teams: training (16 guaranteed, 8 can be borrowed), research (8 + 8) and inference (8, never lent).
@@ -536,10 +668,14 @@ Kueue, 22 checks: borrowing, reclaim, priority within a team and all-or-nothing 
 ## What I learned
 Three rounds of fixes after the first CI run, written up in docs/decisions.md: queue usage is reported with a delay, the preemption reason is in a condition, and fractional GPUs are passed as text.
 
-## Not tested yet
-Real GPUs, Kueue and KAI together, fair sharing, topology-aware scheduling and KubeVirt with GPUs.""",
- es="""## Por qué este laboratorio
-Un laboratorio para aprender. Cuando varios equipos comparten un clúster de GPU, lo difícil es el acuerdo: qué tiene garantizado cada uno, quién puede pedir prestado y qué pasa cuando el dueño lo quiere de vuelta.
+## Next steps
+- Describe your teams and quotas in `tenancy.toml` and render the manifests for Kueue or KAI Scheduler.
+- Add fair sharing and topology-aware scheduling as the cluster grows.
+- Review the agreement with the teams every quarter.""",
+ es="""
+
+## Por qué este laboratorio
+Se apoya en la gestión de capacidad y en los acuerdos de SLA y OLA entre equipos que comparten la misma infraestructura. Cuando varios equipos comparten un clúster de GPU, la clave es el acuerdo: quién tiene qué garantizado, quién puede pedir prestado y qué pasa cuando el dueño lo quiere de vuelta.
 
 ## Qué he hecho
 - `tenancy.toml` con tres equipos: training (16 garantizadas, 8 prestables), research (8 + 8) e inference (8 que nunca presta).
@@ -552,15 +688,19 @@ Kueue, 22 comprobaciones: préstamo, recuperación, prioridad dentro del equipo 
 ## Qué aprendí
 Tres rondas de arreglos tras la primera CI, explicadas en docs/decisions.md: el uso de las colas se informa con retraso, el motivo de la preemption está en una condición y las GPU fraccionarias se pasan como texto.
 
-## Sin probar todavía
-GPU reales, Kueue y KAI juntos, fair sharing, planificación por topología y KubeVirt con GPU."""),
+## Siguientes pasos
+- Describir tus equipos y cuotas en `tenancy.toml` y generar los manifiestos para Kueue o KAI Scheduler.
+- Añadir fair sharing y planificación según topología a medida que crece el clúster.
+- Revisar el acuerdo con los equipos cada trimestre."""),
 
 dict(n="16", repo="16-gitops-gpu-fleet", date="2026-10-09", cat="gpu",
  title_en="Promoting GPU Operator releases from staging to prod with Flux", title_es="Promocionar versiones del GPU Operator de staging a prod con Flux",
  dek_en="One file defines releases and clusters; Git and Flux do the rest, with a gate before production.",
  dek_es="Un fichero define versiones y clústeres; Git y Flux hacen el resto, con una puerta antes de producción.",
- en="""## Why this lab
-A learning lab that ties several earlier ones together: how do you upgrade the GPU software stack across a fleet of clusters without doing it by hand?
+ en="""
+
+## Why this lab
+Builds on Git, CI/CD pipelines and release management, and ties several earlier labs together: how to upgrade the GPU software stack across a fleet of clusters from Git, with a gate before production.
 
 ## What I built
 - `fleet.toml` defines releases (GPU Operator, Network Operator and driver versions, plus one release that fails on purpose) and clusters with GPU pools.
@@ -574,10 +714,14 @@ CI: 21 unit tests; a validate step that renders the real NGC Helm charts at ever
 ## What I learned
 One CI iteration: the rollout plan was applied before the NVIDIADriver objects, so lifecycle now depends on config. I also found a difference in the NVIDIADriver CRD between two GPU Operator versions.
 
-## Not tested yet
-Real GPUs and NICs, the GPU Operator's own upgrade controller, Argo CD and `flux bootstrap`.""",
- es="""## Por qué este laboratorio
-Un laboratorio que une varios de los anteriores: cómo actualizar el software de GPU en una flota de clústeres sin hacerlo a mano.
+## Next steps
+- Describe your clusters and releases in `fleet.toml`.
+- Bootstrap Flux on each cluster (or use Argo CD, the same structure works).
+- Keep the gate before production as a required check in your repository.""",
+ es="""
+
+## Por qué este laboratorio
+Se apoya en Git, pipelines de CI/CD y gestión de releases, y une varios laboratorios anteriores: cómo actualizar el software de GPU en una flota de clústeres desde Git, con una puerta antes de producción.
 
 ## Qué he hecho
 - `fleet.toml` define versiones (GPU Operator, Network Operator y driver, más una versión que falla a propósito) y clústeres con pools de GPU.
@@ -591,14 +735,18 @@ CI: 21 tests unitarios; un paso de validación que renderiza los charts de Helm 
 ## Qué aprendí
 Una iteración de CI: el plan de rollout se aplicaba antes que los objetos NVIDIADriver, así que lifecycle ahora depende de config. También encontré una diferencia en el CRD NVIDIADriver entre dos versiones del GPU Operator.
 
-## Sin probar todavía
-GPU y NIC reales, el upgrade controller del propio GPU Operator, Argo CD y `flux bootstrap`."""),
+## Siguientes pasos
+- Describir tus clústeres y releases en `fleet.toml`.
+- Instalar Flux en cada clúster (o usar Argo CD, la misma estructura sirve).
+- Mantener la puerta antes de producción como comprobación obligatoria en tu repositorio."""),
 
 dict(n="17", repo="17-teams-rooms-fleet-health", date="2026-10-15", cat="tools",
  title_en="Which meeting rooms will fail today, and in what order to fix them", title_es="Qué salas de reuniones van a fallar hoy y en qué orden arreglarlas",
  dek_en="Teams Rooms health from Microsoft Graph, a room register and today's bookings, turned into a morning walk-round.",
  dek_es="La salud de Teams Rooms desde Microsoft Graph, un registro de salas y las reservas del día, convertidos en la ronda de primera hora.",
- en="""## The problem
+ en="""
+
+## The problem
 The Teams admin center shows the health of every room, one device at a time. What the engineer on site needs at 08:00 is a short list: the boardroom with a meeting in 30 minutes first, the small room that is free all day last, and the first thing to try for each problem.
 
 ## What I built
@@ -613,9 +761,13 @@ Python with the standard library only, plus PowerShell for the Graph exports. Th
 ## What I learned
 Most of the value is in the order of the list, not in the detection. And an offline console should show one issue, not five: everything else about it is noise until it is back.
 
-## Not tested yet
-The PowerShell scripts against a real tenant. The `/teamwork/devices` API is in Graph beta, so the parser treats anything missing as unknown instead of failing.""",
- es="""## El problema
+## Next steps
+- Run the PowerShell export against your tenant (the `/teamwork/devices` API is in Graph beta).
+- Fill in the room register with your rooms and their priority.
+- Run it every morning before the first meetings.""",
+ es="""
+
+## El problema
 El Teams admin center enseña la salud de cada sala, de dispositivo en dispositivo. Lo que necesita el técnico a las 8:00 es una lista corta: primero la sala de Consejo con reunión en 30 minutos, al final la sala pequeña que está libre todo el día, y lo primero que hay que probar en cada problema.
 
 ## Qué he hecho
@@ -630,14 +782,18 @@ Python solo con la librería estándar y PowerShell para las exportaciones de Gr
 ## Qué aprendí
 Casi todo el valor está en el orden de la lista, no en la detección. Y una consola sin conexión debe mostrar un problema, no cinco: lo demás es ruido hasta que vuelva.
 
-## Sin probar todavía
-Los scripts de PowerShell contra un tenant real. La API `/teamwork/devices` está en la beta de Graph, así que el parser trata lo que falte como desconocido en lugar de fallar."""),
+## Siguientes pasos
+- Ejecutar la exportación de PowerShell contra tu tenant (la API `/teamwork/devices` está en la beta de Graph).
+- Completar el registro de salas con tus salas y su prioridad.
+- Ejecutarlo cada mañana antes de las primeras reuniones."""),
 
 dict(n="18", repo="18-mecm-intune-comanagement-tracker", date="2026-10-15", cat="tools",
  title_en="A go/no-go for the next co-management slider move", title_es="Un go/no-go para el siguiente paso del slider de co-management",
  dek_en="MECM and Intune joined in one report: real co-management state, workload authority against the plan and Windows 11 waves.",
  dek_es="MECM e Intune en un solo informe: estado real de co-management, autoridad por workload frente al plan y olas de Windows 11.",
- en="""## The problem
+ en="""
+
+## The problem
 In a co-management and Windows 11 migration, every status meeting asks the same things: how many devices are really co-managed, what breaks if we move a workload to Intune for everyone, and will the next wave finish on time. The answers sit in two consoles that do not share a report.
 
 ## What I built
@@ -653,9 +809,13 @@ Python with the standard library only. The demo is a made-up company with 260 de
 ## What I learned
 From the Windows 11 migration I led: most of the effort is not the upgrade, it is finding the devices that are not where the plan says they are. Agreeing the gates before the CAB, not during it, saves the longest discussions.
 
-## Not tested yet
-The SQL query against a real site database and the PowerShell export against a real tenant.""",
- es="""## El problema
+## Next steps
+- Run the read-only SQL query against your MECM site database and the Intune export from Graph.
+- Write your workloads, waves and gates in `plan.json`.
+- Bring `gates.md` to each change advisory board before moving the slider.""",
+ es="""
+
+## El problema
 En una migración a co-management y Windows 11, cada reunión de seguimiento pregunta lo mismo: cuántos equipos están de verdad co-gestionados, qué se rompe si pasamos un workload a Intune para todos y si la siguiente ola va a acabar a tiempo. Las respuestas están en dos consolas que no comparten informe.
 
 ## Qué he hecho
@@ -671,14 +831,18 @@ Python solo con la librería estándar. La demo es una empresa inventada con 260
 ## Qué aprendí
 De la migración a Windows 11 que lideré: casi todo el esfuerzo no está en la actualización, sino en encontrar los equipos que no están donde dice el plan. Acordar los gates antes del CAB, y no durante, ahorra las discusiones más largas.
 
-## Sin probar todavía
-La consulta SQL contra una base de datos de sitio real y la exportación de PowerShell contra un tenant real."""),
+## Siguientes pasos
+- Ejecutar la consulta SQL de solo lectura contra la base de datos de tu sitio MECM y la exportación de Intune desde Graph.
+- Escribir tus workloads, olas y gates en `plan.json`.
+- Llevar `gates.md` a cada comité de cambios antes de mover el slider."""),
 
 dict(n="19", repo="19-ad-infra-health-check", date="2026-10-16", cat="tools",
  title_en="A Monday-morning health check for Active Directory", title_es="Un chequeo de los lunes para Active Directory",
  dek_en="Domain controllers, replication, DHCP, Group Policy and admin accounts from one read-only export, ordered by what to fix today.",
  dek_es="Controladores de dominio, replicación, DHCP, directivas de grupo y cuentas de administrador desde una exportación de solo lectura, ordenados por lo que hay que arreglar hoy.",
- en="""## The problem
+ en="""
+
+## The problem
 `dcdiag` and `repadmin` tell you everything, one domain controller at a time. Most Active Directory problems give a warning first: a clock drifting, DFSR stopped after patching, a replication link failing quietly for weeks, a DHCP scope full the week new joiners arrive, an admin account nobody has used since spring. On Monday morning you want one page with what to fix today.
 
 ## What I built
@@ -693,9 +857,13 @@ Python with the standard library only, plus PowerShell. The demo is a made-up do
 ## What I learned
 An unreachable DC should give one finding, not ten. And most of the value is in the order of the list: what has to be fixed before 09:00 and what can go to a change.
 
-## Not tested yet
-The PowerShell export against a real domain. The clock offset is read from `w32tm` output, which is localised on non-English servers.""",
- es="""## El problema
+## Next steps
+- Run `Export-ADHealth.ps1` with RSAT from an admin workstation joined to the domain.
+- On servers in other languages, adapt the parsing of the `w32tm` output.
+- Schedule it for Monday morning and keep last week's run for the comparison.""",
+ es="""
+
+## El problema
 `dcdiag` y `repadmin` te lo cuentan todo, de controlador en controlador. La mayoría de problemas de Active Directory avisan antes: un reloj que se desvía, DFSR parado después de parchear, un enlace de replicación fallando en silencio durante semanas, un ámbito de DHCP lleno la semana que llegan las incorporaciones, una cuenta de administrador que nadie usa desde la primavera. El lunes a primera hora quieres una página con lo que hay que arreglar hoy.
 
 ## Qué he hecho
@@ -710,14 +878,18 @@ Python solo con la librería estándar y PowerShell. La demo es un dominio inven
 ## Qué aprendí
 Un DC que no responde debe dar un hallazgo, no diez. Y casi todo el valor está en el orden de la lista: qué hay que arreglar antes de las 9:00 y qué puede ir a un cambio.
 
-## Sin probar todavía
-La exportación de PowerShell contra un dominio real. El desfase del reloj se lee de la salida de `w32tm`, que cambia de idioma en servidores que no están en inglés."""),
+## Siguientes pasos
+- Ejecutar `Export-ADHealth.ps1` con RSAT desde un puesto de administración unido al dominio.
+- En servidores en otros idiomas, adaptar la lectura de la salida de `w32tm`.
+- Programarlo para el lunes a primera hora y guardar la ejecución anterior para la comparación."""),
 
 dict(n="20", repo="20-entra-sso-app-audit", date="2026-10-16", cat="tools",
  title_en="Which SSO app will break next, and which one nobody is watching", title_es="Qué app con SSO va a fallar la próxima y cuál no vigila nadie",
  dek_en="Enterprise apps and app registrations in Entra ID: certificates and secrets about to expire, owners, MFA coverage, risky permissions and SCIM.",
  dek_es="Aplicaciones empresariales y registros de aplicaciones en Entra ID: certificados y secretos a punto de caducar, propietarios, cobertura de MFA, permisos de riesgo y SCIM.",
- en="""## The problem
+ en="""
+
+## The problem
 Single sign-on puts access in one place, but the details are spread over hundreds of enterprise apps. The same problems come back: a SAML signing certificate expires and a SaaS app stops accepting logons at 09:00, a client secret expires and a nightly job fails, an app has no owner, every user can open it, it was excluded from the MFA policy "for now", a daemon can write to the whole directory, or provisioning is in quarantine and leavers keep their account in the app.
 
 ## What I built
@@ -731,9 +903,13 @@ Python with the standard library only, plus PowerShell for Graph. The demo is a 
 ## What I learned
 From integrating SaaS apps in Entra ID: the hard part is not the SSO setup, it is who renews the certificate two years later. A secret expired while the app still signs in is urgent; an expired secret already replaced by a newer one is just clean-up.
 
-## Not tested yet
-The export against a real tenant. The sign-in activity report is in Graph beta. SCIM provisioning and the finer points of OIDC are the parts I am still learning, so those checks are deliberately simple.""",
- es="""## El problema
+## Next steps
+- Run `Export-EntraAppInventory.ps1` with read-only Graph permissions on your tenant.
+- Assign an owner to every app in the renewal calendar.
+- Extend the SCIM provisioning and OIDC checks, which are the next ones I am growing.""",
+ es="""
+
+## El problema
 El inicio de sesión único concentra el acceso en un sitio, pero los detalles están repartidos en cientos de aplicaciones empresariales. Los problemas se repiten: caduca un certificado de firma SAML y una aplicación SaaS deja de aceptar inicios de sesión a las 9:00, caduca un secreto y falla un proceso nocturno, una aplicación no tiene propietario, cualquier usuario puede abrirla, se excluyó de la política de MFA "de momento", un proceso desatendido puede escribir en todo el directorio o el aprovisionamiento está en cuarentena y las bajas siguen teniendo cuenta en la aplicación.
 
 ## Qué he hecho
@@ -747,14 +923,18 @@ Python solo con la librería estándar y PowerShell para Graph. La demo es un te
 ## Qué aprendí
 De integrar aplicaciones SaaS en Entra ID: lo difícil no es configurar el SSO, sino quién renueva el certificado dos años después. Un secreto caducado mientras la aplicación sigue iniciando sesión es urgente; uno caducado que ya se sustituyó por otro nuevo es solo limpieza.
 
-## Sin probar todavía
-La exportación contra un tenant real. El informe de actividad de inicio de sesión está en la beta de Graph. El aprovisionamiento SCIM y los detalles finos de OIDC son las partes que aún estoy aprendiendo, así que esas comprobaciones son sencillas a propósito."""),
+## Siguientes pasos
+- Ejecutar `Export-EntraAppInventory.ps1` con permisos de solo lectura de Graph en tu tenant.
+- Asignar un propietario a cada aplicación del calendario de renovaciones.
+- Ampliar las comprobaciones de aprovisionamiento SCIM y de OIDC, que son las siguientes que estoy desarrollando."""),
 
 dict(n="21", repo="21-apple-fleet-audit", date="2026-10-17", cat="tools",
  title_en="A weekly review for a Jamf Pro Apple fleet", title_es="Una revisión semanal para una flota Apple en Jamf Pro",
  dek_en="Push certificate and tokens, OS currency, FileVault, SIP, bootstrap token, passcodes, stale devices and full disks, with the executives' devices first.",
  dek_es="Certificado push y tokens, versiones de sistema, FileVault, SIP, bootstrap token, códigos de acceso, equipos que no se conectan y discos llenos, con los dispositivos de dirección primero.",
- en="""## The problem
+ en="""
+
+## The problem
 Jamf Pro shows every detail of every Mac, iPhone and iPad, but the weekly questions are spread over smart groups, settings pages and Apple's portals. The same problems come back: the APNs push certificate expires and no device gets a command (or someone creates a new one instead of renewing it and every device has to re-enroll), the ADE token expires and new laptops come out of the box unmanaged, a Mac has FileVault on but no recovery key in Jamf Pro, an Apple silicon Mac has no bootstrap token and updates never install, an iPhone has no passcode, a laptop has not checked in for two months, and the CEO's iPad has a full disk the evening before the board meeting.
 
 ## What I built
@@ -768,9 +948,13 @@ Python with the standard library only. The demo is a made-up fleet of 40 devices
 ## What I learned
 From managing MacBooks, iPhones and iPads with Jamf Pro and supporting VIP users and board meetings: the expensive mistakes are not on one device, they are the certificate or token that stops the whole fleet. And a value Jamf Pro did not collect should skip the check, not raise a false alarm.
 
-## Not tested yet
-The exporter against a real Jamf Pro instance (only against fixtures written from the API documentation), reading the APNs expiry through the API and Apple Business Manager data as Jamf Pro returns it.""",
- es="""## El problema
+## Next steps
+- Create a Jamf Pro API role with read privileges only and an API client.
+- Run the export and add the APNs expiry date from Settings > Global > Push certificates.
+- Add your VIP list and bring `review.md` to the weekly meeting.""",
+ es="""
+
+## El problema
 Jamf Pro muestra cada detalle de cada Mac, iPhone y iPad, pero las preguntas de cada semana están repartidas entre grupos inteligentes, páginas de ajustes y los portales de Apple. Los problemas se repiten: caduca el certificado push de APNs y ningún dispositivo recibe órdenes (o alguien crea uno nuevo en lugar de renovarlo y toca volver a inscribirlos todos), caduca el token de ADE y los portátiles nuevos salen de la caja sin gestionar, un Mac tiene FileVault activado pero sin clave de recuperación en Jamf Pro, un Mac con Apple silicon no tiene bootstrap token y las actualizaciones nunca se instalan, un iPhone no tiene código, un portátil lleva dos meses sin conectarse y el iPad del CEO tiene el disco lleno la tarde antes del consejo.
 
 ## Qué he hecho
@@ -784,15 +968,19 @@ Python solo con la librería estándar. La demo es una flota inventada de 40 dis
 ## Qué aprendí
 De gestionar MacBooks, iPhones e iPads con Jamf Pro y dar soporte a usuarios VIP y reuniones de consejo: los errores caros no están en un dispositivo, sino en el certificado o el token que para toda la flota. Y un dato que Jamf Pro no ha recogido debe saltarse la comprobación, no dar una falsa alarma.
 
-## Sin probar todavía
-El exportador contra un Jamf Pro real (solo contra datos de prueba escritos a partir de la documentación de la API), la lectura de la caducidad de APNs por API y los datos de Apple Business Manager tal y como los devuelve Jamf Pro."""),
+## Siguientes pasos
+- Crear en Jamf Pro un rol de API solo con permisos de lectura y un cliente de API.
+- Ejecutar la exportación y añadir la caducidad de APNs desde Settings > Global > Push certificates.
+- Añadir tu lista de VIP y llevar `review.md` a la reunión semanal."""),
 
 dict(n="22", repo="22-dex-experience-score", date="2026-10-17", cat="tools",
- title_en="A 0-10 experience score for every laptop, learning in public", title_es="Una nota de 0 a 10 para la experiencia de cada portátil, aprendiendo en público",
+ title_en="A 0-10 experience score for every laptop", title_es="Una nota de 0 a 10 para la experiencia de cada portátil",
  dek_en="A lab that turns endpoint telemetry into a score per device, site and department, and ranks the five fixes that would raise it most.",
  dek_es="Un laboratorio que convierte la telemetría de los equipos en una nota por dispositivo, sede y departamento, y ordena los cinco arreglos que más la subirían.",
- en="""## Why this lab
-This is a learning lab. I wanted to understand how digital employee experience (DEX) scores work. It is inspired by public descriptions of tools like Nexthink, but I have no hands-on experience with those products; the model, thresholds and weights are my own.
+ en="""
+
+## Why this lab
+Comes from years of supporting Windows users and executives on site. It is inspired by the public descriptions of digital employee experience (DEX) tools such as Nexthink; the model, thresholds and weights are my own and are explained in the repository.
 
 ## The problem
 Anyone who has supported Windows users on site knows it: tickets show a fraction of the problems. People live with a slow laptop or a crashing app for weeks, stop reporting and just say "IT is slow". A monthly update adds 40 seconds to every logon, an Outlook add-in crashes on twenty laptops, the Wi-Fi on one floor is weak, batteries die in meetings. Endpoint telemetry sees all of it.
@@ -808,10 +996,14 @@ Python with the standard library only, plus PowerShell. The demo is a made-up co
 ## What I learned
 Explaining the score matters more than the number: every point lost has to point to a cause and a fix. And telemetry linked to a person is personal data, so report by site and department and talk to the DPO first.
 
-## Not tested yet
-The collector against real devices, the thresholds against real data and data from Intune Endpoint Analytics or an RMM tool.""",
- es="""## Por qué este laboratorio
-Es un laboratorio para aprender. Quería entender cómo funcionan las notas de experiencia digital del empleado (DEX). Se inspira en las descripciones públicas de herramientas como Nexthink, pero no tengo experiencia práctica con esos productos; el modelo, los umbrales y los pesos son míos.
+## Next steps
+- Deploy the collector through an Intune remediation script or your RMM tool.
+- Tune the thresholds after a few weeks of real data.
+- Talk to your data protection officer first, and report by site and department.""",
+ es="""
+
+## Por qué este laboratorio
+Viene de años dando soporte presencial a usuarios de Windows y a dirección. Se inspira en las descripciones públicas de herramientas de experiencia digital del empleado (DEX) como Nexthink; el modelo, los umbrales y los pesos son míos y están explicados en el repositorio.
 
 ## El problema
 Quien haya dado soporte presencial a usuarios de Windows lo sabe: los tickets muestran una parte de los problemas. La gente convive semanas con un portátil lento o una aplicación que se cierra, deja de avisar y solo dice "IT va lento". Una actualización mensual añade 40 segundos a cada inicio de sesión, un complemento de Outlook falla en veinte portátiles, el wifi de una planta es débil, las baterías mueren en mitad de una reunión. La telemetría de los equipos lo ve todo.
@@ -827,6 +1019,8 @@ Python solo con la librería estándar y PowerShell. La demo es una empresa inve
 ## Qué aprendí
 Explicar la nota importa más que el número: cada punto perdido tiene que llevar a una causa y a un arreglo. Y la telemetría ligada a una persona es un dato personal, así que hay que informar por sede y departamento y hablar antes con el DPO.
 
-## Sin probar todavía
-El recolector contra equipos reales, los umbrales contra datos reales y los datos de Intune Endpoint Analytics o de una herramienta RMM."""),
+## Siguientes pasos
+- Desplegar el recolector con un script de corrección de Intune o tu herramienta RMM.
+- Ajustar los umbrales tras unas semanas de datos reales.
+- Hablar antes con tu delegado de protección de datos e informar por sede y departamento."""),
 ]
