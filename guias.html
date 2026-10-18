@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="IT guides · Iñigo González" data-title-es="Guías IT · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>IT guides · Iñigo González</title>
+<meta name="description" content="Practical step-by-step IT guides (Intune, Jamf Pro, Active Directory, Entra ID, MECM). Section under construction.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<meta name="robots" content="noindex, follow">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="website">
+<meta property="og:title" content="IT guides · Iñigo González">
+<meta property="og:description" content="Practical step-by-step IT guides (Intune, Jamf Pro, Active Directory, Entra ID, MECM). Section under construction.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="IT guides · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="index.html#mapa"><span class="es">Mapa</span><span class="en">Map</span></a><a href="blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="index.html#mapa"><span class="label">02</span><span class="es">Mapa</span><span class="en">Map</span></a><a href="blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="about.html"><span class="label">05</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="store.html"><span class="label">06</span><span class="es">Store</span><span class="en">Store</span></a><a href="recursos.html"><span class="label">07</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="links.html"><span class="label">08</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero">
+  <div class="wrap">
+    <p class="label kicker"><span class="es">Guías IT · En construcción</span><span class="en">IT guides · Under construction</span></p>
+    <h1><span class="es">Guías prácticas<br>para el día a día en IT.</span><span class="en">Practical guides<br>for everyday IT work.</span></h1>
+    <p class="lede"><span class="es">Paso a paso, con comandos y comprobaciones, sobre lo que uso en mi trabajo: Intune, Jamf Pro, Active Directory, GPO, Entra ID, MECM y operaciones en sede.</span><span class="en">Step by step, with commands and checks, on what I use at work: Intune, Jamf Pro, Active Directory, GPO, Entra ID, MECM and on-site operations.</span></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <p class="notice reveal"><span class="es"><strong>Sección en construcción.</strong> Pronto tendréis aquí toda la información. Si quieres enterarte el primero, <a href='recursos.html'>apúntate a la newsletter</a>.</span><span class="en"><strong>This section is under construction.</strong> All the information will be here soon. To hear about it first, <a href='recursos.html'>join the newsletter</a>.</span></p>
+    <div class="numbers-head reveal">
+      <div>
+        <p class="label kicker"><span class="es">Mientras tanto</span><span class="en">In the meantime</span></p>
+        <h2 class="h2 sm"><span class="es">Por dónde seguir.</span><span class="en">Where to go next.</span></h2>
+      </div>
+    </div>
+    <div class="etm-grid guide-grid">
+      <a class="etm-item reveal guide-card" href="recursos.html"><p class="label muted"><span class="es">Gratis</span><span class="en">Free</span></p><h3><span class="es">33 ideas + newsletter</span><span class="en">33 ideas + newsletter</span> →</h3><p><span class="es">Apúntate a <em>Tech Career Lab</em> y recibe las 33 ideas para que te encuentren si trabajas en IT. Te aviso cuando salgan las primeras guías.</span><span class="en">Join <em>Tech Career Lab</em> and get the 33 ideas to get found if you work in IT. I'll let you know when the first guides are out.</span></p></a>
+      <a class="etm-item reveal guide-card" href="about.html?reserva=1#reservar"><p class="label muted"><span class="es">30 min · 39 €</span><span class="en">30 min · €39</span></p><h3><span class="es">Sesión inicial</span><span class="en">Initial session</span> →</h3><p><span class="es">¿Tienes una duda concreta sobre tu carrera en IT? Reserva una videollamada de 30 minutos y sales con siguientes pasos claros.</span><span class="en">Got a specific question about your IT career? Book a 30-minute video call and leave with clear next steps.</span></p></a>
+      <a class="etm-item reveal guide-card" href="blog/"><p class="label muted"><span class="es">Blog</span><span class="en">Blog</span></p><h3><span class="es">Labs y herramientas</span><span class="en">Labs & tools</span> →</h3><p><span class="es">Mientras tanto, en el blog cuento cómo construí cada herramienta: Intune, Jamf Pro, Active Directory, Entra ID, MECM y más.</span><span class="en">In the meantime, the blog explains how I built each tool: Intune, Jamf Pro, Active Directory, Entra ID, MECM and more.</span></p></a>
+      <a class="etm-item reveal guide-card" href="https://github.com/inigogonzalezgarcia" target="_blank" rel="noopener noreferrer"><p class="label muted"><span class="es">GitHub</span><span class="en">GitHub</span></p><h3><span class="es">El código de los proyectos</span><span class="en">The project code</span> ↗</h3><p><span class="es">Scripts y herramientas con datos ficticios que puedes probar y adaptar a tu entorno.</span><span class="en">Scripts and tools with fictional data that you can try and adapt to your environment.</span></p></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/consent.js"></script>
+</body>
+</html>
