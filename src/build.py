@@ -747,6 +747,52 @@ sizes["links.html"] = write("links.html", layout(R="", path="links.html", active
     desc="Blog, journey, LinkedIn, GitHub and contact for Iñigo González.", body=links_body,
     ld=[crumbs(("Home", ""), ("Links", "links.html"))]))
 
+# guides: section under construction (noindex until the first guides are published)
+GUIDE_LINKS = [
+    ("recursos.html", "Gratis", "Free", "33 ideas + newsletter", "33 ideas + newsletter",
+     "Apúntate a <em>Tech Career Lab</em> y recibe las 33 ideas para que te encuentren si trabajas en IT. Te aviso cuando salgan las primeras guías.",
+     "Join <em>Tech Career Lab</em> and get the 33 ideas to get found if you work in IT. I'll let you know when the first guides are out."),
+    ("about.html?reserva=1#reservar", "30 min · 39 €", "30 min · €39", "Sesión inicial", "Initial session",
+     "¿Tienes una duda concreta sobre tu carrera en IT? Reserva una videollamada de 30 minutos y sales con siguientes pasos claros.",
+     "Got a specific question about your IT career? Book a 30-minute video call and leave with clear next steps."),
+    ("blog/", "Blog", "Blog", "Labs y herramientas", "Labs & tools",
+     "Mientras tanto, en el blog cuento cómo construí cada herramienta: Intune, Jamf Pro, Active Directory, Entra ID, MECM y más.",
+     "In the meantime, the blog explains how I built each tool: Intune, Jamf Pro, Active Directory, Entra ID, MECM and more."),
+    ("https://github.com/inigogonzalezgarcia", "GitHub", "GitHub", "El código de los proyectos", "The project code",
+     "Scripts y herramientas con datos ficticios que puedes probar y adaptar a tu entorno.",
+     "Scripts and tools with fictional data that you can try and adapt to your environment."),
+]
+def guide_card(href, tes, ten, hes, hen, des, den):
+    ext = href.startswith("http")
+    tgt = ' target="_blank" rel="noopener"' if ext else ""
+    return (f'      <a class="etm-item reveal guide-card" href="{href}"{tgt}><p class="label muted">{bi(tes, ten)}</p>'
+            f'<h3>{bi(hes, hen)} {"↗" if ext else "→"}</h3><p>{bi(des, den)}</p></a>')
+guide_cards = "\n".join(guide_card(*g) for g in GUIDE_LINKS)
+guides_body = page_hero(bi("Guías IT · En construcción", "IT guides · Under construction"),
+    bi("Guías prácticas<br>para el día a día en IT.", "Practical guides<br>for everyday IT work."),
+    bi("Paso a paso, con comandos y comprobaciones, sobre lo que uso en mi trabajo: Intune, Jamf Pro, Active Directory, GPO, Entra ID, MECM y operaciones en sede.",
+       "Step by step, with commands and checks, on what I use at work: Intune, Jamf Pro, Active Directory, GPO, Entra ID, MECM and on-site operations.")) + f'''
+
+<section class="section">
+  <div class="wrap">
+    <p class="notice reveal">{bi("<strong>Sección en construcción.</strong> Pronto tendréis aquí toda la información. Si quieres enterarte el primero, <a href='recursos.html'>apúntate a la newsletter</a>.",
+                                 "<strong>This section is under construction.</strong> All the information will be here soon. To hear about it first, <a href='recursos.html'>join the newsletter</a>.")}</p>
+    <div class="numbers-head reveal">
+      <div>
+        <p class="label kicker">{bi("Mientras tanto", "In the meantime")}</p>
+        <h2 class="h2 sm">{bi("Por dónde seguir.", "Where to go next.")}</h2>
+      </div>
+    </div>
+    <div class="etm-grid guide-grid">
+{guide_cards}
+    </div>
+  </div>
+</section>'''
+sizes["guias.html"] = write("guias.html", layout(R="", path="guias.html", active="guides",
+    title_en="IT guides · Iñigo González", title_es="Guías IT · Iñigo González",
+    desc="Practical step-by-step IT guides (Intune, Jamf Pro, Active Directory, Entra ID, MECM). Section under construction.", body=guides_body,
+    robots="noindex, follow", ld=[crumbs(("Home", ""), ("Guides", "guias.html"))]))
+
 # legal pages (legal notice, terms); privacidad.html stays hand-written
 import legal
 for path, kw in legal.PAGES.items():
@@ -770,7 +816,7 @@ sizes["404.html"] = write("404.html", layout(R="/", path="404.html", active="", 
 
 # sitemap.xml + robots.txt: every indexable page (not noindex, not redirects); lastmod = post date, or the newest
 # post date for pages that list posts, so the file only changes when content does
-NOINDEX = {"404.html", "asesoria.html", "privacidad.html"} | set(legal.PAGES)
+NOINDEX = {"404.html", "asesoria.html", "privacidad.html", "guias.html"} | set(legal.PAGES)
 newest = max(q["date"] for q in POSTS)
 post_date = {f'blog/{q["repo"]}.html': q["date"] for q in POSTS}
 urls = []
