@@ -301,6 +301,32 @@ sizes["blog/index.html"] = write("blog/index.html", layout(R="../", path="blog/"
         crumbs(("Home", ""), ("Blog", "blog/"))]))
 
 # posts
+from urllib.parse import quote as _q
+
+def share_html(p):
+    """Share links for a post: plain URLs to each network (no third-party scripts, nothing loads until clicked),
+    copy-link, and the device share sheet where the browser offers one (app.js shows that button)."""
+    url = f'{SITE_URL}blog/{p["repo"]}.html'
+    U = _q(url, safe="")
+    def row(l, title, copy, copied, more):
+        T = _q(title + " · Iñigo González", safe="")
+        aria = {"es": "Compartir en", "en": "Share on"}[l]
+        links = [("LinkedIn", f"https://www.linkedin.com/sharing/share-offsite/?url={U}"),
+                 ("X", f"https://x.com/intent/post?url={U}&amp;text={T}"),
+                 ("WhatsApp", f"https://wa.me/?text={T}%20{U}"),
+                 ("Email", f"mailto:?subject={T}&amp;body={U}")]
+        ext = ' target="_blank" rel="noopener"'
+        a = "".join(f'<a class="share-btn" href="{h}"{"" if n == "Email" else ext} aria-label="{aria} {n}">{n}</a>' for n, h in links)
+        return (f'<div class="share-row {l}" lang="{l}">{a}'
+                f'<button class="share-btn" type="button" data-copy="{url}" data-copied="{copied}">{copy}</button>'
+                f'<button class="share-btn" type="button" data-share="{url}" data-title="{html.escape(title)}" hidden>{more}</button></div>')
+    return ('<div class="share">\n'
+            f'        <p class="label muted">{bi("Compartir", "Share")}</p>\n'
+            f'        {row("es", p["title_es"], "Copiar enlace", "Enlace copiado", "Más…")}\n'
+            f'        {row("en", p["title_en"], "Copy link", "Link copied", "More…")}\n'
+            '        <p class="share-msg small muted" role="status" aria-live="polite"></p>\n'
+            '      </div>')
+
 order = sorted(POSTS, key=lambda p: p["n"])
 for i, p in enumerate(order):
     c = CATS[p["cat"]]
@@ -335,6 +361,7 @@ for i, p in enumerate(order):
       <p class="repo-name">{p["repo"]}</p>
       <a class="btn" href="{GITHUB}/{p["repo"]}" target="_blank" rel="noopener">{bi("Ver en GitHub", "View on GitHub")} ↗</a>
       <p class="muted small">{bi("Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.", "Synthetic data. No employer code, data or systems.")}</p>
+      {share_html(p)}
     </aside>
   </div>
   <div class="wrap post-nav">
