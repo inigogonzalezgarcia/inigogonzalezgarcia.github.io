@@ -388,7 +388,7 @@ now = f'''<section class="section">
     </div>
     <dl class="spec reveal">
       <div class="spec-row"><dt class="label">{bi("Trabajo", "Work")}</dt><dd>{bi("IT Site Leader en Madrid, en servicios financieros.", "IT Site Leader in Madrid, in financial services.")}</dd></div>
-      <div class="spec-row"><dt class="label">{bi("Construyendo", "Building")}</dt><dd>{bi("Nuevos repos sobre Modern Workplace e infraestructura: Teams Rooms, co-management MECM + Intune, Active Directory.", "New repos on Modern Workplace and infrastructure: Teams Rooms, MECM + Intune co-management, Active Directory.")}</dd></div>
+      <div class="spec-row"><dt class="label">{bi("Construyendo", "Building")}</dt><dd>{bi("Nuevos repos sobre operaciones IT: contratos y proveedores, pre-aperturas de hoteles y evidencias de seguridad.", "New repos on IT operations: contracts and vendors, hotel pre-openings and security evidence.")}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Labs", "Labs")}</dt><dd>{bi("Kubernetes, SRE y operación de clústeres GPU, en laboratorios abiertos.", "Kubernetes, SRE and GPU cluster operations, in open labs.")}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Idiomas", "Languages")}</dt><dd>{bi("Español nativo, inglés a diario y francés en progreso.", "Native Spanish, English every day and French in progress.")}</dd></div>
     </dl>

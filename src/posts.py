@@ -1023,4 +1023,92 @@ Explicar la nota importa más que el número: cada punto perdido tiene que lleva
 - Desplegar el recolector con un script de corrección de Intune o tu herramienta RMM.
 - Ajustar los umbrales tras unas semanas de datos reales.
 - Hablar antes con tu delegado de protección de datos e informar por sede y departamento."""),
+dict(n="23", repo="23-it-vendor-contract-tracker", date="2026-10-18", cat="tools",
+ title_en="Every IT contract renewal, notice deadline and saving in one monthly review", title_es="Cada renovación, preaviso y ahorro de los contratos de IT en una revisión mensual",
+ dek_en="A tracker that reads the contract register and finds the notice deadlines, unused licences, budget overruns and missed SLAs before they cost money.",
+ dek_es="Un tracker que lee el registro de contratos y encuentra los preavisos, licencias sin usar, desviaciones de presupuesto y SLA incumplidos antes de que cuesten dinero.",
+ en="""
+
+## The problem
+IT contracts rarely fail in a dramatic way. They fail quietly: a contract with 60 days' notice renews by itself for another year because nobody looked at the date in time, the support on a firewall ends and nobody notices until a replacement is needed, an add-on has 60 licences and 34 users while the main suite is 12 seats over what was bought, a budget line is on pace to end 14% over, a vendor misses its SLA two months running and the service credit is never claimed.
+
+## What I built
+- Checks in six areas from the register you already keep in a spreadsheet: renewals and notice deadlines (including contracts that already renewed by themselves), licences, budget forecast, SLA and service credits, supplier risk and data quality.
+- `review.md` for the monthly vendor meeting, `actions.csv` as a work list with owners, dates and the money at stake, and `report.html` with a 12-month renewal calendar.
+- `renewals.ics`: every notice deadline in the team calendar, with a reminder 14 days before.
+
+## How it is built
+Python with the standard library only. The demo is a made-up company with 21 contracts from 17 vendors, six budget lines and six months of SLA reports, with faults placed on purpose. 17 tests. A runbook for the monthly review and a checklist for each renewal decision.
+
+## What I learned
+From managing IT suppliers, renewals and budgets: the most expensive date in a contract is not the end date, it is the notice deadline. And usage data turns a renewal into a negotiation.
+
+## Next steps
+- Export your contract register to CSV and map its columns.
+- Add the spend to date from finance and last month's SLA figures before each review.
+- Import `renewals.ics` into the team calendar.""",
+ es="""
+
+## El problema
+Los contratos de IT casi nunca fallan de forma espectacular. Fallan en silencio: un contrato con 60 días de preaviso se renueva solo otro año porque nadie miró la fecha a tiempo, se acaba el soporte de un firewall y nadie se entera hasta que hace falta un repuesto, un complemento tiene 60 licencias y 34 usuarios mientras la suite principal tiene 12 puestos más de los comprados, una partida del presupuesto va camino de acabar un 14% por encima, un proveedor incumple su SLA dos meses seguidos y nadie reclama la penalización.
+
+## Qué he hecho
+- Comprobaciones en seis áreas a partir del registro que ya tienes en una hoja de cálculo: renovaciones y preavisos (también los contratos que ya se han renovado solos), licencias, previsión del presupuesto, SLA y penalizaciones, riesgo de proveedor y calidad de los datos.
+- `review.md` para la reunión mensual de proveedores, `actions.csv` como lista de trabajo con responsable, fecha y el dinero en juego, y `report.html` con un calendario de renovaciones a 12 meses.
+- `renewals.ics`: cada fecha límite de preaviso en el calendario del equipo, con aviso 14 días antes.
+
+## Cómo está hecho
+Python solo con la librería estándar. La demo es una empresa inventada con 21 contratos de 17 proveedores, seis partidas de presupuesto y seis meses de informes de SLA, con fallos puestos a propósito. 17 tests. Un runbook para la revisión mensual y una lista de comprobación para cada decisión de renovación.
+
+## Qué aprendí
+De gestionar proveedores, renovaciones y presupuesto de IT: la fecha más cara de un contrato no es la de fin, es la del preaviso. Y los datos de uso convierten una renovación en una negociación.
+
+## Siguientes pasos
+- Exportar tu registro de contratos a CSV y adaptar sus columnas.
+- Añadir el gasto acumulado de finanzas y las cifras de SLA del mes antes de cada revisión.
+- Importar `renewals.ics` en el calendario del equipo."""),
+dict(n="24", repo="24-hospitality-it-preopening", date="2026-10-18", cat="tools",
+ title_en="Will IT be ready before the hotel opens? A pre-opening tracker", title_es="¿Estará IT lista antes de que abra el hotel? Un tracker de pre-apertura",
+ dek_en="A plan with lead times and dependencies that calculates the critical path, the gates at risk and the work that must start this week.",
+ dek_es="Un plan con plazos de entrega y dependencias que calcula el camino crítico, los hitos en riesgo y lo que tiene que empezar esta semana.",
+ en="""
+
+## The problem
+In a hotel pre-opening every system depends on another one, and most of them on the internet line. The circuits have a 75-day lead time; the cloud PMS, the room-charge interface, the call charges and the interface tests slide with them; training can only start when the interfaces are tested; and the dress rehearsal needs everything. A spreadsheet lists the tasks, but it does not say which delay moves the opening.
+
+## What I built
+- A schedule from the task list: forecast dates, float and the critical path to the day IT is ready, from durations, dependencies and progress.
+- Gates from T-90 (design frozen) to T-1 (ready to open), with gates already passed with open tasks, tasks forecast late, blocked work, tasks that must start this week and a risk register.
+- `report.html` with a Gantt chart, `review.md` for the weekly meeting, `actions.csv` and a go-live checklist for T-7, T-1, opening day and the first week.
+
+## How it is built
+Python with the standard library only. The demo is a made-up 120-room resort hotel opening in January, with 30 tasks in nine workstreams and delays placed on purpose. 14 tests, including the same plan reviewed three weeks later without progress, which puts the opening at risk.
+
+## What I learned
+From years supporting POS, hotel PMS and IPTV at a technology consultancy: integrations and lead times decide the opening, not the installation of each system. The tool makes that visible every week.
+
+## Next steps
+- Export your pre-opening plan with real vendor lead times and dependencies.
+- Set your own gates if your brand uses different milestones.
+- Run it before each weekly meeting, daily from T-7, and print the go-live checklist for the dress rehearsal.""",
+ es="""
+
+## El problema
+En la pre-apertura de un hotel cada sistema depende de otro, y casi todos de la línea de internet. Los circuitos tardan 75 días en llegar; el PMS en la nube, el interfaz de cargos a habitación, los cargos de llamadas y las pruebas de interfaces se retrasan con ellos; la formación solo puede empezar cuando los interfaces están probados, y el ensayo general lo necesita todo. Una hoja de cálculo lista las tareas, pero no dice qué retraso mueve la apertura.
+
+## Qué he hecho
+- Un calendario a partir de la lista de tareas: fechas previstas, holgura y el camino crítico hasta el día en que IT está lista, con duraciones, dependencias y avance.
+- Hitos de T-90 (diseño cerrado) a T-1 (listos para abrir), con hitos ya pasados con tareas abiertas, tareas que llegan tarde, trabajo bloqueado, tareas que tienen que empezar esta semana y un registro de riesgos.
+- `report.html` con un diagrama de Gantt, `review.md` para la reunión semanal, `actions.csv` y una lista de comprobación de puesta en marcha para T-7, T-1, el día de apertura y la primera semana.
+
+## Cómo está hecho
+Python solo con la librería estándar. La demo es un hotel vacacional inventado de 120 habitaciones que abre en enero, con 30 tareas en nueve áreas y retrasos puestos a propósito. 14 tests, entre ellos el mismo plan revisado tres semanas después sin avances, que pone la apertura en riesgo.
+
+## Qué aprendí
+De años dando soporte a TPV, PMS hotelero e IPTV en una consultora tecnológica: lo que decide una apertura son los interfaces y los plazos de entrega, no la instalación de cada sistema. La herramienta lo hace visible cada semana.
+
+## Siguientes pasos
+- Exportar tu plan de pre-apertura con los plazos reales de los proveedores y las dependencias.
+- Definir tus propios hitos si tu marca usa otros.
+- Ejecutarlo antes de cada reunión semanal, a diario desde T-7, e imprimir la lista de comprobación para el ensayo general."""),
 ]
