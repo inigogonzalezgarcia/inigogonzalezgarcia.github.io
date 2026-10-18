@@ -76,6 +76,8 @@ def ld_tag(nodes):
     return '<script type="application/ld+json">' + data.replace("</", "<\\/") + "</script>"
 
 OG_DEFAULT = "assets/og/site.png"
+# Google Search Console ownership (URL-prefix property). Public by design; must stay on the home page to stay verified.
+GSC_VERIFY = "BPFmgcy9AT3FRIMzeQDYNz7wj-FolbKvJYaCzrT8nus"
 
 CUR = ' aria-current="page"'
 
@@ -95,7 +97,7 @@ def layout(*, R, path, active, title_en, title_es, desc, body, home=False, og_ty
 <title>{t_en}</title>
 <meta name="description" content="{html.escape(desc)}">
 <meta name="author" content="Iñigo González">
-<meta name="theme-color" content="#0e1a24">
+{f'<meta name="google-site-verification" content="{GSC_VERIFY}">' + chr(10) if home else ''}<meta name="theme-color" content="#0e1a24">
 {f'<meta name="robots" content="{robots}">' if robots else f'<link rel="canonical" href="{SITE_URL}{path}">'}
 <link rel="icon" href="{R}assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{R}assets/apple-touch-icon.png">
