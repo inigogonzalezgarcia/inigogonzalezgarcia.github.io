@@ -21,6 +21,24 @@
   }
   $("#langBtn").addEventListener("click", function () { applyLang(lang() === "es" ? "en" : "es"); });
 
+  /* ---------- share (blog posts) ---------- */
+  var shareMsg = $(".share-msg");
+  function say(t) { if (!shareMsg) return; shareMsg.textContent = t; setTimeout(function () { if (shareMsg.textContent === t) shareMsg.textContent = ""; }, 3000); }
+  $$("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var u = b.getAttribute("data-copy");
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(u).then(function () { say(b.getAttribute("data-copied")); }, function () { say(u); });
+      } else say(u);
+    });
+  });
+  if (navigator.share) $$("[data-share]").forEach(function (b) {
+    b.hidden = false;
+    b.addEventListener("click", function () {
+      navigator.share({ title: b.getAttribute("data-title"), url: b.getAttribute("data-share") }).catch(function () {});
+    });
+  });
+
   /* ---------- header + menu ---------- */
   var header = $(".site-header");
   function onScroll() { header.classList.toggle("solid", window.scrollY > window.innerHeight * 0.6); }
