@@ -382,3 +382,16 @@ footer a{color:var(--on-ink)}
 .pin.hq text{opacity:1}
 .legend .l4 i{background:var(--accent);box-shadow:0 0 0 2px var(--paper),0 0 0 3.5px var(--accent)}
 .legend .c1 i,.legend .c2 i{border-radius:2px}.legend .c1 i{background:#a9b7c2}.legend .c2 i{background:#c6d0d6}
+
+.booking{border:0;padding:0;margin:0;display:grid;gap:14px}
+.slots{display:grid;gap:12px;padding:16px;border:1px solid var(--line,rgba(0,0,0,.15));border-radius:10px}
+.slots[hidden]{display:none}
+.slot-week{margin:0;font-weight:600}
+.slot-grid{display:grid;gap:10px}
+.slot-day{display:grid;gap:6px}
+.slot-day h4{margin:0;font-size:14px;font-weight:600;text-transform:capitalize}
+.slot-times{display:flex;flex-wrap:wrap;gap:6px}
+.slot-btn{font:inherit;font-size:14px;padding:6px 10px;border:1px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);cursor:pointer}
+.slot-btn:hover{border-color:var(--accent)}
+.slot-btn[aria-checked="true"]{background:var(--ink);color:var(--paper,#fff)}
+.slot-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
