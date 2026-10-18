@@ -395,3 +395,6 @@ footer a{color:var(--on-ink)}
 .slot-btn:hover{border-color:var(--accent)}
 .slot-btn[aria-checked="true"]{background:var(--ink);color:var(--paper,#fff)}
 .slot-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.guide-card{display:block;color:inherit;text-decoration:none}
+.guide-card:hover h3{color:var(--accent)}
+@media (min-width:700px){.guide-grid{grid-template-columns:repeat(2,1fr)}}
