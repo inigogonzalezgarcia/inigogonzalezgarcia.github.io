@@ -109,7 +109,7 @@
     <div class="reveal">
       <p class="label kicker"><span class="es">Contacto</span><span class="en">Contact</span></p>
       <h2 class="h2"><span class="es">Hablemos.</span><span class="en">Let's talk.</span></h2>
-      <p class="lede muted"><span class="es">Proyectos, ideas, una de mis herramientas adaptada a tu entorno o simplemente saludar.</span><span class="en">Projects, ideas, one of my tools adapted to your environment, or just to say hello.</span></p>
+      <p class="lede muted"><span class="es">Proyectos, ideas, una de mis herramientas adaptada a tu entorno o simplemente saludar. Si quieres orientación para tu carrera en IT, marca la casilla de la sesión inicial y elige hora.</span><span class="en">Projects, ideas, one of my tools adapted to your environment, or just to say hello. If you'd like advice on your IT career, tick the initial session box and pick a time.</span></p>
       <div class="socials label">
         <a class="arrow-link" href="https://www.linkedin.com/in/igonzalez93" target="_blank" rel="me noopener noreferrer">LinkedIn ↗</a>
         <a class="arrow-link" href="https://github.com/inigogonzalezgarcia" target="_blank" rel="me noopener noreferrer">GitHub ↗</a>
@@ -120,6 +120,18 @@
       <div class="field"><label class="label" for="f-name"><span class="es">Nombre</span><span class="en">Name</span></label><input id="f-name" name="name" autocomplete="name" required></div>
       <div class="field"><label class="label" for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
       <div class="field"><label class="label" for="f-msg"><span class="es">Mensaje</span><span class="en">Message</span></label><textarea id="f-msg" name="message" required></textarea></div>
+      <fieldset class="booking" id="reservar">
+        <label class="check"><input type="checkbox" id="f-book" name="reserva" value="Sesión inicial IGG-ICS · 30 min · 39 €"> <span><span class="es">Quiero reservar la <strong>sesión inicial</strong> de orientación IT (30 min · 39 €)</span><span class="en">I'd like to book the <strong>initial</strong> IT career session (30 min · €39)</span></span></label>
+        <div class="slots" id="slots" hidden>
+          <p class="label muted"><span class="es">Elige una hora · hora de Madrid (CET) · lunes a viernes, 10:30–18:00</span><span class="en">Pick a time · Madrid time (CET) · Monday to Friday, 10:30–18:00</span></p>
+          <p class="slot-week" id="slotWeek"></p>
+          <div class="slot-grid" id="slotGrid" role="radiogroup" aria-label="Hora / Time"></div>
+          <input type="hidden" name="hora_preferida" id="f-slot">
+          <p class="small muted"><span class="es">La hora queda reservada cuando recibo el pago. Te escribo con el enlace de pago de Revolut (39 €, impuestos incluidos) y, al recibirlo, te confirmo la cita y te envío el enlace de la videollamada. Si esa hora ya no está libre, te propongo otra.</span><span class="en">The slot is held once I receive payment. I'll email you the Revolut payment link (€39, taxes included) and, once it arrives, confirm the appointment and send you the video call link. If that time is no longer free, I'll suggest another.</span></p>
+          <label class="check"><input type="checkbox" id="f-terms" name="acepta_condiciones" value="sí"> <span><span class="es">He leído y acepto las <a href="condiciones.html">condiciones de contratación</a>.</span><span class="en">I have read and accept the <a href="condiciones.html">terms of service</a>.</span></span></label>
+          <label class="check"><input type="checkbox" id="f-early" name="ejecucion_anticipada" value="sí"> <span><span class="es">Pido que la sesión se haga dentro del plazo de desistimiento de 14 días y sé que, una vez hecha, pierdo ese derecho.</span><span class="en">I ask for the session to take place within the 14-day withdrawal period and understand that, once it has been held, I lose that right.</span></span></label>
+        </div>
+      </fieldset>
       <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="cf-turnstile" data-sitekey="0x4AAAAAAFXb-FidzxrxelHX" data-theme="light" data-size="flexible" data-language="auto" data-callback="tsOk" data-expired-callback="tsExpired" data-error-callback="tsExpired"></div>
       <div><button class="btn" type="submit"><span class="es">Enviar mensaje</span><span class="en">Send message</span> ↗</button></div>
