@@ -8,8 +8,8 @@
 
   /* ---------- language ---------- */
   var T = {
-    es: { title: "Iñigo González · Operaciones IT e Infraestructura", sending: "Enviando…", ok: "Gracias. Te responderé lo antes posible.", err: "No se ha podido enviar. Vuelve a intentarlo en unos minutos o escríbeme por LinkedIn.", missing: "Rellena nombre, un email válido y el mensaje.", captcha: "Completa la verificación antes de enviar.", nmissing: "Rellena tu nombre, un email válido y marca la casilla.", nok: "¡Hecho! Te enviaré las 33 ideas por email en las próximas 24 horas. Si no las ves, revisa Promociones y Spam.", nbrevo: "¡Casi está! Te he enviado un email para confirmar tu suscripción. En cuanto confirmes, te llegan las 33 ideas. Si no lo ves, revisa Promociones y Spam.", nconf: "¡Suscripción confirmada! Las 33 ideas van de camino a tu email." },
-    en: { title: "Iñigo González · IT Operations & Infrastructure", sending: "Sending…", ok: "Thank you. I'll get back to you soon.", err: "It couldn't be sent. Please try again in a few minutes or message me on LinkedIn.", missing: "Please fill in your name, a valid email and a message.", captcha: "Please complete the check before sending.", nmissing: "Please fill in your name and a valid email, and tick the box.", nok: "Done! I’ll email you the 33 ideas within 24 hours. If you can’t see them, check your Promotions and Spam folders.", nbrevo: "Almost there! I’ve sent you an email to confirm your subscription. Once you confirm, the 33 ideas will arrive. If you can’t see it, check Promotions and Spam.", nconf: "Subscription confirmed! The 33 ideas are on their way to your inbox." }
+    es: { title: "Iñigo González · Operaciones IT e Infraestructura", sending: "Enviando…", ok: "Gracias. Te responderé lo antes posible.", err: "No se ha podido enviar. Vuelve a intentarlo en unos minutos o escríbeme por LinkedIn.", missing: "Rellena nombre, un email válido y el mensaje.", captcha: "Completa la verificación antes de enviar.", nmissing: "Rellena tu nombre, un email válido y marca la casilla.", nok: "¡Hecho! Te enviaré las 33 ideas por email en las próximas 24 horas. Si no las ves, revisa Promociones y Spam.", nbrevo: "¡Casi está! Te he enviado un email para confirmar tu suscripción. En cuanto confirmes, te llegan las 33 ideas. Si no lo ves, revisa Promociones y Spam.", nconf: "¡Suscripción confirmada! Las 33 ideas van de camino a tu email.", bmissing: "Para reservar, elige una hora y marca las dos casillas.", bok: "¡Recibido! Te escribiré en menos de 24 horas laborables con el enlace de pago de Revolut (39 €). La cita queda confirmada al recibir el pago.", week: "Semana del", none: "No quedan horas esta semana." },
+    en: { title: "Iñigo González · IT Operations & Infrastructure", sending: "Sending…", ok: "Thank you. I'll get back to you soon.", err: "It couldn't be sent. Please try again in a few minutes or message me on LinkedIn.", missing: "Please fill in your name, a valid email and a message.", captcha: "Please complete the check before sending.", nmissing: "Please fill in your name and a valid email, and tick the box.", nok: "Done! I’ll email you the 33 ideas within 24 hours. If you can’t see them, check your Promotions and Spam folders.", nbrevo: "Almost there! I’ve sent you an email to confirm your subscription. Once you confirm, the 33 ideas will arrive. If you can’t see it, check Promotions and Spam.", nconf: "Subscription confirmed! The 33 ideas are on their way to your inbox.", bmissing: "To book, pick a time and tick both boxes.", bok: "Got it! I'll email you within 24 working hours with the Revolut payment link (€39). The appointment is confirmed once payment arrives.", week: "Week of", none: "No times left this week." }
   };
   function applyLang(l) {
     root.lang = l;
@@ -132,6 +132,51 @@
   } else { $$(".reveal").forEach(function (el) { el.classList.add("in"); }); }
 
   function finish() {
+  /* ---------- booking slots: Mon-Fri 10:30-18:00 Madrid, one week, from tomorrow; weekend/Friday -> next week ---------- */
+  var slotsReset = function () {};
+  (function () {
+    var box = $("#slots"), chk = $("#f-book"), grid = $("#slotGrid"), hid = $("#f-slot"), wk = $("#slotWeek");
+    if (!box || !chk || !grid) return;
+    var TZ = "Europe/Madrid", MAD = (function () {
+      var p = {}; new Intl.DateTimeFormat("en-GB", { timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date()).forEach(function (x) { p[x.type] = x.value; });
+      return new Date(Date.UTC(+p.year, +p.month - 1, +p.day));
+    })();
+    function days() {
+      var dow = MAD.getUTCDay(), out = [], start, i;
+      // tomorrow onwards within this week (Mon..Fri); if none left, next Monday..Friday
+      var tomorrow = new Date(MAD.getTime() + 864e5), td = tomorrow.getUTCDay();
+      if (td >= 1 && td <= 5 && dow !== 0) { for (i = td; i <= 5; i++) out.push(new Date(MAD.getTime() + (i - dow) * 864e5)); }
+      if (!out.length) { var add = ((8 - dow) % 7) || 7; start = new Date(MAD.getTime() + add * 864e5); for (i = 0; i < 5; i++) out.push(new Date(start.getTime() + i * 864e5)); }
+      return out;
+    }
+    var TIMES = []; for (var m = 10 * 60 + 30; m <= 17 * 60 + 30; m += 30) TIMES.push(("0" + Math.floor(m / 60)).slice(-2) + ":" + ("0" + m % 60).slice(-2));
+    function render() {
+      var l = lang(), loc = l === "es" ? "es-ES" : "en-GB", ds = days();
+      var fmtD = new Intl.DateTimeFormat(loc, { timeZone: "UTC", weekday: "long", day: "numeric", month: "long" });
+      var monday = new Date(ds[0].getTime() - ((ds[0].getUTCDay() + 6) % 7) * 864e5);
+      wk.textContent = T[l].week + " " + new Intl.DateTimeFormat(loc, { timeZone: "UTC", day: "numeric", month: "long", year: "numeric" }).format(monday);
+      grid.innerHTML = "";
+      ds.forEach(function (d) {
+        var iso = d.toISOString().slice(0, 10), col = document.createElement("div"); col.className = "slot-day";
+        var h = document.createElement("h4"); h.textContent = fmtD.format(d); col.appendChild(h);
+        var row = document.createElement("div"); row.className = "slot-times";
+        TIMES.forEach(function (tm) {
+          var b = document.createElement("button"); b.type = "button"; b.className = "slot-btn"; b.setAttribute("role", "radio");
+          var val = iso + " " + tm + " (Madrid)";
+          b.setAttribute("aria-checked", hid.value === val ? "true" : "false"); b.textContent = tm; b.dataset.v = val;
+          b.addEventListener("click", function () { hid.value = val; $$(".slot-btn", grid).forEach(function (x) { x.setAttribute("aria-checked", x === b ? "true" : "false"); }); });
+          row.appendChild(b);
+        });
+        col.appendChild(row); grid.appendChild(col);
+      });
+    }
+    function toggle() { box.hidden = !chk.checked; if (chk.checked) render(); }
+    chk.addEventListener("change", toggle);
+    var lb = $("#langBtn"); if (lb) lb.addEventListener("click", function () { if (!box.hidden) setTimeout(render, 0); });
+    slotsReset = function () { hid.value = ""; box.hidden = true; };
+    if (/[?&]reserva=1/.test(location.search) || location.hash === "#reservar") { chk.checked = true; toggle(); }
+  })();
+
   /* ---------- forms (contact + newsletter) ---------- */
   var tsBtns = [];
   window.tsOk = function () { tsBtns.forEach(function (b) { b.disabled = false; }); };
@@ -173,7 +218,11 @@
         return;
       }
       var name = (d.get("name") || "").trim(), email = (d.get("email") || "").trim(), msg = (d.get("message") || "").trim();
+      var booking = !!(d.get("reserva"));
+      if (booking && !msg) { msg = "Reserva de la sesión inicial"; d.set("message", msg); }
       if (!name || !msg || !emailRe.test(email)) { status.className = "form-status err"; status.textContent = t.missing; return; }
+      if (booking && (!d.get("hora_preferida") || !d.get("acepta_condiciones") || !d.get("ejecucion_anticipada"))) { status.className = "form-status err"; status.textContent = t.bmissing; return; }
+      if (booking) { d.set("_subject", "Reserva sesión inicial · " + d.get("hora_preferida")); done = function () { form.reset(); slotsReset(); status.className = "form-status ok"; status.textContent = t.bok; }; }
       if (!S.formspree) { fail(); return; }
       if (ts && !d.get("cf-turnstile-response")) { status.className = "form-status err"; status.textContent = t.captcha; return; }
       status.className = "form-status"; status.textContent = t.sending;
