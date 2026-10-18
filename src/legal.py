@@ -2,8 +2,8 @@
 import base64
 from pages import MAIL, SEC_HEAD
 
-UPDATED_ES = "16 de octubre de 2026"
-UPDATED_EN = "16 October 2026"
+UPDATED_ES = "18 de octubre de 2026"
+UPDATED_EN = "18 October 2026"
 SITE = "https://inigogonzalezgarcia.github.io"
 def mail_tag(addr=MAIL, link=True):
     """Email shown without the address in the HTML (against harvesting bots). assets/legal.js turns it into a mailto link;
@@ -89,7 +89,7 @@ AVISO_ES = f'''  <p class="label kicker">Aviso legal · Última actualización: 
     <li><strong>Web:</strong> {SITE}</li>
     <li><strong>Actividad:</strong> web personal y profesional. Publica mi trayectoria, artículos sobre tecnología y carrera en IT y el catálogo de servicios de asesoría profesional <em>IGG-ICS · IT · Tech Career, Lab &amp; Strategy</em>.</li>
   </ul>
-  <p class="note">Por ahora esta web no vende productos ni servicios online. Cuando se abra la contratación, aquí se añadirán los datos fiscales completos (NIF y domicilio).</p>
+  <p class="note">Desde esta web se puede reservar la sesión inicial de orientación profesional, que se paga con Revolut. Las condiciones están en <a href="condiciones.html">condiciones de contratación</a>.</p>
 
   <h2>2. Objeto</h2>
   <p>Este aviso regula el uso de la web. Al navegar por ella aceptas estas condiciones. Si no estás de acuerdo, no la uses.</p>
@@ -104,7 +104,7 @@ AVISO_ES = f'''  <p class="label kicker">Aviso legal · Última actualización: 
   <p>Los contenidos son informativos y se basan en mi experiencia personal. No garantizan ningún resultado, como conseguir un empleo o un ascenso. Intento que la información sea correcta y esté al día, pero no puedo garantizar que lo esté siempre ni que la web funcione sin interrupciones.</p>
 
   <h2>6. Enlaces externos</h2>
-  <p>La web enlaza a sitios de terceros, como LinkedIn, GitHub o Calendly. No controlo su contenido ni respondo de él. Cada uno tiene sus propias condiciones y su política de privacidad.</p>
+  <p>La web enlaza a sitios de terceros, como LinkedIn o GitHub. No controlo su contenido ni respondo de él. Cada uno tiene sus propias condiciones y su política de privacidad.</p>
 
   <h2>7. Servicios</h2>
   <p>Los servicios de la <a href="store.html">Store</a> se rigen por las <a href="condiciones.html">condiciones de contratación</a>.</p>
@@ -126,7 +126,7 @@ AVISO_EN = f'''  <p class="label kicker">Legal notice · Last updated: {UPDATED_
     <li><strong>Website:</strong> {SITE}</li>
     <li><strong>Activity:</strong> a personal and professional website. It publishes my career path, articles on technology and IT careers, and the catalogue of career advisory services <em>IGG-ICS · IT · Tech Career, Lab &amp; Strategy</em>.</li>
   </ul>
-  <p class="note">For now, this site does not sell products or services online. When booking opens, the full tax details (tax ID and address) will be added here.</p>
+  <p class="note">The initial career session can be booked through this site and is paid with Revolut. The terms are in the <a href="condiciones.html">terms of service</a>.</p>
 
   <h2>2. Purpose</h2>
   <p>This notice governs the use of the site. By browsing it you accept these terms. If you don't agree, please don't use it.</p>
@@ -141,7 +141,7 @@ AVISO_EN = f'''  <p class="label kicker">Legal notice · Last updated: {UPDATED_
   <p>The content is informative and based on my personal experience. It does not guarantee any outcome, such as getting a job or a promotion. I try to keep the information accurate and up to date, but I can't guarantee that it always is, or that the site runs without interruptions.</p>
 
   <h2>6. External links</h2>
-  <p>The site links to third-party sites such as LinkedIn, GitHub or Calendly. I don't control their content and I'm not responsible for it. Each has its own terms and privacy policy.</p>
+  <p>The site links to third-party sites such as LinkedIn or GitHub. I don't control their content and I'm not responsible for it. Each has its own terms and privacy policy.</p>
 
   <h2>7. Services</h2>
   <p>The services in the <a href="store.html">Store</a> are governed by the <a href="condiciones.html">terms of service</a>.</p>
@@ -153,32 +153,34 @@ AVISO_EN = f'''  <p class="label kicker">Legal notice · Last updated: {UPDATED_
   <p>This notice is governed by Spanish law. If you are a consumer, the courts of your place of residence have jurisdiction. Otherwise, the courts of Madrid.</p>'''
 
 # ------------------------------------------------------------------ terms of service
-COND_ES = f'''  <p class="label kicker">Condiciones · Versión preliminar · {UPDATED_ES}</p>
+COND_ES = f'''  <p class="label kicker">Condiciones · {UPDATED_ES}</p>
   <h1>Condiciones de contratación</h1>
   <p class="lede">Cómo funcionan los servicios de la Store: qué incluyen, cómo se pagan, cómo se cancelan y qué derechos tienes.</p>
-  <p class="note"><strong>La contratación online todavía no está abierta.</strong> Esta es una versión preliminar para que sepas cómo funcionará. La versión definitiva, con los precios y los datos fiscales completos, se publicará aquí antes de abrir la contratación.</p>
+  <p class="note"><strong>Ya puedes reservar la sesión inicial (30 min · 39 €).</strong> El resto de servicios de la Store se contratará más adelante. Antes de abrirlos, publicaré aquí sus precios y cómo se contratan.</p>
 
   <h2>1. Quién presta el servicio</h2>
   <p>Iñigo González, Madrid (España). Email: {M}. En adelante, «yo». Tú, como cliente, en adelante «tú».</p>
 
   <h2>2. Servicios</h2>
   <p>Servicios de asesoría y orientación profesional para perfiles IT, todos online. Cada servicio tiene su ficha en la <a href="store.html">Store</a> con lo que incluye, el formato y el plazo. Esa ficha forma parte de estas condiciones.</p>
+  <p><strong>Sesión inicial:</strong> videollamada de 30 minutos sobre tu situación profesional y tu objetivo, con siguientes pasos concretos. Se reserva desde el <a href="about.html?reserva=1#reservar">formulario de contacto</a>.</p>
 
   <h2>3. Qué no incluyen</h2>
   <p>Son servicios de orientación: te doy criterio, revisión y un plan de acción. No soy una agencia de colocación ni un servicio de empleo. No garantizo que consigas un trabajo, una entrevista o una subida de sueldo, porque eso depende de ti y del mercado. Tampoco ofrezco asesoría legal, fiscal ni psicológica.</p>
 
   <h2>4. Precio y pago</h2>
   <ul>
-    <li>Los precios se mostrarán en euros en la ficha de cada servicio, con los impuestos aplicables indicados.</li>
-    <li>Se pagarán por adelantado a través de una pasarela de pago segura. Yo no veo ni guardo los datos de tu tarjeta.</li>
-    <li>Si necesitas factura a nombre de una empresa, podrás indicar sus datos al pagar.</li>
+    <li><strong>Sesión inicial:</strong> 39 €, impuestos incluidos. El precio del resto de servicios se mostrará en euros en su ficha, con los impuestos aplicables indicados.</li>
+    <li>Se paga por adelantado con el enlace de pago de Revolut (Revolut Bank UAB) que te envío por email. Puedes pagar con tarjeta o desde tu cuenta Revolut. Yo no veo ni guardo los datos de tu tarjeta.</li>
+    <li>Si necesitas factura, pídemela por email con tus datos fiscales (o los de tu empresa).</li>
   </ul>
 
   <h2>5. Cómo se contrata</h2>
   <ol>
-    <li>Eliges el servicio en la Store.</li>
-    <li>En la página de pago revisas el servicio y el precio, aceptas estas condiciones y, si quieres empezar enseguida, lo indicas en la casilla correspondiente (punto 8).</li>
-    <li>Al pagar, el contrato queda cerrado. Recibes la confirmación por email y, en un máximo de 24 horas, un email mío con los siguientes pasos y estas condiciones.</li>
+    <li>En el formulario de contacto marcas la sesión inicial y eliges una hora preferida, de lunes a viernes entre las 10:30 y las 18:00 (hora de Madrid). Aceptas estas condiciones y pides que la sesión se haga dentro del plazo de desistimiento (punto 8).</li>
+    <li>Enviar el formulario es una solicitud, no un contrato, y no te obliga a nada. En un máximo de 24 horas laborables te envío por email el enlace de pago y estas condiciones.</li>
+    <li>El contrato queda cerrado cuando recibo el pago. Te confirmo la cita por email con el enlace de la videollamada. Si la hora que elegiste ya no está libre, te propongo otra; si no encontramos ninguna que te venga bien, te devuelvo el importe íntegro.</li>
+    <li>Si después quieres más sesiones, te envío un enlace para reservarlas y se pagan de la misma forma, por adelantado.</li>
   </ol>
 
   <h2>6. Cómo se presta</h2>
@@ -191,13 +193,14 @@ COND_ES = f'''  <p class="label kicker">Condiciones · Versión preliminar · {U
   <h2>7. Cambios y cancelaciones</h2>
   <ul>
     <li><strong>Si cambias de fecha:</strong> puedes hacerlo sin coste hasta 24 horas antes de la sesión, una vez por sesión.</li>
+    <li><strong>Si cancelas con más de 24 horas:</strong> eliges entre otra fecha o la devolución íntegra.</li>
     <li><strong>Si no te presentas:</strong> si no avisas, o avisas con menos de 24 horas, la sesión se considera realizada.</li>
     <li><strong>Si cancelo yo:</strong> te propongo otra fecha o te devuelvo el importe de esa sesión, como prefieras.</li>
   </ul>
 
   <h2>8. Derecho de desistimiento (si eres consumidor)</h2>
   <p>Tienes 14 días naturales desde que contratas para desistir sin dar explicaciones. Para hacerlo, escríbeme a {M} o envíame el formulario del final. Te devolveré el importe en un máximo de 14 días desde que me lo comuniques, por el mismo medio de pago.</p>
-  <p>Si quieres que el servicio empiece antes de que terminen esos 14 días, tienes que pedírmelo expresamente al contratar. En ese caso:</p>
+  <p>Si quieres que el servicio empiece antes de que terminen esos 14 días, tienes que pedírmelo expresamente al contratar (en la sesión inicial, con la casilla del formulario). En ese caso:</p>
   <ul>
     <li>Si desistes antes de terminar el servicio, pagas solo la parte ya prestada, en proporción al precio total.</li>
     <li>Una vez prestado el servicio completo, ya no puedes desistir.</li>
@@ -227,32 +230,34 @@ COND_ES = f'''  <p class="label kicker">Condiciones · Versión preliminar · {U
   Firma del consumidor (solo si el formulario se presenta en papel)<br>
   Fecha: […]</p>'''
 
-COND_EN = f'''  <p class="label kicker">Terms · Preliminary version · {UPDATED_EN}</p>
+COND_EN = f'''  <p class="label kicker">Terms · {UPDATED_EN}</p>
   <h1>Terms of service</h1>
   <p class="lede">How the Store services work: what they include, how you pay, how to cancel and what rights you have.</p>
-  <p class="note"><strong>Online booking isn't open yet.</strong> This is a preliminary version so you know how it will work. The final version, with prices and full tax details, will be published here before booking opens.</p>
+  <p class="note"><strong>You can now book the initial session (30 min · €39).</strong> The other Store services will open for booking later. Before they do, I'll publish their prices and how to book them here.</p>
 
   <h2>1. Who provides the service</h2>
   <p>Iñigo González, Madrid (Spain). Email: {M}. Referred to as "I" or "me", and you, the client, as "you".</p>
 
   <h2>2. Services</h2>
   <p>Career advisory services for IT professionals, all online. Each service has its own entry in the <a href="store.html">Store</a> with what it includes, the format and the timeframe. That entry forms part of these terms.</p>
+  <p><strong>Initial session:</strong> a 30-minute video call about your career situation and goal, with concrete next steps. It's booked through the <a href="about.html?reserva=1#reservar">contact form</a>.</p>
 
   <h2>3. What they don't include</h2>
   <p>These are guidance services: I give you judgement, a review and an action plan. I'm not a recruitment agency or an employment service. I don't guarantee you'll get a job, an interview or a pay rise, because that depends on you and on the market. I don't provide legal, tax or psychological advice.</p>
 
   <h2>4. Price and payment</h2>
   <ul>
-    <li>Prices will be shown in euros on each service's entry, with applicable taxes stated.</li>
-    <li>Payment will be made in advance through a secure payment provider. I never see or store your card details.</li>
-    <li>If you need an invoice in a company's name, you'll be able to enter its details when paying.</li>
+    <li><strong>Initial session:</strong> €39, taxes included. Prices for the other services will be shown in euros on their entry, with applicable taxes stated.</li>
+    <li>Payment is made in advance through the Revolut payment link (Revolut Bank UAB) I email you. You can pay by card or from your Revolut account. I never see or store your card details.</li>
+    <li>If you need an invoice, email me your tax details (or your company's).</li>
   </ul>
 
   <h2>5. How to book</h2>
   <ol>
-    <li>Choose the service in the Store.</li>
-    <li>On the payment page, check the service and price, accept these terms and, if you want to start straight away, say so with the checkbox (section 8).</li>
-    <li>Once you pay, the contract is concluded. You get a confirmation by email and, within 24 hours, an email from me with the next steps and these terms.</li>
+    <li>In the contact form, tick the initial session and pick a preferred time, Monday to Friday between 10:30 and 18:00 (Madrid time). You accept these terms and ask for the session to take place within the withdrawal period (section 8).</li>
+    <li>Sending the form is a request, not a contract, and doesn't commit you to anything. Within 24 working hours I email you the payment link and these terms.</li>
+    <li>The contract is concluded when I receive payment. I confirm the appointment by email with the video call link. If the time you picked is no longer free, I'll suggest another; if we can't find one that suits you, I'll refund you in full.</li>
+    <li>If you then want more sessions, I'll send you a link to book them and they're paid the same way, in advance.</li>
   </ol>
 
   <h2>6. How the service is provided</h2>
@@ -265,13 +270,14 @@ COND_EN = f'''  <p class="label kicker">Terms · Preliminary version · {UPDATED
   <h2>7. Changes and cancellations</h2>
   <ul>
     <li><strong>If you reschedule:</strong> free of charge up to 24 hours before the session, once per session.</li>
+    <li><strong>If you cancel more than 24 hours ahead:</strong> you choose between a new date or a full refund.</li>
     <li><strong>If you don't show up:</strong> without notice, or with less than 24 hours' notice, the session counts as held.</li>
     <li><strong>If I cancel:</strong> I'll offer you a new date or refund that session, whichever you prefer.</li>
   </ul>
 
   <h2>8. Right of withdrawal (if you're a consumer)</h2>
   <p>You have 14 calendar days from booking to withdraw without giving a reason. To do so, email me at {M} or send me the form below. I'll refund you within 14 days of being told, using the same payment method.</p>
-  <p>If you want the service to start before those 14 days end, you must ask for it explicitly when booking. In that case:</p>
+  <p>If you want the service to start before those 14 days end, you must ask for it explicitly when booking (for the initial session, with the checkbox on the form). In that case:</p>
   <ul>
     <li>If you withdraw before the service is finished, you only pay for the part already provided, in proportion to the total price.</li>
     <li>Once the service has been fully provided, you can no longer withdraw.</li>
