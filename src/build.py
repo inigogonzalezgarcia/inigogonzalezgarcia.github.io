@@ -402,13 +402,11 @@ sizes["about.html"] = write("about.html", layout(R="", path="about.html", active
     ld=[{"@type": "ProfilePage", "url": SITE_URL + "about.html", "mainEntity": PERSON}, crumbs(("Home", ""), ("About", "about.html"))]))
 
 # store (IGG-ICS · IT · Tech Career, Lab & Strategy): service catalogue, no prices or checkout yet
-BOOK = CONF.get("booking_url", "")
-if BOOK:
-    book_btn = f'<a class="btn" href="{BOOK}" target="_blank" rel="noopener">{bi("Reserva una llamada gratuita", "Book a free call")} ↗</a>'
-    book_link = lambda es, en: f'<a class="arrow-link" href="{BOOK}" target="_blank" rel="noopener">{bi(es, en)} ↗</a>'
-else:
-    book_btn = f'<a class="btn" href="about.html#contacto">{bi("Pide información", "Ask for details")} →</a>'
-    book_link = lambda es, en: f'<a class="arrow-link" href="about.html#contacto">{bi(es, en)} →</a>'
+BOOK = CONF.get("booking_url", "")  # Calendly: only sent by email for follow-up sessions, not shown on the site
+RESERVA = "about.html?reserva=1#reservar"
+book_btn = f'<a class="btn" href="{RESERVA}">{bi("Reserva la sesión inicial · 39 €", "Book the initial session · €39")} →</a>'
+book_link = lambda es, en: f'<a class="arrow-link" href="about.html#contacto">{bi(es, en)} →</a>'
+session_link = lambda es, en: f'<a class="arrow-link" href="{RESERVA}">{bi(es, en)} →</a>'
 
 PROBLEMS = [
     ("Tu CV no pasa el primer filtro", "Your CV doesn't get past the first filter",
@@ -491,22 +489,25 @@ etm_cards = "\n".join(
     for i, (es, en, des, den) in enumerate(ETM_AREAS, 1))
 
 STEPS = [
-    ("Llamada gratuita", "Free call", "30 minutos para hablar de tu situación y tu objetivo, sin compromiso.", "30 minutes to talk about where you are and your goal, no strings attached."),
-    ("Eliges el servicio", "Pick a service", "Te digo cuál encaja contigo, o si de momento no necesitas ninguno.", "I tell you which one fits, or whether you don't need one yet."),
-    ("Trabajamos", "We work on it", "Me envías tu material o hacemos las sesiones online, en español o en inglés.", "You send me your material or we do the sessions online, in Spanish or English."),
-    ("Plan y seguimiento", "Plan and follow-up", "Te llevas un plan por escrito y resolvemos las dudas que surjan.", "You leave with a written plan and we sort out any questions that come up."),
+    ("Empieza gratis", "Start for free", "Apúntate a la newsletter y llévate las <a href='recursos.html'>33 ideas</a> para que te encuentren si trabajas en IT.", "Join the newsletter and get the <a href='recursos.html'>33 ideas</a> to get found if you work in IT."),
+    ("Reserva la sesión inicial", "Book the initial session", "En el <a href='about.html?reserva=1#reservar'>formulario de contacto</a> marcas la sesión inicial (30 min · 39 €) y eliges una hora de lunes a viernes, de 10:30 a 18:00 (hora de Madrid).", "In the <a href='about.html?reserva=1#reservar'>contact form</a>, tick the initial session (30 min · €39) and pick a time, Monday to Friday, 10:30 to 18:00 (Madrid time)."),
+    ("Pago y confirmación", "Payment and confirmation", "Te envío por email el enlace de pago de Revolut. Al recibir el pago te confirmo la cita y te mando el enlace de la videollamada.", "I email you the Revolut payment link. Once payment arrives, I confirm the appointment and send you the video call link."),
+    ("Sesión y siguientes pasos", "Session and next steps", "30 minutos sobre tu situación y tu objetivo, con siguientes pasos concretos. Si quieres seguir, te paso el enlace para reservar más sesiones.", "30 minutes on where you are and your goal, with concrete next steps. If you want to continue, I'll send you the link to book more sessions."),
 ]
 steps_html = "\n".join(
     f'      <div class="spec-row"><dt class="label">{i:02d} · {bi(es, en)}</dt><dd>{bi(des, den)}</dd></div>'
     for i, (es, en, des, den) in enumerate(STEPS, 1))
 
 FAQ = [
-    ("¿Cuánto cuestan los servicios?", "How much do the services cost?",
-     "Publicaré los precios cuando abra la contratación online, muy pronto. Mientras tanto, pregúntame en la llamada gratuita.",
-     "I'll publish the prices when online booking opens, very soon. In the meantime, ask me on the free call."),
-    ("¿La primera llamada es gratis?", "Is the first call free?",
-     "Sí. Son 30 minutos para conocernos y ver si puedo ayudarte. No tienes que contratar nada después.",
-     "Yes. It's 30 minutes to meet and see whether I can help. You don't have to buy anything afterwards."),
+    ("¿Cuánto cuesta la sesión inicial?", "How much is the initial session?",
+     "39 €, impuestos incluidos, por 30 minutos de videollamada. No tienes que contratar nada después.",
+     "€39, taxes included, for a 30-minute video call. You don't have to buy anything afterwards."),
+    ("¿Cómo se paga?", "How do I pay?",
+     "Por adelantado, con el enlace de pago de Revolut que te envío por email cuando reservas. Puedes pagar con tarjeta o desde tu cuenta Revolut. Yo no veo los datos de tu tarjeta.",
+     "In advance, through the Revolut payment link I email you when you book. You can pay by card or from your Revolut account. I never see your card details."),
+    ("¿Y el resto de servicios?", "What about the other services?",
+     "Publicaré sus precios cuando abra su contratación. Si te interesa alguno, lo hablamos en la sesión inicial.",
+     "I'll publish their prices when booking for them opens. If one interests you, we can talk about it in the initial session."),
     ("¿Para quién es?", "Who is it for?",
      "Para perfiles IT: soporte, sistemas, operaciones, workplace, infraestructura, cloud, ciberseguridad o gestión de equipos y servicios, desde junior hasta senior.",
      "For IT professionals: support, systems, operations, workplace, infrastructure, cloud, security or team and service management, from junior to senior."),
@@ -530,7 +531,7 @@ store_body = page_hero("Store · IGG-ICS · IT · Tech Career, Lab &amp; Strateg
        "Career strategy services for IT and tech professionals: I help you create opportunities through visibility, positioning and networking, not just by sending CVs."),
     f'''<div class="hero-ctas u-mt34">
       <a class="btn" href="#servicios">{bi("Ver servicios", "See services")} ↓</a>
-      {book_link("Llamada gratuita de 30 min", "Free 30-min call")}
+      {session_link("Sesión inicial · 30 min · 39 €", "Initial session · 30 min · €39")}
     </div>''') + f'''
 
 <section class="section">
@@ -555,8 +556,8 @@ store_body = page_hero("Store · IGG-ICS · IT · Tech Career, Lab &amp; Strateg
         <h2 class="h2 sm">{bi("Elige por dónde empezar.", "Choose where to start.")}</h2>
       </div>
     </div>
-    <p class="notice reveal">{bi("La contratación online abrirá muy pronto. Si te interesa algún servicio, reserva una llamada gratuita o <a href='recursos.html'>apúntate a la newsletter</a> y te aviso.",
-                                 "Online booking opens very soon. If a service interests you, book a free call or <a href='recursos.html'>join the newsletter</a> and I'll let you know.")}</p>
+    <p class="notice reveal">{bi("Estos servicios se contratarán más adelante. Para empezar, <a href='recursos.html'>llévate las 33 ideas gratis</a> o <a href='about.html?reserva=1#reservar'>reserva la sesión inicial</a> (30 min · 39 €).",
+                                 "These services will open for booking later. To start, <a href='recursos.html'>get the 33 ideas for free</a> or <a href='about.html?reserva=1#reservar'>book the initial session</a> (30 min · €39).")}</p>
     <div class="svc-grid">
 {svc_cards}
     </div>
