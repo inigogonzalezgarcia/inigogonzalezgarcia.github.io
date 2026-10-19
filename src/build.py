@@ -79,7 +79,7 @@ def stage_html(s):
           <p>{bi(*s["p"])}</p>
           <p class="muted">{bi(*s["p2"])}</p>
           <ul class="chips">{chips}</ul>
-          <a class="arrow-link" href="index.html?f={s["key"]}#mapa">{bi("Ver en el mapa", "See on the map")} →</a>
+          <a class="arrow-link" href="about.html?f={s["key"]}#mapa">{bi("Ver en el mapa", "See on the map")} →</a>
         </div>
       </article>'''
 
@@ -221,7 +221,6 @@ home_body = "\n\n".join([
     </div>
   </div>
 </section>''',
-    SEC["map"].replace("{{MAP}}", MAP),
     f'''<section class="section">
   <div class="wrap welcome reveal">
     <div>
@@ -395,7 +394,7 @@ now = f'''<section class="section">
   </div>
 </section>'''
 about_body = SEC["about"].replace('class="section dark" id="sobre-mi"', 'class="section dark about-top" id="sobre-mi"') \
-    + "\n\n" + now + "\n\n" + SEC["contact"].replace("{{FORM_ACTION}}", FORM).replace("{{CAPTCHA}}", CAPTCHA).replace("{{CAPTCHA_JS}}", CAPTCHA_JS)
+    + "\n\n" + now + "\n\n" + SEC["map"].replace("{{MAP}}", MAP) + "\n\n" + SEC["contact"].replace("{{FORM_ACTION}}", FORM).replace("{{CAPTCHA}}", CAPTCHA).replace("{{CAPTCHA_JS}}", CAPTCHA_JS)
 sizes["about.html"] = write("about.html", layout(R="", path="about.html", active="about",
     title_en="About · Iñigo González", title_es="Sobre mí · Iñigo González",
     desc="About Iñigo González, IT Site Leader in Madrid, and how to get in touch.", body=about_body,
