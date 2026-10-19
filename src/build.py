@@ -800,12 +800,66 @@ GUIDE_LEVELS = [
       ("Microsoft Sentinel", "Microsoft Sentinel"), ("Migraciones de tenant Microsoft 365", "Microsoft 365 tenant migrations"),
       ("Nutanix", "Nutanix"), ("Qualys", "Qualys"), ("Red Hat OpenShift", "Red Hat OpenShift"), ("Terraform", "Terraform")]),
 ]
+# Guides from experience: five sectors I have worked in (no company names), titles in "Topic - task" form. Alphabetical inside each list.
+GUIDE_SECTORS = [
+    ("Sector 1", "Sector 1", "Hostelería y punto de venta", "Hospitality and point of sale",
+     "TPV, sistemas de hotel y la puesta en marcha de un establecimiento.",
+     "POS, hotel systems and getting a new venue up and running.",
+     [("CashDro - Integración con el TPV", "CashDro - Integration with the POS"),
+      ("Hotel en pre-apertura - Checklist de IT hasta el día de apertura", "Hotel pre-opening - IT checklist up to opening day"),
+      ("ICG y HIOPOS - Puesta en marcha de un TPV", "ICG and HIOPOS - Setting up a POS"),
+      ("IPTV en hotel - Diagnóstico de canales y equipos de habitación", "Hotel IPTV - Troubleshooting channels and room devices"),
+      ("PMS hotelero - Soporte e interfaces con el TPV", "Hotel PMS - Support and POS interfaces")]),
+    ("Sector 2", "Sector 2", "Retail y oficinas corporativas", "Retail and corporate offices",
+     "El día a día de IT en oficinas y tiendas: usuarios, licencias, impresión y copias.",
+     "Everyday IT in offices and stores: users, licences, printing and backups.",
+     [("Alta de usuario - Red, correo y aplicaciones de negocio", "New starter - Network, email and business apps"),
+      ("AS400 - Alta y gestión de usuarios", "AS400 - Creating and managing users"),
+      ("Backup en cinta - Rotación y comprobación de copias", "Tape backup - Rotation and backup checks"),
+      ("Cisco AnyConnect - Resolver problemas de conexión VPN", "Cisco AnyConnect - Fixing VPN connection issues"),
+      ("Impresoras de tienda - Instalación y mantenimiento", "Store printers - Installation and maintenance"),
+      ("Office 365 - Asignación de licencias con el service desk", "Office 365 - Assigning licences with the service desk"),
+      ("Poly - Salas de videoconferencia", "Poly - Video conference rooms")]),
+    ("Sector 3", "Sector 3", "Sanidad y plataformas críticas", "Healthcare and critical platforms",
+     "Servidores que no pueden parar: rendimiento, actualizaciones y monitorización.",
+     "Servers that can't stop: performance, upgrades and monitoring.",
+     [("Citrix VDI - Publicar y dar soporte a aplicaciones", "Citrix VDI - Publishing and supporting apps"),
+      ("Entornos de prueba - Preparar un entorno para validar cambios", "Test environments - Preparing an environment to validate changes"),
+      ("Monitorización - Desplegar alarmas y responder a ellas", "Monitoring - Deploying alarms and responding to them"),
+      ("Oracle - Actualizar hardware y SO de servidores de base de datos", "Oracle - Upgrading hardware and OS on database servers"),
+      ("Red Hat - Ajuste de rendimiento de un servidor", "Red Hat - Server performance tuning"),
+      ("Windows Server - Actualizaciones planificadas sin cortar el servicio", "Windows Server - Planned updates without service downtime")]),
+    ("Sector 4", "Sector 4", "Industria multinacional", "Multinational manufacturing",
+     "Sedes en varios países, redes entre plantas, ERP y presupuesto de IT.",
+     "Sites in several countries, networks between plants, ERP and IT budget.",
+     [("LAN, WAN y WiFi - Conectar sedes de varios países", "LAN, WAN and WiFi - Connecting sites in several countries"),
+      ("MDM - Gestión de móviles corporativos", "MDM - Managing corporate mobiles"),
+      ("Presupuesto de IT - Preparar y seguir el presupuesto anual", "IT budget - Preparing and tracking the annual budget"),
+      ("SAP - Soporte a usuarios desde IT", "SAP - User support from IT"),
+      ("SQL Server - Copias de seguridad y restauración", "SQL Server - Backup and restore"),
+      ("Veeam - Planificar y probar restauraciones", "Veeam - Planning and testing restores"),
+      ("VMware - Mantenimiento de hosts y máquinas virtuales", "VMware - Maintaining hosts and virtual machines")]),
+    ("Sector 5", "Sector 5", "Servicios financieros y trading", "Financial services and trading",
+     "Una sede que no puede parar, y un laboratorio de FX para aprender con método.",
+     "A site that can't stop, and an FX lab to learn with method.",
+     [("Cisco - Switches, routers y salas de comunicaciones de una sede", "Cisco - Switches, routers and comms rooms on a site"),
+      ("Conditional Access - Políticas para una sede", "Conditional Access - Policies for a site"),
+      ("DR/BCP - Preparar y supervisar una prueba de recuperación", "DR/BCP - Preparing and overseeing a recovery test"),
+      ("FX Trading Lab - Backtesting con datos tick de Dukascopy", "FX Trading Lab - Backtesting with Dukascopy tick data"),
+      ("FX Trading Lab - Comparar una estrategia contra el azar", "FX Trading Lab - Testing a strategy against chance"),
+      ("FX Trading Lab - Montar el laboratorio con Python, SQLite y Docker", "FX Trading Lab - Building the lab with Python, SQLite and Docker"),
+      ("Microsoft Teams Rooms - Salas sobre Crestron", "Microsoft Teams Rooms - Rooms on Crestron"),
+      ("PIM - Acceso Just-In-Time para administradores", "PIM - Just-In-Time access for admins"),
+      ("Proveedores de conectividad - Gestión de circuitos y averías", "Connectivity providers - Managing circuits and faults"),
+      ("Windows 11 - Migrar los equipos de una sede", "Windows 11 - Migrating a site's devices")]),
+]
 def guide_level(n_es, n_en, t_es, t_en, d_es, d_en, topics):
     items = "".join(f"<li>{bi(es, en)}</li>"
                     for es, en in sorted(topics, key=lambda t: t[0].lower()))
     return (f'      <div class="guide-level reveal"><p class="label kicker">{bi(n_es, n_en)}</p><h3>{bi(t_es, t_en)}</h3>'
             f'<p class="muted small">{bi(d_es, d_en)}</p><ul class="guide-topics">{items}</ul></div>')
 guide_levels = "\n".join(guide_level(*l) for l in GUIDE_LEVELS)
+guide_sectors = "\n".join(guide_level(*l) for l in GUIDE_SECTORS)
 def guide_card(href, tes, ten, hes, hen, des, den):
     ext = href.startswith("http")
     tgt = ' target="_blank" rel="noopener"' if ext else ""
@@ -829,6 +883,15 @@ guides_body = page_hero(bi("Guías IT · En construcción", "IT guides · Under 
     </div>
     <div class="guide-levels">
 {guide_levels}
+    </div>
+    <div class="numbers-head reveal u-mt34">
+      <div>
+        <p class="label kicker">{bi("Desde la experiencia", "From experience")}</p>
+        <h2 class="h2 sm">{bi("Casos reales<br>por sector.", "Real cases<br>by sector.")}</h2>
+      </div>
+    </div>
+    <div class="guide-levels five">
+{guide_sectors}
     </div>
     <div class="numbers-head reveal u-mt34">
       <div>
