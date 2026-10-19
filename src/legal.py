@@ -89,7 +89,7 @@ AVISO_ES = f'''  <p class="label kicker">Aviso legal · Última actualización: 
     <li><strong>Web:</strong> {SITE}</li>
     <li><strong>Actividad:</strong> web personal y profesional. Publica mi trayectoria, artículos sobre tecnología y carrera en IT y el catálogo de servicios de asesoría profesional <em>IGG-ICS · IT · Tech Career, Lab &amp; Strategy</em>.</li>
   </ul>
-  <p class="note">Desde esta web se puede reservar la sesión inicial de orientación profesional, que se paga con Revolut. Las condiciones están en <a href="condiciones.html">condiciones de contratación</a>.</p>
+  <p class="note">Desde esta web se puede reservar la sesión inicial de orientación profesional, que se paga por adelantado con un enlace de pago enviado por email. Las condiciones están en <a href="condiciones.html">condiciones de contratación</a>.</p>
 
   <h2>2. Objeto</h2>
   <p>Este aviso regula el uso de la web. Al navegar por ella aceptas estas condiciones. Si no estás de acuerdo, no la uses.</p>
@@ -126,7 +126,7 @@ AVISO_EN = f'''  <p class="label kicker">Legal notice · Last updated: {UPDATED_
     <li><strong>Website:</strong> {SITE}</li>
     <li><strong>Activity:</strong> a personal and professional website. It publishes my career path, articles on technology and IT careers, and the catalogue of career advisory services <em>IGG-ICS · IT · Tech Career, Lab &amp; Strategy</em>.</li>
   </ul>
-  <p class="note">The initial career session can be booked through this site and is paid with Revolut. The terms are in the <a href="condiciones.html">terms of service</a>.</p>
+  <p class="note">The initial career session can be booked through this site and is paid in advance through a payment link sent by email. The terms are in the <a href="condiciones.html">terms of service</a>.</p>
 
   <h2>2. Purpose</h2>
   <p>This notice governs the use of the site. By browsing it you accept these terms. If you don't agree, please don't use it.</p>
@@ -156,7 +156,7 @@ AVISO_EN = f'''  <p class="label kicker">Legal notice · Last updated: {UPDATED_
 COND_ES = f'''  <p class="label kicker">Condiciones · {UPDATED_ES}</p>
   <h1>Condiciones de contratación</h1>
   <p class="lede">Cómo funcionan los servicios de la Store: qué incluyen, cómo se pagan, cómo se cancelan y qué derechos tienes.</p>
-  <p class="note"><strong>Ya puedes reservar la sesión inicial (30 min · 39 €).</strong> El resto de servicios de la Store se contratará más adelante. Antes de abrirlos, publicaré aquí sus precios y cómo se contratan.</p>
+  <p class="note"><strong>Ya puedes reservar la sesión inicial (30 min).</strong> El resto de servicios de la Store se contratará más adelante. Antes de abrirlos, explicaré aquí cómo se contratan.</p>
 
   <h2>1. Quién presta el servicio</h2>
   <p>Iñigo González, Madrid (España). Email: {M}. En adelante, «yo». Tú, como cliente, en adelante «tú».</p>
@@ -170,8 +170,8 @@ COND_ES = f'''  <p class="label kicker">Condiciones · {UPDATED_ES}</p>
 
   <h2>4. Precio y pago</h2>
   <ul>
-    <li><strong>Sesión inicial:</strong> 39 €, impuestos incluidos. El precio del resto de servicios se mostrará en euros en su ficha, con los impuestos aplicables indicados.</li>
-    <li>Se paga por adelantado con el enlace de pago de Revolut (Revolut Bank UAB) que te envío por email. Puedes pagar con tarjeta o desde tu cuenta Revolut. Yo no veo ni guardo los datos de tu tarjeta.</li>
+    <li><strong>Precio:</strong> te lo indico por email, en euros y con los impuestos incluidos, antes de que pagues. No hay ningún cargo ni compromiso hasta que pagas.</li>
+    <li>Se paga por adelantado con el enlace de pago seguro que te envío en ese mismo email, en el que también te indico la entidad de pago. Puedes pagar con tarjeta. Yo no veo ni guardo los datos de tu tarjeta.</li>
     <li>Si necesitas factura, pídemela por email con tus datos fiscales (o los de tu empresa).</li>
   </ul>
 
@@ -233,7 +233,7 @@ COND_ES = f'''  <p class="label kicker">Condiciones · {UPDATED_ES}</p>
 COND_EN = f'''  <p class="label kicker">Terms · {UPDATED_EN}</p>
   <h1>Terms of service</h1>
   <p class="lede">How the Store services work: what they include, how you pay, how to cancel and what rights you have.</p>
-  <p class="note"><strong>You can now book the initial session (30 min · €39).</strong> The other Store services will open for booking later. Before they do, I'll publish their prices and how to book them here.</p>
+  <p class="note"><strong>You can now book the initial session (30 min).</strong> The other Store services will open for booking later. Before they do, I'll explain here how to book them.</p>
 
   <h2>1. Who provides the service</h2>
   <p>Iñigo González, Madrid (Spain). Email: {M}. Referred to as "I" or "me", and you, the client, as "you".</p>
@@ -247,8 +247,8 @@ COND_EN = f'''  <p class="label kicker">Terms · {UPDATED_EN}</p>
 
   <h2>4. Price and payment</h2>
   <ul>
-    <li><strong>Initial session:</strong> €39, taxes included. Prices for the other services will be shown in euros on their entry, with applicable taxes stated.</li>
-    <li>Payment is made in advance through the Revolut payment link (Revolut Bank UAB) I email you. You can pay by card or from your Revolut account. I never see or store your card details.</li>
+    <li><strong>Price:</strong> I tell you by email, in euros and with taxes included, before you pay. There is no charge or commitment until you pay.</li>
+    <li>Payment is made in advance through the secure payment link in that same email, which also names the payment provider. You can pay by card. I never see or store your card details.</li>
     <li>If you need an invoice, email me your tax details (or your company's).</li>
   </ul>
 
