@@ -761,6 +761,51 @@ GUIDE_LINKS = [
      "Scripts y herramientas con datos ficticios que puedes probar y adaptar a tu entorno.",
      "Scripts and tools with fictional data that you can try and adapt to your environment."),
 ]
+# Guides index: topics grouped by level, from basic to advanced (only tools used at work). Alphabetical inside each level.
+GUIDE_LEVELS = [
+    ("Nivel 1", "Level 1", "Primeros pasos", "First steps",
+     "Lo que necesitas para empezar en soporte: el puesto, el usuario y sus herramientas.",
+     "What you need to start in support: the device, the user and their tools.",
+     [("Active Directory: usuarios y grupos", "Active Directory: users and groups"), ("Android", "Android"),
+      ("BitLocker", "BitLocker"), ("Cisco AnyConnect (VPN)", "Cisco AnyConnect (VPN)"),
+      ("Impresoras y periféricos", "Printers and peripherals"), ("iPhone y iPad", "iPhone and iPad"),
+      ("Jira Service Management: tickets", "Jira Service Management: tickets"), ("Microsoft 365 y licencias", "Microsoft 365 and licences"),
+      ("Microsoft Teams", "Microsoft Teams"), ("Outlook y Exchange Online", "Outlook and Exchange Online"),
+      ("Windows 10 y 11", "Windows 10 and 11")]),
+    ("Nivel 2", "Level 2", "Base sólida", "Solid foundations",
+     "Servidores, despliegue de aplicaciones y los primeros scripts.",
+     "Servers, app deployment and your first scripts.",
+     [("Azure AD Connect", "Azure AD Connect"), ("Bash", "Bash"), ("Citrix VDI", "Citrix VDI"), ("Confluence", "Confluence"),
+      ("Git", "Git"), ("Jamf Pro", "Jamf Pro"), ("MECM / SCCM: empaquetado de aplicaciones", "MECM / SCCM: app packaging"),
+      ("Microsoft Teams Rooms", "Microsoft Teams Rooms"), ("PDQ y MDT", "PDQ and MDT"), ("PowerShell", "PowerShell"),
+      ("Red Hat Enterprise Linux", "Red Hat Enterprise Linux"), ("SharePoint", "SharePoint"), ("Ubuntu", "Ubuntu"),
+      ("Veeam Backup", "Veeam Backup"), ("VMware Horizon", "VMware Horizon"), ("Windows Server", "Windows Server")]),
+    ("Nivel 3", "Level 3", "Avanzado", "Advanced",
+     "Gestión moderna del puesto, identidad, virtualización y automatización.",
+     "Modern device management, identity, virtualisation and automation.",
+     [("Ansible", "Ansible"), ("Docker", "Docker"), ("Elasticsearch, Logstash y Kibana", "Elasticsearch, Logstash and Kibana"),
+      ("Entra ID: Conditional Access", "Entra ID: Conditional Access"), ("Entra ID: SSO, SAML y App Registrations", "Entra ID: SSO, SAML and App Registrations"),
+      ("Grafana", "Grafana"), ("Hyper-V", "Hyper-V"), ("Intune: Windows, macOS, iOS y Android", "Intune: Windows, macOS, iOS and Android"),
+      ("Intune EPM", "Intune EPM"), ("Jenkins (CI/CD)", "Jenkins (CI/CD)"), ("Linux integrado con Active Directory", "Linux joined to Active Directory"),
+      ("Microsoft Graph", "Microsoft Graph"), ("NDES y Cloud PKI", "NDES and Cloud PKI"), ("PostgreSQL, MySQL y SQL Server", "PostgreSQL, MySQL and SQL Server"),
+      ("SolarWinds", "SolarWinds"), ("Ubuntu Landscape", "Ubuntu Landscape"), ("VMware vSphere y vCenter", "VMware vSphere and vCenter")]),
+    ("Nivel 4", "Level 4", "Experto", "Expert",
+     "Infraestructura híbrida, redes, seguridad y continuidad de negocio.",
+     "Hybrid infrastructure, networking, security and business continuity.",
+     [("Amazon AWS", "Amazon AWS"), ("Azure Virtual Desktop y Windows 365", "Azure Virtual Desktop and Windows 365"),
+      ("Azure Monitor y Log Analytics", "Azure Monitor and Log Analytics"), ("Backup y recuperación ante desastres (DR/BCP)", "Backup and disaster recovery (DR/BCP)"),
+      ("Cisco: switches y routers", "Cisco switches and routers"), ("CyberArk", "CyberArk"), ("Fortinet FortiGate", "Fortinet FortiGate"),
+      ("ISO 27001, NIS2 y RGPD en IT", "ISO 27001, NIS2 and GDPR in IT"), ("Kubernetes", "Kubernetes"),
+      ("Microsoft 365: Global Admin y PIM", "Microsoft 365: Global Admin and PIM"), ("Microsoft Purview", "Microsoft Purview"),
+      ("Microsoft Sentinel", "Microsoft Sentinel"), ("Migraciones de tenant Microsoft 365", "Microsoft 365 tenant migrations"),
+      ("Nutanix", "Nutanix"), ("Qualys", "Qualys"), ("Red Hat OpenShift", "Red Hat OpenShift"), ("Terraform", "Terraform")]),
+]
+def guide_level(n_es, n_en, t_es, t_en, d_es, d_en, topics):
+    items = "".join(f"<li>{bi(es, en)}</li>"
+                    for es, en in sorted(topics, key=lambda t: t[0].lower()))
+    return (f'      <div class="guide-level reveal"><p class="label kicker">{bi(n_es, n_en)}</p><h3>{bi(t_es, t_en)}</h3>'
+            f'<p class="muted small">{bi(d_es, d_en)}</p><ul class="guide-topics">{items}</ul></div>')
+guide_levels = "\n".join(guide_level(*l) for l in GUIDE_LEVELS)
 def guide_card(href, tes, ten, hes, hen, des, den):
     ext = href.startswith("http")
     tgt = ' target="_blank" rel="noopener"' if ext else ""
@@ -777,6 +822,15 @@ guides_body = page_hero(bi("Guías IT · En construcción", "IT guides · Under 
     <p class="notice reveal">{bi("<strong>Sección en construcción.</strong> Pronto tendréis aquí toda la información. Si quieres enterarte el primero, <a href='recursos.html'>apúntate a la newsletter</a>.",
                                  "<strong>This section is under construction.</strong> All the information will be here soon. To hear about it first, <a href='recursos.html'>join the newsletter</a>.")}</p>
     <div class="numbers-head reveal">
+      <div>
+        <p class="label kicker">{bi("Lo que vas a encontrar", "What you'll find")}</p>
+        <h2 class="h2 sm">{bi("De lo básico<br>a lo experto.", "From the basics<br>to expert level.")}</h2>
+      </div>
+    </div>
+    <div class="guide-levels">
+{guide_levels}
+    </div>
+    <div class="numbers-head reveal u-mt34">
       <div>
         <p class="label kicker">{bi("Mientras tanto", "In the meantime")}</p>
         <h2 class="h2 sm">{bi("Por dónde seguir.", "Where to go next.")}</h2>
