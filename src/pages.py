@@ -12,10 +12,9 @@ def bi(es, en):
 
 NAV = [  # key, href (relative to site root), es, en
     ("journey", "journey.html", "Viaje", "Journey"),
-    ("map", "index.html#mapa", "Mapa", "Map"),
+    ("about", "about.html", "Sobre mí", "About"),
     ("blog", "blog/", "Blog", "Blog"),
     ("guides", "guias.html", "Guías", "Guides"),
-    ("about", "about.html", "Sobre mí", "About"),
     ("store", "store.html", "Store", "Store"),
     ("resources", "recursos.html", "Recursos", "Resources"),
     ("links", "links.html", "Links", "Links"),
