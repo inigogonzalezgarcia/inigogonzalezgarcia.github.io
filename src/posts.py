@@ -1111,4 +1111,48 @@ De años dando soporte a TPV, PMS hotelero e IPTV en una consultora tecnológica
 - Exportar tu plan de pre-apertura con los plazos reales de los proveedores y las dependencias.
 - Definir tus propios hitos si tu marca usa otros.
 - Ejecutarlo antes de cada reunión semanal, a diario desde T-7, e imprimir la lista de comprobación para el ensayo general."""),
+dict(n="25", repo="25-security-controls-evidence", date="2026-10-19", cat="tools",
+ title_en="What will the auditor ask for that you cannot show yet? One register for ISO 27001, NIS2 and GDPR", title_es="¿Qué te pedirá el auditor que aún no puedes enseñar? Un registro para ISO 27001, NIS2 y RGPD",
+ dek_en="One control register mapped to three frameworks that finds missing, late or failing evidence, expired exceptions and how ready each framework is for the audit date.",
+ dek_es="Un registro de controles mapeado a tres marcos que encuentra evidencias que faltan, llegan tarde o fallan, excepciones caducadas y cómo de listo está cada marco para la fecha de auditoría.",
+ en="""
+
+## The problem
+Most audit findings are not about missing security, they are about missing proof. The quarterly restore test was done in June but not in September, and the audit is in five weeks. The immutable backup copy has been failing for a week and nobody linked it to the controls. A control is marked implemented with no evidence behind it. The DLP exception expired last month. And the same restore test answers ISO 27001, NIS2 and GDPR, but it is collected three times by three people, or not at all.
+
+## What I built
+- One register of controls and evidence mapped to ISO/IEC 27001:2022, NIS2 and GDPR, with checks in five areas: evidence, controls, exceptions, coverage per requirement and data quality.
+- Readiness per framework for the audit date: each requirement is covered, excluded, at risk or a gap, with what stands in its way.
+- `report.html` with a nine-week collection plan, `review.md` for the security review, `actions.csv`, an `audit-pack.csv` index for the auditor, a `soa.csv` in Statement-of-Applicability form and `evidence-calendar.ics` with every due date.
+
+## How it is built
+Python with the standard library only. The demo is a made-up company with 23 controls, 33 evidence items and 3 exceptions against 48 requirements, five weeks before an ISO 27001 surveillance audit, with gaps placed on purpose. 14 tests.
+
+## What I learned
+From applying ISO 27001, NIS2 and GDPR in IT operations, preparing evidence and answering audits: one piece of evidence well kept serves several frameworks, and the calendar of what to collect matters as much as the controls themselves.
+
+## Next steps
+- Export your control register and evidence index to CSV and map the columns.
+- Add the requirements you are audited against to the catalogue.
+- Import `evidence-calendar.ics` into the team calendar and run it before each security review.""",
+ es="""
+
+## El problema
+La mayoría de hallazgos de auditoría no son por falta de seguridad, sino por falta de pruebas. La prueba de restauración trimestral se hizo en junio pero no en septiembre, y la auditoría es en cinco semanas. La copia inmutable del backup lleva una semana fallando y nadie lo ha relacionado con los controles. Un control está marcado como implantado sin ninguna evidencia detrás. La excepción de DLP caducó el mes pasado. Y la misma prueba de restauración responde a ISO 27001, NIS2 y RGPD, pero la recogen tres personas tres veces, o nadie.
+
+## Qué he hecho
+- Un único registro de controles y evidencias mapeado a ISO/IEC 27001:2022, NIS2 y RGPD, con comprobaciones en cinco áreas: evidencias, controles, excepciones, cobertura por requisito y calidad de los datos.
+- El grado de preparación de cada marco para la fecha de auditoría: cada requisito queda cubierto, excluido, en riesgo o como brecha, con lo que lo impide.
+- `report.html` con un plan de recogida a nueve semanas, `review.md` para la revisión de seguridad, `actions.csv`, un índice `audit-pack.csv` para el auditor, un `soa.csv` en formato de Declaración de Aplicabilidad y `evidence-calendar.ics` con cada fecha de vencimiento.
+
+## Cómo está hecho
+Python solo con la librería estándar. La demo es una empresa inventada con 23 controles, 33 evidencias y 3 excepciones frente a 48 requisitos, cinco semanas antes de una auditoría de seguimiento de ISO 27001, con brechas puestas a propósito. 14 tests.
+
+## Qué aprendí
+De aplicar ISO 27001, NIS2 y RGPD en operaciones de IT, preparando evidencias y respondiendo auditorías: una evidencia bien guardada sirve para varios marcos, y el calendario de lo que hay que recoger importa tanto como los propios controles.
+
+## Siguientes pasos
+- Exportar tu registro de controles y tu índice de evidencias a CSV y adaptar las columnas.
+- Añadir al catálogo los requisitos frente a los que te auditan.
+- Importar `evidence-calendar.ics` en el calendario del equipo y ejecutarlo antes de cada revisión de seguridad."""),
 ]
