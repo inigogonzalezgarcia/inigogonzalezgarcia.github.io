@@ -1155,4 +1155,48 @@ De aplicar ISO 27001, NIS2 y RGPD en operaciones de IT, preparando evidencias y 
 - Exportar tu registro de controles y tu índice de evidencias a CSV y adaptar las columnas.
 - Añadir al catálogo los requisitos frente a los que te auditan.
 - Importar `evidence-calendar.ics` en el calendario del equipo y ejecutarlo antes de cada revisión de seguridad."""),
+dict(n="26", repo="26-ot-segmentation-lab", date="2026-10-20", cat="tools",
+ title_en="Which paths into the plant network should not exist? A Purdue and IEC 62443 segmentation lab", title_es="¿Qué caminos hacia la red de planta no deberían existir? Un laboratorio de segmentación Purdue e IEC 62443",
+ dek_en="Zones, assets, firewall rules and observed traffic side by side: risky paths into OT, remote access that skips the jump host, and a tighter rule set built from what the plant really uses.",
+ dek_es="Zonas, activos, reglas de firewall y tráfico observado juntos: caminos de riesgo hacia OT, accesos remotos que se saltan el jump host y un conjunto de reglas más ajustado a partir de lo que la planta usa de verdad.",
+ en="""
+
+## The problem
+On a plant network the risky paths are rarely the ones in the diagram. A commissioning rule that allows anything from the office to the plant servers is still there years later. A finance PC reads a PLC with Modbus for a report. A vendor connects with RDP straight to an HMI. A temporary rule for an upgrade expired a month ago and still carries traffic. The rule set, the inventory and the real traffic each tell a different story.
+
+## What I built
+- A check of zones, assets, conduits and observed flows against the Purdue model and the zones and conduits idea of IEC 62443: rules that bypass the DMZ or skip a level, controller protocols from L3 or above, cleartext admin protocols, OT devices talking to the internet, remote access that does not start on the jump host and the safety system reachable from control.
+- Asset and data checks: devices missing from the inventory, assets outside their zone's subnet, end-of-life Windows in OT and zones without an owner.
+- `report.html` with a Purdue diagram coloured by status, `firewall-proposal.csv` with allow, review, re-route via DMZ or block for each observed service, `review.md`, `actions.csv` and a zone-to-zone matrix.
+
+## How it is built
+Python with the standard library only. The demo is a made-up bottling plant with 8 zones, 25 assets, 16 conduits and a week of flows, with problems placed on purpose. 16 tests and a runbook for the segmentation review.
+
+## What I learned
+From years supporting data centre and IT-OT integration work: Cisco switches and routers, comms rooms and racks, FortiGate firewalls, connectivity providers, DR/BCP tests and changes through CAB with a rollback plan. That work showed me that a firewall change in a plant is only safe when you know what traffic really crosses it. Now I am studying IEC 62443 zones and conduits, and this lab is how I practise it.
+
+## Next steps
+- Export your zones, inventory and firewall rules to CSV and a week of flows from your firewall or NetFlow.
+- Review the proposal with the plant before blocking anything, and plan each change through CAB with a rollback.
+- Go deeper into IEC 62443-3-2 risk assessment and security levels per zone.""",
+ es="""
+
+## El problema
+En una red de planta los caminos de riesgo casi nunca son los del diagrama. Una regla de la puesta en marcha que permite todo desde la oficina hacia los servidores de planta sigue ahí años después. Un PC de finanzas lee un PLC con Modbus para un informe. Un proveedor entra por RDP directamente a un HMI. Una regla temporal de una actualización caducó hace un mes y sigue pasando tráfico. Las reglas, el inventario y el tráfico real cuentan cada uno una historia distinta.
+
+## Qué he hecho
+- Una revisión de zonas, activos, conductos y flujos observados frente al modelo Purdue y la idea de zonas y conductos de IEC 62443: reglas que se saltan la DMZ o un nivel, protocolos de controlador desde L3 o superior, protocolos de administración en claro, equipos OT hablando con internet, accesos remotos que no empiezan en el jump host y el sistema de seguridad alcanzable desde control.
+- Comprobaciones de activos y datos: equipos que no están en el inventario, activos fuera de la subred de su zona, Windows sin soporte en OT y zonas sin responsable.
+- `report.html` con un diagrama Purdue coloreado por estado, `firewall-proposal.csv` con permitir, revisar, redirigir por la DMZ o bloquear para cada servicio observado, `review.md`, `actions.csv` y una matriz zona a zona.
+
+## Cómo está hecho
+Python solo con la librería estándar. La demo es una planta embotelladora inventada con 8 zonas, 25 activos, 16 conductos y una semana de flujos, con problemas puestos a propósito. 16 tests y un runbook para la revisión de segmentación.
+
+## Qué aprendí
+De años dando soporte a centro de datos e integración IT-OT: switches y routers Cisco, salas de comunicaciones y racks, firewalls FortiGate, proveedores de conectividad, pruebas de DR/BCP y cambios por CAB con plan de vuelta atrás. Ese trabajo me enseñó que un cambio de firewall en planta solo es seguro cuando sabes qué tráfico pasa de verdad. Ahora estoy estudiando zonas y conductos de IEC 62443, y este laboratorio es mi forma de practicarlo.
+
+## Siguientes pasos
+- Exportar tus zonas, inventario y reglas de firewall a CSV, y una semana de flujos del firewall o de NetFlow.
+- Revisar la propuesta con la planta antes de bloquear nada, y planificar cada cambio por CAB con vuelta atrás.
+- Profundizar en la evaluación de riesgos de IEC 62443-3-2 y los niveles de seguridad por zona."""),
 ]
