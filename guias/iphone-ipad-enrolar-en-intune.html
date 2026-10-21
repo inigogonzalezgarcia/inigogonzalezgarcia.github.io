@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="iPhone and iPad: enrolling in Intune and checking that policies arrive · Iñigo González" data-title-es="iPhone y iPad: enrolar en Intune y comprobar que llegan las políticas · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>iPhone and iPad: enrolling in Intune and checking that policies arrive · Iñigo González</title>
+<meta name="description" content="The user&#x27;s path with Company Portal, what changes when the device comes through Apple Business Manager, and how to verify email, Wi-Fi and apps.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/iphone-ipad-enrolar-en-intune.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iPhone and iPad: enrolling in Intune and checking that policies arrive · Iñigo González">
+<meta property="og:description" content="The user&#x27;s path with Company Portal, what changes when the device comes through Apple Business Manager, and how to verify email, Wi-Fi and apps.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/iphone-ipad-enrolar-en-intune.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="iPhone and iPad: enrolling in Intune and checking that policies arrive · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"iPhone and iPad: enrolling in Intune and checking that policies arrive","alternativeHeadline":"iPhone y iPad: enrolar en Intune y comprobar que llegan las políticas","description":"The user's path with Company Portal, what changes when the device comes through Apple Business Manager, and how to verify email, Wi-Fi and apps.","datePublished":"2026-10-21","dateModified":"2026-10-21","inLanguage":"en","proficiencyLevel":"Beginner","url":"https://inigogonzalezgarcia.github.io/guias/iphone-ipad-enrolar-en-intune.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/iphone-ipad-enrolar-en-intune.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"iPhone and iPad"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 1","item":"https://inigogonzalezgarcia.github.io/guias/nivel-1.html"},{"@type":"ListItem","position":4,"name":"iPhone and iPad: enrolling in Intune and checking that policies arrive","item":"https://inigogonzalezgarcia.github.io/guias/iphone-ipad-enrolar-en-intune.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="nivel-1.html"><span class="es">Nivel 1</span><span class="en">Level 1</span></a></p>
+    <h1><span class="es">iPhone y iPad: enrolar en Intune y comprobar que llegan las políticas</span><span class="en">iPhone and iPad: enrolling in Intune and checking that policies arrive</span></h1>
+    <p class="lede"><span class="es">El camino del usuario con el Portal de empresa, qué cambia si el dispositivo viene por Apple Business Manager, y cómo verificar correo, Wi-Fi y apps.</span><span class="en">The user&#x27;s path with Company Portal, what changes when the device comes through Apple Business Manager, and how to verify email, Wi-Fi and apps.</span></p><p class="label post-meta"><span class="es">Nivel 1</span><span class="en">Level 1</span> · <span class="es">iPhone y iPad</span><span class="en">iPhone and iPad</span> · <span class="es">5 min</span><span class="en">4 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">21 oct 2026</span><span class="en">21 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Un iPhone o iPad gestionado por Intune: con el perfil de administración instalado, el correo configurado solo, la Wi-Fi corporativa y las aplicaciones obligatorias. Y saber dónde mirar cuando algo de eso no llega.</p>
+<h2>Antes de empezar</h2>
+<ul><li>El <strong>certificado push de Apple (APNs)</strong> del tenant tiene que estar vigente. Caduca cada año y, si caduca, ningún dispositivo Apple se enrola ni recibe políticas. Está en Intune → Dispositivos → Inscripción → Apple.</li><li>El usuario tiene licencia con Intune y, en el dispositivo, un <strong>ID de Apple</strong> para instalar el Portal de empresa desde el App Store (si las apps se despliegan con licencias VPP asignadas al dispositivo, el ID de Apple no hace falta para ellas).</li><li>Sabes si el dispositivo es <strong>personal</strong> (el usuario lo enrola con el Portal de empresa) o <strong>corporativo</strong> comprado a través de Apple Business Manager (se enrola solo al encenderlo, con el Asistente de configuración).</li></ul>
+<h2>1. Dispositivo personal: el camino del usuario</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">iOS · Portal de empresa</span></figcaption><div class="ui-body"><div class="ui-path"><span>App Store</span><span class="ui-sep" aria-hidden="true">›</span><span>Intune Company Portal</span><span class="ui-sep" aria-hidden="true">›</span><span>Obtener</span></div><div class="ui-path"><span>Portal de empresa</span><span class="ui-sep" aria-hidden="true">›</span><span>Iniciar sesión</span><span class="ui-sep" aria-hidden="true">›</span><span>laura.prado@contoso.com</span></div><div class="ui-path"><span>Configuración del acceso</span><span class="ui-sep" aria-hidden="true">›</span><span>Comenzar</span><span class="ui-sep" aria-hidden="true">›</span><span>Descargar perfil</span></div><div class="ui-path"><span>Ajustes</span><span class="ui-sep" aria-hidden="true">›</span><span>Perfil descargado</span><span class="ui-sep" aria-hidden="true">›</span><span>Instalar</span><span class="ui-sep" aria-hidden="true">›</span><span>Introducir código del iPhone</span></div><div class="ui-field"><span class="ui-k">Perfil</span><span class="ui-v">Administración de Microsoft Intune</span></div><div class="ui-btn">Instalar</div><div class="ui-path"><span>Portal de empresa</span><span class="ui-sep" aria-hidden="true">›</span><span>Continuar</span><span class="ui-sep" aria-hidden="true">›</span><span>Comprobando el dispositivo…</span></div><div class="ui-field"><span class="ui-k">Estado</span><span class="ui-v">Ya tienes acceso a los recursos de la empresa</span></div></div></figure>
+<p>El paso que más se atasca es el de <strong>Ajustes → Perfil descargado</strong>: el Portal de empresa descarga el perfil pero el usuario tiene que ir a Ajustes a instalarlo. Si cierra la app en ese punto, se queda a medias; con volver al Portal de empresa y pulsar &quot;Continuar&quot; se retoma.</p>
+<h2>2. Dispositivo corporativo (Apple Business Manager)</h2>
+<p>Si el iPhone se compró con el número de cliente de la empresa, aparece en Apple Business Manager y de ahí pasa a Intune por el <strong>token de inscripción automatizada</strong>. Al encenderlo por primera vez, el Asistente de configuración muestra &quot;contoso configurará este dispositivo&quot; y el usuario solo inicia sesión. No hay Portal de empresa que instalar.</p>
+<p>Si un iPhone corporativo se enciende y no muestra esa pantalla, suele ser que no está asignado al token en Apple Business Manager o que el perfil de inscripción no está asignado en Intune. Lo ves en <strong>Intune → Dispositivos → Inscripción → Apple → Tokens de inscripción → Dispositivos</strong>: busca el número de serie.</p>
+<h2>3. Comprueba en Intune</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Intune · Dispositivos › iOS/iPadOS</span></figcaption><div class="ui-body"><div class="ui-path"><span>Dispositivos</span><span class="ui-sep" aria-hidden="true">›</span><span>iOS/iPadOS</span><span class="ui-sep" aria-hidden="true">›</span><span>iPhone de Laura</span></div><div class="ui-field"><span class="ui-k">Propiedad</span><span class="ui-v">Corporativo</span></div><div class="ui-field"><span class="ui-k">Inscrito por</span><span class="ui-v">laura.prado@contoso.com</span></div><div class="ui-field"><span class="ui-k">Versión del SO</span><span class="ui-v">iOS 18.1</span></div><div class="ui-field"><span class="ui-k">Supervisado</span><span class="ui-v">Sí</span></div><div class="ui-field"><span class="ui-k">Cumplimiento</span><span class="ui-v">Conforme</span></div><div class="ui-field"><span class="ui-k">Último check-in</span><span class="ui-v">21/10/2026 10:41</span></div><div class="ui-btn">Sincronizar] [Retirar] [Bloqueo remoto] [Quitar código</div></div></figure>
+<p><strong>Supervisado: Sí</strong> solo aparece en los que vienen por Apple Business Manager, y es lo que permite las políticas más restrictivas (bloquear el App Store, modo de una sola app). Un dispositivo personal nunca está supervisado, y eso no es un fallo.</p>
+<h2>4. Lo que no llega y por qué</h2>
+<ul><li><strong>El correo no se configura solo</strong>: el perfil de correo necesita que el usuario tenga el atributo correcto (UPN o correo principal) y que Outlook esté instalado si el perfil apunta a Outlook. Mira <strong>Dispositivos → el dispositivo → Perfiles de configuración</strong>: el perfil de correo tiene que estar &quot;Correcto&quot;. Si está &quot;Pendiente&quot;, pulsa <strong>Sincronizar</strong> y espera dos minutos.</li><li><strong>La Wi-Fi corporativa no aparece</strong>: lo mismo, perfil de Wi-Fi pendiente o con error. Si usa certificado (EAP-TLS), el perfil SCEP tiene que haber llegado antes: aparece en Ajustes → General → VPN y gestión de dispositivos → el perfil de Intune → Más detalles → Certificados.</li><li><strong>Las apps obligatorias no se instalan</strong>: en un dispositivo personal, iOS pregunta al usuario &quot;contoso quiere instalar Teams&quot; y hay que aceptar. Si no aparece la pregunta, la app está asignada como disponible, no como obligatoria, o las licencias VPP se han agotado (Aplicaciones → iOS → la app → Licencias).</li><li><strong>Pide el ID de Apple para una app de empresa</strong>: la licencia VPP está asignada por usuario en lugar de por dispositivo. Para dispositivos compartidos o corporativos, asignar por dispositivo evita esa pregunta.</li></ul>
+<h2>5. Retirar y bloquear</h2>
+<ul><li><strong>Retirar</strong> quita el perfil de administración, el correo y las apps de empresa. Es lo que haces en una baja o cuando el usuario cambia de móvil. Las fotos y las apps personales no se tocan.</li><li><strong>Bloqueo remoto</strong> bloquea la pantalla con el código del usuario; sirve si lo ha dejado en un taxi.</li><li><strong>Borrar</strong> devuelve el dispositivo a fábrica. En uno personal, solo con el permiso del usuario por escrito en el ticket. En uno corporativo con <strong>bloqueo de activación</strong>, antes de borrar asegúrate de tener el código de omisión (Intune lo guarda si el dispositivo está supervisado): si no, el iPhone queda inservible para el siguiente usuario.</li></ul>
+<h2>Siguientes pasos</h2>
+<ul><li>Apunta en el calendario del equipo la fecha de caducidad del certificado APNs y de los tokens de Apple Business Manager y VPP: los tres caducan cada año.</li><li>Para los iPad compartidos de una sala o un mostrador, mira el <strong>modo de una sola app</strong> y la inscripción sin usuario.</li><li>En el Nivel 3 verás cómo diseñar los perfiles de configuración (correo, Wi-Fi, certificados, restricciones) para iOS, macOS, Windows y Android desde la misma consola.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>An iPhone or iPad managed by Intune: with the management profile installed, email configured on its own, the corporate Wi-Fi and the required apps. And knowing where to look when any of that does not arrive.</p>
+<h2>Before you start</h2>
+<ul><li>The tenant&#x27;s <strong>Apple push certificate (APNs)</strong> has to be valid. It expires every year and, if it does, no Apple device enrols or receives policies. It is in Intune → Devices → Enrolment → Apple.</li><li>The user has a licence with Intune and, on the device, an <strong>Apple ID</strong> to install Company Portal from the App Store (if apps are deployed with device-assigned VPP licences, no Apple ID is needed for those).</li><li>You know whether the device is <strong>personal</strong> (the user enrols it with Company Portal) or <strong>corporate</strong>, bought through Apple Business Manager (it enrols on its own at first power-on, through Setup Assistant).</li></ul>
+<h2>1. Personal device: the user&#x27;s path</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">iOS · Company Portal</span></figcaption><div class="ui-body"><div class="ui-path"><span>App Store</span><span class="ui-sep" aria-hidden="true">›</span><span>Intune Company Portal</span><span class="ui-sep" aria-hidden="true">›</span><span>Get</span></div><div class="ui-path"><span>Company Portal</span><span class="ui-sep" aria-hidden="true">›</span><span>Sign in</span><span class="ui-sep" aria-hidden="true">›</span><span>laura.prado@contoso.com</span></div><div class="ui-path"><span>Access setup</span><span class="ui-sep" aria-hidden="true">›</span><span>Begin</span><span class="ui-sep" aria-hidden="true">›</span><span>Download profile</span></div><div class="ui-path"><span>Settings</span><span class="ui-sep" aria-hidden="true">›</span><span>Profile downloaded</span><span class="ui-sep" aria-hidden="true">›</span><span>Install</span><span class="ui-sep" aria-hidden="true">›</span><span>Enter the iPhone passcode</span></div><div class="ui-field"><span class="ui-k">Profile</span><span class="ui-v">Microsoft Intune management</span></div><div class="ui-btn">Install</div><div class="ui-path"><span>Company Portal</span><span class="ui-sep" aria-hidden="true">›</span><span>Continue</span><span class="ui-sep" aria-hidden="true">›</span><span>Checking your device…</span></div><div class="ui-field"><span class="ui-k">Status</span><span class="ui-v">You can now access company resources</span></div></div></figure>
+<p>The step that gets stuck most is <strong>Settings → Profile downloaded</strong>: Company Portal downloads the profile but the user has to go to Settings to install it. If they close the app at that point, it stays half done; going back to Company Portal and tapping &quot;Continue&quot; picks it up again.</p>
+<h2>2. Corporate device (Apple Business Manager)</h2>
+<p>If the iPhone was bought with the company&#x27;s customer number, it appears in Apple Business Manager and from there passes to Intune through the <strong>automated enrolment token</strong>. At first power-on, Setup Assistant shows &quot;contoso will configure this device&quot; and the user only signs in. There is no Company Portal to install.</p>
+<p>If a corporate iPhone powers on and does not show that screen, it is usually not assigned to the token in Apple Business Manager, or the enrolment profile is not assigned in Intune. You can see it in <strong>Intune → Devices → Enrolment → Apple → Enrolment program tokens → Devices</strong>: search by serial number.</p>
+<h2>3. Check in Intune</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Intune · Devices › iOS/iPadOS</span></figcaption><div class="ui-body"><div class="ui-path"><span>Devices</span><span class="ui-sep" aria-hidden="true">›</span><span>iOS/iPadOS</span><span class="ui-sep" aria-hidden="true">›</span><span>Laura&#x27;s iPhone</span></div><div class="ui-field"><span class="ui-k">Ownership</span><span class="ui-v">Corporate</span></div><div class="ui-field"><span class="ui-k">Enrolled by</span><span class="ui-v">laura.prado@contoso.com</span></div><div class="ui-field"><span class="ui-k">OS version</span><span class="ui-v">iOS 18.1</span></div><div class="ui-field"><span class="ui-k">Supervised</span><span class="ui-v">Yes</span></div><div class="ui-field"><span class="ui-k">Compliance</span><span class="ui-v">Compliant</span></div><div class="ui-field"><span class="ui-k">Last check-in</span><span class="ui-v">21/10/2026 10:41</span></div><div class="ui-btn">Sync] [Retire] [Remote lock] [Remove passcode</div></div></figure>
+<p><strong>Supervised: Yes</strong> only appears on devices that come through Apple Business Manager, and it is what allows the stricter policies (blocking the App Store, single-app mode). A personal device is never supervised, and that is not a fault.</p>
+<h2>4. What doesn&#x27;t arrive and why</h2>
+<ul><li><strong>Email does not configure itself</strong>: the email profile needs the user to have the right attribute (UPN or primary email) and Outlook installed if the profile points to Outlook. Look at <strong>Devices → the device → Configuration profiles</strong>: the email profile has to be &quot;Succeeded&quot;. If it is &quot;Pending&quot;, tap <strong>Sync</strong> and wait two minutes.</li><li><strong>The corporate Wi-Fi does not appear</strong>: same thing, Wi-Fi profile pending or in error. If it uses a certificate (EAP-TLS), the SCEP profile has to have arrived first: it shows in Settings → General → VPN &amp; Device Management → the Intune profile → More details → Certificates.</li><li><strong>Required apps don&#x27;t install</strong>: on a personal device, iOS asks the user &quot;contoso wants to install Teams&quot; and they have to accept. If the prompt never appears, the app is assigned as available rather than required, or the VPP licences have run out (Apps → iOS → the app → Licences).</li><li><strong>It asks for an Apple ID for a company app</strong>: the VPP licence is assigned per user instead of per device. For shared or corporate devices, device assignment avoids that prompt.</li></ul>
+<h2>5. Retire and lock</h2>
+<ul><li><strong>Retire</strong> removes the management profile, email and company apps. That is what you do for a leaver or when the user changes phone. Photos and personal apps are untouched.</li><li><strong>Remote lock</strong> locks the screen with the user&#x27;s passcode; useful if it was left in a taxi.</li><li><strong>Wipe</strong> returns the device to factory settings. On a personal one, only with the user&#x27;s written permission in the ticket. On a corporate one with <strong>Activation Lock</strong>, make sure you have the bypass code before wiping (Intune stores it if the device is supervised): otherwise the iPhone is useless for the next user.</li></ul>
+<h2>Next steps</h2>
+<ul><li>Put the expiry dates of the APNs certificate and the Apple Business Manager and VPP tokens in the team calendar: all three expire every year.</li><li>For shared iPads in a meeting room or at a counter, look at <strong>single-app mode</strong> and userless enrolment.</li><li>In Level 3 you&#x27;ll see how to design configuration profiles (email, Wi-Fi, certificates, restrictions) for iOS, macOS, Windows and Android from the same console.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Nivel 1</span><span class="en">Level 1</span> · <span class="es">iPhone y iPad</span><span class="en">iPhone and iPad</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-1.html"><span class="es">Todas las guías del Nivel 1</span><span class="en">All Level 1 guides</span> →</a>
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="impresoras-instalar-impresora-de-red-y-cola-atascada.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Impresoras: instalar una impresora de red y desatascar la cola</span><span class="en">Printers: installing a network printer and clearing a stuck queue</span></span></a>
+    <a class="post-nav-link next" href="jira-service-management-un-ticket-bien-hecho.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Jira Service Management: un ticket bien hecho, de principio a fin</span><span class="en">Jira Service Management: a well-made ticket, from start to finish</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

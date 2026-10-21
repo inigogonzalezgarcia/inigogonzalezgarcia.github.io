@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Jira Service Management: a well-made ticket, from start to finish · Iñigo González" data-title-es="Jira Service Management: un ticket bien hecho, de principio a fin · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Jira Service Management: a well-made ticket, from start to finish · Iñigo González</title>
+<meta name="description" content="Classify, prioritise, write for the next person, escalate and close. Plus the JQL searches you&#x27;ll use every day.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/jira-service-management-un-ticket-bien-hecho.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jira Service Management: a well-made ticket, from start to finish · Iñigo González">
+<meta property="og:description" content="Classify, prioritise, write for the next person, escalate and close. Plus the JQL searches you&#x27;ll use every day.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/jira-service-management-un-ticket-bien-hecho.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jira Service Management: a well-made ticket, from start to finish · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Jira Service Management: a well-made ticket, from start to finish","alternativeHeadline":"Jira Service Management: un ticket bien hecho, de principio a fin","description":"Classify, prioritise, write for the next person, escalate and close. Plus the JQL searches you'll use every day.","datePublished":"2026-10-21","dateModified":"2026-10-21","inLanguage":"en","proficiencyLevel":"Beginner","url":"https://inigogonzalezgarcia.github.io/guias/jira-service-management-un-ticket-bien-hecho.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/jira-service-management-un-ticket-bien-hecho.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Jira Service Management: tickets"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 1","item":"https://inigogonzalezgarcia.github.io/guias/nivel-1.html"},{"@type":"ListItem","position":4,"name":"Jira Service Management: a well-made ticket, from start to finish","item":"https://inigogonzalezgarcia.github.io/guias/jira-service-management-un-ticket-bien-hecho.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="nivel-1.html"><span class="es">Nivel 1</span><span class="en">Level 1</span></a></p>
+    <h1><span class="es">Jira Service Management: un ticket bien hecho, de principio a fin</span><span class="en">Jira Service Management: a well-made ticket, from start to finish</span></h1>
+    <p class="lede"><span class="es">Clasificar, priorizar, escribir para el siguiente, escalar y cerrar. Y las búsquedas JQL que usarás cada día.</span><span class="en">Classify, prioritise, write for the next person, escalate and close. Plus the JQL searches you&#x27;ll use every day.</span></p><p class="label post-meta"><span class="es">Nivel 1</span><span class="en">Level 1</span> · <span class="es">Jira Service Management: tickets</span><span class="en">Jira Service Management: tickets</span> · <span class="es">5 min</span><span class="en">5 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">21 oct 2026</span><span class="en">21 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Tickets que cualquiera del equipo puede retomar sin llamarte, tiempos de respuesta dentro del SLA, y una cola que al final del día dice la verdad. Suena a poco; es lo que diferencia a un técnico de soporte bueno en la primera semana.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Tu proyecto de servicio en Jira (por ejemplo <code>SD</code>) y los <strong>tipos de solicitud</strong> que tiene: incidencia, petición de servicio, pregunta, cambio.</li><li>La <strong>matriz de prioridad</strong> de tu empresa: impacto (cuántos usuarios o qué servicio) por urgencia (si pueden trabajar o no). Si no existe por escrito, pídela.</li><li>Los SLA del proyecto (tiempo de primera respuesta y de resolución por prioridad). Se ven en cada ticket, en el panel de la derecha.</li></ul>
+<h2>1. Al recibirlo: clasifica en dos minutos</h2>
+<p>Antes de tocar nada, deja el ticket bien puesto. Es lo que permite que los informes y las colas de los demás funcionen.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Jira Service Management · SD-4821</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Resumen</span><span class="ui-v">Outlook no abre tras la actualización de esta mañana</span></div><div class="ui-field"><span class="ui-k">Tipo de solicitud</span><span class="ui-v">Incidencia</span></div><div class="ui-field"><span class="ui-k">Prioridad</span><span class="ui-v">Media (impacto: 1 usuario · urgencia: alta, no puede trabajar)</span></div><div class="ui-field"><span class="ui-k">Componente</span><span class="ui-v">Correo y Outlook</span></div><div class="ui-field"><span class="ui-k">Elemento afectado</span><span class="ui-v">LAPTOP-7F2K9Q</span></div><div class="ui-field"><span class="ui-k">Asignado a</span><span class="ui-v">Iñigo</span></div><div class="ui-field"><span class="ui-k">SLA · Tiempo de primera respuesta</span><span class="ui-v">00:42 restantes</span></div><div class="ui-btn">Responder al cliente] [Comentario interno] [Transición: En curso</div></div></figure>
+<ul><li><strong>Incidencia</strong> es algo que funcionaba y ha dejado de funcionar. <strong>Petición de servicio</strong> es algo nuevo (un acceso, una licencia, un equipo). No las mezcles: tienen SLA y flujos distintos.</li><li>El <strong>resumen</strong> dice el síntoma y el contexto en una línea. &quot;Outlook&quot; no sirve; &quot;Outlook no abre tras la actualización de esta mañana&quot; sí.</li><li>La <strong>prioridad</strong> sale de la matriz, no de lo nervioso que esté el usuario. Un usuario sin trabajar es urgencia alta; un director que quiere un fondo de pantalla, baja.</li></ul>
+<h2>2. La primera respuesta</h2>
+<p>El SLA de primera respuesta se cumple con un comentario <strong>al cliente</strong>, no con un comentario interno ni con cambiar el estado. Que sea corto, concreto y con una pregunta si falta información:</p>
+<p class="g-tip">He visto el ticket. Para localizar el fallo necesito que me digas: ¿sale algún mensaje de error al abrir Outlook? ¿Puedes entrar en el correo desde el navegador (outlook.office.com)? Mientras, lo estoy revisando desde aquí.</p>
+<p>Con eso paras el reloj de primera respuesta y el usuario sabe que alguien está con ello.</p>
+<h2>3. Trabajar el ticket: escribe para el siguiente</h2>
+<p>Cada paso que das va en un <strong>comentario interno</strong> con lo que probaste y el resultado. No para tu jefe: para el compañero que lo retoma a las 17:00 cuando tú te vas.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Jira Service Management · SD-4821 · comentario interno</span></figcaption><div class="ui-body"><div class="ui-txt">Probado: outlook.office.com abre bien → el buzón está OK, es el cliente de Outlook.</div><div class="ui-txt">Probado: Outlook en modo seguro (outlook.exe /safe) abre → es un complemento o el perfil.</div><div class="ui-txt">Deshabilitado el complemento de la app de firmas → Outlook abre con normalidad.</div><div class="ui-txt">Siguiente: pedir al proveedor de la app de firmas la versión compatible con la build 2410. Ticket con ellos: PRV-118.</div></div></figure>
+<p>Un comentario así tiene cuatro cosas: qué probaste, qué pasó, qué descartas y cuál es el siguiente paso. Si el ticket queda <strong>En espera del cliente</strong> o <strong>En espera del proveedor</strong>, el reloj del SLA se para (si el flujo está configurado así; compruébalo en tu proyecto) y queda claro de quién depende.</p>
+<h2>4. Escalar</h2>
+<p>Escalas cuando el siguiente paso necesita permisos o conocimiento que no tienes, no cuando llevas mucho tiempo. Al escalar, el ticket pasa al grupo correspondiente (<strong>Asignado a</strong> el equipo, o un ticket enlazado en su proyecto) con un resumen de lo que ya está descartado. Un ticket escalado con &quot;no funciona, mirad&quot; vuelve a los diez minutos.</p>
+<h2>5. Cerrar</h2>
+<ul><li>La <strong>solución</strong> va en un comentario al cliente, en lenguaje de usuario: &quot;Era un complemento de Outlook incompatible con la última actualización. Lo he desactivado y he pedido al proveedor la versión nueva. Si vuelve a pasar, responde a este correo&quot;.</li><li>El campo <strong>Resolución</strong> se rellena con honestidad: *Resuelto*, *Solución alternativa* (si lo has parcheado y queda un ticket de problema abierto), *No se puede reproducir*, *Duplicado* (enlazado al original).</li><li>Si el usuario no contesta a &quot;¿lo puedes comprobar?&quot;, el flujo lo cierra solo a los pocos días. No lo cierres a mano en el minuto uno: el que reabre un ticket cerrado a la fuerza nunca vuelve contento.</li></ul>
+<h2>6. Las búsquedas JQL de cada día</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Jira · JQL</span><button class="t-copy" type="button" data-copy="project = SD AND assignee = currentUser() AND statusCategory != Done ORDER BY priority DESC, created ASC&#10;project = SD AND assignee IS EMPTY AND &quot;Time to first response&quot; &lt; remaining(&quot;1h&quot;)&#10;project = SD AND reporter = &quot;laura.prado@contoso.com&quot; ORDER BY created DESC&#10;project = SD AND status = &quot;Waiting for vendor&quot; AND updated &lt; -5d" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmt"># Mi cola, lo más urgente primero</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>project = SD AND assignee = currentUser() AND statusCategory != Done ORDER BY priority DESC, created ASC</span><span class="t-cmt"># Tickets sin asignar que van a incumplir el SLA en la próxima hora</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>project = SD AND assignee IS EMPTY AND &quot;Time to first response&quot; &lt; remaining(&quot;1h&quot;)</span><span class="t-cmt"># Todo lo que ha abierto este usuario (para ver si es recurrente)</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>project = SD AND reporter = &quot;laura.prado@contoso.com&quot; ORDER BY created DESC</span><span class="t-cmt"># Lo que lleva más de 5 días esperando al proveedor</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>project = SD AND status = &quot;Waiting for vendor&quot; AND updated &lt; -5d</span></code></pre></figure>
+<p>Guarda las dos primeras como filtros y ponlas en tu tablero: la cola deja de ser una lista y pasa a ser un plan.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Cuando veas el mismo ticket tres veces, abre un <strong>problema</strong> enlazado: ahí vive la causa raíz, y los incidentes solo se enlazan.</li><li>Aprende a escribir un artículo de la <strong>base de conocimiento</strong> desde el ticket: Jira lo sugiere al usuario antes de que abra el siguiente.</li><li>En el Nivel 2 verás Confluence y, en el 4, cómo se administran los flujos, los SLA y las automatizaciones del proyecto.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>Tickets anyone on the team can pick up without calling you, response times inside the SLA, and a queue that tells the truth at the end of the day. It sounds small; it is what sets a good support technician apart in the first week.</p>
+<h2>Before you start</h2>
+<ul><li>Your service project in Jira (say <code>SD</code>) and the <strong>request types</strong> it has: incident, service request, question, change.</li><li>Your company&#x27;s <strong>priority matrix</strong>: impact (how many users or which service) by urgency (whether they can work or not). If it is not written down, ask for it.</li><li>The project&#x27;s SLAs (first response and resolution time per priority). They show on every ticket, in the right-hand panel.</li></ul>
+<h2>1. On arrival: classify in two minutes</h2>
+<p>Before touching anything, set the ticket up properly. That is what lets reports and everyone else&#x27;s queues work.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Jira Service Management · SD-4821</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Summary</span><span class="ui-v">Outlook won&#x27;t open after this morning&#x27;s update</span></div><div class="ui-field"><span class="ui-k">Request type</span><span class="ui-v">Incident</span></div><div class="ui-field"><span class="ui-k">Priority</span><span class="ui-v">Medium (impact: 1 user · urgency: high, cannot work)</span></div><div class="ui-field"><span class="ui-k">Component</span><span class="ui-v">Email and Outlook</span></div><div class="ui-field"><span class="ui-k">Affected item</span><span class="ui-v">LAPTOP-7F2K9Q</span></div><div class="ui-field"><span class="ui-k">Assignee</span><span class="ui-v">Iñigo</span></div><div class="ui-field"><span class="ui-k">SLA · Time to first response</span><span class="ui-v">00:42 remaining</span></div><div class="ui-btn">Reply to customer] [Internal comment] [Transition: In progress</div></div></figure>
+<ul><li>An <strong>incident</strong> is something that worked and has stopped working. A <strong>service request</strong> is something new (an access, a licence, a device). Don&#x27;t mix them: they have different SLAs and workflows.</li><li>The <strong>summary</strong> states the symptom and the context in one line. &quot;Outlook&quot; is useless; &quot;Outlook won&#x27;t open after this morning&#x27;s update&quot; works.</li><li><strong>Priority</strong> comes from the matrix, not from how nervous the user is. A user unable to work is high urgency; a director who wants a wallpaper is low.</li></ul>
+<h2>2. The first response</h2>
+<p>The first-response SLA is met with a comment <strong>to the customer</strong>, not with an internal comment or a status change. Keep it short, concrete and with a question if information is missing:</p>
+<p class="g-tip">I&#x27;ve seen the ticket. To locate the fault I need to know: does any error message appear when opening Outlook? Can you get into your email from the browser (outlook.office.com)? Meanwhile I&#x27;m checking from here.</p>
+<p>That stops the first-response clock and the user knows someone is on it.</p>
+<h2>3. Working the ticket: write for the next person</h2>
+<p>Every step you take goes into an <strong>internal comment</strong> with what you tried and the result. Not for your manager: for the colleague who picks it up at 17:00 when you leave.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Jira Service Management · SD-4821 · internal comment</span></figcaption><div class="ui-body"><div class="ui-txt">Tried: outlook.office.com opens fine → the mailbox is OK, it&#x27;s the Outlook client.</div><div class="ui-txt">Tried: Outlook in safe mode (outlook.exe /safe) opens → it&#x27;s an add-in or the profile.</div><div class="ui-txt">Disabled the signature app&#x27;s add-in → Outlook opens normally.</div><div class="ui-txt">Next: ask the signature app vendor for the version compatible with build 2410. Ticket with them: PRV-118.</div></div></figure>
+<p>A comment like that has four things: what you tried, what happened, what you rule out and what the next step is. If the ticket goes to <strong>Waiting for customer</strong> or <strong>Waiting for vendor</strong>, the SLA clock pauses (if the workflow is set up that way; check your project) and it is clear who it depends on.</p>
+<h2>4. Escalating</h2>
+<p>You escalate when the next step needs permissions or knowledge you don&#x27;t have, not when it has taken a long time. When escalating, the ticket moves to the right group (<strong>Assignee</strong> set to the team, or a linked ticket in their project) with a summary of what is already ruled out. A ticket escalated with &quot;doesn&#x27;t work, have a look&quot; comes back in ten minutes.</p>
+<h2>5. Closing</h2>
+<ul><li>The <strong>solution</strong> goes in a comment to the customer, in user language: &quot;It was an Outlook add-in incompatible with the latest update. I&#x27;ve disabled it and asked the vendor for the new version. If it happens again, reply to this email&quot;.</li><li>The <strong>Resolution</strong> field is filled in honestly: *Done*, *Workaround* (if you patched it and a problem ticket stays open), *Cannot reproduce*, *Duplicate* (linked to the original).</li><li>If the user does not answer &quot;can you check?&quot;, the workflow closes it on its own after a few days. Don&#x27;t close it by hand in minute one: whoever reopens a force-closed ticket never comes back happy.</li></ul>
+<h2>6. The everyday JQL searches</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Jira · JQL</span><button class="t-copy" type="button" data-copy="project = SD AND assignee = currentUser() AND statusCategory != Done ORDER BY priority DESC, created ASC&#10;project = SD AND assignee IS EMPTY AND &quot;Time to first response&quot; &lt; remaining(&quot;1h&quot;)&#10;project = SD AND reporter = &quot;laura.prado@contoso.com&quot; ORDER BY created DESC&#10;project = SD AND status = &quot;Waiting for vendor&quot; AND updated &lt; -5d" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmt"># My queue, most urgent first</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>project = SD AND assignee = currentUser() AND statusCategory != Done ORDER BY priority DESC, created ASC</span><span class="t-cmt"># Unassigned tickets about to breach the SLA in the next hour</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>project = SD AND assignee IS EMPTY AND &quot;Time to first response&quot; &lt; remaining(&quot;1h&quot;)</span><span class="t-cmt"># Everything this user has opened (to see if it is recurring)</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>project = SD AND reporter = &quot;laura.prado@contoso.com&quot; ORDER BY created DESC</span><span class="t-cmt"># What has been waiting for the vendor for more than 5 days</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>project = SD AND status = &quot;Waiting for vendor&quot; AND updated &lt; -5d</span></code></pre></figure>
+<p>Save the first two as filters and put them on your board: the queue stops being a list and becomes a plan.</p>
+<h2>Next steps</h2>
+<ul><li>When you see the same ticket three times, open a linked <strong>problem</strong>: that is where the root cause lives, and the incidents only link to it.</li><li>Learn to write a <strong>knowledge base</strong> article from the ticket: Jira suggests it to the user before they open the next one.</li><li>In Level 2 you&#x27;ll see Confluence and, in Level 4, how the project&#x27;s workflows, SLAs and automations are administered.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Nivel 1</span><span class="en">Level 1</span> · <span class="es">Jira Service Management: tickets</span><span class="en">Jira Service Management: tickets</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-1.html"><span class="es">Todas las guías del Nivel 1</span><span class="en">All Level 1 guides</span> →</a>
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="iphone-ipad-enrolar-en-intune.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">iPhone y iPad: enrolar en Intune y comprobar que llegan las políticas</span><span class="en">iPhone and iPad: enrolling in Intune and checking that policies arrive</span></span></a>
+    <a class="post-nav-link next" href="microsoft-365-asignar-y-retirar-licencias.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Microsoft 365: asignar y retirar licencias, y saber qué incluye cada una</span><span class="en">Microsoft 365: assigning and removing licences, and knowing what each one includes</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

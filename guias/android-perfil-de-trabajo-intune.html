@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Enrolling an Android phone with a work profile in Intune · Iñigo González" data-title-es="Enrolar un Android con perfil de trabajo en Intune · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Enrolling an Android phone with a work profile in Intune · Iñigo González</title>
+<meta name="description" content="What you ask the user to do, what Company Portal does, and how you check that the work profile receives its policies and apps.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/android-perfil-de-trabajo-intune.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Enrolling an Android phone with a work profile in Intune · Iñigo González">
+<meta property="og:description" content="What you ask the user to do, what Company Portal does, and how you check that the work profile receives its policies and apps.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/android-perfil-de-trabajo-intune.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Enrolling an Android phone with a work profile in Intune · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Enrolling an Android phone with a work profile in Intune","alternativeHeadline":"Enrolar un Android con perfil de trabajo en Intune","description":"What you ask the user to do, what Company Portal does, and how you check that the work profile receives its policies and apps.","datePublished":"2026-10-21","dateModified":"2026-10-21","inLanguage":"en","proficiencyLevel":"Beginner","url":"https://inigogonzalezgarcia.github.io/guias/android-perfil-de-trabajo-intune.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/android-perfil-de-trabajo-intune.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Android"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 1","item":"https://inigogonzalezgarcia.github.io/guias/nivel-1.html"},{"@type":"ListItem","position":4,"name":"Enrolling an Android phone with a work profile in Intune","item":"https://inigogonzalezgarcia.github.io/guias/android-perfil-de-trabajo-intune.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="nivel-1.html"><span class="es">Nivel 1</span><span class="en">Level 1</span></a></p>
+    <h1><span class="es">Enrolar un Android con perfil de trabajo en Intune</span><span class="en">Enrolling an Android phone with a work profile in Intune</span></h1>
+    <p class="lede"><span class="es">Qué le pides al usuario, qué hace el Portal de empresa y cómo compruebas que el perfil de trabajo recibe las políticas y las aplicaciones.</span><span class="en">What you ask the user to do, what Company Portal does, and how you check that the work profile receives its policies and apps.</span></p><p class="label post-meta"><span class="es">Nivel 1</span><span class="en">Level 1</span> · <span class="es">Android</span><span class="en">Android</span> · <span class="es">3 min</span><span class="en">3 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">21 oct 2026</span><span class="en">21 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Un móvil Android personal o corporativo con un <strong>perfil de trabajo</strong>: un contenedor separado donde viven el correo, Teams y las aplicaciones de la empresa, con sus políticas, sin tocar las fotos ni las apps personales del usuario. Es el modelo más habitual para &quot;trae tu propio móvil&quot; y el más fácil de dar soporte.</p>
+<h2>Antes de empezar</h2>
+<ul><li>El usuario tiene licencia que incluye Intune y cuenta en Entra ID.</li><li>En Intune, <strong>Inscripción de Android → Perfil de trabajo de propiedad personal</strong> está permitido para su grupo (si no, el Portal de empresa dirá que el dispositivo no se puede inscribir).</li><li>El móvil tiene Android 8 o superior, Google Play y espacio libre. Los teléfonos sin servicios de Google (algunos modelos chinos) no pueden crear perfil de trabajo.</li><li>Si usáis Conditional Access, el usuario verá &quot;necesitas registrar el dispositivo&quot; al abrir Outlook o Teams: es el camino esperado, no un error.</li></ul>
+<h2>1. Lo que hace el usuario</h2>
+<p>Mándale estos pasos tal cual. Son cinco minutos.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Android · Portal de empresa</span></figcaption><div class="ui-body"><div class="ui-path"><span>Google Play</span><span class="ui-sep" aria-hidden="true">›</span><span>Intune Company Portal</span><span class="ui-sep" aria-hidden="true">›</span><span>Instalar</span></div><div class="ui-path"><span>Portal de empresa</span><span class="ui-sep" aria-hidden="true">›</span><span>Iniciar sesión</span><span class="ui-sep" aria-hidden="true">›</span><span>laura.prado@contoso.com</span></div><div class="ui-path"><span>Configuración del acceso</span><span class="ui-sep" aria-hidden="true">›</span><span>Comenzar</span></div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Crear perfil de trabajo</div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Aceptar los términos de Google</div><div class="ui-path"><span>Registro del dispositivo</span><span class="ui-sep" aria-hidden="true">›</span><span>Activar el perfil de trabajo</span></div><div class="ui-field"><span class="ui-k">Estado</span><span class="ui-v">Configurando el perfil de trabajo…</span></div><div class="ui-btn">Siguiente</div></div></figure>
+<p>Al terminar, Android muestra una pestaña <strong>Trabajo</strong> en el cajón de aplicaciones, y las apps de trabajo llevan un maletín pequeño en el icono. Outlook, Teams y Authenticator aparecen allí solas si están asignadas como obligatorias.</p>
+<p class="g-tip">Si el usuario ya tenía Outlook instalado en la parte personal, que lo deje: el de trabajo es otra copia y la cuenta corporativa solo entra en esa.</p>
+<h2>2. Comprueba en Intune</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Intune · Dispositivos › Android</span></figcaption><div class="ui-body"><div class="ui-path"><span>Dispositivos</span><span class="ui-sep" aria-hidden="true">›</span><span>Android</span><span class="ui-sep" aria-hidden="true">›</span><span>Dispositivos Android</span></div><div class="ui-field"><span class="ui-k">Nombre</span><span class="ui-v">Laura_AndroidForWork_21/10/2026</span></div><div class="ui-field"><span class="ui-k">Propiedad</span><span class="ui-v">Personal</span></div><div class="ui-field"><span class="ui-k">Tipo de inscripción</span><span class="ui-v">Perfil de trabajo de propiedad personal</span></div><div class="ui-field"><span class="ui-k">Cumplimiento</span><span class="ui-v">Conforme</span></div><div class="ui-field"><span class="ui-k">Último check-in</span><span class="ui-v">21/10/2026 10:14</span></div><div class="ui-btn">Sincronizar] [Retirar] [Restablecer código de acceso</div></div></figure>
+<p>Si aparece <strong>No conforme</strong>, entra en el dispositivo → <strong>Cumplimiento del dispositivo</strong> y mira qué regla falla. Las habituales: versión de Android por debajo del mínimo, sin bloqueo de pantalla, o el dispositivo está rooteado. La política de cumplimiento te lo dice y el Portal de empresa se lo dice al usuario con el mismo texto.</p>
+<h2>3. Las aplicaciones no llegan</h2>
+<p>La causa más común es la espera: Google Play administrado tarda unos minutos en instalar en el perfil de trabajo. Si pasan más de 15:</p>
+<ol><li>En el móvil: Portal de empresa → <strong>Dispositivos</strong> → el móvil → <strong>Comprobar estado</strong>. Eso fuerza un check-in.</li><li>En Intune: <strong>Aplicaciones → Android → la app → Estado de instalación del dispositivo</strong>. Si pone &quot;No aplicable&quot;, el grupo asignado no incluye al usuario o la app está asignada como disponible y no obligatoria.</li><li>Si la app es de Google Play administrado, comprueba que está <strong>aprobada</strong> en Google Play administrado y sincronizada con Intune (Aplicaciones → Google Play administrado → Sincronizar).</li></ol>
+<h2>4. Retirar el perfil (baja o cambio de móvil)</h2>
+<p>Desde Intune, <strong>Retirar</strong> borra solo el perfil de trabajo: correo, apps y datos de empresa. Las fotos y las apps personales no se tocan. Desde el móvil, el usuario puede hacerlo en Ajustes → Cuentas → <strong>Quitar perfil de trabajo</strong>. Apunta en el ticket la fecha y desde dónde se retiró.</p>
+<p class="g-warn"><strong>Borrar</strong> (wipe) devuelve el móvil a fábrica y solo tiene sentido en dispositivos corporativos. En un móvil personal, retira, no borres.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Para móviles corporativos sin uso personal, mira el modo <strong>dispositivo dedicado</strong> o <strong>totalmente administrado</strong> con Zero-touch.</li><li>Las políticas de protección de aplicaciones (APP/MAM) permiten proteger Outlook y Teams sin inscribir el dispositivo. Es la alternativa cuando el usuario no quiere perfil de trabajo.</li><li>Un filtro de dispositivos por fabricante y versión de Android evita sorpresas con modelos sin servicios de Google.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>A personal or corporate Android phone with a <strong>work profile</strong>: a separate container where company email, Teams and apps live with their policies, without touching the user&#x27;s photos or personal apps. It is the most common model for &quot;bring your own phone&quot; and the easiest to support.</p>
+<h2>Before you start</h2>
+<ul><li>The user has a licence that includes Intune and an account in Entra ID.</li><li>In Intune, <strong>Android enrolment → Personally-owned work profile</strong> is allowed for their group (otherwise Company Portal says the device cannot be enrolled).</li><li>The phone runs Android 8 or later, has Google Play and free space. Phones without Google services (some Chinese models) cannot create a work profile.</li><li>If you use Conditional Access, the user sees &quot;you need to register this device&quot; when opening Outlook or Teams: that is the expected path, not an error.</li></ul>
+<h2>1. What the user does</h2>
+<p>Send them these steps as they are. It takes five minutes.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Android · Company Portal</span></figcaption><div class="ui-body"><div class="ui-path"><span>Google Play</span><span class="ui-sep" aria-hidden="true">›</span><span>Intune Company Portal</span><span class="ui-sep" aria-hidden="true">›</span><span>Install</span></div><div class="ui-path"><span>Company Portal</span><span class="ui-sep" aria-hidden="true">›</span><span>Sign in</span><span class="ui-sep" aria-hidden="true">›</span><span>laura.prado@contoso.com</span></div><div class="ui-path"><span>Access setup</span><span class="ui-sep" aria-hidden="true">›</span><span>Begin</span></div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Create work profile</div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Accept Google&#x27;s terms</div><div class="ui-path"><span>Device registration</span><span class="ui-sep" aria-hidden="true">›</span><span>Activate work profile</span></div><div class="ui-field"><span class="ui-k">Status</span><span class="ui-v">Setting up your work profile…</span></div><div class="ui-btn">Next</div></div></figure>
+<p>When it finishes, Android shows a <strong>Work</strong> tab in the app drawer, and work apps carry a small briefcase on their icon. Outlook, Teams and Authenticator appear there on their own if they are assigned as required.</p>
+<p class="g-tip">If the user already had Outlook installed on the personal side, they can leave it: the work one is a separate copy and the corporate account only signs in there.</p>
+<h2>2. Check in Intune</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Intune · Devices › Android</span></figcaption><div class="ui-body"><div class="ui-path"><span>Devices</span><span class="ui-sep" aria-hidden="true">›</span><span>Android</span><span class="ui-sep" aria-hidden="true">›</span><span>Android devices</span></div><div class="ui-field"><span class="ui-k">Name</span><span class="ui-v">Laura_AndroidForWork_21/10/2026</span></div><div class="ui-field"><span class="ui-k">Ownership</span><span class="ui-v">Personal</span></div><div class="ui-field"><span class="ui-k">Enrolment type</span><span class="ui-v">Personally-owned work profile</span></div><div class="ui-field"><span class="ui-k">Compliance</span><span class="ui-v">Compliant</span></div><div class="ui-field"><span class="ui-k">Last check-in</span><span class="ui-v">21/10/2026 10:14</span></div><div class="ui-btn">Sync] [Retire] [Reset passcode</div></div></figure>
+<p>If it shows <strong>Not compliant</strong>, open the device → <strong>Device compliance</strong> and see which rule fails. The usual ones: Android version below the minimum, no screen lock, or the device is rooted. The compliance policy tells you, and Company Portal tells the user with the same text.</p>
+<h2>3. The apps don&#x27;t arrive</h2>
+<p>The most common cause is waiting: managed Google Play takes a few minutes to install into the work profile. If it has been more than 15:</p>
+<ol><li>On the phone: Company Portal → <strong>Devices</strong> → the phone → <strong>Check status</strong>. That forces a check-in.</li><li>In Intune: <strong>Apps → Android → the app → Device install status</strong>. If it says &quot;Not applicable&quot;, the assigned group does not include the user, or the app is assigned as available rather than required.</li><li>If the app comes from managed Google Play, check it is <strong>approved</strong> in managed Google Play and synced with Intune (Apps → Managed Google Play → Sync).</li></ol>
+<h2>4. Retire the profile (leaver or new phone)</h2>
+<p>From Intune, <strong>Retire</strong> removes only the work profile: email, apps and company data. Photos and personal apps are untouched. From the phone, the user can do it in Settings → Accounts → <strong>Remove work profile</strong>. Note the date and where it was retired from in the ticket.</p>
+<p class="g-warn"><strong>Wipe</strong> returns the phone to factory settings and only makes sense on corporate devices. On a personal phone, retire, don&#x27;t wipe.</p>
+<h2>Next steps</h2>
+<ul><li>For corporate phones with no personal use, look at <strong>dedicated</strong> or <strong>fully managed</strong> mode with Zero-touch.</li><li>App protection policies (APP/MAM) protect Outlook and Teams without enrolling the device. That is the alternative when the user does not want a work profile.</li><li>A device filter by manufacturer and Android version avoids surprises with models that lack Google services.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Nivel 1</span><span class="en">Level 1</span> · <span class="es">Android</span><span class="en">Android</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-1.html"><span class="es">Todas las guías del Nivel 1</span><span class="en">All Level 1 guides</span> →</a>
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="active-directory-alta-usuario-grupos.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Alta de un usuario en Active Directory y sus grupos</span><span class="en">Creating a user in Active Directory and adding them to groups</span></span></a>
+    <a class="post-nav-link next" href="bitlocker-estado-y-clave-de-recuperacion.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">BitLocker: comprobar el cifrado y recuperar un equipo que pide la clave</span><span class="en">BitLocker: checking encryption and recovering a device that asks for the key</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Printers: installing a network printer and clearing a stuck queue · Iñigo González" data-title-es="Impresoras: instalar una impresora de red y desatascar la cola · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Printers: installing a network printer and clearing a stuck queue · Iñigo González</title>
+<meta name="description" content="Add a printer by IP or from the print server, and the three fixes that resolve almost every printing ticket.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/impresoras-instalar-impresora-de-red-y-cola-atascada.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Printers: installing a network printer and clearing a stuck queue · Iñigo González">
+<meta property="og:description" content="Add a printer by IP or from the print server, and the three fixes that resolve almost every printing ticket.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/impresoras-instalar-impresora-de-red-y-cola-atascada.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Printers: installing a network printer and clearing a stuck queue · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Printers: installing a network printer and clearing a stuck queue","alternativeHeadline":"Impresoras: instalar una impresora de red y desatascar la cola","description":"Add a printer by IP or from the print server, and the three fixes that resolve almost every printing ticket.","datePublished":"2026-10-21","dateModified":"2026-10-21","inLanguage":"en","proficiencyLevel":"Beginner","url":"https://inigogonzalezgarcia.github.io/guias/impresoras-instalar-impresora-de-red-y-cola-atascada.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/impresoras-instalar-impresora-de-red-y-cola-atascada.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Printers and peripherals"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 1","item":"https://inigogonzalezgarcia.github.io/guias/nivel-1.html"},{"@type":"ListItem","position":4,"name":"Printers: installing a network printer and clearing a stuck queue","item":"https://inigogonzalezgarcia.github.io/guias/impresoras-instalar-impresora-de-red-y-cola-atascada.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="nivel-1.html"><span class="es">Nivel 1</span><span class="en">Level 1</span></a></p>
+    <h1><span class="es">Impresoras: instalar una impresora de red y desatascar la cola</span><span class="en">Printers: installing a network printer and clearing a stuck queue</span></h1>
+    <p class="lede"><span class="es">Añadir una impresora por IP o desde el servidor de impresión, y los tres arreglos que resuelven casi todas las incidencias de impresión.</span><span class="en">Add a printer by IP or from the print server, and the three fixes that resolve almost every printing ticket.</span></p><p class="label post-meta"><span class="es">Nivel 1</span><span class="en">Level 1</span> · <span class="es">Impresoras y periféricos</span><span class="en">Printers and peripherals</span> · <span class="es">4 min</span><span class="en">4 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">21 oct 2026</span><span class="en">21 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Un usuario imprimiendo en la impresora de su planta, y un método corto para &quot;no imprime&quot;, que es el ticket más repetido de cualquier service desk.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Cómo se publican las impresoras en tu empresa: desde un <strong>servidor de impresión</strong> (<code>\\print01</code>), por <strong>Universal Print</strong> en Intune, o directamente por IP.</li><li>El nombre o la IP de la impresora. Suele estar en una pegatina en la propia impresora o en su página de configuración (botón de menú → Red).</li><li>Permisos: añadir una impresora del servidor no necesita administrador; instalar un controlador por IP, normalmente sí.</li></ul>
+<h2>1. Añadir una impresora</h2>
+<h3>Desde el servidor de impresión</h3>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Windows · Ejecutar</span></figcaption><div class="ui-body"><div class="ui-path"><span>Win + R</span><span class="ui-sep" aria-hidden="true">›</span><span>\\print01</span></div><div class="ui-path"><span>print01</span><span class="ui-sep" aria-hidden="true">›</span><span>PRN-MAD-2P-COLOR</span><span class="ui-sep" aria-hidden="true">›</span><span>Conectar…</span></div><div class="ui-field"><span class="ui-k">Estado</span><span class="ui-v">Instalando controlador… Listo</span></div></div></figure>
+<p>Con PowerShell, igual, y vale para hacerlo en remoto o en lote:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · usuario</span><button class="t-copy" type="button" data-copy="Add-Printer -ConnectionName &quot;\\print01\PRN-MAD-2P-COLOR&quot;&#10;Get-Printer | Select-Object Name, DriverName, PortName, PrinterStatus" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Add-Printer -ConnectionName &quot;\\print01\PRN-MAD-2P-COLOR&quot;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-Printer | Select-Object Name, DriverName, PortName, PrinterStatus</span><span class="t-out">Name                          DriverName                 PortName            PrinterStatus</span><span class="t-out">----                          ----------                 --------            -------------</span><span class="t-out">\\print01\PRN-MAD-2P-COLOR    HP Universal Printing PCL6 PRN-MAD-2P-COLOR    Normal</span><span class="t-out">Microsoft Print to PDF        Microsoft Print To PDF     PORTPROMPT:         Normal</span></code></pre></figure>
+<p>Si aparece <strong>0x0000011b</strong> o &quot;Windows no puede conectarse a la impresora&quot;, es la protección contra PrintNightmare: el controlador tiene que estar firmado y en el servidor, o la impresora se instala por IP. Escálalo al equipo del servidor de impresión con el código, no toques el registro del equipo.</p>
+<h3>Por IP (sin servidor)</h3>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · como administrador</span><button class="t-copy" type="button" data-copy="Add-PrinterPort -Name &quot;IP_10.20.5.41&quot; -PrinterHostAddress &quot;10.20.5.41&quot;&#10;Get-PrinterDriver | Where-Object Name -like &quot;*Universal*&quot; | Select-Object Name&#10;Add-Printer -Name &quot;Impresora planta 2 (color)&quot; -DriverName &quot;HP Universal Printing PCL6&quot; -PortName &quot;IP_10.20.5.41&quot;" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Add-PrinterPort -Name &quot;IP_10.20.5.41&quot; -PrinterHostAddress &quot;10.20.5.41&quot;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-PrinterDriver | Where-Object Name -like &quot;*Universal*&quot; | Select-Object Name</span><span class="t-out">Name</span><span class="t-out">----</span><span class="t-out">HP Universal Printing PCL6</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Add-Printer -Name &quot;Impresora planta 2 (color)&quot; -DriverName &quot;HP Universal Printing PCL6&quot; -PortName &quot;IP_10.20.5.41&quot;</span></code></pre></figure>
+<p>Con una impresora por IP, el controlador universal del fabricante (HP UPD, Xerox Global, Canon Generic) cubre casi todos los modelos. Si el fabricante no es ninguno de esos, descarga el controlador de su web, nunca de un buscador.</p>
+<h2>2. &quot;No imprime&quot;: el orden</h2>
+<h3>2.1 ¿La impresora está viva?</h3>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">CMD · usuario</span><button class="t-copy" type="button" data-copy="ping 10.20.5.41" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>ping 10.20.5.41</span><span class="t-out">Respuesta desde 10.20.5.41: bytes=32 tiempo=2ms TTL=64</span></code></pre></figure>
+<p>Sin respuesta: apagada, sin red o con otra IP (las impresoras con DHCP y sin reserva cambian de IP y dejan huérfano el puerto). Mira la pantalla de la impresora: si muestra una IP distinta, cambia el puerto o pide una reserva DHCP.</p>
+<h3>2.2 ¿Hay trabajos atascados?</h3>
+<p>Un trabajo con error bloquea todos los siguientes. En <strong>Configuración → Impresoras → la impresora → Abrir cola</strong> se ven; si &quot;Cancelar todos&quot; no los quita, limpia la cola:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · como administrador</span><button class="t-copy" type="button" data-copy="Get-PrintJob -PrinterName &quot;Impresora planta 2 (color)&quot; | Select-Object Id, DocumentName, JobStatus, UserName&#10;Stop-Service Spooler&#10;Remove-Item &quot;$env:SystemRoot\System32\spool\PRINTERS\*&quot; -Force&#10;Start-Service Spooler" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-PrintJob -PrinterName &quot;Impresora planta 2 (color)&quot; | Select-Object Id, DocumentName, JobStatus, UserName</span><span class="t-out">Id DocumentName        JobStatus       UserName</span><span class="t-out">-- ------------        ---------       --------</span><span class="t-out"> 7 Informe Q3.pdf      Error, Printing laura.prado</span><span class="t-out"> 8 Factura 1021.docx   Spooling        laura.prado</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Stop-Service Spooler</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Remove-Item &quot;$env:SystemRoot\System32\spool\PRINTERS\*&quot; -Force</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Start-Service Spooler</span></code></pre></figure>
+<h3>2.3 ¿Es el equipo o la impresora?</h3>
+<p>Imprime la <strong>página de prueba</strong> desde las propiedades de la impresora. Si sale, el problema está en la aplicación del usuario (un PDF enorme, una fuente, una versión antigua de Office). Si no sale desde ningún equipo, es la impresora o el servidor: escala con el modelo, la IP y lo que muestra la pantalla de la impresora.</p>
+<h2>3. Periféricos que dejan de responder</h2>
+<p>El mismo método sirve para un escáner, un lector de tarjetas o una base de carga: <strong>Administrador de dispositivos</strong> (<code>devmgmt.msc</code>) muestra un triángulo amarillo si falta el controlador o un código de error. Los tres arreglos por orden: otro puerto USB (mejor directo al equipo, no al monitor o a un hub), <strong>desinstalar el dispositivo</strong> desde el administrador y volver a conectarlo, y actualizar el controlador desde la web del fabricante.</p>
+<p class="g-tip">En los portátiles con base de carga, la mitad de los &quot;no funciona el teclado/monitor/red&quot; son la base: prueba con otra base o conecta el periférico directo al portátil antes de abrir el ticket al fabricante.</p>
+<h2>4. Qué poner en el ticket</h2>
+<p>Nombre de la impresora, IP, qué equipo, qué aplicación, y el resultado de la página de prueba. Si has limpiado la cola, dilo: así quien venga después no repite el paso.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Pide que las impresoras tengan <strong>reserva DHCP</strong> o IP fija: desaparecen la mitad de los tickets.</li><li>Si tu empresa usa Intune, mira <strong>Universal Print</strong>: las impresoras se asignan por grupo y el usuario no instala nada.</li><li>Para lotes (una planta entera), un script con <code>Add-Printer</code> sobre una lista de equipos ahorra una tarde.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>A user printing on their floor&#x27;s printer, and a short method for &quot;it doesn&#x27;t print&quot;, the most repeated ticket at any service desk.</p>
+<h2>Before you start</h2>
+<ul><li>How printers are published in your company: from a <strong>print server</strong> (<code>\\print01</code>), through <strong>Universal Print</strong> in Intune, or directly by IP.</li><li>The printer&#x27;s name or IP. It is usually on a sticker on the printer itself or on its configuration page (menu button → Network).</li><li>Permissions: adding a server printer needs no admin rights; installing a driver by IP usually does.</li></ul>
+<h2>1. Add a printer</h2>
+<h3>From the print server</h3>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Windows · Run</span></figcaption><div class="ui-body"><div class="ui-path"><span>Win + R</span><span class="ui-sep" aria-hidden="true">›</span><span>\\print01</span></div><div class="ui-path"><span>print01</span><span class="ui-sep" aria-hidden="true">›</span><span>PRN-MAD-2P-COLOR</span><span class="ui-sep" aria-hidden="true">›</span><span>Connect…</span></div><div class="ui-field"><span class="ui-k">Status</span><span class="ui-v">Installing driver… Done</span></div></div></figure>
+<p>PowerShell does the same, and it works remotely or in bulk:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · user</span><button class="t-copy" type="button" data-copy="Add-Printer -ConnectionName &quot;\\print01\PRN-MAD-2P-COLOR&quot;&#10;Get-Printer | Select-Object Name, DriverName, PortName, PrinterStatus" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Add-Printer -ConnectionName &quot;\\print01\PRN-MAD-2P-COLOR&quot;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-Printer | Select-Object Name, DriverName, PortName, PrinterStatus</span><span class="t-out">Name                          DriverName                 PortName            PrinterStatus</span><span class="t-out">----                          ----------                 --------            -------------</span><span class="t-out">\\print01\PRN-MAD-2P-COLOR    HP Universal Printing PCL6 PRN-MAD-2P-COLOR    Normal</span><span class="t-out">Microsoft Print to PDF        Microsoft Print To PDF     PORTPROMPT:         Normal</span></code></pre></figure>
+<p>If you see <strong>0x0000011b</strong> or &quot;Windows cannot connect to the printer&quot;, it is the PrintNightmare protection: the driver has to be signed and on the server, or the printer is installed by IP. Escalate to the print server team with the code; do not touch the device&#x27;s registry.</p>
+<h3>By IP (no server)</h3>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · as administrator</span><button class="t-copy" type="button" data-copy="Add-PrinterPort -Name &quot;IP_10.20.5.41&quot; -PrinterHostAddress &quot;10.20.5.41&quot;&#10;Get-PrinterDriver | Where-Object Name -like &quot;*Universal*&quot; | Select-Object Name&#10;Add-Printer -Name &quot;Floor 2 printer (colour)&quot; -DriverName &quot;HP Universal Printing PCL6&quot; -PortName &quot;IP_10.20.5.41&quot;" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Add-PrinterPort -Name &quot;IP_10.20.5.41&quot; -PrinterHostAddress &quot;10.20.5.41&quot;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-PrinterDriver | Where-Object Name -like &quot;*Universal*&quot; | Select-Object Name</span><span class="t-out">Name</span><span class="t-out">----</span><span class="t-out">HP Universal Printing PCL6</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Add-Printer -Name &quot;Floor 2 printer (colour)&quot; -DriverName &quot;HP Universal Printing PCL6&quot; -PortName &quot;IP_10.20.5.41&quot;</span></code></pre></figure>
+<p>With an IP printer, the manufacturer&#x27;s universal driver (HP UPD, Xerox Global, Canon Generic) covers almost every model. If the manufacturer is none of those, download the driver from their website, never from a search engine.</p>
+<h2>2. &quot;It doesn&#x27;t print&quot;: the order</h2>
+<h3>2.1 Is the printer alive?</h3>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">CMD · user</span><button class="t-copy" type="button" data-copy="ping 10.20.5.41" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>ping 10.20.5.41</span><span class="t-out">Reply from 10.20.5.41: bytes=32 time=2ms TTL=64</span></code></pre></figure>
+<p>No reply: switched off, off the network, or on another IP (DHCP printers without a reservation change IP and orphan the port). Look at the printer&#x27;s screen: if it shows a different IP, change the port or ask for a DHCP reservation.</p>
+<h3>2.2 Are there stuck jobs?</h3>
+<p>A job in error blocks everything after it. <strong>Settings → Printers → the printer → Open queue</strong> shows them; if &quot;Cancel all&quot; does not clear them, clean the queue:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · as administrator</span><button class="t-copy" type="button" data-copy="Get-PrintJob -PrinterName &quot;Floor 2 printer (colour)&quot; | Select-Object Id, DocumentName, JobStatus, UserName&#10;Stop-Service Spooler&#10;Remove-Item &quot;$env:SystemRoot\System32\spool\PRINTERS\*&quot; -Force&#10;Start-Service Spooler" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-PrintJob -PrinterName &quot;Floor 2 printer (colour)&quot; | Select-Object Id, DocumentName, JobStatus, UserName</span><span class="t-out">Id DocumentName        JobStatus       UserName</span><span class="t-out">-- ------------        ---------       --------</span><span class="t-out"> 7 Q3 report.pdf       Error, Printing laura.prado</span><span class="t-out"> 8 Invoice 1021.docx   Spooling        laura.prado</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Stop-Service Spooler</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Remove-Item &quot;$env:SystemRoot\System32\spool\PRINTERS\*&quot; -Force</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Start-Service Spooler</span></code></pre></figure>
+<h3>2.3 Is it the device or the printer?</h3>
+<p>Print the <strong>test page</strong> from the printer&#x27;s properties. If it comes out, the problem is in the user&#x27;s application (a huge PDF, a font, an old Office version). If nothing prints from any device, it is the printer or the server: escalate with the model, the IP and what the printer&#x27;s screen shows.</p>
+<h2>3. Peripherals that stop responding</h2>
+<p>The same method works for a scanner, a card reader or a docking station: <strong>Device Manager</strong> (<code>devmgmt.msc</code>) shows a yellow triangle if the driver is missing or an error code. The three fixes in order: another USB port (ideally straight into the device, not the monitor or a hub), <strong>uninstall the device</strong> from Device Manager and plug it in again, and update the driver from the manufacturer&#x27;s website.</p>
+<p class="g-tip">On laptops with a dock, half of the &quot;keyboard/monitor/network doesn&#x27;t work&quot; tickets are the dock: try another dock or plug the peripheral straight into the laptop before opening a ticket with the manufacturer.</p>
+<h2>4. What to put in the ticket</h2>
+<p>Printer name, IP, which device, which application, and the result of the test page. If you cleared the queue, say so: whoever comes next does not repeat the step.</p>
+<h2>Next steps</h2>
+<ul><li>Ask for printers to have a <strong>DHCP reservation</strong> or a fixed IP: half the tickets disappear.</li><li>If your company uses Intune, look at <strong>Universal Print</strong>: printers are assigned by group and the user installs nothing.</li><li>For batches (a whole floor), a script with <code>Add-Printer</code> over a list of devices saves an afternoon.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Nivel 1</span><span class="en">Level 1</span> · <span class="es">Impresoras y periféricos</span><span class="en">Printers and peripherals</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-1.html"><span class="es">Todas las guías del Nivel 1</span><span class="en">All Level 1 guides</span> →</a>
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="anyconnect-instalar-y-diagnosticar-vpn.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Cisco AnyConnect: instalar el cliente y diagnosticar una VPN que no conecta</span><span class="en">Cisco AnyConnect: installing the client and diagnosing a VPN that won&#x27;t connect</span></span></a>
+    <a class="post-nav-link next" href="iphone-ipad-enrolar-en-intune.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">iPhone y iPad: enrolar en Intune y comprobar que llegan las políticas</span><span class="en">iPhone and iPad: enrolling in Intune and checking that policies arrive</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
