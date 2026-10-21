@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Azure AD Connect: forcing a sync and fixing an object that won&#x27;t reach Entra ID · Iñigo González" data-title-es="Azure AD Connect: forzar una sincronización y arreglar un objeto que no pasa a Entra ID · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Azure AD Connect: forcing a sync and fixing an object that won&#x27;t reach Entra ID · Iñigo González</title>
+<meta name="description" content="Where to look when a new user doesn&#x27;t appear in Microsoft 365, how to force the cycle, and how to read export errors.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/azure-ad-connect-forzar-sincronizacion-y-objetos-que-no-pasan.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Azure AD Connect: forcing a sync and fixing an object that won&#x27;t reach Entra ID · Iñigo González">
+<meta property="og:description" content="Where to look when a new user doesn&#x27;t appear in Microsoft 365, how to force the cycle, and how to read export errors.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/azure-ad-connect-forzar-sincronizacion-y-objetos-que-no-pasan.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Azure AD Connect: forcing a sync and fixing an object that won&#x27;t reach Entra ID · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Azure AD Connect: forcing a sync and fixing an object that won't reach Entra ID","alternativeHeadline":"Azure AD Connect: forzar una sincronización y arreglar un objeto que no pasa a Entra ID","description":"Where to look when a new user doesn't appear in Microsoft 365, how to force the cycle, and how to read export errors.","datePublished":"2026-10-21","dateModified":"2026-10-21","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/azure-ad-connect-forzar-sincronizacion-y-objetos-que-no-pasan.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/azure-ad-connect-forzar-sincronizacion-y-objetos-que-no-pasan.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Azure AD Connect"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 2","item":"https://inigogonzalezgarcia.github.io/guias/nivel-2.html"},{"@type":"ListItem","position":4,"name":"Azure AD Connect: forcing a sync and fixing an object that won't reach Entra ID","item":"https://inigogonzalezgarcia.github.io/guias/azure-ad-connect-forzar-sincronizacion-y-objetos-que-no-pasan.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="nivel-2.html"><span class="es">Nivel 2</span><span class="en">Level 2</span></a></p>
+    <h1><span class="es">Azure AD Connect: forzar una sincronización y arreglar un objeto que no pasa a Entra ID</span><span class="en">Azure AD Connect: forcing a sync and fixing an object that won&#x27;t reach Entra ID</span></h1>
+    <p class="lede"><span class="es">Dónde mirar cuando un usuario nuevo no aparece en Microsoft 365, cómo forzar el ciclo y cómo leer los errores de exportación.</span><span class="en">Where to look when a new user doesn&#x27;t appear in Microsoft 365, how to force the cycle, and how to read export errors.</span></p><p class="label post-meta"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">Azure AD Connect</span><span class="en">Azure AD Connect</span> · <span class="es">4 min</span><span class="en">4 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">21 oct 2026</span><span class="en">21 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Entender el camino que sigue una cuenta desde Active Directory hasta Entra ID, forzar una sincronización cuando no puedes esperar 30 minutos, y resolver los tres errores que explican casi todos los &quot;no aparece en Microsoft 365&quot;.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Acceso al servidor donde está instalado <strong>Microsoft Entra Connect</strong> (el nombre nuevo de Azure AD Connect). Suele ser un servidor miembro, no un controlador de dominio.</li><li>Pertenecer al grupo local <strong>ADSyncAdmins</strong> de ese servidor, o ser administrador local. No necesitas ser Global Admin para forzar un ciclo.</li><li>Saber qué OUs están incluidas en la sincronización: si el usuario está en una OU fuera del filtro, nunca pasará, haga lo que haga.</li></ul>
+<h2>1. Cómo viaja un objeto</h2>
+<p>Entra Connect sincroniza cada <strong>30 minutos</strong> en tres pasos: importa de AD al espacio del conector, lo pasa al metaverso aplicando las reglas, y exporta a Entra ID. Un cambio en AD tarda, como mucho, 30 minutos más lo que tarde Entra ID en aprovisionar el buzón y las licencias.</p>
+<p>Lo que sí es instantáneo es lo contrario: si quieres que algo se vea hoy, se fuerza; si se ve mal, el origen casi siempre es el objeto en AD, no el conector.</p>
+<h2>2. Forzar el ciclo</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · servidor de Entra Connect</span><button class="t-copy" type="button" data-copy="Import-Module ADSync&#10;Get-ADSyncScheduler | Select-Object SyncCycleEnabled, NextSyncCycleStartTimeInUTC, SyncCycleInProgress&#10;Start-ADSyncSyncCycle -PolicyType Delta" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Import-Module ADSync</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-ADSyncScheduler | Select-Object SyncCycleEnabled, NextSyncCycleStartTimeInUTC, SyncCycleInProgress</span><span class="t-out">SyncCycleEnabled            : True</span><span class="t-out">NextSyncCycleStartTimeInUTC : 21/10/2026 15:30:02</span><span class="t-out">SyncCycleInProgress         : False</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Start-ADSyncSyncCycle -PolicyType Delta</span><span class="t-out">Result</span><span class="t-out">------</span><span class="t-out">Success</span></code></pre></figure>
+<p><code>Delta</code> sincroniza solo los cambios y tarda un par de minutos. <code>Initial</code> relee todo y solo se usa tras cambiar el filtrado de OUs o las reglas. Si <code>SyncCycleInProgress</code> es <code>True</code>, espera a que acabe: lanzar otro no lo acelera.</p>
+<p class="g-warn">Si <code>SyncCycleEnabled</code> es <code>False</code>, alguien lo desactivó (suele hacerse durante una migración o un cambio de reglas) y se olvidó de volver a activarlo. <code>Set-ADSyncScheduler -SyncCycleEnabled $true</code> lo devuelve a la normalidad.</p>
+<h2>3. El usuario sigue sin aparecer</h2>
+<p>Abre <strong>Synchronization Service Manager</strong> (<code>miisclient.exe</code>, en la carpeta de instalación) y mira la pestaña <strong>Operations</strong>: cada ejecución muestra el conector, el perfil y si hubo errores.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Synchronization Service Manager · Operations</span></figcaption><div class="ui-body"><div class="ui-path"><span>Operations</span><span class="ui-sep" aria-hidden="true">›</span><span>contoso.local</span><span class="ui-sep" aria-hidden="true">›</span><span>Delta Import · Success</span></div><div class="ui-path"><span>Operations</span><span class="ui-sep" aria-hidden="true">›</span><span>contoso.onmicrosoft.com - AAD</span><span class="ui-sep" aria-hidden="true">›</span><span>Export · completed-export-errors</span></div><div class="ui-field"><span class="ui-k">Errores</span><span class="ui-v">1</span></div><div class="ui-field"><span class="ui-k">Objeto</span><span class="ui-v">CN=Laura Prado,OU=Ventas,OU=Usuarios,DC=contoso,DC=local</span></div><div class="ui-field"><span class="ui-k">Error</span><span class="ui-v">AttributeValueMustBeUnique</span></div><div class="ui-field"><span class="ui-k">Atributo</span><span class="ui-v">ProxyAddresses</span></div><div class="ui-field"><span class="ui-k">Valor en conflicto</span><span class="ui-v">SMTP:laura.prado@contoso.com</span></div></div></figure>
+<p>Los tres errores que verás una y otra vez:</p>
+<ul><li><strong>AttributeValueMustBeUnique</strong>: otro objeto en Entra ID ya tiene ese correo o <code>proxyAddresses</code>. Suele ser un usuario antiguo (en la papelera de Entra ID o un invitado) o un buzón compartido. Busca el valor en Entra ID y en los eliminados (<code>Get-MgDirectoryDeletedItemAsUser</code>) y resuelve el duplicado.</li><li><strong>InvalidSoftMatch</strong> o <strong>LargeObject</strong>: el UPN o el correo contienen caracteres no permitidos, o un atributo tiene más valores de la cuenta. <strong>IdFix</strong> (herramienta gratuita de Microsoft) recorre todo el AD y lista estos problemas antes de que lleguen al conector.</li><li><strong>El objeto no está en el espacio del conector</strong>: no es error, es filtro. En <strong>Connectors → contoso.local → Properties → Configure Directory Partitions → Containers</strong> se ve qué OUs se sincronizan. Si la OU no está marcada, el usuario no existe para Entra ID.</li></ul>
+<p>Para ver un objeto concreto: pestaña <strong>Metaverse Search</strong>, busca por <code>displayName</code> y abre <strong>Connectors</strong>: tiene que aparecer en los dos (AD y Entra ID). Si solo está en AD, mira <strong>Lineage</strong> y la regla que lo dejó fuera (<code>cloudFiltered</code>).</p>
+<h2>4. Atributos que importan</h2>
+<ul><li><code>userPrincipalName</code> tiene que ser un dominio <strong>verificado</strong> en Entra ID. Un UPN <code>@contoso.local</code> se convierte en <code>@contoso.onmicrosoft.com</code> y el usuario no podrá iniciar sesión con su correo.</li><li><code>mail</code> y <code>proxyAddresses</code> definen las direcciones del buzón. La principal lleva <code>SMTP:</code> en mayúsculas.</li><li><code>msExchUsageLocation</code> rellena la ubicación de uso que exige la licencia (guía de Microsoft 365 y licencias).</li><li><code>extensionAttribute1-15</code> viajan si se seleccionaron en el asistente: son útiles para grupos dinámicos.</li></ul>
+<h2>5. Qué poner en el ticket</h2>
+<p>Hora del último ciclo, el conector que dio error, el nombre del objeto y el texto del error. Con eso, quien administre Entra ID sabe si es un duplicado o un filtro sin abrir la consola.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Pasa <strong>IdFix</strong> antes de incorporar una OU nueva: evita los errores de exportación en bloque.</li><li>Activa <strong>Entra Connect Health</strong> para ver los ciclos y los errores desde el portal, sin entrar en el servidor.</li><li>En el Nivel 4 verás las migraciones de tenant, donde Entra Connect es la pieza que hay que desmontar y volver a montar con cuidado.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>Understand the path an account takes from Active Directory to Entra ID, force a sync when you can&#x27;t wait 30 minutes, and resolve the three errors behind almost every &quot;doesn&#x27;t appear in Microsoft 365&quot;.</p>
+<h2>Before you start</h2>
+<ul><li>Access to the server where <strong>Microsoft Entra Connect</strong> (the new name for Azure AD Connect) is installed. It is usually a member server, not a domain controller.</li><li>Membership of that server&#x27;s local <strong>ADSyncAdmins</strong> group, or local administrator. You don&#x27;t need Global Admin to force a cycle.</li><li>Know which OUs are included in the sync: if the user sits in an OU outside the filter, it will never cross, whatever you do.</li></ul>
+<h2>1. How an object travels</h2>
+<p>Entra Connect syncs every <strong>30 minutes</strong> in three steps: import from AD into the connector space, pass to the metaverse applying the rules, and export to Entra ID. A change in AD takes at most 30 minutes plus whatever Entra ID needs to provision the mailbox and licences.</p>
+<p>What is immediate is the opposite: if you need something visible today, you force it; if it looks wrong, the cause is almost always the object in AD, not the connector.</p>
+<h2>2. Force the cycle</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · Entra Connect server</span><button class="t-copy" type="button" data-copy="Import-Module ADSync&#10;Get-ADSyncScheduler | Select-Object SyncCycleEnabled, NextSyncCycleStartTimeInUTC, SyncCycleInProgress&#10;Start-ADSyncSyncCycle -PolicyType Delta" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Import-Module ADSync</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-ADSyncScheduler | Select-Object SyncCycleEnabled, NextSyncCycleStartTimeInUTC, SyncCycleInProgress</span><span class="t-out">SyncCycleEnabled            : True</span><span class="t-out">NextSyncCycleStartTimeInUTC : 21/10/2026 15:30:02</span><span class="t-out">SyncCycleInProgress         : False</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Start-ADSyncSyncCycle -PolicyType Delta</span><span class="t-out">Result</span><span class="t-out">------</span><span class="t-out">Success</span></code></pre></figure>
+<p><code>Delta</code> syncs only the changes and takes a couple of minutes. <code>Initial</code> re-reads everything and is only used after changing OU filtering or rules. If <code>SyncCycleInProgress</code> is <code>True</code>, wait for it to finish: launching another does not speed it up.</p>
+<p class="g-warn">If <code>SyncCycleEnabled</code> is <code>False</code>, someone turned it off (usually during a migration or a rule change) and forgot to turn it back on. <code>Set-ADSyncScheduler -SyncCycleEnabled $true</code> restores normal service.</p>
+<h2>3. The user still doesn&#x27;t appear</h2>
+<p>Open <strong>Synchronization Service Manager</strong> (<code>miisclient.exe</code>, in the installation folder) and look at the <strong>Operations</strong> tab: every run shows the connector, the profile and whether there were errors.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Synchronization Service Manager · Operations</span></figcaption><div class="ui-body"><div class="ui-path"><span>Operations</span><span class="ui-sep" aria-hidden="true">›</span><span>contoso.local</span><span class="ui-sep" aria-hidden="true">›</span><span>Delta Import · Success</span></div><div class="ui-path"><span>Operations</span><span class="ui-sep" aria-hidden="true">›</span><span>contoso.onmicrosoft.com - AAD</span><span class="ui-sep" aria-hidden="true">›</span><span>Export · completed-export-errors</span></div><div class="ui-field"><span class="ui-k">Errors</span><span class="ui-v">1</span></div><div class="ui-field"><span class="ui-k">Object</span><span class="ui-v">CN=Laura Prado,OU=Sales,OU=Users,DC=contoso,DC=local</span></div><div class="ui-field"><span class="ui-k">Error</span><span class="ui-v">AttributeValueMustBeUnique</span></div><div class="ui-field"><span class="ui-k">Attribute</span><span class="ui-v">ProxyAddresses</span></div><div class="ui-field"><span class="ui-k">Conflicting value</span><span class="ui-v">SMTP:laura.prado@contoso.com</span></div></div></figure>
+<p>The three errors you will see again and again:</p>
+<ul><li><strong>AttributeValueMustBeUnique</strong>: another object in Entra ID already holds that email or <code>proxyAddresses</code>. It is usually an old user (in the Entra ID recycle bin, or a guest) or a shared mailbox. Search the value in Entra ID and among deleted items (<code>Get-MgDirectoryDeletedItemAsUser</code>) and resolve the duplicate.</li><li><strong>InvalidSoftMatch</strong> or <strong>LargeObject</strong>: the UPN or email contains characters that are not allowed, or an attribute has more values than permitted. <strong>IdFix</strong> (Microsoft&#x27;s free tool) walks the whole AD and lists these problems before they reach the connector.</li><li><strong>The object is not in the connector space</strong>: not an error, a filter. <strong>Connectors → contoso.local → Properties → Configure Directory Partitions → Containers</strong> shows which OUs are synced. If the OU is unticked, the user does not exist for Entra ID.</li></ul>
+<p>To look at one object: <strong>Metaverse Search</strong> tab, search by <code>displayName</code> and open <strong>Connectors</strong>: it has to appear in both (AD and Entra ID). If it is only in AD, check <strong>Lineage</strong> and the rule that left it out (<code>cloudFiltered</code>).</p>
+<h2>4. Attributes that matter</h2>
+<ul><li><code>userPrincipalName</code> has to be a domain <strong>verified</strong> in Entra ID. A <code>@contoso.local</code> UPN becomes <code>@contoso.onmicrosoft.com</code> and the user can&#x27;t sign in with their email.</li><li><code>mail</code> and <code>proxyAddresses</code> define the mailbox addresses. The primary carries <code>SMTP:</code> in upper case.</li><li><code>msExchUsageLocation</code> fills the usage location the licence requires (see the Microsoft 365 and licences guide).</li><li><code>extensionAttribute1-15</code> travel if they were selected in the wizard: useful for dynamic groups.</li></ul>
+<h2>5. What to put in the ticket</h2>
+<p>Time of the last cycle, the connector that errored, the object name and the error text. With that, whoever administers Entra ID knows whether it is a duplicate or a filter without opening the console.</p>
+<h2>Next steps</h2>
+<ul><li>Run <strong>IdFix</strong> before onboarding a new OU: it avoids export errors in bulk.</li><li>Enable <strong>Entra Connect Health</strong> to see cycles and errors from the portal, without logging on to the server.</li><li>In Level 4 you&#x27;ll see tenant migrations, where Entra Connect is the piece that has to be taken apart and rebuilt with care.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">Azure AD Connect</span><span class="en">Azure AD Connect</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span><span class="en">All Level 2 guides</span> →</a>
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <span></span>
+    <a class="post-nav-link next" href="bash-primer-script-de-comprobacion-de-un-servidor.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Bash: tu primer script de comprobación de un servidor Linux</span><span class="en">Bash: your first health-check script for a Linux server</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

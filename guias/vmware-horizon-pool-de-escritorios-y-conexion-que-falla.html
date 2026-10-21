@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="VMware Horizon: a desktop pool from a golden image, and the connection that fails · Iñigo González" data-title-es="VMware Horizon: un pool de escritorios desde una imagen maestra y la conexión que falla · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>VMware Horizon: a desktop pool from a golden image, and the connection that fails · Iñigo González</title>
+<meta name="description" content="Golden image with the agent, an instant-clone pool, entitlement to a group, and the order for diagnosing &#x27;the desktop won&#x27;t connect&#x27; with Horizon Console and the client logs.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/vmware-horizon-pool-de-escritorios-y-conexion-que-falla.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VMware Horizon: a desktop pool from a golden image, and the connection that fails · Iñigo González">
+<meta property="og:description" content="Golden image with the agent, an instant-clone pool, entitlement to a group, and the order for diagnosing &#x27;the desktop won&#x27;t connect&#x27; with Horizon Console and the client logs.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/vmware-horizon-pool-de-escritorios-y-conexion-que-falla.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="VMware Horizon: a desktop pool from a golden image, and the connection that fails · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"VMware Horizon: a desktop pool from a golden image, and the connection that fails","alternativeHeadline":"VMware Horizon: un pool de escritorios desde una imagen maestra y la conexión que falla","description":"Golden image with the agent, an instant-clone pool, entitlement to a group, and the order for diagnosing 'the desktop won't connect' with Horizon Console and the client logs.","datePublished":"2026-10-21","dateModified":"2026-10-21","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/vmware-horizon-pool-de-escritorios-y-conexion-que-falla.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/vmware-horizon-pool-de-escritorios-y-conexion-que-falla.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"VMware Horizon"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 2","item":"https://inigogonzalezgarcia.github.io/guias/nivel-2.html"},{"@type":"ListItem","position":4,"name":"VMware Horizon: a desktop pool from a golden image, and the connection that fails","item":"https://inigogonzalezgarcia.github.io/guias/vmware-horizon-pool-de-escritorios-y-conexion-que-falla.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="nivel-2.html"><span class="es">Nivel 2</span><span class="en">Level 2</span></a></p>
+    <h1><span class="es">VMware Horizon: un pool de escritorios desde una imagen maestra y la conexión que falla</span><span class="en">VMware Horizon: a desktop pool from a golden image, and the connection that fails</span></h1>
+    <p class="lede"><span class="es">Imagen maestra con el agente, pool de clones instantáneos, asignación a un grupo, y el orden para diagnosticar &#x27;el escritorio no conecta&#x27; con Horizon Console y los logs del cliente.</span><span class="en">Golden image with the agent, an instant-clone pool, entitlement to a group, and the order for diagnosing &#x27;the desktop won&#x27;t connect&#x27; with Horizon Console and the client logs.</span></p><p class="label post-meta"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">VMware Horizon</span><span class="en">VMware Horizon</span> · <span class="es">5 min</span><span class="en">4 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">21 oct 2026</span><span class="en">21 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Un pool de escritorios virtuales en VMware Horizon (ahora bajo Omnissa) que se crea desde una imagen maestra, se asigna a un grupo de Active Directory y se recrea limpio en cada sesión. Y un método fijo para el ticket &quot;me conecto y se queda en negro&quot; o &quot;no aparece mi escritorio&quot;.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Acceso a <strong>Horizon Console</strong> (<code>https://horizon-cs-01.contoso.local/admin</code>) con rol de administrador o de help desk.</li><li>vCenter añadido en <strong>Settings → Servers</strong> con la cuenta de servicio que Horizon documenta, y un <strong>Connection Server</strong> sano.</li><li>Una VM de Windows 11 Enterprise preparada como <strong>imagen maestra</strong>: unida al dominio, optimizada (OS Optimization Tool), con <strong>Horizon Agent</strong> instalado y las aplicaciones base. Apagada y con una <strong>snapshot</strong> con nombre y fecha.</li><li>Un grupo de AD con los usuarios del pool (<code>GG-VDI-Finanzas</code>).</li></ul>
+<h2>1. Las piezas (y su equivalente en Citrix)</h2>
+<ul><li><strong>Connection Server</strong>: el broker; los clientes se autentican aquí (equivale al Delivery Controller).</li><li><strong>Horizon Agent</strong> en la VM: lo que hace que el escritorio sea gestionable (el VDA).</li><li><strong>Pool</strong>: el conjunto de escritorios y su política (grupo de entrega + catálogo).</li><li><strong>Entitlement</strong>: qué usuarios o grupos ven el pool.</li><li><strong>Protocolo</strong>: <strong>Blast Extreme</strong> (el de Horizon, puerto 8443/22443) o PCoIP (4172). El cliente es <strong>Horizon Client</strong>.</li></ul>
+<h2>2. Crear un pool de clones instantáneos</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Horizon Console · Inventory › Desktops › Add</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Type</span><span class="ui-v">Automated Desktop Pool · vCenter Server · Instant Clone</span></div><div class="ui-field"><span class="ui-k">User Assignment</span><span class="ui-v">Floating</span></div><div class="ui-field"><span class="ui-k">ID</span><span class="ui-v">POOL-FIN-W11 · Display name: Finanzas (Windows 11)</span></div><div class="ui-path"><span>vCenter Settings</span></div><div class="ui-field"><span class="ui-k">Golden image</span><span class="ui-v">/DC-MAD/vm/Templates/W11-GOLD-FIN · Snapshot: 2026-10-20_agent-2406_office</span></div><div class="ui-field"><span class="ui-k">VM folder</span><span class="ui-v">/VDI/Finanzas · Cluster: CL-VDI-01 · Datastore: DS-VDI-FLASH-01</span></div><div class="ui-path"><span>Provisioning</span></div><div class="ui-field"><span class="ui-k">Naming pattern</span><span class="ui-v">FIN-W11-{n:fixed=3} · Max machines: 40 · Spare (powered on): 5</span></div><div class="ui-path"><span>Desktop Pool Settings</span></div><div class="ui-field"><span class="ui-k">Remote display protocol</span><span class="ui-v">VMware Blast · Allow users to choose: No</span></div><div class="ui-field"><span class="ui-k">[x] Refresh OS disk after logoff</span><span class="ui-v">Always</span></div><div class="ui-path"><span>Guest Customization</span></div><div class="ui-field"><span class="ui-k">Domain</span><span class="ui-v">contoso.local · AD container: OU=VDI,OU=Equipos</span></div><div class="ui-btn">Submit</div></div></figure>
+<p>Clones instantáneos: cada escritorio se crea en segundos a partir de la snapshot y se <strong>destruye al cerrar sesión</strong>. Un usuario arranca siempre limpio; lo que tiene que persistir (perfil, datos) va en FSLogix o en un perfil de DEM, nunca en el escritorio.</p>
+<p>Después: <strong>Entitlements → Add entitlement → GG-VDI-Finanzas</strong>. Hasta que no hay entitlement, el pool existe pero nadie lo ve.</p>
+<h2>3. Comprobar que está sano</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Horizon Console · Inventory › Desktops › POOL-FIN-W11 › Machines</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">FIN-W11-001 · Available · Agent 2406 · Last connected</span><span class="ui-v">laura.prado 21/10/2026 09:12</span></div><div class="ui-field"><span class="ui-k">FIN-W11-002 · Connected · laura.prado · Blast · 21/10/2026 10</span><span class="ui-v">05</span></div><div class="ui-field"><span class="ui-k">FIN-W11-003 · Agent unreachable · (tombstoned)</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">FIN-W11-004 · Provisioning · 48%</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">FIN-W11-005 · Available</span><span class="ui-v"></span></div><div class="ui-path"><span>Dashboard</span><span class="ui-sep" aria-hidden="true">›</span><span>System Health</span><span class="ui-sep" aria-hidden="true">›</span><span>Connection Servers: 2/2 OK · vCenter: OK · Domains: contoso.local OK</span></div></div></figure>
+<p><strong>Available</strong> y <strong>Connected</strong> son los estados buenos. <strong>Agent unreachable</strong> es un escritorio cuyo agente no habla con el Connection Server (red, DNS, hora, o clon a medias): con clones instantáneos, se <strong>recrea</strong> (Machines → la máquina → Remove, el pool crea otra). <strong>Provisioning</strong> atascado largo rato suele ser vCenter o el datastore lleno.</p>
+<h2>4. &quot;No conecta&quot;: el orden</h2>
+<ol><li><strong>¿Ve el pool en Horizon Client?</strong> Si no: entitlement (el usuario no está en el grupo o el grupo no está en el pool) o el pool está deshabilitado. Comprueba <code>Users and Groups → el usuario → Entitlements</code>.</li><li><strong>¿Se queda en &quot;Connecting…&quot; o pantalla negra?</strong> El cliente ha llegado al Connection Server pero no al escritorio. Hace falta el puerto <strong>8443/22443 (Blast)</strong> desde el cliente hasta la <strong>VM del escritorio</strong> (no solo al broker) cuando se conecta por túnel desactivado, o hasta el <strong>Unified Access Gateway</strong> si viene de internet. <code>Test-NetConnection FIN-W11-002 -Port 22443</code> desde el equipo del usuario lo dice.</li><li><strong>¿Conecta y a los segundos se cierra?</strong> El escritorio está asignado pero el inicio de sesión falla: perfil de FSLogix bloqueado (otro escritorio tiene el contenedor abierto; se ve en el log de FSLogix <code>C:\ProgramData\FSLogix\Logs</code>), o la GPO de inicio tarda más que el tiempo de espera.</li><li><strong>¿Le toca siempre la misma máquina rota?</strong> En pools flotantes, Horizon reintenta la última; <strong>Reset</strong> o <strong>Remove</strong> de esa máquina desde la consola y que vuelva a entrar.</li></ol>
+<p>Logs del cliente cuando hay que escalar: en Windows, <code>%LOCALAPPDATA%\VMware\VDM\Logs\</code> (<code>vmware-horizon-client-*.log</code>); en el escritorio, <code>C:\ProgramData\VMware\VDM\logs\</code> (<code>debug-*.txt</code> del agente). Horizon Console → <strong>Help Desk</strong> (con el usuario) resume sesión, protocolo, latencia y los eventos de inicio de sesión en una pantalla: es por donde empieza el soporte de primer nivel.</p>
+<h2>5. Actualizar la imagen maestra</h2>
+<p>Cambiar algo en el pool (parche, aplicación nueva) es: encender la imagen maestra, hacer el cambio, apagarla, <strong>nueva snapshot</strong> con fecha, y en el pool <strong>Maintain → Push Image</strong> eligiendo esa snapshot y cuándo (al cerrar sesión cada usuario, o forzado en una ventana). Nunca se toca un escritorio del pool a mano: desaparece en el siguiente cierre de sesión.</p>
+<p class="g-warn">Antes del Push Image, prueba la snapshot nueva en un <strong>pool de prueba</strong> de 2 máquinas. Una imagen con el agente mal instalado deja los 40 escritorios en *Agent unreachable* a la vez.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Monta <strong>FSLogix</strong> para los perfiles si no está: es lo que hace que un escritorio flotante parezca el del usuario.</li><li>Un <strong>Unified Access Gateway</strong> en la DMZ para el acceso desde fuera sin VPN; y en el Nivel 4, <strong>Azure Virtual Desktop y Windows 365</strong>, la alternativa en nube.</li><li>La guía de Citrix VDI es el espejo de esta: mismos problemas, otros nombres. Conocer las dos te sitúa en cualquier empresa.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>A virtual desktop pool in VMware Horizon (now under Omnissa) created from a golden image, entitled to an Active Directory group and rebuilt clean on every session. And a fixed method for the ticket &quot;I connect and it stays black&quot; or &quot;my desktop doesn&#x27;t appear&quot;.</p>
+<h2>Before you start</h2>
+<ul><li>Access to <strong>Horizon Console</strong> (<code>https://horizon-cs-01.contoso.local/admin</code>) with an administrator or help desk role.</li><li>vCenter added under <strong>Settings → Servers</strong> with the service account Horizon documents, and a healthy <strong>Connection Server</strong>.</li><li>A Windows 11 Enterprise VM prepared as the <strong>golden image</strong>: domain-joined, optimised (OS Optimization Tool), with <strong>Horizon Agent</strong> installed and the base applications. Powered off, with a <strong>snapshot</strong> named and dated.</li><li>An AD group with the pool&#x27;s users (<code>GG-VDI-Finance</code>).</li></ul>
+<h2>1. The pieces (and their Citrix equivalent)</h2>
+<ul><li><strong>Connection Server</strong>: the broker; clients authenticate here (equivalent to the Delivery Controller).</li><li><strong>Horizon Agent</strong> on the VM: what makes the desktop manageable (the VDA).</li><li><strong>Pool</strong>: the set of desktops and their policy (delivery group + catalog).</li><li><strong>Entitlement</strong>: which users or groups see the pool.</li><li><strong>Protocol</strong>: <strong>Blast Extreme</strong> (Horizon&#x27;s own, port 8443/22443) or PCoIP (4172). The client is <strong>Horizon Client</strong>.</li></ul>
+<h2>2. Create an instant-clone pool</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Horizon Console · Inventory › Desktops › Add</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Type</span><span class="ui-v">Automated Desktop Pool · vCenter Server · Instant Clone</span></div><div class="ui-field"><span class="ui-k">User Assignment</span><span class="ui-v">Floating</span></div><div class="ui-field"><span class="ui-k">ID</span><span class="ui-v">POOL-FIN-W11 · Display name: Finance (Windows 11)</span></div><div class="ui-path"><span>vCenter Settings</span></div><div class="ui-field"><span class="ui-k">Golden image</span><span class="ui-v">/DC-MAD/vm/Templates/W11-GOLD-FIN · Snapshot: 2026-10-20_agent-2406_office</span></div><div class="ui-field"><span class="ui-k">VM folder</span><span class="ui-v">/VDI/Finance · Cluster: CL-VDI-01 · Datastore: DS-VDI-FLASH-01</span></div><div class="ui-path"><span>Provisioning</span></div><div class="ui-field"><span class="ui-k">Naming pattern</span><span class="ui-v">FIN-W11-{n:fixed=3} · Max machines: 40 · Spare (powered on): 5</span></div><div class="ui-path"><span>Desktop Pool Settings</span></div><div class="ui-field"><span class="ui-k">Remote display protocol</span><span class="ui-v">VMware Blast · Allow users to choose: No</span></div><div class="ui-field"><span class="ui-k">[x] Refresh OS disk after logoff</span><span class="ui-v">Always</span></div><div class="ui-path"><span>Guest Customization</span></div><div class="ui-field"><span class="ui-k">Domain</span><span class="ui-v">contoso.local · AD container: OU=VDI,OU=Computers</span></div><div class="ui-btn">Submit</div></div></figure>
+<p>Instant clones: each desktop is created in seconds from the snapshot and <strong>destroyed at logoff</strong>. A user always starts clean; whatever must persist (profile, data) lives in FSLogix or a DEM profile, never on the desktop.</p>
+<p>Then: <strong>Entitlements → Add entitlement → GG-VDI-Finance</strong>. Until there is an entitlement, the pool exists but nobody sees it.</p>
+<h2>3. Check that it is healthy</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Horizon Console · Inventory › Desktops › POOL-FIN-W11 › Machines</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">FIN-W11-001 · Available · Agent 2406 · Last connected</span><span class="ui-v">laura.prado 21/10/2026 09:12</span></div><div class="ui-field"><span class="ui-k">FIN-W11-002 · Connected · laura.prado · Blast · 21/10/2026 10</span><span class="ui-v">05</span></div><div class="ui-field"><span class="ui-k">FIN-W11-003 · Agent unreachable · (tombstoned)</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">FIN-W11-004 · Provisioning · 48%</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">FIN-W11-005 · Available</span><span class="ui-v"></span></div><div class="ui-path"><span>Dashboard</span><span class="ui-sep" aria-hidden="true">›</span><span>System Health</span><span class="ui-sep" aria-hidden="true">›</span><span>Connection Servers: 2/2 OK · vCenter: OK · Domains: contoso.local OK</span></div></div></figure>
+<p><strong>Available</strong> and <strong>Connected</strong> are the good states. <strong>Agent unreachable</strong> is a desktop whose agent is not talking to the Connection Server (network, DNS, time, or a half-made clone): with instant clones, you <strong>rebuild</strong> it (Machines → the machine → Remove, the pool creates another). <strong>Provisioning</strong> stuck for a long time is usually vCenter or a full datastore.</p>
+<h2>4. &quot;It won&#x27;t connect&quot;: the order</h2>
+<ol><li><strong>Can they see the pool in Horizon Client?</strong> If not: entitlement (the user is not in the group, or the group is not on the pool) or the pool is disabled. Check <code>Users and Groups → the user → Entitlements</code>.</li><li><strong>Stuck on &quot;Connecting…&quot; or a black screen?</strong> The client reached the Connection Server but not the desktop. Port <strong>8443/22443 (Blast)</strong> is needed from the client to the <strong>desktop VM</strong> (not just the broker) when tunnelling is off, or to the <strong>Unified Access Gateway</strong> when coming from the internet. <code>Test-NetConnection FIN-W11-002 -Port 22443</code> from the user&#x27;s device tells you.</li><li><strong>Connects and closes after a few seconds?</strong> The desktop is assigned but logon fails: a locked FSLogix profile (another desktop has the container open; visible in the FSLogix log <code>C:\ProgramData\FSLogix\Logs</code>), or the logon GPO takes longer than the timeout.</li><li><strong>Always lands on the same broken machine?</strong> In floating pools, Horizon retries the last one; <strong>Reset</strong> or <strong>Remove</strong> that machine from the console and have them log in again.</li></ol>
+<p>Client logs when escalating: on Windows, <code>%LOCALAPPDATA%\VMware\VDM\Logs\</code> (<code>vmware-horizon-client-*.log</code>); on the desktop, <code>C:\ProgramData\VMware\VDM\logs\</code> (the agent&#x27;s <code>debug-*.txt</code>). Horizon Console → <strong>Help Desk</strong> (with the user) summarises session, protocol, latency and logon events on one screen: that is where first-line support starts.</p>
+<h2>5. Update the golden image</h2>
+<p>Changing something in the pool (a patch, a new application) means: power on the golden image, make the change, power it off, <strong>new snapshot</strong> with a date, and on the pool <strong>Maintain → Push Image</strong> choosing that snapshot and when (as each user logs off, or forced in a window). Never touch a pool desktop by hand: it vanishes at the next logoff.</p>
+<p class="g-warn">Before the Push Image, test the new snapshot on a 2-machine <strong>test pool</strong>. An image with the agent badly installed leaves all 40 desktops in *Agent unreachable* at once.</p>
+<h2>Next steps</h2>
+<ul><li>Set up <strong>FSLogix</strong> for profiles if it is not there: it is what makes a floating desktop feel like the user&#x27;s own.</li><li>A <strong>Unified Access Gateway</strong> in the DMZ for access from outside without VPN; and in Level 4, <strong>Azure Virtual Desktop and Windows 365</strong>, the cloud alternative.</li><li>The Citrix VDI guide is this one&#x27;s mirror: same problems, other names. Knowing both puts you at home in any company.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">VMware Horizon</span><span class="en">VMware Horizon</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span><span class="en">All Level 2 guides</span> →</a>
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="veeam-crear-un-job-comprobar-copias-y-restaurar.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Veeam Backup: crear un trabajo, comprobar que termina bien y hacer una restauración de prueba</span><span class="en">Veeam Backup: creating a job, checking it completes, and running a test restore</span></span></a>
+    <a class="post-nav-link next" href="windows-server-instalar-rol-parchear-y-leer-eventos.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Windows Server: instalar un rol, parchear sin cortar el servicio y leer los eventos que importan</span><span class="en">Windows Server: installing a role, patching without cutting the service, and reading the events that matter</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="PDQ and MDT: deploying software in bulk and installing Windows from scratch · Iñigo González" data-title-es="PDQ y MDT: desplegar software en lote e instalar Windows desde cero · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>PDQ and MDT: deploying software in bulk and installing Windows from scratch · Iñigo González</title>
+<meta name="description" content="PDQ Deploy and Inventory to push an installer to 50 devices this afternoon, and MDT for a clean Windows install from a deployment share. When it still makes sense next to Intune.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/pdq-y-mdt-desplegar-software-en-lote-e-instalar-windows.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PDQ and MDT: deploying software in bulk and installing Windows from scratch · Iñigo González">
+<meta property="og:description" content="PDQ Deploy and Inventory to push an installer to 50 devices this afternoon, and MDT for a clean Windows install from a deployment share. When it still makes sense next to Intune.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/pdq-y-mdt-desplegar-software-en-lote-e-instalar-windows.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PDQ and MDT: deploying software in bulk and installing Windows from scratch · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"PDQ and MDT: deploying software in bulk and installing Windows from scratch","alternativeHeadline":"PDQ y MDT: desplegar software en lote e instalar Windows desde cero","description":"PDQ Deploy and Inventory to push an installer to 50 devices this afternoon, and MDT for a clean Windows install from a deployment share. When it still makes sense next to Intune.","datePublished":"2026-10-21","dateModified":"2026-10-21","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/pdq-y-mdt-desplegar-software-en-lote-e-instalar-windows.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/pdq-y-mdt-desplegar-software-en-lote-e-instalar-windows.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"PDQ and MDT"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 2","item":"https://inigogonzalezgarcia.github.io/guias/nivel-2.html"},{"@type":"ListItem","position":4,"name":"PDQ and MDT: deploying software in bulk and installing Windows from scratch","item":"https://inigogonzalezgarcia.github.io/guias/pdq-y-mdt-desplegar-software-en-lote-e-instalar-windows.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="nivel-2.html"><span class="es">Nivel 2</span><span class="en">Level 2</span></a></p>
+    <h1><span class="es">PDQ y MDT: desplegar software en lote e instalar Windows desde cero</span><span class="en">PDQ and MDT: deploying software in bulk and installing Windows from scratch</span></h1>
+    <p class="lede"><span class="es">PDQ Deploy e Inventory para empujar un instalador a 50 equipos esta tarde, y MDT para una instalación limpia de Windows con un recurso compartido de implementación. Cuándo sigue teniendo sentido frente a Intune.</span><span class="en">PDQ Deploy and Inventory to push an installer to 50 devices this afternoon, and MDT for a clean Windows install from a deployment share. When it still makes sense next to Intune.</span></p><p class="label post-meta"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">PDQ y MDT</span><span class="en">PDQ and MDT</span> · <span class="es">5 min</span><span class="en">4 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">21 oct 2026</span><span class="en">21 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Dos herramientas que resuelven el día a día de una oficina sin MECM: con <strong>PDQ Deploy</strong> instalas o actualizas una aplicación en decenas de equipos en minutos; con <strong>MDT</strong> (Microsoft Deployment Toolkit) preparas un Windows limpio con los controladores y las aplicaciones base para un equipo nuevo o reinstalado.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Un servidor o equipo de administración unido al dominio para PDQ y para el recurso compartido de MDT.</li><li>Una cuenta de dominio con <strong>administrador local</strong> en los equipos de destino (PDQ la usa para instalar). Guárdala en PDQ como credencial, no en un script.</li><li>En los equipos de destino: compartición de archivos e impresoras activada y el firewall permitiendo <strong>Administración remota</strong> (PDQ usa SMB y el servicio de administración remota, no WinRM).</li><li>Para MDT: el ADK de Windows y el complemento WinPE instalados en el servidor, y una ISO de Windows 11 Enterprise.</li></ul>
+<h2>1. PDQ Inventory: saber qué hay</h2>
+<p>Antes de desplegar, saber dónde. PDQ Inventory escanea los equipos del dominio y mantiene colecciones dinámicas (por aplicación, versión, SO, disco).</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PDQ Inventory · Colecciones</span></figcaption><div class="ui-body"><div class="ui-path"><span>Colecciones</span><span class="ui-sep" aria-hidden="true">›</span><span>Nueva colección dinámica</span></div><div class="ui-field"><span class="ui-k">Nombre</span><span class="ui-v">7-Zip desactualizado</span></div><div class="ui-field"><span class="ui-k">Equipos donde</span><span class="ui-v">Aplicación · Nombre · contiene · 7-Zip</span></div><div class="ui-field"><span class="ui-k">y · Aplicación · Versión · menor que · 24.08</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">y · Equipo · Visto por última vez · en los últimos · 7 días</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">Miembros</span><span class="ui-v">38 equipos</span></div></div></figure>
+<p>Con esto, &quot;¿cuántos equipos tienen el Java viejo?&quot; o &quot;¿qué portátiles no han aparecido en 30 días?&quot; es una colección, no una tarde.</p>
+<h2>2. PDQ Deploy: el paquete y el despliegue</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PDQ Deploy · Paquetes › Nuevo paquete</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Nombre</span><span class="ui-v">7-Zip 24.08 (x64)</span></div><div class="ui-path"><span>Paso 1 · Instalar</span></div><div class="ui-field"><span class="ui-k">Archivo</span><span class="ui-v">\\srv-files-01\Deploy\7-Zip\7z2408-x64.msi</span></div><div class="ui-field"><span class="ui-k">Parámetros</span><span class="ui-v">/qn /norestart</span></div><div class="ui-field"><span class="ui-k">Códigos de éxito</span><span class="ui-v">0, 1641, 3010</span></div><div class="ui-path"><span>Condiciones</span></div><div class="ui-field"><span class="ui-k">Arquitectura</span><span class="ui-v">64 bits · SO: Windows 10, Windows 11</span></div><div class="ui-btn">Guardar</div></div></figure>
+<p>Despliegue: botón derecho sobre el paquete → <strong>Implementar una vez</strong> → elegir la colección de Inventory &quot;7-Zip desactualizado&quot; → <strong>Implementar ahora</strong>. La ventana de estado muestra cada equipo en vivo: Correcto, Error (con el código) o Sin conexión.</p>
+<ul><li><strong>Sin conexión</strong>: el equipo está apagado o fuera de la red. Con <strong>Implementación automática</strong> ligada a la colección, PDQ lo instalará cuando aparezca (lo que PDQ llama *heartbeat*).</li><li><strong>Error 1603</strong> o similar: el instalador falla en ese equipo. Prueba el comando a mano en él (igual que en la guía de MECM): casi siempre es una versión antigua que no se desinstala o un proceso abierto.</li><li><strong>Acceso denegado</strong>: la credencial no es administrador local en ese equipo, o el firewall bloquea.</li></ul>
+<p class="g-tip">PDQ no tiene cliente: todo lo hace por SMB y servicios remotos desde la consola. Por eso es tan rápido de montar, y por eso solo llega a los equipos que están en la red corporativa o en VPN.</p>
+<h2>3. MDT: un Windows limpio</h2>
+<p>MDT instala Windows a partir de un <strong>recurso compartido de implementación</strong> (<code>\\srv-mdt-01\DeploymentShare$</code>) con una <strong>secuencia de tareas</strong> que formatea, instala el SO, los controladores y las aplicaciones base, une al dominio y pone el nombre.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Deployment Workbench · Deployment Share</span></figcaption><div class="ui-body"><div class="ui-path"><span>Deployment Shares</span><span class="ui-sep" aria-hidden="true">›</span><span>MDT Production</span><span class="ui-sep" aria-hidden="true">›</span><span>Operating Systems</span><span class="ui-sep" aria-hidden="true">›</span><span>Importar: Windows 11 Enterprise 24H2 (install.wim)</span></div><div class="ui-path"><span>Deployment Shares</span><span class="ui-sep" aria-hidden="true">›</span><span>MDT Production</span><span class="ui-sep" aria-hidden="true">›</span><span>Out-of-Box Drivers</span><span class="ui-sep" aria-hidden="true">›</span><span>Fabrikam</span><span class="ui-sep" aria-hidden="true">›</span><span>Portable 14 G3 (importados desde el paquete del fabricante)</span></div><div class="ui-path"><span>Deployment Shares</span><span class="ui-sep" aria-hidden="true">›</span><span>MDT Production</span><span class="ui-sep" aria-hidden="true">›</span><span>Applications</span><span class="ui-sep" aria-hidden="true">›</span><span>7-Zip 24.08 · Office 365 Apps · Cisco Secure Client</span></div><div class="ui-path"><span>Deployment Shares</span><span class="ui-sep" aria-hidden="true">›</span><span>MDT Production</span><span class="ui-sep" aria-hidden="true">›</span><span>Task Sequences</span><span class="ui-sep" aria-hidden="true">›</span><span>Nueva: &quot;W11 Estándar oficina&quot; (Standard Client Task Sequence)</span></div><div class="ui-path"><span>Task Sequence</span><span class="ui-sep" aria-hidden="true">›</span><span>Preinstall</span><span class="ui-sep" aria-hidden="true">›</span><span>Inject Drivers</span><span class="ui-sep" aria-hidden="true">›</span><span>Selección por perfil: modelo (%Model%)</span></div><div class="ui-path"><span>Task Sequence</span><span class="ui-sep" aria-hidden="true">›</span><span>State Restore</span><span class="ui-sep" aria-hidden="true">›</span><span>Install Applications</span><span class="ui-sep" aria-hidden="true">›</span><span>7-Zip, Office, Secure Client</span></div><div class="ui-txt">[Update Deployment Share] (genera el WinPE de arranque: LiteTouchPE_x64.iso / .wim)</div></div></figure>
+<p>Dos ficheros deciden casi todo:</p>
+<ul><li><strong>CustomSettings.ini</strong>: las respuestas por defecto (dominio, OU, zona horaria, idioma, nombre del equipo con <code>OSDComputerName=%SerialNumber%</code>), para que el asistente no pregunte lo que ya sabes.</li><li><strong>Bootstrap.ini</strong>: la ruta del recurso compartido y la credencial de solo lectura con la que WinPE lo monta. Se mete dentro del WinPE al actualizar el share.</li></ul>
+<p>Después: arrancar el equipo desde el USB o por PXE (si hay WDS) con <code>LiteTouchPE_x64</code>, elegir la secuencia de tareas y en 25-40 minutos el equipo está en el dominio con todo instalado. El log que importa si algo falla: <code>C:\MININT\SMSOSD\OSDLOGS\BDD.log</code> durante la instalación, y <code>C:\Windows\Temp\DeploymentLogs\</code> al final (ábrelos con CMTrace).</p>
+<h2>4. Dónde encajan hoy</h2>
+<p>PDQ y MDT siguen siendo útiles en oficinas con equipos en red local, sin MECM, y para reinstalar en el taller. Lo que ha cambiado: los portátiles que nunca pisan la oficina se gestionan con <strong>Intune y Autopilot</strong> (la imagen viene de fábrica y se configura sola), y las aplicaciones en esos equipos se despliegan con <strong>Win32 apps</strong> de Intune. Lo normal en 2026 es tener las dos cosas: MDT para el taller y el equipo de sobremesa, Autopilot para el portátil remoto.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>En PDQ, crea una <strong>implementación automática</strong> para los parches de navegadores y Java: se mantienen al día sin que nadie lo lance.</li><li>En MDT, añade un paso de <strong>actualización de Windows</strong> al final de la secuencia (Windows Update dentro de la secuencia de tareas) para que el equipo salga ya parcheado.</li><li>En el Nivel 3 verás Intune de principio a fin, y en la guía de MECM/SCCM el equivalente de todo esto con infraestructura propia.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>Two tools that handle the everyday needs of an office without MECM: with <strong>PDQ Deploy</strong> you install or update an application on dozens of devices in minutes; with <strong>MDT</strong> (Microsoft Deployment Toolkit) you prepare a clean Windows with drivers and base applications for a new or rebuilt device.</p>
+<h2>Before you start</h2>
+<ul><li>A domain-joined server or admin workstation for PDQ and for the MDT share.</li><li>A domain account with <strong>local administrator</strong> on the target devices (PDQ uses it to install). Store it in PDQ as a credential, not in a script.</li><li>On the targets: file and printer sharing enabled and the firewall allowing <strong>Remote Administration</strong> (PDQ uses SMB and the remote admin service, not WinRM).</li><li>For MDT: the Windows ADK and the WinPE add-on installed on the server, and a Windows 11 Enterprise ISO.</li></ul>
+<h2>1. PDQ Inventory: know what&#x27;s there</h2>
+<p>Before deploying, know where. PDQ Inventory scans the domain&#x27;s devices and keeps dynamic collections (by application, version, OS, disk).</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PDQ Inventory · Collections</span></figcaption><div class="ui-body"><div class="ui-path"><span>Collections</span><span class="ui-sep" aria-hidden="true">›</span><span>New Dynamic Collection</span></div><div class="ui-field"><span class="ui-k">Name</span><span class="ui-v">7-Zip outdated</span></div><div class="ui-field"><span class="ui-k">Computers where</span><span class="ui-v">Application · Name · contains · 7-Zip</span></div><div class="ui-field"><span class="ui-k">and · Application · Version · less than · 24.08</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">and · Computer · Last seen · within the last · 7 days</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">Members</span><span class="ui-v">38 computers</span></div></div></figure>
+<p>With this, &quot;how many devices have the old Java?&quot; or &quot;which laptops haven&#x27;t shown up in 30 days?&quot; is a collection, not an afternoon.</p>
+<h2>2. PDQ Deploy: the package and the deployment</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PDQ Deploy · Packages › New Package</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Name</span><span class="ui-v">7-Zip 24.08 (x64)</span></div><div class="ui-path"><span>Step 1 · Install</span></div><div class="ui-field"><span class="ui-k">File</span><span class="ui-v">\\srv-files-01\Deploy\7-Zip\7z2408-x64.msi</span></div><div class="ui-field"><span class="ui-k">Parameters</span><span class="ui-v">/qn /norestart</span></div><div class="ui-field"><span class="ui-k">Success codes</span><span class="ui-v">0, 1641, 3010</span></div><div class="ui-path"><span>Conditions</span></div><div class="ui-field"><span class="ui-k">Architecture</span><span class="ui-v">64-bit · OS: Windows 10, Windows 11</span></div><div class="ui-btn">Save</div></div></figure>
+<p>Deployment: right-click the package → <strong>Deploy Once</strong> → pick the Inventory collection &quot;7-Zip outdated&quot; → <strong>Deploy Now</strong>. The status window shows every device live: Successful, Failed (with the code) or Offline.</p>
+<ul><li><strong>Offline</strong>: the device is off or away from the network. With an <strong>Auto Deployment</strong> tied to the collection, PDQ installs it when it reappears (what PDQ calls *heartbeat*).</li><li><strong>Error 1603</strong> or similar: the installer fails on that device. Try the command by hand on it (as in the MECM guide): almost always an old version that won&#x27;t uninstall, or an open process.</li><li><strong>Access denied</strong>: the credential is not a local admin on that device, or the firewall blocks it.</li></ul>
+<p class="g-tip">PDQ has no client: it does everything over SMB and remote services from the console. That is why it is so quick to set up, and why it only reaches devices on the corporate network or VPN.</p>
+<h2>3. MDT: a clean Windows</h2>
+<p>MDT installs Windows from a <strong>deployment share</strong> (<code>\\srv-mdt-01\DeploymentShare$</code>) with a <strong>task sequence</strong> that formats, installs the OS, drivers and base apps, joins the domain and sets the name.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Deployment Workbench · Deployment Share</span></figcaption><div class="ui-body"><div class="ui-path"><span>Deployment Shares</span><span class="ui-sep" aria-hidden="true">›</span><span>MDT Production</span><span class="ui-sep" aria-hidden="true">›</span><span>Operating Systems</span><span class="ui-sep" aria-hidden="true">›</span><span>Import: Windows 11 Enterprise 24H2 (install.wim)</span></div><div class="ui-path"><span>Deployment Shares</span><span class="ui-sep" aria-hidden="true">›</span><span>MDT Production</span><span class="ui-sep" aria-hidden="true">›</span><span>Out-of-Box Drivers</span><span class="ui-sep" aria-hidden="true">›</span><span>Fabrikam</span><span class="ui-sep" aria-hidden="true">›</span><span>Portable 14 G3 (imported from the vendor&#x27;s driver pack)</span></div><div class="ui-path"><span>Deployment Shares</span><span class="ui-sep" aria-hidden="true">›</span><span>MDT Production</span><span class="ui-sep" aria-hidden="true">›</span><span>Applications</span><span class="ui-sep" aria-hidden="true">›</span><span>7-Zip 24.08 · Office 365 Apps · Cisco Secure Client</span></div><div class="ui-path"><span>Deployment Shares</span><span class="ui-sep" aria-hidden="true">›</span><span>MDT Production</span><span class="ui-sep" aria-hidden="true">›</span><span>Task Sequences</span><span class="ui-sep" aria-hidden="true">›</span><span>New: &quot;W11 Standard office&quot; (Standard Client Task Sequence)</span></div><div class="ui-path"><span>Task Sequence</span><span class="ui-sep" aria-hidden="true">›</span><span>Preinstall</span><span class="ui-sep" aria-hidden="true">›</span><span>Inject Drivers</span><span class="ui-sep" aria-hidden="true">›</span><span>Selection profile: model (%Model%)</span></div><div class="ui-path"><span>Task Sequence</span><span class="ui-sep" aria-hidden="true">›</span><span>State Restore</span><span class="ui-sep" aria-hidden="true">›</span><span>Install Applications</span><span class="ui-sep" aria-hidden="true">›</span><span>7-Zip, Office, Secure Client</span></div><div class="ui-txt">[Update Deployment Share] (builds the WinPE boot media: LiteTouchPE_x64.iso / .wim)</div></div></figure>
+<p>Two files decide almost everything:</p>
+<ul><li><strong>CustomSettings.ini</strong>: the default answers (domain, OU, time zone, language, computer name with <code>OSDComputerName=%SerialNumber%</code>), so the wizard doesn&#x27;t ask what you already know.</li><li><strong>Bootstrap.ini</strong>: the share path and the read-only credential WinPE mounts it with. It is baked into WinPE when you update the share.</li></ul>
+<p>Then: boot the device from USB or PXE (if WDS is there) with <code>LiteTouchPE_x64</code>, pick the task sequence, and in 25-40 minutes the device is in the domain with everything installed. The log that matters if something fails: <code>C:\MININT\SMSOSD\OSDLOGS\BDD.log</code> during the install, and <code>C:\Windows\Temp\DeploymentLogs\</code> at the end (open them with CMTrace).</p>
+<h2>4. Where they fit today</h2>
+<p>PDQ and MDT are still useful in offices with devices on the LAN, without MECM, and for rebuilding in the workshop. What has changed: laptops that never set foot in the office are managed with <strong>Intune and Autopilot</strong> (the image comes from the factory and configures itself), and applications on those devices are deployed as Intune <strong>Win32 apps</strong>. The normal setup in 2026 is both: MDT for the workshop and the desktop, Autopilot for the remote laptop.</p>
+<h2>Next steps</h2>
+<ul><li>In PDQ, create an <strong>Auto Deployment</strong> for browser and Java patches: they stay current without anyone launching them.</li><li>In MDT, add a <strong>Windows Update</strong> step at the end of the sequence (Windows Update inside the task sequence) so the device comes out already patched.</li><li>In Level 3 you&#x27;ll see Intune from start to finish, and in the MECM/SCCM guide the equivalent of all this with your own infrastructure.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">PDQ y MDT</span><span class="en">PDQ and MDT</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span><span class="en">All Level 2 guides</span> →</a>
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="teams-rooms-poner-en-marcha-una-sala.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Microsoft Teams Rooms: poner en marcha una sala y supervisarla</span><span class="en">Microsoft Teams Rooms: bringing a room online and keeping an eye on it</span></span></a>
+    <a class="post-nav-link next" href="powershell-script-de-inventario-remoto-con-csv.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">PowerShell: un script de inventario que corre en remoto, maneja errores y deja un CSV</span><span class="en">PowerShell: an inventory script that runs remotely, handles errors and leaves a CSV</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
