@@ -4,45 +4,108 @@
 :::ui Title         a simulated window: lines starting with "> " are a navigation path, "[ ]" / "[x]" are options, the rest is text
 Both end with ":::". No real hostnames, users, tenants or company names: every example is fictional."""
 
-LEVEL1 = dict(key="nivel-1", n_es="Nivel 1", n_en="Level 1", t_es="Primeros pasos", t_en="First steps",
-              d_es="Lo que necesitas para empezar en soporte: el puesto, el usuario y sus herramientas.",
-              d_en="What you need to start in support: the device, the user and their tools.")
+LEVELS = {
+    "nivel-1": dict(key="nivel-1", n_es="Nivel 1", n_en="Level 1", t_es="Primeros pasos", t_en="First steps",
+                    h_es="Primeros pasos<br>en soporte IT.", h_en="First steps<br>in IT support.",
+                    d_es="Lo que necesitas para empezar en soporte: el puesto, el usuario y sus herramientas.",
+                    d_en="What you need to start in support: the device, the user and their tools.",
+                    l_es="Once temas para empezar: el puesto, el usuario y sus herramientas. Paso a paso, con los comandos y las comprobaciones que harías en un ticket real.",
+                    l_en="Eleven topics to get started: the device, the user and their tools. Step by step, with the commands and checks you would run on a real ticket.",
+                    seo="Beginner IT support guides: Active Directory, Android, BitLocker, Cisco AnyConnect, printers, iPhone and iPad, Jira Service Management, Microsoft 365 licences, Teams, Outlook and Windows."),
+    "nivel-2": dict(key="nivel-2", n_es="Nivel 2", n_en="Level 2", t_es="Base sólida", t_en="Solid foundations",
+                    h_es="Servidores, despliegues<br>y los primeros scripts.", h_en="Servers, deployments<br>and your first scripts.",
+                    d_es="Servidores, despliegue de aplicaciones y los primeros scripts.",
+                    d_en="Servers, app deployment and your first scripts.",
+                    l_es="Dieciséis temas para pasar del puesto de usuario a lo que hay detrás: servidores Windows y Linux, despliegue de aplicaciones, copias, escritorios virtuales, salas y los primeros scripts en PowerShell y Bash.",
+                    l_en="Sixteen topics to move from the user's device to what sits behind it: Windows and Linux servers, app deployment, backups, virtual desktops, meeting rooms and your first PowerShell and Bash scripts.",
+                    seo="Intermediate IT guides: Azure AD Connect, Bash, Citrix, Confluence, Git, Jamf Pro, MECM/SCCM, Microsoft Teams Rooms, PDQ and MDT, PowerShell, Red Hat, SharePoint, Ubuntu, Veeam, VMware Horizon and Windows Server."),
+}
+LEVEL1 = LEVELS["nivel-1"]
 
-# key, name_es, name_en, one-line description es/en
+# level, key, name_es, name_en, one-line description es/en
 TOPICS = [
-    ("active-directory", "Active Directory: usuarios y grupos", "Active Directory: users and groups",
+    ("nivel-1", "active-directory", "Active Directory: usuarios y grupos", "Active Directory: users and groups",
      "Altas, bajas, grupos y las incidencias de cada día: cuentas bloqueadas y contraseñas.",
      "Joiners, leavers, groups and the everyday tickets: locked accounts and passwords."),
-    ("android", "Android", "Android",
+    ("nivel-1", "android", "Android", "Android",
      "Móviles corporativos y perfil de trabajo con Intune.",
      "Corporate phones and the work profile with Intune."),
-    ("bitlocker", "BitLocker", "BitLocker",
+    ("nivel-1", "bitlocker", "BitLocker", "BitLocker",
      "Cifrado del disco, claves de recuperación y qué hacer cuando un equipo pide la clave.",
      "Disk encryption, recovery keys and what to do when a device asks for one."),
-    ("anyconnect", "Cisco AnyConnect (VPN)", "Cisco AnyConnect (VPN)",
+    ("nivel-1", "anyconnect", "Cisco AnyConnect (VPN)", "Cisco AnyConnect (VPN)",
      "Instalar el cliente, conectar y diagnosticar los fallos más habituales.",
      "Install the client, connect and diagnose the usual failures."),
-    ("impresoras", "Impresoras y periféricos", "Printers and peripherals",
+    ("nivel-1", "impresoras", "Impresoras y periféricos", "Printers and peripherals",
      "Instalar una impresora de red, colas atascadas y periféricos que no responden.",
      "Install a network printer, stuck queues and peripherals that stop responding."),
-    ("ios", "iPhone y iPad", "iPhone and iPad",
+    ("nivel-1", "ios", "iPhone y iPad", "iPhone and iPad",
      "Enrolar un dispositivo Apple en Intune y comprobar que recibe las políticas.",
      "Enrol an Apple device in Intune and check that it receives its policies."),
-    ("jira", "Jira Service Management: tickets", "Jira Service Management: tickets",
+    ("nivel-1", "jira", "Jira Service Management: tickets", "Jira Service Management: tickets",
      "Abrir, clasificar, trabajar y cerrar un ticket de forma que ayude al siguiente.",
      "Open, classify, work and close a ticket in a way that helps the next person."),
-    ("m365", "Microsoft 365 y licencias", "Microsoft 365 and licences",
+    ("nivel-1", "m365", "Microsoft 365 y licencias", "Microsoft 365 and licences",
      "Asignar y retirar licencias, y saber qué incluye cada una.",
      "Assign and remove licences, and know what each one includes."),
-    ("teams", "Microsoft Teams", "Microsoft Teams",
+    ("nivel-1", "teams", "Microsoft Teams", "Microsoft Teams",
      "Los problemas que más llegan al service desk y cómo resolverlos en minutos.",
      "The issues that reach the service desk most often, and how to fix them in minutes."),
-    ("outlook", "Outlook y Exchange Online", "Outlook and Exchange Online",
+    ("nivel-1", "outlook", "Outlook y Exchange Online", "Outlook and Exchange Online",
      "Buzones compartidos, permisos, respuestas automáticas y perfiles que no abren.",
      "Shared mailboxes, permissions, automatic replies and profiles that won't open."),
-    ("windows", "Windows 10 y 11", "Windows 10 and 11",
+    ("nivel-1", "windows", "Windows 10 y 11", "Windows 10 and 11",
      "Diagnóstico básico de un equipo: lento, con errores o que no sincroniza con Intune.",
      "Basic diagnosis of a device: slow, throwing errors or not syncing with Intune."),
+    # ---- Level 2
+    ("nivel-2", "azure-ad-connect", "Azure AD Connect", "Azure AD Connect",
+     "La sincronización entre Active Directory y Entra ID: forzar un ciclo y arreglar objetos que no pasan.",
+     "The sync between Active Directory and Entra ID: force a cycle and fix objects that don't make it across."),
+    ("nivel-2", "bash", "Bash", "Bash",
+     "El primer script de comprobación de un servidor Linux, con las reglas que evitan los sustos.",
+     "Your first health-check script for a Linux server, with the rules that avoid nasty surprises."),
+    ("nivel-2", "citrix-vdi", "Citrix VDI", "Citrix VDI",
+     "Publicar una aplicación y diagnosticar una sesión que no abre.",
+     "Publish an application and diagnose a session that won't launch."),
+    ("nivel-2", "confluence", "Confluence", "Confluence",
+     "Montar el espacio de IT y escribir runbooks que el equipo use de verdad.",
+     "Set up the IT space and write runbooks the team actually uses."),
+    ("nivel-2", "git", "Git", "Git",
+     "Poner los scripts del equipo bajo control de versiones: repo, ramas, commits y revisión.",
+     "Put the team's scripts under version control: repo, branches, commits and review."),
+    ("nivel-2", "jamf-pro", "Jamf Pro", "Jamf Pro",
+     "Enrolar un Mac y desplegar una política con un grupo inteligente.",
+     "Enrol a Mac and deploy a policy with a smart group."),
+    ("nivel-2", "mecm-sccm", "MECM / SCCM: empaquetado de aplicaciones", "MECM / SCCM: app packaging",
+     "Crear una aplicación, su método de detección y desplegarla a una colección.",
+     "Create an application, its detection method, and deploy it to a collection."),
+    ("nivel-2", "teams-rooms", "Microsoft Teams Rooms", "Microsoft Teams Rooms",
+     "Poner en marcha una sala: cuenta de recurso, licencia, inicio de sesión y supervisión.",
+     "Bring a room online: resource account, licence, sign-in and monitoring."),
+    ("nivel-2", "pdq-mdt", "PDQ y MDT", "PDQ and MDT",
+     "Desplegar software en lote con PDQ e instalar Windows desde cero con MDT.",
+     "Deploy software in bulk with PDQ and install Windows from scratch with MDT."),
+    ("nivel-2", "powershell", "PowerShell", "PowerShell",
+     "Un script de inventario que se ejecuta en remoto, maneja errores y deja un CSV.",
+     "An inventory script that runs remotely, handles errors and leaves a CSV."),
+    ("nivel-2", "rhel", "Red Hat Enterprise Linux", "Red Hat Enterprise Linux",
+     "Registrar el sistema, parchear, y controlar servicios, firewall y SELinux.",
+     "Register the system, patch it, and manage services, the firewall and SELinux."),
+    ("nivel-2", "sharepoint", "SharePoint", "SharePoint",
+     "Crear un sitio de equipo, dar permisos bien y entender el uso compartido.",
+     "Create a team site, grant permissions properly and understand sharing."),
+    ("nivel-2", "ubuntu", "Ubuntu", "Ubuntu",
+     "Un Ubuntu Server recién instalado: usuarios, SSH con claves, firewall y actualizaciones.",
+     "A freshly installed Ubuntu Server: users, SSH with keys, firewall and updates."),
+    ("nivel-2", "veeam", "Veeam Backup", "Veeam Backup",
+     "Crear un trabajo de copia, comprobar que termina bien y hacer una restauración de prueba.",
+     "Create a backup job, check it completes, and run a test restore."),
+    ("nivel-2", "vmware-horizon", "VMware Horizon", "VMware Horizon",
+     "Un pool de escritorios desde una imagen maestra y el diagnóstico de una conexión que falla.",
+     "A desktop pool from a golden image, and diagnosing a connection that fails."),
+    ("nivel-2", "windows-server", "Windows Server", "Windows Server",
+     "Instalar un rol, parchear sin cortar el servicio y leer los eventos que importan.",
+     "Install a role, patch without cutting the service, and read the events that matter."),
 ]
 
 GUIDES = []
@@ -2001,4 +2064,3049 @@ Name and model, Windows build, last reboot, free disk, the critical events from 
 - Turn points 1, 2, 4 and 5 into a script that runs remotely and pastes the result into the ticket: ten minutes become one.
 - The **Windows Update for Business** report and the **device health** report in Intune tell you in advance which devices are about to cause trouble.
 - In Level 2 you'll see MECM/SCCM and PowerShell properly; in Level 3, Intune from start to finish.
+""")
+
+# ================================================================ Level 2
+# ---------------------------------------------------------------- 2.1 · Azure AD Connect
+g(slug="azure-ad-connect-forzar-sincronizacion-y-objetos-que-no-pasan", topic="azure-ad-connect", date="2026-10-21",
+  title_es="Azure AD Connect: forzar una sincronización y arreglar un objeto que no pasa a Entra ID",
+  title_en="Azure AD Connect: forcing a sync and fixing an object that won't reach Entra ID",
+  dek_es="Dónde mirar cuando un usuario nuevo no aparece en Microsoft 365, cómo forzar el ciclo y cómo leer los errores de exportación.",
+  dek_en="Where to look when a new user doesn't appear in Microsoft 365, how to force the cycle, and how to read export errors.",
+  es="""
+## Qué vas a conseguir
+
+Entender el camino que sigue una cuenta desde Active Directory hasta Entra ID, forzar una sincronización cuando no puedes esperar 30 minutos, y resolver los tres errores que explican casi todos los "no aparece en Microsoft 365".
+
+## Antes de empezar
+
+- Acceso al servidor donde está instalado **Microsoft Entra Connect** (el nombre nuevo de Azure AD Connect). Suele ser un servidor miembro, no un controlador de dominio.
+- Pertenecer al grupo local **ADSyncAdmins** de ese servidor, o ser administrador local. No necesitas ser Global Admin para forzar un ciclo.
+- Saber qué OUs están incluidas en la sincronización: si el usuario está en una OU fuera del filtro, nunca pasará, haga lo que haga.
+
+## 1. Cómo viaja un objeto
+
+Entra Connect sincroniza cada **30 minutos** en tres pasos: importa de AD al espacio del conector, lo pasa al metaverso aplicando las reglas, y exporta a Entra ID. Un cambio en AD tarda, como mucho, 30 minutos más lo que tarde Entra ID en aprovisionar el buzón y las licencias.
+
+Lo que sí es instantáneo es lo contrario: si quieres que algo se vea hoy, se fuerza; si se ve mal, el origen casi siempre es el objeto en AD, no el conector.
+
+## 2. Forzar el ciclo
+
+:::term PowerShell · servidor de Entra Connect
+$ Import-Module ADSync
+$ Get-ADSyncScheduler | Select-Object SyncCycleEnabled, NextSyncCycleStartTimeInUTC, SyncCycleInProgress
+SyncCycleEnabled            : True
+NextSyncCycleStartTimeInUTC : 21/10/2026 15:30:02
+SyncCycleInProgress         : False
+$ Start-ADSyncSyncCycle -PolicyType Delta
+Result
+------
+Success
+:::
+
+`Delta` sincroniza solo los cambios y tarda un par de minutos. `Initial` relee todo y solo se usa tras cambiar el filtrado de OUs o las reglas. Si `SyncCycleInProgress` es `True`, espera a que acabe: lanzar otro no lo acelera.
+
+! Si `SyncCycleEnabled` es `False`, alguien lo desactivó (suele hacerse durante una migración o un cambio de reglas) y se olvidó de volver a activarlo. `Set-ADSyncScheduler -SyncCycleEnabled $true` lo devuelve a la normalidad.
+
+## 3. El usuario sigue sin aparecer
+
+Abre **Synchronization Service Manager** (`miisclient.exe`, en la carpeta de instalación) y mira la pestaña **Operations**: cada ejecución muestra el conector, el perfil y si hubo errores.
+
+:::ui Synchronization Service Manager · Operations
+> Operations › contoso.local › Delta Import · Success
+> Operations › contoso.onmicrosoft.com - AAD › Export · completed-export-errors
+= Errores: 1
+= Objeto: CN=Laura Prado,OU=Ventas,OU=Usuarios,DC=contoso,DC=local
+= Error: AttributeValueMustBeUnique
+= Atributo: ProxyAddresses
+= Valor en conflicto: SMTP:laura.prado@contoso.com
+:::
+
+Los tres errores que verás una y otra vez:
+
+- **AttributeValueMustBeUnique**: otro objeto en Entra ID ya tiene ese correo o `proxyAddresses`. Suele ser un usuario antiguo (en la papelera de Entra ID o un invitado) o un buzón compartido. Busca el valor en Entra ID y en los eliminados (`Get-MgDirectoryDeletedItemAsUser`) y resuelve el duplicado.
+- **InvalidSoftMatch** o **LargeObject**: el UPN o el correo contienen caracteres no permitidos, o un atributo tiene más valores de la cuenta. **IdFix** (herramienta gratuita de Microsoft) recorre todo el AD y lista estos problemas antes de que lleguen al conector.
+- **El objeto no está en el espacio del conector**: no es error, es filtro. En **Connectors → contoso.local → Properties → Configure Directory Partitions → Containers** se ve qué OUs se sincronizan. Si la OU no está marcada, el usuario no existe para Entra ID.
+
+Para ver un objeto concreto: pestaña **Metaverse Search**, busca por `displayName` y abre **Connectors**: tiene que aparecer en los dos (AD y Entra ID). Si solo está en AD, mira **Lineage** y la regla que lo dejó fuera (`cloudFiltered`).
+
+## 4. Atributos que importan
+
+- `userPrincipalName` tiene que ser un dominio **verificado** en Entra ID. Un UPN `@contoso.local` se convierte en `@contoso.onmicrosoft.com` y el usuario no podrá iniciar sesión con su correo.
+- `mail` y `proxyAddresses` definen las direcciones del buzón. La principal lleva `SMTP:` en mayúsculas.
+- `msExchUsageLocation` rellena la ubicación de uso que exige la licencia (guía de Microsoft 365 y licencias).
+- `extensionAttribute1-15` viajan si se seleccionaron en el asistente: son útiles para grupos dinámicos.
+
+## 5. Qué poner en el ticket
+
+Hora del último ciclo, el conector que dio error, el nombre del objeto y el texto del error. Con eso, quien administre Entra ID sabe si es un duplicado o un filtro sin abrir la consola.
+
+## Siguientes pasos
+
+- Pasa **IdFix** antes de incorporar una OU nueva: evita los errores de exportación en bloque.
+- Activa **Entra Connect Health** para ver los ciclos y los errores desde el portal, sin entrar en el servidor.
+- En el Nivel 4 verás las migraciones de tenant, donde Entra Connect es la pieza que hay que desmontar y volver a montar con cuidado.
+""",
+  en="""
+## What you'll get
+
+Understand the path an account takes from Active Directory to Entra ID, force a sync when you can't wait 30 minutes, and resolve the three errors behind almost every "doesn't appear in Microsoft 365".
+
+## Before you start
+
+- Access to the server where **Microsoft Entra Connect** (the new name for Azure AD Connect) is installed. It is usually a member server, not a domain controller.
+- Membership of that server's local **ADSyncAdmins** group, or local administrator. You don't need Global Admin to force a cycle.
+- Know which OUs are included in the sync: if the user sits in an OU outside the filter, it will never cross, whatever you do.
+
+## 1. How an object travels
+
+Entra Connect syncs every **30 minutes** in three steps: import from AD into the connector space, pass to the metaverse applying the rules, and export to Entra ID. A change in AD takes at most 30 minutes plus whatever Entra ID needs to provision the mailbox and licences.
+
+What is immediate is the opposite: if you need something visible today, you force it; if it looks wrong, the cause is almost always the object in AD, not the connector.
+
+## 2. Force the cycle
+
+:::term PowerShell · Entra Connect server
+$ Import-Module ADSync
+$ Get-ADSyncScheduler | Select-Object SyncCycleEnabled, NextSyncCycleStartTimeInUTC, SyncCycleInProgress
+SyncCycleEnabled            : True
+NextSyncCycleStartTimeInUTC : 21/10/2026 15:30:02
+SyncCycleInProgress         : False
+$ Start-ADSyncSyncCycle -PolicyType Delta
+Result
+------
+Success
+:::
+
+`Delta` syncs only the changes and takes a couple of minutes. `Initial` re-reads everything and is only used after changing OU filtering or rules. If `SyncCycleInProgress` is `True`, wait for it to finish: launching another does not speed it up.
+
+! If `SyncCycleEnabled` is `False`, someone turned it off (usually during a migration or a rule change) and forgot to turn it back on. `Set-ADSyncScheduler -SyncCycleEnabled $true` restores normal service.
+
+## 3. The user still doesn't appear
+
+Open **Synchronization Service Manager** (`miisclient.exe`, in the installation folder) and look at the **Operations** tab: every run shows the connector, the profile and whether there were errors.
+
+:::ui Synchronization Service Manager · Operations
+> Operations › contoso.local › Delta Import · Success
+> Operations › contoso.onmicrosoft.com - AAD › Export · completed-export-errors
+= Errors: 1
+= Object: CN=Laura Prado,OU=Sales,OU=Users,DC=contoso,DC=local
+= Error: AttributeValueMustBeUnique
+= Attribute: ProxyAddresses
+= Conflicting value: SMTP:laura.prado@contoso.com
+:::
+
+The three errors you will see again and again:
+
+- **AttributeValueMustBeUnique**: another object in Entra ID already holds that email or `proxyAddresses`. It is usually an old user (in the Entra ID recycle bin, or a guest) or a shared mailbox. Search the value in Entra ID and among deleted items (`Get-MgDirectoryDeletedItemAsUser`) and resolve the duplicate.
+- **InvalidSoftMatch** or **LargeObject**: the UPN or email contains characters that are not allowed, or an attribute has more values than permitted. **IdFix** (Microsoft's free tool) walks the whole AD and lists these problems before they reach the connector.
+- **The object is not in the connector space**: not an error, a filter. **Connectors → contoso.local → Properties → Configure Directory Partitions → Containers** shows which OUs are synced. If the OU is unticked, the user does not exist for Entra ID.
+
+To look at one object: **Metaverse Search** tab, search by `displayName` and open **Connectors**: it has to appear in both (AD and Entra ID). If it is only in AD, check **Lineage** and the rule that left it out (`cloudFiltered`).
+
+## 4. Attributes that matter
+
+- `userPrincipalName` has to be a domain **verified** in Entra ID. A `@contoso.local` UPN becomes `@contoso.onmicrosoft.com` and the user can't sign in with their email.
+- `mail` and `proxyAddresses` define the mailbox addresses. The primary carries `SMTP:` in upper case.
+- `msExchUsageLocation` fills the usage location the licence requires (see the Microsoft 365 and licences guide).
+- `extensionAttribute1-15` travel if they were selected in the wizard: useful for dynamic groups.
+
+## 5. What to put in the ticket
+
+Time of the last cycle, the connector that errored, the object name and the error text. With that, whoever administers Entra ID knows whether it is a duplicate or a filter without opening the console.
+
+## Next steps
+
+- Run **IdFix** before onboarding a new OU: it avoids export errors in bulk.
+- Enable **Entra Connect Health** to see cycles and errors from the portal, without logging on to the server.
+- In Level 4 you'll see tenant migrations, where Entra Connect is the piece that has to be taken apart and rebuilt with care.
+""")
+
+# ---------------------------------------------------------------- 2.2 · Bash
+g(slug="bash-primer-script-de-comprobacion-de-un-servidor", topic="bash", date="2026-10-21",
+  title_es="Bash: tu primer script de comprobación de un servidor Linux",
+  title_en="Bash: your first health-check script for a Linux server",
+  dek_es="Un script que mira disco, memoria, carga y servicios, avisa si algo pasa de un umbral y se programa en cron. Con las cinco reglas que evitan sustos.",
+  dek_en="A script that checks disk, memory, load and services, warns when something crosses a threshold, and runs from cron. With the five rules that avoid nasty surprises.",
+  es="""
+## Qué vas a conseguir
+
+Un script de Bash que puedes dejar en cualquier servidor Linux y que, cada mañana, te dice si el disco se llena, si un servicio se ha caído o si la carga está disparada. Y, de paso, las reglas de escritura que separan un script que ayuda de uno que un día borra algo.
+
+## Antes de empezar
+
+- Un servidor Linux (Ubuntu, RHEL, Debian) con acceso por SSH y `sudo`.
+- Un editor: `nano` vale para empezar; `vim` cuando quieras.
+- Para probar, un directorio propio: `mkdir -p ~/scripts`.
+
+## 1. Las cinco reglas
+
+1. **Empieza siempre igual**: `#!/usr/bin/env bash` y `set -euo pipefail`. Para en el primer error (`-e`), falla si usas una variable no definida (`-u`) y no esconde errores en una tubería (`-o pipefail`).
+2. **Comillas en las variables**: `"$ruta"`, nunca `$ruta`. Un espacio en un nombre de archivo y un `rm` sin comillas es cómo se pierden carpetas.
+3. **Nunca `rm -rf` sobre una variable** sin comprobar antes que no está vacía y que apunta a donde crees: `[[ -n "$dir" && "$dir" != "/" ]]`.
+4. **Primero en modo lectura**. Un script que solo lee y avisa no puede romper nada. Lo que escribe (borrar logs, reiniciar servicios) se añade después, con `--apply` explícito.
+5. **Pásalo por `shellcheck`** antes de ejecutarlo en un servidor. Encuentra los errores clásicos que el ojo no ve.
+
+## 2. El script
+
+:::term nano ~/scripts/check-server.sh
+#!/usr/bin/env bash
+set -euo pipefail
+
+DISK_MAX=85          # % de uso de disco a partir del que avisa
+LOAD_MAX=4           # carga media de 5 min
+SERVICES=(sshd cron) # servicios que deben estar activos
+STATUS=0
+
+warn() { echo "AVISO: $*"; STATUS=1; }
+
+echo "== $(hostname) · $(date '+%d/%m/%Y %H:%M') =="
+
+# Disco: cada sistema de ficheros real por encima del umbral
+while read -r fs use mount; do
+  use=${use%\\%}
+  (( use >= DISK_MAX )) && warn "disco $mount al $use% ($fs)"
+done < <(df -h --output=source,pcent,target -x tmpfs -x devtmpfs | tail -n +2)
+
+# Memoria y carga
+read -r _ total used _ < <(free -m | awk '/^Mem:/')
+echo "memoria: $used/$total MB"
+load=$(cut -d' ' -f2 /proc/loadavg)
+awk -v l="$load" -v m="$LOAD_MAX" 'BEGIN{exit !(l>=m)}' && warn "carga a 5 min: $load"
+
+# Servicios
+for s in "${SERVICES[@]}"; do
+  systemctl is-active --quiet "$s" || warn "servicio $s no está activo"
+done
+
+(( STATUS == 0 )) && echo "OK: sin avisos"
+exit $STATUS
+:::
+
+Notas sobre lo que hace: `df --output` evita tener que contar columnas; `tail -n +2` salta la cabecera; `${use%\\%}` quita el `%`; `read ... < <(...)` lee de un comando sin abrir una subshell (así `STATUS` sí cambia dentro del bucle). La comparación de la carga va con `awk` porque Bash no compara decimales.
+
+## 3. Probar
+
+:::term bash · servidor
+$ chmod +x ~/scripts/check-server.sh
+$ shellcheck ~/scripts/check-server.sh && echo "shellcheck ok"
+shellcheck ok
+$ ~/scripts/check-server.sh
+== srv-files-01 · 21/10/2026 08:00 ==
+AVISO: disco /var al 91% (/dev/sda3)
+memoria: 3105/7812 MB
+AVISO: servicio cron no está activo
+$ echo $?
+1
+:::
+
+El código de salida (`1` con avisos, `0` sin ellos) es lo que permite que cron, un monitor o otro script sepan si ha ido bien sin leer el texto.
+
+## 4. Programarlo
+
+:::term bash · servidor
+$ sudo cp ~/scripts/check-server.sh /usr/local/bin/check-server
+$ sudo crontab -e
+# cada día a las 7:00, guardando la salida en un log que rota
+0 7 * * * /usr/local/bin/check-server >> /var/log/check-server.log 2>&1
+$ sudo tail -n 20 /var/log/check-server.log
+:::
+
+En cron no hay tu `PATH` ni tus alias: usa rutas completas y prueba el script con `env -i bash -c /usr/local/bin/check-server` para ver cómo se comporta sin tu entorno. Para que avise por correo, `MAILTO=it@contoso.com` al principio del crontab (si el servidor tiene correo configurado), o mejor, que escriba en el log que ya recoge tu monitorización.
+
+## Siguientes pasos
+
+- Añade un `--apply` que haga algo útil y seguro: rotar un log, reiniciar el servicio caído con `systemctl restart`.
+- Pon el script en el repositorio del equipo (guía de Git) para que cambie con revisión y no por SSH a mano.
+- En el Nivel 3 verás Ansible: cuando el mismo script tiene que correr en 40 servidores, es su trabajo.
+""",
+  en="""
+## What you'll get
+
+A Bash script you can drop on any Linux server which, every morning, tells you whether the disk is filling up, a service has died or the load is through the roof. And, along the way, the writing rules that separate a script that helps from one that deletes something one day.
+
+## Before you start
+
+- A Linux server (Ubuntu, RHEL, Debian) with SSH access and `sudo`.
+- An editor: `nano` is fine to start; `vim` whenever you like.
+- A folder of your own to test in: `mkdir -p ~/scripts`.
+
+## 1. The five rules
+
+1. **Always start the same way**: `#!/usr/bin/env bash` and `set -euo pipefail`. It stops at the first error (`-e`), fails on an undefined variable (`-u`) and does not hide errors inside a pipe (`-o pipefail`).
+2. **Quote your variables**: `"$path"`, never `$path`. A space in a file name plus an unquoted `rm` is how folders get lost.
+3. **Never `rm -rf` on a variable** without first checking it is not empty and points where you think: `[[ -n "$dir" && "$dir" != "/" ]]`.
+4. **Read-only first**. A script that only reads and warns cannot break anything. Whatever writes (deleting logs, restarting services) is added later, behind an explicit `--apply`.
+5. **Run it through `shellcheck`** before executing it on a server. It finds the classic mistakes the eye misses.
+
+## 2. The script
+
+:::term nano ~/scripts/check-server.sh
+#!/usr/bin/env bash
+set -euo pipefail
+
+DISK_MAX=85          # % disk usage that triggers a warning
+LOAD_MAX=4           # 5-minute load average
+SERVICES=(sshd cron) # services that must be active
+STATUS=0
+
+warn() { echo "WARN: $*"; STATUS=1; }
+
+echo "== $(hostname) · $(date '+%d/%m/%Y %H:%M') =="
+
+# Disk: every real filesystem above the threshold
+while read -r fs use mount; do
+  use=${use%\\%}
+  (( use >= DISK_MAX )) && warn "disk $mount at $use% ($fs)"
+done < <(df -h --output=source,pcent,target -x tmpfs -x devtmpfs | tail -n +2)
+
+# Memory and load
+read -r _ total used _ < <(free -m | awk '/^Mem:/')
+echo "memory: $used/$total MB"
+load=$(cut -d' ' -f2 /proc/loadavg)
+awk -v l="$load" -v m="$LOAD_MAX" 'BEGIN{exit !(l>=m)}' && warn "5-min load: $load"
+
+# Services
+for s in "${SERVICES[@]}"; do
+  systemctl is-active --quiet "$s" || warn "service $s is not active"
+done
+
+(( STATUS == 0 )) && echo "OK: no warnings"
+exit $STATUS
+:::
+
+Notes on what it does: `df --output` avoids counting columns; `tail -n +2` skips the header; `${use%\\%}` strips the `%`; `read ... < <(...)` reads from a command without opening a subshell (so `STATUS` really changes inside the loop). The load comparison goes through `awk` because Bash does not compare decimals.
+
+## 3. Test it
+
+:::term bash · server
+$ chmod +x ~/scripts/check-server.sh
+$ shellcheck ~/scripts/check-server.sh && echo "shellcheck ok"
+shellcheck ok
+$ ~/scripts/check-server.sh
+== srv-files-01 · 21/10/2026 08:00 ==
+WARN: disk /var at 91% (/dev/sda3)
+memory: 3105/7812 MB
+WARN: service cron is not active
+$ echo $?
+1
+:::
+
+The exit code (`1` with warnings, `0` without) is what lets cron, a monitor or another script know whether it went well without reading the text.
+
+## 4. Schedule it
+
+:::term bash · server
+$ sudo cp ~/scripts/check-server.sh /usr/local/bin/check-server
+$ sudo crontab -e
+# every day at 07:00, appending to a log that gets rotated
+0 7 * * * /usr/local/bin/check-server >> /var/log/check-server.log 2>&1
+$ sudo tail -n 20 /var/log/check-server.log
+:::
+
+Cron has neither your `PATH` nor your aliases: use full paths and test the script with `env -i bash -c /usr/local/bin/check-server` to see how it behaves without your environment. To get an email, put `MAILTO=it@contoso.com` at the top of the crontab (if the server has mail configured), or better, have it write to the log your monitoring already collects.
+
+## Next steps
+
+- Add an `--apply` that does something useful and safe: rotate a log, restart the dead service with `systemctl restart`.
+- Put the script in the team repository (see the Git guide) so it changes through review, not by hand over SSH.
+- In Level 3 you'll see Ansible: when the same script has to run on 40 servers, that is its job.
+""")
+
+# ---------------------------------------------------------------- 2.3 · Citrix VDI
+g(slug="citrix-vdi-publicar-aplicacion-y-sesion-que-no-abre", topic="citrix-vdi", date="2026-10-21",
+  title_es="Citrix VDI: publicar una aplicación y diagnosticar una sesión que no abre",
+  title_en="Citrix VDI: publishing an application and diagnosing a session that won't launch",
+  dek_es="Los cuatro objetos que hay que entender (catálogo, grupo de entrega, VDA, StoreFront), cómo publicar una app y el orden para resolver 'no me abre'.",
+  dek_en="The four objects you need to understand (catalog, delivery group, VDA, StoreFront), how to publish an app, and the order for solving 'it won't open'.",
+  es="""
+## Qué vas a conseguir
+
+Publicar una aplicación en Citrix Virtual Apps and Desktops para un grupo de usuarios y resolver, con un orden fijo, el ticket más común de VDI: "pulso en la aplicación y no se abre" o "se queda en Connecting...".
+
+## Antes de empezar
+
+- Acceso a **Citrix Studio** (o Web Studio) con un rol de administrador de aplicaciones o de ayuda al usuario, y a **Citrix Director** para ver sesiones.
+- Saber dónde está instalada la aplicación: en los servidores del **catálogo de máquinas** (Windows Server con el VDA), no en el equipo del usuario.
+- El **Citrix Workspace app** en el equipo del usuario, y la URL del StoreFront o de Workspace.
+
+## 1. Las piezas
+
+- **Catálogo de máquinas**: los servidores o escritorios con el **VDA** (Virtual Delivery Agent) instalado. Se crean desde una imagen maestra.
+- **Grupo de entrega**: une máquinas del catálogo con los usuarios que pueden usarlas. Aquí se publican las aplicaciones y los escritorios.
+- **Delivery Controller**: el cerebro. Los VDA se **registran** en él; sin registro, la máquina existe pero no sirve sesiones.
+- **StoreFront / Workspace**: la tienda que ve el usuario. Pide la lista de apps al Controller y entrega el fichero `.ica` que abre la sesión.
+
+## 2. Publicar la aplicación
+
+:::ui Citrix Studio · Applications
+> Applications › Add Applications
+> Delivery Groups › [x] DG-Finanzas-Apps
+> Applications › From start menu › [x] ERP Client 7.2
+= Nombre (usuario): ERP
+= Ruta: C:\\Program Files\\ERP\\erp.exe
+= Directorio de trabajo: C:\\Program Files\\ERP
+= Carpeta en StoreFront: Finanzas
+> Limit Visibility › [x] GG-ERP-Usuarios
+[Finish]
+:::
+
+Con PowerShell desde el Controller se hace lo mismo y queda documentado:
+
+:::term PowerShell · Delivery Controller
+$ Add-PSSnapin Citrix*
+$ New-BrokerApplication -Name "ERP" -CommandLineExecutable "C:\\Program Files\\ERP\\erp.exe" -WorkingDirectory "C:\\Program Files\\ERP" -DesktopGroup "DG-Finanzas-Apps" -UserFilterEnabled $true
+$ Add-BrokerUser -Name "CONTOSO\\GG-ERP-Usuarios" -Application "ERP"
+$ Get-BrokerApplication -Name "ERP" | Select-Object Name, Enabled, AssociatedDesktopGroupUids, UserFilterEnabled
+Name Enabled AssociatedDesktopGroupUids UserFilterEnabled
+---- ------- -------------------------- -----------------
+ERP     True {3}                                     True
+:::
+
+El usuario la verá en Workspace tras actualizar la lista (icono de refrescar, o cerrar y abrir la app). Si no aparece: no está en el grupo del filtro, o el grupo de entrega no incluye su cuenta.
+
+## 3. "No me abre": el orden
+
+### 3.1 ¿Hay máquinas disponibles?
+
+:::term PowerShell · Delivery Controller
+$ Get-BrokerMachine -DesktopGroupName "DG-Finanzas-Apps" | Select-Object MachineName, RegistrationState, InMaintenanceMode, SessionCount, LoadIndex
+MachineName          RegistrationState InMaintenanceMode SessionCount LoadIndex
+-----------          ----------------- ----------------- ------------ ---------
+CONTOSO\\XA-APP-01       Registered                  False           41      8200
+CONTOSO\\XA-APP-02     Unregistered                  False            0         0
+CONTOSO\\XA-APP-03       Registered                   True            0         0
+:::
+
+Aquí ya ves el problema del día: una máquina **Unregistered** (el VDA no habla con el Controller: casi siempre se ha reiniciado mal, el servicio `BrokerAgent` está parado o tiene la hora desajustada), otra en **mantenimiento** (alguien la dejó así tras parchear), y la que queda con carga al tope (`LoadIndex` 10000 es el máximo). Resultado: las sesiones nuevas no entran.
+
+- Unregistered: en la máquina, `Restart-Service BrokerAgent`; si sigue, revisa el visor de eventos (origen *Citrix Desktop Service*) y que resuelve el nombre del Controller.
+- Mantenimiento: `Set-BrokerMachine -MachineName "CONTOSO\\XA-APP-03" -InMaintenanceMode $false` una vez comprobado que está parcheada y bien.
+
+### 3.2 ¿Es el usuario o es todo el mundo?
+
+En **Director → Buscar usuario** aparecen sus sesiones: si tiene una sesión **Disconnected** de ayer en otra máquina, la app intenta reconectar a esa y falla. **Log off** de esa sesión desde Director y que vuelva a probar. Si nadie puede abrir la app, es el 3.1 o la propia aplicación en el servidor.
+
+### 3.3 ¿Llega el .ica?
+
+Si al pulsar en la app el navegador descarga un fichero `.ica` y no pasa nada, Workspace app no está asociado al tipo de fichero o no está instalado. Si el fichero se abre y se queda en **Connecting**: el equipo del usuario no llega al VDA por el puerto **1494** (ICA) o **2598** (Session Reliability): `Test-NetConnection XA-APP-01 -Port 2598` desde el equipo. Lo normal es un firewall entre la red del usuario (VPN, oficina nueva) y los servidores VDA.
+
+### 3.4 La aplicación abre y se cierra
+
+Ya no es Citrix: es la aplicación. Entra por RDP en el servidor VDA como el usuario (o con una cuenta de prueba del mismo grupo) y ábrela a mano. Lo que falle ahí (licencia de la app, permisos en una carpeta, un perfil de usuario corrupto en `C:\\Users`) es lo que hay que arreglar. Los perfiles con **Citrix Profile Management** o FSLogix se restablecen borrando el contenedor del usuario, con su permiso y con copia.
+
+## 4. Qué poner en el ticket
+
+Nombre de la app, grupo de entrega, resultado de `Get-BrokerMachine`, en qué paso se queda (lista, .ica, Connecting, dentro) y el nombre de la máquina a la que intentaba conectar (Director lo muestra). Con eso, el equipo de Citrix no tiene que repetir nada.
+
+## Siguientes pasos
+
+- Un script diario con `Get-BrokerMachine` que avise de máquinas Unregistered o en mantenimiento evita la mitad de los tickets de la mañana.
+- Aprende a actualizar la imagen maestra y a hacer *rollout* a un catálogo con MCS: es el siguiente paso natural.
+- En el Nivel 2 también está VMware Horizon, la alternativa con los mismos conceptos y otros nombres.
+""",
+  en="""
+## What you'll get
+
+Publish an application in Citrix Virtual Apps and Desktops for a group of users and solve, in a fixed order, the most common VDI ticket: "I click the app and nothing opens" or "it sits on Connecting...".
+
+## Before you start
+
+- Access to **Citrix Studio** (or Web Studio) with an application administrator or help desk role, and to **Citrix Director** to see sessions.
+- Know where the application is installed: on the servers in the **machine catalog** (Windows Server with the VDA), not on the user's device.
+- The **Citrix Workspace app** on the user's device, and the StoreFront or Workspace URL.
+
+## 1. The pieces
+
+- **Machine catalog**: the servers or desktops with the **VDA** (Virtual Delivery Agent) installed. Created from a master image.
+- **Delivery group**: joins machines from the catalog with the users who may use them. Applications and desktops are published here.
+- **Delivery Controller**: the brain. VDAs **register** with it; without registration, the machine exists but serves no sessions.
+- **StoreFront / Workspace**: the store the user sees. It asks the Controller for the app list and hands over the `.ica` file that opens the session.
+
+## 2. Publish the application
+
+:::ui Citrix Studio · Applications
+> Applications › Add Applications
+> Delivery Groups › [x] DG-Finance-Apps
+> Applications › From start menu › [x] ERP Client 7.2
+= Name (for user): ERP
+= Path: C:\\Program Files\\ERP\\erp.exe
+= Working directory: C:\\Program Files\\ERP
+= StoreFront folder: Finance
+> Limit Visibility › [x] GG-ERP-Users
+[Finish]
+:::
+
+PowerShell from the Controller does the same, and it stays documented:
+
+:::term PowerShell · Delivery Controller
+$ Add-PSSnapin Citrix*
+$ New-BrokerApplication -Name "ERP" -CommandLineExecutable "C:\\Program Files\\ERP\\erp.exe" -WorkingDirectory "C:\\Program Files\\ERP" -DesktopGroup "DG-Finance-Apps" -UserFilterEnabled $true
+$ Add-BrokerUser -Name "CONTOSO\\GG-ERP-Users" -Application "ERP"
+$ Get-BrokerApplication -Name "ERP" | Select-Object Name, Enabled, AssociatedDesktopGroupUids, UserFilterEnabled
+Name Enabled AssociatedDesktopGroupUids UserFilterEnabled
+---- ------- -------------------------- -----------------
+ERP     True {3}                                     True
+:::
+
+The user sees it in Workspace after refreshing the list (refresh icon, or close and reopen the app). If it does not appear: they are not in the filter group, or the delivery group does not include their account.
+
+## 3. "It won't open": the order
+
+### 3.1 Are there machines available?
+
+:::term PowerShell · Delivery Controller
+$ Get-BrokerMachine -DesktopGroupName "DG-Finance-Apps" | Select-Object MachineName, RegistrationState, InMaintenanceMode, SessionCount, LoadIndex
+MachineName          RegistrationState InMaintenanceMode SessionCount LoadIndex
+-----------          ----------------- ----------------- ------------ ---------
+CONTOSO\\XA-APP-01       Registered                  False           41      8200
+CONTOSO\\XA-APP-02     Unregistered                  False            0         0
+CONTOSO\\XA-APP-03       Registered                   True            0         0
+:::
+
+The day's problem is right there: one machine **Unregistered** (the VDA is not talking to the Controller: almost always a bad reboot, the `BrokerAgent` service stopped, or the clock off), another in **maintenance** (someone left it there after patching), and the remaining one at full load (`LoadIndex` 10000 is the maximum). Result: new sessions don't get in.
+
+- Unregistered: on the machine, `Restart-Service BrokerAgent`; if it persists, check Event Viewer (source *Citrix Desktop Service*) and that it resolves the Controller's name.
+- Maintenance: `Set-BrokerMachine -MachineName "CONTOSO\\XA-APP-03" -InMaintenanceMode $false` once you have confirmed it is patched and healthy.
+
+### 3.2 Is it the user or everyone?
+
+In **Director → Search user** their sessions appear: if they have a **Disconnected** session from yesterday on another machine, the app tries to reconnect to that one and fails. **Log off** that session from Director and have them try again. If nobody can open the app, it is 3.1 or the application itself on the server.
+
+### 3.3 Does the .ica arrive?
+
+If clicking the app makes the browser download an `.ica` file and nothing happens, Workspace app is not associated with the file type or not installed. If the file opens and sits on **Connecting**: the user's device cannot reach the VDA on port **1494** (ICA) or **2598** (Session Reliability): `Test-NetConnection XA-APP-01 -Port 2598` from the device. It is usually a firewall between the user's network (VPN, new office) and the VDA servers.
+
+### 3.4 The application opens and closes
+
+That is no longer Citrix: it is the application. RDP into the VDA server as the user (or with a test account from the same group) and open it by hand. Whatever fails there (the app's licence, permissions on a folder, a corrupt user profile in `C:\\Users`) is what needs fixing. Profiles with **Citrix Profile Management** or FSLogix are reset by deleting the user's container, with their permission and a backup.
+
+## 4. What to put in the ticket
+
+App name, delivery group, the `Get-BrokerMachine` output, which step it gets stuck at (list, .ica, Connecting, inside) and the name of the machine it tried to connect to (Director shows it). With that, the Citrix team repeats nothing.
+
+## Next steps
+
+- A daily script with `Get-BrokerMachine` that flags Unregistered or maintenance machines removes half the morning tickets.
+- Learn to update the master image and roll it out to a catalog with MCS: that is the natural next step.
+- Level 2 also has VMware Horizon, the alternative with the same concepts and different names.
+""")
+
+# ---------------------------------------------------------------- 2.4 · Confluence
+g(slug="confluence-espacio-de-it-y-runbooks-que-se-usan", topic="confluence", date="2026-10-21",
+  title_es="Confluence: montar el espacio de IT y escribir runbooks que el equipo use",
+  title_en="Confluence: setting up the IT space and writing runbooks the team actually uses",
+  dek_es="Estructura del espacio, permisos, una plantilla de runbook con los campos que importan, y cómo enlazarlo con los tickets de Jira.",
+  dek_en="Space structure, permissions, a runbook template with the fields that matter, and how to link it to Jira tickets.",
+  es="""
+## Qué vas a conseguir
+
+Un espacio de Confluence donde el equipo de IT encuentra en 30 segundos cómo se hace cada cosa, con runbooks que se mantienen porque están ligados a los tickets. Lo contrario de una wiki con 400 páginas que nadie abre.
+
+## Antes de empezar
+
+- Permiso para **crear espacios** en Confluence (lo da el administrador del sitio) o un espacio de IT ya creado donde seas administrador.
+- Decidir con el equipo quién puede **leer** (toda la empresa o solo IT) y quién puede **editar** (IT). Los runbooks con contraseñas o IPs internas no se escriben; se enlaza al gestor de secretos.
+- Jira Service Management en el mismo sitio de Atlassian, para enlazar artículos y tickets.
+
+## 1. Estructura: poca y estable
+
+Un espacio por equipo (`IT`), no uno por proyecto. Dentro, cuatro ramas de primer nivel que no cambian:
+
+:::ui Confluence · Espacio IT › Árbol de páginas
+> IT › Runbooks (cómo se hace cada tarea, uno por tarea)
+> IT › Servicios (qué es cada sistema, quién lo lleva, proveedor, contrato)
+> IT › Procedimientos (altas, bajas, cambios, incidentes graves)
+> IT › Decisiones (una página por decisión técnica, con fecha y motivo)
+= Página de inicio: buscador + los 10 runbooks más usados + "quién lleva qué"
+:::
+
+Un runbook es **una tarea**: "Dar de alta un usuario", "Renovar el certificado del portal", "Reiniciar el servicio de impresión". Si una página explica tres cosas, son tres runbooks.
+
+## 2. La plantilla de runbook
+
+Crea una **plantilla de espacio** (Configuración del espacio → Plantillas) con estos bloques y usa la macro de **estado** para que se vea de un vistazo si está vigente:
+
+:::ui Confluence · Plantilla "Runbook"
+= Estado: VIGENTE · Propietario: @persona · Revisado: 21/10/2026 · Servicio: enlace a Servicios
+= Cuándo se usa: una frase. Si no sabes si aplica, aquí lo sabes.
+= Requisitos: accesos, herramientas, a quién avisar antes
+= Pasos: numerados, un comando o una acción por paso, con el resultado esperado
+= Comprobación: cómo sabes que ha funcionado
+= Si falla: los dos o tres errores conocidos y qué hacer
+= Tickets relacionados: macro de Jira con el filtro "labels = runbook-alta-usuario"
+:::
+
+Dos reglas que hacen que se mantenga: cada runbook tiene **un propietario** (no "el equipo") y una fecha de **revisión** que se actualiza al usarlo. Una página sin revisar en 6 meses se marca como DUDOSA, no se borra.
+
+## 3. Enlazar con Jira
+
+Cuando resuelves un ticket siguiendo un runbook, enlaza la página desde el ticket (**Enlazar → Página de Confluence**). Y en la página, la macro de Jira muestra los tickets que la han usado: así ves cuáles valen y cuáles no se usan nunca.
+
+Si el service desk tiene **base de conocimiento** activada, el espacio de IT (o uno aparte para usuarios) se vincula desde Jira Service Management → Proyecto → Base de conocimiento. Jira sugiere los artículos al usuario mientras escribe el ticket, y ahí es donde un buen título ("Outlook pide la contraseña una y otra vez") desvía tickets antes de que existan.
+
+## 4. Permisos
+
+:::ui Confluence · Configuración del espacio › Permisos
+= Grupo confluence-users (toda la empresa): Ver páginas
+= Grupo it-team: Ver, Añadir, Eliminar páginas · Añadir comentarios
+= Grupo it-admins: Administrar espacio
+= Anónimo: sin acceso
+:::
+
+Las páginas con información sensible (diagramas de red con IPs, procedimientos de emergencia) van en una rama con **restricciones de página** a `it-team`. Las contraseñas no van en ningún sitio de Confluence: se enlaza al gestor de contraseñas del equipo.
+
+## 5. Buscar que funcione
+
+- **Etiquetas** por sistema (`intune`, `exchange`, `vpn`) y por tipo (`runbook`, `decision`). Una página de "Runbooks por sistema" con la macro de **Content by Label** se mantiene sola.
+- Títulos con el verbo y el objeto: "Renovar el certificado de vpn.contoso.com", no "Certificados".
+- Al final de cada página, **Páginas relacionadas** (macro) con dos o tres enlaces.
+
+## Siguientes pasos
+
+- Migra los procedimientos que hoy viven en Word o en el correo, uno por semana, empezando por los que más tickets generan.
+- Una vez al trimestre, revisa la lista de páginas sin visitas en 90 días: se archivan o se fusionan.
+- En el Nivel 4 verás la administración de Jira y Confluence a nivel de sitio: esquemas, automatizaciones y la relación con Atlassian.
+""",
+  en="""
+## What you'll get
+
+A Confluence space where the IT team finds how to do anything in 30 seconds, with runbooks that stay maintained because they are tied to tickets. The opposite of a wiki with 400 pages nobody opens.
+
+## Before you start
+
+- Permission to **create spaces** in Confluence (the site administrator grants it) or an existing IT space where you are an administrator.
+- Decide with the team who can **read** (the whole company or only IT) and who can **edit** (IT). Runbooks with passwords or internal IPs are not written down; you link to the secrets manager.
+- Jira Service Management on the same Atlassian site, to link articles and tickets.
+
+## 1. Structure: small and stable
+
+One space per team (`IT`), not one per project. Inside, four top-level branches that never change:
+
+:::ui Confluence · IT space › Page tree
+> IT › Runbooks (how each task is done, one per task)
+> IT › Services (what each system is, who owns it, vendor, contract)
+> IT › Procedures (joiners, leavers, changes, major incidents)
+> IT › Decisions (one page per technical decision, with date and reason)
+= Home page: search box + the 10 most used runbooks + "who owns what"
+:::
+
+A runbook is **one task**: "Create a user", "Renew the portal certificate", "Restart the print service". If a page explains three things, that is three runbooks.
+
+## 2. The runbook template
+
+Create a **space template** (Space settings → Templates) with these blocks, and use the **status** macro so you can see at a glance whether it is current:
+
+:::ui Confluence · "Runbook" template
+= Status: CURRENT · Owner: @person · Reviewed: 21/10/2026 · Service: link to Services
+= When to use: one sentence. If you don't know whether it applies, this tells you.
+= Requirements: access, tools, who to warn beforehand
+= Steps: numbered, one command or action per step, with the expected result
+= Check: how you know it worked
+= If it fails: the two or three known errors and what to do
+= Related tickets: Jira macro with the filter "labels = runbook-new-user"
+:::
+
+Two rules that keep it maintained: every runbook has **one owner** (not "the team") and a **review** date that gets updated when it is used. A page not reviewed in 6 months is marked DOUBTFUL, not deleted.
+
+## 3. Link with Jira
+
+When you resolve a ticket by following a runbook, link the page from the ticket (**Link → Confluence page**). And on the page, the Jira macro shows the tickets that used it: that way you see which ones earn their keep and which are never used.
+
+If the service desk has a **knowledge base** enabled, the IT space (or a separate one for users) is linked from Jira Service Management → Project → Knowledge base. Jira suggests articles to the user while they type the ticket, and that is where a good title ("Outlook keeps asking for the password") deflects tickets before they exist.
+
+## 4. Permissions
+
+:::ui Confluence · Space settings › Permissions
+= Group confluence-users (whole company): View pages
+= Group it-team: View, Add, Delete pages · Add comments
+= Group it-admins: Administer space
+= Anonymous: no access
+:::
+
+Pages with sensitive information (network diagrams with IPs, emergency procedures) go in a branch with **page restrictions** to `it-team`. Passwords go nowhere in Confluence: link to the team's password manager.
+
+## 5. Search that works
+
+- **Labels** per system (`intune`, `exchange`, `vpn`) and per type (`runbook`, `decision`). A "Runbooks by system" page with the **Content by Label** macro maintains itself.
+- Titles with the verb and the object: "Renew the certificate for vpn.contoso.com", not "Certificates".
+- At the bottom of every page, **Related pages** (macro) with two or three links.
+
+## Next steps
+
+- Migrate the procedures that live in Word or email today, one per week, starting with those that generate the most tickets.
+- Once a quarter, review the list of pages with no visits in 90 days: archive or merge them.
+- In Level 4 you'll see site-level Jira and Confluence administration: schemes, automations and the relationship with Atlassian.
+""")
+
+# ---------------------------------------------------------------- 2.5 · Git
+g(slug="git-scripts-del-equipo-bajo-control-de-versiones", topic="git", date="2026-10-21",
+  title_es="Git: poner los scripts del equipo bajo control de versiones",
+  title_en="Git: putting the team's scripts under version control",
+  dek_es="Repositorio, ramas, commits que se entienden, pull request con revisión, y lo que nunca debe entrar en un repo.",
+  dek_en="Repository, branches, commits that make sense, pull requests with review, and what must never go into a repo.",
+  es="""
+## Qué vas a conseguir
+
+Que los scripts de PowerShell y Bash del equipo dejen de vivir en `C:\\Scripts\\final_v3_bueno.ps1` y pasen a un repositorio con historial, revisión y un sitio único del que todo el mundo tira. Con el flujo mínimo que un equipo de IT usa de verdad.
+
+## Antes de empezar
+
+- Git instalado (`git --version`). En Windows, **Git for Windows**; en Linux viene o se instala con `apt`/`dnf`.
+- Una cuenta en el servidor de Git de tu empresa (GitHub, GitLab, Azure DevOps, Bitbucket) y un repositorio vacío creado por quien administre: `it-scripts`.
+- Tu nombre y correo configurados una vez: `git config --global user.name "Laura Prado"` y `git config --global user.email laura.prado@contoso.com`.
+
+## 1. Lo que nunca entra en un repo
+
+Antes de la primera subida, porque después es muy difícil sacarlo del historial:
+
+- **Contraseñas, claves de API, tokens, certificados con clave privada.** Van en el gestor de secretos y el script los lee de una variable de entorno o de un vault.
+- Ficheros con datos de personas (exports de AD con correos, listados de usuarios).
+- Lo que se genera: logs, `output/`, CSV de resultados.
+
+Un `.gitignore` en la raíz lo evita:
+
+:::term .gitignore
+# resultados y temporales
+output/
+*.log
+*.csv
+# secretos: nunca
+*.pfx
+*.key
+.env
+secrets.*
+:::
+
+## 2. Primer repositorio
+
+:::term bash · tu equipo
+$ git clone https://git.contoso.com/it/it-scripts.git
+$ cd it-scripts
+$ mkdir -p powershell bash
+$ cp ~/scripts/check-server.sh bash/
+$ git status --short
+?? .gitignore
+?? bash/check-server.sh
+$ git add .gitignore bash/check-server.sh
+$ git commit -m "bash: comprobación diaria de disco, carga y servicios"
+[main 3f2a9c1] bash: comprobación diaria de disco, carga y servicios
+ 2 files changed, 58 insertions(+)
+$ git push -u origin main
+:::
+
+`git status` antes de cada `add` te enseña qué vas a subir. `git add .` a ciegas es como se cuela un `.pfx`.
+
+## 3. Cambios con rama y revisión
+
+El flujo que evita que un cambio a medias llegue a producción: cada cambio en una **rama**, se sube, alguien lo revisa en un **pull request** (merge request en GitLab) y se fusiona a `main`.
+
+:::term bash · tu equipo
+$ git switch -c fix/umbral-disco-90
+$ nano bash/check-server.sh
+$ git diff
+-DISK_MAX=85
++DISK_MAX=90
+$ git commit -am "check-server: umbral de disco al 90% (acordado en la reunión del 20/10)"
+$ git push -u origin fix/umbral-disco-90
+remote: Create a pull request for 'fix/umbral-disco-90':
+remote:   https://git.contoso.com/it/it-scripts/pull/new/fix/umbral-disco-90
+:::
+
+En el pull request, el compañero ve el `diff`, comenta y aprueba. Después, `main` se actualiza y todos hacen `git pull`. Nombres de rama que ayudan: `fix/…`, `feat/…`, `docs/…`.
+
+## 4. Commits que se entienden
+
+Un commit es un cambio con un motivo. El mensaje: qué cambia y por qué, en una línea de menos de 70 caracteres, en imperativo o en presente. Si hace falta más, una línea en blanco y el detalle.
+
+- Bien: `vpn-check: reintentar 3 veces antes de avisar (falsos positivos en la VPN de Milán)`.
+- Mal: `cambios`, `arreglo`, `v2`.
+
+Si lo que vas a escribir es "varios cambios", son varios commits.
+
+## 5. Lo que harás cada semana
+
+:::term bash · chuleta
+# ponerte al día antes de empezar
+$ git switch main && git pull
+# ver qué ha cambiado y quién
+$ git log --oneline -10
+$ git log -p bash/check-server.sh
+# deshacer un cambio local que no has confirmado
+$ git restore bash/check-server.sh
+# volver a una versión anterior de un fichero sin perder el historial
+$ git checkout 3f2a9c1 -- bash/check-server.sh
+:::
+
+! `git push --force` y `git reset --hard` reescriben o borran. Si no sabes exactamente qué hacen, no los uses sobre `main`; pide ayuda y se arregla en dos minutos. Casi todo en Git se recupera; lo que se pierde es por forzar.
+
+## Siguientes pasos
+
+- Protege `main` en el servidor: sin push directo, pull request obligatorio con una aprobación.
+- Añade una comprobación automática al pull request: `shellcheck` para Bash, `PSScriptAnalyzer` para PowerShell.
+- En el Nivel 3 verás Jenkins y CI/CD: el repositorio es lo que dispara las pruebas y los despliegues.
+""",
+  en="""
+## What you'll get
+
+The team's PowerShell and Bash scripts stop living in `C:\\Scripts\\final_v3_good.ps1` and move into a repository with history, review and one place everyone pulls from. With the minimal flow an IT team really uses.
+
+## Before you start
+
+- Git installed (`git --version`). On Windows, **Git for Windows**; on Linux it ships or installs with `apt`/`dnf`.
+- An account on your company's Git server (GitHub, GitLab, Azure DevOps, Bitbucket) and an empty repository created by whoever administers it: `it-scripts`.
+- Your name and email set once: `git config --global user.name "Laura Prado"` and `git config --global user.email laura.prado@contoso.com`.
+
+## 1. What never goes into a repo
+
+Before the first push, because afterwards it is very hard to get out of the history:
+
+- **Passwords, API keys, tokens, certificates with private keys.** They live in the secrets manager and the script reads them from an environment variable or a vault.
+- Files with personal data (AD exports with emails, user lists).
+- Anything generated: logs, `output/`, result CSVs.
+
+A `.gitignore` at the root prevents it:
+
+:::term .gitignore
+# results and temporary files
+output/
+*.log
+*.csv
+# secrets: never
+*.pfx
+*.key
+.env
+secrets.*
+:::
+
+## 2. First repository
+
+:::term bash · your device
+$ git clone https://git.contoso.com/it/it-scripts.git
+$ cd it-scripts
+$ mkdir -p powershell bash
+$ cp ~/scripts/check-server.sh bash/
+$ git status --short
+?? .gitignore
+?? bash/check-server.sh
+$ git add .gitignore bash/check-server.sh
+$ git commit -m "bash: daily check of disk, load and services"
+[main 3f2a9c1] bash: daily check of disk, load and services
+ 2 files changed, 58 insertions(+)
+$ git push -u origin main
+:::
+
+`git status` before every `add` shows what you are about to push. A blind `git add .` is how a `.pfx` slips in.
+
+## 3. Changes with a branch and a review
+
+The flow that stops a half-finished change reaching production: every change on a **branch**, pushed, reviewed by someone in a **pull request** (merge request in GitLab) and merged into `main`.
+
+:::term bash · your device
+$ git switch -c fix/disk-threshold-90
+$ nano bash/check-server.sh
+$ git diff
+-DISK_MAX=85
++DISK_MAX=90
+$ git commit -am "check-server: disk threshold to 90% (agreed in the 20/10 meeting)"
+$ git push -u origin fix/disk-threshold-90
+remote: Create a pull request for 'fix/disk-threshold-90':
+remote:   https://git.contoso.com/it/it-scripts/pull/new/fix/disk-threshold-90
+:::
+
+In the pull request, a colleague sees the `diff`, comments and approves. Then `main` is updated and everyone runs `git pull`. Branch names that help: `fix/…`, `feat/…`, `docs/…`.
+
+## 4. Commits that make sense
+
+A commit is one change with one reason. The message: what changes and why, in one line under 70 characters, in the imperative or present tense. If more is needed, a blank line and the detail.
+
+- Good: `vpn-check: retry 3 times before warning (false positives on the Milan VPN)`.
+- Bad: `changes`, `fix`, `v2`.
+
+If what you are about to write is "various changes", that is several commits.
+
+## 5. What you'll do every week
+
+:::term bash · cheat sheet
+# catch up before starting
+$ git switch main && git pull
+# see what changed and who did it
+$ git log --oneline -10
+$ git log -p bash/check-server.sh
+# undo a local change you haven't committed
+$ git restore bash/check-server.sh
+# bring back an earlier version of a file without losing history
+$ git checkout 3f2a9c1 -- bash/check-server.sh
+:::
+
+! `git push --force` and `git reset --hard` rewrite or delete. If you don't know exactly what they do, don't use them on `main`; ask for help and it is fixed in two minutes. Almost everything in Git is recoverable; what gets lost is lost by forcing.
+
+## Next steps
+
+- Protect `main` on the server: no direct push, pull request required with one approval.
+- Add an automatic check to the pull request: `shellcheck` for Bash, `PSScriptAnalyzer` for PowerShell.
+- In Level 3 you'll see Jenkins and CI/CD: the repository is what triggers tests and deployments.
+""")
+
+# ---------------------------------------------------------------- 2.6 · Jamf Pro
+g(slug="jamf-pro-enrolar-un-mac-y-desplegar-una-politica", topic="jamf-pro", date="2026-10-21",
+  title_es="Jamf Pro: enrolar un Mac y desplegar una política con un grupo inteligente",
+  title_en="Jamf Pro: enrolling a Mac and deploying a policy with a smart group",
+  dek_es="Enrolamiento automatizado o por el usuario, el inventario que lo alimenta todo, un grupo inteligente y una política que instala y configura. Más los comandos del día a día.",
+  dek_en="Automated or user-initiated enrolment, the inventory that feeds everything, a smart group and a policy that installs and configures. Plus the everyday commands.",
+  es="""
+## Qué vas a conseguir
+
+Un Mac gestionado en Jamf Pro desde el primer encendido, y una política que instala una aplicación solo en los equipos que la necesitan, elegidos por un **grupo inteligente** en lugar de a mano. Es la base de todo lo que harás después en Jamf.
+
+## Antes de empezar
+
+- Acceso a la consola de Jamf Pro con un rol que pueda crear políticas y grupos.
+- Para el enrolamiento automatizado: el Mac comprado a través de **Apple Business Manager** y asignado al servidor MDM de Jamf; un **PreStage Enrollment** configurado.
+- Para el enrolamiento por el usuario: la URL de enrolamiento (`https://contoso.jamfcloud.com/enroll`) y una cuenta de usuario en Jamf o en el directorio integrado.
+- El certificado **APNs** vigente (Configuración → Push certificates). Caduca cada año; sin él, nada.
+
+## 1. Enrolar
+
+**Automatizado (ABM)**: el Mac arranca, el Asistente de configuración muestra "contoso configurará este Mac", el usuario inicia sesión y el PreStage crea la cuenta local, instala el agente y aplica los perfiles. No hay nada que descargar.
+
+**Por el usuario**: en `https://contoso.jamfcloud.com/enroll`, inicia sesión, descarga el perfil de gestión y lo aprueba en **Ajustes del Sistema → Privacidad y seguridad → Perfiles**. Desde macOS 11 el usuario tiene que pulsar **Aprobar** a mano: si no lo hace, el Mac aparece en Jamf pero sin MDM supervisado y los perfiles no se aplican.
+
+:::ui Jamf Pro · Equipos › Inventario
+> Equipos › Buscar inventario › MBP-LAURA
+= Gestionado: Sí · Supervisado: Sí · MDM aprobado por el usuario: Sí
+= macOS: 15.1 · Modelo: MacBook Pro 14" (M3)
+= Última entrada: 21/10/2026 10:52 · Último inventario: 21/10/2026 10:52
+= Usuario: laura.prado · Departamento: Ventas
+[Gestión] [Historial] [Enviar comando MDM]
+:::
+
+**Supervisado: Sí** y **MDM aprobado por el usuario: Sí** son las dos casillas que tienen que estar. Sin ellas, FileVault, las restricciones y los comandos remotos fallan en silencio.
+
+## 2. El inventario manda
+
+Todo en Jamf (grupos, políticas, informes) se decide a partir del **inventario** que el Mac envía al hacer `recon`. Por defecto se actualiza una vez al día; si acabas de cambiar algo en el Mac y Jamf no lo refleja, fuerza uno:
+
+:::term Terminal · en el Mac
+$ sudo jamf recon
+Retrieving inventory preferences from https://contoso.jamfcloud.com/...
+Locating hardware information (macOS 15.1)...
+Locating applications...
+Submitting data to https://contoso.jamfcloud.com/...
+<computer_id>417</computer_id>
+:::
+
+## 3. Un grupo inteligente
+
+Un grupo inteligente es una consulta sobre el inventario que se recalcula sola. Ejemplo: los Mac de Ventas que todavía no tienen la app del CRM.
+
+:::ui Jamf Pro · Equipos › Grupos inteligentes › Nuevo
+= Nombre: Ventas sin CRM
+> Criterios
+= Departamento: es · Ventas
+= y · Título de la aplicación: no tiene · CRM Desktop.app
+= y · Último inventario: menos de x días · 7
+[Guardar]
+= Miembros: 23 equipos
+:::
+
+El tercer criterio (inventario reciente) evita que la política persiga equipos apagados desde hace meses.
+
+## 4. La política
+
+:::ui Jamf Pro · Equipos › Políticas › Nueva
+= Nombre: Instalar CRM Desktop
+= Activador: Check-in recurrente · Frecuencia: Una vez por equipo
+> Paquetes › CRM-Desktop-4.2.pkg › Instalar
+> Mantenimiento › [x] Actualizar inventario
+> Alcance › Equipos de destino: Ventas sin CRM
+> Autoservicio › [ ] (no: instalación obligatoria)
+[Guardar]
+:::
+
+Qué pasa después: cada Mac del grupo, en su siguiente check-in (cada 15 minutos por defecto), ejecuta la política, instala el paquete y actualiza el inventario. En el siguiente recálculo deja de cumplir el criterio y **sale del grupo solo**. Cuando el grupo llega a 0 miembros, has terminado, sin tocar nada.
+
+Para probar en un Mac sin esperar al check-in:
+
+:::term Terminal · en el Mac
+$ sudo jamf policy -verbose
+Checking for policies triggered by "recurring check-in" for user "laura.prado"...
+Executing Policy Instalar CRM Desktop
+Downloading CRM-Desktop-4.2.pkg...
+Installing CRM-Desktop-4.2.pkg...
+Successfully installed CRM-Desktop-4.2.pkg.
+Running Recon...
+$ sudo jamf policy -event instalar-crm   # si la política tiene un activador personalizado
+:::
+
+## 5. Cuando una política no se ejecuta
+
+- **Registros de la política** (Políticas → la política → Registros): si el Mac aparece con "Pendiente", no ha hecho check-in; si aparece "Fallida", el log dice por qué (paquete que no existe en el punto de distribución, disco lleno, `pkg` que exige reinicio).
+- En el Mac: `sudo jamf checkJSSConnection` comprueba que llega al servidor; `tail -f /var/log/jamf.log` muestra la ejecución en vivo.
+- Una política con frecuencia "Una vez por equipo" que falló no se reintenta sola: **Limpiar registros** para esos equipos y vuelve a ejecutarse.
+- El Mac no aparece en el grupo: criterio mal escrito (el nombre de la app es el del bundle, `CRM Desktop.app`, con `.app`) o inventario sin actualizar.
+
+## Siguientes pasos
+
+- Empaqueta las aplicaciones con **Jamf Composer** o usa el **Jamf App Catalog** para que se actualicen solas.
+- Mira **Autoservicio** para lo que el usuario puede instalar cuando quiera: baja tickets y les da autonomía.
+- En el Nivel 3 verás la gestión de Mac desde Intune y cuándo tiene sentido Jamf, Intune o los dos.
+""",
+  en="""
+## What you'll get
+
+A Mac managed in Jamf Pro from first power-on, and a policy that installs an application only on the devices that need it, picked by a **smart group** rather than by hand. It is the foundation of everything you will do in Jamf afterwards.
+
+## Before you start
+
+- Access to the Jamf Pro console with a role that can create policies and groups.
+- For automated enrolment: the Mac bought through **Apple Business Manager** and assigned to Jamf's MDM server; a **PreStage Enrollment** configured.
+- For user-initiated enrolment: the enrolment URL (`https://contoso.jamfcloud.com/enroll`) and a user account in Jamf or the integrated directory.
+- A valid **APNs** certificate (Settings → Push certificates). It expires every year; without it, nothing works.
+
+## 1. Enrol
+
+**Automated (ABM)**: the Mac boots, Setup Assistant shows "contoso will configure this Mac", the user signs in and the PreStage creates the local account, installs the agent and applies the profiles. Nothing to download.
+
+**User-initiated**: at `https://contoso.jamfcloud.com/enroll`, sign in, download the management profile and approve it in **System Settings → Privacy & Security → Profiles**. Since macOS 11 the user has to click **Approve** by hand: if they don't, the Mac appears in Jamf without supervised MDM and profiles don't apply.
+
+:::ui Jamf Pro · Computers › Inventory
+> Computers › Search Inventory › MBP-LAURA
+= Managed: Yes · Supervised: Yes · User Approved MDM: Yes
+= macOS: 15.1 · Model: MacBook Pro 14" (M3)
+= Last check-in: 21/10/2026 10:52 · Last inventory: 21/10/2026 10:52
+= User: laura.prado · Department: Sales
+[Management] [History] [Send MDM command]
+:::
+
+**Supervised: Yes** and **User Approved MDM: Yes** are the two boxes that must be ticked. Without them, FileVault, restrictions and remote commands fail silently.
+
+## 2. Inventory rules everything
+
+Everything in Jamf (groups, policies, reports) is decided from the **inventory** the Mac submits when it runs `recon`. By default it updates once a day; if you just changed something on the Mac and Jamf doesn't show it, force one:
+
+:::term Terminal · on the Mac
+$ sudo jamf recon
+Retrieving inventory preferences from https://contoso.jamfcloud.com/...
+Locating hardware information (macOS 15.1)...
+Locating applications...
+Submitting data to https://contoso.jamfcloud.com/...
+<computer_id>417</computer_id>
+:::
+
+## 3. A smart group
+
+A smart group is a query on the inventory that recalculates itself. Example: Sales Macs that don't yet have the CRM app.
+
+:::ui Jamf Pro · Computers › Smart Computer Groups › New
+= Name: Sales without CRM
+> Criteria
+= Department: is · Sales
+= and · Application Title: does not have · CRM Desktop.app
+= and · Last Inventory Update: less than x days ago · 7
+[Save]
+= Members: 23 computers
+:::
+
+The third criterion (recent inventory) stops the policy chasing Macs that have been switched off for months.
+
+## 4. The policy
+
+:::ui Jamf Pro · Computers › Policies › New
+= Name: Install CRM Desktop
+= Trigger: Recurring Check-in · Frequency: Once per computer
+> Packages › CRM-Desktop-4.2.pkg › Install
+> Maintenance › [x] Update Inventory
+> Scope › Target Computers: Sales without CRM
+> Self Service › [ ] (no: mandatory install)
+[Save]
+:::
+
+What happens next: every Mac in the group, at its next check-in (every 15 minutes by default), runs the policy, installs the package and updates the inventory. At the next recalculation it no longer meets the criterion and **leaves the group on its own**. When the group reaches 0 members, you are done, without touching anything.
+
+To test on one Mac without waiting for check-in:
+
+:::term Terminal · on the Mac
+$ sudo jamf policy -verbose
+Checking for policies triggered by "recurring check-in" for user "laura.prado"...
+Executing Policy Install CRM Desktop
+Downloading CRM-Desktop-4.2.pkg...
+Installing CRM-Desktop-4.2.pkg...
+Successfully installed CRM-Desktop-4.2.pkg.
+Running Recon...
+$ sudo jamf policy -event install-crm   # if the policy has a custom trigger
+:::
+
+## 5. When a policy doesn't run
+
+- **Policy logs** (Policies → the policy → Logs): if the Mac shows "Pending", it has not checked in; if "Failed", the log says why (package missing from the distribution point, disk full, a `pkg` that requires a reboot).
+- On the Mac: `sudo jamf checkJSSConnection` confirms it reaches the server; `tail -f /var/log/jamf.log` shows execution live.
+- A "Once per computer" policy that failed does not retry on its own: **Flush logs** for those computers and it runs again.
+- The Mac is not in the group: criterion written wrong (the app name is the bundle name, `CRM Desktop.app`, with `.app`) or inventory not updated.
+
+## Next steps
+
+- Package applications with **Jamf Composer** or use the **Jamf App Catalog** so they update themselves.
+- Look at **Self Service** for what the user may install whenever they want: it lowers tickets and gives them autonomy.
+- In Level 3 you'll see Mac management from Intune and when Jamf, Intune or both make sense.
+""")
+
+# ---------------------------------------------------------------- 2.7 · MECM / SCCM
+g(slug="mecm-sccm-empaquetar-una-aplicacion-y-desplegarla", topic="mecm-sccm", date="2026-10-21",
+  title_es="MECM / SCCM: empaquetar una aplicación y desplegarla a una colección",
+  title_en="MECM / SCCM: packaging an application and deploying it to a collection",
+  dek_es="El modelo de aplicación paso a paso: instalación silenciosa, método de detección, distribución de contenido, despliegue y los logs del cliente que dicen la verdad.",
+  dek_en="The application model step by step: silent install, detection method, content distribution, deployment, and the client logs that tell the truth.",
+  es="""
+## Qué vas a conseguir
+
+Una aplicación empaquetada en Microsoft Configuration Manager (MECM, antes SCCM) que se instala sola en los equipos de una colección, con un método de detección que evita reinstalarla, y los tres logs que te dicen por qué un equipo no la recibe.
+
+## Antes de empezar
+
+- Rol de **Application Administrator** (o superior) en la consola de Configuration Manager.
+- El instalador en un recurso compartido al que llegue el servidor de sitio: `\\\\cm01\\Sources\\Apps\\7-Zip\\24.08\\`. Una carpeta por aplicación y versión; nunca se sobrescribe una versión anterior.
+- Los parámetros de instalación silenciosa del fabricante. Para un MSI son estándar; para un EXE, los pone el fabricante (`/S`, `/quiet`, `/VERYSILENT`).
+- Una colección de prueba con dos o tres equipos tuyos antes de cualquier colección real.
+
+## 1. Probar la instalación silenciosa a mano
+
+Antes de tocar la consola, el comando tiene que funcionar en un equipo limpio sin preguntar nada. Si no funciona a mano, no funcionará desde MECM.
+
+:::term PowerShell · como administrador, equipo de prueba
+$ msiexec /i "\\\\cm01\\Sources\\Apps\\7-Zip\\24.08\\7z2408-x64.msi" /qn /norestart /l*v C:\\Windows\\Temp\\7zip-install.log
+$ $LASTEXITCODE
+0
+$ Get-ItemProperty "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*" | Where-Object DisplayName -like "7-Zip*" | Select-Object DisplayName, DisplayVersion, UninstallString
+DisplayName          DisplayVersion UninstallString
+-----------          -------------- ---------------
+7-Zip 24.08 (x64)    24.08          MsiExec.exe /I{23170F69-40C1-2702-2408-000001000000}
+:::
+
+Código de salida `0` (o `3010` si pide reinicio) y la entrada en el registro: eso es lo que MECM va a necesitar para saber que está instalada.
+
+## 2. Crear la aplicación
+
+:::ui Configuration Manager · Biblioteca de software › Aplicaciones › Crear aplicación
+= Tipo: Windows Installer (archivo *.msi)
+= Ubicación: \\\\cm01\\Sources\\Apps\\7-Zip\\24.08\\7z2408-x64.msi
+> Información general
+= Nombre: 7-Zip 24.08 (x64)
+= Programa de instalación: msiexec /i "7z2408-x64.msi" /qn /norestart
+= Comportamiento: Instalar para el sistema · Tanto si el usuario inició sesión como si no
+> Tipo de implementación › Método de detección
+= Regla: Windows Installer · Código de producto {23170F69-40C1-2702-2408-000001000000}
+> Tipo de implementación › Programa de desinstalación
+= msiexec /x {23170F69-40C1-2702-2408-000001000000} /qn
+[Siguiente] [Cerrar]
+:::
+
+Al importar un MSI, el asistente rellena el código de producto y el método de detección solo. Para un EXE tienes que escribirlos tú: el método de detección más fiable es la clave del registro de desinstalación con `DisplayVersion` igual o mayor que la versión que instalas.
+
+! Sin un método de detección correcto, MECM instala la aplicación en cada ciclo de evaluación o la marca como fallida aunque se haya instalado bien. Es el error número uno de los despliegues "que no funcionan".
+
+## 3. Distribuir el contenido
+
+Botón derecho sobre la aplicación → **Distribuir contenido** → el grupo de puntos de distribución. Hasta que el contenido no está en los DP, los clientes no pueden descargarlo. Se comprueba en **Supervisión → Estado de distribución → Estado del contenido**: tiene que estar al 100 % en verde.
+
+## 4. Desplegar
+
+:::ui Configuration Manager · Aplicación › Implementar
+= Colección: Pilot - IT (3 miembros)
+= Acción: Instalar · Propósito: Obligatorio
+= Programación: Disponible ahora · Fecha límite de instalación: lo antes posible
+= Experiencia del usuario: Mostrar en Centro de software y todas las notificaciones
+= Reinicio: Suprimir el reinicio en estaciones de trabajo
+[Siguiente] [Cerrar]
+:::
+
+**Disponible** la pone en el Centro de software para que el usuario la instale si quiere; **Obligatorio** con fecha límite la instala sola. Para el piloto, Obligatorio; para la colección real, primero Disponible una semana y después Obligatorio: así los usuarios ya la conocen cuando se les impone.
+
+## 5. En el cliente: forzar y leer los logs
+
+El cliente evalúa las políticas cada hora. Para no esperar:
+
+:::term PowerShell · como administrador, equipo de prueba
+# Pedir la política nueva y evaluar las aplicaciones
+$ Invoke-CimMethod -Namespace root\\ccm -ClassName SMS_Client -MethodName TriggerSchedule -Arguments @{sScheduleID="{00000000-0000-0000-0000-000000000021}"}
+$ Invoke-CimMethod -Namespace root\\ccm -ClassName SMS_Client -MethodName TriggerSchedule -Arguments @{sScheduleID="{00000000-0000-0000-0000-000000000121}"}
+# Los tres logs, en C:\\Windows\\CCM\\Logs (ábrelos con CMTrace)
+$ Get-Content C:\\Windows\\CCM\\Logs\\AppEnforce.log -Tail 5
+    Performing detection of app deployment type 7-Zip 24.08 (x64)...
+    App enforcement environment: ... Context: Machine ...
+    Prepared command line: "C:\\Windows\\system32\\msiexec.exe" /i "7z2408-x64.msi" /qn /norestart
+    Matched exit code 0 to a Success entry in exit codes table.
+    ++++++ App enforcement completed (5 seconds) ++++++
+:::
+
+- **AppDiscovery.log**: si el método de detección encuentra la app. "Not discovered" cuando sí está instalada = método de detección mal.
+- **AppEnforce.log**: el comando que ejecutó y el código de salida. Un `1603` es error genérico del MSI: abre el log del `msiexec` (`/l*v`) para ver el motivo real.
+- **CAS.log** y **ContentTransferManager.log**: si no encuentra el contenido ("No DP locations found"), el equipo está en un límite sin DP asignado o el contenido no se distribuyó.
+
+## 6. Qué poner en el ticket
+
+Nombre de la aplicación, colección, nombre del equipo y las líneas de `AppDiscovery` y `AppEnforce` con la hora. Con eso, el administrador de MECM resuelve sin conectarse al equipo.
+
+## Siguientes pasos
+
+- Convierte el EXE más usado del equipo en una aplicación con detección por registro: es el ejercicio que enseña el modelo entero.
+- Añade **requisitos** (solo x64, solo Windows 11) y **supersedencia** (la versión nueva reemplaza a la vieja) cuando tengas dos versiones.
+- En el Nivel 3 verás Intune y la coadministración: qué cargas de trabajo pasan a la nube y cuáles siguen en MECM.
+""",
+  en="""
+## What you'll get
+
+An application packaged in Microsoft Configuration Manager (MECM, formerly SCCM) that installs itself on the devices in a collection, with a detection method that stops it reinstalling, and the three logs that tell you why a device isn't getting it.
+
+## Before you start
+
+- The **Application Administrator** role (or higher) in the Configuration Manager console.
+- The installer on a share the site server can reach: `\\\\cm01\\Sources\\Apps\\7-Zip\\24.08\\`. One folder per application and version; an earlier version is never overwritten.
+- The vendor's silent install parameters. For an MSI they are standard; for an EXE the vendor sets them (`/S`, `/quiet`, `/VERYSILENT`).
+- A pilot collection with two or three of your own devices before any real collection.
+
+## 1. Test the silent install by hand
+
+Before touching the console, the command has to work on a clean device without asking anything. If it does not work by hand, it will not work from MECM.
+
+:::term PowerShell · as administrator, test device
+$ msiexec /i "\\\\cm01\\Sources\\Apps\\7-Zip\\24.08\\7z2408-x64.msi" /qn /norestart /l*v C:\\Windows\\Temp\\7zip-install.log
+$ $LASTEXITCODE
+0
+$ Get-ItemProperty "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*" | Where-Object DisplayName -like "7-Zip*" | Select-Object DisplayName, DisplayVersion, UninstallString
+DisplayName          DisplayVersion UninstallString
+-----------          -------------- ---------------
+7-Zip 24.08 (x64)    24.08          MsiExec.exe /I{23170F69-40C1-2702-2408-000001000000}
+:::
+
+Exit code `0` (or `3010` if it asks for a reboot) and the registry entry: that is what MECM will need to know it is installed.
+
+## 2. Create the application
+
+:::ui Configuration Manager · Software Library › Applications › Create Application
+= Type: Windows Installer (*.msi file)
+= Location: \\\\cm01\\Sources\\Apps\\7-Zip\\24.08\\7z2408-x64.msi
+> General Information
+= Name: 7-Zip 24.08 (x64)
+= Installation program: msiexec /i "7z2408-x64.msi" /qn /norestart
+= Install behavior: Install for system · Whether or not a user is logged on
+> Deployment Type › Detection Method
+= Rule: Windows Installer · Product code {23170F69-40C1-2702-2408-000001000000}
+> Deployment Type › Uninstall program
+= msiexec /x {23170F69-40C1-2702-2408-000001000000} /qn
+[Next] [Close]
+:::
+
+When importing an MSI, the wizard fills in the product code and the detection method on its own. For an EXE you write them yourself: the most reliable detection method is the uninstall registry key with `DisplayVersion` equal to or greater than the version you install.
+
+! Without a correct detection method, MECM installs the application on every evaluation cycle, or marks it failed even though it installed fine. It is the number one cause of deployments "that don't work".
+
+## 3. Distribute the content
+
+Right-click the application → **Distribute Content** → the distribution point group. Until the content is on the DPs, clients cannot download it. Check it under **Monitoring → Distribution Status → Content Status**: it has to be 100% green.
+
+## 4. Deploy
+
+:::ui Configuration Manager · Application › Deploy
+= Collection: Pilot - IT (3 members)
+= Action: Install · Purpose: Required
+= Scheduling: Available now · Installation deadline: As soon as possible
+= User Experience: Display in Software Center and show all notifications
+= Restart: Suppress restart on workstations
+[Next] [Close]
+:::
+
+**Available** puts it in Software Center for the user to install if they want; **Required** with a deadline installs it on its own. For the pilot, Required; for the real collection, Available for a week first and then Required: users already know it by the time it is enforced.
+
+## 5. On the client: force it and read the logs
+
+The client evaluates policies every hour. To avoid waiting:
+
+:::term PowerShell · as administrator, test device
+# Request the new policy and evaluate applications
+$ Invoke-CimMethod -Namespace root\\ccm -ClassName SMS_Client -MethodName TriggerSchedule -Arguments @{sScheduleID="{00000000-0000-0000-0000-000000000021}"}
+$ Invoke-CimMethod -Namespace root\\ccm -ClassName SMS_Client -MethodName TriggerSchedule -Arguments @{sScheduleID="{00000000-0000-0000-0000-000000000121}"}
+# The three logs, in C:\\Windows\\CCM\\Logs (open them with CMTrace)
+$ Get-Content C:\\Windows\\CCM\\Logs\\AppEnforce.log -Tail 5
+    Performing detection of app deployment type 7-Zip 24.08 (x64)...
+    App enforcement environment: ... Context: Machine ...
+    Prepared command line: "C:\\Windows\\system32\\msiexec.exe" /i "7z2408-x64.msi" /qn /norestart
+    Matched exit code 0 to a Success entry in exit codes table.
+    ++++++ App enforcement completed (5 seconds) ++++++
+:::
+
+- **AppDiscovery.log**: whether the detection method finds the app. "Not discovered" when it is installed = detection method wrong.
+- **AppEnforce.log**: the command it ran and the exit code. A `1603` is the MSI's generic error: open the `msiexec` log (`/l*v`) for the real reason.
+- **CAS.log** and **ContentTransferManager.log**: if it cannot find the content ("No DP locations found"), the device is in a boundary with no DP assigned, or the content was not distributed.
+
+## 6. What to put in the ticket
+
+Application name, collection, device name and the `AppDiscovery` and `AppEnforce` lines with the time. With that, the MECM administrator resolves it without connecting to the device.
+
+## Next steps
+
+- Turn the team's most used EXE into an application with registry detection: it is the exercise that teaches the whole model.
+- Add **requirements** (x64 only, Windows 11 only) and **supersedence** (the new version replaces the old one) once you have two versions.
+- In Level 3 you'll see Intune and co-management: which workloads move to the cloud and which stay in MECM.
+""")
+
+# ---------------------------------------------------------------- 2.8 · Microsoft Teams Rooms
+g(slug="teams-rooms-poner-en-marcha-una-sala", topic="teams-rooms", date="2026-10-21",
+  title_es="Microsoft Teams Rooms: poner en marcha una sala y supervisarla",
+  title_en="Microsoft Teams Rooms: bringing a room online and keeping an eye on it",
+  dek_es="Cuenta de recurso, licencia, inicio de sesión del dispositivo, periféricos y el Pro Management Portal. Y los fallos típicos de una sala el lunes por la mañana.",
+  dek_en="Resource account, licence, device sign-in, peripherals and the Pro Management Portal. Plus the typical Monday-morning room failures.",
+  es="""
+## Qué vas a conseguir
+
+Una sala de reuniones con Microsoft Teams Rooms (MTR) que aparece en el calendario, se une a las reuniones con un toque y se supervisa desde el portal sin ir a la sala. Y un método corto para "la sala no funciona".
+
+## Antes de empezar
+
+- Rol de **Administrador de Teams** y de **Exchange** (o un compañero que los tenga): la sala es un buzón de recurso.
+- Licencia **Teams Rooms Pro** (o Basic, para menos de 25 salas, sin el portal completo) disponible para asignarla a la cuenta de la sala.
+- El equipo de la sala (Crestron, Logitech, Poly, Yealink… con Windows o Android) montado, con la pantalla táctil, la cámara y el audio conectados, y red (cable mejor que Wi-Fi).
+
+## 1. La cuenta de recurso
+
+La sala es un buzón de tipo **sala** en Exchange Online con una contraseña que no caduca y la licencia de Teams Rooms. Todo lo demás depende de esto.
+
+:::term PowerShell · Exchange Online + Graph
+$ Connect-ExchangeOnline
+$ New-Mailbox -Room -Name "Sala Madrid 2.1" -Alias sala-mad-21 -PrimarySmtpAddress sala-mad-21@contoso.com
+$ Set-CalendarProcessing -Identity sala-mad-21 -AutomateProcessing AutoAccept -AddOrganizerToSubject $false -DeleteComments $false -DeleteSubject $false -RemovePrivateProperty $false -ProcessExternalMeetingMessages $true
+$ Set-Mailbox -Identity sala-mad-21 -Type Regular   # permite iniciar sesión; después vuelve a Room si tu política lo pide
+$ Connect-MgGraph -Scopes "User.ReadWrite.All","Organization.Read.All"
+$ Update-MgUser -UserId sala-mad-21@contoso.com -UsageLocation ES -PasswordPolicies DisablePasswordExpiration -AccountEnabled:$true
+$ $sku = (Get-MgSubscribedSku | Where-Object SkuPartNumber -eq "Microsoft_Teams_Rooms_Pro").SkuId
+$ Set-MgUserLicense -UserId sala-mad-21@contoso.com -AddLicenses @{SkuId = $sku} -RemoveLicenses @()
+:::
+
+`DeleteComments $false` y `DeleteSubject $false` son lo que hace que la reunión llegue al panel de la sala con el enlace de Teams dentro. Si se dejan por defecto, Exchange borra el cuerpo de la invitación y el botón **Unirse** no aparece.
+
+! Si usáis Conditional Access que exige MFA a todos, la cuenta de la sala no podrá iniciar sesión. Lo habitual es una política específica para las cuentas de sala: exclusión de MFA, pero restringida a las IP de las oficinas o a dispositivos conformes.
+
+## 2. Inicio de sesión en el dispositivo
+
+En la consola táctil: **Más → Configuración → contraseña de administrador → Cuenta**, correo y contraseña de la sala, modo **Exchange/Teams** (o solo Teams si no hay buzón híbrido). Al reiniciar, el panel muestra el nombre de la sala y el calendario del día.
+
+:::ui Teams Rooms · consola táctil › Configuración › Cuenta
+= Correo electrónico: sala-mad-21@contoso.com
+= Modo compatible: Exchange y Teams
+= Dirección de Exchange: autodetectar
+= Estado: Teams conectado · Exchange conectado · Calendario sincronizado
+[Guardar y salir]
+:::
+
+Si pone "Exchange: error de autenticación" pero Teams conecta, el buzón sigue siendo de tipo Room sin permitir inicio de sesión, o la contraseña ha caducado.
+
+## 3. Periféricos
+
+En **Configuración → Periféricos** se elige qué cámara, micrófono y altavoz usa la sala. Las barras todo-en-uno (Logitech Rally Bar, Poly Studio) aparecen como un solo dispositivo; con un procesador Crestron y periféricos separados, cada uno va por USB y hay que elegirlos uno a uno. Regla práctica: un solo cable USB desde la barra o el hub al equipo de la sala, sin alargadores de dudosa calidad; la mitad de los "no hay cámara" es un cable.
+
+## 4. Supervisar desde el portal
+
+Con la licencia Pro, el **Teams Rooms Pro Management Portal** (`portal.rooms.microsoft.com`) muestra cada sala, su estado, los periféricos y los incidentes, y permite reiniciar y actualizar sin ir a la sala.
+
+:::ui Teams Rooms Pro Management · Salas
+= Sala Madrid 2.1 · Estado: Correcto · Última señal: hace 2 min
+= Dispositivo: Crestron Flex UC-C100 · Windows · App 5.2
+= Periféricos: cámara OK · micrófono OK · altavoz OK · pantalla OK
+= Incidentes: 0 abiertos · Última reunión: hoy 10:00 (2 participantes remotos)
+[Reiniciar] [Actualizar] [Ver registro]
+:::
+
+Un **ticket** en el portal se abre solo cuando un periférico deja de responder o la app lleva sin señal un tiempo. Conviene ir ahí antes de que el usuario lo diga.
+
+## 5. "La sala no funciona": el orden
+
+1. **¿La consola está encendida y con la hora correcta?** Una sala con la hora mal no inicia sesión (certificados). Reinicio desde el portal o apagado físico 30 segundos.
+2. **¿Aparece el calendario?** Si no, es la cuenta (paso 1 y 2): contraseña, licencia, Conditional Access. Prueba a iniciar sesión con la cuenta de la sala en `outlook.office.com` desde un portátil: si pide MFA o está bloqueada, ahí está.
+3. **¿La reunión no tiene botón Unirse?** `Set-CalendarProcessing` con `DeleteComments` a `$true`, o la reunión no es de Teams (invitación sin enlace). Las reuniones de terceros (Zoom, Webex) necesitan la **unión directa a invitados** activada en la configuración de la sala.
+4. **¿No hay audio, vídeo o pantalla compartida?** Periféricos (paso 3): cable, hub, o el dispositivo elegido en la configuración no es el que está conectado. Un reinicio del dispositivo reconoce los periféricos de nuevo.
+5. **¿Todo bien pero los remotos no oyen?** Calidad de red: la sala por Wi-Fi o en una VLAN con QoS mal configurada. El portal muestra la calidad de cada reunión; si es la red, va a redes con la hora y la sala.
+
+## Siguientes pasos
+
+- Pon la cuenta de la sala en un grupo con **licencias por grupo** y una política de Conditional Access propia: así cada sala nueva es dar de alta un buzón y meterlo en el grupo.
+- Activa en el portal las **actualizaciones automáticas** en un anillo de prueba con una sala antes del resto.
+- En el Nivel 4 verás el soporte a comités y dirección: cuando una sala de consejo falla, no hay segundo intento.
+""",
+  en="""
+## What you'll get
+
+A meeting room with Microsoft Teams Rooms (MTR) that shows up in the calendar, joins meetings with one tap and is monitored from the portal without walking to the room. Plus a short method for "the room doesn't work".
+
+## Before you start
+
+- The **Teams Administrator** and **Exchange** roles (or a colleague who has them): the room is a resource mailbox.
+- A **Teams Rooms Pro** licence (or Basic, for fewer than 25 rooms, without the full portal) available to assign to the room account.
+- The room hardware (Crestron, Logitech, Poly, Yealink… on Windows or Android) installed, with the touch console, camera and audio connected, and network (cable rather than Wi-Fi).
+
+## 1. The resource account
+
+The room is a **room** mailbox in Exchange Online with a non-expiring password and the Teams Rooms licence. Everything else depends on this.
+
+:::term PowerShell · Exchange Online + Graph
+$ Connect-ExchangeOnline
+$ New-Mailbox -Room -Name "Madrid Room 2.1" -Alias room-mad-21 -PrimarySmtpAddress room-mad-21@contoso.com
+$ Set-CalendarProcessing -Identity room-mad-21 -AutomateProcessing AutoAccept -AddOrganizerToSubject $false -DeleteComments $false -DeleteSubject $false -RemovePrivateProperty $false -ProcessExternalMeetingMessages $true
+$ Set-Mailbox -Identity room-mad-21 -Type Regular   # allows sign-in; switch back to Room afterwards if your policy requires it
+$ Connect-MgGraph -Scopes "User.ReadWrite.All","Organization.Read.All"
+$ Update-MgUser -UserId room-mad-21@contoso.com -UsageLocation ES -PasswordPolicies DisablePasswordExpiration -AccountEnabled:$true
+$ $sku = (Get-MgSubscribedSku | Where-Object SkuPartNumber -eq "Microsoft_Teams_Rooms_Pro").SkuId
+$ Set-MgUserLicense -UserId room-mad-21@contoso.com -AddLicenses @{SkuId = $sku} -RemoveLicenses @()
+:::
+
+`DeleteComments $false` and `DeleteSubject $false` are what make the meeting reach the room's console with the Teams link inside. Left at the defaults, Exchange strips the invitation body and the **Join** button never appears.
+
+! If you use Conditional Access requiring MFA for everyone, the room account won't be able to sign in. The usual approach is a dedicated policy for room accounts: MFA exclusion, but restricted to office IPs or compliant devices.
+
+## 2. Sign in on the device
+
+On the touch console: **More → Settings → admin password → Account**, the room's email and password, **Exchange/Teams** mode (or Teams only if there is no hybrid mailbox). After a restart, the console shows the room name and the day's calendar.
+
+:::ui Teams Rooms · touch console › Settings › Account
+= Email address: room-mad-21@contoso.com
+= Supported meeting mode: Exchange and Teams
+= Exchange address: autodiscover
+= Status: Teams connected · Exchange connected · Calendar synced
+[Save and exit]
+:::
+
+If it says "Exchange: authentication error" but Teams connects, the mailbox is still of type Room without sign-in allowed, or the password has expired.
+
+## 3. Peripherals
+
+**Settings → Peripherals** is where you pick which camera, microphone and speaker the room uses. All-in-one bars (Logitech Rally Bar, Poly Studio) appear as a single device; with a Crestron processor and separate peripherals, each one comes over USB and has to be selected one by one. Practical rule: a single USB cable from the bar or hub to the room PC, with no dubious extenders; half of all "no camera" tickets are a cable.
+
+## 4. Monitor from the portal
+
+With the Pro licence, the **Teams Rooms Pro Management Portal** (`portal.rooms.microsoft.com`) shows every room, its status, peripherals and incidents, and lets you restart and update without visiting the room.
+
+:::ui Teams Rooms Pro Management · Rooms
+= Madrid Room 2.1 · Status: Healthy · Last signal: 2 min ago
+= Device: Crestron Flex UC-C100 · Windows · App 5.2
+= Peripherals: camera OK · microphone OK · speaker OK · display OK
+= Incidents: 0 open · Last meeting: today 10:00 (2 remote participants)
+[Restart] [Update] [View log]
+:::
+
+A **ticket** opens in the portal on its own when a peripheral stops responding or the app has gone silent for a while. Worth looking there before the user tells you.
+
+## 5. "The room doesn't work": the order
+
+1. **Is the console on, with the right time?** A room with the wrong time can't sign in (certificates). Restart from the portal, or a physical 30-second power-off.
+2. **Does the calendar appear?** If not, it is the account (steps 1 and 2): password, licence, Conditional Access. Try signing in with the room account at `outlook.office.com` from a laptop: if it asks for MFA or is blocked, there is your answer.
+3. **The meeting has no Join button?** `Set-CalendarProcessing` with `DeleteComments` at `$true`, or the meeting isn't a Teams one (invitation with no link). Third-party meetings (Zoom, Webex) need **direct guest join** enabled in the room settings.
+4. **No audio, video or screen sharing?** Peripherals (step 3): cable, hub, or the device chosen in settings isn't the one plugged in. A device restart re-detects the peripherals.
+5. **All fine but remote people can't hear?** Network quality: the room on Wi-Fi or on a VLAN with misconfigured QoS. The portal shows each meeting's quality; if it is the network, it goes to networks with the time and the room.
+
+## Next steps
+
+- Put the room account in a group with **group-based licensing** and its own Conditional Access policy: every new room then becomes creating a mailbox and adding it to the group.
+- Enable **automatic updates** in the portal on a test ring with one room before the rest.
+- In Level 4 you'll see board and executive support: when a boardroom fails, there is no second attempt.
+""")
+
+# ---------------------------------------------------------------- 2.9 · PDQ y MDT
+g(slug="pdq-y-mdt-desplegar-software-en-lote-e-instalar-windows", topic="pdq-mdt", date="2026-10-21",
+  title_es="PDQ y MDT: desplegar software en lote e instalar Windows desde cero",
+  title_en="PDQ and MDT: deploying software in bulk and installing Windows from scratch",
+  dek_es="PDQ Deploy e Inventory para empujar un instalador a 50 equipos esta tarde, y MDT para una instalación limpia de Windows con un recurso compartido de implementación. Cuándo sigue teniendo sentido frente a Intune.",
+  dek_en="PDQ Deploy and Inventory to push an installer to 50 devices this afternoon, and MDT for a clean Windows install from a deployment share. When it still makes sense next to Intune.",
+  es="""
+## Qué vas a conseguir
+
+Dos herramientas que resuelven el día a día de una oficina sin MECM: con **PDQ Deploy** instalas o actualizas una aplicación en decenas de equipos en minutos; con **MDT** (Microsoft Deployment Toolkit) preparas un Windows limpio con los controladores y las aplicaciones base para un equipo nuevo o reinstalado.
+
+## Antes de empezar
+
+- Un servidor o equipo de administración unido al dominio para PDQ y para el recurso compartido de MDT.
+- Una cuenta de dominio con **administrador local** en los equipos de destino (PDQ la usa para instalar). Guárdala en PDQ como credencial, no en un script.
+- En los equipos de destino: compartición de archivos e impresoras activada y el firewall permitiendo **Administración remota** (PDQ usa SMB y el servicio de administración remota, no WinRM).
+- Para MDT: el ADK de Windows y el complemento WinPE instalados en el servidor, y una ISO de Windows 11 Enterprise.
+
+## 1. PDQ Inventory: saber qué hay
+
+Antes de desplegar, saber dónde. PDQ Inventory escanea los equipos del dominio y mantiene colecciones dinámicas (por aplicación, versión, SO, disco).
+
+:::ui PDQ Inventory · Colecciones
+> Colecciones › Nueva colección dinámica
+= Nombre: 7-Zip desactualizado
+= Equipos donde: Aplicación · Nombre · contiene · 7-Zip
+= y · Aplicación · Versión · menor que · 24.08
+= y · Equipo · Visto por última vez · en los últimos · 7 días
+= Miembros: 38 equipos
+:::
+
+Con esto, "¿cuántos equipos tienen el Java viejo?" o "¿qué portátiles no han aparecido en 30 días?" es una colección, no una tarde.
+
+## 2. PDQ Deploy: el paquete y el despliegue
+
+:::ui PDQ Deploy · Paquetes › Nuevo paquete
+= Nombre: 7-Zip 24.08 (x64)
+> Paso 1 · Instalar
+= Archivo: \\\\srv-files-01\\Deploy\\7-Zip\\7z2408-x64.msi
+= Parámetros: /qn /norestart
+= Códigos de éxito: 0, 1641, 3010
+> Condiciones
+= Arquitectura: 64 bits · SO: Windows 10, Windows 11
+[Guardar]
+:::
+
+Despliegue: botón derecho sobre el paquete → **Implementar una vez** → elegir la colección de Inventory "7-Zip desactualizado" → **Implementar ahora**. La ventana de estado muestra cada equipo en vivo: Correcto, Error (con el código) o Sin conexión.
+
+- **Sin conexión**: el equipo está apagado o fuera de la red. Con **Implementación automática** ligada a la colección, PDQ lo instalará cuando aparezca (lo que PDQ llama *heartbeat*).
+- **Error 1603** o similar: el instalador falla en ese equipo. Prueba el comando a mano en él (igual que en la guía de MECM): casi siempre es una versión antigua que no se desinstala o un proceso abierto.
+- **Acceso denegado**: la credencial no es administrador local en ese equipo, o el firewall bloquea.
+
+> PDQ no tiene cliente: todo lo hace por SMB y servicios remotos desde la consola. Por eso es tan rápido de montar, y por eso solo llega a los equipos que están en la red corporativa o en VPN.
+
+## 3. MDT: un Windows limpio
+
+MDT instala Windows a partir de un **recurso compartido de implementación** (`\\\\srv-mdt-01\\DeploymentShare$`) con una **secuencia de tareas** que formatea, instala el SO, los controladores y las aplicaciones base, une al dominio y pone el nombre.
+
+:::ui Deployment Workbench · Deployment Share
+> Deployment Shares › MDT Production › Operating Systems › Importar: Windows 11 Enterprise 24H2 (install.wim)
+> Deployment Shares › MDT Production › Out-of-Box Drivers › Fabrikam › Portable 14 G3 (importados desde el paquete del fabricante)
+> Deployment Shares › MDT Production › Applications › 7-Zip 24.08 · Office 365 Apps · Cisco Secure Client
+> Deployment Shares › MDT Production › Task Sequences › Nueva: "W11 Estándar oficina" (Standard Client Task Sequence)
+> Task Sequence › Preinstall › Inject Drivers › Selección por perfil: modelo (%Model%)
+> Task Sequence › State Restore › Install Applications › 7-Zip, Office, Secure Client
+[Update Deployment Share] (genera el WinPE de arranque: LiteTouchPE_x64.iso / .wim)
+:::
+
+Dos ficheros deciden casi todo:
+
+- **CustomSettings.ini**: las respuestas por defecto (dominio, OU, zona horaria, idioma, nombre del equipo con `OSDComputerName=%SerialNumber%`), para que el asistente no pregunte lo que ya sabes.
+- **Bootstrap.ini**: la ruta del recurso compartido y la credencial de solo lectura con la que WinPE lo monta. Se mete dentro del WinPE al actualizar el share.
+
+Después: arrancar el equipo desde el USB o por PXE (si hay WDS) con `LiteTouchPE_x64`, elegir la secuencia de tareas y en 25-40 minutos el equipo está en el dominio con todo instalado. El log que importa si algo falla: `C:\\MININT\\SMSOSD\\OSDLOGS\\BDD.log` durante la instalación, y `C:\\Windows\\Temp\\DeploymentLogs\\` al final (ábrelos con CMTrace).
+
+## 4. Dónde encajan hoy
+
+PDQ y MDT siguen siendo útiles en oficinas con equipos en red local, sin MECM, y para reinstalar en el taller. Lo que ha cambiado: los portátiles que nunca pisan la oficina se gestionan con **Intune y Autopilot** (la imagen viene de fábrica y se configura sola), y las aplicaciones en esos equipos se despliegan con **Win32 apps** de Intune. Lo normal en 2026 es tener las dos cosas: MDT para el taller y el equipo de sobremesa, Autopilot para el portátil remoto.
+
+## Siguientes pasos
+
+- En PDQ, crea una **implementación automática** para los parches de navegadores y Java: se mantienen al día sin que nadie lo lance.
+- En MDT, añade un paso de **actualización de Windows** al final de la secuencia (Windows Update dentro de la secuencia de tareas) para que el equipo salga ya parcheado.
+- En el Nivel 3 verás Intune de principio a fin, y en la guía de MECM/SCCM el equivalente de todo esto con infraestructura propia.
+""",
+  en="""
+## What you'll get
+
+Two tools that handle the everyday needs of an office without MECM: with **PDQ Deploy** you install or update an application on dozens of devices in minutes; with **MDT** (Microsoft Deployment Toolkit) you prepare a clean Windows with drivers and base applications for a new or rebuilt device.
+
+## Before you start
+
+- A domain-joined server or admin workstation for PDQ and for the MDT share.
+- A domain account with **local administrator** on the target devices (PDQ uses it to install). Store it in PDQ as a credential, not in a script.
+- On the targets: file and printer sharing enabled and the firewall allowing **Remote Administration** (PDQ uses SMB and the remote admin service, not WinRM).
+- For MDT: the Windows ADK and the WinPE add-on installed on the server, and a Windows 11 Enterprise ISO.
+
+## 1. PDQ Inventory: know what's there
+
+Before deploying, know where. PDQ Inventory scans the domain's devices and keeps dynamic collections (by application, version, OS, disk).
+
+:::ui PDQ Inventory · Collections
+> Collections › New Dynamic Collection
+= Name: 7-Zip outdated
+= Computers where: Application · Name · contains · 7-Zip
+= and · Application · Version · less than · 24.08
+= and · Computer · Last seen · within the last · 7 days
+= Members: 38 computers
+:::
+
+With this, "how many devices have the old Java?" or "which laptops haven't shown up in 30 days?" is a collection, not an afternoon.
+
+## 2. PDQ Deploy: the package and the deployment
+
+:::ui PDQ Deploy · Packages › New Package
+= Name: 7-Zip 24.08 (x64)
+> Step 1 · Install
+= File: \\\\srv-files-01\\Deploy\\7-Zip\\7z2408-x64.msi
+= Parameters: /qn /norestart
+= Success codes: 0, 1641, 3010
+> Conditions
+= Architecture: 64-bit · OS: Windows 10, Windows 11
+[Save]
+:::
+
+Deployment: right-click the package → **Deploy Once** → pick the Inventory collection "7-Zip outdated" → **Deploy Now**. The status window shows every device live: Successful, Failed (with the code) or Offline.
+
+- **Offline**: the device is off or away from the network. With an **Auto Deployment** tied to the collection, PDQ installs it when it reappears (what PDQ calls *heartbeat*).
+- **Error 1603** or similar: the installer fails on that device. Try the command by hand on it (as in the MECM guide): almost always an old version that won't uninstall, or an open process.
+- **Access denied**: the credential is not a local admin on that device, or the firewall blocks it.
+
+> PDQ has no client: it does everything over SMB and remote services from the console. That is why it is so quick to set up, and why it only reaches devices on the corporate network or VPN.
+
+## 3. MDT: a clean Windows
+
+MDT installs Windows from a **deployment share** (`\\\\srv-mdt-01\\DeploymentShare$`) with a **task sequence** that formats, installs the OS, drivers and base apps, joins the domain and sets the name.
+
+:::ui Deployment Workbench · Deployment Share
+> Deployment Shares › MDT Production › Operating Systems › Import: Windows 11 Enterprise 24H2 (install.wim)
+> Deployment Shares › MDT Production › Out-of-Box Drivers › Fabrikam › Portable 14 G3 (imported from the vendor's driver pack)
+> Deployment Shares › MDT Production › Applications › 7-Zip 24.08 · Office 365 Apps · Cisco Secure Client
+> Deployment Shares › MDT Production › Task Sequences › New: "W11 Standard office" (Standard Client Task Sequence)
+> Task Sequence › Preinstall › Inject Drivers › Selection profile: model (%Model%)
+> Task Sequence › State Restore › Install Applications › 7-Zip, Office, Secure Client
+[Update Deployment Share] (builds the WinPE boot media: LiteTouchPE_x64.iso / .wim)
+:::
+
+Two files decide almost everything:
+
+- **CustomSettings.ini**: the default answers (domain, OU, time zone, language, computer name with `OSDComputerName=%SerialNumber%`), so the wizard doesn't ask what you already know.
+- **Bootstrap.ini**: the share path and the read-only credential WinPE mounts it with. It is baked into WinPE when you update the share.
+
+Then: boot the device from USB or PXE (if WDS is there) with `LiteTouchPE_x64`, pick the task sequence, and in 25-40 minutes the device is in the domain with everything installed. The log that matters if something fails: `C:\\MININT\\SMSOSD\\OSDLOGS\\BDD.log` during the install, and `C:\\Windows\\Temp\\DeploymentLogs\\` at the end (open them with CMTrace).
+
+## 4. Where they fit today
+
+PDQ and MDT are still useful in offices with devices on the LAN, without MECM, and for rebuilding in the workshop. What has changed: laptops that never set foot in the office are managed with **Intune and Autopilot** (the image comes from the factory and configures itself), and applications on those devices are deployed as Intune **Win32 apps**. The normal setup in 2026 is both: MDT for the workshop and the desktop, Autopilot for the remote laptop.
+
+## Next steps
+
+- In PDQ, create an **Auto Deployment** for browser and Java patches: they stay current without anyone launching them.
+- In MDT, add a **Windows Update** step at the end of the sequence (Windows Update inside the task sequence) so the device comes out already patched.
+- In Level 3 you'll see Intune from start to finish, and in the MECM/SCCM guide the equivalent of all this with your own infrastructure.
+""")
+
+# ---------------------------------------------------------------- 2.10 · PowerShell
+g(slug="powershell-script-de-inventario-remoto-con-csv", topic="powershell", date="2026-10-21",
+  title_es="PowerShell: un script de inventario que corre en remoto, maneja errores y deja un CSV",
+  title_en="PowerShell: an inventory script that runs remotely, handles errors and leaves a CSV",
+  dek_es="Objetos en lugar de texto, Invoke-Command sobre una lista de equipos, try/catch para los que no responden, y un CSV que abre Excel. Con la política de ejecución y la firma explicadas.",
+  dek_en="Objects instead of text, Invoke-Command over a list of devices, try/catch for the ones that don't answer, and a CSV Excel can open. With execution policy and signing explained.",
+  es="""
+## Qué vas a conseguir
+
+Un script que, dada una lista de equipos, se conecta a cada uno, saca modelo, número de serie, versión de Windows, disco libre y último arranque, y deja un CSV con una fila por equipo, incluidos los que no respondieron y por qué. Es el patrón que repetirás en la mitad de los scripts de IT.
+
+## Antes de empezar
+
+- PowerShell 5.1 (viene con Windows) o PowerShell 7 (`winget install Microsoft.PowerShell`). El script vale en los dos.
+- **WinRM** activado en los equipos de destino (en dominio suele estarlo por GPO; si no, `Enable-PSRemoting -Force` en cada uno, o la GPO *Permitir la administración remota del servidor a través de WinRM*).
+- Tu cuenta con administrador local en los equipos, o una credencial para pasarla con `-Credential`.
+- Un editor con PowerShell integrado: **VS Code** con la extensión de PowerShell marca errores mientras escribes.
+
+## 1. Objetos, no texto
+
+La diferencia con `cmd` y con Bash: un comando de PowerShell devuelve **objetos** con propiedades, no líneas. Por eso puedes seleccionar, filtrar y exportar sin cortar cadenas.
+
+:::term PowerShell
+$ Get-CimInstance Win32_OperatingSystem | Select-Object Caption, Version, LastBootUpTime
+Caption                          Version    LastBootUpTime
+-------                          -------    --------------
+Microsoft Windows 11 Enterprise  10.0.26100 03/10/2026 8:12:40
+$ (Get-CimInstance Win32_OperatingSystem).LastBootUpTime -lt (Get-Date).AddDays(-14)
+True
+:::
+
+`Get-CimInstance` sustituye a `Get-WmiObject` (obsoleto). `Get-Member` sobre cualquier objeto te enseña qué propiedades tiene.
+
+## 2. El script
+
+:::term VS Code · Get-DeviceInventory.ps1
+#Requires -Version 5.1
+<#
+.SYNOPSIS  Inventario básico de equipos por WinRM, con un CSV de salida.
+.EXAMPLE   .\\Get-DeviceInventory.ps1 -ComputerName (Get-Content equipos.txt) -OutFile inventario.csv
+#>
+[CmdletBinding()]
+param(
+    [Parameter(Mandatory)] [string[]] $ComputerName,
+    [string] $OutFile = "inventario-$(Get-Date -Format yyyyMMdd).csv",
+    [pscredential] $Credential
+)
+
+$remote = {
+    $os  = Get-CimInstance Win32_OperatingSystem
+    $cs  = Get-CimInstance Win32_ComputerSystem
+    $bio = Get-CimInstance Win32_BIOS
+    $c   = Get-CimInstance Win32_LogicalDisk -Filter "DeviceID='C:'"
+    [pscustomobject]@{
+        Computer   = $env:COMPUTERNAME
+        Model      = "$($cs.Manufacturer) $($cs.Model)"
+        Serial     = $bio.SerialNumber
+        OS         = $os.Caption
+        Build      = $os.Version
+        FreeGB     = [math]::Round($c.FreeSpace / 1GB, 1)
+        LastBoot   = $os.LastBootUpTime
+        LastUser   = $cs.UserName
+    }
+}
+
+$results = foreach ($pc in $ComputerName) {
+    Write-Verbose "Consultando $pc"
+    try {
+        $p = @{ ComputerName = $pc; ScriptBlock = $remote; ErrorAction = 'Stop' }
+        if ($Credential) { $p.Credential = $Credential }
+        $r = Invoke-Command @p
+        $r | Select-Object * -ExcludeProperty PSComputerName, RunspaceId, PSShowComputerName |
+             Add-Member -NotePropertyName Status -NotePropertyValue OK -PassThru
+    }
+    catch {
+        [pscustomobject]@{ Computer = $pc; Model = $null; Serial = $null; OS = $null; Build = $null
+                           FreeGB = $null; LastBoot = $null; LastUser = $null
+                           Status = "ERROR: $($_.Exception.Message -replace '\\s+',' ')" }
+    }
+}
+
+$results | Export-Csv -Path $OutFile -NoTypeInformation -Encoding UTF8 -Delimiter ';'
+$ok = ($results | Where-Object Status -eq 'OK').Count
+Write-Host "$ok de $($ComputerName.Count) equipos respondieron. CSV: $OutFile"
+:::
+
+Lo que hace que sea un script y no un apaño: `param` con tipos (así `-ComputerName` acepta una lista), `[CmdletBinding()]` que da `-Verbose` gratis, el bloque remoto que devuelve un **objeto** por equipo, `try/catch` con `ErrorAction Stop` para que un equipo apagado no pare el bucle, y el CSV con **`;`** como separador para que Excel en español lo abra en columnas.
+
+## 3. Ejecutarlo
+
+:::term PowerShell
+$ .\\Get-DeviceInventory.ps1 -ComputerName LAPTOP-7F2K9Q, DESK-MAD-201, LAPTOP-OLD-1 -Verbose
+VERBOSE: Consultando LAPTOP-7F2K9Q
+VERBOSE: Consultando DESK-MAD-201
+VERBOSE: Consultando LAPTOP-OLD-1
+2 de 3 equipos respondieron. CSV: inventario-20261021.csv
+$ Import-Csv .\\inventario-20261021.csv -Delimiter ';' | Format-Table Computer, FreeGB, LastBoot, Status
+Computer       FreeGB LastBoot            Status
+--------       ------ --------            ------
+LAPTOP-7F2K9Q    21,4 03/10/2026 8:12:40  OK
+DESK-MAD-201    188,0 20/10/2026 7:55:02  OK
+LAPTOP-OLD-1                              ERROR: Connecting to remote server LAPTOP-OLD-1 failed with the following error message : WinRM cannot complete the operation...
+:::
+
+Para cientos de equipos, `Invoke-Command` acepta la lista entera a la vez y los consulta en paralelo (`-ThrottleLimit 32`); el bucle de arriba es más lento pero deja claro qué equipo falló y por qué.
+
+## 4. Política de ejecución y firma
+
+Si al ejecutarlo aparece *"no se puede cargar porque la ejecución de scripts está deshabilitada"*, es la **política de ejecución**. No es seguridad contra atacantes; es un seguro contra ejecutar scripts por accidente.
+
+:::term PowerShell
+$ Get-ExecutionPolicy -List
+        Scope ExecutionPolicy
+        ----- ---------------
+  MachinePolicy       Undefined
+     UserPolicy       Undefined
+        Process       Undefined
+    CurrentUser       Undefined
+   LocalMachine      Restricted
+$ Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+:::
+
+`RemoteSigned` ejecuta lo que escribes tú y exige firma a lo descargado. Si la empresa la fija por GPO en `AllSigned`, los scripts del equipo se **firman** con un certificado de firma de código de la CA interna (`Set-AuthenticodeSignature`). Es lo correcto en producción y encaja con el repositorio de la guía de Git: solo lo revisado se firma.
+
+## Siguientes pasos
+
+- Cambia la lista de equipos por `Get-ADComputer -Filter {OperatingSystem -like "Windows 11*"}` y tendrás el inventario de todo el dominio.
+- Pasa el resultado por `PSScriptAnalyzer` (`Invoke-ScriptAnalyzer .\\Get-DeviceInventory.ps1`) antes de subirlo al repo.
+- En el Nivel 3 verás Microsoft Graph desde PowerShell: el mismo patrón, contra Entra ID e Intune en lugar de WinRM.
+""",
+  en="""
+## What you'll get
+
+A script that, given a list of devices, connects to each one, pulls model, serial number, Windows version, free disk and last boot, and leaves a CSV with one row per device, including the ones that didn't answer and why. It is the pattern you'll repeat in half of all IT scripts.
+
+## Before you start
+
+- PowerShell 5.1 (ships with Windows) or PowerShell 7 (`winget install Microsoft.PowerShell`). The script works on both.
+- **WinRM** enabled on the target devices (in a domain it usually is, by GPO; if not, `Enable-PSRemoting -Force` on each, or the GPO *Allow remote server management through WinRM*).
+- Your account as local administrator on the devices, or a credential to pass with `-Credential`.
+- An editor with PowerShell support: **VS Code** with the PowerShell extension flags errors as you type.
+
+## 1. Objects, not text
+
+The difference from `cmd` and Bash: a PowerShell command returns **objects** with properties, not lines. That is why you can select, filter and export without slicing strings.
+
+:::term PowerShell
+$ Get-CimInstance Win32_OperatingSystem | Select-Object Caption, Version, LastBootUpTime
+Caption                          Version    LastBootUpTime
+-------                          -------    --------------
+Microsoft Windows 11 Enterprise  10.0.26100 03/10/2026 8:12:40
+$ (Get-CimInstance Win32_OperatingSystem).LastBootUpTime -lt (Get-Date).AddDays(-14)
+True
+:::
+
+`Get-CimInstance` replaces `Get-WmiObject` (deprecated). `Get-Member` on any object shows you which properties it has.
+
+## 2. The script
+
+:::term VS Code · Get-DeviceInventory.ps1
+#Requires -Version 5.1
+<#
+.SYNOPSIS  Basic device inventory over WinRM, with a CSV output.
+.EXAMPLE   .\\Get-DeviceInventory.ps1 -ComputerName (Get-Content devices.txt) -OutFile inventory.csv
+#>
+[CmdletBinding()]
+param(
+    [Parameter(Mandatory)] [string[]] $ComputerName,
+    [string] $OutFile = "inventory-$(Get-Date -Format yyyyMMdd).csv",
+    [pscredential] $Credential
+)
+
+$remote = {
+    $os  = Get-CimInstance Win32_OperatingSystem
+    $cs  = Get-CimInstance Win32_ComputerSystem
+    $bio = Get-CimInstance Win32_BIOS
+    $c   = Get-CimInstance Win32_LogicalDisk -Filter "DeviceID='C:'"
+    [pscustomobject]@{
+        Computer   = $env:COMPUTERNAME
+        Model      = "$($cs.Manufacturer) $($cs.Model)"
+        Serial     = $bio.SerialNumber
+        OS         = $os.Caption
+        Build      = $os.Version
+        FreeGB     = [math]::Round($c.FreeSpace / 1GB, 1)
+        LastBoot   = $os.LastBootUpTime
+        LastUser   = $cs.UserName
+    }
+}
+
+$results = foreach ($pc in $ComputerName) {
+    Write-Verbose "Querying $pc"
+    try {
+        $p = @{ ComputerName = $pc; ScriptBlock = $remote; ErrorAction = 'Stop' }
+        if ($Credential) { $p.Credential = $Credential }
+        $r = Invoke-Command @p
+        $r | Select-Object * -ExcludeProperty PSComputerName, RunspaceId, PSShowComputerName |
+             Add-Member -NotePropertyName Status -NotePropertyValue OK -PassThru
+    }
+    catch {
+        [pscustomobject]@{ Computer = $pc; Model = $null; Serial = $null; OS = $null; Build = $null
+                           FreeGB = $null; LastBoot = $null; LastUser = $null
+                           Status = "ERROR: $($_.Exception.Message -replace '\\s+',' ')" }
+    }
+}
+
+$results | Export-Csv -Path $OutFile -NoTypeInformation -Encoding UTF8
+$ok = ($results | Where-Object Status -eq 'OK').Count
+Write-Host "$ok of $($ComputerName.Count) devices answered. CSV: $OutFile"
+:::
+
+What makes it a script rather than a hack: `param` with types (so `-ComputerName` takes a list), `[CmdletBinding()]` which gives you `-Verbose` for free, the remote block returning one **object** per device, `try/catch` with `ErrorAction Stop` so a switched-off device doesn't stop the loop, and a UTF-8 CSV Excel opens straight away (add `-Delimiter ';'` if your Excel locale expects semicolons).
+
+## 3. Run it
+
+:::term PowerShell
+$ .\\Get-DeviceInventory.ps1 -ComputerName LAPTOP-7F2K9Q, DESK-MAD-201, LAPTOP-OLD-1 -Verbose
+VERBOSE: Querying LAPTOP-7F2K9Q
+VERBOSE: Querying DESK-MAD-201
+VERBOSE: Querying LAPTOP-OLD-1
+2 of 3 devices answered. CSV: inventory-20261021.csv
+$ Import-Csv .\\inventory-20261021.csv | Format-Table Computer, FreeGB, LastBoot, Status
+Computer       FreeGB LastBoot            Status
+--------       ------ --------            ------
+LAPTOP-7F2K9Q    21.4 03/10/2026 8:12:40  OK
+DESK-MAD-201    188.0 20/10/2026 7:55:02  OK
+LAPTOP-OLD-1                              ERROR: Connecting to remote server LAPTOP-OLD-1 failed with the following error message : WinRM cannot complete the operation...
+:::
+
+For hundreds of devices, `Invoke-Command` takes the whole list at once and queries them in parallel (`-ThrottleLimit 32`); the loop above is slower but makes it obvious which device failed and why.
+
+## 4. Execution policy and signing
+
+If running it shows *"cannot be loaded because running scripts is disabled"*, that is the **execution policy**. It is not security against attackers; it is a guard against running scripts by accident.
+
+:::term PowerShell
+$ Get-ExecutionPolicy -List
+        Scope ExecutionPolicy
+        ----- ---------------
+  MachinePolicy       Undefined
+     UserPolicy       Undefined
+        Process       Undefined
+    CurrentUser       Undefined
+   LocalMachine      Restricted
+$ Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+:::
+
+`RemoteSigned` runs what you write and requires a signature on anything downloaded. If the company pins it to `AllSigned` by GPO, the team's scripts are **signed** with a code-signing certificate from the internal CA (`Set-AuthenticodeSignature`). That is the right thing in production and fits the repository from the Git guide: only what is reviewed gets signed.
+
+## Next steps
+
+- Swap the device list for `Get-ADComputer -Filter {OperatingSystem -like "Windows 11*"}` and you have the inventory of the whole domain.
+- Run the result through `PSScriptAnalyzer` (`Invoke-ScriptAnalyzer .\\Get-DeviceInventory.ps1`) before pushing it to the repo.
+- In Level 3 you'll see Microsoft Graph from PowerShell: the same pattern, against Entra ID and Intune instead of WinRM.
+""")
+
+# ---------------------------------------------------------------- 2.11 · Red Hat Enterprise Linux
+g(slug="rhel-registrar-parchear-servicios-firewall-selinux", topic="rhel", date="2026-10-21",
+  title_es="Red Hat Enterprise Linux: registrar, parchear y controlar servicios, firewall y SELinux",
+  title_en="Red Hat Enterprise Linux: registering, patching, and managing services, the firewall and SELinux",
+  dek_es="Lo que haces en un RHEL recién entregado y lo que repites cada mes: suscripción, dnf, systemd, journalctl, firewalld y los dos comandos de SELinux que evitan desactivarlo.",
+  dek_en="What you do on a freshly delivered RHEL and what you repeat every month: subscription, dnf, systemd, journalctl, firewalld, and the two SELinux commands that save you from turning it off.",
+  es="""
+## Qué vas a conseguir
+
+Saber manejar un servidor RHEL (o Rocky/Alma, que son compatibles) para lo que se pide en operaciones: que esté registrado y reciba parches, que los servicios arranquen y se vigilen, que el firewall deje pasar solo lo necesario, y que SELinux siga activado aunque una aplicación proteste.
+
+## Antes de empezar
+
+- Acceso por SSH con un usuario que tenga `sudo`. No trabajes como `root` directamente.
+- La cuenta o la clave de activación de Red Hat para registrar el sistema (la tiene quien gestione las suscripciones).
+- Saber qué servicios debe dar ese servidor (web, base de datos, aplicación) y en qué puertos: es lo que decide el firewall.
+
+## 1. Registrar y parchear
+
+:::term bash · servidor RHEL
+$ sudo subscription-manager register --org 1234567 --activationkey rhel9-servers
+The system has been registered with ID: 8a1c...-...-...
+$ sudo subscription-manager status
+Overall Status: Current
+$ sudo dnf check-update | tail -n +2 | wc -l
+47
+$ sudo dnf update -y
+...
+Complete!
+$ sudo dnf needs-restarting -r
+Core libraries or services have been updated since boot-up:
+  * kernel
+Reboot is required to fully utilize these updates.
+:::
+
+`needs-restarting -r` es lo que te dice si el parche necesita reinicio (kernel, glibc, systemd). Un servidor parcheado y sin reiniciar sigue corriendo el kernel viejo. Planifica el reinicio en la ventana de cambios y apúntalo en el ticket.
+
+Para parchear solo seguridad (lo habitual fuera de la ventana mensual): `sudo dnf update --security -y`.
+
+## 2. Servicios con systemd
+
+:::term bash · servidor RHEL
+$ systemctl status httpd --no-pager
+● httpd.service - The Apache HTTP Server
+     Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled; preset: disabled)
+     Active: failed (Result: exit-code) since Wed 2026-10-21 08:02:11 CEST; 3min ago
+$ sudo journalctl -u httpd -n 20 --no-pager
+oct 21 08:02:11 srv-web-01 httpd[1842]: (13)Permission denied: AH00072: make_sock: could not bind to address 0.0.0.0:8081
+$ sudo systemctl enable --now httpd      # activar al arranque y arrancar ahora
+$ systemctl is-enabled httpd; systemctl is-active httpd
+enabled
+active
+:::
+
+Las cuatro órdenes que usarás todos los días: `status`, `restart`, `enable --now` y `journalctl -u <servicio>`. `journalctl -p err -b` muestra todos los errores desde el último arranque, de cualquier servicio; `journalctl -f` los sigue en vivo.
+
+## 3. Firewall: firewalld
+
+En RHEL el firewall es **firewalld**, con zonas y servicios con nombre. Lo que no está abierto, está cerrado.
+
+:::term bash · servidor RHEL
+$ sudo firewall-cmd --get-default-zone
+public
+$ sudo firewall-cmd --list-all
+public (active)
+  interfaces: ens192
+  services: cockpit dhcpv6-client ssh
+  ports:
+$ sudo firewall-cmd --add-service=http --add-service=https --permanent
+$ sudo firewall-cmd --add-port=8081/tcp --permanent
+$ sudo firewall-cmd --reload
+$ sudo firewall-cmd --list-services --list-ports
+cockpit dhcpv6-client http https ssh
+8081/tcp
+:::
+
+`--permanent` escribe la regla a disco; sin `--reload` no se aplica. Prueba desde fuera con `nc -zv srv-web-01 8081` o `Test-NetConnection` desde Windows. Y antes de tocar `ssh` en el firewall, ten otra sesión abierta.
+
+## 4. SELinux: no lo desactives
+
+El error del paso 2 (`Permission denied` al abrir el puerto 8081) no es el firewall ni los permisos del fichero: es **SELinux**, que solo permite a Apache escuchar en los puertos etiquetados como `http_port_t`. La solución correcta es decírselo, no apagarlo.
+
+:::term bash · servidor RHEL
+$ getenforce
+Enforcing
+$ sudo sealert -a /var/log/audit/audit.log | grep -A3 "httpd"     # instala setroubleshoot-server si no está
+SELinux is preventing /usr/sbin/httpd from name_bind access on the tcp_socket port 8081.
+*****  Plugin bind_ports (92.2 confidence) suggests   ************************
+If you want to allow /usr/sbin/httpd to bind to network port 8081
+Then you need to modify the port type.
+Do: # semanage port -a -t http_port_t -p tcp 8081
+$ sudo semanage port -a -t http_port_t -p tcp 8081
+$ sudo systemctl restart httpd && systemctl is-active httpd
+active
+:::
+
+Los dos comandos que resuelven el 90 %: `semanage port` para puertos y `restorecon -Rv /ruta` para ficheros con contexto incorrecto (los que se copiaron desde otro sitio y Apache no puede leer). Los **booleanos** (`getsebool -a | grep httpd`, `setsebool -P httpd_can_network_connect on`) cubren el resto. `setenforce 0` solo sirve para confirmar en un minuto que es SELinux; después vuelve a `1` y arregla el contexto.
+
+## 5. Lo que miras cada mes
+
+- `subscription-manager status` y `dnf check-update`: que sigue registrado y cuánto hay pendiente.
+- `needs-restarting -r` tras parchear, y el reinicio en la ventana.
+- `journalctl -p err -S "1 month ago" --no-pager | tail`: errores repetidos que nadie ha mirado.
+- `df -h` y el script de la guía de Bash en cron.
+- Con **Red Hat Insights** (incluido en la suscripción), los sistemas registrados aparecen en `console.redhat.com` con CVE pendientes y recomendaciones; es el informe que llevas a la reunión de parcheo.
+
+## Siguientes pasos
+
+- Con más de cinco servidores, el parcheo mensual se hace con **Ansible** (Nivel 3): un playbook con `dnf update` y reinicio controlado, servidor a servidor.
+- Mira **Cockpit** (`https://srv-web-01:9090`): la consola web que viene con RHEL para ver servicios, logs y actualizaciones sin SSH.
+- La guía de Ubuntu cubre lo mismo con `apt`, `ufw` y AppArmor: las diferencias son menos de lo que parece.
+""",
+  en="""
+## What you'll get
+
+Handle a RHEL server (or Rocky/Alma, which are compatible) for what operations asks of you: it is registered and receives patches, services start and are watched, the firewall lets through only what is needed, and SELinux stays on even when an application complains.
+
+## Before you start
+
+- SSH access with a user that has `sudo`. Don't work directly as `root`.
+- The Red Hat account or activation key to register the system (whoever manages subscriptions has it).
+- Know which services that server must provide (web, database, application) and on which ports: that is what decides the firewall.
+
+## 1. Register and patch
+
+:::term bash · RHEL server
+$ sudo subscription-manager register --org 1234567 --activationkey rhel9-servers
+The system has been registered with ID: 8a1c...-...-...
+$ sudo subscription-manager status
+Overall Status: Current
+$ sudo dnf check-update | tail -n +2 | wc -l
+47
+$ sudo dnf update -y
+...
+Complete!
+$ sudo dnf needs-restarting -r
+Core libraries or services have been updated since boot-up:
+  * kernel
+Reboot is required to fully utilize these updates.
+:::
+
+`needs-restarting -r` is what tells you whether the patch needs a reboot (kernel, glibc, systemd). A patched server that has not rebooted is still running the old kernel. Schedule the reboot in the change window and note it in the ticket.
+
+To patch security only (the usual outside the monthly window): `sudo dnf update --security -y`.
+
+## 2. Services with systemd
+
+:::term bash · RHEL server
+$ systemctl status httpd --no-pager
+● httpd.service - The Apache HTTP Server
+     Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled; preset: disabled)
+     Active: failed (Result: exit-code) since Wed 2026-10-21 08:02:11 CEST; 3min ago
+$ sudo journalctl -u httpd -n 20 --no-pager
+Oct 21 08:02:11 srv-web-01 httpd[1842]: (13)Permission denied: AH00072: make_sock: could not bind to address 0.0.0.0:8081
+$ sudo systemctl enable --now httpd      # enable at boot and start now
+$ systemctl is-enabled httpd; systemctl is-active httpd
+enabled
+active
+:::
+
+The four commands you'll use every day: `status`, `restart`, `enable --now` and `journalctl -u <service>`. `journalctl -p err -b` shows every error since the last boot, from any service; `journalctl -f` follows them live.
+
+## 3. Firewall: firewalld
+
+On RHEL the firewall is **firewalld**, with zones and named services. What is not open is closed.
+
+:::term bash · RHEL server
+$ sudo firewall-cmd --get-default-zone
+public
+$ sudo firewall-cmd --list-all
+public (active)
+  interfaces: ens192
+  services: cockpit dhcpv6-client ssh
+  ports:
+$ sudo firewall-cmd --add-service=http --add-service=https --permanent
+$ sudo firewall-cmd --add-port=8081/tcp --permanent
+$ sudo firewall-cmd --reload
+$ sudo firewall-cmd --list-services --list-ports
+cockpit dhcpv6-client http https ssh
+8081/tcp
+:::
+
+`--permanent` writes the rule to disk; without `--reload` it is not applied. Test from outside with `nc -zv srv-web-01 8081` or `Test-NetConnection` from Windows. And before touching `ssh` in the firewall, keep a second session open.
+
+## 4. SELinux: don't turn it off
+
+The error in step 2 (`Permission denied` opening port 8081) is neither the firewall nor file permissions: it is **SELinux**, which only lets Apache listen on ports labelled `http_port_t`. The right fix is to tell it, not to switch it off.
+
+:::term bash · RHEL server
+$ getenforce
+Enforcing
+$ sudo sealert -a /var/log/audit/audit.log | grep -A3 "httpd"     # install setroubleshoot-server if missing
+SELinux is preventing /usr/sbin/httpd from name_bind access on the tcp_socket port 8081.
+*****  Plugin bind_ports (92.2 confidence) suggests   ************************
+If you want to allow /usr/sbin/httpd to bind to network port 8081
+Then you need to modify the port type.
+Do: # semanage port -a -t http_port_t -p tcp 8081
+$ sudo semanage port -a -t http_port_t -p tcp 8081
+$ sudo systemctl restart httpd && systemctl is-active httpd
+active
+:::
+
+The two commands that solve 90%: `semanage port` for ports and `restorecon -Rv /path` for files with the wrong context (the ones copied from elsewhere that Apache can't read). **Booleans** (`getsebool -a | grep httpd`, `setsebool -P httpd_can_network_connect on`) cover the rest. `setenforce 0` is only for confirming in a minute that SELinux is the cause; then go back to `1` and fix the context.
+
+## 5. What you look at every month
+
+- `subscription-manager status` and `dnf check-update`: still registered, and how much is pending.
+- `needs-restarting -r` after patching, and the reboot in the window.
+- `journalctl -p err -S "1 month ago" --no-pager | tail`: repeated errors nobody has looked at.
+- `df -h` and the script from the Bash guide in cron.
+- With **Red Hat Insights** (included in the subscription), registered systems show up at `console.redhat.com` with pending CVEs and recommendations; that is the report you take to the patching meeting.
+
+## Next steps
+
+- With more than five servers, monthly patching is done with **Ansible** (Level 3): a playbook with `dnf update` and a controlled reboot, server by server.
+- Look at **Cockpit** (`https://srv-web-01:9090`): the web console that ships with RHEL to see services, logs and updates without SSH.
+- The Ubuntu guide covers the same with `apt`, `ufw` and AppArmor: the differences are smaller than they look.
+""")
+
+# ---------------------------------------------------------------- 2.12 · SharePoint
+g(slug="sharepoint-sitio-de-equipo-permisos-y-uso-compartido", topic="sharepoint", date="2026-10-21",
+  title_es="SharePoint Online: crear un sitio de equipo, dar permisos bien y entender el uso compartido",
+  title_en="SharePoint Online: creating a team site, granting permissions properly and understanding sharing",
+  dek_es="Sitio de equipo con grupo de Microsoft 365, los tres niveles de permiso, el uso compartido externo, versiones y papelera. Con PowerShell para no hacerlo a mano cien veces.",
+  dek_en="A team site with a Microsoft 365 group, the three permission levels, external sharing, versioning and the recycle bin. With PowerShell so you don't do it by hand a hundred times.",
+  es="""
+## Qué vas a conseguir
+
+Un sitio de SharePoint para un equipo con los permisos bien puestos desde el principio, saber por qué un usuario "no ve la carpeta" y recuperar un documento borrado o sobrescrito. Y cómo se comparte fuera de la empresa sin perder el control.
+
+## Antes de empezar
+
+- Rol de **Administrador de SharePoint** para crear sitios y tocar la configuración del tenant. Para administrar un sitio concreto basta con ser **propietario** del sitio.
+- El módulo `Microsoft.Online.SharePoint.PowerShell` (`Install-Module -Name Microsoft.Online.SharePoint.PowerShell`) o **PnP.PowerShell** para automatizar.
+- Saber si el sitio va ligado a un **equipo de Teams** (sí, casi siempre): entonces se crea desde Teams y SharePoint viene detrás.
+
+## 1. Crear el sitio
+
+Un **sitio de equipo** lleva un grupo de Microsoft 365 (propietarios y miembros) y un buzón; es el que quieres para un departamento o proyecto. Un **sitio de comunicación** es para publicar (intranet, noticias), sin grupo.
+
+:::term PowerShell · SharePoint Online
+$ Connect-SPOService -Url https://contoso-admin.sharepoint.com
+$ New-SPOSite -Url https://contoso.sharepoint.com/sites/ventas -Title "Ventas" -Owner laura.prado@contoso.com -Template "STS#3" -StorageQuota 26214400 -LocaleId 3082
+# Mejor aún: con PnP, un sitio de equipo con grupo M365 desde el principio
+$ Connect-PnPOnline -Url https://contoso-admin.sharepoint.com -Interactive
+$ New-PnPSite -Type TeamSite -Title "Ventas" -Alias ventas -Owners laura.prado@contoso.com -Lcid 3082
+https://contoso.sharepoint.com/sites/ventas
+:::
+
+Si el equipo ya existe en Teams, el sitio ya está creado: `https://contoso.sharepoint.com/sites/<alias del equipo>`. No crees otro.
+
+## 2. Permisos: tres grupos y nada más
+
+Cada sitio nace con tres grupos de SharePoint: **Propietarios** (control total), **Miembros** (editar) y **Visitantes** (leer). La regla que evita el caos: los usuarios entran en esos grupos (o en el grupo de Microsoft 365, que alimenta Propietarios y Miembros), nunca con permisos directos sobre carpetas sueltas.
+
+:::ui SharePoint · Ventas › Configuración › Permisos del sitio
+= Propietarios del sitio: Laura Prado, Carlos Rey (grupo M365: propietarios)
+= Miembros del sitio: GG-Ventas (34) (grupo M365: miembros)
+= Visitantes del sitio: GG-Direccion (lectura)
+> Configuración avanzada de permisos › Comprobar permisos
+= Usuario: ana.sol@contoso.com
+= Resultado: Leer · dado por · Visitantes del sitio › GG-Direccion
+:::
+
+**Comprobar permisos** es la herramienta para "no veo la carpeta": dice exactamente por qué camino tiene (o no tiene) acceso. Si una carpeta tiene **permisos únicos** (herencia rota), aparece ahí: eso es lo que hace que alguien vea el sitio pero no una carpeta concreta. Se arregla restaurando la herencia o dando acceso en esa carpeta, pero lo primero es mejor.
+
+! "Control total" para Miembros, o un grupo de 300 personas en Propietarios, es cómo un sitio acaba con documentos borrados y nadie sabe por quién. Propietarios: dos o tres personas.
+
+## 3. Uso compartido: lo que ve el usuario
+
+Cuando un usuario pulsa **Compartir**, lo que puede hacer depende de la configuración del tenant y del sitio:
+
+:::term PowerShell · SharePoint Online
+$ Get-SPOTenant | Select-Object SharingCapability, DefaultSharingLinkType, RequireAnonymousLinksExpireInDays
+SharingCapability                : ExternalUserSharingOnly
+DefaultSharingLinkType           : Internal
+RequireAnonymousLinksExpireInDays : 30
+$ Get-SPOSite https://contoso.sharepoint.com/sites/ventas | Select-Object SharingCapability
+SharingCapability : Disabled
+$ Set-SPOSite https://contoso.sharepoint.com/sites/ventas -SharingCapability ExternalUserSharingOnly
+:::
+
+- **Disabled**: solo gente de la empresa. Lo normal para RRHH, Finanzas y dirección.
+- **ExternalUserSharingOnly**: invitados que inician sesión (aparecen en Entra ID como `#EXT#`). Lo normal para proyectos con proveedores.
+- **ExternalUserAndGuestSharing**: enlaces "Cualquiera" sin iniciar sesión. Solo si la política lo permite, y con caducidad.
+
+El sitio nunca puede ser más abierto que el tenant. Si un usuario dice "no me deja compartir con el proveedor", mira primero el sitio y después el tenant.
+
+## 4. Recuperar: versiones y papelera
+
+- **Versiones**: en una biblioteca, botón derecho sobre el documento → **Historial de versiones** → restaurar la de antes del cambio. Está activado por defecto (500 versiones principales). Un documento "sobrescrito" casi nunca está perdido.
+- **Papelera**: `Contenido del sitio → Papelera de reciclaje`, 93 días. Lo que el usuario borra pasa por ahí; lo que se vacía de ahí, pasa a la **papelera de segunda etapa** (solo administradores del sitio) hasta completar los 93 días.
+- Lo borrado hace más de 93 días o un sitio entero eliminado: `Get-SPODeletedSite` y `Restore-SPODeletedSite` para sitios (93 días también); para documentos, la retención de Purview si existe. Después de eso, no hay copia que valga: SharePoint no tiene "backup" clásico, tiene retención.
+
+## 5. Lo que preguntan en los tickets
+
+- **"El sitio va lento o no carga"**: estado del servicio en el centro de administración de Microsoft 365 antes de nada. Si solo le pasa a uno, caché del navegador o OneDrive sincronizando una biblioteca de 200.000 ficheros (límite recomendado: 300.000 en total por usuario sincronizado).
+- **"Me pide iniciar sesión todo el rato"**: Conditional Access y dispositivo no conforme, o un invitado con cuenta en dos tenants.
+- **"Han desaparecido archivos"**: `Compartido conmigo`, vista con filtro, o la papelera. Casi nunca han desaparecido.
+
+## Siguientes pasos
+
+- Un informe mensual de sitios con uso compartido externo activo y de enlaces "Cualquiera" vivos: `Get-SPOSite -Limit All | Where-Object SharingCapability -ne Disabled`.
+- Aprende las **etiquetas de confidencialidad** aplicadas a sitios: deciden el uso compartido y el acceso desde dispositivos no gestionados sin tocar cada sitio.
+- En el Nivel 4 verás Purview completo: retención, DLP y las etiquetas que protegen un documento allá donde vaya.
+""",
+  en="""
+## What you'll get
+
+A SharePoint site for a team with permissions set properly from day one, knowing why a user "can't see the folder", and recovering a deleted or overwritten document. Plus how sharing outside the company works without losing control.
+
+## Before you start
+
+- The **SharePoint Administrator** role to create sites and touch tenant settings. To administer one site, being a site **owner** is enough.
+- The `Microsoft.Online.SharePoint.PowerShell` module (`Install-Module -Name Microsoft.Online.SharePoint.PowerShell`) or **PnP.PowerShell** to automate.
+- Know whether the site is tied to a **Teams team** (yes, almost always): then it is created from Teams and SharePoint follows.
+
+## 1. Create the site
+
+A **team site** carries a Microsoft 365 group (owners and members) and a mailbox; it is what you want for a department or project. A **communication site** is for publishing (intranet, news), with no group.
+
+:::term PowerShell · SharePoint Online
+$ Connect-SPOService -Url https://contoso-admin.sharepoint.com
+$ New-SPOSite -Url https://contoso.sharepoint.com/sites/sales -Title "Sales" -Owner laura.prado@contoso.com -Template "STS#3" -StorageQuota 26214400 -LocaleId 1033
+# Better still: with PnP, a group-connected team site from the start
+$ Connect-PnPOnline -Url https://contoso-admin.sharepoint.com -Interactive
+$ New-PnPSite -Type TeamSite -Title "Sales" -Alias sales -Owners laura.prado@contoso.com -Lcid 1033
+https://contoso.sharepoint.com/sites/sales
+:::
+
+If the team already exists in Teams, the site is already there: `https://contoso.sharepoint.com/sites/<team alias>`. Don't create another one.
+
+## 2. Permissions: three groups and nothing else
+
+Every site is born with three SharePoint groups: **Owners** (full control), **Members** (edit) and **Visitors** (read). The rule that avoids chaos: users go into those groups (or into the Microsoft 365 group, which feeds Owners and Members), never with direct permissions on loose folders.
+
+:::ui SharePoint · Sales › Settings › Site permissions
+= Site owners: Laura Prado, Carlos Rey (M365 group: owners)
+= Site members: GG-Sales (34) (M365 group: members)
+= Site visitors: GG-Management (read)
+> Advanced permissions settings › Check Permissions
+= User: ana.sol@contoso.com
+= Result: Read · given through · Site visitors › GG-Management
+:::
+
+**Check Permissions** is the tool for "I can't see the folder": it says exactly through which path they have (or don't have) access. If a folder has **unique permissions** (broken inheritance), it shows there: that is what makes someone see the site but not one folder. Fix it by restoring inheritance or granting access on that folder, but the first is better.
+
+! "Full control" for Members, or a 300-person group in Owners, is how a site ends up with deleted documents and nobody knows who did it. Owners: two or three people.
+
+## 3. Sharing: what the user sees
+
+When a user clicks **Share**, what they can do depends on tenant and site settings:
+
+:::term PowerShell · SharePoint Online
+$ Get-SPOTenant | Select-Object SharingCapability, DefaultSharingLinkType, RequireAnonymousLinksExpireInDays
+SharingCapability                : ExternalUserSharingOnly
+DefaultSharingLinkType           : Internal
+RequireAnonymousLinksExpireInDays : 30
+$ Get-SPOSite https://contoso.sharepoint.com/sites/sales | Select-Object SharingCapability
+SharingCapability : Disabled
+$ Set-SPOSite https://contoso.sharepoint.com/sites/sales -SharingCapability ExternalUserSharingOnly
+:::
+
+- **Disabled**: company people only. The norm for HR, Finance and management.
+- **ExternalUserSharingOnly**: guests who sign in (they appear in Entra ID as `#EXT#`). The norm for projects with vendors.
+- **ExternalUserAndGuestSharing**: "Anyone" links with no sign-in. Only if policy allows it, and with expiry.
+
+A site can never be more open than the tenant. If a user says "it won't let me share with the vendor", look at the site first and then the tenant.
+
+## 4. Recover: versions and the recycle bin
+
+- **Versions**: in a library, right-click the document → **Version history** → restore the one before the change. It is on by default (500 major versions). An "overwritten" document is almost never lost.
+- **Recycle bin**: `Site contents → Recycle bin`, 93 days. What the user deletes goes through there; what is emptied from there goes to the **second-stage recycle bin** (site admins only) until the 93 days are up.
+- Deleted more than 93 days ago, or a whole site removed: `Get-SPODeletedSite` and `Restore-SPODeletedSite` for sites (93 days too); for documents, Purview retention if it exists. After that there is no backup to fall back on: SharePoint has no classic "backup", it has retention.
+
+## 5. What tickets ask
+
+- **"The site is slow or won't load"**: service health in the Microsoft 365 admin centre before anything else. If only one person is affected, browser cache, or OneDrive syncing a library of 200,000 files (recommended limit: 300,000 in total per synced user).
+- **"It keeps asking me to sign in"**: Conditional Access and a non-compliant device, or a guest with accounts in two tenants.
+- **"Files have disappeared"**: `Shared with me`, a filtered view, or the recycle bin. They have almost never disappeared.
+
+## Next steps
+
+- A monthly report of sites with external sharing on and live "Anyone" links: `Get-SPOSite -Limit All | Where-Object SharingCapability -ne Disabled`.
+- Learn **sensitivity labels** applied to sites: they decide sharing and access from unmanaged devices without touching each site.
+- In Level 4 you'll see the whole of Purview: retention, DLP and the labels that protect a document wherever it goes.
+""")
+
+# ---------------------------------------------------------------- 2.13 · Ubuntu
+g(slug="ubuntu-server-usuarios-ssh-firewall-y-actualizaciones", topic="ubuntu", date="2026-10-21",
+  title_es="Ubuntu Server: los primeros 30 minutos tras la instalación",
+  title_en="Ubuntu Server: the first 30 minutes after installation",
+  dek_es="Usuario con sudo, SSH solo con claves, ufw, actualizaciones automáticas de seguridad, hora y nombre. Lo que convierte un Ubuntu recién instalado en un servidor que puedes dejar solo.",
+  dek_en="A sudo user, SSH with keys only, ufw, automatic security updates, time and hostname. What turns a fresh Ubuntu into a server you can leave alone.",
+  es="""
+## Qué vas a conseguir
+
+Un Ubuntu Server (22.04 o 24.04 LTS) endurecido lo justo para producción: nadie entra por contraseña, el firewall solo abre lo que das de alta, los parches de seguridad se instalan solos y el sistema tiene nombre y hora correctos. Treinta minutos que te ahorran un incidente.
+
+## Antes de empezar
+
+- Acceso a la consola (hipervisor o KVM) o por SSH al usuario creado en la instalación.
+- Tu **clave pública SSH** (`~/.ssh/id_ed25519.pub` en tu equipo; si no la tienes, `ssh-keygen -t ed25519`).
+- Decidido con el equipo: nombre del servidor, qué servicios dará y qué puertos abrir.
+
+## 1. Nombre, hora y actualización inicial
+
+:::term bash · servidor Ubuntu
+$ sudo hostnamectl set-hostname srv-app-02
+$ sudo timedatectl set-timezone Europe/Madrid
+$ timedatectl | grep -E "Time zone|synchronized"
+                Time zone: Europe/Madrid (CEST, +0200)
+System clock synchronized: yes
+$ sudo apt update && sudo apt full-upgrade -y
+$ [ -f /var/run/reboot-required ] && echo "Reinicio necesario"
+Reinicio necesario
+$ sudo reboot
+:::
+
+`timedatectl` tiene que decir `synchronized: yes` (Ubuntu usa `systemd-timesyncd`). Un servidor con la hora mal falla en certificados, en Kerberos y en los logs correlacionados con el resto.
+
+## 2. Usuario de administración y sudo
+
+Un usuario por persona, nunca una cuenta compartida. `root` sin contraseña y sin acceso por SSH.
+
+:::term bash · servidor Ubuntu
+$ sudo adduser laura
+$ sudo usermod -aG sudo laura
+$ sudo mkdir -p /home/laura/.ssh && sudo chmod 700 /home/laura/.ssh
+$ echo "ssh-ed25519 AAAAC3Nza...  laura@laptop" | sudo tee /home/laura/.ssh/authorized_keys
+$ sudo chmod 600 /home/laura/.ssh/authorized_keys && sudo chown -R laura:laura /home/laura/.ssh
+# Probar desde tu equipo, en OTRA ventana, antes de seguir:
+#   ssh laura@srv-app-02   → debe entrar sin pedir contraseña
+:::
+
+## 3. SSH solo con claves
+
+:::term bash · servidor Ubuntu
+$ sudo nano /etc/ssh/sshd_config.d/10-hardening.conf
+PasswordAuthentication no
+PermitRootLogin no
+KbdInteractiveAuthentication no
+MaxAuthTries 3
+$ sudo sshd -t && sudo systemctl reload ssh
+$ sudo sshd -T | grep -E "^(passwordauthentication|permitrootlogin)"
+passwordauthentication no
+permitrootlogin no
+:::
+
+`sshd -t` comprueba la sintaxis antes de recargar: un error aquí con la sesión cerrada es un viaje a la consola. Y la regla de oro: **no cierres la sesión actual** hasta haber entrado con otra usando solo la clave.
+
+! Los ficheros en `/etc/ssh/sshd_config.d/` se cargan antes que `sshd_config` y la primera aparición de cada opción gana. Si Ubuntu ya trae ahí un `50-cloud-init.conf` con `PasswordAuthentication yes`, tu fichero `10-…` lo adelanta por orden alfabético.
+
+## 4. Firewall con ufw
+
+:::term bash · servidor Ubuntu
+$ sudo ufw default deny incoming
+$ sudo ufw default allow outgoing
+$ sudo ufw allow from 10.20.0.0/16 to any port 22 proto tcp comment "SSH desde la red de IT"
+$ sudo ufw allow 443/tcp comment "HTTPS app"
+$ sudo ufw enable
+Firewall is active and enabled on system startup
+$ sudo ufw status numbered
+     To                         Action      From
+     --                         ------      ----
+[ 1] 22/tcp                     ALLOW IN    10.20.0.0/16    # SSH desde la red de IT
+[ 2] 443/tcp                    ALLOW IN    Anywhere        # HTTPS app
+:::
+
+`ufw` es una capa sobre `nftables`; lo que no está en la lista no entra. Limitar SSH a la red de administración o a la VPN es la medida que más ataques automáticos quita de los logs.
+
+## 5. Actualizaciones de seguridad automáticas
+
+:::term bash · servidor Ubuntu
+$ sudo apt install -y unattended-upgrades
+$ sudo dpkg-reconfigure -plow unattended-upgrades    # responde Sí
+$ sudo nano /etc/apt/apt.conf.d/50unattended-upgrades
+Unattended-Upgrade::Allowed-Origins {
+        "${distro_id}:${distro_codename}-security";
+};
+Unattended-Upgrade::Automatic-Reboot "false";
+Unattended-Upgrade::Mail "it@contoso.com";
+$ sudo unattended-upgrade --dry-run --debug 2>&1 | tail -n 3
+:::
+
+Solo el origen `-security`: los parches de seguridad entran solos cada noche, el resto (y los reinicios) se hacen en la ventana de cambios con `apt full-upgrade`. `/var/log/unattended-upgrades/` guarda lo que instaló cada noche.
+
+## 6. Comprobación final
+
+:::term bash · servidor Ubuntu
+$ hostnamectl --static; timedatectl show -p NTPSynchronized --value
+srv-app-02
+yes
+$ sudo ss -tlnp | awk 'NR==1 || /LISTEN/' | awk '{print $4, $7}'
+Local Address:Port Process
+0.0.0.0:22 users:(("sshd",pid=812,fd=3))
+0.0.0.0:443 users:(("nginx",pid=1204,fd=6))
+$ sudo ufw status | head -n 1; systemctl is-active unattended-upgrades
+Status: active
+active
+$ sudo journalctl -p err -b --no-pager | tail -n 5
+:::
+
+`ss -tlnp` es la lista de lo que escucha: si hay algo que no esperas (una base de datos en `0.0.0.0`, un panel de administración), o se cierra o se limita a `127.0.0.1`.
+
+## Siguientes pasos
+
+- Instala el script de comprobación de la guía de Bash en cron, y **fail2ban** si SSH tiene que estar expuesto.
+- Para más de un servidor, la secuencia entera de esta guía es un playbook de Ansible de 40 líneas (Nivel 3).
+- **Ubuntu Landscape** (Nivel 3) hace el inventario, el parcheo y los informes de toda la flota desde una consola.
+""",
+  en="""
+## What you'll get
+
+An Ubuntu Server (22.04 or 24.04 LTS) hardened just enough for production: nobody gets in with a password, the firewall opens only what you register, security patches install themselves, and the system has the right name and time. Thirty minutes that save you an incident.
+
+## Before you start
+
+- Console access (hypervisor or KVM) or SSH to the user created at install time.
+- Your **SSH public key** (`~/.ssh/id_ed25519.pub` on your device; if you don't have one, `ssh-keygen -t ed25519`).
+- Agreed with the team: server name, which services it will provide and which ports to open.
+
+## 1. Name, time and first update
+
+:::term bash · Ubuntu server
+$ sudo hostnamectl set-hostname srv-app-02
+$ sudo timedatectl set-timezone Europe/Madrid
+$ timedatectl | grep -E "Time zone|synchronized"
+                Time zone: Europe/Madrid (CEST, +0200)
+System clock synchronized: yes
+$ sudo apt update && sudo apt full-upgrade -y
+$ [ -f /var/run/reboot-required ] && echo "Reboot required"
+Reboot required
+$ sudo reboot
+:::
+
+`timedatectl` has to say `synchronized: yes` (Ubuntu uses `systemd-timesyncd`). A server with the wrong time fails on certificates, on Kerberos, and in logs correlated with everything else.
+
+## 2. Admin user and sudo
+
+One user per person, never a shared account. `root` with no password and no SSH access.
+
+:::term bash · Ubuntu server
+$ sudo adduser laura
+$ sudo usermod -aG sudo laura
+$ sudo mkdir -p /home/laura/.ssh && sudo chmod 700 /home/laura/.ssh
+$ echo "ssh-ed25519 AAAAC3Nza...  laura@laptop" | sudo tee /home/laura/.ssh/authorized_keys
+$ sudo chmod 600 /home/laura/.ssh/authorized_keys && sudo chown -R laura:laura /home/laura/.ssh
+# Test from your device, in ANOTHER window, before going on:
+#   ssh laura@srv-app-02   → must log in without asking for a password
+:::
+
+## 3. SSH with keys only
+
+:::term bash · Ubuntu server
+$ sudo nano /etc/ssh/sshd_config.d/10-hardening.conf
+PasswordAuthentication no
+PermitRootLogin no
+KbdInteractiveAuthentication no
+MaxAuthTries 3
+$ sudo sshd -t && sudo systemctl reload ssh
+$ sudo sshd -T | grep -E "^(passwordauthentication|permitrootlogin)"
+passwordauthentication no
+permitrootlogin no
+:::
+
+`sshd -t` checks the syntax before reloading: a mistake here with the session closed means a trip to the console. And the golden rule: **don't close the current session** until you have logged in with another one using only the key.
+
+! Files in `/etc/ssh/sshd_config.d/` load before `sshd_config` and the first occurrence of each option wins. If Ubuntu already ships a `50-cloud-init.conf` there with `PasswordAuthentication yes`, your `10-…` file overrides it by alphabetical order.
+
+## 4. Firewall with ufw
+
+:::term bash · Ubuntu server
+$ sudo ufw default deny incoming
+$ sudo ufw default allow outgoing
+$ sudo ufw allow from 10.20.0.0/16 to any port 22 proto tcp comment "SSH from the IT network"
+$ sudo ufw allow 443/tcp comment "HTTPS app"
+$ sudo ufw enable
+Firewall is active and enabled on system startup
+$ sudo ufw status numbered
+     To                         Action      From
+     --                         ------      ----
+[ 1] 22/tcp                     ALLOW IN    10.20.0.0/16    # SSH from the IT network
+[ 2] 443/tcp                    ALLOW IN    Anywhere        # HTTPS app
+:::
+
+`ufw` is a layer over `nftables`; what is not on the list does not get in. Limiting SSH to the admin network or the VPN is the measure that removes the most automated attacks from the logs.
+
+## 5. Automatic security updates
+
+:::term bash · Ubuntu server
+$ sudo apt install -y unattended-upgrades
+$ sudo dpkg-reconfigure -plow unattended-upgrades    # answer Yes
+$ sudo nano /etc/apt/apt.conf.d/50unattended-upgrades
+Unattended-Upgrade::Allowed-Origins {
+        "${distro_id}:${distro_codename}-security";
+};
+Unattended-Upgrade::Automatic-Reboot "false";
+Unattended-Upgrade::Mail "it@contoso.com";
+$ sudo unattended-upgrade --dry-run --debug 2>&1 | tail -n 3
+:::
+
+Only the `-security` origin: security patches install themselves every night, the rest (and reboots) happen in the change window with `apt full-upgrade`. `/var/log/unattended-upgrades/` keeps what was installed each night.
+
+## 6. Final check
+
+:::term bash · Ubuntu server
+$ hostnamectl --static; timedatectl show -p NTPSynchronized --value
+srv-app-02
+yes
+$ sudo ss -tlnp | awk 'NR==1 || /LISTEN/' | awk '{print $4, $7}'
+Local Address:Port Process
+0.0.0.0:22 users:(("sshd",pid=812,fd=3))
+0.0.0.0:443 users:(("nginx",pid=1204,fd=6))
+$ sudo ufw status | head -n 1; systemctl is-active unattended-upgrades
+Status: active
+active
+$ sudo journalctl -p err -b --no-pager | tail -n 5
+:::
+
+`ss -tlnp` is the list of what is listening: if there is something you don't expect (a database on `0.0.0.0`, an admin panel), either close it or bind it to `127.0.0.1`.
+
+## Next steps
+
+- Install the check script from the Bash guide in cron, and **fail2ban** if SSH has to be exposed.
+- For more than one server, the whole sequence in this guide is a 40-line Ansible playbook (Level 3).
+- **Ubuntu Landscape** (Level 3) does inventory, patching and reports for the whole fleet from one console.
+""")
+
+# ---------------------------------------------------------------- 2.14 · Veeam Backup
+g(slug="veeam-crear-un-job-comprobar-copias-y-restaurar", topic="veeam", date="2026-10-21",
+  title_es="Veeam Backup: crear un trabajo, comprobar que termina bien y hacer una restauración de prueba",
+  title_en="Veeam Backup: creating a job, checking it completes, and running a test restore",
+  dek_es="Repositorio, trabajo de copia con retención, los avisos que no hay que ignorar, y la restauración de un fichero y de una máquina entera. Porque una copia sin restaurar no es una copia.",
+  dek_en="Repository, backup job with retention, the warnings you must not ignore, and restoring a file and a whole machine. Because a backup you never restored is not a backup.",
+  es="""
+## Qué vas a conseguir
+
+Un trabajo de copia en Veeam Backup & Replication que protege las máquinas virtuales de un servicio, con retención definida, y la rutina que de verdad importa: leer el resultado cada mañana y restaurar algo cada mes para saber que funciona.
+
+## Antes de empezar
+
+- Acceso a la consola de Veeam con rol **Backup Administrator** (o **Backup Operator** para restaurar sin cambiar trabajos).
+- El hipervisor añadido en **Inventory** (vCenter o Hyper-V) con una cuenta de solo lectura más los permisos de snapshot que Veeam documenta.
+- Un **repositorio** con espacio: como regla, 2-3 veces el tamaño de los datos protegidos para dos semanas de retención con incrementales.
+- Para el **3-2-1**: una segunda copia fuera (otro sitio, cinta o nube) planificada como *Backup Copy Job*; esta guía monta la primera.
+
+## 1. El trabajo de copia
+
+:::ui Veeam Backup & Replication · Home › Jobs › Backup › Virtual machine
+= Name: BKP-APP-ERP (diario)
+> Virtual Machines › Add › vCenter › Carpeta "ERP" (3 VMs: erp-app-01, erp-db-01, erp-web-01)
+> Storage
+= Backup repository: REPO-NAS-01 (libre: 9,2 TB)
+= Retention policy: 14 restore points
+= [x] Keep certain full backups longer for archival purposes: Weekly 4 · Monthly 3
+> Advanced › Backup › Incremental (recommended) · [x] Create synthetic full backups periodically: Saturday
+> Guest Processing › [x] Enable application-aware processing (cuenta de dominio con admin local en las VMs)
+> Schedule › [x] Run the job automatically · Daily at 22:00 · Retry 3 times every 10 minutes
+[Finish]
+:::
+
+Dos decisiones que importan: **application-aware processing** para la VM de base de datos (hace la copia consistente con VSS y trunca los logs de SQL si lo configuras), y la **retención** acordada con negocio, no inventada: 14 puntos diarios + 4 semanales + 3 mensuales cubre "lo que había hace tres meses".
+
+> Un **job por servicio**, no uno gigante. Así un fallo en una VM no deja sin copia a otras, y el informe de la mañana dice qué servicio está sin proteger.
+
+## 2. Leer el resultado cada mañana
+
+El correo de Veeam (o el panel **Home → Last 24 hours**) tiene tres colores y hay que mirar los tres:
+
+:::ui Veeam · Home › Last 24 Hours
+= BKP-APP-ERP · Success · 3 of 3 VMs · 21/10/2026 22:00 · 00:41:12 · Transferred 38,4 GB
+= BKP-FILES · Warning · 1 of 1 VMs · 21/10/2026 23:00 · 01:55:08
+> Warning › srv-files-01: Unable to truncate transaction logs. Details: Failed to call RPC function 'VssFreezeSnapshot'
+= BKP-INFRA · Failed · 2 of 3 VMs · 22/10/2026 01:00
+> Error › dc-02: Error: VM is disconnected from the host or powered off (object not found)
+:::
+
+- **Success**: todo bien. Aun así, mira el tamaño transferido: un incremental que de repente pesa como un full suele ser un cambio masivo (actualización, cifrado por ransomware, un disco añadido).
+- **Warning**: la copia existe pero algo no fue como debía. El de VSS de arriba es el más frecuente: la cuenta de guest processing no tiene permisos, o el servicio VSS en la VM está roto. No se ignora dos días seguidos.
+- **Failed**: esa VM no tiene copia de hoy. `dc-02` ha desaparecido del inventario (borrada, migrada a otro clúster, renombrada): hay que actualizar el job y lanzar un **Retry**.
+
+El informe que llevas a la reunión semanal: **Reports → Backup Job Reports** o, mejor, **Veeam ONE** si está instalado, con el porcentaje de éxito por job y las VMs sin copia en 7 días.
+
+## 3. Restaurar un fichero
+
+:::ui Veeam · Home › Backups › Disk › BKP-FILES › srv-files-01 › Restore guest files › Microsoft Windows
+> Restore point: 21/10/2026 23:00 (incremental)
+> Backup Browser › C: › Shares › Ventas › Ofertas › Oferta-1021.xlsx
+= Tamaño: 412 KB · Modificado: 20/10/2026 17:40
+[Restore › Keep (restaura junto al original con sufijo RESTORED-)] [Copy To…]
+:::
+
+**Keep** deja el original y añade la versión restaurada al lado; **Overwrite** pisa el actual. Para un usuario que ha borrado o sobrescrito un fichero, **Copy To** una carpeta tuya y entregárselo es lo más seguro. Todo el proceso tarda minutos y no toca la VM.
+
+## 4. Restaurar una máquina entera (la prueba mensual)
+
+Una vez al mes, restaura una VM en un **entorno aislado** y comprueba que arranca y que la aplicación responde. Es lo único que demuestra que la copia sirve.
+
+:::ui Veeam · Home › Backups › BKP-APP-ERP › erp-web-01 › Restore entire VM
+> Restore point: 20/10/2026 22:00
+> Restore mode: Restore to a new location, or with different settings
+= Name: erp-web-01_RESTORETEST
+= Host: esx-test-01 · Datastore: DS-TEST · Network: VLAN-AISLADA (sin salida a producción)
+= [ ] Power on target VM after restoring   (arráncala tú, con la red aislada confirmada)
+[Finish]
+= Resultado: Restore completed successfully · 00:23:40
+:::
+
+Con **SureBackup** (Veeam lo automatiza) la prueba se programa y el informe dice cada semana si cada VM arranca. Sin SureBackup, la prueba manual con una VM distinta cada mes y una línea en el ticket de cambios es suficiente, y es lo que piden las auditorías.
+
+! Restaurar una VM **en producción con la misma red y el mismo nombre** mientras la original está encendida provoca un conflicto de IP y de identidad en el dominio. Siempre a red aislada o con la original apagada.
+
+## 5. Qué poner en el ticket
+
+Nombre del job, VM, punto de restauración usado, dónde se restauró, cuánto tardó y la comprobación hecha (fichero abierto, aplicación responde). Esa línea es la evidencia del DR/BCP.
+
+## Siguientes pasos
+
+- Monta el **Backup Copy Job** a un segundo repositorio (otro sitio, S3 con inmutabilidad, cinta): sin él no hay 3-2-1.
+- Activa la **inmutabilidad** en el repositorio si lo soporta (Linux hardened repository u object lock): es lo que salva la copia en un ransomware.
+- En el Nivel 4 verás DR/BCP de principio a fin: planes, pruebas de recuperación completas y los tiempos (RPO/RTO) que negocias con cada servicio.
+""",
+  en="""
+## What you'll get
+
+A backup job in Veeam Backup & Replication that protects a service's virtual machines, with defined retention, and the routine that really matters: reading the result every morning and restoring something every month to know it works.
+
+## Before you start
+
+- Access to the Veeam console with the **Backup Administrator** role (or **Backup Operator** to restore without changing jobs).
+- The hypervisor added in **Inventory** (vCenter or Hyper-V) with a read-only account plus the snapshot permissions Veeam documents.
+- A **repository** with space: as a rule, 2-3 times the size of the protected data for two weeks of retention with incrementals.
+- For **3-2-1**: a second copy elsewhere (another site, tape or cloud) planned as a *Backup Copy Job*; this guide sets up the first one.
+
+## 1. The backup job
+
+:::ui Veeam Backup & Replication · Home › Jobs › Backup › Virtual machine
+= Name: BKP-APP-ERP (daily)
+> Virtual Machines › Add › vCenter › Folder "ERP" (3 VMs: erp-app-01, erp-db-01, erp-web-01)
+> Storage
+= Backup repository: REPO-NAS-01 (free: 9.2 TB)
+= Retention policy: 14 restore points
+= [x] Keep certain full backups longer for archival purposes: Weekly 4 · Monthly 3
+> Advanced › Backup › Incremental (recommended) · [x] Create synthetic full backups periodically: Saturday
+> Guest Processing › [x] Enable application-aware processing (domain account with local admin on the VMs)
+> Schedule › [x] Run the job automatically · Daily at 22:00 · Retry 3 times every 10 minutes
+[Finish]
+:::
+
+Two decisions that matter: **application-aware processing** for the database VM (makes the backup VSS-consistent and truncates SQL logs if you configure it), and **retention** agreed with the business, not invented: 14 daily points + 4 weekly + 3 monthly covers "what we had three months ago".
+
+> One **job per service**, not one giant job. That way a failure on one VM does not leave others unprotected, and the morning report says which service is uncovered.
+
+## 2. Read the result every morning
+
+Veeam's email (or the **Home → Last 24 hours** panel) has three colours and you have to look at all three:
+
+:::ui Veeam · Home › Last 24 Hours
+= BKP-APP-ERP · Success · 3 of 3 VMs · 21/10/2026 22:00 · 00:41:12 · Transferred 38.4 GB
+= BKP-FILES · Warning · 1 of 1 VMs · 21/10/2026 23:00 · 01:55:08
+> Warning › srv-files-01: Unable to truncate transaction logs. Details: Failed to call RPC function 'VssFreezeSnapshot'
+= BKP-INFRA · Failed · 2 of 3 VMs · 22/10/2026 01:00
+> Error › dc-02: Error: VM is disconnected from the host or powered off (object not found)
+:::
+
+- **Success**: all good. Still, look at the transferred size: an incremental that suddenly weighs as much as a full is usually a massive change (an update, ransomware encryption, a disk added).
+- **Warning**: the backup exists but something did not go as it should. The VSS one above is the most frequent: the guest processing account lacks permissions, or the VSS service inside the VM is broken. Not to be ignored two days running.
+- **Failed**: that VM has no backup for today. `dc-02` has vanished from the inventory (deleted, migrated to another cluster, renamed): update the job and launch a **Retry**.
+
+The report you take to the weekly meeting: **Reports → Backup Job Reports** or, better, **Veeam ONE** if installed, with success rate per job and VMs with no backup in 7 days.
+
+## 3. Restore a file
+
+:::ui Veeam · Home › Backups › Disk › BKP-FILES › srv-files-01 › Restore guest files › Microsoft Windows
+> Restore point: 21/10/2026 23:00 (incremental)
+> Backup Browser › C: › Shares › Sales › Quotes › Quote-1021.xlsx
+= Size: 412 KB · Modified: 20/10/2026 17:40
+[Restore › Keep (restores next to the original with a RESTORED- suffix)] [Copy To…]
+:::
+
+**Keep** leaves the original and adds the restored version beside it; **Overwrite** replaces the current one. For a user who deleted or overwrote a file, **Copy To** a folder of yours and handing it over is the safest. The whole thing takes minutes and does not touch the VM.
+
+## 4. Restore a whole machine (the monthly test)
+
+Once a month, restore a VM into an **isolated environment** and check that it boots and the application responds. It is the only thing that proves the backup is any good.
+
+:::ui Veeam · Home › Backups › BKP-APP-ERP › erp-web-01 › Restore entire VM
+> Restore point: 20/10/2026 22:00
+> Restore mode: Restore to a new location, or with different settings
+= Name: erp-web-01_RESTORETEST
+= Host: esx-test-01 · Datastore: DS-TEST · Network: VLAN-ISOLATED (no route to production)
+= [ ] Power on target VM after restoring   (power it on yourself, once the isolated network is confirmed)
+[Finish]
+= Result: Restore completed successfully · 00:23:40
+:::
+
+With **SureBackup** (Veeam automates it) the test is scheduled and the report says every week whether each VM boots. Without SureBackup, a manual test with a different VM every month and a line in the change ticket is enough, and it is what audits ask for.
+
+! Restoring a VM **into production with the same network and name** while the original is running causes an IP and domain identity conflict. Always to an isolated network, or with the original switched off.
+
+## 5. What to put in the ticket
+
+Job name, VM, restore point used, where it was restored, how long it took and the check performed (file opened, application responds). That line is the DR/BCP evidence.
+
+## Next steps
+
+- Set up the **Backup Copy Job** to a second repository (another site, S3 with immutability, tape): without it there is no 3-2-1.
+- Enable **immutability** on the repository if it supports it (Linux hardened repository or object lock): it is what saves the backup in a ransomware event.
+- In Level 4 you'll see DR/BCP end to end: plans, full recovery tests and the times (RPO/RTO) you negotiate with each service.
+""")
+
+# ---------------------------------------------------------------- 2.15 · VMware Horizon
+g(slug="vmware-horizon-pool-de-escritorios-y-conexion-que-falla", topic="vmware-horizon", date="2026-10-21",
+  title_es="VMware Horizon: un pool de escritorios desde una imagen maestra y la conexión que falla",
+  title_en="VMware Horizon: a desktop pool from a golden image, and the connection that fails",
+  dek_es="Imagen maestra con el agente, pool de clones instantáneos, asignación a un grupo, y el orden para diagnosticar 'el escritorio no conecta' con Horizon Console y los logs del cliente.",
+  dek_en="Golden image with the agent, an instant-clone pool, entitlement to a group, and the order for diagnosing 'the desktop won't connect' with Horizon Console and the client logs.",
+  es="""
+## Qué vas a conseguir
+
+Un pool de escritorios virtuales en VMware Horizon (ahora bajo Omnissa) que se crea desde una imagen maestra, se asigna a un grupo de Active Directory y se recrea limpio en cada sesión. Y un método fijo para el ticket "me conecto y se queda en negro" o "no aparece mi escritorio".
+
+## Antes de empezar
+
+- Acceso a **Horizon Console** (`https://horizon-cs-01.contoso.local/admin`) con rol de administrador o de help desk.
+- vCenter añadido en **Settings → Servers** con la cuenta de servicio que Horizon documenta, y un **Connection Server** sano.
+- Una VM de Windows 11 Enterprise preparada como **imagen maestra**: unida al dominio, optimizada (OS Optimization Tool), con **Horizon Agent** instalado y las aplicaciones base. Apagada y con una **snapshot** con nombre y fecha.
+- Un grupo de AD con los usuarios del pool (`GG-VDI-Finanzas`).
+
+## 1. Las piezas (y su equivalente en Citrix)
+
+- **Connection Server**: el broker; los clientes se autentican aquí (equivale al Delivery Controller).
+- **Horizon Agent** en la VM: lo que hace que el escritorio sea gestionable (el VDA).
+- **Pool**: el conjunto de escritorios y su política (grupo de entrega + catálogo).
+- **Entitlement**: qué usuarios o grupos ven el pool.
+- **Protocolo**: **Blast Extreme** (el de Horizon, puerto 8443/22443) o PCoIP (4172). El cliente es **Horizon Client**.
+
+## 2. Crear un pool de clones instantáneos
+
+:::ui Horizon Console · Inventory › Desktops › Add
+= Type: Automated Desktop Pool · vCenter Server · Instant Clone
+= User Assignment: Floating
+= ID: POOL-FIN-W11 · Display name: Finanzas (Windows 11)
+> vCenter Settings
+= Golden image: /DC-MAD/vm/Templates/W11-GOLD-FIN · Snapshot: 2026-10-20_agent-2406_office
+= VM folder: /VDI/Finanzas · Cluster: CL-VDI-01 · Datastore: DS-VDI-FLASH-01
+> Provisioning
+= Naming pattern: FIN-W11-{n:fixed=3} · Max machines: 40 · Spare (powered on): 5
+> Desktop Pool Settings
+= Remote display protocol: VMware Blast · Allow users to choose: No
+= [x] Refresh OS disk after logoff: Always
+> Guest Customization
+= Domain: contoso.local · AD container: OU=VDI,OU=Equipos
+[Submit]
+:::
+
+Clones instantáneos: cada escritorio se crea en segundos a partir de la snapshot y se **destruye al cerrar sesión**. Un usuario arranca siempre limpio; lo que tiene que persistir (perfil, datos) va en FSLogix o en un perfil de DEM, nunca en el escritorio.
+
+Después: **Entitlements → Add entitlement → GG-VDI-Finanzas**. Hasta que no hay entitlement, el pool existe pero nadie lo ve.
+
+## 3. Comprobar que está sano
+
+:::ui Horizon Console · Inventory › Desktops › POOL-FIN-W11 › Machines
+= FIN-W11-001 · Available · Agent 2406 · Last connected: laura.prado 21/10/2026 09:12
+= FIN-W11-002 · Connected · laura.prado · Blast · 21/10/2026 10:05
+= FIN-W11-003 · Agent unreachable · (tombstoned)
+= FIN-W11-004 · Provisioning · 48%
+= FIN-W11-005 · Available
+> Dashboard › System Health › Connection Servers: 2/2 OK · vCenter: OK · Domains: contoso.local OK
+:::
+
+**Available** y **Connected** son los estados buenos. **Agent unreachable** es un escritorio cuyo agente no habla con el Connection Server (red, DNS, hora, o clon a medias): con clones instantáneos, se **recrea** (Machines → la máquina → Remove, el pool crea otra). **Provisioning** atascado largo rato suele ser vCenter o el datastore lleno.
+
+## 4. "No conecta": el orden
+
+1. **¿Ve el pool en Horizon Client?** Si no: entitlement (el usuario no está en el grupo o el grupo no está en el pool) o el pool está deshabilitado. Comprueba `Users and Groups → el usuario → Entitlements`.
+2. **¿Se queda en "Connecting…" o pantalla negra?** El cliente ha llegado al Connection Server pero no al escritorio. Hace falta el puerto **8443/22443 (Blast)** desde el cliente hasta la **VM del escritorio** (no solo al broker) cuando se conecta por túnel desactivado, o hasta el **Unified Access Gateway** si viene de internet. `Test-NetConnection FIN-W11-002 -Port 22443` desde el equipo del usuario lo dice.
+3. **¿Conecta y a los segundos se cierra?** El escritorio está asignado pero el inicio de sesión falla: perfil de FSLogix bloqueado (otro escritorio tiene el contenedor abierto; se ve en el log de FSLogix `C:\\ProgramData\\FSLogix\\Logs`), o la GPO de inicio tarda más que el tiempo de espera.
+4. **¿Le toca siempre la misma máquina rota?** En pools flotantes, Horizon reintenta la última; **Reset** o **Remove** de esa máquina desde la consola y que vuelva a entrar.
+
+Logs del cliente cuando hay que escalar: en Windows, `%LOCALAPPDATA%\\VMware\\VDM\\Logs\\` (`vmware-horizon-client-*.log`); en el escritorio, `C:\\ProgramData\\VMware\\VDM\\logs\\` (`debug-*.txt` del agente). Horizon Console → **Help Desk** (con el usuario) resume sesión, protocolo, latencia y los eventos de inicio de sesión en una pantalla: es por donde empieza el soporte de primer nivel.
+
+## 5. Actualizar la imagen maestra
+
+Cambiar algo en el pool (parche, aplicación nueva) es: encender la imagen maestra, hacer el cambio, apagarla, **nueva snapshot** con fecha, y en el pool **Maintain → Push Image** eligiendo esa snapshot y cuándo (al cerrar sesión cada usuario, o forzado en una ventana). Nunca se toca un escritorio del pool a mano: desaparece en el siguiente cierre de sesión.
+
+! Antes del Push Image, prueba la snapshot nueva en un **pool de prueba** de 2 máquinas. Una imagen con el agente mal instalado deja los 40 escritorios en *Agent unreachable* a la vez.
+
+## Siguientes pasos
+
+- Monta **FSLogix** para los perfiles si no está: es lo que hace que un escritorio flotante parezca el del usuario.
+- Un **Unified Access Gateway** en la DMZ para el acceso desde fuera sin VPN; y en el Nivel 4, **Azure Virtual Desktop y Windows 365**, la alternativa en nube.
+- La guía de Citrix VDI es el espejo de esta: mismos problemas, otros nombres. Conocer las dos te sitúa en cualquier empresa.
+""",
+  en="""
+## What you'll get
+
+A virtual desktop pool in VMware Horizon (now under Omnissa) created from a golden image, entitled to an Active Directory group and rebuilt clean on every session. And a fixed method for the ticket "I connect and it stays black" or "my desktop doesn't appear".
+
+## Before you start
+
+- Access to **Horizon Console** (`https://horizon-cs-01.contoso.local/admin`) with an administrator or help desk role.
+- vCenter added under **Settings → Servers** with the service account Horizon documents, and a healthy **Connection Server**.
+- A Windows 11 Enterprise VM prepared as the **golden image**: domain-joined, optimised (OS Optimization Tool), with **Horizon Agent** installed and the base applications. Powered off, with a **snapshot** named and dated.
+- An AD group with the pool's users (`GG-VDI-Finance`).
+
+## 1. The pieces (and their Citrix equivalent)
+
+- **Connection Server**: the broker; clients authenticate here (equivalent to the Delivery Controller).
+- **Horizon Agent** on the VM: what makes the desktop manageable (the VDA).
+- **Pool**: the set of desktops and their policy (delivery group + catalog).
+- **Entitlement**: which users or groups see the pool.
+- **Protocol**: **Blast Extreme** (Horizon's own, port 8443/22443) or PCoIP (4172). The client is **Horizon Client**.
+
+## 2. Create an instant-clone pool
+
+:::ui Horizon Console · Inventory › Desktops › Add
+= Type: Automated Desktop Pool · vCenter Server · Instant Clone
+= User Assignment: Floating
+= ID: POOL-FIN-W11 · Display name: Finance (Windows 11)
+> vCenter Settings
+= Golden image: /DC-MAD/vm/Templates/W11-GOLD-FIN · Snapshot: 2026-10-20_agent-2406_office
+= VM folder: /VDI/Finance · Cluster: CL-VDI-01 · Datastore: DS-VDI-FLASH-01
+> Provisioning
+= Naming pattern: FIN-W11-{n:fixed=3} · Max machines: 40 · Spare (powered on): 5
+> Desktop Pool Settings
+= Remote display protocol: VMware Blast · Allow users to choose: No
+= [x] Refresh OS disk after logoff: Always
+> Guest Customization
+= Domain: contoso.local · AD container: OU=VDI,OU=Computers
+[Submit]
+:::
+
+Instant clones: each desktop is created in seconds from the snapshot and **destroyed at logoff**. A user always starts clean; whatever must persist (profile, data) lives in FSLogix or a DEM profile, never on the desktop.
+
+Then: **Entitlements → Add entitlement → GG-VDI-Finance**. Until there is an entitlement, the pool exists but nobody sees it.
+
+## 3. Check that it is healthy
+
+:::ui Horizon Console · Inventory › Desktops › POOL-FIN-W11 › Machines
+= FIN-W11-001 · Available · Agent 2406 · Last connected: laura.prado 21/10/2026 09:12
+= FIN-W11-002 · Connected · laura.prado · Blast · 21/10/2026 10:05
+= FIN-W11-003 · Agent unreachable · (tombstoned)
+= FIN-W11-004 · Provisioning · 48%
+= FIN-W11-005 · Available
+> Dashboard › System Health › Connection Servers: 2/2 OK · vCenter: OK · Domains: contoso.local OK
+:::
+
+**Available** and **Connected** are the good states. **Agent unreachable** is a desktop whose agent is not talking to the Connection Server (network, DNS, time, or a half-made clone): with instant clones, you **rebuild** it (Machines → the machine → Remove, the pool creates another). **Provisioning** stuck for a long time is usually vCenter or a full datastore.
+
+## 4. "It won't connect": the order
+
+1. **Can they see the pool in Horizon Client?** If not: entitlement (the user is not in the group, or the group is not on the pool) or the pool is disabled. Check `Users and Groups → the user → Entitlements`.
+2. **Stuck on "Connecting…" or a black screen?** The client reached the Connection Server but not the desktop. Port **8443/22443 (Blast)** is needed from the client to the **desktop VM** (not just the broker) when tunnelling is off, or to the **Unified Access Gateway** when coming from the internet. `Test-NetConnection FIN-W11-002 -Port 22443` from the user's device tells you.
+3. **Connects and closes after a few seconds?** The desktop is assigned but logon fails: a locked FSLogix profile (another desktop has the container open; visible in the FSLogix log `C:\\ProgramData\\FSLogix\\Logs`), or the logon GPO takes longer than the timeout.
+4. **Always lands on the same broken machine?** In floating pools, Horizon retries the last one; **Reset** or **Remove** that machine from the console and have them log in again.
+
+Client logs when escalating: on Windows, `%LOCALAPPDATA%\\VMware\\VDM\\Logs\\` (`vmware-horizon-client-*.log`); on the desktop, `C:\\ProgramData\\VMware\\VDM\\logs\\` (the agent's `debug-*.txt`). Horizon Console → **Help Desk** (with the user) summarises session, protocol, latency and logon events on one screen: that is where first-line support starts.
+
+## 5. Update the golden image
+
+Changing something in the pool (a patch, a new application) means: power on the golden image, make the change, power it off, **new snapshot** with a date, and on the pool **Maintain → Push Image** choosing that snapshot and when (as each user logs off, or forced in a window). Never touch a pool desktop by hand: it vanishes at the next logoff.
+
+! Before the Push Image, test the new snapshot on a 2-machine **test pool**. An image with the agent badly installed leaves all 40 desktops in *Agent unreachable* at once.
+
+## Next steps
+
+- Set up **FSLogix** for profiles if it is not there: it is what makes a floating desktop feel like the user's own.
+- A **Unified Access Gateway** in the DMZ for access from outside without VPN; and in Level 4, **Azure Virtual Desktop and Windows 365**, the cloud alternative.
+- The Citrix VDI guide is this one's mirror: same problems, other names. Knowing both puts you at home in any company.
+""")
+
+# ---------------------------------------------------------------- 2.16 · Windows Server
+g(slug="windows-server-instalar-rol-parchear-y-leer-eventos", topic="windows-server", date="2026-10-21",
+  title_es="Windows Server: instalar un rol, parchear sin cortar el servicio y leer los eventos que importan",
+  title_en="Windows Server: installing a role, patching without cutting the service, and reading the events that matter",
+  dek_es="Roles y características con PowerShell, la rutina de parcheo con ventana y comprobación, y las tres consultas al visor de eventos que resuelven la mayoría de los 'el servidor va raro'.",
+  dek_en="Roles and features with PowerShell, the patching routine with a window and a check, and the three Event Viewer queries that solve most 'the server is acting up' tickets.",
+  es="""
+## Qué vas a conseguir
+
+Manejar un Windows Server (2019, 2022 o 2025) para lo que se pide en operaciones: añadir un rol sin asistente, parchearlo un martes por la noche sin que nadie lo note, y saber leer el visor de eventos para decir con datos qué pasó.
+
+## Antes de empezar
+
+- Acceso por RDP o, mejor, por **PowerShell remoto** (`Enter-PSSession srv-files-01`) con una cuenta de administración del servidor. Instala **RSAT** y **Windows Admin Center** si no están: la mitad del trabajo se hace sin entrar.
+- Saber qué servicio da el servidor y quién depende de él: es lo que decide la ventana de parcheo y a quién avisas.
+- Un ticket de cambio aprobado para cualquier cosa que reinicie.
+
+## 1. Instalar un rol o característica
+
+Ejemplo: un servidor de ficheros nuevo necesita el rol **File Server** y la herramienta de administración de deduplicación.
+
+:::term PowerShell · servidor (o remoto con -ComputerName)
+$ Get-WindowsFeature | Where-Object Installed | Select-Object -ExpandProperty Name
+FileAndStorage-Services
+Storage-Services
+...
+$ Get-WindowsFeature FS-FileServer, FS-Data-Deduplication, RSAT-File-Services | Select-Object Name, InstallState
+Name                   InstallState
+----                   ------------
+FS-FileServer             Available
+FS-Data-Deduplication     Available
+RSAT-File-Services        Available
+$ Install-WindowsFeature FS-FileServer, FS-Data-Deduplication -IncludeManagementTools
+Success Restart Needed Exit Code      Feature Result
+------- -------------- ---------      --------------
+True    No             Success        {Data Deduplication, File Server, File Server ...}
+:::
+
+`Restart Needed: No` es lo que esperas en la mayoría; cuando dice `Yes` (p. ej. al instalar Hyper-V), el rol no funciona hasta reiniciar. En **Server Core** (sin interfaz) esto es la única forma, y es la razón de aprenderlo así.
+
+## 2. Parchear sin cortar el servicio
+
+La rutina mensual, en este orden:
+
+1. **Antes**: snapshot o copia reciente (Veeam de la noche anterior vale), ticket de cambio con la ventana, y aviso a los que dependen del servicio.
+2. **Ver qué hay pendiente** y aprobarlo (si hay WSUS o Windows Update for Business, ya llega filtrado):
+
+:::term PowerShell · servidor
+$ Install-Module PSWindowsUpdate -Scope AllUsers -Force   # una vez
+$ Get-WindowsUpdate
+ComputerName Status KB        Size Title
+------------ ------ --        ---- -----
+SRV-FILES-01 ------ KB5044281 712MB 2026-10 Cumulative Update for Microsoft server operating system version 21H2
+SRV-FILES-01 ------ KB5043066  45MB Security Update for .NET Framework
+$ Install-WindowsUpdate -AcceptAll -IgnoreReboot
+...
+Reboot is required.
+:::
+
+3. **Reiniciar en la ventana**, no al acabar de instalar: `Restart-Computer -ComputerName srv-files-01 -Wait -For PowerShell -Timeout 900` desde tu equipo espera a que vuelva y te devuelve el control.
+4. **Después**: que el servicio responde (un `Test-NetConnection` al puerto, abrir el recurso compartido, un inicio de sesión de prueba), que no hay errores nuevos en el visor de eventos, y cerrar el ticket con la hora.
+
+En un **clúster de conmutación por error** (ficheros, SQL, Hyper-V), el truco para no cortar es parchear nodo a nodo: `Suspend-ClusterNode -Drain` mueve los roles al otro nodo, parcheas y reinicias ese, `Resume-ClusterNode`, y repites. **Cluster-Aware Updating** lo automatiza.
+
+! Un servidor con `Pending reboot` desde hace semanas es un servidor a medio parchear: las actualizaciones no se aplican hasta reiniciar, y el siguiente parche fallará con `0x800f0922` o similar. `Test-PendingReboot` (módulo del mismo nombre) te lo dice en una línea para toda la lista de servidores.
+
+## 3. Leer el visor de eventos con criterio
+
+Abrirlo y mirar es perder la tarde. Pregúntale lo concreto:
+
+:::term PowerShell · servidor
+# 1. ¿Qué errores y críticos hubo desde el último arranque?
+$ Get-WinEvent -FilterHashtable @{LogName="System"; Level=1,2; StartTime=(Get-Date).AddDays(-1)} | Group-Object Id, ProviderName | Sort-Object Count -Descending | Select-Object -First 5 Count, Name
+Count Name
+----- ----
+   14 7031, Service Control Manager
+    3 5719, NETLOGON
+    1 1074, User32
+# 2. ¿Quién reinició el servidor y por qué? (1074 planificado, 6008 apagado sucio, 41 Kernel-Power)
+$ Get-WinEvent -FilterHashtable @{LogName="System"; Id=1074,6008,41} -MaxEvents 3 | Select-Object TimeCreated, Id, @{n="Msg";e={$_.Message.Substring(0,[math]::Min(110,$_.Message.Length))}}
+TimeCreated         Id Msg
+-----------         -- ---
+21/10/2026 23:41:02 1074 The process C:\\Windows\\system32\\winlogon.exe (SRV-FILES-01) has initiated the restart of computer SRV-FILES-01 on behalf of user CONTOSO\\laura.prado for the following reason: Operating System: Service pack (Planned)
+# 3. ¿Qué servicio se cae y cuándo? (7031/7034 = terminó inesperadamente)
+$ Get-WinEvent -FilterHashtable @{LogName="System"; Id=7031,7034} -MaxEvents 5 | Select-Object TimeCreated, @{n="Svc";e={$_.Properties[0].Value}}
+TimeCreated         Svc
+-----------         ---
+21/10/2026 08:02:11 Print Spooler
+21/10/2026 07:47:55 Print Spooler
+:::
+
+Las tres consultas cubren casi todo: **qué se repite** (la primera), **por qué se reinició** (la segunda: un 6008 sin 1074 antes es un apagón o un cuelgue) y **qué servicio falla** (la tercera). Un 5719 de NETLOGON repetido es el servidor sin contacto con un controlador de dominio al arrancar: red o DNS. Lo demás se busca por ID en la documentación de Microsoft, con el texto exacto.
+
+## 4. Lo que miras cada semana
+
+- `Get-Service | Where-Object {$_.StartType -eq "Automatic" -and $_.Status -ne "Running"}`: servicios automáticos parados.
+- `Get-PSDrive -PSProvider FileSystem`: disco libre; y en un servidor de ficheros, `Get-DedupStatus`.
+- `Get-WindowsUpdate` y `Test-PendingReboot`.
+- El visor de eventos con la consulta 1 de arriba.
+- En **Windows Admin Center**, todo esto para varios servidores en una pantalla, sin RDP.
+
+## Siguientes pasos
+
+- Pon la rutina de parcheo en un script con `PSWindowsUpdate` sobre la lista de servidores, con el reinicio en la ventana y el informe al final: es el mismo patrón que la guía de PowerShell.
+- Aprende **Server Core**: los servidores nuevos sin interfaz tienen menos parches, menos superficie y se gestionan igual desde PowerShell y Admin Center.
+- En el Nivel 3 verás Hyper-V y, en el 4, los clústeres, el DR y la nube híbrida donde estos servidores acaban viviendo.
+""",
+  en="""
+## What you'll get
+
+Handle a Windows Server (2019, 2022 or 2025) for what operations asks: add a role without a wizard, patch it on a Tuesday night without anyone noticing, and know how to read Event Viewer to say, with data, what happened.
+
+## Before you start
+
+- Access by RDP or, better, by **PowerShell remoting** (`Enter-PSSession srv-files-01`) with a server admin account. Install **RSAT** and **Windows Admin Center** if they are missing: half the work is done without logging on.
+- Know what service the server provides and who depends on it: that decides the patch window and who you warn.
+- An approved change ticket for anything that reboots.
+
+## 1. Install a role or feature
+
+Example: a new file server needs the **File Server** role and the deduplication management tool.
+
+:::term PowerShell · server (or remote with -ComputerName)
+$ Get-WindowsFeature | Where-Object Installed | Select-Object -ExpandProperty Name
+FileAndStorage-Services
+Storage-Services
+...
+$ Get-WindowsFeature FS-FileServer, FS-Data-Deduplication, RSAT-File-Services | Select-Object Name, InstallState
+Name                   InstallState
+----                   ------------
+FS-FileServer             Available
+FS-Data-Deduplication     Available
+RSAT-File-Services        Available
+$ Install-WindowsFeature FS-FileServer, FS-Data-Deduplication -IncludeManagementTools
+Success Restart Needed Exit Code      Feature Result
+------- -------------- ---------      --------------
+True    No             Success        {Data Deduplication, File Server, File Server ...}
+:::
+
+`Restart Needed: No` is what you expect for most; when it says `Yes` (e.g. installing Hyper-V), the role does not work until you reboot. On **Server Core** (no GUI) this is the only way, and the reason to learn it like this.
+
+## 2. Patch without cutting the service
+
+The monthly routine, in this order:
+
+1. **Before**: a snapshot or recent backup (last night's Veeam is fine), a change ticket with the window, and a heads-up to those who depend on the service.
+2. **See what is pending** and approve it (with WSUS or Windows Update for Business it already arrives filtered):
+
+:::term PowerShell · server
+$ Install-Module PSWindowsUpdate -Scope AllUsers -Force   # once
+$ Get-WindowsUpdate
+ComputerName Status KB        Size Title
+------------ ------ --        ---- -----
+SRV-FILES-01 ------ KB5044281 712MB 2026-10 Cumulative Update for Microsoft server operating system version 21H2
+SRV-FILES-01 ------ KB5043066  45MB Security Update for .NET Framework
+$ Install-WindowsUpdate -AcceptAll -IgnoreReboot
+...
+Reboot is required.
+:::
+
+3. **Reboot in the window**, not right after installing: `Restart-Computer -ComputerName srv-files-01 -Wait -For PowerShell -Timeout 900` from your device waits for it to come back and hands control back to you.
+4. **After**: the service responds (a `Test-NetConnection` to the port, opening the share, a test logon), no new errors in Event Viewer, and close the ticket with the time.
+
+On a **failover cluster** (files, SQL, Hyper-V), the trick to avoid downtime is to patch node by node: `Suspend-ClusterNode -Drain` moves the roles to the other node, you patch and reboot that one, `Resume-ClusterNode`, and repeat. **Cluster-Aware Updating** automates it.
+
+! A server with `Pending reboot` for weeks is a half-patched server: updates don't apply until it reboots, and the next patch fails with `0x800f0922` or similar. `Test-PendingReboot` (module of the same name) tells you in one line for the whole server list.
+
+## 3. Read Event Viewer with intent
+
+Opening it and browsing wastes the afternoon. Ask it something specific:
+
+:::term PowerShell · server
+# 1. Which errors and criticals since yesterday?
+$ Get-WinEvent -FilterHashtable @{LogName="System"; Level=1,2; StartTime=(Get-Date).AddDays(-1)} | Group-Object Id, ProviderName | Sort-Object Count -Descending | Select-Object -First 5 Count, Name
+Count Name
+----- ----
+   14 7031, Service Control Manager
+    3 5719, NETLOGON
+    1 1074, User32
+# 2. Who rebooted the server and why? (1074 planned, 6008 dirty shutdown, 41 Kernel-Power)
+$ Get-WinEvent -FilterHashtable @{LogName="System"; Id=1074,6008,41} -MaxEvents 3 | Select-Object TimeCreated, Id, @{n="Msg";e={$_.Message.Substring(0,[math]::Min(110,$_.Message.Length))}}
+TimeCreated         Id Msg
+-----------         -- ---
+21/10/2026 23:41:02 1074 The process C:\\Windows\\system32\\winlogon.exe (SRV-FILES-01) has initiated the restart of computer SRV-FILES-01 on behalf of user CONTOSO\\laura.prado for the following reason: Operating System: Service pack (Planned)
+# 3. Which service keeps dying and when? (7031/7034 = terminated unexpectedly)
+$ Get-WinEvent -FilterHashtable @{LogName="System"; Id=7031,7034} -MaxEvents 5 | Select-Object TimeCreated, @{n="Svc";e={$_.Properties[0].Value}}
+TimeCreated         Svc
+-----------         ---
+21/10/2026 08:02:11 Print Spooler
+21/10/2026 07:47:55 Print Spooler
+:::
+
+The three queries cover almost everything: **what repeats** (the first), **why it rebooted** (the second: a 6008 without a 1074 before it is a power cut or a hang) and **which service fails** (the third). A repeated NETLOGON 5719 is the server with no contact to a domain controller at boot: network or DNS. The rest is looked up by ID in Microsoft's documentation, with the exact text.
+
+## 4. What you check every week
+
+- `Get-Service | Where-Object {$_.StartType -eq "Automatic" -and $_.Status -ne "Running"}`: automatic services that are stopped.
+- `Get-PSDrive -PSProvider FileSystem`: free disk; and on a file server, `Get-DedupStatus`.
+- `Get-WindowsUpdate` and `Test-PendingReboot`.
+- Event Viewer with query 1 above.
+- In **Windows Admin Center**, all of this for several servers on one screen, without RDP.
+
+## Next steps
+
+- Turn the patching routine into a script with `PSWindowsUpdate` over the server list, with the reboot in the window and a report at the end: the same pattern as the PowerShell guide.
+- Learn **Server Core**: new servers without a GUI have fewer patches, less surface, and are managed the same from PowerShell and Admin Center.
+- In Level 3 you'll see Hyper-V and, in Level 4, clusters, DR and the hybrid cloud where these servers end up living.
 """)
