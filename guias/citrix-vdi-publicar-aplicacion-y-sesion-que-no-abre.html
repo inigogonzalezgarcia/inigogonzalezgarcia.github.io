@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Citrix VDI: publishing an application and diagnosing a session that won&#x27;t launch · Iñigo González" data-title-es="Citrix VDI: publicar una aplicación y diagnosticar una sesión que no abre · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Citrix VDI: publishing an application and diagnosing a session that won&#x27;t launch · Iñigo González</title>
+<meta name="description" content="The four objects you need to understand (catalog, delivery group, VDA, StoreFront), how to publish an app, and the order for solving &#x27;it won&#x27;t open&#x27;.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/citrix-vdi-publicar-aplicacion-y-sesion-que-no-abre.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Citrix VDI: publishing an application and diagnosing a session that won&#x27;t launch · Iñigo González">
+<meta property="og:description" content="The four objects you need to understand (catalog, delivery group, VDA, StoreFront), how to publish an app, and the order for solving &#x27;it won&#x27;t open&#x27;.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/citrix-vdi-publicar-aplicacion-y-sesion-que-no-abre.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Citrix VDI: publishing an application and diagnosing a session that won&#x27;t launch · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Citrix VDI: publishing an application and diagnosing a session that won't launch","alternativeHeadline":"Citrix VDI: publicar una aplicación y diagnosticar una sesión que no abre","description":"The four objects you need to understand (catalog, delivery group, VDA, StoreFront), how to publish an app, and the order for solving 'it won't open'.","datePublished":"2026-10-21","dateModified":"2026-10-21","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/citrix-vdi-publicar-aplicacion-y-sesion-que-no-abre.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/citrix-vdi-publicar-aplicacion-y-sesion-que-no-abre.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Citrix VDI"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 2","item":"https://inigogonzalezgarcia.github.io/guias/nivel-2.html"},{"@type":"ListItem","position":4,"name":"Citrix VDI: publishing an application and diagnosing a session that won't launch","item":"https://inigogonzalezgarcia.github.io/guias/citrix-vdi-publicar-aplicacion-y-sesion-que-no-abre.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="nivel-2.html"><span class="es">Nivel 2</span><span class="en">Level 2</span></a></p>
+    <h1><span class="es">Citrix VDI: publicar una aplicación y diagnosticar una sesión que no abre</span><span class="en">Citrix VDI: publishing an application and diagnosing a session that won&#x27;t launch</span></h1>
+    <p class="lede"><span class="es">Los cuatro objetos que hay que entender (catálogo, grupo de entrega, VDA, StoreFront), cómo publicar una app y el orden para resolver &#x27;no me abre&#x27;.</span><span class="en">The four objects you need to understand (catalog, delivery group, VDA, StoreFront), how to publish an app, and the order for solving &#x27;it won&#x27;t open&#x27;.</span></p><p class="label post-meta"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">Citrix VDI</span><span class="en">Citrix VDI</span> · <span class="es">4 min</span><span class="en">4 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">21 oct 2026</span><span class="en">21 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Publicar una aplicación en Citrix Virtual Apps and Desktops para un grupo de usuarios y resolver, con un orden fijo, el ticket más común de VDI: &quot;pulso en la aplicación y no se abre&quot; o &quot;se queda en Connecting...&quot;.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Acceso a <strong>Citrix Studio</strong> (o Web Studio) con un rol de administrador de aplicaciones o de ayuda al usuario, y a <strong>Citrix Director</strong> para ver sesiones.</li><li>Saber dónde está instalada la aplicación: en los servidores del <strong>catálogo de máquinas</strong> (Windows Server con el VDA), no en el equipo del usuario.</li><li>El <strong>Citrix Workspace app</strong> en el equipo del usuario, y la URL del StoreFront o de Workspace.</li></ul>
+<h2>1. Las piezas</h2>
+<ul><li><strong>Catálogo de máquinas</strong>: los servidores o escritorios con el <strong>VDA</strong> (Virtual Delivery Agent) instalado. Se crean desde una imagen maestra.</li><li><strong>Grupo de entrega</strong>: une máquinas del catálogo con los usuarios que pueden usarlas. Aquí se publican las aplicaciones y los escritorios.</li><li><strong>Delivery Controller</strong>: el cerebro. Los VDA se <strong>registran</strong> en él; sin registro, la máquina existe pero no sirve sesiones.</li><li><strong>StoreFront / Workspace</strong>: la tienda que ve el usuario. Pide la lista de apps al Controller y entrega el fichero <code>.ica</code> que abre la sesión.</li></ul>
+<h2>2. Publicar la aplicación</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Citrix Studio · Applications</span></figcaption><div class="ui-body"><div class="ui-path"><span>Applications</span><span class="ui-sep" aria-hidden="true">›</span><span>Add Applications</span></div><div class="ui-path"><span>Delivery Groups</span><span class="ui-sep" aria-hidden="true">›</span><span>[x] DG-Finanzas-Apps</span></div><div class="ui-path"><span>Applications</span><span class="ui-sep" aria-hidden="true">›</span><span>From start menu</span><span class="ui-sep" aria-hidden="true">›</span><span>[x] ERP Client 7.2</span></div><div class="ui-field"><span class="ui-k">Nombre (usuario)</span><span class="ui-v">ERP</span></div><div class="ui-field"><span class="ui-k">Ruta</span><span class="ui-v">C:\Program Files\ERP\erp.exe</span></div><div class="ui-field"><span class="ui-k">Directorio de trabajo</span><span class="ui-v">C:\Program Files\ERP</span></div><div class="ui-field"><span class="ui-k">Carpeta en StoreFront</span><span class="ui-v">Finanzas</span></div><div class="ui-path"><span>Limit Visibility</span><span class="ui-sep" aria-hidden="true">›</span><span>[x] GG-ERP-Usuarios</span></div><div class="ui-btn">Finish</div></div></figure>
+<p>Con PowerShell desde el Controller se hace lo mismo y queda documentado:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · Delivery Controller</span><button class="t-copy" type="button" data-copy="Add-PSSnapin Citrix*&#10;New-BrokerApplication -Name &quot;ERP&quot; -CommandLineExecutable &quot;C:\Program Files\ERP\erp.exe&quot; -WorkingDirectory &quot;C:\Program Files\ERP&quot; -DesktopGroup &quot;DG-Finanzas-Apps&quot; -UserFilterEnabled $true&#10;Add-BrokerUser -Name &quot;CONTOSO\GG-ERP-Usuarios&quot; -Application &quot;ERP&quot;&#10;Get-BrokerApplication -Name &quot;ERP&quot; | Select-Object Name, Enabled, AssociatedDesktopGroupUids, UserFilterEnabled" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Add-PSSnapin Citrix*</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>New-BrokerApplication -Name &quot;ERP&quot; -CommandLineExecutable &quot;C:\Program Files\ERP\erp.exe&quot; -WorkingDirectory &quot;C:\Program Files\ERP&quot; -DesktopGroup &quot;DG-Finanzas-Apps&quot; -UserFilterEnabled $true</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Add-BrokerUser -Name &quot;CONTOSO\GG-ERP-Usuarios&quot; -Application &quot;ERP&quot;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-BrokerApplication -Name &quot;ERP&quot; | Select-Object Name, Enabled, AssociatedDesktopGroupUids, UserFilterEnabled</span><span class="t-out">Name Enabled AssociatedDesktopGroupUids UserFilterEnabled</span><span class="t-out">---- ------- -------------------------- -----------------</span><span class="t-out">ERP     True {3}                                     True</span></code></pre></figure>
+<p>El usuario la verá en Workspace tras actualizar la lista (icono de refrescar, o cerrar y abrir la app). Si no aparece: no está en el grupo del filtro, o el grupo de entrega no incluye su cuenta.</p>
+<h2>3. &quot;No me abre&quot;: el orden</h2>
+<h3>3.1 ¿Hay máquinas disponibles?</h3>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · Delivery Controller</span><button class="t-copy" type="button" data-copy="Get-BrokerMachine -DesktopGroupName &quot;DG-Finanzas-Apps&quot; | Select-Object MachineName, RegistrationState, InMaintenanceMode, SessionCount, LoadIndex" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-BrokerMachine -DesktopGroupName &quot;DG-Finanzas-Apps&quot; | Select-Object MachineName, RegistrationState, InMaintenanceMode, SessionCount, LoadIndex</span><span class="t-out">MachineName          RegistrationState InMaintenanceMode SessionCount LoadIndex</span><span class="t-out">-----------          ----------------- ----------------- ------------ ---------</span><span class="t-out">CONTOSO\XA-APP-01       Registered                  False           41      8200</span><span class="t-out">CONTOSO\XA-APP-02     Unregistered                  False            0         0</span><span class="t-out">CONTOSO\XA-APP-03       Registered                   True            0         0</span></code></pre></figure>
+<p>Aquí ya ves el problema del día: una máquina <strong>Unregistered</strong> (el VDA no habla con el Controller: casi siempre se ha reiniciado mal, el servicio <code>BrokerAgent</code> está parado o tiene la hora desajustada), otra en <strong>mantenimiento</strong> (alguien la dejó así tras parchear), y la que queda con carga al tope (<code>LoadIndex</code> 10000 es el máximo). Resultado: las sesiones nuevas no entran.</p>
+<ul><li>Unregistered: en la máquina, <code>Restart-Service BrokerAgent</code>; si sigue, revisa el visor de eventos (origen *Citrix Desktop Service*) y que resuelve el nombre del Controller.</li><li>Mantenimiento: <code>Set-BrokerMachine -MachineName &quot;CONTOSO\XA-APP-03&quot; -InMaintenanceMode $false</code> una vez comprobado que está parcheada y bien.</li></ul>
+<h3>3.2 ¿Es el usuario o es todo el mundo?</h3>
+<p>En <strong>Director → Buscar usuario</strong> aparecen sus sesiones: si tiene una sesión <strong>Disconnected</strong> de ayer en otra máquina, la app intenta reconectar a esa y falla. <strong>Log off</strong> de esa sesión desde Director y que vuelva a probar. Si nadie puede abrir la app, es el 3.1 o la propia aplicación en el servidor.</p>
+<h3>3.3 ¿Llega el .ica?</h3>
+<p>Si al pulsar en la app el navegador descarga un fichero <code>.ica</code> y no pasa nada, Workspace app no está asociado al tipo de fichero o no está instalado. Si el fichero se abre y se queda en <strong>Connecting</strong>: el equipo del usuario no llega al VDA por el puerto <strong>1494</strong> (ICA) o <strong>2598</strong> (Session Reliability): <code>Test-NetConnection XA-APP-01 -Port 2598</code> desde el equipo. Lo normal es un firewall entre la red del usuario (VPN, oficina nueva) y los servidores VDA.</p>
+<h3>3.4 La aplicación abre y se cierra</h3>
+<p>Ya no es Citrix: es la aplicación. Entra por RDP en el servidor VDA como el usuario (o con una cuenta de prueba del mismo grupo) y ábrela a mano. Lo que falle ahí (licencia de la app, permisos en una carpeta, un perfil de usuario corrupto en <code>C:\Users</code>) es lo que hay que arreglar. Los perfiles con <strong>Citrix Profile Management</strong> o FSLogix se restablecen borrando el contenedor del usuario, con su permiso y con copia.</p>
+<h2>4. Qué poner en el ticket</h2>
+<p>Nombre de la app, grupo de entrega, resultado de <code>Get-BrokerMachine</code>, en qué paso se queda (lista, .ica, Connecting, dentro) y el nombre de la máquina a la que intentaba conectar (Director lo muestra). Con eso, el equipo de Citrix no tiene que repetir nada.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Un script diario con <code>Get-BrokerMachine</code> que avise de máquinas Unregistered o en mantenimiento evita la mitad de los tickets de la mañana.</li><li>Aprende a actualizar la imagen maestra y a hacer *rollout* a un catálogo con MCS: es el siguiente paso natural.</li><li>En el Nivel 2 también está VMware Horizon, la alternativa con los mismos conceptos y otros nombres.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>Publish an application in Citrix Virtual Apps and Desktops for a group of users and solve, in a fixed order, the most common VDI ticket: &quot;I click the app and nothing opens&quot; or &quot;it sits on Connecting...&quot;.</p>
+<h2>Before you start</h2>
+<ul><li>Access to <strong>Citrix Studio</strong> (or Web Studio) with an application administrator or help desk role, and to <strong>Citrix Director</strong> to see sessions.</li><li>Know where the application is installed: on the servers in the <strong>machine catalog</strong> (Windows Server with the VDA), not on the user&#x27;s device.</li><li>The <strong>Citrix Workspace app</strong> on the user&#x27;s device, and the StoreFront or Workspace URL.</li></ul>
+<h2>1. The pieces</h2>
+<ul><li><strong>Machine catalog</strong>: the servers or desktops with the <strong>VDA</strong> (Virtual Delivery Agent) installed. Created from a master image.</li><li><strong>Delivery group</strong>: joins machines from the catalog with the users who may use them. Applications and desktops are published here.</li><li><strong>Delivery Controller</strong>: the brain. VDAs <strong>register</strong> with it; without registration, the machine exists but serves no sessions.</li><li><strong>StoreFront / Workspace</strong>: the store the user sees. It asks the Controller for the app list and hands over the <code>.ica</code> file that opens the session.</li></ul>
+<h2>2. Publish the application</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Citrix Studio · Applications</span></figcaption><div class="ui-body"><div class="ui-path"><span>Applications</span><span class="ui-sep" aria-hidden="true">›</span><span>Add Applications</span></div><div class="ui-path"><span>Delivery Groups</span><span class="ui-sep" aria-hidden="true">›</span><span>[x] DG-Finance-Apps</span></div><div class="ui-path"><span>Applications</span><span class="ui-sep" aria-hidden="true">›</span><span>From start menu</span><span class="ui-sep" aria-hidden="true">›</span><span>[x] ERP Client 7.2</span></div><div class="ui-field"><span class="ui-k">Name (for user)</span><span class="ui-v">ERP</span></div><div class="ui-field"><span class="ui-k">Path</span><span class="ui-v">C:\Program Files\ERP\erp.exe</span></div><div class="ui-field"><span class="ui-k">Working directory</span><span class="ui-v">C:\Program Files\ERP</span></div><div class="ui-field"><span class="ui-k">StoreFront folder</span><span class="ui-v">Finance</span></div><div class="ui-path"><span>Limit Visibility</span><span class="ui-sep" aria-hidden="true">›</span><span>[x] GG-ERP-Users</span></div><div class="ui-btn">Finish</div></div></figure>
+<p>PowerShell from the Controller does the same, and it stays documented:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · Delivery Controller</span><button class="t-copy" type="button" data-copy="Add-PSSnapin Citrix*&#10;New-BrokerApplication -Name &quot;ERP&quot; -CommandLineExecutable &quot;C:\Program Files\ERP\erp.exe&quot; -WorkingDirectory &quot;C:\Program Files\ERP&quot; -DesktopGroup &quot;DG-Finance-Apps&quot; -UserFilterEnabled $true&#10;Add-BrokerUser -Name &quot;CONTOSO\GG-ERP-Users&quot; -Application &quot;ERP&quot;&#10;Get-BrokerApplication -Name &quot;ERP&quot; | Select-Object Name, Enabled, AssociatedDesktopGroupUids, UserFilterEnabled" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Add-PSSnapin Citrix*</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>New-BrokerApplication -Name &quot;ERP&quot; -CommandLineExecutable &quot;C:\Program Files\ERP\erp.exe&quot; -WorkingDirectory &quot;C:\Program Files\ERP&quot; -DesktopGroup &quot;DG-Finance-Apps&quot; -UserFilterEnabled $true</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Add-BrokerUser -Name &quot;CONTOSO\GG-ERP-Users&quot; -Application &quot;ERP&quot;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-BrokerApplication -Name &quot;ERP&quot; | Select-Object Name, Enabled, AssociatedDesktopGroupUids, UserFilterEnabled</span><span class="t-out">Name Enabled AssociatedDesktopGroupUids UserFilterEnabled</span><span class="t-out">---- ------- -------------------------- -----------------</span><span class="t-out">ERP     True {3}                                     True</span></code></pre></figure>
+<p>The user sees it in Workspace after refreshing the list (refresh icon, or close and reopen the app). If it does not appear: they are not in the filter group, or the delivery group does not include their account.</p>
+<h2>3. &quot;It won&#x27;t open&quot;: the order</h2>
+<h3>3.1 Are there machines available?</h3>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · Delivery Controller</span><button class="t-copy" type="button" data-copy="Get-BrokerMachine -DesktopGroupName &quot;DG-Finance-Apps&quot; | Select-Object MachineName, RegistrationState, InMaintenanceMode, SessionCount, LoadIndex" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-BrokerMachine -DesktopGroupName &quot;DG-Finance-Apps&quot; | Select-Object MachineName, RegistrationState, InMaintenanceMode, SessionCount, LoadIndex</span><span class="t-out">MachineName          RegistrationState InMaintenanceMode SessionCount LoadIndex</span><span class="t-out">-----------          ----------------- ----------------- ------------ ---------</span><span class="t-out">CONTOSO\XA-APP-01       Registered                  False           41      8200</span><span class="t-out">CONTOSO\XA-APP-02     Unregistered                  False            0         0</span><span class="t-out">CONTOSO\XA-APP-03       Registered                   True            0         0</span></code></pre></figure>
+<p>The day&#x27;s problem is right there: one machine <strong>Unregistered</strong> (the VDA is not talking to the Controller: almost always a bad reboot, the <code>BrokerAgent</code> service stopped, or the clock off), another in <strong>maintenance</strong> (someone left it there after patching), and the remaining one at full load (<code>LoadIndex</code> 10000 is the maximum). Result: new sessions don&#x27;t get in.</p>
+<ul><li>Unregistered: on the machine, <code>Restart-Service BrokerAgent</code>; if it persists, check Event Viewer (source *Citrix Desktop Service*) and that it resolves the Controller&#x27;s name.</li><li>Maintenance: <code>Set-BrokerMachine -MachineName &quot;CONTOSO\XA-APP-03&quot; -InMaintenanceMode $false</code> once you have confirmed it is patched and healthy.</li></ul>
+<h3>3.2 Is it the user or everyone?</h3>
+<p>In <strong>Director → Search user</strong> their sessions appear: if they have a <strong>Disconnected</strong> session from yesterday on another machine, the app tries to reconnect to that one and fails. <strong>Log off</strong> that session from Director and have them try again. If nobody can open the app, it is 3.1 or the application itself on the server.</p>
+<h3>3.3 Does the .ica arrive?</h3>
+<p>If clicking the app makes the browser download an <code>.ica</code> file and nothing happens, Workspace app is not associated with the file type or not installed. If the file opens and sits on <strong>Connecting</strong>: the user&#x27;s device cannot reach the VDA on port <strong>1494</strong> (ICA) or <strong>2598</strong> (Session Reliability): <code>Test-NetConnection XA-APP-01 -Port 2598</code> from the device. It is usually a firewall between the user&#x27;s network (VPN, new office) and the VDA servers.</p>
+<h3>3.4 The application opens and closes</h3>
+<p>That is no longer Citrix: it is the application. RDP into the VDA server as the user (or with a test account from the same group) and open it by hand. Whatever fails there (the app&#x27;s licence, permissions on a folder, a corrupt user profile in <code>C:\Users</code>) is what needs fixing. Profiles with <strong>Citrix Profile Management</strong> or FSLogix are reset by deleting the user&#x27;s container, with their permission and a backup.</p>
+<h2>4. What to put in the ticket</h2>
+<p>App name, delivery group, the <code>Get-BrokerMachine</code> output, which step it gets stuck at (list, .ica, Connecting, inside) and the name of the machine it tried to connect to (Director shows it). With that, the Citrix team repeats nothing.</p>
+<h2>Next steps</h2>
+<ul><li>A daily script with <code>Get-BrokerMachine</code> that flags Unregistered or maintenance machines removes half the morning tickets.</li><li>Learn to update the master image and roll it out to a catalog with MCS: that is the natural next step.</li><li>Level 2 also has VMware Horizon, the alternative with the same concepts and different names.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">Citrix VDI</span><span class="en">Citrix VDI</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span><span class="en">All Level 2 guides</span> →</a>
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="bash-primer-script-de-comprobacion-de-un-servidor.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Bash: tu primer script de comprobación de un servidor Linux</span><span class="en">Bash: your first health-check script for a Linux server</span></span></a>
+    <a class="post-nav-link next" href="confluence-espacio-de-it-y-runbooks-que-se-usan.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Confluence: montar el espacio de IT y escribir runbooks que el equipo use</span><span class="en">Confluence: setting up the IT space and writing runbooks the team actually uses</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

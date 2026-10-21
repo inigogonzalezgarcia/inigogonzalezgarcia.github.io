@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Jamf Pro: enrolling a Mac and deploying a policy with a smart group · Iñigo González" data-title-es="Jamf Pro: enrolar un Mac y desplegar una política con un grupo inteligente · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Jamf Pro: enrolling a Mac and deploying a policy with a smart group · Iñigo González</title>
+<meta name="description" content="Automated or user-initiated enrolment, the inventory that feeds everything, a smart group and a policy that installs and configures. Plus the everyday commands.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/jamf-pro-enrolar-un-mac-y-desplegar-una-politica.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jamf Pro: enrolling a Mac and deploying a policy with a smart group · Iñigo González">
+<meta property="og:description" content="Automated or user-initiated enrolment, the inventory that feeds everything, a smart group and a policy that installs and configures. Plus the everyday commands.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/jamf-pro-enrolar-un-mac-y-desplegar-una-politica.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jamf Pro: enrolling a Mac and deploying a policy with a smart group · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Jamf Pro: enrolling a Mac and deploying a policy with a smart group","alternativeHeadline":"Jamf Pro: enrolar un Mac y desplegar una política con un grupo inteligente","description":"Automated or user-initiated enrolment, the inventory that feeds everything, a smart group and a policy that installs and configures. Plus the everyday commands.","datePublished":"2026-10-21","dateModified":"2026-10-21","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/jamf-pro-enrolar-un-mac-y-desplegar-una-politica.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/jamf-pro-enrolar-un-mac-y-desplegar-una-politica.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Jamf Pro"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 2","item":"https://inigogonzalezgarcia.github.io/guias/nivel-2.html"},{"@type":"ListItem","position":4,"name":"Jamf Pro: enrolling a Mac and deploying a policy with a smart group","item":"https://inigogonzalezgarcia.github.io/guias/jamf-pro-enrolar-un-mac-y-desplegar-una-politica.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="nivel-2.html"><span class="es">Nivel 2</span><span class="en">Level 2</span></a></p>
+    <h1><span class="es">Jamf Pro: enrolar un Mac y desplegar una política con un grupo inteligente</span><span class="en">Jamf Pro: enrolling a Mac and deploying a policy with a smart group</span></h1>
+    <p class="lede"><span class="es">Enrolamiento automatizado o por el usuario, el inventario que lo alimenta todo, un grupo inteligente y una política que instala y configura. Más los comandos del día a día.</span><span class="en">Automated or user-initiated enrolment, the inventory that feeds everything, a smart group and a policy that installs and configures. Plus the everyday commands.</span></p><p class="label post-meta"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">Jamf Pro</span><span class="en">Jamf Pro</span> · <span class="es">4 min</span><span class="en">4 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">21 oct 2026</span><span class="en">21 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Un Mac gestionado en Jamf Pro desde el primer encendido, y una política que instala una aplicación solo en los equipos que la necesitan, elegidos por un <strong>grupo inteligente</strong> en lugar de a mano. Es la base de todo lo que harás después en Jamf.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Acceso a la consola de Jamf Pro con un rol que pueda crear políticas y grupos.</li><li>Para el enrolamiento automatizado: el Mac comprado a través de <strong>Apple Business Manager</strong> y asignado al servidor MDM de Jamf; un <strong>PreStage Enrollment</strong> configurado.</li><li>Para el enrolamiento por el usuario: la URL de enrolamiento (<code>https://contoso.jamfcloud.com/enroll</code>) y una cuenta de usuario en Jamf o en el directorio integrado.</li><li>El certificado <strong>APNs</strong> vigente (Configuración → Push certificates). Caduca cada año; sin él, nada.</li></ul>
+<h2>1. Enrolar</h2>
+<p><strong>Automatizado (ABM)</strong>: el Mac arranca, el Asistente de configuración muestra &quot;contoso configurará este Mac&quot;, el usuario inicia sesión y el PreStage crea la cuenta local, instala el agente y aplica los perfiles. No hay nada que descargar.</p>
+<p><strong>Por el usuario</strong>: en <code>https://contoso.jamfcloud.com/enroll</code>, inicia sesión, descarga el perfil de gestión y lo aprueba en <strong>Ajustes del Sistema → Privacidad y seguridad → Perfiles</strong>. Desde macOS 11 el usuario tiene que pulsar <strong>Aprobar</strong> a mano: si no lo hace, el Mac aparece en Jamf pero sin MDM supervisado y los perfiles no se aplican.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Jamf Pro · Equipos › Inventario</span></figcaption><div class="ui-body"><div class="ui-path"><span>Equipos</span><span class="ui-sep" aria-hidden="true">›</span><span>Buscar inventario</span><span class="ui-sep" aria-hidden="true">›</span><span>MBP-LAURA</span></div><div class="ui-field"><span class="ui-k">Gestionado</span><span class="ui-v">Sí · Supervisado: Sí · MDM aprobado por el usuario: Sí</span></div><div class="ui-field"><span class="ui-k">macOS</span><span class="ui-v">15.1 · Modelo: MacBook Pro 14&quot; (M3)</span></div><div class="ui-field"><span class="ui-k">Última entrada</span><span class="ui-v">21/10/2026 10:52 · Último inventario: 21/10/2026 10:52</span></div><div class="ui-field"><span class="ui-k">Usuario</span><span class="ui-v">laura.prado · Departamento: Ventas</span></div><div class="ui-btn">Gestión] [Historial] [Enviar comando MDM</div></div></figure>
+<p><strong>Supervisado: Sí</strong> y <strong>MDM aprobado por el usuario: Sí</strong> son las dos casillas que tienen que estar. Sin ellas, FileVault, las restricciones y los comandos remotos fallan en silencio.</p>
+<h2>2. El inventario manda</h2>
+<p>Todo en Jamf (grupos, políticas, informes) se decide a partir del <strong>inventario</strong> que el Mac envía al hacer <code>recon</code>. Por defecto se actualiza una vez al día; si acabas de cambiar algo en el Mac y Jamf no lo refleja, fuerza uno:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Terminal · en el Mac</span><button class="t-copy" type="button" data-copy="sudo jamf recon" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>sudo jamf recon</span><span class="t-out">Retrieving inventory preferences from https://contoso.jamfcloud.com/...</span><span class="t-out">Locating hardware information (macOS 15.1)...</span><span class="t-out">Locating applications...</span><span class="t-out">Submitting data to https://contoso.jamfcloud.com/...</span><span class="t-out">&lt;computer_id&gt;417&lt;/computer_id&gt;</span></code></pre></figure>
+<h2>3. Un grupo inteligente</h2>
+<p>Un grupo inteligente es una consulta sobre el inventario que se recalcula sola. Ejemplo: los Mac de Ventas que todavía no tienen la app del CRM.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Jamf Pro · Equipos › Grupos inteligentes › Nuevo</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Nombre</span><span class="ui-v">Ventas sin CRM</span></div><div class="ui-path"><span>Criterios</span></div><div class="ui-field"><span class="ui-k">Departamento</span><span class="ui-v">es · Ventas</span></div><div class="ui-field"><span class="ui-k">y · Título de la aplicación</span><span class="ui-v">no tiene · CRM Desktop.app</span></div><div class="ui-field"><span class="ui-k">y · Último inventario</span><span class="ui-v">menos de x días · 7</span></div><div class="ui-btn">Guardar</div><div class="ui-field"><span class="ui-k">Miembros</span><span class="ui-v">23 equipos</span></div></div></figure>
+<p>El tercer criterio (inventario reciente) evita que la política persiga equipos apagados desde hace meses.</p>
+<h2>4. La política</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Jamf Pro · Equipos › Políticas › Nueva</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Nombre</span><span class="ui-v">Instalar CRM Desktop</span></div><div class="ui-field"><span class="ui-k">Activador</span><span class="ui-v">Check-in recurrente · Frecuencia: Una vez por equipo</span></div><div class="ui-path"><span>Paquetes</span><span class="ui-sep" aria-hidden="true">›</span><span>CRM-Desktop-4.2.pkg</span><span class="ui-sep" aria-hidden="true">›</span><span>Instalar</span></div><div class="ui-path"><span>Mantenimiento</span><span class="ui-sep" aria-hidden="true">›</span><span>[x] Actualizar inventario</span></div><div class="ui-path"><span>Alcance</span><span class="ui-sep" aria-hidden="true">›</span><span>Equipos de destino: Ventas sin CRM</span></div><div class="ui-path"><span>Autoservicio</span><span class="ui-sep" aria-hidden="true">›</span><span>[ ] (no: instalación obligatoria)</span></div><div class="ui-btn">Guardar</div></div></figure>
+<p>Qué pasa después: cada Mac del grupo, en su siguiente check-in (cada 15 minutos por defecto), ejecuta la política, instala el paquete y actualiza el inventario. En el siguiente recálculo deja de cumplir el criterio y <strong>sale del grupo solo</strong>. Cuando el grupo llega a 0 miembros, has terminado, sin tocar nada.</p>
+<p>Para probar en un Mac sin esperar al check-in:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Terminal · en el Mac</span><button class="t-copy" type="button" data-copy="sudo jamf policy -verbose&#10;sudo jamf policy -event instalar-crm   # si la política tiene un activador personalizado" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>sudo jamf policy -verbose</span><span class="t-out">Checking for policies triggered by &quot;recurring check-in&quot; for user &quot;laura.prado&quot;...</span><span class="t-out">Executing Policy Instalar CRM Desktop</span><span class="t-out">Downloading CRM-Desktop-4.2.pkg...</span><span class="t-out">Installing CRM-Desktop-4.2.pkg...</span><span class="t-out">Successfully installed CRM-Desktop-4.2.pkg.</span><span class="t-out">Running Recon...</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>sudo jamf policy -event instalar-crm   # si la política tiene un activador personalizado</span></code></pre></figure>
+<h2>5. Cuando una política no se ejecuta</h2>
+<ul><li><strong>Registros de la política</strong> (Políticas → la política → Registros): si el Mac aparece con &quot;Pendiente&quot;, no ha hecho check-in; si aparece &quot;Fallida&quot;, el log dice por qué (paquete que no existe en el punto de distribución, disco lleno, <code>pkg</code> que exige reinicio).</li><li>En el Mac: <code>sudo jamf checkJSSConnection</code> comprueba que llega al servidor; <code>tail -f /var/log/jamf.log</code> muestra la ejecución en vivo.</li><li>Una política con frecuencia &quot;Una vez por equipo&quot; que falló no se reintenta sola: <strong>Limpiar registros</strong> para esos equipos y vuelve a ejecutarse.</li><li>El Mac no aparece en el grupo: criterio mal escrito (el nombre de la app es el del bundle, <code>CRM Desktop.app</code>, con <code>.app</code>) o inventario sin actualizar.</li></ul>
+<h2>Siguientes pasos</h2>
+<ul><li>Empaqueta las aplicaciones con <strong>Jamf Composer</strong> o usa el <strong>Jamf App Catalog</strong> para que se actualicen solas.</li><li>Mira <strong>Autoservicio</strong> para lo que el usuario puede instalar cuando quiera: baja tickets y les da autonomía.</li><li>En el Nivel 3 verás la gestión de Mac desde Intune y cuándo tiene sentido Jamf, Intune o los dos.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>A Mac managed in Jamf Pro from first power-on, and a policy that installs an application only on the devices that need it, picked by a <strong>smart group</strong> rather than by hand. It is the foundation of everything you will do in Jamf afterwards.</p>
+<h2>Before you start</h2>
+<ul><li>Access to the Jamf Pro console with a role that can create policies and groups.</li><li>For automated enrolment: the Mac bought through <strong>Apple Business Manager</strong> and assigned to Jamf&#x27;s MDM server; a <strong>PreStage Enrollment</strong> configured.</li><li>For user-initiated enrolment: the enrolment URL (<code>https://contoso.jamfcloud.com/enroll</code>) and a user account in Jamf or the integrated directory.</li><li>A valid <strong>APNs</strong> certificate (Settings → Push certificates). It expires every year; without it, nothing works.</li></ul>
+<h2>1. Enrol</h2>
+<p><strong>Automated (ABM)</strong>: the Mac boots, Setup Assistant shows &quot;contoso will configure this Mac&quot;, the user signs in and the PreStage creates the local account, installs the agent and applies the profiles. Nothing to download.</p>
+<p><strong>User-initiated</strong>: at <code>https://contoso.jamfcloud.com/enroll</code>, sign in, download the management profile and approve it in <strong>System Settings → Privacy &amp; Security → Profiles</strong>. Since macOS 11 the user has to click <strong>Approve</strong> by hand: if they don&#x27;t, the Mac appears in Jamf without supervised MDM and profiles don&#x27;t apply.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Jamf Pro · Computers › Inventory</span></figcaption><div class="ui-body"><div class="ui-path"><span>Computers</span><span class="ui-sep" aria-hidden="true">›</span><span>Search Inventory</span><span class="ui-sep" aria-hidden="true">›</span><span>MBP-LAURA</span></div><div class="ui-field"><span class="ui-k">Managed</span><span class="ui-v">Yes · Supervised: Yes · User Approved MDM: Yes</span></div><div class="ui-field"><span class="ui-k">macOS</span><span class="ui-v">15.1 · Model: MacBook Pro 14&quot; (M3)</span></div><div class="ui-field"><span class="ui-k">Last check-in</span><span class="ui-v">21/10/2026 10:52 · Last inventory: 21/10/2026 10:52</span></div><div class="ui-field"><span class="ui-k">User</span><span class="ui-v">laura.prado · Department: Sales</span></div><div class="ui-btn">Management] [History] [Send MDM command</div></div></figure>
+<p><strong>Supervised: Yes</strong> and <strong>User Approved MDM: Yes</strong> are the two boxes that must be ticked. Without them, FileVault, restrictions and remote commands fail silently.</p>
+<h2>2. Inventory rules everything</h2>
+<p>Everything in Jamf (groups, policies, reports) is decided from the <strong>inventory</strong> the Mac submits when it runs <code>recon</code>. By default it updates once a day; if you just changed something on the Mac and Jamf doesn&#x27;t show it, force one:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Terminal · on the Mac</span><button class="t-copy" type="button" data-copy="sudo jamf recon" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>sudo jamf recon</span><span class="t-out">Retrieving inventory preferences from https://contoso.jamfcloud.com/...</span><span class="t-out">Locating hardware information (macOS 15.1)...</span><span class="t-out">Locating applications...</span><span class="t-out">Submitting data to https://contoso.jamfcloud.com/...</span><span class="t-out">&lt;computer_id&gt;417&lt;/computer_id&gt;</span></code></pre></figure>
+<h2>3. A smart group</h2>
+<p>A smart group is a query on the inventory that recalculates itself. Example: Sales Macs that don&#x27;t yet have the CRM app.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Jamf Pro · Computers › Smart Computer Groups › New</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Name</span><span class="ui-v">Sales without CRM</span></div><div class="ui-path"><span>Criteria</span></div><div class="ui-field"><span class="ui-k">Department</span><span class="ui-v">is · Sales</span></div><div class="ui-field"><span class="ui-k">and · Application Title</span><span class="ui-v">does not have · CRM Desktop.app</span></div><div class="ui-field"><span class="ui-k">and · Last Inventory Update</span><span class="ui-v">less than x days ago · 7</span></div><div class="ui-btn">Save</div><div class="ui-field"><span class="ui-k">Members</span><span class="ui-v">23 computers</span></div></div></figure>
+<p>The third criterion (recent inventory) stops the policy chasing Macs that have been switched off for months.</p>
+<h2>4. The policy</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Jamf Pro · Computers › Policies › New</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Name</span><span class="ui-v">Install CRM Desktop</span></div><div class="ui-field"><span class="ui-k">Trigger</span><span class="ui-v">Recurring Check-in · Frequency: Once per computer</span></div><div class="ui-path"><span>Packages</span><span class="ui-sep" aria-hidden="true">›</span><span>CRM-Desktop-4.2.pkg</span><span class="ui-sep" aria-hidden="true">›</span><span>Install</span></div><div class="ui-path"><span>Maintenance</span><span class="ui-sep" aria-hidden="true">›</span><span>[x] Update Inventory</span></div><div class="ui-path"><span>Scope</span><span class="ui-sep" aria-hidden="true">›</span><span>Target Computers: Sales without CRM</span></div><div class="ui-path"><span>Self Service</span><span class="ui-sep" aria-hidden="true">›</span><span>[ ] (no: mandatory install)</span></div><div class="ui-btn">Save</div></div></figure>
+<p>What happens next: every Mac in the group, at its next check-in (every 15 minutes by default), runs the policy, installs the package and updates the inventory. At the next recalculation it no longer meets the criterion and <strong>leaves the group on its own</strong>. When the group reaches 0 members, you are done, without touching anything.</p>
+<p>To test on one Mac without waiting for check-in:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Terminal · on the Mac</span><button class="t-copy" type="button" data-copy="sudo jamf policy -verbose&#10;sudo jamf policy -event install-crm   # if the policy has a custom trigger" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>sudo jamf policy -verbose</span><span class="t-out">Checking for policies triggered by &quot;recurring check-in&quot; for user &quot;laura.prado&quot;...</span><span class="t-out">Executing Policy Install CRM Desktop</span><span class="t-out">Downloading CRM-Desktop-4.2.pkg...</span><span class="t-out">Installing CRM-Desktop-4.2.pkg...</span><span class="t-out">Successfully installed CRM-Desktop-4.2.pkg.</span><span class="t-out">Running Recon...</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>sudo jamf policy -event install-crm   # if the policy has a custom trigger</span></code></pre></figure>
+<h2>5. When a policy doesn&#x27;t run</h2>
+<ul><li><strong>Policy logs</strong> (Policies → the policy → Logs): if the Mac shows &quot;Pending&quot;, it has not checked in; if &quot;Failed&quot;, the log says why (package missing from the distribution point, disk full, a <code>pkg</code> that requires a reboot).</li><li>On the Mac: <code>sudo jamf checkJSSConnection</code> confirms it reaches the server; <code>tail -f /var/log/jamf.log</code> shows execution live.</li><li>A &quot;Once per computer&quot; policy that failed does not retry on its own: <strong>Flush logs</strong> for those computers and it runs again.</li><li>The Mac is not in the group: criterion written wrong (the app name is the bundle name, <code>CRM Desktop.app</code>, with <code>.app</code>) or inventory not updated.</li></ul>
+<h2>Next steps</h2>
+<ul><li>Package applications with <strong>Jamf Composer</strong> or use the <strong>Jamf App Catalog</strong> so they update themselves.</li><li>Look at <strong>Self Service</strong> for what the user may install whenever they want: it lowers tickets and gives them autonomy.</li><li>In Level 3 you&#x27;ll see Mac management from Intune and when Jamf, Intune or both make sense.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">Jamf Pro</span><span class="en">Jamf Pro</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span><span class="en">All Level 2 guides</span> →</a>
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="git-scripts-del-equipo-bajo-control-de-versiones.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Git: poner los scripts del equipo bajo control de versiones</span><span class="en">Git: putting the team&#x27;s scripts under version control</span></span></a>
+    <a class="post-nav-link next" href="mecm-sccm-empaquetar-una-aplicacion-y-desplegarla.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">MECM / SCCM: empaquetar una aplicación y desplegarla a una colección</span><span class="en">MECM / SCCM: packaging an application and deploying it to a collection</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

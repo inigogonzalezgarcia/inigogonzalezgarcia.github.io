@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Microsoft Teams Rooms: bringing a room online and keeping an eye on it · Iñigo González" data-title-es="Microsoft Teams Rooms: poner en marcha una sala y supervisarla · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Microsoft Teams Rooms: bringing a room online and keeping an eye on it · Iñigo González</title>
+<meta name="description" content="Resource account, licence, device sign-in, peripherals and the Pro Management Portal. Plus the typical Monday-morning room failures.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/teams-rooms-poner-en-marcha-una-sala.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Microsoft Teams Rooms: bringing a room online and keeping an eye on it · Iñigo González">
+<meta property="og:description" content="Resource account, licence, device sign-in, peripherals and the Pro Management Portal. Plus the typical Monday-morning room failures.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/teams-rooms-poner-en-marcha-una-sala.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Microsoft Teams Rooms: bringing a room online and keeping an eye on it · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Microsoft Teams Rooms: bringing a room online and keeping an eye on it","alternativeHeadline":"Microsoft Teams Rooms: poner en marcha una sala y supervisarla","description":"Resource account, licence, device sign-in, peripherals and the Pro Management Portal. Plus the typical Monday-morning room failures.","datePublished":"2026-10-21","dateModified":"2026-10-21","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/teams-rooms-poner-en-marcha-una-sala.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/teams-rooms-poner-en-marcha-una-sala.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Microsoft Teams Rooms"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 2","item":"https://inigogonzalezgarcia.github.io/guias/nivel-2.html"},{"@type":"ListItem","position":4,"name":"Microsoft Teams Rooms: bringing a room online and keeping an eye on it","item":"https://inigogonzalezgarcia.github.io/guias/teams-rooms-poner-en-marcha-una-sala.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="nivel-2.html"><span class="es">Nivel 2</span><span class="en">Level 2</span></a></p>
+    <h1><span class="es">Microsoft Teams Rooms: poner en marcha una sala y supervisarla</span><span class="en">Microsoft Teams Rooms: bringing a room online and keeping an eye on it</span></h1>
+    <p class="lede"><span class="es">Cuenta de recurso, licencia, inicio de sesión del dispositivo, periféricos y el Pro Management Portal. Y los fallos típicos de una sala el lunes por la mañana.</span><span class="en">Resource account, licence, device sign-in, peripherals and the Pro Management Portal. Plus the typical Monday-morning room failures.</span></p><p class="label post-meta"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">Microsoft Teams Rooms</span><span class="en">Microsoft Teams Rooms</span> · <span class="es">5 min</span><span class="en">4 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">21 oct 2026</span><span class="en">21 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Una sala de reuniones con Microsoft Teams Rooms (MTR) que aparece en el calendario, se une a las reuniones con un toque y se supervisa desde el portal sin ir a la sala. Y un método corto para &quot;la sala no funciona&quot;.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Rol de <strong>Administrador de Teams</strong> y de <strong>Exchange</strong> (o un compañero que los tenga): la sala es un buzón de recurso.</li><li>Licencia <strong>Teams Rooms Pro</strong> (o Basic, para menos de 25 salas, sin el portal completo) disponible para asignarla a la cuenta de la sala.</li><li>El equipo de la sala (Crestron, Logitech, Poly, Yealink… con Windows o Android) montado, con la pantalla táctil, la cámara y el audio conectados, y red (cable mejor que Wi-Fi).</li></ul>
+<h2>1. La cuenta de recurso</h2>
+<p>La sala es un buzón de tipo <strong>sala</strong> en Exchange Online con una contraseña que no caduca y la licencia de Teams Rooms. Todo lo demás depende de esto.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · Exchange Online + Graph</span><button class="t-copy" type="button" data-copy="Connect-ExchangeOnline&#10;New-Mailbox -Room -Name &quot;Sala Madrid 2.1&quot; -Alias sala-mad-21 -PrimarySmtpAddress sala-mad-21@contoso.com&#10;Set-CalendarProcessing -Identity sala-mad-21 -AutomateProcessing AutoAccept -AddOrganizerToSubject $false -DeleteComments $false -DeleteSubject $false -RemovePrivateProperty $false -ProcessExternalMeetingMessages $true&#10;Set-Mailbox -Identity sala-mad-21 -Type Regular   # permite iniciar sesión; después vuelve a Room si tu política lo pide&#10;Connect-MgGraph -Scopes &quot;User.ReadWrite.All&quot;,&quot;Organization.Read.All&quot;&#10;Update-MgUser -UserId sala-mad-21@contoso.com -UsageLocation ES -PasswordPolicies DisablePasswordExpiration -AccountEnabled:$true&#10;$sku = (Get-MgSubscribedSku | Where-Object SkuPartNumber -eq &quot;Microsoft_Teams_Rooms_Pro&quot;).SkuId&#10;Set-MgUserLicense -UserId sala-mad-21@contoso.com -AddLicenses @{SkuId = $sku} -RemoveLicenses @()" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Connect-ExchangeOnline</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>New-Mailbox -Room -Name &quot;Sala Madrid 2.1&quot; -Alias sala-mad-21 -PrimarySmtpAddress sala-mad-21@contoso.com</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Set-CalendarProcessing -Identity sala-mad-21 -AutomateProcessing AutoAccept -AddOrganizerToSubject $false -DeleteComments $false -DeleteSubject $false -RemovePrivateProperty $false -ProcessExternalMeetingMessages $true</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Set-Mailbox -Identity sala-mad-21 -Type Regular   # permite iniciar sesión; después vuelve a Room si tu política lo pide</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Connect-MgGraph -Scopes &quot;User.ReadWrite.All&quot;,&quot;Organization.Read.All&quot;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Update-MgUser -UserId sala-mad-21@contoso.com -UsageLocation ES -PasswordPolicies DisablePasswordExpiration -AccountEnabled:$true</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>$sku = (Get-MgSubscribedSku | Where-Object SkuPartNumber -eq &quot;Microsoft_Teams_Rooms_Pro&quot;).SkuId</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Set-MgUserLicense -UserId sala-mad-21@contoso.com -AddLicenses @{SkuId = $sku} -RemoveLicenses @()</span></code></pre></figure>
+<p><code>DeleteComments $false</code> y <code>DeleteSubject $false</code> son lo que hace que la reunión llegue al panel de la sala con el enlace de Teams dentro. Si se dejan por defecto, Exchange borra el cuerpo de la invitación y el botón <strong>Unirse</strong> no aparece.</p>
+<p class="g-warn">Si usáis Conditional Access que exige MFA a todos, la cuenta de la sala no podrá iniciar sesión. Lo habitual es una política específica para las cuentas de sala: exclusión de MFA, pero restringida a las IP de las oficinas o a dispositivos conformes.</p>
+<h2>2. Inicio de sesión en el dispositivo</h2>
+<p>En la consola táctil: <strong>Más → Configuración → contraseña de administrador → Cuenta</strong>, correo y contraseña de la sala, modo <strong>Exchange/Teams</strong> (o solo Teams si no hay buzón híbrido). Al reiniciar, el panel muestra el nombre de la sala y el calendario del día.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Teams Rooms · consola táctil › Configuración › Cuenta</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Correo electrónico</span><span class="ui-v">sala-mad-21@contoso.com</span></div><div class="ui-field"><span class="ui-k">Modo compatible</span><span class="ui-v">Exchange y Teams</span></div><div class="ui-field"><span class="ui-k">Dirección de Exchange</span><span class="ui-v">autodetectar</span></div><div class="ui-field"><span class="ui-k">Estado</span><span class="ui-v">Teams conectado · Exchange conectado · Calendario sincronizado</span></div><div class="ui-btn">Guardar y salir</div></div></figure>
+<p>Si pone &quot;Exchange: error de autenticación&quot; pero Teams conecta, el buzón sigue siendo de tipo Room sin permitir inicio de sesión, o la contraseña ha caducado.</p>
+<h2>3. Periféricos</h2>
+<p>En <strong>Configuración → Periféricos</strong> se elige qué cámara, micrófono y altavoz usa la sala. Las barras todo-en-uno (Logitech Rally Bar, Poly Studio) aparecen como un solo dispositivo; con un procesador Crestron y periféricos separados, cada uno va por USB y hay que elegirlos uno a uno. Regla práctica: un solo cable USB desde la barra o el hub al equipo de la sala, sin alargadores de dudosa calidad; la mitad de los &quot;no hay cámara&quot; es un cable.</p>
+<h2>4. Supervisar desde el portal</h2>
+<p>Con la licencia Pro, el <strong>Teams Rooms Pro Management Portal</strong> (<code>portal.rooms.microsoft.com</code>) muestra cada sala, su estado, los periféricos y los incidentes, y permite reiniciar y actualizar sin ir a la sala.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Teams Rooms Pro Management · Salas</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Sala Madrid 2.1 · Estado</span><span class="ui-v">Correcto · Última señal: hace 2 min</span></div><div class="ui-field"><span class="ui-k">Dispositivo</span><span class="ui-v">Crestron Flex UC-C100 · Windows · App 5.2</span></div><div class="ui-field"><span class="ui-k">Periféricos</span><span class="ui-v">cámara OK · micrófono OK · altavoz OK · pantalla OK</span></div><div class="ui-field"><span class="ui-k">Incidentes</span><span class="ui-v">0 abiertos · Última reunión: hoy 10:00 (2 participantes remotos)</span></div><div class="ui-btn">Reiniciar] [Actualizar] [Ver registro</div></div></figure>
+<p>Un <strong>ticket</strong> en el portal se abre solo cuando un periférico deja de responder o la app lleva sin señal un tiempo. Conviene ir ahí antes de que el usuario lo diga.</p>
+<h2>5. &quot;La sala no funciona&quot;: el orden</h2>
+<ol><li><strong>¿La consola está encendida y con la hora correcta?</strong> Una sala con la hora mal no inicia sesión (certificados). Reinicio desde el portal o apagado físico 30 segundos.</li><li><strong>¿Aparece el calendario?</strong> Si no, es la cuenta (paso 1 y 2): contraseña, licencia, Conditional Access. Prueba a iniciar sesión con la cuenta de la sala en <code>outlook.office.com</code> desde un portátil: si pide MFA o está bloqueada, ahí está.</li><li><strong>¿La reunión no tiene botón Unirse?</strong> <code>Set-CalendarProcessing</code> con <code>DeleteComments</code> a <code>$true</code>, o la reunión no es de Teams (invitación sin enlace). Las reuniones de terceros (Zoom, Webex) necesitan la <strong>unión directa a invitados</strong> activada en la configuración de la sala.</li><li><strong>¿No hay audio, vídeo o pantalla compartida?</strong> Periféricos (paso 3): cable, hub, o el dispositivo elegido en la configuración no es el que está conectado. Un reinicio del dispositivo reconoce los periféricos de nuevo.</li><li><strong>¿Todo bien pero los remotos no oyen?</strong> Calidad de red: la sala por Wi-Fi o en una VLAN con QoS mal configurada. El portal muestra la calidad de cada reunión; si es la red, va a redes con la hora y la sala.</li></ol>
+<h2>Siguientes pasos</h2>
+<ul><li>Pon la cuenta de la sala en un grupo con <strong>licencias por grupo</strong> y una política de Conditional Access propia: así cada sala nueva es dar de alta un buzón y meterlo en el grupo.</li><li>Activa en el portal las <strong>actualizaciones automáticas</strong> en un anillo de prueba con una sala antes del resto.</li><li>En el Nivel 4 verás el soporte a comités y dirección: cuando una sala de consejo falla, no hay segundo intento.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>A meeting room with Microsoft Teams Rooms (MTR) that shows up in the calendar, joins meetings with one tap and is monitored from the portal without walking to the room. Plus a short method for &quot;the room doesn&#x27;t work&quot;.</p>
+<h2>Before you start</h2>
+<ul><li>The <strong>Teams Administrator</strong> and <strong>Exchange</strong> roles (or a colleague who has them): the room is a resource mailbox.</li><li>A <strong>Teams Rooms Pro</strong> licence (or Basic, for fewer than 25 rooms, without the full portal) available to assign to the room account.</li><li>The room hardware (Crestron, Logitech, Poly, Yealink… on Windows or Android) installed, with the touch console, camera and audio connected, and network (cable rather than Wi-Fi).</li></ul>
+<h2>1. The resource account</h2>
+<p>The room is a <strong>room</strong> mailbox in Exchange Online with a non-expiring password and the Teams Rooms licence. Everything else depends on this.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · Exchange Online + Graph</span><button class="t-copy" type="button" data-copy="Connect-ExchangeOnline&#10;New-Mailbox -Room -Name &quot;Madrid Room 2.1&quot; -Alias room-mad-21 -PrimarySmtpAddress room-mad-21@contoso.com&#10;Set-CalendarProcessing -Identity room-mad-21 -AutomateProcessing AutoAccept -AddOrganizerToSubject $false -DeleteComments $false -DeleteSubject $false -RemovePrivateProperty $false -ProcessExternalMeetingMessages $true&#10;Set-Mailbox -Identity room-mad-21 -Type Regular   # allows sign-in; switch back to Room afterwards if your policy requires it&#10;Connect-MgGraph -Scopes &quot;User.ReadWrite.All&quot;,&quot;Organization.Read.All&quot;&#10;Update-MgUser -UserId room-mad-21@contoso.com -UsageLocation ES -PasswordPolicies DisablePasswordExpiration -AccountEnabled:$true&#10;$sku = (Get-MgSubscribedSku | Where-Object SkuPartNumber -eq &quot;Microsoft_Teams_Rooms_Pro&quot;).SkuId&#10;Set-MgUserLicense -UserId room-mad-21@contoso.com -AddLicenses @{SkuId = $sku} -RemoveLicenses @()" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Connect-ExchangeOnline</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>New-Mailbox -Room -Name &quot;Madrid Room 2.1&quot; -Alias room-mad-21 -PrimarySmtpAddress room-mad-21@contoso.com</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Set-CalendarProcessing -Identity room-mad-21 -AutomateProcessing AutoAccept -AddOrganizerToSubject $false -DeleteComments $false -DeleteSubject $false -RemovePrivateProperty $false -ProcessExternalMeetingMessages $true</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Set-Mailbox -Identity room-mad-21 -Type Regular   # allows sign-in; switch back to Room afterwards if your policy requires it</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Connect-MgGraph -Scopes &quot;User.ReadWrite.All&quot;,&quot;Organization.Read.All&quot;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Update-MgUser -UserId room-mad-21@contoso.com -UsageLocation ES -PasswordPolicies DisablePasswordExpiration -AccountEnabled:$true</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>$sku = (Get-MgSubscribedSku | Where-Object SkuPartNumber -eq &quot;Microsoft_Teams_Rooms_Pro&quot;).SkuId</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Set-MgUserLicense -UserId room-mad-21@contoso.com -AddLicenses @{SkuId = $sku} -RemoveLicenses @()</span></code></pre></figure>
+<p><code>DeleteComments $false</code> and <code>DeleteSubject $false</code> are what make the meeting reach the room&#x27;s console with the Teams link inside. Left at the defaults, Exchange strips the invitation body and the <strong>Join</strong> button never appears.</p>
+<p class="g-warn">If you use Conditional Access requiring MFA for everyone, the room account won&#x27;t be able to sign in. The usual approach is a dedicated policy for room accounts: MFA exclusion, but restricted to office IPs or compliant devices.</p>
+<h2>2. Sign in on the device</h2>
+<p>On the touch console: <strong>More → Settings → admin password → Account</strong>, the room&#x27;s email and password, <strong>Exchange/Teams</strong> mode (or Teams only if there is no hybrid mailbox). After a restart, the console shows the room name and the day&#x27;s calendar.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Teams Rooms · touch console › Settings › Account</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Email address</span><span class="ui-v">room-mad-21@contoso.com</span></div><div class="ui-field"><span class="ui-k">Supported meeting mode</span><span class="ui-v">Exchange and Teams</span></div><div class="ui-field"><span class="ui-k">Exchange address</span><span class="ui-v">autodiscover</span></div><div class="ui-field"><span class="ui-k">Status</span><span class="ui-v">Teams connected · Exchange connected · Calendar synced</span></div><div class="ui-btn">Save and exit</div></div></figure>
+<p>If it says &quot;Exchange: authentication error&quot; but Teams connects, the mailbox is still of type Room without sign-in allowed, or the password has expired.</p>
+<h2>3. Peripherals</h2>
+<p><strong>Settings → Peripherals</strong> is where you pick which camera, microphone and speaker the room uses. All-in-one bars (Logitech Rally Bar, Poly Studio) appear as a single device; with a Crestron processor and separate peripherals, each one comes over USB and has to be selected one by one. Practical rule: a single USB cable from the bar or hub to the room PC, with no dubious extenders; half of all &quot;no camera&quot; tickets are a cable.</p>
+<h2>4. Monitor from the portal</h2>
+<p>With the Pro licence, the <strong>Teams Rooms Pro Management Portal</strong> (<code>portal.rooms.microsoft.com</code>) shows every room, its status, peripherals and incidents, and lets you restart and update without visiting the room.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Teams Rooms Pro Management · Rooms</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Madrid Room 2.1 · Status</span><span class="ui-v">Healthy · Last signal: 2 min ago</span></div><div class="ui-field"><span class="ui-k">Device</span><span class="ui-v">Crestron Flex UC-C100 · Windows · App 5.2</span></div><div class="ui-field"><span class="ui-k">Peripherals</span><span class="ui-v">camera OK · microphone OK · speaker OK · display OK</span></div><div class="ui-field"><span class="ui-k">Incidents</span><span class="ui-v">0 open · Last meeting: today 10:00 (2 remote participants)</span></div><div class="ui-btn">Restart] [Update] [View log</div></div></figure>
+<p>A <strong>ticket</strong> opens in the portal on its own when a peripheral stops responding or the app has gone silent for a while. Worth looking there before the user tells you.</p>
+<h2>5. &quot;The room doesn&#x27;t work&quot;: the order</h2>
+<ol><li><strong>Is the console on, with the right time?</strong> A room with the wrong time can&#x27;t sign in (certificates). Restart from the portal, or a physical 30-second power-off.</li><li><strong>Does the calendar appear?</strong> If not, it is the account (steps 1 and 2): password, licence, Conditional Access. Try signing in with the room account at <code>outlook.office.com</code> from a laptop: if it asks for MFA or is blocked, there is your answer.</li><li><strong>The meeting has no Join button?</strong> <code>Set-CalendarProcessing</code> with <code>DeleteComments</code> at <code>$true</code>, or the meeting isn&#x27;t a Teams one (invitation with no link). Third-party meetings (Zoom, Webex) need <strong>direct guest join</strong> enabled in the room settings.</li><li><strong>No audio, video or screen sharing?</strong> Peripherals (step 3): cable, hub, or the device chosen in settings isn&#x27;t the one plugged in. A device restart re-detects the peripherals.</li><li><strong>All fine but remote people can&#x27;t hear?</strong> Network quality: the room on Wi-Fi or on a VLAN with misconfigured QoS. The portal shows each meeting&#x27;s quality; if it is the network, it goes to networks with the time and the room.</li></ol>
+<h2>Next steps</h2>
+<ul><li>Put the room account in a group with <strong>group-based licensing</strong> and its own Conditional Access policy: every new room then becomes creating a mailbox and adding it to the group.</li><li>Enable <strong>automatic updates</strong> in the portal on a test ring with one room before the rest.</li><li>In Level 4 you&#x27;ll see board and executive support: when a boardroom fails, there is no second attempt.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">Microsoft Teams Rooms</span><span class="en">Microsoft Teams Rooms</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span><span class="en">All Level 2 guides</span> →</a>
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="mecm-sccm-empaquetar-una-aplicacion-y-desplegarla.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">MECM / SCCM: empaquetar una aplicación y desplegarla a una colección</span><span class="en">MECM / SCCM: packaging an application and deploying it to a collection</span></span></a>
+    <a class="post-nav-link next" href="pdq-y-mdt-desplegar-software-en-lote-e-instalar-windows.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">PDQ y MDT: desplegar software en lote e instalar Windows desde cero</span><span class="en">PDQ and MDT: deploying software in bulk and installing Windows from scratch</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
