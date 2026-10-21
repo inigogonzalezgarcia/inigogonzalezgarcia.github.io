@@ -1,0 +1,37 @@
+# Builds every page from src/ (python src/build.py) and commits the generated files, so a change to
+# src/posts.py, src/guides.py or src/build.py only needs the source pushed. Pages are generated with the
+# same script and the same inputs as a local build, so the result is identical.
+name: Build site
+on:
+  push:
+    branches: [main]
+    paths: ["src/**", "assets/style.css", ".github/workflows/build.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: og-images
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pillow==12.2.0
+      - name: Map data (src/map.json is not committed; Natural Earth 1:110m, pinned to v5.1.2)
+        run: |
+          git clone -q --depth 1 --branch v5.1.2 --filter=blob:none --sparse https://github.com/nvkelso/natural-earth-vector /tmp/ne
+          git -C /tmp/ne sparse-checkout set --no-cone /geojson/ne_110m_admin_0_countries.geojson
+          python src/make_map.py /tmp/ne/geojson/ne_110m_admin_0_countries.geojson
+      - run: python src/build.py
+      - name: Commit generated pages if they changed
+        run: |
+          git add -A
+          git restore --staged src/__pycache__ 2>/dev/null || true
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898099+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Build: regenerate pages from src/"
+          git pull --rebase
+          git push
