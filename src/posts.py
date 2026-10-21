@@ -1199,4 +1199,48 @@ De años dando soporte a centro de datos e integración IT-OT: switches y router
 - Exportar tus zonas, inventario y reglas de firewall a CSV, y una semana de flujos del firewall o de NetFlow.
 - Revisar la propuesta con la planta antes de bloquear nada, y planificar cada cambio por CAB con vuelta atrás.
 - Profundizar en la evaluación de riesgos de IEC 62443-3-2 y los niveles de seguridad por zona."""),
+dict(n="27", repo="27-m365-tenant-governance-review", date="2026-10-21", cat="tools",
+ title_en="Is the tenant still governed the way we agreed? A monthly Microsoft 365 review", title_es="¿Sigue el tenant gobernado como acordamos? Una revisión mensual de Microsoft 365",
+ dek_en="Admin roles and PIM, emergency accounts, Conditional Access basics, settings drift, licences to reclaim, and admin changes matched to change tickets, including the provider's.",
+ dek_es="Roles de administración y PIM, cuentas de emergencia, lo básico de Acceso condicional, desviaciones de configuración, licencias a recuperar y cambios de administración cruzados con los tickets de cambio, también los del proveedor.",
+ en="""
+
+## The problem
+A Microsoft 365 tenant drifts one reasonable change at a time. A Global Administrator given for a migration is still always-on two years later. The provider's engineers hold permanent admin roles with no end date. The change to allow automatic forwarding was rejected at CAB and made anyway. The legacy authentication block has been in report-only since July. When the platform is operated by a provider, the internal team still owns the risk, and it needs a short list for the monthly review.
+
+## What I built
+- A review of a read-only export of the tenant in six areas: privileged access, emergency accounts, the four Conditional Access basics, ten tenant settings against a baseline, licences, and sensitive admin changes.
+- Each admin change on roles, Conditional Access, tenant or mail-flow settings is matched to a change ticket by implementer and window: approved, emergency, rejected, no ticket, or made with an emergency account.
+- `report.html`, `review.md` with a section for the service review with the provider, `actions.csv`, `privileged-access.csv` for the quarterly access review, `licence-reclaim.csv` and `admin-changes.csv`.
+
+## How it is built
+Python with the standard library only, and a read-only PowerShell exporter on Microsoft Graph and, optionally, Exchange Online. The demo is a made-up retailer with 395 accounts, operated by a fictional provider, with problems placed on purpose. 16 tests and a runbook for the monthly review.
+
+## What I learned
+From running Microsoft 365 as Global Administrator: PIM and just-in-time access, Conditional Access, Exchange Online, Purview, tenant-to-tenant migrations and changes through CAB with providers. Governance is not a one-off hardening project; it is a monthly habit, and the change ticket is what keeps the provider and the internal team on the same page.
+
+## Next steps
+- Run the exporter with a Global Reader account against your tenant and check the role names and the Conditional Access mapping on the first run.
+- Agree the baseline with security before the first review.
+- Ask the provider to put the change reference in every admin session, so the change matching becomes a formality.""",
+ es="""
+
+## El problema
+Un tenant de Microsoft 365 se desvía cambio razonable a cambio razonable. Un Global Administrator dado para una migración sigue activo dos años después. Los ingenieros del proveedor tienen roles de administración permanentes sin fecha de fin. El cambio para permitir el reenvío automático se rechazó en el CAB y se hizo igualmente. El bloqueo de la autenticación heredada lleva en modo solo informe desde julio. Cuando la plataforma la opera un proveedor, el riesgo sigue siendo del equipo interno, que necesita una lista corta para la revisión mensual.
+
+## Qué he hecho
+- Una revisión de una exportación de solo lectura del tenant en seis áreas: acceso privilegiado, cuentas de emergencia, lo básico de Acceso condicional, diez ajustes del tenant frente a una línea base, licencias y cambios de administración sensibles.
+- Cada cambio de administración en roles, Acceso condicional, ajustes del tenant o del flujo de correo se cruza con un ticket de cambio por implementador y ventana: aprobado, de emergencia, rechazado, sin ticket o hecho con una cuenta de emergencia.
+- `report.html`, `review.md` con una sección para la revisión de servicio con el proveedor, `actions.csv`, `privileged-access.csv` para la revisión trimestral de accesos, `licence-reclaim.csv` y `admin-changes.csv`.
+
+## Cómo está hecho
+Python solo con la librería estándar, y un exportador de solo lectura en PowerShell sobre Microsoft Graph y, si se quiere, Exchange Online. La demo es un comercio inventado con 395 cuentas, operado por un proveedor ficticio, con problemas puestos a propósito. 16 tests y un runbook para la revisión mensual.
+
+## Qué aprendí
+De administrar Microsoft 365 como Global Administrator: PIM y acceso just-in-time, Acceso condicional, Exchange Online, Purview, migraciones de tenant a tenant y cambios por CAB con proveedores. El gobierno de un tenant no es un proyecto de bastionado puntual, es un hábito mensual, y el ticket de cambio es lo que mantiene alineados al proveedor y al equipo interno.
+
+## Siguientes pasos
+- Ejecutar el exportador con una cuenta Global Reader en tu tenant y revisar en la primera ejecución los nombres de roles y el mapeo de Acceso condicional.
+- Acordar la línea base con seguridad antes de la primera revisión.
+- Pedir al proveedor que ponga la referencia del cambio en cada sesión de administración, para que el cruce con los cambios sea un trámite."""),
 ]
