@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Git: putting the team&#x27;s scripts under version control · Iñigo González" data-title-es="Git: poner los scripts del equipo bajo control de versiones · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Git: putting the team&#x27;s scripts under version control · Iñigo González</title>
+<meta name="description" content="Repository, branches, commits that make sense, pull requests with review, and what must never go into a repo.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/git-scripts-del-equipo-bajo-control-de-versiones.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git: putting the team&#x27;s scripts under version control · Iñigo González">
+<meta property="og:description" content="Repository, branches, commits that make sense, pull requests with review, and what must never go into a repo.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/git-scripts-del-equipo-bajo-control-de-versiones.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Git: putting the team&#x27;s scripts under version control · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Git: putting the team's scripts under version control","alternativeHeadline":"Git: poner los scripts del equipo bajo control de versiones","description":"Repository, branches, commits that make sense, pull requests with review, and what must never go into a repo.","datePublished":"2026-10-21","dateModified":"2026-10-21","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/git-scripts-del-equipo-bajo-control-de-versiones.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/git-scripts-del-equipo-bajo-control-de-versiones.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Git"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 2","item":"https://inigogonzalezgarcia.github.io/guias/nivel-2.html"},{"@type":"ListItem","position":4,"name":"Git: putting the team's scripts under version control","item":"https://inigogonzalezgarcia.github.io/guias/git-scripts-del-equipo-bajo-control-de-versiones.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="nivel-2.html"><span class="es">Nivel 2</span><span class="en">Level 2</span></a></p>
+    <h1><span class="es">Git: poner los scripts del equipo bajo control de versiones</span><span class="en">Git: putting the team&#x27;s scripts under version control</span></h1>
+    <p class="lede"><span class="es">Repositorio, ramas, commits que se entienden, pull request con revisión, y lo que nunca debe entrar en un repo.</span><span class="en">Repository, branches, commits that make sense, pull requests with review, and what must never go into a repo.</span></p><p class="label post-meta"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">Git</span><span class="en">Git</span> · <span class="es">3 min</span><span class="en">3 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">21 oct 2026</span><span class="en">21 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Que los scripts de PowerShell y Bash del equipo dejen de vivir en <code>C:\Scripts\final_v3_bueno.ps1</code> y pasen a un repositorio con historial, revisión y un sitio único del que todo el mundo tira. Con el flujo mínimo que un equipo de IT usa de verdad.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Git instalado (<code>git --version</code>). En Windows, <strong>Git for Windows</strong>; en Linux viene o se instala con <code>apt</code>/<code>dnf</code>.</li><li>Una cuenta en el servidor de Git de tu empresa (GitHub, GitLab, Azure DevOps, Bitbucket) y un repositorio vacío creado por quien administre: <code>it-scripts</code>.</li><li>Tu nombre y correo configurados una vez: <code>git config --global user.name &quot;Laura Prado&quot;</code> y <code>git config --global user.email laura.prado@contoso.com</code>.</li></ul>
+<h2>1. Lo que nunca entra en un repo</h2>
+<p>Antes de la primera subida, porque después es muy difícil sacarlo del historial:</p>
+<ul><li><strong>Contraseñas, claves de API, tokens, certificados con clave privada.</strong> Van en el gestor de secretos y el script los lee de una variable de entorno o de un vault.</li><li>Ficheros con datos de personas (exports de AD con correos, listados de usuarios).</li><li>Lo que se genera: logs, <code>output/</code>, CSV de resultados.</li></ul>
+<p>Un <code>.gitignore</code> en la raíz lo evita:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">.gitignore</span><button class="t-copy" type="button" data-copy="# resultados y temporales&#10;output/&#10;*.log&#10;*.csv&#10;# secretos: nunca&#10;*.pfx&#10;*.key&#10;.env&#10;secrets.*" data-copied="Copiado">Copiar</button></figcaption><pre class="t-body"><code><span class="t-cmt"># resultados y temporales</span><span class="t-out">output/</span><span class="t-out">*.log</span><span class="t-out">*.csv</span><span class="t-cmt"># secretos: nunca</span><span class="t-out">*.pfx</span><span class="t-out">*.key</span><span class="t-out">.env</span><span class="t-out">secrets.*</span></code></pre></figure>
+<h2>2. Primer repositorio</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">bash · tu equipo</span><button class="t-copy" type="button" data-copy="git clone https://git.contoso.com/it/it-scripts.git&#10;cd it-scripts&#10;mkdir -p powershell bash&#10;cp ~/scripts/check-server.sh bash/&#10;git status --short&#10;git add .gitignore bash/check-server.sh&#10;git commit -m &quot;bash: comprobación diaria de disco, carga y servicios&quot;&#10;git push -u origin main" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git clone https://git.contoso.com/it/it-scripts.git</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>cd it-scripts</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>mkdir -p powershell bash</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>cp ~/scripts/check-server.sh bash/</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git status --short</span><span class="t-out">?? .gitignore</span><span class="t-out">?? bash/check-server.sh</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git add .gitignore bash/check-server.sh</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git commit -m &quot;bash: comprobación diaria de disco, carga y servicios&quot;</span><span class="t-out">[main 3f2a9c1] bash: comprobación diaria de disco, carga y servicios</span><span class="t-out"> 2 files changed, 58 insertions(+)</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git push -u origin main</span></code></pre></figure>
+<p><code>git status</code> antes de cada <code>add</code> te enseña qué vas a subir. <code>git add .</code> a ciegas es como se cuela un <code>.pfx</code>.</p>
+<h2>3. Cambios con rama y revisión</h2>
+<p>El flujo que evita que un cambio a medias llegue a producción: cada cambio en una <strong>rama</strong>, se sube, alguien lo revisa en un <strong>pull request</strong> (merge request en GitLab) y se fusiona a <code>main</code>.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">bash · tu equipo</span><button class="t-copy" type="button" data-copy="git switch -c fix/umbral-disco-90&#10;nano bash/check-server.sh&#10;git diff&#10;git commit -am &quot;check-server: umbral de disco al 90% (acordado en la reunión del 20/10)&quot;&#10;git push -u origin fix/umbral-disco-90" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git switch -c fix/umbral-disco-90</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>nano bash/check-server.sh</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git diff</span><span class="t-out">-DISK_MAX=85</span><span class="t-out">+DISK_MAX=90</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git commit -am &quot;check-server: umbral de disco al 90% (acordado en la reunión del 20/10)&quot;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git push -u origin fix/umbral-disco-90</span><span class="t-out">remote: Create a pull request for &#x27;fix/umbral-disco-90&#x27;:</span><span class="t-out">remote:   https://git.contoso.com/it/it-scripts/pull/new/fix/umbral-disco-90</span></code></pre></figure>
+<p>En el pull request, el compañero ve el <code>diff</code>, comenta y aprueba. Después, <code>main</code> se actualiza y todos hacen <code>git pull</code>. Nombres de rama que ayudan: <code>fix/…</code>, <code>feat/…</code>, <code>docs/…</code>.</p>
+<h2>4. Commits que se entienden</h2>
+<p>Un commit es un cambio con un motivo. El mensaje: qué cambia y por qué, en una línea de menos de 70 caracteres, en imperativo o en presente. Si hace falta más, una línea en blanco y el detalle.</p>
+<ul><li>Bien: <code>vpn-check: reintentar 3 veces antes de avisar (falsos positivos en la VPN de Milán)</code>.</li><li>Mal: <code>cambios</code>, <code>arreglo</code>, <code>v2</code>.</li></ul>
+<p>Si lo que vas a escribir es &quot;varios cambios&quot;, son varios commits.</p>
+<h2>5. Lo que harás cada semana</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">bash · chuleta</span><button class="t-copy" type="button" data-copy="git switch main &amp;&amp; git pull&#10;git log --oneline -10&#10;git log -p bash/check-server.sh&#10;git restore bash/check-server.sh&#10;git checkout 3f2a9c1 -- bash/check-server.sh" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmt"># ponerte al día antes de empezar</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git switch main &amp;&amp; git pull</span><span class="t-cmt"># ver qué ha cambiado y quién</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git log --oneline -10</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git log -p bash/check-server.sh</span><span class="t-cmt"># deshacer un cambio local que no has confirmado</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git restore bash/check-server.sh</span><span class="t-cmt"># volver a una versión anterior de un fichero sin perder el historial</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git checkout 3f2a9c1 -- bash/check-server.sh</span></code></pre></figure>
+<p class="g-warn"><code>git push --force</code> y <code>git reset --hard</code> reescriben o borran. Si no sabes exactamente qué hacen, no los uses sobre <code>main</code>; pide ayuda y se arregla en dos minutos. Casi todo en Git se recupera; lo que se pierde es por forzar.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Protege <code>main</code> en el servidor: sin push directo, pull request obligatorio con una aprobación.</li><li>Añade una comprobación automática al pull request: <code>shellcheck</code> para Bash, <code>PSScriptAnalyzer</code> para PowerShell.</li><li>En el Nivel 3 verás Jenkins y CI/CD: el repositorio es lo que dispara las pruebas y los despliegues.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>The team&#x27;s PowerShell and Bash scripts stop living in <code>C:\Scripts\final_v3_good.ps1</code> and move into a repository with history, review and one place everyone pulls from. With the minimal flow an IT team really uses.</p>
+<h2>Before you start</h2>
+<ul><li>Git installed (<code>git --version</code>). On Windows, <strong>Git for Windows</strong>; on Linux it ships or installs with <code>apt</code>/<code>dnf</code>.</li><li>An account on your company&#x27;s Git server (GitHub, GitLab, Azure DevOps, Bitbucket) and an empty repository created by whoever administers it: <code>it-scripts</code>.</li><li>Your name and email set once: <code>git config --global user.name &quot;Laura Prado&quot;</code> and <code>git config --global user.email laura.prado@contoso.com</code>.</li></ul>
+<h2>1. What never goes into a repo</h2>
+<p>Before the first push, because afterwards it is very hard to get out of the history:</p>
+<ul><li><strong>Passwords, API keys, tokens, certificates with private keys.</strong> They live in the secrets manager and the script reads them from an environment variable or a vault.</li><li>Files with personal data (AD exports with emails, user lists).</li><li>Anything generated: logs, <code>output/</code>, result CSVs.</li></ul>
+<p>A <code>.gitignore</code> at the root prevents it:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">.gitignore</span><button class="t-copy" type="button" data-copy="# results and temporary files&#10;output/&#10;*.log&#10;*.csv&#10;# secrets: never&#10;*.pfx&#10;*.key&#10;.env&#10;secrets.*" data-copied="Copied">Copy</button></figcaption><pre class="t-body"><code><span class="t-cmt"># results and temporary files</span><span class="t-out">output/</span><span class="t-out">*.log</span><span class="t-out">*.csv</span><span class="t-cmt"># secrets: never</span><span class="t-out">*.pfx</span><span class="t-out">*.key</span><span class="t-out">.env</span><span class="t-out">secrets.*</span></code></pre></figure>
+<h2>2. First repository</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">bash · your device</span><button class="t-copy" type="button" data-copy="git clone https://git.contoso.com/it/it-scripts.git&#10;cd it-scripts&#10;mkdir -p powershell bash&#10;cp ~/scripts/check-server.sh bash/&#10;git status --short&#10;git add .gitignore bash/check-server.sh&#10;git commit -m &quot;bash: daily check of disk, load and services&quot;&#10;git push -u origin main" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git clone https://git.contoso.com/it/it-scripts.git</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>cd it-scripts</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>mkdir -p powershell bash</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>cp ~/scripts/check-server.sh bash/</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git status --short</span><span class="t-out">?? .gitignore</span><span class="t-out">?? bash/check-server.sh</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git add .gitignore bash/check-server.sh</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git commit -m &quot;bash: daily check of disk, load and services&quot;</span><span class="t-out">[main 3f2a9c1] bash: daily check of disk, load and services</span><span class="t-out"> 2 files changed, 58 insertions(+)</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git push -u origin main</span></code></pre></figure>
+<p><code>git status</code> before every <code>add</code> shows what you are about to push. A blind <code>git add .</code> is how a <code>.pfx</code> slips in.</p>
+<h2>3. Changes with a branch and a review</h2>
+<p>The flow that stops a half-finished change reaching production: every change on a <strong>branch</strong>, pushed, reviewed by someone in a <strong>pull request</strong> (merge request in GitLab) and merged into <code>main</code>.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">bash · your device</span><button class="t-copy" type="button" data-copy="git switch -c fix/disk-threshold-90&#10;nano bash/check-server.sh&#10;git diff&#10;git commit -am &quot;check-server: disk threshold to 90% (agreed in the 20/10 meeting)&quot;&#10;git push -u origin fix/disk-threshold-90" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git switch -c fix/disk-threshold-90</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>nano bash/check-server.sh</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git diff</span><span class="t-out">-DISK_MAX=85</span><span class="t-out">+DISK_MAX=90</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git commit -am &quot;check-server: disk threshold to 90% (agreed in the 20/10 meeting)&quot;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git push -u origin fix/disk-threshold-90</span><span class="t-out">remote: Create a pull request for &#x27;fix/disk-threshold-90&#x27;:</span><span class="t-out">remote:   https://git.contoso.com/it/it-scripts/pull/new/fix/disk-threshold-90</span></code></pre></figure>
+<p>In the pull request, a colleague sees the <code>diff</code>, comments and approves. Then <code>main</code> is updated and everyone runs <code>git pull</code>. Branch names that help: <code>fix/…</code>, <code>feat/…</code>, <code>docs/…</code>.</p>
+<h2>4. Commits that make sense</h2>
+<p>A commit is one change with one reason. The message: what changes and why, in one line under 70 characters, in the imperative or present tense. If more is needed, a blank line and the detail.</p>
+<ul><li>Good: <code>vpn-check: retry 3 times before warning (false positives on the Milan VPN)</code>.</li><li>Bad: <code>changes</code>, <code>fix</code>, <code>v2</code>.</li></ul>
+<p>If what you are about to write is &quot;various changes&quot;, that is several commits.</p>
+<h2>5. What you&#x27;ll do every week</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">bash · cheat sheet</span><button class="t-copy" type="button" data-copy="git switch main &amp;&amp; git pull&#10;git log --oneline -10&#10;git log -p bash/check-server.sh&#10;git restore bash/check-server.sh&#10;git checkout 3f2a9c1 -- bash/check-server.sh" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmt"># catch up before starting</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git switch main &amp;&amp; git pull</span><span class="t-cmt"># see what changed and who did it</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git log --oneline -10</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git log -p bash/check-server.sh</span><span class="t-cmt"># undo a local change you haven&#x27;t committed</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git restore bash/check-server.sh</span><span class="t-cmt"># bring back an earlier version of a file without losing history</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>git checkout 3f2a9c1 -- bash/check-server.sh</span></code></pre></figure>
+<p class="g-warn"><code>git push --force</code> and <code>git reset --hard</code> rewrite or delete. If you don&#x27;t know exactly what they do, don&#x27;t use them on <code>main</code>; ask for help and it is fixed in two minutes. Almost everything in Git is recoverable; what gets lost is lost by forcing.</p>
+<h2>Next steps</h2>
+<ul><li>Protect <code>main</code> on the server: no direct push, pull request required with one approval.</li><li>Add an automatic check to the pull request: <code>shellcheck</code> for Bash, <code>PSScriptAnalyzer</code> for PowerShell.</li><li>In Level 3 you&#x27;ll see Jenkins and CI/CD: the repository is what triggers tests and deployments.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">Git</span><span class="en">Git</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span><span class="en">All Level 2 guides</span> →</a>
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="confluence-espacio-de-it-y-runbooks-que-se-usan.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Confluence: montar el espacio de IT y escribir runbooks que el equipo use</span><span class="en">Confluence: setting up the IT space and writing runbooks the team actually uses</span></span></a>
+    <a class="post-nav-link next" href="jamf-pro-enrolar-un-mac-y-desplegar-una-politica.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Jamf Pro: enrolar un Mac y desplegar una política con un grupo inteligente</span><span class="en">Jamf Pro: enrolling a Mac and deploying a policy with a smart group</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

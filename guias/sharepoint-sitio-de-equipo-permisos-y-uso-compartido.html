@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="SharePoint Online: creating a team site, granting permissions properly and understanding sharing · Iñigo González" data-title-es="SharePoint Online: crear un sitio de equipo, dar permisos bien y entender el uso compartido · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>SharePoint Online: creating a team site, granting permissions properly and understanding sharing · Iñigo González</title>
+<meta name="description" content="A team site with a Microsoft 365 group, the three permission levels, external sharing, versioning and the recycle bin. With PowerShell so you don&#x27;t do it by hand a hundred times.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/sharepoint-sitio-de-equipo-permisos-y-uso-compartido.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SharePoint Online: creating a team site, granting permissions properly and understanding sharing · Iñigo González">
+<meta property="og:description" content="A team site with a Microsoft 365 group, the three permission levels, external sharing, versioning and the recycle bin. With PowerShell so you don&#x27;t do it by hand a hundred times.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/sharepoint-sitio-de-equipo-permisos-y-uso-compartido.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SharePoint Online: creating a team site, granting permissions properly and understanding sharing · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"SharePoint Online: creating a team site, granting permissions properly and understanding sharing","alternativeHeadline":"SharePoint Online: crear un sitio de equipo, dar permisos bien y entender el uso compartido","description":"A team site with a Microsoft 365 group, the three permission levels, external sharing, versioning and the recycle bin. With PowerShell so you don't do it by hand a hundred times.","datePublished":"2026-10-21","dateModified":"2026-10-21","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/sharepoint-sitio-de-equipo-permisos-y-uso-compartido.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/sharepoint-sitio-de-equipo-permisos-y-uso-compartido.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"SharePoint"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 2","item":"https://inigogonzalezgarcia.github.io/guias/nivel-2.html"},{"@type":"ListItem","position":4,"name":"SharePoint Online: creating a team site, granting permissions properly and understanding sharing","item":"https://inigogonzalezgarcia.github.io/guias/sharepoint-sitio-de-equipo-permisos-y-uso-compartido.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="nivel-2.html"><span class="es">Nivel 2</span><span class="en">Level 2</span></a></p>
+    <h1><span class="es">SharePoint Online: crear un sitio de equipo, dar permisos bien y entender el uso compartido</span><span class="en">SharePoint Online: creating a team site, granting permissions properly and understanding sharing</span></h1>
+    <p class="lede"><span class="es">Sitio de equipo con grupo de Microsoft 365, los tres niveles de permiso, el uso compartido externo, versiones y papelera. Con PowerShell para no hacerlo a mano cien veces.</span><span class="en">A team site with a Microsoft 365 group, the three permission levels, external sharing, versioning and the recycle bin. With PowerShell so you don&#x27;t do it by hand a hundred times.</span></p><p class="label post-meta"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">SharePoint</span><span class="en">SharePoint</span> · <span class="es">4 min</span><span class="en">4 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">21 oct 2026</span><span class="en">21 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Un sitio de SharePoint para un equipo con los permisos bien puestos desde el principio, saber por qué un usuario &quot;no ve la carpeta&quot; y recuperar un documento borrado o sobrescrito. Y cómo se comparte fuera de la empresa sin perder el control.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Rol de <strong>Administrador de SharePoint</strong> para crear sitios y tocar la configuración del tenant. Para administrar un sitio concreto basta con ser <strong>propietario</strong> del sitio.</li><li>El módulo <code>Microsoft.Online.SharePoint.PowerShell</code> (<code>Install-Module -Name Microsoft.Online.SharePoint.PowerShell</code>) o <strong>PnP.PowerShell</strong> para automatizar.</li><li>Saber si el sitio va ligado a un <strong>equipo de Teams</strong> (sí, casi siempre): entonces se crea desde Teams y SharePoint viene detrás.</li></ul>
+<h2>1. Crear el sitio</h2>
+<p>Un <strong>sitio de equipo</strong> lleva un grupo de Microsoft 365 (propietarios y miembros) y un buzón; es el que quieres para un departamento o proyecto. Un <strong>sitio de comunicación</strong> es para publicar (intranet, noticias), sin grupo.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · SharePoint Online</span><button class="t-copy" type="button" data-copy="Connect-SPOService -Url https://contoso-admin.sharepoint.com&#10;New-SPOSite -Url https://contoso.sharepoint.com/sites/ventas -Title &quot;Ventas&quot; -Owner laura.prado@contoso.com -Template &quot;STS#3&quot; -StorageQuota 26214400 -LocaleId 3082&#10;Connect-PnPOnline -Url https://contoso-admin.sharepoint.com -Interactive&#10;New-PnPSite -Type TeamSite -Title &quot;Ventas&quot; -Alias ventas -Owners laura.prado@contoso.com -Lcid 3082" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Connect-SPOService -Url https://contoso-admin.sharepoint.com</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>New-SPOSite -Url https://contoso.sharepoint.com/sites/ventas -Title &quot;Ventas&quot; -Owner laura.prado@contoso.com -Template &quot;STS#3&quot; -StorageQuota 26214400 -LocaleId 3082</span><span class="t-cmt"># Mejor aún: con PnP, un sitio de equipo con grupo M365 desde el principio</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Connect-PnPOnline -Url https://contoso-admin.sharepoint.com -Interactive</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>New-PnPSite -Type TeamSite -Title &quot;Ventas&quot; -Alias ventas -Owners laura.prado@contoso.com -Lcid 3082</span><span class="t-out">https://contoso.sharepoint.com/sites/ventas</span></code></pre></figure>
+<p>Si el equipo ya existe en Teams, el sitio ya está creado: <code>https://contoso.sharepoint.com/sites/&lt;alias del equipo&gt;</code>. No crees otro.</p>
+<h2>2. Permisos: tres grupos y nada más</h2>
+<p>Cada sitio nace con tres grupos de SharePoint: <strong>Propietarios</strong> (control total), <strong>Miembros</strong> (editar) y <strong>Visitantes</strong> (leer). La regla que evita el caos: los usuarios entran en esos grupos (o en el grupo de Microsoft 365, que alimenta Propietarios y Miembros), nunca con permisos directos sobre carpetas sueltas.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">SharePoint · Ventas › Configuración › Permisos del sitio</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Propietarios del sitio</span><span class="ui-v">Laura Prado, Carlos Rey (grupo M365: propietarios)</span></div><div class="ui-field"><span class="ui-k">Miembros del sitio</span><span class="ui-v">GG-Ventas (34) (grupo M365: miembros)</span></div><div class="ui-field"><span class="ui-k">Visitantes del sitio</span><span class="ui-v">GG-Direccion (lectura)</span></div><div class="ui-path"><span>Configuración avanzada de permisos</span><span class="ui-sep" aria-hidden="true">›</span><span>Comprobar permisos</span></div><div class="ui-field"><span class="ui-k">Usuario</span><span class="ui-v">ana.sol@contoso.com</span></div><div class="ui-field"><span class="ui-k">Resultado</span><span class="ui-v">Leer · dado por · Visitantes del sitio › GG-Direccion</span></div></div></figure>
+<p><strong>Comprobar permisos</strong> es la herramienta para &quot;no veo la carpeta&quot;: dice exactamente por qué camino tiene (o no tiene) acceso. Si una carpeta tiene <strong>permisos únicos</strong> (herencia rota), aparece ahí: eso es lo que hace que alguien vea el sitio pero no una carpeta concreta. Se arregla restaurando la herencia o dando acceso en esa carpeta, pero lo primero es mejor.</p>
+<p class="g-warn">&quot;Control total&quot; para Miembros, o un grupo de 300 personas en Propietarios, es cómo un sitio acaba con documentos borrados y nadie sabe por quién. Propietarios: dos o tres personas.</p>
+<h2>3. Uso compartido: lo que ve el usuario</h2>
+<p>Cuando un usuario pulsa <strong>Compartir</strong>, lo que puede hacer depende de la configuración del tenant y del sitio:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · SharePoint Online</span><button class="t-copy" type="button" data-copy="Get-SPOTenant | Select-Object SharingCapability, DefaultSharingLinkType, RequireAnonymousLinksExpireInDays&#10;Get-SPOSite https://contoso.sharepoint.com/sites/ventas | Select-Object SharingCapability&#10;Set-SPOSite https://contoso.sharepoint.com/sites/ventas -SharingCapability ExternalUserSharingOnly" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-SPOTenant | Select-Object SharingCapability, DefaultSharingLinkType, RequireAnonymousLinksExpireInDays</span><span class="t-out">SharingCapability                : ExternalUserSharingOnly</span><span class="t-out">DefaultSharingLinkType           : Internal</span><span class="t-out">RequireAnonymousLinksExpireInDays : 30</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-SPOSite https://contoso.sharepoint.com/sites/ventas | Select-Object SharingCapability</span><span class="t-out">SharingCapability : Disabled</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Set-SPOSite https://contoso.sharepoint.com/sites/ventas -SharingCapability ExternalUserSharingOnly</span></code></pre></figure>
+<ul><li><strong>Disabled</strong>: solo gente de la empresa. Lo normal para RRHH, Finanzas y dirección.</li><li><strong>ExternalUserSharingOnly</strong>: invitados que inician sesión (aparecen en Entra ID como <code>#EXT#</code>). Lo normal para proyectos con proveedores.</li><li><strong>ExternalUserAndGuestSharing</strong>: enlaces &quot;Cualquiera&quot; sin iniciar sesión. Solo si la política lo permite, y con caducidad.</li></ul>
+<p>El sitio nunca puede ser más abierto que el tenant. Si un usuario dice &quot;no me deja compartir con el proveedor&quot;, mira primero el sitio y después el tenant.</p>
+<h2>4. Recuperar: versiones y papelera</h2>
+<ul><li><strong>Versiones</strong>: en una biblioteca, botón derecho sobre el documento → <strong>Historial de versiones</strong> → restaurar la de antes del cambio. Está activado por defecto (500 versiones principales). Un documento &quot;sobrescrito&quot; casi nunca está perdido.</li><li><strong>Papelera</strong>: <code>Contenido del sitio → Papelera de reciclaje</code>, 93 días. Lo que el usuario borra pasa por ahí; lo que se vacía de ahí, pasa a la <strong>papelera de segunda etapa</strong> (solo administradores del sitio) hasta completar los 93 días.</li><li>Lo borrado hace más de 93 días o un sitio entero eliminado: <code>Get-SPODeletedSite</code> y <code>Restore-SPODeletedSite</code> para sitios (93 días también); para documentos, la retención de Purview si existe. Después de eso, no hay copia que valga: SharePoint no tiene &quot;backup&quot; clásico, tiene retención.</li></ul>
+<h2>5. Lo que preguntan en los tickets</h2>
+<ul><li><strong>&quot;El sitio va lento o no carga&quot;</strong>: estado del servicio en el centro de administración de Microsoft 365 antes de nada. Si solo le pasa a uno, caché del navegador o OneDrive sincronizando una biblioteca de 200.000 ficheros (límite recomendado: 300.000 en total por usuario sincronizado).</li><li><strong>&quot;Me pide iniciar sesión todo el rato&quot;</strong>: Conditional Access y dispositivo no conforme, o un invitado con cuenta en dos tenants.</li><li><strong>&quot;Han desaparecido archivos&quot;</strong>: <code>Compartido conmigo</code>, vista con filtro, o la papelera. Casi nunca han desaparecido.</li></ul>
+<h2>Siguientes pasos</h2>
+<ul><li>Un informe mensual de sitios con uso compartido externo activo y de enlaces &quot;Cualquiera&quot; vivos: <code>Get-SPOSite -Limit All | Where-Object SharingCapability -ne Disabled</code>.</li><li>Aprende las <strong>etiquetas de confidencialidad</strong> aplicadas a sitios: deciden el uso compartido y el acceso desde dispositivos no gestionados sin tocar cada sitio.</li><li>En el Nivel 4 verás Purview completo: retención, DLP y las etiquetas que protegen un documento allá donde vaya.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>A SharePoint site for a team with permissions set properly from day one, knowing why a user &quot;can&#x27;t see the folder&quot;, and recovering a deleted or overwritten document. Plus how sharing outside the company works without losing control.</p>
+<h2>Before you start</h2>
+<ul><li>The <strong>SharePoint Administrator</strong> role to create sites and touch tenant settings. To administer one site, being a site <strong>owner</strong> is enough.</li><li>The <code>Microsoft.Online.SharePoint.PowerShell</code> module (<code>Install-Module -Name Microsoft.Online.SharePoint.PowerShell</code>) or <strong>PnP.PowerShell</strong> to automate.</li><li>Know whether the site is tied to a <strong>Teams team</strong> (yes, almost always): then it is created from Teams and SharePoint follows.</li></ul>
+<h2>1. Create the site</h2>
+<p>A <strong>team site</strong> carries a Microsoft 365 group (owners and members) and a mailbox; it is what you want for a department or project. A <strong>communication site</strong> is for publishing (intranet, news), with no group.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · SharePoint Online</span><button class="t-copy" type="button" data-copy="Connect-SPOService -Url https://contoso-admin.sharepoint.com&#10;New-SPOSite -Url https://contoso.sharepoint.com/sites/sales -Title &quot;Sales&quot; -Owner laura.prado@contoso.com -Template &quot;STS#3&quot; -StorageQuota 26214400 -LocaleId 1033&#10;Connect-PnPOnline -Url https://contoso-admin.sharepoint.com -Interactive&#10;New-PnPSite -Type TeamSite -Title &quot;Sales&quot; -Alias sales -Owners laura.prado@contoso.com -Lcid 1033" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Connect-SPOService -Url https://contoso-admin.sharepoint.com</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>New-SPOSite -Url https://contoso.sharepoint.com/sites/sales -Title &quot;Sales&quot; -Owner laura.prado@contoso.com -Template &quot;STS#3&quot; -StorageQuota 26214400 -LocaleId 1033</span><span class="t-cmt"># Better still: with PnP, a group-connected team site from the start</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Connect-PnPOnline -Url https://contoso-admin.sharepoint.com -Interactive</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>New-PnPSite -Type TeamSite -Title &quot;Sales&quot; -Alias sales -Owners laura.prado@contoso.com -Lcid 1033</span><span class="t-out">https://contoso.sharepoint.com/sites/sales</span></code></pre></figure>
+<p>If the team already exists in Teams, the site is already there: <code>https://contoso.sharepoint.com/sites/&lt;team alias&gt;</code>. Don&#x27;t create another one.</p>
+<h2>2. Permissions: three groups and nothing else</h2>
+<p>Every site is born with three SharePoint groups: <strong>Owners</strong> (full control), <strong>Members</strong> (edit) and <strong>Visitors</strong> (read). The rule that avoids chaos: users go into those groups (or into the Microsoft 365 group, which feeds Owners and Members), never with direct permissions on loose folders.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">SharePoint · Sales › Settings › Site permissions</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Site owners</span><span class="ui-v">Laura Prado, Carlos Rey (M365 group: owners)</span></div><div class="ui-field"><span class="ui-k">Site members</span><span class="ui-v">GG-Sales (34) (M365 group: members)</span></div><div class="ui-field"><span class="ui-k">Site visitors</span><span class="ui-v">GG-Management (read)</span></div><div class="ui-path"><span>Advanced permissions settings</span><span class="ui-sep" aria-hidden="true">›</span><span>Check Permissions</span></div><div class="ui-field"><span class="ui-k">User</span><span class="ui-v">ana.sol@contoso.com</span></div><div class="ui-field"><span class="ui-k">Result</span><span class="ui-v">Read · given through · Site visitors › GG-Management</span></div></div></figure>
+<p><strong>Check Permissions</strong> is the tool for &quot;I can&#x27;t see the folder&quot;: it says exactly through which path they have (or don&#x27;t have) access. If a folder has <strong>unique permissions</strong> (broken inheritance), it shows there: that is what makes someone see the site but not one folder. Fix it by restoring inheritance or granting access on that folder, but the first is better.</p>
+<p class="g-warn">&quot;Full control&quot; for Members, or a 300-person group in Owners, is how a site ends up with deleted documents and nobody knows who did it. Owners: two or three people.</p>
+<h2>3. Sharing: what the user sees</h2>
+<p>When a user clicks <strong>Share</strong>, what they can do depends on tenant and site settings:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · SharePoint Online</span><button class="t-copy" type="button" data-copy="Get-SPOTenant | Select-Object SharingCapability, DefaultSharingLinkType, RequireAnonymousLinksExpireInDays&#10;Get-SPOSite https://contoso.sharepoint.com/sites/sales | Select-Object SharingCapability&#10;Set-SPOSite https://contoso.sharepoint.com/sites/sales -SharingCapability ExternalUserSharingOnly" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-SPOTenant | Select-Object SharingCapability, DefaultSharingLinkType, RequireAnonymousLinksExpireInDays</span><span class="t-out">SharingCapability                : ExternalUserSharingOnly</span><span class="t-out">DefaultSharingLinkType           : Internal</span><span class="t-out">RequireAnonymousLinksExpireInDays : 30</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-SPOSite https://contoso.sharepoint.com/sites/sales | Select-Object SharingCapability</span><span class="t-out">SharingCapability : Disabled</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Set-SPOSite https://contoso.sharepoint.com/sites/sales -SharingCapability ExternalUserSharingOnly</span></code></pre></figure>
+<ul><li><strong>Disabled</strong>: company people only. The norm for HR, Finance and management.</li><li><strong>ExternalUserSharingOnly</strong>: guests who sign in (they appear in Entra ID as <code>#EXT#</code>). The norm for projects with vendors.</li><li><strong>ExternalUserAndGuestSharing</strong>: &quot;Anyone&quot; links with no sign-in. Only if policy allows it, and with expiry.</li></ul>
+<p>A site can never be more open than the tenant. If a user says &quot;it won&#x27;t let me share with the vendor&quot;, look at the site first and then the tenant.</p>
+<h2>4. Recover: versions and the recycle bin</h2>
+<ul><li><strong>Versions</strong>: in a library, right-click the document → <strong>Version history</strong> → restore the one before the change. It is on by default (500 major versions). An &quot;overwritten&quot; document is almost never lost.</li><li><strong>Recycle bin</strong>: <code>Site contents → Recycle bin</code>, 93 days. What the user deletes goes through there; what is emptied from there goes to the <strong>second-stage recycle bin</strong> (site admins only) until the 93 days are up.</li><li>Deleted more than 93 days ago, or a whole site removed: <code>Get-SPODeletedSite</code> and <code>Restore-SPODeletedSite</code> for sites (93 days too); for documents, Purview retention if it exists. After that there is no backup to fall back on: SharePoint has no classic &quot;backup&quot;, it has retention.</li></ul>
+<h2>5. What tickets ask</h2>
+<ul><li><strong>&quot;The site is slow or won&#x27;t load&quot;</strong>: service health in the Microsoft 365 admin centre before anything else. If only one person is affected, browser cache, or OneDrive syncing a library of 200,000 files (recommended limit: 300,000 in total per synced user).</li><li><strong>&quot;It keeps asking me to sign in&quot;</strong>: Conditional Access and a non-compliant device, or a guest with accounts in two tenants.</li><li><strong>&quot;Files have disappeared&quot;</strong>: <code>Shared with me</code>, a filtered view, or the recycle bin. They have almost never disappeared.</li></ul>
+<h2>Next steps</h2>
+<ul><li>A monthly report of sites with external sharing on and live &quot;Anyone&quot; links: <code>Get-SPOSite -Limit All | Where-Object SharingCapability -ne Disabled</code>.</li><li>Learn <strong>sensitivity labels</strong> applied to sites: they decide sharing and access from unmanaged devices without touching each site.</li><li>In Level 4 you&#x27;ll see the whole of Purview: retention, DLP and the labels that protect a document wherever it goes.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">SharePoint</span><span class="en">SharePoint</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span><span class="en">All Level 2 guides</span> →</a>
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="rhel-registrar-parchear-servicios-firewall-selinux.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Red Hat Enterprise Linux: registrar, parchear y controlar servicios, firewall y SELinux</span><span class="en">Red Hat Enterprise Linux: registering, patching, and managing services, the firewall and SELinux</span></span></a>
+    <a class="post-nav-link next" href="ubuntu-server-usuarios-ssh-firewall-y-actualizaciones.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Ubuntu Server: los primeros 30 minutos tras la instalación</span><span class="en">Ubuntu Server: the first 30 minutes after installation</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
