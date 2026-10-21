@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="BitLocker: checking encryption and recovering a device that asks for the key · Iñigo González" data-title-es="BitLocker: comprobar el cifrado y recuperar un equipo que pide la clave · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>BitLocker: checking encryption and recovering a device that asks for the key · Iñigo González</title>
+<meta name="description" content="See whether the disk is encrypted, where the recovery key is stored, and what to do when a laptop boots into the blue BitLocker screen.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/bitlocker-estado-y-clave-de-recuperacion.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BitLocker: checking encryption and recovering a device that asks for the key · Iñigo González">
+<meta property="og:description" content="See whether the disk is encrypted, where the recovery key is stored, and what to do when a laptop boots into the blue BitLocker screen.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/bitlocker-estado-y-clave-de-recuperacion.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="BitLocker: checking encryption and recovering a device that asks for the key · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"BitLocker: checking encryption and recovering a device that asks for the key","alternativeHeadline":"BitLocker: comprobar el cifrado y recuperar un equipo que pide la clave","description":"See whether the disk is encrypted, where the recovery key is stored, and what to do when a laptop boots into the blue BitLocker screen.","datePublished":"2026-10-21","dateModified":"2026-10-21","inLanguage":"en","proficiencyLevel":"Beginner","url":"https://inigogonzalezgarcia.github.io/guias/bitlocker-estado-y-clave-de-recuperacion.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/bitlocker-estado-y-clave-de-recuperacion.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"BitLocker"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 1","item":"https://inigogonzalezgarcia.github.io/guias/nivel-1.html"},{"@type":"ListItem","position":4,"name":"BitLocker: checking encryption and recovering a device that asks for the key","item":"https://inigogonzalezgarcia.github.io/guias/bitlocker-estado-y-clave-de-recuperacion.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="nivel-1.html"><span class="es">Nivel 1</span><span class="en">Level 1</span></a></p>
+    <h1><span class="es">BitLocker: comprobar el cifrado y recuperar un equipo que pide la clave</span><span class="en">BitLocker: checking encryption and recovering a device that asks for the key</span></h1>
+    <p class="lede"><span class="es">Ver si el disco está cifrado, dónde está guardada la clave de recuperación y qué hacer cuando un portátil arranca en la pantalla azul de BitLocker.</span><span class="en">See whether the disk is encrypted, where the recovery key is stored, and what to do when a laptop boots into the blue BitLocker screen.</span></p><p class="label post-meta"><span class="es">Nivel 1</span><span class="en">Level 1</span> · <span class="es">BitLocker</span><span class="en">BitLocker</span> · <span class="es">4 min</span><span class="en">4 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">21 oct 2026</span><span class="en">21 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Saber en un minuto si un equipo está cifrado y con qué protector, encontrar la clave de recuperación en Entra ID o en Active Directory, y devolver a un usuario su portátil cuando aparece la pantalla azul que pide 48 dígitos.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Para leer el estado del equipo necesitas una consola de PowerShell <strong>como administrador</strong> en ese equipo.</li><li>Para ver claves de recuperación necesitas un rol que las muestre: en Entra ID, <strong>Helpdesk Administrator</strong> o un rol personalizado con <code>microsoft.directory/bitlockerKeys/key/read</code>; en Active Directory, permiso de lectura sobre el objeto equipo con RSAT y la pestaña de recuperación de BitLocker instalada.</li><li>Cada lectura de una clave queda en el registro de auditoría. Es normal y es bueno: escribe el número de ticket en tus notas.</li></ul>
+<h2>1. Comprueba el estado del cifrado</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · como administrador</span><button class="t-copy" type="button" data-copy="manage-bde -status C:&#10;Get-BitLockerVolume C: | Select-Object VolumeStatus, ProtectionStatus, EncryptionPercentage, KeyProtector" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>manage-bde -status C:</span><span class="t-out">Volumen C: [Windows]</span><span class="t-out">[Volumen del sistema operativo]</span><span class="t-out">    Tamaño:                 476,00 GB</span><span class="t-out">    Versión de BitLocker:   2.0</span><span class="t-out">    Estado de la conversión: Cifrado completo</span><span class="t-out">    Porcentaje cifrado:     100,0 %</span><span class="t-out">    Método de cifrado:      XTS-AES 128</span><span class="t-out">    Estado de la protección: Protección activada</span><span class="t-out">    Protectores de clave:</span><span class="t-out">        TPM</span><span class="t-out">        Contraseña numérica</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-BitLockerVolume C: | Select-Object VolumeStatus, ProtectionStatus, EncryptionPercentage, KeyProtector</span><span class="t-out">VolumeStatus         : FullyEncrypted</span><span class="t-out">ProtectionStatus     : On</span><span class="t-out">EncryptionPercentage : 100</span><span class="t-out">KeyProtector         : {Tpm, RecoveryPassword}</span></code></pre></figure>
+<p>Lo que quieres ver: <strong>Cifrado completo</strong>, <strong>Protección activada</strong> y dos protectores, <code>TPM</code> y <code>Contraseña numérica</code> (la clave de recuperación). Si la protección está <strong>desactivada</strong>, el disco está cifrado pero cualquiera puede arrancarlo: suele ser porque alguien la suspendió para una actualización de firmware y no se reanudó.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · como administrador</span><button class="t-copy" type="button" data-copy="Resume-BitLocker -MountPoint C:&#10;$kp = (Get-BitLockerVolume C:).KeyProtector | Where-Object KeyProtectorType -eq &quot;RecoveryPassword&quot;&#10;BackupToAAD-BitLockerKeyProtector -MountPoint C: -KeyProtectorId $kp.KeyProtectorId" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmt"># Reanudar la protección si estaba suspendida</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Resume-BitLocker -MountPoint C:</span><span class="t-cmt"># Confirmar que la clave de recuperación está guardada en Entra ID (equipos unidos o registrados en Entra)</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>$kp = (Get-BitLockerVolume C:).KeyProtector | Where-Object KeyProtectorType -eq &quot;RecoveryPassword&quot;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>BackupToAAD-BitLockerKeyProtector -MountPoint C: -KeyProtectorId $kp.KeyProtectorId</span></code></pre></figure>
+<h2>2. Encuentra la clave de recuperación</h2>
+<p>En un equipo gestionado con Intune la clave está en Entra ID. Busca el equipo por nombre y abre <strong>Claves de BitLocker</strong>.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Entra ID · Dispositivos</span></figcaption><div class="ui-body"><div class="ui-path"><span>Entra ID</span><span class="ui-sep" aria-hidden="true">›</span><span>Dispositivos</span><span class="ui-sep" aria-hidden="true">›</span><span>Todos los dispositivos</span><span class="ui-sep" aria-hidden="true">›</span><span>LAPTOP-7F2K9Q</span><span class="ui-sep" aria-hidden="true">›</span><span>Claves de BitLocker</span></div><div class="ui-field"><span class="ui-k">Id. de clave</span><span class="ui-v">7a1c…-…-…-…-…3e9d</span></div><div class="ui-field"><span class="ui-k">Unidad</span><span class="ui-v">Unidad del sistema operativo</span></div><div class="ui-field"><span class="ui-k">Clave de recuperación</span><span class="ui-v">123456-654321-112233-445566-778899-998877-665544-332211</span></div><div class="ui-btn">Mostrar clave de recuperación</div></div></figure>
+<p>En un dominio clásico, la clave está en el objeto <strong>equipo</strong> de Active Directory, pestaña <strong>Recuperación de BitLocker</strong>, siempre que la directiva de grupo la guarde allí. Si el equipo es híbrido, mira primero en Entra ID.</p>
+<p class="g-warn">Comprueba que el <strong>Id. de clave</strong> coincide con los 8 primeros caracteres que muestra la pantalla azul del portátil. Un equipo puede tener varias claves (una por cada vez que se cifró) y solo una vale.</p>
+<h2>3. El portátil pide la clave de recuperación</h2>
+<p>Pasa casi siempre después de una de estas cosas: actualización de BIOS/firmware, cambio en la placa o en el orden de arranque, Secure Boot desactivado, o un disco que se ha movido de equipo. Es BitLocker haciendo su trabajo.</p>
+<ol><li>Pide al usuario el <strong>Id. de clave</strong> que ve en pantalla (los primeros 8 caracteres bastan) y el nombre del equipo (en la etiqueta o en el ticket).</li><li>Busca la clave como en el paso 2 y dictásela por teléfono o por un canal cifrado. Nunca la pegues en el ticket ni en un correo.</li><li>Cuando arranque, inicia sesión y comprueba por qué saltó: si fue una actualización de firmware ya está; si Secure Boot está desactivado, actívalo.</li><li>Si va a volver a pedirla en cada arranque, <strong>suspende y reanuda</strong> la protección una vez para que el TPM vuelva a sellar las medidas de arranque:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · como administrador</span><button class="t-copy" type="button" data-copy="Suspend-BitLocker -MountPoint C: -RebootCount 1&#10;Restart-Computer&#10;(Get-BitLockerVolume C:).ProtectionStatus" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Suspend-BitLocker -MountPoint C: -RebootCount 1</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Restart-Computer</span><span class="t-cmt"># Tras el reinicio, la protección se reanuda sola. Compruébalo:</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>(Get-BitLockerVolume C:).ProtectionStatus</span><span class="t-out">On</span></code></pre></figure>
+<ol><li>Si tu política lo exige, <strong>rota la clave de recuperación</strong> después de usarla. Desde Intune: el dispositivo → <strong>Rotación de la clave de BitLocker</strong>. Así la clave que se dictó por teléfono deja de valer.</li></ol>
+<h2>4. Un equipo nuevo no se cifra</h2>
+<p>En Intune, el informe <strong>Dispositivos → Supervisar → Informe de cifrado</strong> te dice el motivo. Los más frecuentes: el TPM no está listo (<code>Get-Tpm</code> muestra <code>TpmReady : False</code>), el usuario no es administrador local y la política no permite cifrado silencioso, o el perfil de cifrado no está asignado al equipo.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Haz que la clave se guarde en Entra ID por política antes de cifrar: un equipo cifrado sin clave guardada es un equipo perdido el día que la pida.</li><li>Revisa el informe de cifrado de Intune cada semana y persigue los equipos que llevan días en &quot;pendiente&quot;.</li><li>En el Nivel 3 verás cómo configurar el perfil de cifrado de Intune con cifrado silencioso y rotación automática.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>Know in a minute whether a device is encrypted and with which protector, find the recovery key in Entra ID or Active Directory, and give a user their laptop back when the blue screen asking for 48 digits appears.</p>
+<h2>Before you start</h2>
+<ul><li>To read a device&#x27;s status you need a PowerShell console <strong>as administrator</strong> on that device.</li><li>To view recovery keys you need a role that shows them: in Entra ID, <strong>Helpdesk Administrator</strong> or a custom role with <code>microsoft.directory/bitlockerKeys/key/read</code>; in Active Directory, read permission on the computer object with RSAT and the BitLocker recovery tab installed.</li><li>Every key read lands in the audit log. That is normal and good: put the ticket number in your notes.</li></ul>
+<h2>1. Check the encryption status</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · as administrator</span><button class="t-copy" type="button" data-copy="manage-bde -status C:&#10;Get-BitLockerVolume C: | Select-Object VolumeStatus, ProtectionStatus, EncryptionPercentage, KeyProtector" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>manage-bde -status C:</span><span class="t-out">Volume C: [Windows]</span><span class="t-out">[OS Volume]</span><span class="t-out">    Size:                 476.00 GB</span><span class="t-out">    BitLocker Version:    2.0</span><span class="t-out">    Conversion Status:    Fully Encrypted</span><span class="t-out">    Percentage Encrypted: 100.0%</span><span class="t-out">    Encryption Method:    XTS-AES 128</span><span class="t-out">    Protection Status:    Protection On</span><span class="t-out">    Key Protectors:</span><span class="t-out">        TPM</span><span class="t-out">        Numerical Password</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-BitLockerVolume C: | Select-Object VolumeStatus, ProtectionStatus, EncryptionPercentage, KeyProtector</span><span class="t-out">VolumeStatus         : FullyEncrypted</span><span class="t-out">ProtectionStatus     : On</span><span class="t-out">EncryptionPercentage : 100</span><span class="t-out">KeyProtector         : {Tpm, RecoveryPassword}</span></code></pre></figure>
+<p>What you want to see: <strong>Fully Encrypted</strong>, <strong>Protection On</strong> and two protectors, <code>TPM</code> and <code>Numerical Password</code> (the recovery key). If protection is <strong>Off</strong>, the disk is encrypted but anyone can boot it: usually someone suspended it for a firmware update and it was never resumed.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · as administrator</span><button class="t-copy" type="button" data-copy="Resume-BitLocker -MountPoint C:&#10;$kp = (Get-BitLockerVolume C:).KeyProtector | Where-Object KeyProtectorType -eq &quot;RecoveryPassword&quot;&#10;BackupToAAD-BitLockerKeyProtector -MountPoint C: -KeyProtectorId $kp.KeyProtectorId" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmt"># Resume protection if it was suspended</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Resume-BitLocker -MountPoint C:</span><span class="t-cmt"># Confirm the recovery key is stored in Entra ID (Entra joined or registered devices)</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>$kp = (Get-BitLockerVolume C:).KeyProtector | Where-Object KeyProtectorType -eq &quot;RecoveryPassword&quot;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>BackupToAAD-BitLockerKeyProtector -MountPoint C: -KeyProtectorId $kp.KeyProtectorId</span></code></pre></figure>
+<h2>2. Find the recovery key</h2>
+<p>On a device managed with Intune the key is in Entra ID. Search the device by name and open <strong>BitLocker keys</strong>.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Entra ID · Devices</span></figcaption><div class="ui-body"><div class="ui-path"><span>Entra ID</span><span class="ui-sep" aria-hidden="true">›</span><span>Devices</span><span class="ui-sep" aria-hidden="true">›</span><span>All devices</span><span class="ui-sep" aria-hidden="true">›</span><span>LAPTOP-7F2K9Q</span><span class="ui-sep" aria-hidden="true">›</span><span>BitLocker keys</span></div><div class="ui-field"><span class="ui-k">Key ID</span><span class="ui-v">7a1c…-…-…-…-…3e9d</span></div><div class="ui-field"><span class="ui-k">Drive</span><span class="ui-v">OS drive</span></div><div class="ui-field"><span class="ui-k">Recovery key</span><span class="ui-v">123456-654321-112233-445566-778899-998877-665544-332211</span></div><div class="ui-btn">Show recovery key</div></div></figure>
+<p>In a classic domain the key sits on the <strong>computer</strong> object in Active Directory, <strong>BitLocker Recovery</strong> tab, as long as Group Policy stores it there. On a hybrid device, look in Entra ID first.</p>
+<p class="g-warn">Check that the <strong>Key ID</strong> matches the first 8 characters shown on the laptop&#x27;s blue screen. A device can have several keys (one per time it was encrypted) and only one works.</p>
+<h2>3. The laptop asks for the recovery key</h2>
+<p>It almost always happens after one of these: a BIOS/firmware update, a change to the board or the boot order, Secure Boot turned off, or a disk moved to another device. That is BitLocker doing its job.</p>
+<ol><li>Ask the user for the <strong>Key ID</strong> on screen (the first 8 characters are enough) and the device name (on the label or in the ticket).</li><li>Find the key as in step 2 and read it out by phone or over an encrypted channel. Never paste it into the ticket or an email.</li><li>Once it boots, sign in and check why it triggered: a firmware update needs nothing more; if Secure Boot is off, turn it on.</li><li>If it will ask again at every boot, <strong>suspend and resume</strong> protection once so the TPM re-seals the boot measurements:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · as administrator</span><button class="t-copy" type="button" data-copy="Suspend-BitLocker -MountPoint C: -RebootCount 1&#10;Restart-Computer&#10;(Get-BitLockerVolume C:).ProtectionStatus" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Suspend-BitLocker -MountPoint C: -RebootCount 1</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Restart-Computer</span><span class="t-cmt"># After the reboot, protection resumes on its own. Check it:</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>(Get-BitLockerVolume C:).ProtectionStatus</span><span class="t-out">On</span></code></pre></figure>
+<ol><li>If your policy requires it, <strong>rotate the recovery key</strong> after using it. From Intune: the device → <strong>BitLocker key rotation</strong>. The key read out by phone then stops working.</li></ol>
+<h2>4. A new device won&#x27;t encrypt</h2>
+<p>In Intune, the report <strong>Devices → Monitor → Encryption report</strong> gives the reason. The most frequent: the TPM is not ready (<code>Get-Tpm</code> shows <code>TpmReady : False</code>), the user is not a local administrator and the policy does not allow silent encryption, or the encryption profile is not assigned to the device.</p>
+<h2>Next steps</h2>
+<ul><li>Make the key back up to Entra ID by policy before encrypting: an encrypted device with no stored key is a lost device the day it asks.</li><li>Review the Intune encryption report weekly and chase devices that have been &quot;pending&quot; for days.</li><li>In Level 3 you&#x27;ll see how to configure the Intune encryption profile with silent encryption and automatic rotation.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Nivel 1</span><span class="en">Level 1</span> · <span class="es">BitLocker</span><span class="en">BitLocker</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-1.html"><span class="es">Todas las guías del Nivel 1</span><span class="en">All Level 1 guides</span> →</a>
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="android-perfil-de-trabajo-intune.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Enrolar un Android con perfil de trabajo en Intune</span><span class="en">Enrolling an Android phone with a work profile in Intune</span></span></a>
+    <a class="post-nav-link next" href="anyconnect-instalar-y-diagnosticar-vpn.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Cisco AnyConnect: instalar el cliente y diagnosticar una VPN que no conecta</span><span class="en">Cisco AnyConnect: installing the client and diagnosing a VPN that won&#x27;t connect</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
