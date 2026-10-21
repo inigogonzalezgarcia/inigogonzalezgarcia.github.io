@@ -746,7 +746,7 @@ sizes["links.html"] = write("links.html", layout(R="", path="links.html", active
     desc="Blog, journey, LinkedIn, GitHub and contact for Iñigo González.", body=links_body,
     ld=[crumbs(("Home", ""), ("Links", "links.html"))]))
 
-# guides: section under construction (noindex until the first guides are published)
+# guides
 GUIDE_LINKS = [
     ("recursos.html", "Gratis", "Free", "33 ideas + newsletter", "33 ideas + newsletter",
      "Apúntate a <em>Tech Career Lab</em> y recibe las 33 ideas para que te encuentren si trabajas en IT. Te aviso cuando salgan las primeras guías.",
@@ -853,28 +853,32 @@ GUIDE_SECTORS = [
       ("Proveedores de conectividad - Gestión de circuitos y averías", "Connectivity providers - Managing circuits and faults"),
       ("Windows 11 - Migrar los equipos de una sede", "Windows 11 - Migrating a site's devices")]),
 ]
-def guide_level(n_es, n_en, t_es, t_en, d_es, d_en, topics):
-    items = "".join(f"<li>{bi(es, en)}</li>"
-                    for es, en in sorted(topics, key=lambda t: t[0].lower()))
-    return (f'      <div class="guide-level reveal"><p class="label kicker">{bi(n_es, n_en)}</p><h3>{bi(t_es, t_en)}</h3>'
-            f'<p class="muted small">{bi(d_es, d_en)}</p><ul class="guide-topics">{items}</ul></div>')
-guide_levels = "\n".join(guide_level(*l) for l in GUIDE_LEVELS)
-guide_sectors = "\n".join(guide_level(*l) for l in GUIDE_SECTORS)
+def guide_level(n_es, n_en, t_es, t_en, d_es, d_en, topics, href=None, soon=True):
+    from guides import TOPICS as _T
+    key = {t[1]: t[0] for t in _T}
+    def item(es, en):
+        if href and es in key: return f'<li><a href="{href}#{key[es]}">{bi(es, en)}</a></li>'
+        return f"<li>{bi(es, en)}</li>"
+    items = "".join(item(es, en) for es, en in sorted(topics, key=lambda t: t[0].lower()))
+    open_ = (f'<a class="btn" href="{href}">{bi("Ver las guías", "See the guides")} →</a>' if href
+             else f'<p class="label muted">{bi("Próximamente", "Coming soon")}</p>' if soon else "")
+    return (f'      <div class="guide-level reveal{" open" if href else ""}"><p class="label kicker">{bi(n_es, n_en)}</p><h3>{bi(t_es, t_en)}</h3>'
+            f'<p class="muted small">{bi(d_es, d_en)}</p><ul class="guide-topics">{items}</ul>{open_}</div>')
+guide_levels = "\n".join(guide_level(*l, href=("guias/nivel-1.html" if l[1] == "Level 1" else None)) for l in GUIDE_LEVELS)
+guide_sectors = "\n".join(guide_level(*l, soon=False) for l in GUIDE_SECTORS)
 def guide_card(href, tes, ten, hes, hen, des, den):
     ext = href.startswith("http")
     tgt = ' target="_blank" rel="noopener"' if ext else ""
     return (f'      <a class="etm-item reveal guide-card" href="{href}"{tgt}><p class="label muted">{bi(tes, ten)}</p>'
             f'<h3>{bi(hes, hen)} {"↗" if ext else "→"}</h3><p>{bi(des, den)}</p></a>')
 guide_cards = "\n".join(guide_card(*g) for g in GUIDE_LINKS)
-guides_body = page_hero(bi("Guías IT · En construcción", "IT guides · Under construction"),
+guides_body = page_hero(bi("Guías IT", "IT guides"),
     bi("Guías prácticas<br>para el día a día en IT.", "Practical guides<br>for everyday IT work."),
     bi("Paso a paso, con comandos y comprobaciones, sobre lo que uso en mi trabajo: Intune, Jamf Pro, Active Directory, GPO, Entra ID, MECM y operaciones en sede.",
        "Step by step, with commands and checks, on what I use at work: Intune, Jamf Pro, Active Directory, GPO, Entra ID, MECM and on-site operations.")) + f'''
 
 <section class="section">
   <div class="wrap">
-    <p class="notice reveal">{bi("<strong>Sección en construcción.</strong> Pronto tendréis aquí toda la información. Si quieres enterarte el primero, <a href='recursos.html'>apúntate a la newsletter</a>.",
-                                 "<strong>This section is under construction.</strong> All the information will be here soon. To hear about it first, <a href='recursos.html'>join the newsletter</a>.")}</p>
     <div class="numbers-head reveal">
       <div>
         <p class="label kicker">{bi("Lo que vas a encontrar", "What you'll find")}</p>
@@ -906,8 +910,186 @@ guides_body = page_hero(bi("Guías IT · En construcción", "IT guides · Under 
 </section>'''
 sizes["guias.html"] = write("guias.html", layout(R="", path="guias.html", active="guides",
     title_en="IT guides · Iñigo González", title_es="Guías IT · Iñigo González",
-    desc="Practical step-by-step IT guides (Intune, Jamf Pro, Active Directory, Entra ID, MECM). Section under construction.", body=guides_body,
-    robots="noindex, follow", ld=[crumbs(("Home", ""), ("Guides", "guias.html"))]))
+    desc="Practical step-by-step IT guides, from first steps in support to expert level: Active Directory, Microsoft 365, Intune, Windows, Teams and more.", body=guides_body,
+    ld=[crumbs(("Home", ""), ("Guides", "guias.html"))]))
+
+# ---------------------------------------------------------------- guides: level 1 index + one page per guide
+from guides import LEVEL1, TOPICS, GUIDES
+
+def _ginline(t):
+    t = html.escape(t)
+    t = _re.sub(r"`([^`]+)`", r"<code>\1</code>", t)
+    t = _re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", t)
+    return t
+
+def _term(title, lines, lang):
+    """A simulated terminal: "$ " lines are commands (joined into the copy button), "# " lines are comments, the rest is output."""
+    rows, cmds = [], []
+    for l in lines:
+        if l.startswith("$ "):
+            cmds.append(l[2:]); rows.append(f'<span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>{html.escape(l[2:])}</span>')
+        elif l.startswith("# "):
+            rows.append(f'<span class="t-cmt">{html.escape(l)}</span>')
+        else:
+            rows.append(f'<span class="t-out">{html.escape(l)}</span>')
+    copy = html.escape("\n".join(cmds)).replace("\n", "&#10;")
+    lab = {"es": ("Copiar comandos", "Comandos copiados"), "en": ("Copy commands", "Commands copied")}[lang]
+    btn = (f'<button class="t-copy" type="button" data-copy="{copy}" data-copied="{lab[1]}">{lab[0]}</button>' if cmds else "")
+    return (f'<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span>'
+            f'<span class="t-title">{html.escape(title)}</span>{btn}</figcaption><pre class="t-body"><code>' + "".join(rows) + '</code></pre></figure>')
+
+def _ui(title, lines):
+    """A simulated window: "> " lines are a navigation path, "[ ]"/"[x]" are options, "= " is a field (label: value), "[Button]" a button, the rest is text."""
+    rows = []
+    for l in lines:
+        if l.startswith("> "):
+            parts = [f"<span>{_ginline(x.strip())}</span>" for x in l[2:].split("›")]
+            rows.append('<div class="ui-path">' + '<span class="ui-sep" aria-hidden="true">›</span>'.join(parts) + "</div>")
+        elif l.startswith("[x] ") or l.startswith("[ ] "):
+            on = l.startswith("[x]")
+            rows.append(f'<div class="ui-opt{" on" if on else ""}"><span class="ui-box" aria-hidden="true">{"✓" if on else ""}</span>{_ginline(l[4:])}</div>')
+        elif l.startswith("= "):
+            k, _, v = l[2:].partition(":")
+            rows.append(f'<div class="ui-field"><span class="ui-k">{_ginline(k.strip())}</span><span class="ui-v">{_ginline(v.strip())}</span></div>')
+        elif l.startswith("[") and l.endswith("]"):
+            rows.append(f'<div class="ui-btn">{_ginline(l[1:-1])}</div>')
+        else:
+            rows.append(f'<div class="ui-txt">{_ginline(l)}</div>')
+    return (f'<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span>'
+            f'<span class="t-title">{html.escape(title)}</span></figcaption><div class="ui-body">' + "".join(rows) + "</div></figure>")
+
+def gmd(text, lang):
+    out, para, ul, ol = [], [], [], []
+    def flush():
+        if para: out.append("<p>" + _ginline(" ".join(para)) + "</p>"); para.clear()
+        if ul: out.append("<ul>" + "".join(f"<li>{_ginline(i)}</li>" for i in ul) + "</ul>"); ul.clear()
+        if ol: out.append("<ol>" + "".join(f"<li>{_ginline(i)}</li>" for i in ol) + "</ol>"); ol.clear()
+    lines = text.strip().split("\n"); i = 0
+    while i < len(lines):
+        line = lines[i].rstrip(); i += 1
+        if line.startswith(":::"):
+            flush()
+            kind, _, title = line[3:].partition(" ")
+            body = []
+            while i < len(lines) and lines[i].rstrip() != ":::":
+                body.append(lines[i].rstrip()); i += 1
+            i += 1
+            out.append(_term(title, body, lang) if kind == "term" else _ui(title, body))
+            continue
+        if not line: flush(); continue
+        if line.startswith("|"):
+            flush(); rows = [line]
+            while i < len(lines) and lines[i].startswith("|"):
+                rows.append(lines[i].rstrip()); i += 1
+            cells = [[c.strip() for c in r.strip("|").split("|")] for r in rows if not _re.match(r"^\|[\s|:-]+\|$", r)]
+            head = "".join(f"<th>{_ginline(c)}</th>" for c in cells[0])
+            body = "".join("<tr>" + "".join(f"<td>{_ginline(c)}</td>" for c in r) + "</tr>" for r in cells[1:])
+            out.append(f'<div class="g-table"><table><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table></div>'); continue
+        if line.startswith("## "): flush(); out.append(f"<h2>{_ginline(line[3:])}</h2>"); continue
+        if line.startswith("### "): flush(); out.append(f"<h3>{_ginline(line[4:])}</h3>"); continue
+        if line.startswith("> "): flush(); out.append(f'<p class="g-tip">{_ginline(line[2:])}</p>'); continue
+        if line.startswith("! "): flush(); out.append(f'<p class="g-warn">{_ginline(line[2:])}</p>'); continue
+        if line.startswith("- "):
+            if para or ol: flush()
+            ul.append(line[2:]); continue
+        if _re.match(r"\d+\. ", line):
+            if para or ul: flush()
+            ol.append(line.partition(". ")[2]); continue
+        if ul or ol: flush()
+        para.append(line)
+    flush()
+    return "\n".join(out)
+
+TOPIC = {t[0]: t for t in TOPICS}
+G_ORDER = sorted(GUIDES, key=lambda q: ([t[0] for t in TOPICS].index(q["topic"]), q["slug"]))
+for i, q in enumerate(G_ORDER):
+    t = TOPIC[q["topic"]]
+    prev = G_ORDER[i - 1] if i > 0 else None
+    nxt = G_ORDER[i + 1] if i + 1 < len(G_ORDER) else None
+    def gnav(x, label_es, label_en, cls):
+        if not x: return "<span></span>"
+        return f'<a class="post-nav-link {cls}" href="{x["slug"]}.html"><span class="label muted">{bi(label_es, label_en)}</span><span>{bi(html.escape(x["title_es"]), html.escape(x["title_en"]))}</span></a>'
+    meta = f'{bi(LEVEL1["n_es"], LEVEL1["n_en"])} · {bi(html.escape(t[1]), html.escape(t[2]))} · {bi(str(minutes(q["es"])) + " min", str(minutes(q["en"])) + " min read")} · {bi("Actualizado", "Updated")} {fdate(q["date"])}'
+    body = page_hero(f'<a href="../guias.html">{bi("Guías", "Guides")}</a> · <a href="nivel-1.html">{bi(LEVEL1["n_es"], LEVEL1["n_en"])}</a>',
+                     bi(html.escape(q["title_es"]), html.escape(q["title_en"])),
+                     bi(html.escape(q["dek_es"]), html.escape(q["dek_en"])), f'<p class="label post-meta">{meta}</p>').replace('class="page-hero"', 'class="page-hero post-hero"', 1) + f'''
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+{gmd(q["es"], "es")}
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+{gmd(q["en"], "en")}
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t">{bi("¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.", "Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.")}</p>
+        <a class="btn" href="../recursos.html">{bi("Apúntate y llévate las 33 ideas", "Sign up and get the 33 ideas")} →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted">{bi("Esta guía", "This guide")}</p>
+      <p class="repo-name">{bi(LEVEL1["n_es"], LEVEL1["n_en"])} · {bi(html.escape(t[1]), html.escape(t[2]))}</p>
+      <p class="muted small">{bi("Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.", "The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.")}</p>
+      <a class="arrow-link" href="nivel-1.html">{bi("Todas las guías del Nivel 1", "All Level 1 guides")} →</a>
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    {gnav(prev, "Anterior", "Previous", "prev")}
+    {gnav(nxt, "Siguiente", "Next", "next")}
+  </div>
+</section>'''
+    sizes[f"guias/{q['slug']}.html"] = write(f"guias/{q['slug']}.html", layout(R="../", path=f"guias/{q['slug']}.html", active="guides",
+        title_en=f'{q["title_en"]} · Iñigo González', title_es=f'{q["title_es"]} · Iñigo González',
+        desc=q["dek_en"], body=body, og_type="article",
+        ld=[{"@type": "TechArticle", "headline": q["title_en"], "alternativeHeadline": q["title_es"], "description": q["dek_en"],
+             "datePublished": q["date"], "dateModified": q["date"], "inLanguage": "en", "proficiencyLevel": "Beginner",
+             "url": f'{SITE_URL}guias/{q["slug"]}.html', "mainEntityOfPage": f'{SITE_URL}guias/{q["slug"]}.html',
+             "author": PERSON_REF, "publisher": PERSON_REF, "articleSection": t[2]},
+            crumbs(("Home", ""), ("Guides", "guias.html"), ("Level 1", "guias/nivel-1.html"), (q["title_en"], f'guias/{q["slug"]}.html'))]))
+
+# level 1 index: one block per topic with its guides
+def topic_block(t):
+    gs = [q for q in G_ORDER if q["topic"] == t[0]]
+    items = "".join(f'<li><a href="{q["slug"]}.html">{bi(html.escape(q["title_es"]), html.escape(q["title_en"]))}</a>'
+                    f'<span class="muted small">{bi(html.escape(q["dek_es"]), html.escape(q["dek_en"]))}</span></li>' for q in gs)
+    n = bi(f"{len(gs)} guía" + ("s" if len(gs) != 1 else ""), f"{len(gs)} guide" + ("s" if len(gs) != 1 else ""))
+    return (f'      <div class="guide-level reveal" id="{t[0]}"><p class="label kicker">{n}</p><h3>{bi(html.escape(t[1]), html.escape(t[2]))}</h3>'
+            f'<p class="muted small">{bi(html.escape(t[3]), html.escape(t[4]))}</p><ul class="guide-topics guide-list">{items}</ul></div>')
+l1_body = page_hero(f'<a href="../guias.html">{bi("Guías", "Guides")}</a> · {bi(LEVEL1["n_es"], LEVEL1["n_en"])}',
+    bi("Primeros pasos<br>en soporte IT.", "First steps<br>in IT support."),
+    bi("Once temas para empezar: el puesto, el usuario y sus herramientas. Paso a paso, con los comandos y las comprobaciones que harías en un ticket real.",
+       "Eleven topics to get started: the device, the user and their tools. Step by step, with the commands and checks you would run on a real ticket."),
+    f'<p class="label post-meta">{bi(str(len(G_ORDER)) + " guías · ES/EN · ejemplos ficticios", str(len(G_ORDER)) + " guides · ES/EN · fictional examples")}</p>') + f'''
+
+<section class="section">
+  <div class="wrap">
+    <div class="guide-levels three">
+{chr(10).join(topic_block(t) for t in TOPICS)}
+    </div>
+    <div class="numbers-head reveal u-mt34">
+      <div>
+        <p class="label kicker">{bi("Cómo están hechas", "How they are made")}</p>
+        <h2 class="h2 sm">{bi("Terminales y ventanas<br>simuladas.", "Simulated terminals<br>and windows.")}</h2>
+      </div>
+    </div>
+    <p class="lede reveal">{bi("Las guías no llevan capturas de sistemas reales: los terminales y las ventanas que ves son simulaciones con nombres, dominios y usuarios ficticios. Los comandos sí son los de verdad, y cada terminal tiene un botón para copiarlos.",
+                               "The guides carry no screenshots of real systems: the terminals and windows you see are simulations with fictional names, domains and users. The commands are the real ones, and every terminal has a button to copy them.")}</p>
+    <p class="reveal u-mt22"><a class="arrow-link" href="../guias.html">{bi("Todos los niveles", "All levels")} →</a></p>
+  </div>
+</section>'''
+sizes["guias/nivel-1.html"] = write("guias/nivel-1.html", layout(R="../", path="guias/nivel-1.html", active="guides",
+    title_en="Level 1 · First steps in IT support · Iñigo González", title_es="Nivel 1 · Primeros pasos en soporte IT · Iñigo González",
+    desc="Beginner IT support guides: Active Directory, Android, BitLocker, Cisco AnyConnect, printers, iPhone and iPad, Jira Service Management, Microsoft 365 licences, Teams, Outlook and Windows.",
+    body=l1_body, ld=[{"@type": "CollectionPage", "@id": SITE_URL + "guias/nivel-1.html", "url": SITE_URL + "guias/nivel-1.html",
+                       "name": "Level 1 · First steps in IT support", "inLanguage": "en", "isPartOf": {"@id": SITE_URL + "#website"},
+                       "hasPart": [{"@type": "TechArticle", "headline": q["title_en"], "url": f'{SITE_URL}guias/{q["slug"]}.html'} for q in G_ORDER]},
+                      crumbs(("Home", ""), ("Guides", "guias.html"), ("Level 1", "guias/nivel-1.html"))]))
 
 # legal pages (legal notice, terms); privacidad.html stays hand-written
 import legal
@@ -932,11 +1114,13 @@ sizes["404.html"] = write("404.html", layout(R="/", path="404.html", active="", 
 
 # sitemap.xml + robots.txt: every indexable page (not noindex, not redirects); lastmod = post date, or the newest
 # post date for pages that list posts, so the file only changes when content does
-NOINDEX = {"404.html", "asesoria.html", "privacidad.html", "guias.html"} | set(legal.PAGES)
+NOINDEX = {"404.html", "asesoria.html", "privacidad.html"} | set(legal.PAGES)
 newest = max(q["date"] for q in POSTS)
 post_date = {f'blog/{q["repo"]}.html': q["date"] for q in POSTS}
+post_date.update({f'guias/{q["slug"]}.html': q["date"] for q in GUIDES})
+post_date["guias/nivel-1.html"] = post_date["guias.html"] = max(q["date"] for q in GUIDES)
 urls = []
-for rel in sorted(sizes, key=lambda r: (r != "index.html", r.startswith("blog/"), r)):
+for rel in sorted(sizes, key=lambda r: (r != "index.html", r.startswith("blog/") or r.startswith("guias/"), r)):
     if rel in NOINDEX: continue
     loc = SITE_URL + ("" if rel == "index.html" else rel.replace("index.html", ""))
     urls.append(f"  <url><loc>{loc}</loc><lastmod>{post_date.get(rel, newest)}</lastmod></url>")
