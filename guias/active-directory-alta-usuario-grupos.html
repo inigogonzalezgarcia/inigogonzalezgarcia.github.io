@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Creating a user in Active Directory and adding them to groups · Iñigo González" data-title-es="Alta de un usuario en Active Directory y sus grupos · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Creating a user in Active Directory and adding them to groups · Iñigo González</title>
+<meta name="description" content="Create the account, place it in the right OU, add the groups and check everything before telling the user.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/active-directory-alta-usuario-grupos.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Creating a user in Active Directory and adding them to groups · Iñigo González">
+<meta property="og:description" content="Create the account, place it in the right OU, add the groups and check everything before telling the user.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/active-directory-alta-usuario-grupos.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Creating a user in Active Directory and adding them to groups · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Creating a user in Active Directory and adding them to groups","alternativeHeadline":"Alta de un usuario en Active Directory y sus grupos","description":"Create the account, place it in the right OU, add the groups and check everything before telling the user.","datePublished":"2026-10-21","dateModified":"2026-10-21","inLanguage":"en","proficiencyLevel":"Beginner","url":"https://inigogonzalezgarcia.github.io/guias/active-directory-alta-usuario-grupos.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/active-directory-alta-usuario-grupos.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Active Directory: users and groups"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 1","item":"https://inigogonzalezgarcia.github.io/guias/nivel-1.html"},{"@type":"ListItem","position":4,"name":"Creating a user in Active Directory and adding them to groups","item":"https://inigogonzalezgarcia.github.io/guias/active-directory-alta-usuario-grupos.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="nivel-1.html"><span class="es">Nivel 1</span><span class="en">Level 1</span></a></p>
+    <h1><span class="es">Alta de un usuario en Active Directory y sus grupos</span><span class="en">Creating a user in Active Directory and adding them to groups</span></h1>
+    <p class="lede"><span class="es">Crear la cuenta, ponerla en la OU correcta, añadir los grupos y comprobar que todo está bien antes de avisar al usuario.</span><span class="en">Create the account, place it in the right OU, add the groups and check everything before telling the user.</span></p><p class="label post-meta"><span class="es">Nivel 1</span><span class="en">Level 1</span> · <span class="es">Active Directory: usuarios y grupos</span><span class="en">Active Directory: users and groups</span> · <span class="es">4 min</span><span class="en">3 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">21 oct 2026</span><span class="en">21 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Una cuenta nueva en Active Directory lista para el primer día: en su unidad organizativa (OU), con los grupos que le dan acceso a carpetas y aplicaciones, y con la contraseña inicial que el usuario cambiará en su primer inicio de sesión.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Una cuenta de administración delegada sobre la OU (no uses tu cuenta de usuario diario).</li><li>El ticket con los datos: nombre, departamento, responsable y a quién tiene que parecerse (el &quot;usuario modelo&quot; del mismo equipo).</li><li>Las herramientas RSAT instaladas: <strong>Usuarios y equipos de Active Directory</strong> y el módulo de PowerShell.</li></ul>
+<p class="g-tip">Si tu empresa tiene un proceso de alta automatizado (RRHH → identidad), esta guía te sirve para entender lo que hace por debajo y para corregir lo que el proceso no cubre.</p>
+<h2>1. Mira cómo está el usuario modelo</h2>
+<p>Antes de crear nada, copia la referencia. Así evitas inventarte grupos o OUs.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · RSAT</span><button class="t-copy" type="button" data-copy="Get-ADUser modelo.ventas -Properties MemberOf, Department, Title, Manager | Select-Object SamAccountName, DistinguishedName, Department, Title&#10;(Get-ADUser modelo.ventas -Properties MemberOf).MemberOf | ForEach-Object { ($_ -split &quot;,&quot;)[0] -replace &quot;CN=&quot; }" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-ADUser modelo.ventas -Properties MemberOf, Department, Title, Manager | Select-Object SamAccountName, DistinguishedName, Department, Title</span><span class="t-out">SamAccountName    : modelo.ventas</span><span class="t-out">DistinguishedName : CN=Modelo Ventas,OU=Ventas,OU=Usuarios,DC=contoso,DC=local</span><span class="t-out">Department        : Ventas</span><span class="t-out">Title             : Account Manager</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>(Get-ADUser modelo.ventas -Properties MemberOf).MemberOf | ForEach-Object { ($_ -split &quot;,&quot;)[0] -replace &quot;CN=&quot; }</span><span class="t-out">GG-Ventas</span><span class="t-out">GG-Carpeta-Ventas-RW</span><span class="t-out">GG-App-CRM-Usuarios</span><span class="t-out">GG-VPN-Usuarios</span></code></pre></figure>
+<p>Apunta la OU (<code>OU=Ventas,OU=Usuarios</code>) y la lista de grupos. Si el modelo tiene un grupo que parece de otra época (una app retirada, un proyecto cerrado), no lo copies: pregúntalo en el ticket.</p>
+<h2>2. Crea la cuenta</h2>
+<p>En la consola gráfica: botón derecho sobre la OU → <strong>Nuevo → Usuario</strong>. Rellena nombre, apellidos, nombre de inicio de sesión y marca <strong>El usuario debe cambiar la contraseña en el siguiente inicio de sesión</strong>.</p>
+<p>Con PowerShell es lo mismo, y queda registrado en el ticket tal cual lo ejecutaste:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · RSAT</span><button class="t-copy" type="button" data-copy="$pwd = Read-Host &quot;Contraseña inicial&quot; -AsSecureString&#10;New-ADUser -Name &quot;Laura Prado&quot; -GivenName Laura -Surname Prado -SamAccountName laura.prado -UserPrincipalName laura.prado@contoso.com -Path &quot;OU=Ventas,OU=Usuarios,DC=contoso,DC=local&quot; -Department Ventas -Title &quot;Account Manager&quot; -AccountPassword $pwd -ChangePasswordAtLogon $true -Enabled $true&#10;Get-ADUser laura.prado | Select-Object Enabled, UserPrincipalName, DistinguishedName" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>$pwd = Read-Host &quot;Contraseña inicial&quot; -AsSecureString</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>New-ADUser -Name &quot;Laura Prado&quot; -GivenName Laura -Surname Prado -SamAccountName laura.prado -UserPrincipalName laura.prado@contoso.com -Path &quot;OU=Ventas,OU=Usuarios,DC=contoso,DC=local&quot; -Department Ventas -Title &quot;Account Manager&quot; -AccountPassword $pwd -ChangePasswordAtLogon $true -Enabled $true</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-ADUser laura.prado | Select-Object Enabled, UserPrincipalName, DistinguishedName</span><span class="t-out">Enabled           : True</span><span class="t-out">UserPrincipalName : laura.prado@contoso.com</span><span class="t-out">DistinguishedName : CN=Laura Prado,OU=Ventas,OU=Usuarios,DC=contoso,DC=local</span></code></pre></figure>
+<p class="g-warn">El <code>UserPrincipalName</code> tiene que coincidir con el correo que tendrá el usuario. Si no, el inicio de sesión en Microsoft 365 y en las aplicaciones con SSO fallará aunque la cuenta de AD esté perfecta.</p>
+<h2>3. Añade los grupos</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · RSAT</span><button class="t-copy" type="button" data-copy="&quot;GG-Ventas&quot;,&quot;GG-Carpeta-Ventas-RW&quot;,&quot;GG-App-CRM-Usuarios&quot;,&quot;GG-VPN-Usuarios&quot; | ForEach-Object { Add-ADGroupMember -Identity $_ -Members laura.prado }&#10;(Get-ADUser laura.prado -Properties MemberOf).MemberOf.Count" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>&quot;GG-Ventas&quot;,&quot;GG-Carpeta-Ventas-RW&quot;,&quot;GG-App-CRM-Usuarios&quot;,&quot;GG-VPN-Usuarios&quot; | ForEach-Object { Add-ADGroupMember -Identity $_ -Members laura.prado }</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>(Get-ADUser laura.prado -Properties MemberOf).MemberOf.Count</span><span class="t-out">4</span></code></pre></figure>
+<p>Los grupos de seguridad se aplican en el siguiente inicio de sesión del usuario. Si ya había iniciado sesión, tiene que cerrarla y volver a entrar (o ejecutar <code>klist purge</code> y volver a abrir la carpeta).</p>
+<h2>4. Comprueba</h2>
+<ul><li>La cuenta está habilitada y en la OU correcta.</li><li>Los grupos coinciden con el modelo.</li><li>Si hay sincronización con Entra ID (Azure AD Connect), espera al siguiente ciclo (normalmente 30 minutos) o pide que lo fuercen. El usuario aparecerá en Microsoft 365 y entonces se le podrá asignar la licencia.</li><li>Deja en el ticket el nombre de inicio de sesión, la OU y los grupos. La contraseña inicial se entrega por un canal aparte, nunca en el ticket.</li></ul>
+<h2>Las incidencias que llegarán después</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · RSAT</span><button class="t-copy" type="button" data-copy="Get-ADUser laura.prado -Properties LockedOut, BadLogonCount, LastBadPasswordAttempt | Select-Object LockedOut, BadLogonCount, LastBadPasswordAttempt&#10;Unlock-ADAccount -Identity laura.prado&#10;Set-ADAccountPassword -Identity laura.prado -Reset -NewPassword (Read-Host &quot;Nueva&quot; -AsSecureString)&#10;Set-ADUser -Identity laura.prado -ChangePasswordAtLogon $true" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmt"># ¿Cuenta bloqueada por intentos fallidos?</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-ADUser laura.prado -Properties LockedOut, BadLogonCount, LastBadPasswordAttempt | Select-Object LockedOut, BadLogonCount, LastBadPasswordAttempt</span><span class="t-out">LockedOut              : True</span><span class="t-out">BadLogonCount          : 5</span><span class="t-out">LastBadPasswordAttempt : 21/10/2026 9:02:14</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Unlock-ADAccount -Identity laura.prado</span><span class="t-cmt"># Restablecer la contraseña y forzar el cambio</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Set-ADAccountPassword -Identity laura.prado -Reset -NewPassword (Read-Host &quot;Nueva&quot; -AsSecureString)</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Set-ADUser -Identity laura.prado -ChangePasswordAtLogon $true</span></code></pre></figure>
+<p>Si una cuenta se bloquea una y otra vez, el origen suele ser una contraseña antigua guardada en un móvil, una unidad de red mapeada o una tarea programada. El atributo <code>LastBadPasswordAttempt</code> y el visor de eventos del controlador de dominio (evento 4740) te dicen desde qué equipo viene.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Haz una plantilla de PowerShell por departamento: OU y grupos fijos, y solo cambian nombre y cargo.</li><li>Aprende a leer <code>Get-ADPrincipalGroupMembership</code> para auditorías de acceso.</li><li>En el Nivel 2 verás cómo Azure AD Connect lleva estas cuentas a Entra ID y qué atributos importan.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>A new Active Directory account ready for day one: in its organisational unit (OU), with the groups that give access to folders and applications, and with an initial password the user will change at first sign-in.</p>
+<h2>Before you start</h2>
+<ul><li>A delegated admin account over the OU (not your everyday user account).</li><li>The ticket with the details: name, department, manager and who to mirror (the &quot;model user&quot; from the same team).</li><li>The RSAT tools installed: <strong>Active Directory Users and Computers</strong> and the PowerShell module.</li></ul>
+<p class="g-tip">If your company has an automated joiner process (HR → identity), this guide helps you understand what it does underneath and fix what the process doesn&#x27;t cover.</p>
+<h2>1. Look at the model user</h2>
+<p>Before creating anything, copy the reference. That way you don&#x27;t invent groups or OUs.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · RSAT</span><button class="t-copy" type="button" data-copy="Get-ADUser model.sales -Properties MemberOf, Department, Title, Manager | Select-Object SamAccountName, DistinguishedName, Department, Title&#10;(Get-ADUser model.sales -Properties MemberOf).MemberOf | ForEach-Object { ($_ -split &quot;,&quot;)[0] -replace &quot;CN=&quot; }" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-ADUser model.sales -Properties MemberOf, Department, Title, Manager | Select-Object SamAccountName, DistinguishedName, Department, Title</span><span class="t-out">SamAccountName    : model.sales</span><span class="t-out">DistinguishedName : CN=Model Sales,OU=Sales,OU=Users,DC=contoso,DC=local</span><span class="t-out">Department        : Sales</span><span class="t-out">Title             : Account Manager</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>(Get-ADUser model.sales -Properties MemberOf).MemberOf | ForEach-Object { ($_ -split &quot;,&quot;)[0] -replace &quot;CN=&quot; }</span><span class="t-out">GG-Sales</span><span class="t-out">GG-Folder-Sales-RW</span><span class="t-out">GG-App-CRM-Users</span><span class="t-out">GG-VPN-Users</span></code></pre></figure>
+<p>Note the OU (<code>OU=Sales,OU=Users</code>) and the group list. If the model has a group that looks like a leftover (a retired app, a closed project), don&#x27;t copy it: ask in the ticket.</p>
+<h2>2. Create the account</h2>
+<p>In the GUI: right-click the OU → <strong>New → User</strong>. Fill in first name, last name and logon name, and tick <strong>User must change password at next logon</strong>.</p>
+<p>PowerShell does the same, and it goes into the ticket exactly as you ran it:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · RSAT</span><button class="t-copy" type="button" data-copy="$pwd = Read-Host &quot;Initial password&quot; -AsSecureString&#10;New-ADUser -Name &quot;Laura Prado&quot; -GivenName Laura -Surname Prado -SamAccountName laura.prado -UserPrincipalName laura.prado@contoso.com -Path &quot;OU=Sales,OU=Users,DC=contoso,DC=local&quot; -Department Sales -Title &quot;Account Manager&quot; -AccountPassword $pwd -ChangePasswordAtLogon $true -Enabled $true&#10;Get-ADUser laura.prado | Select-Object Enabled, UserPrincipalName, DistinguishedName" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>$pwd = Read-Host &quot;Initial password&quot; -AsSecureString</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>New-ADUser -Name &quot;Laura Prado&quot; -GivenName Laura -Surname Prado -SamAccountName laura.prado -UserPrincipalName laura.prado@contoso.com -Path &quot;OU=Sales,OU=Users,DC=contoso,DC=local&quot; -Department Sales -Title &quot;Account Manager&quot; -AccountPassword $pwd -ChangePasswordAtLogon $true -Enabled $true</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-ADUser laura.prado | Select-Object Enabled, UserPrincipalName, DistinguishedName</span><span class="t-out">Enabled           : True</span><span class="t-out">UserPrincipalName : laura.prado@contoso.com</span><span class="t-out">DistinguishedName : CN=Laura Prado,OU=Sales,OU=Users,DC=contoso,DC=local</span></code></pre></figure>
+<p class="g-warn">The <code>UserPrincipalName</code> has to match the email address the user will have. Otherwise sign-in to Microsoft 365 and to SSO applications fails even though the AD account is perfect.</p>
+<h2>3. Add the groups</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · RSAT</span><button class="t-copy" type="button" data-copy="&quot;GG-Sales&quot;,&quot;GG-Folder-Sales-RW&quot;,&quot;GG-App-CRM-Users&quot;,&quot;GG-VPN-Users&quot; | ForEach-Object { Add-ADGroupMember -Identity $_ -Members laura.prado }&#10;(Get-ADUser laura.prado -Properties MemberOf).MemberOf.Count" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>&quot;GG-Sales&quot;,&quot;GG-Folder-Sales-RW&quot;,&quot;GG-App-CRM-Users&quot;,&quot;GG-VPN-Users&quot; | ForEach-Object { Add-ADGroupMember -Identity $_ -Members laura.prado }</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>(Get-ADUser laura.prado -Properties MemberOf).MemberOf.Count</span><span class="t-out">4</span></code></pre></figure>
+<p>Security groups apply at the user&#x27;s next sign-in. If they were already signed in, they need to sign out and back in (or run <code>klist purge</code> and reopen the folder).</p>
+<h2>4. Check</h2>
+<ul><li>The account is enabled and in the right OU.</li><li>The groups match the model.</li><li>If there is synchronisation with Entra ID (Azure AD Connect), wait for the next cycle (usually 30 minutes) or ask for it to be forced. The user then appears in Microsoft 365 and can get a licence.</li><li>Leave the logon name, OU and groups in the ticket. The initial password goes through a separate channel, never in the ticket.</li></ul>
+<h2>The tickets that come later</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · RSAT</span><button class="t-copy" type="button" data-copy="Get-ADUser laura.prado -Properties LockedOut, BadLogonCount, LastBadPasswordAttempt | Select-Object LockedOut, BadLogonCount, LastBadPasswordAttempt&#10;Unlock-ADAccount -Identity laura.prado&#10;Set-ADAccountPassword -Identity laura.prado -Reset -NewPassword (Read-Host &quot;New&quot; -AsSecureString)&#10;Set-ADUser -Identity laura.prado -ChangePasswordAtLogon $true" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmt"># Locked out after failed attempts?</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-ADUser laura.prado -Properties LockedOut, BadLogonCount, LastBadPasswordAttempt | Select-Object LockedOut, BadLogonCount, LastBadPasswordAttempt</span><span class="t-out">LockedOut              : True</span><span class="t-out">BadLogonCount          : 5</span><span class="t-out">LastBadPasswordAttempt : 21/10/2026 9:02:14</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Unlock-ADAccount -Identity laura.prado</span><span class="t-cmt"># Reset the password and force a change</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Set-ADAccountPassword -Identity laura.prado -Reset -NewPassword (Read-Host &quot;New&quot; -AsSecureString)</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Set-ADUser -Identity laura.prado -ChangePasswordAtLogon $true</span></code></pre></figure>
+<p>If an account locks again and again, the cause is usually an old password saved on a phone, a mapped network drive or a scheduled task. The <code>LastBadPasswordAttempt</code> attribute and the domain controller&#x27;s event log (event 4740) tell you which device it comes from.</p>
+<h2>Next steps</h2>
+<ul><li>Make a PowerShell template per department: fixed OU and groups, only name and title change.</li><li>Learn to read <code>Get-ADPrincipalGroupMembership</code> for access audits.</li><li>In Level 2 you&#x27;ll see how Azure AD Connect takes these accounts to Entra ID and which attributes matter.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Nivel 1</span><span class="en">Level 1</span> · <span class="es">Active Directory: usuarios y grupos</span><span class="en">Active Directory: users and groups</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-1.html"><span class="es">Todas las guías del Nivel 1</span><span class="en">All Level 1 guides</span> →</a>
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <span></span>
+    <a class="post-nav-link next" href="android-perfil-de-trabajo-intune.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Enrolar un Android con perfil de trabajo en Intune</span><span class="en">Enrolling an Android phone with a work profile in Intune</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

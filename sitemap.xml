@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://inigogonzalezgarcia.github.io/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/about.html</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/journey.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/links.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/recursos.html</loc><lastmod>2026-10-21</lastmod></url>
@@ -34,4 +35,16 @@
   <url><loc>https://inigogonzalezgarcia.github.io/blog/26-ot-segmentation-lab.html</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/blog/27-m365-tenant-governance-review.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/blog/</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/active-directory-alta-usuario-grupos.html</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/android-perfil-de-trabajo-intune.html</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/anyconnect-instalar-y-diagnosticar-vpn.html</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/bitlocker-estado-y-clave-de-recuperacion.html</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/impresoras-instalar-impresora-de-red-y-cola-atascada.html</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/iphone-ipad-enrolar-en-intune.html</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/jira-service-management-un-ticket-bien-hecho.html</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/microsoft-365-asignar-y-retirar-licencias.html</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/nivel-1.html</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/outlook-exchange-online-buzon-compartido-permisos-autorespuesta.html</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/teams-los-problemas-mas-comunes.html</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/windows-diagnostico-basico-equipo-lento-o-con-errores.html</loc><lastmod>2026-10-21</lastmod></url>
 </urlset>

@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Cisco AnyConnect: installing the client and diagnosing a VPN that won&#x27;t connect · Iñigo González" data-title-es="Cisco AnyConnect: instalar el cliente y diagnosticar una VPN que no conecta · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Cisco AnyConnect: installing the client and diagnosing a VPN that won&#x27;t connect · Iñigo González</title>
+<meta name="description" content="Install Secure Client, connect, and follow a fixed order when it fails: network, DNS, certificate, credentials or the client itself.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/anyconnect-instalar-y-diagnosticar-vpn.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cisco AnyConnect: installing the client and diagnosing a VPN that won&#x27;t connect · Iñigo González">
+<meta property="og:description" content="Install Secure Client, connect, and follow a fixed order when it fails: network, DNS, certificate, credentials or the client itself.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/anyconnect-instalar-y-diagnosticar-vpn.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cisco AnyConnect: installing the client and diagnosing a VPN that won&#x27;t connect · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Cisco AnyConnect: installing the client and diagnosing a VPN that won't connect","alternativeHeadline":"Cisco AnyConnect: instalar el cliente y diagnosticar una VPN que no conecta","description":"Install Secure Client, connect, and follow a fixed order when it fails: network, DNS, certificate, credentials or the client itself.","datePublished":"2026-10-21","dateModified":"2026-10-21","inLanguage":"en","proficiencyLevel":"Beginner","url":"https://inigogonzalezgarcia.github.io/guias/anyconnect-instalar-y-diagnosticar-vpn.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/anyconnect-instalar-y-diagnosticar-vpn.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Cisco AnyConnect (VPN)"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 1","item":"https://inigogonzalezgarcia.github.io/guias/nivel-1.html"},{"@type":"ListItem","position":4,"name":"Cisco AnyConnect: installing the client and diagnosing a VPN that won't connect","item":"https://inigogonzalezgarcia.github.io/guias/anyconnect-instalar-y-diagnosticar-vpn.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="nivel-1.html"><span class="es">Nivel 1</span><span class="en">Level 1</span></a></p>
+    <h1><span class="es">Cisco AnyConnect: instalar el cliente y diagnosticar una VPN que no conecta</span><span class="en">Cisco AnyConnect: installing the client and diagnosing a VPN that won&#x27;t connect</span></h1>
+    <p class="lede"><span class="es">Instalar Secure Client, conectar, y seguir un orden fijo cuando falla: red, DNS, certificado, credenciales o el propio cliente.</span><span class="en">Install Secure Client, connect, and follow a fixed order when it fails: network, DNS, certificate, credentials or the client itself.</span></p><p class="label post-meta"><span class="es">Nivel 1</span><span class="en">Level 1</span> · <span class="es">Cisco AnyConnect (VPN)</span><span class="en">Cisco AnyConnect (VPN)</span> · <span class="es">5 min</span><span class="en">5 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">21 oct 2026</span><span class="en">21 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Un usuario conectado a la VPN desde casa o desde un hotel, y un método para que el ticket &quot;la VPN no me va&quot; se resuelva en cinco minutos en lugar de media hora de pruebas al azar.</p>
+<p>Cisco ha renombrado AnyConnect como <strong>Cisco Secure Client</strong>. El icono y los mensajes cambian un poco, pero los pasos son los mismos.</p>
+<h2>Antes de empezar</h2>
+<ul><li>El instalador que usa tu empresa (normalmente lo despliega Intune o SCCM, y en el equipo ya está). Si no, se descarga del portal de la propia VPN al conectarse por el navegador.</li><li>La dirección del concentrador VPN (<code>vpn.contoso.com</code>) y el <strong>grupo</strong> o perfil que debe elegir el usuario.</li><li>Cómo se autentica: usuario y contraseña de dominio, MFA con Authenticator, certificado de equipo, o una combinación.</li></ul>
+<h2>1. Instalar y conectar</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Cisco Secure Client · AnyConnect VPN</span></figcaption><div class="ui-body"><div class="ui-path"><span>Cisco Secure Client</span><span class="ui-sep" aria-hidden="true">›</span><span>AnyConnect VPN</span></div><div class="ui-field"><span class="ui-k">Conectar a</span><span class="ui-v">vpn.contoso.com</span></div><div class="ui-btn">Conectar</div><div class="ui-path"><span>Cisco Secure Client</span><span class="ui-sep" aria-hidden="true">›</span><span>Inicio de sesión</span></div><div class="ui-field"><span class="ui-k">Grupo</span><span class="ui-v">Empleados</span></div><div class="ui-field"><span class="ui-k">Usuario</span><span class="ui-v">laura.prado</span></div><div class="ui-field"><span class="ui-k">Contraseña</span><span class="ui-v">••••••••••</span></div><div class="ui-field"><span class="ui-k">Segundo factor</span><span class="ui-v">aprobación en Authenticator</span></div><div class="ui-btn">Aceptar</div><div class="ui-field"><span class="ui-k">Estado</span><span class="ui-v">Conectado a vpn.contoso.com</span></div></div></figure>
+<p>Cuando conecta, el icono de la bandeja muestra un candado cerrado. Pide al usuario que abra una unidad de red o la intranet para confirmar que el túnel funciona, no solo que dice &quot;conectado&quot;.</p>
+<h2>2. Cuando no conecta: el orden</h2>
+<p>Haz las comprobaciones en este orden y para en la primera que falle. Cada una descarta una capa.</p>
+<h3>2.1 ¿Hay internet?</h3>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">CMD · usuario</span><button class="t-copy" type="button" data-copy="ping -n 2 1.1.1.1&#10;nslookup vpn.contoso.com" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>ping -n 2 1.1.1.1</span><span class="t-out">Respuesta desde 1.1.1.1: bytes=32 tiempo=14ms TTL=57</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>nslookup vpn.contoso.com</span><span class="t-out">Servidor:  UnKnown</span><span class="t-out">Address:  192.168.1.1</span><span class="t-out">Respuesta no autoritativa:</span><span class="t-out">Nombre:  vpn.contoso.com</span><span class="t-out">Address:  203.0.113.10</span></code></pre></figure>
+<p>Sin respuesta al ping: es la red del usuario (wifi del hotel con portal cautivo, cable suelto, datos móviles sin cobertura). Si el ping va pero <code>nslookup</code> no resuelve, es DNS: que pruebe con los datos del móvil para confirmarlo.</p>
+<h3>2.2 ¿Se llega al concentrador?</h3>
+<p>Abre en el navegador <code>https://vpn.contoso.com</code>. Si aparece el portal de la VPN, la red y el DNS están bien y el problema está en el cliente o en las credenciales. Si el navegador avisa de <strong>certificado no válido</strong>, lo verá también el cliente: suele ser una red que intercepta TLS (wifi pública, proxy de hotel) o la hora del equipo mal puesta.</p>
+<h3>2.3 ¿Qué dice el cliente?</h3>
+<p>Los mensajes de Secure Client son más útiles de lo que parecen:</p>
+<ul><li><strong>Login failed</strong>: usuario o contraseña incorrectos, o la cuenta bloqueada o caducada en Active Directory. Compruébalo con <code>Get-ADUser -Properties LockedOut, PasswordExpired</code>.</li><li><strong>The VPN connection failed due to unsuccessful domain name resolution</strong>: DNS, vuelve al 2.1.</li><li><strong>Untrusted VPN Server certificate</strong>: el 2.2; en redes de hotel suele arreglarse conectando primero el móvil como punto de acceso.</li><li><strong>VPN establishment capability for a remote user is disabled</strong>: el usuario está en sesión remota (RDP) y la política no permite VPN desde ahí. Que lo haga desde el equipo físico.</li><li><strong>The VPN client agent was unable to create the interprocess communication depot</strong> o el cliente no abre: el servicio no arranca, ve al 2.4.</li><li><strong>Posture assessment failed</strong> o &quot;tu equipo no cumple&quot;: el módulo de cumplimiento (ISE, HostScan) exige antivirus al día, disco cifrado o una versión mínima de Windows. El propio mensaje dice qué falta.</li></ul>
+<h3>2.4 ¿Está bien el cliente?</h3>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · como administrador</span><button class="t-copy" type="button" data-copy="Get-Service -Name &quot;csc_vpnagent&quot;,&quot;vpnagent&quot; -ErrorAction SilentlyContinue | Select-Object Name, Status, StartType&#10;Restart-Service csc_vpnagent&#10;Get-NetAdapter | Where-Object InterfaceDescription -like &quot;Cisco AnyConnect*&quot; | Select-Object Name, Status&#10;Enable-NetAdapter -Name &quot;Ethernet 3&quot;" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-Service -Name &quot;csc_vpnagent&quot;,&quot;vpnagent&quot; -ErrorAction SilentlyContinue | Select-Object Name, Status, StartType</span><span class="t-out">Name         Status  StartType</span><span class="t-out">----         ------  ---------</span><span class="t-out">csc_vpnagent Running Automatic</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Restart-Service csc_vpnagent</span><span class="t-cmt"># Adaptador virtual de la VPN: tiene que existir y no estar deshabilitado</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-NetAdapter | Where-Object InterfaceDescription -like &quot;Cisco AnyConnect*&quot; | Select-Object Name, Status</span><span class="t-out">Name                      Status</span><span class="t-out">----                      ------</span><span class="t-out">Ethernet 3                Disabled</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Enable-NetAdapter -Name &quot;Ethernet 3&quot;</span></code></pre></figure>
+<p>Si el servicio no arranca o el adaptador no existe, reinstala el cliente: desinstalar desde <strong>Aplicaciones</strong>, reiniciar, instalar de nuevo. Muchas veces una actualización de Windows a medias deja el adaptador virtual a medio camino.</p>
+<h2>3. Conecta pero no llega a nada</h2>
+<ul><li>Con la VPN conectada, <code>ipconfig /all</code> tiene que mostrar el adaptador de la VPN con una IP del rango corporativo y los DNS internos.</li><li><code>nslookup intranet.contoso.local</code> debe resolver con el DNS interno. Si resuelve con el de casa, el cliente no ha cambiado los DNS: reconecta, y si sigue, es el perfil del concentrador (split-DNS) y toca escalar.</li><li>Si solo falla una aplicación, pide la IP o el nombre y prueba <code>Test-NetConnection servidor -Port 443</code>. Si el puerto no responde con la VPN pero sí desde la oficina, es una regla del firewall para el rango VPN: escalar a redes con el nombre, el puerto y la hora de la prueba.</li></ul>
+<h2>4. Qué poner en el ticket</h2>
+<p>Mensaje exacto del cliente, red desde la que conecta (casa, hotel, datos móviles), hora de la prueba, y el resultado de 2.1 y 2.2. Con eso, redes puede buscar en los logs del concentrador en un minuto. Si hay que escalar a Cisco, el <strong>DART</strong> (Diagnostics and Reporting Tool, en el menú del cliente) genera un paquete con todos los logs.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Documenta los mensajes de error y su causa en la base de conocimiento del service desk: cada uno que añades ahorra una escalada.</li><li>Pide a redes el perfil XML del cliente para saber si usa split-tunnel y qué DNS empuja: así entiendes qué debería verse cuando conecta.</li><li>En el Nivel 4 verás el concentrador por dentro: FortiGate y Cisco, perfiles, grupos y las reglas que deciden qué ve cada usuario.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>A user connected to the VPN from home or a hotel, and a method that resolves the &quot;my VPN doesn&#x27;t work&quot; ticket in five minutes rather than half an hour of random tests.</p>
+<p>Cisco has renamed AnyConnect to <strong>Cisco Secure Client</strong>. The icon and messages change a little, but the steps are the same.</p>
+<h2>Before you start</h2>
+<ul><li>The installer your company uses (Intune or SCCM usually deploys it, so it is already on the device). If not, it downloads from the VPN&#x27;s own portal when connecting through the browser.</li><li>The address of the VPN concentrator (<code>vpn.contoso.com</code>) and the <strong>group</strong> or profile the user has to pick.</li><li>How it authenticates: domain username and password, MFA with Authenticator, a device certificate, or a combination.</li></ul>
+<h2>1. Install and connect</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Cisco Secure Client · AnyConnect VPN</span></figcaption><div class="ui-body"><div class="ui-path"><span>Cisco Secure Client</span><span class="ui-sep" aria-hidden="true">›</span><span>AnyConnect VPN</span></div><div class="ui-field"><span class="ui-k">Connect to</span><span class="ui-v">vpn.contoso.com</span></div><div class="ui-btn">Connect</div><div class="ui-path"><span>Cisco Secure Client</span><span class="ui-sep" aria-hidden="true">›</span><span>Login</span></div><div class="ui-field"><span class="ui-k">Group</span><span class="ui-v">Employees</span></div><div class="ui-field"><span class="ui-k">Username</span><span class="ui-v">laura.prado</span></div><div class="ui-field"><span class="ui-k">Password</span><span class="ui-v">••••••••••</span></div><div class="ui-field"><span class="ui-k">Second factor</span><span class="ui-v">approve in Authenticator</span></div><div class="ui-btn">OK</div><div class="ui-field"><span class="ui-k">Status</span><span class="ui-v">Connected to vpn.contoso.com</span></div></div></figure>
+<p>When it connects, the tray icon shows a closed padlock. Ask the user to open a network drive or the intranet to confirm the tunnel works, not just that it says &quot;connected&quot;.</p>
+<h2>2. When it doesn&#x27;t connect: the order</h2>
+<p>Run the checks in this order and stop at the first one that fails. Each one rules out a layer.</p>
+<h3>2.1 Is there internet?</h3>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">CMD · user</span><button class="t-copy" type="button" data-copy="ping -n 2 1.1.1.1&#10;nslookup vpn.contoso.com" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>ping -n 2 1.1.1.1</span><span class="t-out">Reply from 1.1.1.1: bytes=32 time=14ms TTL=57</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>nslookup vpn.contoso.com</span><span class="t-out">Server:  UnKnown</span><span class="t-out">Address:  192.168.1.1</span><span class="t-out">Non-authoritative answer:</span><span class="t-out">Name:    vpn.contoso.com</span><span class="t-out">Address: 203.0.113.10</span></code></pre></figure>
+<p>No ping reply: it is the user&#x27;s network (hotel wifi with a captive portal, loose cable, mobile data with no coverage). If ping works but <code>nslookup</code> does not resolve, it is DNS: have them try on mobile data to confirm.</p>
+<h3>2.2 Can the concentrator be reached?</h3>
+<p>Open <code>https://vpn.contoso.com</code> in the browser. If the VPN portal appears, network and DNS are fine and the problem is in the client or the credentials. If the browser warns of an <strong>invalid certificate</strong>, the client sees it too: usually a network that intercepts TLS (public wifi, hotel proxy) or the device clock set wrong.</p>
+<h3>2.3 What does the client say?</h3>
+<p>Secure Client&#x27;s messages are more useful than they look:</p>
+<ul><li><strong>Login failed</strong>: wrong username or password, or the account locked or expired in Active Directory. Check with <code>Get-ADUser -Properties LockedOut, PasswordExpired</code>.</li><li><strong>The VPN connection failed due to unsuccessful domain name resolution</strong>: DNS, back to 2.1.</li><li><strong>Untrusted VPN Server certificate</strong>: see 2.2; on hotel networks it is often fixed by tethering to the phone first.</li><li><strong>VPN establishment capability for a remote user is disabled</strong>: the user is in a remote session (RDP) and policy does not allow VPN from there. They need to do it from the physical device.</li><li><strong>The VPN client agent was unable to create the interprocess communication depot</strong> or the client does not open: the service is not starting, go to 2.4.</li><li><strong>Posture assessment failed</strong> or &quot;your device is not compliant&quot;: the compliance module (ISE, HostScan) requires an up-to-date antivirus, an encrypted disk or a minimum Windows version. The message itself says what is missing.</li></ul>
+<h3>2.4 Is the client healthy?</h3>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · as administrator</span><button class="t-copy" type="button" data-copy="Get-Service -Name &quot;csc_vpnagent&quot;,&quot;vpnagent&quot; -ErrorAction SilentlyContinue | Select-Object Name, Status, StartType&#10;Restart-Service csc_vpnagent&#10;Get-NetAdapter | Where-Object InterfaceDescription -like &quot;Cisco AnyConnect*&quot; | Select-Object Name, Status&#10;Enable-NetAdapter -Name &quot;Ethernet 3&quot;" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-Service -Name &quot;csc_vpnagent&quot;,&quot;vpnagent&quot; -ErrorAction SilentlyContinue | Select-Object Name, Status, StartType</span><span class="t-out">Name         Status  StartType</span><span class="t-out">----         ------  ---------</span><span class="t-out">csc_vpnagent Running Automatic</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Restart-Service csc_vpnagent</span><span class="t-cmt"># The VPN&#x27;s virtual adapter: it has to exist and not be disabled</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-NetAdapter | Where-Object InterfaceDescription -like &quot;Cisco AnyConnect*&quot; | Select-Object Name, Status</span><span class="t-out">Name                      Status</span><span class="t-out">----                      ------</span><span class="t-out">Ethernet 3                Disabled</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Enable-NetAdapter -Name &quot;Ethernet 3&quot;</span></code></pre></figure>
+<p>If the service won&#x27;t start or the adapter does not exist, reinstall the client: uninstall from <strong>Apps</strong>, reboot, install again. A half-finished Windows update often leaves the virtual adapter in a broken state.</p>
+<h2>3. It connects but reaches nothing</h2>
+<ul><li>With the VPN connected, <code>ipconfig /all</code> has to show the VPN adapter with an IP from the corporate range and the internal DNS servers.</li><li><code>nslookup intranet.contoso.local</code> must resolve through the internal DNS. If it resolves through the home one, the client has not switched DNS: reconnect, and if it persists it is the concentrator profile (split-DNS) and it is time to escalate.</li><li>If only one application fails, ask for the IP or name and test <code>Test-NetConnection server -Port 443</code>. If the port does not answer over VPN but does from the office, it is a firewall rule for the VPN range: escalate to networks with the name, the port and the time of the test.</li></ul>
+<h2>4. What to put in the ticket</h2>
+<p>The client&#x27;s exact message, the network they connect from (home, hotel, mobile data), the time of the test, and the result of 2.1 and 2.2. With that, networks can search the concentrator logs in a minute. If it has to go to Cisco, the <strong>DART</strong> (Diagnostics and Reporting Tool, in the client menu) builds a bundle with all the logs.</p>
+<h2>Next steps</h2>
+<ul><li>Document the error messages and their cause in the service desk knowledge base: every one you add saves an escalation.</li><li>Ask networks for the client&#x27;s XML profile to learn whether it uses split-tunnel and which DNS it pushes: then you know what should appear when it connects.</li><li>In Level 4 you&#x27;ll see the concentrator from the inside: FortiGate and Cisco, profiles, groups and the rules that decide what each user can reach.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Nivel 1</span><span class="en">Level 1</span> · <span class="es">Cisco AnyConnect (VPN)</span><span class="en">Cisco AnyConnect (VPN)</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-1.html"><span class="es">Todas las guías del Nivel 1</span><span class="en">All Level 1 guides</span> →</a>
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="bitlocker-estado-y-clave-de-recuperacion.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">BitLocker: comprobar el cifrado y recuperar un equipo que pide la clave</span><span class="en">BitLocker: checking encryption and recovering a device that asks for the key</span></span></a>
+    <a class="post-nav-link next" href="impresoras-instalar-impresora-de-red-y-cola-atascada.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Impresoras: instalar una impresora de red y desatascar la cola</span><span class="en">Printers: installing a network printer and clearing a stuck queue</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
