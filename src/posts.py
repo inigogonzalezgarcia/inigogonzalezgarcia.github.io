@@ -1243,4 +1243,48 @@ De administrar Microsoft 365 como Global Administrator: PIM y acceso just-in-tim
 - Ejecutar el exportador con una cuenta Global Reader en tu tenant y revisar en la primera ejecución los nombres de roles y el mapeo de Acceso condicional.
 - Acordar la línea base con seguridad antes de la primera revisión.
 - Pedir al proveedor que ponga la referencia del cambio en cada sesión de administración, para que el cruce con los cambios sea un trámite."""),
+dict(n="28", repo="28-euc-provider-service-review", date="2026-10-22", cat="tools",
+ title_en="The provider says 96% and the users say it is slow: a monthly EUC service review from the tickets", title_es="El proveedor dice 96% y los usuarios dicen que va lento: una revisión mensual del servicio EUC desde los tickets",
+ dek_en="SLA scorecard with the breach list, backlog and ageing, escalations and the OLAs we owe the provider, out-of-hours coverage, the quality signals a compliance figure hides, and the service credits nobody has claimed.",
+ dek_es="Cuadro de SLA con la lista de incumplimientos, backlog y antigüedad, escalados y las OLAs que le debemos al proveedor, cobertura fuera de horario, las señales de calidad que un porcentaje esconde y los créditos de servicio que nadie ha reclamado.",
+ en="""
+
+## The problem
+The provider's monthly pack says 96% and the users say the service is slow. Both are usually right. The P2 figure leaves out the tickets that spent a week in "waiting for customer". The out-of-hours P2s wait for the follow-the-sun hand-over, and the average hides them. A fifth of the compliant tickets were closed in the last 10% of the window. The provider escalated 19% of its tickets to the internal teams, and the network team is sitting on twelve of them since July, so that breach is ours. And the contract has service credits nobody has ever claimed, because nobody computed them. A service review needs one set of numbers both sides accept, computed from the raw tickets with the rules written down.
+
+## What I built
+- A review of a month of tickets in six areas: SLA per type and priority with business-hours or 24x7 clocks and pending time subtracted; backlog and ageing by team; escalations to the internal teams and their OLAs, with the clock starting at the hand-over; coverage in and out of hours; quality (reopens, first-contact resolution, satisfaction, last-minute closes, parked tickets, instant closes); and the contract, with service credits per missed metric and the monthly cap.
+- `report.html`, `service-review.md` as the agenda for the meeting with two sides (what to raise with the provider, what we owe them), `actions.csv` with owners, `scorecard.csv`, `breaches.csv` with a `cause` column for the provider, `ageing.csv` with a `decision` column, `escalations.csv` and `findings.csv`.
+- A read-only PowerShell exporter for Jira Cloud; ServiceNow list exports load as they are.
+
+## How it is built
+Python with the standard library only. The demo is a made-up trading company with offices in four cities whose service is run by a fictional provider, with an offshore desk and onsite teams, and 1,454 tickets with the problems placed on purpose. 16 tests and a runbook for before, during and after the meeting.
+
+## What I learned
+From managing end-user services with providers: SLAs and OLAs defined and followed, provider and contract negotiation, backlog and ageing follow-up, escalations with offshore teams, and process ownership for incidents, requests, changes and problems. The lesson that shaped the tool is that the review goes better when the internal teams' OLAs are on the same page as the provider's SLAs. Half of the "provider problems" turn out to be queues on our side.
+
+## Next steps
+- Run it on last month's export next to the provider's own pack and reconcile the two before the meeting. The difference is the exclusions, and that is the first thing to agree.
+- Put the OLAs in `settings.json` only after the internal team leads have agreed them.
+- Keep each month's output so the third review can show the trend.""",
+ es="""
+
+## El problema
+El informe mensual del proveedor dice 96% y los usuarios dicen que el servicio va lento. Normalmente los dos tienen razón. El dato de P2 deja fuera los tickets que pasaron una semana en "esperando al usuario". Los P2 fuera de horario esperan al relevo del follow-the-sun, y la media los esconde. Una quinta parte de los tickets cumplidos se cerraron en el último 10% de la ventana. El proveedor escaló el 19% de sus tickets a los equipos internos, y el equipo de red tiene doce desde julio, así que ese incumplimiento es nuestro. Y el contrato tiene créditos de servicio que nadie ha reclamado, porque nadie los ha calculado. Una revisión de servicio necesita un único conjunto de números que acepten las dos partes, calculado desde los tickets en bruto y con las reglas escritas.
+
+## Qué he hecho
+- Una revisión de un mes de tickets en seis áreas: SLA por tipo y prioridad con reloj de horario laboral o 24x7 y el tiempo en pendiente descontado; backlog y antigüedad por equipo; escalados a los equipos internos y sus OLAs, con el reloj arrancando en el traspaso; cobertura dentro y fuera de horario; calidad (reaperturas, resolución al primer contacto, satisfacción, cierres de último minuto, tickets aparcados, cierres instantáneos); y el contrato, con créditos de servicio por métrica incumplida y el tope mensual.
+- `report.html`, `service-review.md` como orden del día de la reunión con dos lados (qué plantear al proveedor, qué le debemos), `actions.csv` con responsables, `scorecard.csv`, `breaches.csv` con una columna `cause` para el proveedor, `ageing.csv` con una columna `decision`, `escalations.csv` y `findings.csv`.
+- Un exportador de solo lectura en PowerShell para Jira Cloud; las exportaciones de lista de ServiceNow cargan tal cual.
+
+## Cómo está hecho
+Python solo con la librería estándar. La demo es una empresa de trading inventada con oficinas en cuatro ciudades cuyo servicio lo opera un proveedor ficticio, con un service desk offshore y equipos presenciales, y 1.454 tickets con los problemas puestos a propósito. 16 tests y un runbook para antes, durante y después de la reunión.
+
+## Qué aprendí
+De gestionar servicios de puesto de trabajo con proveedores: SLAs y OLAs definidos y seguidos, negociación de proveedores y contratos, seguimiento del backlog y la antigüedad, escalados con equipos offshore, y ser process owner de incidencias, peticiones, cambios y problemas. La lección que da forma a la herramienta es que la revisión va mejor cuando las OLAs de los equipos internos están en la misma página que los SLAs del proveedor. La mitad de los "problemas del proveedor" resultan ser colas de nuestro lado.
+
+## Siguientes pasos
+- Ejecutarlo sobre la exportación del mes pasado junto al informe del proveedor y conciliar los dos antes de la reunión. La diferencia son las exclusiones, y eso es lo primero que hay que acordar.
+- Poner las OLAs en `settings.json` solo cuando los responsables de los equipos internos las hayan aceptado.
+- Guardar la salida de cada mes para que la tercera revisión pueda enseñar la tendencia."""),
 ]
