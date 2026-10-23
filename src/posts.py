@@ -1287,4 +1287,52 @@ De gestionar servicios de puesto de trabajo con proveedores: SLAs y OLAs definid
 - Ejecutarlo sobre la exportación del mes pasado junto al informe del proveedor y conciliar los dos antes de la reunión. La diferencia son las exclusiones, y eso es lo primero que hay que acordar.
 - Poner las OLAs en `settings.json` solo cuando los responsables de los equipos internos las hayan aceptado.
 - Guardar la salida de cada mes para que la tercera revisión pueda enseñar la tendencia."""),
+dict(n="29", repo="29-tenant-separation-cutover-planner", date="2026-10-23", cat="tools",
+ title_en="The plan says wave 3 on the 30th; the inventory says no: readiness for a Microsoft 365 tenant separation", title_es="El plan dice ola 3 el día 30; el inventario dice que no: preparación de una separación de tenant de Microsoft 365",
+ dek_en="Devices that cannot be reset into the target, users who will fail on day 1, applications without a decision, and a go or no-go per wave with the reason, from the source tenant's own exports.",
+ dek_es="Equipos que no se pueden resetear al tenant destino, usuarios que van a fallar el primer día, aplicaciones sin decisión y un go o no-go por ola con su motivo, a partir de las exportaciones del propio tenant origen.",
+ en="""
+
+## The problem
+A tenant separation is a thousand small resets that all have to work on the same weekend. The programme plan says "wave 3, the plant, 30 November". The inventory says a third of the plant's devices have no TPM, fourteen kiosks have no primary user, ninety devices run an HMI application nobody has catalogued, and the wave has two more devices than the technicians can reset in four days. None of that shows in the project tracker, and all of it is in the Intune, Entra and Exchange exports. The readiness review should start from those exports, not from the plan.
+
+## What I built
+- Device readiness with four blockers that stop a wave: no Autopilot hardware hash in the target, BitLocker key not escrowed, hardware not Windows 11 capable, and devices not seen for weeks. Plus the actions for the day itself: OS below the baseline, low disk, domain-only joins, non-compliant devices, local admins the reset will remove, kiosks and applications without a decision.
+- User readiness: no MFA method (Conditional Access in the target stops them on day 1), mailboxes too big for the window, licences with no SKU bought in the target, shared mailboxes split across waves, dormant users and leavers.
+- A go, go with actions or no-go per wave, with the reason: capacity (technicians, devices per day, days), blocked share, mailbox hours against the migration window, freeze windows, and a pilot that waits for the target tenant to be finished.
+- `report.html`, `cutover-plan.md` for the change board with the prerequisites checklist and the order of the cutover day, `blockers.csv` with owner and cleared columns, and the CSVs per wave, device, user and application.
+- A read-only PowerShell exporter for Microsoft Graph and Exchange Online.
+
+## How it is built
+Python with the standard library only. The demo is a made-up carve-out of an automotive dealer group from its parent: four sites, 1,208 devices, 1,182 users and six waves, with the problems placed on purpose so each wave fails for a different reason. 22 tests and a runbook with the weekly cadence, how to read the verdicts and the usual fix per finding.
+
+## What I learned
+From tenant-to-tenant migrations and the Microsoft 365 administration behind them, Windows Autopilot and Intune with ConfigMgr co-management, a Windows 11 migration across sites, and changes taken through the CAB with freeze windows. The lesson that shaped the tool is that a wave rarely fails on the day. It fails weeks before, when nobody counts the devices without a hardware hash or the users without MFA, and the date stays on the plan anyway.
+
+## Next steps
+- Join the Windows 11 hardware readiness report to the Graph export, so the hardware check uses real TPM and Secure Boot data.
+- Re-run it every week of the programme and keep the dated outputs, so the review shows the blockers going down.
+- Agree the wave rules and the freeze calendar with the change board before the first run, not after.""",
+ es="""
+
+## El problema
+Una separación de tenant son mil reseteos pequeños que tienen que salir bien el mismo fin de semana. El plan del programa dice "ola 3, la planta, 30 de noviembre". El inventario dice que un tercio de los equipos de la planta no tienen TPM, que catorce kioscos no tienen usuario principal, que noventa equipos llevan una aplicación HMI que nadie ha catalogado, y que la ola tiene dos equipos más de los que los técnicos pueden resetear en cuatro días. Nada de eso aparece en el seguimiento del proyecto, y todo está en las exportaciones de Intune, Entra y Exchange. La revisión de preparación debería empezar por esas exportaciones, no por el plan.
+
+## Qué he hecho
+- Preparación de equipos con cuatro bloqueos que paran una ola: sin hardware hash de Autopilot en el destino, clave de BitLocker sin custodiar, hardware no apto para Windows 11 y equipos que no se conectan desde hace semanas. Además, las acciones para el propio día: sistema por debajo de la línea base, poco disco, equipos solo unidos al dominio, equipos no conformes, administradores locales que el reseteo va a quitar, kioscos y aplicaciones sin decisión.
+- Preparación de usuarios: sin método de MFA (el acceso condicional del destino los para el primer día), buzones demasiado grandes para la ventana, licencias sin SKU comprado en el destino, buzones compartidos repartidos entre olas, usuarios inactivos y bajas.
+- Un go, go con acciones o no-go por ola, con su motivo: capacidad (técnicos, equipos por día, días), porcentaje de bloqueados, horas de migración de buzones frente a la ventana, periodos de congelación y un piloto que espera a que el tenant destino esté terminado.
+- `report.html`, `cutover-plan.md` para el comité de cambios con el checklist de prerrequisitos y el orden del día del corte, `blockers.csv` con columnas de responsable y resuelto, y los CSV por ola, equipo, usuario y aplicación.
+- Un exportador de solo lectura en PowerShell para Microsoft Graph y Exchange Online.
+
+## Cómo está hecho
+Python solo con la librería estándar. La demo es una segregación inventada de un grupo de concesionarios de automoción respecto a su matriz: cuatro sedes, 1.208 equipos, 1.182 usuarios y seis olas, con los problemas puestos a propósito para que cada ola falle por un motivo distinto. 22 tests y un runbook con la cadencia semanal, cómo leer los veredictos y la corrección habitual de cada hallazgo.
+
+## Qué aprendí
+De migraciones tenant a tenant y la administración de Microsoft 365 que hay detrás, de Windows Autopilot e Intune con co-gestión de ConfigMgr, de una migración a Windows 11 en varias sedes, y de cambios pasados por el CAB con periodos de congelación. La lección que da forma a la herramienta es que una ola rara vez falla el día del corte. Falla semanas antes, cuando nadie cuenta los equipos sin hardware hash o los usuarios sin MFA, y la fecha sigue en el plan igualmente.
+
+## Siguientes pasos
+- Unir el informe de preparación de hardware para Windows 11 con la exportación de Graph, para que la comprobación de hardware use datos reales de TPM y Secure Boot.
+- Ejecutarlo cada semana del programa y guardar las salidas con fecha, para que la revisión enseñe cómo bajan los bloqueos.
+- Acordar las reglas de las olas y el calendario de congelación con el comité de cambios antes de la primera ejecución, no después."""),
 ]
