@@ -308,7 +308,7 @@ footer a{color:var(--on-ink)}
 .prose h2:first-child{margin-top:0}
 .prose ul{padding-left:1.2em}
 .prose li{margin:6px 0}
-.prose code,.repo-name{font-family:var(--mono);font-size:.88em;background:var(--paper-2);padding:1px 5px}
+.prose code,.repo-name{font-family:var(--mono);font-size:.88em;background:var(--paper-2);padding:1px 5px;overflow-wrap:anywhere}
 .post-aside{align-self:start;position:sticky;top:100px;border-top:2px solid var(--ink);padding-top:18px}
 .repo-name{display:inline-block;margin:6px 0 18px;word-break:break-all}
 .small{font-size:14px}
@@ -441,7 +441,7 @@ footer a{color:var(--on-ink)}
 .ui{background:#fff;border:1px solid var(--line)}
 .ui-bar{background:var(--paper-2);color:var(--ink);border-bottom:1px solid var(--line)}
 .ui-body{padding:14px 18px;font-size:15px;line-height:1.5;color:var(--ink)}
-.ui-path{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-family:var(--mono);font-size:12.5px;padding:7px 0;border-bottom:1px solid var(--line);margin-bottom:8px}
+.ui-path{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-family:var(--mono);font-size:12.5px;padding:7px 0;border-bottom:1px solid var(--line);margin-bottom:8px;overflow-wrap:anywhere;min-width:0}.ui-path span{min-width:0}
 .ui-path span:last-of-type{font-weight:700}
 .ui-sep{color:var(--muted)}
 .ui-opt{display:flex;gap:10px;align-items:flex-start;padding:6px 0}
