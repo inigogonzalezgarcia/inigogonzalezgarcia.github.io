@@ -1,5 +1,5 @@
 """Build every page (index, journey, blog, about, store, resources, links, legal) and assets/data.js from src/. Run: python3 src/build.py"""
-import json, html, math, pathlib
+import json, html, math, pathlib, re
 
 ROOT = pathlib.Path(__file__).parent
 SITE_ROOT = ROOT.parent
@@ -182,7 +182,7 @@ def safe_rel(s):
     return _BLANK.sub(fix, s)
 
 def write(path, s):
-    assert "{{" not in s, path
+    assert not re.search(r"\{\{[A-Z_]+\}\}", s), path  # unreplaced template placeholder; guide content may contain {{ }} legitimately
     s = safe_rel(s)
     f = SITE / path
     f.parent.mkdir(parents=True, exist_ok=True)
@@ -960,7 +960,8 @@ def _ui(title, lines):
             k, _, v = l[2:].partition(":")
             rows.append(f'<div class="ui-field"><span class="ui-k">{_ginline(k.strip())}</span><span class="ui-v">{_ginline(v.strip())}</span></div>')
         elif l.startswith("[") and l.endswith("]"):
-            rows.append(f'<div class="ui-btn">{_ginline(l[1:-1])}</div>')
+            btns = re.findall(r"\[([^\[\]]+)\]", l)  # "[Save] [Cancel]" → two buttons
+            rows.append("".join(f'<div class="ui-btn">{_ginline(b.strip())}</div>' for b in btns) if btns and l.count("[") == len(btns) else f'<div class="ui-btn">{_ginline(l[1:-1])}</div>')
         else:
             rows.append(f'<div class="ui-txt">{_ginline(l)}</div>')
     return (f'<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span>'
