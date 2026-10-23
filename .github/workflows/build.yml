@@ -7,6 +7,11 @@ on:
     branches: [main]
     paths: ["src/**", "assets/style.css", ".github/workflows/build.yml"]
   workflow_dispatch:
+    inputs:
+      indexnow:
+        description: "IndexNow: 'changed' (pages changed by this run) or 'all' (every URL in the sitemap)"
+        default: "changed"
+        required: false
 permissions:
   contents: write
 concurrency: og-images
@@ -15,6 +20,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - name: Remember where this push started (so IndexNow also gets pages pushed directly)
+        run: |
+          B="${{ github.event.before }}"
+          if [ -z "$B" ] || ! git cat-file -e "$B" 2>/dev/null; then B=$(git rev-parse HEAD); fi
+          echo "BEFORE=$B" >> "$GITHUB_ENV"
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -35,3 +46,7 @@ jobs:
           git commit -m "Build: regenerate pages from src/"
           git pull --rebase
           git push
+      - name: IndexNow (tell Bing and friends which pages changed; key file lives at the site root)
+        run: |
+          if [ "${{ github.event.inputs.indexnow }}" = "all" ]; then python src/indexnow.py --all
+          else python src/indexnow.py --since "$BEFORE"; fi
