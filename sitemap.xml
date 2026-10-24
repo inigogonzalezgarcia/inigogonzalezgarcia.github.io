@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://inigogonzalezgarcia.github.io/</loc><lastmod>2026-10-24</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/about.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/about.html</loc><lastmod>2026-10-25</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias.html</loc><lastmod>2026-10-22</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/journey.html</loc><lastmod>2026-10-24</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/links.html</loc><lastmod>2026-10-24</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/recursos.html</loc><lastmod>2026-10-24</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/store.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/journey.html</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/links.html</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/recursos.html</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/store.html</loc><lastmod>2026-10-25</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/blog/01-finops-cloud-cost-dashboard.html</loc><lastmod>2026-09-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/blog/02-intune-compliance-report.html</loc><lastmod>2026-09-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/blog/03-entra-id-hygiene-audit.html</loc><lastmod>2026-09-30</lastmod></url>
@@ -37,7 +37,8 @@
   <url><loc>https://inigogonzalezgarcia.github.io/blog/28-euc-provider-service-review.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/blog/29-tenant-separation-cutover-planner.html</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/blog/30-jira-confluence-admin-kit.html</loc><lastmod>2026-10-24</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/blog/</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/blog/31-dealer-systems-health.html</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/blog/</loc><lastmod>2026-10-25</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/active-directory-alta-usuario-grupos.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/android-perfil-de-trabajo-intune.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/ansible-primer-playbook-parchear-servidores-linux.html</loc><lastmod>2026-10-22</lastmod></url>
