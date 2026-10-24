@@ -1335,4 +1335,54 @@ De migraciones tenant a tenant y la administración de Microsoft 365 que hay det
 - Unir el informe de preparación de hardware para Windows 11 con la exportación de Graph, para que la comprobación de hardware use datos reales de TPM y Secure Boot.
 - Ejecutarlo cada semana del programa y guardar las salidas con fecha, para que la revisión enseñe cómo bajan los bloqueos.
 - Acordar las reglas de las olas y el calendario de congelación con el comité de cambios antes de la primera ejecución, no después."""),
+dict(n="30", repo="30-jira-confluence-admin-kit", date="2026-10-24", cat="tools",
+ title_en="128 licences nobody uses and a sprint still open nine days late: a monthly review of a Jira and Confluence site", title_es="128 licencias que nadie usa y un sprint abierto nueve días tarde: una revisión mensual de un sitio de Jira y Confluence",
+ dek_en="Licences to reclaim with the saving, admins who should not be admins, external users and service accounts without an owner, projects, spaces and custom fields to clean up, and the agile health of every Scrum board, from the site's own exports.",
+ dek_es="Licencias a recuperar con el ahorro, administradores que no deberían serlo, usuarios externos y cuentas de servicio sin responsable, proyectos, espacios y campos personalizados que limpiar, y la salud ágil de cada tablero Scrum, a partir de las exportaciones del propio sitio.",
+ en="""
+
+## The problem
+An Atlassian site grows by itself. Everybody who joins gets Jira through a default group, whether they will use it or not. Contractors keep access after the project ends. Somebody added a colleague to `jira-admins` "for a day" two years ago. A demo project still lets Anyone browse it. There are 460 custom fields, and a third of them have not been used in a year. And two Scrum boards carry over a third of every sprint, which nobody notices because the board still looks busy. None of this is hard to fix. It is hard to see. The licence renewal, the access review and the retrospective all need the same thing: a list, the rule that put each item on it, and a column for the decision.
+
+## What I built
+- Licences: product access not used for 90 days, never used after the grace period (the default-group problem), or kept by suspended accounts, with the cost per year and the seats against what was bought.
+- Access: more admins than the target, admins who are deactivated or idle, admins on personal domains, external users by domain, and service accounts without a named owner.
+- Jira and Confluence hygiene: projects open to Anyone, projects without a lead or with a lead who has left, idle projects and spaces to archive, one-off permission and workflow schemes, spaces with anonymous access or no active admin, personal spaces of leavers, and custom fields to remove.
+- Agile health per Scrum board over the last six sprints: sprints still open past their end date, carry-over, scope added after the start, say/do, and idle boards.
+- `report.html`, `admin-review.md` as the agenda with the decisions as a checklist, `licences.csv` with `manager_ok` and `removed` columns, `access-review.csv` with a `decision` column, and the CSVs per project, space, field and board.
+- A read-only PowerShell exporter for the Jira, Agile and Confluence Cloud REST APIs; the user export from admin.atlassian.com loads as it is.
+
+## How it is built
+Python with the standard library only. The demo is a made-up warehouse-robotics company on Jira, Jira Service Management and Confluence Cloud: 437 user accounts, 61 projects, 77 spaces, 460 custom fields and 12 Scrum boards, with the problems placed on purpose. 17 tests and a 45-minute runbook with how to read the agile numbers.
+
+## What I learned
+From administering Jira and Confluence and managing the relationship with Atlassian, working as Scrum Master and Product Owner with Kanban and portfolio views, running release management with changes through the CAB, and managing licences and vendors. The lesson that shaped the tool is that the licence saving pays for the review, but the agile numbers are what the teams come for. They are conversation starters for the retrospective, not targets, and one team's trend against itself is the only comparison that means anything.
+
+## Next steps
+- Run it before the next renewal and give managers a week to object before any licence is removed.
+- Agree the admin target and the service-account owners with security before the first review.
+- Keep each month's output, so the next review opens with what changed since the last one.""",
+ es="""
+
+## El problema
+Un sitio de Atlassian crece solo. Todo el que entra recibe Jira por un grupo por defecto, lo vaya a usar o no. Los externos siguen con acceso cuando termina el proyecto. Alguien metió a un compañero en `jira-admins` "por un día" hace dos años. Un proyecto de demo sigue abierto a Anyone. Hay 460 campos personalizados y un tercio no se ha usado en un año. Y dos tableros Scrum arrastran un tercio de cada sprint al siguiente, cosa que nadie nota porque el tablero sigue pareciendo activo. Nada de esto es difícil de arreglar. Es difícil de ver. La renovación de licencias, la revisión de accesos y la retrospectiva necesitan lo mismo: una lista, la regla que puso cada elemento en ella y una columna para la decisión.
+
+## Qué he hecho
+- Licencias: acceso a producto sin usar en 90 días, nunca usado pasado el periodo de gracia (el problema del grupo por defecto) o en manos de cuentas suspendidas, con el coste anual y las licencias frente a las compradas.
+- Accesos: más administradores que el objetivo, administradores desactivados o inactivos, administradores con dominios personales, usuarios externos por dominio y cuentas de servicio sin responsable con nombre.
+- Higiene de Jira y Confluence: proyectos abiertos a Anyone, proyectos sin responsable o con un responsable que ya no está, proyectos y espacios inactivos para archivar, esquemas de permisos y de flujo usados por un solo proyecto, espacios con acceso anónimo o sin administrador activo, espacios personales de bajas y campos personalizados que eliminar.
+- Salud ágil por tablero Scrum en los últimos seis sprints: sprints abiertos después de su fecha de fin, trabajo arrastrado, alcance añadido después del inicio, say/do y tableros parados.
+- `report.html`, `admin-review.md` como orden del día con las decisiones en forma de checklist, `licences.csv` con columnas `manager_ok` y `removed`, `access-review.csv` con una columna `decision`, y los CSV por proyecto, espacio, campo y tablero.
+- Un exportador de solo lectura en PowerShell para las API REST de Jira, Agile y Confluence Cloud; la exportación de usuarios de admin.atlassian.com carga tal cual.
+
+## Cómo está hecho
+Python solo con la librería estándar. La demo es una empresa inventada de robótica de almacenes con Jira, Jira Service Management y Confluence Cloud: 437 cuentas de usuario, 61 proyectos, 77 espacios, 460 campos personalizados y 12 tableros Scrum, con los problemas puestos a propósito. 17 tests y un runbook de 45 minutos con cómo leer los números ágiles.
+
+## Qué aprendí
+De administrar Jira y Confluence y llevar la relación con Atlassian, de trabajar como Scrum Master y Product Owner con Kanban y vistas de portfolio, de llevar la gestión de releases con los cambios por el CAB, y de gestionar licencias y proveedores. La lección que da forma a la herramienta es que el ahorro en licencias paga la revisión, pero los números ágiles son lo que interesa a los equipos. Sirven para abrir la conversación en la retrospectiva, no son objetivos, y la única comparación que tiene sentido es la de un equipo consigo mismo en el tiempo.
+
+## Siguientes pasos
+- Ejecutarlo antes de la próxima renovación y dar a los responsables una semana para objetar antes de quitar ninguna licencia.
+- Acordar con seguridad el objetivo de administradores y los responsables de las cuentas de servicio antes de la primera revisión.
+- Guardar la salida de cada mes, para que la siguiente revisión empiece por lo que ha cambiado desde la anterior."""),
 ]
