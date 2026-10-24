@@ -1385,4 +1385,54 @@ De administrar Jira y Confluence y llevar la relación con Atlassian, de trabaja
 - Ejecutarlo antes de la próxima renovación y dar a los responsables una semana para objetar antes de quitar ninguna licencia.
 - Acordar con seguridad el objetivo de administradores y los responsables de las cuentas de servicio antes de la primera revisión.
 - Guardar la salida de cada mes, para que la siguiente revisión empiece por lo que ha cambiado desde la anterior."""),
+dict(n="31", repo="31-dealer-systems-health", date="2026-10-25", cat="tools",
+ title_en="The warranty feed stopped on Thursday and the dealer found out on Tuesday: a weekly review of a dealer network's systems", title_es="El feed de garantías se paró el jueves y el concesionario se enteró el martes: una revisión semanal de los sistemas de una red de concesionarios",
+ dek_en="DMS feeds that stopped or send nothing, warranty claims about to miss the deadline and why they are rejected, the parts catalogue and price file each dealer really uses, and the dealers opening or leaving, per dealer and in red, amber or green.",
+ dek_es="Feeds del DMS parados o vacíos, garantías a punto de caducar y por qué se rechazan, el catálogo de recambios y la tarifa que usa de verdad cada concesionario, y los concesionarios que abren o se van, por concesionario y en rojo, ámbar o verde.",
+ en="""
+
+## The problem
+A car brand's aftersales runs on systems that live at the dealers. When a dealer's warranty feed stops on a Thursday night, nobody notices until the dealer asks on Tuesday why its claims have no answer. A DMS job that "succeeds" with zero records alerts nobody at all. A dealer still on last month's parts catalogue sends labour operations the warranty system no longer accepts, its rejection rate climbs, and the conversation turns to bad claims instead of an old catalogue. A price file that did not apply means a week of parts sold at the wrong price. And the dealer that closed in September still has working interface credentials. Each of these lives in a different system; the weekly review needs them side by side, per dealer, with the team that owns each fix.
+
+## What I built
+- Interfaces: feeds with no successful run within the limit (one failed night is already red for repair orders and warranty claims), feeds rejecting records, and feeds that succeed with nothing in them.
+- Warranty: drafts past or close to the submission limit, claims waiting for the brand's own decision, information requests nobody answered, rejection rate per dealer with the main reasons, possible duplicates (same VIN and labour operation), and accepted claims that were never paid.
+- Parts: the catalogue version and price file each dealer has actually applied, against the current ones and their grace periods.
+- Network: DMS versions not certified for the brand interfaces, dealers opening with checklist items still open, and terminated dealers still sending data.
+- `report.html` with the network as a red/amber/green grid, `dealer-review.md` as the agenda for the weekly call, `dealers.csv`, `interfaces.csv`, `claims-at-risk.csv` with who each claim is waiting on, `rejections.csv` and `catalogue.csv`.
+- A read-only PowerShell exporter with example SQL queries that refuses anything but a single SELECT.
+
+## How it is built
+Python with the standard library only. The demo is a made-up importer with 53 dealers in Spain and Portugal, two weeks of interface runs and about 4,600 warranty claims, with the problems placed on purpose. 15 tests, a runbook for the weekly review, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+
+## What I learned
+From working with dealer management systems and dealer networks, warranty claim management and aftersales parts catalogues, together with integrations, vendors, SLAs and OLAs. The lesson that shaped the tool is that most "dealer problems" have a systems cause one step upstream: a rejection rate that is really an old catalogue, a late claim that is really a feed that stopped, a backlog that is really the brand's own queue. Putting the four sources on one page per dealer is what makes that visible.
+
+## Next steps
+- Run it on one region's real exports first and agree the limits with the warranty team before showing it to the dealers.
+- Adapt the three SQL queries to the integration log and the warranty system once, and schedule the export for Monday morning.
+- Send each red dealer's line to its area manager before the call, so the meeting is about fixes and not about discovering the problems.""",
+ es="""
+
+## El problema
+La posventa de una marca de coches funciona con sistemas que están en los concesionarios. Cuando el feed de garantías de un concesionario se para un jueves por la noche, nadie se entera hasta que el concesionario pregunta el martes por qué sus reclamaciones no tienen respuesta. Un trabajo del DMS que "termina bien" con cero registros no avisa a nadie. Un concesionario que sigue con el catálogo de recambios del mes pasado envía operaciones de mano de obra que el sistema de garantías ya no acepta, su tasa de rechazo sube y la conversación acaba en reclamaciones mal hechas en vez de en un catálogo viejo. Una tarifa que no se aplicó significa una semana de recambios vendidos al precio equivocado. Y el concesionario que cerró en septiembre sigue teniendo credenciales de interfaz que funcionan. Cada cosa vive en un sistema distinto; la revisión semanal necesita verlas juntas, por concesionario, con el equipo responsable de cada corrección.
+
+## Qué he hecho
+- Interfaces: feeds sin una ejecución correcta dentro del límite (una noche fallida ya es rojo para órdenes de reparación y garantías), feeds que rechazan registros y feeds que terminan bien sin traer nada.
+- Garantías: borradores pasados o cerca del límite de envío, reclamaciones esperando la decisión de la propia marca, peticiones de información sin contestar, tasa de rechazo por concesionario con los motivos principales, posibles duplicados (mismo VIN y misma operación) y reclamaciones aceptadas que nunca se pagaron.
+- Recambios: la versión de catálogo y la tarifa que cada concesionario ha aplicado de verdad, frente a las vigentes y sus periodos de gracia.
+- Red: versiones de DMS no certificadas para las interfaces de la marca, concesionarios que abren con tareas del checklist sin cerrar y concesionarios dados de baja que siguen enviando datos.
+- `report.html` con la red en una cuadrícula roja, ámbar y verde, `dealer-review.md` como orden del día de la reunión semanal, `dealers.csv`, `interfaces.csv`, `claims-at-risk.csv` con a quién está esperando cada reclamación, `rejections.csv` y `catalogue.csv`.
+- Un exportador de solo lectura en PowerShell con consultas SQL de ejemplo que rechaza cualquier cosa que no sea un único SELECT.
+
+## Cómo está hecho
+Python solo con la librería estándar. La demo es un importador inventado con 53 concesionarios en España y Portugal, dos semanas de ejecuciones de interfaces y unas 4.600 reclamaciones de garantía, con los problemas puestos a propósito. 15 tests, un runbook para la revisión semanal y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+
+## Qué aprendí
+De trabajar con sistemas de gestión de concesionarios (DMS) y redes de concesionarios, gestión de garantías y catálogos de recambios de posventa, junto con integraciones, proveedores, SLAs y OLAs. La lección que da forma a la herramienta es que la mayoría de los "problemas del concesionario" tienen una causa de sistemas un paso antes: una tasa de rechazo que en realidad es un catálogo viejo, una reclamación tardía que en realidad es un feed parado, un atasco que en realidad es la cola de la propia marca. Poner las cuatro fuentes en una sola página por concesionario es lo que lo hace visible.
+
+## Siguientes pasos
+- Ejecutarlo primero con las exportaciones reales de una región y acordar los límites con el equipo de garantías antes de enseñárselo a los concesionarios.
+- Adaptar una vez las tres consultas SQL al log de integraciones y al sistema de garantías, y programar la exportación para el lunes por la mañana.
+- Enviar la línea de cada concesionario en rojo a su jefe de zona antes de la reunión, para que la reunión vaya de soluciones y no de descubrir los problemas."""),
 ]
