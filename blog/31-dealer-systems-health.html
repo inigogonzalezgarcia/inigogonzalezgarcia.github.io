@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="The warranty feed stopped on Thursday and the dealer found out on Tuesday: a weekly review of a dealer network&#x27;s systems · Iñigo González" data-title-es="El feed de garantías se paró el jueves y el concesionario se enteró el martes: una revisión semanal de los sistemas de una red de concesionarios · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>The warranty feed stopped on Thursday and the dealer found out on Tuesday: a weekly review of a dealer network&#x27;s systems · Iñigo González</title>
+<meta name="description" content="DMS feeds that stopped or send nothing, warranty claims about to miss the deadline and why they are rejected, the parts catalogue and price file each dealer really uses, and the dealers opening or leaving, per dealer and in red, amber or green.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/31-dealer-systems-health.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The warranty feed stopped on Thursday and the dealer found out on Tuesday: a weekly review of a dealer network&#x27;s systems · Iñigo González">
+<meta property="og:description" content="DMS feeds that stopped or send nothing, warranty claims about to miss the deadline and why they are rejected, the parts catalogue and price file each dealer really uses, and the dealers opening or leaving, per dealer and in red, amber or green.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/31-dealer-systems-health.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/31-dealer-systems-health.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The warranty feed stopped on Thursday and the dealer found out on Tuesday: a weekly review of a dealer network&#x27;s systems · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"The warranty feed stopped on Thursday and the dealer found out on Tuesday: a weekly review of a dealer network's systems","alternativeHeadline":"El feed de garantías se paró el jueves y el concesionario se enteró el martes: una revisión semanal de los sistemas de una red de concesionarios","description":"DMS feeds that stopped or send nothing, warranty claims about to miss the deadline and why they are rejected, the parts catalogue and price file each dealer really uses, and the dealers opening or leaving, per dealer and in red, amber or green.","datePublished":"2026-10-25","dateModified":"2026-10-25","inLanguage":"en","image":"https://inigogonzalezgarcia.github.io/assets/og/31-dealer-systems-health.png","url":"https://inigogonzalezgarcia.github.io/blog/31-dealer-systems-health.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/blog/31-dealer-systems-health.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/blog/#blog"},"articleSection":"IT Ops tools"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/blog/"},{"@type":"ListItem","position":3,"name":"The warranty feed stopped on Thursday and the dealer found out on Tuesday: a weekly review of a dealer network's systems","item":"https://inigogonzalezgarcia.github.io/blog/31-dealer-systems-health.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 31</p>
+    <h1><span class="es">El feed de garantías se paró el jueves y el concesionario se enteró el martes: una revisión semanal de los sistemas de una red de concesionarios</span><span class="en">The warranty feed stopped on Thursday and the dealer found out on Tuesday: a weekly review of a dealer network&#x27;s systems</span></h1>
+    <p class="lede"><span class="es">Feeds del DMS parados o vacíos, garantías a punto de caducar y por qué se rechazan, el catálogo de recambios y la tarifa que usa de verdad cada concesionario, y los concesionarios que abren o se van, por concesionario y en rojo, ámbar o verde.</span><span class="en">DMS feeds that stopped or send nothing, warranty claims about to miss the deadline and why they are rejected, the parts catalogue and price file each dealer really uses, and the dealers opening or leaving, per dealer and in red, amber or green.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span> · <span class="es">25 oct 2026</span><span class="en">25 Oct 2026</span> · <span class="es">3 min</span><span class="en">3 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>El problema</h2>
+<p>La posventa de una marca de coches funciona con sistemas que están en los concesionarios. Cuando el feed de garantías de un concesionario se para un jueves por la noche, nadie se entera hasta que el concesionario pregunta el martes por qué sus reclamaciones no tienen respuesta. Un trabajo del DMS que &quot;termina bien&quot; con cero registros no avisa a nadie. Un concesionario que sigue con el catálogo de recambios del mes pasado envía operaciones de mano de obra que el sistema de garantías ya no acepta, su tasa de rechazo sube y la conversación acaba en reclamaciones mal hechas en vez de en un catálogo viejo. Una tarifa que no se aplicó significa una semana de recambios vendidos al precio equivocado. Y el concesionario que cerró en septiembre sigue teniendo credenciales de interfaz que funcionan. Cada cosa vive en un sistema distinto; la revisión semanal necesita verlas juntas, por concesionario, con el equipo responsable de cada corrección.</p>
+<h2>Qué he hecho</h2>
+<ul><li>Interfaces: feeds sin una ejecución correcta dentro del límite (una noche fallida ya es rojo para órdenes de reparación y garantías), feeds que rechazan registros y feeds que terminan bien sin traer nada.</li><li>Garantías: borradores pasados o cerca del límite de envío, reclamaciones esperando la decisión de la propia marca, peticiones de información sin contestar, tasa de rechazo por concesionario con los motivos principales, posibles duplicados (mismo VIN y misma operación) y reclamaciones aceptadas que nunca se pagaron.</li><li>Recambios: la versión de catálogo y la tarifa que cada concesionario ha aplicado de verdad, frente a las vigentes y sus periodos de gracia.</li><li>Red: versiones de DMS no certificadas para las interfaces de la marca, concesionarios que abren con tareas del checklist sin cerrar y concesionarios dados de baja que siguen enviando datos.</li><li><code>report.html</code> con la red en una cuadrícula roja, ámbar y verde, <code>dealer-review.md</code> como orden del día de la reunión semanal, <code>dealers.csv</code>, <code>interfaces.csv</code>, <code>claims-at-risk.csv</code> con a quién está esperando cada reclamación, <code>rejections.csv</code> y <code>catalogue.csv</code>.</li><li>Un exportador de solo lectura en PowerShell con consultas SQL de ejemplo que rechaza cualquier cosa que no sea un único SELECT.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python solo con la librería estándar. La demo es un importador inventado con 53 concesionarios en España y Portugal, dos semanas de ejecuciones de interfaces y unas 4.600 reclamaciones de garantía, con los problemas puestos a propósito. 15 tests, un runbook para la revisión semanal y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.</p>
+<h2>Qué aprendí</h2>
+<p>De trabajar con sistemas de gestión de concesionarios (DMS) y redes de concesionarios, gestión de garantías y catálogos de recambios de posventa, junto con integraciones, proveedores, SLAs y OLAs. La lección que da forma a la herramienta es que la mayoría de los &quot;problemas del concesionario&quot; tienen una causa de sistemas un paso antes: una tasa de rechazo que en realidad es un catálogo viejo, una reclamación tardía que en realidad es un feed parado, un atasco que en realidad es la cola de la propia marca. Poner las cuatro fuentes en una sola página por concesionario es lo que lo hace visible.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Ejecutarlo primero con las exportaciones reales de una región y acordar los límites con el equipo de garantías antes de enseñárselo a los concesionarios.</li><li>Adaptar una vez las tres consultas SQL al log de integraciones y al sistema de garantías, y programar la exportación para el lunes por la mañana.</li><li>Enviar la línea de cada concesionario en rojo a su jefe de zona antes de la reunión, para que la reunión vaya de soluciones y no de descubrir los problemas.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>The problem</h2>
+<p>A car brand&#x27;s aftersales runs on systems that live at the dealers. When a dealer&#x27;s warranty feed stops on a Thursday night, nobody notices until the dealer asks on Tuesday why its claims have no answer. A DMS job that &quot;succeeds&quot; with zero records alerts nobody at all. A dealer still on last month&#x27;s parts catalogue sends labour operations the warranty system no longer accepts, its rejection rate climbs, and the conversation turns to bad claims instead of an old catalogue. A price file that did not apply means a week of parts sold at the wrong price. And the dealer that closed in September still has working interface credentials. Each of these lives in a different system; the weekly review needs them side by side, per dealer, with the team that owns each fix.</p>
+<h2>What I built</h2>
+<ul><li>Interfaces: feeds with no successful run within the limit (one failed night is already red for repair orders and warranty claims), feeds rejecting records, and feeds that succeed with nothing in them.</li><li>Warranty: drafts past or close to the submission limit, claims waiting for the brand&#x27;s own decision, information requests nobody answered, rejection rate per dealer with the main reasons, possible duplicates (same VIN and labour operation), and accepted claims that were never paid.</li><li>Parts: the catalogue version and price file each dealer has actually applied, against the current ones and their grace periods.</li><li>Network: DMS versions not certified for the brand interfaces, dealers opening with checklist items still open, and terminated dealers still sending data.</li><li><code>report.html</code> with the network as a red/amber/green grid, <code>dealer-review.md</code> as the agenda for the weekly call, <code>dealers.csv</code>, <code>interfaces.csv</code>, <code>claims-at-risk.csv</code> with who each claim is waiting on, <code>rejections.csv</code> and <code>catalogue.csv</code>.</li><li>A read-only PowerShell exporter with example SQL queries that refuses anything but a single SELECT.</li></ul>
+<h2>How it is built</h2>
+<p>Python with the standard library only. The demo is a made-up importer with 53 dealers in Spain and Portugal, two weeks of interface runs and about 4,600 warranty claims, with the problems placed on purpose. 15 tests, a runbook for the weekly review, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.</p>
+<h2>What I learned</h2>
+<p>From working with dealer management systems and dealer networks, warranty claim management and aftersales parts catalogues, together with integrations, vendors, SLAs and OLAs. The lesson that shaped the tool is that most &quot;dealer problems&quot; have a systems cause one step upstream: a rejection rate that is really an old catalogue, a late claim that is really a feed that stopped, a backlog that is really the brand&#x27;s own queue. Putting the four sources on one page per dealer is what makes that visible.</p>
+<h2>Next steps</h2>
+<ul><li>Run it on one region&#x27;s real exports first and agree the limits with the warranty team before showing it to the dealers.</li><li>Adapt the three SQL queries to the integration log and the warranty system once, and schedule the export for Monday morning.</li><li>Send each red dealer&#x27;s line to its area manager before the call, so the meeting is about fixes and not about discovering the problems.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
+      <p class="repo-name">31-dealer-systems-health</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/31-dealer-systems-health" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="es">Compartir</span><span class="en">Share</span></p>
+        <div class="share-row es" lang="es"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F31-dealer-systems-health.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F31-dealer-systems-health.html&amp;text=El%20feed%20de%20garant%C3%ADas%20se%20par%C3%B3%20el%20jueves%20y%20el%20concesionario%20se%20enter%C3%B3%20el%20martes%3A%20una%20revisi%C3%B3n%20semanal%20de%20los%20sistemas%20de%20una%20red%20de%20concesionarios%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">X</a><a class="share-btn" href="https://wa.me/?text=El%20feed%20de%20garant%C3%ADas%20se%20par%C3%B3%20el%20jueves%20y%20el%20concesionario%20se%20enter%C3%B3%20el%20martes%3A%20una%20revisi%C3%B3n%20semanal%20de%20los%20sistemas%20de%20una%20red%20de%20concesionarios%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F31-dealer-systems-health.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=El%20feed%20de%20garant%C3%ADas%20se%20par%C3%B3%20el%20jueves%20y%20el%20concesionario%20se%20enter%C3%B3%20el%20martes%3A%20una%20revisi%C3%B3n%20semanal%20de%20los%20sistemas%20de%20una%20red%20de%20concesionarios%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F31-dealer-systems-health.html" aria-label="Compartir en Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/31-dealer-systems-health.html" data-copied="Enlace copiado">Copiar enlace</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/31-dealer-systems-health.html" data-title="El feed de garantías se paró el jueves y el concesionario se enteró el martes: una revisión semanal de los sistemas de una red de concesionarios" hidden>Más…</button></div>
+        <div class="share-row en" lang="en"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F31-dealer-systems-health.html" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F31-dealer-systems-health.html&amp;text=The%20warranty%20feed%20stopped%20on%20Thursday%20and%20the%20dealer%20found%20out%20on%20Tuesday%3A%20a%20weekly%20review%20of%20a%20dealer%20network%27s%20systems%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Share on X">X</a><a class="share-btn" href="https://wa.me/?text=The%20warranty%20feed%20stopped%20on%20Thursday%20and%20the%20dealer%20found%20out%20on%20Tuesday%3A%20a%20weekly%20review%20of%20a%20dealer%20network%27s%20systems%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F31-dealer-systems-health.html" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=The%20warranty%20feed%20stopped%20on%20Thursday%20and%20the%20dealer%20found%20out%20on%20Tuesday%3A%20a%20weekly%20review%20of%20a%20dealer%20network%27s%20systems%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F31-dealer-systems-health.html" aria-label="Share on Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/31-dealer-systems-health.html" data-copied="Link copied">Copy link</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/31-dealer-systems-health.html" data-title="The warranty feed stopped on Thursday and the dealer found out on Tuesday: a weekly review of a dealer network&#x27;s systems" hidden>More…</button></div>
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="30-jira-confluence-admin-kit.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">128 licencias que nadie usa y un sprint abierto nueve días tarde: una revisión mensual de un sitio de Jira y Confluence</span><span class="en">128 licences nobody uses and a sprint still open nine days late: a monthly review of a Jira and Confluence site</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
