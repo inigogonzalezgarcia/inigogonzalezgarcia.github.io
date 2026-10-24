@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="128 licences nobody uses and a sprint still open nine days late: a monthly review of a Jira and Confluence site · Iñigo González" data-title-es="128 licencias que nadie usa y un sprint abierto nueve días tarde: una revisión mensual de un sitio de Jira y Confluence · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>128 licences nobody uses and a sprint still open nine days late: a monthly review of a Jira and Confluence site · Iñigo González</title>
+<meta name="description" content="Licences to reclaim with the saving, admins who should not be admins, external users and service accounts without an owner, projects, spaces and custom fields to clean up, and the agile health of every Scrum board, from the site&#x27;s own exports.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/30-jira-confluence-admin-kit.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="128 licences nobody uses and a sprint still open nine days late: a monthly review of a Jira and Confluence site · Iñigo González">
+<meta property="og:description" content="Licences to reclaim with the saving, admins who should not be admins, external users and service accounts without an owner, projects, spaces and custom fields to clean up, and the agile health of every Scrum board, from the site&#x27;s own exports.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/30-jira-confluence-admin-kit.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/30-jira-confluence-admin-kit.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="128 licences nobody uses and a sprint still open nine days late: a monthly review of a Jira and Confluence site · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"128 licences nobody uses and a sprint still open nine days late: a monthly review of a Jira and Confluence site","alternativeHeadline":"128 licencias que nadie usa y un sprint abierto nueve días tarde: una revisión mensual de un sitio de Jira y Confluence","description":"Licences to reclaim with the saving, admins who should not be admins, external users and service accounts without an owner, projects, spaces and custom fields to clean up, and the agile health of every Scrum board, from the site's own exports.","datePublished":"2026-10-24","dateModified":"2026-10-24","inLanguage":"en","image":"https://inigogonzalezgarcia.github.io/assets/og/30-jira-confluence-admin-kit.png","url":"https://inigogonzalezgarcia.github.io/blog/30-jira-confluence-admin-kit.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/blog/30-jira-confluence-admin-kit.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/blog/#blog"},"articleSection":"IT Ops tools"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/blog/"},{"@type":"ListItem","position":3,"name":"128 licences nobody uses and a sprint still open nine days late: a monthly review of a Jira and Confluence site","item":"https://inigogonzalezgarcia.github.io/blog/30-jira-confluence-admin-kit.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 30</p>
+    <h1><span class="es">128 licencias que nadie usa y un sprint abierto nueve días tarde: una revisión mensual de un sitio de Jira y Confluence</span><span class="en">128 licences nobody uses and a sprint still open nine days late: a monthly review of a Jira and Confluence site</span></h1>
+    <p class="lede"><span class="es">Licencias a recuperar con el ahorro, administradores que no deberían serlo, usuarios externos y cuentas de servicio sin responsable, proyectos, espacios y campos personalizados que limpiar, y la salud ágil de cada tablero Scrum, a partir de las exportaciones del propio sitio.</span><span class="en">Licences to reclaim with the saving, admins who should not be admins, external users and service accounts without an owner, projects, spaces and custom fields to clean up, and the agile health of every Scrum board, from the site&#x27;s own exports.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span> · <span class="es">24 oct 2026</span><span class="en">24 Oct 2026</span> · <span class="es">3 min</span><span class="en">3 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>El problema</h2>
+<p>Un sitio de Atlassian crece solo. Todo el que entra recibe Jira por un grupo por defecto, lo vaya a usar o no. Los externos siguen con acceso cuando termina el proyecto. Alguien metió a un compañero en <code>jira-admins</code> &quot;por un día&quot; hace dos años. Un proyecto de demo sigue abierto a Anyone. Hay 460 campos personalizados y un tercio no se ha usado en un año. Y dos tableros Scrum arrastran un tercio de cada sprint al siguiente, cosa que nadie nota porque el tablero sigue pareciendo activo. Nada de esto es difícil de arreglar. Es difícil de ver. La renovación de licencias, la revisión de accesos y la retrospectiva necesitan lo mismo: una lista, la regla que puso cada elemento en ella y una columna para la decisión.</p>
+<h2>Qué he hecho</h2>
+<ul><li>Licencias: acceso a producto sin usar en 90 días, nunca usado pasado el periodo de gracia (el problema del grupo por defecto) o en manos de cuentas suspendidas, con el coste anual y las licencias frente a las compradas.</li><li>Accesos: más administradores que el objetivo, administradores desactivados o inactivos, administradores con dominios personales, usuarios externos por dominio y cuentas de servicio sin responsable con nombre.</li><li>Higiene de Jira y Confluence: proyectos abiertos a Anyone, proyectos sin responsable o con un responsable que ya no está, proyectos y espacios inactivos para archivar, esquemas de permisos y de flujo usados por un solo proyecto, espacios con acceso anónimo o sin administrador activo, espacios personales de bajas y campos personalizados que eliminar.</li><li>Salud ágil por tablero Scrum en los últimos seis sprints: sprints abiertos después de su fecha de fin, trabajo arrastrado, alcance añadido después del inicio, say/do y tableros parados.</li><li><code>report.html</code>, <code>admin-review.md</code> como orden del día con las decisiones en forma de checklist, <code>licences.csv</code> con columnas <code>manager_ok</code> y <code>removed</code>, <code>access-review.csv</code> con una columna <code>decision</code>, y los CSV por proyecto, espacio, campo y tablero.</li><li>Un exportador de solo lectura en PowerShell para las API REST de Jira, Agile y Confluence Cloud; la exportación de usuarios de admin.atlassian.com carga tal cual.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python solo con la librería estándar. La demo es una empresa inventada de robótica de almacenes con Jira, Jira Service Management y Confluence Cloud: 437 cuentas de usuario, 61 proyectos, 77 espacios, 460 campos personalizados y 12 tableros Scrum, con los problemas puestos a propósito. 17 tests y un runbook de 45 minutos con cómo leer los números ágiles.</p>
+<h2>Qué aprendí</h2>
+<p>De administrar Jira y Confluence y llevar la relación con Atlassian, de trabajar como Scrum Master y Product Owner con Kanban y vistas de portfolio, de llevar la gestión de releases con los cambios por el CAB, y de gestionar licencias y proveedores. La lección que da forma a la herramienta es que el ahorro en licencias paga la revisión, pero los números ágiles son lo que interesa a los equipos. Sirven para abrir la conversación en la retrospectiva, no son objetivos, y la única comparación que tiene sentido es la de un equipo consigo mismo en el tiempo.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Ejecutarlo antes de la próxima renovación y dar a los responsables una semana para objetar antes de quitar ninguna licencia.</li><li>Acordar con seguridad el objetivo de administradores y los responsables de las cuentas de servicio antes de la primera revisión.</li><li>Guardar la salida de cada mes, para que la siguiente revisión empiece por lo que ha cambiado desde la anterior.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>The problem</h2>
+<p>An Atlassian site grows by itself. Everybody who joins gets Jira through a default group, whether they will use it or not. Contractors keep access after the project ends. Somebody added a colleague to <code>jira-admins</code> &quot;for a day&quot; two years ago. A demo project still lets Anyone browse it. There are 460 custom fields, and a third of them have not been used in a year. And two Scrum boards carry over a third of every sprint, which nobody notices because the board still looks busy. None of this is hard to fix. It is hard to see. The licence renewal, the access review and the retrospective all need the same thing: a list, the rule that put each item on it, and a column for the decision.</p>
+<h2>What I built</h2>
+<ul><li>Licences: product access not used for 90 days, never used after the grace period (the default-group problem), or kept by suspended accounts, with the cost per year and the seats against what was bought.</li><li>Access: more admins than the target, admins who are deactivated or idle, admins on personal domains, external users by domain, and service accounts without a named owner.</li><li>Jira and Confluence hygiene: projects open to Anyone, projects without a lead or with a lead who has left, idle projects and spaces to archive, one-off permission and workflow schemes, spaces with anonymous access or no active admin, personal spaces of leavers, and custom fields to remove.</li><li>Agile health per Scrum board over the last six sprints: sprints still open past their end date, carry-over, scope added after the start, say/do, and idle boards.</li><li><code>report.html</code>, <code>admin-review.md</code> as the agenda with the decisions as a checklist, <code>licences.csv</code> with <code>manager_ok</code> and <code>removed</code> columns, <code>access-review.csv</code> with a <code>decision</code> column, and the CSVs per project, space, field and board.</li><li>A read-only PowerShell exporter for the Jira, Agile and Confluence Cloud REST APIs; the user export from admin.atlassian.com loads as it is.</li></ul>
+<h2>How it is built</h2>
+<p>Python with the standard library only. The demo is a made-up warehouse-robotics company on Jira, Jira Service Management and Confluence Cloud: 437 user accounts, 61 projects, 77 spaces, 460 custom fields and 12 Scrum boards, with the problems placed on purpose. 17 tests and a 45-minute runbook with how to read the agile numbers.</p>
+<h2>What I learned</h2>
+<p>From administering Jira and Confluence and managing the relationship with Atlassian, working as Scrum Master and Product Owner with Kanban and portfolio views, running release management with changes through the CAB, and managing licences and vendors. The lesson that shaped the tool is that the licence saving pays for the review, but the agile numbers are what the teams come for. They are conversation starters for the retrospective, not targets, and one team&#x27;s trend against itself is the only comparison that means anything.</p>
+<h2>Next steps</h2>
+<ul><li>Run it before the next renewal and give managers a week to object before any licence is removed.</li><li>Agree the admin target and the service-account owners with security before the first review.</li><li>Keep each month&#x27;s output, so the next review opens with what changed since the last one.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
+      <p class="repo-name">30-jira-confluence-admin-kit</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/30-jira-confluence-admin-kit" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="es">Compartir</span><span class="en">Share</span></p>
+        <div class="share-row es" lang="es"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F30-jira-confluence-admin-kit.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F30-jira-confluence-admin-kit.html&amp;text=128%20licencias%20que%20nadie%20usa%20y%20un%20sprint%20abierto%20nueve%20d%C3%ADas%20tarde%3A%20una%20revisi%C3%B3n%20mensual%20de%20un%20sitio%20de%20Jira%20y%20Confluence%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">X</a><a class="share-btn" href="https://wa.me/?text=128%20licencias%20que%20nadie%20usa%20y%20un%20sprint%20abierto%20nueve%20d%C3%ADas%20tarde%3A%20una%20revisi%C3%B3n%20mensual%20de%20un%20sitio%20de%20Jira%20y%20Confluence%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F30-jira-confluence-admin-kit.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=128%20licencias%20que%20nadie%20usa%20y%20un%20sprint%20abierto%20nueve%20d%C3%ADas%20tarde%3A%20una%20revisi%C3%B3n%20mensual%20de%20un%20sitio%20de%20Jira%20y%20Confluence%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F30-jira-confluence-admin-kit.html" aria-label="Compartir en Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/30-jira-confluence-admin-kit.html" data-copied="Enlace copiado">Copiar enlace</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/30-jira-confluence-admin-kit.html" data-title="128 licencias que nadie usa y un sprint abierto nueve días tarde: una revisión mensual de un sitio de Jira y Confluence" hidden>Más…</button></div>
+        <div class="share-row en" lang="en"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F30-jira-confluence-admin-kit.html" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F30-jira-confluence-admin-kit.html&amp;text=128%20licences%20nobody%20uses%20and%20a%20sprint%20still%20open%20nine%20days%20late%3A%20a%20monthly%20review%20of%20a%20Jira%20and%20Confluence%20site%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Share on X">X</a><a class="share-btn" href="https://wa.me/?text=128%20licences%20nobody%20uses%20and%20a%20sprint%20still%20open%20nine%20days%20late%3A%20a%20monthly%20review%20of%20a%20Jira%20and%20Confluence%20site%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F30-jira-confluence-admin-kit.html" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=128%20licences%20nobody%20uses%20and%20a%20sprint%20still%20open%20nine%20days%20late%3A%20a%20monthly%20review%20of%20a%20Jira%20and%20Confluence%20site%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F30-jira-confluence-admin-kit.html" aria-label="Share on Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/30-jira-confluence-admin-kit.html" data-copied="Link copied">Copy link</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/30-jira-confluence-admin-kit.html" data-title="128 licences nobody uses and a sprint still open nine days late: a monthly review of a Jira and Confluence site" hidden>More…</button></div>
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="29-tenant-separation-cutover-planner.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">El plan dice ola 3 el día 30; el inventario dice que no: preparación de una separación de tenant de Microsoft 365</span><span class="en">The plan says wave 3 on the 30th; the inventory says no: readiness for a Microsoft 365 tenant separation</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
