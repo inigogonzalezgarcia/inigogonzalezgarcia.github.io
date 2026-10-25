@@ -1435,4 +1435,102 @@ De trabajar con sistemas de gestión de concesionarios (DMS) y redes de concesio
 - Ejecutarlo primero con las exportaciones reales de una región y acordar los límites con el equipo de garantías antes de enseñárselo a los concesionarios.
 - Adaptar una vez las tres consultas SQL al log de integraciones y al sistema de garantías, y programar la exportación para el lunes por la mañana.
 - Enviar la línea de cada concesionario en rojo a su jefe de zona antes de la reunión, para que la reunión vaya de soluciones y no de descubrir los problemas."""),
+dict(n="32", repo="32-backup-restore-test-tracker", date="2026-10-25", cat="tools",
+ title_en="The backup ran every night, but would it bring the system back? A monthly review of backups, restore tests and DR",
+ title_es="El backup corrió cada noche, pero ¿devolvería el sistema? Una revisión mensual de backups, pruebas de restauración y DR",
+ dek_en="The last good backup of each system against its RPO, offsite and immutable copies that actually ran, restore tests against the plan and the RTO, and the DR exercises and their actions, per system and tier, in red, amber or green.",
+ dek_es="El último backup bueno de cada sistema frente a su RPO, las copias offsite e inmutables que de verdad se hicieron, las pruebas de restauración frente al plan y al RTO, y los ejercicios de DR y sus acciones, por sistema y nivel, en rojo, ámbar o verde.",
+ en="""
+
+## The problem
+A green backup dashboard says the jobs ran. It does not say the system can be brought back within the time the business was promised. A job scheduled every night that failed three nights in a row is three days outside a 24-hour RPO. A copy job that exists but has failed for a week leaves the system with one copy, in one place. Restoring a file proves the backup is readable, not that the ERP comes back in four hours. A test where "the database came back but the application could not log in" is exactly what a real recovery would hit. And an auditor counts the evidence, not the tests. The answers live in the backup console, a spreadsheet of tests, the change tickets and the continuity plan; the monthly review needs them side by side.
+
+## What I built
+- Backups: systems in scope with no backup job, the last good backup against each system's RPO, failure streaks, the offsite and immutable copies each tier requires, and jobs still running for retired or unknown systems.
+- Restore tests: systems never restored, last tests that failed or half worked, tests overdue against the plan for their tier, restores slower than the RTO (measured only on full restores), systems only tested with file or item restores, and tests with no evidence.
+- DR exercises: the last exercise, exercises planned and not done, and actions past their due date.
+- `report.html` with tier 1 at a glance and a 12-month calendar of tests due, `restore-review.md` as the agenda, `tests-due.csv` with booked and done columns, `failing-backups.csv` and `evidence-pack.csv` for the auditor.
+- A read-only PowerShell exporter for Veeam job sessions; other tools' job reports work as CSV.
+
+## How it is built
+Python with the standard library only. The demo is a made-up manufacturer with 76 systems in three tiers, two weeks of job runs, a year of restore tests and its DR exercises, with the problems placed on purpose. 13 tests, a runbook for the monthly review, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+
+## What I learned
+From my work with Veeam Backup and Commvault, and tape backups earlier on, designing and testing backup and DR plans, and supervising DR and business continuity tests aligned with ISO 22301. The lesson that shaped the tool is that the question is never "did the job run?" but "when did we last prove we can get this system back, how long did it take, and where is the evidence?". Measuring the RPO from the last good backup and the RTO only from full restores is what turns a green dashboard into an honest one.
+
+## Next steps
+- Run it first on the tier 1 systems with one month of real exports, and agree the test frequency per tier with the service owners.
+- Schedule the Veeam export for the first Monday of the month and keep each month's output folder.
+- Use `tests-due.csv` to book the next month's restore tests in the change calendar, tier 1 first.""",
+ es="""
+
+## El problema
+Un panel de backups en verde dice que los trabajos se ejecutaron. No dice que el sistema se pueda recuperar en el tiempo que se prometió al negocio. Un trabajo programado cada noche que ha fallado tres noches seguidas está tres días fuera de un RPO de 24 horas. Una copia que existe pero lleva una semana fallando deja el sistema con una sola copia, en un solo sitio. Restaurar un fichero demuestra que el backup se puede leer, no que el ERP vuelva en cuatro horas. Una prueba en la que "la base de datos volvió pero la aplicación no podía iniciar sesión" es justo lo que pasaría en una recuperación real. Y un auditor cuenta las evidencias, no las pruebas. Las respuestas están en la consola de backup, una hoja de pruebas, los tickets de cambio y el plan de continuidad; la revisión mensual necesita verlas juntas.
+
+## Qué he hecho
+- Backups: sistemas en alcance sin trabajo de backup, el último backup bueno frente al RPO de cada sistema, rachas de fallos, las copias offsite e inmutables que exige cada nivel y trabajos que siguen corriendo para sistemas retirados o desconocidos.
+- Pruebas de restauración: sistemas nunca restaurados, últimas pruebas fallidas o a medias, pruebas vencidas frente al plan de su nivel, restauraciones más lentas que el RTO (medido solo con restauraciones completas), sistemas probados solo con ficheros o elementos y pruebas sin evidencia.
+- Ejercicios de DR: el último ejercicio, ejercicios planificados y no hechos, y acciones pasadas de fecha.
+- `report.html` con el nivel 1 de un vistazo y un calendario de 12 meses de pruebas pendientes, `restore-review.md` como orden del día, `tests-due.csv` con columnas de reservado y hecho, `failing-backups.csv` y `evidence-pack.csv` para el auditor.
+- Un exportador de solo lectura en PowerShell para las sesiones de Veeam; los informes de otras herramientas sirven en CSV.
+
+## Cómo está hecho
+Python solo con la librería estándar. La demo es un fabricante inventado con 76 sistemas en tres niveles, dos semanas de trabajos, un año de pruebas de restauración y sus ejercicios de DR, con los problemas puestos a propósito. 13 tests, un runbook para la revisión mensual y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+
+## Qué aprendí
+De mi trabajo con Veeam Backup y Commvault, y antes con backups en cinta, diseñando y probando planes de backup y DR, y supervisando pruebas de DR y continuidad de negocio alineadas con ISO 22301. La lección que da forma a la herramienta es que la pregunta nunca es "¿se ejecutó el trabajo?", sino "¿cuándo demostramos por última vez que podemos recuperar este sistema, cuánto tardó y dónde está la evidencia?". Medir el RPO desde el último backup bueno y el RTO solo con restauraciones completas es lo que convierte un panel en verde en uno honesto.
+
+## Siguientes pasos
+- Ejecutarlo primero con los sistemas de nivel 1 y un mes de exportaciones reales, y acordar la frecuencia de pruebas por nivel con los responsables de servicio.
+- Programar la exportación de Veeam para el primer lunes de cada mes y guardar la carpeta de resultados de cada mes.
+- Usar `tests-due.csv` para reservar las pruebas del mes siguiente en el calendario de cambios, empezando por el nivel 1."""),
+dict(n="33", repo="33-executive-meeting-readiness", date="2026-10-25", cat="tools",
+ title_en="The chair's iPad had not synced for twelve days: a readiness check for board and executive meetings",
+ title_es="El iPad del presidente llevaba doce días sin sincronizar: una revisión de preparación para consejos y comités",
+ dek_en="For every board, committee and executive meeting in the next two weeks: the tech check, the Teams Room and its peripherals, updates inside the freeze, the VIP devices and the support engineer, with a verdict per meeting.",
+ dek_es="Para cada consejo, comité y reunión de dirección de las próximas dos semanas: la prueba técnica, la sala Teams Rooms y sus periféricos, actualizaciones dentro de la congelación, los dispositivos VIP y el técnico de soporte, con un veredicto por reunión.",
+ en="""
+
+## The problem
+When a board meeting starts, nobody remembers the dashboard was green. They remember the remote director who could not hear the room, the chair's iPad that had not synced the pack, or the update that rebooted the room at 08:55. Each of those was visible days before: the microphone array showed as disconnected in the Teams Rooms health, the iPad had not checked in to the MDM for twelve days, the update was scheduled for the night before, and the rehearsal planned for last week never happened. The signals live in the Teams admin center, Intune or Jamf, the room calendars and the service desk; the check that matters joins them per meeting.
+
+## What I built
+- Meetings: board, committee and investor meetings without a tech check in the last week, rooms that do not fit (too small, or hybrid in a room with no Teams Room), overlapping bookings or no setup time, and meetings with no support engineer.
+- Rooms: Teams Rooms offline or not reporting, faulty camera, microphone, speaker or display (critical when audio or video is down in a hybrid meeting), updates inside the freeze before the meeting, and rooms with repeated incidents.
+- VIP devices: not compliant or not checked in, OS or board app below the minimum, worn batteries, attendees with no registered device, and warranties ending.
+- A verdict per meeting (ready, attention or at risk), `report.html` day by day, `readiness-pack.md` with a checklist per meeting and attendee, and CSVs for meetings, rooms, VIP devices and incidents.
+- A read-only PowerShell exporter for Microsoft Graph: Teams Rooms health, room calendars and Intune devices.
+
+## How it is built
+Python with the standard library only. The demo is a made-up insurer with eleven rooms in three offices (Crestron, Logitech and Poly systems), 13 meetings in the next two weeks, 20 VIP devices and 90 days of room incidents, with the problems placed on purpose. 13 tests, a runbook for the weekly check, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+
+## What I learned
+From supporting board and executive committee meetings: Teams Rooms on Crestron with Logitech and Poly systems, iPads, MacBooks and iPhones managed with Jamf Pro and Intune, and VIP support for executives and board members. The lesson that shaped the tool is that readiness belongs to the meeting, not to the room: the same degraded display is a note for an internal workshop and a decision for the board. It complements the fleet view of repo 17, which looks at every room every morning.
+
+## Next steps
+- Run it on the next month of board and committee meetings, with the executive office filling in the tech checks and the support engineers.
+- Agree the freeze window and the minimum OS and board app versions with the AV provider and the VIP support team.
+- Send the readiness pack to the company secretary's team the day before each board meeting.""",
+ es="""
+
+## El problema
+Cuando empieza un consejo, nadie se acuerda de que el panel estaba en verde. Se acuerdan del consejero en remoto que no oía la sala, del iPad del presidente que no había sincronizado la documentación o de la actualización que reinició la sala a las 08:55. Todo eso se veía días antes: el array de micrófonos aparecía desconectado en la salud de Teams Rooms, el iPad llevaba doce días sin conectar con el MDM, la actualización estaba programada para la noche anterior y la prueba técnica prevista la semana pasada nunca se hizo. Las señales están en el centro de administración de Teams, Intune o Jamf, los calendarios de las salas y la herramienta de soporte; la revisión que importa las junta por reunión.
+
+## Qué he hecho
+- Reuniones: consejos, comités y reuniones con inversores sin prueba técnica en la última semana, salas que no encajan (pequeñas, o reunión híbrida en una sala sin Teams Rooms), reservas solapadas o sin tiempo de preparación, y reuniones sin técnico asignado.
+- Salas: Teams Rooms desconectadas o sin reportar, cámara, micrófono, altavoz o pantalla con fallos (crítico si el audio o el vídeo caen en una reunión híbrida), actualizaciones dentro de la congelación previa y salas con incidencias repetidas.
+- Dispositivos VIP: sin cumplir la política o sin conectar, sistema operativo o app del consejo por debajo del mínimo, baterías gastadas, asistentes sin dispositivo registrado y garantías que vencen.
+- Un veredicto por reunión (lista, atención o en riesgo), `report.html` día a día, `readiness-pack.md` con una lista de comprobación por reunión y asistente, y CSVs de reuniones, salas, dispositivos VIP e incidencias.
+- Un exportador de solo lectura en PowerShell para Microsoft Graph: salud de Teams Rooms, calendarios de salas y dispositivos de Intune.
+
+## Cómo está hecho
+Python solo con la librería estándar. La demo es una aseguradora inventada con once salas en tres oficinas (sistemas Crestron, Logitech y Poly), 13 reuniones en las próximas dos semanas, 20 dispositivos VIP y 90 días de incidencias de salas, con los problemas puestos a propósito. 13 tests, un runbook para la revisión semanal y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+
+## Qué aprendí
+De dar soporte a consejos y comités de dirección: Teams Rooms sobre Crestron con sistemas Logitech y Poly, iPads, MacBooks e iPhones gestionados con Jamf Pro e Intune, y soporte VIP a directivos y consejeros. La lección que da forma a la herramienta es que la preparación es de la reunión, no de la sala: la misma pantalla degradada es una nota para un taller interno y una decisión para el consejo. Complementa la vista de flota del repo 17, que revisa todas las salas cada mañana.
+
+## Siguientes pasos
+- Ejecutarlo con los consejos y comités del próximo mes, con la oficina de presidencia rellenando las pruebas técnicas y los técnicos asignados.
+- Acordar la ventana de congelación y las versiones mínimas de sistema operativo y app del consejo con el proveedor audiovisual y el equipo de soporte VIP.
+- Enviar el pack de preparación al equipo de secretaría del consejo el día antes de cada consejo."""),
 ]
