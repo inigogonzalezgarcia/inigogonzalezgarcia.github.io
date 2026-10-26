@@ -749,8 +749,8 @@ sizes["links.html"] = write("links.html", layout(R="", path="links.html", active
 # guides
 GUIDE_LINKS = [
     ("https://sysadmindesksbyigg.pages.dev/", "Práctica", "Practice", "SysAdmin Desks", "SysAdmin Desks",
-     "Practica tickets de soporte en una consola simulada: Active Directory, DNS, Windows, impresoras, Exchange Online e Intune. Cada puesto enlaza con su guía. Gratis y sin registro.",
-     "Practise support tickets in a simulated console: Active Directory, DNS, Windows, printers, Exchange Online and Intune. Each desk links to its guide. Free, no sign-up."),
+     "Practica tickets de soporte en una consola simulada: Active Directory, DNS, Windows, impresoras, Exchange Online e Intune. Cada puesto enlaza con su guía. Gratis, con tu propia cuenta.",
+     "Practise support tickets in a simulated console: Active Directory, DNS, Windows, printers, Exchange Online and Intune. Each desk links to its guide. Free, with your own account."),
     ("recursos.html", "Gratis", "Free", "33 ideas + newsletter", "33 ideas + newsletter",
      "Apúntate a <em>Tech Career Lab</em> y recibe las 33 ideas para que te encuentren si trabajas en IT. Te aviso cuando salgan las primeras guías.",
      "Join <em>Tech Career Lab</em> and get the 33 ideas to get found if you work in IT. I'll let you know when the first guides are out."),
@@ -1044,7 +1044,7 @@ def practice_box(slug):
             f'<p class="practice-kicker">{bi("Practícalo", "Practise it")}</p>'
             f'<p class="practice-h">{bi("Resuelve " + ("este ticket" if n == 1 else "estos tickets") + " en una consola simulada", "Solve " + ("this ticket" if n == 1 else "these tickets") + " in a simulated console")}</p>'
             f'<p class="practice-cmd" aria-hidden="true">PS C:\\&gt; </p>'
-            f'<p class="practice-t">{bi("Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis y sin registro.", "Investigate, fix the cause and write the work note: it is scored when you close the ticket. Free, no sign-up.")}</p>'
+            f'<p class="practice-t">{bi("Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.", "Investigate, fix the cause and write the work note: it is scored when you close the ticket. Free, with your own account.")}</p>'
             f'{links}</div></div>')
 def practice_strip(slug, lang):
     desks = PRACTICE.get(slug, [])
