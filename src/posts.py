@@ -1533,4 +1533,55 @@ De dar soporte a consejos y comités de dirección: Teams Rooms sobre Crestron c
 - Ejecutarlo con los consejos y comités del próximo mes, con la oficina de presidencia rellenando las pruebas técnicas y los técnicos asignados.
 - Acordar la ventana de congelación y las versiones mínimas de sistema operativo y app del consejo con el proveedor audiovisual y el equipo de soporte VIP.
 - Enviar el pack de preparación al equipo de secretaría del consejo el día antes de cada consejo."""),
+dict(n="34", repo="34-venue-service-readiness", date="2026-10-26", cat="tools",
+ title_en="The only kitchen printer had been down since yesterday: a morning readiness check for a hospitality venue",
+ title_es="La única impresora de cocina llevaba caída desde ayer: una revisión de cada mañana para un local de hostelería",
+ dek_en="For every service in the next week, in a restaurant, a pool club, a bar and a hotel: the opening check, enough working tills and handhelds, kitchen printers, card terminals and cash machines, the network and the failover, the PMS and IPTV, and the vendor who would fix each of them, with a verdict per service.",
+ dek_es="Para cada servicio de la próxima semana, en un restaurante, un pool club, un bar y un hotel: la prueba de apertura, suficientes TPV y comanderos funcionando, impresoras de cocina, datáfonos y cajones de efectivo, la red y su respaldo, el PMS y la IPTV, y el proveedor que arreglaría cada cosa, con un veredicto por servicio.",
+ en="""
+
+## The problem
+When the pool club fills up at one o'clock, nobody remembers that the monitoring was green at nine. They remember the orders that never reached the kitchen, the queue at the only card terminal that worked, or the room charges that never reached the guest's bill. Each of those was visible that morning: the beach kitchen printer had been in error since the afternoon before, two of the four handhelds were dead or in a drawer, the backup internet line had been down for five days, and the PMS interface had 37 charges waiting. The POS vendor answers until seven in the evening; the bar closes at one. The signals live in the POS back office, the network controller, the cash machine and PMS consoles and the vendors' portals; the check that matters joins them per service.
+
+## What I built
+- Services: no opening check close to opening, big services and events with nobody from IT on duty, and device updates scheduled inside the freeze before a service.
+- POS and payments: fewer working tills and handhelds than the guests need, kitchen printers or KDS down where there is food, card terminals down, and cash machines in error, short of change or with a full stacker.
+- Network and guest systems: primary or backup internet line down, Wi-Fi access points, switches and firewall, the PMS interface for room charges, IPTV in the rooms and the key card encoders.
+- Vendors: open tickets past each vendor's SLA, contracts ended or ending, and services that open or close outside the vendor's support hours.
+- `report.html` with the services day by day and devices by outlet, `opening-pack.md` as the checklist for the outlet managers, and CSVs for services, devices, vendor cover and incidents.
+- A read-only PowerShell probe that pings every device on the venue network and keeps the last time each one answered.
+
+## How it is built
+Python with the standard library only. The demo is a made-up beach club and boutique hotel with a restaurant, a pool club, a sunset bar and 24 rooms, 16 services in a week including a 900-guest Halloween night, 74 devices and five vendors, with the problems placed on purpose. 15 tests, a runbook for the morning check, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+
+## What I learned
+From my first years in IT supporting hospitality clients, with POS systems such as ICG and HIOPOS, CashDro cash machines, hotel PMS and IPTV, and later from around 200 pre-openings of luxury brand corners in department stores. At one of them the connection failed two hours before opening; I solved it with a temporary USB router while I checked the line and the floor's comms room with the store's technicians. The lesson that shaped the tool is that a service is only as ready as its weakest device and the vendor who would fix it at that hour, so the verdict is per service, and the backup line, the spare handheld and the vendor's hours are part of the plan.
+
+## Next steps
+- Run it every morning for two weeks with the real device register and service plan, and tune the guests per till and the opening check with the outlet managers.
+- Read the device states from the POS back office and the network controller instead of the probe.
+- Send each outlet manager their service's checklist before opening, and write the minutes lost back after closing for the vendors' monthly reviews.""",
+ es="""
+
+## El problema
+Cuando el pool club se llena a la una, nadie se acuerda de que la monitorización estaba en verde a las nueve. Se acuerdan de las comandas que nunca llegaron a cocina, de la cola en el único datáfono que funcionaba o de los cargos a habitación que nunca llegaron a la factura del cliente. Todo eso se veía esa misma mañana: la impresora de la cocina de playa llevaba en error desde la tarde anterior, dos de los cuatro comanderos estaban sin batería o en un cajón, la línea de internet de respaldo llevaba cinco días caída y el interfaz del PMS tenía 37 cargos pendientes. El proveedor del TPV atiende hasta las siete de la tarde; el bar cierra a la una. Las señales están en el back office del TPV, el controlador de red, las consolas de los cajones de efectivo y del PMS y los portales de los proveedores; la revisión que importa las junta por servicio.
+
+## Qué he hecho
+- Servicios: sin prueba de apertura cerca de abrir, servicios grandes y eventos sin nadie de IT de guardia, y actualizaciones de equipos programadas dentro de la congelación antes de un servicio.
+- TPV y pagos: menos TPV y comanderos funcionando de los que necesitan los clientes, impresoras de cocina o KDS caídas donde hay comida, datáfonos caídos, y cajones de efectivo en error, sin cambio o con el depósito lleno.
+- Red y sistemas del cliente: línea de internet principal o de respaldo caída, puntos de acceso Wi-Fi, switches y firewall, el interfaz del PMS para los cargos a habitación, la IPTV de las habitaciones y los codificadores de tarjetas.
+- Proveedores: tickets abiertos fuera del SLA de cada proveedor, contratos vencidos o a punto de vencer, y servicios que abren o cierran fuera del horario de soporte del proveedor.
+- `report.html` con los servicios día a día y los equipos por zona, `opening-pack.md` como checklist para los responsables de cada zona, y CSV de servicios, equipos, cobertura de proveedores e incidencias.
+- Una prueba de solo lectura en PowerShell que hace ping a cada equipo de la red del local y guarda la última vez que respondió.
+
+## Cómo está hecho
+Python solo con la librería estándar. La demo es un beach club con hotel boutique inventado, con restaurante, pool club, bar de atardecer y 24 habitaciones, 16 servicios en una semana con una noche de Halloween para 900 personas, 74 equipos y cinco proveedores, con los problemas puestos a propósito. 15 tests, un runbook para la revisión de cada mañana y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+
+## Qué aprendí
+De mis primeros años en IT dando soporte a clientes de hostelería, con TPV como ICG y HIOPOS, cajones CashDro, PMS hotelero e IPTV, y después de unas 200 preaperturas de corners de marcas de lujo en grandes almacenes. En una de ellas la conexión falló a dos horas de abrir; lo resolví con un router USB temporal mientras revisaba la línea y la sala de comunicaciones de la planta con los técnicos de los grandes almacenes. La lección que da forma a la herramienta es que un servicio está tan preparado como su equipo más débil y el proveedor que lo arreglaría a esa hora, así que el veredicto es por servicio, y la línea de respaldo, el comandero de repuesto y el horario del proveedor forman parte del plan.
+
+## Siguientes pasos
+- Ejecutarlo cada mañana durante dos semanas con el inventario real de equipos y el plan de servicios, y ajustar los clientes por TPV y la prueba de apertura con los responsables de cada zona.
+- Leer el estado de los equipos del back office del TPV y del controlador de red en lugar de la prueba de ping.
+- Enviar a cada responsable el checklist de su servicio antes de abrir, y registrar los minutos perdidos al cerrar para las revisiones mensuales con los proveedores."""),
 ]
