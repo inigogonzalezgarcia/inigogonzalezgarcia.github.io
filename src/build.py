@@ -748,6 +748,9 @@ sizes["links.html"] = write("links.html", layout(R="", path="links.html", active
 
 # guides
 GUIDE_LINKS = [
+    ("https://sysadmindesksbyigg.pages.dev/", "Práctica", "Practice", "SysAdmin Desks", "SysAdmin Desks",
+     "Practica tickets de soporte en una consola simulada: Active Directory, DNS, Windows, impresoras, Exchange Online e Intune. Cada puesto enlaza con su guía. Gratis y sin registro.",
+     "Practise support tickets in a simulated console: Active Directory, DNS, Windows, printers, Exchange Online and Intune. Each desk links to its guide. Free, no sign-up."),
     ("recursos.html", "Gratis", "Free", "33 ideas + newsletter", "33 ideas + newsletter",
      "Apúntate a <em>Tech Career Lab</em> y recibe las 33 ideas para que te encuentren si trabajas en IT. Te aviso cuando salgan las primeras guías.",
      "Join <em>Tech Career Lab</em> and get the 33 ideas to get found if you work in IT. I'll let you know when the first guides are out."),
@@ -1009,6 +1012,35 @@ def gmd(text, lang):
     flush()
     return "\n".join(out)
 
+# SysAdmin Desks (simulated tickets on Cloudflare Pages): the desk that practises each guide
+SIM_URL = "https://sysadmindesksbyigg.pages.dev/"
+_DESK = {
+    "ad-lockout": ("La cuenta que se bloquea cada mañana", "The account that locks every morning"),
+    "dns-intranet": ("Internet funciona, la intranet no", "Internet works, the intranet does not"),
+    "disk-full": ("Disco lleno: Excel no puede guardar", "Disk full: Excel cannot save"),
+    "print-queue": ("La cola de la impresora de recepción que no se vacía", "The reception printer queue that will not empty"),
+    "mailbox-full": ("Los correos de clientes rebotan: el buzón del director comercial", "Customer emails bounce: the sales director's mailbox"),
+    "intune-bitlocker": ("'Tu dispositivo no cumple los requisitos'", "'Your device does not meet requirements'"),
+}
+PRACTICE = {
+    "active-directory-alta-usuario-grupos": ["ad-lockout"],
+    "windows-diagnostico-basico-equipo-lento-o-con-errores": ["dns-intranet", "disk-full"],
+    "impresoras-instalar-impresora-de-red-y-cola-atascada": ["print-queue"],
+    "outlook-exchange-online-buzon-compartido-permisos-autorespuesta": ["mailbox-full"],
+    "intune-perfiles-y-cumplimiento-en-windows-macos-ios-android-y-dispositivo-que-no-cumple": ["intune-bitlocker"],
+    "bitlocker-estado-y-clave-de-recuperacion": ["intune-bitlocker"],
+}
+def practice_box(slug):
+    desks = PRACTICE.get(slug, [])
+    if not desks: return ""
+    links = "".join(
+        f'<p><a class="arrow-link es" href="{SIM_URL}?lang=es#/desk/{d}" target="_blank" rel="noopener noreferrer">{html.escape(_DESK[d][0])} ↗</a>'
+        f'<a class="arrow-link en" href="{SIM_URL}?lang=en#/desk/{d}" target="_blank" rel="noopener noreferrer">{html.escape(_DESK[d][1])} ↗</a></p>'
+        for d in desks)
+    return (f'<p class="label muted u-mt22">{bi("Practícalo", "Practise it")}</p>'
+            f'<p class="muted small">{bi("Resuelve un ticket simulado sobre este tema en SysAdmin Desks: consola, pistas y nota de trabajo evaluada. Gratis y sin registro.", "Solve a simulated ticket on this topic in SysAdmin Desks: console, hints and a scored work note. Free, no sign-up.")}</p>'
+            f'{links}')
+
 TOPIC = {t[1]: t for t in TOPICS}
 TKEYS = [t[1] for t in TOPICS]
 G_ORDER = sorted(GUIDES, key=lambda q: (TKEYS.index(q["topic"]), q["slug"]))
@@ -1050,6 +1082,7 @@ for i, q in enumerate(G_ORDER):
       <p class="repo-name">{bi(L["n_es"], L["n_en"])} · {bi(html.escape(t[2]), html.escape(t[3]))}</p>
       <p class="muted small">{bi("Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.", "The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.")}</p>
       <a class="arrow-link" href="{L["key"]}.html">{bi("Todas las guías del " + L["n_es"], "All " + L["n_en"] + " guides")} →</a>
+      {practice_box(q["slug"])}
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>
