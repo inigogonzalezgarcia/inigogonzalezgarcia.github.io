@@ -1030,16 +1030,32 @@ PRACTICE = {
     "intune-perfiles-y-cumplimiento-en-windows-macos-ios-android-y-dispositivo-que-no-cumple": ["intune-bitlocker"],
     "bitlocker-estado-y-clave-de-recuperacion": ["intune-bitlocker"],
 }
+def _desk_url(d, lang):
+    return f"{SIM_URL}?lang={lang}#/desk/{d}"
 def practice_box(slug):
     desks = PRACTICE.get(slug, [])
     if not desks: return ""
     links = "".join(
-        f'<p><a class="arrow-link es" href="{SIM_URL}?lang=es#/desk/{d}" target="_blank" rel="noopener noreferrer">{html.escape(_DESK[d][0])} ↗</a>'
-        f'<a class="arrow-link en" href="{SIM_URL}?lang=en#/desk/{d}" target="_blank" rel="noopener noreferrer">{html.escape(_DESK[d][1])} ↗</a></p>'
+        f'<a class="practice-desk es" href="{_desk_url(d, "es")}" target="_blank" rel="noopener noreferrer"><span>{html.escape(_DESK[d][0])}</span><span aria-hidden="true">↗</span></a>'
+        f'<a class="practice-desk en" href="{_desk_url(d, "en")}" target="_blank" rel="noopener noreferrer"><span>{html.escape(_DESK[d][1])}</span><span aria-hidden="true">↗</span></a>'
         for d in desks)
-    return (f'<p class="label muted u-mt22">{bi("Practícalo", "Practise it")}</p>'
-            f'<p class="muted small">{bi("Resuelve un ticket simulado sobre este tema en SysAdmin Desks: consola, pistas y nota de trabajo evaluada. Gratis y sin registro.", "Solve a simulated ticket on this topic in SysAdmin Desks: console, hints and a scored work note. Free, no sign-up.")}</p>'
-            f'{links}')
+    n = len(desks)
+    return (f'<div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body">'
+            f'<p class="practice-kicker">{bi("Practícalo", "Practise it")}</p>'
+            f'<p class="practice-h">{bi("Resuelve " + ("este ticket" if n == 1 else "estos tickets") + " en una consola simulada", "Solve " + ("this ticket" if n == 1 else "these tickets") + " in a simulated console")}</p>'
+            f'<p class="practice-cmd" aria-hidden="true">PS C:\\&gt; </p>'
+            f'<p class="practice-t">{bi("Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis y sin registro.", "Investigate, fix the cause and write the work note: it is scored when you close the ticket. Free, no sign-up.")}</p>'
+            f'{links}</div></div>')
+def practice_strip(slug, lang):
+    desks = PRACTICE.get(slug, [])
+    if not desks: return ""
+    d = desks[0]
+    k, t = ("¿Prefieres practicarlo?", "Resuelve el ticket simulado") if lang == "es" else ("Rather practise it?", "Solve the simulated ticket")
+    return (f'<a class="practice-strip" href="{_desk_url(d, lang)}" target="_blank" rel="noopener noreferrer"><b>{k}</b>'
+            f'<span>{t} «{html.escape(_DESK[d][0 if lang == "es" else 1])}» en SysAdmin Desks ↗</span></a>\n'
+            if lang == "es" else
+            f'<a class="practice-strip" href="{_desk_url(d, lang)}" target="_blank" rel="noopener noreferrer"><b>{k}</b>'
+            f'<span>{t} "{html.escape(_DESK[d][1])}" in SysAdmin Desks ↗</span></a>\n')
 
 TOPIC = {t[1]: t for t in TOPICS}
 TKEYS = [t[1] for t in TOPICS]
@@ -1064,11 +1080,11 @@ for i, q in enumerate(G_ORDER):
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
-{gmd(q["es"], "es")}
+{practice_strip(q["slug"], "es")}{gmd(q["es"], "es")}
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       <div class="en" lang="en">
-{gmd(q["en"], "en")}
+{practice_strip(q["slug"], "en")}{gmd(q["en"], "en")}
 <p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
       </div>
       <div class="news-box">
