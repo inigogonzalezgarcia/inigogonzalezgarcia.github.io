@@ -1194,7 +1194,7 @@ for rel in sorted(sizes, key=lambda r: (r != "index.html", r.startswith("blog/")
     urls.append(f"  <url><loc>{loc}</loc><lastmod>{post_date.get(rel, newest)}</lastmod></url>")
 (SITE / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                   + "\n".join(urls) + "\n</urlset>\n")
-(SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /src/\n\nSitemap: {SITE_URL}sitemap.xml\n")
+(SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}sitemap.xml\n")
 
 data = {"cities": {c["id"]: c for c in CITIES}, "hero": CONF["hero_photos"], "about": CONF.get("about_photo"),
         "formspree": bool(CONF.get("formspree_id")), "ga4": CONF.get("ga4_id", "")}
