@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Hotel pre-opening: the IT checklist from the building site to opening day · Iñigo González" data-title-es="Hotel en pre-apertura: el checklist de IT desde la obra hasta el día de apertura · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Hotel pre-opening: the IT checklist from the building site to opening day · Iñigo González</title>
+<meta name="description" content="The calendar counted back from the opening date, the network split by use, the circuits to order before anything else, the map of interfaces with the PMS, the test week with simulated guests and support on day one.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/hotel-en-pre-apertura-checklist-de-it-hasta-el-dia-de-apertura.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hotel pre-opening: the IT checklist from the building site to opening day · Iñigo González">
+<meta property="og:description" content="The calendar counted back from the opening date, the network split by use, the circuits to order before anything else, the map of interfaces with the PMS, the test week with simulated guests and support on day one.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/hotel-en-pre-apertura-checklist-de-it-hasta-el-dia-de-apertura.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Hotel pre-opening: the IT checklist from the building site to opening day · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Hotel pre-opening: the IT checklist from the building site to opening day","alternativeHeadline":"Hotel en pre-apertura: el checklist de IT desde la obra hasta el día de apertura","description":"The calendar counted back from the opening date, the network split by use, the circuits to order before anything else, the map of interfaces with the PMS, the test week with simulated guests and support on day one.","datePublished":"2026-10-27","dateModified":"2026-10-27","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/hotel-en-pre-apertura-checklist-de-it-hasta-el-dia-de-apertura.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/hotel-en-pre-apertura-checklist-de-it-hasta-el-dia-de-apertura.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Hotel pre-opening - IT checklist up to opening day"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 1","item":"https://inigogonzalezgarcia.github.io/guias/sector-1.html"},{"@type":"ListItem","position":4,"name":"Hotel pre-opening: the IT checklist from the building site to opening day","item":"https://inigogonzalezgarcia.github.io/guias/hotel-en-pre-apertura-checklist-de-it-hasta-el-dia-de-apertura.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="sector-1.html"><span class="es">Sector 1</span><span class="en">Sector 1</span></a></p>
+    <h1><span class="es">Hotel en pre-apertura: el checklist de IT desde la obra hasta el día de apertura</span><span class="en">Hotel pre-opening: the IT checklist from the building site to opening day</span></h1>
+    <p class="lede"><span class="es">El calendario hacia atrás desde la fecha de apertura, la red separada por usos, los circuitos que hay que pedir antes que nada, el mapa de interfaces con el PMS, la semana de pruebas con huéspedes simulados y el soporte del primer día.</span><span class="en">The calendar counted back from the opening date, the network split by use, the circuits to order before anything else, the map of interfaces with the PMS, the test week with simulated guests and support on day one.</span></p><p class="label post-meta"><span class="es">Sector 1</span><span class="en">Sector 1</span> · <span class="es">Hotel en pre-apertura - Checklist de IT hasta el día de apertura</span><span class="en">Hotel pre-opening - IT checklist up to opening day</span> · <span class="es">6 min</span><span class="en">5 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">27 oct 2026</span><span class="en">27 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Llegar al día de apertura con el check-in funcionando, las tarjetas de habitación abriendo puertas, los TPV cobrando y cargando a habitación, la WiFi de huéspedes estable y la televisión con canales. En un hotel nuevo todo eso depende de sistemas de proveedores distintos que tienen que hablar entre sí, y de una obra que nunca termina cuando estaba previsto.</p>
+<h2>Antes de empezar</h2>
+<ul><li>La <strong>fecha de apertura</strong> y la de entrega de cada planta por parte de la constructora.</li><li>La lista de proveedores contratados (PMS, TPV, cerraduras, telefonía, IPTV, WiFi, CCTV) con un contacto técnico de cada uno.</li><li>Los planos con los armarios de comunicaciones (rack principal y racks de planta) y la ruta del cableado estructurado.</li><li>Un sitio para trabajar mientras no hay oficina: la oficina de pre-apertura suele estar fuera del hotel o en una zona provisional.</li></ul>
+<h2>1. El calendario hacia atrás</h2>
+<div class="g-table"><table><thead><tr><th>Cuándo</th><th>Qué</th><th>Por qué tan pronto</th></tr></thead><tbody><tr><td>T-120 días</td><td>Pedir los <strong>circuitos</strong> (principal y respaldo, de operadores distintos)</td><td>El plazo de un operador para una fibra nueva puede pasar de 60 días</td></tr><tr><td>T-90</td><td>Diseño de red y direccionamiento; pedido de switches, AP y servidores</td><td>Plazos de entrega de hardware</td></tr><tr><td>T-75</td><td>Alta del tenant o de la sede en Microsoft 365, cuentas del equipo de pre-apertura</td><td>Los primeros empleados llegan antes que el edificio</td></tr><tr><td>T-60</td><td>Configuración del PMS: tipos de habitación, tarifas, códigos de transacción</td><td>Lo hace el equipo de recepción con el proveedor, IT da la infraestructura</td></tr><tr><td>T-45</td><td>Racks montados, switches y AP instalados por planta según entrega la obra</td><td>Sin red no se puede probar nada más</td></tr><tr><td>T-30</td><td>Interfaces con el PMS conectadas y probadas una a una</td><td>Es la parte que más falla</td></tr><tr><td>T-14</td><td><strong>Semana de pruebas</strong> con huéspedes simulados</td><td>Encontrar los fallos antes que los huéspedes</td></tr><tr><td>T-0</td><td>Apertura con soporte en planta</td><td></td></tr></tbody></table></div>
+<p class="g-tip">Consejo: los circuitos y el hardware son lo único que no se recupera trabajando más horas. Todo lo demás, sí.</p>
+<h2>2. La red, separada por usos</h2>
+<div class="g-table"><table><thead><tr><th>VLAN</th><th>Uso</th><th>Notas</th></tr></thead><tbody><tr><td>10</td><td>Gestión de red</td><td>Solo IT y proveedores con acceso nominal</td></tr><tr><td>20</td><td>Oficinas y back office</td><td>Equipos del personal</td></tr><tr><td>30</td><td>PMS, TPV y servidores del hotel</td><td>Aislada del resto, sin salida directa a internet salvo la que necesiten los proveedores</td></tr><tr><td>40</td><td>Datáfonos</td><td>Segmentada para el alcance de <strong>PCI DSS</strong></td></tr><tr><td>50</td><td>IPTV</td><td>Multicast, con IGMP snooping (guía de IPTV en hotel)</td></tr><tr><td>60</td><td>Voz</td><td>Teléfonos de habitación y de oficina</td></tr><tr><td>70</td><td>Cerraduras, control de accesos y climatización</td><td>Sistemas del edificio de proveedores distintos</td></tr><tr><td>80</td><td>CCTV</td><td>Mucho tráfico, grabación local</td></tr><tr><td>100</td><td>WiFi de huéspedes</td><td>Aislamiento entre clientes, portal cautivo y límite de ancho de banda</td></tr></tbody></table></div>
+<ul><li>Una VLAN por uso permite que cada proveedor acceda solo a lo suyo, y que un problema en una (un bucle en CCTV) no deje sin servicio a las demás.</li><li>La WiFi de huéspedes nunca ve las otras redes. Es lo primero que mira cualquier auditoría.</li></ul>
+<h2>3. El mapa de interfaces con el PMS</h2>
+<p>El PMS es el centro: casi todos los sistemas del hotel le preguntan o le envían algo.</p>
+<div class="g-table"><table><thead><tr><th>Sistema</th><th>Qué intercambia con el PMS</th></tr></thead><tbody><tr><td>TPV (restaurante, bar, spa)</td><td>Consulta del huésped y <strong>cargo a habitación</strong> (guía de PMS hotelero)</td></tr><tr><td>Cerraduras</td><td>Codificar la tarjeta al hacer el check-in, anularla al hacer el check-out</td></tr><tr><td>Centralita</td><td>Llamadas facturables al folio, despertador, estado de habitación desde el teléfono</td></tr><tr><td>IPTV</td><td>Mensaje de bienvenida con el nombre, idioma, factura en pantalla</td></tr><tr><td>WiFi de huéspedes</td><td>Acceso con número de habitación y apellido</td></tr><tr><td>Motor de reservas y channel manager</td><td>Disponibilidad y reservas desde la web y las agencias online</td></tr></tbody></table></div>
+<p>Cada interfaz tiene dos proveedores, y en cada prueba los dos dicen que el fallo es del otro. Para cada una se apunta en una hoja: quién es el responsable de cada extremo, el puerto o la URL, la cuenta que usa y la prueba que demuestra que funciona.</p>
+<h2>4. La semana de pruebas</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Hoja de pruebas · Pre-apertura · Día T-10</span></figcaption><div class="ui-body"><div class="ui-path"><span>Pruebas</span><span class="ui-sep" aria-hidden="true">›</span><span>Recepción</span><span class="ui-sep" aria-hidden="true">›</span><span>Flujo completo de un huésped</span></div><div class="ui-field"><span class="ui-k">1. Reserva desde la web</span><span class="ui-v">aparece en el PMS · [x] OK</span></div><div class="ui-field"><span class="ui-k">2. Check-in de la habitación 214 con tarjeta codificada · [x] OK</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">3. La tarjeta abre la 214 y el ascensor a la planta 2 · [x] OK</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">4. Cena en el restaurante cargada a la 214 desde el TPV · [ ] Falla</span><span class="ui-v">el TPV no encuentra al huésped</span></div><div class="ui-field"><span class="ui-k">5. Llamada desde la 214 a un móvil</span><span class="ui-v">el cargo llega al folio · [x] OK</span></div><div class="ui-field"><span class="ui-k">6. Mensaje de bienvenida en la TV con el nombre del huésped · [x] OK</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">7. Check-out</span><span class="ui-v">la tarjeta deja de abrir y el folio cuadra · [ ] Pendiente</span></div></div></figure>
+<ul><li>Se prueba el <strong>flujo entero de un huésped</strong>, no cada sistema por separado: lo que falla son las uniones.</li><li>Cada fallo es un ticket con dueño y fecha, revisado en una reunión corta cada mañana con los proveedores.</li><li>Las pruebas las hace el personal que va a trabajar ese día, no solo IT: es también su formación.</li></ul>
+<h2>5. El día de apertura</h2>
+<ul><li>IT en planta desde una hora antes del primer check-in, con un teléfono que todos conocen.</li><li>Los contactos de guardia de cada proveedor, confirmados el día anterior.</li><li>Un procedimiento en papel para el check-in si cae el PMS (lista de llegadas impresa y tarjetas codificadas a mano desde el sistema de cerraduras).</li><li>Al final del día, una lista de lo que ha fallado y de quién lo arregla. El cierre del día (auditoría nocturna del PMS) es la última prueba.</li></ul>
+<h2>6. Lo que revisas después de abrir</h2>
+<ul><li>La primera semana, cada mañana: interfaces con errores, tickets abiertos por sistema y quejas de WiFi.</li><li>Al mes: documentación entregada por cada proveedor (configuración, credenciales en el gestor de contraseñas, contratos de soporte con sus horarios).</li><li>Las cuentas temporales de los instaladores, retiradas.</li></ul>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <strong>PMS hotelero</strong> cubre el cargo a habitación desde el TPV paso a paso.</li><li>La guía de <strong>IPTV en hotel</strong> explica la red multicast de la televisión.</li><li>La de <strong>ICG y HIOPOS</strong> y la de <strong>CashDro</strong> cubren la puesta en marcha de los puntos de venta.</li><li>La guía de DR/BCP del Nivel 4 sirve para preparar qué pasa si el PMS o la conexión caen con el hotel lleno.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>Reaching opening day with check-in working, room cards opening doors, the POS taking payments and posting to rooms, stable guest WiFi and a TV with channels. In a new hotel all of that depends on systems from different vendors that have to talk to each other, and on a building site that never finishes when it was meant to.</p>
+<h2>Before you start</h2>
+<ul><li>The <strong>opening date</strong> and the date the builder hands over each floor.</li><li>The list of contracted vendors (PMS, POS, door locks, telephony, IPTV, WiFi, CCTV) with a technical contact for each.</li><li>The plans with the comms cabinets (main rack and floor racks) and the structured cabling route.</li><li>A place to work while there is no office: the pre-opening office is usually outside the hotel or in a temporary area.</li></ul>
+<h2>1. The calendar counted back</h2>
+<div class="g-table"><table><thead><tr><th>When</th><th>What</th><th>Why so early</th></tr></thead><tbody><tr><td>T-120 days</td><td>Order the <strong>circuits</strong> (primary and backup, from different carriers)</td><td>A carrier&#x27;s lead time for new fibre can exceed 60 days</td></tr><tr><td>T-90</td><td>Network design and addressing; order switches, APs and servers</td><td>Hardware lead times</td></tr><tr><td>T-75</td><td>Create the tenant or site in Microsoft 365, accounts for the pre-opening team</td><td>The first employees arrive before the building does</td></tr><tr><td>T-60</td><td>PMS setup: room types, rates, transaction codes</td><td>Done by the front office team with the vendor, IT provides the infrastructure</td></tr><tr><td>T-45</td><td>Racks mounted, switches and APs installed floor by floor as the site hands them over</td><td>Without a network nothing else can be tested</td></tr><tr><td>T-30</td><td>PMS interfaces connected and tested one by one</td><td>It is the part that fails most</td></tr><tr><td>T-14</td><td><strong>Test week</strong> with simulated guests</td><td>Find the faults before the guests do</td></tr><tr><td>T-0</td><td>Opening with on-site support</td><td></td></tr></tbody></table></div>
+<p class="g-tip">Tip: circuits and hardware are the only things you can&#x27;t recover by working longer hours. Everything else, you can.</p>
+<h2>2. The network, split by use</h2>
+<div class="g-table"><table><thead><tr><th>VLAN</th><th>Use</th><th>Notes</th></tr></thead><tbody><tr><td>10</td><td>Network management</td><td>IT and vendors with named access only</td></tr><tr><td>20</td><td>Offices and back office</td><td>Staff devices</td></tr><tr><td>30</td><td>PMS, POS and hotel servers</td><td>Isolated from the rest, no direct internet access except what vendors need</td></tr><tr><td>40</td><td>Card terminals</td><td>Segmented for <strong>PCI DSS</strong> scope</td></tr><tr><td>50</td><td>IPTV</td><td>Multicast, with IGMP snooping (hotel IPTV guide)</td></tr><tr><td>60</td><td>Voice</td><td>Room and office phones</td></tr><tr><td>70</td><td>Door locks, access control and HVAC</td><td>Building systems from different vendors</td></tr><tr><td>80</td><td>CCTV</td><td>Heavy traffic, local recording</td></tr><tr><td>100</td><td>Guest WiFi</td><td>Client isolation, captive portal and bandwidth limit</td></tr></tbody></table></div>
+<ul><li>One VLAN per use lets each vendor reach only their own systems, and stops a problem in one (a loop on CCTV) from taking the others down.</li><li>Guest WiFi never sees the other networks. It is the first thing any audit checks.</li></ul>
+<h2>3. The map of PMS interfaces</h2>
+<p>The PMS is the centre: almost every system in the hotel asks it something or sends it something.</p>
+<div class="g-table"><table><thead><tr><th>System</th><th>What it exchanges with the PMS</th></tr></thead><tbody><tr><td>POS (restaurant, bar, spa)</td><td>Guest lookup and <strong>room charge</strong> (hotel PMS guide)</td></tr><tr><td>Door locks</td><td>Encode the card at check-in, cancel it at check-out</td></tr><tr><td>PBX</td><td>Billable calls to the folio, wake-up calls, room status from the phone</td></tr><tr><td>IPTV</td><td>Welcome message with the name, language, bill on screen</td></tr><tr><td>Guest WiFi</td><td>Access with room number and surname</td></tr><tr><td>Booking engine and channel manager</td><td>Availability and bookings from the website and online agencies</td></tr></tbody></table></div>
+<p>Each interface has two vendors, and in every test each one says the fault is the other&#x27;s. For each one, note in a sheet: who owns each end, the port or URL, the account it uses and the test that proves it works.</p>
+<h2>4. The test week</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Test sheet · Pre-opening · Day T-10</span></figcaption><div class="ui-body"><div class="ui-path"><span>Tests</span><span class="ui-sep" aria-hidden="true">›</span><span>Front office</span><span class="ui-sep" aria-hidden="true">›</span><span>A guest&#x27;s full journey</span></div><div class="ui-field"><span class="ui-k">1. Booking from the website</span><span class="ui-v">appears in the PMS · [x] OK</span></div><div class="ui-field"><span class="ui-k">2. Check-in to room 214 with an encoded card · [x] OK</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">3. The card opens 214 and the lift to floor 2 · [x] OK</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">4. Dinner in the restaurant posted to 214 from the POS · [ ] Fails</span><span class="ui-v">the POS can&#x27;t find the guest</span></div><div class="ui-field"><span class="ui-k">5. Call from 214 to a mobile</span><span class="ui-v">the charge reaches the folio · [x] OK</span></div><div class="ui-field"><span class="ui-k">6. Welcome message on the TV with the guest&#x27;s name · [x] OK</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">7. Check-out</span><span class="ui-v">the card stops opening and the folio balances · [ ] Pending</span></div></div></figure>
+<ul><li>Test a <strong>guest&#x27;s whole journey</strong>, not each system on its own: what fails are the joins.</li><li>Each fault is a ticket with an owner and a date, reviewed in a short meeting with the vendors every morning.</li><li>The tests are run by the staff who will work that day, not just IT: it is their training too.</li></ul>
+<h2>5. Opening day</h2>
+<ul><li>IT on site from an hour before the first check-in, with a phone number everyone knows.</li><li>Each vendor&#x27;s on-call contacts, confirmed the day before.</li><li>A paper procedure for check-in if the PMS goes down (printed arrivals list and cards encoded by hand from the lock system).</li><li>At the end of the day, a list of what failed and who is fixing it. The PMS night audit is the last test.</li></ul>
+<h2>6. What you review after opening</h2>
+<ul><li>In the first week, every morning: interfaces with errors, open tickets per system and WiFi complaints.</li><li>After a month: documentation handed over by each vendor (configuration, credentials in the password manager, support contracts with their hours).</li><li>The installers&#x27; temporary accounts, removed.</li></ul>
+<h2>Next steps</h2>
+<ul><li>The <strong>hotel PMS</strong> guide covers posting to a room from the POS step by step.</li><li>The <strong>hotel IPTV</strong> guide explains the TV&#x27;s multicast network.</li><li>The <strong>ICG and HIOPOS</strong> and <strong>CashDro</strong> guides cover setting up the points of sale.</li><li>The Level 4 DR/BCP guide helps you prepare for the PMS or the connection going down with the hotel full.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Sector 1</span><span class="en">Sector 1</span> · <span class="es">Hotel en pre-apertura - Checklist de IT hasta el día de apertura</span><span class="en">Hotel pre-opening - IT checklist up to opening day</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="sector-1.html"><span class="es">Todas las guías del Sector 1</span><span class="en">All Sector 1 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="cashdro-integracion-con-el-tpv-red-cobro-en-efectivo-y-arqueo.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">CashDro: integración con el TPV, el cobro en efectivo y el arqueo que cuadra</span><span class="en">CashDro: integration with the POS, cash payments and a cash count that balances</span></span></a>
+    <a class="post-nav-link next" href="icg-y-hiopos-puesta-en-marcha-de-un-tpv-red-impresoras-de-cocina-y-cierre.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">ICG y HIOPOS: puesta en marcha de un TPV, con la red, las impresoras de cocina y el cierre de caja</span><span class="en">ICG and HIOPOS: setting up a POS, with the network, kitchen printers and end-of-day close</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
