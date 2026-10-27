@@ -221,6 +221,18 @@ home_body = "\n\n".join([
     </div>
   </div>
 </section>''',
+    f'''<section class="section dark">
+  <div class="wrap welcome reveal">
+    <div>
+      <p class="label kicker">SysAdmin Desks · {bi("práctica gratis", "free practice")}</p>
+      <h2 class="h2 sm">{bi("Practica con<br>tickets simulados.", "Practise with<br>simulated tickets.")}</h2>
+    </div>
+    <div>
+      <p class="lede">{bi("Una consola de soporte simulada: cuentas bloqueadas en Active Directory, DNS, impresoras, Exchange Online, Intune y BitLocker. Cada ticket tiene su SLA, su veredicto y un enlace a la guía que lo explica. Gratis, con tu propia cuenta.", "A simulated support console: locked accounts in Active Directory, DNS, printers, Exchange Online, Intune and BitLocker. Every ticket has its SLA, a verdict and a link to the guide that explains it. Free, with your own account.")}</p>
+      <a class="btn" href="https://sysadmindesksbyigg.pages.dev/" target="_blank" rel="noopener noreferrer">{bi("Abrir SysAdmin Desks", "Open SysAdmin Desks")} ↗</a>
+    </div>
+  </div>
+</section>''',
     f'''<section class="section">
   <div class="wrap welcome reveal">
     <div>
@@ -524,7 +536,7 @@ faq_html = "\n".join(
     f'      <details class="faq-item"><summary>{bi(q_es, q_en)}</summary><p>{bi(a_es, a_en)}</p></details>'
     for q_es, q_en, a_es, a_en in FAQ)
 
-store_body = page_hero("Store · IGG-ICS · IT · Tech Career, Lab &amp; Strategy",
+store_body = page_hero(bi("Servicios", "Services") + " · IGG-ICS · IT · Tech Career, Lab &amp; Strategy",
     bi("Tu carrera en IT,<br>con estrategia.", "Your IT career,<br>with a strategy."),
     bi("Servicios de estrategia profesional para perfiles IT y tecnológicos: te ayudo a generar oportunidades con visibilidad, posicionamiento y networking, y no solo enviando currículums.",
        "Career strategy services for IT and tech professionals: I help you create opportunities through visibility, positioning and networking, not just by sending CVs."),
@@ -629,9 +641,9 @@ store_body = page_hero("Store · IGG-ICS · IT · Tech Career, Lab &amp; Strateg
   </div>
 </section>'''
 sizes["store.html"] = write("store.html", layout(R="", path="store.html", active="store",
-    title_en="Store · IGG-ICS IT career services · Iñigo González", title_es="Store · Servicios IGG-ICS para perfiles IT · Iñigo González",
+    title_en="Services · IGG-ICS IT career services · Iñigo González", title_es="Servicios IGG-ICS para perfiles IT · Iñigo González",
     desc="IGG-ICS career services for IT professionals: CV and LinkedIn review, IT 360º diagnosis and a 4-week action plan. Online, in Spanish or English.", body=store_body,
-    ld=[crumbs(("Home", ""), ("Store", "store.html"))]))
+    ld=[crumbs(("Home", ""), ("Services", "store.html"))]))
 
 # old advisory URL: keep it working (newsletters link to it) and send visitors to the store
 sizes["asesoria.html"] = write("asesoria.html", '''<!doctype html>
@@ -640,14 +652,14 @@ sizes["asesoria.html"] = write("asesoria.html", '''<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <!--SEC-->
-<title>IGG-ICS · Store · Iñigo González</title>
+<title>IGG-ICS · Servicios · Iñigo González</title>
 <meta name="robots" content="noindex">
 <link rel="canonical" href="https://inigogonzalezgarcia.github.io/store.html">
 <meta http-equiv="refresh" content="0; url=store.html">
 <script src="assets/redirect.js"></script>
 </head>
 <body>
-<p><a href="store.html">IGG-ICS → Store</a></p>
+<p><a href="store.html">IGG-ICS → Servicios</a></p>
 </body>
 </html>
 '''.replace("<!--SEC-->", SEC_HEAD))
@@ -723,7 +735,7 @@ sizes["recursos.html"] = write("recursos.html", layout(R="", path="recursos.html
 LINKS = [
     ("blog/", bi("Blog: cómo construí cada proyecto", "Blog: how I built each project"), ""),
     ("journey.html", bi("El viaje: once años en cinco etapas", "The journey: eleven years in five stages"), ""),
-    ("store.html", bi("Store · IGG-ICS: servicios para perfiles IT", "Store · IGG-ICS: services for IT professionals"), ""),
+    ("store.html", bi("Servicios · IGG-ICS: para perfiles IT", "Services · IGG-ICS: for IT professionals"), ""),
     ("recursos.html", bi("Gratis: 33 ideas para que te encuentren si trabajas en IT", "Free: 33 ideas to get found if you work in IT"), ""),
     (LINKEDIN, "LinkedIn", "ext"),
     (GITHUB, "GitHub", "ext"),
