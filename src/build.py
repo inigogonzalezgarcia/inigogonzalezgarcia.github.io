@@ -861,6 +861,7 @@ def guide_level(n_es, n_en, t_es, t_en, d_es, d_en, topics, href=None, soon=True
     key = {t[2]: (t[0], t[1]) for t in _T}
     def item(es, en):
         if href and es in key: return f'<li><a href="{href}#{key[es][1]}">{bi(es, en)}</a></li>'
+        if href: return f'<li>{bi(es, en)} <span class="muted small">{bi("· pronto", "· soon")}</span></li>'
         return f"<li>{bi(es, en)}</li>"
     items = "".join(item(es, en) for es, en in sorted(topics, key=lambda t: t[0].lower()))
     open_ = (f'<a class="btn" href="{href}">{bi("Ver las guías", "See the guides")} →</a>' if href
