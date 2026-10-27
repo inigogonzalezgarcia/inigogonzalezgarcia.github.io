@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Level 4 · Expert · IT guides · Iñigo González" data-title-es="Nivel 4 · Experto · Guías IT · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Level 4 · Expert · IT guides · Iñigo González</title>
+<meta name="description" content="Expert IT guides: Azure Virtual Desktop and Windows 365, backup and disaster recovery (DR/BCP), Cisco switches and routers, Microsoft 365 Global Admin and PIM, Microsoft Sentinel, and Microsoft 365 tenant migrations.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/nivel-4.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Level 4 · Expert · IT guides · Iñigo González">
+<meta property="og:description" content="Expert IT guides: Azure Virtual Desktop and Windows 365, backup and disaster recovery (DR/BCP), Cisco switches and routers, Microsoft 365 Global Admin and PIM, Microsoft Sentinel, and Microsoft 365 tenant migrations.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/nivel-4.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Level 4 · Expert · IT guides · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","@id":"https://inigogonzalezgarcia.github.io/guias/nivel-4.html","url":"https://inigogonzalezgarcia.github.io/guias/nivel-4.html","name":"Level 4 · Expert","inLanguage":"en","isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/#website"},"hasPart":[{"@type":"TechArticle","headline":"Azure Virtual Desktop and Windows 365: which one to choose, a host pool with FSLogix and a connection that fails","url":"https://inigogonzalezgarcia.github.io/guias/azure-virtual-desktop-y-windows-365-host-pool-cloud-pc-y-conexion-que-falla.html"},{"@type":"TechArticle","headline":"DR/BCP: RPO and RTO per service, the recovery plan and a full test","url":"https://inigogonzalezgarcia.github.io/guias/dr-bcp-rpo-y-rto-por-servicio-plan-de-recuperacion-y-prueba-completa.html"},{"@type":"TechArticle","headline":"Cisco: VLANs, trunks, the site router and a port that gives no network","url":"https://inigogonzalezgarcia.github.io/guias/cisco-vlans-troncales-router-de-la-sede-y-un-puerto-que-no-da-red.html"},{"@type":"TechArticle","headline":"Microsoft 365: admin roles, PIM and the emergency accounts","url":"https://inigogonzalezgarcia.github.io/guias/microsoft-365-roles-de-administracion-pim-y-cuentas-de-emergencia.html"},{"@type":"TechArticle","headline":"Microsoft Sentinel: connectors, a KQL rule and an incident from start to finish","url":"https://inigogonzalezgarcia.github.io/guias/microsoft-sentinel-conectores-una-regla-en-kql-y-un-incidente-de-principio-a-fin.html"},{"@type":"TechArticle","headline":"Microsoft 365 tenant migrations: inventory, identities, mailboxes, OneDrive and cutover day","url":"https://inigogonzalezgarcia.github.io/guias/migracion-de-tenant-microsoft-365-inventario-identidades-buzones-onedrive-y-dia-del-corte.html"}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 4","item":"https://inigogonzalezgarcia.github.io/guias/nivel-4.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Store</span><span class="en">Store</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <span class="es">Nivel 4</span><span class="en">Level 4</span></p>
+    <h1><span class="es">Infraestructura híbrida,<br>seguridad y continuidad.</span><span class="en">Hybrid infrastructure,<br>security and continuity.</span></h1>
+    <p class="lede"><span class="es">Para quien diseña, decide y responde cuando algo grande falla: escritorios en la nube, recuperación ante desastres, la red de una sede, el gobierno de los administradores de Microsoft 365, la detección con Sentinel y las migraciones de tenant. Seis temas ya publicados; el resto, en camino.</span><span class="en">For people who design, decide and respond when something big fails: cloud desktops, disaster recovery, a site's network, governing Microsoft 365 administrators, detection with Sentinel and tenant migrations. Six topics published so far; the rest are on the way.</span></p><p class="label post-meta"><span class="es">6 guías · ES/EN · ejemplos ficticios</span><span class="en">6 guides · ES/EN · fictional examples</span></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="guide-levels three">
+      <div class="guide-level reveal" id="avd-w365"><p class="label kicker"><span class="es">1 guía</span><span class="en">1 guide</span></p><h3><span class="es">Azure Virtual Desktop y Windows 365</span><span class="en">Azure Virtual Desktop and Windows 365</span></h3><p class="muted small"><span class="es">Cuándo usar cada uno, un host pool con FSLogix y escalado automático, y una conexión que falla.</span><span class="en">When to use each, a host pool with FSLogix and autoscaling, and a connection that fails.</span></p><ul class="guide-topics guide-list"><li><a href="azure-virtual-desktop-y-windows-365-host-pool-cloud-pc-y-conexion-que-falla.html"><span class="es">Azure Virtual Desktop y Windows 365: cuál elegir, un host pool con FSLogix y una conexión que falla</span><span class="en">Azure Virtual Desktop and Windows 365: which one to choose, a host pool with FSLogix and a connection that fails</span></a><span class="muted small"><span class="es">Cuándo encaja cada uno, un host pool multisesión unido a Entra ID con perfiles en FSLogix y escalado automático, un Cloud PC de Windows 365 en tres pasos, y cómo leer por qué un usuario no llega a su escritorio.</span><span class="en">When each one fits, a multi-session host pool joined to Entra ID with FSLogix profiles and autoscaling, a Windows 365 Cloud PC in three steps, and how to read why a user can&#x27;t reach their desktop.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="dr-bcp"><p class="label kicker"><span class="es">1 guía</span><span class="en">1 guide</span></p><h3><span class="es">Backup y recuperación ante desastres (DR/BCP)</span><span class="en">Backup and disaster recovery (DR/BCP)</span></h3><p class="muted small"><span class="es">RPO y RTO por servicio, copias inmutables, el plan de recuperación y una prueba completa medida.</span><span class="en">RPO and RTO per service, immutable backups, the recovery plan and a measured full test.</span></p><ul class="guide-topics guide-list"><li><a href="dr-bcp-rpo-y-rto-por-servicio-plan-de-recuperacion-y-prueba-completa.html"><span class="es">DR/BCP: RPO y RTO por servicio, el plan de recuperación y una prueba completa</span><span class="en">DR/BCP: RPO and RTO per service, the recovery plan and a full test</span></a><span class="muted small"><span class="es">El análisis de impacto que fija cuánto dato y cuánto tiempo puede perder cada servicio, la regla 3-2-1-1-0 con una copia inmutable, el runbook con el orden de arranque, y una prueba de recuperación medida con informe y acciones.</span><span class="en">The impact analysis that sets how much data and how much time each service can lose, the 3-2-1-1-0 rule with an immutable copy, the runbook with the start-up order, and a measured recovery test with a report and actions.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="cisco"><p class="label kicker"><span class="es">1 guía</span><span class="en">1 guide</span></p><h3><span class="es">Cisco: switches y routers</span><span class="en">Cisco switches and routers</span></h3><p class="muted small"><span class="es">VLANs, troncales sin cortar una planta, el router con circuito de respaldo y un puerto que no da red.</span><span class="en">VLANs, trunks without cutting off a floor, the router with a backup circuit and a port that gives no network.</span></p><ul class="guide-topics guide-list"><li><a href="cisco-vlans-troncales-router-de-la-sede-y-un-puerto-que-no-da-red.html"><span class="es">Cisco: VLANs, troncales, el router de la sede y un puerto que no da red</span><span class="en">Cisco: VLANs, trunks, the site router and a port that gives no network</span></a><span class="muted small"><span class="es">Leer un switch Catalyst antes de tocarlo, configurar puertos de acceso y troncales sin cortar una planta, la ruta por defecto con respaldo automático en el router, el diagnóstico de un puerto en err-disabled y cómo hacer cambios en remoto con red de seguridad.</span><span class="en">Read a Catalyst switch before touching it, configure access ports and trunks without cutting off a floor, the default route with automatic failover on the router, diagnosing a port in err-disabled, and how to make remote changes with a safety net.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="m365-pim"><p class="label kicker"><span class="es">1 guía</span><span class="en">1 guide</span></p><h3><span class="es">Microsoft 365: Global Admin y PIM</span><span class="en">Microsoft 365: Global Admin and PIM</span></h3><p class="muted small"><span class="es">Roles mínimos, cuentas de emergencia y administradores que activan su rol solo cuando lo necesitan.</span><span class="en">Least-privileged roles, emergency accounts and administrators who activate their role only when they need it.</span></p><ul class="guide-topics guide-list"><li><a href="microsoft-365-roles-de-administracion-pim-y-cuentas-de-emergencia.html"><span class="es">Microsoft 365: los roles de administración, PIM y las cuentas de emergencia</span><span class="en">Microsoft 365: admin roles, PIM and the emergency accounts</span></a><span class="muted small"><span class="es">Inventariar quién es administrador hoy, pasar cada tarea al rol mínimo, dejar dos cuentas de emergencia bien guardadas, convertir el resto en asignaciones elegibles con PIM (MFA, justificación y aprobación), y las revisiones y alertas que lo mantienen así.</span><span class="en">Inventory who is an administrator today, move each task to the least-privileged role, keep two well-guarded emergency accounts, turn the rest into eligible assignments with PIM (MFA, justification and approval), and the reviews and alerts that keep it that way.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="sentinel"><p class="label kicker"><span class="es">1 guía</span><span class="en">1 guide</span></p><h3><span class="es">Microsoft Sentinel</span><span class="en">Microsoft Sentinel</span></h3><p class="muted small"><span class="es">Conectores, una regla de análisis en KQL, la automatización y un incidente de principio a fin.</span><span class="en">Connectors, a KQL analytics rule, automation and an incident from start to finish.</span></p><ul class="guide-topics guide-list"><li><a href="microsoft-sentinel-conectores-una-regla-en-kql-y-un-incidente-de-principio-a-fin.html"><span class="es">Microsoft Sentinel: conectores, una regla en KQL y un incidente de principio a fin</span><span class="en">Microsoft Sentinel: connectors, a KQL rule and an incident from start to finish</span></a><span class="muted small"><span class="es">El área de trabajo y los conectores que importan (Entra ID, Microsoft 365, Defender, servidores), la primera regla de análisis que avisa cuando entra una cuenta de emergencia, la automatización que asigna y avisa, la investigación de un incidente con KQL y cómo no arruinarse con la ingesta.</span><span class="en">The workspace and the connectors that matter (Entra ID, Microsoft 365, Defender, servers), the first analytics rule that alerts when an emergency account signs in, the automation that assigns and notifies, investigating an incident with KQL, and how not to go broke on ingestion.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="tenant-migration"><p class="label kicker"><span class="es">1 guía</span><span class="en">1 guide</span></p><h3><span class="es">Migraciones de tenant Microsoft 365</span><span class="en">Microsoft 365 tenant migrations</span></h3><p class="muted small"><span class="es">Inventario, identidades, buzones entre tenants, OneDrive, dispositivos y el fin de semana del corte.</span><span class="en">Inventory, identities, cross-tenant mailboxes, OneDrive, devices and the cutover weekend.</span></p><ul class="guide-topics guide-list"><li><a href="migracion-de-tenant-microsoft-365-inventario-identidades-buzones-onedrive-y-dia-del-corte.html"><span class="es">Migraciones de tenant de Microsoft 365: inventario, identidades, buzones, OneDrive y el día del corte</span><span class="en">Microsoft 365 tenant migrations: inventory, identities, mailboxes, OneDrive and cutover day</span></a><span class="muted small"><span class="es">Fusiones, escisiones y cambios de dominio: qué se mueve y qué se rehace, el inventario que evita sorpresas, la migración de buzones entre tenants sin respuestas que rebotan, OneDrive, los dispositivos, y el runbook del fin de semana del corte con su semana de soporte posterior.</span><span class="en">Mergers, divestitures and domain changes: what moves and what gets rebuilt, the inventory that avoids surprises, cross-tenant mailbox migration without bouncing replies, OneDrive, the devices, and the runbook for the cutover weekend with the week of support after it.</span></span></li></ul></div>
+    </div>
+    <div class="numbers-head reveal u-mt34">
+      <div>
+        <p class="label kicker"><span class="es">Cómo están hechas</span><span class="en">How they are made</span></p>
+        <h2 class="h2 sm"><span class="es">Terminales y ventanas<br>simuladas.</span><span class="en">Simulated terminals<br>and windows.</span></h2>
+      </div>
+    </div>
+    <p class="lede reveal"><span class="es">Las guías no llevan capturas de sistemas reales: los terminales y las ventanas que ves son simulaciones con nombres, dominios y usuarios ficticios. Los comandos sí son los de verdad, y cada terminal tiene un botón para copiarlos.</span><span class="en">The guides carry no screenshots of real systems: the terminals and windows you see are simulations with fictional names, domains and users. The commands are the real ones, and every terminal has a button to copy them.</span></p>
+    <p class="reveal u-mt22"><a class="arrow-link" href="nivel-1.html"><span class="es">Nivel 1: Primeros pasos</span><span class="en">Level 1: First steps</span> →</a> · <a class="arrow-link" href="nivel-2.html"><span class="es">Nivel 2: Base sólida</span><span class="en">Level 2: Solid foundations</span> →</a> · <a class="arrow-link" href="nivel-3.html"><span class="es">Nivel 3: Avanzado</span><span class="en">Level 3: Advanced</span> →</a> · <a class="arrow-link" href="../guias.html"><span class="es">Todos los niveles</span><span class="en">All levels</span> →</a></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

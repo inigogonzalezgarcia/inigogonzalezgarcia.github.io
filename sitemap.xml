@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://inigogonzalezgarcia.github.io/</loc><lastmod>2026-10-26</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/about.html</loc><lastmod>2026-10-26</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/guias.html</loc><lastmod>2026-10-22</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias.html</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/journey.html</loc><lastmod>2026-10-26</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/links.html</loc><lastmod>2026-10-26</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/recursos.html</loc><lastmod>2026-10-26</lastmod></url>
@@ -47,11 +47,14 @@
   <url><loc>https://inigogonzalezgarcia.github.io/guias/ansible-primer-playbook-parchear-servidores-linux.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/anyconnect-instalar-y-diagnosticar-vpn.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/azure-ad-connect-forzar-sincronizacion-y-objetos-que-no-pasan.html</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/azure-virtual-desktop-y-windows-365-host-pool-cloud-pc-y-conexion-que-falla.html</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/bash-primer-script-de-comprobacion-de-un-servidor.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/bitlocker-estado-y-clave-de-recuperacion.html</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/cisco-vlans-troncales-router-de-la-sede-y-un-puerto-que-no-da-red.html</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/citrix-vdi-publicar-aplicacion-y-sesion-que-no-abre.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/confluence-espacio-de-it-y-runbooks-que-se-usan.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/docker-contenedores-en-un-servidor-de-operaciones.html</loc><lastmod>2026-10-22</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/dr-bcp-rpo-y-rto-por-servicio-plan-de-recuperacion-y-prueba-completa.html</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/elk-centralizar-logs-de-servidores-y-buscar-un-error-en-kibana.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/entra-conditional-access-politicas-base-y-usuario-bloqueado.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/entra-sso-saml-dar-de-alta-una-aplicacion-y-login-que-falla.html</loc><lastmod>2026-10-22</lastmod></url>
@@ -68,11 +71,15 @@
   <url><loc>https://inigogonzalezgarcia.github.io/guias/linux-unir-un-servidor-a-active-directory-con-sssd.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/mecm-sccm-empaquetar-una-aplicacion-y-desplegarla.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/microsoft-365-asignar-y-retirar-licencias.html</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/microsoft-365-roles-de-administracion-pim-y-cuentas-de-emergencia.html</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/microsoft-graph-primeras-consultas-con-powershell-y-un-informe-que-no-existe-en-el-portal.html</loc><lastmod>2026-10-22</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/microsoft-sentinel-conectores-una-regla-en-kql-y-un-incidente-de-principio-a-fin.html</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/migracion-de-tenant-microsoft-365-inventario-identidades-buzones-onedrive-y-dia-del-corte.html</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/ndes-y-cloud-pki-certificados-a-los-dispositivos-desde-intune.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/nivel-1.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/nivel-2.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/nivel-3.html</loc><lastmod>2026-10-22</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/nivel-4.html</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/outlook-exchange-online-buzon-compartido-permisos-autorespuesta.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/pdq-y-mdt-desplegar-software-en-lote-e-instalar-windows.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/postgresql-mysql-sql-server-tareas-de-operaciones-copia-restauracion-espacio-y-consulta-lenta.html</loc><lastmod>2026-10-22</lastmod></url>
