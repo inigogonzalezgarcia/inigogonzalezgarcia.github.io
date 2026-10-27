@@ -33,6 +33,13 @@ LEVELS = {
                     l_es="Para quien diseña, decide y responde cuando algo grande falla: escritorios en la nube, recuperación ante desastres, la red de una sede, el gobierno de los administradores de Microsoft 365, la detección con Sentinel y las migraciones de tenant. Seis temas ya publicados; el resto, en camino.",
                     l_en="For people who design, decide and respond when something big fails: cloud desktops, disaster recovery, a site's network, governing Microsoft 365 administrators, detection with Sentinel and tenant migrations. Six topics published so far; the rest are on the way.",
                     seo="Expert IT guides: Azure Virtual Desktop and Windows 365, backup and disaster recovery (DR/BCP), Cisco switches and routers, Microsoft 365 Global Admin and PIM, Microsoft Sentinel, and Microsoft 365 tenant migrations."),
+    "sector-1": dict(key="sector-1", n_es="Sector 1", n_en="Sector 1", t_es="Hostelería y punto de venta", t_en="Hospitality and point of sale",
+                    h_es="Hostelería<br>y punto de venta.", h_en="Hospitality<br>and point of sale.",
+                    d_es="TPV, sistemas de hotel y la puesta en marcha de un establecimiento.",
+                    d_en="POS, hotel systems and getting a new venue up and running.",
+                    l_es="Cinco guías desde el día a día de IT en hoteles y restaurantes: la pre-apertura de un hotel, el punto de venta con ICG y HIOPOS, el cobro en efectivo con CashDro, el cargo a habitación en el PMS y la televisión por IPTV.",
+                    l_en="Five guides from everyday IT in hotels and restaurants: a hotel's pre-opening, the point of sale with ICG and HIOPOS, cash payments with CashDro, room charges in the PMS and IPTV television.",
+                    seo="IT guides for hospitality: hotel pre-opening IT checklist, ICG and HIOPOS POS setup, CashDro integration, hotel PMS interfaces and room charges, and hotel IPTV troubleshooting."),
 }
 LEVEL1 = LEVELS["nivel-1"]
 
@@ -191,6 +198,21 @@ TOPICS = [
     ("nivel-4", "tenant-migration", "Migraciones de tenant Microsoft 365", "Microsoft 365 tenant migrations",
      "Inventario, identidades, buzones entre tenants, OneDrive, dispositivos y el fin de semana del corte.",
      "Inventory, identities, cross-tenant mailboxes, OneDrive, devices and the cutover weekend."),
+    ("sector-1", "cashdro", "CashDro - Integración con el TPV", "CashDro - Integration with the POS",
+     "El cobro en efectivo automático: red, credenciales, la rutina diaria y el arqueo.",
+     "Automatic cash payments: network, credentials, the daily routine and the cash count."),
+    ("sector-1", "hotel-preopening", "Hotel en pre-apertura - Checklist de IT hasta el día de apertura", "Hotel pre-opening - IT checklist up to opening day",
+     "El calendario hacia atrás, la red por usos, las interfaces con el PMS y la semana de pruebas.",
+     "The calendar counted back, the network by use, the PMS interfaces and the test week."),
+    ("sector-1", "icg-hiopos", "ICG y HIOPOS - Puesta en marcha de un TPV", "ICG and HIOPOS - Setting up a POS",
+     "Terminales, impresoras y pantallas de cocina, rutas por familia y el ticket de \"no imprime\".",
+     "Terminals, kitchen printers and screens, routes per family and the \"not printing\" ticket."),
+    ("sector-1", "iptv-hotel", "IPTV en hotel - Diagnóstico de canales y equipos de habitación", "Hotel IPTV - Troubleshooting channels and room devices",
+     "La red multicast de la televisión, IGMP snooping y querier, y las averías más habituales.",
+     "The TV's multicast network, IGMP snooping and querier, and the most common faults."),
+    ("sector-1", "pms-hotel", "PMS hotelero - Soporte e interfaces con el TPV", "Hotel PMS - Support and POS interfaces",
+     "Cómo viaja un cargo a habitación, las correspondencias y por qué se rechaza un cargo.",
+     "How a room charge travels, the mappings and why a charge is rejected."),
 ]
 
 GUIDES = []
@@ -11189,4 +11211,1035 @@ $ Get-Recipient -ResultSize Unlimited | Where-Object { $_.EmailAddresses -match 
 - If the tenants will live side by side, **cross-tenant synchronisation** and Microsoft 365's **multitenant organization**: users see each other in the directory and in Teams without migrating anything.
 - **B2B access** during the TSA: users already migrated sign in as guests to whatever still lives in the source.
 - The Level 2 Azure AD Connect guide: in a hybrid migration it is the piece taken apart in the source and rebuilt in the target.
+""")
+
+# ---------------------------------------------------------------- Sector 1 · Hotel pre-opening
+g(slug="hotel-en-pre-apertura-checklist-de-it-hasta-el-dia-de-apertura", topic="hotel-preopening", date="2026-10-27",
+  title_es="Hotel en pre-apertura: el checklist de IT desde la obra hasta el día de apertura",
+  title_en="Hotel pre-opening: the IT checklist from the building site to opening day",
+  dek_es="El calendario hacia atrás desde la fecha de apertura, la red separada por usos, los circuitos que hay que pedir antes que nada, el mapa de interfaces con el PMS, la semana de pruebas con huéspedes simulados y el soporte del primer día.",
+  dek_en="The calendar counted back from the opening date, the network split by use, the circuits to order before anything else, the map of interfaces with the PMS, the test week with simulated guests and support on day one.",
+  es="""
+## Qué vas a conseguir
+
+Llegar al día de apertura con el check-in funcionando, las tarjetas de habitación abriendo puertas, los TPV cobrando y cargando a habitación, la WiFi de huéspedes estable y la televisión con canales. En un hotel nuevo todo eso depende de sistemas de proveedores distintos que tienen que hablar entre sí, y de una obra que nunca termina cuando estaba previsto.
+
+## Antes de empezar
+
+- La **fecha de apertura** y la de entrega de cada planta por parte de la constructora.
+- La lista de proveedores contratados (PMS, TPV, cerraduras, telefonía, IPTV, WiFi, CCTV) con un contacto técnico de cada uno.
+- Los planos con los armarios de comunicaciones (rack principal y racks de planta) y la ruta del cableado estructurado.
+- Un sitio para trabajar mientras no hay oficina: la oficina de pre-apertura suele estar fuera del hotel o en una zona provisional.
+
+## 1. El calendario hacia atrás
+
+| Cuándo | Qué | Por qué tan pronto |
+|---|---|---|
+| T-120 días | Pedir los **circuitos** (principal y respaldo, de operadores distintos) | El plazo de un operador para una fibra nueva puede pasar de 60 días |
+| T-90 | Diseño de red y direccionamiento; pedido de switches, AP y servidores | Plazos de entrega de hardware |
+| T-75 | Alta del tenant o de la sede en Microsoft 365, cuentas del equipo de pre-apertura | Los primeros empleados llegan antes que el edificio |
+| T-60 | Configuración del PMS: tipos de habitación, tarifas, códigos de transacción | Lo hace el equipo de recepción con el proveedor, IT da la infraestructura |
+| T-45 | Racks montados, switches y AP instalados por planta según entrega la obra | Sin red no se puede probar nada más |
+| T-30 | Interfaces con el PMS conectadas y probadas una a una | Es la parte que más falla |
+| T-14 | **Semana de pruebas** con huéspedes simulados | Encontrar los fallos antes que los huéspedes |
+| T-0 | Apertura con soporte en planta | |
+
+> Consejo: los circuitos y el hardware son lo único que no se recupera trabajando más horas. Todo lo demás, sí.
+
+## 2. La red, separada por usos
+
+| VLAN | Uso | Notas |
+|---|---|---|
+| 10 | Gestión de red | Solo IT y proveedores con acceso nominal |
+| 20 | Oficinas y back office | Equipos del personal |
+| 30 | PMS, TPV y servidores del hotel | Aislada del resto, sin salida directa a internet salvo la que necesiten los proveedores |
+| 40 | Datáfonos | Segmentada para el alcance de **PCI DSS** |
+| 50 | IPTV | Multicast, con IGMP snooping (guía de IPTV en hotel) |
+| 60 | Voz | Teléfonos de habitación y de oficina |
+| 70 | Cerraduras, control de accesos y climatización | Sistemas del edificio de proveedores distintos |
+| 80 | CCTV | Mucho tráfico, grabación local |
+| 100 | WiFi de huéspedes | Aislamiento entre clientes, portal cautivo y límite de ancho de banda |
+
+- Una VLAN por uso permite que cada proveedor acceda solo a lo suyo, y que un problema en una (un bucle en CCTV) no deje sin servicio a las demás.
+- La WiFi de huéspedes nunca ve las otras redes. Es lo primero que mira cualquier auditoría.
+
+## 3. El mapa de interfaces con el PMS
+
+El PMS es el centro: casi todos los sistemas del hotel le preguntan o le envían algo.
+
+| Sistema | Qué intercambia con el PMS |
+|---|---|
+| TPV (restaurante, bar, spa) | Consulta del huésped y **cargo a habitación** (guía de PMS hotelero) |
+| Cerraduras | Codificar la tarjeta al hacer el check-in, anularla al hacer el check-out |
+| Centralita | Llamadas facturables al folio, despertador, estado de habitación desde el teléfono |
+| IPTV | Mensaje de bienvenida con el nombre, idioma, factura en pantalla |
+| WiFi de huéspedes | Acceso con número de habitación y apellido |
+| Motor de reservas y channel manager | Disponibilidad y reservas desde la web y las agencias online |
+
+Cada interfaz tiene dos proveedores, y en cada prueba los dos dicen que el fallo es del otro. Para cada una se apunta en una hoja: quién es el responsable de cada extremo, el puerto o la URL, la cuenta que usa y la prueba que demuestra que funciona.
+
+## 4. La semana de pruebas
+
+:::ui Hoja de pruebas · Pre-apertura · Día T-10
+> Pruebas › Recepción › Flujo completo de un huésped
+= 1. Reserva desde la web: aparece en el PMS · [x] OK
+= 2. Check-in de la habitación 214 con tarjeta codificada · [x] OK
+= 3. La tarjeta abre la 214 y el ascensor a la planta 2 · [x] OK
+= 4. Cena en el restaurante cargada a la 214 desde el TPV · [ ] Falla: el TPV no encuentra al huésped
+= 5. Llamada desde la 214 a un móvil: el cargo llega al folio · [x] OK
+= 6. Mensaje de bienvenida en la TV con el nombre del huésped · [x] OK
+= 7. Check-out: la tarjeta deja de abrir y el folio cuadra · [ ] Pendiente
+:::
+
+- Se prueba el **flujo entero de un huésped**, no cada sistema por separado: lo que falla son las uniones.
+- Cada fallo es un ticket con dueño y fecha, revisado en una reunión corta cada mañana con los proveedores.
+- Las pruebas las hace el personal que va a trabajar ese día, no solo IT: es también su formación.
+
+## 5. El día de apertura
+
+- IT en planta desde una hora antes del primer check-in, con un teléfono que todos conocen.
+- Los contactos de guardia de cada proveedor, confirmados el día anterior.
+- Un procedimiento en papel para el check-in si cae el PMS (lista de llegadas impresa y tarjetas codificadas a mano desde el sistema de cerraduras).
+- Al final del día, una lista de lo que ha fallado y de quién lo arregla. El cierre del día (auditoría nocturna del PMS) es la última prueba.
+
+## 6. Lo que revisas después de abrir
+
+- La primera semana, cada mañana: interfaces con errores, tickets abiertos por sistema y quejas de WiFi.
+- Al mes: documentación entregada por cada proveedor (configuración, credenciales en el gestor de contraseñas, contratos de soporte con sus horarios).
+- Las cuentas temporales de los instaladores, retiradas.
+
+## Siguientes pasos
+
+- La guía de **PMS hotelero** cubre el cargo a habitación desde el TPV paso a paso.
+- La guía de **IPTV en hotel** explica la red multicast de la televisión.
+- La de **ICG y HIOPOS** y la de **CashDro** cubren la puesta en marcha de los puntos de venta.
+- La guía de DR/BCP del Nivel 4 sirve para preparar qué pasa si el PMS o la conexión caen con el hotel lleno.
+""",
+  en="""
+## What you'll get
+
+Reaching opening day with check-in working, room cards opening doors, the POS taking payments and posting to rooms, stable guest WiFi and a TV with channels. In a new hotel all of that depends on systems from different vendors that have to talk to each other, and on a building site that never finishes when it was meant to.
+
+## Before you start
+
+- The **opening date** and the date the builder hands over each floor.
+- The list of contracted vendors (PMS, POS, door locks, telephony, IPTV, WiFi, CCTV) with a technical contact for each.
+- The plans with the comms cabinets (main rack and floor racks) and the structured cabling route.
+- A place to work while there is no office: the pre-opening office is usually outside the hotel or in a temporary area.
+
+## 1. The calendar counted back
+
+| When | What | Why so early |
+|---|---|---|
+| T-120 days | Order the **circuits** (primary and backup, from different carriers) | A carrier's lead time for new fibre can exceed 60 days |
+| T-90 | Network design and addressing; order switches, APs and servers | Hardware lead times |
+| T-75 | Create the tenant or site in Microsoft 365, accounts for the pre-opening team | The first employees arrive before the building does |
+| T-60 | PMS setup: room types, rates, transaction codes | Done by the front office team with the vendor, IT provides the infrastructure |
+| T-45 | Racks mounted, switches and APs installed floor by floor as the site hands them over | Without a network nothing else can be tested |
+| T-30 | PMS interfaces connected and tested one by one | It is the part that fails most |
+| T-14 | **Test week** with simulated guests | Find the faults before the guests do |
+| T-0 | Opening with on-site support | |
+
+> Tip: circuits and hardware are the only things you can't recover by working longer hours. Everything else, you can.
+
+## 2. The network, split by use
+
+| VLAN | Use | Notes |
+|---|---|---|
+| 10 | Network management | IT and vendors with named access only |
+| 20 | Offices and back office | Staff devices |
+| 30 | PMS, POS and hotel servers | Isolated from the rest, no direct internet access except what vendors need |
+| 40 | Card terminals | Segmented for **PCI DSS** scope |
+| 50 | IPTV | Multicast, with IGMP snooping (hotel IPTV guide) |
+| 60 | Voice | Room and office phones |
+| 70 | Door locks, access control and HVAC | Building systems from different vendors |
+| 80 | CCTV | Heavy traffic, local recording |
+| 100 | Guest WiFi | Client isolation, captive portal and bandwidth limit |
+
+- One VLAN per use lets each vendor reach only their own systems, and stops a problem in one (a loop on CCTV) from taking the others down.
+- Guest WiFi never sees the other networks. It is the first thing any audit checks.
+
+## 3. The map of PMS interfaces
+
+The PMS is the centre: almost every system in the hotel asks it something or sends it something.
+
+| System | What it exchanges with the PMS |
+|---|---|
+| POS (restaurant, bar, spa) | Guest lookup and **room charge** (hotel PMS guide) |
+| Door locks | Encode the card at check-in, cancel it at check-out |
+| PBX | Billable calls to the folio, wake-up calls, room status from the phone |
+| IPTV | Welcome message with the name, language, bill on screen |
+| Guest WiFi | Access with room number and surname |
+| Booking engine and channel manager | Availability and bookings from the website and online agencies |
+
+Each interface has two vendors, and in every test each one says the fault is the other's. For each one, note in a sheet: who owns each end, the port or URL, the account it uses and the test that proves it works.
+
+## 4. The test week
+
+:::ui Test sheet · Pre-opening · Day T-10
+> Tests › Front office › A guest's full journey
+= 1. Booking from the website: appears in the PMS · [x] OK
+= 2. Check-in to room 214 with an encoded card · [x] OK
+= 3. The card opens 214 and the lift to floor 2 · [x] OK
+= 4. Dinner in the restaurant posted to 214 from the POS · [ ] Fails: the POS can't find the guest
+= 5. Call from 214 to a mobile: the charge reaches the folio · [x] OK
+= 6. Welcome message on the TV with the guest's name · [x] OK
+= 7. Check-out: the card stops opening and the folio balances · [ ] Pending
+:::
+
+- Test a **guest's whole journey**, not each system on its own: what fails are the joins.
+- Each fault is a ticket with an owner and a date, reviewed in a short meeting with the vendors every morning.
+- The tests are run by the staff who will work that day, not just IT: it is their training too.
+
+## 5. Opening day
+
+- IT on site from an hour before the first check-in, with a phone number everyone knows.
+- Each vendor's on-call contacts, confirmed the day before.
+- A paper procedure for check-in if the PMS goes down (printed arrivals list and cards encoded by hand from the lock system).
+- At the end of the day, a list of what failed and who is fixing it. The PMS night audit is the last test.
+
+## 6. What you review after opening
+
+- In the first week, every morning: interfaces with errors, open tickets per system and WiFi complaints.
+- After a month: documentation handed over by each vendor (configuration, credentials in the password manager, support contracts with their hours).
+- The installers' temporary accounts, removed.
+
+## Next steps
+
+- The **hotel PMS** guide covers posting to a room from the POS step by step.
+- The **hotel IPTV** guide explains the TV's multicast network.
+- The **ICG and HIOPOS** and **CashDro** guides cover setting up the points of sale.
+- The Level 4 DR/BCP guide helps you prepare for the PMS or the connection going down with the hotel full.
+""")
+
+# ---------------------------------------------------------------- Sector 1 · ICG and HIOPOS
+g(slug="icg-y-hiopos-puesta-en-marcha-de-un-tpv-red-impresoras-de-cocina-y-cierre", topic="icg-hiopos", date="2026-10-27",
+  title_es="ICG y HIOPOS: puesta en marcha de un TPV, con la red, las impresoras de cocina y el cierre de caja",
+  title_en="ICG and HIOPOS: setting up a POS, with the network, kitchen printers and end-of-day close",
+  dek_es="Qué parte del trabajo es de IT y qué parte del integrador, el inventario de un local, las IP fijas que evitan la mitad de los tickets, cómo llega cada plato a su impresora o pantalla de cocina, la prueba antes de abrir y el ticket de \"no imprime en cocina\".",
+  dek_en="Which part of the work belongs to IT and which to the integrator, a venue's inventory, the fixed IPs that prevent half the tickets, how each dish reaches its kitchen printer or screen, the test before opening and the \"kitchen isn't printing\" ticket.",
+  es="""
+## Qué vas a conseguir
+
+Dejar listo el punto de venta de un restaurante o un bar: terminales, impresoras de tickets y de cocina, cajón, datáfono y la conexión con el resto del grupo, de forma que el día de apertura el camarero solo tenga que marcar y cobrar. Y saber resolver en pocos minutos el ticket que más se repite en hostelería.
+
+## Antes de empezar
+
+- El **integrador** o distribuidor del software (ICG y HIOPOS se venden e instalan casi siempre a través de distribuidores): quién da de alta las licencias, quién carga la carta y a quién llamas de noche.
+- La versión del sistema: **ICG FrontRest** en terminales Windows con la gestión central en **ICG Manager**, o **HIOPOS** en sus propios terminales, con la gestión en la nube.
+- La distribución del local: barras, salas, terraza, cocina caliente, cocina fría, postres. De ahí salen las impresoras y las rutas.
+- La red del local preparada, con una VLAN para el punto de venta y otra para los datáfonos (guía de hotel en pre-apertura).
+
+## 1. Quién hace qué
+
+| Tarea | IT | Integrador | Negocio |
+|---|---|---|---|
+| Red, VLAN, IP fijas, WiFi para comanderos | ✓ | | |
+| Licencias e instalación del software | | ✓ | |
+| Carta: artículos, familias, precios, modificadores | | Carga inicial | Mantenimiento |
+| Usuarios y permisos de camareros y encargados | | ✓ | Altas y bajas |
+| Impresoras y pantallas de cocina: instalación física y red | ✓ | | |
+| Rutas de impresión por familia | | ✓ | Valida |
+| Datáfono y medios de pago | Red | Integración | Contrato con el banco |
+| Copias de seguridad de la base de datos local, si la hay | ✓ | Indica qué copiar | |
+
+Escribir esta tabla con el integrador el primer día evita que, la noche de apertura, cada uno piense que algo lo hacía el otro.
+
+## 2. El inventario del local
+
+:::ui Inventario · Restaurante Brisa · Punto de venta
+> Activos › Sede 04 › Punto de venta
+= TPV-BARRA-01 · terminal táctil · 10.40.30.11 · VLAN 30
+= TPV-SALA-01 · terminal táctil · 10.40.30.12 · VLAN 30
+= CMD-01 a CMD-04 · comanderos (tabletas) · WiFi SSID pos-sala · 10.40.30.21-24
+= IMP-TICKET-BARRA · impresora térmica 80 mm · 10.40.30.51 · puerto 9100
+= IMP-COC-CALIENTE · impresora de cocina · 10.40.30.52 · puerto 9100
+= IMP-COC-FRIA · impresora de cocina · 10.40.30.53 · puerto 9100
+= KDS-POSTRES · pantalla de cocina · 10.40.30.61
+= DAT-BARRA-01 · datáfono · 10.40.40.11 · VLAN 40
+= Cajón portamonedas: conectado a IMP-TICKET-BARRA (se abre al imprimir un cobro en efectivo)
+:::
+
+- **IP fijas** (o reservas en el DHCP) para todo lo que el software busca por dirección: impresoras, pantallas de cocina, el servidor local. Una impresora que cambia de IP tras un corte de luz es el origen de la mitad de los tickets de \"no imprime\".
+- El nombre de cada impresora dice dónde está. Cuando llamen de cocina a las 21:30, no hay tiempo para averiguar qué es \"Printer 3\".
+
+## 3. Cómo llega cada plato a su sitio
+
+Cada artículo pertenece a una **familia** (entrantes, carnes, pescados, postres, bebidas), y cada familia tiene una o varias **rutas de impresión**: el destino donde se imprime o se muestra la comanda.
+
+| Familia | Destino | Notas |
+|---|---|---|
+| Entrantes fríos, ensaladas | IMP-COC-FRIA | |
+| Carnes, pescados, arroces | IMP-COC-CALIENTE | |
+| Postres | KDS-POSTRES | Pantalla de cocina con tiempos |
+| Bebidas | Ninguno (las sirve la barra) | O la impresora de barra si la sala está lejos |
+| Menú del día | Se reparte: cada plato del menú va a la ruta de su familia | Se comprueba siempre en la prueba |
+
+- Las **pantallas de cocina** (en ICG, HioScreen) muestran los platos pendientes con el tiempo que llevan esperando. Sustituyen a la impresora o la acompañan.
+- Define también la **impresora de respaldo** de cada ruta: si la de cocina caliente no responde, que salga en la de fría y no se pierda la comanda.
+
+## 4. La prueba antes de abrir
+
+:::ui Hoja de pruebas · Restaurante Brisa · TPV
+> Pruebas › Apertura › Flujo completo
+= Abrir mesa 12 desde un comandero y pedir un plato de cada familia · [x] Cada plato sale en su cocina
+= Pedir un menú del día · [x] Los platos se reparten entre cocinas
+= Desconectar el cable de IMP-COC-CALIENTE y pedir una carne · [x] Sale en la impresora de respaldo
+= Cobrar la mesa 12 con tarjeta · [x] El datáfono recibe el importe y el ticket sale con la firma del pago
+= Cobrar una consumición en barra en efectivo · [x] Se abre el cajón
+= Anular una línea como camarero · [x] Pide la autorización del encargado
+= Cierre de caja de prueba · [x] El informe cuadra con las ventas de prueba
+:::
+
+Después se borran o se anulan las ventas de prueba siguiendo lo que indique el integrador: un cierre con ventas falsas ensucia los informes de la primera semana.
+
+## 5. El ticket: \"no imprime en cocina\"
+
+Viernes, 21:30, cocina caliente no recibe comandas. En orden, de lo más rápido a lo más lento:
+
+1. **¿Es una impresora o todas?** Si sale en la fría y no en la caliente, el problema está en esa impresora, no en el TPV.
+2. **Lo físico**: papel, tapa bien cerrada, piloto de error, cable de red conectado y con luz en el puerto.
+3. **La red**, desde un equipo del local en la misma VLAN:
+
+:::term PowerShell · desde el equipo de la oficina del local
+$ Test-NetConnection 10.40.30.52 -Port 9100
+ComputerName     : 10.40.30.52
+RemoteAddress    : 10.40.30.52
+RemotePort       : 9100
+TcpTestSucceeded : False
+$ arp -a | Select-String "10.40.30.52"
+:::
+
+`TcpTestSucceeded : False` y sin entrada en la tabla ARP: la impresora no está en esa dirección. Lo más habitual es que, tras un corte de luz, la impresora haya arrancado con una IP por DHCP distinta. Se imprime su hoja de configuración (normalmente manteniendo pulsado el botón de avance de papel al encenderla), se ve la IP real y se corrige la reserva o la IP fija.
+
+4. **Las comandas atascadas**: con la impresora de nuevo en línea, se reenvían desde el TPV las comandas que no salieron. Se confirma con cocina qué mesas faltaban.
+5. **El cierre del ticket**: la causa (IP cambiada), la solución (reserva DHCP creada) y la acción para que no se repita en las demás impresoras del local.
+
+> Consejo: un datáfono que \"no conecta\" sigue el mismo camino: primero lo físico, luego la red de su VLAN, y después el proveedor de pagos. Nunca se mueve un datáfono a otra red para probar.
+
+## 6. Lo que revisas cada mes
+
+- Que cada impresora y pantalla tiene su IP reservada y su etiqueta en el inventario.
+- Las altas y bajas de camareros: las bajas, desactivadas el último día, no a final de mes.
+- Las versiones del software y de los terminales, con el integrador.
+- Si hay base de datos local, que la copia de seguridad se hace y que se ha restaurado alguna vez.
+
+## Siguientes pasos
+
+- La guía de **CashDro** añade el cobro en efectivo automático al TPV.
+- La de **PMS hotelero** cubre el cargo a habitación cuando el restaurante está en un hotel.
+- La guía de impresoras del Nivel 1 explica las colas de impresión de oficina, que funcionan distinto que las de cocina.
+""",
+  en="""
+## What you'll get
+
+Getting a restaurant or bar's point of sale ready: terminals, receipt and kitchen printers, cash drawer, card terminal and the link to the rest of the group, so that on opening day the waiter only has to ring things up and take payment. And knowing how to solve hospitality's most repeated ticket in a few minutes.
+
+## Before you start
+
+- The software's **integrator** or reseller (ICG and HIOPOS are almost always sold and installed through resellers): who registers the licences, who loads the menu and who you call at night.
+- The system version: **ICG FrontRest** on Windows terminals with central management in **ICG Manager**, or **HIOPOS** on its own terminals, managed from the cloud.
+- The venue layout: bars, dining rooms, terrace, hot kitchen, cold kitchen, desserts. That is where the printers and routes come from.
+- The venue's network ready, with a VLAN for the point of sale and another for card terminals (hotel pre-opening guide).
+
+## 1. Who does what
+
+| Task | IT | Integrator | Business |
+|---|---|---|---|
+| Network, VLANs, fixed IPs, WiFi for handhelds | ✓ | | |
+| Licences and software installation | | ✓ | |
+| Menu: items, families, prices, modifiers | | Initial load | Upkeep |
+| Users and permissions for waiters and managers | | ✓ | Joiners and leavers |
+| Kitchen printers and screens: physical install and network | ✓ | | |
+| Print routes per family | | ✓ | Validates |
+| Card terminal and payment methods | Network | Integration | Contract with the bank |
+| Backups of the local database, if there is one | ✓ | Says what to back up | |
+
+Writing this table with the integrator on day one stops everyone thinking, on opening night, that something was the other's job.
+
+## 2. The venue's inventory
+
+:::ui Inventory · Brisa Restaurant · Point of sale
+> Assets › Site 04 › Point of sale
+= POS-BAR-01 · touch terminal · 10.40.30.11 · VLAN 30
+= POS-DINING-01 · touch terminal · 10.40.30.12 · VLAN 30
+= HH-01 to HH-04 · handhelds (tablets) · WiFi SSID pos-dining · 10.40.30.21-24
+= PRN-RECEIPT-BAR · 80 mm thermal printer · 10.40.30.51 · port 9100
+= PRN-KIT-HOT · kitchen printer · 10.40.30.52 · port 9100
+= PRN-KIT-COLD · kitchen printer · 10.40.30.53 · port 9100
+= KDS-DESSERTS · kitchen screen · 10.40.30.61
+= CT-BAR-01 · card terminal · 10.40.40.11 · VLAN 40
+= Cash drawer: connected to PRN-RECEIPT-BAR (opens when a cash payment prints)
+:::
+
+- **Fixed IPs** (or DHCP reservations) for everything the software looks up by address: printers, kitchen screens, the local server. A printer that changes IP after a power cut is behind half of the \"not printing\" tickets.
+- Each printer's name says where it is. When the kitchen calls at 21:30 there is no time to work out what \"Printer 3\" is.
+
+## 3. How each dish gets to its place
+
+Every item belongs to a **family** (starters, meat, fish, desserts, drinks), and every family has one or more **print routes**: the destination where the order is printed or shown.
+
+| Family | Destination | Notes |
+|---|---|---|
+| Cold starters, salads | PRN-KIT-COLD | |
+| Meat, fish, rice dishes | PRN-KIT-HOT | |
+| Desserts | KDS-DESSERTS | Kitchen screen with timings |
+| Drinks | None (the bar serves them) | Or the bar printer if the dining room is far away |
+| Set menu | Split: each dish goes to its family's route | Always checked in the test |
+
+- **Kitchen screens** (HioScreen in ICG) show pending dishes with how long they have been waiting. They replace the printer or sit alongside it.
+- Also set each route's **backup printer**: if the hot kitchen one doesn't answer, the order comes out on the cold one and isn't lost.
+
+## 4. The test before opening
+
+:::ui Test sheet · Brisa Restaurant · POS
+> Tests › Opening › Full flow
+= Open table 12 from a handheld and order one dish from each family · [x] Each dish prints in its kitchen
+= Order a set menu · [x] The dishes are split between kitchens
+= Unplug PRN-KIT-HOT and order a meat dish · [x] It prints on the backup printer
+= Charge table 12 by card · [x] The card terminal receives the amount and the receipt prints with the payment slip
+= Charge a drink at the bar in cash · [x] The drawer opens
+= Void a line as a waiter · [x] It asks for the manager's authorisation
+= Test end-of-day close · [x] The report matches the test sales
+:::
+
+Afterwards the test sales are deleted or voided as the integrator tells you: a close with fake sales spoils the first week's reports.
+
+## 5. The ticket: \"the kitchen isn't printing\"
+
+Friday, 21:30, the hot kitchen isn't getting orders. In order, from quickest to slowest:
+
+1. **One printer or all of them?** If orders reach the cold kitchen and not the hot one, the problem is that printer, not the POS.
+2. **The physical side**: paper, cover properly shut, error light, network cable plugged in with a link light on the port.
+3. **The network**, from a venue computer on the same VLAN:
+
+:::term PowerShell · from the venue's office computer
+$ Test-NetConnection 10.40.30.52 -Port 9100
+ComputerName     : 10.40.30.52
+RemoteAddress    : 10.40.30.52
+RemotePort       : 9100
+TcpTestSucceeded : False
+$ arp -a | Select-String "10.40.30.52"
+:::
+
+`TcpTestSucceeded : False` and no ARP entry: the printer isn't at that address. Most often, after a power cut, the printer booted with a different DHCP address. Print its configuration sheet (usually by holding the paper feed button while powering it on), read the real IP and fix the reservation or the fixed IP.
+
+4. **The stuck orders**: with the printer back online, resend from the POS the orders that didn't print. Confirm with the kitchen which tables were missing.
+5. **Closing the ticket**: the cause (IP changed), the fix (DHCP reservation created) and the action so it doesn't happen with the venue's other printers.
+
+> Tip: a card terminal that \"won't connect\" follows the same path: first the physical side, then its VLAN's network, then the payment provider. Never move a card terminal to another network to test it.
+
+## 6. What you review each month
+
+- That every printer and screen has its reserved IP and its label in the inventory.
+- Waiter joiners and leavers: leavers disabled on their last day, not at the end of the month.
+- Software and terminal versions, with the integrator.
+- If there is a local database, that the backup runs and has been restored at least once.
+
+## Next steps
+
+- The **CashDro** guide adds automatic cash payments to the POS.
+- The **hotel PMS** guide covers room charges when the restaurant is in a hotel.
+- The Level 1 printers guide explains office print queues, which work differently from kitchen ones.
+""")
+
+# ---------------------------------------------------------------- Sector 1 · CashDro
+g(slug="cashdro-integracion-con-el-tpv-red-cobro-en-efectivo-y-arqueo", topic="cashdro", date="2026-10-27",
+  title_es="CashDro: integración con el TPV, el cobro en efectivo y el arqueo que cuadra",
+  title_en="CashDro: integration with the POS, cash payments and a cash count that balances",
+  dek_es="Cómo funciona un cajón de cobro automático conectado al TPV, la red y las credenciales que necesita, el flujo de un cobro, la rutina diaria de fondo, retirada y arqueo, y qué mirar cuando el TPV no conecta o el arqueo no cuadra.",
+  dek_en="How an automatic cash machine connected to the POS works, the network and credentials it needs, the flow of a payment, the daily routine of float, collection and cash count, and what to check when the POS won't connect or the count doesn't balance.",
+  es="""
+## Qué vas a conseguir
+
+Que el cobro en efectivo pase por una máquina y no por las manos del camarero: el TPV manda el importe, el cliente mete billetes y monedas, la máquina devuelve el cambio y el TPV da la venta por cobrada. Menos descuadres, menos tiempo de cierre y menos dinero en contacto con la comida. Para IT, el trabajo es la red, la integración y saber diagnosticar cuando algo falla con cola en la barra.
+
+## Antes de empezar
+
+- El modelo de CashDro instalado y el **distribuidor** que lo mantiene (los atascos y las piezas son cosa suya).
+- El TPV con la **integración de CashDro** disponible y activada por su integrador (guía de ICG y HIOPOS).
+- La red del local: el CashDro va en la misma VLAN que los TPV o en una a la que los TPV llegan por una regla concreta.
+- Las **credenciales** de integración que entrega el instalador. Van al gestor de contraseñas del equipo, no a un pósit en la caja.
+
+## 1. Cómo funciona un cobro
+
+1. El camarero cierra la cuenta en el TPV y elige el medio de pago **CashDro**.
+2. El TPV envía el importe a la máquina por la red, con un identificador del TPV que lo pide (por ejemplo `TPV-BARRA-01`).
+3. El TPV muestra una ventana de espera; la máquina muestra el importe al cliente.
+4. El cliente introduce el efectivo. La máquina cuenta, valida y devuelve el cambio.
+5. La máquina confirma el cobro al TPV, la ventana se cierra y se imprime el ticket.
+
+Si el cliente se arrepiente, el TPV permite cancelar mientras la operación no ha terminado, y la máquina devuelve lo introducido.
+
+## 2. La configuración en el TPV
+
+:::ui TPV · Configuración · Medios de pago · CashDro
+> Configuración › Dispositivos › Cajón de cobro automático
+= Tipo: CashDro
+= Dirección IP del equipo: 10.40.30.71
+= Usuario: tpv-integracion (entregado por el instalador)
+= Contraseña: •••••••• (en el gestor de contraseñas)
+= Identificador del puesto: TPV-BARRA-01
+= Medio de pago asociado: Efectivo (CashDro)
+[Probar conexión]
+:::
+
+- **IP fija** para el CashDro. Si la dirección es privada, solo los TPV de esa red pueden usarlo: un TPV en otra VLAN sin regla no lo verá nunca.
+- Un **identificador por TPV**: así el informe de la máquina dice desde qué puesto se pidió cada cobro, que es lo primero que preguntará quien revise un descuadre.
+- Las credenciales por defecto, cambiadas en la instalación. Quien tiene ese usuario puede pedir cobros y, según el modelo, operaciones de la máquina.
+
+## 3. La rutina diaria
+
+| Momento | Qué se hace | Quién |
+|---|---|---|
+| Apertura | Comprobar el **fondo de cambio** (lo que la máquina tiene para devolver) y recargar monedas si hace falta | Encargado |
+| Durante el día | Nada: el cambio se recicla con lo que pagan los clientes | |
+| Si se llena | **Retirada** parcial de billetes al cajón de recaudación, registrada en la máquina | Encargado |
+| Cierre | **Arqueo**: lo que dice la máquina, lo que dice el TPV y lo retirado deben cuadrar | Encargado |
+
+Cada retirada o recarga se hace desde el menú de la máquina con un usuario nominal, nunca abriendo el equipo sin registrar la operación. Si no queda registrada, el arqueo no cuadra.
+
+## 4. El ticket: \"el TPV no conecta con el CashDro\"
+
+Sábado, 14:00, cola en la barra. El TPV da error al elegir CashDro.
+
+1. **¿Le pasa a un TPV o a todos?** Si los demás cobran, el problema está en ese TPV (configuración, red del puesto).
+2. **La máquina**: encendida, sin mensaje de error en su pantalla, con el cable de red conectado.
+3. **La red**:
+
+:::term PowerShell · desde el TPV o un equipo de la misma VLAN
+$ Test-Connection 10.40.30.71 -Count 2
+Destination     Status
+-----------     ------
+10.40.30.71     TimedOut
+10.40.30.71     TimedOut
+$ Get-NetIPConfiguration | Select-Object InterfaceAlias, IPv4Address, IPv4DefaultGateway
+InterfaceAlias  IPv4Address    IPv4DefaultGateway
+--------------  -----------    ------------------
+Ethernet        10.40.20.34    10.40.20.1
+:::
+
+El TPV tiene una IP de la **VLAN 20** (oficinas), no de la 30: alguien lo ha cambiado de toma o el puerto del switch ha perdido su VLAN. Se vuelve a poner en su puerto (o se corrige la VLAN del puerto, guía de Cisco del Nivel 4) y se prueba de nuevo.
+
+4. **Mientras tanto**: se cobra con el medio de pago **Efectivo** manual y se apunta en una hoja qué ventas se cobraron así, para el arqueo del cierre.
+
+## 5. El ticket: \"el arqueo no cuadra\"
+
+1. **Las operaciones manuales**: retiradas, recargas o aperturas no registradas en la máquina son la causa más frecuente.
+2. **Los cobros cancelados a medias**: una venta que el TPV dio por cancelada pero la máquina cobró (o al revés). El informe de la máquina, filtrado por el identificador del TPV y la hora, lo muestra.
+3. **Las ventas cobradas en efectivo manual** durante una incidencia, que no pasan por la máquina.
+4. Si con eso no cuadra, el distribuidor tiene el registro interno de la máquina (billetes rechazados, atascos y devoluciones).
+
+## 6. Lo que revisas cada mes
+
+- Que el CashDro y los TPV tienen su IP reservada y están en su VLAN.
+- Los usuarios de la máquina: los de personal que ya no trabaja, desactivados.
+- Las actualizaciones de la integración en el TPV, con el integrador, antes de una temporada fuerte y no en mitad de ella.
+- Los descuadres del mes por local y su causa: si se repite una, hay un proceso que corregir, no una máquina.
+
+## Siguientes pasos
+
+- La guía de **ICG y HIOPOS** cubre el resto del punto de venta.
+- La guía de Cisco del Nivel 4 explica cómo leer en qué VLAN está un puerto.
+- La guía de **hotel en pre-apertura** sitúa los datáfonos y el punto de venta en la red de un hotel.
+""",
+  en="""
+## What you'll get
+
+Cash payments going through a machine instead of the waiter's hands: the POS sends the amount, the customer inserts notes and coins, the machine gives change and the POS marks the sale as paid. Fewer discrepancies, a faster close and less money near the food. For IT, the work is the network, the integration and knowing how to diagnose a fault with a queue at the bar.
+
+## Before you start
+
+- The CashDro model installed and the **reseller** who maintains it (jams and parts are theirs to handle).
+- The POS with the **CashDro integration** available and enabled by its integrator (ICG and HIOPOS guide).
+- The venue's network: the CashDro sits on the same VLAN as the POS terminals, or on one they reach through a specific rule.
+- The integration **credentials** the installer hands over. They go in the team's password manager, not on a sticky note at the till.
+
+## 1. How a payment works
+
+1. The waiter closes the bill on the POS and picks the **CashDro** payment method.
+2. The POS sends the amount to the machine over the network, with an identifier for the requesting terminal (for example `POS-BAR-01`).
+3. The POS shows a waiting window; the machine shows the amount to the customer.
+4. The customer inserts the cash. The machine counts, validates and gives change.
+5. The machine confirms the payment to the POS, the window closes and the receipt prints.
+
+If the customer changes their mind, the POS lets you cancel while the operation hasn't finished, and the machine returns what was inserted.
+
+## 2. The configuration in the POS
+
+:::ui POS · Settings · Payment methods · CashDro
+> Settings › Devices › Automatic cash machine
+= Type: CashDro
+= Device IP address: 10.40.30.71
+= User: pos-integration (provided by the installer)
+= Password: •••••••• (in the password manager)
+= Terminal identifier: POS-BAR-01
+= Linked payment method: Cash (CashDro)
+[Test connection]
+:::
+
+- A **fixed IP** for the CashDro. If the address is private, only terminals on that network can use it: a POS on another VLAN without a rule will never see it.
+- **One identifier per terminal**: that way the machine's report says which terminal requested each payment, the first thing whoever reviews a discrepancy will ask.
+- Default credentials changed at installation. Whoever has that user can request payments and, depending on the model, machine operations.
+
+## 3. The daily routine
+
+| When | What | Who |
+|---|---|---|
+| Opening | Check the **change float** (what the machine holds to give back) and top up coins if needed | Manager |
+| During the day | Nothing: change is recycled from what customers pay | |
+| If it fills up | Partial **collection** of notes to the cash box, logged on the machine | Manager |
+| Close | **Cash count**: what the machine says, what the POS says and what was collected must match | Manager |
+
+Every collection or top-up is done from the machine's menu with a named user, never by opening the unit without logging the operation. If it isn't logged, the count won't balance.
+
+## 4. The ticket: \"the POS can't connect to the CashDro\"
+
+Saturday, 14:00, a queue at the bar. The POS throws an error when CashDro is chosen.
+
+1. **One terminal or all of them?** If the others take payments, the problem is that terminal (configuration, the desk's network).
+2. **The machine**: switched on, no error message on its screen, network cable connected.
+3. **The network**:
+
+:::term PowerShell · from the POS or a computer on the same VLAN
+$ Test-Connection 10.40.30.71 -Count 2
+Destination     Status
+-----------     ------
+10.40.30.71     TimedOut
+10.40.30.71     TimedOut
+$ Get-NetIPConfiguration | Select-Object InterfaceAlias, IPv4Address, IPv4DefaultGateway
+InterfaceAlias  IPv4Address    IPv4DefaultGateway
+--------------  -----------    ------------------
+Ethernet        10.40.20.34    10.40.20.1
+:::
+
+The POS has an address from **VLAN 20** (offices), not 30: someone moved it to another wall socket or the switch port lost its VLAN. Put it back on its port (or fix the port's VLAN, Level 4 Cisco guide) and test again.
+
+4. **In the meantime**: take payment with the manual **Cash** method and note on a sheet which sales were paid that way, for the cash count at close.
+
+## 5. The ticket: \"the cash count doesn't balance\"
+
+1. **Manual operations**: collections, top-ups or openings not logged on the machine are the most common cause.
+2. **Half-cancelled payments**: a sale the POS treated as cancelled but the machine charged (or the other way round). The machine's report, filtered by terminal identifier and time, shows it.
+3. **Sales paid in manual cash** during an incident, which don't go through the machine.
+4. If that doesn't explain it, the reseller has the machine's internal log (rejected notes, jams and refunds).
+
+## 6. What you review each month
+
+- That the CashDro and the POS terminals have reserved IPs and sit on their VLAN.
+- The machine's users: those of staff who have left, disabled.
+- Integration updates on the POS, with the integrator, before a busy season and not in the middle of it.
+- The month's discrepancies per venue and their cause: if one repeats, there is a process to fix, not a machine.
+
+## Next steps
+
+- The **ICG and HIOPOS** guide covers the rest of the point of sale.
+- The Level 4 Cisco guide explains how to read which VLAN a port is on.
+- The **hotel pre-opening** guide places card terminals and the point of sale in a hotel's network.
+""")
+
+# ---------------------------------------------------------------- Sector 1 · Hotel PMS
+g(slug="pms-hotelero-soporte-interfaces-y-cargo-a-habitacion-desde-el-tpv", topic="pms-hotel", date="2026-10-27",
+  title_es="PMS hotelero: soporte, interfaces y el cargo a habitación desde el TPV",
+  title_en="Hotel PMS: support, interfaces and room charges from the POS",
+  dek_es="Qué es el PMS y por qué todo el hotel depende de él, cómo viaja un cargo del restaurante al folio del huésped, la tabla de correspondencias entre puntos de venta y códigos de transacción, los motivos por los que un cargo se rechaza y qué revisar antes de la auditoría nocturna.",
+  dek_en="What the PMS is and why the whole hotel depends on it, how a restaurant charge travels to the guest's folio, the mapping table between outlets and transaction codes, the reasons a charge is rejected and what to check before the night audit.",
+  es="""
+## Qué vas a conseguir
+
+Entender el PMS lo bastante para dar soporte a recepción sin ser recepcionista, y resolver el ticket que más se repite entre el restaurante y la recepción: \"no me deja cargar a la habitación\". El ejemplo usa términos de **Oracle OPERA**, el PMS más extendido en cadenas; otros PMS tienen las mismas piezas con otros nombres.
+
+## Antes de empezar
+
+- Un usuario del PMS con permisos de consulta de reservas y de la configuración de interfaces (no de tarifas ni de facturación: no los necesitas).
+- El nombre del **servidor o servicio de interfaces** y del proveedor de cada interfaz (TPV, cerraduras, centralita, IPTV).
+- La lista de **puntos de venta** del hotel (restaurante, bar, room service, spa) y su código en el TPV.
+
+## 1. El PMS y sus piezas
+
+- **Reserva y perfil**: quién es el huésped, en qué habitación está, cuándo llega y se va.
+- **Folio**: la cuenta del huésped, donde se suman la habitación, el restaurante, el minibar o el spa.
+- **Códigos de transacción**: cada tipo de cargo tiene uno (alojamiento, alimentos, bebidas, spa). Contabilidad cuenta los ingresos con ellos.
+- **Interfaces**: los otros sistemas se conectan al PMS a través de un servidor de interfaces (en OPERA, **IFC8**) o de su API en la nube (**OHIP** en OPERA Cloud), con protocolos como **FIAS**.
+- **Auditoría nocturna**: el cierre del día. Pasa los cargos de habitación, cambia la fecha del hotel y saca los informes. Si una interfaz tiene cargos pendientes, se quedan fuera del día.
+
+## 2. Cómo viaja un cargo a habitación
+
+1. El camarero cierra la mesa y elige **Cargo a habitación**. Escribe el número de habitación (o el apellido).
+2. El TPV envía una **consulta** al PMS: ¿quién está alojado en la 214?
+3. El PMS responde con el huésped (o los huéspedes) de esa habitación y si puede recibir cargos.
+4. El camarero elige el huésped, que firma el ticket.
+5. El TPV envía el **cargo**: importe, desglose por tipo (comida, bebida), punto de venta, número de ticket y la reserva.
+6. El PMS lo apunta en el folio con el código de transacción que corresponde y contesta con un OK. Si contesta con un rechazo, el TPV lo muestra y la venta sigue abierta.
+
+## 3. La tabla de correspondencias
+
+Cada punto de venta del TPV, y cada tipo de venta dentro de él, se corresponde con un código de transacción del PMS. Si falta una fila, el cargo se rechaza.
+
+:::ui PMS · Interfaces · Correspondencias del TPV
+> Configuración › Interfaces › TPV-RESTAURANTES › Correspondencias
+= Punto de venta 10 · Restaurante · Comida → 2010 Alimentos restaurante
+= Punto de venta 10 · Restaurante · Bebida → 2110 Bebidas restaurante
+= Punto de venta 20 · Bar del lobby · Bebida → 2120 Bebidas bar
+= Punto de venta 30 · Room service · Comida → 2030 Alimentos room service
+= Punto de venta 40 · Terraza · (sin correspondencias)
+:::
+
+La terraza se abrió la semana pasada y nadie añadió su fila: todos sus cargos a habitación fallan. Es el motivo número uno cuando un punto de venta nuevo \"no carga\" y los demás sí.
+
+## 4. El ticket: \"no me deja cargar a la habitación\"
+
+| Lo que dice el TPV | Causa probable | Qué haces |
+|---|---|---|
+| Habitación no encontrada | El huésped ya ha hecho el check-out, o se ha cambiado de habitación | Recepción confirma la habitación actual; si ya se fue, se cobra en el momento |
+| Huésped sin crédito / no admite cargos | La reserva está marcada como **No Post** (sin cargos) o ha superado el límite de crédito | Lo decide recepción, no IT: suele ser un huésped sin tarjeta de garantía |
+| Código de transacción no válido | Falta la correspondencia del punto de venta (apartado 3) | Se añade la fila con el responsable de contabilidad y se reenvía el cargo |
+| Sin respuesta del PMS / tiempo de espera | La interfaz está caída | Apartado 5 |
+| Cargo duplicado | El TPV reintentó tras un tiempo de espera y el primer cargo sí llegó | Recepción anula uno en el folio; se revisa el tiempo de espera de la interfaz |
+
+## 5. Cuando la interfaz está caída
+
+:::ui PMS · Interfaces · Estado
+> Configuración › Interfaces › Estado de las interfaces
+TPV-RESTAURANTES    Desconectada    Último mensaje: 27/10/2026 13:42:18
+CERRADURAS          Conectada       Último mensaje: 27/10/2026 14:05:51
+CENTRALITA          Conectada       Último mensaje: 27/10/2026 14:05:47
+IPTV                Conectada       Último mensaje: 27/10/2026 14:04:02
+:::
+
+1. **Cuál está caída y desde cuándo**: solo la del TPV, desde las 13:42. No es el PMS entero: las cerraduras funcionan.
+2. **El otro extremo**: el servicio de interfaz del TPV en su servidor, arrancado; la red entre ese servidor y el de interfaces (las IP y el puerto están en la hoja de interfaces).
+3. **Reiniciar en orden**: primero el servicio de interfaz del lado del TPV, luego la interfaz en el PMS. Nunca el servidor de interfaces entero en plena hora de comidas: tira también las cerraduras y la centralita.
+4. **Los cargos pendientes**: al reconectar, el TPV reenvía los cargos que no pudo entregar (según cómo esté configurado). Se comprueba en el folio de dos o tres huéspedes que han llegado una sola vez.
+5. Si sigue caída, el proveedor del TPV con la hora exacta del último mensaje.
+
+## 6. Antes de la auditoría nocturna
+
+- Todas las interfaces conectadas y sin cargos pendientes de enviar.
+- Los cierres de caja de los puntos de venta hechos: un cargo que llega después de la auditoría cae en el día siguiente.
+- Los rechazos del día revisados con recepción: cada uno es un importe que alguien tiene que cobrar.
+
+## 7. Lo que revisas cada mes
+
+- La tabla de correspondencias frente a los puntos de venta que existen de verdad (los nuevos, añadidos; los cerrados, retirados).
+- Los usuarios del PMS: altas con su rol, bajas el último día. El PMS tiene datos personales y de pago de los huéspedes.
+- Las versiones del servidor de interfaces y de cada interfaz, con sus proveedores.
+
+## Siguientes pasos
+
+- La guía de **hotel en pre-apertura** tiene el mapa completo de interfaces de un hotel nuevo.
+- La de **ICG y HIOPOS** cubre el lado del TPV.
+- La de **IPTV en hotel** usa la interfaz con el PMS para el mensaje de bienvenida y la factura en pantalla.
+""",
+  en="""
+## What you'll get
+
+Understanding the PMS well enough to support the front office without being a receptionist, and solving the most repeated ticket between the restaurant and reception: \"it won't let me charge it to the room\". The example uses **Oracle OPERA** terms, the most widespread PMS in hotel chains; other PMSs have the same pieces under other names.
+
+## Before you start
+
+- A PMS user with permission to look up reservations and the interface configuration (not rates or billing: you don't need them).
+- The name of the **interface server or service** and the vendor of each interface (POS, door locks, PBX, IPTV).
+- The list of the hotel's **outlets** (restaurant, bar, room service, spa) and their code in the POS.
+
+## 1. The PMS and its pieces
+
+- **Reservation and profile**: who the guest is, which room they are in, when they arrive and leave.
+- **Folio**: the guest's bill, which adds up the room, the restaurant, the minibar or the spa.
+- **Transaction codes**: each kind of charge has one (accommodation, food, beverage, spa). Accounting counts revenue with them.
+- **Interfaces**: the other systems connect to the PMS through an interface server (in OPERA, **IFC8**) or its cloud API (**OHIP** in OPERA Cloud), with protocols such as **FIAS**.
+- **Night audit**: the end of the day. It posts room charges, rolls the hotel date and produces the reports. If an interface has pending charges, they miss the day.
+
+## 2. How a room charge travels
+
+1. The waiter closes the table and picks **Room charge**. They type the room number (or the surname).
+2. The POS sends an **inquiry** to the PMS: who is staying in 214?
+3. The PMS answers with the guest (or guests) in that room and whether they can receive charges.
+4. The waiter picks the guest, who signs the receipt.
+5. The POS sends the **charge**: amount, breakdown by type (food, beverage), outlet, receipt number and the reservation.
+6. The PMS posts it to the folio with the matching transaction code and answers OK. If it answers with a rejection, the POS shows it and the sale stays open.
+
+## 3. The mapping table
+
+Each POS outlet, and each sale type within it, maps to a PMS transaction code. If a row is missing, the charge is rejected.
+
+:::ui PMS · Interfaces · POS mappings
+> Configuration › Interfaces › POS-RESTAURANTS › Mappings
+= Outlet 10 · Restaurant · Food → 2010 Restaurant food
+= Outlet 10 · Restaurant · Beverage → 2110 Restaurant beverage
+= Outlet 20 · Lobby bar · Beverage → 2120 Bar beverage
+= Outlet 30 · Room service · Food → 2030 Room service food
+= Outlet 40 · Terrace · (no mappings)
+:::
+
+The terrace opened last week and nobody added its row: all its room charges fail. It is the number one reason a new outlet \"won't post\" while the others do.
+
+## 4. The ticket: \"it won't let me charge it to the room\"
+
+| What the POS says | Likely cause | What you do |
+|---|---|---|
+| Room not found | The guest has checked out, or moved room | Reception confirms the current room; if they have left, take payment there and then |
+| Guest has no credit / no posting allowed | The reservation is flagged **No Post** or is over its credit limit | Reception decides, not IT: usually a guest without a guarantee card |
+| Invalid transaction code | The outlet's mapping is missing (section 3) | Add the row with the accounting lead and resend the charge |
+| No answer from the PMS / timeout | The interface is down | Section 5 |
+| Duplicate charge | The POS retried after a timeout and the first charge did arrive | Reception voids one on the folio; review the interface timeout |
+
+## 5. When the interface is down
+
+:::ui PMS · Interfaces · Status
+> Configuration › Interfaces › Interface status
+POS-RESTAURANTS     Disconnected    Last message: 27/10/2026 13:42:18
+DOOR-LOCKS          Connected       Last message: 27/10/2026 14:05:51
+PBX                 Connected       Last message: 27/10/2026 14:05:47
+IPTV                Connected       Last message: 27/10/2026 14:04:02
+:::
+
+1. **Which one is down and since when**: only the POS one, since 13:42. It isn't the whole PMS: the door locks work.
+2. **The other end**: the POS interface service on its server, running; the network between that server and the interface server (IPs and port are in the interfaces sheet).
+3. **Restart in order**: first the interface service on the POS side, then the interface in the PMS. Never the whole interface server in the middle of lunch service: it also drops the door locks and the PBX.
+4. **The pending charges**: on reconnecting, the POS resends the charges it couldn't deliver (depending on how it is configured). Check on two or three guests' folios that they arrived exactly once.
+5. If it is still down, the POS vendor with the exact time of the last message.
+
+## 6. Before the night audit
+
+- Every interface connected with no charges waiting to be sent.
+- The outlets' end-of-day closes done: a charge arriving after the audit lands on the next day.
+- The day's rejections reviewed with reception: each one is an amount someone has to collect.
+
+## 7. What you review each month
+
+- The mapping table against the outlets that actually exist (new ones added; closed ones removed).
+- PMS users: joiners with their role, leavers on their last day. The PMS holds guests' personal and payment data.
+- The versions of the interface server and of each interface, with their vendors.
+
+## Next steps
+
+- The **hotel pre-opening** guide has the full interface map of a new hotel.
+- The **ICG and HIOPOS** guide covers the POS side.
+- The **hotel IPTV** guide uses the PMS interface for the welcome message and the bill on screen.
+""")
+
+# ---------------------------------------------------------------- Sector 1 · Hotel IPTV
+g(slug="iptv-en-hotel-diagnostico-de-canales-multicast-y-televisores-de-habitacion", topic="iptv-hotel", date="2026-10-27",
+  title_es="IPTV en hotel: diagnóstico de canales, la red multicast y los televisores de habitación",
+  title_en="Hotel IPTV: troubleshooting channels, the multicast network and in-room TVs",
+  dek_es="Cómo llega un canal desde la cabecera hasta la habitación, la configuración de IGMP snooping y del querier que evita la mitad de las averías, la tabla de síntomas para saber dónde mirar, y el diagnóstico de una habitación sin canales y de canales que se cortan cada pocos minutos.",
+  dek_en="How a channel gets from the headend to the room, the IGMP snooping and querier setup that prevents half the faults, the symptom table that tells you where to look, and troubleshooting a room with no channels and channels that cut out every few minutes.",
+  es="""
+## Qué vas a conseguir
+
+Saber por qué un televisor de habitación no tiene canales, o los pierde, sin llamar al proveedor de IPTV para cada queja. En un hotel la televisión es una red: casi todas las averías se encuentran en el switch de planta, no en el televisor.
+
+## Antes de empezar
+
+- El esquema de la instalación del proveedor de IPTV: dónde está la **cabecera**, qué fuentes recibe (satélite, TDT, canales por internet) y en qué grupos multicast emite cada canal.
+- Acceso de lectura a los switches del core y de planta (guía de Cisco del Nivel 4).
+- La VLAN de IPTV (en este ejemplo, la 50) y qué puertos de cada planta son de televisores.
+- El **mando de instalador** o el acceso al servidor de gestión de los televisores, que suelen estar en **modo hotel**: el huésped no puede tocar la configuración.
+
+## 1. Cómo llega un canal a la habitación
+
+1. La **cabecera** recibe cada canal y lo emite a la red como un flujo **multicast**: un grupo por canal (por ejemplo, `239.10.0.1` el canal 1, `239.10.0.2` el 2).
+2. Cuando el huésped elige un canal, el televisor envía un mensaje **IGMP Join** a ese grupo: \"quiero recibir 239.10.0.2\".
+3. El switch de planta, con **IGMP snooping**, apunta que ese puerto quiere ese grupo y le envía solo ese flujo.
+4. Al cambiar de canal, el televisor envía un **Leave** del anterior y un Join del nuevo.
+5. Un **querier** (normalmente en el core) pregunta cada cierto tiempo quién sigue queriendo cada grupo. Los televisores contestan, y así el switch sabe que tiene que seguir enviando.
+
+Sin multicast, cada televisor recibiría su propia copia de cada canal; con multicast, cada flujo viaja una vez por enlace.
+
+## 2. La configuración que evita la mitad de las averías
+
+:::term CORE-01 · la VLAN de IPTV
+$ configure terminal
+$ ip igmp snooping
+$ ip igmp snooping vlan 50
+$ ip igmp snooping querier
+$ end
+$ show ip igmp snooping querier
+Vlan      IP Address      IGMP Version   Port
+-------------------------------------------------------------
+50        10.40.50.1      v2             Switch
+:::
+
+:::term SW-P2-01 · switch de planta
+$ configure terminal
+$ ip igmp snooping vlan 50
+$ interface range GigabitEthernet1/0/1 - 24
+$  description TV HABITACIONES P2
+$  switchport mode access
+$  switchport access vlan 50
+$ end
+$ show ip igmp snooping groups vlan 50
+Vlan      Group           Type        Version     Port List
+-----------------------------------------------------------------------
+50        239.10.0.2      igmp        v2          Gi1/0/14
+50        239.10.0.7      igmp        v2          Gi1/0/3, Gi1/0/9
+:::
+
+- **IGMP snooping** activo en todos los switches que tocan la VLAN 50. Sin él, cada canal que alguien ve en el hotel llega a todos los puertos de la VLAN.
+- **Un solo querier**, en el core o cerca de la cabecera. Sin querier, el switch deja de enviar el canal cuando caduca la pertenencia al grupo (unos minutos) aunque el huésped siga viéndolo.
+- En los puertos de televisor se puede activar la salida inmediata (**fast leave** o *immediate-leave*, según el modelo de switch): el cambio de canal es más rápido. Nunca en los enlaces entre switches.
+- La tabla de grupos dice qué canal está viendo cada puerto en este momento: en la 2.14 (`Gi1/0/14`), el canal 2.
+
+## 3. Dónde mirar según el síntoma
+
+| Síntoma | Dónde está casi siempre | Qué miras |
+|---|---|---|
+| Una habitación sin ningún canal | Cable, roseta, puerto o configuración del televisor | Estado del puerto y su VLAN; que el televisor tiene IP de la VLAN 50 |
+| Todas las habitaciones sin un canal concreto | Cabecera o fuente (antena, satélite, proveedor) | Proveedor de IPTV con el número de canal y el grupo |
+| Los canales se cortan a los pocos minutos y vuelven al cambiar de canal | Falta el querier o hay dos | `show ip igmp snooping querier` en cada switch |
+| Al encender televisores, la red de la planta va lenta | IGMP snooping desactivado: el multicast inunda la VLAN | `show ip igmp snooping` en el switch de planta |
+| Imagen pixelada en toda una planta | Enlace de subida saturado o con errores | Contadores de errores y uso del uplink |
+| Televisores por WiFi que se cortan | El multicast por WiFi va a la velocidad mínima | Conversión de multicast a unicast en la controladora WiFi, o mejor cable |
+
+## 4. El ticket: \"la habitación 2.14 no tiene canales\"
+
+:::term SW-P2-01 · diagnóstico
+$ show interfaces Gi1/0/14 status
+$ show mac address-table interface Gi1/0/14
+$ show ip igmp snooping groups vlan 50 | include Gi1/0/14
+Port      Name                Status       Vlan  Duplex  Speed Type
+Gi1/0/14  TV HABITACIONES P2  connected    20    a-full  a-100 10/100/1000BaseTX
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+  20    00a1.b2c3.d4e5    DYNAMIC     Gi1/0/14
+:::
+
+El puerto está conectado pero en la **VLAN 20**, no en la 50, y no aparece en ningún grupo: el televisor nunca llega a la cabecera. Alguien reutilizó el puerto para un portátil durante la obra y no lo devolvió a su VLAN. Se corrige (`switchport access vlan 50` en `Gi1/0/14`), se reinicia el televisor y en la tabla de grupos aparece el canal que esté pidiendo.
+
+Si el puerto ya estaba en la 50 y el televisor no aparece en la tabla de grupos, el siguiente sospechoso es el propio televisor: que esté en modo hotel con el perfil de canales del hotel (normalmente se clona desde el servidor de gestión o con un USB del proveedor).
+
+## 5. El ticket: \"los canales se cortan cada pocos minutos\"
+
+Pasa en todas las plantas, y vuelve al cambiar de canal. En el core:
+
+:::term CORE-01
+$ show ip igmp snooping querier
+Vlan      IP Address      IGMP Version   Port
+-------------------------------------------------------------
+:::
+
+No hay querier: tras un cambio en el core alguien quitó `ip igmp snooping querier` o la VLAN 50 perdió su dirección. Sin consultas, los switches dan por caducada la pertenencia de cada televisor al cabo de unos minutos y cortan el flujo. Se vuelve a configurar el querier en un solo switch y se comprueba que los demás lo ven en su salida de `show ip igmp snooping querier`.
+
+## 6. Lo que revisas cada mes
+
+- Un querier por VLAN de IPTV, el mismo de siempre, visto desde todos los switches.
+- Los puertos de televisores en su VLAN y con su descripción (los cambiados durante obras o mantenimiento son los que fallan).
+- El uso de los enlaces de subida de cada planta en horas punta (por la noche, con los huéspedes en las habitaciones).
+- Las quejas de televisión por habitación: tres en la misma planta apuntan al switch, no a tres televisores.
+
+## Siguientes pasos
+
+- La guía de Cisco del Nivel 4 cubre la lectura de puertos, VLAN y troncales que se usan aquí.
+- La de **PMS hotelero** explica la interfaz que pone el nombre del huésped en la pantalla de bienvenida.
+- La de **hotel en pre-apertura** sitúa la VLAN de IPTV en la red completa del hotel.
+""",
+  en="""
+## What you'll get
+
+Knowing why an in-room TV has no channels, or loses them, without calling the IPTV vendor for every complaint. In a hotel, television is a network: almost every fault is found in the floor switch, not in the TV.
+
+## Before you start
+
+- The IPTV vendor's installation diagram: where the **headend** is, which sources it receives (satellite, terrestrial, internet channels) and which multicast group each channel is sent on.
+- Read access to the core and floor switches (Level 4 Cisco guide).
+- The IPTV VLAN (50 in this example) and which ports on each floor are TVs.
+- The **installer remote** or access to the TVs' management server; the TVs usually run in **hotel mode**: guests can't change the settings.
+
+## 1. How a channel gets to the room
+
+1. The **headend** receives each channel and sends it onto the network as a **multicast** stream: one group per channel (for example `239.10.0.1` for channel 1, `239.10.0.2` for 2).
+2. When the guest picks a channel, the TV sends an **IGMP Join** to that group: \"I want to receive 239.10.0.2\".
+3. The floor switch, with **IGMP snooping**, notes that the port wants that group and sends it only that stream.
+4. On a channel change, the TV sends a **Leave** for the old one and a Join for the new one.
+5. A **querier** (usually on the core) asks every so often who still wants each group. The TVs answer, so the switch knows to keep sending.
+
+Without multicast, every TV would get its own copy of every channel; with multicast, each stream crosses each link once.
+
+## 2. The configuration that prevents half the faults
+
+:::term CORE-01 · the IPTV VLAN
+$ configure terminal
+$ ip igmp snooping
+$ ip igmp snooping vlan 50
+$ ip igmp snooping querier
+$ end
+$ show ip igmp snooping querier
+Vlan      IP Address      IGMP Version   Port
+-------------------------------------------------------------
+50        10.40.50.1      v2             Switch
+:::
+
+:::term SW-F2-01 · floor switch
+$ configure terminal
+$ ip igmp snooping vlan 50
+$ interface range GigabitEthernet1/0/1 - 24
+$  description TV ROOMS F2
+$  switchport mode access
+$  switchport access vlan 50
+$ end
+$ show ip igmp snooping groups vlan 50
+Vlan      Group           Type        Version     Port List
+-----------------------------------------------------------------------
+50        239.10.0.2      igmp        v2          Gi1/0/14
+50        239.10.0.7      igmp        v2          Gi1/0/3, Gi1/0/9
+:::
+
+- **IGMP snooping** on in every switch that carries VLAN 50. Without it, every channel anyone in the hotel watches reaches every port on the VLAN.
+- **A single querier**, on the core or near the headend. Without a querier, the switch stops sending the channel when group membership expires (a few minutes) even though the guest is still watching.
+- On TV ports you can enable immediate leave (**fast leave** or *immediate-leave*, depending on the switch model): channel changes are quicker. Never on links between switches.
+- The group table tells you which channel each port is watching right now: room 2.14 (`Gi1/0/14`) is on channel 2.
+
+## 3. Where to look by symptom
+
+| Symptom | Where it almost always is | What you check |
+|---|---|---|
+| One room with no channels at all | Cable, wall socket, port or TV configuration | Port status and VLAN; that the TV has an address on VLAN 50 |
+| Every room missing one specific channel | Headend or source (aerial, satellite, provider) | IPTV vendor with the channel number and group |
+| Channels cut out after a few minutes and come back on a channel change | No querier, or two of them | `show ip igmp snooping querier` on each switch |
+| When TVs are switched on, the floor's network slows down | IGMP snooping off: multicast floods the VLAN | `show ip igmp snooping` on the floor switch |
+| Pixelated picture across a whole floor | Uplink saturated or with errors | Error counters and uplink usage |
+| TVs on WiFi that keep dropping | Multicast over WiFi runs at the lowest rate | Multicast-to-unicast conversion on the WiFi controller, or better, a cable |
+
+## 4. The ticket: \"room 2.14 has no channels\"
+
+:::term SW-F2-01 · diagnosis
+$ show interfaces Gi1/0/14 status
+$ show mac address-table interface Gi1/0/14
+$ show ip igmp snooping groups vlan 50 | include Gi1/0/14
+Port      Name                Status       Vlan  Duplex  Speed Type
+Gi1/0/14  TV ROOMS F2         connected    20    a-full  a-100 10/100/1000BaseTX
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+  20    00a1.b2c3.d4e5    DYNAMIC     Gi1/0/14
+:::
+
+The port is connected but on **VLAN 20**, not 50, and it isn't in any group: the TV never reaches the headend. Someone reused the port for a laptop during the works and never put it back on its VLAN. Fix it (`switchport access vlan 50` on `Gi1/0/14`), restart the TV, and the channel it requests shows up in the group table.
+
+If the port was already on 50 and the TV doesn't appear in the group table, the next suspect is the TV itself: that it is in hotel mode with the hotel's channel profile (usually cloned from the management server or with a USB stick from the vendor).
+
+## 5. The ticket: \"channels cut out every few minutes\"
+
+It happens on every floor, and comes back on a channel change. On the core:
+
+:::term CORE-01
+$ show ip igmp snooping querier
+Vlan      IP Address      IGMP Version   Port
+-------------------------------------------------------------
+:::
+
+No querier: after a change on the core, someone removed `ip igmp snooping querier` or VLAN 50 lost its address. With no queries, the switches expire each TV's membership after a few minutes and cut the stream. Configure the querier again on a single switch and check the others see it in their `show ip igmp snooping querier` output.
+
+## 6. What you review each month
+
+- One querier per IPTV VLAN, the usual one, seen from every switch.
+- TV ports on their VLAN and with their description (the ones changed during works or maintenance are the ones that fail).
+- Each floor's uplink usage at peak time (in the evening, with guests in their rooms).
+- TV complaints per room: three on the same floor point to the switch, not to three TVs.
+
+## Next steps
+
+- The Level 4 Cisco guide covers reading the ports, VLANs and trunks used here.
+- The **hotel PMS** guide explains the interface that puts the guest's name on the welcome screen.
+- The **hotel pre-opening** guide places the IPTV VLAN in the hotel's whole network.
 """)
