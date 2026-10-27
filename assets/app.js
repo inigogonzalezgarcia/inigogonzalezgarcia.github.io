@@ -177,6 +177,15 @@
     if (/[?&]reserva=1/.test(location.search) || location.hash === "#reservar") { chk.checked = true; toggle(); }
   })();
 
+  /* ---------- contact form: "Report a problem" in SysAdmin Desks opens about.html?tema=sysadmindesks with the message started */
+  (function () {
+    var m = $("#f-msg");
+    if (!m || m.value || !/[?&]tema=sysadmindesks(&|$)/.test(location.search)) return;
+    m.value = document.documentElement.lang === "es"
+      ? "SysAdmin Desks · Ticket: \nQué escribí o hice: \nQué esperaba que pasara: \n"
+      : "SysAdmin Desks · Ticket: \nWhat I typed or did: \nWhat I expected to happen: \n";
+  })();
+
   /* ---------- forms (contact + newsletter) ---------- */
   var tsBtns = [];
   window.tsOk = function () { tsBtns.forEach(function (b) { b.disabled = false; }); };
