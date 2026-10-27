@@ -872,7 +872,8 @@ from guides import LEVELS as _LV, GUIDES as _G, TOPICS as _TT
 _live = {t[0] for t in _TT if any(q["topic"] == t[1] for q in _G)}
 _lk = {"Level 1": "nivel-1", "Level 2": "nivel-2", "Level 3": "nivel-3", "Level 4": "nivel-4"}
 guide_levels = "\n".join(guide_level(*l, href=(f"guias/{_lk[l[1]]}.html" if _lk.get(l[1]) in _live else None)) for l in GUIDE_LEVELS)
-guide_sectors = "\n".join(guide_level(*l, soon=False) for l in GUIDE_SECTORS)
+_sk = {f"Sector {i}": f"sector-{i}" for i in range(1, 6)}
+guide_sectors = "\n".join(guide_level(*l, soon=False, href=(f"guias/{_sk[l[1]]}.html" if _sk.get(l[1]) in _live else None)) for l in GUIDE_SECTORS)
 def guide_card(href, tes, ten, hes, hen, des, den):
     ext = href.startswith("http")
     tgt = ' target="_blank" rel="noopener"' if ext else ""
