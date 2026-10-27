@@ -15,7 +15,7 @@ NAV = [  # key, href (relative to site root), es, en
     ("about", "about.html", "Sobre mí", "About"),
     ("blog", "blog/", "Blog", "Blog"),
     ("guides", "guias.html", "Guías", "Guides"),
-    ("store", "store.html", "Store", "Store"),
+    ("store", "store.html", "Servicios", "Services"),
     ("resources", "recursos.html", "Recursos", "Resources"),
     ("links", "links.html", "Links", "Links"),
 ]
