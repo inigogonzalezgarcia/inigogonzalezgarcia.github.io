@@ -26,6 +26,13 @@ LEVELS = {
                     l_es="Diecisiete temas para quien ya administra: Intune en todas las plataformas, Entra ID y certificados, hipervisores, bases de datos, monitorización y logs, y la automatización con Ansible, Docker, Jenkins y Microsoft Graph.",
                     l_en="Seventeen topics for people who already administer: Intune on every platform, Entra ID and certificates, hypervisors, databases, monitoring and logs, and automation with Ansible, Docker, Jenkins and Microsoft Graph.",
                     seo="Advanced IT guides: Ansible, Docker, Elasticsearch and Kibana, Entra ID Conditional Access and SSO, Grafana, Hyper-V, Intune, Intune EPM, Jenkins, Linux joined to Active Directory, Microsoft Graph, NDES and Cloud PKI, PostgreSQL, MySQL and SQL Server, SolarWinds, Ubuntu Landscape, VMware vSphere."),
+    "nivel-4": dict(key="nivel-4", n_es="Nivel 4", n_en="Level 4", t_es="Experto", t_en="Expert",
+                    h_es="Infraestructura híbrida,<br>seguridad y continuidad.", h_en="Hybrid infrastructure,<br>security and continuity.",
+                    d_es="Infraestructura híbrida, redes, seguridad y continuidad de negocio.",
+                    d_en="Hybrid infrastructure, networking, security and business continuity.",
+                    l_es="Para quien diseña, decide y responde cuando algo grande falla: escritorios en la nube, recuperación ante desastres, la red de una sede, el gobierno de los administradores de Microsoft 365, la detección con Sentinel y las migraciones de tenant. Seis temas ya publicados; el resto, en camino.",
+                    l_en="For people who design, decide and respond when something big fails: cloud desktops, disaster recovery, a site's network, governing Microsoft 365 administrators, detection with Sentinel and tenant migrations. Six topics published so far; the rest are on the way.",
+                    seo="Expert IT guides: Azure Virtual Desktop and Windows 365, backup and disaster recovery (DR/BCP), Cisco switches and routers, Microsoft 365 Global Admin and PIM, Microsoft Sentinel, and Microsoft 365 tenant migrations."),
 }
 LEVEL1 = LEVELS["nivel-1"]
 
@@ -165,6 +172,25 @@ TOPICS = [
     ("nivel-3", "vsphere", "VMware vSphere y vCenter", "VMware vSphere and vCenter",
      "Crear una máquina virtual, snapshots con fecha de caducidad y poner un host en mantenimiento sin cortar nada.",
      "Create a virtual machine, snapshots with an expiry date, and put a host into maintenance without cutting anything."),
+    # ---- Level 4
+    ("nivel-4", "avd-w365", "Azure Virtual Desktop y Windows 365", "Azure Virtual Desktop and Windows 365",
+     "Cuándo usar cada uno, un host pool con FSLogix y escalado automático, y una conexión que falla.",
+     "When to use each, a host pool with FSLogix and autoscaling, and a connection that fails."),
+    ("nivel-4", "dr-bcp", "Backup y recuperación ante desastres (DR/BCP)", "Backup and disaster recovery (DR/BCP)",
+     "RPO y RTO por servicio, copias inmutables, el plan de recuperación y una prueba completa medida.",
+     "RPO and RTO per service, immutable backups, the recovery plan and a measured full test."),
+    ("nivel-4", "cisco", "Cisco: switches y routers", "Cisco switches and routers",
+     "VLANs, troncales sin cortar una planta, el router con circuito de respaldo y un puerto que no da red.",
+     "VLANs, trunks without cutting off a floor, the router with a backup circuit and a port that gives no network."),
+    ("nivel-4", "m365-pim", "Microsoft 365: Global Admin y PIM", "Microsoft 365: Global Admin and PIM",
+     "Roles mínimos, cuentas de emergencia y administradores que activan su rol solo cuando lo necesitan.",
+     "Least-privileged roles, emergency accounts and administrators who activate their role only when they need it."),
+    ("nivel-4", "sentinel", "Microsoft Sentinel", "Microsoft Sentinel",
+     "Conectores, una regla de análisis en KQL, la automatización y un incidente de principio a fin.",
+     "Connectors, a KQL analytics rule, automation and an incident from start to finish."),
+    ("nivel-4", "tenant-migration", "Migraciones de tenant Microsoft 365", "Microsoft 365 tenant migrations",
+     "Inventario, identidades, buzones entre tenants, OneDrive, dispositivos y el fin de semana del corte.",
+     "Inventory, identities, cross-tenant mailboxes, OneDrive, devices and the cutover weekend."),
 ]
 
 GUIDES = []
@@ -6064,7 +6090,7 @@ Toda política excluye al grupo de emergencia. Sin esa exclusión, un error en u
 [Guardar]
 :::
 
-Las cuentas de emergencia no tienen MFA ni licencia, no se usan nunca salvo emergencia, y cada inicio de sesión con ellas dispara una alerta (Nivel 4: Sentinel).
+Las cuentas de emergencia no tienen licencia ni se usan nunca salvo emergencia. Entran con una llave FIDO2 guardada en una caja fuerte (Microsoft exige MFA en los portales de administración también a ellas), y cada inicio de sesión con ellas dispara una alerta (guías de Global Admin y PIM y de Microsoft Sentinel, Nivel 4).
 
 ## 2. Las cuatro políticas base
 
@@ -6163,7 +6189,7 @@ Every policy excludes the emergency group. Without that exclusion, a mistake in 
 [Save]
 :::
 
-Emergency accounts have no MFA and no licence, are never used except in an emergency, and every sign-in with them raises an alert (Level 4: Sentinel).
+Emergency accounts have no licence and are never used except in an emergency. They sign in with a FIDO2 key kept in a safe (Microsoft requires MFA for the admin portals for them too), and every sign-in with them raises an alert (Global Admin and PIM and Microsoft Sentinel guides, Level 4).
 
 ## 2. The four baseline policies
 
@@ -9535,4 +9561,1632 @@ The three places to look: **snapshots** on the datastore (412 GB here, 90% of th
 - **VCF / NSX** when the cluster grows into several and the network becomes software-defined; the daily operation is the same, with more layers.
 - **vSphere Replication** or **SRM** for Level 4 DR: the VM replicated in the other data centre and the recovery plan tested twice a year.
 - For those coming from Hyper-V (previous guide) or going to **Nutanix** (Level 4): short snapshots, host in maintenance, datastore headroom and notes on the VM are the same rules with other names.
+""")
+
+# ---------------------------------------------------------------- L4 · Azure Virtual Desktop and Windows 365
+g(slug="azure-virtual-desktop-y-windows-365-host-pool-cloud-pc-y-conexion-que-falla", topic="avd-w365", date="2026-10-27",
+  title_es="Azure Virtual Desktop y Windows 365: cuál elegir, un host pool con FSLogix y una conexión que falla",
+  title_en="Azure Virtual Desktop and Windows 365: which one to choose, a host pool with FSLogix and a connection that fails",
+  dek_es="Cuándo encaja cada uno, un host pool multisesión unido a Entra ID con perfiles en FSLogix y escalado automático, un Cloud PC de Windows 365 en tres pasos, y cómo leer por qué un usuario no llega a su escritorio.",
+  dek_en="When each one fits, a multi-session host pool joined to Entra ID with FSLogix profiles and autoscaling, a Windows 365 Cloud PC in three steps, and how to read why a user can't reach their desktop.",
+  es="""
+## Qué vas a conseguir
+
+Saber cuándo proponer Azure Virtual Desktop (AVD) y cuándo Windows 365, montar un host pool multisesión que arranca y apaga máquinas solo, con perfiles que siguen al usuario, y la rutina para el ticket de "no me conecta al escritorio", que en estos entornos casi nunca es la red del usuario.
+
+## Antes de empezar
+
+- Una suscripción de Azure con los roles **Desktop Virtualization Contributor** y **Virtual Machine Contributor** en el grupo de recursos (activados por PIM).
+- Licencias que dan derecho a usar AVD con Windows cliente: Microsoft 365 E3/E5, Business Premium o Windows Enterprise E3/E5 por usuario. El coste aparte es el de las máquinas, el disco y el almacenamiento de Azure.
+- Una red virtual con salida a internet y, si los hosts se unen a Active Directory, DNS que resuelva el dominio.
+- Una cuenta de almacenamiento **Azure Files Premium** para los perfiles de FSLogix.
+
+## 1. AVD o Windows 365
+
+| | Azure Virtual Desktop | Windows 365 |
+|---|---|---|
+| Pago | Por uso: máquinas, discos y almacenamiento de Azure | Licencia fija al mes por usuario y tamaño de Cloud PC |
+| Sesiones | Multisesión (varios usuarios por máquina) o personal | Un Cloud PC por usuario |
+| Quién gestiona qué | Tú: host pools, imágenes, escalado, red | Microsoft la infraestructura; tú el Cloud PC con Intune |
+| Encaja con | Turnos, muchos usuarios ligeros, aplicaciones publicadas (RemoteApp) | Contratistas, puesto persistente, coste previsible, equipos pequeños de IT |
+
+La pregunta que decide casi siempre es quién va a mantener las imágenes y el escalado. Si no hay nadie con tiempo para eso, Windows 365.
+
+## 2. El host pool
+
+:::ui Azure portal · Azure Virtual Desktop
+> Azure Virtual Desktop › Grupos de hosts › Crear
+= Nombre: hp-oficina-01
+= Tipo de grupo de hosts: Agrupado
+= Algoritmo de equilibrio de carga: En amplitud (breadth-first)
+= Límite máximo de sesiones: 8
+= Imagen: Windows 11 Enterprise multisesión + aplicaciones de Microsoft 365
+= Tamaño de máquina virtual: Standard D4s v5 (4 vCPU, 16 GiB)
+= Número de máquinas virtuales: 3
+= Red virtual: vnet-avd / snet-hosts
+= Dominio al que unirse: Microsoft Entra ID · [x] Inscribir la máquina virtual en Intune
+= Registrar el grupo de aplicaciones de escritorio: Sí · Área de trabajo: ws-oficina
+[Revisar y crear]
+:::
+
+Con hosts unidos a Entra ID hacen falta dos asignaciones al mismo grupo de usuarios (`sg-avd-oficina`):
+
+- En el **grupo de aplicaciones de escritorio**: la asignación de usuarios, para que vean el escritorio.
+- En el **grupo de recursos** de las máquinas: el rol **Virtual Machine User Login** (o *Administrator Login* para IT). Sin él, el usuario ve el escritorio en la lista pero el inicio de sesión en el host falla.
+
+En las propiedades RDP del host pool, `enablerdsaadauth:i:1` activa el inicio de sesión único con Entra ID: el usuario no vuelve a escribir la contraseña al entrar en la sesión.
+
+## 3. Perfiles con FSLogix
+
+En multisesión el usuario no cae siempre en la misma máquina: su perfil tiene que viajar con él. FSLogix lo guarda en un disco VHDX en Azure Files y lo monta al iniciar sesión.
+
+:::term PowerShell · en la imagen o por Intune (catálogo de configuración, FSLogix)
+$ New-Item -Path "HKLM:\\SOFTWARE\\FSLogix\\Profiles" -Force | Out-Null
+$ Set-ItemProperty "HKLM:\\SOFTWARE\\FSLogix\\Profiles" -Name Enabled -Value 1 -Type DWord
+$ Set-ItemProperty "HKLM:\\SOFTWARE\\FSLogix\\Profiles" -Name VHDLocations -Value "\\\\stavdperfiles.file.core.windows.net\\perfiles" -Type String
+$ Set-ItemProperty "HKLM:\\SOFTWARE\\FSLogix\\Profiles" -Name DeleteLocalProfileWhenVHDShouldApply -Value 1 -Type DWord
+$ Set-ItemProperty "HKLM:\\SOFTWARE\\FSLogix\\Profiles" -Name FlipFlopProfileDirectoryName -Value 1 -Type DWord
+:::
+
+- `FlipFlopProfileDirectoryName` nombra la carpeta de cada perfil como `usuario_SID`: se encuentra a simple vista cuando hay que soltar o borrar uno.
+- Para que los hosts unidos a Entra ID monten el recurso con la identidad del usuario, la cuenta de almacenamiento usa **Microsoft Entra Kerberos** (identidades híbridas) y los permisos de recurso compartido se dan al mismo grupo `sg-avd-oficina`.
+
+## 4. Escalado automático
+
+Tres máquinas encendidas de noche son dinero tirado. Un **plan de escalado** las enciende y apaga según la hora y la carga.
+
+:::ui Azure portal · Plan de escalado
+> Azure Virtual Desktop › Planes de escalado › sp-oficina › Programaciones › Laborables
+= Inicio de aumento: 07:30 · Hosts mínimos: 20 % · Umbral de capacidad: 60 %
+= Horas punta: 08:30 · Equilibrio de carga: En amplitud
+= Inicio de reducción: 18:00 · Hosts mínimos: 10 % · Forzar cierre de sesión: Sí, tras 30 min con aviso
+= Horas valle: 20:00 · Equilibrio de carga: En profundidad
+= Grupo de hosts asignado: hp-oficina-01
+[Guardar]
+:::
+
+Para que el plan pueda encender y apagar máquinas, la entidad de servicio de **Azure Virtual Desktop** necesita el rol **Desktop Virtualization Power On Off Contributor** en la suscripción o el grupo de recursos. Es el olvido más habitual: el plan existe, pero nunca hace nada.
+
+## 5. Windows 365 en tres pasos
+
+:::ui Intune admin center · Windows 365
+> Dispositivos › Windows 365 › Directivas de aprovisionamiento › Crear directiva
+= Nombre: w365-contratistas
+= Tipo de unión: Microsoft Entra Join
+= Red: Red hospedada por Microsoft · Región: Europa (Oeste)
+= Imagen: Galería · Windows 11 Enterprise + aplicaciones de Microsoft 365
+= Asignaciones: sg-w365-contratistas
+[Crear]
+:::
+
+1. La directiva de aprovisionamiento (arriba).
+2. Una licencia de **Windows 365 Enterprise** del tamaño adecuado (por ejemplo 2 vCPU, 8 GB, 128 GB) a cada usuario del grupo.
+3. Esperar el estado **Aprovisionado** en *Todos los PC en la nube* y mandar al usuario a `windows365.microsoft.com` o a la aplicación Windows.
+
+El Cloud PC se gestiona después como cualquier equipo de Intune: perfiles, cumplimiento, aplicaciones (guía de Intune del Nivel 3).
+
+## 6. El ticket: "no me conecta al escritorio"
+
+Primero, el estado de los hosts:
+
+:::ui Azure portal · Hosts de sesión
+> Azure Virtual Desktop › Grupos de hosts › hp-oficina-01 › Hosts de sesión
+avd-ofi-0   Disponible        Sesiones: 8/8   Modo de purga: No
+avd-ofi-1   No disponible     Sesiones: 0/8   Modo de purga: No   Comprobación: FSLogix · Error
+avd-ofi-2   Apagado           Sesiones: 0/8   Modo de purga: No
+:::
+
+Con una máquina llena, otra con FSLogix roto y la tercera apagada por el plan de escalado, ningún usuario nuevo entra. Las **comprobaciones de estado** de cada host (unión al dominio, FSLogix, pila de AVD, agente) dicen cuál falla sin entrar en la máquina.
+
+Después, los errores de conexión. Con el diagnóstico del host pool enviado a Log Analytics (o la página **Insights**):
+
+:::term Log Analytics · KQL
+$ WVDErrors
+$ | where TimeGenerated > ago(4h) and UserName == "laura.prado@contoso.com"
+$ | project TimeGenerated, CodeSymbolic, Source, Message
+TimeGenerated         CodeSymbolic                              Source        Message
+27/10/2026 08:41:12   ConnectionFailedNoHealthyRdshAvailable    RDBroker      No healthy session host is available
+:::
+
+- `ConnectionFailedNoHealthyRdshAvailable`: no hay hosts sanos con hueco. Mira las comprobaciones de estado y el plan de escalado (umbral de capacidad demasiado alto, hosts mínimos demasiado bajos).
+- En el host, `C:\\ProgramData\\FSLogix\\Logs\\Profile` explica los perfiles que no se montan. El clásico: **0x00000020** (el disco del perfil está en uso), una sesión anterior que se quedó colgada en otro host. Se cierra esa sesión y el usuario vuelve a entrar.
+- En Windows 365, *Todos los PC en la nube* tiene **Solucionar problemas** (prueba de conectividad), **Reiniciar** y **Restaurar** a un punto anterior.
+
+## 7. Lo que revisas cada mes
+
+- **Coste** por grupo de recursos en Cost Management: si sube sin más usuarios, el escalado no está apagando.
+- Hosts con una imagen de hace más de un mes: se sustituyen por hosts nuevos con la imagen actual, no se parchean a mano uno a uno.
+- En Windows 365, el informe de **utilización de PC en la nube**: los que nadie usa se reasignan o se retira la licencia.
+- Tamaño de los perfiles en Azure Files: un perfil que crece sin parar suele ser la caché de Teams u OneDrive sin excluir.
+
+## Siguientes pasos
+
+- **Azure Compute Gallery** con Azure Image Builder para que la imagen mensual se construya sola.
+- Grupos de aplicaciones **RemoteApp**: publicar solo el ERP en lugar de todo el escritorio.
+- **Windows 365 Frontline** para puestos compartidos por turnos.
+- La guía de VMware Horizon del Nivel 2 tiene la versión local de todo esto: comparar las dos ayuda a defender la propuesta.
+""",
+  en="""
+## What you'll get
+
+Knowing when to propose Azure Virtual Desktop (AVD) and when Windows 365, building a multi-session host pool that powers machines on and off by itself, with profiles that follow the user, and the routine for the "I can't connect to my desktop" ticket, which in these environments is almost never the user's network.
+
+## Before you start
+
+- An Azure subscription with the **Desktop Virtualization Contributor** and **Virtual Machine Contributor** roles on the resource group (activated through PIM).
+- Licences that grant the right to use AVD with Windows client: Microsoft 365 E3/E5, Business Premium or Windows Enterprise E3/E5 per user. The separate cost is the Azure machines, disks and storage.
+- A virtual network with internet egress and, if the hosts join Active Directory, DNS that resolves the domain.
+- An **Azure Files Premium** storage account for the FSLogix profiles.
+
+## 1. AVD or Windows 365
+
+| | Azure Virtual Desktop | Windows 365 |
+|---|---|---|
+| Billing | Pay as you go: Azure machines, disks and storage | Fixed monthly licence per user and Cloud PC size |
+| Sessions | Multi-session (several users per machine) or personal | One Cloud PC per user |
+| Who manages what | You: host pools, images, scaling, network | Microsoft the infrastructure; you the Cloud PC with Intune |
+| Fits | Shifts, many light users, published apps (RemoteApp) | Contractors, persistent desktop, predictable cost, small IT teams |
+
+The question that usually decides is who will maintain the images and the scaling. If nobody has time for that, Windows 365.
+
+## 2. The host pool
+
+:::ui Azure portal · Azure Virtual Desktop
+> Azure Virtual Desktop › Host pools › Create
+= Name: hp-office-01
+= Host pool type: Pooled
+= Load balancing algorithm: Breadth-first
+= Max session limit: 8
+= Image: Windows 11 Enterprise multi-session + Microsoft 365 apps
+= Virtual machine size: Standard D4s v5 (4 vCPU, 16 GiB)
+= Number of VMs: 3
+= Virtual network: vnet-avd / snet-hosts
+= Domain to join: Microsoft Entra ID · [x] Enroll VM with Intune
+= Register desktop app group: Yes · Workspace: ws-office
+[Review + create]
+:::
+
+With hosts joined to Entra ID you need two assignments to the same user group (`sg-avd-office`):
+
+- On the **desktop application group**: the user assignment, so they see the desktop.
+- On the machines' **resource group**: the **Virtual Machine User Login** role (or *Administrator Login* for IT). Without it, users see the desktop in their list but the sign-in to the host fails.
+
+In the host pool's RDP properties, `enablerdsaadauth:i:1` turns on single sign-on with Entra ID: users don't type their password again when the session starts.
+
+## 3. Profiles with FSLogix
+
+In multi-session, users don't always land on the same machine: their profile has to travel with them. FSLogix keeps it in a VHDX disk on Azure Files and mounts it at sign-in.
+
+:::term PowerShell · in the image or through Intune (settings catalog, FSLogix)
+$ New-Item -Path "HKLM:\\SOFTWARE\\FSLogix\\Profiles" -Force | Out-Null
+$ Set-ItemProperty "HKLM:\\SOFTWARE\\FSLogix\\Profiles" -Name Enabled -Value 1 -Type DWord
+$ Set-ItemProperty "HKLM:\\SOFTWARE\\FSLogix\\Profiles" -Name VHDLocations -Value "\\\\stavdprofiles.file.core.windows.net\\profiles" -Type String
+$ Set-ItemProperty "HKLM:\\SOFTWARE\\FSLogix\\Profiles" -Name DeleteLocalProfileWhenVHDShouldApply -Value 1 -Type DWord
+$ Set-ItemProperty "HKLM:\\SOFTWARE\\FSLogix\\Profiles" -Name FlipFlopProfileDirectoryName -Value 1 -Type DWord
+:::
+
+- `FlipFlopProfileDirectoryName` names each profile folder `user_SID`: you find it at a glance when one has to be released or deleted.
+- For hosts joined to Entra ID to mount the share with the user's identity, the storage account uses **Microsoft Entra Kerberos** (hybrid identities), and the share permissions go to the same `sg-avd-office` group.
+
+## 4. Autoscaling
+
+Three machines running all night is money thrown away. A **scaling plan** powers them on and off by time and load.
+
+:::ui Azure portal · Scaling plan
+> Azure Virtual Desktop › Scaling plans › sp-office › Schedules › Weekdays
+= Ramp-up start: 07:30 · Minimum hosts: 20% · Capacity threshold: 60%
+= Peak hours: 08:30 · Load balancing: Breadth-first
+= Ramp-down start: 18:00 · Minimum hosts: 10% · Force logoff: Yes, after 30 min with a warning
+= Off-peak: 20:00 · Load balancing: Depth-first
+= Assigned host pool: hp-office-01
+[Save]
+:::
+
+For the plan to power machines on and off, the **Azure Virtual Desktop** service principal needs the **Desktop Virtualization Power On Off Contributor** role on the subscription or resource group. It is the most common miss: the plan exists, but never does anything.
+
+## 5. Windows 365 in three steps
+
+:::ui Intune admin center · Windows 365
+> Devices › Windows 365 › Provisioning policies › Create policy
+= Name: w365-contractors
+= Join type: Microsoft Entra Join
+= Network: Microsoft hosted network · Region: Europe (West)
+= Image: Gallery · Windows 11 Enterprise + Microsoft 365 apps
+= Assignments: sg-w365-contractors
+[Create]
+:::
+
+1. The provisioning policy (above).
+2. A **Windows 365 Enterprise** licence of the right size (for example 2 vCPU, 8 GB, 128 GB) for each user in the group.
+3. Wait for the **Provisioned** status in *All Cloud PCs* and send the user to `windows365.microsoft.com` or the Windows app.
+
+From then on the Cloud PC is managed like any Intune device: profiles, compliance, apps (Level 3 Intune guide).
+
+## 6. The ticket: "I can't connect to my desktop"
+
+First, the state of the hosts:
+
+:::ui Azure portal · Session hosts
+> Azure Virtual Desktop › Host pools › hp-office-01 › Session hosts
+avd-off-0   Available       Sessions: 8/8   Drain mode: Off
+avd-off-1   Unavailable     Sessions: 0/8   Drain mode: Off   Health check: FSLogix · Failed
+avd-off-2   Shutdown        Sessions: 0/8   Drain mode: Off
+:::
+
+With one machine full, another with FSLogix broken and the third powered off by the scaling plan, no new user gets in. Each host's **health checks** (domain join, FSLogix, AVD stack, agent) tell you which one fails without logging on to the machine.
+
+Then the connection errors. With the host pool diagnostics sent to Log Analytics (or the **Insights** page):
+
+:::term Log Analytics · KQL
+$ WVDErrors
+$ | where TimeGenerated > ago(4h) and UserName == "laura.prado@contoso.com"
+$ | project TimeGenerated, CodeSymbolic, Source, Message
+TimeGenerated         CodeSymbolic                              Source        Message
+27/10/2026 08:41:12   ConnectionFailedNoHealthyRdshAvailable    RDBroker      No healthy session host is available
+:::
+
+- `ConnectionFailedNoHealthyRdshAvailable`: no healthy host with room. Look at the health checks and the scaling plan (capacity threshold too high, minimum hosts too low).
+- On the host, `C:\\ProgramData\\FSLogix\\Logs\\Profile` explains profiles that won't mount. The classic: **0x00000020** (the profile disk is in use), an earlier session left hanging on another host. Close that session and the user signs in again.
+- In Windows 365, *All Cloud PCs* has **Troubleshoot** (connectivity test), **Restart** and **Restore** to an earlier point.
+
+## 7. What you review each month
+
+- **Cost** per resource group in Cost Management: if it rises without more users, scaling isn't powering off.
+- Hosts on an image more than a month old: they are replaced by new hosts on the current image, not patched by hand one by one.
+- In Windows 365, the **Cloud PC utilization** report: the ones nobody uses are reassigned or the licence is removed.
+- Profile size on Azure Files: a profile that keeps growing is usually an unexcluded Teams or OneDrive cache.
+
+## Next steps
+
+- **Azure Compute Gallery** with Azure Image Builder so the monthly image builds itself.
+- **RemoteApp** application groups: publish just the ERP instead of the whole desktop.
+- **Windows 365 Frontline** for devices shared across shifts.
+- The Level 2 VMware Horizon guide has the on-premises version of all this: comparing the two helps you defend the proposal.
+""")
+
+# ---------------------------------------------------------------- L4 · DR/BCP
+g(slug="dr-bcp-rpo-y-rto-por-servicio-plan-de-recuperacion-y-prueba-completa", topic="dr-bcp", date="2026-10-27",
+  title_es="DR/BCP: RPO y RTO por servicio, el plan de recuperación y una prueba completa",
+  title_en="DR/BCP: RPO and RTO per service, the recovery plan and a full test",
+  dek_es="El análisis de impacto que fija cuánto dato y cuánto tiempo puede perder cada servicio, la regla 3-2-1-1-0 con una copia inmutable, el runbook con el orden de arranque, y una prueba de recuperación medida con informe y acciones.",
+  dek_en="The impact analysis that sets how much data and how much time each service can lose, the 3-2-1-1-0 rule with an immutable copy, the runbook with the start-up order, and a measured recovery test with a report and actions.",
+  es="""
+## Qué vas a conseguir
+
+Pasar de "tenemos copias" a "sabemos cuánto tardamos en volver y lo hemos medido". Cada servicio con su RPO y RTO acordados con negocio, copias que un ransomware no puede borrar, un plan de recuperación que otra persona puede seguir a las tres de la mañana, y una prueba anual que demuestra que todo eso funciona.
+
+## Antes de empezar
+
+- La lista de servicios y sus dependencias (CMDB, inventario o la hoja que haya). El repo 32 del portfolio, *Backup Restore Test Tracker*, sirve de plantilla para llevar servicios, RPO y pruebas.
+- Un responsable de negocio por servicio que pueda decidir cuánto puede estar parado.
+- La herramienta de copias con trabajos funcionando (guía de Veeam del Nivel 2) y un segundo emplazamiento o región de nube.
+- Dos palabras claras: **RPO** es cuánto dato puedes perder (la antigüedad de la última copia buena) y **RTO** es cuánto puedes tardar en volver a dar servicio.
+
+## 1. El análisis de impacto (BIA) en una tabla
+
+Una reunión por área con una pregunta: "si este servicio cae a las 10:00 de un lunes, ¿a partir de qué hora es un problema serio, y cuánto trabajo perdido aceptas rehacer?". De ahí sale la tabla, no de IT.
+
+| Servicio | Si cae | RPO | RTO | Nivel |
+|---|---|---|---|---|
+| ERP (pedidos y facturación) | No se factura ni se envía | 15 min | 4 h | 1 |
+| Active Directory y DNS | No entra nadie a nada | 1 h | 2 h | 1 |
+| Servidor de ficheros (unidad S:) | Se trabaja con copias locales | 24 h | 8 h | 2 |
+| Intranet | Molestia, hay alternativas | 24 h | 48 h | 3 |
+| Correo (Microsoft 365) | SaaS: depende de Microsoft | 24 h (copia propia) | — | 1 |
+
+- El **nivel** decide el orden de recuperación y el presupuesto: un RPO de 15 minutos exige replicación o logs de base de datos, no una copia nocturna.
+- Microsoft 365 no es "sin copia": Microsoft garantiza el servicio, no que recuperes lo que un usuario o un atacante borró hace cuatro meses. Una copia propia (por ejemplo Veeam Backup for Microsoft 365) cubre ese hueco.
+
+## 2. La regla 3-2-1-1-0
+
+- **3** copias de los datos (la producción y dos más).
+- **2** soportes distintos (disco y objeto, o disco y cinta).
+- **1** fuera del emplazamiento.
+- **1** inmutable o desconectada: ni un administrador comprometido puede borrarla antes de que caduque.
+- **0** errores en la verificación: una copia que nunca se ha restaurado es una hipótesis.
+
+:::ui Veeam Backup & Replication · Repositorio reforzado
+> Infraestructura de copia › Repositorios › Añadir › Directo › Linux reforzado
+= Servidor: vbr-hardened-01 (Ubuntu, sin SSH, credenciales de un solo uso)
+= Ruta: /mnt/veeam-xfs (XFS con bloques compartidos)
+= [x] Hacer inmutables las copias recientes durante: 14 días
+= Copia secundaria: Objeto (S3 compatible) con Object Lock · 30 días
+[Aplicar]
+:::
+
+:::term PowerShell · Veeam (consola de copias)
+$ Get-VBRBackupSession | Where-Object { $_.EndTime -gt (Get-Date).AddDays(-1) } | Sort-Object JobName | Format-Table JobName, Result, EndTime
+JobName              Result    EndTime
+-------              ------    -------
+BK-ERP-SQL           Success   27/10/2026 02:14:51
+BK-FS01              Warning   27/10/2026 03:40:09
+BK-Tier1-AD          Success   27/10/2026 01:05:33
+:::
+
+Cada aviso (*Warning*) tiene una causa y un dueño antes del mediodía: un archivo bloqueado hoy es una restauración incompleta mañana.
+
+## 3. El plan de recuperación (runbook)
+
+El plan vive fuera de la infraestructura que protege: impreso, en el gestor de documentos de otro proveedor o en el repositorio, no solo en el SharePoint que puede estar caído.
+
+:::ui Confluence · DR · Runbook de recuperación
+> Espacio IT › Continuidad › RB-DR-01 Recuperación completa de la sede
+= Quién declara el desastre: Director de IT (suplente: responsable de infraestructura)
+= Árbol de llamadas: IT → Dirección → Responsables de área → Proveedores (circuitos, nube, copias)
+= Orden 1: DC01 y DC02 (AD y DNS) · comprobación: dcdiag sin errores, resolución de nombres
+= Orden 2: SQL01 (ERP) · comprobación: base de datos en línea, último log aplicado
+= Orden 3: APP01 y APP02 (servidores del ERP) · comprobación: servicio del ERP arrancado
+= Orden 4: FS01, INTRANET01 · comprobación: unidad S: accesible desde un puesto
+= Vuelta atrás: cómo volver al sitio principal cuando esté sano (y quién decide)
+:::
+
+- El orden sale de las **dependencias**, no del nivel: el ERP es nivel 1, pero sin AD y DNS no arranca.
+- Cada paso tiene una **comprobación** que demuestra que ha funcionado, y la hora a la que se marcó.
+- Los teléfonos de los proveedores y los contratos con sus números de cliente van dentro del plan.
+
+## 4. La prueba
+
+Hay tres tipos y se hacen los tres: **de mesa** (se lee el plan en voz alta con un escenario y aparecen los huecos), **parcial** (se restaura un servicio en una red aislada) y **completa** (se recupera la sede entera en el sitio secundario, sin tocar producción).
+
+:::ui Veeam · Trabajo SureBackup
+> Copia de seguridad › SureBackup › Trabajos › SB-Tier1
+= Laboratorio virtual: VLAB-DR (red aislada, sin salida a producción)
+= Grupo de aplicaciones: DC01 → SQL01 → APP01 (con orden y esperas)
+= Comprobaciones: latido, ping, puerto 1433 en SQL01, script que consulta un pedido de prueba
+= Programación: primer sábado de cada mes, 06:00
+[Iniciar]
+:::
+
+En la prueba completa se cronometra cada paso del runbook:
+
+| Paso | RTO objetivo | Medido | Nota |
+|---|---|---|---|
+| AD y DNS en línea | 2 h | 1 h 10 min | — |
+| ERP dando servicio | 4 h | 5 h 25 min | La licencia del ERP estaba ligada a la MAC del servidor original |
+| Unidad S: accesible | 8 h | 3 h 05 min | — |
+| Último dato del ERP (RPO) | 15 min | 12 min | — |
+
+El ERP se pasó de su RTO por algo que ninguna copia arregla: la licencia. Para eso se hacen las pruebas.
+
+## 5. El informe y las acciones
+
+- Alcance, escenario, hora de inicio y de fin, quién participó.
+- La tabla de tiempos medidos contra los objetivos, servicio a servicio.
+- Cada desviación con una **acción, un dueño y una fecha** (en el ejemplo: pedir al fabricante una licencia para el sitio secundario y añadirla al runbook).
+- Qué cambia en el plan. La versión nueva del runbook se publica el mismo mes.
+- Se presenta a dirección: el BCP es una decisión de negocio, IT aporta los números.
+
+## 6. Lo que revisas cada mes y cada año
+
+- Cada mes: trabajos con aviso o error, resultado del SureBackup, que la copia inmutable sigue siéndolo (fecha de bloqueo del último punto).
+- Cada vez que entra un servicio nuevo: su fila en la tabla del BIA y su paso en el runbook. Sin eso, no entra en producción.
+- Cada año: la prueba completa y la revisión del BIA con negocio (los RPO y RTO cambian cuando cambia el negocio).
+
+## Siguientes pasos
+
+- **Azure Site Recovery** para usar una región de Azure como sitio secundario y pagar el cómputo solo cuando se usa.
+- Un **plan específico de ransomware**: aislar, decidir desde qué punto restaurar (el último limpio, no el último) y comprobar con antivirus el punto antes de devolverlo a producción.
+- **ISO 22301** si la empresa necesita certificar su continuidad de negocio.
+- La alerta de Sentinel que avisa cuando alguien intenta borrar copias o cambiar la inmutabilidad (guía de Microsoft Sentinel).
+""",
+  en="""
+## What you'll get
+
+Moving from "we have backups" to "we know how long it takes us to come back, and we have measured it". Every service with an RPO and RTO agreed with the business, backups ransomware can't delete, a recovery plan someone else can follow at three in the morning, and a yearly test that proves all of it works.
+
+## Before you start
+
+- The list of services and their dependencies (CMDB, inventory or whatever spreadsheet exists). Repo 32 in the portfolio, *Backup Restore Test Tracker*, works as a template to track services, RPOs and tests.
+- One business owner per service who can decide how long it may be down.
+- The backup tool with working jobs (Level 2 Veeam guide) and a second site or cloud region.
+- Two clear words: **RPO** is how much data you can lose (the age of the last good backup) and **RTO** is how long you can take to restore service.
+
+## 1. The impact analysis (BIA) in one table
+
+One meeting per area with one question: "if this service goes down at 10:00 on a Monday, from what time is it a serious problem, and how much lost work will you accept redoing?". The table comes from there, not from IT.
+
+| Service | If it goes down | RPO | RTO | Tier |
+|---|---|---|---|---|
+| ERP (orders and invoicing) | No invoicing, no shipping | 15 min | 4 h | 1 |
+| Active Directory and DNS | Nobody can get into anything | 1 h | 2 h | 1 |
+| File server (S: drive) | People work from local copies | 24 h | 8 h | 2 |
+| Intranet | Annoying, there are alternatives | 24 h | 48 h | 3 |
+| Email (Microsoft 365) | SaaS: depends on Microsoft | 24 h (own backup) | — | 1 |
+
+- The **tier** decides the recovery order and the budget: a 15-minute RPO needs replication or database logs, not a nightly backup.
+- Microsoft 365 is not "no backup needed": Microsoft guarantees the service, not that you recover what a user or an attacker deleted four months ago. Your own backup (for example Veeam Backup for Microsoft 365) covers that gap.
+
+## 2. The 3-2-1-1-0 rule
+
+- **3** copies of the data (production plus two).
+- **2** different media (disk and object, or disk and tape).
+- **1** off site.
+- **1** immutable or offline: not even a compromised administrator can delete it before it expires.
+- **0** errors in verification: a backup that has never been restored is a hypothesis.
+
+:::ui Veeam Backup & Replication · Hardened repository
+> Backup Infrastructure › Backup Repositories › Add › Direct attached › Hardened Linux
+= Server: vbr-hardened-01 (Ubuntu, no SSH, single-use credentials)
+= Path: /mnt/veeam-xfs (XFS with shared blocks)
+= [x] Make recent backups immutable for: 14 days
+= Secondary copy: Object (S3 compatible) with Object Lock · 30 days
+[Apply]
+:::
+
+:::term PowerShell · Veeam (backup console)
+$ Get-VBRBackupSession | Where-Object { $_.EndTime -gt (Get-Date).AddDays(-1) } | Sort-Object JobName | Format-Table JobName, Result, EndTime
+JobName              Result    EndTime
+-------              ------    -------
+BK-ERP-SQL           Success   27/10/2026 02:14:51
+BK-FS01              Warning   27/10/2026 03:40:09
+BK-Tier1-AD          Success   27/10/2026 01:05:33
+:::
+
+Every *Warning* has a cause and an owner before midday: a locked file today is an incomplete restore tomorrow.
+
+## 3. The recovery plan (runbook)
+
+The plan lives outside the infrastructure it protects: printed, in another provider's document store or in the repository, not only in the SharePoint that may be down.
+
+:::ui Confluence · DR · Recovery runbook
+> IT space › Continuity › RB-DR-01 Full site recovery
+= Who declares the disaster: IT Director (deputy: infrastructure lead)
+= Call tree: IT → Management → Area leads → Providers (circuits, cloud, backup)
+= Order 1: DC01 and DC02 (AD and DNS) · check: dcdiag with no errors, name resolution
+= Order 2: SQL01 (ERP) · check: database online, last log applied
+= Order 3: APP01 and APP02 (ERP servers) · check: ERP service started
+= Order 4: FS01, INTRANET01 · check: S: drive reachable from a desktop
+= Failback: how to return to the main site once it is healthy (and who decides)
+:::
+
+- The order comes from **dependencies**, not from the tier: the ERP is tier 1, but without AD and DNS it won't start.
+- Every step has a **check** that proves it worked, and the time it was ticked.
+- The providers' phone numbers and the contracts with their customer numbers go inside the plan.
+
+## 4. The test
+
+There are three kinds and you do all three: **tabletop** (the plan is read aloud against a scenario and the gaps appear), **partial** (one service is restored into an isolated network) and **full** (the whole site is recovered at the secondary site, without touching production).
+
+:::ui Veeam · SureBackup job
+> Backup › SureBackup › Jobs › SB-Tier1
+= Virtual lab: VLAB-DR (isolated network, no route to production)
+= Application group: DC01 → SQL01 → APP01 (with order and waits)
+= Checks: heartbeat, ping, port 1433 on SQL01, a script that queries a test order
+= Schedule: first Saturday of every month, 06:00
+[Start]
+:::
+
+In the full test each runbook step is timed:
+
+| Step | Target RTO | Measured | Note |
+|---|---|---|---|
+| AD and DNS online | 2 h | 1 h 10 min | — |
+| ERP serving | 4 h | 5 h 25 min | The ERP licence was tied to the original server's MAC address |
+| S: drive reachable | 8 h | 3 h 05 min | — |
+| Latest ERP data (RPO) | 15 min | 12 min | — |
+
+The ERP missed its RTO because of something no backup fixes: the licence. That is what tests are for.
+
+## 5. The report and the actions
+
+- Scope, scenario, start and end time, who took part.
+- The table of measured times against the targets, service by service.
+- Every deviation with an **action, an owner and a date** (in the example: ask the vendor for a licence for the secondary site and add it to the runbook).
+- What changes in the plan. The new runbook version is published the same month.
+- It goes to management: the BCP is a business decision, IT brings the numbers.
+
+## 6. What you review every month and every year
+
+- Every month: jobs with warnings or errors, the SureBackup result, that the immutable copy still is (the lock date of the latest point).
+- Whenever a new service arrives: its row in the BIA table and its step in the runbook. Without them, it doesn't go into production.
+- Every year: the full test and the BIA review with the business (RPOs and RTOs change when the business changes).
+
+## Next steps
+
+- **Azure Site Recovery** to use an Azure region as the secondary site and pay for compute only when you use it.
+- A **ransomware-specific plan**: isolate, decide which point to restore from (the last clean one, not the last one) and scan that point before it goes back to production.
+- **ISO 22301** if the company needs to certify its business continuity.
+- The Sentinel alert that fires when someone tries to delete backups or change immutability (Microsoft Sentinel guide).
+""")
+
+# ---------------------------------------------------------------- L4 · Cisco
+g(slug="cisco-vlans-troncales-router-de-la-sede-y-un-puerto-que-no-da-red", topic="cisco", date="2026-10-27",
+  title_es="Cisco: VLANs, troncales, el router de la sede y un puerto que no da red",
+  title_en="Cisco: VLANs, trunks, the site router and a port that gives no network",
+  dek_es="Leer un switch Catalyst antes de tocarlo, configurar puertos de acceso y troncales sin cortar una planta, la ruta por defecto con respaldo automático en el router, el diagnóstico de un puerto en err-disabled y cómo hacer cambios en remoto con red de seguridad.",
+  dek_en="Read a Catalyst switch before touching it, configure access ports and trunks without cutting off a floor, the default route with automatic failover on the router, diagnosing a port in err-disabled, and how to make remote changes with a safety net.",
+  es="""
+## Qué vas a conseguir
+
+Moverte con soltura en la red de una sede con switches Catalyst y un router ISR: entender qué hay antes de cambiar nada, dar de alta puestos y teléfonos en su VLAN, ampliar una troncal sin dejar a nadie sin red, que el router cambie solo al circuito de respaldo, y resolver el ticket de red más habitual en minutos.
+
+## Antes de empezar
+
+- Acceso por **SSH** (nunca Telnet) o consola, con usuario nominal (TACACS+ o RADIUS si existe; cuenta local solo de emergencia).
+- Una **copia de la configuración** de cada equipo antes de la ventana de cambio, y el cambio aprobado.
+- El plano de la sede: qué switch da servicio a qué planta, qué VLAN es qué, dónde está el uplink al core y qué IP tiene cada circuito.
+
+## 1. Leer el switch antes de tocarlo
+
+:::term SW-P2-01 · Catalyst 9200 (IOS XE)
+$ show version | include uptime|Software
+$ show vlan brief
+$ show interfaces status
+$ show interfaces trunk
+$ show cdp neighbors
+SW-P2-01 uptime is 41 weeks, 2 days, 3 hours, 12 minutes
+Cisco IOS XE Software, Version 17.09.04a
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+10   GESTION                          active
+20   USUARIOS                         active    Gi1/0/1, Gi1/0/2, ... Gi1/0/40
+30   VOZ                              active
+99   IMPRESORAS                       active    Gi1/0/41, Gi1/0/42
+Port      Mode     Encapsulation  Status        Native vlan
+Te1/1/1   on       802.1q         trunking      999
+Port      Vlans allowed on trunk
+Te1/1/1   10,20,30,99
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+CORE-01          Ten 1/1/1         141             R S I  C9500     Ten 1/0/7
+:::
+
+Con esto sabes la versión, qué VLAN existe y dónde, qué troncales hay y qué VLAN dejan pasar, y quién está al otro lado de cada enlace (CDP). Si una VLAN no aparece en *Vlans allowed on trunk*, esa VLAN no llega a esta planta.
+
+## 2. Un puesto con teléfono: puerto de acceso
+
+:::term SW-P2-01 · configuración
+$ configure terminal
+$ interface GigabitEthernet1/0/12
+$  description PUESTO 2.14
+$  switchport mode access
+$  switchport access vlan 20
+$  switchport voice vlan 30
+$  spanning-tree portfast
+$  spanning-tree bpduguard enable
+$  no shutdown
+$ end
+$ copy running-config startup-config
+:::
+
+- `switchport voice vlan 30`: el teléfono IP marca su tráfico en la VLAN de voz y el PC que cuelga de él sigue en la 20. Un solo cable, dos redes.
+- `portfast` hace que el puerto pase a reenviar al instante (el PC coge IP sin esperar 30 segundos) y `bpduguard` lo apaga si alguien conecta un switch. Siempre van juntos en los puertos de usuario.
+- Sin `copy running-config startup-config`, el cambio se pierde en el siguiente reinicio.
+
+## 3. La troncal: añadir una VLAN sin cortar la planta
+
+:::term SW-P2-01 · troncal hacia el core
+$ show interfaces Te1/1/1 trunk
+$ configure terminal
+$ interface TenGigabitEthernet1/1/1
+$  switchport trunk allowed vlan add 40
+$ end
+:::
+
+! `switchport trunk allowed vlan 40` (sin **add**) sustituye la lista entera: la troncal deja pasar solo la VLAN 40 y la planta se queda sin red de usuarios, voz y gestión, incluida tu sesión SSH. Es el error de red más caro y más repetido. Siempre `add` o `remove`, y la lista completa revisada con `show interfaces trunk` antes y después.
+
+La VLAN 40 también tiene que existir en el switch (`vlan 40`, `name INVITADOS`) y estar permitida en el otro extremo, en el core. Y la VLAN nativa de las troncales es una que no use nadie (aquí la 999), no la 1.
+
+## 4. El router de la sede: salida y circuito de respaldo
+
+La sede tiene un circuito principal y uno de respaldo. El router sale por el principal mientras el proveedor responda, y cambia solo al respaldo cuando deja de hacerlo.
+
+:::term RT-SEDE-01 · ISR 4331
+$ configure terminal
+$ ip sla 1
+$  icmp-echo 203.0.113.1 source-interface GigabitEthernet0/0/0
+$  frequency 10
+$ ip sla schedule 1 life forever start-time now
+$ track 1 ip sla 1 reachability
+$ ip route 0.0.0.0 0.0.0.0 203.0.113.1 track 1
+$ ip route 0.0.0.0 0.0.0.0 198.51.100.1 250
+$ end
+$ show track 1
+Track 1
+  IP SLA 1 reachability
+  Reachability is Up
+    2 changes, last change 3d04h
+:::
+
+- **IP SLA** hace ping cada 10 segundos a la puerta de enlace del proveedor principal; el **track** sigue ese resultado.
+- La ruta por defecto principal depende del track. Cuando el ping falla, desaparece y queda la de respaldo, que tiene distancia administrativa 250 (*ruta flotante*).
+- Para comprobarlo sin esperar a una avería: `show ip route 0.0.0.0` dice qué ruta está activa; en una ventana de cambio, se apaga la interfaz del principal y se mira cuánto tarda en cambiar.
+
+En la interfaz de cada VLAN de usuarios del core, `ip helper-address 10.20.1.10` reenvía las peticiones de DHCP al servidor: sin ella, los puestos de una VLAN nueva se quedan con una IP 169.254.x.x.
+
+## 5. El ticket: "el puesto 2.14 no tiene red"
+
+:::term SW-P2-01 · diagnóstico
+$ show interfaces Gi1/0/12 status
+$ show logging | include Gi1/0/12
+Port      Name          Status       Vlan  Duplex  Speed Type
+Gi1/0/12  PUESTO 2.14   err-disabled 20    auto    auto  10/100/1000BaseTX
+%SPANTREE-2-BLOCK_BPDUGUARD: Received BPDU on port Gi1/0/12 with BPDU Guard enabled. Disabling port.
+%PM-4-ERR_DISABLE: bpduguard error detected on Gi1/0/12, putting Gi1/0/12 in err-disable state
+:::
+
+El estado del puerto dice casi todo:
+
+| Estado | Qué significa | Qué haces |
+|---|---|---|
+| **connected** | Hay enlace | `show mac address-table interface Gi1/0/12`: ¿aparece la MAC del PC? Si sí, el problema es IP/DHCP, no el switch |
+| **notconnect** | No hay enlace | Cable, roseta, el patch del armario o la tarjeta del PC |
+| **err-disabled** | El switch lo ha apagado a propósito | `show logging` dice por qué (bpduguard, port-security, flapping) |
+| **disabled** | Alguien lo apagó (`shutdown`) | El historial de cambios dice quién y por qué |
+
+Aquí alguien conectó un switch pequeño en su mesa para tener más puertos. Se retira el aparato y se reactiva el puerto:
+
+:::term SW-P2-01
+$ configure terminal
+$ interface Gi1/0/12
+$  shutdown
+$  no shutdown
+$ end
+:::
+
+Si en `show interfaces Gi1/0/12` aparecen errores de **CRC** o *input errors* que suben, el problema es físico: el cable o la roseta.
+
+## 6. Cambios en remoto con red de seguridad
+
+:::term Antes de un cambio que podría dejarte sin acceso
+$ reload in 10
+$ configure terminal
+# ... el cambio ...
+$ end
+# si sigues conectado y todo va bien:
+$ reload cancel
+$ copy running-config startup-config
+:::
+
+`reload in 10` programa un reinicio dentro de 10 minutos. Si el cambio te deja fuera, el equipo arranca con la configuración guardada (la anterior) y vuelves a entrar. Si todo va bien, `reload cancel` y se guarda. Es la diferencia entre una corrección en dos minutos y un viaje a la sede.
+
+## 7. Lo que revisas cada mes
+
+- Copias de configuración automáticas (Oxidized, RANCID o el propio `archive` de IOS) y que el último cambio está en el repositorio.
+- Versiones de IOS XE frente a los avisos de seguridad de Cisco: los equipos con un aviso crítico tienen fecha de actualización.
+- Puertos `err-disabled` y puertos sin uso en más de 90 días (`show interfaces | include line protocol|Last input`): los que no se usan se apagan y se dejan en una VLAN sin servicio.
+- Que el track del router ha cambiado tantas veces como averías ha tenido el circuito. Si cambia sin avería, el ping se está perdiendo y hay que hablar con el proveedor.
+
+## Siguientes pasos
+
+- **802.1X** con Cisco ISE o NPS: el puerto da la VLAN según quién se conecta, no según el puerto.
+- **NetBox** como fuente de verdad (qué puerto va a qué roseta) y **Ansible** con la colección `cisco.ios` para cambios repetibles (guía de Ansible del Nivel 3).
+- SD-WAN cuando las sedes son muchas y los circuitos, variados.
+- La guía de FortiGate (próximamente) cubre el cortafuegos que suele estar entre este router y el resto del mundo.
+""",
+  en="""
+## What you'll get
+
+Moving with ease in a site's network with Catalyst switches and an ISR router: understanding what is there before changing anything, bringing desks and phones onto their VLAN, extending a trunk without leaving anyone offline, having the router switch to the backup circuit by itself, and solving the most common network ticket in minutes.
+
+## Before you start
+
+- Access over **SSH** (never Telnet) or console, with a named account (TACACS+ or RADIUS if available; local account for emergencies only).
+- A **copy of the configuration** of every device before the change window, and the change approved.
+- The site map: which switch serves which floor, which VLAN is which, where the uplink to the core is and which IP each circuit has.
+
+## 1. Read the switch before touching it
+
+:::term SW-F2-01 · Catalyst 9200 (IOS XE)
+$ show version | include uptime|Software
+$ show vlan brief
+$ show interfaces status
+$ show interfaces trunk
+$ show cdp neighbors
+SW-F2-01 uptime is 41 weeks, 2 days, 3 hours, 12 minutes
+Cisco IOS XE Software, Version 17.09.04a
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+10   MANAGEMENT                       active
+20   USERS                            active    Gi1/0/1, Gi1/0/2, ... Gi1/0/40
+30   VOICE                            active
+99   PRINTERS                         active    Gi1/0/41, Gi1/0/42
+Port      Mode     Encapsulation  Status        Native vlan
+Te1/1/1   on       802.1q         trunking      999
+Port      Vlans allowed on trunk
+Te1/1/1   10,20,30,99
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+CORE-01          Ten 1/1/1         141             R S I  C9500     Ten 1/0/7
+:::
+
+With this you know the version, which VLANs exist and where, which trunks there are and which VLANs they carry, and who is on the other side of each link (CDP). If a VLAN isn't in *Vlans allowed on trunk*, that VLAN doesn't reach this floor.
+
+## 2. A desk with a phone: access port
+
+:::term SW-F2-01 · configuration
+$ configure terminal
+$ interface GigabitEthernet1/0/12
+$  description DESK 2.14
+$  switchport mode access
+$  switchport access vlan 20
+$  switchport voice vlan 30
+$  spanning-tree portfast
+$  spanning-tree bpduguard enable
+$  no shutdown
+$ end
+$ copy running-config startup-config
+:::
+
+- `switchport voice vlan 30`: the IP phone tags its traffic on the voice VLAN and the PC hanging off it stays on 20. One cable, two networks.
+- `portfast` makes the port forward straight away (the PC gets an IP without waiting 30 seconds) and `bpduguard` shuts it down if someone plugs in a switch. They always go together on user ports.
+- Without `copy running-config startup-config`, the change is lost at the next reload.
+
+## 3. The trunk: adding a VLAN without cutting off the floor
+
+:::term SW-F2-01 · trunk to the core
+$ show interfaces Te1/1/1 trunk
+$ configure terminal
+$ interface TenGigabitEthernet1/1/1
+$  switchport trunk allowed vlan add 40
+$ end
+:::
+
+! `switchport trunk allowed vlan 40` (without **add**) replaces the whole list: the trunk carries only VLAN 40 and the floor loses the user, voice and management networks, including your SSH session. It is the most expensive and most repeated network mistake. Always `add` or `remove`, and the full list checked with `show interfaces trunk` before and after.
+
+VLAN 40 also has to exist on the switch (`vlan 40`, `name GUESTS`) and be allowed at the other end, on the core. And the trunks' native VLAN is one nobody uses (999 here), not 1.
+
+## 4. The site router: egress and backup circuit
+
+The site has a primary circuit and a backup one. The router goes out through the primary while the provider responds, and switches to the backup by itself when it stops responding.
+
+:::term RT-SITE-01 · ISR 4331
+$ configure terminal
+$ ip sla 1
+$  icmp-echo 203.0.113.1 source-interface GigabitEthernet0/0/0
+$  frequency 10
+$ ip sla schedule 1 life forever start-time now
+$ track 1 ip sla 1 reachability
+$ ip route 0.0.0.0 0.0.0.0 203.0.113.1 track 1
+$ ip route 0.0.0.0 0.0.0.0 198.51.100.1 250
+$ end
+$ show track 1
+Track 1
+  IP SLA 1 reachability
+  Reachability is Up
+    2 changes, last change 3d04h
+:::
+
+- **IP SLA** pings the primary provider's gateway every 10 seconds; the **track** follows that result.
+- The primary default route depends on the track. When the ping fails it disappears and the backup one remains, with administrative distance 250 (a *floating route*).
+- To check it without waiting for a fault: `show ip route 0.0.0.0` says which route is active; in a change window, shut the primary interface and time how long it takes to switch.
+
+On each user VLAN interface on the core, `ip helper-address 10.20.1.10` forwards DHCP requests to the server: without it, desks on a new VLAN end up with a 169.254.x.x address.
+
+## 5. The ticket: "desk 2.14 has no network"
+
+:::term SW-F2-01 · diagnosis
+$ show interfaces Gi1/0/12 status
+$ show logging | include Gi1/0/12
+Port      Name          Status       Vlan  Duplex  Speed Type
+Gi1/0/12  DESK 2.14     err-disabled 20    auto    auto  10/100/1000BaseTX
+%SPANTREE-2-BLOCK_BPDUGUARD: Received BPDU on port Gi1/0/12 with BPDU Guard enabled. Disabling port.
+%PM-4-ERR_DISABLE: bpduguard error detected on Gi1/0/12, putting Gi1/0/12 in err-disable state
+:::
+
+The port status says almost everything:
+
+| Status | What it means | What you do |
+|---|---|---|
+| **connected** | There is a link | `show mac address-table interface Gi1/0/12`: does the PC's MAC show up? If yes, the problem is IP/DHCP, not the switch |
+| **notconnect** | No link | Cable, wall socket, the patch in the cabinet or the PC's network card |
+| **err-disabled** | The switch shut it down on purpose | `show logging` says why (bpduguard, port-security, flapping) |
+| **disabled** | Someone shut it down (`shutdown`) | The change history says who and why |
+
+Here someone plugged a small switch into their desk to get more ports. The device is removed and the port re-enabled:
+
+:::term SW-F2-01
+$ configure terminal
+$ interface Gi1/0/12
+$  shutdown
+$  no shutdown
+$ end
+:::
+
+If `show interfaces Gi1/0/12` shows **CRC** errors or *input errors* going up, the problem is physical: the cable or the wall socket.
+
+## 6. Remote changes with a safety net
+
+:::term Before a change that could lock you out
+$ reload in 10
+$ configure terminal
+# ... the change ...
+$ end
+# if you are still connected and everything works:
+$ reload cancel
+$ copy running-config startup-config
+:::
+
+`reload in 10` schedules a reload in 10 minutes. If the change locks you out, the device boots with the saved (previous) configuration and you get back in. If all is well, `reload cancel` and save. It is the difference between a two-minute fix and a trip to the site.
+
+## 7. What you review each month
+
+- Automatic configuration backups (Oxidized, RANCID or IOS's own `archive`) and that the latest change is in the repository.
+- IOS XE versions against Cisco's security advisories: devices with a critical advisory have an upgrade date.
+- Ports in `err-disabled` and ports unused for more than 90 days (`show interfaces | include line protocol|Last input`): unused ones are shut down and left in a VLAN with no service.
+- That the router's track has changed as many times as the circuit has had faults. If it changes without a fault, pings are being lost and it's time to talk to the provider.
+
+## Next steps
+
+- **802.1X** with Cisco ISE or NPS: the port gives a VLAN based on who connects, not on the port.
+- **NetBox** as the source of truth (which port goes to which socket) and **Ansible** with the `cisco.ios` collection for repeatable changes (Level 3 Ansible guide).
+- SD-WAN when there are many sites and the circuits are varied.
+- The FortiGate guide (coming soon) covers the firewall that usually sits between this router and the rest of the world.
+""")
+
+# ---------------------------------------------------------------- L4 · Global Admin and PIM
+g(slug="microsoft-365-roles-de-administracion-pim-y-cuentas-de-emergencia", topic="m365-pim", date="2026-10-27",
+  title_es="Microsoft 365: los roles de administración, PIM y las cuentas de emergencia",
+  title_en="Microsoft 365: admin roles, PIM and the emergency accounts",
+  dek_es="Inventariar quién es administrador hoy, pasar cada tarea al rol mínimo, dejar dos cuentas de emergencia bien guardadas, convertir el resto en asignaciones elegibles con PIM (MFA, justificación y aprobación), y las revisiones y alertas que lo mantienen así.",
+  dek_en="Inventory who is an administrator today, move each task to the least-privileged role, keep two well-guarded emergency accounts, turn the rest into eligible assignments with PIM (MFA, justification and approval), and the reviews and alerts that keep it that way.",
+  es="""
+## Qué vas a conseguir
+
+Un tenant donde nadie es administrador global por costumbre. Cada técnico tiene el rol justo para su trabajo, lo activa cuando lo necesita durante un tiempo limitado y dejando rastro, y solo dos cuentas de emergencia tienen el rol de forma permanente. Si roban la contraseña de un técnico un martes cualquiera, el atacante no se lleva el tenant.
+
+## Antes de empezar
+
+- Licencias **Microsoft Entra ID P2** (incluidas en Microsoft 365 E5 o en Entra ID Governance) para los usuarios que usarán PIM.
+- El rol **Privileged Role Administrator** para configurar PIM (y, al principio, un Global Administrator a mano).
+- El módulo **Microsoft Graph PowerShell** (guía de Graph del Nivel 3).
+- Una conversación previa con el equipo: va a cambiar cómo trabajan. Explicar el porqué ahorra muchas quejas.
+
+## 1. Quién es administrador hoy
+
+:::term PowerShell · Microsoft Graph
+$ Connect-MgGraph -Scopes "RoleManagement.Read.Directory","User.Read.All"
+$ Get-MgDirectoryRole | ForEach-Object { $r = $_; Get-MgDirectoryRoleMember -DirectoryRoleId $r.Id | ForEach-Object { [pscustomobject]@{ Rol = $r.DisplayName; Miembro = $_.AdditionalProperties.userPrincipalName } } } | Sort-Object Rol | Format-Table
+Rol                          Miembro
+---                          -------
+Exchange Administrator       a.vidal@contoso.com
+Global Administrator         admin@contoso.onmicrosoft.com
+Global Administrator         j.serrano@contoso.com
+Global Administrator         m.ortega@contoso.com
+Global Administrator         p.ruiz@contoso.com
+Global Administrator         proveedor.soporte@contoso.com
+Global Administrator         s.navas@contoso.com
+User Administrator           l.prado@contoso.com
+:::
+
+Seis administradores globales, uno de ellos la cuenta de un proveedor y otro la cuenta con la que se creó el tenant. Es lo normal en un tenant de unos años, y es lo que vas a cambiar.
+
+## 2. Cada tarea a su rol mínimo
+
+| Tarea habitual | Rol suficiente |
+|---|---|
+| Restablecer contraseñas de usuarios | Helpdesk Administrator |
+| Métodos de MFA de los usuarios | Authentication Administrator |
+| Altas, bajas y grupos | User Administrator |
+| Licencias | License Administrator |
+| Buzones, reglas de transporte | Exchange Administrator |
+| Teams, directivas de reuniones | Teams Administrator |
+| Dispositivos y directivas de Intune | Intune Administrator |
+| Conditional Access | Conditional Access Administrator |
+| Leer todo sin cambiar nada (auditorías) | Global Reader |
+| Facturación y suscripciones | Billing Administrator |
+
+Con esta tabla, casi nadie necesita Global Administrator para su día a día. El proveedor tampoco: se le da un rol concreto mediante **GDAP** (relaciones de administración delegada con permisos granulares y caducidad) en lugar de una cuenta dentro del tenant.
+
+## 3. Las dos cuentas de emergencia
+
+- Dos cuentas **solo en la nube** con el dominio `onmicrosoft.com` (`brk-admin-01`, `brk-admin-02`), sin licencia, sin buzón, sin dependencia de AD local ni de un proveedor de identidad federado.
+- Son las únicas con **Global Administrator permanente (activo)**.
+- Excluidas de todas las políticas de Conditional Access (guía de Conditional Access del Nivel 3), salvo de una propia que exija su método de autenticación.
+- Microsoft exige MFA para entrar en los portales de administración, también a estas cuentas: cada una tiene una **llave FIDO2 (passkey)** guardada en una caja fuerte, distinta para cada cuenta, y la contraseña larga en un sobre en otra ubicación.
+- Cada inicio de sesión con ellas genera una alerta inmediata (guía de Microsoft Sentinel). Se prueban cada tres meses, con un cambio registrado, para saber que funcionan.
+
+## 4. PIM: elegible en lugar de permanente
+
+:::ui Entra admin center · PIM · Configuración del rol
+> Gobierno de identidades › Privileged Identity Management › Roles de Microsoft Entra › Configuración › Global Administrator
+= Duración máxima de la activación: 2 horas
+= Al activar, requerir: Contexto de autenticación de Conditional Access (c1 · MFA resistente a phishing)
+= Requerir justificación al activar: Sí
+= Requerir información del ticket al activar: Sí
+= Requerir aprobación para activar: Sí · Aprobadores: sg-pim-aprobadores
+= Permitir asignación elegible permanente: No · Caducar asignaciones elegibles tras: 6 meses
+= Notificaciones: al activar, aviso a sg-pim-aprobadores y al equipo de seguridad
+[Actualizar]
+:::
+
+Se configuran así los roles más sensibles (Global Administrator, Privileged Role Administrator, Security Administrator, Conditional Access Administrator). Para roles de menos impacto (Helpdesk, License) basta con MFA y justificación, sin aprobación: si cada reseteo de contraseña espera a un aprobador, la gente buscará atajos.
+
+Después, en **Asignaciones › Agregar asignaciones › Elegible**, cada técnico recibe sus roles como elegibles y se retiran las asignaciones activas que tenía.
+
+El técnico activa el rol desde **Mis roles** cuando lo necesita, o con PowerShell:
+
+:::term PowerShell · activar un rol elegible
+$ $me = (Get-MgUser -UserId "m.ortega@contoso.com").Id
+$ $rol = (Get-MgRoleManagementDirectoryRoleDefinition -Filter "displayName eq 'Exchange Administrator'").Id
+$ $params = @{ Action = "selfActivate"; PrincipalId = $me; RoleDefinitionId = $rol; DirectoryScopeId = "/"; Justification = "CHG-1042 regla de transporte"; ScheduleInfo = @{ StartDateTime = (Get-Date); Expiration = @{ Type = "AfterDuration"; Duration = "PT2H" } } }
+$ New-MgRoleManagementDirectoryRoleAssignmentScheduleRequest -BodyParameter $params | Format-List Status, Action
+Status : Provisioned
+Action : selfActivate
+:::
+
+> Consejo: el **contexto de autenticación** de Conditional Access (en "Al activar, requerir") es más fuerte que el simple "MFA de Azure": exige que la activación se haga con una llave FIDO2 o Windows Hello, no con un SMS que se puede interceptar.
+
+## 5. El ticket: "no me deja activar el rol"
+
+| Lo que ve el técnico | Causa | Qué haces |
+|---|---|---|
+| No aparece el rol en *Mis roles* | La asignación elegible caducó (6 meses) | Se renueva tras revisar que sigue haciéndole falta |
+| "Pendiente de aprobación" | El rol requiere aprobación | El aprobador lo ve en *Aprobar solicitudes*; si es urgente, el teléfono |
+| Error de autenticación al activar | No cumple el contexto de autenticación (sin llave FIDO2 registrada) | Registrar el método en *Mi información de seguridad* |
+| Activado pero el portal dice que no tiene permiso | El token anterior no lleva el rol | Cerrar sesión y volver a entrar en el portal (o esperar unos minutos) |
+
+## 6. Revisiones y alertas
+
+- **Revisiones de acceso** trimestrales de los roles privilegiados (*PIM › Revisiones de acceso*): cada técnico confirma que sigue necesitando sus roles, o su responsable lo decide; si nadie responde, se retira el acceso.
+- **Alertas de PIM** que revisas cada semana: *Demasiados administradores globales*, *Se asignan roles fuera de Privileged Identity Management*, *Los administradores no usan sus roles privilegiados*.
+- **Historial de auditoría de PIM**: quién activó qué, cuándo, con qué justificación y qué ticket. Es lo que te pedirá un auditor de ISO 27001.
+
+## 7. Lo que revisas cada mes
+
+- Número de Global Administrator activos: dos (las de emergencia). Si hay más, alguien se asignó el rol fuera de PIM.
+- Activaciones sin número de ticket válido o con justificaciones vacías ("necesario", "trabajo").
+- Las cuentas de emergencia: sin inicios de sesión salvo las pruebas, llaves en su sitio.
+- Las relaciones GDAP de los proveedores: roles concedidos y fecha de caducidad.
+
+## Siguientes pasos
+
+- **PIM para grupos**: grupos con acceso a recursos (por ejemplo, propietarios de una suscripción) que también se activan bajo demanda.
+- **PIM para recursos de Azure**: los roles de suscripción y grupo de recursos con el mismo modelo.
+- **Unidades administrativas**: un técnico de una sede administra solo los usuarios de su sede.
+- **Estaciones de trabajo con acceso privilegiado** (PAW) para las tareas de Global Administrator.
+""",
+  en="""
+## What you'll get
+
+A tenant where nobody is a global administrator out of habit. Each technician has just the role their work needs, activates it when they need it for a limited time and leaving a trail, and only two emergency accounts hold the role permanently. If a technician's password is stolen on any given Tuesday, the attacker doesn't walk away with the tenant.
+
+## Before you start
+
+- **Microsoft Entra ID P2** licences (included in Microsoft 365 E5 or Entra ID Governance) for the users who will use PIM.
+- The **Privileged Role Administrator** role to configure PIM (and, at the start, a Global Administrator at hand).
+- The **Microsoft Graph PowerShell** module (Level 3 Graph guide).
+- A conversation with the team first: the way they work is going to change. Explaining why saves a lot of complaints.
+
+## 1. Who is an administrator today
+
+:::term PowerShell · Microsoft Graph
+$ Connect-MgGraph -Scopes "RoleManagement.Read.Directory","User.Read.All"
+$ Get-MgDirectoryRole | ForEach-Object { $r = $_; Get-MgDirectoryRoleMember -DirectoryRoleId $r.Id | ForEach-Object { [pscustomobject]@{ Role = $r.DisplayName; Member = $_.AdditionalProperties.userPrincipalName } } } | Sort-Object Role | Format-Table
+Role                         Member
+----                         ------
+Exchange Administrator       a.vidal@contoso.com
+Global Administrator         admin@contoso.onmicrosoft.com
+Global Administrator         j.serrano@contoso.com
+Global Administrator         m.ortega@contoso.com
+Global Administrator         p.ruiz@contoso.com
+Global Administrator         supplier.support@contoso.com
+Global Administrator         s.navas@contoso.com
+User Administrator           l.prado@contoso.com
+:::
+
+Six global administrators, one of them a supplier's account and another the account the tenant was created with. That is normal in a tenant a few years old, and it is what you are going to change.
+
+## 2. Every task to its least-privileged role
+
+| Common task | Role that is enough |
+|---|---|
+| Reset user passwords | Helpdesk Administrator |
+| Users' MFA methods | Authentication Administrator |
+| Joiners, leavers and groups | User Administrator |
+| Licences | License Administrator |
+| Mailboxes, transport rules | Exchange Administrator |
+| Teams, meeting policies | Teams Administrator |
+| Intune devices and policies | Intune Administrator |
+| Conditional Access | Conditional Access Administrator |
+| Read everything without changing anything (audits) | Global Reader |
+| Billing and subscriptions | Billing Administrator |
+
+With this table, almost nobody needs Global Administrator for their daily work. Neither does the supplier: they get a specific role through **GDAP** (granular delegated admin privileges, with expiry) instead of an account inside the tenant.
+
+## 3. The two emergency accounts
+
+- Two **cloud-only** accounts on the `onmicrosoft.com` domain (`brk-admin-01`, `brk-admin-02`), with no licence, no mailbox and no dependency on on-premises AD or a federated identity provider.
+- They are the only ones with **permanent (active) Global Administrator**.
+- Excluded from every Conditional Access policy (Level 3 Conditional Access guide), except one of their own that requires their authentication method.
+- Microsoft requires MFA to sign in to the admin portals, for these accounts too: each one has a **FIDO2 security key (passkey)** kept in a safe, a different one per account, and the long password in a sealed envelope in another location.
+- Every sign-in with them raises an immediate alert (Microsoft Sentinel guide). They are tested every three months, with a logged change, so you know they work.
+
+## 4. PIM: eligible instead of permanent
+
+:::ui Entra admin center · PIM · Role settings
+> Identity governance › Privileged Identity Management › Microsoft Entra roles › Settings › Global Administrator
+= Activation maximum duration: 2 hours
+= On activation, require: Conditional Access authentication context (c1 · phishing-resistant MFA)
+= Require justification on activation: Yes
+= Require ticket information on activation: Yes
+= Require approval to activate: Yes · Approvers: sg-pim-approvers
+= Allow permanent eligible assignment: No · Expire eligible assignments after: 6 months
+= Notifications: on activation, notify sg-pim-approvers and the security team
+[Update]
+:::
+
+The most sensitive roles are set up like this (Global Administrator, Privileged Role Administrator, Security Administrator, Conditional Access Administrator). For lower-impact roles (Helpdesk, License) MFA and justification are enough, without approval: if every password reset waits for an approver, people will look for shortcuts.
+
+Then, in **Assignments › Add assignments › Eligible**, each technician gets their roles as eligible and their active assignments are removed.
+
+The technician activates the role from **My roles** when needed, or with PowerShell:
+
+:::term PowerShell · activate an eligible role
+$ $me = (Get-MgUser -UserId "m.ortega@contoso.com").Id
+$ $role = (Get-MgRoleManagementDirectoryRoleDefinition -Filter "displayName eq 'Exchange Administrator'").Id
+$ $params = @{ Action = "selfActivate"; PrincipalId = $me; RoleDefinitionId = $role; DirectoryScopeId = "/"; Justification = "CHG-1042 transport rule"; ScheduleInfo = @{ StartDateTime = (Get-Date); Expiration = @{ Type = "AfterDuration"; Duration = "PT2H" } } }
+$ New-MgRoleManagementDirectoryRoleAssignmentScheduleRequest -BodyParameter $params | Format-List Status, Action
+Status : Provisioned
+Action : selfActivate
+:::
+
+> Tip: the Conditional Access **authentication context** (in "On activation, require") is stronger than plain "Azure MFA": it requires the activation to be done with a FIDO2 key or Windows Hello, not with a text message that can be intercepted.
+
+## 5. The ticket: "it won't let me activate the role"
+
+| What the technician sees | Cause | What you do |
+|---|---|---|
+| The role isn't in *My roles* | The eligible assignment expired (6 months) | Renew it after checking they still need it |
+| "Pending approval" | The role requires approval | The approver sees it in *Approve requests*; if urgent, the phone |
+| Authentication error on activation | The authentication context isn't met (no FIDO2 key registered) | Register the method in *My security info* |
+| Activated but the portal says no permission | The previous token doesn't carry the role | Sign out of the portal and back in (or wait a few minutes) |
+
+## 6. Reviews and alerts
+
+- Quarterly **access reviews** of privileged roles (*PIM › Access reviews*): each technician confirms they still need their roles, or their manager decides; if nobody answers, access is removed.
+- **PIM alerts** you review every week: *There are too many global administrators*, *Roles are being assigned outside of Privileged Identity Management*, *Administrators aren't using their privileged roles*.
+- The **PIM audit history**: who activated what, when, with what justification and which ticket. It is what an ISO 27001 auditor will ask you for.
+
+## 7. What you review each month
+
+- The number of active Global Administrators: two (the emergency ones). If there are more, someone was assigned the role outside PIM.
+- Activations without a valid ticket number or with empty justifications ("needed", "work").
+- The emergency accounts: no sign-ins except the tests, keys where they should be.
+- The suppliers' GDAP relationships: roles granted and expiry date.
+
+## Next steps
+
+- **PIM for Groups**: groups with access to resources (for example, owners of a subscription) that are also activated on demand.
+- **PIM for Azure resources**: subscription and resource group roles under the same model.
+- **Administrative units**: a site technician administers only that site's users.
+- **Privileged access workstations** (PAW) for Global Administrator tasks.
+""")
+
+# ---------------------------------------------------------------- L4 · Microsoft Sentinel
+g(slug="microsoft-sentinel-conectores-una-regla-en-kql-y-un-incidente-de-principio-a-fin", topic="sentinel", date="2026-10-27",
+  title_es="Microsoft Sentinel: conectores, una regla en KQL y un incidente de principio a fin",
+  title_en="Microsoft Sentinel: connectors, a KQL rule and an incident from start to finish",
+  dek_es="El área de trabajo y los conectores que importan (Entra ID, Microsoft 365, Defender, servidores), la primera regla de análisis que avisa cuando entra una cuenta de emergencia, la automatización que asigna y avisa, la investigación de un incidente con KQL y cómo no arruinarse con la ingesta.",
+  dek_en="The workspace and the connectors that matter (Entra ID, Microsoft 365, Defender, servers), the first analytics rule that alerts when an emergency account signs in, the automation that assigns and notifies, investigating an incident with KQL, and how not to go broke on ingestion.",
+  es="""
+## Qué vas a conseguir
+
+Un Sentinel que recibe los registros que importan, genera incidentes que alguien atiende y no se come el presupuesto. Una regla de análisis escrita por ti, una automatización que la asigna y avisa al canal del equipo, y la rutina para investigar y cerrar un incidente con una clasificación que sirva para mejorar las reglas.
+
+## Antes de empezar
+
+- Un **área de trabajo de Log Analytics** en la región que corresponda a tus datos, y el rol **Microsoft Sentinel Contributor** sobre ella (y Log Analytics Contributor para los conectores).
+- Sentinel se usa desde el **portal de Microsoft Defender** (operaciones de seguridad unificadas), junto con los incidentes de Defender XDR. Las rutas de esta guía son las de ese portal.
+- Una idea del presupuesto: se paga por GB ingerido. Hay orígenes gratuitos (actividad de Azure, auditoría de Office 365, alertas de Defender) y otros que no lo son (inicios de sesión de Entra ID, eventos de seguridad de Windows).
+- La guía de Azure Monitor y Log Analytics (próximamente) explica el área de trabajo por dentro; aquí basta con saber escribir una consulta KQL sencilla.
+
+## 1. Los conectores que importan
+
+:::ui Microsoft Defender · Sentinel · Centro de contenido
+> Microsoft Sentinel › Administración de contenido › Centro de contenido
+= Microsoft Entra ID: instalado · Tablas: SigninLogs, AuditLogs, AADNonInteractiveUserSignInLogs
+= Microsoft 365: instalado · Tabla: OfficeActivity (Exchange, SharePoint, Teams) · sin coste de ingesta
+= Microsoft Defender XDR: instalado · Incidentes y alertas sincronizados
+= Windows Security Events via AMA: instalado · Regla de recopilación: dcr-servidores-seguridad (conjunto Común)
+= Syslog via AMA: instalado · Regla de recopilación: dcr-linux-auth (auth, authpriv)
+[Administrar]
+:::
+
+- Empieza por **identidad** (Entra ID) y **correo y documentos** (Microsoft 365): es por donde entra la mayoría de los ataques en un tenant de oficina.
+- Los eventos de Windows se recogen con el **agente de Azure Monitor** y una regla de recopilación de datos. El conjunto **Común** basta para empezar; *Todos los eventos* multiplica el coste sin multiplicar las detecciones.
+- Comprueba que llegan datos antes de escribir ninguna regla:
+
+:::term Sentinel · Búsqueda avanzada (KQL)
+$ SigninLogs
+$ | where TimeGenerated > ago(1h)
+$ | summarize Inicios = count() by ResultType
+ResultType   Inicios
+0            1 284
+50126        37
+50074        12
+53003        4
+:::
+
+`ResultType` 0 es un inicio correcto; el resto son códigos de error de Entra ID (50126: credenciales incorrectas; 50074: falta completar MFA; 53003: bloqueado por Conditional Access).
+
+## 2. La primera regla: entra una cuenta de emergencia
+
+Las cuentas de emergencia no se usan nunca (guía de Global Admin y PIM). Si alguien entra con una, tiene que saberse en minutos. Primero, una **watchlist** con sus nombres para no escribirlos dentro de la regla:
+
+:::ui Microsoft Defender · Sentinel · Watchlists
+> Microsoft Sentinel › Configuración › Watchlists › Nueva
+= Nombre y alias: breakglass
+= Origen: archivo CSV con la columna UserPrincipalName
+= Clave de búsqueda: UserPrincipalName
+= Filas: brk-admin-01@contoso.onmicrosoft.com · brk-admin-02@contoso.onmicrosoft.com
+[Crear]
+:::
+
+:::term Regla de análisis · consulta
+$ let breakglass = _GetWatchlist("breakglass") | project UserPrincipalName;
+$ SigninLogs
+$ | where UserPrincipalName in~ (breakglass)
+$ | project TimeGenerated, UserPrincipalName, IPAddress, Location, AppDisplayName, ResultType, UserAgent
+:::
+
+:::ui Microsoft Defender · Sentinel · Regla de análisis
+> Microsoft Sentinel › Configuración › Análisis › Crear › Regla de consulta casi en tiempo real (NRT)
+= Nombre: Inicio de sesión de una cuenta de emergencia
+= Gravedad: Alta · Táctica MITRE ATT&CK: Acceso inicial, Cuentas válidas (T1078)
+= Asignación de entidades: Cuenta → UserPrincipalName · IP → IPAddress
+= Detalles de la alerta: título dinámico "Cuenta de emergencia {{UserPrincipalName}} desde {{IPAddress}}"
+= Creación de incidentes: Habilitada · Agrupación de alertas: por cuenta, 24 horas
+[Revisar y crear]
+:::
+
+- Una regla **NRT** se ejecuta cada minuto. Para la mayoría de reglas basta una **programada** cada 5 o 15 minutos; las NRT se reservan para lo que no puede esperar.
+- La **asignación de entidades** es lo que permite después ver la cuenta y la IP como objetos en la investigación, y que Sentinel relacione este incidente con otros de la misma IP.
+
+## 3. La automatización: asignar y avisar
+
+:::ui Microsoft Defender · Sentinel · Automatización
+> Microsoft Sentinel › Configuración › Automatización › Crear › Regla de automatización
+= Nombre: Cuentas de emergencia → seguridad
+= Desencadenador: Cuando se crea el incidente
+= Condiciones: Nombre de la regla de análisis contiene "cuenta de emergencia"
+= Acciones: Asignar propietario: equipo de seguridad de guardia · Cambiar gravedad: Alta · Agregar etiqueta: breakglass
+= Acción: Ejecutar playbook: pb-aviso-teams (publica el incidente en el canal de seguridad)
+[Aplicar]
+:::
+
+El **playbook** es una aplicación lógica de Azure: recibe el incidente y publica en Teams con el enlace. Las reglas de automatización ordenan el trabajo; los playbooks hacen cosas fuera de Sentinel (avisar, deshabilitar una cuenta, abrir un ticket en Jira Service Management).
+
+## 4. Un incidente de principio a fin
+
+Lunes, 07:12. El canal de seguridad recibe: *Cuenta de emergencia brk-admin-02 desde 198.51.100.23*.
+
+1. **Abrir el incidente** (*Investigación y respuesta › Incidentes y alertas › Incidentes*): ver la alerta, las entidades (cuenta e IP) y la línea temporal.
+2. **¿Fue un cambio planificado?** El registro de cambios dice que no hay prueba de las cuentas de emergencia programada esta semana.
+3. **¿Qué hizo esa IP?**
+
+:::term Búsqueda avanzada · la IP del incidente
+$ SigninLogs
+$ | where TimeGenerated > ago(24h) and IPAddress == "198.51.100.23"
+$ | summarize Usuarios = dcount(UserPrincipalName), Fallos = countif(ResultType != "0"), Correctos = countif(ResultType == "0") by bin(TimeGenerated, 1h)
+TimeGenerated         Usuarios   Fallos   Correctos
+27/10/2026 05:00      143        141      0
+27/10/2026 06:00      211        208      1
+27/10/2026 07:00      1          0        1
+:::
+
+Muchos usuarios distintos, casi todo fallos y un acierto: un **ataque de difusión de contraseñas** (password spray) que acertó con la contraseña de una cuenta de emergencia.
+
+4. **Contener**: deshabilitar la cuenta, revocar sus sesiones (`Revoke-MgUserSignInSession`), cambiar la contraseña, bloquear la IP en una ubicación con nombre de Conditional Access y revisar en *AuditLogs* qué hizo la cuenta en esos minutos.
+5. **Clasificar y cerrar**: *Verdadero positivo — actividad sospechosa*, con un comentario de lo que se hizo y las acciones pendientes (por qué la cuenta de emergencia podía entrar solo con contraseña).
+
+La clasificación no es burocracia: los incidentes cerrados como *Falso positivo* te dicen qué reglas hay que afinar, y los *Benignos* (actividad sospechosa pero esperada, como una prueba planificada) qué excepciones faltan.
+
+## 5. El coste
+
+:::term Búsqueda avanzada · qué ingiere más
+$ Usage
+$ | where TimeGenerated > ago(30d) and IsBillable == true
+$ | summarize GB = round(sum(Quantity) / 1000, 1) by DataType
+$ | sort by GB desc
+DataType                          GB
+SecurityEvent                     412.6
+AADNonInteractiveUserSignInLogs   188.3
+SigninLogs                        41.2
+Syslog                            19.8
+:::
+
+- `SecurityEvent` arriba del todo suele ser un conjunto de eventos demasiado amplio o un servidor ruidoso: se ajusta la regla de recopilación.
+- Las tablas que solo se consultan en una investigación pueden ir al plan **Basic** o **Auxiliary**, mucho más barato, a cambio de consultas más limitadas.
+- Con un volumen estable, un **nivel de compromiso** diario abarata el GB.
+
+## 6. Lo que revisas cada mes
+
+- Reglas que no han generado ningún incidente en 90 días (¿siguen llegando los datos que miran?) y reglas que generan tantos que nadie los lee.
+- El estado de los conectores y de las reglas: la tabla `SentinelHealth` y la página de cada conector dicen cuándo dejaron de llegar datos.
+- Tiempo medio hasta asignar y hasta cerrar los incidentes de gravedad alta.
+- La factura de ingesta frente al mes anterior, por tabla.
+
+## Siguientes pasos
+
+- Las **plantillas de reglas** de cada solución del Centro de contenido: se activan, se prueban y se afinan en lugar de escribirlas desde cero.
+- **UEBA** (análisis de comportamiento de usuarios y entidades): detecta lo raro para cada usuario, no lo raro en general.
+- **Inteligencia de amenazas**: indicadores de IP y dominios cruzados con tus registros.
+- La alerta de copias borradas o inmutabilidad cambiada de la guía de DR/BCP, como segunda regla propia.
+""",
+  en="""
+## What you'll get
+
+A Sentinel that receives the logs that matter, raises incidents someone actually handles, and doesn't eat the budget. An analytics rule written by you, an automation that assigns it and notifies the team channel, and the routine to investigate and close an incident with a classification that helps improve the rules.
+
+## Before you start
+
+- A **Log Analytics workspace** in the region your data belongs in, and the **Microsoft Sentinel Contributor** role on it (plus Log Analytics Contributor for the connectors).
+- Sentinel is used from the **Microsoft Defender portal** (unified security operations), alongside the Defender XDR incidents. The paths in this guide are that portal's.
+- A rough budget: you pay per GB ingested. Some sources are free (Azure activity, Office 365 audit, Defender alerts) and others are not (Entra ID sign-ins, Windows security events).
+- The Azure Monitor and Log Analytics guide (coming soon) explains the workspace from the inside; here it is enough to be able to write a simple KQL query.
+
+## 1. The connectors that matter
+
+:::ui Microsoft Defender · Sentinel · Content hub
+> Microsoft Sentinel › Content management › Content hub
+= Microsoft Entra ID: installed · Tables: SigninLogs, AuditLogs, AADNonInteractiveUserSignInLogs
+= Microsoft 365: installed · Table: OfficeActivity (Exchange, SharePoint, Teams) · no ingestion cost
+= Microsoft Defender XDR: installed · Incidents and alerts synchronised
+= Windows Security Events via AMA: installed · Collection rule: dcr-servers-security (Common set)
+= Syslog via AMA: installed · Collection rule: dcr-linux-auth (auth, authpriv)
+[Manage]
+:::
+
+- Start with **identity** (Entra ID) and **mail and documents** (Microsoft 365): that is where most attacks on an office tenant come in.
+- Windows events are collected with the **Azure Monitor agent** and a data collection rule. The **Common** set is enough to start; *All events* multiplies the cost without multiplying the detections.
+- Check data is arriving before writing any rule:
+
+:::term Sentinel · Advanced hunting (KQL)
+$ SigninLogs
+$ | where TimeGenerated > ago(1h)
+$ | summarize SignIns = count() by ResultType
+ResultType   SignIns
+0            1,284
+50126        37
+50074        12
+53003        4
+:::
+
+`ResultType` 0 is a successful sign-in; the rest are Entra ID error codes (50126: wrong credentials; 50074: MFA not completed; 53003: blocked by Conditional Access).
+
+## 2. The first rule: an emergency account signs in
+
+Emergency accounts are never used (Global Admin and PIM guide). If someone signs in with one, it has to be known within minutes. First, a **watchlist** with their names so they aren't written inside the rule:
+
+:::ui Microsoft Defender · Sentinel · Watchlists
+> Microsoft Sentinel › Configuration › Watchlists › New
+= Name and alias: breakglass
+= Source: CSV file with the UserPrincipalName column
+= Search key: UserPrincipalName
+= Rows: brk-admin-01@contoso.onmicrosoft.com · brk-admin-02@contoso.onmicrosoft.com
+[Create]
+:::
+
+:::term Analytics rule · query
+$ let breakglass = _GetWatchlist("breakglass") | project UserPrincipalName;
+$ SigninLogs
+$ | where UserPrincipalName in~ (breakglass)
+$ | project TimeGenerated, UserPrincipalName, IPAddress, Location, AppDisplayName, ResultType, UserAgent
+:::
+
+:::ui Microsoft Defender · Sentinel · Analytics rule
+> Microsoft Sentinel › Configuration › Analytics › Create › NRT query rule
+= Name: Emergency account sign-in
+= Severity: High · MITRE ATT&CK tactic: Initial Access, Valid Accounts (T1078)
+= Entity mapping: Account → UserPrincipalName · IP → IPAddress
+= Alert details: dynamic title "Emergency account {{UserPrincipalName}} from {{IPAddress}}"
+= Incident creation: Enabled · Alert grouping: by account, 24 hours
+[Review and create]
+:::
+
+- An **NRT** rule runs every minute. For most rules a **scheduled** one every 5 or 15 minutes is enough; NRT is kept for what can't wait.
+- **Entity mapping** is what later lets you see the account and the IP as objects in the investigation, and lets Sentinel relate this incident to others from the same IP.
+
+## 3. The automation: assign and notify
+
+:::ui Microsoft Defender · Sentinel · Automation
+> Microsoft Sentinel › Configuration › Automation › Create › Automation rule
+= Name: Emergency accounts → security
+= Trigger: When incident is created
+= Conditions: Analytics rule name contains "emergency account"
+= Actions: Assign owner: on-call security team · Change severity: High · Add tag: breakglass
+= Action: Run playbook: pb-notify-teams (posts the incident to the security channel)
+[Apply]
+:::
+
+The **playbook** is an Azure Logic App: it receives the incident and posts to Teams with the link. Automation rules organise the work; playbooks do things outside Sentinel (notify, disable an account, open a ticket in Jira Service Management).
+
+## 4. An incident from start to finish
+
+Monday, 07:12. The security channel receives: *Emergency account brk-admin-02 from 198.51.100.23*.
+
+1. **Open the incident** (*Investigation & response › Incidents & alerts › Incidents*): see the alert, the entities (account and IP) and the timeline.
+2. **Was it a planned change?** The change log says no emergency account test is scheduled this week.
+3. **What did that IP do?**
+
+:::term Advanced hunting · the incident's IP
+$ SigninLogs
+$ | where TimeGenerated > ago(24h) and IPAddress == "198.51.100.23"
+$ | summarize Users = dcount(UserPrincipalName), Failures = countif(ResultType != "0"), Successes = countif(ResultType == "0") by bin(TimeGenerated, 1h)
+TimeGenerated         Users   Failures   Successes
+27/10/2026 05:00      143     141        0
+27/10/2026 06:00      211     208        1
+27/10/2026 07:00      1       0          1
+:::
+
+Many different users, almost all failures and one hit: a **password spray** attack that guessed an emergency account's password.
+
+4. **Contain**: disable the account, revoke its sessions (`Revoke-MgUserSignInSession`), change the password, block the IP with a Conditional Access named location, and review in *AuditLogs* what the account did in those minutes.
+5. **Classify and close**: *True positive — suspicious activity*, with a comment on what was done and the pending actions (why the emergency account could sign in with only a password).
+
+The classification is not bureaucracy: incidents closed as *False positive* tell you which rules need tuning, and *Benign* ones (suspicious but expected activity, such as a planned test) which exceptions are missing.
+
+## 5. The cost
+
+:::term Advanced hunting · what ingests most
+$ Usage
+$ | where TimeGenerated > ago(30d) and IsBillable == true
+$ | summarize GB = round(sum(Quantity) / 1000, 1) by DataType
+$ | sort by GB desc
+DataType                          GB
+SecurityEvent                     412.6
+AADNonInteractiveUserSignInLogs   188.3
+SigninLogs                        41.2
+Syslog                            19.8
+:::
+
+- `SecurityEvent` at the top is usually an event set that is too broad or a noisy server: adjust the collection rule.
+- Tables that are only queried during an investigation can go to the **Basic** or **Auxiliary** plan, much cheaper, in exchange for more limited queries.
+- With a steady volume, a daily **commitment tier** lowers the price per GB.
+
+## 6. What you review each month
+
+- Rules that haven't raised an incident in 90 days (is the data they look at still arriving?) and rules that raise so many that nobody reads them.
+- Connector and rule health: the `SentinelHealth` table and each connector's page say when data stopped arriving.
+- Mean time to assign and to close high-severity incidents.
+- The ingestion bill against the previous month, per table.
+
+## Next steps
+
+- The **rule templates** in each Content hub solution: enable, test and tune them instead of writing from scratch.
+- **UEBA** (user and entity behaviour analytics): it detects what is unusual for each user, not what is unusual in general.
+- **Threat intelligence**: IP and domain indicators matched against your logs.
+- The alert for deleted backups or changed immutability from the DR/BCP guide, as your second rule of your own.
+""")
+
+# ---------------------------------------------------------------- L4 · Microsoft 365 tenant migrations
+g(slug="migracion-de-tenant-microsoft-365-inventario-identidades-buzones-onedrive-y-dia-del-corte", topic="tenant-migration", date="2026-10-27",
+  title_es="Migraciones de tenant de Microsoft 365: inventario, identidades, buzones, OneDrive y el día del corte",
+  title_en="Microsoft 365 tenant migrations: inventory, identities, mailboxes, OneDrive and cutover day",
+  dek_es="Fusiones, escisiones y cambios de dominio: qué se mueve y qué se rehace, el inventario que evita sorpresas, la migración de buzones entre tenants sin respuestas que rebotan, OneDrive, los dispositivos, y el runbook del fin de semana del corte con su semana de soporte posterior.",
+  dek_en="Mergers, divestitures and domain changes: what moves and what gets rebuilt, the inventory that avoids surprises, cross-tenant mailbox migration without bouncing replies, OneDrive, the devices, and the runbook for the cutover weekend with the week of support after it.",
+  es="""
+## Qué vas a conseguir
+
+Llevar los usuarios, el correo y los archivos de una empresa de un tenant de Microsoft 365 a otro con un fin de semana de corte y un lunes tranquilo. Saber desde el principio qué se migra con herramientas, qué hay que rehacer a mano y qué no se puede mover, para que nadie se entere el lunes.
+
+## Antes de empezar
+
+- El escenario claro: **fusión** (dos tenants pasan a uno), **escisión** (una parte de la empresa sale a un tenant nuevo, normalmente con un acuerdo de servicios transitorios, TSA, que fija hasta cuándo el origen da servicio) o **cambio de marca** (el dominio cambia de tenant).
+- Roles administrativos en los dos tenants, activados por PIM (guía de Global Admin y PIM).
+- Las herramientas: la migración nativa de buzones y de OneDrive entre tenants necesita una licencia **Cross-Tenant User Data Migration** por usuario migrado; la alternativa son herramientas de terceros (para correo, OneDrive, SharePoint y Teams) con su propio coste.
+- El repo 29 del portfolio, *Tenant Separation Cutover Planner*, sirve de plantilla para el plan del corte y sus dependencias.
+
+## 1. El inventario
+
+Todo lo que no está en el inventario aparece el lunes como ticket.
+
+:::term PowerShell · tenant de origen
+$ Connect-ExchangeOnline
+$ Get-EXOMailbox -ResultSize Unlimited -Properties RecipientTypeDetails | Group-Object RecipientTypeDetails | Select-Object Name, Count
+$ Get-EXOMailbox -ResultSize Unlimited | Get-EXOMailboxStatistics | Sort-Object TotalItemSize -Descending | Select-Object -First 5 DisplayName, TotalItemSize, ItemCount
+Name                  Count
+----                  -----
+UserMailbox           412
+SharedMailbox         37
+RoomMailbox           18
+EquipmentMailbox      3
+DisplayName           TotalItemSize                      ItemCount
+-----------           -------------                      ---------
+Carlos Martín         48.71 GB (52,302,131,200 bytes)    398112
+Facturación           31.02 GB (33,307,705,344 bytes)    521007
+:::
+
+| Elemento | Cómo se mueve |
+|---|---|
+| Usuarios y grupos | Se crean en el destino (o los sincroniza Entra Connect del destino) |
+| Buzones de usuario, compartidos y archivos | Migración entre tenants (nativa o herramienta) |
+| OneDrive | Migración entre tenants (nativa o herramienta) |
+| Sitios de SharePoint y archivos de Teams | Herramienta de migración, sitio a sitio |
+| Chats de Teams | No se mueven de forma nativa: se avisa y se exportan si hace falta por cumplimiento |
+| Aplicaciones con SSO | Se dan de alta otra vez en el destino (guía de Entra ID SSO) |
+| Dispositivos | No se mueven: se restablecen y se inscriben en el destino |
+| Licencias, Conditional Access, Intune | Se rehacen en el destino antes del corte |
+| Dominio de correo | Se mueve el día del corte (solo puede estar en un tenant) |
+
+## 2. Las identidades en el destino
+
+- Cada usuario existe en el destino **antes** del corte, con un UPN provisional en el dominio `onmicrosoft.com` del destino (el dominio de verdad aún está en el origen).
+- Un CSV de correspondencias es la columna vertebral de todo el proyecto: `SourceUPN,TargetUPN,FinalUPN`. Lo usan los scripts de buzones, de OneDrive, de licencias y de UPN final.
+- Los usuarios tendrán que registrar MFA otra vez en el tenant destino: se prepara la comunicación y, si se puede, se usan **Temporary Access Pass** el lunes para que el primer inicio de sesión sea sencillo.
+
+## 3. Los buzones entre tenants
+
+Las piezas de la migración nativa: una aplicación de migración en el tenant destino con consentimiento del origen, una **relación de organización** en cada tenant que permite mover buzones, y un **punto de conexión de migración** en el destino.
+
+En el destino, cada usuario es primero un **usuario de correo** (MailUser) que se convierte en buzón al migrar. Tres atributos tienen que coincidir con el origen:
+
+:::term PowerShell · tenant destino (un usuario; en la práctica, desde el CSV)
+$ Set-MailUser -Identity "laura.prado" -ExchangeGuid "4f1d2a9c-0b3e-4c8e-9a51-7c2d1e6b3f10" -ArchiveGuid "9b7e3c21-5d4a-4e0f-8c6b-2a1f9d0e7c45"
+$ Set-MailUser -Identity "laura.prado" -EmailAddresses @{ add = "x500:/o=ExchangeLabs/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=7a1c0e5b9d2f4c3a8e6b1d0f2a9c4e7b-laura.prado" }
+:::
+
+- `ExchangeGuid` y `ArchiveGuid` iguales a los del buzón de origen: sin ellos, la migración no encuentra destino.
+- La dirección **x500** con el `LegacyExchangeDN` del origen: sin ella, responder a un correo antiguo o a una convocatoria vieja rebota con un error `IMCEAEX`. Es el fallo que más tickets genera tras una migración.
+
+:::term PowerShell · tenant destino · lotes
+$ New-MigrationBatch -Name "ola1-finanzas" -SourceEndpoint "ep-origen" -CSVData ([System.IO.File]::ReadAllBytes("C:\\mig\\ola1.csv")) -TargetDeliveryDomain "fabrikam.onmicrosoft.com" -Autostart
+$ Get-MigrationUser -BatchId "ola1-finanzas" | Get-MigrationUserStatistics | Format-Table Identity, Status, SyncedItemCount, SkippedItemCount
+Identity                     Status    SyncedItemCount   SkippedItemCount
+--------                     ------    ---------------   ----------------
+laura.prado@fabrikam.com     Synced    84211             0
+carlos.martin@fabrikam.com   Syncing   301455            12
+:::
+
+Los lotes se crean y sincronizan **semanas antes** del corte: copian casi todo y se quedan en *Synced*, actualizándose. El día del corte solo se completa el último incremento, que tarda minutos y no días. Los elementos omitidos (*SkippedItemCount*) se revisan antes, no el lunes.
+
+## 4. OneDrive, SharePoint y Teams
+
+- **OneDrive**: la migración nativa entre tenants (`Start-SPOCrossTenantUserContentMove` en SharePoint Online PowerShell, tras confiar los dos tenants) mueve el OneDrive completo y deja una redirección en el origen. Con herramientas de terceros, el modelo es el mismo: copia previa y delta el fin de semana.
+- **SharePoint y Teams**: sitio a sitio con la herramienta de migración, con los propietarios de cada sitio validando antes del corte qué se lleva y qué se archiva.
+- Los **chats de Teams** no viajan: se avisa con tiempo para que lo importante se guarde en un canal o un documento.
+
+## 5. El fin de semana del corte
+
+:::ui Runbook · corte del viernes 06/11/2026
+> Proyecto › Migración de tenant › RB-CORTE
+= Martes T-3: TTL de los registros MX, autodiscover y SPF bajado a 5 minutos
+= Viernes 18:00: congelación de cambios · aviso a usuarios: cerrar Outlook y Teams al salir
+= Viernes 19:00: quitar el dominio de todos los objetos del origen (UPN, direcciones proxy, grupos) y eliminarlo del tenant origen
+= Viernes 20:00: verificar el dominio en el destino (registro TXT), asignar UPN finales desde el CSV
+= Viernes 21:00: completar los lotes de buzones y el último delta de OneDrive
+= Sábado 09:00: MX, autodiscover, SPF, DKIM y DMARC apuntando al destino; prueba de correo entrante y saliente
+= Sábado 11:00: aplicaciones SSO apuntando al destino; Conditional Access e Intune activos
+= Domingo: pruebas de un grupo piloto de cada área con su lista de comprobaciones
+= Lunes 07:30: soporte en las sedes y canal de incidencias abierto
+:::
+
+El dominio no puede estar en dos tenants a la vez, y Entra ID no te deja quitarlo del origen mientras algún objeto lo use. Encontrarlos lleva tiempo; se ensaya antes con un script:
+
+:::term PowerShell · tenant de origen · ¿quién usa aún el dominio?
+$ Get-Recipient -ResultSize Unlimited | Where-Object { $_.EmailAddresses -match "@fabrikam\\.com" } | Select-Object Name, RecipientTypeDetails
+:::
+
+**Dispositivos**: los equipos unidos a Entra ID y gestionados por Intune no se pueden mover entre tenants. Se borra su registro de Autopilot en el origen, se importa el hash en el destino y se restablecen (en el corte o por olas, con los datos ya en OneDrive). Los equipos unidos a un AD local se vuelven a unir al dominio del destino.
+
+## 6. La semana de hipercuidado
+
+- **Rebotes**: seguimiento de mensajes en el destino buscando `550 5.1.1` e `IMCEAEX`; cada uno suele ser una x500 que falta.
+- **MFA y primer inicio de sesión**: el pico de llamadas del lunes. Los Temporary Access Pass y una guía de una página con capturas reducen la cola.
+- **Outlook**: perfiles que hay que volver a crear y buzones compartidos que no aparecen (los permisos se vuelven a aplicar en el destino desde el inventario).
+- Un **parte diario** a dirección: incidencias abiertas, cerradas y las que requieren decisión.
+- Al cerrar el TSA: retirar licencias y cerrar el tenant de origen (o la parte que corresponda) con copia de lo que haya que conservar por cumplimiento.
+
+## Siguientes pasos
+
+- Si los tenants van a convivir, **sincronización entre tenants** y la **organización multiinquilino** de Microsoft 365: los usuarios se ven en el directorio y en Teams sin migrar nada.
+- **Acceso B2B** durante el TSA: que los usuarios ya migrados entren como invitados a lo que aún vive en el origen.
+- La guía de Azure AD Connect del Nivel 2: en una migración híbrida es la pieza que se desmonta en el origen y se monta en el destino.
+""",
+  en="""
+## What you'll get
+
+Moving a company's users, mail and files from one Microsoft 365 tenant to another with a single cutover weekend and a quiet Monday. Knowing from the start what is migrated with tools, what has to be rebuilt by hand and what cannot be moved, so nobody finds out on Monday.
+
+## Before you start
+
+- A clear scenario: **merger** (two tenants become one), **divestiture** (part of the company moves to a new tenant, usually with a transitional services agreement, TSA, that sets how long the source keeps providing service) or **rebrand** (the domain changes tenant).
+- Admin roles in both tenants, activated through PIM (Global Admin and PIM guide).
+- The tools: native cross-tenant mailbox and OneDrive migration needs a **Cross-Tenant User Data Migration** licence per migrated user; the alternative is third-party tools (for mail, OneDrive, SharePoint and Teams) with their own cost.
+- Repo 29 in the portfolio, *Tenant Separation Cutover Planner*, works as a template for the cutover plan and its dependencies.
+
+## 1. The inventory
+
+Everything that isn't in the inventory turns up on Monday as a ticket.
+
+:::term PowerShell · source tenant
+$ Connect-ExchangeOnline
+$ Get-EXOMailbox -ResultSize Unlimited -Properties RecipientTypeDetails | Group-Object RecipientTypeDetails | Select-Object Name, Count
+$ Get-EXOMailbox -ResultSize Unlimited | Get-EXOMailboxStatistics | Sort-Object TotalItemSize -Descending | Select-Object -First 5 DisplayName, TotalItemSize, ItemCount
+Name                  Count
+----                  -----
+UserMailbox           412
+SharedMailbox         37
+RoomMailbox           18
+EquipmentMailbox      3
+DisplayName           TotalItemSize                      ItemCount
+-----------           -------------                      ---------
+Carlos Martín         48.71 GB (52,302,131,200 bytes)    398112
+Invoicing             31.02 GB (33,307,705,344 bytes)    521007
+:::
+
+| Item | How it moves |
+|---|---|
+| Users and groups | Created in the target (or synchronised by the target's Entra Connect) |
+| User and shared mailboxes, archives | Cross-tenant migration (native or a tool) |
+| OneDrive | Cross-tenant migration (native or a tool) |
+| SharePoint sites and Teams files | Migration tool, site by site |
+| Teams chats | Not moved natively: users are warned and they are exported if compliance requires it |
+| Apps with SSO | Onboarded again in the target (Entra ID SSO guide) |
+| Devices | Not moved: reset and enrolled in the target |
+| Licences, Conditional Access, Intune | Rebuilt in the target before the cutover |
+| Mail domain | Moved on cutover day (it can only live in one tenant) |
+
+## 2. Identities in the target
+
+- Every user exists in the target **before** the cutover, with a temporary UPN on the target's `onmicrosoft.com` domain (the real domain is still in the source).
+- A mapping CSV is the backbone of the whole project: `SourceUPN,TargetUPN,FinalUPN`. The mailbox, OneDrive, licence and final-UPN scripts all use it.
+- Users will have to register MFA again in the target tenant: prepare the communication and, where possible, use **Temporary Access Pass** on Monday so the first sign-in is simple.
+
+## 3. Cross-tenant mailboxes
+
+The pieces of the native migration: a migration application in the target tenant with consent from the source, an **organization relationship** in each tenant that allows mailbox moves, and a **migration endpoint** in the target.
+
+In the target, each user starts as a **mail user** (MailUser) that becomes a mailbox when migrated. Three attributes must match the source:
+
+:::term PowerShell · target tenant (one user; in practice, from the CSV)
+$ Set-MailUser -Identity "laura.prado" -ExchangeGuid "4f1d2a9c-0b3e-4c8e-9a51-7c2d1e6b3f10" -ArchiveGuid "9b7e3c21-5d4a-4e0f-8c6b-2a1f9d0e7c45"
+$ Set-MailUser -Identity "laura.prado" -EmailAddresses @{ add = "x500:/o=ExchangeLabs/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=7a1c0e5b9d2f4c3a8e6b1d0f2a9c4e7b-laura.prado" }
+:::
+
+- `ExchangeGuid` and `ArchiveGuid` equal to the source mailbox's: without them, the migration finds no target.
+- The **x500** address with the source `LegacyExchangeDN`: without it, replying to an old email or an old meeting invite bounces with an `IMCEAEX` error. It is the failure that generates most tickets after a migration.
+
+:::term PowerShell · target tenant · batches
+$ New-MigrationBatch -Name "wave1-finance" -SourceEndpoint "ep-source" -CSVData ([System.IO.File]::ReadAllBytes("C:\\mig\\wave1.csv")) -TargetDeliveryDomain "fabrikam.onmicrosoft.com" -Autostart
+$ Get-MigrationUser -BatchId "wave1-finance" | Get-MigrationUserStatistics | Format-Table Identity, Status, SyncedItemCount, SkippedItemCount
+Identity                     Status    SyncedItemCount   SkippedItemCount
+--------                     ------    ---------------   ----------------
+laura.prado@fabrikam.com     Synced    84211             0
+carlos.martin@fabrikam.com   Syncing   301455            12
+:::
+
+Batches are created and synchronised **weeks before** the cutover: they copy almost everything and stay in *Synced*, keeping up to date. On cutover day only the last increment is completed, which takes minutes rather than days. Skipped items (*SkippedItemCount*) are reviewed beforehand, not on Monday.
+
+## 4. OneDrive, SharePoint and Teams
+
+- **OneDrive**: native cross-tenant migration (`Start-SPOCrossTenantUserContentMove` in SharePoint Online PowerShell, once the two tenants trust each other) moves the whole OneDrive and leaves a redirect in the source. With third-party tools the model is the same: a pre-copy and a delta over the weekend.
+- **SharePoint and Teams**: site by site with the migration tool, with each site's owners validating before the cutover what is taken and what is archived.
+- **Teams chats** don't travel: users are warned early so anything important is saved to a channel or a document.
+
+## 5. The cutover weekend
+
+:::ui Runbook · cutover Friday 06/11/2026
+> Project › Tenant migration › RB-CUTOVER
+= Tuesday T-3: TTL of the MX, autodiscover and SPF records lowered to 5 minutes
+= Friday 18:00: change freeze · user notice: close Outlook and Teams when leaving
+= Friday 19:00: remove the domain from every object in the source (UPNs, proxy addresses, groups) and delete it from the source tenant
+= Friday 20:00: verify the domain in the target (TXT record), set final UPNs from the CSV
+= Friday 21:00: complete the mailbox batches and the last OneDrive delta
+= Saturday 09:00: MX, autodiscover, SPF, DKIM and DMARC pointing at the target; inbound and outbound mail test
+= Saturday 11:00: SSO apps pointing at the target; Conditional Access and Intune active
+= Sunday: tests by a pilot group from each area with their checklist
+= Monday 07:30: on-site support and incident channel open
+:::
+
+The domain can't live in two tenants at once, and Entra ID won't let you remove it from the source while any object still uses it. Finding them takes time; rehearse it beforehand with a script:
+
+:::term PowerShell · source tenant · who still uses the domain?
+$ Get-Recipient -ResultSize Unlimited | Where-Object { $_.EmailAddresses -match "@fabrikam\\.com" } | Select-Object Name, RecipientTypeDetails
+:::
+
+**Devices**: devices joined to Entra ID and managed by Intune can't be moved between tenants. Their Autopilot registration is deleted in the source, the hash is imported into the target and they are reset (at cutover or in waves, with the data already in OneDrive). Devices joined to an on-premises AD are re-joined to the target's domain.
+
+## 6. The hypercare week
+
+- **Bounces**: message trace in the target looking for `550 5.1.1` and `IMCEAEX`; each one is usually a missing x500.
+- **MFA and first sign-in**: Monday's call peak. Temporary Access Pass and a one-page guide with screenshots shorten the queue.
+- **Outlook**: profiles that need recreating and shared mailboxes that don't appear (permissions are re-applied in the target from the inventory).
+- A **daily report** to management: incidents open, closed and those that need a decision.
+- When the TSA ends: remove licences and close the source tenant (or the relevant part) with a copy of whatever must be kept for compliance.
+
+## Next steps
+
+- If the tenants will live side by side, **cross-tenant synchronisation** and Microsoft 365's **multitenant organization**: users see each other in the directory and in Teams without migrating anything.
+- **B2B access** during the TSA: users already migrated sign in as guests to whatever still lives in the source.
+- The Level 2 Azure AD Connect guide: in a hybrid migration it is the piece taken apart in the source and rebuilt in the target.
 """)
