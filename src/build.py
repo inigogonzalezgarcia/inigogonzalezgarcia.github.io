@@ -440,7 +440,7 @@ now = f'''<section class="section">
       <h2 class="h2 sm">{bi("En qué estoy.", "What I'm up to.")}</h2>
     </div>
     <dl class="spec reveal">
-      <div class="spec-row"><dt class="label">{bi("Trabajo", "Work")}</dt><dd>{bi("IT Site Leader en Madrid, en servicios financieros.", "IT Site Leader in Madrid, in financial services.")}</dd></div>
+      <div class="spec-row"><dt class="label">{bi("Trabajo", "Work")}</dt><dd>{bi("Quién soy y en qué estoy ahora.", "Who I am and what I'm working on now.")}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Simulador", "Simulator")}</dt><dd><a href="https://sysadmindesksbyigg.pages.dev/" target="_blank" rel="noopener noreferrer">SysAdmin Desks ↗</a>{bi(": práctica gratuita de soporte IT con tickets, SLA y nota de trabajo.", ": free IT support practice with tickets, SLA and work notes.")}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Proyectos", "Projects")}</dt><dd><a href="blog/">{bi(f"{len(POSTS)} repos en GitHub", f"{len(POSTS)} repos on GitHub")}</a>{bi(", cada uno con su artículo.", ", each with its own story.")}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Guías", "Guides")}</dt><dd><a href="guias.html">{bi(f"{len(_GALL)} guías paso a paso", f"{len(_GALL)} step-by-step guides")}</a>{bi(", por nivel y por sector.", ", by level and by sector.")}</dd></div>
@@ -775,22 +775,37 @@ sizes["recursos.html"] = write("recursos.html", layout(R="", path="recursos.html
     desc="Free resource: 33 ideas for IT professionals to get found on LinkedIn, show their work with projects, network and get through hiring processes. Plus the Tech Career Lab newsletter.", body=resources_body,
     ld=[crumbs(("Home", ""), ("Resources", "recursos.html"))]))
 
-# links
-LINKS = [
-    ("blog/", bi("Blog: cómo construí cada proyecto", "Blog: how I built each project"), ""),
-    ("journey.html", bi("El viaje: once años en cinco etapas", "The journey: eleven years in five stages"), ""),
-    ("store.html", bi("Servicios · IGG-ICS: para perfiles IT", "Services · IGG-ICS: for IT professionals"), ""),
-    ("recursos.html", bi("Gratis: 33 ideas para que te encuentren si trabajas en IT", "Free: 33 ideas to get found if you work in IT"), ""),
-    (LINKEDIN, "LinkedIn", "ext"),
-    (GITHUB, "GitHub", "ext"),
-    ("about.html#contacto", bi("Formulario de contacto", "Contact form"), ""),
-    (LINKTREE, "Linktree", "ext"),
+# links: grouped, each with one line saying what is behind it; counts come from the content itself
+from guides import GUIDES as _GL, LEVELS as _LVL
+_nsec = sum(1 for k in _LVL if k.startswith("sector-")); _nlvl = sum(1 for k in _LVL if k.startswith("nivel-"))
+LINK_GROUPS = [
+    (bi("Aprende y practica", "Learn and practise"), [
+        ("https://sysadmindesksbyigg.pages.dev/", "SysAdmin Desks", bi("Simulador gratuito de soporte IT: tickets, SLA y nota de trabajo.", "Free IT support simulator: tickets, SLA and work notes."), "ext"),
+        ("guias.html", bi("Guías IT", "IT guides"), bi(f"{len(_GL)} guías paso a paso: {_nlvl} niveles y {_nsec} sectores.", f"{len(_GL)} step-by-step guides: {_nlvl} levels and {_nsec} sectors."), ""),
+        ("blog/", "Blog", bi(f"{len(POSTS)} proyectos en GitHub, cada uno con su artículo.", f"{len(POSTS)} projects on GitHub, each with its story."), ""),
+    ]),
+    (bi("Gratis para tu carrera", "Free for your career"), [
+        ("recursos.html", bi("33 ideas para que te encuentren en IT", "33 ideas to get found in IT"), bi("LinkedIn, proyectos, networking y procesos de selección.", "LinkedIn, projects, networking and hiring processes."), ""),
+        ("recursos.html", "Tech Career Lab", bi("La newsletter: una idea práctica cada dos semanas.", "The newsletter: one practical idea every two weeks."), ""),
+    ]),
+    (bi("Trabaja conmigo", "Work with me"), [
+        ("store.html", bi("Servicios · IGG-ICS", "Services · IGG-ICS"), bi("Asesoría para perfiles IT, con un plan a tu medida.", "Coaching for IT professionals, with a plan built for you."), ""),
+        ("about.html", bi("Sobre mí", "About me"), bi("Quién soy y en qué estoy ahora.", "Who I am and what I'm working on now."), ""),
+        ("journey.html", bi("El viaje", "The journey"), bi("Once años en cinco etapas, y con qué trabajo.", "Eleven years in five stages, and what I work with."), ""),
+    ]),
+    (bi("Contacto y redes", "Contact and profiles"), [
+        ("about.html#contacto", bi("Formulario de contacto", "Contact form"), bi("Escríbeme directamente desde la web.", "Write to me directly from the site."), ""),
+        (LINKEDIN, "LinkedIn", bi("Publicaciones y experiencia.", "Posts and experience."), "me"),
+        (GITHUB, "GitHub", bi("El código de los proyectos.", "The code behind the projects."), "me"),
+    ]),
 ]
-TGT = ' target="_blank" rel="me noopener"'
-links_html = "\n".join(
-    f'      <a class="link-btn reveal" href="{h}"{TGT if x == "ext" and h.startswith("http") else ""}><span>{t}</span><span aria-hidden="true">{"↗" if x else "→"}</span></a>'
-    for h, t, x in LINKS)
-links_body = page_hero("Links", bi("Todo, en un sitio.", "Everything, in one place."), "") + f'''
+def _link(h, t, d, x):
+    tgt = (' target="_blank" rel="me noopener noreferrer"' if x == "me" else ' target="_blank" rel="noopener noreferrer"') if x else ""
+    return (f'      <a class="link-btn reveal" href="{h}"{tgt}><span class="link-txt"><span class="link-t">{t}</span>'
+            f'<span class="link-d">{d}</span></span><span aria-hidden="true">{"↗" if x else "→"}</span></a>')
+links_html = "\n".join(f'    <div class="links-group">\n      <p class="label kicker">{g}</p>\n' + "\n".join(_link(*l) for l in items) + "\n    </div>"
+                       for g, items in LINK_GROUPS)
+links_body = page_hero("Links", bi("Todo, en un sitio.", "Everything, in one place."), bi("Practica, aprende, o escríbeme: elige por dónde empezar.", "Practise, learn or get in touch: pick where to start.")) + f'''
 
 <section class="section links-section">
   <div class="wrap links-list">
@@ -799,7 +814,7 @@ links_body = page_hero("Links", bi("Todo, en un sitio.", "Everything, in one pla
 </section>'''
 sizes["links.html"] = write("links.html", layout(R="", path="links.html", active="links",
     title_en="Links · Iñigo González", title_es="Links · Iñigo González",
-    desc="Blog, journey, LinkedIn, GitHub and contact for Iñigo González.", body=links_body,
+    desc="Everything in one place: SysAdmin Desks, IT guides, blog, free resources, services, LinkedIn, GitHub and contact for Iñigo González.", body=links_body,
     ld=[crumbs(("Home", ""), ("Links", "links.html"))]))
 
 # guides
