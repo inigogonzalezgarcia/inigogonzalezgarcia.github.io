@@ -268,11 +268,51 @@ def credit(ph):
     return (f'<li>{bi(html.escape(ph["place_es"]), html.escape(ph["place_en"]))}: <a href="{ph["source"]}" target="_blank" rel="noopener">'
             f'{html.escape(ph["author"])}</a>, <a href="{ph["license_url"]}" target="_blank" rel="noopener">{ph["license"]}</a></li>')
 CREDITS = "".join(credit(p) for p in ([JP] if JP else []) + [CONF["stage_photos"][k] for k in sorted(CONF["stage_photos"])])
+# toolkit on the journey page: each tool links to its guide, and "blog" to the repo story when there is one
+TOOLKIT = [
+    (("Endpoint", "Endpoint"), [("Intune", "intune", "02-intune-compliance-report"), ("Autopilot", None, None), ("Defender for Endpoint", None, None),
+        ("MECM / SCCM", "mecm-sccm", "18-mecm-intune-comanagement-tracker"), ("BitLocker", "bitlocker", None), ("Jamf Pro", "jamf-pro", "21-apple-fleet-audit")]),
+    (("Identidad", "Identity"), [("Entra ID", None, "03-entra-id-hygiene-audit"), ("Conditional Access", "conditional-access", None), ("PIM", "m365-pim", None),
+        ("SSO / SAML", "entra-sso", "20-entra-sso-app-audit"), ("Active Directory", "active-directory", "19-ad-infra-health-check"),
+        ("Azure AD Connect", "azure-ad-connect", None), ("Exchange Online", "outlook", None)]),
+    (("Infraestructura", "Infrastructure"), [("Cisco", "cisco", None), ("VMware vSphere", "vsphere", None), ("Citrix", "citrix-vdi", None),
+        ("Veeam", "veeam", "32-backup-restore-test-tracker"), ("Windows Server", "windows-server", None), ("Red Hat", "rhel", None), ("AWS + Azure", None, "01-finops-cloud-cost-dashboard")]),
+    (("Colaboración", "Collaboration"), [("Microsoft 365", "m365", "27-m365-tenant-governance-review"), ("Copilot", None, None), ("SharePoint", "sharepoint", None),
+        ("Teams Rooms (Crestron, Logitech)", "teams-rooms", "17-teams-rooms-fleet-health")]),
+    (("Monitorización", "Monitoring"), [("SolarWinds", "solarwinds", None), ("Grafana", "grafana", None), ("Elasticsearch · Logstash · Kibana", "elk", None), ("Device42", None, None)]),
+    (("Automatización", "Automation"), [("PowerShell", "powershell", "05-it-ops-console"), ("Python", None, ""), ("Microsoft Graph", "graph", None), ("Git", "git", None)]),
+    (("Gestión", "Delivery"), [("ServiceNow", None, "04-itsm-kpi-dashboard"), ("Jira", "jira", "30-jira-confluence-admin-kit"), ("Confluence", "confluence", "30-jira-confluence-admin-kit"),
+        ("Power BI", None, None), ("DR/BCP", "dr-bcp", "32-backup-restore-test-tracker"), (("proveedores", "vendors"), None, "23-it-vendor-contract-tracker"), ("CAB", None, None)]),
+]
+def _toolkit_dl():
+    from guides import GUIDES as _GS
+    first = {}
+    for q in _GS: first.setdefault(q["topic"], q["slug"])
+    repos = {q["repo"] for q in POSTS}
+    def item(name, topic, repo):
+        label = bi(*name) if isinstance(name, tuple) else html.escape(name)
+        g = f"guias/{first[topic]}.html" if topic else None
+        b = ("blog/" if repo == "" else f"blog/{repo}.html") if repo is not None else None
+        assert (not topic or topic in first) and (not repo or repo in repos), (name, topic, repo)
+        if g:
+            out = f'<a class="tk" href="{g}">{label}</a>'
+            if b: out += f'<a class="tk-blog" href="{b}" aria-label="Blog: {html.escape(name if isinstance(name, str) else name[1])}">blog</a>'
+            return out
+        if b: return f'<a class="tk" href="{b}">{label}</a>'
+        return label
+    rows = "\n".join(f'      <div class="spec-row"><dt class="label">{bi(*cat)}</dt><dd>{" · ".join(item(*t) for t in tools)}</dd></div>' for cat, tools in TOOLKIT)
+    return '    <dl class="spec reveal">\n' + rows + "\n    </dl>"
+_tk = SEC["toolkit"]
+_i = _tk.index('    <dl class="spec reveal">'); _j = _tk.index("    </dl>", _i) + len("    </dl>")
+TOOLKIT_HTML = _tk[:_i] + _toolkit_dl() + _tk[_j:]
+TOOLKIT_HTML = TOOLKIT_HTML.replace('Lo que estoy aprendiendo fuera del trabajo está en los proyectos.</span>',
+    'Lo que estoy aprendiendo fuera del trabajo está en los proyectos. Cada herramienta enlaza con su guía, y «blog» con el artículo del repo.</span>').replace(
+    "What I'm learning outside work is in the projects.</span>", "What I'm learning outside work is in the projects. Each tool links to its guide, and \u201cblog\u201d to the repo story.</span>")
 journey_body = page_hero(bi("El viaje · 2015 — 2026", "The journey · 2015 — 2026"),
     bi("Once años.<br>Cinco etapas.", "Eleven years.<br>Five stages."),
     bi("De una consultora tecnológica a la sede de Madrid de una firma de servicios financieros, con la misma idea: que la tecnología funcione y no se note.",
        "From a technology consultancy to the Madrid site of a financial services firm, with the same idea throughout: technology that works and that people don't have to think about.")) \
-    + "\n\n" + SEC["numbers"].replace(' u-pt0"', '"') + "\n\n" + SEC["stages"].replace("{{STAGES}}", STAGES_HTML) + "\n\n" + SEC["toolkit"] \
+    + "\n\n" + SEC["numbers"].replace(' u-pt0"', '"') + "\n\n" + SEC["stages"].replace("{{STAGES}}", STAGES_HTML) + "\n\n" + TOOLKIT_HTML \
     + f'''
 
 <section class="credits">
