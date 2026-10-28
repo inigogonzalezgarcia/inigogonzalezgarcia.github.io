@@ -1584,4 +1584,106 @@ De mis primeros años en IT dando soporte a clientes de hostelería, con TPV com
 - Ejecutarlo cada mañana durante dos semanas con el inventario real de equipos y el plan de servicios, y ajustar los clientes por TPV y la prueba de apertura con los responsables de cada zona.
 - Leer el estado de los equipos del back office del TPV y del controlador de red en lugar de la prueba de ping.
 - Enviar a cada responsable el checklist de su servicio antes de abrir, y registrar los minutos perdidos al cerrar para las revisiones mensuales con los proveedores."""),
+dict(n="35", repo="35-private-cloud-capacity-review", date="2026-10-27", cat="tools",
+ title_en="The cluster looked fine at 74%: a monthly capacity and availability review of a private cloud",
+ title_es="El clúster parecía ir bien al 74%: una revisión mensual de capacidad y disponibilidad de una nube privada",
+ dek_en="For every vSphere and Nutanix cluster: the CPU and RAM left after a host failure, the vCPU ratio, a 12-month trend with the approved projects and the reclaim list, the month it crosses its N+1 limit against the purchase lead time, datastores, and the month's availability.",
+ dek_es="Para cada clúster vSphere y Nutanix: la CPU y la RAM que quedan tras caer un host, el ratio de vCPU, una tendencia de 12 meses con los proyectos aprobados y la lista de recuperación, el mes en que cruza su límite N+1 frente al plazo de compra, los datastores y la disponibilidad del mes.",
+ en="""
+
+## The problem
+Capacity is a date, not a percentage. A cluster at 74% of its RAM looks healthy on the dashboard. Take away the host that HA needs as a spare, though, and it is at 85% of what is left. It grows half a point a month, and two approved projects land in January and March. Put the three facts together and the cluster crosses its N+1 limit in January. New hosts take four months to order, deliver and add to the cluster, so the decision was due in September. The facts live in different places: capacity and utilisation in vCenter and Prism Central, projects in the portfolio, powered-off VMs and forgotten snapshots in the inventory, outages in the incident records. The monthly capacity review is where they meet.
+
+## What I built
+- Headroom after a host failure: the CPU and RAM left when the largest host fails, the vCPU:pCPU ratio against the policy, vRAM overcommit, and hosts in maintenance.
+- Runway: the latest p95 plus a linear trend over 12 months, with the approved projects added at their go-live month and the reclaim list taken away. The result is the month each cluster crosses its limit, the month to order by and the hosts to add.
+- Reclaim: VMs powered off for 30 or 90 days, idle VMs, VMs oversized against their p95 with the recommended size, old snapshots, and VMs without an owner, with the RAM and storage each one gives back.
+- Storage and availability: datastores below the free space threshold, thin provisioning, cluster outages against the availability target, host failures and HA restarts, and hosts out of vendor support.
+- `report.html` with a card and a runway chart per cluster, `capacity-review.md` with the decisions table for the meeting, and CSVs for clusters, forecast, reclaim, datastores and demand.
+- A read-only PowerShell exporter for vCenter with PowerCLI and for Nutanix Prism Central through its REST API.
+
+## How it is built
+Python with the standard library only. The demo is a made-up engineering company with a private cloud in Madrid and Guadalajara: two vSphere production clusters, a Nutanix AHV cluster, a management cluster, 23 hosts, 458 VMs, 13 months of utilisation and seven demand items. The problems are placed on purpose. The Madrid production cluster crosses its N+1 limit in January once the approved projects are counted, and the reclaim list moves that date to March, enough to order the hosts in November. 15 tests, a runbook for the monthly meeting, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+
+## What I learned
+From running private cloud infrastructure on vCenter and vSphere, VMware VCF with vSAN and NSX-T, Nutanix, OpenShift and HPE GreenLake, on Dell, HP and Supermicro servers with SAN, NAS and NetApp storage, and from formal capacity and availability management with metrics, trends and availability plans. Right-sizing and reservations in Azure taught me the same lesson on the cost side. The lesson that shaped the tool: the capacity meeting should end with dates and owners, not percentages. The runway is set against the purchase lead time, and the reclaim list only counts when it moves the date.
+
+## Next steps
+- Run it with the last 12 months of vCenter and Prism Central data, and check the N+1 limits and the vCPU policy with the platform team before the first meeting.
+- Put the project portfolio into the demand file every month, and send each service owner their reclaim rows a week before the meeting.
+- Keep each month's output, so the next review compares the forecast with what actually happened.""",
+ es="""
+
+## El problema
+La capacidad es una fecha, no un porcentaje. Un clúster al 74% de su RAM parece sano en el panel. Pero si quitas el host que HA necesita de reserva, está al 85% de lo que queda. Crece medio punto al mes, y hay dos proyectos aprobados que llegan en enero y en marzo. Juntando las tres cosas, el clúster cruza su límite N+1 en enero. Pedir, recibir y añadir hosts nuevos al clúster lleva cuatro meses, así que la decisión había que tomarla en septiembre. Los datos están en sitios distintos: capacidad y uso en vCenter y Prism Central, proyectos en la cartera, máquinas apagadas y snapshots olvidados en el inventario, caídas en los registros de incidencias. La revisión mensual de capacidad es donde se juntan.
+
+## Qué he hecho
+- Margen tras caer un host: la CPU y la RAM que quedan si cae el host más grande, el ratio vCPU:pCPU frente a la política, la sobreasignación de vRAM y los hosts en mantenimiento.
+- Autonomía: el último p95 más una tendencia lineal de 12 meses, sumando los proyectos aprobados en su mes de puesta en marcha y restando la lista de recuperación. El resultado es el mes en que cada clúster cruza su límite, el mes límite para pedir y los hosts a añadir.
+- Recuperación: máquinas apagadas desde hace 30 o 90 días, máquinas ociosas, máquinas sobredimensionadas según su p95 con el tamaño recomendado, snapshots antiguos y máquinas sin responsable, con la RAM y el almacenamiento que devuelve cada una.
+- Almacenamiento y disponibilidad: datastores por debajo del umbral de espacio libre, thin provisioning, caídas de clúster frente al objetivo de disponibilidad, fallos de host y reinicios de HA, y hosts sin soporte del fabricante.
+- `report.html` con una tarjeta y una gráfica de autonomía por clúster, `capacity-review.md` con la tabla de decisiones para la reunión, y CSV de clústeres, previsión, recuperación, datastores y demanda.
+- Un exportador de solo lectura en PowerShell para vCenter con PowerCLI y para Nutanix Prism Central con su API REST.
+
+## Cómo está hecho
+Python solo con la librería estándar. La demo es una empresa de ingeniería inventada con una nube privada en Madrid y Guadalajara: dos clústeres vSphere de producción, un clúster Nutanix AHV, un clúster de gestión, 23 hosts, 458 máquinas virtuales, 13 meses de uso y siete peticiones de demanda. Los problemas están puestos a propósito. El clúster de producción de Madrid cruza su límite N+1 en enero al contar los proyectos aprobados, y la lista de recuperación mueve esa fecha a marzo, lo justo para pedir los hosts en noviembre. 15 tests, un runbook para la reunión mensual y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+
+## Qué aprendí
+De gestionar infraestructura de nube privada con vCenter y vSphere, VMware VCF con vSAN y NSX-T, Nutanix, OpenShift y HPE GreenLake, sobre servidores Dell, HP y Supermicro con almacenamiento SAN, NAS y NetApp, y de la gestión formal de capacidad y disponibilidad con métricas, tendencias y planes de disponibilidad. El ajuste de tamaños y las reservas en Azure me enseñaron lo mismo desde el lado del coste. La lección que da forma a la herramienta: la reunión de capacidad tiene que acabar con fechas y responsables, no con porcentajes. La autonomía se compara con el plazo de compra, y la lista de recuperación solo cuenta si mueve la fecha.
+
+## Siguientes pasos
+- Ejecutarlo con los últimos 12 meses de datos de vCenter y Prism Central, y revisar los límites N+1 y la política de vCPU con el equipo de plataforma antes de la primera reunión.
+- Pasar cada mes la cartera de proyectos al fichero de demanda, y enviar a cada responsable de servicio sus filas de recuperación una semana antes de la reunión.
+- Guardar la salida de cada mes, para que la siguiente revisión compare la previsión con lo que pasó de verdad."""),
+dict(n="36", repo="36-major-incident-command-kit", date="2026-10-28", cat="tools",
+ title_en="Users told us 40 minutes before monitoring did: a kit to run and review major incidents",
+ title_es="Los usuarios nos avisaron 40 minutos antes que la monitorización: un kit para dirigir y revisar incidentes mayores",
+ dek_en="For every P1 and P2 of the quarter: the first alert against the first user report, time to acknowledge, mitigate and resolve against target, who ran it, the gaps in stakeholder updates, the change the night before, the review, the root cause and the overdue actions, with a timeline and a draft post-incident review per incident.",
+ dek_es="Para cada P1 y P2 del trimestre: la primera alerta frente al primer aviso de los usuarios, el tiempo de respuesta, mitigación y resolución frente al objetivo, quién lo dirigió, los huecos en las comunicaciones, el cambio de la noche anterior, la revisión, la causa raíz y las acciones vencidas, con una línea de tiempo y un borrador de revisión post-incidente por incidente.",
+ en="""
+
+## The problem
+The post-incident review is usually written a week later, from memory, by the person who was busiest on the bridge. By then the timeline is a guess, and the questions that would change something next time are not asked. The service desk had dozens of calls about logins before anyone in IT knew, and no alert fired until well after detection. An alert on the payments queue fired at ten past two and nobody acted until three. The trading desk went an hour and a half without an update and never got the resolution notice. The change the night before was the cause, and the ticket does not say so. The action that would have caught the login outage is a month overdue. The facts are in the ITSM tool, the monitoring consoles, the bridge chat and the sent folder; the review that matters joins them per incident and measures them against the policy the team signed up to.
+
+## What I built
+- Detection: the first alert on the service or CI against the first user report and the ticket, with blind spots (users first, no alert) and alerts nobody acted on.
+- Response: time to acknowledge, mitigate and resolve against the targets of each priority, and whether an incident commander, a comms lead and a tech lead were recorded.
+- Communications: a stakeholder update every N minutes as the policy says, the first one late, the gaps, and the missing resolution notice.
+- Before and after: changes on the service in the 72 hours before the impact, the post-incident review within N business days, the root cause in the problem record, overdue actions, and incidents that came back on the same CI within 30 days.
+- `report.html` with a timeline per incident as inline SVG, one draft post-incident review per major incident with the parts only people can write clearly marked, and CSVs for the incidents, MTTD/MTTA/MTTM/MTTR by month and priority, comms gaps, overdue actions and repeats.
+- A `start` command that prints the role card, the first-fifteen-minutes checklist and the first stakeholder update for a new incident, and a read-only PowerShell exporter for ServiceNow and Jira Service Management.
+
+## How it is built
+Python with the standard library only. The demo is the IT operations team of a made-up bank over one quarter: 54 incidents, six of them major, on card payments, online banking, trader voice, the mobile API, the payments hub and market data, with alerts from five monitoring tools, changes, bridge timelines, stakeholder updates, problems and actions, and the problems placed on purpose. 15 tests, a runbook for the first fifteen minutes and the weekly review, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+
+## What I learned
+From leading the technical response in major incidents and the post-mortems that followed, and from owning the incident, change and problem processes. One of them was the outage of a voice line used by a trading desk at a financial services firm: the fix was technical, but what the desk remembered was how often they heard from us. The lessons that shaped the tool are that detection starts at the first signal, not at the ticket; that an update with nothing new is still an update; that a change in the days before is a suspect until the review rules it out; and that a review without an owner and a date for each action is a meeting, not a review.
+
+## Next steps
+- Run it on last quarter's real exports and tune the targets, the update interval and the review days with the major incident managers.
+- Read the alerts from the monitoring APIs and the updates from the communication plan instead of two CSVs.
+- Write the draft review into the problem record, and bring the blind spots and overdue actions to the monthly service review.""",
+ es="""
+
+## El problema
+La revisión post-incidente se suele escribir una semana después, de memoria, por la persona que más trabajo tuvo en el puente. Para entonces la línea de tiempo es una suposición, y las preguntas que cambiarían algo la próxima vez no se hacen. El service desk había recibido decenas de llamadas por el login antes de que nadie en IT lo supiera, y ninguna alerta saltó hasta mucho después de la detección. Una alerta de la cola de pagos saltó a las dos y diez y nadie actuó hasta las tres. La mesa de trading pasó hora y media sin una actualización y nunca recibió el aviso de resolución. El cambio de la noche anterior fue la causa, y el ticket no lo dice. La acción que habría detectado la caída del login lleva un mes vencida. Los datos están en la herramienta ITSM, las consolas de monitorización, el chat del puente y la bandeja de enviados; la revisión que importa los junta por incidente y los mide contra la política que el equipo se comprometió a cumplir.
+
+## Qué he hecho
+- Detección: la primera alerta sobre el servicio o el CI frente al primer aviso de los usuarios y el ticket, con los puntos ciegos (avisan los usuarios, sin alerta) y las alertas que nadie atendió.
+- Respuesta: el tiempo hasta la asignación, la mitigación y la resolución frente a los objetivos de cada prioridad, y si constan un incident commander, un responsable de comunicaciones y un responsable técnico.
+- Comunicaciones: una actualización a los interesados cada N minutos según la política, la primera tarde, los huecos y el aviso de resolución que falta.
+- Antes y después: cambios en el servicio en las 72 horas previas al impacto, la revisión post-incidente en N días laborables, la causa raíz en el registro de problema, las acciones vencidas y los incidentes que vuelven en el mismo CI en 30 días.
+- `report.html` con una línea de tiempo por incidente en SVG, un borrador de revisión post-incidente por cada incidente mayor con las partes que solo pueden escribir las personas bien marcadas, y CSV de incidentes, MTTD/MTTA/MTTM/MTTR por mes y prioridad, huecos de comunicación, acciones vencidas y repeticiones.
+- Un comando `start` que imprime la tarjeta de roles, el checklist de los primeros quince minutos y la primera comunicación para un incidente nuevo, y un exportador de solo lectura en PowerShell para ServiceNow y Jira Service Management.
+
+## Cómo está hecho
+Python solo con la librería estándar. La demo es el equipo de operaciones IT de un banco inventado durante un trimestre: 54 incidentes, seis de ellos mayores, en pagos con tarjeta, banca online, voz de trading, la API móvil, el hub de pagos y datos de mercado, con alertas de cinco herramientas de monitorización, cambios, líneas de tiempo del puente, comunicaciones, problemas y acciones, y los problemas puestos a propósito. 15 tests, un runbook para los primeros quince minutos y la revisión semanal, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+
+## Qué aprendí
+De liderar la respuesta técnica en incidentes mayores y los post-mortems que vinieron después, y de ser responsable de los procesos de incidencias, cambios y problemas. Uno de ellos fue la caída de una línea de voz que usaba una mesa de trading en una empresa de servicios financieros: la solución fue técnica, pero lo que la mesa recordaba era cada cuánto tenía noticias nuestras. Las lecciones que dan forma a la herramienta son que la detección empieza con la primera señal, no con el ticket; que una actualización sin novedades sigue siendo una actualización; que un cambio en los días previos es sospechoso hasta que la revisión lo descarta; y que una revisión sin responsable y fecha para cada acción es una reunión, no una revisión.
+
+## Siguientes pasos
+- Ejecutarlo con las exportaciones reales del último trimestre y ajustar los objetivos, el intervalo de comunicaciones y los días para la revisión con los responsables de incidentes mayores.
+- Leer las alertas de las APIs de monitorización y las comunicaciones del plan de comunicación en lugar de dos CSV.
+- Escribir el borrador de revisión en el registro de problema, y llevar los puntos ciegos y las acciones vencidas a la revisión mensual de servicio."""),
 ]
