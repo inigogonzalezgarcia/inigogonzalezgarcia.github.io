@@ -259,7 +259,7 @@ home_body = "\n\n".join([
   </div>
 </section>'''])
 sizes["index.html"] = write("index.html", layout(R="", path="", active="", home=True,
-    title_en="Iñigo González · IT Operations & Infrastructure", title_es="Iñigo González · Operaciones IT e Infraestructura",
+    title_en="Iñigo González García · IT Site Leader in Madrid", title_es="Iñigo González García · IT Site Leader en Madrid",
     desc=DESC, body=home_body, ld=[PERSON, WEBSITE]))
 
 # journey
@@ -305,8 +305,8 @@ blog_body = page_hero("Blog · " + bi("Labs y herramientas", "Labs & tools"),
   </div>
 </section>'''
 sizes["blog/index.html"] = write("blog/index.html", layout(R="../", path="blog/", active="blog",
-    title_en="Blog · Iñigo González", title_es="Blog · Iñigo González",
-    desc="How I built each of my GitHub projects: IT Ops tools and cloud, SRE and GPU labs.", body=blog_body,
+    title_en="Blog · IT Ops tools & labs · Iñigo González García", title_es="Blog · Herramientas y labs de IT Ops · Iñigo González García",
+    desc="How I built my IT Ops tools and labs: Jamf, Entra ID, MECM + Intune, Active Directory and Teams Rooms, plus cloud, SRE and GPU labs, each with its GitHub repo.", body=blog_body,
     ld=[{"@type": "Blog", "@id": SITE_URL + "blog/#blog", "url": SITE_URL + "blog/", "name": "Labs & tools · Iñigo González",
          "inLanguage": "en", "author": PERSON_REF,
          "blogPost": [{"@type": "BlogPosting", "headline": q["title_en"], "url": f'{SITE_URL}blog/{q["repo"]}.html', "datePublished": q["date"]} for q in POSTS_SORTED]},
@@ -407,10 +407,11 @@ now = f'''<section class="section">
   </div>
 </section>'''
 about_body = SEC["about"].replace('class="section dark" id="sobre-mi"', 'class="section dark about-top" id="sobre-mi"') \
+    .replace('<h2 class="h2 sm">Iñigo González.</h2>', '<h1 class="h2 sm">Iñigo González García<br>' + bi("IT Site Leader en Madrid", "IT Site Leader in Madrid") + '</h1>') \
     + "\n\n" + now + "\n\n" + SEC["map"].replace("{{MAP}}", MAP) + "\n\n" + SEC["contact"].replace("{{FORM_ACTION}}", FORM).replace("{{CAPTCHA}}", CAPTCHA).replace("{{CAPTCHA_JS}}", CAPTCHA_JS)
 sizes["about.html"] = write("about.html", layout(R="", path="about.html", active="about",
-    title_en="About · Iñigo González", title_es="Sobre mí · Iñigo González",
-    desc="About Iñigo González, IT Site Leader in Madrid, and how to get in touch.", body=about_body,
+    title_en="About · Iñigo González García, IT Site Leader in Madrid", title_es="Sobre mí · Iñigo González García, IT Site Leader en Madrid",
+    desc="Iñigo González García, IT Site Leader in Madrid: 11+ years in IT operations, Modern Workplace and infrastructure across financial services, healthcare, manufacturing and luxury retail. Background, current work and contact.", body=about_body,
     ld=[{"@type": "ProfilePage", "url": SITE_URL + "about.html", "mainEntity": PERSON}, crumbs(("Home", ""), ("About", "about.html"))]))
 
 # store (IGG-ICS · IT · Tech Career, Lab & Strategy): service catalogue, no prices or checkout yet
