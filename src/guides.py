@@ -30,9 +30,9 @@ LEVELS = {
                     h_es="Infraestructura híbrida,<br>seguridad y continuidad.", h_en="Hybrid infrastructure,<br>security and continuity.",
                     d_es="Infraestructura híbrida, redes, seguridad y continuidad de negocio.",
                     d_en="Hybrid infrastructure, networking, security and business continuity.",
-                    l_es="Para quien diseña, decide y responde cuando algo grande falla: escritorios en la nube, recuperación ante desastres, la red de una sede, el gobierno de los administradores de Microsoft 365, la detección con Sentinel y las migraciones de tenant. Seis temas ya publicados; el resto, en camino.",
-                    l_en="For people who design, decide and respond when something big fails: cloud desktops, disaster recovery, a site's network, governing Microsoft 365 administrators, detection with Sentinel and tenant migrations. Six topics published so far; the rest are on the way.",
-                    seo="Expert IT guides: Azure Virtual Desktop and Windows 365, backup and disaster recovery (DR/BCP), Cisco switches and routers, Microsoft 365 Global Admin and PIM, Microsoft Sentinel, and Microsoft 365 tenant migrations."),
+                    l_es="Diecisiete temas para quien diseña, decide y responde cuando algo grande falla: nube e infraestructura como código, contenedores, redes y cortafuegos, acceso privilegiado, detección y vulnerabilidades, protección de datos, cumplimiento normativo y recuperación ante desastres.",
+                    l_en="Seventeen topics for people who design, decide and respond when something big fails: cloud and infrastructure as code, containers, networks and firewalls, privileged access, detection and vulnerabilities, data protection, compliance and disaster recovery.",
+                    seo="Expert IT guides: Amazon AWS, Azure Virtual Desktop and Windows 365, Azure Monitor and Log Analytics, backup and disaster recovery (DR/BCP), Cisco switches and routers, CyberArk, Fortinet FortiGate, ISO 27001, NIS2 and GDPR, Kubernetes, Microsoft 365 Global Admin and PIM, Microsoft Purview, Microsoft Sentinel, Microsoft 365 tenant migrations, Nutanix, Qualys, Red Hat OpenShift and Terraform."),
     "sector-1": dict(key="sector-1", n_es="Sector 1", n_en="Sector 1", t_es="Hostelería y punto de venta", t_en="Hospitality and point of sale",
                     h_es="Hostelería<br>y punto de venta.", h_en="Hospitality<br>and point of sale.",
                     d_es="TPV, sistemas de hotel y la puesta en marcha de un establecimiento.",
@@ -180,6 +180,12 @@ TOPICS = [
      "Crear una máquina virtual, snapshots con fecha de caducidad y poner un host en mantenimiento sin cortar nada.",
      "Create a virtual machine, snapshots with an expiry date, and put a host into maintenance without cutting anything."),
     # ---- Level 4
+    ("nivel-4", "aws", "Amazon AWS", "Amazon AWS",
+     'Cuentas e IAM bien hechos, una VPC con VPN a la oficina, servidores sin RDP abierto, copias y alertas de coste.',
+     'Accounts and IAM done right, a VPC with VPN to the office, servers without open RDP, backups and cost alerts.'),
+    ("nivel-4", "azure-monitor", "Azure Monitor y Log Analytics", "Azure Monitor and Log Analytics",
+     'Un área de trabajo bien pensada, el agente con reglas de recopilación, Arc en local, KQL, alertas y un servidor mudo.',
+     'One well-planned workspace, the agent with collection rules, Arc on-prem, KQL, alerts and a server gone silent.'),
     ("nivel-4", "avd-w365", "Azure Virtual Desktop y Windows 365", "Azure Virtual Desktop and Windows 365",
      "Cuándo usar cada uno, un host pool con FSLogix y escalado automático, y una conexión que falla.",
      "When to use each, a host pool with FSLogix and autoscaling, and a connection that fails."),
@@ -189,15 +195,42 @@ TOPICS = [
     ("nivel-4", "cisco", "Cisco: switches y routers", "Cisco switches and routers",
      "VLANs, troncales sin cortar una planta, el router con circuito de respaldo y un puerto que no da red.",
      "VLANs, trunks without cutting off a floor, the router with a backup circuit and a port that gives no network."),
+    ("nivel-4", "cyberark", "CyberArk", "CyberArk",
+     'Safes y sus miembros, cuentas privilegiadas con rotación automática, sesiones grabadas por PSM y una contraseña que el CPM no cambia.',
+     "Safes and their members, privileged accounts with automatic rotation, PSM-recorded sessions and a password the CPM can't change."),
+    ("nivel-4", "fortigate", "Fortinet FortiGate", "Fortinet FortiGate",
+     'Interfaces, objetos y políticas con mínimo privilegio, VPN de usuarios con Entra ID, túneles entre sedes y un usuario que no llega a una aplicación.',
+     "Interfaces, objects and least-privilege policies, user VPN with Entra ID, site tunnels and a user who can't reach an app."),
+    ("nivel-4", "compliance", "ISO 27001, NIS2 y RGPD en IT", "ISO 27001, NIS2 and GDPR in IT",
+     'El SGSI y sus evidencias, qué pide NIS2 y sus plazos, el RGPD visto desde IT y un portátil perdido con datos personales.',
+     'The ISMS and its evidence, what NIS2 asks and its deadlines, GDPR seen from IT and a lost laptop with personal data.'),
+    ("nivel-4", "kubernetes", "Kubernetes", "Kubernetes",
+     'Cuándo compensa dejar Docker Compose, un clúster gestionado, desplegar una herramienta interna y un pod en CrashLoopBackOff.',
+     'When it pays to leave Docker Compose, a managed cluster, deploying an internal tool and a pod in CrashLoopBackOff.'),
     ("nivel-4", "m365-pim", "Microsoft 365: Global Admin y PIM", "Microsoft 365: Global Admin and PIM",
      "Roles mínimos, cuentas de emergencia y administradores que activan su rol solo cuando lo necesitan.",
      "Least-privileged roles, emergency accounts and administrators who activate their role only when they need it."),
+    ("nivel-4", "purview", "Microsoft Purview", "Microsoft Purview",
+     'Etiquetas que cifran, retención, DLP probada antes de bloquear, búsquedas de eDiscovery y un documento de socio que no abre.',
+     "Labels that encrypt, retention, DLP tested before it blocks, eDiscovery searches and a partner document that won't open."),
     ("nivel-4", "sentinel", "Microsoft Sentinel", "Microsoft Sentinel",
      "Conectores, una regla de análisis en KQL, la automatización y un incidente de principio a fin.",
      "Connectors, a KQL analytics rule, automation and an incident from start to finish."),
     ("nivel-4", "tenant-migration", "Migraciones de tenant Microsoft 365", "Microsoft 365 tenant migrations",
      "Inventario, identidades, buzones entre tenants, OneDrive, dispositivos y el fin de semana del corte.",
      "Inventory, identities, cross-tenant mailboxes, OneDrive, devices and the cutover weekend."),
+    ("nivel-4", "nutanix", "Nutanix", "Nutanix",
+     'De vSphere a Nutanix: Prism, CVM y factor de replicación, VMs en AHV, réplica a otra sede, LCM y una alerta de disco con NCC.',
+     'From vSphere to Nutanix: Prism, CVMs and replication factor, AHV VMs, replication to another site, LCM and a disk alert with NCC.'),
+    ("nivel-4", "qualys", "Qualys", "Qualys",
+     'Cloud Agent con Intune o MECM, etiquetas, escaneo autenticado, priorizar con KEV y el parche que no hace desaparecer la vulnerabilidad.',
+     "Cloud Agent via Intune or MECM, tags, authenticated scans, prioritising with KEV and the patch that doesn't clear the vulnerability."),
+    ("nivel-4", "openshift", "Red Hat OpenShift", "Red Hat OpenShift",
+     'Lo que añade a Kubernetes, desplegar una app con Route, acceso por grupos de Entra ID, actualizar por canales y el pod que no arranca.',
+     "What it adds to Kubernetes, deploying an app with a Route, access by Entra ID groups, channel upgrades and the pod that won't start."),
+    ("nivel-4", "terraform", "Terraform", "Terraform",
+     'Un módulo pequeño, estado remoto con bloqueo, plan revisado en el pipeline, deriva, importación y secretos fuera del código.',
+     'A small module, remote state with locking, a reviewed plan in the pipeline, drift, import and secrets out of the code.'),
     ("sector-1", "cashdro", "CashDro - Integración con el TPV", "CashDro - Integration with the POS",
      "El cobro en efectivo automático: red, credenciales, la rutina diaria y el arqueo.",
      "Automatic cash payments: network, credentials, the daily routine and the cash count."),
@@ -10273,7 +10306,7 @@ $ copy running-config startup-config
 - **802.1X** con Cisco ISE o NPS: el puerto da la VLAN según quién se conecta, no según el puerto.
 - **NetBox** como fuente de verdad (qué puerto va a qué roseta) y **Ansible** con la colección `cisco.ios` para cambios repetibles (guía de Ansible del Nivel 3).
 - SD-WAN cuando las sedes son muchas y los circuitos, variados.
-- La guía de FortiGate (próximamente) cubre el cortafuegos que suele estar entre este router y el resto del mundo.
+- La guía de **Fortinet FortiGate** cubre el cortafuegos que suele estar entre este router y el resto del mundo.
 """,
   en="""
 ## What you'll get
@@ -10431,7 +10464,7 @@ $ copy running-config startup-config
 - **802.1X** with Cisco ISE or NPS: the port gives a VLAN based on who connects, not on the port.
 - **NetBox** as the source of truth (which port goes to which socket) and **Ansible** with the `cisco.ios` collection for repeatable changes (Level 3 Ansible guide).
 - SD-WAN when there are many sites and the circuits are varied.
-- The FortiGate guide (coming soon) covers the firewall that usually sits between this router and the rest of the world.
+- The **Fortinet FortiGate** guide covers the firewall that usually sits between this router and the rest of the world.
 """)
 
 # ---------------------------------------------------------------- L4 · Global Admin and PIM
@@ -10689,7 +10722,7 @@ Un Sentinel que recibe los registros que importan, genera incidentes que alguien
 - Un **área de trabajo de Log Analytics** en la región que corresponda a tus datos, y el rol **Microsoft Sentinel Contributor** sobre ella (y Log Analytics Contributor para los conectores).
 - Sentinel se usa desde el **portal de Microsoft Defender** (operaciones de seguridad unificadas), junto con los incidentes de Defender XDR. Las rutas de esta guía son las de ese portal.
 - Una idea del presupuesto: se paga por GB ingerido. Hay orígenes gratuitos (actividad de Azure, auditoría de Office 365, alertas de Defender) y otros que no lo son (inicios de sesión de Entra ID, eventos de seguridad de Windows).
-- La guía de Azure Monitor y Log Analytics (próximamente) explica el área de trabajo por dentro; aquí basta con saber escribir una consulta KQL sencilla.
+- La guía de **Azure Monitor y Log Analytics** explica el área de trabajo por dentro; aquí basta con saber escribir una consulta KQL sencilla.
 
 ## 1. Los conectores que importan
 
@@ -10834,7 +10867,7 @@ A Sentinel that receives the logs that matter, raises incidents someone actually
 - A **Log Analytics workspace** in the region your data belongs in, and the **Microsoft Sentinel Contributor** role on it (plus Log Analytics Contributor for the connectors).
 - Sentinel is used from the **Microsoft Defender portal** (unified security operations), alongside the Defender XDR incidents. The paths in this guide are that portal's.
 - A rough budget: you pay per GB ingested. Some sources are free (Azure activity, Office 365 audit, Defender alerts) and others are not (Entra ID sign-ins, Windows security events).
-- The Azure Monitor and Log Analytics guide (coming soon) explains the workspace from the inside; here it is enough to be able to write a simple KQL query.
+- The **Azure Monitor and Log Analytics** guide explains the workspace from the inside; here it is enough to be able to write a simple KQL query.
 
 ## 1. The connectors that matter
 
@@ -11211,6 +11244,3053 @@ $ Get-Recipient -ResultSize Unlimited | Where-Object { $_.EmailAddresses -match 
 - If the tenants will live side by side, **cross-tenant synchronisation** and Microsoft 365's **multitenant organization**: users see each other in the directory and in Teams without migrating anything.
 - **B2B access** during the TSA: users already migrated sign in as guests to whatever still lives in the source.
 - The Level 2 Azure AD Connect guide: in a hybrid migration it is the piece taken apart in the source and rebuilt in the target.
+""")
+
+# ---------------------------------------------------------------- L4 · Amazon AWS
+g(slug="amazon-aws-cuentas-iam-vpc-con-vpn-a-la-oficina-y-un-servidor-que-no-llega-al-recurso-compartido", topic="aws", date="2026-10-28",
+  title_es="Amazon AWS: cuentas, IAM, una VPC con VPN a la oficina y un servidor que no llega al recurso compartido",
+  title_en="Amazon AWS: accounts, IAM, a VPC with VPN to the office and a server that can't reach the file share",
+  dek_es="AWS Organizations y IAM Identity Center con Entra ID como origen de identidades, la cuenta raíz guardada bajo llave, una VPC privada con VPN de sitio a sitio, un servidor EC2 administrado con Session Manager en lugar de RDP abierto, AWS Backup, alertas de coste con etiquetas y el diagnóstico de un servidor que no ve la oficina.",
+  dek_en="AWS Organizations and IAM Identity Center with Entra ID as the identity source, the root user locked away, a private VPC with a site-to-site VPN, an EC2 server managed with Session Manager instead of open RDP, AWS Backup, cost alerts with tags, and diagnosing a server that can't see the office.",
+  es="""
+## Qué vas a conseguir
+
+Una presencia en AWS que un responsable de sistemas puede defender en una auditoría: cuentas separadas por uso, acceso con las mismas identidades de Entra ID que el resto de la empresa, ninguna puerta RDP o SSH abierta a Internet, copias que se comprueban y un aviso antes de que la factura dé un susto. Y el ticket de conectividad más habitual entre la nube y la oficina, resuelto con la AWS CLI.
+
+## Antes de empezar
+
+- Una cuenta de AWS que será la **cuenta de administración** de la organización. Sin cargas de trabajo.
+- Permiso de **Administrador de aplicaciones** (o superior) en Entra ID para crear la aplicación empresarial.
+- La **AWS CLI v2** y el **plugin de Session Manager** instalados en tu equipo.
+- El rango de la oficina (aquí `192.168.10.0/24`) y la IP pública del cortafuegos de la sede.
+- Un rango para AWS que no se solape con nada de la empresa (aquí `10.40.0.0/16`).
+
+## 1. Organizaciones, cuentas y la cuenta raíz
+
+- **AWS Organizations** con unidades organizativas sencillas: *Seguridad* (registros y auditoría), *Producción* y *Pruebas*. Una cuenta por entorno.
+- **Políticas de control de servicios (SCP)** mínimas desde el primer día: impedir que una cuenta abandone la organización, limitar las regiones a las que usáis (por ejemplo `eu-west-1` y `eu-south-2`) y proteger el CloudTrail de organización (en la cuenta de Seguridad) para que nadie lo apague.
+- La **cuenta raíz** no se usa: MFA con llave física, sin claves de acceso, y la dirección de correo es una lista del equipo, no la de una persona. Con la **gestión centralizada del acceso raíz** de Organizations puedes eliminar las credenciales raíz de las cuentas miembro.
+
+! Nadie trabaja con usuarios IAM con claves de larga duración. Un proceso usa un rol (perfil de instancia, OIDC desde el pipeline): las claves olvidadas en un portátil o un repositorio son la causa más común de incidentes en AWS.
+
+## 2. Acceso con Entra ID: IAM Identity Center
+
+En Entra ID se añade la aplicación de la galería **AWS IAM Identity Center** (SAML) y en AWS se cambia el origen de identidades. El aprovisionamiento **SCIM** crea en AWS los usuarios y grupos que asignes a la aplicación, y los desactiva cuando alguien se va.
+
+:::ui AWS · IAM Identity Center
+> IAM Identity Center › Configuración › Origen de identidades › Acciones › Cambiar el origen de identidades
+= Origen de identidades: Proveedor de identidades externo
+= Metadatos del IdP: archivo XML descargado de la aplicación empresarial de Entra ID
+= Aprovisionamiento automático: Habilitado (SCIM) · punto de conexión y token copiados a Entra ID
+= Conjunto de permisos: OpsAdmin (AdministratorAccess) · duración de la sesión 4 h
+= Conjunto de permisos: ReadOnly (ViewOnlyAccess) · duración de la sesión 8 h
+= Asignación: grupo GRP-AWS-OPS → cuentas Producción y Pruebas → OpsAdmin
+[Guardar cambios]
+:::
+
+- Se asignan **grupos**, nunca personas sueltas. El alta y la baja se hacen en Entra ID, y el acceso condicional y la MFA de Entra se aplican también a AWS.
+- Desde la terminal: `aws configure sso` una vez y `aws sso login --profile prod-ops` cada día. Credenciales temporales, sin claves guardadas.
+
+## 3. La red: VPC privada y VPN a la oficina
+
+- VPC `10.40.0.0/16` con subredes **privadas** en dos zonas de disponibilidad (`10.40.1.0/24`, `10.40.2.0/24`) para los servidores y una pública pequeña solo si hace falta un NAT Gateway para salir a Internet.
+- **Puerta de enlace privada virtual** (VGW) unida a la VPC, una **puerta de enlace de cliente** con la IP pública del cortafuegos de la sede y una **conexión VPN de sitio a sitio**. AWS siempre da **dos túneles**: configura los dos en el cortafuegos.
+- Rutas estáticas en la conexión VPN (`192.168.10.0/24`) o BGP si el cortafuegos lo soporta, y **propagación de rutas** activada en las tablas de rutas de las subredes privadas.
+- Los **grupos de seguridad** se escriben por origen: el del servidor admite el tráfico de la oficina en los puertos que necesita la aplicación, y nada desde `0.0.0.0/0`.
+
+## 4. Un servidor sin RDP abierto: Session Manager
+
+La instancia EC2 vive en la subred privada, sin IP pública y sin el puerto 3389 en su grupo de seguridad. Se administra con **AWS Systems Manager**:
+
+- Perfil de instancia con la política **AmazonSSMManagedInstanceCore**. El agente de SSM ya viene en las AMI de Windows Server y Amazon Linux.
+- Si la subred no sale a Internet, **puntos de conexión de VPC** de interfaz para `ssm`, `ssmmessages` y `ec2messages`.
+
+:::term PowerShell · tu equipo
+$ aws sso login --profile prod-ops
+$ aws ssm describe-instance-information --profile prod-ops --query "InstanceInformationList[].[InstanceId,ComputerName,PingStatus]" --output text
+i-0a1b2c3d4e5f60718	srv-app01.contoso.local	Online
+$ aws ssm start-session --profile prod-ops --target i-0a1b2c3d4e5f60718 --document-name AWS-StartPortForwardingSession --parameters "portNumber=3389,localPortNumber=13389"
+Starting session with SessionId: javier.ruiz-0f1e2d3c4b5a69788
+Port 13389 opened for sessionId javier.ruiz-0f1e2d3c4b5a69788.
+Waiting for connections...
+# ahora el cliente de Escritorio remoto se conecta a localhost:13389
+:::
+
+Sin `--document-name`, la sesión abre PowerShell o bash en el servidor. Todo queda registrado en CloudTrail.
+
+## 5. Copias y coste
+
+**AWS Backup**: un plan con copia diaria (retención 35 días) y mensual (12 meses), una selección de recursos **por etiqueta** (`backup=diario`) y copia a un almacén de otra cuenta. **Vault Lock** en modo cumplimiento impide borrar las copias antes de tiempo, también a un administrador comprometido.
+
+Para el coste, dos piezas (y **Cost Anomaly Detection** para los picos a mitad de mes):
+
+- **Etiquetas** obligatorias (`proyecto`, `entorno`, `responsable`) y activadas como **etiquetas de asignación de costes** en la consola de Facturación; si no se activan, no aparecen en Cost Explorer.
+- **AWS Budgets** con avisos sobre el gasto real y el previsto.
+
+:::ui AWS · Billing and Cost Management · Presupuestos
+> Billing and Cost Management › Presupuestos › Crear presupuesto › Presupuesto de costes
+= Nombre: prod-mensual · Periodo: mensual · Importe: el aprobado para el año entre doce
+= Ámbito: cuenta Producción · filtro de etiqueta entorno=prod
+= Umbral de alerta 1: 80 % del gasto real → grupo de correo del equipo y canal SNS
+= Umbral de alerta 2: 100 % del gasto previsto → mismo destino
+[Crear presupuesto]
+:::
+
+## 6. El ticket: "el servidor no llega al recurso compartido de la oficina"
+
+`srv-app01` necesita leer `\\\\srv-fs01\\intercambio` en la sede y falla. Se recorre el camino en orden: túnel, rutas, grupo de seguridad, y el otro extremo.
+
+:::term AWS CLI · diagnóstico
+$ aws ec2 describe-vpn-connections --vpn-connection-ids vpn-0c1d2e3f4a5b6c7d8 --query "VpnConnections[0].VgwTelemetry[].[OutsideIpAddress,Status,LastStatusChange]" --output text
+198.51.100.21	UP	2026-10-27T22:14:05+00:00
+198.51.100.22	DOWN	2026-10-27T22:13:58+00:00
+$ aws ec2 describe-route-tables --filters Name=association.subnet-id,Values=subnet-0a9b8c7d6e5f40312 --query "RouteTables[0].Routes[].[DestinationCidrBlock,GatewayId,NatGatewayId,State]" --output text
+10.40.0.0/16	local	None	active
+0.0.0.0/0	None	nat-0f9e8d7c6b5a40321	active
+$ aws ec2 describe-route-tables --filters Name=association.subnet-id,Values=subnet-0a9b8c7d6e5f40312 --query "RouteTables[0].[RouteTableId,PropagatingVgws]" --output text
+rtb-0d4c3b2a1f0e9d8c7
+# no hay ruta a 192.168.10.0/24 y la tabla no propaga desde la VGW
+$ aws ec2 enable-vgw-route-propagation --route-table-id rtb-0d4c3b2a1f0e9d8c7 --gateway-id vgw-0b1a2c3d4e5f60789
+:::
+
+- **Túneles**: con uno arriba hay servicio; el otro caído se corrige en el cortafuegos, pero no es la causa.
+- **Rutas**: aquí estaba el problema. La tabla se recreó la semana anterior y nadie volvió a activar la propagación, así que el tráfico hacia la oficina salía por el NAT. Tras activarla aparece `192.168.10.0/24` con destino la VGW.
+- **Grupo de seguridad**: la salida por defecto lo permite todo; si se restringió, necesita TCP 445 hacia `192.168.10.0/24`.
+- **El otro extremo**: el cortafuegos de la sede tiene que conocer `10.40.0.0/16` por el túnel y permitir SMB desde ahí. Desde una sesión de SSM, `Test-NetConnection srv-fs01 -Port 445` lo confirma de punta a punta.
+
+## 7. Lo que revisas cada mes
+
+- Hallazgos de **Security Hub** e **IAM Access Analyzer**: accesos externos, roles sin uso, claves de acceso que no deberían existir.
+- Trabajos de AWS Backup fallidos y una restauración de prueba al trimestre.
+- Estado de los dos túneles VPN y el informe de Cost Explorer agrupado por la etiqueta `proyecto`, con los recursos sin etiquetar.
+
+## Siguientes pasos
+
+- La guía de **Terraform** para que cuentas, VPC y servidores salgan de un repositorio revisado.
+- La guía de **Backup y DR/BCP** para encajar AWS Backup en el plan de continuidad de la empresa.
+- La guía de **Fortinet FortiGate** para el lado de la oficina de la VPN.
+- La guía de **Kubernetes** cuando las aplicaciones pasen de un servidor a contenedores (EKS).
+""",
+  en="""
+## What you'll get
+
+An AWS presence that an IT lead can defend in an audit: accounts separated by purpose, access with the same Entra ID identities as the rest of the company, no RDP or SSH door open to the Internet, backups that are tested and a warning before the bill becomes a shock. And the most common connectivity ticket between the cloud and the office, solved with the AWS CLI.
+
+## Before you start
+
+- An AWS account that will be the organisation's **management account**. No workloads.
+- The **Application Administrator** role (or higher) in Entra ID to create the enterprise application.
+- **AWS CLI v2** and the **Session Manager plugin** installed on your machine.
+- The office range (`192.168.10.0/24` here) and the public IP of the site firewall.
+- A range for AWS that doesn't overlap with anything in the company (`10.40.0.0/16` here).
+
+## 1. Organisations, accounts and the root user
+
+- **AWS Organizations** with simple organisational units: *Security* (logs and audit), *Production* and *Test*. One account per environment.
+- Minimal **service control policies (SCPs)** from day one: stop an account leaving the organisation, limit regions to the ones you use (for example `eu-west-1` and `eu-south-2`) and protect the organisation CloudTrail trail (in the Security account) so nobody turns it off.
+- The **root user** is not used: MFA with a hardware key, no access keys, and its email address is a team list, not one person's. With Organizations' **centralised root access management** you can remove root credentials from member accounts.
+
+! Nobody works with IAM users holding long-lived keys. A process uses a role (instance profile, OIDC from the pipeline): keys forgotten on a laptop or in a repository are the most common cause of AWS incidents.
+
+## 2. Access with Entra ID: IAM Identity Center
+
+In Entra ID you add the gallery application **AWS IAM Identity Center** (SAML) and in AWS you change the identity source. **SCIM** provisioning creates in AWS the users and groups you assign to the application, and disables them when someone leaves.
+
+:::ui AWS · IAM Identity Center
+> IAM Identity Center › Settings › Identity source › Actions › Change identity source
+= Identity source: External identity provider
+= IdP metadata: XML file downloaded from the Entra ID enterprise application
+= Automatic provisioning: Enabled (SCIM) · endpoint and token copied into Entra ID
+= Permission set: OpsAdmin (AdministratorAccess) · session duration 4 h
+= Permission set: ReadOnly (ViewOnlyAccess) · session duration 8 h
+= Assignment: group GRP-AWS-OPS → Production and Test accounts → OpsAdmin
+[Save changes]
+:::
+
+- You assign **groups**, never individual people. Joiners and leavers are handled in Entra ID, and Entra's Conditional Access and MFA apply to AWS too.
+- From the terminal: `aws configure sso` once and `aws sso login --profile prod-ops` each day. Temporary credentials, no stored keys.
+
+## 3. The network: private VPC and VPN to the office
+
+- VPC `10.40.0.0/16` with **private** subnets in two availability zones (`10.40.1.0/24`, `10.40.2.0/24`) for the servers, and a small public one only if a NAT gateway is needed to reach the Internet.
+- A **virtual private gateway** (VGW) attached to the VPC, a **customer gateway** with the public IP of the site firewall and a **site-to-site VPN connection**. AWS always gives you **two tunnels**: configure both on the firewall.
+- Static routes on the VPN connection (`192.168.10.0/24`) or BGP if the firewall supports it, and **route propagation** enabled on the private subnets' route tables.
+- **Security groups** are written by source: the server's one allows traffic from the office on the ports the application needs, and nothing from `0.0.0.0/0`.
+
+## 4. A server without open RDP: Session Manager
+
+The EC2 instance lives in the private subnet, with no public IP and no port 3389 in its security group. It is managed with **AWS Systems Manager**:
+
+- An instance profile with the **AmazonSSMManagedInstanceCore** policy. The SSM agent already ships in the Windows Server and Amazon Linux AMIs.
+- If the subnet has no Internet egress, interface **VPC endpoints** for `ssm`, `ssmmessages` and `ec2messages`.
+
+:::term PowerShell · your machine
+$ aws sso login --profile prod-ops
+$ aws ssm describe-instance-information --profile prod-ops --query "InstanceInformationList[].[InstanceId,ComputerName,PingStatus]" --output text
+i-0a1b2c3d4e5f60718	srv-app01.contoso.local	Online
+$ aws ssm start-session --profile prod-ops --target i-0a1b2c3d4e5f60718 --document-name AWS-StartPortForwardingSession --parameters "portNumber=3389,localPortNumber=13389"
+Starting session with SessionId: javier.ruiz-0f1e2d3c4b5a69788
+Port 13389 opened for sessionId javier.ruiz-0f1e2d3c4b5a69788.
+Waiting for connections...
+# now the Remote Desktop client connects to localhost:13389
+:::
+
+Without `--document-name`, the session opens PowerShell or bash on the server. Everything is logged in CloudTrail.
+
+## 5. Backups and cost
+
+**AWS Backup**: a plan with daily backups (35-day retention) and monthly ones (12 months), a resource selection **by tag** (`backup=daily`) and a copy to a vault in another account. **Vault Lock** in compliance mode prevents deleting backups early, even by a compromised administrator.
+
+For cost, two pieces (and **Cost Anomaly Detection** for mid-month spikes):
+
+- Mandatory **tags** (`project`, `environment`, `owner`) activated as **cost allocation tags** in the Billing console; if they aren't activated, they don't show up in Cost Explorer.
+- **AWS Budgets** with alerts on actual and forecast spend.
+
+:::ui AWS · Billing and Cost Management · Budgets
+> Billing and Cost Management › Budgets › Create budget › Cost budget
+= Name: prod-monthly · Period: monthly · Amount: the yearly approved figure divided by twelve
+= Scope: Production account · tag filter environment=prod
+= Alert threshold 1: 80 % of actual spend → team mailing list and SNS topic
+= Alert threshold 2: 100 % of forecast spend → same target
+[Create budget]
+:::
+
+## 6. The ticket: "the server can't reach the office file share"
+
+`srv-app01` needs to read `\\\\srv-fs01\\exchange` at the site and fails. Walk the path in order: tunnel, routes, security group, and the other end.
+
+:::term AWS CLI · diagnosis
+$ aws ec2 describe-vpn-connections --vpn-connection-ids vpn-0c1d2e3f4a5b6c7d8 --query "VpnConnections[0].VgwTelemetry[].[OutsideIpAddress,Status,LastStatusChange]" --output text
+198.51.100.21	UP	2026-10-27T22:14:05+00:00
+198.51.100.22	DOWN	2026-10-27T22:13:58+00:00
+$ aws ec2 describe-route-tables --filters Name=association.subnet-id,Values=subnet-0a9b8c7d6e5f40312 --query "RouteTables[0].Routes[].[DestinationCidrBlock,GatewayId,NatGatewayId,State]" --output text
+10.40.0.0/16	local	None	active
+0.0.0.0/0	None	nat-0f9e8d7c6b5a40321	active
+$ aws ec2 describe-route-tables --filters Name=association.subnet-id,Values=subnet-0a9b8c7d6e5f40312 --query "RouteTables[0].[RouteTableId,PropagatingVgws]" --output text
+rtb-0d4c3b2a1f0e9d8c7
+# no route to 192.168.10.0/24 and the table doesn't propagate from the VGW
+$ aws ec2 enable-vgw-route-propagation --route-table-id rtb-0d4c3b2a1f0e9d8c7 --gateway-id vgw-0b1a2c3d4e5f60789
+:::
+
+- **Tunnels**: with one up there is service; the other one down gets fixed on the firewall, but it isn't the cause.
+- **Routes**: this was the problem. The table was recreated the week before and nobody re-enabled propagation, so traffic to the office went out through the NAT. Once enabled, `192.168.10.0/24` appears with the VGW as target.
+- **Security group**: default egress allows everything; if it was restricted, it needs TCP 445 to `192.168.10.0/24`.
+- **The other end**: the site firewall has to know `10.40.0.0/16` through the tunnel and allow SMB from it. From an SSM session, `Test-NetConnection srv-fs01 -Port 445` confirms it end to end.
+
+## 7. What you review each month
+
+- **Security Hub** and **IAM Access Analyzer** findings: external access, unused roles, access keys that shouldn't exist.
+- Failed AWS Backup jobs, and a test restore every quarter.
+- Status of both VPN tunnels, and the Cost Explorer report grouped by the `project` tag, with the untagged resources.
+
+## Next steps
+
+- The **Terraform** guide so that accounts, VPCs and servers come out of a reviewed repository.
+- The **Backup y DR/BCP** guide to fit AWS Backup into the company's continuity plan.
+- The **Fortinet FortiGate** guide for the office side of the VPN.
+- The **Kubernetes** guide when applications move from a server to containers (EKS).
+""")
+
+# ---------------------------------------------------------------- L4 · Azure Monitor and Log Analytics
+g(slug="azure-monitor-y-log-analytics-area-de-trabajo-reglas-de-recopilacion-alertas-y-un-servidor-que-deja-de-enviar-datos", topic="azure-monitor", date="2026-10-28",
+  title_es="Azure Monitor y Log Analytics: el área de trabajo, el agente, las alertas y un servidor que deja de enviar datos",
+  title_en="Azure Monitor and Log Analytics: the workspace, the agent, alerts and a server that stops sending data",
+  dek_es="Cómo diseñar un área de trabajo, recoger eventos, contadores y syslog con el agente de Azure Monitor y reglas de recopilación, traer los servidores locales con Azure Arc, consultar con KQL, alertar con un grupo de acciones, controlar retención y coste, y resolver el ticket de un servidor que ya no informa.",
+  dek_en="How to design a workspace, collect events, counters and syslog with the Azure Monitor agent and data collection rules, bring on-prem servers in with Azure Arc, query with KQL, alert through an action group, keep retention and cost under control, and solve the ticket for a server that no longer reports.",
+  es="""
+## Qué vas a conseguir
+
+Un área de trabajo de Log Analytics que recibe los datos de tus servidores, en Azure y en el CPD, con reglas que dicen exactamente qué se recoge. Las consultas KQL que usas a diario, una alerta que llega al equipo de guardia y no al buzón de nadie, una factura que entiendes por tabla, y el procedimiento para cuando un servidor deja de aparecer.
+
+## Antes de empezar
+
+- Una suscripción para la monitorización y el rol **Monitoring Contributor** (alertas y reglas) y **Log Analytics Contributor** (área de trabajo) sobre su grupo de recursos.
+- Para los servidores locales, salida HTTPS (443) hacia los puntos de conexión de Azure Arc y de Azure Monitor, directa o por proxy.
+- El **agente de Log Analytics** (MMA/OMS) está retirado desde agosto de 2024. Si aún queda alguno, la migración al agente de Azure Monitor va antes que cualquier otra cosa de esta guía.
+
+## 1. Un área de trabajo, no veinte
+
+La regla general es **una área de trabajo por región de datos**, no una por equipo ni por aplicación.
+
+- **Acceso**: con el modo *usar permisos de recurso o de área de trabajo*, quien tiene acceso a una VM ve sus registros sin ver los de las demás. Para tablas delicadas existe RBAC por tabla.
+- **Cuándo separar**: datos que por ley deben quedarse en otra región, otro tenant, o la decisión de no mezclar con Sentinel. Si Sentinel está activado en un área de trabajo, cobra sobre los datos facturables de esa área; muchos equipos dejan los contadores de rendimiento en un área de operaciones aparte por ese motivo.
+
+## 2. El agente y las reglas de recopilación
+
+El **agente de Azure Monitor** (AMA) no tiene configuración propia: recoge lo que dicen las **reglas de recopilación de datos** (DCR) asociadas a la máquina. Una máquina puede tener varias reglas; una regla puede aplicarse a cientos de máquinas.
+
+:::ui Azure portal · Monitor · Regla de recopilación de datos
+> Monitor › Configuración › Reglas de recopilación de datos › Crear
+= Nombre: dcr-windows-base · Región: West Europe · Tipo de plataforma: Windows
+= Recursos: grupo rg-servidores-prod (12 VM) y rg-arc-cpd (31 servidores Arc)
+= Origen 1 · Registros de eventos de Windows: Sistema y Aplicación, Crítico, Error y Advertencia
+= Origen 2 · Contadores de rendimiento: CPU, memoria, disco lógico, red · cada 60 s
+= Destino: Registros de Azure Monitor → law-contoso-ops-weu
+[Revisar y crear]
+:::
+
+- Los eventos van a la tabla `Event`, los contadores a `Perf` y el syslog de Linux a `Syslog` (con su propia regla: `auth`, `daemon` y `kern` desde *Warning* suele bastar). Los eventos de seguridad de Windows van a `SecurityEvent` y se configuran desde el conector de Sentinel.
+- La regla admite XPath para afinar: `System!*[System[(Level=1 or Level=2)]]` deja solo críticos y errores.
+- El agente se instala como extensión (`AzureMonitorWindowsAgent` / `AzureMonitorLinuxAgent`). Al asociar una regla desde el portal, la extensión se instala sola; a escala, se asigna la iniciativa de **Azure Policy** que instala el agente y asocia la regla a todo lo nuevo.
+
+## 3. Los servidores del CPD con Azure Arc
+
+Un servidor local no puede tener la extensión del agente sin existir antes en Azure. **Azure Arc** (agente Connected Machine, `azcmagent`) lo convierte en un recurso de Azure con identidad administrada, etiquetas, políticas y extensiones.
+
+1. En *Azure Arc › Máquinas › Agregar o crear*, genera el script para varios servidores con una **entidad de servicio** que solo tenga el rol *Azure Connected Machine Onboarding* en `rg-arc-cpd`.
+2. Si hay proxy, configúralo antes de conectar: `azcmagent config set proxy.url "http://proxy.contoso.local:8080"`.
+3. Ejecuta `azcmagent check` para probar los puntos de conexión y despliega el script con MECM, GPO o Ansible.
+4. Cuando el servidor aparece como **Conectado**, la iniciativa de Azure Policy instala el agente y le asocia `dcr-windows-base`.
+
+## 4. Las consultas de cada día
+
+:::term Log Analytics · law-contoso-ops-weu
+# Quién ha dejado de informar en los últimos 15 minutos
+$ Heartbeat
+$ | summarize Ultimo = max(TimeGenerated) by Computer, ComputerEnvironment
+$ | where Ultimo < ago(15m)
+Computer         ComputerEnvironment   Ultimo
+srv-file02       Non-Azure             28/10/2026 06:41
+srv-print01      Non-Azure             27/10/2026 22:03
+# Discos con menos del 10 % libre
+$ Perf
+$ | where TimeGenerated > ago(1h) and ObjectName == "LogicalDisk" and CounterName == "% Free Space" and InstanceName != "_Total"
+$ | summarize Libre = round(min(CounterValue), 1) by Computer, InstanceName
+$ | where Libre < 10
+Computer      InstanceName   Libre
+srv-sql03     E:             6.4
+srv-app07     D:             8.9
+:::
+
+- `Event` responde a "¿qué pasó en esta máquina anoche?": `Event | where Computer == "srv-app07" and EventLevelName == "Error" | summarize count() by Source, EventID`.
+
+## 5. Una alerta que llega a alguien
+
+:::ui Azure portal · Monitor · Regla de alerta
+> Monitor › Alertas › Crear › Regla de alerta
+= Ámbito: law-contoso-ops-weu · Señal: búsqueda de registros personalizada
+= Consulta: Heartbeat | summarize Ultimo = max(TimeGenerated) by Computer | where Ultimo < ago(10m)
+= Medición: recuento de filas · Dividir por dimensiones: Computer · Umbral: mayor que 0
+= Evaluación: cada 5 minutos, periodo de 24 horas · Gravedad: 1 – Error
+= Grupo de acciones: ag-ops-guardia (correo al buzón del equipo, webhook a Jira Service Management)
+[Revisar y crear]
+:::
+
+- **Dividir por `Computer`** genera una alerta por servidor, con su nombre en el aviso, en lugar de un único "hay servidores caídos".
+- El **grupo de acciones** se reutiliza en todas las reglas: notificación al buzón compartido, webhook a la herramienta de tickets o una aplicación lógica que publica en Teams. Nunca el correo personal de quien creó la regla.
+- Para las ventanas de mantenimiento, una **regla de procesamiento de alertas** suprime las notificaciones de un grupo de recursos durante el horario del cambio, sin desactivar las reglas.
+
+## 6. Retención y coste
+
+- La retención analítica por defecto es de **30 días** (31 incluidos en el precio de ingesta). Por tabla puedes ampliarla hasta dos años y añadir **retención a largo plazo** hasta 12 años, consultable con trabajos de búsqueda.
+- Planes por tabla: **Analytics** para lo que alimenta alertas y paneles, **Basic** para lo que se consulta en una investigación, **Auxiliary** para registros verbosos de auditoría. Las alertas dejan de funcionar en una tabla Auxiliary.
+- `Usage | where IsBillable | summarize GB = sum(Quantity) / 1000 by DataType` dice qué tabla pesa. Lo habitual: contadores cada 10 segundos o *Información* en todos los registros de eventos. Se corrige en la regla, no en el área de trabajo.
+- Un **límite diario** evita sorpresas, pero al alcanzarlo deja de entrar todo, alertas incluidas. Úsalo como red de seguridad con un umbral alto y una alerta al 80 %.
+
+## 7. El ticket: "srv-file02 ha dejado de enviar datos"
+
+La alerta de latido salta a las 06:51. El servidor responde al ping y los usuarios abren sus carpetas.
+
+1. **¿Desde cuándo?** La consulta de `Heartbeat` dice 06:41. Si el resto de servidores de la sede también calla, es la red o el proxy, no la máquina.
+2. **¿Arc está conectado?**
+
+:::term srv-file02 · PowerShell (administrador)
+$ azcmagent show
+Resource Name                           : srv-file02
+Resource Group Name                     : rg-arc-cpd
+Agent Status                            : Connected
+Agent Last Heartbeat                    : 2026-10-28T07:02:14Z
+Using HTTPS Proxy                       : http://proxy.contoso.local:8080
+Dependent Service Status
+  Agent Service (himds)                 : running
+  Extension Service (extensionservice)  : running
+  GC Service (gcarcservice)             : running
+$ az monitor data-collection rule association list --resource "/subscriptions/<id>/resourceGroups/rg-arc-cpd/providers/Microsoft.HybridCompute/machines/srv-file02" --query "[].name" -o tsv
+# Sin resultados: el servidor no tiene ninguna regla asociada
+:::
+
+3. **¿El agente está instalado y vivo?** En *Extensiones* del servidor Arc, `AzureMonitorWindowsAgent` debe estar en *Correcto*, y el proceso `MonAgentCore.exe` en ejecución. Los registros de la extensión están en `C:\\ProgramData\\GuestConfig\\extension_logs\\Microsoft.Azure.Monitor.AzureMonitorWindowsAgent`.
+4. **¿Tiene regla asociada?** Aquí estaba el fallo: la noche anterior se recreó `dcr-windows-base` con otro ámbito y srv-file02 quedó fuera. Sin regla, el agente no tiene nada que enviar, ni siquiera el latido. Se vuelve a asociar y el latido aparece en unos minutos.
+5. **Si la regla está bien**, mira la red: el agente necesita `global.handler.control.monitor.azure.com`, `westeurope.handler.control.monitor.azure.com` y `<id-del-área>.ods.opinsights.azure.com`, sin inspección TLS. Recuerda que la extensión del agente puede no heredar el proxy de Arc: tiene su propia configuración de proxy.
+
+> Cierra el ticket con la causa y la prevención: las asociaciones las gestiona Azure Policy, no el portal a mano.
+
+## Siguientes pasos
+
+- La guía de **Microsoft Sentinel** usa esta misma área de trabajo para la seguridad: conectores, reglas en KQL e incidentes.
+- La guía de **Terraform** para declarar áreas de trabajo, reglas de recopilación y alertas como código.
+- La guía de **Backup y DR/BCP**: la alerta de trabajos de copia fallidos es la siguiente que merece una regla.
+""",
+  en="""
+## What you'll get
+
+A Log Analytics workspace that receives data from your servers, in Azure and in the data centre, with rules that state exactly what is collected. The KQL queries you use every day, an alert that reaches the on-call team rather than someone's inbox, a bill you understand per table, and the procedure for when a server stops showing up.
+
+## Before you start
+
+- A subscription for monitoring, and the **Monitoring Contributor** (alerts and rules) and **Log Analytics Contributor** (workspace) roles on its resource group.
+- For on-prem servers, outbound HTTPS (443) to the Azure Arc and Azure Monitor endpoints, direct or through a proxy.
+- The **Log Analytics agent** (MMA/OMS) has been retired since August 2024. If any are left, migrating them to the Azure Monitor agent comes before anything else in this guide.
+
+## 1. One workspace, not twenty
+
+The general rule is **one workspace per data region**, not one per team or per application.
+
+- **Access**: with the *use resource or workspace permissions* mode, whoever has access to a VM sees its logs without seeing the others'. For sensitive tables there is table-level RBAC.
+- **When to split**: data that must legally stay in another region, another tenant, or the decision not to mix with Sentinel. If Sentinel is enabled on a workspace, it charges on that workspace's billable data; many teams keep performance counters in a separate operations workspace for that reason.
+
+## 2. The agent and the collection rules
+
+The **Azure Monitor agent** (AMA) has no configuration of its own: it collects what the **data collection rules** (DCRs) associated with the machine say. A machine can have several rules; a rule can apply to hundreds of machines.
+
+:::ui Azure portal · Monitor · Data collection rule
+> Monitor › Settings › Data Collection Rules › Create
+= Name: dcr-windows-base · Region: West Europe · Platform type: Windows
+= Resources: resource group rg-servers-prod (12 VMs) and rg-arc-dc (31 Arc servers)
+= Source 1 · Windows Event Logs: System and Application, Critical, Error and Warning
+= Source 2 · Performance Counters: CPU, memory, logical disk, network · every 60 s
+= Destination: Azure Monitor Logs → law-contoso-ops-weu
+[Review + create]
+:::
+
+- Events go to the `Event` table, counters to `Perf` and Linux syslog to `Syslog` (with its own rule: `auth`, `daemon` and `kern` from *Warning* up is usually enough). Windows security events go to `SecurityEvent` and are configured from the Sentinel connector.
+- The rule accepts XPath for finer control: `System!*[System[(Level=1 or Level=2)]]` keeps only critical and error events.
+- The agent is installed as an extension (`AzureMonitorWindowsAgent` / `AzureMonitorLinuxAgent`). When you associate a rule from the portal, the extension installs itself; at scale, assign the **Azure Policy** initiative that installs the agent and associates the rule with everything new.
+
+## 3. Data centre servers with Azure Arc
+
+An on-prem server can't get the agent extension without first existing in Azure. **Azure Arc** (Connected Machine agent, `azcmagent`) turns it into an Azure resource with a managed identity, tags, policies and extensions.
+
+1. In *Azure Arc › Machines › Add/Create*, generate the script for multiple servers with a **service principal** that only has the *Azure Connected Machine Onboarding* role on `rg-arc-dc`.
+2. If there is a proxy, configure it before connecting: `azcmagent config set proxy.url "http://proxy.contoso.local:8080"`.
+3. Run `azcmagent check` to test the endpoints, and deploy the script with MECM, GPO or Ansible.
+4. Once the server shows as **Connected**, the Azure Policy initiative installs the agent and associates `dcr-windows-base`.
+
+## 4. The everyday queries
+
+:::term Log Analytics · law-contoso-ops-weu
+# Who has stopped reporting in the last 15 minutes
+$ Heartbeat
+$ | summarize LastSeen = max(TimeGenerated) by Computer, ComputerEnvironment
+$ | where LastSeen < ago(15m)
+Computer         ComputerEnvironment   LastSeen
+srv-file02       Non-Azure             28/10/2026 06:41
+srv-print01      Non-Azure             27/10/2026 22:03
+# Disks with less than 10% free
+$ Perf
+$ | where TimeGenerated > ago(1h) and ObjectName == "LogicalDisk" and CounterName == "% Free Space" and InstanceName != "_Total"
+$ | summarize Free = round(min(CounterValue), 1) by Computer, InstanceName
+$ | where Free < 10
+Computer      InstanceName   Free
+srv-sql03     E:             6.4
+srv-app07     D:             8.9
+:::
+
+- `Event` answers "what happened on this machine last night?": `Event | where Computer == "srv-app07" and EventLevelName == "Error" | summarize count() by Source, EventID`.
+
+## 5. An alert that reaches someone
+
+:::ui Azure portal · Monitor · Alert rule
+> Monitor › Alerts › Create › Alert rule
+= Scope: law-contoso-ops-weu · Signal: custom log search
+= Query: Heartbeat | summarize LastSeen = max(TimeGenerated) by Computer | where LastSeen < ago(10m)
+= Measurement: table rows · Split by dimensions: Computer · Threshold: greater than 0
+= Evaluation: every 5 minutes, 24-hour period · Severity: 1 – Error
+= Action group: ag-ops-oncall (email to the team mailbox, webhook to Jira Service Management)
+[Review + create]
+:::
+
+- **Splitting by `Computer`** raises one alert per server, with its name in the notification, instead of a single "some servers are down".
+- The **action group** is reused across all rules: a notification to the shared mailbox, a webhook to the ticketing tool, or a Logic App that posts to Teams. Never the personal mailbox of whoever created the rule.
+- For maintenance windows, an **alert processing rule** suppresses notifications for a resource group during the change, without disabling the rules.
+
+## 6. Retention and cost
+
+- Default analytics retention is **30 days** (31 included in the ingestion price). Per table you can extend it to two years and add **long-term retention** up to 12 years, queryable with search jobs.
+- Plans per table: **Analytics** for what feeds alerts and dashboards, **Basic** for what is queried during an investigation, **Auxiliary** for verbose audit logs. Alerts stop working on an Auxiliary table.
+- `Usage | where IsBillable | summarize GB = sum(Quantity) / 1000 by DataType` tells you which table is heavy. The usual culprits: counters every 10 seconds, or *Information* level on every event log. Fix it in the rule, not the workspace.
+- A **daily cap** avoids surprises, but when it is reached everything stops coming in, alerts included. Use it as a safety net with a high threshold and an alert at 80%.
+
+## 7. The ticket: "srv-file02 has stopped sending data"
+
+The heartbeat alert fires at 06:51. The server answers ping and users are opening their folders.
+
+1. **Since when?** The `Heartbeat` query says 06:41. If every other server at the site is silent too, it's the network or the proxy, not the machine.
+2. **Is Arc connected?**
+
+:::term srv-file02 · PowerShell (administrator)
+$ azcmagent show
+Resource Name                           : srv-file02
+Resource Group Name                     : rg-arc-dc
+Agent Status                            : Connected
+Agent Last Heartbeat                    : 2026-10-28T07:02:14Z
+Using HTTPS Proxy                       : http://proxy.contoso.local:8080
+Dependent Service Status
+  Agent Service (himds)                 : running
+  Extension Service (extensionservice)  : running
+  GC Service (gcarcservice)             : running
+$ az monitor data-collection rule association list --resource "/subscriptions/<id>/resourceGroups/rg-arc-dc/providers/Microsoft.HybridCompute/machines/srv-file02" --query "[].name" -o tsv
+# No results: the server has no rule associated
+:::
+
+3. **Is the agent installed and alive?** Under the Arc server's *Extensions*, `AzureMonitorWindowsAgent` must show *Succeeded*, and the `MonAgentCore.exe` process must be running. The extension logs are in `C:\\ProgramData\\GuestConfig\\extension_logs\\Microsoft.Azure.Monitor.AzureMonitorWindowsAgent`.
+4. **Does it have a rule associated?** This was the fault: the night before, `dcr-windows-base` was recreated with a different scope and srv-file02 was left out. Without a rule the agent has nothing to send, not even the heartbeat. Re-associate it and the heartbeat appears within minutes.
+5. **If the rule is fine**, look at the network: the agent needs `global.handler.control.monitor.azure.com`, `westeurope.handler.control.monitor.azure.com` and `<workspace-id>.ods.opinsights.azure.com`, without TLS inspection. Remember the agent extension may not inherit the Arc proxy: it has its own proxy setting.
+
+> Close the ticket with the cause and the prevention: associations are managed by Azure Policy, not by hand in the portal.
+
+## Next steps
+
+- The **Microsoft Sentinel** guide uses this same workspace for security: connectors, KQL rules and incidents.
+- The **Terraform** guide to declare workspaces, collection rules and alerts as code.
+- The **Backup and DR/BCP** guide: the failed backup job alert is the next one that deserves a rule.
+""")
+
+# ---------------------------------------------------------------- L4 · ISO 27001, NIS2 and GDPR in IT
+g(slug="iso-27001-nis2-y-rgpd-en-it-controles-evidencias-plazos-y-un-portatil-perdido", topic="compliance", date="2026-10-28",
+  title_es="ISO 27001, NIS2 y RGPD en IT: controles, evidencias, plazos y un portátil perdido",
+  title_en="ISO 27001, NIS2 and GDPR in IT: controls, evidence, deadlines and a lost laptop",
+  dek_es="Lo que significan para un equipo de operaciones en España en 2026: el SGSI de ISO 27001:2022 y su declaración de aplicabilidad, quién entra en NIS2 y los plazos de notificación, el RGPD desde IT, una tabla de tareas frente a controles, la carpeta de evidencias, la auditoría y un portátil perdido.",
+  dek_en="What they mean for an operations team in Spain in 2026: the ISO 27001:2022 ISMS and its Statement of Applicability, who is in NIS2 and the reporting deadlines, GDPR from IT's side, a table of tasks against controls, the evidence folder, the audit and a lost laptop.",
+  es="""
+## Qué vas a conseguir
+
+Entender qué te piden de verdad la norma, la directiva y el reglamento en el día a día de IT, y convertir el trabajo que ya haces (altas y bajas, parches, copias, cambios) en evidencias que un auditor acepta a la primera. Y saber qué hacer en las primeras horas cuando se pierde un equipo con datos personales.
+
+## Antes de empezar
+
+- Esta guía no es asesoramiento jurídico: si algo se notifica o no lo deciden el DPO y Jurídico, con la información técnica que IT les da.
+- Localiza a tres personas: el responsable de seguridad (CISO o responsable del SGSI), el **delegado de protección de datos** (DPO) y quien firma los riesgos en dirección.
+- Ten a mano el inventario de sistemas, el registro de cambios y el de incidentes. Si no existen, son lo primero.
+
+## 1. ISO 27001:2022: el SGSI en lo que toca a IT
+
+ISO/IEC 27001 certifica un **sistema de gestión** (SGSI), no un nivel técnico. Las cláusulas 4 a 10 piden contexto, alcance, análisis de riesgos, objetivos, **auditoría interna** (9.2), **revisión por la dirección** (9.3) y mejora. El **Anexo A** de la versión 2022 tiene 93 controles en cuatro temas: organizativos (37), de personas (8), físicos (14) y tecnológicos (34). La transición desde la versión 2013 terminó en octubre de 2025.
+
+- La **declaración de aplicabilidad** (SoA) lista los 93 controles, si se aplican, por qué, y cómo. Es el documento que el auditor abre primero; cada "aplicado" necesita una evidencia detrás.
+- Una evidencia buena es **fechada, completa y repetida**: un informe de cada trimestre, no una captura del día anterior a la auditoría.
+- La **auditoría interna** la hace alguien independiente del área auditada. Para un equipo pequeño, otro departamento o un externo.
+
+| Tarea de IT | Control del Anexo A | Evidencia |
+|---|---|---|
+| Revisión trimestral de accesos | 5.18 Derechos de acceso | Exportación de la revisión de acceso de Entra ID con decisiones y tickets de retirada |
+| Altas, bajas y cambios de puesto | 5.16 Gestión de identidades | Tickets enlazados con la baja de RR. HH. y fecha de deshabilitación |
+| Cuentas de administración | 8.2 Derechos de acceso privilegiado | Activaciones de PIM con justificación |
+| Parches y vulnerabilidades | 8.8 Gestión de vulnerabilidades técnicas | Informe mensual de Qualys o Intune, excepciones aprobadas |
+| Copias y pruebas de restauración | 8.13 Copias de seguridad de la información | Informes de trabajos y acta de restauración probada |
+| Cambios en producción | 8.32 Gestión de cambios | Solicitudes con aprobación, ventana y vuelta atrás |
+| Registros y alertas | 8.15 Registro · 8.16 Seguimiento | Retención configurada y revisión de alertas |
+| Cifrado de portátiles | 8.1 Dispositivos de usuario final · 8.24 Criptografía | Informe de cumplimiento de BitLocker |
+| Proveedores en la nube | 5.19 a 5.23 Proveedores y servicios en la nube | Contrato, acuerdo de encargo e informes del proveedor |
+
+## 2. NIS2: quién entra y qué cambia
+
+La Directiva (UE) 2022/2555 amplía mucho la primera NIS. Entran las **medianas y grandes** entidades de los sectores de sus anexos: energía, transporte, banca, sanidad, agua, infraestructura digital, **gestión de servicios TIC entre empresas** (proveedores de servicios gestionados y de seguridad gestionada), administración pública, fabricación, alimentación, servicios postales y otros. Algunas entran sea cual sea su tamaño, como los proveedores de DNS.
+
+- **Responsabilidad de la dirección** (artículo 20): el órgano de dirección aprueba las medidas, supervisa su aplicación, recibe formación y puede responder personalmente.
+- **Medidas** (artículo 21): análisis de riesgos, gestión de incidentes, continuidad y copias, cadena de suministro, gestión de vulnerabilidades, formación, criptografía, control de acceso, inventario de activos y MFA. Un SGSI ISO 27001 cubre la mayor parte.
+- **Notificación de incidentes significativos** (artículo 23): **alerta temprana en 24 horas** desde que se tiene conocimiento, **notificación en 72 horas** con una primera evaluación, y **informe final en un mes** desde la notificación.
+- **En España**: en el momento de escribir esta guía (octubre de 2026), la ley de transposición, el anteproyecto de **Ley de Coordinación y Gobernanza de la Ciberseguridad**, no se ha publicado en el BOE, y la Comisión Europea ha llevado el retraso al Tribunal de Justicia de la UE. Sigue vigente el Real Decreto-ley 12/2018 (la primera NIS), y el sector público y sus proveedores aplican el **Esquema Nacional de Seguridad**. Comprueba el BOE antes de citar plazos u obligaciones nacionales.
+- Las entidades financieras siguen **DORA**, aplicable desde enero de 2025, que prevalece sobre NIS2 en lo que regula.
+
+## 3. El RGPD desde IT
+
+- **Registro de actividades de tratamiento**: lo lleva el DPO, pero IT aporta los sistemas, dónde están los datos, cuánto tiempo se guardan y qué medidas los protegen.
+- **Encargados del tratamiento** (artículo 28): cada proveedor que trata datos personales por vuestra cuenta (SaaS, soporte externo, copias en la nube) necesita un acuerdo de encargo firmado y una lista de subencargados. Antes de dar de alta una herramienta nueva, no después.
+- **Brechas** (artículo 33): se notifican a la **AEPD** en 72 horas desde que se tiene constancia, salvo que sea improbable que supongan un riesgo para las personas. Todas, notificadas o no, se documentan en el registro interno. La AEPD ofrece la herramienta **Asesora Brecha** para orientar la decisión.
+- **Conservación**: los registros con datos personales (IP, usuario) también tienen plazo. Que esté definido y que la retención de Log Analytics o de Purview lo cumpla.
+- **Derecho de acceso**: se responde en un mes, ampliable dos más en casos complejos. IT localiza los datos (buzón, sistemas de RR. HH., registros) con búsquedas de eDiscovery y los entrega por un canal seguro sin incluir datos de terceros.
+
+## 4. La carpeta de evidencias
+
+:::ui SharePoint · Sitio SGSI · Evidencias
+> SGSI › Documentos › Evidencias › 2026
+= 5.16-identidades: T1 … T4 · bajas-RRHH-vs-Entra.xlsx · tickets enlazados
+= 5.18-revision-accesos: 2026-T3-revision-accesos-entra.pdf · retiradas-JSM.csv
+= 8.8-vulnerabilidades: 2026-09-informe-mensual.pdf · excepciones-aprobadas.xlsx
+= 8.13-copias: 2026-09-informe-trabajos.pdf · 2026-09-acta-restauracion-srv-sql03.pdf
+= 8.32-cambios: exportación mensual de cambios aprobados
+= Permisos: Propietarios: equipo del SGSI · Lectura: auditores durante la auditoría
+[Nueva carpeta]
+:::
+
+- Una carpeta por control, un archivo por periodo y un nombre que diga qué es y de cuándo. Lo que genera una herramienta se exporta con una tarea programada, no a mano.
+- Una **retención de Purview** sobre el sitio evita que alguien borre la evidencia del año pasado.
+
+## 5. La auditoría: "enséñame las revisiones de acceso y las copias probadas"
+
+El auditor elige una muestra: dos trimestres y tres aplicaciones, y dos meses de copias.
+
+1. **Revisiones de acceso**: el procedimiento (quién revisa, cada cuánto), la exportación de cada revisión con las decisiones, y los **tickets de retirada** de lo que se denegó, con fecha. La no conformidad más habitual es revisar y no retirar, o que el usuario se revise a sí mismo.
+2. **Copias probadas**: el informe de trabajos del mes y el **acta de restauración**: qué se restauró, dónde, cuánto tardó frente al RTO, quién lo hizo y qué falló. Una restauración real de un servidor o una base de datos al trimestre vale más que doce capturas de "trabajo correcto".
+3. Si falta algo, no lo fabriques: se registra como no conformidad menor con su acción correctiva. Una evidencia inventada convierte un hallazgo menor en uno grave.
+
+## 6. El ticket: "he perdido el portátil en el tren"
+
+Lunes, 09:10. Marta Gil, de RR. HH., perdió anoche su portátil PT-0231. Trabaja con nóminas. Desde este momento la organización tiene constancia y corren las 72 horas.
+
+:::term PowerShell · Microsoft Graph
+$ Connect-MgGraph -Scopes "DeviceManagementManagedDevices.Read.All"
+$ Get-MgDeviceManagementManagedDevice -Filter "deviceName eq 'PT-0231'" | Select-Object DeviceName, UserDisplayName, IsEncrypted, ComplianceState, LastSyncDateTime
+DeviceName   UserDisplayName   IsEncrypted   ComplianceState   LastSyncDateTime
+PT-0231      Marta Gil         True          compliant         27/10/2026 19:42:10
+:::
+
+1. **Contener**: bloqueo y borrado remoto desde Intune (se ejecuta cuando conecte), revocar las sesiones de la usuaria y cambiar su contraseña.
+2. **Reunir los hechos para el DPO**: BitLocker activo (XTS-AES 256 con TPM y PIN), cumplimiento correcto en la última sincronización, equipo apagado según la usuaria, datos de nóminas sincronizados desde OneDrive.
+3. **La evaluación** la hacen el DPO y Jurídico: con cifrado fuerte y la clave sin comprometer, los datos son ininteligibles para quien encuentre el equipo, y lo habitual es concluir que es improbable un riesgo y no notificar a la AEPD. Se documenta igualmente en el **registro de brechas**.
+4. **Si BitLocker no estaba activo** o no se puede demostrar, la conclusión cambia: notificación a la AEPD dentro de las 72 horas y, si el riesgo es alto, comunicación a las personas afectadas.
+
+> El informe de BitLocker de cada mes es la evidencia que decide este caso. Sin él, no puedes demostrar que el portátil estaba cifrado.
+
+## Siguientes pasos
+
+- La guía de **BitLocker** y la de **Intune** para que el cifrado y su informe estén en todos los equipos.
+- La guía de **Microsoft Purview** para la retención, las etiquetas y las búsquedas que piden el RGPD y la auditoría.
+- La guía de **Backup y DR/BCP** para las pruebas de restauración que alimentan el control 8.13.
+- La guía de **Microsoft 365: Global Admin y PIM** para las evidencias de acceso privilegiado.
+""",
+  en="""
+## What you'll get
+
+An understanding of what the standard, the directive and the regulation actually ask of IT day to day, and how to turn the work you already do (joiners and leavers, patching, backups, changes) into evidence an auditor accepts first time. And knowing what to do in the first hours when a device with personal data is lost.
+
+## Before you start
+
+- This guide is not legal advice: whether something is reported is decided by the DPO and Legal, with the technical information IT gives them.
+- Identify three people: the security lead (CISO or ISMS owner), the **data protection officer** (DPO) and whoever signs off risk at management level.
+- Have the system inventory, the change log and the incident log to hand. If they don't exist, they come first.
+
+## 1. ISO 27001:2022: the ISMS as it affects IT
+
+ISO/IEC 27001 certifies a **management system** (ISMS), not a technical level. Clauses 4 to 10 require context, scope, risk assessment, objectives, **internal audit** (9.2), **management review** (9.3) and improvement. **Annex A** of the 2022 version has 93 controls in four themes: organisational (37), people (8), physical (14) and technological (34). The transition from the 2013 version ended in October 2025.
+
+- The **Statement of Applicability** (SoA) lists the 93 controls, whether they apply, why, and how. It is the first document the auditor opens; each "applied" needs evidence behind it.
+- Good evidence is **dated, complete and repeated**: a report for every quarter, not a screenshot taken the day before the audit.
+- The **internal audit** is done by someone independent of the area audited. For a small team, another department or an external party.
+
+| IT task | Annex A control | Evidence |
+|---|---|---|
+| Quarterly access review | 5.18 Access rights | Export of the Entra ID access review with decisions and removal tickets |
+| Joiners, leavers and movers | 5.16 Identity management | Tickets linked to the HR leaver record and the disable date |
+| Admin accounts | 8.2 Privileged access rights | PIM activations with justification |
+| Patching and vulnerabilities | 8.8 Management of technical vulnerabilities | Monthly Qualys or Intune report, approved exceptions |
+| Backups and restore tests | 8.13 Information backup | Job reports and a record of a tested restore |
+| Production changes | 8.32 Change management | Requests with approval, window and rollback |
+| Logs and alerts | 8.15 Logging · 8.16 Monitoring activities | Configured retention and alert reviews |
+| Laptop encryption | 8.1 User endpoint devices · 8.24 Use of cryptography | BitLocker compliance report |
+| Cloud suppliers | 5.19 to 5.23 Suppliers and cloud services | Contract, processing agreement and supplier reports |
+
+## 2. NIS2: who is in and what changes
+
+Directive (EU) 2022/2555 greatly widens the first NIS. It covers **medium and large** entities in the sectors of its annexes: energy, transport, banking, health, water, digital infrastructure, **B2B ICT service management** (managed service and managed security service providers), public administration, manufacturing, food, postal services and others. Some are in regardless of size, such as DNS providers.
+
+- **Management responsibility** (Article 20): the management body approves the measures, oversees their implementation, receives training and can be held personally liable.
+- **Measures** (Article 21): risk analysis, incident handling, continuity and backups, supply chain, vulnerability handling, training, cryptography, access control, asset inventory and MFA. An ISO 27001 ISMS covers most of it.
+- **Reporting significant incidents** (Article 23): an **early warning within 24 hours** of becoming aware, an **incident notification within 72 hours** with an initial assessment, and a **final report within one month** of the notification.
+- **In Spain**: at the time of writing (October 2026), the transposing law, the draft **Ley de Coordinación y Gobernanza de la Ciberseguridad**, has not been published in the BOE, and the European Commission has taken the delay to the EU Court of Justice. Royal Decree-law 12/2018 (the first NIS) remains in force, and the public sector and its suppliers apply the **Esquema Nacional de Seguridad**. Check the BOE before quoting national deadlines or obligations.
+- Financial entities follow **DORA**, applicable since January 2025, which takes precedence over NIS2 where it regulates.
+
+## 3. GDPR from IT's side
+
+- **Records of processing activities**: kept by the DPO, but IT supplies the systems, where the data sits, how long it is kept and which measures protect it.
+- **Processors** (Article 28): every supplier processing personal data on your behalf (SaaS, outsourced support, cloud backups) needs a signed data processing agreement and a list of sub-processors. Before onboarding a new tool, not after.
+- **Breaches** (Article 33): reported to the **AEPD** within 72 hours of becoming aware, unless they are unlikely to result in a risk to people. All of them, reported or not, are documented in the internal register. The AEPD offers the **Asesora Brecha** tool to guide the decision.
+- **Retention**: logs containing personal data (IP, user) have a period too. It should be defined, and the Log Analytics or Purview retention should match it.
+- **Right of access**: answered within one month, extendable by two more in complex cases. IT finds the data (mailbox, HR systems, logs) with eDiscovery searches and delivers it through a secure channel without including third parties' data.
+
+## 4. The evidence folder
+
+:::ui SharePoint · ISMS site · Evidence
+> ISMS › Documents › Evidence › 2026
+= 5.16-identities: Q1 … Q4 · hr-leavers-vs-entra.xlsx · linked tickets
+= 5.18-access-reviews: 2026-Q3-entra-access-review.pdf · removals-JSM.csv
+= 8.8-vulnerabilities: 2026-09-monthly-report.pdf · approved-exceptions.xlsx
+= 8.13-backups: 2026-09-job-report.pdf · 2026-09-restore-record-srv-sql03.pdf
+= 8.32-changes: monthly export of approved changes
+= Permissions: Owners: ISMS team · Read: auditors during the audit
+[New folder]
+:::
+
+- One folder per control, one file per period, and a name that says what it is and when. Whatever a tool generates is exported with a scheduled task, not by hand.
+- A **Purview retention** policy on the site stops someone deleting last year's evidence.
+
+## 5. The audit: "show me the access reviews and the tested backups"
+
+The auditor picks a sample: two quarters and three applications, and two months of backups.
+
+1. **Access reviews**: the procedure (who reviews, how often), the export of each review with its decisions, and the **removal tickets** for what was denied, with dates. The most common nonconformity is reviewing and not removing, or users reviewing themselves.
+2. **Tested backups**: the month's job report and the **restore record**: what was restored, where, how long it took against the RTO, who did it and what failed. One real restore of a server or a database per quarter is worth more than twelve "job succeeded" screenshots.
+3. If something is missing, don't fabricate it: it is logged as a minor nonconformity with its corrective action. Invented evidence turns a minor finding into a major one.
+
+## 6. The ticket: "I've lost my laptop on the train"
+
+Monday, 09:10. Marta Gil, from HR, lost her laptop PT-0231 last night. She works with payroll. From this moment the organisation is aware and the 72 hours are running.
+
+:::term PowerShell · Microsoft Graph
+$ Connect-MgGraph -Scopes "DeviceManagementManagedDevices.Read.All"
+$ Get-MgDeviceManagementManagedDevice -Filter "deviceName eq 'PT-0231'" | Select-Object DeviceName, UserDisplayName, IsEncrypted, ComplianceState, LastSyncDateTime
+DeviceName   UserDisplayName   IsEncrypted   ComplianceState   LastSyncDateTime
+PT-0231      Marta Gil         True          compliant         27/10/2026 19:42:10
+:::
+
+1. **Contain**: remote lock and wipe from Intune (it runs when the device connects), revoke the user's sessions and change her password.
+2. **Gather the facts for the DPO**: BitLocker on (XTS-AES 256 with TPM and PIN), compliant at the last sync, device switched off according to the user, payroll data synced from OneDrive.
+3. **The assessment** is made by the DPO and Legal: with strong encryption and the key not compromised, the data is unintelligible to whoever finds the device, and the usual conclusion is that a risk is unlikely and the AEPD is not notified. It is still documented in the **breach register**.
+4. **If BitLocker was not on**, or can't be proven, the conclusion changes: notification to the AEPD within the 72 hours and, if the risk is high, communication to the people affected.
+
+> Each month's BitLocker report is the evidence that decides this case. Without it you can't prove the laptop was encrypted.
+
+## Next steps
+
+- The **BitLocker** and **Intune** guides so encryption and its report cover every device.
+- The **Microsoft Purview** guide for the retention, labels and searches that GDPR and the audit call for.
+- The **Backup and DR/BCP** guide for the restore tests that feed control 8.13.
+- The **Microsoft 365: Global Admin and PIM** guide for privileged access evidence.
+""")
+
+# ---------------------------------------------------------------- L4 · CyberArk
+g(slug="cyberark-safes-rotacion-automatica-sesiones-grabadas-y-una-cuenta-que-el-cpm-no-cambia", topic="cyberark", date="2026-10-28",
+  title_es="CyberArk: safes, rotación automática, sesiones grabadas y una cuenta que el CPM no cambia",
+  title_en="CyberArk: safes, automatic rotation, recorded sessions and an account the CPM can't change",
+  dek_es="Diseñar safes y sus miembros, dar de alta una cuenta de administrador de dominio, una local y una de servicio con su plataforma, que el CPM rote, verifique y reconcilie, conectarse por PSM sin ver la contraseña, la doble aprobación con ticket, revisar grabaciones y el ticket de la cuenta que se queda en fallo.",
+  dek_en="Designing safes and their members, onboarding a domain admin, a local admin and a service account with their platform, having the CPM rotate, verify and reconcile, connecting through PSM without seeing the password, dual control with a ticket, reviewing recordings, and the ticket of the account stuck in failure.",
+  es="""
+## Qué vas a conseguir
+
+Un CyberArk en el que las cuentas con más poder de la organización viven en safes con dueño, cambian de contraseña solas, se usan a través de una sesión grabada sin que nadie vea la credencial y, en las más sensibles, solo con una segunda aprobación y un ticket. Y el método para resolver el ticket más habitual de la plataforma: una cuenta que el CPM no consigue cambiar.
+
+Vale para **Privilege Cloud** y para **PAM self-hosted**: cambia dónde vive el Vault y cómo se entra al portal; safes, plataformas, CPM y PSM funcionan igual (en Privilege Cloud, CPM y PSM son conectores en tu red).
+
+## Antes de empezar
+
+- Un usuario con permisos de administración de safes y plataformas (en self-hosted, miembro de **Vault Admins**; en Privilege Cloud, el rol de administrador de Privilege Cloud).
+- Al menos un **CPM** y un **PSM** con alcance de red a los servidores: el CPM habla con los controladores de dominio y los servidores (RPC/SMB, WinRM o SSH según la plataforma) y el PSM abre las sesiones RDP y SSH.
+- Una cuenta de **reconciliación** por dominio: una cuenta del propio Vault con permiso para restablecer contraseñas en las OU de las cuentas gestionadas, y nada más.
+- El inventario: qué cuentas privilegiadas existen, quién las usa y en qué servidores, servicios o tareas programadas está escrita cada contraseña.
+
+## 1. Safes y sus miembros: el diseño que no se rehace
+
+Un safe es un contenedor de cuentas con su propia lista de acceso. El error típico es un safe por equipo con todo dentro; lo que aguanta en el tiempo es un safe por **tipo de cuenta y ámbito**, con nombres que se entiendan solos.
+
+:::ui CyberArk · Safes · Nuevo safe
+> Policies › Access Control (Safes) › Create safe
+= Nombre: WIN-DOMINIO-ADMINS
+= Descripción: Cuentas de administrador de dominio de contoso.local · Dueño: equipo de identidad
+= CPM asignado: CPM-MAD-01
+= Retención: 5 versiones anteriores de cada contraseña
+= Miembro: GRP-PAM-Identidad-Admin · Permisos: Full
+= Miembro: GRP-PAM-Identidad-Uso · Permisos: Connect only
+= Miembro: GRP-PAM-Aprobadores-Dominio · Permisos: Approver
+[Create]
+:::
+
+- Los miembros son **grupos del directorio**, no personas: el alta y la baja del puesto se hacen en AD o Entra ID y el safe lo hereda.
+- **Connect only** permite abrir una sesión por PSM sin ver ni copiar la contraseña. Es el permiso que lleva casi todo el mundo; *Retrieve* (ver o copiar) es la excepción y queda justificada.
+- Quien administra el safe no usa sus cuentas sin pasar por el flujo de aprobación.
+
+## 2. Dar de alta una cuenta con su plataforma
+
+La **plataforma** decide cómo se trata la cuenta: cada cuántos días cambia, cómo se verifica, con qué cuenta se reconcilia y por qué componente se conecta. Tres casos habituales:
+
+| Cuenta | Plataforma | Rotación | Conexión |
+|---|---|---|---|
+| Administrador de dominio (`adm-laura.prado`) | Windows Domain Account | Cada 30 días y tras cada uso | PSM-RDP a servidores de salto |
+| Administrador local (`Administrator` en `srv-file-01`) | Windows Server Local Accounts | Cada 30 días | PSM-RDP al propio servidor |
+| Cuenta de servicio (`svc-backup`) | Windows Domain Account con sus dependencias | Cada 90 días, en ventana | No se usa para conectarse |
+
+- En la cuenta de dominio, el campo **Address** es el dominio (`contoso.local`) y el CPM cambia la contraseña contra un controlador de dominio. En la local, Address es el servidor.
+- La **cuenta de reconciliación** se asocia en la plataforma o en cada cuenta. Es la que el CPM usa cuando la contraseña del Vault ya no coincide con la real.
+- Para una cuenta de servicio se dan de alta también sus **dependencias** (servicio de Windows, tarea programada, grupo de aplicaciones de IIS): el CPM cambia la contraseña en el directorio y después en cada dependencia. Si no sabes dónde está escrita, no la pongas a rotar todavía.
+
+## 3. Rotar, verificar y reconciliar: el ciclo del CPM
+
+- **Change**: el CPM genera una contraseña según la política de la plataforma y la cambia en el destino. Puede ser periódico, tras cada uso (*one-time password*) o manual.
+- **Verify**: el CPM prueba que la contraseña guardada en el Vault funciona. Es lo que detecta que alguien la cambió por fuera.
+- **Reconcile**: si la verificación falla, el CPM entra con la cuenta de reconciliación y fuerza una contraseña nueva. Con *reconciliar automáticamente cuando la contraseña no está sincronizada* activado en la plataforma, no hace falta que nadie intervenga.
+
+> Pon primero las cuentas nuevas solo a verificar durante unos días. Si la verificación pasa, activa el cambio periódico; si falla, has encontrado una contraseña que alguien tiene escrita en algún sitio, antes de que la rotación rompa algo.
+
+## 4. Conectarse por PSM y la doble aprobación
+
+El administrador pulsa **Connect** sobre la cuenta, elige el servidor y el componente (PSM-RDP o PSM for SSH). El PSM abre la sesión con la credencial, la graba y el usuario nunca la ve. Para el usuario es un RDP normal; para auditoría, cada tecla y cada ventana quedan asociadas a una persona con nombre.
+
+En la **Master Policy** (o como excepción por plataforma) se activan, para las cuentas más sensibles:
+
+- **Doble control**: la petición de acceso necesita la aprobación de un miembro con permiso de aprobador del safe. El aprobador ve quién pide, qué cuenta, para cuánto tiempo y por qué.
+- **Motivo obligatorio** y, si hay integración con el sistema de tickets, **un número de ticket válido** que se comprueba antes de conceder el acceso.
+- **Acceso exclusivo** (*check-in/check-out*): mientras alguien tiene la cuenta, nadie más puede usarla, y al devolverla el CPM cambia la contraseña.
+
+! Las cuentas de emergencia y una cuenta de reconciliación como mínimo tienen que poder usarse si el Vault o el PSM no responden. Su contraseña se guarda fuera de CyberArk (sobre cerrado, caja fuerte) y su uso se avisa y revisa.
+
+## 5. El ticket: "el CPM no puede cambiar la contraseña: la cuenta aparece en fallo"
+
+La cuenta `svc-backup` aparece en rojo en la lista de cuentas:
+
+:::ui CyberArk · Cuentas · Detalle de la cuenta
+> Accounts › Accounts View › svc-backup (contoso.local)
+= Safe: WIN-SERVICIO-BACKUP · Plataforma: Windows Domain Account
+= Estado: Fallo · Último cambio correcto: hace 92 días
+= Último error: el cambio de contraseña ha fallado · código de Windows 5 (acceso denegado)
+= Dependencias: Servicio de Windows "VeeamBackupSvc" en srv-bkp-01 · Tarea programada "Copia-nocturna" en srv-bkp-01
+[Change] [Verify] [Reconcile] [Resume]
+:::
+
+Se lee de fuera hacia dentro:
+
+1. **¿Qué paso falló?** No es lo mismo que falle el cambio en el directorio que el de una dependencia. El detalle de la cuenta y el registro del CPM (`pm_error.log` y `PMTrace.log` en la carpeta *Logs* del CPM) lo dicen.
+2. **Acceso denegado (5)** al cambiar en el dominio: la cuenta no puede cambiar su propia contraseña (la opción *El usuario no puede cambiar la contraseña* está marcada) o la directiva de dominio lo impide (antigüedad mínima de contraseña). La solución es una **reconciliación**, con una cuenta de reconciliación que tenga *Restablecer contraseña* delegado en esa OU.
+3. **Error de inicio de sesión (1326)** al verificar: la contraseña del Vault ya no es la real. Alguien la cambió por fuera. Se reconcilia y se averigua quién y por qué.
+4. **Ruta de red no encontrada (53)** o tiempo de espera: el CPM no llega al servidor o al controlador de dominio. Cortafuegos, DNS o el servidor apagado.
+5. **Falla una dependencia**: la contraseña ya ha cambiado en AD, pero el servicio o la tarea siguen con la anterior. Se comprueba que la cuenta del CPM tiene permisos de administrador en `srv-bkp-01` y que la dependencia está dada de alta con el nombre exacto.
+
+:::term PowerShell · psPAS · lanzar la reconciliación
+$ New-PASSession -BaseURI https://pvwa.contoso.local -Credential $cred -type LDAP
+$ $a = Get-PASAccount -search "svc-backup" -safeName "WIN-SERVICIO-BACKUP"
+$ $a.secretManagement
+automaticManagementEnabled : True
+status                     : failure
+lastModifiedTime           : 1753862400
+lastReconciledTime         :
+lastVerifiedTime           : 1761552000
+$ Invoke-PASCPMOperation -AccountID $a.id -ReconcileTask
+:::
+
+Si el CPM ya había deshabilitado la gestión automática, tras corregir la causa se reanuda con **Resume**. Y una pregunta para el cierre del ticket: si una cuenta de servicio que se usa en un solo servidor podría ser una **gMSA**, que Windows rota sola, ya no necesita que el CPM la cambie.
+
+## 6. Revisar grabaciones y lo que miras cada mes
+
+Las grabaciones de PSM están en la sección de grabaciones del portal (*Monitoring › Recordings* en PVWA), con quién, qué cuenta, qué servidor y cuánto duró. Se revisan con criterio: fuera de horario, largas con cuentas de dominio o con un motivo vago.
+
+Cada mes:
+
+- Cuentas en **fallo** o con la gestión automática deshabilitada: ninguna debería pasar de una semana.
+- Cuentas privilegiadas del directorio que **no están en CyberArk** (un administrador de dominio nuevo creado a mano es la primera señal de que alguien se salta el proceso).
+- Miembros de cada safe frente a la lista de personas del equipo y permisos *Retrieve* que siguen activos sin motivo.
+- Aprobaciones concedidas sin ticket válido y usos de cuentas de emergencia.
+
+## Siguientes pasos
+
+- La guía de **Microsoft 365: Global Admin y PIM** es la pieza complementaria: PIM controla los roles de Entra ID y Microsoft 365 con activación temporal; CyberArk, las cuentas y contraseñas del directorio local y de los servidores.
+- **Microsoft Sentinel**: los eventos del Vault y del PSM enviados por syslog permiten alertar de una cuenta de emergencia usada o de una aprobación fuera de horario.
+- **ISO 27001/NIS2/RGPD en IT**: el control de accesos privilegiados es uno de los primeros puntos que pide una auditoría, y las grabaciones son la evidencia.
+""",
+  en="""
+## What you'll get
+
+A CyberArk where the most powerful accounts in the organisation live in owned safes, change their password by themselves, are used through a recorded session without anyone seeing the credential and, for the most sensitive ones, only with a second approval and a ticket. And the method for the most common ticket on the platform: an account the CPM can't change.
+
+It holds for **Privilege Cloud** and for **PAM self-hosted**: what changes is where the Vault lives and how you sign in to the portal; safes, platforms, CPM and PSM work the same (in Privilege Cloud, CPM and PSM are connectors in your network).
+
+## Before you start
+
+- A user with rights to administer safes and platforms (self-hosted: member of **Vault Admins**; Privilege Cloud: the Privilege Cloud administrator role).
+- At least one **CPM** and one **PSM** with network reach to the servers: the CPM talks to domain controllers and servers (RPC/SMB, WinRM or SSH depending on the platform) and the PSM opens the RDP and SSH sessions.
+- A **reconcile account** per domain: an account held in the Vault itself with the right to reset passwords in the OUs of the managed accounts, and nothing else.
+- The inventory: which privileged accounts exist, who uses them and on which servers, services or scheduled tasks each password is written.
+
+## 1. Safes and their members: the design you don't redo
+
+A safe is a container of accounts with its own access list. The typical mistake is one safe per team with everything in it; what lasts is one safe per **account type and scope**, with names that explain themselves.
+
+:::ui CyberArk · Safes · New safe
+> Policies › Access Control (Safes) › Create safe
+= Name: WIN-DOMAIN-ADMINS
+= Description: Domain admin accounts for contoso.local · Owner: identity team
+= Assigned CPM: CPM-MAD-01
+= Retention: 5 previous versions of each password
+= Member: GRP-PAM-Identity-Admin · Permissions: Full
+= Member: GRP-PAM-Identity-Use · Permissions: Connect only
+= Member: GRP-PAM-Domain-Approvers · Permissions: Approver
+[Create]
+:::
+
+- Members are **directory groups**, not people: joiners and leavers are handled in AD or Entra ID and the safe inherits it.
+- **Connect only** allows opening a PSM session without seeing or copying the password. It is the permission almost everyone gets; *Retrieve* (show or copy) is the exception and is justified.
+- Whoever administers the safe doesn't use its accounts without going through the approval flow.
+
+## 2. Onboarding an account with its platform
+
+The **platform** decides how the account is handled: how often it changes, how it is verified, which account reconciles it and which component connects with it. Three common cases:
+
+| Account | Platform | Rotation | Connection |
+|---|---|---|---|
+| Domain admin (`adm-laura.prado`) | Windows Domain Account | Every 30 days and after each use | PSM-RDP to jump servers |
+| Local admin (`Administrator` on `srv-file-01`) | Windows Server Local Accounts | Every 30 days | PSM-RDP to the server itself |
+| Service account (`svc-backup`) | Windows Domain Account with its dependencies | Every 90 days, in a window | Not used to connect |
+
+- For the domain account, the **Address** field is the domain (`contoso.local`) and the CPM changes the password against a domain controller. For the local one, Address is the server.
+- The **reconcile account** is linked on the platform or on each account. It is the one the CPM uses when the Vault's password no longer matches the real one.
+- For a service account you also onboard its **dependencies** (Windows service, scheduled task, IIS application pool): the CPM changes the password in the directory and then on each dependency. If you don't know where it is written, don't put it on rotation yet.
+
+## 3. Rotate, verify and reconcile: the CPM cycle
+
+- **Change**: the CPM generates a password according to the platform's policy and changes it on the target. It can be periodic, after each use (*one-time password*) or manual.
+- **Verify**: the CPM tests that the password stored in the Vault works. This is what detects that someone changed it outside CyberArk.
+- **Reconcile**: if verification fails, the CPM signs in with the reconcile account and forces a new password. With *automatically reconcile when the password is out of sync* enabled on the platform, nobody needs to step in.
+
+> Put new accounts on verify only for a few days first. If verification passes, enable periodic change; if it fails, you have found a password someone has written down somewhere, before rotation breaks something.
+
+## 4. Connecting through PSM and dual control
+
+The admin clicks **Connect** on the account, chooses the server and the component (PSM-RDP or PSM for SSH). The PSM opens the session with the credential, records it and the user never sees it. For the user it is a normal RDP session; for audit, every keystroke and window is tied to a named person.
+
+In the **Master Policy** (or as an exception per platform), for the most sensitive accounts you enable:
+
+- **Dual control**: the access request needs approval from a member with approver rights on the safe. The approver sees who is asking, for which account, for how long and why.
+- **Mandatory reason** and, if the ticketing system is integrated, **a valid ticket number** checked before access is granted.
+- **Exclusive access** (*check-in/check-out*): while someone has the account, nobody else can use it, and when it is returned the CPM changes the password.
+
+! Emergency accounts and at least one reconcile account must be usable if the Vault or the PSM is down. Their password is kept outside CyberArk (sealed envelope, physical safe) and any use is alerted and reviewed.
+
+## 5. The ticket: "the CPM can't change the password: the account shows a failure"
+
+The `svc-backup` account shows in red in the account list:
+
+:::ui CyberArk · Accounts · Account details
+> Accounts › Accounts View › svc-backup (contoso.local)
+= Safe: WIN-SERVICE-BACKUP · Platform: Windows Domain Account
+= Status: Failure · Last successful change: 92 days ago
+= Last error: password change failed · Windows code 5 (access denied)
+= Dependencies: Windows service "VeeamBackupSvc" on srv-bkp-01 · Scheduled task "Nightly-backup" on srv-bkp-01
+[Change] [Verify] [Reconcile] [Resume]
+:::
+
+Read it from the outside in:
+
+1. **Which step failed?** A failed change in the directory is not the same as a failed dependency update. The account details and the CPM log (`pm_error.log` and `PMTrace.log` in the CPM's *Logs* folder) say which.
+2. **Access denied (5)** when changing in the domain: the account can't change its own password (*User cannot change password* is ticked) or domain policy prevents it (minimum password age). The fix is a **reconcile**, with a reconcile account that has *Reset password* delegated on that OU.
+3. **Logon failure (1326)** on verify: the Vault's password is no longer the real one. Someone changed it outside CyberArk. Reconcile, and find out who and why.
+4. **Network path not found (53)** or a timeout: the CPM can't reach the server or the domain controller. Firewall, DNS or the server is off.
+5. **A dependency fails**: the password has already changed in AD, but the service or task still has the old one. Check that the CPM's account has admin rights on `srv-bkp-01` and that the dependency is onboarded with its exact name.
+
+:::term PowerShell · psPAS · trigger the reconcile
+$ New-PASSession -BaseURI https://pvwa.contoso.local -Credential $cred -type LDAP
+$ $a = Get-PASAccount -search "svc-backup" -safeName "WIN-SERVICE-BACKUP"
+$ $a.secretManagement
+automaticManagementEnabled : True
+status                     : failure
+lastModifiedTime           : 1753862400
+lastReconciledTime         :
+lastVerifiedTime           : 1761552000
+$ Invoke-PASCPMOperation -AccountID $a.id -ReconcileTask
+:::
+
+If the CPM had already disabled automatic management, once the cause is fixed it is resumed with **Resume**. And one question before closing the ticket: if a service account used on a single server could be a **gMSA**, which Windows rotates by itself, it no longer needs the CPM to change it.
+
+## 6. Reviewing recordings and what you check each month
+
+PSM recordings are in the portal's recordings section (*Monitoring › Recordings* in PVWA), with who, which account, which server and how long. They are reviewed with a criterion: out of hours, long ones with domain accounts or with a vague reason.
+
+Each month:
+
+- Accounts in **failure** or with automatic management disabled: none should stay that way for more than a week.
+- Privileged directory accounts that **are not in CyberArk** (a new domain admin created by hand is the first sign someone is bypassing the process).
+- Each safe's members against the team's list of people, and *Retrieve* permissions still active for no reason.
+- Approvals granted without a valid ticket, and uses of emergency accounts.
+
+## Next steps
+
+- The **Microsoft 365: Global Admin and PIM** guide is the complementary piece: PIM controls Entra ID and Microsoft 365 roles with time-bound activation; CyberArk, the accounts and passwords of the on-premises directory and the servers.
+- **Microsoft Sentinel**: Vault and PSM events sent over syslog let you alert on an emergency account being used or an out-of-hours approval.
+- **ISO 27001/NIS2/GDPR in IT**: privileged access control is one of the first things an audit asks for, and recordings are the evidence.
+""")
+
+# ---------------------------------------------------------------- L4 · Fortinet FortiGate
+g(slug="fortigate-politicas-con-minimo-privilegio-vpn-con-entra-id-tuneles-entre-sedes-y-un-usuario-que-no-llega", topic="fortigate", date="2026-10-28",
+  title_es="Fortinet FortiGate: políticas con mínimo privilegio, VPN con Entra ID, túneles entre sedes y un usuario que no llega",
+  title_en="Fortinet FortiGate: least-privilege policies, VPN with Entra ID, site tunnels and a user who can't get through",
+  dek_es="Interfaces, zonas y objetos con nombre, una política que solo deja pasar lo necesario y lo registra, la VPN de usuarios autenticada contra Entra ID con grupos que deciden qué ve cada uno, un túnel IPsec entre sedes, dos circuitos con SD-WAN, la actualización de firmware y el diagnóstico de un usuario de VPN que no llega a una aplicación.",
+  dek_en="Interfaces, zones and named objects, a policy that lets through only what is needed and logs it, user VPN authenticated against Entra ID with groups deciding what each person sees, a site-to-site IPsec tunnel, two circuits with SD-WAN, firmware upgrades and diagnosing a VPN user who can't reach an application.",
+  es="""
+## Qué vas a conseguir
+
+Un FortiGate (FortiOS 7.4 o 7.6) que se lee de un vistazo: interfaces agrupadas en zonas, objetos con nombre en lugar de IP sueltas, políticas que dejan pasar lo justo y lo registran, y una VPN de usuarios en la que el grupo de cada persona en Entra ID decide qué aplicaciones alcanza. Y la forma de responder en minutos al ticket "estoy en la VPN y no llego a la aplicación".
+
+## Antes de empezar
+
+- Acceso de administración por HTTPS o SSH solo desde la red de gestión (*trusted hosts* en el administrador), con usuario nominal y MFA. La cuenta `admin` local, solo para emergencias.
+- Una **copia de la configuración** antes de cada cambio, y el cambio aprobado.
+- El plano: qué puerto es cada interfaz, qué redes hay detrás de cada una, qué circuitos tiene la sede y qué aplicaciones internas deben ver los usuarios remotos.
+
+## 1. Interfaces, zonas y objetos
+
+Las políticas se escriben entre **zonas**, no entre puertos (si la red de servidores crece a otro puerto, se añade a la zona y ninguna política cambia), y hacia **objetos y grupos** con nombre, no hacia IP sueltas.
+
+:::term FW-SEDE-01 · zonas, objetos y una política
+$ config system zone
+$     edit "LAN-SERVIDORES"
+$         set interface "port3" "port4"
+$         set intrazone deny
+$     next
+$ end
+$ config firewall policy
+$     edit 0
+$         set name "VPN-RRHH-a-apps-RRHH"
+$         set srcintf "vpn-usuarios"
+$         set dstintf "LAN-SERVIDORES"
+$         set srcaddr "VPN-POOL-USUARIOS"
+$         set dstaddr "GRP-APPS-RRHH"
+$         set groups "VPN-RRHH"
+$         set service "HTTPS"
+$         set schedule "always"
+$         set action accept
+$         set ssl-ssh-profile "certificate-inspection"
+$         set logtraffic all
+$     next
+$ end
+:::
+
+- `GRP-APPS-RRHH` es un grupo de direcciones (*Policy & Objects › Addresses*) con un objeto por servidor, como `SRV-APP-NOMINAS` (10.50.20.15/32).
+- **Mínimo privilegio** es origen concreto, destino concreto y servicio concreto. `all` en destino o `ALL` en servicio solo se aceptan con fecha de caducidad y un motivo en el comentario.
+- `set logtraffic all` registra también lo permitido: sin él, una investigación no sabe quién llegó a dónde.
+- El **orden** importa: se evalúa de arriba abajo y gana la primera que coincide. Al final siempre está la política implícita 0, que deniega.
+
+**Inspección SSL.** `certificate-inspection` solo lee el certificado del servidor; `deep-inspection` descifra y necesita que los equipos confíen en la CA del FortiGate (distribuida por Intune o GPO), con excepciones para banca, salud y aplicaciones que fijan su certificado.
+
+## 2. La VPN de usuarios: Entra ID, grupos y lo que ve cada uno
+
+**El cambio de dirección de Fortinet.** En FortiOS 7.6.3 y posteriores el modo túnel de SSL-VPN ya no existe; el modo web sobrevive con el nombre de *Agentless VPN*, desactivado por defecto. En los modelos con poca memoria la retirada llegó antes (incluso en ramas 7.2 y 7.4). La recomendación del fabricante es **IPsec en modo dial-up con IKEv2 y FortiClient**. Si aún tienes SSL-VPN, planifica la migración.
+
+La autenticación contra **Entra ID por SAML** en IPsec IKEv2 necesita FortiClient 7.2 o posterior. El esquema:
+
+1. En Entra ID, una **aplicación empresarial** con el FortiGate como proveedor de servicio, una notificación `username` con el UPN y la de grupos con el **ID de objeto** de los grupos asignados.
+2. En el FortiGate, el servidor SAML (`config user saml`) y un **grupo de usuarios** por perfil de acceso que mapea ese ID de objeto.
+3. El servidor SAML en la interfaz WAN y el túnel dial-up con IKEv2, EAP y un rango para los clientes:
+
+:::term FW-SEDE-01 · VPN dial-up IKEv2 con SAML
+$ config system interface
+$     edit "wan1"
+$         set ike-saml-server "entra-vpn"
+$     next
+$ end
+$ config vpn ipsec phase1-interface
+$     edit "vpn-usuarios"
+$         set type dynamic
+$         set interface "wan1"
+$         set ike-version 2
+$         set mode-cfg enable
+$         set ipv4-start-ip 10.212.134.1
+$         set ipv4-end-ip 10.212.134.254
+$         set eap enable
+$         set eap-identity send-request
+$         set proposal aes256gcm-prfsha384
+$         set dhgrp 20
+$     next
+$ end
+:::
+
+- **Los grupos deciden qué ve cada usuario**: `VPN-RRHH` tiene una política hacia las aplicaciones de RRHH, `VPN-IT` otra hacia la red de gestión. Un usuario que está en dos grupos alcanza la suma de ambos, nada más.
+- Pon los grupos en las **políticas**, no en `authusrgrp` de la fase 1, si quieres un perfil por grupo. Fortinet advierte de no mezclar ambos sitios.
+- Con SAML, el MFA y las reglas de **Conditional Access** los aplica Entra ID antes de que el túnel se levante.
+- Con **LDAP** (o RADIUS con NPS) el esquema es el mismo: grupos del FortiGate que apuntan a grupos de AD y las mismas políticas.
+
+## 3. Un túnel IPsec entre sedes
+
+Dos sedes, `10.10.0.0/16` y `10.30.0.0/16`, un túnel IKEv2 con clave precompartida larga (o certificados), dos políticas (una en cada sentido) y las rutas:
+
+:::term FW-SEDE-01 · túnel a la sede de Bilbao
+$ config vpn ipsec phase1-interface
+$     edit "a-sede-bio"
+$         set interface "wan1"
+$         set ike-version 2
+$         set proposal aes256-sha256
+$         set dhgrp 20
+$         set remote-gw 198.51.100.20
+$         set psksecret <clave-larga-del-gestor-de-secretos>
+$     next
+$ end
+$ config vpn ipsec phase2-interface
+$     edit "a-sede-bio-p2"
+$         set phase1name "a-sede-bio"
+$         set proposal aes256-sha256
+$         set dhgrp 20
+$         set src-subnet 10.10.0.0 255.255.0.0
+$         set dst-subnet 10.30.0.0 255.255.0.0
+$     next
+$ end
+$ config router static
+$     edit 0
+$         set dst 10.30.0.0 255.255.0.0
+$         set device "a-sede-bio"
+$     next
+$     edit 0
+$         set dst 10.30.0.0 255.255.0.0
+$         set blackhole enable
+$         set distance 254
+$     next
+$ end
+:::
+
+La ruta **blackhole** con distancia 254 evita que, con el túnel caído, el tráfico hacia la otra sede salga a internet por la ruta por defecto. Propuestas y grupos DH iguales en los dos extremos, o el túnel no sube; `get vpn ipsec tunnel summary` dice si está arriba.
+
+**Dos circuitos con SD-WAN.** En *Network › SD-WAN* se añaden `wan1` y `wan2` como miembros con su puerta de enlace, un **Performance SLA** que mide latencia, jitter y pérdida contra un destino fiable, y reglas que mandan cada tipo de tráfico por el circuito que cumple el SLA (por ejemplo, Microsoft 365 y voz por el de menor latencia). Las políticas de salida apuntan a la zona SD-WAN.
+
+## 4. Firmware y copias de configuración
+
+- La **ruta de actualización** no se improvisa: la herramienta *Upgrade Path* de Fortinet indica las versiones intermedias obligatorias entre la tuya y la de destino. Saltarse una puede dejar parte de la configuración sin convertir.
+- Antes de actualizar: copia de configuración, notas de versión (cambios incompatibles y funciones retiradas) y ventana de cambio. En HA se actualiza el clúster y los nodos van por turnos.
+- Las copias se sacan desde el menú del administrador (*Configuration › Backup*, cifradas con contraseña) o por CLI con `execute backup config sftp` hacia un servidor de copias, programadas a diario y guardadas fuera del propio equipo.
+
+## 5. El ticket: "estoy en la VPN y no llego a la aplicación de nóminas"
+
+Javier Ruiz se conecta a la VPN sin problema, pero `https://nominas.contoso.local` no carga. Primero, qué dice el propio FortiGate de él y de la política que debería dejarle pasar:
+
+:::term FW-SEDE-01 · diagnóstico
+$ diagnose firewall auth list
+10.212.134.19, javier.ruiz
+  server: entra-vpn
+  group_name: VPN-COMERCIAL
+$ diagnose debug reset
+$ diagnose debug flow filter clear
+$ diagnose debug flow filter addr 10.50.20.15
+$ diagnose debug flow filter dport 443
+$ diagnose debug flow show function-name enable
+$ diagnose debug flow trace start 10
+$ diagnose debug enable
+id=65308 trace_id=1 func=print_pkt_detail line=5939 msg="vd-root:0 received a packet(proto=6, 10.212.134.19:51544->10.50.20.15:443) from vpn-usuarios.  flag [S]"
+id=65308 trace_id=1 func=vf_ip_route_input_common line=2612 msg="find a route: flag=04000000 gw-10.50.20.15 via port3"
+id=65308 trace_id=1 func=fw_forward_handler line=989 msg="Denied by forward policy check (policy 0)"
+$ diagnose debug disable
+:::
+
+| Lo que ves | Qué significa | Qué haces |
+|---|---|---|
+| **Denied by forward policy check (policy 0)** | Ninguna política coincide: cae en la denegación implícita | Revisar grupo, origen, destino y servicio de la política que debería aplicar |
+| **find a route ... via** una interfaz inesperada | El FortiGate enruta el paquete por otro sitio | Tabla de rutas (`get router info routing-table all`) y SD-WAN |
+
+Aquí el registro de autenticación lo dice todo: Javier está en `VPN-COMERCIAL` y la política hacia las aplicaciones de RRHH solo admite `VPN-RRHH`. No es una avería, es una petición de acceso: se tramita con su responsable y, si se aprueba, se le añade al grupo en Entra ID. No se amplía la política.
+
+Si la política sí coincide y la aplicación no responde, `diagnose sniffer packet any 'host 10.50.20.15 and port 443' 4 20 l` muestra 20 paquetes con su interfaz: si sale el SYN por `port3` y no vuelve el SYN-ACK, el problema está en el servidor, en su cortafuegos o en su ruta de vuelta al rango de la VPN.
+
+! `diagnose debug flow` sin filtros consume CPU en un equipo cargado: filtra por dirección y puerto, limita la traza y termina con `diagnose debug disable`.
+
+## 6. Lo que revisas cada mes
+
+- Políticas sin tráfico en 90 días (columna *Hit count* / *Last used*): se desactivan y, si nadie las reclama, se borran.
+- Políticas con `all` en destino o servicio y su fecha de caducidad.
+- Miembros de los grupos de VPN en Entra ID frente a lo que necesita cada persona.
+- Versión de FortiOS frente a los avisos de seguridad del PSIRT de Fortinet: los equipos expuestos a internet con un aviso crítico se actualizan esa semana, no en el siguiente trimestre.
+
+## Siguientes pasos
+
+- La guía de **Cisco: switches y routers** cubre lo que hay detrás del FortiGate en la sede: VLANs, troncales y el router con circuito de respaldo.
+- **Entra ID: SSO/SAML** explica la aplicación empresarial y las notificaciones que usa la VPN, y **Entra ID: Conditional Access** las reglas que se aplican antes de que el túnel suba.
+- **Microsoft Sentinel**: los registros del FortiGate enviados por syslog (CEF) permiten correlacionar conexiones VPN con inicios de sesión de Entra ID.
+""",
+  en="""
+## What you'll get
+
+A FortiGate (FortiOS 7.4 or 7.6) that reads at a glance: interfaces grouped into zones, named objects instead of loose IPs, policies that let through just enough and log it, and a user VPN where each person's group in Entra ID decides which applications they reach. And the way to answer the ticket "I'm on the VPN and can't reach the app" in minutes.
+
+## Before you start
+
+- Admin access over HTTPS or SSH only from the management network (*trusted hosts* on the administrator), with a named account and MFA. The local `admin` account for emergencies only.
+- A **copy of the configuration** before every change, and the change approved.
+- The map: which port is each interface, which networks sit behind each, which circuits the site has and which internal applications remote users must see.
+
+## 1. Interfaces, zones and objects
+
+Policies are written between **zones**, not ports (if the server network grows onto another port, it is added to the zone and no policy changes), and towards named **objects and groups**, not loose IPs.
+
+:::term FW-SITE-01 · zones, objects and a policy
+$ config system zone
+$     edit "LAN-SERVERS"
+$         set interface "port3" "port4"
+$         set intrazone deny
+$     next
+$ end
+$ config firewall policy
+$     edit 0
+$         set name "VPN-HR-to-HR-apps"
+$         set srcintf "vpn-users"
+$         set dstintf "LAN-SERVERS"
+$         set srcaddr "VPN-POOL-USERS"
+$         set dstaddr "GRP-APPS-HR"
+$         set groups "VPN-HR"
+$         set service "HTTPS"
+$         set schedule "always"
+$         set action accept
+$         set ssl-ssh-profile "certificate-inspection"
+$         set logtraffic all
+$     next
+$ end
+:::
+
+- `GRP-APPS-HR` is an address group (*Policy & Objects › Addresses*) with one object per server, such as `SRV-APP-PAYROLL` (10.50.20.15/32).
+- **Least privilege** means a specific source, a specific destination and a specific service. `all` as destination or `ALL` as service is only accepted with an expiry date and a reason in the comment.
+- `set logtraffic all` logs allowed traffic too: without it, an investigation can't tell who reached what.
+- **Order** matters: policies are evaluated top down and the first match wins. At the bottom there is always implicit policy 0, which denies.
+
+**SSL inspection.** `certificate-inspection` only reads the server's certificate; `deep-inspection` decrypts and needs devices to trust the FortiGate's CA (deployed through Intune or GPO), with exemptions for banking, health and applications that pin their certificate.
+
+## 2. The user VPN: Entra ID, groups and what each user sees
+
+**Fortinet's change of direction.** In FortiOS 7.6.3 and later, SSL-VPN tunnel mode no longer exists; web mode survives under the name *Agentless VPN*, disabled by default. On low-memory models the removal came earlier (even on the 7.2 and 7.4 branches). The vendor's recommendation is **dial-up IPsec with IKEv2 and FortiClient**. If you still run SSL-VPN, plan the migration.
+
+Authenticating against **Entra ID over SAML** on IKEv2 IPsec needs FortiClient 7.2 or later. The outline:
+
+1. In Entra ID, an **enterprise application** with the FortiGate as service provider, a `username` claim with the UPN and the groups claim with the **object ID** of the assigned groups.
+2. On the FortiGate, the SAML server (`config user saml`) and one **user group** per access profile mapping that object ID.
+3. The SAML server on the WAN interface and the dial-up tunnel with IKEv2, EAP and a range for the clients:
+
+:::term FW-SITE-01 · IKEv2 dial-up VPN with SAML
+$ config system interface
+$     edit "wan1"
+$         set ike-saml-server "entra-vpn"
+$     next
+$ end
+$ config vpn ipsec phase1-interface
+$     edit "vpn-users"
+$         set type dynamic
+$         set interface "wan1"
+$         set ike-version 2
+$         set mode-cfg enable
+$         set ipv4-start-ip 10.212.134.1
+$         set ipv4-end-ip 10.212.134.254
+$         set eap enable
+$         set eap-identity send-request
+$         set proposal aes256gcm-prfsha384
+$         set dhgrp 20
+$     next
+$ end
+:::
+
+- **Groups decide what each user sees**: `VPN-HR` has a policy to the HR applications, `VPN-IT` another to the management network. A user in two groups reaches the sum of both, nothing more.
+- Put the groups in the **policies**, not in phase 1's `authusrgrp`, if you want one profile per group. Fortinet warns against mixing both places.
+- With SAML, MFA and **Conditional Access** rules are enforced by Entra ID before the tunnel comes up.
+- With **LDAP** (or RADIUS with NPS) the outline is the same: FortiGate groups pointing at AD groups and the same policies.
+
+## 3. A site-to-site IPsec tunnel
+
+Two sites, `10.10.0.0/16` and `10.30.0.0/16`, an IKEv2 tunnel with a long pre-shared key (or certificates), two policies (one each way) and the routes:
+
+:::term FW-SITE-01 · tunnel to the Bilbao site
+$ config vpn ipsec phase1-interface
+$     edit "to-site-bio"
+$         set interface "wan1"
+$         set ike-version 2
+$         set proposal aes256-sha256
+$         set dhgrp 20
+$         set remote-gw 198.51.100.20
+$         set psksecret <long-key-from-the-secrets-manager>
+$     next
+$ end
+$ config vpn ipsec phase2-interface
+$     edit "to-site-bio-p2"
+$         set phase1name "to-site-bio"
+$         set proposal aes256-sha256
+$         set dhgrp 20
+$         set src-subnet 10.10.0.0 255.255.0.0
+$         set dst-subnet 10.30.0.0 255.255.0.0
+$     next
+$ end
+$ config router static
+$     edit 0
+$         set dst 10.30.0.0 255.255.0.0
+$         set device "to-site-bio"
+$     next
+$     edit 0
+$         set dst 10.30.0.0 255.255.0.0
+$         set blackhole enable
+$         set distance 254
+$     next
+$ end
+:::
+
+The **blackhole** route with distance 254 stops traffic for the other site leaking to the internet through the default route while the tunnel is down. Proposals and DH groups must match at both ends or the tunnel won't come up; `get vpn ipsec tunnel summary` says whether it is up.
+
+**Two circuits with SD-WAN.** Under *Network › SD-WAN* you add `wan1` and `wan2` as members with their gateway, a **Performance SLA** that measures latency, jitter and loss against a reliable target, and rules that send each kind of traffic over the circuit that meets the SLA (for example, Microsoft 365 and voice over the lowest-latency one). Outbound policies point to the SD-WAN zone.
+
+## 4. Firmware and configuration backups
+
+- The **upgrade path** is not improvised: Fortinet's *Upgrade Path* tool lists the mandatory intermediate versions between yours and the target. Skipping one can leave part of the configuration unconverted.
+- Before upgrading: a configuration backup, the release notes (incompatible changes and removed features) and a change window. In HA you upgrade the cluster and the nodes go in turn.
+- Backups are taken from the administrator menu (*Configuration › Backup*, encrypted with a password) or from the CLI with `execute backup config sftp` to a backup server, scheduled daily and kept off the device itself.
+
+## 5. The ticket: "I'm on the VPN and can't reach the payroll app"
+
+Javier Ruiz connects to the VPN without trouble, but `https://payroll.contoso.local` won't load. First, what the FortiGate itself says about him and about the policy that should let him through:
+
+:::term FW-SITE-01 · diagnosis
+$ diagnose firewall auth list
+10.212.134.19, javier.ruiz
+  server: entra-vpn
+  group_name: VPN-SALES
+$ diagnose debug reset
+$ diagnose debug flow filter clear
+$ diagnose debug flow filter addr 10.50.20.15
+$ diagnose debug flow filter dport 443
+$ diagnose debug flow show function-name enable
+$ diagnose debug flow trace start 10
+$ diagnose debug enable
+id=65308 trace_id=1 func=print_pkt_detail line=5939 msg="vd-root:0 received a packet(proto=6, 10.212.134.19:51544->10.50.20.15:443) from vpn-users.  flag [S]"
+id=65308 trace_id=1 func=vf_ip_route_input_common line=2612 msg="find a route: flag=04000000 gw-10.50.20.15 via port3"
+id=65308 trace_id=1 func=fw_forward_handler line=989 msg="Denied by forward policy check (policy 0)"
+$ diagnose debug disable
+:::
+
+| What you see | What it means | What you do |
+|---|---|---|
+| **Denied by forward policy check (policy 0)** | No policy matches: it falls into the implicit deny | Check group, source, destination and service of the policy that should apply |
+| **find a route ... via** an unexpected interface | The FortiGate routes the packet somewhere else | Routing table (`get router info routing-table all`) and SD-WAN |
+
+Here the authentication list says it all: Javier is in `VPN-SALES` and the policy to the HR applications only admits `VPN-HR`. It isn't a fault, it's an access request: it goes through his manager and, if approved, he is added to the group in Entra ID. The policy is not widened.
+
+If the policy does match and the application doesn't respond, `diagnose sniffer packet any 'host 10.50.20.15 and port 443' 4 20 l` shows 20 packets with their interface: if the SYN leaves on `port3` and no SYN-ACK comes back, the problem is the server, its firewall or its return route to the VPN range.
+
+! `diagnose debug flow` without filters eats CPU on a busy device: filter by address and port, limit the trace and finish with `diagnose debug disable`.
+
+## 6. What you review each month
+
+- Policies with no traffic in 90 days (*Hit count* / *Last used* column): disabled and, if nobody claims them, deleted.
+- Policies with `all` as destination or service, and their expiry date.
+- Members of the VPN groups in Entra ID against what each person needs.
+- FortiOS version against Fortinet PSIRT advisories: internet-facing devices with a critical advisory are upgraded that week, not next quarter.
+
+## Next steps
+
+- The **Cisco: switches and routers** guide covers what sits behind the FortiGate at the site: VLANs, trunks and the router with a backup circuit.
+- **Entra ID: SSO/SAML** explains the enterprise application and claims the VPN uses, and **Entra ID: Conditional Access** the rules applied before the tunnel comes up.
+- **Microsoft Sentinel**: FortiGate logs sent over syslog (CEF) let you correlate VPN connections with Entra ID sign-ins.
+""")
+
+# ---------------------------------------------------------------- L4 · Kubernetes
+g(slug="kubernetes-de-docker-compose-a-un-cluster-gestionado-despliegue-y-un-pod-en-crashloopbackoff", topic="kubernetes", date="2026-10-28",
+  title_es="Kubernetes: de Docker Compose a un clúster gestionado, un despliegue y un pod en CrashLoopBackOff",
+  title_en="Kubernetes: from Docker Compose to a managed cluster, a deployment and a pod in CrashLoopBackOff",
+  dek_es="Cuándo compensa el salto desde Compose en un servidor y cuándo no, un clúster AKS o EKS, una herramienta interna con Deployment, Service y Gateway API, configuración y secretos, peticiones y límites de recursos, una actualización progresiva con vuelta atrás y cómo leer un pod que no arranca.",
+  dek_en="When the jump from Compose on one server pays off and when it doesn't, an AKS or EKS cluster, an internal tool with Deployment, Service and Gateway API, configuration and secrets, resource requests and limits, a rolling update with rollback, and how to read a pod that won't start.",
+  es="""
+## Qué vas a conseguir
+
+Decidir si una aplicación interna debe pasar de Docker Compose a Kubernetes y, si pasa, desplegarla bien en un clúster gestionado: varias réplicas, configuración fuera de la imagen, recursos acotados, actualizaciones sin corte y la vuelta atrás en un comando. Y leer el problema más típico, un pod que se reinicia sin parar, en cinco minutos.
+
+## Antes de empezar
+
+- La guía de **Docker** del Nivel 3: imágenes, registro y Compose.
+- La imagen de la aplicación en un registro privado (aquí `acrcontoso.azurecr.io/inventario`), con etiquetas de versión, nunca solo `latest`.
+- `kubectl` y la CLI del proveedor (`az` o `aws`), con acceso por tu identidad de Entra ID o IAM Identity Center.
+- Un responsable del clúster en el equipo: es una plataforma que hay que mantener.
+
+## 1. ¿Compensa el salto?
+
+| Situación | Recomendación |
+|---|---|
+| Una o dos herramientas internas, un servidor, se toleran unos minutos de corte al actualizar | **Se queda en Compose**. Copias, monitorización y un `docker compose pull && up -d` en ventana |
+| Varios servicios, varios equipos que despliegan, se necesita alta disponibilidad | **Kubernetes gestionado** (AKS, EKS) |
+| Muchas aplicaciones, requisitos de seguridad fuertes, se quiere un portal para desarrolladores | **Red Hat OpenShift** o similar, con un equipo de plataforma |
+| Una sola web o API sin estado, sin ganas de gestionar nodos | Un servicio de contenedores sin clúster (Azure Container Apps, AWS App Runner o ECS con Fargate) |
+
+Lo que da Kubernetes: réplicas que se reponen solas, actualizaciones progresivas y configuración declarativa en Git. Lo que cuesta: actualizar el clúster cada pocos meses, aprender otra herramienta y vigilar más piezas.
+
+## 2. El clúster gestionado
+
+En **AKS**, lo que importa al crear el clúster, mejor desde la guía de **Terraform** que a mano:
+
+- `--tier standard` (SLA del plano de control), nodos en **tres zonas de disponibilidad**, red **Azure CNI Overlay** y `--attach-acr acrcontoso` para leer el registro sin secretos.
+- Integración con **Entra ID** y **Azure RBAC** para Kubernetes, y `--disable-local-accounts`: nadie entra con un certificado de administrador compartido.
+- La entrada HTTP: el complemento de enrutamiento de aplicaciones con **Gateway API** (`--enable-gateway-api --enable-app-routing-istio`). El proyecto ingress-nginx se retiró en marzo de 2026 y Microsoft da parches para su versión gestionada hasta noviembre de 2026; un clúster nuevo empieza ya con Gateway API, el sucesor del recurso Ingress.
+
+En **EKS** el equivalente es un clúster con nodos gestionados en tres zonas, acceso con **EKS access entries** ligadas a IAM Identity Center y el **AWS Load Balancer Controller** para la entrada.
+
+## 3. La herramienta interna: Deployment, Service y Gateway
+
+Un espacio de nombres por aplicación (`herramientas`) y cuatro objetos:
+
+:::term inventario.yaml (extracto)
+$ cat inventario.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventario
+  namespace: herramientas
+spec:
+  replicas: 2
+  strategy:
+    rollingUpdate: { maxSurge: 1, maxUnavailable: 0 }
+  selector:
+    matchLabels: { app: inventario }
+  template:
+    metadata:
+      labels: { app: inventario }
+    spec:
+      containers:
+        - name: inventario
+          image: acrcontoso.azurecr.io/inventario:1.4.2
+          envFrom:
+            - configMapRef: { name: inventario-config }
+            - secretRef: { name: inventario-db }
+          resources:
+            requests: { cpu: 250m, memory: 256Mi }
+            limits: { memory: 512Mi }
+          readinessProbe:
+            httpGet: { path: /healthz, port: 8080 }
+---
+apiVersion: v1
+kind: Service
+metadata: { name: inventario, namespace: herramientas }
+spec:
+  selector: { app: inventario }
+  ports: [{ port: 80, targetPort: 8080 }]
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata: { name: gw-herramientas, namespace: herramientas }
+spec:
+  gatewayClassName: approuting-istio
+  infrastructure:
+    annotations:
+      service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+  listeners: [{ name: http, port: 80, protocol: HTTP }]
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata: { name: inventario, namespace: herramientas }
+spec:
+  parentRefs: [{ name: gw-herramientas }]
+  hostnames: ["inventario.intranet.contoso.com"]
+  rules: [{ backendRefs: [{ name: inventario, port: 80 }] }]
+:::
+
+- **Deployment**: cuántas réplicas, qué imagen y cómo se actualiza. `maxUnavailable: 0` significa que nunca baja de dos réplicas sanas durante una actualización.
+- **Service**: un nombre y una IP estables dentro del clúster delante de pods que vienen y van.
+- **Gateway + HTTPRoute**: la entrada HTTP. La anotación crea un **balanceador interno**: la herramienta solo se ve desde la red de la empresa.
+- **readinessProbe**: el pod no recibe tráfico hasta que `/healthz` responde.
+
+## 4. Configuración, secretos y recursos
+
+- **ConfigMap** para lo que no es secreto (`DB_HOST`, nivel de log), en el mismo repositorio que el manifiesto.
+- **Secret** para la contraseña de la base de datos. Un Secret está en base64, **no cifrado** para quien pueda leerlo. Lo correcto es guardarlo en Key Vault o Secrets Manager y montarlo con el **Secrets Store CSI Driver** (en AKS, el complemento *Azure Key Vault provider*) y una identidad de carga de trabajo. Nunca en el repositorio.
+- **requests**: lo que el planificador reserva en el nodo. Sin ellas, los pods acaban donde no caben.
+- **limits** de memoria: si el contenedor los supera, se mata con **OOMKilled**. Para la CPU se suele poner solo la petición: un límite de CPU frena la aplicación sin avisar.
+
+## 5. Actualizar y volver atrás
+
+:::term kubectl · actualización a 1.5.0
+$ kubectl -n herramientas set image deployment/inventario inventario=acrcontoso.azurecr.io/inventario:1.5.0
+deployment.apps/inventario image updated
+$ kubectl -n herramientas rollout status deployment/inventario --timeout=3m
+Waiting for deployment "inventario" rollout to finish: 1 out of 2 new replicas have been updated...
+error: timed out waiting for the condition
+$ kubectl -n herramientas get pods
+NAME                          READY   STATUS             RESTARTS      AGE
+inventario-5d8b7f6c49-kq7zt   1/1     Running            0             6d
+inventario-5d8b7f6c49-w2m9r   1/1     Running            0             6d
+inventario-7c9f8d6b5-x2k4p    0/1     CrashLoopBackOff   5 (40s ago)   4m
+$ kubectl -n herramientas rollout undo deployment/inventario
+deployment.apps/inventario rolled back
+:::
+
+Gracias a `maxUnavailable: 0` y a la sonda de disponibilidad, los dos pods de la 1.4.2 siguieron atendiendo: los usuarios no notaron nada. `rollout undo` vuelve a la revisión anterior; `rollout history` las lista. En el día a día la imagen se cambia desde el pipeline o con GitOps (Argo CD, Flux).
+
+## 6. El ticket: "el pod está en CrashLoopBackOff"
+
+CrashLoopBackOff no es la causa: el contenedor arranca, muere y Kubernetes lo reintenta cada vez más tarde. La causa está en tres sitios:
+
+:::term kubectl · diagnóstico
+$ kubectl -n herramientas describe pod inventario-7c9f8d6b5-x2k4p
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+    Restart Count:  5
+Events:
+  Type     Reason   Age                 From     Message
+  ----     ------   ----                ----     -------
+  Warning  BackOff  15s (x18 over 4m)   kubelet  Back-off restarting failed container inventario in pod inventario-7c9f8d6b5-x2k4p
+$ kubectl -n herramientas logs inventario-7c9f8d6b5-x2k4p --previous
+2026-10-28T09:41:07Z INFO  inventario 1.5.0 arrancando
+2026-10-28T09:41:07Z FATAL falta la variable DATABASE_URL; desde 1.5.0 sustituye a DB_HOST y DB_NAME
+$ kubectl -n herramientas get events --sort-by=.lastTimestamp | tail -5
+:::
+
+- `describe`: el **motivo** y el **código de salida** del último intento, y los eventos del pod.
+- `logs --previous`: lo que escribió el contenedor **anterior**, el que murió. Sin `--previous` ves el intento actual, que a menudo aún no ha escrito nada.
+- `get events`: lo que pasa alrededor (nodo sin recursos, volumen que no monta, imagen que no baja).
+
+| Lo que ves | Qué suele ser |
+|---|---|
+| **Error**, código 1 | La aplicación falla al arrancar: configuración, una variable, la base de datos. Lo dicen los logs |
+| **OOMKilled**, código 137 | Superó el límite de memoria. Subir el límite o revisar la aplicación |
+| **CreateContainerConfigError** | Falta el ConfigMap o el Secret que referencia el pod |
+| **ImagePullBackOff** | Otra familia: la etiqueta no existe o el clúster no puede leer el registro |
+
+Aquí la versión 1.5.0 cambió el nombre de una variable y nadie actualizó el ConfigMap. Se añade `DATABASE_URL` (en el Secret, porque lleva la contraseña), se revisa en pruebas y se repite la actualización.
+
+## 7. Lo que revisas cada mes
+
+- Versión del clúster frente al calendario de soporte de AKS o EKS: la siguiente actualización tiene fecha, primero en pruebas.
+- Pods con reinicios en los últimos 30 días y pods sin `requests` o sin sondas.
+- Imágenes con vulnerabilidades críticas en el registro (Defender for Containers, Amazon Inspector).
+
+## Siguientes pasos
+
+- La guía de **Red Hat OpenShift** si lo que se necesita es una plataforma completa con portal, compilaciones y políticas.
+- La guía de **Terraform** para que el clúster, el registro y la red salgan de código revisado.
+- La guía de **Azure Monitor y Log Analytics** para Container Insights y alertas sobre reinicios, y la de **Grafana** para cuadros de mando con Prometheus.
+- La guía de **Amazon AWS** si el clúster va a ser EKS.
+""",
+  en="""
+## What you'll get
+
+Deciding whether an internal application should move from Docker Compose to Kubernetes and, if it does, deploying it properly on a managed cluster: several replicas, configuration outside the image, bounded resources, updates without downtime and rollback in one command. And reading the most typical problem, a pod that keeps restarting, in five minutes.
+
+## Before you start
+
+- The Level 3 **Docker** guide: images, registry and Compose.
+- The application image in a private registry (`acrcontoso.azurecr.io/inventory` here), with version tags, never just `latest`.
+- `kubectl` and the provider CLI (`az` or `aws`), with access through your Entra ID or IAM Identity Center identity.
+- A cluster owner on the team: it is a platform that needs maintaining.
+
+## 1. Is the jump worth it?
+
+| Situation | Recommendation |
+|---|---|
+| One or two internal tools, one server, a few minutes of downtime when updating is acceptable | **Stay on Compose**. Backups, monitoring and a `docker compose pull && up -d` in a window |
+| Several services, several teams deploying, high availability needed | **Managed Kubernetes** (AKS, EKS) |
+| Many applications, strong security requirements, a developer portal wanted | **Red Hat OpenShift** or similar, with a platform team |
+| A single stateless website or API, no appetite for managing nodes | A container service without a cluster (Azure Container Apps, AWS App Runner or ECS with Fargate) |
+
+What Kubernetes gives you: self-healing replicas, rolling updates and declarative configuration in Git. What it costs: upgrading the cluster every few months, learning another tool and watching more moving parts.
+
+## 2. The managed cluster
+
+On **AKS**, what matters when creating the cluster, better from the **Terraform** guide than by hand:
+
+- `--tier standard` (control plane SLA), nodes across **three availability zones**, **Azure CNI Overlay** networking and `--attach-acr acrcontoso` to read the registry without secrets.
+- **Entra ID** integration and **Azure RBAC** for Kubernetes, and `--disable-local-accounts`: nobody gets in with a shared admin certificate.
+- HTTP ingress: the application routing add-on with **Gateway API** (`--enable-gateway-api --enable-app-routing-istio`). The ingress-nginx project was retired in March 2026 and Microsoft provides patches for its managed version until November 2026; a new cluster starts straight away with Gateway API, the successor to the Ingress resource.
+
+On **EKS** the equivalent is a cluster with managed node groups across three zones, access through **EKS access entries** tied to IAM Identity Center, and the **AWS Load Balancer Controller** for ingress.
+
+## 3. The internal tool: Deployment, Service and Gateway
+
+One namespace per application (`tools`) and four objects:
+
+:::term inventory.yaml (excerpt)
+$ cat inventory.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory
+  namespace: tools
+spec:
+  replicas: 2
+  strategy:
+    rollingUpdate: { maxSurge: 1, maxUnavailable: 0 }
+  selector:
+    matchLabels: { app: inventory }
+  template:
+    metadata:
+      labels: { app: inventory }
+    spec:
+      containers:
+        - name: inventory
+          image: acrcontoso.azurecr.io/inventory:1.4.2
+          envFrom:
+            - configMapRef: { name: inventory-config }
+            - secretRef: { name: inventory-db }
+          resources:
+            requests: { cpu: 250m, memory: 256Mi }
+            limits: { memory: 512Mi }
+          readinessProbe:
+            httpGet: { path: /healthz, port: 8080 }
+---
+apiVersion: v1
+kind: Service
+metadata: { name: inventory, namespace: tools }
+spec:
+  selector: { app: inventory }
+  ports: [{ port: 80, targetPort: 8080 }]
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata: { name: gw-tools, namespace: tools }
+spec:
+  gatewayClassName: approuting-istio
+  infrastructure:
+    annotations:
+      service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+  listeners: [{ name: http, port: 80, protocol: HTTP }]
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata: { name: inventory, namespace: tools }
+spec:
+  parentRefs: [{ name: gw-tools }]
+  hostnames: ["inventory.intranet.contoso.com"]
+  rules: [{ backendRefs: [{ name: inventory, port: 80 }] }]
+:::
+
+- **Deployment**: how many replicas, which image and how it is updated. `maxUnavailable: 0` means it never drops below two healthy replicas during an update.
+- **Service**: a stable name and IP inside the cluster in front of pods that come and go.
+- **Gateway + HTTPRoute**: HTTP ingress. The annotation creates an **internal load balancer**: the tool is only visible from the company network.
+- **readinessProbe**: the pod receives no traffic until `/healthz` answers.
+
+## 4. Configuration, secrets and resources
+
+- **ConfigMap** for what isn't secret (`DB_HOST`, log level), in the same repository as the manifest.
+- **Secret** for the database password. A Secret is base64, **not encrypted** for anyone who can read it. The right way is to keep it in Key Vault or Secrets Manager and mount it with the **Secrets Store CSI Driver** (on AKS, the *Azure Key Vault provider* add-on) and a workload identity. Never in the repository.
+- **requests**: what the scheduler reserves on the node. Without them, pods end up where they don't fit.
+- Memory **limits**: if the container exceeds them, it is killed with **OOMKilled**. For CPU usually only the request is set: a CPU limit throttles the application silently.
+
+## 5. Updating and rolling back
+
+:::term kubectl · update to 1.5.0
+$ kubectl -n tools set image deployment/inventory inventory=acrcontoso.azurecr.io/inventory:1.5.0
+deployment.apps/inventory image updated
+$ kubectl -n tools rollout status deployment/inventory --timeout=3m
+Waiting for deployment "inventory" rollout to finish: 1 out of 2 new replicas have been updated...
+error: timed out waiting for the condition
+$ kubectl -n tools get pods
+NAME                         READY   STATUS             RESTARTS      AGE
+inventory-5d8b7f6c49-kq7zt   1/1     Running            0             6d
+inventory-5d8b7f6c49-w2m9r   1/1     Running            0             6d
+inventory-7c9f8d6b5-x2k4p    0/1     CrashLoopBackOff   5 (40s ago)   4m
+$ kubectl -n tools rollout undo deployment/inventory
+deployment.apps/inventory rolled back
+:::
+
+Thanks to `maxUnavailable: 0` and the readiness probe, the two 1.4.2 pods kept serving: users noticed nothing. `rollout undo` goes back to the previous revision; `rollout history` lists them. Day to day the image is changed from the pipeline or with GitOps (Argo CD, Flux).
+
+## 6. The ticket: "the pod is in CrashLoopBackOff"
+
+CrashLoopBackOff is not the cause: the container starts, dies and Kubernetes retries it later each time. The cause is in three places:
+
+:::term kubectl · diagnosis
+$ kubectl -n tools describe pod inventory-7c9f8d6b5-x2k4p
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+    Restart Count:  5
+Events:
+  Type     Reason   Age                 From     Message
+  ----     ------   ----                ----     -------
+  Warning  BackOff  15s (x18 over 4m)   kubelet  Back-off restarting failed container inventory in pod inventory-7c9f8d6b5-x2k4p
+$ kubectl -n tools logs inventory-7c9f8d6b5-x2k4p --previous
+2026-10-28T09:41:07Z INFO  inventory 1.5.0 starting
+2026-10-28T09:41:07Z FATAL missing variable DATABASE_URL; since 1.5.0 it replaces DB_HOST and DB_NAME
+$ kubectl -n tools get events --sort-by=.lastTimestamp | tail -5
+:::
+
+- `describe`: the **reason** and **exit code** of the last attempt, and the pod's events.
+- `logs --previous`: what the **previous** container wrote, the one that died. Without `--previous` you see the current attempt, which often hasn't written anything yet.
+- `get events`: what is happening around it (node short of resources, volume that won't mount, image that won't pull).
+
+| What you see | What it usually is |
+|---|---|
+| **Error**, code 1 | The application fails at startup: configuration, a variable, the database. The logs say which |
+| **OOMKilled**, code 137 | It exceeded the memory limit. Raise the limit or look at the application |
+| **CreateContainerConfigError** | The ConfigMap or Secret the pod references is missing |
+| **ImagePullBackOff** | A different family: the tag doesn't exist or the cluster can't read the registry |
+
+Here version 1.5.0 renamed a variable and nobody updated the ConfigMap. `DATABASE_URL` is added (in the Secret, as it carries the password), checked in test and the update repeated.
+
+## 7. What you review each month
+
+- Cluster version against the AKS or EKS support calendar: the next upgrade has a date, test first.
+- Pods with restarts in the last 30 days and pods without `requests` or without probes.
+- Images with critical vulnerabilities in the registry (Defender for Containers, Amazon Inspector).
+
+## Next steps
+
+- The **Red Hat OpenShift** guide if what you need is a complete platform with a portal, builds and policies.
+- The **Terraform** guide so that the cluster, registry and network come out of reviewed code.
+- The **Azure Monitor y Log Analytics** guide for Container Insights and alerts on restarts, and the **Grafana** guide for dashboards with Prometheus.
+- The **Amazon AWS** guide if the cluster is going to be EKS.
+""")
+
+# ---------------------------------------------------------------- L4 · Nutanix
+g(slug="nutanix-ahv-para-quien-viene-de-vsphere-prism-proteccion-lcm-y-un-disco-caido", topic="nutanix", date="2026-10-28",
+  title_es="Nutanix AHV para quien viene de vSphere: Prism, protección, LCM y un disco caído",
+  title_en="Nutanix AHV for vSphere people: Prism, protection, LCM and a failed disk",
+  dek_es="Prism Element frente a Prism Central, qué hacen la CVM, los contenedores de almacenamiento y el factor de replicación, crear una VM en AHV, snapshots y políticas de protección con réplica a una segunda sede, actualizar con LCM, poner un host en mantenimiento y leer una alerta de disco o una VM lenta con ncli, acli y NCC.",
+  dek_en="Prism Element versus Prism Central, what the CVM, storage containers and replication factor do, creating a VM in AHV, snapshots and protection policies replicating to a second site, upgrading with LCM, putting a host into maintenance, and reading a disk alert or a slow VM with ncli, acli and NCC.",
+  es="""
+## Qué vas a conseguir
+
+Traducir lo que ya sabes de vSphere a Nutanix con AHV: dónde se administra cada cosa, cómo guarda los datos el clúster y cuánto aguanta, crear y proteger una VM con réplica a otra sede, actualizar sin ventana de corte y responder a una alerta de disco o a una VM lenta con las herramientas del propio clúster.
+
+## Antes de empezar
+
+- Un clúster Nutanix con **AOS** y **AHV** (tres nodos o más), acceso de administrador a **Prism Element** y, si existe, a **Prism Central**.
+- Acceso SSH a las CVM con el usuario `nutanix`: ahí viven `ncli`, `acli` y `ncc`.
+- La guía de **VMware vSphere y vCenter** como punto de partida: esta tabla resume las equivalencias.
+
+| vSphere | Nutanix AHV |
+|---|---|
+| vCenter | **Prism Central** (varios clústeres, políticas, categorías) |
+| Cliente del host / gestión del clúster | **Prism Element** (un clúster, servido por sus CVM) |
+| ESXi | **AHV** |
+| Datastore (VMFS, vSAN) | **Contenedor de almacenamiento** sobre el pool del clúster |
+| FTT de vSAN | **Factor de replicación** (RF2 / RF3) |
+| vMotion / DRS / HA | Migración en vivo / **ADS** / HA de AHV |
+| Grupo de puertos | **Subred** (VLAN) en el switch virtual |
+
+## 1. El clúster por dentro: CVM, contenedores y factor de replicación
+
+Cada nodo ejecuta una **Controller VM (CVM)** que tiene los discos locales en passthrough y sirve el almacenamiento a todo el clúster. Las VM escriben en su CVM local, y la CVM copia cada dato a otro nodo (RF2) o a otros dos (RF3) antes de confirmar la escritura.
+
+- **RF2** aguanta la caída de un nodo o de un disco; **RF3** aguanta dos, pero necesita cinco nodos o más y usa más espacio.
+- Los **contenedores de almacenamiento** son los "datastores": cada uno con su compresión, deduplicación o erasure coding. Un contenedor por tipo de carga (servidores, VDI, copias) es suficiente.
+- Deja libre al menos la capacidad de un nodo: si cae uno, sus datos se reconstruyen en los demás y necesitan sitio.
+
+:::term CVM · estado del clúster
+$ cluster status | grep -E "CVM:|state"
+2026-10-28 09:12:41 INFO cluster:3195 The state of the cluster: start
+        CVM: 10.20.0.31 Up
+        CVM: 10.20.0.32 Up
+        CVM: 10.20.0.33 Up, ZeusLeader
+        CVM: 10.20.0.34 Up
+$ ncli container ls | grep -E "Name  |Replication Factor"
+    Name                      : ctr-servidores
+    Replication Factor        : 2
+    Name                      : ctr-vdi
+    Replication Factor        : 2
+$ ncli cluster get-domain-fault-tolerance-status type=node
+    Domain Type               : NODE
+    Component Type            : EXTENT_GROUPS
+    Current Fault Tolerance   : 1
+:::
+
+**Current Fault Tolerance: 1** quiere decir que el clúster puede perder un nodo ahora mismo sin perder datos. Si es 0, no se toca nada hasta que vuelva a 1.
+
+## 2. Crear una VM en AHV
+
+En Prism (Element o Central): **VMs › Create VM**, con disco desde una imagen o un ISO y la NIC en su subred. Lo mismo con `acli`, útil para repetirlo:
+
+:::term CVM · acli
+$ acli vm.create srv-app01 num_vcpus=2 num_cores_per_vcpu=1 memory=8G
+$ acli vm.disk_create srv-app01 clone_from_image=win2022-plantilla
+$ acli vm.disk_create srv-app01 create_size=100G container=ctr-servidores
+$ acli vm.nic_create srv-app01 network=vlan20-servidores
+$ acli vm.on srv-app01
+$ acli vm.snapshot_create srv-app01 snapshot_name_list=antes-parche-oct
+:::
+
+- Instala **Nutanix Guest Tools** (NGT) y los controladores VirtIO: sin ellos el disco y la red van más lentos y los snapshots no son coherentes con la aplicación.
+- Para traer VMs desde vSphere, **Nutanix Move** migra con sincronización incremental y un corte corto al final.
+- Un snapshot no es una copia de seguridad: está en el mismo clúster. Bórralo cuando el cambio esté validado.
+
+## 3. Protección y réplica a una segunda sede
+
+En Prism Element existen los **Protection Domains** (grupo de VM, calendario y sitio remoto). En instalaciones nuevas se usan las **políticas de protección** de Prism Central, que se aplican por **categoría**: la VM que recibe la categoría queda protegida sin tocar la política.
+
+:::ui Prism Central · Política de protección
+> Prism Central › Data Protection › Protection Policies › Create Protection Policy
+= Nombre: pp-produccion-4h
+= Origen: clúster ntnx-mad01 · Destino: clúster ntnx-bcn01 (Prism Central de la sede secundaria)
+= Calendario: asíncrono · RPO: 4 horas · Retención local: 6 · Retención remota: 12
+= Categorías: Proteccion: Produccion
+[Create]
+:::
+
+- Completa con un **plan de recuperación** (Recovery Plan): orden de arranque, retardo entre grupos y la red de destino, con una red de pruebas aislada para ensayar.
+- Haz una **conmutación de prueba** cada trimestre: es la única forma de saber que el RPO prometido se cumple y que las VM arrancan en la otra sede.
+- La réplica no sustituye a la copia de seguridad: si se cifran las VM, se replica el cifrado.
+
+## 4. Actualizar con LCM y poner un host en mantenimiento
+
+**Life Cycle Manager** (en Prism: *LCM*) actualiza AOS, AHV, NCC, firmware y BIOS. Primero **Perform Inventory**, después elige versiones y deja que haga las comprobaciones previas. Va nodo a nodo: migra las VM, reinicia, espera a que el clúster recupere la resiliencia y pasa al siguiente.
+
+- Orden habitual: NCC, después AOS, después AHV, y el firmware al final. Revisa la matriz de compatibilidad antes.
+- Ejecuta `ncc health_checks run_all` antes de empezar y no lances LCM con fallos abiertos.
+
+Para un trabajo de hardware en un nodo, el mantenimiento se hace en Prism (*Hardware › Host › Enter Maintenance Mode*) o desde una CVM:
+
+`acli host.enter_maintenance_mode 10.20.0.22 wait=true`
+
+Con eso el host AHV vacía sus VM por migración en vivo. Si hay que apagar el nodo, también se pone en mantenimiento su CVM (`ncli host edit id=<id> enable-maintenance-mode=true`). Al terminar, en orden inverso: `ncli host edit id=<id> enable-maintenance-mode=false` y `acli host.exit_maintenance_mode 10.20.0.22`.
+
+! Las VM fijadas a un host o con afinidad estricta no se migran: se apagan. Revísalas antes y comprueba que **Data Resiliency** está en OK antes de pasar al siguiente nodo.
+
+## 5. El ticket: "el clúster muestra una alerta de almacenamiento / ha fallado un disco"
+
+Martes, 08:40. Prism muestra *Disk ... marked offline* y el widget de **Data Resiliency** en amarillo.
+
+1. **No reiniciar nada.** El clúster ya está reconstruyendo las copias que tenía ese disco en el resto de discos.
+2. **Ver el estado general** con NCC:
+
+:::term CVM · NCC y discos
+$ ncc health_checks run_all
++-----------------------+
+| State         | Count |
++-----------------------+
+| Pass          | 228   |
+| Warning       | 3     |
+| Fail          | 1     |
+| Total Plugins | 232   |
++-----------------------+
+Detailed information can be found in /home/nutanix/data/logs/ncc-output-latest.log
+$ grep -A6 "FAIL:" /home/nutanix/data/logs/ncc-output-latest.log
+FAIL: Disk 0000003 (serial S6Z4NX0T812345) on host 10.20.0.23 is offline.
+$ ncli disk get-remove-status
+    Disk Id                   : 0005f1a2-...::42
+    Remove Status             : DATA_MIGRATION_INITIATED
+:::
+
+3. **Esperar a que la tolerancia vuelva a 1** (`ncli cluster get-domain-fault-tolerance-status type=node`). Mientras sea 0, nada de mantenimientos ni actualizaciones.
+4. **Abrir el caso con el fabricante** con el número de serie, el resumen de NCC y un paquete de logs (`logbay collect`), y sustituir el disco en caliente. Prism lo detecta y lo añade al pool (*Hardware › Diagram*, si no lo hace solo: *Repartition and Add*).
+
+**La variante: "una VM va lenta".** En Prism, en la VM: **latencia del controlador** (lectura y escritura), IOPS y uso de CPU y memoria. Latencia alta en todo el clúster apunta a almacenamiento (nivel SSD lleno, un disco o un nodo degradado: NCC lo dirá). Latencia alta solo en esa VM apunta a la propia VM: sin VirtIO, disco único con mucha cola, o un snapshot antiguo que nadie ha borrado. CPU con tiempo de espera alto (*CPU Ready*) indica un host sobrecargado: deja que ADS reparta o revisa las reglas de afinidad. `acli vm.get srv-app01` muestra la configuración real (vCPU, memoria, discos y en qué contenedor está cada uno).
+
+## 6. Lo que revisas cada mes
+
+- Resultado de `ncc health_checks run_all` y alertas sin resolver en Prism Central.
+- Capacidad: uso del pool frente a la reserva de un nodo, y la previsión de *Planning* en Prism Central.
+- Snapshots con más de una semana y réplicas que no cumplen su RPO.
+- Versiones pendientes en LCM y el fin de soporte de la rama de AOS en uso.
+
+## Siguientes pasos
+
+- La guía de **Backup y DR/BCP** para encajar las políticas de protección en el plan de continuidad y en las pruebas.
+- **Veeam Backup** tiene integración con AHV para la copia fuera del clúster.
+- **Red Hat OpenShift** y **Kubernetes** pueden ejecutarse sobre el clúster con el controlador CSI de Nutanix.
+- **Terraform** con el proveedor de Nutanix para crear VMs y categorías como código.
+""",
+  en="""
+## What you'll get
+
+Translating what you already know from vSphere to Nutanix with AHV: where each thing is managed, how the cluster stores data and how much it can survive, creating and protecting a VM with replication to another site, upgrading without a downtime window, and answering a disk alert or a slow VM with the cluster's own tools.
+
+## Before you start
+
+- A Nutanix cluster running **AOS** and **AHV** (three nodes or more), administrator access to **Prism Element** and, if there is one, **Prism Central**.
+- SSH access to the CVMs as the `nutanix` user: that is where `ncli`, `acli` and `ncc` live.
+- The **VMware vSphere and vCenter** guide as a starting point: this table sums up the equivalents.
+
+| vSphere | Nutanix AHV |
+|---|---|
+| vCenter | **Prism Central** (several clusters, policies, categories) |
+| Host client / cluster management | **Prism Element** (one cluster, served by its CVMs) |
+| ESXi | **AHV** |
+| Datastore (VMFS, vSAN) | **Storage container** on the cluster's pool |
+| vSAN FTT | **Replication factor** (RF2 / RF3) |
+| vMotion / DRS / HA | Live migration / **ADS** / AHV HA |
+| Port group | **Subnet** (VLAN) on the virtual switch |
+
+## 1. Inside the cluster: CVMs, containers and replication factor
+
+Each node runs a **Controller VM (CVM)** that owns the local disks in passthrough and serves storage to the whole cluster. VMs write to their local CVM, and the CVM copies each piece of data to another node (RF2) or to two others (RF3) before acknowledging the write.
+
+- **RF2** survives losing one node or one disk; **RF3** survives two, but needs five nodes or more and uses more space.
+- **Storage containers** are the "datastores": each with its own compression, deduplication or erasure coding. One container per kind of workload (servers, VDI, backups) is enough.
+- Keep at least one node's worth of capacity free: if one fails, its data is rebuilt on the others and needs room.
+
+:::term CVM · cluster status
+$ cluster status | grep -E "CVM:|state"
+2026-10-28 09:12:41 INFO cluster:3195 The state of the cluster: start
+        CVM: 10.20.0.31 Up
+        CVM: 10.20.0.32 Up
+        CVM: 10.20.0.33 Up, ZeusLeader
+        CVM: 10.20.0.34 Up
+$ ncli container ls | grep -E "Name  |Replication Factor"
+    Name                      : ctr-servers
+    Replication Factor        : 2
+    Name                      : ctr-vdi
+    Replication Factor        : 2
+$ ncli cluster get-domain-fault-tolerance-status type=node
+    Domain Type               : NODE
+    Component Type            : EXTENT_GROUPS
+    Current Fault Tolerance   : 1
+:::
+
+**Current Fault Tolerance: 1** means the cluster can lose a node right now without losing data. If it is 0, nothing gets touched until it is back to 1.
+
+## 2. Create a VM in AHV
+
+In Prism (Element or Central): **VMs › Create VM**, with a disk from an image or an ISO and the NIC on its subnet. The same with `acli`, handy for repeating it:
+
+:::term CVM · acli
+$ acli vm.create srv-app01 num_vcpus=2 num_cores_per_vcpu=1 memory=8G
+$ acli vm.disk_create srv-app01 clone_from_image=win2022-template
+$ acli vm.disk_create srv-app01 create_size=100G container=ctr-servers
+$ acli vm.nic_create srv-app01 network=vlan20-servers
+$ acli vm.on srv-app01
+$ acli vm.snapshot_create srv-app01 snapshot_name_list=before-patch-oct
+:::
+
+- Install **Nutanix Guest Tools** (NGT) and the VirtIO drivers: without them disk and network are slower and snapshots aren't application-consistent.
+- To bring VMs over from vSphere, **Nutanix Move** migrates with incremental sync and a short cutover at the end.
+- A snapshot is not a backup: it lives on the same cluster. Delete it once the change is validated.
+
+## 3. Protection and replication to a second site
+
+Prism Element has **Protection Domains** (a group of VMs, a schedule and a remote site). New deployments use Prism Central **protection policies**, applied by **category**: a VM that gets the category is protected without touching the policy.
+
+:::ui Prism Central · Protection policy
+> Prism Central › Data Protection › Protection Policies › Create Protection Policy
+= Name: pp-production-4h
+= Source: cluster ntnx-mad01 · Target: cluster ntnx-bcn01 (secondary site's Prism Central)
+= Schedule: asynchronous · RPO: 4 hours · Local retention: 6 · Remote retention: 12
+= Categories: Protection: Production
+[Create]
+:::
+
+- Complete it with a **Recovery Plan**: boot order, delay between groups and the target network, with an isolated test network for rehearsals.
+- Run a **test failover** every quarter: it is the only way to know the promised RPO is met and that the VMs boot at the other site.
+- Replication doesn't replace backup: if the VMs get encrypted, the encryption is replicated.
+
+## 4. Upgrade with LCM and put a host into maintenance
+
+**Life Cycle Manager** (in Prism: *LCM*) upgrades AOS, AHV, NCC, firmware and BIOS. First **Perform Inventory**, then pick versions and let it run the pre-checks. It goes node by node: migrates the VMs, reboots, waits for the cluster to regain resiliency and moves to the next.
+
+- Usual order: NCC, then AOS, then AHV, and firmware last. Check the compatibility matrix first.
+- Run `ncc health_checks run_all` before starting and don't launch LCM with open failures.
+
+For hardware work on a node, maintenance is done in Prism (*Hardware › Host › Enter Maintenance Mode*) or from a CVM:
+
+`acli host.enter_maintenance_mode 10.20.0.22 wait=true`
+
+That empties the AHV host of its VMs by live migration. If the node has to be powered off, its CVM goes into maintenance too (`ncli host edit id=<id> enable-maintenance-mode=true`). When done, in reverse order: `ncli host edit id=<id> enable-maintenance-mode=false` and `acli host.exit_maintenance_mode 10.20.0.22`.
+
+! VMs pinned to a host or with strict affinity are not migrated: they are powered off. Check them first, and confirm **Data Resiliency** is OK before moving on to the next node.
+
+## 5. The ticket: "the cluster shows a storage alert / a disk failed"
+
+Tuesday, 08:40. Prism shows *Disk ... marked offline* and the **Data Resiliency** widget in amber.
+
+1. **Don't reboot anything.** The cluster is already rebuilding the copies that disk held onto the remaining disks.
+2. **See the overall state** with NCC:
+
+:::term CVM · NCC and disks
+$ ncc health_checks run_all
++-----------------------+
+| State         | Count |
++-----------------------+
+| Pass          | 228   |
+| Warning       | 3     |
+| Fail          | 1     |
+| Total Plugins | 232   |
++-----------------------+
+Detailed information can be found in /home/nutanix/data/logs/ncc-output-latest.log
+$ grep -A6 "FAIL:" /home/nutanix/data/logs/ncc-output-latest.log
+FAIL: Disk 0000003 (serial S6Z4NX0T812345) on host 10.20.0.23 is offline.
+$ ncli disk get-remove-status
+    Disk Id                   : 0005f1a2-...::42
+    Remove Status             : DATA_MIGRATION_INITIATED
+:::
+
+3. **Wait for fault tolerance to return to 1** (`ncli cluster get-domain-fault-tolerance-status type=node`). While it is 0, no maintenance and no upgrades.
+4. **Open the case with the vendor** with the serial number, the NCC summary and a log bundle (`logbay collect`), and hot-swap the disk. Prism detects it and adds it to the pool (*Hardware › Diagram*; if it doesn't do it on its own: *Repartition and Add*).
+
+**The variant: "a VM is slow".** In Prism, on the VM: **controller latency** (read and write), IOPS and CPU and memory usage. High latency across the whole cluster points at storage (SSD tier full, a degraded disk or node: NCC will say). High latency only on that VM points at the VM itself: no VirtIO, a single disk with a deep queue, or an old snapshot nobody deleted. High CPU wait (*CPU Ready*) means an overloaded host: let ADS rebalance or review the affinity rules. `acli vm.get srv-app01` shows the real configuration (vCPUs, memory, disks and which container each one sits on).
+
+## 6. What you review each month
+
+- The result of `ncc health_checks run_all` and unresolved alerts in Prism Central.
+- Capacity: pool usage against the one-node reserve, and the *Planning* forecast in Prism Central.
+- Snapshots older than a week and replications that miss their RPO.
+- Pending versions in LCM and the end of support of the AOS branch in use.
+
+## Next steps
+
+- The **Backup and DR/BCP** guide to fit protection policies into the continuity plan and its tests.
+- **Veeam Backup** integrates with AHV for copies outside the cluster.
+- **Red Hat OpenShift** and **Kubernetes** can run on the cluster with the Nutanix CSI driver.
+- **Terraform** with the Nutanix provider to create VMs and categories as code.
+""")
+
+# ---------------------------------------------------------------- L4 · Red Hat OpenShift
+g(slug="openshift-proyectos-routes-scc-acceso-por-grupos-y-actualizaciones-por-canal", topic="openshift", date="2026-10-28",
+  title_es="Red Hat OpenShift: proyectos, Routes, SCC, acceso por grupos y actualizaciones por canal",
+  title_en="Red Hat OpenShift: projects, Routes, SCCs, group access and channel upgrades",
+  dek_es="Qué añade OpenShift a Kubernetes, entrar con oc y desplegar una aplicación interna con Deployment, Service y Route, dar acceso a un equipo con grupos de Entra ID y RoleBindings, actualizar el clúster por canales y resolver el pod que no arranca por la SCC o la Route que devuelve 503.",
+  dek_en="What OpenShift adds to Kubernetes, signing in with oc and deploying an internal app with a Deployment, Service and Route, giving a team access with Entra ID groups and RoleBindings, upgrading the cluster through channels, and fixing the pod blocked by its SCC or the Route that returns 503.",
+  es="""
+## Qué vas a conseguir
+
+Un clúster OpenShift en el que cada equipo tiene su proyecto, entra con su cuenta corporativa y despliega sin pedirte permiso para cada cosa; una aplicación interna publicada con una Route; un procedimiento de actualización que no te pilla por sorpresa, y los dos tickets que más llegan resueltos en minutos.
+
+## Antes de empezar
+
+- Un clúster **OpenShift Container Platform 4.x** ya instalado (en vSphere, Nutanix, bare metal o en la nube) y acceso de `cluster-admin`.
+- El cliente **`oc`** de la misma versión menor que el clúster (se descarga desde la propia consola: icono de ayuda › *Herramientas de línea de comandos*).
+- Saber qué es un Pod, un Deployment y un Service: la guía de **Kubernetes** lo cuenta. Aquí se habla de lo que OpenShift pone encima.
+
+## 1. Lo que OpenShift añade a Kubernetes
+
+| Kubernetes | OpenShift |
+|---|---|
+| Namespace | **Project**: un namespace con plantilla, cuotas y permisos por defecto al crearlo |
+| Ingress (si instalas un controlador) | **Route** servida por el router HAProxy integrado, con TLS en el borde, re-encrypt o passthrough |
+| Pod Security Admission | Además, **Security Context Constraints (SCC)**: por defecto los pods corren con un UID aleatorio y sin privilegios (`restricted-v2`) |
+| Dashboard opcional | **Consola web** completa: cargas de trabajo, logs, métricas, alertas y actualizaciones |
+| Helm o manifiestos | **Operators** desde el catálogo (OperatorHub) gestionados por OLM, y el propio clúster se gestiona con Operators |
+| Registro externo | **Registro integrado** (`image-registry.openshift-image-registry.svc:5000`) y builds con BuildConfig / Source-to-Image |
+
+Lo que más cambia en el día a día es la SCC: una imagen que en un Kubernetes cualquiera arranca como root, aquí no lo hace. Es intencionado y es la causa del primer ticket de la sección 6.
+
+## 2. Entrar con oc y crear el proyecto
+
+En la consola, menú de usuario › **Copy login command** da el token de la sesión. Con él:
+
+`oc login --token=sha256~XXXXXXXX --server=https://api.ocp01.contoso.example.com:6443`
+
+Después, `oc new-project finanzas-informes --display-name="Finanzas · Informes"` crea el proyecto y lo deja como activo, y `oc whoami --show-console` devuelve la URL de la consola.
+
+- Todo lo que se crea a partir de aquí va al proyecto activo; `oc project` dice cuál es y `oc get projects` lista los tuyos.
+
+## 3. Desplegar una aplicación interna
+
+La forma rápida es `oc new-app`, que crea el Deployment y el Service a partir de una imagen:
+
+:::term oc · despliegue rápido
+$ oc new-app --name=informes registry.contoso.example.com/finanzas/informes:1.4.2
+--> Creating resources ...
+    deployment.apps "informes" created
+    service "informes" created
+--> Success
+$ oc create route edge informes --service=informes --hostname=informes.apps.ocp01.contoso.example.com
+route.route.openshift.io/informes created
+$ oc get pods,route
+NAME                            READY   STATUS    RESTARTS   AGE
+pod/informes-6d9c7b9f5c-2kqzl   1/1     Running   0          48s
+NAME                                HOST/PORT                                  SERVICES   PORT       TERMINATION
+route.route.openshift.io/informes   informes.apps.ocp01.contoso.example.com    informes   8080-tcp   edge
+:::
+
+- Para producción, guarda los manifiestos (Deployment, Service, Route) en Git y aplícalos con `oc apply -f` o con **OpenShift GitOps** (Argo CD). `new-app` sirve para empezar; lo que no está en Git no se puede reconstruir.
+- **edge** termina TLS en el router con el certificado comodín de `*.apps`; **re-encrypt** vuelve a cifrar hasta el pod; **passthrough** deja el TLS al pod.
+- Añade *readiness* y *liveness probes*: sin ellas el router manda tráfico a pods que aún no responden.
+
+## 4. Acceso de un equipo: proveedor de identidad y RoleBindings
+
+Tras la instalación solo existe `kubeadmin`. Lo primero es conectar el proveedor de identidad. Con **Entra ID** se usa OpenID Connect: registra una aplicación en Entra ID con la URL de retorno `https://oauth-openshift.apps.ocp01.contoso.example.com/oauth2callback/entra-id`, guarda su secreto en `openshift-config` y añádela al recurso `OAuth`:
+
+:::ui Consola de OpenShift · Proveedor de identidad
+> Administración › Configuración del clúster › Configuración › OAuth › Añadir › OpenID Connect
+= Nombre: entra-id
+= ID de cliente: (ID de la aplicación registrada en Entra ID)
+= Secreto de cliente: (se guarda como Secret en openshift-config)
+= Emisor: https://login.microsoftonline.com/<id-del-tenant>/v2.0
+= Claims · usuario preferido: preferred_username · nombre: name · correo: email · grupos: groups
+[Añadir]
+:::
+
+- Con **LDAP / Active Directory** el proveedor es de tipo LDAP y los grupos se traen con `oc adm groups sync` y un fichero de configuración, programado como CronJob.
+- Los permisos se dan **a grupos, nunca a personas**:
+
+`oc adm policy add-role-to-group edit grp-ocp-finanzas -n finanzas-informes`
+
+- Roles predefinidos: `view` (solo lectura), `edit` (desplegar), `admin` (además gestionar permisos del proyecto). `cluster-admin` solo para el equipo de plataforma, y mejor con un grupo dedicado.
+- Cuando el proveedor funciona y hay al menos un `cluster-admin` de grupo, elimina `kubeadmin`: `oc delete secrets kubeadmin -n kube-system`.
+
+! Antes de borrar kubeadmin, entra con una cuenta del grupo de administradores en otra ventana. Si el proveedor falla después, el acceso de emergencia es el kubeconfig de la instalación: guárdalo en la caja fuerte de credenciales.
+
+## 5. Actualizar el clúster por canales
+
+OpenShift se actualiza entero (sistema operativo de los nodos incluido) desde el **Cluster Version Operator**. El canal decide qué versiones se ofrecen: `stable-4.x` para producción, `fast-4.x` cuando quieres la versión antes, `eus-4.x` en las versiones pares para saltar de EUS a EUS.
+
+:::term oc · estado y actualización
+$ oc get clusterversion
+NAME      VERSION   AVAILABLE   PROGRESSING   SINCE   STATUS
+version   4.20.14   True        False         23d     Cluster version is 4.20.14
+$ oc adm upgrade
+Cluster version is 4.20.14
+Channel: stable-4.20
+Recommended updates:
+  VERSION     IMAGE
+  4.20.18     quay.io/openshift-release-dev/ocp-release@sha256:...
+$ oc adm upgrade --to=4.20.18
+Requested update to 4.20.18
+$ oc get clusteroperators | grep -v "True        False         False"
+NAME                 VERSION   AVAILABLE   PROGRESSING   DEGRADED
+machine-config       4.20.14   True        True          False
+:::
+
+- Antes: todos los `clusteroperators` en *Available* y sin *Degraded*, los `MachineConfigPool` actualizados (`oc get mcp`) y las notas de la versión leídas, sobre todo las APIs retiradas (el clúster pide un *admin-ack* cuando hay alguna).
+- Los nodos se reinician de uno en uno. Los **PodDisruptionBudget** mal puestos (mínimo disponible igual al número de réplicas) bloquean el drenado: es la causa más habitual de una actualización parada.
+- Para controlar el ritmo en los workers, pausa su pool (`oc patch mcp worker --type merge -p '{"spec":{"paused":true}}'`) y reanúdalo en la ventana.
+
+## 6. El ticket: "el pod no arranca: permission denied"
+
+Una imagen de nginx publicada en Docker Hub entra en *CrashLoopBackOff*:
+
+:::term oc · diagnóstico
+$ oc logs deploy/portal
+nginx: [emerg] mkdir() "/var/cache/nginx/client_temp" failed (13: Permission denied)
+$ oc get pod portal-7f8d6c5b4-xk2vp -o jsonpath='{.metadata.annotations.openshift\\.io/scc}{"\\n"}'
+restricted-v2
+$ oc get pod portal-7f8d6c5b4-xk2vp -o jsonpath='{.spec.containers[0].securityContext.runAsUser}{"\\n"}'
+1000680000
+:::
+
+El pod corre con un UID del rango del proyecto, no como root, y la imagen espera escribir en carpetas de root. Por orden de preferencia:
+
+1. Usar una imagen preparada para UID arbitrario (las **UBI** de Red Hat o las variantes *unprivileged*), o ajustar el Dockerfile para que las carpetas de escritura pertenezcan al grupo 0 con permisos de grupo.
+2. Montar un `emptyDir` en las rutas donde escribe.
+3. Solo si no hay otra salida, una cuenta de servicio propia con la SCC `nonroot-v2` o `anyuid` (`oc adm policy add-scc-to-user anyuid -z sa-portal`), documentada como excepción. Nunca a la cuenta `default` ni con `privileged`.
+
+**La variante: "la Route devuelve 503 Application is not available".** El router no encuentra un pod sano detrás del Service. Revisa en este orden: `oc get endpoints portal` (si está vacío, el *selector* del Service no coincide con las etiquetas de los pods, o los pods no están *Ready*); `oc describe route portal` (¿apunta al Service y al puerto correctos?), y el `targetPort` del Service frente al puerto en el que escucha realmente el contenedor.
+
+## 7. Lo que revisas cada mes
+
+- Actualizaciones pendientes del canal y el fin de soporte de la versión menor en uso.
+- Alertas activas en *Observar › Alertas*, certificados próximos a caducar y uso de disco de etcd.
+- Excepciones de SCC concedidas: quién, para qué y si siguen haciendo falta.
+- Proyectos sin propietario o sin cuota, y RoleBindings a usuarios individuales que deberían ser de grupo.
+
+## Siguientes pasos
+
+- La guía de **Kubernetes** para lo que comparte con OpenShift: Deployments, probes, recursos y almacenamiento.
+- **Terraform** para crear la infraestructura del clúster y los registros DNS de `api` y `*.apps`.
+- La guía de **Entra ID: SSO/SAML** para el registro de aplicaciones y los grupos en el token.
+- **Azure Monitor y Log Analytics** o **Grafana** si quieres llevar las métricas y logs fuera del clúster.
+""",
+  en="""
+## What you'll get
+
+An OpenShift cluster in which each team has its own project, signs in with its corporate account and deploys without asking you for every change; an internal application published with a Route; an upgrade procedure that doesn't take you by surprise, and the two most common tickets solved in minutes.
+
+## Before you start
+
+- An **OpenShift Container Platform 4.x** cluster already installed (on vSphere, Nutanix, bare metal or in the cloud) and `cluster-admin` access.
+- The **`oc`** client at the same minor version as the cluster (downloadable from the console itself: help icon › *Command line tools*).
+- Knowing what a Pod, a Deployment and a Service are: the **Kubernetes** guide covers that. This one is about what OpenShift puts on top.
+
+## 1. What OpenShift adds to Kubernetes
+
+| Kubernetes | OpenShift |
+|---|---|
+| Namespace | **Project**: a namespace with a template, quotas and default permissions on creation |
+| Ingress (if you install a controller) | **Route** served by the built-in HAProxy router, with edge, re-encrypt or passthrough TLS |
+| Pod Security Admission | Plus **Security Context Constraints (SCCs)**: by default pods run with a random UID and no privileges (`restricted-v2`) |
+| Optional dashboard | Full **web console**: workloads, logs, metrics, alerts and upgrades |
+| Helm or manifests | **Operators** from the catalogue (OperatorHub) managed by OLM, and the cluster itself is run by Operators |
+| External registry | **Integrated registry** (`image-registry.openshift-image-registry.svc:5000`) and builds with BuildConfig / Source-to-Image |
+
+What changes most day to day is the SCC: an image that starts as root on any other Kubernetes does not start that way here. That is deliberate, and it is the cause of the first ticket in section 6.
+
+## 2. Sign in with oc and create the project
+
+In the console, user menu › **Copy login command** gives the session token. With it:
+
+`oc login --token=sha256~XXXXXXXX --server=https://api.ocp01.contoso.example.com:6443`
+
+Then `oc new-project finance-reports --display-name="Finance · Reports"` creates the project and makes it active, and `oc whoami --show-console` returns the console URL.
+
+- Everything created from here goes into the active project; `oc project` tells you which one and `oc get projects` lists yours.
+
+## 3. Deploy an internal application
+
+The quick way is `oc new-app`, which creates the Deployment and the Service from an image:
+
+:::term oc · quick deployment
+$ oc new-app --name=reports registry.contoso.example.com/finance/reports:1.4.2
+--> Creating resources ...
+    deployment.apps "reports" created
+    service "reports" created
+--> Success
+$ oc create route edge reports --service=reports --hostname=reports.apps.ocp01.contoso.example.com
+route.route.openshift.io/reports created
+$ oc get pods,route
+NAME                           READY   STATUS    RESTARTS   AGE
+pod/reports-6d9c7b9f5c-2kqzl   1/1     Running   0          48s
+NAME                               HOST/PORT                                 SERVICES   PORT       TERMINATION
+route.route.openshift.io/reports   reports.apps.ocp01.contoso.example.com    reports    8080-tcp   edge
+:::
+
+- For production, keep the manifests (Deployment, Service, Route) in Git and apply them with `oc apply -f` or with **OpenShift GitOps** (Argo CD). `new-app` is for getting started; what isn't in Git can't be rebuilt.
+- **edge** terminates TLS at the router with the `*.apps` wildcard certificate; **re-encrypt** encrypts again to the pod; **passthrough** leaves TLS to the pod.
+- Add *readiness* and *liveness probes*: without them the router sends traffic to pods that aren't answering yet.
+
+## 4. Team access: identity provider and RoleBindings
+
+After installation only `kubeadmin` exists. The first thing is to connect the identity provider. With **Entra ID** it is OpenID Connect: register an application in Entra ID with the redirect URL `https://oauth-openshift.apps.ocp01.contoso.example.com/oauth2callback/entra-id`, store its secret in `openshift-config` and add it to the `OAuth` resource:
+
+:::ui OpenShift console · Identity provider
+> Administration › Cluster Settings › Configuration › OAuth › Add › OpenID Connect
+= Name: entra-id
+= Client ID: (ID of the application registered in Entra ID)
+= Client secret: (stored as a Secret in openshift-config)
+= Issuer: https://login.microsoftonline.com/<tenant-id>/v2.0
+= Claims · preferred username: preferred_username · name: name · email: email · groups: groups
+[Add]
+:::
+
+- With **LDAP / Active Directory** the provider is of type LDAP and groups are brought in with `oc adm groups sync` and a configuration file, scheduled as a CronJob.
+- Permissions go **to groups, never to people**:
+
+`oc adm policy add-role-to-group edit grp-ocp-finance -n finance-reports`
+
+- Built-in roles: `view` (read only), `edit` (deploy), `admin` (also manage the project's permissions). `cluster-admin` only for the platform team, and preferably through a dedicated group.
+- Once the provider works and there is at least one group-based `cluster-admin`, remove `kubeadmin`: `oc delete secrets kubeadmin -n kube-system`.
+
+! Before deleting kubeadmin, sign in with an account from the administrators group in another window. If the provider fails later, the emergency access is the installation kubeconfig: keep it in the credentials vault.
+
+## 5. Upgrade the cluster through channels
+
+OpenShift is upgraded as a whole (including the nodes' operating system) by the **Cluster Version Operator**. The channel decides which versions are offered: `stable-4.x` for production, `fast-4.x` when you want the release earlier, `eus-4.x` on even versions to jump from EUS to EUS.
+
+:::term oc · status and upgrade
+$ oc get clusterversion
+NAME      VERSION   AVAILABLE   PROGRESSING   SINCE   STATUS
+version   4.20.14   True        False         23d     Cluster version is 4.20.14
+$ oc adm upgrade
+Cluster version is 4.20.14
+Channel: stable-4.20
+Recommended updates:
+  VERSION     IMAGE
+  4.20.18     quay.io/openshift-release-dev/ocp-release@sha256:...
+$ oc adm upgrade --to=4.20.18
+Requested update to 4.20.18
+$ oc get clusteroperators | grep -v "True        False         False"
+NAME                 VERSION   AVAILABLE   PROGRESSING   DEGRADED
+machine-config       4.20.14   True        True          False
+:::
+
+- Beforehand: every `clusteroperator` *Available* and not *Degraded*, the `MachineConfigPools` up to date (`oc get mcp`) and the release notes read, especially removed APIs (the cluster asks for an *admin-ack* when there are any).
+- Nodes reboot one at a time. Badly set **PodDisruptionBudgets** (minimum available equal to the number of replicas) block the drain: the most common cause of a stalled upgrade.
+- To control the pace on the workers, pause their pool (`oc patch mcp worker --type merge -p '{"spec":{"paused":true}}'`) and resume it in the window.
+
+## 6. The ticket: "the pod won't start: permission denied"
+
+An nginx image published on Docker Hub goes into *CrashLoopBackOff*:
+
+:::term oc · diagnosis
+$ oc logs deploy/portal
+nginx: [emerg] mkdir() "/var/cache/nginx/client_temp" failed (13: Permission denied)
+$ oc get pod portal-7f8d6c5b4-xk2vp -o jsonpath='{.metadata.annotations.openshift\\.io/scc}{"\\n"}'
+restricted-v2
+$ oc get pod portal-7f8d6c5b4-xk2vp -o jsonpath='{.spec.containers[0].securityContext.runAsUser}{"\\n"}'
+1000680000
+:::
+
+The pod runs with a UID from the project's range, not as root, and the image expects to write to root-owned folders. In order of preference:
+
+1. Use an image built for an arbitrary UID (Red Hat **UBI** images or the *unprivileged* variants), or adjust the Dockerfile so the writable folders belong to group 0 with group permissions.
+2. Mount an `emptyDir` on the paths it writes to.
+3. Only if there is no other way, a dedicated service account with the `nonroot-v2` or `anyuid` SCC (`oc adm policy add-scc-to-user anyuid -z sa-portal`), documented as an exception. Never on the `default` account and never `privileged`.
+
+**The variant: "the Route returns 503 Application is not available".** The router can't find a healthy pod behind the Service. Check in this order: `oc get endpoints portal` (if empty, the Service *selector* doesn't match the pods' labels, or the pods aren't *Ready*); `oc describe route portal` (does it point to the right Service and port?), and the Service `targetPort` against the port the container actually listens on.
+
+## 7. What you review each month
+
+- Pending updates in the channel and the end of support of the minor version in use.
+- Active alerts in *Observe › Alerting*, certificates about to expire and etcd disk usage.
+- SCC exceptions granted: who, what for, and whether they are still needed.
+- Projects with no owner or no quota, and RoleBindings to individual users that should be group-based.
+
+## Next steps
+
+- The **Kubernetes** guide for what it shares with OpenShift: Deployments, probes, resources and storage.
+- **Terraform** to build the cluster's infrastructure and the DNS records for `api` and `*.apps`.
+- The **Entra ID: SSO/SAML** guide for app registrations and groups in the token.
+- **Azure Monitor and Log Analytics** or **Grafana** if you want to take metrics and logs out of the cluster.
+""")
+
+# ---------------------------------------------------------------- L4 · Microsoft Purview
+g(slug="microsoft-purview-etiquetas-de-confidencialidad-retencion-dlp-y-un-documento-cifrado-que-no-abre", topic="purview", date="2026-10-28",
+  title_es="Microsoft Purview: etiquetas de confidencialidad, retención, DLP y un documento cifrado que no abre",
+  title_en="Microsoft Purview: sensitivity labels, retention, DLP and an encrypted document that won't open",
+  dek_es="Un esquema de etiquetas que la gente entiende y que cifra donde hace falta, la directiva que las publica con etiqueta por defecto, el etiquetado automático, retención por directiva y por etiqueta, una directiva DLP en simulación antes de bloquear, búsquedas de eDiscovery, los roles, y el ticket del documento de un socio que no se abre.",
+  dek_en="A label scheme people understand that encrypts where it must, the policy that publishes it with a default label, auto-labelling, retention by policy and by label, a DLP policy in simulation before it blocks, eDiscovery searches, the roles, and the ticket for a partner's document that won't open.",
+  es="""
+## Qué vas a conseguir
+
+Documentos y correos clasificados con pocas etiquetas claras, cifrado que acompaña al archivo aunque salga de la organización, lo que hay que conservar conservado y lo que sobra borrado, una directiva DLP que bloquea lo que debe sin parar el negocio, y criterio para resolver los dos tickets que más llegan: "no puedo abrir este documento" y "DLP no me deja enviar".
+
+## Antes de empezar
+
+- Licencias: etiquetado manual y DLP de Exchange, SharePoint y OneDrive con Microsoft 365 E3; etiquetado automático por servicio, DLP de dispositivos y eDiscovery Premium con E5 o el complemento de cumplimiento correspondiente.
+- Todo se administra en el **portal de Microsoft Purview**. Roles mínimos: grupo **Information Protection Admins** para etiquetas, el rol **DLP Compliance Management** para DLP, **Records Management** para etiquetas de retención y **eDiscovery Manager** para búsquedas.
+- Un responsable de negocio o del DPO que firme el esquema de clasificación y los plazos de conservación. IT los configura; no los decide.
+
+## 1. Etiquetas de confidencialidad
+
+Cinco etiquetas bastan para casi cualquier organización: **Público**, **General**, **Confidencial**, **Confidencial – Solo empleados** y **Altamente confidencial**. Más de siete y la gente elige al azar.
+
+:::ui Microsoft Purview · Information Protection · Etiqueta
+> Information Protection › Etiquetas de confidencialidad › Confidencial – Solo empleados › Editar
+= Ámbito: Archivos y otros recursos de datos · Correos electrónicos
+= Cifrado: Asignar permisos ahora · Todos los usuarios y grupos de contoso.com → Coautor
+= Acceso sin conexión: permitido durante 7 días · Caducidad del acceso: nunca
+= Marcado: pie de página "Confidencial – Solo empleados"
+= Etiquetado automático en apps: recomendar si contiene IBAN o DNI/NIF (10 o más coincidencias)
+[Guardar]
+:::
+
+- **Asignar permisos ahora** fija quién abre el documento, viaje a donde viaje: un adjunto reenviado fuera de contoso.com no se abre. Esa es la idea, y también la fuente de tickets.
+- El cifrado afecta a la búsqueda, la coautoría y algunas apps de terceros. Activa **coautoría de archivos cifrados** en la configuración de Information Protection y reserva el cifrado para las dos etiquetas superiores.
+- Las etiquetas también se aplican a **grupos y sitios** (privacidad de un equipo de Teams, invitados permitidos): úsalo en una fase posterior.
+
+## 2. La directiva de publicación
+
+Una etiqueta no existe para los usuarios hasta que una **directiva de publicación** la pone en Office, Outlook y el explorador.
+
+:::ui Microsoft Purview · Information Protection · Directiva de publicación
+> Information Protection › Directivas › Directivas de publicación de etiquetas › Crear
+= Etiquetas: las cinco del esquema
+= Usuarios y grupos: piloto (gs-purview-piloto, 40 personas), después toda la organización
+= Etiqueta predeterminada para documentos: General · para correo: General
+= Requerir justificación para quitar o bajar una etiqueta: sí
+= Requerir que los usuarios apliquen una etiqueta: no en la primera fase
+[Enviar]
+:::
+
+- La **etiqueta por defecto** sin cifrado (*General*) clasifica todo lo nuevo sin molestar a nadie. El etiquetado obligatorio llega cuando el piloto ya no genera dudas.
+- Los cambios de directiva tardan hasta 24 horas en llegar a las apps. No corrijas dos veces en una mañana.
+- El **etiquetado automático por servicio** (directivas de etiquetado automático) etiqueta lo que ya está en SharePoint, OneDrive y Exchange. Arranca siempre en **simulación**, revisa los archivos que coincidirían y solo después actívalo.
+
+## 3. Retención: directivas y etiquetas
+
+- Una **directiva de retención** cubre ubicaciones enteras: por ejemplo, correo de Exchange y OneDrive conservados 6 años y eliminados después, si es el plazo que el negocio ha decidido.
+- Una **etiqueta de retención** se aplica a elementos concretos: *Contrato – 10 años desde el fin*, publicada a Jurídico o aplicada automáticamente a una biblioteca. Puede **marcar el elemento como registro**, que ya no se puede editar ni borrar.
+- Cuando coinciden varias, gana la **retención**: el periodo más largo de conservación prevalece sobre una eliminación y, para la eliminación, una etiqueta explícita prevalece sobre una directiva.
+- Lo que el usuario borra no desaparece: se queda en **Elementos recuperables** (Exchange) o en la **biblioteca de conservación** (SharePoint y OneDrive) hasta que acabe el plazo.
+
+! Retención no es copia de seguridad. Conserva frente al borrado del usuario; no te devuelve un sitio entero en una hora.
+
+## 4. DLP: primero simular, después bloquear
+
+Una directiva para datos bancarios y de identidad que salgan por correo o se compartan fuera:
+
+1. *Prevención de pérdida de datos › Directivas › Crear directiva*: plantilla personalizada, ubicaciones Exchange, SharePoint y OneDrive (Teams requiere E5).
+2. Regla: el contenido contiene **IBAN** o **número de identidad nacional (DNI) de España**, 10 o más coincidencias, compartido con personas de fuera de la organización.
+3. Acción: **bloquear con invalidación**, sugerencia de directiva al usuario y alerta al equipo de seguridad.
+4. Modo: **ejecutar la directiva en modo de simulación** y mostrar sugerencias durante la simulación, dos o tres semanas.
+5. Revisa la simulación y el **Explorador de actividad**: qué coincidió, quién, con qué destino. Ajusta umbrales y excepciones antes de activar.
+
+:::term PowerShell · Security & Compliance
+$ Connect-IPPSSession
+$ Get-DlpCompliancePolicy | Format-Table Name, Mode
+Name                          Mode
+----                          ----
+DLP – Datos bancarios UE      TestWithNotifications
+DLP – Datos de salud          Enable
+$ Set-DlpCompliancePolicy -Identity "DLP – Datos bancarios UE" -Mode Enable
+:::
+
+**El ticket que llega después**: "DLP bloquea el correo de remesas a un proveedor". El seguimiento de mensajes del centro de administración de Exchange muestra la regla que actuó. Si el envío es legítimo y recurrente, la solución no es desactivar la directiva: una excepción por **dominio del destinatario** para los proveedores de pago aprobados, que mantiene Finanzas, o la invalidación con justificación, que deja rastro auditable.
+
+## 5. Búsquedas y eDiscovery
+
+- Desde 2025, la **búsqueda de contenido** forma parte de **eDiscovery** en el portal de Purview: un caso de sistema que contiene todas las búsquedas. Para una investigación concreta, crea un **caso** propio con sus miembros.
+- Busca en buzones, sitios y Teams con condiciones o KQL (`from:laura.prado AND sent>=2026-09-01`), revisa estadísticas y exporta. Las **retenciones** (holds) se ponen dentro de un caso.
+- Todo lo que hace un eDiscovery Manager queda en el registro de auditoría. Las solicitudes de acceso de una persona a sus datos (RGPD) se resuelven con esta misma búsqueda.
+
+## 6. El ticket: "no puedo abrir un documento cifrado de un socio"
+
+Javier Ruiz recibe de Fabrikam un Excel con su etiqueta *Altamente confidencial*. Al abrirlo: **Acceso bloqueado por su organización**.
+
+1. **Lee el mensaje con atención.** *Bloqueado por su organización* señala a tu tenant; *bloqueado por la organización fabrikam.com* señala al suyo, y el arreglo es allí.
+2. **Configuración de acceso entre inquilinos** (Entra ID › Identidades externas): si la configuración saliente bloquea aplicaciones externas, hay que permitir **Microsoft Rights Management Services** (`00000012-0000-0000-c000-000000000000`), en la configuración por defecto o solo para Fabrikam. Era esto: alguien había restringido la colaboración saliente a una lista de aplicaciones.
+3. Si el mensaje dice que la cuenta no existe en su directorio, el problema es suyo: su Conditional Access exige MFA para Rights Management y no confía en la MFA de contoso. Se arregla con la **confianza de MFA** en su configuración entrante o una cuenta de invitado.
+4. Si no hay mensaje de bloqueo sino "no tienes permisos", la etiqueta de Fabrikam solo concede acceso a usuarios concretos. Lo cambia el propietario del documento, no IT.
+
+> Documenta el arreglo de acceso entre inquilinos en el registro de cambios: la próxima restricción saliente volverá a romperlo.
+
+## Siguientes pasos
+
+- La guía de **ISO 27001, NIS2 y RGPD en IT**: dónde encajan etiquetas, retención y DLP como controles y evidencias.
+- La guía de **Entra ID: Conditional Access** para las directivas que afectan a Rights Management y a invitados.
+- La guía de **Intune** para extender DLP a los dispositivos y controlar copiar a USB.
+- La guía de **Migraciones de tenant M365**: el contenido cifrado con etiquetas del origen es de lo más delicado de mover.
+""",
+  en="""
+## What you'll get
+
+Documents and email classified with a few clear labels, encryption that travels with the file even when it leaves the organisation, what must be kept kept and what is surplus deleted, a DLP policy that blocks what it should without stopping the business, and the judgement to resolve the two tickets that arrive most: "I can't open this document" and "DLP won't let me send".
+
+## Before you start
+
+- Licences: manual labelling and DLP for Exchange, SharePoint and OneDrive with Microsoft 365 E3; service-side auto-labelling, endpoint DLP and eDiscovery Premium with E5 or the matching compliance add-on.
+- Everything is administered in the **Microsoft Purview portal**. Minimum roles: the **Information Protection Admins** group for labels, the **DLP Compliance Management** role for DLP, **Records Management** for retention labels and **eDiscovery Manager** for searches.
+- A business owner or the DPO to sign off the classification scheme and the retention periods. IT configures them; it doesn't decide them.
+
+## 1. Sensitivity labels
+
+Five labels are enough for almost any organisation: **Public**, **General**, **Confidential**, **Confidential – Employees only** and **Highly confidential**. More than seven and people pick at random.
+
+:::ui Microsoft Purview · Information Protection · Label
+> Information Protection › Sensitivity labels › Confidential – Employees only › Edit
+= Scope: Files & other data assets · Emails
+= Encryption: Assign permissions now · All users and groups in contoso.com → Co-Author
+= Offline access: allowed for 7 days · Access expiry: never
+= Marking: footer "Confidential – Employees only"
+= Auto-labelling in apps: recommend if it contains IBAN or Spanish DNI/NIF (10 or more matches)
+[Save]
+:::
+
+- **Assign permissions now** fixes who opens the document wherever it travels: an attachment forwarded outside contoso.com won't open. That is the point, and also the source of tickets.
+- Encryption affects search, co-authoring and some third-party apps. Turn on **co-authoring for encrypted files** in the Information Protection settings and keep encryption for the top two labels.
+- Labels also apply to **groups and sites** (privacy of a Teams team, guests allowed): leave that for a later phase.
+
+## 2. The publishing policy
+
+A label doesn't exist for users until a **publishing policy** puts it into Office, Outlook and the browser.
+
+:::ui Microsoft Purview · Information Protection · Publishing policy
+> Information Protection › Policies › Label publishing policies › Create
+= Labels: the five in the scheme
+= Users and groups: pilot (gs-purview-pilot, 40 people), then the whole organisation
+= Default label for documents: General · for email: General
+= Require justification to remove or downgrade a label: yes
+= Require users to apply a label: no in the first phase
+[Submit]
+:::
+
+- An unencrypted **default label** (*General*) classifies everything new without bothering anyone. Mandatory labelling comes when the pilot no longer raises questions.
+- Policy changes take up to 24 hours to reach the apps. Don't fix things twice in one morning.
+- **Service-side auto-labelling** (auto-labelling policies) labels what is already in SharePoint, OneDrive and Exchange. Always start in **simulation**, review the files that would match, and only then turn it on.
+
+## 3. Retention: policies and labels
+
+- A **retention policy** covers whole locations: for example, Exchange mail and OneDrive kept for 6 years and deleted afterwards, if that is the period the business has decided.
+- A **retention label** applies to specific items: *Contract – 10 years from end*, published to Legal or applied automatically to a library. It can **mark the item as a record**, which can then no longer be edited or deleted.
+- When several apply, **retention wins**: the longest retention period prevails over a deletion and, for deletion, an explicit label prevails over a policy.
+- What the user deletes doesn't disappear: it stays in **Recoverable Items** (Exchange) or the **Preservation Hold library** (SharePoint and OneDrive) until the period ends.
+
+! Retention is not backup. It preserves against user deletion; it won't give you a whole site back in an hour.
+
+## 4. DLP: simulate first, block later
+
+A policy for banking and identity data leaving by email or shared externally:
+
+1. *Data loss prevention › Policies › Create policy*: custom template, Exchange, SharePoint and OneDrive locations (Teams needs E5).
+2. Rule: content contains **IBAN** or **Spain national identity number (DNI)**, 10 or more instances, shared with people outside the organisation.
+3. Action: **block with override**, a policy tip to the user and an alert to the security team.
+4. Mode: **run the policy in simulation mode** and show policy tips while in simulation, for two or three weeks.
+5. Review the simulation and **Activity explorer**: what matched, who, to which destination. Adjust thresholds and exceptions before turning it on.
+
+:::term PowerShell · Security & Compliance
+$ Connect-IPPSSession
+$ Get-DlpCompliancePolicy | Format-Table Name, Mode
+Name                          Mode
+----                          ----
+DLP – EU banking data         TestWithNotifications
+DLP – Health data             Enable
+$ Set-DlpCompliancePolicy -Identity "DLP – EU banking data" -Mode Enable
+:::
+
+**The ticket that comes afterwards**: "DLP is blocking the payment remittance email to a supplier". Message trace in the Exchange admin centre shows which rule acted. If the sending is legitimate and recurring, the fix is not to disable the policy: an exception by **recipient domain** for approved payment suppliers, maintained by Finance, or override with justification, which leaves an auditable trail.
+
+## 5. Searches and eDiscovery
+
+- Since 2025, **Content search** is part of **eDiscovery** in the Purview portal: a system case that holds all searches. For a specific investigation, create a **case** of its own with its members.
+- Search mailboxes, sites and Teams with conditions or KQL (`from:laura.prado AND sent>=2026-09-01`), review statistics and export. **Holds** are placed inside a case.
+- Everything an eDiscovery Manager does lands in the audit log. A person's request for access to their data (GDPR) is resolved with this same search.
+
+## 6. The ticket: "I can't open an encrypted document from a partner"
+
+Javier Ruiz receives an Excel file from Fabrikam with their *Highly confidential* label. On opening it: **Access is blocked by your organization**.
+
+1. **Read the message carefully.** *Blocked by your organization* points at your tenant; *blocked by the organization fabrikam.com* points at theirs, and the fix is there.
+2. **Cross-tenant access settings** (Entra ID › External Identities): if the outbound settings block external applications, you must allow **Microsoft Rights Management Services** (`00000012-0000-0000-c000-000000000000`), in the default settings or for Fabrikam only. That was it: someone had restricted outbound collaboration to a list of applications.
+3. If the message says the account doesn't exist in their directory, the problem is theirs: their Conditional Access requires MFA for Rights Management and doesn't trust contoso's MFA. It is fixed with **MFA trust** in their inbound settings or a guest account.
+4. If there is no block message but "you don't have permission", Fabrikam's label only grants access to specific users. The document owner changes that, not IT.
+
+> Record the cross-tenant access fix in the change log: the next outbound restriction will break it again.
+
+## Next steps
+
+- The **ISO 27001, NIS2 and GDPR in IT** guide: where labels, retention and DLP fit as controls and evidence.
+- The **Entra ID: Conditional Access** guide for the policies that affect Rights Management and guests.
+- The **Intune** guide to extend DLP to devices and control copying to USB.
+- The **M365 tenant migrations** guide: content encrypted with the source tenant's labels is among the most delicate things to move.
+""")
+
+# ---------------------------------------------------------------- L4 · Qualys
+g(slug="qualys-agentes-etiquetas-priorizacion-y-la-vulnerabilidad-que-sigue-tras-parchear", topic="qualys", date="2026-10-28",
+  title_es="Qualys: agentes, etiquetas, priorización y la vulnerabilidad que sigue ahí tras parchear",
+  title_en="Qualys: agents, tags, prioritisation and the vulnerability still there after patching",
+  dek_es="Desplegar Cloud Agent con Intune o MECM, etiquetar activos por criticidad, cuándo usar escaneo autenticado y cuándo agente, leer una detección (QDS, severidad, CVE, resultados), priorizar por exposición, KEV y criticidad, el ciclo de parcheo y reescaneo con SLA y excepciones, y el ticket de la vulnerabilidad que no se va.",
+  dek_en="Deploying Cloud Agent with Intune or MECM, tagging assets by criticality, when to use an authenticated scan and when the agent, reading a detection (QDS, severity, CVE, results), prioritising by exposure, KEV and criticality, the patch-and-rescan loop with SLAs and exceptions, and the ticket about the vulnerability that won't go away.",
+  es="""
+## Qué vas a conseguir
+
+Un inventario de vulnerabilidades que cubre todos los equipos, ordenado por lo que de verdad importa, con plazos que el equipo de sistemas conoce y cumple, y excepciones escritas en lugar de olvidadas. Y el criterio para responder cuando alguien dice "ya lo he parcheado y Qualys sigue diciendo que no".
+
+## Antes de empezar
+
+- Una suscripción de **Qualys VMDR** con acceso a la plataforma de tu región (la URL de la plataforma y del servicio de agentes dependen de ella: aparecen en la propia consola).
+- Un **appliance de escaneo** virtual en la red interna para los equipos sin agente.
+- Quién parchea qué: el equipo de puestos (Intune o MECM), el de servidores, el de red. Sin dueño, una vulnerabilidad no se cierra nunca.
+
+## 1. Desplegar Cloud Agent con Intune o MECM
+
+En *Cloud Agent › Agent Management › Activation Keys* se crea una **clave de activación** por tipo de equipo (puestos, servidores) y se le asocian etiquetas: cada agente que se active con ella las recibe. Después se descarga el instalador de Windows y se empaqueta:
+
+:::ui Intune · Aplicación Win32 · Qualys Cloud Agent
+> Intune › Aplicaciones › Windows › Agregar › Aplicación Windows (Win32)
+= Paquete: QualysCloudAgent.intunewin
+= Comando de instalación: QualysCloudAgent.exe CustomerId={id-de-cliente} ActivationId={id-de-activacion-puestos} WebServiceUri=https://(URL de tu plataforma)/CloudAgent/
+= Comando de desinstalación: el indicado en la documentación del agente para tu versión
+= Detección: servicio QualysAgent · o la clave HKLM\\SOFTWARE\\Qualys\\QualysAgent
+= Asignación: Requerida · grupo Todos los dispositivos Windows
+[Crear]
+:::
+
+- En **MECM** es lo mismo como aplicación con método de detección por la clave de registro, desplegada a una colección. En Linux, paquete `.rpm` o `.deb` y un script con los mismos tres valores.
+- El agente informa en *Cloud Agent › Agents*: estado, versión y **Last Checked-In**. Un agente que lleva días sin conectar es un equipo que no estás viendo.
+- Revisa el **perfil de configuración** del agente: intervalo de escaneo de vulnerabilidades y límite de CPU. El de puestos puede ser más agresivo que el de servidores críticos.
+
+## 2. Etiquetas: quién es quién
+
+Las etiquetas son la base de todo lo demás: informes, plazos, escaneos y dueños.
+
+- **Dinámicas** por regla: sistema operativo, rango de red (`10.20.0.0/16` = CPD Madrid), nombre (`srv-*`), software instalado.
+- **De negocio**: entorno (Producción, Preproducción), propietario (Sistemas, Puestos, Red) y **criticidad del activo** del 1 al 5. En VMDR la criticidad entra en el cálculo del **TruRisk** del activo.
+- **Expuesto a Internet**: una etiqueta para lo que está publicado (proxies inversos, VPN, web). Es el primer filtro de prioridad.
+
+## 3. Escaneo autenticado frente a agente
+
+| | Cloud Agent | Escaneo autenticado |
+|---|---|---|
+| Qué cubre | Puestos y servidores Windows, Linux y macOS con agente | Todo lo que tiene IP, incluidos equipos de red, appliances e impresoras |
+| Credenciales | No necesita | **Registros de autenticación** (Windows, Unix, por SSH, SNMP…) |
+| Portátiles fuera de la oficina | Siguen informando | No los ve |
+| Visión de red | No | Puertos y servicios abiertos tal como los ve un atacante interno |
+
+Lo normal es **agente en todo lo que lo admite y escaneo autenticado para el resto**, más un escaneo externo del perímetro. Los registros de autenticación se crean en *Scans › Authentication*: para Windows, una cuenta de dominio dedicada con derechos de administrador local en los servidores (por GPO) y acceso por SMB; para Linux, SSH con clave y `sudo` limitado. Tras cada escaneo, el **informe de autenticación** dice en qué equipos falló el inicio de sesión: un escaneo sin autenticar encuentra una fracción de lo que hay.
+
+## 4. Leer una detección y priorizar
+
+Cada detección tiene un **QID** (la comprobación de Qualys), su **severidad** de 1 a 5, los **CVE** que cubre, el **QDS** (Qualys Detection Score, de 1 a 100, que pondera explotación conocida y amenaza activa), el estado (*New, Active, Fixed, Reopened*) y, lo más útil, el campo **Results**: la prueba concreta que encontró, normalmente una ruta y una versión de fichero.
+
+:::ui Qualys VMDR · Priorización
+> VMDR › Prioritization › Assets por etiqueta: Producción
+= Filtro de amenaza: CISA Known Exploited Vulnerabilities · Explotación activa
+= Filtro de activos: etiqueta Expuesto a Internet · criticidad 4 o 5
+= Resultado: 37 detecciones en 12 activos · QDS 95 · CVE-2026-XXXXX en srv-proxy01 · Results: version 2.4.57 detected
+[Crear informe] [Asignar al propietario]
+:::
+
+El orden de trabajo sale de cruzar tres cosas: **¿está en el catálogo KEV o se explota activamente?**, **¿está expuesto?** y **¿qué criticidad tiene el activo?** Una severidad 5 en un portátil de pruebas sin datos puede esperar a un QDS 90 en un servidor publicado. La severidad sola no ordena el trabajo.
+
+## 5. El ciclo de parcheo y reescaneo, con plazos
+
+| Prioridad | Criterio | Plazo |
+|---|---|---|
+| Crítica | KEV o explotación activa en activo expuesto o crítico | 72 horas |
+| Alta | QDS 70 o más, o severidad 5 | 14 días |
+| Media | QDS 40–69, severidad 3–4 | 60 días |
+| Baja | El resto | Siguiente ciclo de mantenimiento |
+
+Los plazos son de ejemplo: lo importante es que estén aprobados por la dirección y que el informe mensual los mida.
+
+1. El informe por propietario (etiqueta) sale el día después del Patch Tuesday.
+2. Cada equipo parchea con su herramienta (Intune, MECM, el repositorio de Linux).
+3. El agente reescanea en su intervalo, o se fuerza (sección 6). La detección pasa a **Fixed** sola: nadie la cierra a mano.
+4. Lo que no se puede parchear en plazo pide una **excepción** documentada: motivo, control compensatorio (aislamiento de red, regla del cortafuegos, deshabilitar el servicio), responsable y **fecha de caducidad**. En Qualys se registra ignorando la detección con comentario y fecha; en el registro de riesgos, con su aprobación.
+
+! Una excepción sin fecha de caducidad es una vulnerabilidad aceptada para siempre. Revísalas todas cada trimestre.
+
+## 6. El ticket: "la vulnerabilidad sigue ahí después de parchear"
+
+Javier Ruiz, del equipo de servidores: *"Parcheé srv-files02 el martes y Qualys sigue con la detección de Windows de octubre."*
+
+1. **¿Ha informado el agente desde el parche?** En *Cloud Agent › Agents*, la fecha de **Last Checked-In** y la del último escaneo de vulnerabilidades. Si es anterior al parche, Qualys aún no lo sabe.
+2. **Forzar un escaneo** en el propio servidor:
+
+:::term PowerShell · srv-files02
+$ Get-Service QualysAgent | Select-Object Status, StartType
+Status  StartType
+------  ---------
+Running Automatic
+$ Get-HotFix | Sort-Object InstalledOn -Descending | Select-Object -First 2 HotFixID, InstalledOn
+HotFixID  InstalledOn
+--------  -----------
+KB5066123 21/10/2026 0:00:00
+KB5065410 16/09/2026 0:00:00
+$ Test-Path "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Component Based Servicing\\RebootPending"
+True
+$ Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Qualys\\QualysAgent\\ScanOnDemand\\Vulnerability" -Name ScanOnDemand -Value 1
+:::
+
+3. **Reinicio pendiente.** Aquí está: la actualización está instalada pero los ficheros no se sustituyen hasta reiniciar, y Qualys mira la **versión del fichero**, no la lista de KB. Reiniciar en la ventana y reescanear.
+4. **Si no es eso, leer el campo Results.** Dice qué fichero y qué versión ha encontrado. Las causas habituales:
+- **Parche sustituido**: se instaló una actualización anterior y la detección pide la acumulativa más reciente.
+- **Otro producto**: la ruta es de una segunda instalación (una versión antigua de Java, .NET o un runtime que una aplicación lleva dentro), no la que se ha actualizado.
+- **Requiere configuración**: algunas correcciones necesitan además una clave de registro o un cambio de configuración; la descripción del QID lo indica.
+5. **Si la prueba no tiene sentido** (el fichero está en la versión corregida), abre un caso con Qualys con el QID, el activo y el contenido de Results: puede ser un error en la lógica de detección.
+
+## 7. Lo que revisas cada mes
+
+- Cobertura: activos del inventario sin agente o sin escaneo autenticado correcto, y agentes que no informan en 7 días.
+- Cumplimiento de plazos por prioridad y por propietario, y la tendencia del TruRisk.
+- Detecciones KEV abiertas en activos expuestos: debería ser cero.
+- Excepciones a punto de caducar y las ya caducadas.
+
+## Siguientes pasos
+
+- La guía de **Intune** y la de **MECM / SCCM** para los anillos de actualización que cierran la mayoría de detecciones.
+- **Microsoft Sentinel** para correlacionar las vulnerabilidades críticas con alertas sobre los mismos activos.
+- **ISO 27001/NIS2/RGPD en IT** para encajar los plazos y las excepciones en la gestión de riesgos.
+- **Ansible** para aplicar parches y cambios de configuración en Linux de forma repetible.
+""",
+  en="""
+## What you'll get
+
+A vulnerability inventory that covers every machine, ordered by what really matters, with deadlines the infrastructure team knows and meets, and exceptions written down instead of forgotten. And the judgement to answer when someone says "I've already patched it and Qualys still says no".
+
+## Before you start
+
+- A **Qualys VMDR** subscription with access to your region's platform (the platform and agent service URLs depend on it: they appear in the console itself).
+- A virtual **scanner appliance** on the internal network for machines without an agent.
+- Who patches what: the endpoint team (Intune or MECM), the server team, the network team. Without an owner, a vulnerability never gets closed.
+
+## 1. Deploy Cloud Agent with Intune or MECM
+
+In *Cloud Agent › Agent Management › Activation Keys* you create an **activation key** per type of machine (endpoints, servers) and attach tags to it: every agent activated with it receives them. Then download the Windows installer and package it:
+
+:::ui Intune · Win32 app · Qualys Cloud Agent
+> Intune › Apps › Windows › Add › Windows app (Win32)
+= Package: QualysCloudAgent.intunewin
+= Install command: QualysCloudAgent.exe CustomerId={customer-id} ActivationId={endpoints-activation-id} WebServiceUri=https://(your platform URL)/CloudAgent/
+= Uninstall command: the one given in the agent documentation for your version
+= Detection: QualysAgent service · or the key HKLM\\SOFTWARE\\Qualys\\QualysAgent
+= Assignment: Required · All Windows devices group
+[Create]
+:::
+
+- In **MECM** it is the same as an application with a registry key detection method, deployed to a collection. On Linux, an `.rpm` or `.deb` package and a script with the same three values.
+- The agent reports in *Cloud Agent › Agents*: status, version and **Last Checked-In**. An agent that hasn't connected for days is a machine you aren't seeing.
+- Review the agent's **configuration profile**: vulnerability scan interval and CPU limit. The endpoint one can be more aggressive than the one for critical servers.
+
+## 2. Tags: who is who
+
+Tags are the basis of everything else: reports, deadlines, scans and owners.
+
+- **Dynamic** by rule: operating system, network range (`10.20.0.0/16` = Madrid data centre), name (`srv-*`), installed software.
+- **Business**: environment (Production, Pre-production), owner (Servers, Endpoints, Network) and **asset criticality** from 1 to 5. In VMDR, criticality feeds into the asset's **TruRisk** score.
+- **Internet-facing**: a tag for what is published (reverse proxies, VPN, web). It is the first priority filter.
+
+## 3. Authenticated scan versus agent
+
+| | Cloud Agent | Authenticated scan |
+|---|---|---|
+| What it covers | Windows, Linux and macOS endpoints and servers with the agent | Anything with an IP, including network devices, appliances and printers |
+| Credentials | Not needed | **Authentication records** (Windows, Unix over SSH, SNMP…) |
+| Laptops away from the office | Keep reporting | Not seen |
+| Network view | No | Open ports and services as an internal attacker sees them |
+
+The usual pattern is **the agent on everything that supports it and authenticated scans for the rest**, plus an external perimeter scan. Authentication records are created in *Scans › Authentication*: for Windows, a dedicated domain account with local administrator rights on the servers (via GPO) and SMB access; for Linux, SSH with a key and limited `sudo`. After each scan, the **authentication report** shows which machines the login failed on: an unauthenticated scan finds a fraction of what is there.
+
+## 4. Read a detection and prioritise
+
+Each detection has a **QID** (the Qualys check), its **severity** from 1 to 5, the **CVEs** it covers, the **QDS** (Qualys Detection Score, 1 to 100, weighting known exploitation and active threats), the status (*New, Active, Fixed, Reopened*) and, most usefully, the **Results** field: the specific evidence it found, usually a file path and version.
+
+:::ui Qualys VMDR · Prioritisation
+> VMDR › Prioritization › Assets by tag: Production
+= Threat filter: CISA Known Exploited Vulnerabilities · Active exploitation
+= Asset filter: Internet-facing tag · criticality 4 or 5
+= Result: 37 detections on 12 assets · QDS 95 · CVE-2026-XXXXX on srv-proxy01 · Results: version 2.4.57 detected
+[Create report] [Assign to owner]
+:::
+
+The order of work comes from crossing three things: **is it in the KEV catalogue or actively exploited?**, **is it exposed?** and **how critical is the asset?** A severity 5 on a test laptop with no data can wait behind a QDS 90 on a published server. Severity alone doesn't order the work.
+
+## 5. The patch-and-rescan loop, with deadlines
+
+| Priority | Criterion | Deadline |
+|---|---|---|
+| Critical | KEV or active exploitation on an exposed or critical asset | 72 hours |
+| High | QDS 70 or higher, or severity 5 | 14 days |
+| Medium | QDS 40–69, severity 3–4 | 60 days |
+| Low | Everything else | Next maintenance cycle |
+
+These deadlines are examples: what matters is that management approves them and the monthly report measures them.
+
+1. The report per owner (tag) goes out the day after Patch Tuesday.
+2. Each team patches with its own tool (Intune, MECM, the Linux repository).
+3. The agent rescans on its interval, or a scan is forced (section 6). The detection moves to **Fixed** by itself: nobody closes it by hand.
+4. Whatever can't be patched in time needs a documented **exception**: reason, compensating control (network isolation, a firewall rule, disabling the service), owner and **expiry date**. In Qualys it is recorded by ignoring the detection with a comment and a date; in the risk register, with its approval.
+
+! An exception with no expiry date is a vulnerability accepted for ever. Review them all every quarter.
+
+## 6. The ticket: "the vulnerability is still there after patching"
+
+Javier Ruiz, from the server team: *"I patched srv-files02 on Tuesday and Qualys still shows the October Windows detection."*
+
+1. **Has the agent reported since the patch?** In *Cloud Agent › Agents*, the **Last Checked-In** date and the last vulnerability scan. If they are earlier than the patch, Qualys doesn't know yet.
+2. **Force a scan** on the server itself:
+
+:::term PowerShell · srv-files02
+$ Get-Service QualysAgent | Select-Object Status, StartType
+Status  StartType
+------  ---------
+Running Automatic
+$ Get-HotFix | Sort-Object InstalledOn -Descending | Select-Object -First 2 HotFixID, InstalledOn
+HotFixID  InstalledOn
+--------  -----------
+KB5066123 21/10/2026 0:00:00
+KB5065410 16/09/2026 0:00:00
+$ Test-Path "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Component Based Servicing\\RebootPending"
+True
+$ Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Qualys\\QualysAgent\\ScanOnDemand\\Vulnerability" -Name ScanOnDemand -Value 1
+:::
+
+3. **Pending reboot.** There it is: the update is installed but the files aren't replaced until the reboot, and Qualys looks at the **file version**, not the list of KBs. Reboot in the window and rescan.
+4. **If that's not it, read the Results field.** It says which file and which version it found. The usual causes:
+- **Superseded patch**: an older update was installed and the detection wants the latest cumulative one.
+- **A different product**: the path belongs to a second installation (an old version of Java, .NET or a runtime bundled inside an application), not the one that was updated.
+- **Configuration needed**: some fixes also need a registry key or a configuration change; the QID description says so.
+5. **If the evidence makes no sense** (the file is at the fixed version), open a case with Qualys with the QID, the asset and the Results content: it may be a flaw in the detection logic.
+
+## 7. What you review each month
+
+- Coverage: inventory assets with no agent or no successful authenticated scan, and agents that haven't reported in 7 days.
+- Deadline compliance by priority and by owner, and the TruRisk trend.
+- Open KEV detections on exposed assets: it should be zero.
+- Exceptions about to expire and those already expired.
+
+## Next steps
+
+- The **Intune** and **MECM / SCCM** guides for the update rings that close most detections.
+- **Microsoft Sentinel** to correlate critical vulnerabilities with alerts on the same assets.
+- **ISO 27001/NIS2/RGPD in IT** to fit deadlines and exceptions into risk management.
+- **Ansible** to apply patches and configuration changes on Linux repeatably.
+""")
+
+# ---------------------------------------------------------------- L4 · Terraform
+g(slug="terraform-modulo-estado-remoto-plan-en-el-pipeline-deriva-e-importacion", topic="terraform", date="2026-10-28",
+  title_es="Terraform: un módulo, estado remoto, el plan en el pipeline y alguien que lo cambió en el portal",
+  title_en="Terraform: a module, remote state, the plan in the pipeline and someone who changed it in the portal",
+  dek_es="Infraestructura como código para un equipo de sistemas: un módulo pequeño en Azure (grupo de recursos, red y VM), estado remoto con bloqueo, plan y apply en un pipeline con revisión, qué hacer con la deriva, cómo importar lo que ya existe y cómo mantener el estado limpio y los secretos fuera del repositorio.",
+  dek_en="Infrastructure as code for an IT team: a small module on Azure (resource group, network and VM), remote state with locking, plan and apply in a pipeline with review, what to do about drift, how to import what already exists, and how to keep state clean and secrets out of the repository.",
+  es="""
+## Qué vas a conseguir
+
+Que la infraestructura de una sede o de un servicio salga de un repositorio revisado y no de clics en el portal. Un módulo reutilizable, un estado compartido que nadie pisa, un pipeline donde el cambio se lee antes de aplicarse y una forma ordenada de tratar lo que se cambió a mano o lo que ya existía antes de Terraform.
+
+## Antes de empezar
+
+- **Terraform 1.10 o posterior** y el proveedor **azurerm 4.x**.
+- Un repositorio Git con ramas protegidas: a `main` solo se llega por pull request revisado (guía de **Git**).
+- Una **cuenta de almacenamiento** para el estado, creada aparte, con versionado de blobs y eliminación temporal activados.
+- Una identidad para el pipeline: identidad administrada o aplicación de Entra ID con **federación de identidades de carga de trabajo** (OIDC), con rol Contributor solo sobre las suscripciones que gestiona. Sin secretos de cliente guardados.
+
+## 1. El módulo: grupo de recursos, red y VM
+
+Módulos en `modules/` y una carpeta por entorno (`envs/prod`, `envs/pruebas`) que los usa con sus valores.
+
+:::term repo infra-azure
+$ cat envs/prod/main.tf
+terraform {
+  required_version = ">= 1.10"
+  required_providers {
+    azurerm = { source = "hashicorp/azurerm", version = "~> 4.0" }
+  }
+  backend "azurerm" {
+    resource_group_name  = "rg-tfstate"
+    storage_account_name = "sttfstatecontoso01"
+    container_name       = "tfstate"
+    key                  = "prod/sede-vm.tfstate"
+    use_azuread_auth     = true
+  }
+}
+
+provider "azurerm" {
+  features {}
+  subscription_id = "00000000-0000-0000-0000-000000000000"
+}
+
+module "sede_madrid" {
+  source         = "../../modules/sede-vm"
+  nombre         = "mad"
+  ubicacion      = "spaincentral"
+  rango_red      = "10.50.0.0/16"
+  tamano_vm      = "Standard_B2ms"
+  admin_password = var.admin_password
+  etiquetas      = { entorno = "prod", responsable = "laura.prado" }
+}
+:::
+
+- El módulo `sede-vm` contiene `azurerm_resource_group`, `azurerm_virtual_network`, `azurerm_subnet`, `azurerm_network_security_group`, `azurerm_network_interface` y `azurerm_windows_virtual_machine`, con sus variables y salidas. Todo llega por variable.
+- Versiones **acotadas** (`~> 4.0`) y el `.terraform.lock.hcl` en el repositorio, para que todos usen el mismo proveedor.
+
+## 2. Estado remoto con bloqueo
+
+El estado dice qué recurso real corresponde a cada bloque. En el portátil de alguien no sirve para un equipo.
+
+- **azurerm**: el estado vive en un blob y el bloqueo usa el *lease* del blob, sin nada más que configurar. Con `use_azuread_auth = true` el acceso es con identidad de Entra ID (rol **Storage Blob Data Contributor**), no con la clave de la cuenta.
+- **S3** (en AWS): desde Terraform 1.10, `use_lockfile = true` bloquea con un fichero en el propio bucket; la tabla de DynamoDB queda obsoleta.
+- Una **clave de estado por entorno y componente** (`prod/sede-vm.tfstate`, `prod/red-core.tfstate`). Un estado gigante hace que un error alcance a todo.
+
+! Si un apply se corta, el bloqueo puede quedarse puesto. `terraform force-unlock <ID>` solo tras confirmar que no hay otro apply en marcha: dos procesos escribiendo corrompen el estado.
+
+## 3. Plan y apply en el pipeline, con revisión
+
+Nadie ejecuta `apply` desde su equipo contra producción. El flujo:
+
+1. Pull request → el pipeline ejecuta `terraform fmt -check`, `terraform validate` y `terraform plan -out=tfplan`, y publica el plan como comentario o artefacto.
+2. Un compañero lee **el plan**, no solo el código. Lo que importa es qué se crea, qué cambia y, sobre todo, qué se destruye.
+3. Merge a `main` → el pipeline aplica **ese mismo plan guardado** (`terraform apply tfplan`) tras la aprobación del entorno (environments de Azure DevOps o de GitHub).
+
+:::term Pipeline · etapa plan (PR 214)
+$ terraform init -input=false
+$ terraform plan -input=false -out=tfplan
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # module.sede_madrid.azurerm_network_security_group.vm will be updated in-place
+  ~ resource "azurerm_network_security_group" "vm" {
+        id   = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-sede-mad/providers/Microsoft.Network/networkSecurityGroups/nsg-srv-mad01"
+        name = "nsg-srv-mad01"
+      ~ security_rule = [
+          + {
+              + name                       = "allow-https-oficina"
+              + source_address_prefix      = "192.168.10.0/24"
+              + priority                   = 200
+                # (10 unchanged attributes hidden)
+            },
+        ]
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+:::
+
+> Una regla útil en la revisión: cualquier plan con `destroy` o con `-/+` (*replace*) en un recurso con datos (VM, disco, base de datos) se para y se habla.
+
+## 4. "Alguien lo cambió en el portal": la deriva
+
+Un viernes por la noche alguien amplió la VM desde el portal para salir del paso. El siguiente plan lo detecta:
+
+:::term terraform plan -refresh-only
+$ terraform plan -refresh-only
+Note: Objects have changed outside of Terraform
+
+Terraform detected the following changes made outside of Terraform since the
+last "terraform apply" which may have affected this plan:
+
+  # module.sede_madrid.azurerm_windows_virtual_machine.app has changed
+  ~ resource "azurerm_windows_virtual_machine" "app" {
+        id   = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-sede-mad/providers/Microsoft.Compute/virtualMachines/srv-mad01"
+        name = "srv-mad01"
+      ~ size = "Standard_B2ms" -> "Standard_D4s_v5"
+        tags = {
+            "entorno"     = "prod"
+            "responsable" = "laura.prado"
+        }
+    }
+:::
+
+Hay dos salidas, y se decide con el responsable del servicio, no en solitario:
+
+- **El cambio era necesario**: se lleva al código (`tamano_vm = "Standard_D4s_v5"`) por pull request. El plan siguiente queda vacío.
+- **No lo era**: un plan normal propone devolverla a `Standard_B2ms`, y se aplica en una ventana (cambiar el tamaño reinicia la VM).
+
+Un `plan` programado cada noche contra cada entorno, que avisa si sale algo distinto de *No changes*, convierte la deriva en un aviso en lugar de una sorpresa. Y sin rol Contributor permanente para las personas en producción (lectura más PIM), la deriva es la excepción.
+
+## 5. Importar lo que ya existe
+
+El servidor de impresión se creó a mano hace años. Desde Terraform 1.5, la importación se declara en el código y pasa por el mismo plan revisado:
+
+:::term import.tf + plan
+$ cat import.tf
+import {
+  to = azurerm_windows_virtual_machine.impresion
+  id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-sede-mad/providers/Microsoft.Compute/virtualMachines/srv-print01"
+}
+$ terraform plan -generate-config-out=generado.tf
+azurerm_windows_virtual_machine.impresion: Preparing import... [id=/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-sede-mad/providers/Microsoft.Compute/virtualMachines/srv-print01]
+
+Terraform will perform the following actions:
+
+  # azurerm_windows_virtual_machine.impresion will be imported
+  # (config will be generated)
+
+Plan: 1 to import, 0 to add, 0 to change, 0 to destroy.
+:::
+
+`generado.tf` es un punto de partida, no código final: se limpia (fuera atributos por defecto, valores a variables), se repite el plan hasta que diga **1 to import, 0 to change** y se aplica.
+
+## 6. Higiene del estado y secretos
+
+- **Mover sin destruir**: al renombrar un recurso o meterlo en un módulo, un bloque `moved { from = ... to = ... }` evita que Terraform lo destruya y lo cree de nuevo. Para dejar de gestionar algo sin borrarlo, un bloque `removed` (1.7+). Ambos pasan por revisión, a diferencia de `terraform state mv` o `state rm`.
+- El estado **no se edita a mano**. Si algo se rompe, el versionado del blob permite volver a la versión anterior.
+- **Secretos fuera del código**: nada de contraseñas en `.tfvars` dentro del repositorio. La contraseña de administración se genera con `random_password` y se guarda en **Key Vault**, o llega como variable `sensitive` desde el almacén de secretos del pipeline.
+- Ojo: `sensitive` oculta el valor en la salida, pero **el estado lo guarda en claro**. El acceso al contenedor del estado se restringe como el de Key Vault; los argumentos *write-only* (Terraform 1.11+) evitan que lleguen al estado cuando el proveedor los admite.
+
+## 7. Lo que revisas cada mes
+
+- El plan nocturno de deriva: entornos con cambios pendientes y por qué.
+- Quién tiene permisos de escritura sobre el contenedor del estado y sobre las suscripciones, además del pipeline.
+- Recursos en el portal que no están en ningún estado (Azure Resource Graph por etiqueta `gestionado-por`): candidatos a importar o a borrar.
+
+## Siguientes pasos
+
+- La guía de **Amazon AWS**: la misma disciplina con el backend S3 y el proveedor `aws`.
+- La guía de **Jenkins (CI/CD)** para montar el pipeline si no usáis Azure DevOps o GitHub Actions, y la de **Ansible** para configurar dentro de las VM lo que Terraform crea.
+- La guía de **Kubernetes** para crear el clúster AKS con este mismo flujo.
+""",
+  en="""
+## What you'll get
+
+Infrastructure for a site or a service that comes out of a reviewed repository and not from clicks in the portal. A reusable module, a shared state nobody tramples on, a pipeline where the change is read before it is applied, and an orderly way of dealing with what was changed by hand or already existed before Terraform.
+
+## Before you start
+
+- **Terraform 1.10 or later** and the **azurerm 4.x** provider.
+- A Git repository with protected branches: `main` is reached only through a reviewed pull request (**Git** guide).
+- A **storage account** for state, created separately, with blob versioning and soft delete enabled.
+- An identity for the pipeline: managed identity or Entra ID application with **workload identity federation** (OIDC), with Contributor only on the subscriptions it manages. No stored client secrets.
+
+## 1. The module: resource group, network and VM
+
+Modules in `modules/` and one folder per environment (`envs/prod`, `envs/test`) that uses them with its own values.
+
+:::term repo infra-azure
+$ cat envs/prod/main.tf
+terraform {
+  required_version = ">= 1.10"
+  required_providers {
+    azurerm = { source = "hashicorp/azurerm", version = "~> 4.0" }
+  }
+  backend "azurerm" {
+    resource_group_name  = "rg-tfstate"
+    storage_account_name = "sttfstatecontoso01"
+    container_name       = "tfstate"
+    key                  = "prod/site-vm.tfstate"
+    use_azuread_auth     = true
+  }
+}
+
+provider "azurerm" {
+  features {}
+  subscription_id = "00000000-0000-0000-0000-000000000000"
+}
+
+module "site_madrid" {
+  source         = "../../modules/site-vm"
+  name           = "mad"
+  location       = "spaincentral"
+  address_space  = "10.50.0.0/16"
+  vm_size        = "Standard_B2ms"
+  admin_password = var.admin_password
+  tags           = { environment = "prod", owner = "laura.prado" }
+}
+:::
+
+- The `site-vm` module contains `azurerm_resource_group`, `azurerm_virtual_network`, `azurerm_subnet`, `azurerm_network_security_group`, `azurerm_network_interface` and `azurerm_windows_virtual_machine`, with their variables and outputs. Everything comes in through variables.
+- **Constrained** versions (`~> 4.0`) and `.terraform.lock.hcl` committed, so everyone uses the same provider.
+
+## 2. Remote state with locking
+
+State records which real resource corresponds to each block. On someone's laptop it is no use to a team.
+
+- **azurerm**: state lives in a blob and locking uses the blob *lease*, with nothing else to configure. With `use_azuread_auth = true` access uses an Entra ID identity (**Storage Blob Data Contributor** role), not the account key.
+- **S3** (on AWS): since Terraform 1.10, `use_lockfile = true` locks with a file in the bucket itself; the DynamoDB table is deprecated.
+- **One state key per environment and component** (`prod/site-vm.tfstate`, `prod/core-network.tfstate`). A giant state lets one mistake reach everything.
+
+! If an apply is cut off, the lock can stay in place. `terraform force-unlock <ID>` only after confirming no other apply is running: two processes writing will corrupt the state.
+
+## 3. Plan and apply in the pipeline, with review
+
+Nobody runs `apply` from their own machine against production. The flow:
+
+1. Pull request → the pipeline runs `terraform fmt -check`, `terraform validate` and `terraform plan -out=tfplan`, and publishes the plan as a comment or artefact.
+2. A colleague reads **the plan**, not just the code. What matters is what gets created, what changes and, above all, what gets destroyed.
+3. Merge to `main` → the pipeline applies **that same saved plan** (`terraform apply tfplan`) after the environment approval (Azure DevOps or GitHub environments).
+
+:::term Pipeline · plan stage (PR 214)
+$ terraform init -input=false
+$ terraform plan -input=false -out=tfplan
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # module.site_madrid.azurerm_network_security_group.vm will be updated in-place
+  ~ resource "azurerm_network_security_group" "vm" {
+        id   = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-site-mad/providers/Microsoft.Network/networkSecurityGroups/nsg-srv-mad01"
+        name = "nsg-srv-mad01"
+      ~ security_rule = [
+          + {
+              + name                       = "allow-https-office"
+              + source_address_prefix      = "192.168.10.0/24"
+              + priority                   = 200
+                # (10 unchanged attributes hidden)
+            },
+        ]
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+:::
+
+> A useful review rule: any plan with `destroy` or `-/+` (*replace*) on a resource holding data (VM, disk, database) stops and gets discussed.
+
+## 4. "Someone changed it in the portal": drift
+
+On a Friday night someone resized the VM from the portal to get by. The next plan spots it:
+
+:::term terraform plan -refresh-only
+$ terraform plan -refresh-only
+Note: Objects have changed outside of Terraform
+
+Terraform detected the following changes made outside of Terraform since the
+last "terraform apply" which may have affected this plan:
+
+  # module.site_madrid.azurerm_windows_virtual_machine.app has changed
+  ~ resource "azurerm_windows_virtual_machine" "app" {
+        id   = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-site-mad/providers/Microsoft.Compute/virtualMachines/srv-mad01"
+        name = "srv-mad01"
+      ~ size = "Standard_B2ms" -> "Standard_D4s_v5"
+        tags = {
+            "environment" = "prod"
+            "owner"       = "laura.prado"
+        }
+    }
+:::
+
+There are two ways out, and you decide with the service owner, not alone:
+
+- **The change was needed**: it goes into the code (`vm_size = "Standard_D4s_v5"`) through a pull request. The next plan comes out empty.
+- **It wasn't**: a normal plan proposes putting it back to `Standard_B2ms`, and it is applied in a window (resizing restarts the VM).
+
+A nightly scheduled `plan` against each environment, alerting if anything other than *No changes* comes out, turns drift into an alert instead of a surprise. And with no standing Contributor for people in production (read plus PIM), drift is the exception.
+
+## 5. Importing what already exists
+
+The print server was created by hand years ago. Since Terraform 1.5, import is declared in code and goes through the same reviewed plan:
+
+:::term import.tf + plan
+$ cat import.tf
+import {
+  to = azurerm_windows_virtual_machine.print
+  id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-site-mad/providers/Microsoft.Compute/virtualMachines/srv-print01"
+}
+$ terraform plan -generate-config-out=generated.tf
+azurerm_windows_virtual_machine.print: Preparing import... [id=/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-site-mad/providers/Microsoft.Compute/virtualMachines/srv-print01]
+
+Terraform will perform the following actions:
+
+  # azurerm_windows_virtual_machine.print will be imported
+  # (config will be generated)
+
+Plan: 1 to import, 0 to add, 0 to change, 0 to destroy.
+:::
+
+`generated.tf` is a starting point, not final code: clean it up (drop default attributes, move values to variables), repeat the plan until it says **1 to import, 0 to change** and apply.
+
+## 6. State hygiene and secrets
+
+- **Move without destroying**: when renaming a resource or moving it into a module, a `moved { from = ... to = ... }` block stops Terraform destroying and recreating it. To stop managing something without deleting it, a `removed` block (1.7+). Both go through review, unlike `terraform state mv` or `state rm`.
+- State is **not edited by hand**. If something breaks, blob versioning lets you go back to the previous version.
+- **Secrets out of the code**: no passwords in `.tfvars` inside the repository. The admin password is generated with `random_password` and stored in **Key Vault**, or arrives as a `sensitive` variable from the pipeline's secret store.
+- Careful: `sensitive` hides the value in output, but **state stores it in clear text**. Access to the state container is restricted like Key Vault's; *write-only* arguments (Terraform 1.11+) keep secrets out of state where the provider supports them.
+
+## 7. What you review each month
+
+- The nightly drift plan: environments with pending changes and why.
+- Who has write access to the state container and to the subscriptions, besides the pipeline.
+- Resources in the portal that aren't in any state (Azure Resource Graph by a `managed-by` tag): candidates to import or delete.
+
+## Next steps
+
+- The **Amazon AWS** guide: the same discipline with the S3 backend and the `aws` provider.
+- The **Jenkins (CI/CD)** guide to build the pipeline if you don't use Azure DevOps or GitHub Actions, and the **Ansible** guide to configure inside the VMs what Terraform creates.
+- The **Kubernetes** guide to create the AKS cluster with this same flow.
 """)
 
 # ---------------------------------------------------------------- Sector 1 · Hotel pre-opening

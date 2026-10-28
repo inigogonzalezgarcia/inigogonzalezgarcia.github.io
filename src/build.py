@@ -984,7 +984,9 @@ def _ginline(t):
     t = html.escape(t)
     t = _re.sub(r"`([^`]+)`", r"<code>\1</code>", t)
     t = _re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", t)
-    return t
+    # *text* → italics (menu names, statuses), never inside <code>
+    parts = _re.split(r"(<code>.*?</code>)", t)
+    return "".join(x if x.startswith("<code>") else _re.sub(r"(?<![*\w])\*(\S(?:[^*\n]*?\S)?)\*(?![*\w])", r"<em>\1</em>", x) for x in parts)
 
 def _term(title, lines, lang):
     """A simulated terminal: "$ " lines are commands (joined into the copy button), "# " lines are comments, the rest is output."""
