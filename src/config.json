@@ -18,20 +18,13 @@
       "caption_en": "Lower Manhattan, New York"
     }
   ],
-  "about_photo": [
-    {
-      "src": "assets/img/about.jpg",
-      "alt": "Iñigo González en el paseo del río Hudson, con Manhattan al fondo",
-      "pos": "50% 40%",
-      "caption_es": "Nueva York",
-      "caption_en": "New York"
-    },
-    {
-      "src": "assets/img/about-2.jpg",
-      "alt": "Iñigo González de traje y corbata a la entrada de un edificio de oficinas",
-      "pos": "50% 50%"
-    }
-  ],
+  "about_photo": {
+    "src": "assets/img/about.jpg",
+    "alt": "Iñigo González",
+    "pos": "50% 40%",
+    "caption_es": "Nueva York",
+    "caption_en": "New York"
+  },
   "stage_photos": {
     "s1": {
       "src": "assets/img/stage-s1.webp",
