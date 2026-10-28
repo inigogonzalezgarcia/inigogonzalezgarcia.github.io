@@ -899,14 +899,11 @@ GUIDE_SECTORS = [
       ("Veeam - Planificar y probar restauraciones", "Veeam - Planning and testing restores"),
       ("VMware - Mantenimiento de hosts y máquinas virtuales", "VMware - Maintaining hosts and virtual machines")]),
     ("Sector 5", "Sector 5", "Servicios financieros y trading", "Financial services and trading",
-     "Una sede que no puede parar, y un laboratorio de FX para aprender con método.",
-     "A site that can't stop, and an FX lab to learn with method.",
+     "Una sede con sala de trading que no puede parar: red, acceso, salas y continuidad.",
+     "A site with a trading floor that can't stop: network, access, rooms and continuity.",
      [("Cisco - Switches, routers y salas de comunicaciones de una sede", "Cisco - Switches, routers and comms rooms on a site"),
       ("Conditional Access - Políticas para una sede", "Conditional Access - Policies for a site"),
       ("DR/BCP - Preparar y supervisar una prueba de recuperación", "DR/BCP - Preparing and overseeing a recovery test"),
-      ("FX Trading Lab - Backtesting con datos tick de Dukascopy", "FX Trading Lab - Backtesting with Dukascopy tick data"),
-      ("FX Trading Lab - Comparar una estrategia contra el azar", "FX Trading Lab - Testing a strategy against chance"),
-      ("FX Trading Lab - Montar el laboratorio con Python, SQLite y Docker", "FX Trading Lab - Building the lab with Python, SQLite and Docker"),
       ("Microsoft Teams Rooms - Salas sobre Crestron", "Microsoft Teams Rooms - Rooms on Crestron"),
       ("PIM - Acceso Just-In-Time para administradores", "PIM - Just-In-Time access for admins"),
       ("Proveedores de conectividad - Gestión de circuitos y averías", "Connectivity providers - Managing circuits and faults"),
@@ -1265,6 +1262,10 @@ pv = SITE / "privacidad.html"
 pt = pv.read_text()
 pt = _re.sub(r"(<!-- sec:start[^>]*-->\n).*?(<!-- sec:end -->)", lambda m: m.group(1) + SEC_HEAD + "\n" + m.group(2), pt, count=1, flags=_re.S)
 pv.write_text(safe_rel(pt))
+
+# guide pages whose guide was removed from guides.py are deleted, so they stop being served
+for _f in (SITE / "guias").glob("*.html"):
+    if f"guias/{_f.name}" not in sizes: _f.unlink()
 
 # security checks on everything that is served
 problems = []
