@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Monitoring: deploying alarms and responding to them on a 24x7 platform · Iñigo González" data-title-es="Monitorización: desplegar alarmas y responder a ellas en una plataforma 24x7 · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Monitoring: deploying alarms and responding to them on a 24x7 platform · Iñigo González</title>
+<meta name="description" content="What to watch on a platform that can&#x27;t stop, how to set thresholds and severities, who each alarm wakes up, the runbook inside the alert, maintenance windows, the noise review, and a night-time alarm from page to closure.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/monitorizacion-desplegar-alarmas-y-responder-en-plataformas-24x7.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Monitoring: deploying alarms and responding to them on a 24x7 platform · Iñigo González">
+<meta property="og:description" content="What to watch on a platform that can&#x27;t stop, how to set thresholds and severities, who each alarm wakes up, the runbook inside the alert, maintenance windows, the noise review, and a night-time alarm from page to closure.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/monitorizacion-desplegar-alarmas-y-responder-en-plataformas-24x7.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Monitoring: deploying alarms and responding to them on a 24x7 platform · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Monitoring: deploying alarms and responding to them on a 24x7 platform","alternativeHeadline":"Monitorización: desplegar alarmas y responder a ellas en una plataforma 24x7","description":"What to watch on a platform that can't stop, how to set thresholds and severities, who each alarm wakes up, the runbook inside the alert, maintenance windows, the noise review, and a night-time alarm from page to closure.","datePublished":"2026-10-28","dateModified":"2026-10-28","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/monitorizacion-desplegar-alarmas-y-responder-en-plataformas-24x7.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/monitorizacion-desplegar-alarmas-y-responder-en-plataformas-24x7.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Monitoring - Deploying alarms and responding to them"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 3","item":"https://inigogonzalezgarcia.github.io/guias/sector-3.html"},{"@type":"ListItem","position":4,"name":"Monitoring: deploying alarms and responding to them on a 24x7 platform","item":"https://inigogonzalezgarcia.github.io/guias/monitorizacion-desplegar-alarmas-y-responder-en-plataformas-24x7.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="sector-3.html"><span class="es">Sector 3</span><span class="en">Sector 3</span></a></p>
+    <h1><span class="es">Monitorización: desplegar alarmas y responder a ellas en una plataforma 24x7</span><span class="en">Monitoring: deploying alarms and responding to them on a 24x7 platform</span></h1>
+    <p class="lede"><span class="es">Qué vigilar en una plataforma que no puede pararse, cómo fijar umbrales y severidades, a quién despierta cada alarma, el runbook dentro del aviso, las ventanas de mantenimiento, la revisión del ruido y una alarma de madrugada desde el aviso hasta el cierre.</span><span class="en">What to watch on a platform that can&#x27;t stop, how to set thresholds and severities, who each alarm wakes up, the runbook inside the alert, maintenance windows, the noise review, and a night-time alarm from page to closure.</span></p><p class="label post-meta"><span class="es">Sector 3</span><span class="en">Sector 3</span> · <span class="es">Monitorización - Desplegar alarmas y responder a ellas</span><span class="en">Monitoring - Deploying alarms and responding to them</span> · <span class="es">5 min</span><span class="en">5 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">28 oct 2026</span><span class="en">28 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Que la historia clínica, el laboratorio o la central de urgencias avisen a IT antes de que llame la planta, y que el técnico de guardia sepa a las 3:40 qué hacer con el aviso sin tener que adivinarlo. Una monitorización útil no es la que más alarmas tiene: es la que despierta a alguien solo cuando hace falta y le dice por dónde empezar. La herramienta da igual (SolarWinds, Grafana u otra); los ejemplos usan las dos.</p>
+<h2>Antes de empezar</h2>
+<ul><li>El inventario de servicios críticos y su <strong>responsable</strong>: qué aplicaciones, de qué servidores, bases de datos e integraciones dependen.</li><li>El horario de cobertura: qué servicios son 24x7 y cuáles pueden esperar al turno de mañana.</li><li>El <strong>calendario de guardias</strong> y el canal de aviso (llamada, SMS, aplicación de guardias). Un correo de madrugada no despierta a nadie.</li><li>Acceso a la herramienta de monitorización con permisos para crear reglas, silencios y contactos.</li></ul>
+<h2>1. Qué vigilar</h2>
+<div class="g-table"><table><thead><tr><th>Qué</th><th>Ejemplo</th><th>Por qué</th></tr></thead><tbody><tr><td>Disponibilidad</td><td>La página de inicio de la historia clínica responde 200</td><td>Es lo que ve el usuario</td></tr><tr><td>Latencia</td><td>Tiempo de respuesta de la consulta de paciente</td><td>En planta, lenta es igual que caída</td></tr><tr><td>Capacidad</td><td>Disco de logs y de base de datos, CPU, memoria, sesiones</td><td>Avisa con días de margen</td></tr><tr><td>Certificados</td><td>Días hasta la caducidad del certificado del servicio</td><td>Caducan de madrugada y en fin de semana</td></tr><tr><td>Copias de seguridad</td><td>Último trabajo correcto de cada base de datos</td><td>Una copia fallida no se nota hasta que hace falta</td></tr><tr><td>Integraciones</td><td>Mensajes en cola hacia laboratorio y farmacia</td><td>La aplicación funciona pero los resultados no llegan</td></tr></tbody></table></div>
+<p>Empieza por la <strong>prueba sintética</strong> del servicio (lo que hace un usuario) y añade debajo los componentes. Así sabes si hay impacto antes de mirar por qué.</p>
+<h2>2. Umbrales, severidad y a quién avisa</h2>
+<ul><li><strong>Severidad 1</strong>: el servicio no está disponible o hay impacto clínico. Llamada a la guardia a cualquier hora.</li><li><strong>Severidad 2</strong>: degradado o con riesgo de caída en horas (disco al 90 %, latencia alta). Aviso a la guardia, sin llamada fuera de horario.</li><li><strong>Severidad 3</strong>: hay que verlo en horario (certificado a 30 días, una copia fallida con otra correcta después). Ticket en la cola del equipo.</li></ul>
+<p>Cada umbral lleva un <strong>periodo de espera</strong>: una latencia alta durante un minuto no es una alarma; durante diez, sí.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Grafana · Alerting · Nueva regla de alerta</span></figcaption><div class="ui-body"><div class="ui-path"><span>Alerting</span><span class="ui-sep" aria-hidden="true">›</span><span>Alert rules</span><span class="ui-sep" aria-hidden="true">›</span><span>New alert rule</span></div><div class="ui-field"><span class="ui-k">Nombre</span><span class="ui-v">HCE - latencia consulta de paciente</span></div><div class="ui-field"><span class="ui-k">Consulta</span><span class="ui-v">p95 de hce_patient_query_seconds, servicio hce-pro</span></div><div class="ui-field"><span class="ui-k">Condición</span><span class="ui-v">IS ABOVE 3</span></div><div class="ui-field"><span class="ui-k">Carpeta y grupo de evaluación</span><span class="ui-v">Clínicas / cada 1m</span></div><div class="ui-field"><span class="ui-k">Periodo pendiente</span><span class="ui-v">10m</span></div><div class="ui-field"><span class="ui-k">Etiquetas</span><span class="ui-v">severity=2, servicio=hce, equipo=sistemas</span></div><div class="ui-field"><span class="ui-k">Runbook URL</span><span class="ui-v">https://wiki.contoso.example/runbooks/hce-latencia</span></div><div class="ui-field"><span class="ui-k">Resumen</span><span class="ui-v">La consulta de paciente tarda más de 3 s (p95) desde hace 10 min</span></div><div class="ui-btn">Guardar regla y salir</div></div></figure>
+<p>Las etiquetas <code>severity</code> y <code>equipo</code> son las que usa la política de notificaciones para decidir el punto de contacto: la severidad 1 va a la aplicación de guardias, la 3 al canal del equipo.</p>
+<h2>3. Un runbook en cada alarma</h2>
+<p>Una alarma sin instrucciones es una pregunta a las tres de la mañana. Cada regla enlaza su runbook con:</p>
+<ol><li>Qué significa la alarma y qué ve el usuario.</li><li>Las comprobaciones en orden, con los comandos.</li><li>Qué se puede hacer sin permiso (reiniciar el servicio X) y qué no (tocar la base de datos).</li><li>A quién se escala y cuándo: proveedor, administrador de base de datos, responsable de guardia.</li></ol>
+<h2>4. Ventanas de mantenimiento</h2>
+<ul><li>Antes de un cambio aprobado se silencian <strong>solo</strong> los componentes afectados y solo durante la ventana: en Grafana, un silencio por etiquetas con hora de fin; en SolarWinds, el modo mantenimiento del nodo con <strong>Mute Alerts</strong> programado.</li><li>Silenciar no es apagar: la guardia sigue viendo el estado en el panel.</li><li>Al terminar la ventana se comprueba que el silencio ha caducado y que la prueba sintética está en verde.</li></ul>
+<p class="g-warn">Un silencio sin hora de fin acaba ocultando una caída real semanas después.</p>
+<h2>5. El ticket: &quot;alarma de madrugada en la historia clínica&quot;</h2>
+<p>Domingo, 03:40. La aplicación de guardias llama a javier.ruiz: <strong>Sev 1 · HCE · prueba sintética fallando desde hace 5 min</strong>.</p>
+<ol><li><strong>Reconocer</strong> el aviso en menos de cinco minutos. Así no escala al siguiente de la lista y queda constancia de quién lo tiene.</li><li><strong>Confirmar el impacto</strong>: abrir la aplicación como lo haría la planta, o llamar a urgencias.</li><li><strong>Seguir el runbook</strong>:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · equipo de administración</span><button class="t-copy" type="button" data-copy="Test-NetConnection srv-hce-app01 -Port 443 | Select-Object ComputerName, TcpTestSucceeded&#10;Get-Service -ComputerName srv-hce-app01 -Name HCE* | Select-Object Name, Status" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Test-NetConnection srv-hce-app01 -Port 443 | Select-Object ComputerName, TcpTestSucceeded</span><span class="t-out">ComputerName   TcpTestSucceeded</span><span class="t-out">------------   ----------------</span><span class="t-out">srv-hce-app01  True</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-Service -ComputerName srv-hce-app01 -Name HCE* | Select-Object Name, Status</span><span class="t-out">Name         Status</span><span class="t-out">----         ------</span><span class="t-out">HCEAppPool   Running</span><span class="t-out">HCEIntegra   Stopped</span></code></pre></figure>
+<p>El servidor responde y el servicio de integración está parado. El runbook permite arrancarlo una vez; si vuelve a pararse, se escala al proveedor.</p>
+<ol><li><strong>Arrancar, comprobar</strong> que la prueba sintética vuelve a verde y que los mensajes en cola hacia laboratorio se procesan.</li><li><strong>Cerrar</strong> con un registro: hora del aviso, del reconocimiento y de la recuperación, causa aparente y si hace falta un problema para el turno de mañana.</li></ol>
+<h2>6. La revisión del ruido</h2>
+<p>Cada mes, con el informe de alarmas de la herramienta:</p>
+<ul><li>Las alarmas que <strong>nadie atendió</strong> o que se cerraron solas: umbral mal puesto o alarma inútil. Se ajusta o se elimina.</li><li>Las que sonaron más de diez veces: un problema de fondo que pide un cambio, no más avisos.</li><li>Las caídas que <strong>no</strong> dieron alarma: falta una comprobación.</li><li>Las llamadas de madrugada que podían esperar: bajan de severidad.</li></ul>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <strong>SolarWinds</strong> del Nivel 3 explica nodos, alertas y modo mantenimiento.</li><li>La guía de <strong>Grafana</strong> del Nivel 3 cubre fuentes de datos, paneles y reglas de alerta.</li><li>La guía de <strong>Azure Monitor y Log Analytics</strong> sirve si parte de la plataforma está en Azure.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>The health record, the laboratory or the A&amp;E system alerting IT before the ward phones, and the on-call technician knowing at 03:40 what to do with the page without guessing. Useful monitoring isn&#x27;t the one with the most alarms: it&#x27;s the one that wakes someone only when needed and tells them where to start. The tool doesn&#x27;t matter (SolarWinds, Grafana or another); the examples use both.</p>
+<h2>Before you start</h2>
+<ul><li>The inventory of critical services and their <strong>owner</strong>: which applications, and which servers, databases and integrations they depend on.</li><li>The hours of cover: which services are 24x7 and which can wait for the morning shift.</li><li>The <strong>on-call rota</strong> and the paging channel (call, SMS, on-call app). An email at night wakes nobody.</li><li>Access to the monitoring tool with rights to create rules, silences and contacts.</li></ul>
+<h2>1. What to watch</h2>
+<div class="g-table"><table><thead><tr><th>What</th><th>Example</th><th>Why</th></tr></thead><tbody><tr><td>Availability</td><td>The health record home page returns 200</td><td>It&#x27;s what the user sees</td></tr><tr><td>Latency</td><td>Response time of the patient lookup</td><td>On a ward, slow is as bad as down</td></tr><tr><td>Capacity</td><td>Log and database disks, CPU, memory, sessions</td><td>Warns days in advance</td></tr><tr><td>Certificates</td><td>Days until the service certificate expires</td><td>They expire at night and at weekends</td></tr><tr><td>Backups</td><td>Last successful job for each database</td><td>A failed backup goes unnoticed until you need it</td></tr><tr><td>Integrations</td><td>Messages queued to laboratory and pharmacy</td><td>The app works but results don&#x27;t arrive</td></tr></tbody></table></div>
+<p>Start with the service&#x27;s <strong>synthetic check</strong> (what a user does) and add the components underneath. That way you know whether there&#x27;s impact before you look at why.</p>
+<h2>2. Thresholds, severity and who gets paged</h2>
+<ul><li><strong>Severity 1</strong>: the service is unavailable or there&#x27;s clinical impact. Call the on-call engineer at any hour.</li><li><strong>Severity 2</strong>: degraded or at risk of failing within hours (disk at 90%, high latency). Notify on-call, no call out of hours.</li><li><strong>Severity 3</strong>: to be looked at in hours (certificate at 30 days, a failed backup with a good one after it). Ticket in the team queue.</li></ul>
+<p>Each threshold has a <strong>pending period</strong>: high latency for one minute isn&#x27;t an alarm; for ten, it is.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Grafana · Alerting · New alert rule</span></figcaption><div class="ui-body"><div class="ui-path"><span>Alerting</span><span class="ui-sep" aria-hidden="true">›</span><span>Alert rules</span><span class="ui-sep" aria-hidden="true">›</span><span>New alert rule</span></div><div class="ui-field"><span class="ui-k">Name</span><span class="ui-v">HCE - patient lookup latency</span></div><div class="ui-field"><span class="ui-k">Query</span><span class="ui-v">p95 of hce_patient_query_seconds, service hce-pro</span></div><div class="ui-field"><span class="ui-k">Condition</span><span class="ui-v">IS ABOVE 3</span></div><div class="ui-field"><span class="ui-k">Folder and evaluation group</span><span class="ui-v">Clinical / every 1m</span></div><div class="ui-field"><span class="ui-k">Pending period</span><span class="ui-v">10m</span></div><div class="ui-field"><span class="ui-k">Labels</span><span class="ui-v">severity=2, service=hce, team=systems</span></div><div class="ui-field"><span class="ui-k">Runbook URL</span><span class="ui-v">https://wiki.contoso.example/runbooks/hce-latency</span></div><div class="ui-field"><span class="ui-k">Summary</span><span class="ui-v">Patient lookup taking over 3 s (p95) for 10 min</span></div><div class="ui-btn">Save rule and exit</div></div></figure>
+<p>The <code>severity</code> and <code>team</code> labels are what the notification policy uses to choose the contact point: severity 1 goes to the on-call app, severity 3 to the team channel.</p>
+<h2>3. A runbook in every alarm</h2>
+<p>An alarm without instructions is a question at three in the morning. Each rule links to its runbook with:</p>
+<ol><li>What the alarm means and what the user sees.</li><li>The checks in order, with the commands.</li><li>What can be done without permission (restart service X) and what can&#x27;t (touch the database).</li><li>Who to escalate to and when: vendor, database administrator, on-call manager.</li></ol>
+<h2>4. Maintenance windows</h2>
+<ul><li>Before an approved change, silence <strong>only</strong> the affected components and only for the window: in Grafana, a silence by labels with an end time; in SolarWinds, the node&#x27;s maintenance mode with a scheduled <strong>Mute Alerts</strong>.</li><li>Silencing isn&#x27;t switching off: on-call still sees the state on the dashboard.</li><li>When the window ends, check the silence has expired and the synthetic check is green.</li></ul>
+<p class="g-warn">A silence with no end time ends up hiding a real outage weeks later.</p>
+<h2>5. The ticket: &quot;night-time alarm on the health record&quot;</h2>
+<p>Sunday, 03:40. The on-call app calls javier.ruiz: <strong>Sev 1 · HCE · synthetic check failing for 5 min</strong>.</p>
+<ol><li><strong>Acknowledge</strong> the page within five minutes. That stops it escalating to the next person and records who owns it.</li><li><strong>Confirm the impact</strong>: open the application as the ward would, or phone A&amp;E.</li><li><strong>Follow the runbook</strong>:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · admin workstation</span><button class="t-copy" type="button" data-copy="Test-NetConnection srv-hce-app01 -Port 443 | Select-Object ComputerName, TcpTestSucceeded&#10;Get-Service -ComputerName srv-hce-app01 -Name HCE* | Select-Object Name, Status" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Test-NetConnection srv-hce-app01 -Port 443 | Select-Object ComputerName, TcpTestSucceeded</span><span class="t-out">ComputerName   TcpTestSucceeded</span><span class="t-out">------------   ----------------</span><span class="t-out">srv-hce-app01  True</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-Service -ComputerName srv-hce-app01 -Name HCE* | Select-Object Name, Status</span><span class="t-out">Name         Status</span><span class="t-out">----         ------</span><span class="t-out">HCEAppPool   Running</span><span class="t-out">HCEIntegra   Stopped</span></code></pre></figure>
+<p>The server responds and the integration service is stopped. The runbook allows starting it once; if it stops again, escalate to the vendor.</p>
+<ol><li><strong>Start it, check</strong> the synthetic check goes back to green and the messages queued for the laboratory are processed.</li><li><strong>Close</strong> with a record: time of the page, acknowledgement and recovery, apparent cause and whether a problem record is needed for the morning shift.</li></ol>
+<h2>6. The noise review</h2>
+<p>Each month, with the tool&#x27;s alarm report:</p>
+<ul><li>Alarms <strong>nobody acted on</strong> or that closed by themselves: a badly set threshold or a useless alarm. Adjust or remove it.</li><li>Those that fired more than ten times: an underlying problem that needs a change, not more alerts.</li><li>Outages that <strong>didn&#x27;t</strong> raise an alarm: a check is missing.</li><li>Night-time calls that could have waited: lower their severity.</li></ul>
+<h2>Next steps</h2>
+<ul><li>The Level 3 <strong>SolarWinds</strong> guide explains nodes, alerts and maintenance mode.</li><li>The Level 3 <strong>Grafana</strong> guide covers data sources, dashboards and alert rules.</li><li>The <strong>Azure Monitor y Log Analytics</strong> guide helps if part of the platform runs in Azure.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Sector 3</span><span class="en">Sector 3</span> · <span class="es">Monitorización - Desplegar alarmas y responder a ellas</span><span class="en">Monitoring - Deploying alarms and responding to them</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="sector-3.html"><span class="es">Todas las guías del Sector 3</span><span class="en">All Sector 3 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Entornos de prueba: preparar una preproducción para validar cambios en plataformas críticas</span><span class="en">Test environments: preparing a pre-production to validate changes on critical platforms</span></span></a>
+    <a class="post-nav-link next" href="oracle-cambiar-hardware-y-sistema-operativo-del-servidor-de-base-de-datos.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Oracle: cambiar el hardware y el sistema operativo del servidor de base de datos sin parar el hospital</span><span class="en">Oracle: replacing the database server&#x27;s hardware and operating system without stopping the hospital</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

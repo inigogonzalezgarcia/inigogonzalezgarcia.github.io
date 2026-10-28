@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Cisco AnyConnect: troubleshooting VPN connections from stores, hotels and on the road · Iñigo González" data-title-es="Cisco AnyConnect: resolver problemas de conexión VPN en tiendas, hoteles y viajes · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Cisco AnyConnect: troubleshooting VPN connections from stores, hotels and on the road · Iñigo González</title>
+<meta name="description" content="The VPN faults that come from people who don&#x27;t work at the office: area managers going from store to store, hotel Wi-Fi with captive portals, expired certificates, MFA prompts, the split tunnel that doesn&#x27;t reach the ERP and the DART bundle to diagnose without being there.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/cisco-anyconnect-resolver-problemas-de-conexion-vpn-en-tiendas-y-viajes.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cisco AnyConnect: troubleshooting VPN connections from stores, hotels and on the road · Iñigo González">
+<meta property="og:description" content="The VPN faults that come from people who don&#x27;t work at the office: area managers going from store to store, hotel Wi-Fi with captive portals, expired certificates, MFA prompts, the split tunnel that doesn&#x27;t reach the ERP and the DART bundle to diagnose without being there.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/cisco-anyconnect-resolver-problemas-de-conexion-vpn-en-tiendas-y-viajes.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cisco AnyConnect: troubleshooting VPN connections from stores, hotels and on the road · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Cisco AnyConnect: troubleshooting VPN connections from stores, hotels and on the road","alternativeHeadline":"Cisco AnyConnect: resolver problemas de conexión VPN en tiendas, hoteles y viajes","description":"The VPN faults that come from people who don't work at the office: area managers going from store to store, hotel Wi-Fi with captive portals, expired certificates, MFA prompts, the split tunnel that doesn't reach the ERP and the DART bundle to diagnose without being there.","datePublished":"2026-10-28","dateModified":"2026-10-28","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/cisco-anyconnect-resolver-problemas-de-conexion-vpn-en-tiendas-y-viajes.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/cisco-anyconnect-resolver-problemas-de-conexion-vpn-en-tiendas-y-viajes.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Cisco AnyConnect - Fixing VPN connection issues"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 2","item":"https://inigogonzalezgarcia.github.io/guias/sector-2.html"},{"@type":"ListItem","position":4,"name":"Cisco AnyConnect: troubleshooting VPN connections from stores, hotels and on the road","item":"https://inigogonzalezgarcia.github.io/guias/cisco-anyconnect-resolver-problemas-de-conexion-vpn-en-tiendas-y-viajes.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="sector-2.html"><span class="es">Sector 2</span><span class="en">Sector 2</span></a></p>
+    <h1><span class="es">Cisco AnyConnect: resolver problemas de conexión VPN en tiendas, hoteles y viajes</span><span class="en">Cisco AnyConnect: troubleshooting VPN connections from stores, hotels and on the road</span></h1>
+    <p class="lede"><span class="es">Los fallos de VPN que llegan de quien no trabaja en la oficina: jefes de área que van de tienda en tienda, Wi-Fi de hotel con portal cautivo, certificados caducados, avisos de MFA, el túnel dividido que no lleva al ERP y el paquete DART para diagnosticar sin estar allí.</span><span class="en">The VPN faults that come from people who don&#x27;t work at the office: area managers going from store to store, hotel Wi-Fi with captive portals, expired certificates, MFA prompts, the split tunnel that doesn&#x27;t reach the ERP and the DART bundle to diagnose without being there.</span></p><p class="label post-meta"><span class="es">Sector 2</span><span class="en">Sector 2</span> · <span class="es">Cisco AnyConnect - Resolver problemas de conexión VPN</span><span class="en">Cisco AnyConnect - Fixing VPN connection issues</span> · <span class="es">7 min</span><span class="en">6 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">28 oct 2026</span><span class="en">28 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Resolver por teléfono los problemas de VPN de la gente que más la usa en retail: los <strong>jefes de área</strong> que visitan seis tiendas por semana y duermen en hoteles, y el personal de la oficina central que trabaja desde casa o desde un tren. Llaman desde un aparcamiento, con el portátil abierto sobre el capó y una reunión de ventas en diez minutos. No hay nadie de IT cerca, así que tienes que saber qué preguntar y qué pedir.</p>
+<p>El cliente se llama hoy <strong>Cisco Secure Client</strong> (desde la versión 5); el módulo de VPN sigue siendo AnyConnect y los usuarios lo seguirán llamando así. Lo básico (instalar, conectar, el perfil) está en la guía del Nivel 1.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Acceso de lectura a la <strong>cabecera VPN</strong> (el firewall o el concentrador) y a sus registros de sesión, o alguien de redes localizable.</li><li>El método de autenticación: usuario y contraseña con <strong>MFA</strong>, certificado de equipo, o ambos.</li><li>La <strong>política de túnel</strong>: completo (todo el tráfico va a la oficina) o dividido (solo las redes internas). Cambia por completo el diagnóstico.</li><li>Saber cómo llegan las tiendas a la central: si la red de tienda ya está unida a la oficina por SD-WAN o un túnel entre sedes, en tienda no hace falta la VPN de usuario.</li></ul>
+<h2>1. Las redes desde las que se conecta la gente</h2>
+<div class="g-table"><table><thead><tr><th>Lugar</th><th>Problema típico</th><th>Qué hacer</th></tr></thead><tbody><tr><td>Hotel</td><td>Portal cautivo sin aceptar, puertos filtrados</td><td>Abrir el navegador, aceptar el portal y reconectar</td></tr><tr><td>Tienda, Wi-Fi corporativa</td><td>La VPN no hace falta o choca con el túnel de la tienda</td><td>Detección de red de confianza; no conectar VPN dentro</td></tr><tr><td>Tienda, Wi-Fi de clientes</td><td>Filtrado de contenidos, límite de tiempo, aislamiento</td><td>Mejor el punto de acceso del móvil</td></tr><tr><td>Móvil como punto de acceso</td><td>Cobertura y consumo de datos</td><td>Válido como plan B, sobre todo en una urgencia</td></tr><tr><td>Casa</td><td>Router doméstico, DNS del operador</td><td>Raro que falle si funciona en otros sitios</td></tr></tbody></table></div>
+<p class="g-tip">Si la VPN funciona con el punto de acceso del móvil y no con la Wi-Fi del sitio, el problema es esa red. Es la prueba más rápida y se hace en dos minutos.</p>
+<h2>2. Portales cautivos y Wi-Fi de hotel</h2>
+<ul><li>Con un portal cautivo pendiente, Secure Client avisa de que el proveedor de la red <strong>está restringiendo el acceso a Internet</strong> y no conecta. El usuario abre el navegador, acepta las condiciones o mete el número de habitación y vuelve a conectar.</li><li>Si la política es <strong>Always-On</strong> (la VPN debe estar siempre activa), el perfil tiene que permitir la <strong>corrección de portal cautivo</strong>; si no, el portátil no puede ni abrir la página del hotel.</li><li>Algunas redes de hotel bloquean UDP. El cliente cae entonces de <strong>DTLS</strong> a <strong>TLS</strong>: conecta, pero va más lento y las llamadas de Teams se cortan. Es una limitación de la red, no una avería.</li></ul>
+<h2>3. Certificados y MFA</h2>
+<ul><li><strong>Certificado de servidor no válido</strong>: si el cliente avisa de un certificado no fiable en la cabecera, no se acepta. O ha caducado el de la cabecera (se ve en todos los usuarios a la vez) o la red del hotel intercepta el tráfico. En el segundo caso, cambia de red.</li><li><strong>Certificado de equipo caducado</strong>: si la autenticación usa certificado del portátil, un equipo que lleva semanas fuera sin renovarlo se queda sin VPN. Se ve en el almacén de certificados del equipo; la renovación necesita conexión con la entidad emisora (guía de <strong>NDES y Cloud PKI</strong>).</li><li><strong>MFA</strong>: el aviso llega al móvil y el usuario no lo ve porque está en el coche con el móvil en el soporte, o porque cambió de móvil y no volvió a registrar el método. Si la cabecera da tiempo de espera, conecta en el segundo intento con el móvil en la mano.</li><li><strong>Hora del equipo</strong>: un portátil con la hora mal (batería de la BIOS, zona horaria) rompe certificados y códigos de un solo uso.</li></ul>
+<h2>4. El ticket: &quot;la VPN conecta pero no llego al ERP&quot;</h2>
+<p>Martes, 11:00. Un jefe de área en el hotel: la VPN dice <strong>Connected</strong>, el correo funciona, pero el ERP no abre.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Cisco Secure Client · Ventana avanzada · VPN › Estadísticas</span></figcaption><div class="ui-body"><div class="ui-path"><span>Cisco Secure Client</span><span class="ui-sep" aria-hidden="true">›</span><span>VPN</span><span class="ui-sep" aria-hidden="true">›</span><span>Statistics</span></div><div class="ui-field"><span class="ui-k">Connection State</span><span class="ui-v">Connected</span></div><div class="ui-field"><span class="ui-k">Tunnel Mode (IPv4)</span><span class="ui-v">Split Include</span></div><div class="ui-field"><span class="ui-k">Transport Protocol</span><span class="ui-v">DTLSv1.2</span></div><div class="ui-field"><span class="ui-k">Client Address (IPv4)</span><span class="ui-v">10.250.12.44</span></div><div class="ui-field"><span class="ui-k">Server</span><span class="ui-v">vpn.contoso.com</span></div><div class="ui-btn">Route Details</div><div class="ui-btn">Reset</div><div class="ui-btn">Export Stats</div></div></figure>
+<p>El correo va por Internet (Microsoft 365 no entra en el túnel), así que &quot;el correo funciona&quot; no prueba nada. El túnel es <strong>dividido</strong>: solo van por la VPN las redes de la lista.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · en el portátil del usuario, por sesión remota o dictado</span><button class="t-copy" type="button" data-copy="Resolve-DnsName erp.contoso.local&#10;Test-NetConnection 10.20.5.15 -Port 443" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Resolve-DnsName erp.contoso.local</span><span class="t-out">Resolve-DnsName : erp.contoso.local : DNS name does not exist</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Test-NetConnection 10.20.5.15 -Port 443</span><span class="t-out">ComputerName     : 10.20.5.15</span><span class="t-out">RemotePort       : 443</span><span class="t-out">TcpTestSucceeded : True</span></code></pre></figure>
+<ol><li><strong>El nombre no resuelve pero la IP responde</strong>: falta el dominio interno en la lista de <strong>DNS dividido</strong> del perfil del grupo. Se corrige en la cabecera; mientras, el usuario puede entrar por IP si la aplicación lo permite.</li><li><strong>Ni el nombre ni la IP</strong>: en <strong>Route Details</strong> no aparece la red del ERP (<code>10.20.5.0/24</code>). Falta en la lista del túnel dividido; es un cambio de redes.</li><li><strong>A otros del mismo grupo les funciona</strong>: el usuario tiene una política distinta (otro grupo en la cabecera) o un perfil de VPN antiguo en el portátil.</li><li><strong>El ERP es IBM i con emulador 5250</strong>: además del puerto web, comprueba el 992 (5250 sobre TLS) o el 23.</li></ol>
+<h2>5. El ticket: &quot;la VPN no conecta desde la tienda&quot;</h2>
+<p>Jueves, 16:30. Un jefe de área en la tienda 042 no consigue conectar.</p>
+<ol><li><strong>¿Qué red?</strong> Si es la <strong>Wi-Fi corporativa</strong> de la tienda, el portátil ya está en la red de la empresa: la <strong>detección de red de confianza</strong> debería desconectar o no iniciar la VPN, y el ERP debería abrir sin ella. Si no abre, el problema es la red de la tienda, no la VPN.</li><li><strong>Si es la Wi-Fi de clientes</strong>: suele filtrar el tráfico VPN o aislar los equipos. Punto de acceso del móvil.</li><li><strong>Si el error es de autenticación</strong> (credenciales o MFA), es el usuario, no la tienda: mismo diagnóstico que en el apartado 3.</li><li><strong>Si falla en todas las redes</strong> y a nadie más le pasa: perfil corrupto o cliente desactualizado. Pide el paquete DART.</li></ol>
+<h2>6. DART y la revisión mensual</h2>
+<p><strong>DART</strong> (Diagnostics and Reporting Tool) se instala con Secure Client y recoge en un ZIP los registros del cliente, el perfil, la configuración de red y los registros de eventos. El usuario lo lanza desde el menú Inicio, elige la recogida por defecto y el fichero aparece en su escritorio. Se adjunta al ticket, no se envía por chat.</p>
+<p>Cada mes:</p>
+<ul><li>Fechas de caducidad del <strong>certificado de la cabecera</strong> y de la CA de los certificados de equipo.</li><li>Versión de Secure Client en el parque: las antiguas se actualizan desde la cabecera o con Intune.</li><li>Usuarios con más fallos de conexión: si son siempre los mismos, son los que viajan más y merecen un portátil con módem o una formación de diez minutos.</li><li>Revisión de la lista de túnel dividido cuando se añade un servidor o una aplicación interna nueva.</li></ul>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <strong>Cisco AnyConnect (VPN)</strong> del Nivel 1 cubre la instalación y la conexión básica.</li><li><strong>Fortinet FortiGate</strong> explica la cabecera y los túneles entre sedes si el firewall es Fortinet.</li><li><strong>Entra ID: Conditional Access</strong> ayuda con el MFA y las condiciones de acceso.</li><li><strong>NDES y Cloud PKI</strong> cubre la emisión y renovación de certificados de equipo.</li><li>La guía de <strong>AS400</strong> explica el acceso al emulador 5250 al otro lado del túnel.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>Fix by phone the VPN problems of the people who use it most in retail: the <strong>area managers</strong> who visit six stores a week and sleep in hotels, and the head office staff who work from home or from a train. They call from a car park, with the laptop open on the bonnet and a sales meeting in ten minutes. There is nobody from IT nearby, so you need to know what to ask and what to request.</p>
+<p>The client is now called <strong>Cisco Secure Client</strong> (since version 5); the VPN module is still AnyConnect and users will keep calling it that. The basics (installing, connecting, the profile) are in the Level 1 guide.</p>
+<h2>Before you start</h2>
+<ul><li>Read access to the <strong>VPN headend</strong> (the firewall or concentrator) and its session logs, or someone from networks you can reach.</li><li>The authentication method: username and password with <strong>MFA</strong>, device certificate, or both.</li><li>The <strong>tunnel policy</strong>: full (all traffic goes to the office) or split (internal networks only). It changes the diagnosis completely.</li><li>Knowing how stores reach head office: if the store network is already joined to the office by SD-WAN or a site-to-site tunnel, user VPN isn&#x27;t needed inside the store.</li></ul>
+<h2>1. The networks people connect from</h2>
+<div class="g-table"><table><thead><tr><th>Place</th><th>Typical problem</th><th>What to do</th></tr></thead><tbody><tr><td>Hotel</td><td>Captive portal not accepted, filtered ports</td><td>Open the browser, accept the portal and reconnect</td></tr><tr><td>Store, corporate Wi-Fi</td><td>VPN not needed or clashes with the store&#x27;s tunnel</td><td>Trusted network detection; don&#x27;t connect VPN inside</td></tr><tr><td>Store, customer Wi-Fi</td><td>Content filtering, time limit, client isolation</td><td>Better the mobile hotspot</td></tr><tr><td>Mobile hotspot</td><td>Coverage and data usage</td><td>Valid as plan B, especially in an emergency</td></tr><tr><td>Home</td><td>Home router, ISP DNS</td><td>Rarely fails if it works elsewhere</td></tr></tbody></table></div>
+<p class="g-tip">If the VPN works on the mobile hotspot and not on the site&#x27;s Wi-Fi, the problem is that network. It&#x27;s the quickest test and takes two minutes.</p>
+<h2>2. Captive portals and hotel Wi-Fi</h2>
+<ul><li>With a captive portal pending, Secure Client warns that the network provider <strong>is restricting access to the Internet</strong> and won&#x27;t connect. The user opens the browser, accepts the terms or enters the room number and connects again.</li><li>If the policy is <strong>Always-On</strong> (VPN must always be up), the profile has to allow <strong>captive portal remediation</strong>; otherwise the laptop can&#x27;t even open the hotel&#x27;s page.</li><li>Some hotel networks block UDP. The client then falls back from <strong>DTLS</strong> to <strong>TLS</strong>: it connects, but it&#x27;s slower and Teams calls drop. It&#x27;s a network limitation, not a fault.</li></ul>
+<h2>3. Certificates and MFA</h2>
+<ul><li><strong>Invalid server certificate</strong>: if the client warns of an untrusted certificate on the headend, don&#x27;t accept it. Either the headend&#x27;s certificate has expired (all users see it at once) or the hotel network is intercepting traffic. In the second case, change network.</li><li><strong>Expired device certificate</strong>: if authentication uses the laptop&#x27;s certificate, a machine that has been away for weeks without renewing it loses VPN. It shows in the machine&#x27;s certificate store; renewal needs a connection to the issuing authority (<strong>NDES and Cloud PKI</strong> guide).</li><li><strong>MFA</strong>: the prompt reaches the phone and the user doesn&#x27;t see it because they&#x27;re in the car with the phone in its holder, or they changed phones and never re-registered the method. If the headend times out, it connects on the second try with the phone in hand.</li><li><strong>Device time</strong>: a laptop with the wrong time (BIOS battery, time zone) breaks certificates and one-time codes.</li></ul>
+<h2>4. The ticket: &quot;VPN connects but I can&#x27;t reach the ERP&quot;</h2>
+<p>Tuesday, 11:00. An area manager at a hotel: the VPN says <strong>Connected</strong>, email works, but the ERP won&#x27;t open.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Cisco Secure Client · Advanced Window · VPN › Statistics</span></figcaption><div class="ui-body"><div class="ui-path"><span>Cisco Secure Client</span><span class="ui-sep" aria-hidden="true">›</span><span>VPN</span><span class="ui-sep" aria-hidden="true">›</span><span>Statistics</span></div><div class="ui-field"><span class="ui-k">Connection State</span><span class="ui-v">Connected</span></div><div class="ui-field"><span class="ui-k">Tunnel Mode (IPv4)</span><span class="ui-v">Split Include</span></div><div class="ui-field"><span class="ui-k">Transport Protocol</span><span class="ui-v">DTLSv1.2</span></div><div class="ui-field"><span class="ui-k">Client Address (IPv4)</span><span class="ui-v">10.250.12.44</span></div><div class="ui-field"><span class="ui-k">Server</span><span class="ui-v">vpn.contoso.com</span></div><div class="ui-btn">Route Details</div><div class="ui-btn">Reset</div><div class="ui-btn">Export Stats</div></div></figure>
+<p>Email goes over the Internet (Microsoft 365 isn&#x27;t in the tunnel), so &quot;email works&quot; proves nothing. The tunnel is <strong>split</strong>: only the networks on the list go through the VPN.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · on the user&#x27;s laptop, via remote session or dictated</span><button class="t-copy" type="button" data-copy="Resolve-DnsName erp.contoso.local&#10;Test-NetConnection 10.20.5.15 -Port 443" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Resolve-DnsName erp.contoso.local</span><span class="t-out">Resolve-DnsName : erp.contoso.local : DNS name does not exist</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Test-NetConnection 10.20.5.15 -Port 443</span><span class="t-out">ComputerName     : 10.20.5.15</span><span class="t-out">RemotePort       : 443</span><span class="t-out">TcpTestSucceeded : True</span></code></pre></figure>
+<ol><li><strong>The name doesn&#x27;t resolve but the IP answers</strong>: the internal domain is missing from the group profile&#x27;s <strong>split DNS</strong> list. It&#x27;s fixed on the headend; meanwhile, the user can go in by IP if the application allows it.</li><li><strong>Neither name nor IP</strong>: <strong>Route Details</strong> doesn&#x27;t show the ERP network (<code>10.20.5.0/24</code>). It&#x27;s missing from the split tunnel list; that&#x27;s a network change.</li><li><strong>It works for others in the same group</strong>: the user has a different policy (another group on the headend) or an old VPN profile on the laptop.</li><li><strong>The ERP is IBM i with a 5250 emulator</strong>: besides the web port, check 992 (5250 over TLS) or 23.</li></ol>
+<h2>5. The ticket: &quot;VPN won&#x27;t connect from the store&quot;</h2>
+<p>Thursday, 16:30. An area manager at store 042 can&#x27;t connect.</p>
+<ol><li><strong>Which network?</strong> If it&#x27;s the store&#x27;s <strong>corporate Wi-Fi</strong>, the laptop is already on the company network: <strong>trusted network detection</strong> should disconnect or not start the VPN, and the ERP should open without it. If it doesn&#x27;t, the problem is the store network, not the VPN.</li><li><strong>If it&#x27;s the customer Wi-Fi</strong>: it usually filters VPN traffic or isolates devices. Mobile hotspot.</li><li><strong>If the error is authentication</strong> (credentials or MFA), it&#x27;s the user, not the store: same diagnosis as section 3.</li><li><strong>If it fails on every network</strong> and nobody else has the problem: corrupt profile or outdated client. Ask for the DART bundle.</li></ol>
+<h2>6. DART and the monthly review</h2>
+<p><strong>DART</strong> (Diagnostics and Reporting Tool) installs with Secure Client and gathers into a ZIP the client logs, the profile, the network configuration and the event logs. The user launches it from the Start menu, picks the default collection and the file appears on their desktop. It goes into the ticket, not over chat.</p>
+<p>Each month:</p>
+<ul><li>Expiry dates of the <strong>headend certificate</strong> and of the CA for device certificates.</li><li>Secure Client version across the estate: old ones are updated from the headend or with Intune.</li><li>Users with the most connection failures: if they&#x27;re always the same, they&#x27;re the ones who travel most and deserve a laptop with a modem or a ten-minute briefing.</li><li>A review of the split tunnel list whenever a new internal server or application is added.</li></ul>
+<h2>Next steps</h2>
+<ul><li>The Level 1 <strong>Cisco AnyConnect (VPN)</strong> guide covers installation and basic connection.</li><li><strong>Fortinet FortiGate</strong> explains the headend and site-to-site tunnels if the firewall is Fortinet.</li><li><strong>Entra ID: Conditional Access</strong> helps with MFA and access conditions.</li><li><strong>NDES and Cloud PKI</strong> covers issuing and renewing device certificates.</li><li>The <strong>AS400</strong> guide explains access to the 5250 emulator on the other side of the tunnel.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Sector 2</span><span class="en">Sector 2</span> · <span class="es">Cisco AnyConnect - Resolver problemas de conexión VPN</span><span class="en">Cisco AnyConnect - Fixing VPN connection issues</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="sector-2.html"><span class="es">Todas las guías del Sector 2</span><span class="en">All Sector 2 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="backup-en-cinta-rotacion-gfs-custodia-y-comprobacion-de-copias.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Backup en cinta: rotación, custodia y comprobación de las copias</span><span class="en">Tape backup: rotation, custody and checking the copies</span></span></a>
+    <a class="post-nav-link next" href="impresoras-de-tienda-etiquetas-tickets-y-multifuncion-sin-it-en-sitio.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Impresoras de tienda: instalación y mantenimiento de etiquetas, tickets y multifunción sin IT en sitio</span><span class="en">Store printers: installing and maintaining label, receipt and multifunction printers with no IT on site</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
