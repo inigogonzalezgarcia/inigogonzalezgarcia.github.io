@@ -326,7 +326,7 @@ footer a{color:var(--on-ink)}
 @media (min-width:960px){.now-grid{grid-template-columns:1fr 1.25fr;gap:72px}}
 .about-top{padding-top:clamp(140px,16vw,190px)}
 .cta-band .btn{margin-top:8px}
-.links-list{max-width:640px;display:flex;flex-direction:column;gap:14px}
+.links-list{max-width:640px;display:flex;flex-direction:column;gap:40px}.links-group{display:flex;flex-direction:column;gap:12px}.links-group .kicker{margin:0 0 2px}.link-txt{display:flex;flex-direction:column;gap:4px}.link-d{font-weight:400;font-size:15px;color:var(--muted)}.link-btn:hover .link-d{color:inherit;opacity:.8}
 .link-btn{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 22px;border:1px solid var(--ink);text-decoration:none;font-weight:700;font-size:18px;background:var(--paper);transition:background .2s,color .2s}
 .link-btn:hover{background:var(--ink);color:var(--on-ink)}
 .links-section{padding-top:56px}
