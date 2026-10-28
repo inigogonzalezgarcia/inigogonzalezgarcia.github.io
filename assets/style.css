@@ -481,3 +481,5 @@ a.practice-desk span:last-child{font-family:var(--mono)}
 @media (prefers-reduced-motion:reduce){.practice-cmd::after{animation:none}a.practice-desk{transition:none}}
 
 .spec-row dd a{color:inherit;text-decoration:underline;text-underline-offset:3px}.spec-row dd .dd-note{display:block;margin-top:6px;font-size:15px;font-weight:400;line-height:1.55;color:var(--muted)}
+
+#herramientas dd a.tk{color:inherit;text-decoration:underline;text-decoration-color:rgba(242,238,230,.35);text-underline-offset:3px}#herramientas dd a.tk:hover{text-decoration-color:var(--accent)}#herramientas dd a.tk-blog{font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);text-decoration:none;margin-left:5px;vertical-align:super}#herramientas dd a.tk-blog:hover{text-decoration:underline}
