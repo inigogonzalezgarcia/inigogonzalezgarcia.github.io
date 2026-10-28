@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Connectivity providers: the circuit inventory, faults with the carrier and the monthly SLA · Iñigo González" data-title-es="Proveedores de conectividad: el inventario de circuitos, las averías con el operador y el SLA de cada mes · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Connectivity providers: the circuit inventory, faults with the carrier and the monthly SLA · Iñigo González</title>
+<meta name="description" content="What the circuit inventory of a site with a trading floor must hold, how to check routes are really diverse, what market data lines are, what to give the carrier when raising a fault, how to track and escalate it, the monthly SLA review and the primary circuit down at 8:00.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/proveedores-de-conectividad-inventario-de-circuitos-averias-y-sla.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Connectivity providers: the circuit inventory, faults with the carrier and the monthly SLA · Iñigo González">
+<meta property="og:description" content="What the circuit inventory of a site with a trading floor must hold, how to check routes are really diverse, what market data lines are, what to give the carrier when raising a fault, how to track and escalate it, the monthly SLA review and the primary circuit down at 8:00.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/proveedores-de-conectividad-inventario-de-circuitos-averias-y-sla.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Connectivity providers: the circuit inventory, faults with the carrier and the monthly SLA · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Connectivity providers: the circuit inventory, faults with the carrier and the monthly SLA","alternativeHeadline":"Proveedores de conectividad: el inventario de circuitos, las averías con el operador y el SLA de cada mes","description":"What the circuit inventory of a site with a trading floor must hold, how to check routes are really diverse, what market data lines are, what to give the carrier when raising a fault, how to track and escalate it, the monthly SLA review and the primary circuit down at 8:00.","datePublished":"2026-10-28","dateModified":"2026-10-28","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/proveedores-de-conectividad-inventario-de-circuitos-averias-y-sla.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/proveedores-de-conectividad-inventario-de-circuitos-averias-y-sla.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Connectivity providers - Managing circuits and faults"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 5","item":"https://inigogonzalezgarcia.github.io/guias/sector-5.html"},{"@type":"ListItem","position":4,"name":"Connectivity providers: the circuit inventory, faults with the carrier and the monthly SLA","item":"https://inigogonzalezgarcia.github.io/guias/proveedores-de-conectividad-inventario-de-circuitos-averias-y-sla.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="sector-5.html"><span class="es">Sector 5</span><span class="en">Sector 5</span></a></p>
+    <h1><span class="es">Proveedores de conectividad: el inventario de circuitos, las averías con el operador y el SLA de cada mes</span><span class="en">Connectivity providers: the circuit inventory, faults with the carrier and the monthly SLA</span></h1>
+    <p class="lede"><span class="es">Qué tiene que tener el inventario de circuitos de una sede con sala de trading, cómo comprobar que las rutas son diversas de verdad, qué son las líneas de datos de mercado, qué dar al operador al abrir una avería, cómo seguirla y escalarla, la revisión mensual del SLA y el circuito principal caído a las 8:00.</span><span class="en">What the circuit inventory of a site with a trading floor must hold, how to check routes are really diverse, what market data lines are, what to give the carrier when raising a fault, how to track and escalate it, the monthly SLA review and the primary circuit down at 8:00.</span></p><p class="label post-meta"><span class="es">Sector 5</span><span class="en">Sector 5</span> · <span class="es">Proveedores de conectividad - Gestión de circuitos y averías</span><span class="en">Connectivity providers - Managing circuits and faults</span> · <span class="es">7 min</span><span class="en">6 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">28 oct 2026</span><span class="en">28 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Que cuando un circuito cae no pierdas los primeros veinte minutos buscando el identificador, el teléfono del operador o el contrato. En una sede con sala de trading la conectividad es parte del negocio: Internet, la red con el centro de datos, las líneas de datos de mercado y la voz. Cada una tiene su operador, su SLA y su forma de abrir averías, y quien está de guardia a las 8:00 tiene que tenerlo todo en una página.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Los <strong>contratos</strong> de cada servicio, con su anexo de SLA (disponibilidad, tiempo de respuesta, tiempo de reparación, penalizaciones).</li><li>Acceso al <strong>portal de averías</strong> de cada operador con usuarios nominales del equipo, no una cuenta compartida.</li><li>El plano de la sede: sala de comunicaciones, por dónde entran los circuitos al edificio y qué equipo termina cada uno.</li><li>La monitorización de los enlaces (SolarWinds, Grafana o la que uses) con alertas al equipo de guardia.</li></ul>
+<h2>1. El inventario de circuitos</h2>
+<p>Una tabla por sede, mantenida en la CMDB o en Confluence, y una copia impresa en la sala de comunicaciones:</p>
+<div class="g-table"><table><thead><tr><th>Campo</th><th>Ejemplo</th></tr></thead><tbody><tr><td>Servicio</td><td>Internet principal</td></tr><tr><td>Operador</td><td>Operador A</td></tr><tr><td>ID de circuito</td><td><code>OPA-MAD-0048213</code></td></tr><tr><td>Ancho de banda</td><td>1 Gbps simétrico</td></tr><tr><td>Terminación</td><td>NTE en rack R02, puerto 1 → <code>rtr-mad-01</code> Gi0/0/0</td></tr><tr><td>Direccionamiento</td><td>192.0.2.0/29 (pública), vecino BGP 192.0.2.1</td></tr><tr><td>SLA</td><td>99,95 %, reparación 4 h, 24x7</td></tr><tr><td>Averías</td><td>Portal + teléfono del NOC 24x7</td></tr><tr><td>Escalado</td><td>Nivel 1 NOC → nivel 2 jefe de turno (1 h) → nivel 3 gestor de cuenta (2 h)</td></tr><tr><td>Ruta</td><td>Entrada norte, central X</td></tr></tbody></table></div>
+<ul><li><strong>Matriz de escalado</strong> actualizada: los nombres cambian y nadie avisa. Pide al operador que la confirme cada trimestre.</li><li>El <strong>ID de circuito</strong> también en una etiqueta en el NTE (el equipo del operador) y en la descripción de la interfaz del router.</li><li>Las fechas de <strong>fin de contrato</strong>: una renovación que se pasa suele acabar con un circuito más caro o con una baja que nadie pidió.</li></ul>
+<h2>2. Rutas diversas: comprobarlo, no suponerlo</h2>
+<p>Dos circuitos de dos operadores no garantizan nada si los dos van por la misma zanja. La diversidad real se mira en tres puntos:</p>
+<ol><li><strong>Entrada al edificio</strong>: por fachadas o accesos distintos.</li><li><strong>Central o nodo</strong>: cada circuito llega a una central distinta del operador.</li><li><strong>Trazado</strong>: pide a cada operador el <strong>mapa de ruta</strong> del circuito y compáralos. Si un tramo coincide, una sola obra en la calle corta los dos.</li></ol>
+<p class="g-tip">Un operador puede alquilar la última milla a otro. Pregúntalo por escrito al contratar: dos marcas distintas en el contrato pueden ser el mismo cable.</p>
+<p>Del lado de la red, el router conmuta solo cuando cae el principal (ruta por defecto con seguimiento, guía de <strong>Cisco: switches y routers</strong>), y esa conmutación se prueba en una ventana planificada, no por primera vez en una avería.</p>
+<h2>3. Líneas de datos de mercado y extranets</h2>
+<p>Además de Internet, la sede suele tener <strong>líneas dedicadas</strong> hacia proveedores de datos de mercado, centros de contratación o redes extranet del sector financiero. Lo que cambia respecto a un circuito normal:</p>
+<ul><li>Van <strong>en pareja</strong>, por rutas separadas, y la aplicación de mercado suele estar preparada para usar las dos.</li><li>El operador o el proveedor de datos gestiona su propio equipo en tu rack: tú no lo configuras, pero sí das acceso al técnico y anotas cada visita.</li><li>La latencia importa tanto como la disponibilidad. Una línea que sigue arriba pero ha pasado por una ruta más larga también es una avería.</li><li>Hay requisitos de contrato y de cumplimiento sobre quién accede a esos datos. Cualquier cambio de red en ese segmento pasa por el comité de cambios.</li></ul>
+<h2>4. Abrir una avería con el operador</h2>
+<p>Lo que el operador necesita para no hacerte perder tiempo:</p>
+<ul><li><strong>ID de circuito</strong> y dirección de la sede.</li><li><strong>Hora de inicio</strong> exacta (la de la alerta, no la de la llamada).</li><li><strong>Síntoma</strong>: caída total, pérdida de paquetes, latencia, cortes intermitentes.</li><li><strong>Lo que ya has comprobado</strong>: alimentación y luces del NTE, estado de la interfaz, si hay luz en la fibra, reinicio del NTE si el operador lo autoriza.</li><li><strong>Contacto en la sede</strong> y <strong>horario de acceso</strong>: quién abre la sala a un técnico y si hace falta acreditación previa del edificio.</li><li><strong>Impacto</strong>: si afecta a la sala de trading, dilo. Muchos operadores tienen una prioridad distinta para clientes con servicios críticos.</li></ul>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Portal de averías · Operador A · Nueva incidencia</span></figcaption><div class="ui-body"><div class="ui-path"><span>Inicio</span><span class="ui-sep" aria-hidden="true">›</span><span>Mis servicios</span><span class="ui-sep" aria-hidden="true">›</span><span>OPA-MAD-0048213</span><span class="ui-sep" aria-hidden="true">›</span><span>Abrir avería</span></div><div class="ui-field"><span class="ui-k">Tipo</span><span class="ui-v">Caída total del servicio</span></div><div class="ui-field"><span class="ui-k">Inicio</span><span class="ui-v">2026-10-27 07:52</span></div><div class="ui-field"><span class="ui-k">Pruebas realizadas</span><span class="ui-v">NTE encendido, luz LOS en rojo, interfaz del router down/down</span></div><div class="ui-field"><span class="ui-k">Contacto en sede</span><span class="ui-v">laura.prado · teléfono de guardia de IT</span></div><div class="ui-field"><span class="ui-k">Acceso</span><span class="ui-v">24x7, acreditación en recepción con DNI</span></div><div class="ui-field"><span class="ui-k">Prioridad solicitada</span><span class="ui-v">P1 · Servicio crítico</span></div><div class="ui-btn">Enviar</div></div></figure>
+<p>Apunta el <strong>número de incidencia</strong> del operador en tu ticket interno. Sin él, cualquier llamada posterior empieza de cero.</p>
+<h2>5. El ticket: &quot;el circuito principal de Internet está caído a las 8:00&quot;</h2>
+<p>Lunes, 7:52, salta la alerta. La sala empieza a llegar a las 8:00.</p>
+<ol><li><strong>¿Ha conmutado?</strong> Lo primero es saber si los usuarios tienen servicio por el respaldo:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">rtr-mad-01 · Cisco IOS XE</span><button class="t-copy" type="button" data-copy="show ip sla statistics 10 | include Latest&#10;show track 10&#10;show ip route 0.0.0.0&#10;show interfaces GigabitEthernet0/0/0 | include line protocol" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show ip sla statistics 10 | include Latest</span><span class="t-out">Latest RTT: NoConnection/Busy/Timeout</span><span class="t-out">Latest operation return code: Timeout</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show track 10</span><span class="t-out">Track 10</span><span class="t-out">  IP SLA 10 reachability</span><span class="t-out">  Reachability is Down</span><span class="t-out">    1 change, last change 00:07:41</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show ip route 0.0.0.0</span><span class="t-out">Routing entry for 0.0.0.0/0, supernet</span><span class="t-out">  Known via &quot;static&quot;, distance 10, metric 0, candidate default path</span><span class="t-out">  * 198.51.100.9</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show interfaces GigabitEthernet0/0/0 | include line protocol</span><span class="t-out">GigabitEthernet0/0/0 is down, line protocol is down</span></code></pre></figure>
+<p>La ruta por defecto ya va por el respaldo (<code>198.51.100.9</code>, distancia administrativa 10 en vez de la 1 del principal). Los usuarios tienen Internet, con menos ancho de banda.</p>
+<ol><li><strong>Avisa</strong>: un mensaje breve al responsable de la sala y a la mesa de soporte. &quot;Internet funciona por la línea de respaldo; puede ir más lento; el operador está avisado.&quot;</li><li><strong>Abre la avería</strong> con lo del apartado anterior y anota el número.</li><li><strong>Reduce el consumo</strong> del respaldo si se queda corto: aplaza las actualizaciones de Windows y las copias que salen por Internet hasta que vuelva el principal.</li><li><strong>Sigue la avería</strong>: pide una hora estimada y vuelve a llamar al vencer. Si se pasa el tiempo de la matriz, escala al siguiente nivel sin esperar.</li><li><strong>Al volver</strong>: comprueba que el tráfico vuelve al principal, pide al operador la <strong>causa</strong> por escrito y cierra el ticket con las horas de inicio y fin.</li></ol>
+<p class="g-warn">Si el respaldo también cae, el impacto ya no es de IT de la sede: abre el procedimiento de incidente mayor y avisa a continuidad de negocio.</p>
+<h2>6. La revisión mensual del SLA</h2>
+<ul><li><strong>Disponibilidad medida</strong> por tu monitorización frente a la que reporta el operador. Si no coinciden, gana la que tenga datos.</li><li>Cada avería del mes: tiempo de respuesta y de reparación frente al SLA. Las que lo incumplen se reclaman según el contrato, con las fechas y números de incidencia.</li><li>Averías repetidas en el mismo circuito: más de dos en un trimestre es una conversación con el gestor de cuenta, no otro ticket.</li><li>La matriz de escalado y los contactos, comprobados.</li><li>La prueba de conmutación del trimestre, registrada.</li></ul>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <strong>Cisco: switches y routers</strong> explica la ruta por defecto con respaldo automático.</li><li>La guía de <strong>SolarWinds</strong> o la de <strong>Grafana</strong> cubren la monitorización de los enlaces que alimenta esta revisión.</li><li>La guía de <strong>Backup y DR/BCP</strong> sitúa la conectividad dentro del plan de continuidad.</li><li>La guía de <strong>Fortinet FortiGate</strong> cubre el cortafuegos que suele terminar los circuitos de Internet.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>When a circuit goes down, you don&#x27;t lose the first twenty minutes looking for the identifier, the carrier&#x27;s phone number or the contract. At a site with a trading floor, connectivity is part of the business: Internet, the network to the data centre, the market data lines and voice. Each has its carrier, its SLA and its own way of raising faults, and whoever is on call at 8:00 needs all of it on one page.</p>
+<h2>Before you start</h2>
+<ul><li>The <strong>contracts</strong> for each service, with their SLA schedule (availability, response time, time to repair, service credits).</li><li>Access to each carrier&#x27;s <strong>fault portal</strong> with named team users, not a shared account.</li><li>The site plan: comms room, where circuits enter the building and which device terminates each one.</li><li>Link monitoring (SolarWinds, Grafana or whatever you use) with alerts to the on-call team.</li></ul>
+<h2>1. The circuit inventory</h2>
+<p>One table per site, kept in the CMDB or in Confluence, and a printed copy in the comms room:</p>
+<div class="g-table"><table><thead><tr><th>Field</th><th>Example</th></tr></thead><tbody><tr><td>Service</td><td>Primary Internet</td></tr><tr><td>Carrier</td><td>Carrier A</td></tr><tr><td>Circuit ID</td><td><code>OPA-MAD-0048213</code></td></tr><tr><td>Bandwidth</td><td>1 Gbps symmetric</td></tr><tr><td>Termination</td><td>NTE in rack R02, port 1 → <code>rtr-mad-01</code> Gi0/0/0</td></tr><tr><td>Addressing</td><td>192.0.2.0/29 (public), BGP neighbour 192.0.2.1</td></tr><tr><td>SLA</td><td>99.95%, 4 h repair, 24x7</td></tr><tr><td>Faults</td><td>Portal + 24x7 NOC phone</td></tr><tr><td>Escalation</td><td>Level 1 NOC → level 2 shift lead (1 h) → level 3 account manager (2 h)</td></tr><tr><td>Route</td><td>North entry, exchange X</td></tr></tbody></table></div>
+<ul><li>An up-to-date <strong>escalation matrix</strong>: names change and nobody tells you. Ask the carrier to confirm it every quarter.</li><li>The <strong>circuit ID</strong> also on a label on the NTE (the carrier&#x27;s device) and in the router interface description.</li><li><strong>Contract end</strong> dates: a missed renewal usually ends with a more expensive circuit or a cancellation nobody asked for.</li></ul>
+<h2>2. Diverse routing: check it, don&#x27;t assume it</h2>
+<p>Two circuits from two carriers guarantee nothing if both run down the same trench. Real diversity is checked at three points:</p>
+<ol><li><strong>Building entry</strong>: through different façades or entry points.</li><li><strong>Exchange or node</strong>: each circuit reaches a different carrier exchange.</li><li><strong>Path</strong>: ask each carrier for the circuit&#x27;s <strong>route map</strong> and compare them. If one section overlaps, a single roadworks cuts both.</li></ol>
+<p class="g-tip">A carrier may rent the last mile from another. Ask in writing when contracting: two different brands on the contract can be the same cable.</p>
+<p>On the network side, the router fails over only when the primary drops (default route with tracking, <strong>Cisco: switches and routers</strong> guide), and that failover is tested in a planned window, not for the first time during a fault.</p>
+<h2>3. Market data lines and extranets</h2>
+<p>Besides Internet, the site usually has <strong>dedicated lines</strong> to market data providers, trading venues or financial-sector extranet networks. What changes from a normal circuit:</p>
+<ul><li>They come <strong>in pairs</strong>, on separate routes, and the market data application is usually built to use both.</li><li>The carrier or data provider manages its own device in your rack: you don&#x27;t configure it, but you do give the engineer access and log every visit.</li><li>Latency matters as much as availability. A line that stays up but has moved to a longer path is also a fault.</li><li>There are contractual and compliance requirements on who accesses that data. Any network change in that segment goes through the change board.</li></ul>
+<h2>4. Raising a fault with the carrier</h2>
+<p>What the carrier needs so it doesn&#x27;t waste your time:</p>
+<ul><li><strong>Circuit ID</strong> and site address.</li><li>Exact <strong>start time</strong> (the alert&#x27;s, not the call&#x27;s).</li><li><strong>Symptom</strong>: total outage, packet loss, latency, intermittent drops.</li><li><strong>What you&#x27;ve already checked</strong>: NTE power and lights, interface status, whether there is light on the fibre, NTE reboot if the carrier authorises it.</li><li><strong>Site contact</strong> and <strong>access hours</strong>: who opens the room to an engineer and whether the building needs advance accreditation.</li><li><strong>Impact</strong>: if it affects the trading floor, say so. Many carriers have a different priority for customers with critical services.</li></ul>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Fault portal · Carrier A · New incident</span></figcaption><div class="ui-body"><div class="ui-path"><span>Home</span><span class="ui-sep" aria-hidden="true">›</span><span>My services</span><span class="ui-sep" aria-hidden="true">›</span><span>OPA-MAD-0048213</span><span class="ui-sep" aria-hidden="true">›</span><span>Raise fault</span></div><div class="ui-field"><span class="ui-k">Type</span><span class="ui-v">Total loss of service</span></div><div class="ui-field"><span class="ui-k">Start</span><span class="ui-v">2026-10-27 07:52</span></div><div class="ui-field"><span class="ui-k">Tests done</span><span class="ui-v">NTE powered, LOS light red, router interface down/down</span></div><div class="ui-field"><span class="ui-k">Site contact</span><span class="ui-v">laura.prado · IT on-call phone</span></div><div class="ui-field"><span class="ui-k">Access</span><span class="ui-v">24x7, accreditation at reception with ID</span></div><div class="ui-field"><span class="ui-k">Requested priority</span><span class="ui-v">P1 · Critical service</span></div><div class="ui-btn">Submit</div></div></figure>
+<p>Note the carrier&#x27;s <strong>incident number</strong> in your internal ticket. Without it, every later call starts from scratch.</p>
+<h2>5. The ticket: &quot;the primary internet circuit is down at 8:00&quot;</h2>
+<p>Monday, 7:52, the alert fires. The floor starts arriving at 8:00.</p>
+<ol><li><strong>Has it failed over?</strong> The first thing is to know whether users have service over the backup:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">rtr-mad-01 · Cisco IOS XE</span><button class="t-copy" type="button" data-copy="show ip sla statistics 10 | include Latest&#10;show track 10&#10;show ip route 0.0.0.0&#10;show interfaces GigabitEthernet0/0/0 | include line protocol" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show ip sla statistics 10 | include Latest</span><span class="t-out">Latest RTT: NoConnection/Busy/Timeout</span><span class="t-out">Latest operation return code: Timeout</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show track 10</span><span class="t-out">Track 10</span><span class="t-out">  IP SLA 10 reachability</span><span class="t-out">  Reachability is Down</span><span class="t-out">    1 change, last change 00:07:41</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show ip route 0.0.0.0</span><span class="t-out">Routing entry for 0.0.0.0/0, supernet</span><span class="t-out">  Known via &quot;static&quot;, distance 10, metric 0, candidate default path</span><span class="t-out">  * 198.51.100.9</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show interfaces GigabitEthernet0/0/0 | include line protocol</span><span class="t-out">GigabitEthernet0/0/0 is down, line protocol is down</span></code></pre></figure>
+<p>The default route already goes over the backup (<code>198.51.100.9</code>, administrative distance 10 instead of the primary&#x27;s 1). Users have Internet, with less bandwidth.</p>
+<ol><li><strong>Tell people</strong>: a short message to the floor manager and the service desk. &quot;Internet is running on the backup line; it may be slower; the carrier has been notified.&quot;</li><li><strong>Raise the fault</strong> with the details from the previous section and note the number.</li><li><strong>Cut load</strong> on the backup if it falls short: defer Windows updates and backups going over the Internet until the primary returns.</li><li><strong>Track the fault</strong>: ask for an estimated time and call back when it passes. If the matrix time is exceeded, escalate to the next level without waiting.</li><li><strong>When it&#x27;s back</strong>: check traffic returns to the primary, ask the carrier for the <strong>root cause</strong> in writing and close the ticket with start and end times.</li></ol>
+<p class="g-warn">If the backup also drops, the impact is no longer site IT&#x27;s: open the major incident procedure and alert business continuity.</p>
+<h2>6. The monthly SLA review</h2>
+<ul><li><strong>Availability measured</strong> by your monitoring against what the carrier reports. If they differ, the one with data wins.</li><li>Every fault in the month: response and repair time against the SLA. Breaches are claimed under the contract, with dates and incident numbers.</li><li>Repeat faults on the same circuit: more than two in a quarter is a conversation with the account manager, not another ticket.</li><li>The escalation matrix and contacts, checked.</li><li>The quarter&#x27;s failover test, recorded.</li></ul>
+<h2>Next steps</h2>
+<ul><li>The <strong>Cisco: switches and routers</strong> guide explains the default route with automatic failover.</li><li>The <strong>SolarWinds</strong> or <strong>Grafana</strong> guides cover the link monitoring that feeds this review.</li><li>The <strong>Backup and DR/BCP</strong> guide places connectivity within the continuity plan.</li><li>The <strong>Fortinet FortiGate</strong> guide covers the firewall that usually terminates the Internet circuits.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Sector 5</span><span class="en">Sector 5</span> · <span class="es">Proveedores de conectividad - Gestión de circuitos y averías</span><span class="en">Connectivity providers - Managing circuits and faults</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="sector-5.html"><span class="es">Todas las guías del Sector 5</span><span class="en">All Sector 5 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="pim-acceso-just-in-time-para-administradores-de-una-sede-financiera.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">PIM: acceso just-in-time para los administradores de la sede, con ticket, aprobación y revisiones</span><span class="en">PIM: just-in-time access for site administrators, with ticket, approval and reviews</span></span></a>
+    <a class="post-nav-link next" href="windows-11-migrar-los-equipos-de-una-sede-con-sala-de-trading.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Windows 11: migrar los equipos de una sede con sala de trading sin tocar el horario de mercado</span><span class="en">Windows 11: migrating a site&#x27;s PCs with a trading floor without touching market hours</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

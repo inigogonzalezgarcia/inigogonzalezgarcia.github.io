@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Red Hat: performance tuning of a server that can&#x27;t stop · Iñigo González" data-title-es="Red Hat: ajuste de rendimiento de un servidor que no puede parar · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Red Hat: performance tuning of a server that can&#x27;t stop · Iñigo González</title>
+<meta name="description" content="A method so you don&#x27;t tune blind: the baseline with sysstat, how to read top, vmstat, iostat and sar, tuned profiles, memory and swap, the I/O scheduler, file systems, limits, journald and the ticket about the server that has been slow since first thing.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/red-hat-ajuste-de-rendimiento-de-un-servidor-critico.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Red Hat: performance tuning of a server that can&#x27;t stop · Iñigo González">
+<meta property="og:description" content="A method so you don&#x27;t tune blind: the baseline with sysstat, how to read top, vmstat, iostat and sar, tuned profiles, memory and swap, the I/O scheduler, file systems, limits, journald and the ticket about the server that has been slow since first thing.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/red-hat-ajuste-de-rendimiento-de-un-servidor-critico.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Red Hat: performance tuning of a server that can&#x27;t stop · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Red Hat: performance tuning of a server that can't stop","alternativeHeadline":"Red Hat: ajuste de rendimiento de un servidor que no puede parar","description":"A method so you don't tune blind: the baseline with sysstat, how to read top, vmstat, iostat and sar, tuned profiles, memory and swap, the I/O scheduler, file systems, limits, journald and the ticket about the server that has been slow since first thing.","datePublished":"2026-10-28","dateModified":"2026-10-28","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/red-hat-ajuste-de-rendimiento-de-un-servidor-critico.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/red-hat-ajuste-de-rendimiento-de-un-servidor-critico.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Red Hat - Server performance tuning"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 3","item":"https://inigogonzalezgarcia.github.io/guias/sector-3.html"},{"@type":"ListItem","position":4,"name":"Red Hat: performance tuning of a server that can't stop","item":"https://inigogonzalezgarcia.github.io/guias/red-hat-ajuste-de-rendimiento-de-un-servidor-critico.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="sector-3.html"><span class="es">Sector 3</span><span class="en">Sector 3</span></a></p>
+    <h1><span class="es">Red Hat: ajuste de rendimiento de un servidor que no puede parar</span><span class="en">Red Hat: performance tuning of a server that can&#x27;t stop</span></h1>
+    <p class="lede"><span class="es">Un método para no ajustar a ciegas: la línea base con sysstat, cómo leer top, vmstat, iostat y sar, los perfiles de tuned, la memoria y el swap, el planificador de E/S, los sistemas de ficheros, los límites, journald y el ticket del servidor lento desde primera hora.</span><span class="en">A method so you don&#x27;t tune blind: the baseline with sysstat, how to read top, vmstat, iostat and sar, tuned profiles, memory and swap, the I/O scheduler, file systems, limits, journald and the ticket about the server that has been slow since first thing.</span></p><p class="label post-meta"><span class="es">Sector 3</span><span class="en">Sector 3</span> · <span class="es">Red Hat - Ajuste de rendimiento de un servidor</span><span class="en">Red Hat - Server performance tuning</span> · <span class="es">5 min</span><span class="en">5 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">28 oct 2026</span><span class="en">28 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Saber, con datos, por qué un servidor Red Hat va lento y qué cambiar sin empeorar nada. En un hospital estos servidores suelen ser el motor de integración que mueve los mensajes HL7 entre la historia clínica y el laboratorio, el servidor de la aplicación de farmacia o el que recibe las imágenes de radiología: si van lentos, un resultado tarda en llegar a la planta. Por eso aquí no se prueba en producción ni se reinicia a media mañana; se mide, se compara y se cambia una cosa cada vez, con su cambio aprobado.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Acceso con <code>sudo</code> al servidor y el nombre del <strong>responsable de la aplicación</strong> que corre en él.</li><li>Saber qué es &quot;normal&quot;: sin una línea base, cualquier número parece alto.</li><li>El proveedor de la aplicación localizado: muchos certifican solo ciertos parámetros del sistema y no aceptan ajustes por su cuenta.</li><li>La ventana de cambios del hospital y el criterio de urgencia para un cambio fuera de ella.</li></ul>
+<h2>1. La línea base con sysstat</h2>
+<p><code>sysstat</code> guarda cada diez minutos CPU, memoria, disco y red. Es lo que te permite comparar hoy con ayer a la misma hora.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Bash · srv-hl7-01 (RHEL 9)</span><button class="t-copy" type="button" data-copy="sudo dnf install -y sysstat&#10;sudo systemctl enable --now sysstat&#10;systemctl list-timers &#x27;sysstat*&#x27; --no-pager&#10;ls /var/log/sa/" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>sudo dnf install -y sysstat</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>sudo systemctl enable --now sysstat</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>systemctl list-timers &#x27;sysstat*&#x27; --no-pager</span><span class="t-out">NEXT                        LEFT     UNIT</span><span class="t-out">Wed 2026-10-28 10:40:00 CET 6min     sysstat-collect.timer</span><span class="t-out">Thu 2026-10-29 00:07:00 CET 13h      sysstat-summary.timer</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>ls /var/log/sa/</span><span class="t-out">sa26  sa27  sa28</span></code></pre></figure>
+<p class="g-tip">Actívalo en todos los servidores críticos desde el primer día, junto con la monitorización (guía de <strong>Grafana</strong>). Los datos de la semana anterior al incidente valen más que cualquier ajuste.</p>
+<h2>2. Leer el servidor: top, vmstat, iostat y sar</h2>
+<div class="g-table"><table><thead><tr><th>Herramienta</th><th>Qué miras</th><th>Señal de problema</th></tr></thead><tbody><tr><td><code>top</code></td><td>Carga, procesos que más CPU o memoria usan, <code>wa</code></td><td><code>wa</code> alto: la CPU espera al disco</td></tr><tr><td><code>vmstat 2 5</code></td><td><code>r</code> (cola de CPU), <code>si</code>/<code>so</code> (swap), <code>wa</code></td><td><code>r</code> mayor que núcleos de forma sostenida, <code>si</code>/<code>so</code> distintos de cero</td></tr><tr><td><code>iostat -xz 2 3</code></td><td><code>r_await</code>, <code>w_await</code>, <code>aqu-sz</code>, <code>%util</code> por disco</td><td>Esperas de decenas de ms en un disco que antes daba pocos</td></tr><tr><td><code>sar</code></td><td>Lo mismo, pero en el pasado</td><td>El cambio entre ayer y hoy</td></tr><tr><td><code>pidstat -d 2</code></td><td>Qué proceso lee o escribe</td><td>El culpable con nombre</td></tr></tbody></table></div>
+<p>La carga (<code>load average</code>) en Linux incluye procesos esperando disco: una carga alta con la CPU ociosa apunta al almacenamiento, no al procesador.</p>
+<h2>3. Lo que puedes ajustar</h2>
+<p><strong>Perfiles de tuned.</strong> <code>tuned-adm active</code> dice el perfil activo y <code>tuned-adm recommend</code> el sugerido. En una VM lo normal es <code>virtual-guest</code>; en físico, <code>throughput-performance</code>. Muchos proveedores piden uno concreto, y ese manda.</p>
+<p><strong>Memoria y swap.</strong> <code>free -h</code> y <code>vmstat</code> dicen si hay swap en uso activo (<code>si</code>/<code>so</code>), que es lo que duele, no el swap ocupado de hace días. <code>vm.swappiness</code> se cambia en un fichero de <code>/etc/sysctl.d/</code> y solo si el proveedor lo indica; si falta memoria, la solución es memoria.</p>
+<p><strong>Planificador de E/S.</strong> <code>cat /sys/block/sdb/queue/scheduler</code> muestra el activo entre corchetes. En RHEL 9 los discos de VM y NVMe suelen ir con <code>none</code> o <code>mq-deadline</code>; el perfil de tuned ya lo fija, así que cámbialo en el perfil y no a mano.</p>
+<p><strong>Sistemas de ficheros.</strong> <code>df -h</code> y también <code>df -i</code>: un <code>/var</code> sin inodos libres falla igual que uno lleno. XFS es el estándar en RHEL; el montaje por defecto (<code>relatime</code>) basta casi siempre.</p>
+<p><strong>Límites.</strong> Para un servicio de systemd, los límites de <code>/etc/security/limits.d/</code> no aplican: se ponen con <code>LimitNOFILE=</code> en un drop-in (<code>systemctl edit motor-hl7</code>). <code>systemctl show motor-hl7 -p LimitNOFILE</code> dice el valor real. El síntoma típico es <code>Too many open files</code> en el log de la aplicación.</p>
+<p><strong>journald.</strong> <code>journalctl --disk-usage</code> dice cuánto ocupa. Limítalo con <code>SystemMaxUse=</code> en <code>/etc/systemd/journald.conf</code> para que un servicio que escribe sin parar no llene <code>/var</code>.</p>
+<h2>4. El ticket: &quot;el servidor va lento desde esta mañana&quot;</h2>
+<p>Miércoles, 9:15. El laboratorio avisa de que los resultados tardan veinte minutos en verse en la historia clínica. El motor de integración está en <code>srv-hl7-01</code>.</p>
+<ol><li><strong>¿Qué ha cambiado?</strong> <code>dnf history</code> (paquetes), <code>last reboot</code>, <code>journalctl --since today -p err</code> y el registro de cambios del hospital.</li><li><strong>Ahora mismo</strong>: <code>vmstat</code> y <code>iostat</code> para ver si es CPU, memoria o disco.</li><li><strong>Comparar con ayer</strong> a la misma hora con <code>sar</code>, y buscar el proceso.</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Bash · srv-hl7-01</span><button class="t-copy" type="button" data-copy="iostat -xz 2 2&#10;sar -d -p -f /var/log/sa/sa27 -s 09:00:00 -e 09:30:00 | grep -E &#x27;DEV|sdb&#x27;&#10;pidstat -d 2 1" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>iostat -xz 2 2</span><span class="t-cmt"># columnas recortadas</span><span class="t-out">Device   r/s     w/s     r_await  w_await  aqu-sz  %util</span><span class="t-out">sdb      812.0   96.5    41.20    38.70    37.10   99.1</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>sar -d -p -f /var/log/sa/sa27 -s 09:00:00 -e 09:30:00 | grep -E &#x27;DEV|sdb&#x27;</span><span class="t-out">09:00:00   DEV       tps     ...  await  %util</span><span class="t-out">09:10:00   sdb       102.4   ...  1.40   12.3</span><span class="t-out">09:20:00   sdb       98.7    ...  1.60   13.1</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>pidstat -d 2 1</span><span class="t-out">Time      UID   PID    kB_rd/s   kB_wr/s  kB_ccwr/s iodelay  Command</span><span class="t-out">09:17:42  0     48213  98304.0   0.0      0.0       180      rsync</span><span class="t-out">09:17:42  987   2210   120.0     3410.0   0.0       96       java</span></code></pre></figure>
+<p>El disco de datos (<code>sdb</code>) está saturado, cuando ayer a la misma hora estaba al 12 %. El proceso es un <code>rsync</code> de una copia que alguien ha movido de las 3:00 a las 7:00. Se para la tarea con el responsable de la copia, se devuelve a su hora y los mensajes en cola se procesan en minutos. Ningún parámetro del kernel lo habría arreglado.</p>
+<ol><li><strong>Cierra el ticket con la causa y la medida</strong>: se documenta en el cambio que la copia tiene una hora fija y quién debe aprobar moverla.</li></ol>
+<h2>5. Lo que revisas cada mes</h2>
+<ul><li>Que <code>sysstat</code> sigue recogiendo en todos los servidores críticos.</li><li>El crecimiento de <code>/var</code>, de los datos y del journal.</li><li>El perfil de tuned de cada servidor frente al que pide su proveedor.</li><li>Las horas de copias, antivirus y tareas programadas: que ninguna coincide con picos de actividad asistencial.</li></ul>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <strong>Red Hat Enterprise Linux</strong> del Nivel 2 cubre la administración básica del sistema.</li><li>La guía de <strong>Ansible</strong> permite aplicar el mismo perfil y los mismos límites a todos los servidores.</li><li>La guía de <strong>Grafana</strong> convierte la línea base en paneles que ve todo el equipo.</li><li>La guía de <strong>Linux integrado con AD</strong> explica el acceso nominal de los técnicos a estos servidores.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>Knowing, with data, why a Red Hat server is slow and what to change without making anything worse. In a hospital these servers are often the integration engine moving HL7 messages between the health record and the laboratory, the pharmacy application server or the one receiving radiology images: if they slow down, a result takes longer to reach the ward. That&#x27;s why you don&#x27;t experiment in production or reboot mid-morning here; you measure, compare and change one thing at a time, with its change approved.</p>
+<h2>Before you start</h2>
+<ul><li><code>sudo</code> access to the server and the name of the <strong>owner of the application</strong> that runs on it.</li><li>Knowing what &quot;normal&quot; is: without a baseline, any number looks high.</li><li>The application vendor&#x27;s contact: many certify only certain system parameters and won&#x27;t accept tuning done on your own.</li><li>The hospital&#x27;s change window and the urgency criterion for a change outside it.</li></ul>
+<h2>1. The baseline with sysstat</h2>
+<p><code>sysstat</code> records CPU, memory, disk and network every ten minutes. It is what lets you compare today with yesterday at the same time.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Bash · srv-hl7-01 (RHEL 9)</span><button class="t-copy" type="button" data-copy="sudo dnf install -y sysstat&#10;sudo systemctl enable --now sysstat&#10;systemctl list-timers &#x27;sysstat*&#x27; --no-pager&#10;ls /var/log/sa/" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>sudo dnf install -y sysstat</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>sudo systemctl enable --now sysstat</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>systemctl list-timers &#x27;sysstat*&#x27; --no-pager</span><span class="t-out">NEXT                        LEFT     UNIT</span><span class="t-out">Wed 2026-10-28 10:40:00 CET 6min     sysstat-collect.timer</span><span class="t-out">Thu 2026-10-29 00:07:00 CET 13h      sysstat-summary.timer</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>ls /var/log/sa/</span><span class="t-out">sa26  sa27  sa28</span></code></pre></figure>
+<p class="g-tip">Enable it on every critical server from day one, together with monitoring (<strong>Grafana</strong> guide). Data from the week before the incident is worth more than any tuning.</p>
+<h2>2. Reading the server: top, vmstat, iostat and sar</h2>
+<div class="g-table"><table><thead><tr><th>Tool</th><th>What you look at</th><th>Sign of trouble</th></tr></thead><tbody><tr><td><code>top</code></td><td>Load, processes using most CPU or memory, <code>wa</code></td><td>High <code>wa</code>: the CPU is waiting for disk</td></tr><tr><td><code>vmstat 2 5</code></td><td><code>r</code> (CPU queue), <code>si</code>/<code>so</code> (swap), <code>wa</code></td><td><code>r</code> above the core count for a sustained time, non-zero <code>si</code>/<code>so</code></td></tr><tr><td><code>iostat -xz 2 3</code></td><td><code>r_await</code>, <code>w_await</code>, <code>aqu-sz</code>, <code>%util</code> per disk</td><td>Waits of tens of ms on a disk that used to give a few</td></tr><tr><td><code>sar</code></td><td>The same, but in the past</td><td>The change between yesterday and today</td></tr><tr><td><code>pidstat -d 2</code></td><td>Which process reads or writes</td><td>The culprit by name</td></tr></tbody></table></div>
+<p>Load average on Linux includes processes waiting for disk: high load with an idle CPU points at storage, not the processor.</p>
+<h2>3. What you can tune</h2>
+<p><strong>tuned profiles.</strong> <code>tuned-adm active</code> shows the active profile and <code>tuned-adm recommend</code> the suggested one. On a VM the usual one is <code>virtual-guest</code>; on physical hardware, <code>throughput-performance</code>. Many vendors require a specific one, and that one wins.</p>
+<p><strong>Memory and swap.</strong> <code>free -h</code> and <code>vmstat</code> tell you whether swap is in active use (<code>si</code>/<code>so</code>), which is what hurts, not swap filled days ago. <code>vm.swappiness</code> is changed in a file under <code>/etc/sysctl.d/</code> and only if the vendor says so; if memory is short, the fix is memory.</p>
+<p><strong>I/O scheduler.</strong> <code>cat /sys/block/sdb/queue/scheduler</code> shows the active one in brackets. On RHEL 9, VM and NVMe disks usually run <code>none</code> or <code>mq-deadline</code>; the tuned profile already sets it, so change it in the profile, not by hand.</p>
+<p><strong>File systems.</strong> <code>df -h</code> and also <code>df -i</code>: a <code>/var</code> with no free inodes fails just like a full one. XFS is the RHEL standard; the default mount (<code>relatime</code>) is almost always enough.</p>
+<p><strong>Limits.</strong> For a systemd service, the limits in <code>/etc/security/limits.d/</code> don&#x27;t apply: they go in a drop-in with <code>LimitNOFILE=</code> (<code>systemctl edit hl7-engine</code>). <code>systemctl show hl7-engine -p LimitNOFILE</code> gives the real value. The typical symptom is <code>Too many open files</code> in the application log.</p>
+<p><strong>journald.</strong> <code>journalctl --disk-usage</code> shows how much it uses. Cap it with <code>SystemMaxUse=</code> in <code>/etc/systemd/journald.conf</code> so a service that never stops writing can&#x27;t fill <code>/var</code>.</p>
+<h2>4. The ticket: &quot;the server has been slow since this morning&quot;</h2>
+<p>Wednesday, 9:15. The laboratory reports that results take twenty minutes to show in the health record. The integration engine runs on <code>srv-hl7-01</code>.</p>
+<ol><li><strong>What changed?</strong> <code>dnf history</code> (packages), <code>last reboot</code>, <code>journalctl --since today -p err</code> and the hospital&#x27;s change log.</li><li><strong>Right now</strong>: <code>vmstat</code> and <code>iostat</code> to see whether it is CPU, memory or disk.</li><li><strong>Compare with yesterday</strong> at the same time with <code>sar</code>, and find the process.</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Bash · srv-hl7-01</span><button class="t-copy" type="button" data-copy="iostat -xz 2 2&#10;sar -d -p -f /var/log/sa/sa27 -s 09:00:00 -e 09:30:00 | grep -E &#x27;DEV|sdb&#x27;&#10;pidstat -d 2 1" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>iostat -xz 2 2</span><span class="t-cmt"># columns trimmed</span><span class="t-out">Device   r/s     w/s     r_await  w_await  aqu-sz  %util</span><span class="t-out">sdb      812.0   96.5    41.20    38.70    37.10   99.1</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>sar -d -p -f /var/log/sa/sa27 -s 09:00:00 -e 09:30:00 | grep -E &#x27;DEV|sdb&#x27;</span><span class="t-out">09:00:00   DEV       tps     ...  await  %util</span><span class="t-out">09:10:00   sdb       102.4   ...  1.40   12.3</span><span class="t-out">09:20:00   sdb       98.7    ...  1.60   13.1</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>pidstat -d 2 1</span><span class="t-out">Time      UID   PID    kB_rd/s   kB_wr/s  kB_ccwr/s iodelay  Command</span><span class="t-out">09:17:42  0     48213  98304.0   0.0      0.0       180      rsync</span><span class="t-out">09:17:42  987   2210   120.0     3410.0   0.0       96       java</span></code></pre></figure>
+<p>The data disk (<code>sdb</code>) is saturated, when yesterday at the same time it was at 12 %. The process is an <code>rsync</code> from a backup job someone moved from 3:00 to 7:00. The job is stopped with the backup owner, put back at its time, and the queued messages are processed in minutes. No kernel parameter would have fixed it.</p>
+<ol><li><strong>Close the ticket with the cause and the action</strong>: the change record notes that the backup has a fixed time and who must approve moving it.</li></ol>
+<h2>5. What you review each month</h2>
+<ul><li>That <code>sysstat</code> is still collecting on every critical server.</li><li>The growth of <code>/var</code>, of the data and of the journal.</li><li>Each server&#x27;s tuned profile against the one its vendor requires.</li><li>The times of backups, antivirus scans and scheduled tasks: that none overlaps with peaks of clinical activity.</li></ul>
+<h2>Next steps</h2>
+<ul><li>The Level 2 <strong>Red Hat Enterprise Linux</strong> guide covers basic system administration.</li><li>The <strong>Ansible</strong> guide lets you apply the same profile and limits to every server.</li><li>The <strong>Grafana</strong> guide turns the baseline into dashboards the whole team can see.</li><li>The <strong>Linux integrated with AD</strong> guide explains named access for technicians to these servers.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Sector 3</span><span class="en">Sector 3</span> · <span class="es">Red Hat - Ajuste de rendimiento de un servidor</span><span class="en">Red Hat - Server performance tuning</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="sector-3.html"><span class="es">Todas las guías del Sector 3</span><span class="en">All Sector 3 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="oracle-cambiar-hardware-y-sistema-operativo-del-servidor-de-base-de-datos.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Oracle: cambiar el hardware y el sistema operativo del servidor de base de datos sin parar el hospital</span><span class="en">Oracle: replacing the database server&#x27;s hardware and operating system without stopping the hospital</span></span></a>
+    <a class="post-nav-link next" href="windows-server-actualizaciones-planificadas-sin-cortar-el-servicio.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Windows Server: actualizaciones planificadas sin cortar el servicio</span><span class="en">Windows Server: planned updates without interrupting the service</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

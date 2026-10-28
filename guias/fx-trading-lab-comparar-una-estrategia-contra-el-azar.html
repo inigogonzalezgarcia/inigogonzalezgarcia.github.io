@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="FX Trading Lab: comparing a strategy against chance · Iñigo González" data-title-es="FX Trading Lab: comparar una estrategia contra el azar · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>FX Trading Lab: comparing a strategy against chance · Iñigo González</title>
+<meta name="description" content="The lab&#x27;s research method: a random-entry benchmark that pays the same costs, the percentile against chance, out-of-sample periods, sensitivity to neighbouring parameters and how to read the real 2024 results honestly.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/fx-trading-lab-comparar-una-estrategia-contra-el-azar.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FX Trading Lab: comparing a strategy against chance · Iñigo González">
+<meta property="og:description" content="The lab&#x27;s research method: a random-entry benchmark that pays the same costs, the percentile against chance, out-of-sample periods, sensitivity to neighbouring parameters and how to read the real 2024 results honestly.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/fx-trading-lab-comparar-una-estrategia-contra-el-azar.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FX Trading Lab: comparing a strategy against chance · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"FX Trading Lab: comparing a strategy against chance","alternativeHeadline":"FX Trading Lab: comparar una estrategia contra el azar","description":"The lab's research method: a random-entry benchmark that pays the same costs, the percentile against chance, out-of-sample periods, sensitivity to neighbouring parameters and how to read the real 2024 results honestly.","datePublished":"2026-10-28","dateModified":"2026-10-28","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/fx-trading-lab-comparar-una-estrategia-contra-el-azar.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/fx-trading-lab-comparar-una-estrategia-contra-el-azar.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"FX Trading Lab - Testing a strategy against chance"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 5","item":"https://inigogonzalezgarcia.github.io/guias/sector-5.html"},{"@type":"ListItem","position":4,"name":"FX Trading Lab: comparing a strategy against chance","item":"https://inigogonzalezgarcia.github.io/guias/fx-trading-lab-comparar-una-estrategia-contra-el-azar.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="sector-5.html"><span class="es">Sector 5</span><span class="en">Sector 5</span></a></p>
+    <h1><span class="es">FX Trading Lab: comparar una estrategia contra el azar</span><span class="en">FX Trading Lab: comparing a strategy against chance</span></h1>
+    <p class="lede"><span class="es">El método de investigación del laboratorio: una referencia de entradas aleatorias que paga los mismos costes, el percentil frente al azar, los periodos fuera de muestra, la sensibilidad a parámetros vecinos y cómo leer con honestidad los resultados reales de 2024.</span><span class="en">The lab&#x27;s research method: a random-entry benchmark that pays the same costs, the percentile against chance, out-of-sample periods, sensitivity to neighbouring parameters and how to read the real 2024 results honestly.</span></p><p class="label post-meta"><span class="es">Sector 5</span><span class="en">Sector 5</span> · <span class="es">FX Trading Lab - Comparar una estrategia contra el azar</span><span class="en">FX Trading Lab - Testing a strategy against chance</span> · <span class="es">7 min</span><span class="en">6 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">28 oct 2026</span><span class="en">28 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Saber leer un informe de investigación del laboratorio y responder a la única pregunta que importa: ¿este resultado se distingue del azar? En un entorno de trading, alguien acabará enseñándote una curva de capital que sube. Esta guía te da el método para mirarla con calma: comparar contra entradas aleatorias que pagan lo mismo, mirar solo lo que la estrategia no vio, mover los parámetros un poco y ver si el signo aguanta. Y lo aplica a los resultados reales de 2024, que son <strong>sin evidencia de ventaja</strong>.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Datos de EUR/USD 2024 descargados y validados (guía <strong>FX Trading Lab: backtesting con datos tick de Dukascopy</strong>).</li><li>Saber qué es un <strong>R</strong>: el resultado de una operación medido en múltiplos de lo que arriesgaba. +1R es ganar lo arriesgado; −1R, perderlo.</li></ul>
+<p class="g-warn">Herramienta educativa de investigación: no es asesoramiento de inversión ni un servicio de señales, y los resultados simulados no son evidencia de una ventaja rentable. El rendimiento histórico no garantiza resultados futuros.</p>
+<h2>1. Por qué un backtest positivo no basta</h2>
+<p>Un resultado positivo sobre todo el histórico puede salir de muchas cosas que no son habilidad: muy pocas operaciones, un periodo concreto que favoreció la idea, costes mal puestos o un parámetro que justo cae en el sitio bueno. Por eso el laboratorio separa el protocolo en piezas y lo lanza con un comando:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">bash · el protocolo completo</span><button class="t-copy" type="button" data-copy="python -m backend.cli research data/raw/EURUSD_2024.csv --symbol EURUSD --out results/EURUSD_2024_research.json" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>python -m backend.cli research data/raw/EURUSD_2024.csv --symbol EURUSD --out results/EURUSD_2024_research.json</span></code></pre></figure>
+<div class="g-table"><table><thead><tr><th>Pieza</th><th>Qué pregunta responde</th><th>Valores por defecto</th></tr></thead><tbody><tr><td>Splits cronológicos</td><td>¿Aguanta en periodos independientes?</td><td>60 / 20 / 20 % del tiempo</td></tr><tr><td>Walk-forward</td><td>¿Qué habría pasado en tramos no vistos, uno tras otro?</td><td>120 días dentro, 30 fuera</td></tr><tr><td>Monte Carlo</td><td>¿Qué rango de resultados y caídas cabía con estas operaciones?</td><td>1 000 caminos</td></tr><tr><td>Sensibilidad</td><td>¿Cambia el signo si muevo un parámetro al valor vecino?</td><td>Valores declarados en la configuración</td></tr><tr><td>Referencia aleatoria</td><td>¿Lo haría igual de bien entrar al azar pagando lo mismo?</td><td>200 simulaciones</td></tr></tbody></table></div>
+<p>La regla del laboratorio: solo se citan resultados <strong>fuera de muestra</strong> y de walk-forward, siempre junto al percentil frente al azar, el rango de caídas de Monte Carlo y la tabla de sensibilidad.</p>
+<h2>2. La referencia: entradas aleatorias con los mismos costes</h2>
+<p>Cada simulación sustituye cada operación real por una aleatoria en el mismo par: un minuto al azar dentro de las ventanas de observación, una dirección al azar, la <strong>misma distancia de stop</strong>, el mismo objetivo en R, el mismo spread, deslizamiento y comisión, y la misma expiración de sesión. Se repite 200 veces y se compara la esperanza real con esa distribución.</p>
+<ul><li>El <strong>percentil</strong> es la fracción de simulaciones aleatorias que quedaron por debajo de la estrategia. Un 50 % es exactamente lo que daría el azar.</li><li>Es una estimación empírica de una cola, no un test formal. Por debajo de un 95 % no significa nada.</li><li>Que pague los mismos costes es lo importante: si no, cualquier estrategia parece mejor que el azar solo por operar menos.</li></ul>
+<h2>3. Fuera de muestra: splits y walk-forward</h2>
+<ul><li><strong>Splits cronológicos</strong>: el año se parte por tiempo de calendario en entrenamiento, validación y fuera de muestra. V1 no tiene parámetros ajustados, así que los dos primeros tramos son réplicas independientes; el tercero es el único que cuenta como evidencia.</li><li><strong>Walk-forward</strong>: ventanas de 120 días seguidas de 30 fuera, desplazándose. Las piezas fuera de muestra, puestas en orden, forman un historial continuo de periodos no vistos.</li><li><strong>Calentamiento</strong>: cada tramo recibe 15 días previos para construir estructura, y las operaciones abiertas antes del inicio se descartan. Como los niveles de liquidez de V1 no caducan, un tramo cortado puede dar operaciones distintas a las de las mismas fechas dentro del año completo; hay que decir qué modo se usó.</li></ul>
+<h2>4. Sensibilidad y Monte Carlo</h2>
+<p>La sensibilidad cambia <strong>un parámetro cada vez</strong> (objetivo, deslizamiento, distancia máxima de stop, referencia del stop, caducidad de niveles) y, aparte, prueba experimentos de sesión etiquetados en las aperturas de Londres y Nueva York. Si dos valores vecinos dan signos opuestos, el resultado depende del parámetro y no de la idea.</p>
+<p>Monte Carlo remuestrea la secuencia de operaciones para dar percentiles del resultado final y de la caída máxima. Con pocas operaciones, el rango es enorme, y eso también es información.</p>
+<h2>5. Los resultados reales de 2024, leídos sin trampas</h2>
+<p>Base V1 sobre EUR/USD 2024, datos tick de Dukascopy, configuración sin tocar:</p>
+<div class="g-table"><table><thead><tr><th>Medida</th><th>Resultado</th></tr></thead><tbody><tr><td>Operaciones ejecutadas</td><td>5 (1 ganadora, 4 perdedoras)</td></tr><tr><td>Total / esperanza</td><td>−2.61R / −0.52R por operación</td></tr><tr><td>Splits 60/20/20</td><td>entrenamiento 4 operaciones, validación 1, fuera de muestra <strong>0</strong></td></tr><tr><td>Walk-forward (9 tramos)</td><td>3 operaciones fuera de muestra, −0.66R; 1 de 3 tramos positivo</td></tr><tr><td>Monte Carlo</td><td>probabilidad de camino perdedor 94 %; final p5/p50/p95 = −5.0 / −2.61 / +0.52</td></tr><tr><td>Frente al azar</td><td><strong>percentil 8.5 %</strong>; mediana aleatoria −0.10R por operación</td></tr><tr><td>Sesión de Londres (experimento)</td><td>17 operaciones, +0.29R, prácticamente en tablas</td></tr></tbody></table></div>
+<p>La lectura honesta: cinco operaciones en un año no permiten separar habilidad de ruido, y el tramo fuera de muestra no tiene ninguna. Lo que sí deja el año es <strong>dónde mueren los candidatos</strong>: la mayoría de setups completos se forman en las aperturas de Londres y Nueva York, fuera de las ventanas nocturnas de Madrid, y la regla de stop rechaza casi todo lo que sobrevive.</p>
+<h2>6. El problema: &quot;la V1.1 da +2.35R, ¿ya está?&quot;</h2>
+<p>Alguien prueba la configuración experimental <code>strategy_v1_1.yaml</code> (ventanas en la apertura de Londres, stop en el borde distal de la zona, niveles que caducan) y el total sale positivo. Parece demasiado bueno. Se diagnostica con el mismo protocolo:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">bash · investigación de la V1.1</span><button class="t-copy" type="button" data-copy="python -m backend.cli research data/raw/EURUSD_2024.csv --symbol EURUSD --strategy strategy_v1_1.yaml --out results/EURUSD_2024_v1_1_research.json" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>python -m backend.cli research data/raw/EURUSD_2024.csv --symbol EURUSD --strategy strategy_v1_1.yaml --out results/EURUSD_2024_v1_1_research.json</span><span class="t-out">NOTICE: educational research tool. Simulated historical results; not investment advice.</span><span class="t-out">baseline trades=12 expectancy=+0.196R total=+2.35R (95s)</span><span class="t-out">walk-forward OOS: {&quot;trades&quot;: 6, &quot;total_r&quot;: 3.0, &quot;expectancy_r&quot;: 0.5, &quot;folds_with_trades&quot;: 4, &quot;folds_positive&quot;: 2, &quot;consistency&quot;: 0.5}</span><span class="t-out">vs cost-matched random: percentile 0.76</span></code></pre></figure>
+<ol><li><strong>Frente al azar</strong>: percentil 75.5 % (la CLI lo redondea a 0.76). Lejos del 95 %: entradas aleatorias con los mismos costes lo hacen igual de bien una de cada cuatro veces.</li><li><strong>Fuera de muestra</strong>: el split final tiene <strong>1 operación, −0.03R</strong>. El walk-forward da 6 operaciones y +3.0R, con 2 de 4 tramos positivos: muy pocas para concluir nada.</li><li><strong>Parámetros vecinos</strong>: subir la distancia máxima de stop de 3 a 4 ATR da 17 operaciones y <strong>−1.55R</strong>; cambiar la referencia del stop al origen del primer tramo, −3.74R; pasar a la apertura de Nueva York, −6.66R. El signo no aguanta.</li><li><strong>Otro par</strong>: en cartera con GBP/USD, la V1.1 pasa a 20 operaciones y −1.18R. El signo positivo de EUR/USD desaparece.</li><li><strong>Conclusión</strong>: <strong>sin evidencia de ventaja</strong>. La siguiente pregunta honesta es estructural (dónde debe ir el stop respecto a la entrada) y necesita datos de varios años, 2022 a 2025, antes de cualquier otra afirmación.</li></ol>
+<p class="g-tip">Consejo: cuando un resultado sale inesperadamente bueno, revisa en este orden: mirada al futuro, huecos en los datos, costes, concentración por hora o régimen, tamaño de muestra y dependencia de parámetros.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía <strong>FX Trading Lab: montar el laboratorio con Python, SQLite y Docker</strong> explica dónde queda guardado cada informe.</li><li>La guía <strong>FX Trading Lab: backtesting con datos tick de Dukascopy</strong> baja los años 2022 y 2023 que este análisis necesita.</li><li>La guía de <strong>Git</strong> ayuda a registrar cada nueva versión de la estrategia como un fichero nuevo y no como una edición.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>The ability to read a lab research report and answer the only question that matters: does this result stand out from chance? In a trading environment, someone will end up showing you an equity curve going up. This guide gives you the method to look at it calmly: compare against random entries that pay the same, look only at what the strategy didn&#x27;t see, move the parameters a little and check whether the sign holds. And it applies that to the real 2024 results, which show <strong>no evidence of an edge</strong>.</p>
+<h2>Before you start</h2>
+<ul><li>EUR/USD 2024 data downloaded and validated (guide <strong>FX Trading Lab: backtesting with Dukascopy tick data</strong>).</li><li>Knowing what an <strong>R</strong> is: a trade&#x27;s result measured in multiples of what it risked. +1R is winning the amount risked; −1R, losing it.</li></ul>
+<p class="g-warn">Educational research tool: it is not investment advice or a signal service, and simulated results are not evidence of a profitable edge. Historical performance does not guarantee future results.</p>
+<h2>1. Why a positive backtest isn&#x27;t enough</h2>
+<p>A positive result over the whole history can come from many things that aren&#x27;t skill: very few trades, one period that happened to suit the idea, wrong costs, or a parameter that just lands in the right place. That&#x27;s why the lab splits the protocol into parts and runs it with one command:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">bash · the full protocol</span><button class="t-copy" type="button" data-copy="python -m backend.cli research data/raw/EURUSD_2024.csv --symbol EURUSD --out results/EURUSD_2024_research.json" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>python -m backend.cli research data/raw/EURUSD_2024.csv --symbol EURUSD --out results/EURUSD_2024_research.json</span></code></pre></figure>
+<div class="g-table"><table><thead><tr><th>Part</th><th>The question it answers</th><th>Defaults</th></tr></thead><tbody><tr><td>Chronological splits</td><td>Does it hold in independent periods?</td><td>60 / 20 / 20 % of time</td></tr><tr><td>Walk-forward</td><td>What would have happened in unseen stretches, one after another?</td><td>120 days in, 30 out</td></tr><tr><td>Monte Carlo</td><td>What range of results and drawdowns fitted these trades?</td><td>1 000 paths</td></tr><tr><td>Sensitivity</td><td>Does the sign change if I move a parameter to the neighbouring value?</td><td>Values declared in the configuration</td></tr><tr><td>Random benchmark</td><td>Would random entries paying the same do as well?</td><td>200 simulations</td></tr></tbody></table></div>
+<p>The lab&#x27;s rule: only <strong>out-of-sample</strong> and walk-forward results are quoted, always with the percentile against chance, the Monte Carlo drawdown range and the sensitivity table.</p>
+<h2>2. The benchmark: random entries with the same costs</h2>
+<p>Each simulation replaces every real trade with a random one on the same pair: a random minute inside the observation windows, a random direction, the <strong>same stop distance</strong>, the same target in R, the same spread, slippage and commission, and the same session expiry. It repeats 200 times and compares the real expectancy with that distribution.</p>
+<ul><li>The <strong>percentile</strong> is the fraction of random simulations that ended below the strategy. 50 % is exactly what chance would give.</li><li>It is an empirical one-sided estimate, not a formal test. Below 95 % it means nothing.</li><li>Paying the same costs is the key part: otherwise any strategy looks better than chance just by trading less.</li></ul>
+<h2>3. Out-of-sample: splits and walk-forward</h2>
+<ul><li><strong>Chronological splits</strong>: the year is cut by calendar time into training, validation and out-of-sample. V1 has no fitted parameters, so the first two are independent replications; the third is the only one that counts as evidence.</li><li><strong>Walk-forward</strong>: windows of 120 days followed by 30 out, rolling forward. The out-of-sample pieces, put in order, form a continuous record of unseen periods.</li><li><strong>Warm-up</strong>: each slice gets 15 earlier days to build structure, and trades opened before the start are discarded. Because V1 liquidity levels don&#x27;t expire, a sliced period can give different trades from the same dates inside the full year; you have to say which mode you used.</li></ul>
+<h2>4. Sensitivity and Monte Carlo</h2>
+<p>Sensitivity changes <strong>one parameter at a time</strong> (target, slippage, maximum stop distance, stop reference, level expiry) and, separately, runs labelled session experiments at the London and New York opens. If two neighbouring values give opposite signs, the result depends on the parameter and not on the idea.</p>
+<p>Monte Carlo resamples the trade sequence to give percentiles of the final result and the maximum drawdown. With few trades the range is huge, and that is information too.</p>
+<h2>5. The real 2024 results, read honestly</h2>
+<p>V1 baseline on EUR/USD 2024, Dukascopy tick data, configuration untouched:</p>
+<div class="g-table"><table><thead><tr><th>Measure</th><th>Result</th></tr></thead><tbody><tr><td>Executed trades</td><td>5 (1 winner, 4 losers)</td></tr><tr><td>Total / expectancy</td><td>−2.61R / −0.52R per trade</td></tr><tr><td>Splits 60/20/20</td><td>training 4 trades, validation 1, out-of-sample <strong>0</strong></td></tr><tr><td>Walk-forward (9 folds)</td><td>3 out-of-sample trades, −0.66R; 1 of 3 folds positive</td></tr><tr><td>Monte Carlo</td><td>probability of a losing path 94 %; final p5/p50/p95 = −5.0 / −2.61 / +0.52</td></tr><tr><td>Against chance</td><td><strong>percentile 8.5 %</strong>; random median −0.10R per trade</td></tr><tr><td>London session (experiment)</td><td>17 trades, +0.29R, roughly breakeven</td></tr></tbody></table></div>
+<p>The honest reading: five trades in a year can&#x27;t separate skill from noise, and the out-of-sample slice has none. What the year does show is <strong>where the candidates die</strong>: most complete setups form at the London and New York opens, outside the Madrid night windows, and the stop rule rejects almost everything that survives.</p>
+<h2>6. The problem: &quot;V1.1 gives +2.35R, is that it?&quot;</h2>
+<p>Someone tries the experimental configuration <code>strategy_v1_1.yaml</code> (London-open windows, stop at the zone&#x27;s distal edge, levels that expire) and the total comes out positive. It looks too good. You diagnose it with the same protocol:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">bash · V1.1 research</span><button class="t-copy" type="button" data-copy="python -m backend.cli research data/raw/EURUSD_2024.csv --symbol EURUSD --strategy strategy_v1_1.yaml --out results/EURUSD_2024_v1_1_research.json" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>python -m backend.cli research data/raw/EURUSD_2024.csv --symbol EURUSD --strategy strategy_v1_1.yaml --out results/EURUSD_2024_v1_1_research.json</span><span class="t-out">NOTICE: educational research tool. Simulated historical results; not investment advice.</span><span class="t-out">baseline trades=12 expectancy=+0.196R total=+2.35R (95s)</span><span class="t-out">walk-forward OOS: {&quot;trades&quot;: 6, &quot;total_r&quot;: 3.0, &quot;expectancy_r&quot;: 0.5, &quot;folds_with_trades&quot;: 4, &quot;folds_positive&quot;: 2, &quot;consistency&quot;: 0.5}</span><span class="t-out">vs cost-matched random: percentile 0.76</span></code></pre></figure>
+<ol><li><strong>Against chance</strong>: percentile 75.5 % (the CLI rounds it to 0.76). Far from 95 %: random entries with the same costs do as well about one time in four.</li><li><strong>Out-of-sample</strong>: the final split has <strong>1 trade, −0.03R</strong>. Walk-forward gives 6 trades and +3.0R, with 2 of 4 folds positive: far too few to conclude anything.</li><li><strong>Neighbouring parameters</strong>: raising the maximum stop distance from 3 to 4 ATR gives 17 trades and <strong>−1.55R</strong>; moving the stop reference to the leg-1 origin, −3.74R; switching to the New York open, −6.66R. The sign doesn&#x27;t hold.</li><li><strong>Another pair</strong>: in a portfolio with GBP/USD, V1.1 becomes 20 trades and −1.18R. The positive sign on EUR/USD disappears.</li><li><strong>Conclusion</strong>: <strong>no evidence of an edge</strong>. The next honest question is structural (where the stop belongs relative to the entry) and needs several years of data, 2022 to 2025, before any further claim.</li></ol>
+<p class="g-tip">Tip: when a result comes out unexpectedly good, check in this order: look-ahead, data gaps, costs, concentration by hour or regime, sample size and parameter dependence.</p>
+<h2>Next steps</h2>
+<ul><li>The guide <strong>FX Trading Lab: setting up the lab with Python, SQLite and Docker</strong> explains where each report is stored.</li><li>The guide <strong>FX Trading Lab: backtesting with Dukascopy tick data</strong> downloads the 2022 and 2023 years this analysis needs.</li><li>The <strong>Git</strong> guide helps you record each new strategy version as a new file rather than an edit.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Sector 5</span><span class="en">Sector 5</span> · <span class="es">FX Trading Lab - Comparar una estrategia contra el azar</span><span class="en">FX Trading Lab - Testing a strategy against chance</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="sector-5.html"><span class="es">Todas las guías del Sector 5</span><span class="en">All Sector 5 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="fx-trading-lab-backtesting-con-datos-tick-de-dukascopy.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">FX Trading Lab: backtesting con datos tick de Dukascopy</span><span class="en">FX Trading Lab: backtesting with Dukascopy tick data</span></span></a>
+    <a class="post-nav-link next" href="fx-trading-lab-montar-el-laboratorio-con-python-sqlite-y-docker.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">FX Trading Lab: montar el laboratorio con Python, SQLite y Docker</span><span class="en">FX Trading Lab: setting up the lab with Python, SQLite and Docker</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

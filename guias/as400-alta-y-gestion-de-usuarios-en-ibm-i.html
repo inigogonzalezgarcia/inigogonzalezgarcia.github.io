@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="AS400: creating and managing users on IBM i · Iñigo González" data-title-es="AS400: alta y gestión de usuarios en IBM i · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>AS400: creating and managing users on IBM i · Iñigo González</title>
+<meta name="description" content="How to create an IBM i user profile for a store chain&#x27;s ERP: user classes and special authorities, group profiles, initial program, password resets, profiles disabled by QMAXSIGN, the Access Client Solutions 5250 emulator and leavers.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/as400-alta-y-gestion-de-usuarios-en-ibm-i.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AS400: creating and managing users on IBM i · Iñigo González">
+<meta property="og:description" content="How to create an IBM i user profile for a store chain&#x27;s ERP: user classes and special authorities, group profiles, initial program, password resets, profiles disabled by QMAXSIGN, the Access Client Solutions 5250 emulator and leavers.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/as400-alta-y-gestion-de-usuarios-en-ibm-i.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AS400: creating and managing users on IBM i · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"AS400: creating and managing users on IBM i","alternativeHeadline":"AS400: alta y gestión de usuarios en IBM i","description":"How to create an IBM i user profile for a store chain's ERP: user classes and special authorities, group profiles, initial program, password resets, profiles disabled by QMAXSIGN, the Access Client Solutions 5250 emulator and leavers.","datePublished":"2026-10-28","dateModified":"2026-10-28","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/as400-alta-y-gestion-de-usuarios-en-ibm-i.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/as400-alta-y-gestion-de-usuarios-en-ibm-i.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"AS400 - Creating and managing users"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 2","item":"https://inigogonzalezgarcia.github.io/guias/sector-2.html"},{"@type":"ListItem","position":4,"name":"AS400: creating and managing users on IBM i","item":"https://inigogonzalezgarcia.github.io/guias/as400-alta-y-gestion-de-usuarios-en-ibm-i.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="sector-2.html"><span class="es">Sector 2</span><span class="en">Sector 2</span></a></p>
+    <h1><span class="es">AS400: alta y gestión de usuarios en IBM i</span><span class="en">AS400: creating and managing users on IBM i</span></h1>
+    <p class="lede"><span class="es">Cómo se crea un perfil de usuario en IBM i para el ERP de una cadena de tiendas: clases de usuario y autorizaciones especiales, perfiles de grupo, programa inicial, restablecer contraseñas, perfiles inhabilitados por QMAXSIGN, el emulador 5250 de Access Client Solutions y las bajas.</span><span class="en">How to create an IBM i user profile for a store chain&#x27;s ERP: user classes and special authorities, group profiles, initial program, password resets, profiles disabled by QMAXSIGN, the Access Client Solutions 5250 emulator and leavers.</span></p><p class="label post-meta"><span class="es">Sector 2</span><span class="en">Sector 2</span> · <span class="es">AS400 - Alta y gestión de usuarios</span><span class="en">AS400 - Creating and managing users</span> · <span class="es">6 min</span><span class="en">6 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">28 oct 2026</span><span class="en">28 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Dar de alta, mantener y dar de baja usuarios en el IBM i (el AS400 de siempre) donde corre el ERP: pedidos a almacén, stock, precios y a veces la contabilidad. En muchas cadenas de tiendas sigue siendo el corazón del negocio y lo usan a la vez la oficina central, los jefes de área y el encargado desde el PC de trastienda. El soporte de primer nivel recibe sobre todo dos cosas: altas y &quot;no puedo entrar&quot;.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Un perfil con autorización especial <code>*SECADM</code> (y autoridad sobre los perfiles que vas a tocar) para crear y cambiar usuarios. No uses QSECOFR para el día a día.</li><li>La <strong>convención de nombres</strong>: los perfiles tienen como máximo 10 caracteres, por ejemplo <code>LPRADO</code>.</li><li>Los <strong>perfiles de grupo</strong> por rol que ha definido el equipo de aplicaciones (por ejemplo <code>GRPTIENDA</code>, <code>GRPCOMPRAS</code>, <code>GRPADMIN</code>).</li><li><strong>IBM i Access Client Solutions</strong> (ACS) instalado en los PC que lo usan, con la configuración del sistema ya creada.</li></ul>
+<h2>1. Lo que define un perfil de usuario</h2>
+<div class="g-table"><table><thead><tr><th>Parámetro</th><th>Qué controla</th><th>Valor típico para tienda</th></tr></thead><tbody><tr><td><code>USRCLS</code></td><td>Clase de usuario: <code>*USER</code>, <code>*SYSOPR</code>, <code>*PGMR</code>, <code>*SECADM</code>, <code>*SECOFR</code></td><td><code>*USER</code></td></tr><tr><td><code>SPCAUT</code></td><td>Autorizaciones especiales (<code>*ALLOBJ</code>, <code>*SECADM</code>, <code>*JOBCTL</code>, <code>*SPLCTL</code>, <code>*SAVSYS</code>, <code>*SERVICE</code>, <code>*AUDIT</code>, <code>*IOSYSCFG</code>)</td><td><code>*NONE</code></td></tr><tr><td><code>GRPPRF</code></td><td>Perfil de grupo del que hereda autoridades</td><td>GRPTIENDA</td></tr><tr><td><code>INLPGM</code></td><td>Programa inicial que se ejecuta al entrar</td><td>El menú del ERP</td></tr><tr><td><code>INLMNU</code></td><td>Menú inicial</td><td><code>*SIGNOFF</code> (al salir del programa, sale de la sesión)</td></tr><tr><td><code>LMTCPB</code></td><td>Limitar capacidades: no puede ejecutar mandatos en la línea de mandatos</td><td><code>*YES</code></td></tr><tr><td><code>PWDEXP</code></td><td>Contraseña caducada: obliga a cambiarla en el primer inicio</td><td><code>*YES</code></td></tr></tbody></table></div>
+<ul><li>Un usuario de tienda nunca necesita autorizaciones especiales. Si alguien pide <code>*ALLOBJ</code> &quot;para que le funcione&quot;, el problema es la autoridad de un objeto, y se resuelve en el grupo.</li><li><code>INLPGM</code> + <code>INLMNU(*SIGNOFF)</code> + <code>LMTCPB(*YES)</code> es la combinación que deja al usuario dentro del menú del ERP, sin línea de mandatos.</li></ul>
+<h2>2. Crear el perfil</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Emulador 5250 · línea de mandatos</span><button class="t-copy" type="button" data-copy="CRTUSRPRF USRPRF(LPRADO) PASSWORD(********) PWDEXP(*YES) STATUS(*ENABLED) USRCLS(*USER) INLPGM(ERPLIB/MNUTIENDA) INLMNU(*SIGNOFF) LMTCPB(*YES) TEXT(&#x27;Laura Prado - Encargada Tienda 042&#x27;) SPCAUT(*NONE) GRPPRF(GRPTIENDA) OWNER(*GRPPRF)&#10;DSPUSRPRF USRPRF(LPRADO)" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>CRTUSRPRF USRPRF(LPRADO) PASSWORD(********) PWDEXP(*YES) STATUS(*ENABLED) USRCLS(*USER) INLPGM(ERPLIB/MNUTIENDA) INLMNU(*SIGNOFF) LMTCPB(*YES) TEXT(&#x27;Laura Prado - Encargada Tienda 042&#x27;) SPCAUT(*NONE) GRPPRF(GRPTIENDA) OWNER(*GRPPRF)</span><span class="t-out">Perfil de usuario LPRADO creado.</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>DSPUSRPRF USRPRF(LPRADO)</span><span class="t-out"> Perfil de usuario . . . . . . . . . . :   LPRADO</span><span class="t-out"> Estado . . . . . . . . . . . . . . . . :   *ENABLED</span><span class="t-out"> Clase de usuario . . . . . . . . . . . :   *USER</span><span class="t-out"> Autorización especial  . . . . . . . . :   *NONE</span><span class="t-out"> Perfil de grupo  . . . . . . . . . . . :   GRPTIENDA</span><span class="t-out"> Programa inicial . . . . . . . . . . . :   MNUTIENDA</span><span class="t-out">   Biblioteca . . . . . . . . . . . . . :     ERPLIB</span><span class="t-out"> Menú inicial . . . . . . . . . . . . . :   *SIGNOFF</span><span class="t-out"> Limitar posibilidades  . . . . . . . . :   *YES</span></code></pre></figure>
+<ul><li>Si el ERP necesita más (almacén por defecto, tienda asignada), suele ir en una tabla del propio ERP, no en el perfil. Pregunta al equipo de aplicaciones qué falta tras el <code>CRTUSRPRF</code>.</li><li>Para cambiar algo después se usa <code>CHGUSRPRF</code> con los mismos parámetros, y <code>WRKUSRPRF USRPRF(L*)</code> para ver y trabajar con varios perfiles a la vez.</li><li>Para un segundo grupo, <code>SUPGRPPRF</code> admite hasta 15 grupos suplementarios. Úsalo poco: cada grupo extra es una autoridad más que revisar.</li></ul>
+<h2>3. Acceso con Access Client Solutions</h2>
+<ol><li>En ACS, la configuración del sistema apunta al nombre del IBM i (por ejemplo <code>srv-ibmi01</code>) y usa <strong>TLS</strong> (puerto 992) si el sistema lo tiene configurado.</li><li>El usuario abre <strong>Emulador 5250</strong>, entra con su perfil y la contraseña inicial, y el sistema le pide la nueva.</li><li>Si se configura un <strong>nombre de dispositivo</strong> fijo por puesto (por ejemplo <code>T042PC01</code>), es más fácil saber desde qué tienda se conecta cada sesión.</li><li>Desde casa o de viaje, el emulador funciona igual a través de la VPN.</li></ol>
+<h2>4. Contraseñas y perfiles inhabilitados</h2>
+<p>El valor del sistema <strong>QMAXSIGN</strong> fija cuántos intentos de inicio fallidos se permiten (3 por defecto) y <strong>QMAXSGNACN</strong> qué pasa al llegar al límite: inhabilitar el dispositivo, el perfil o ambos. Cuando se inhabilita el perfil, su estado pasa a <code>*DISABLED</code> y queda un mensaje CPF1393 en la cola QSYSMSG (si existe) y en el histórico.</p>
+<p>Para restablecer la contraseña y habilitar el perfil a la vez:</p>
+<p><code>CHGUSRPRF USRPRF(LPRADO) PASSWORD(********) PWDEXP(*YES) STATUS(*ENABLED)</code></p>
+<p class="g-tip">Antes de restablecer, confirma la identidad: llamada al móvil que consta en RR. HH. o validación del jefe de área. La tienda es un sitio donde cualquiera puede llamar diciendo ser el encargado.</p>
+<h2>5. El ticket: &quot;el perfil está inhabilitado / CPF1394 al iniciar sesión&quot;</h2>
+<p>Lunes, 9:10. El encargado de la tienda 042 llama: el emulador le dice &quot;El perfil de usuario LPRADO no puede iniciar la sesión&quot; (mensaje <strong>CPF1394</strong>).</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Emulador 5250 · diagnóstico</span><button class="t-copy" type="button" data-copy="DSPUSRPRF USRPRF(LPRADO)&#10;DSPSYSVAL SYSVAL(QMAXSIGN)" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>DSPUSRPRF USRPRF(LPRADO)</span><span class="t-out"> Perfil de usuario . . . . . . . . . . :   LPRADO</span><span class="t-out"> Inicio de sesión anterior  . . . . . . :   26/10/26  20:41:07</span><span class="t-out"> Intentos de inicio no válidos  . . . . :   3</span><span class="t-out"> Estado . . . . . . . . . . . . . . . . :   *DISABLED</span><span class="t-out"> Fecha de último cambio de contraseña . :   01/09/26</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>DSPSYSVAL SYSVAL(QMAXSIGN)</span><span class="t-out"> Máximo de intentos de inicio de sesión . :   3</span></code></pre></figure>
+<ol><li>**Estado <code>*DISABLED</code> con 3 intentos no válidos**: alguien falló la contraseña tres veces. Puede ser él mismo, un compañero en el PC de trastienda o una contraseña guardada en un script de ACS antiguo.</li><li><strong>Pregunta antes de habilitar</strong>: ¿cambió la contraseña hace poco?, ¿la comparte con alguien? Si la caducidad (QPWDEXPITV) coincide con el fin de semana, es lo de siempre.</li><li><strong>Restablece y habilita</strong> con el <code>CHGUSRPRF</code> del apartado anterior, con <code>PWDEXP(*YES)</code> para que la cambie él.</li><li>**Si el perfil está <code>*ENABLED</code> y aun así no entra<strong>: puede estar inhabilitado el </strong>dispositivo** (según QMAXSGNACN). <code>WRKCFGSTS CFGTYPE(*DEV) CFGD(T042PC01)</code> muestra su estado y <code>VRYCFG CFGOBJ(T042PC01) CFGTYPE(*DEV) STATUS(*ON)</code> lo vuelve a activar.</li><li><strong>Si se repite cada semana</strong> con el mismo usuario, revisa el histórico (<code>DSPLOG</code>) para ver desde qué dispositivo llegan los intentos fallidos: suele ser un PC con la sesión de otra persona.</li></ol>
+<h2>6. Bajas y revisión mensual</h2>
+<p>En la baja, primero se <strong>inhabilita</strong>, y se borra más tarde, cuando el equipo de aplicaciones confirme que no posee objetos ni trabajos planificados:</p>
+<ol><li>El día de la baja: <code>CHGUSRPRF USRPRF(MGIL) STATUS(*DISABLED)</code>.</li><li><code>WRKOBJOWN USRPRF(MGIL)</code> para ver qué objetos posee.</li><li>Pasado el plazo acordado (30 días, por ejemplo): <code>DLTUSRPRF USRPRF(MGIL) OWNOBJOPT(*CHGOWN GRPTIENDA)</code> para transferir esos objetos en lugar de borrarlos.</li></ol>
+<p>Cada mes:</p>
+<ul><li><code>ANZPRFACT</code> (o un informe equivalente) para inhabilitar perfiles sin actividad en los últimos 60 o 90 días.</li><li>Perfiles con autorizaciones especiales: deben ser pocos y nominales, ninguno de tienda.</li><li>Cruce con las bajas de RR. HH.: un perfil activo de alguien que ya no está es un hallazgo de auditoría.</li></ul>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <strong>alta de usuario</strong> sitúa el perfil del ERP dentro de la incorporación completa.</li><li><strong>Active Directory</strong> cubre la cuenta corporativa que debe existir antes del perfil de IBM i.</li><li><strong>Cisco AnyConnect (VPN)</strong> explica el acceso al emulador desde fuera de la oficina.</li><li><strong>ISO 27001/NIS2/RGPD en IT</strong> ayuda a justificar la revisión periódica de accesos.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>Create, maintain and remove users on the IBM i (the classic AS400) where the ERP runs: warehouse orders, stock, prices and sometimes accounting. In many store chains it is still the heart of the business, used at the same time by head office, area managers and the store manager from the back-office PC. First-line support gets mostly two things: new users and &quot;I can&#x27;t get in&quot;.</p>
+<h2>Before you start</h2>
+<ul><li>A profile with the <code>*SECADM</code> special authority (and authority over the profiles you will change) to create and change users. Don&#x27;t use QSECOFR for daily work.</li><li>The <strong>naming convention</strong>: profiles are 10 characters at most, for example <code>LPRADO</code>.</li><li>The <strong>group profiles</strong> per role defined by the applications team (for example <code>GRPTIENDA</code>, <code>GRPCOMPRAS</code>, <code>GRPADMIN</code>).</li><li><strong>IBM i Access Client Solutions</strong> (ACS) installed on the PCs that use it, with the system configuration already created.</li></ul>
+<h2>1. What a user profile defines</h2>
+<div class="g-table"><table><thead><tr><th>Parameter</th><th>What it controls</th><th>Typical value for a store</th></tr></thead><tbody><tr><td><code>USRCLS</code></td><td>User class: <code>*USER</code>, <code>*SYSOPR</code>, <code>*PGMR</code>, <code>*SECADM</code>, <code>*SECOFR</code></td><td><code>*USER</code></td></tr><tr><td><code>SPCAUT</code></td><td>Special authorities (<code>*ALLOBJ</code>, <code>*SECADM</code>, <code>*JOBCTL</code>, <code>*SPLCTL</code>, <code>*SAVSYS</code>, <code>*SERVICE</code>, <code>*AUDIT</code>, <code>*IOSYSCFG</code>)</td><td><code>*NONE</code></td></tr><tr><td><code>GRPPRF</code></td><td>Group profile it inherits authorities from</td><td>GRPTIENDA</td></tr><tr><td><code>INLPGM</code></td><td>Initial program run at sign-on</td><td>The ERP menu</td></tr><tr><td><code>INLMNU</code></td><td>Initial menu</td><td><code>*SIGNOFF</code> (leaving the program ends the session)</td></tr><tr><td><code>LMTCPB</code></td><td>Limit capabilities: can&#x27;t run commands from the command line</td><td><code>*YES</code></td></tr><tr><td><code>PWDEXP</code></td><td>Password expired: forces a change at first sign-on</td><td><code>*YES</code></td></tr></tbody></table></div>
+<ul><li>A store user never needs special authorities. If someone asks for <code>*ALLOBJ</code> &quot;so it works&quot;, the problem is an object&#x27;s authority, and it is fixed in the group.</li><li><code>INLPGM</code> + <code>INLMNU(*SIGNOFF)</code> + <code>LMTCPB(*YES)</code> is the combination that keeps the user inside the ERP menu, with no command line.</li></ul>
+<h2>2. Create the profile</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">5250 emulator · command line</span><button class="t-copy" type="button" data-copy="CRTUSRPRF USRPRF(LPRADO) PASSWORD(********) PWDEXP(*YES) STATUS(*ENABLED) USRCLS(*USER) INLPGM(ERPLIB/MNUTIENDA) INLMNU(*SIGNOFF) LMTCPB(*YES) TEXT(&#x27;Laura Prado - Manager Store 042&#x27;) SPCAUT(*NONE) GRPPRF(GRPTIENDA) OWNER(*GRPPRF)&#10;DSPUSRPRF USRPRF(LPRADO)" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>CRTUSRPRF USRPRF(LPRADO) PASSWORD(********) PWDEXP(*YES) STATUS(*ENABLED) USRCLS(*USER) INLPGM(ERPLIB/MNUTIENDA) INLMNU(*SIGNOFF) LMTCPB(*YES) TEXT(&#x27;Laura Prado - Manager Store 042&#x27;) SPCAUT(*NONE) GRPPRF(GRPTIENDA) OWNER(*GRPPRF)</span><span class="t-out">User profile LPRADO created.</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>DSPUSRPRF USRPRF(LPRADO)</span><span class="t-out"> User profile . . . . . . . . . . . . :   LPRADO</span><span class="t-out"> Status . . . . . . . . . . . . . . . :   *ENABLED</span><span class="t-out"> User class . . . . . . . . . . . . . :   *USER</span><span class="t-out"> Special authority  . . . . . . . . . :   *NONE</span><span class="t-out"> Group profile  . . . . . . . . . . . :   GRPTIENDA</span><span class="t-out"> Initial program  . . . . . . . . . . :   MNUTIENDA</span><span class="t-out">   Library  . . . . . . . . . . . . . :     ERPLIB</span><span class="t-out"> Initial menu . . . . . . . . . . . . :   *SIGNOFF</span><span class="t-out"> Limit capabilities . . . . . . . . . :   *YES</span></code></pre></figure>
+<ul><li>If the ERP needs more (default warehouse, assigned store), it usually lives in a table of the ERP itself, not in the profile. Ask the applications team what is missing after the <code>CRTUSRPRF</code>.</li><li>To change something later, use <code>CHGUSRPRF</code> with the same parameters, and <code>WRKUSRPRF USRPRF(L*)</code> to view and work with several profiles at once.</li><li>For a second group, <code>SUPGRPPRF</code> accepts up to 15 supplemental groups. Use it sparingly: each extra group is one more authority to review.</li></ul>
+<h2>3. Access with Access Client Solutions</h2>
+<ol><li>In ACS, the system configuration points to the IBM i name (for example <code>srv-ibmi01</code>) and uses <strong>TLS</strong> (port 992) if the system has it configured.</li><li>The user opens the <strong>5250 Emulator</strong>, signs on with their profile and the initial password, and the system asks for a new one.</li><li>If you set a fixed <strong>device name</strong> per workstation (for example <code>T042PC01</code>), it&#x27;s easier to tell which store each session comes from.</li><li>From home or on the road, the emulator works the same way through the VPN.</li></ol>
+<h2>4. Passwords and disabled profiles</h2>
+<p>The <strong>QMAXSIGN</strong> system value sets how many failed sign-on attempts are allowed (3 by default) and <strong>QMAXSGNACN</strong> what happens at the limit: disable the device, the profile or both. When the profile is disabled, its status becomes <code>*DISABLED</code> and a CPF1393 message is left in the QSYSMSG queue (if it exists) and in the history log.</p>
+<p>To reset the password and enable the profile in one go:</p>
+<p><code>CHGUSRPRF USRPRF(LPRADO) PASSWORD(********) PWDEXP(*YES) STATUS(*ENABLED)</code></p>
+<p class="g-tip">Before resetting, confirm identity: a call to the mobile number HR holds, or validation by the area manager. A store is a place where anyone can phone in claiming to be the manager.</p>
+<h2>5. The ticket: &quot;user profile is disabled / CPF1394 at sign-on&quot;</h2>
+<p>Monday, 9:10. The manager of store 042 calls: the emulator says &quot;User profile LPRADO cannot sign on&quot; (message <strong>CPF1394</strong>).</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">5250 emulator · diagnosis</span><button class="t-copy" type="button" data-copy="DSPUSRPRF USRPRF(LPRADO)&#10;DSPSYSVAL SYSVAL(QMAXSIGN)" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>DSPUSRPRF USRPRF(LPRADO)</span><span class="t-out"> User profile . . . . . . . . . . . . :   LPRADO</span><span class="t-out"> Previous sign-on . . . . . . . . . . :   26/10/26  20:41:07</span><span class="t-out"> Sign-on attempts not valid . . . . . :   3</span><span class="t-out"> Status . . . . . . . . . . . . . . . :   *DISABLED</span><span class="t-out"> Date password last changed . . . . . :   01/09/26</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>DSPSYSVAL SYSVAL(QMAXSIGN)</span><span class="t-out"> Maximum sign-on attempts allowed . . :   3</span></code></pre></figure>
+<ol><li>**Status <code>*DISABLED</code> with 3 invalid attempts**: someone got the password wrong three times. It may be them, a colleague on the back-office PC or a password saved in an old ACS script.</li><li><strong>Ask before enabling</strong>: did they change the password recently? Do they share it with anyone? If the expiry (QPWDEXPITV) fell over the weekend, it&#x27;s the usual story.</li><li><strong>Reset and enable</strong> with the <code>CHGUSRPRF</code> from the previous section, with <code>PWDEXP(*YES)</code> so they change it themselves.</li><li>**If the profile is <code>*ENABLED</code> and they still can&#x27;t get in<strong>: the </strong>device** may be disabled (depending on QMAXSGNACN). <code>WRKCFGSTS CFGTYPE(*DEV) CFGD(T042PC01)</code> shows its status and <code>VRYCFG CFGOBJ(T042PC01) CFGTYPE(*DEV) STATUS(*ON)</code> varies it back on.</li><li><strong>If it happens every week</strong> with the same user, check the history log (<code>DSPLOG</code>) to see which device the failed attempts come from: it&#x27;s usually a PC with someone else&#x27;s session.</li></ol>
+<h2>6. Leavers and monthly review</h2>
+<p>For a leaver, first <strong>disable</strong>, and delete later, once the applications team confirms the profile owns no objects or scheduled jobs:</p>
+<ol><li>On the leaving date: <code>CHGUSRPRF USRPRF(MGIL) STATUS(*DISABLED)</code>.</li><li><code>WRKOBJOWN USRPRF(MGIL)</code> to see which objects it owns.</li><li>After the agreed period (30 days, for example): <code>DLTUSRPRF USRPRF(MGIL) OWNOBJOPT(*CHGOWN GRPTIENDA)</code> to transfer those objects instead of deleting them.</li></ol>
+<p>Each month:</p>
+<ul><li><code>ANZPRFACT</code> (or an equivalent report) to disable profiles with no activity in the last 60 or 90 days.</li><li>Profiles with special authorities: they should be few and named, none of them in stores.</li><li>A cross-check against HR leavers: an active profile for someone who has left is an audit finding.</li></ul>
+<h2>Next steps</h2>
+<ul><li>The <strong>new starter</strong> guide places the ERP profile within the complete onboarding.</li><li><strong>Active Directory</strong> covers the corporate account that should exist before the IBM i profile.</li><li><strong>Cisco AnyConnect (VPN)</strong> explains access to the emulator from outside the office.</li><li><strong>ISO 27001/NIS2/RGPD in IT</strong> helps justify the periodic access review.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Sector 2</span><span class="en">Sector 2</span> · <span class="es">AS400 - Alta y gestión de usuarios</span><span class="en">AS400 - Creating and managing users</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="sector-2.html"><span class="es">Todas las guías del Sector 2</span><span class="en">All Sector 2 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="alta-de-usuario-en-retail-red-correo-y-aplicaciones-de-negocio.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Alta de usuario: red, correo y aplicaciones de negocio en tiendas y oficina central</span><span class="en">New starter: network, email and business apps in stores and head office</span></span></a>
+    <a class="post-nav-link next" href="backup-en-cinta-rotacion-gfs-custodia-y-comprobacion-de-copias.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Backup en cinta: rotación, custodia y comprobación de las copias</span><span class="en">Tape backup: rotation, custody and checking the copies</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

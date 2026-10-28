@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Citrix VDI: publishing a clinical application and supporting it on the wards · Iñigo González" data-title-es="Citrix VDI: publicar una aplicación clínica y darle soporte en las plantas · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Citrix VDI: publishing a clinical application and supporting it on the wards · Iñigo González</title>
+<meta name="description" content="How to publish a clinical application in Citrix Virtual Apps and Desktops so it reaches the right people, the session that follows the nurse from one PC to the next, badge access, Director for support, and what to check when the app opens on one ward PC but not another.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/citrix-publicar-aplicacion-clinica-y-dar-soporte-en-planta.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Citrix VDI: publishing a clinical application and supporting it on the wards · Iñigo González">
+<meta property="og:description" content="How to publish a clinical application in Citrix Virtual Apps and Desktops so it reaches the right people, the session that follows the nurse from one PC to the next, badge access, Director for support, and what to check when the app opens on one ward PC but not another.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/citrix-publicar-aplicacion-clinica-y-dar-soporte-en-planta.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Citrix VDI: publishing a clinical application and supporting it on the wards · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Citrix VDI: publishing a clinical application and supporting it on the wards","alternativeHeadline":"Citrix VDI: publicar una aplicación clínica y darle soporte en las plantas","description":"How to publish a clinical application in Citrix Virtual Apps and Desktops so it reaches the right people, the session that follows the nurse from one PC to the next, badge access, Director for support, and what to check when the app opens on one ward PC but not another.","datePublished":"2026-10-28","dateModified":"2026-10-28","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/citrix-publicar-aplicacion-clinica-y-dar-soporte-en-planta.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/citrix-publicar-aplicacion-clinica-y-dar-soporte-en-planta.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Citrix VDI - Publishing and supporting apps"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 3","item":"https://inigogonzalezgarcia.github.io/guias/sector-3.html"},{"@type":"ListItem","position":4,"name":"Citrix VDI: publishing a clinical application and supporting it on the wards","item":"https://inigogonzalezgarcia.github.io/guias/citrix-publicar-aplicacion-clinica-y-dar-soporte-en-planta.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="sector-3.html"><span class="es">Sector 3</span><span class="en">Sector 3</span></a></p>
+    <h1><span class="es">Citrix VDI: publicar una aplicación clínica y darle soporte en las plantas</span><span class="en">Citrix VDI: publishing a clinical application and supporting it on the wards</span></h1>
+    <p class="lede"><span class="es">Cómo publicar una aplicación clínica en Citrix Virtual Apps and Desktops para que llegue a quien debe, la sesión que sigue a la enfermera de un puesto a otro, el acceso con tarjeta, Director para el soporte y qué mirar cuando la aplicación abre en un PC de planta y no en otro.</span><span class="en">How to publish a clinical application in Citrix Virtual Apps and Desktops so it reaches the right people, the session that follows the nurse from one PC to the next, badge access, Director for support, and what to check when the app opens on one ward PC but not another.</span></p><p class="label post-meta"><span class="es">Sector 3</span><span class="en">Sector 3</span> · <span class="es">Citrix VDI - Publicar y dar soporte a aplicaciones</span><span class="en">Citrix VDI - Publishing and supporting apps</span> · <span class="es">5 min</span><span class="en">5 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">28 oct 2026</span><span class="en">28 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Que la historia clínica, la prescripción o el gestor de citas lleguen a cada puesto del hospital como una aplicación publicada, igual en la planta 3 que en urgencias, y que el profesional retome su sesión en el PC de al lado sin volver a abrirlo todo. En un hospital el puesto es compartido, se usa a cualquier hora y el usuario no tiene tiempo para un reinicio: el diseño de la publicación y el soporte tienen que contar con eso.</p>
+<h2>Antes de empezar</h2>
+<ul><li>El entorno Citrix ya montado (Delivery Controllers, VDA, StoreFront o Workspace): los conceptos básicos están en la guía de <strong>Citrix VDI</strong> del Nivel 2.</li><li>La aplicación instalada y validada en la imagen de los VDA por el proveedor de la aplicación, con su versión y su ruta de ejecución documentadas.</li><li>Los <strong>grupos de Active Directory</strong> por perfil (medicina, enfermería, admisión) que define el responsable funcional de la aplicación, no IT.</li><li>Una ventana de cambio aprobada: publicar o mover una aplicación clínica es un cambio, aunque parezca un clic.</li></ul>
+<h2>1. Publicar la aplicación</h2>
+<ol><li><strong>Delivery Group</strong>: la aplicación va en un grupo de entrega de aplicaciones con máquinas suficientes para la carga de un cambio de turno, que es el pico real (todos inician sesión a la vez a las 8:00, 15:00 y 22:00).</li><li><strong>Aplicación</strong>: ruta del ejecutable, argumentos y carpeta de trabajo tal y como los da el proveedor.</li><li><strong>Usuarios</strong>: el grupo de entrega admite a todo el personal clínico; la visibilidad de cada aplicación se limita a su grupo de AD.</li><li><strong>Store</strong>: la aplicación aparece en el store de StoreFront o en Workspace, en una categoría clara (&quot;Clínicas&quot;) para que nadie busque entre cuarenta iconos.</li></ol>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Web Studio · Aplicaciones · Historia clínica · Propiedades</span></figcaption><div class="ui-body"><div class="ui-path"><span>Aplicaciones</span><span class="ui-sep" aria-hidden="true">›</span><span>HCE-Clinica</span><span class="ui-sep" aria-hidden="true">›</span><span>Propiedades</span></div><div class="ui-field"><span class="ui-k">Nombre para el usuario</span><span class="ui-v">Historia clínica</span></div><div class="ui-field"><span class="ui-k">Ruta del ejecutable</span><span class="ui-v">C:\Program Files\Fabrikam\HCE\hce.exe</span></div><div class="ui-field"><span class="ui-k">Argumentos</span><span class="ui-v">/entorno=PRO</span></div><div class="ui-field"><span class="ui-k">Carpeta de trabajo</span><span class="ui-v">C:\Program Files\Fabrikam\HCE</span></div><div class="ui-field"><span class="ui-k">Delivery Group</span><span class="ui-v">DG-Clinicas-PRO</span></div><div class="ui-field"><span class="ui-k">Categoría</span><span class="ui-v">Clínicas</span></div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Limitar visibilidad: CONTOSO\GG-HCE-Medicina, CONTOSO\GG-HCE-Enfermeria</div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Aplicación habilitada</div><div class="ui-btn">Guardar</div></div></figure>
+<p class="g-warn">Nunca publiques a &quot;Usuarios del dominio&quot; una aplicación con acceso a datos de pacientes. Quién la ve forma parte del control de acceso que te pedirá auditoría.</p>
+<h2>2. La sesión que sigue al profesional</h2>
+<p>En planta, la enfermera abre la aplicación en el control, se va a una habitación y sigue en el carro o en otro PC. Lo que debe pasar es que su sesión <strong>se reconecte</strong> en el nuevo puesto, con el paciente que tenía abierto:</p>
+<ul><li><strong>Itinerancia de sesión</strong>: por defecto, las sesiones de aplicación siguen al usuario entre dispositivos. Se ajusta con <code>Set-BrokerAppEntitlementPolicyRule -SessionReconnection</code> (para escritorios, <code>Set-BrokerEntitlementPolicyRule</code>): <code>Always</code>, <code>DisconnectedOnly</code> o <code>SameEndpointOnly</code>.</li><li><strong>Control del espacio de trabajo</strong> en StoreFront: que al iniciar sesión en otro puesto se reconecten las aplicaciones del usuario.</li><li><strong>Temporizadores</strong>: cuánto vive una sesión desconectada. Demasiado corto, pierde el trabajo entre habitaciones; demasiado largo, ocupa VDA y licencias. Se acuerda con el responsable de la aplicación y queda en la directiva de Citrix.</li></ul>
+<h2>3. Tarjeta o acreditación en el puesto</h2>
+<p>Muchos hospitales usan una solución de acceso con tarjeta o acreditación de proximidad sobre un usuario genérico de Windows: el profesional acerca la tarjeta, se abre su sesión de Citrix, la retira o la acerca otro y la sesión se desconecta.</p>
+<ul><li>La solución de tarjeta es de un tercero; IT de Citrix se ocupa de que el lector esté redirigido o gestionado en el puesto, de que Workspace app esté en la versión que el fabricante certifica y de que la desconexión deje la sesión <strong>desconectada</strong>, no cerrada.</li><li>Prueba siempre con dos personas en el mismo puesto: la primera debe desconectarse y la segunda abrir lo suyo, nunca ver la sesión de la anterior.</li></ul>
+<h2>4. Director para el soporte</h2>
+<p>Director es la primera pantalla del técnico de guardia: busca al usuario, ve en qué VDA está, el estado de la sesión, desde qué puesto (<code>ClientName</code>) y con qué versión de Workspace app, y el desglose de la <strong>duración de inicio de sesión</strong> (perfil, GPO, scripts). Desde ahí puedes desconectar, cerrar la sesión o terminar un proceso colgado sin entrar en el servidor.</p>
+<p class="g-tip">Da a la mesa de servicio un rol de Director de solo ayuda (help desk): ve y desconecta sesiones, pero no cambia la configuración del sitio.</p>
+<h2>5. El ticket: &quot;la historia clínica abre en un PC de la planta y en otro no&quot;</h2>
+<p>Martes, 16:20, planta 4. En el PC del control abre; en el de la sala de curas, el icono no aparece o da error al lanzar.</p>
+<ol><li><strong>¿El mismo usuario en los dos puestos?</strong> Si es la misma persona, el problema no son sus permisos: es el puesto.</li><li><strong>El puesto</strong>: Workspace app y la URL del store. Un PC reinstalado puede quedarse con otra versión o sin el store por GPO.</li><li><strong>La sesión</strong> desde el Delivery Controller:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · Delivery Controller</span><button class="t-copy" type="button" data-copy="Get-BrokerSession -UserName &quot;CONTOSO\laura.prado&quot; | Select-Object MachineName, SessionState, ClientName, ClientVersion&#10;Get-BrokerApplication -Name &quot;HCE-Clinica&quot; | Select-Object Name, Enabled, UserFilterEnabled" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-BrokerSession -UserName &quot;CONTOSO\laura.prado&quot; | Select-Object MachineName, SessionState, ClientName, ClientVersion</span><span class="t-out">MachineName              SessionState  ClientName      ClientVersion</span><span class="t-out">-----------              ------------  ----------      -------------</span><span class="t-out">CONTOSO\VDA-CLIN-07      Disconnected  PC-P4-CONTROL1  24.9.10.28</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-BrokerApplication -Name &quot;HCE-Clinica&quot; | Select-Object Name, Enabled, UserFilterEnabled</span><span class="t-out">Name         Enabled  UserFilterEnabled</span><span class="t-out">----         -------  -----------------</span><span class="t-out">HCE-Clinica  True     True</span></code></pre></figure>
+<p>La sesión está desconectada del PC del control y la aplicación está bien publicada. Si desde la sala de curas no se reconecta, mira la regla de itinerancia (<code>SameEndpointOnly</code> no deja reconectar desde otro puesto) y una directiva de Citrix filtrada por <strong>nombre de cliente</strong> o por unidad organizativa que no incluya ese PC.</p>
+<ol><li><strong>Cierre</strong>: anota en el ticket el puesto, la causa y si hay más PC iguales en la planta.</li></ol>
+<h2>6. El ticket: &quot;la sesión se queda colgada al abrir&quot;</h2>
+<ul><li>En Director, la duración de inicio de sesión dice en qué fase se para: perfil, GPO, script de inicio o la propia aplicación.</li><li>Si se para siempre en el mismo VDA, ponlo en <strong>modo mantenimiento</strong>, deja que las sesiones terminen y revísalo fuera del cambio de turno.</li><li>Si es la aplicación (espera a su base de datos o a un servicio del proveedor), escala al proveedor con la hora, el VDA y el usuario.</li></ul>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <strong>Citrix VDI</strong> del Nivel 2 explica la arquitectura y el soporte básico.</li><li>La guía de <strong>Active Directory</strong> cubre los grupos con los que se limita la visibilidad.</li><li>La guía de <strong>SolarWinds</strong> del Nivel 3 sirve para vigilar los VDA y el registro de máquinas.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>The electronic health record, prescribing or appointments system reaching every PC in the hospital as a published application, the same on ward 3 as in A&amp;E, and staff picking up their session on the next PC without opening everything again. In a hospital the PC is shared, used at any hour and the user has no time for a reboot: the publishing design and the support have to allow for that.</p>
+<h2>Before you start</h2>
+<ul><li>The Citrix environment already in place (Delivery Controllers, VDAs, StoreFront or Workspace): the basics are in the Level 2 <strong>Citrix VDI</strong> guide.</li><li>The application installed and validated in the VDA image by the application vendor, with its version and executable path documented.</li><li>The <strong>Active Directory groups</strong> per role (medical, nursing, admissions) defined by the application&#x27;s business owner, not by IT.</li><li>An approved change window: publishing or moving a clinical application is a change, even if it looks like one click.</li></ul>
+<h2>1. Publishing the application</h2>
+<ol><li><strong>Delivery Group</strong>: the application goes in an application Delivery Group with enough machines for a shift change, which is the real peak (everyone logs on at once at 08:00, 15:00 and 22:00).</li><li><strong>Application</strong>: executable path, arguments and working folder exactly as the vendor provides them.</li><li><strong>Users</strong>: the Delivery Group admits all clinical staff; each application&#x27;s visibility is limited to its AD group.</li><li><strong>Store</strong>: the application appears in the StoreFront store or in Workspace, in a clear category (&quot;Clinical&quot;) so nobody hunts through forty icons.</li></ol>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Web Studio · Applications · Health record · Properties</span></figcaption><div class="ui-body"><div class="ui-path"><span>Applications</span><span class="ui-sep" aria-hidden="true">›</span><span>HCE-Clinical</span><span class="ui-sep" aria-hidden="true">›</span><span>Properties</span></div><div class="ui-field"><span class="ui-k">Name for user</span><span class="ui-v">Health record</span></div><div class="ui-field"><span class="ui-k">Executable path</span><span class="ui-v">C:\Program Files\Fabrikam\HCE\hce.exe</span></div><div class="ui-field"><span class="ui-k">Arguments</span><span class="ui-v">/environment=PRO</span></div><div class="ui-field"><span class="ui-k">Working folder</span><span class="ui-v">C:\Program Files\Fabrikam\HCE</span></div><div class="ui-field"><span class="ui-k">Delivery Group</span><span class="ui-v">DG-Clinical-PRO</span></div><div class="ui-field"><span class="ui-k">Category</span><span class="ui-v">Clinical</span></div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Limit visibility: CONTOSO\GG-HCE-Medical, CONTOSO\GG-HCE-Nursing</div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Application enabled</div><div class="ui-btn">Save</div></div></figure>
+<p class="g-warn">Never publish an application with access to patient data to &quot;Domain Users&quot;. Who can see it is part of the access control an audit will ask you about.</p>
+<h2>2. The session that follows staff</h2>
+<p>On a ward, the nurse opens the application at the nurses&#x27; station, goes to a room and carries on at the trolley or another PC. What should happen is that their session <strong>reconnects</strong> on the new device, with the patient they had open:</p>
+<ul><li><strong>Session roaming</strong>: by default, application sessions follow the user between devices. It is set with <code>Set-BrokerAppEntitlementPolicyRule -SessionReconnection</code> (for desktops, <code>Set-BrokerEntitlementPolicyRule</code>): <code>Always</code>, <code>DisconnectedOnly</code> or <code>SameEndpointOnly</code>.</li><li><strong>Workspace control</strong> in StoreFront: logging on at another PC reconnects the user&#x27;s applications.</li><li><strong>Timers</strong>: how long a disconnected session lives. Too short and work is lost between rooms; too long and it ties up VDAs and licences. Agree it with the application owner and set it in the Citrix policy.</li></ul>
+<h2>3. Badge or card at the PC</h2>
+<p>Many hospitals use a card or proximity badge solution on top of a generic Windows user: staff tap the badge, their Citrix session opens, they tap out or someone else taps in and the session disconnects.</p>
+<ul><li>The badge solution comes from a third party; the Citrix team makes sure the reader is redirected or handled at the device, that Workspace app is on the version the vendor certifies, and that tapping out leaves the session <strong>disconnected</strong>, not logged off.</li><li>Always test with two people on the same PC: the first must disconnect and the second open their own work, never see the previous user&#x27;s session.</li></ul>
+<h2>4. Director for support</h2>
+<p>Director is the on-call technician&#x27;s first screen: search for the user, see which VDA they are on, the session state, from which device (<code>ClientName</code>) and with which Workspace app version, and the <strong>logon duration</strong> breakdown (profile, GPO, scripts). From there you can disconnect, log off or end a hung process without going into the server.</p>
+<p class="g-tip">Give the service desk a help desk Director role: it sees and disconnects sessions, but doesn&#x27;t change the site configuration.</p>
+<h2>5. The ticket: &quot;the health record opens on one ward PC and not on another&quot;</h2>
+<p>Tuesday, 16:20, ward 4. It opens on the nurses&#x27; station PC; on the treatment room PC the icon doesn&#x27;t appear or the launch fails.</p>
+<ol><li><strong>Same user on both PCs?</strong> If it&#x27;s the same person, the problem isn&#x27;t their permissions: it&#x27;s the device.</li><li><strong>The device</strong>: Workspace app and the store URL. A reimaged PC can end up on another version or without the store from GPO.</li><li><strong>The session</strong>, from the Delivery Controller:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · Delivery Controller</span><button class="t-copy" type="button" data-copy="Get-BrokerSession -UserName &quot;CONTOSO\laura.prado&quot; | Select-Object MachineName, SessionState, ClientName, ClientVersion&#10;Get-BrokerApplication -Name &quot;HCE-Clinical&quot; | Select-Object Name, Enabled, UserFilterEnabled" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-BrokerSession -UserName &quot;CONTOSO\laura.prado&quot; | Select-Object MachineName, SessionState, ClientName, ClientVersion</span><span class="t-out">MachineName              SessionState  ClientName      ClientVersion</span><span class="t-out">-----------              ------------  ----------      -------------</span><span class="t-out">CONTOSO\VDA-CLIN-07      Disconnected  PC-W4-STATION1  24.9.10.28</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-BrokerApplication -Name &quot;HCE-Clinical&quot; | Select-Object Name, Enabled, UserFilterEnabled</span><span class="t-out">Name          Enabled  UserFilterEnabled</span><span class="t-out">----          -------  -----------------</span><span class="t-out">HCE-Clinical  True     True</span></code></pre></figure>
+<p>The session is disconnected from the station PC and the application is published correctly. If the treatment room PC won&#x27;t reconnect, check the roaming rule (<code>SameEndpointOnly</code> blocks reconnecting from another device) and any Citrix policy filtered by <strong>client name</strong> or by organisational unit that doesn&#x27;t include that PC.</p>
+<ol><li><strong>Closing</strong>: note the device, the cause and whether there are more identical PCs on the ward.</li></ol>
+<h2>6. The ticket: &quot;the session hangs on launch&quot;</h2>
+<ul><li>In Director, logon duration shows which phase it stops at: profile, GPO, logon script or the application itself.</li><li>If it always stops on the same VDA, put it in <strong>maintenance mode</strong>, let sessions drain and look at it away from the shift change.</li><li>If it&#x27;s the application (waiting for its database or a vendor service), escalate to the vendor with the time, the VDA and the user.</li></ul>
+<h2>Next steps</h2>
+<ul><li>The Level 2 <strong>Citrix VDI</strong> guide explains the architecture and basic support.</li><li>The <strong>Active Directory</strong> guide covers the groups used to limit visibility.</li><li>The Level 3 <strong>SolarWinds</strong> guide helps you watch the VDAs and machine registration.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Sector 3</span><span class="en">Sector 3</span> · <span class="es">Citrix VDI - Publicar y dar soporte a aplicaciones</span><span class="en">Citrix VDI - Publishing and supporting apps</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="sector-3.html"><span class="es">Todas las guías del Sector 3</span><span class="en">All Sector 3 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <span></span>
+    <a class="post-nav-link next" href="entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Entornos de prueba: preparar una preproducción para validar cambios en plataformas críticas</span><span class="en">Test environments: preparing a pre-production to validate changes on critical platforms</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

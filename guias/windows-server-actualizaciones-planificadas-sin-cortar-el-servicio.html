@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Windows Server: planned updates without interrupting the service · Iñigo González" data-title-es="Windows Server: actualizaciones planificadas sin cortar el servicio · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Windows Server: planned updates without interrupting the service · Iñigo González</title>
+<meta name="description" content="How to patch a 24x7 hospital&#x27;s servers every month: rings, windows agreed with clinical owners, clusters with Cluster-Aware Updating, balanced pairs one at a time, checks before and after, WSUS, MECM or Azure Update Manager, rollback and the server that didn&#x27;t come back after Patch Tuesday.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/windows-server-actualizaciones-planificadas-sin-cortar-el-servicio.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows Server: planned updates without interrupting the service · Iñigo González">
+<meta property="og:description" content="How to patch a 24x7 hospital&#x27;s servers every month: rings, windows agreed with clinical owners, clusters with Cluster-Aware Updating, balanced pairs one at a time, checks before and after, WSUS, MECM or Azure Update Manager, rollback and the server that didn&#x27;t come back after Patch Tuesday.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/windows-server-actualizaciones-planificadas-sin-cortar-el-servicio.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Windows Server: planned updates without interrupting the service · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Windows Server: planned updates without interrupting the service","alternativeHeadline":"Windows Server: actualizaciones planificadas sin cortar el servicio","description":"How to patch a 24x7 hospital's servers every month: rings, windows agreed with clinical owners, clusters with Cluster-Aware Updating, balanced pairs one at a time, checks before and after, WSUS, MECM or Azure Update Manager, rollback and the server that didn't come back after Patch Tuesday.","datePublished":"2026-10-28","dateModified":"2026-10-28","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/windows-server-actualizaciones-planificadas-sin-cortar-el-servicio.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/windows-server-actualizaciones-planificadas-sin-cortar-el-servicio.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Windows Server - Planned updates without service downtime"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 3","item":"https://inigogonzalezgarcia.github.io/guias/sector-3.html"},{"@type":"ListItem","position":4,"name":"Windows Server: planned updates without interrupting the service","item":"https://inigogonzalezgarcia.github.io/guias/windows-server-actualizaciones-planificadas-sin-cortar-el-servicio.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="sector-3.html"><span class="es">Sector 3</span><span class="en">Sector 3</span></a></p>
+    <h1><span class="es">Windows Server: actualizaciones planificadas sin cortar el servicio</span><span class="en">Windows Server: planned updates without interrupting the service</span></h1>
+    <p class="lede"><span class="es">Cómo parchear cada mes los servidores de un hospital que funciona 24x7: anillos, ventanas acordadas con los responsables clínicos, clústeres con Cluster-Aware Updating, pares balanceados de uno en uno, comprobaciones antes y después, WSUS, MECM o Azure Update Manager, la vuelta atrás y el servidor que no volvió tras el Patch Tuesday.</span><span class="en">How to patch a 24x7 hospital&#x27;s servers every month: rings, windows agreed with clinical owners, clusters with Cluster-Aware Updating, balanced pairs one at a time, checks before and after, WSUS, MECM or Azure Update Manager, rollback and the server that didn&#x27;t come back after Patch Tuesday.</span></p><p class="label post-meta"><span class="es">Sector 3</span><span class="en">Sector 3</span> · <span class="es">Windows Server - Actualizaciones planificadas sin cortar el servicio</span><span class="en">Windows Server - Planned updates without service downtime</span> · <span class="es">5 min</span><span class="en">5 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">28 oct 2026</span><span class="en">28 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Aplicar las actualizaciones de seguridad de cada mes a los servidores Windows del hospital sin que urgencias, el laboratorio o radiología se queden sin servicio. La idea es sencilla: nada crítico se reinicia solo, todo lo que tiene redundancia se parchea de un nodo en uno, y lo que no la tiene se parchea en una ventana pactada con quien trabaja con ello, con el procedimiento de contingencia preparado.</p>
+<h2>Antes de empezar</h2>
+<ul><li>El <strong>inventario</strong> de servidores con su aplicación, su responsable clínico o de servicio, y si es un clúster, un par balanceado o un servidor único.</li><li>La herramienta de despliegue: <strong>WSUS</strong>, <strong>MECM</strong> o <strong>Azure Update Manager</strong> (sección 4).</li><li>Copias de seguridad recientes o instantáneas de las VM, y el criterio para borrarlas después (una instantánea olvidada también es un problema).</li><li>La lista de proveedores de aplicaciones clínicas que <strong>validan los parches</strong> antes de que los instales, y en qué plazo.</li></ul>
+<h2>1. Anillos y calendario</h2>
+<p>Microsoft publica el segundo martes de cada mes (<strong>Patch Tuesday</strong>). El calendario cuenta desde ese día:</p>
+<div class="g-table"><table><thead><tr><th>Anillo</th><th>Qué servidores</th><th>Cuándo</th></tr></thead><tbody><tr><td>0 · Pruebas</td><td>Laboratorio y preproducción de las aplicaciones clínicas</td><td>Día +1 a +3</td></tr><tr><td>1 · No críticos</td><td>Ficheros, impresión, herramientas de IT</td><td>Semana 1</td></tr><tr><td>2 · Con redundancia</td><td>Clústeres y pares balanceados, de un nodo en uno</td><td>Semana 2</td></tr><tr><td>3 · Únicos y sensibles</td><td>Servidores sin redundancia, en su ventana pactada</td><td>Semana 2 o 3</td></tr></tbody></table></div>
+<p>Un parche crítico explotado activamente puede acortar los plazos: se decide en el comité de cambios, no por la urgencia de quien lo lee primero.</p>
+<h2>2. Ventanas con los responsables clínicos</h2>
+<ul><li><strong>Una ventana por sistema</strong>, no una para todo el hospital. El laboratorio tiene picos a primera hora; radiología trabaja de noche con urgencias; la farmacia prepara la dosis unitaria a horas fijas.</li><li>La ventana se pacta con el <strong>responsable del servicio</strong> y se avisa a la <strong>supervisión de guardia</strong>, que es quien sabe a esa hora qué está pasando en planta.</li><li>Para los servidores únicos se acuerda el <strong>corte máximo</strong> (por ejemplo, 20 minutos) y se tiene preparado el procedimiento de contingencia en papel.</li><li>Fuera de la ventana, los servidores no reinician: la directiva de Windows Update o la ventana de mantenimiento de la herramienta lo impide.</li></ul>
+<h2>3. Clústeres y pares balanceados</h2>
+<p><strong>Clústeres de conmutación por error.</strong> <strong>Cluster-Aware Updating</strong> (CAU) pausa un nodo, mueve sus roles, lo actualiza, lo reinicia, lo devuelve y pasa al siguiente. Usa el origen de actualizaciones configurado en los nodos, así que respeta WSUS.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · desde un equipo de administración</span><button class="t-copy" type="button" data-copy="Invoke-CauScan -ClusterName CL-LIS01 -CauPluginName Microsoft.WindowsUpdatePlugin | Select-Object NodeName, UpdateTitle&#10;Invoke-CauRun -ClusterName CL-LIS01 -CauPluginName Microsoft.WindowsUpdatePlugin -MaxFailedNodes 0 -MaxRetriesPerNode 2 -RequireAllNodesOnline -Force" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Invoke-CauScan -ClusterName CL-LIS01 -CauPluginName Microsoft.WindowsUpdatePlugin | Select-Object NodeName, UpdateTitle</span><span class="t-out">NodeName     UpdateTitle</span><span class="t-out">--------     -----------</span><span class="t-out">SRV-LIS-N1   Actualización acumulativa para Windows Server 2022 (KB50xxxxx)</span><span class="t-out">SRV-LIS-N2   Actualización acumulativa para Windows Server 2022 (KB50xxxxx)</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Invoke-CauRun -ClusterName CL-LIS01 -CauPluginName Microsoft.WindowsUpdatePlugin -MaxFailedNodes 0 -MaxRetriesPerNode 2 -RequireAllNodesOnline -Force</span></code></pre></figure>
+<p><code>-MaxFailedNodes 0</code> hace que la ejecución se detenga si un nodo falla, en lugar de seguir y dejar el clúster sin redundancia. El informe queda en <code>Get-CauReport -ClusterName CL-LIS01 -Last -Detailed</code>.</p>
+<p><strong>Pares detrás de un balanceador</strong> (servidores web o de aplicación). De uno en uno: se <strong>drena</strong> el nodo en el balanceador hasta que no tiene sesiones, se parchea y reinicia, se comprueba, se vuelve a activar y solo entonces se pasa al otro. Si las sesiones son largas (un puesto de enfermería abierto todo el turno), el drenaje se empieza con horas de antelación.</p>
+<h2>4. Las herramientas</h2>
+<ul><li><strong>WSUS</strong>: aprobación por grupos de equipos, que se corresponden con los anillos. Sencillo, pero la programación de reinicios va por directiva.</li><li><strong>MECM</strong>: grupos de actualizaciones de software, despliegues por colección y <strong>ventanas de mantenimiento</strong> en cada colección (guía de <strong>MECM / SCCM</strong>).</li><li><strong>Azure Update Manager</strong>: para VM de Azure y servidores locales conectados con <strong>Azure Arc</strong>, con configuraciones de mantenimiento programadas. En Windows Server 2025 con Arc, <strong>Hotpatch</strong> instala la mayoría de los parches de seguridad sin reiniciar; los meses de línea base sí reinician.</li></ul>
+<h2>5. Antes y después de cada servidor</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · SRV-PACS-WEB1</span><button class="t-copy" type="button" data-copy="Get-Service | Where-Object { $_.StartType -eq &#x27;Automatic&#x27; -and $_.Status -ne &#x27;Running&#x27; } | Select-Object Name, Status&#10;Test-Path &#x27;HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending&#x27;&#10;Get-CimInstance Win32_LogicalDisk -Filter &quot;DeviceID=&#x27;C:&#x27;&quot; | Select-Object DeviceID, @{n=&#x27;LibreGB&#x27;;e={[math]::Round($_.FreeSpace/1GB,1)}}" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-Service | Where-Object { $_.StartType -eq &#x27;Automatic&#x27; -and $_.Status -ne &#x27;Running&#x27; } | Select-Object Name, Status</span><span class="t-out">Name              Status</span><span class="t-out">----              ------</span><span class="t-out">sppsvc            Stopped</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Test-Path &#x27;HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending&#x27;</span><span class="t-out">False</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-CimInstance Win32_LogicalDisk -Filter &quot;DeviceID=&#x27;C:&#x27;&quot; | Select-Object DeviceID, @{n=&#x27;LibreGB&#x27;;e={[math]::Round($_.FreeSpace/1GB,1)}}</span><span class="t-out">DeviceID LibreGB</span><span class="t-out">-------- -------</span><span class="t-out">C:       18.4</span></code></pre></figure>
+<ul><li><strong>Antes</strong>: la lista de servicios automáticos parados (para saber cuáles ya lo estaban), sin reinicio pendiente, espacio en <code>C:</code>, copia o instantánea hecha.</li><li><strong>Después</strong>: la misma lista, comparada con la de antes; la aplicación responde; los eventos de error desde el reinicio; y una prueba funcional del responsable (un estudio que se abre en el visor, un resultado que llega).</li></ul>
+<h2>6. El ticket: &quot;tras el Patch Tuesday un servidor no volvió / un servicio no arrancó&quot;</h2>
+<p><strong>El servidor no vuelve.</strong> Mira la consola (hipervisor o gestión remota del físico): si está en &quot;Trabajando en las actualizaciones&quot; o deshaciendo cambios, espera el tiempo pactado. Si entra en bucle, desde el entorno de recuperación se revierten las acciones pendientes con <code>dism /image:C:\ /cleanup-image /revertpendingactions</code>. Si con eso no arranca, se restaura la instantánea o la copia y se avisa al responsable de que el servidor queda sin el parche.</p>
+<p><strong>Un servicio no arrancó.</strong> Domingo, 7:10: radiología no recibe imágenes de la resonancia. El servicio que las recibe está parado tras el reinicio de la noche.</p>
+<ol><li>El registro del sistema dice por qué: <code>Get-WinEvent -FilterHashtable @{LogName=&#x27;System&#x27;; Id=7000,7009,7023,7034; StartTime=(Get-Date).AddHours(-8)}</code>. Un evento <strong>7009</strong> es un tiempo de espera agotado al arrancar.</li><li>Se arranca a mano y se comprueba con radiología que entran estudios.</li><li>La causa: el servicio depende de la base de datos, que tarda más en estar lista tras el parche. Con el proveedor se configura una <strong>dependencia</strong> o el inicio <strong>Automático (inicio retrasado)</strong>.</li></ol>
+<p><strong>Desinstalar el parche.</strong> Solo si el problema es el parche. Las acumulativas recientes van con la actualización de la pila de servicio y no se quitan con <code>wusa /uninstall</code>: se busca el paquete con <code>DISM /Online /Get-Packages</code> y se elimina con <code>DISM /Online /Remove-Package /PackageName:...</code>.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <strong>Windows Server</strong> del Nivel 2 cubre la administración básica de los servidores.</li><li>La guía de <strong>MECM / SCCM</strong> detalla despliegues y ventanas de mantenimiento.</li><li>La guía de <strong>Hyper-V</strong> explica los clústeres sobre los que corre CAU.</li><li>La guía de <strong>Azure Monitor y Log Analytics</strong> sirve para alertar de servicios parados tras la ventana.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>Applying each month&#x27;s security updates to the hospital&#x27;s Windows servers without A&amp;E, the laboratory or radiology losing service. The idea is simple: nothing critical reboots on its own, anything with redundancy is patched one node at a time, and anything without it is patched in a window agreed with the people who use it, with the downtime procedure ready.</p>
+<h2>Before you start</h2>
+<ul><li>The <strong>inventory</strong> of servers with their application, their clinical or service owner, and whether each is a cluster, a balanced pair or a single server.</li><li>The deployment tool: <strong>WSUS</strong>, <strong>MECM</strong> or <strong>Azure Update Manager</strong> (section 4).</li><li>Recent backups or VM snapshots, and the rule for deleting them afterwards (a forgotten snapshot is a problem too).</li><li>The list of clinical application vendors that <strong>validate patches</strong> before you install them, and how long they take.</li></ul>
+<h2>1. Rings and calendar</h2>
+<p>Microsoft releases on the second Tuesday of each month (<strong>Patch Tuesday</strong>). The calendar counts from that day:</p>
+<div class="g-table"><table><thead><tr><th>Ring</th><th>Which servers</th><th>When</th></tr></thead><tbody><tr><td>0 · Test</td><td>Laboratory and pre-production of the clinical applications</td><td>Day +1 to +3</td></tr><tr><td>1 · Non-critical</td><td>File, print, IT tools</td><td>Week 1</td></tr><tr><td>2 · Redundant</td><td>Clusters and balanced pairs, one node at a time</td><td>Week 2</td></tr><tr><td>3 · Single and sensitive</td><td>Servers without redundancy, in their agreed window</td><td>Week 2 or 3</td></tr></tbody></table></div>
+<p>A critical patch under active exploitation can shorten the timings: that is decided in the change board, not by the urgency of whoever reads about it first.</p>
+<h2>2. Windows with clinical owners</h2>
+<ul><li><strong>One window per system</strong>, not one for the whole hospital. The laboratory peaks first thing; radiology works nights with A&amp;E; the pharmacy prepares unit doses at fixed times.</li><li>The window is agreed with the <strong>service owner</strong> and the <strong>duty nurse manager</strong> is told, since they know what is happening on the wards at that hour.</li><li>For single servers, the <strong>maximum outage</strong> is agreed (for example, 20 minutes) and the paper downtime procedure is ready.</li><li>Outside the window, servers don&#x27;t reboot: the Windows Update policy or the tool&#x27;s maintenance window prevents it.</li></ul>
+<h2>3. Clusters and balanced pairs</h2>
+<p><strong>Failover clusters.</strong> <strong>Cluster-Aware Updating</strong> (CAU) pauses a node, moves its roles, updates it, reboots it, brings it back and moves on to the next. It uses the update source configured on the nodes, so it respects WSUS.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · from an admin workstation</span><button class="t-copy" type="button" data-copy="Invoke-CauScan -ClusterName CL-LIS01 -CauPluginName Microsoft.WindowsUpdatePlugin | Select-Object NodeName, UpdateTitle&#10;Invoke-CauRun -ClusterName CL-LIS01 -CauPluginName Microsoft.WindowsUpdatePlugin -MaxFailedNodes 0 -MaxRetriesPerNode 2 -RequireAllNodesOnline -Force" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Invoke-CauScan -ClusterName CL-LIS01 -CauPluginName Microsoft.WindowsUpdatePlugin | Select-Object NodeName, UpdateTitle</span><span class="t-out">NodeName     UpdateTitle</span><span class="t-out">--------     -----------</span><span class="t-out">SRV-LIS-N1   Cumulative Update for Windows Server 2022 (KB50xxxxx)</span><span class="t-out">SRV-LIS-N2   Cumulative Update for Windows Server 2022 (KB50xxxxx)</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Invoke-CauRun -ClusterName CL-LIS01 -CauPluginName Microsoft.WindowsUpdatePlugin -MaxFailedNodes 0 -MaxRetriesPerNode 2 -RequireAllNodesOnline -Force</span></code></pre></figure>
+<p><code>-MaxFailedNodes 0</code> makes the run stop if a node fails, instead of carrying on and leaving the cluster without redundancy. The report is in <code>Get-CauReport -ClusterName CL-LIS01 -Last -Detailed</code>.</p>
+<p><strong>Pairs behind a load balancer</strong> (web or application servers). One at a time: <strong>drain</strong> the node in the load balancer until it has no sessions, patch and reboot it, check it, re-enable it and only then move to the other. If sessions are long (a nursing station open the whole shift), start draining hours in advance.</p>
+<h2>4. The tools</h2>
+<ul><li><strong>WSUS</strong>: approval by computer groups, which map to the rings. Simple, but reboot scheduling goes through policy.</li><li><strong>MECM</strong>: software update groups, deployments per collection and <strong>maintenance windows</strong> on each collection (<strong>MECM / SCCM</strong> guide).</li><li><strong>Azure Update Manager</strong>: for Azure VMs and on-premises servers connected through <strong>Azure Arc</strong>, with scheduled maintenance configurations. On Windows Server 2025 with Arc, <strong>Hotpatch</strong> installs most security patches without a reboot; baseline months do reboot.</li></ul>
+<h2>5. Before and after each server</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · SRV-PACS-WEB1</span><button class="t-copy" type="button" data-copy="Get-Service | Where-Object { $_.StartType -eq &#x27;Automatic&#x27; -and $_.Status -ne &#x27;Running&#x27; } | Select-Object Name, Status&#10;Test-Path &#x27;HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending&#x27;&#10;Get-CimInstance Win32_LogicalDisk -Filter &quot;DeviceID=&#x27;C:&#x27;&quot; | Select-Object DeviceID, @{n=&#x27;FreeGB&#x27;;e={[math]::Round($_.FreeSpace/1GB,1)}}" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-Service | Where-Object { $_.StartType -eq &#x27;Automatic&#x27; -and $_.Status -ne &#x27;Running&#x27; } | Select-Object Name, Status</span><span class="t-out">Name              Status</span><span class="t-out">----              ------</span><span class="t-out">sppsvc            Stopped</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Test-Path &#x27;HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending&#x27;</span><span class="t-out">False</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-CimInstance Win32_LogicalDisk -Filter &quot;DeviceID=&#x27;C:&#x27;&quot; | Select-Object DeviceID, @{n=&#x27;FreeGB&#x27;;e={[math]::Round($_.FreeSpace/1GB,1)}}</span><span class="t-out">DeviceID FreeGB</span><span class="t-out">-------- ------</span><span class="t-out">C:       18.4</span></code></pre></figure>
+<ul><li><strong>Before</strong>: the list of stopped automatic services (so you know which were already stopped), no pending reboot, space on <code>C:</code>, backup or snapshot taken.</li><li><strong>After</strong>: the same list, compared with the earlier one; the application responds; error events since the reboot; and a functional test by the owner (a study that opens in the viewer, a result that arrives).</li></ul>
+<h2>6. The ticket: &quot;after Patch Tuesday a server didn&#x27;t come back / a service didn&#x27;t start&quot;</h2>
+<p><strong>The server doesn&#x27;t come back.</strong> Look at the console (hypervisor or the physical server&#x27;s remote management): if it shows &quot;Working on updates&quot; or is undoing changes, wait the agreed time. If it loops, revert pending actions from the recovery environment with <code>dism /image:C:\ /cleanup-image /revertpendingactions</code>. If it still won&#x27;t boot, restore the snapshot or backup and tell the owner the server is left without the patch.</p>
+<p><strong>A service didn&#x27;t start.</strong> Sunday, 7:10: radiology isn&#x27;t receiving images from the MRI scanner. The service that receives them is stopped after the overnight reboot.</p>
+<ol><li>The system log says why: <code>Get-WinEvent -FilterHashtable @{LogName=&#x27;System&#x27;; Id=7000,7009,7023,7034; StartTime=(Get-Date).AddHours(-8)}</code>. An event <strong>7009</strong> is a timeout while starting.</li><li>Start it by hand and check with radiology that studies are coming in.</li><li>The cause: the service depends on the database, which takes longer to be ready after the patch. With the vendor, set a <strong>dependency</strong> or <strong>Automatic (Delayed Start)</strong>.</li></ol>
+<p><strong>Uninstalling the patch.</strong> Only if the patch is the problem. Recent cumulative updates are bundled with the servicing stack update and can&#x27;t be removed with <code>wusa /uninstall</code>: find the package with <code>DISM /Online /Get-Packages</code> and remove it with <code>DISM /Online /Remove-Package /PackageName:...</code>.</p>
+<h2>Next steps</h2>
+<ul><li>The Level 2 <strong>Windows Server</strong> guide covers basic server administration.</li><li>The <strong>MECM / SCCM</strong> guide details deployments and maintenance windows.</li><li>The <strong>Hyper-V</strong> guide explains the clusters CAU runs on.</li><li>The <strong>Azure Monitor and Log Analytics</strong> guide helps you alert on stopped services after the window.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Sector 3</span><span class="en">Sector 3</span> · <span class="es">Windows Server - Actualizaciones planificadas sin cortar el servicio</span><span class="en">Windows Server - Planned updates without service downtime</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="sector-3.html"><span class="es">Todas las guías del Sector 3</span><span class="en">All Sector 3 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="red-hat-ajuste-de-rendimiento-de-un-servidor-critico.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Red Hat: ajuste de rendimiento de un servidor que no puede parar</span><span class="en">Red Hat: performance tuning of a server that can&#x27;t stop</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
