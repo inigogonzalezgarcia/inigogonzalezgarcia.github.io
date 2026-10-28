@@ -258,7 +258,7 @@ home_body = "\n\n".join([
     </div>
   </div>
 </section>'''])
-sizes["index.html"] = write("index.html", layout(R="", path="", active="", home=True,
+sizes["index.html"] = write("index.html", layout(R="", path="", active="", home=True, gsap=("SplitText",),
     title_en="Iñigo González García · IT Site Leader in Madrid", title_es="Iñigo González García · IT Site Leader en Madrid",
     desc=DESC, body=home_body, ld=[PERSON, WEBSITE]))
 
@@ -324,7 +324,7 @@ journey_body = page_hero(bi("El viaje · 2015 — 2026", "The journey · 2015 �
 </section>'''
 if JP:
     journey_body = journey_body.replace('<section class="page-hero">', '<section class="page-hero has-bg bg-journey">', 1)
-sizes["journey.html"] = write("journey.html", layout(R="", path="journey.html", active="journey",
+sizes["journey.html"] = write("journey.html", layout(R="", path="journey.html", active="journey", gsap=("ScrollTrigger",),
     title_en="Journey · Iñigo González", title_es="Viaje · Iñigo González",
     desc="Eleven years in IT operations in five stages: consulting, luxury retail, healthcare software, manufacturing and financial services.", body=journey_body,
     ld=[crumbs(("Home", ""), ("Journey", "journey.html"))]))

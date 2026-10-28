@@ -81,7 +81,13 @@ GSC_VERIFY = "BPFmgcy9AT3FRIMzeQDYNz7wj-FolbKvJYaCzrT8nus"
 
 CUR = ' aria-current="page"'
 
-def layout(*, R, path, active, title_en, title_es, desc, body, home=False, og_type="website", og_image=OG_DEFAULT, ld=None, robots=None):
+def gsap_tags(R, plugins):
+    """GSAP only on the pages that use it (self-hosted, CSP script-src 'self'), then assets/motion.js."""
+    if not plugins: return ""
+    tags = [f'<script src="{R}assets/vendor/gsap/gsap.min.js"></script>'] + [f'<script src="{R}assets/vendor/gsap/{p}.min.js"></script>' for p in plugins]
+    return "\n" + "\n".join(tags + [f'<script src="{R}assets/motion.js"></script>'])
+
+def layout(*, R, path, active, title_en, title_es, desc, body, home=False, og_type="website", og_image=OG_DEFAULT, ld=None, robots=None, gsap=()):
     t_en = html.escape(title_en); t_es = html.escape(title_es)
     nav_top = "".join(
         f'<a href="{R}{h}"{CUR if k == active else ""}>{bi(es, en)}</a>'
@@ -89,7 +95,7 @@ def layout(*, R, path, active, title_en, title_es, desc, body, home=False, og_ty
     nav_menu = "".join(
         f'<a href="{R}{h}"><span class="label">{i:02d}</span>{bi(es, en)}</a>' for i, (k, h, es, en) in enumerate(NAV, 1))
     return f'''<!doctype html>
-<html lang="en" class="no-js{' inner' if not home else ''}" data-title-en="{t_en}" data-title-es="{t_es}">
+<html lang="en" class="no-js{' inner' if not home else ''}{' motion-wait' if 'SplitText' in gsap else ''}" data-title-en="{t_en}" data-title-es="{t_es}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -163,7 +169,7 @@ def layout(*, R, path, active, title_en, title_es, desc, body, home=False, og_ty
 
 <script src="{R}assets/data.js"></script>
 <script src="{R}assets/app.js"></script>
-<script src="{R}assets/consent.js"></script>
+<script src="{R}assets/consent.js"></script>{gsap_tags(R, gsap)}
 </body>
 </html>
 '''

@@ -490,3 +490,14 @@ a.practice-desk:hover{background:var(--accent)}
 .practice-strip:hover span{text-decoration-thickness:2px}#herramientas dd a.tk:hover{text-decoration-color:var(--accent)}#herramientas dd a.tk-blog:hover{text-decoration:underline}}
 @media (max-width:760px){footer a,footer .linkbtn{display:inline-block;padding:11px 0;min-height:44px}.arrow-link{display:inline-flex;align-items:center;min-height:44px}.t-copy{min-height:40px;padding-left:14px;padding-right:14px}.check input{width:24px;height:24px;margin-top:0}}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.motion-wait .hero h1{visibility:hidden;animation:motion-show 0s 1.5s forwards}
+@keyframes motion-show{to{visibility:visible}}
+.no-js .hero h1{visibility:visible}
+@media (prefers-reduced-motion:reduce){.motion-wait .hero h1{visibility:visible}}
+.stages.is-scrolly{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:64px;row-gap:0;align-items:start}
+.is-scrolly .scrolly-media{grid-column:1;position:sticky;top:16vh;aspect-ratio:4/3}
+.is-scrolly .scrolly-media .stage-visual{position:absolute;inset:0;opacity:0;transition:opacity .45s var(--ease-out)}
+.is-scrolly .scrolly-media .stage-visual.on{opacity:1}
+.is-scrolly>.stage{grid-column:2;display:block;min-height:72vh;padding:10vh 0}
+.is-scrolly>.stage.reveal.in{opacity:.35;transition:opacity .35s ease}
+.is-scrolly>.stage.reveal.in.on{opacity:1}
