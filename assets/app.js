@@ -90,19 +90,47 @@
     auto();
   }
 
-  /* ---------- about photo ---------- */
-  if (S.about && $("#aboutPhoto")) {
-    var ap = $("#aboutPhoto"), im = new Image();
-    im.src = S.about.src; im.alt = S.about.alt || "Iñigo González"; im.loading = "lazy";
-    if (S.about.pos) im.style.objectPosition = S.about.pos;
-    ap.insertBefore(im, ap.firstChild);
-    var ini = $(".initials", ap); if (ini) ini.remove();
-    var cap = $(".cap", ap);
-    if (cap && S.about.caption_es) {
+  /* ---------- about photos: one, or several that take turns ---------- */
+  var AB = S.about ? [].concat(S.about) : [];
+  if (AB.length && $("#aboutPhoto")) {
+    var ap = $("#aboutPhoto"), cap = $(".cap", ap), ini = $(".initials", ap), abImgs = [], abDots = [], abI = 0, abTimer;
+    if (ini) ini.remove();
+    AB.forEach(function (p, i) {
+      var im = new Image();
+      im.src = p.src; im.alt = p.alt || "Iñigo González"; im.loading = i ? "lazy" : "eager"; im.decoding = "async";
+      if (p.pos) im.style.objectPosition = p.pos;
+      if (!i) im.className = "on"; else im.setAttribute("aria-hidden", "true");
+      ap.insertBefore(im, cap); abImgs.push(im);
+    });
+    function abCap(p) {
+      if (!cap) return;
+      if (!p.caption_es) { cap.replaceChildren(); return; }
       var ce = document.createElement("span"), cn = document.createElement("span");
-      ce.className = "es"; ce.textContent = S.about.caption_es;
-      cn.className = "en"; cn.textContent = S.about.caption_en || S.about.caption_es;
+      ce.className = "es"; ce.textContent = p.caption_es;
+      cn.className = "en"; cn.textContent = p.caption_en || p.caption_es;
       cap.replaceChildren(ce, cn);
+    }
+    function abShow(i) {
+      abI = (i + abImgs.length) % abImgs.length;
+      abImgs.forEach(function (im, j) { im.classList.toggle("on", j === abI); if (j === abI) im.removeAttribute("aria-hidden"); else im.setAttribute("aria-hidden", "true"); });
+      abDots.forEach(function (d, j) { d.setAttribute("aria-current", j === abI ? "true" : "false"); });
+      abCap(AB[abI]);
+    }
+    abCap(AB[0]);
+    if (AB.length > 1) {
+      var dots = document.createElement("div"); dots.className = "about-dots";
+      AB.forEach(function (p, i) {
+        var b = document.createElement("button"); b.type = "button";
+        b.setAttribute("aria-label", (root.lang === "es" ? "Foto " : "Photo ") + (i + 1));
+        b.addEventListener("click", function () { abShow(i); abAuto(); });
+        dots.appendChild(b); abDots.push(b);
+      });
+      ap.appendChild(dots); abShow(0);
+      var abAuto = function () {
+        clearInterval(abTimer);
+        if (!matchMedia("(prefers-reduced-motion: reduce)").matches) abTimer = setInterval(function () { abShow(abI + 1); }, 6000);
+      };
+      abAuto();
     }
   }
 
