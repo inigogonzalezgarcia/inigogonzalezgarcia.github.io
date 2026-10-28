@@ -338,6 +338,7 @@ blog_body = page_hero("Blog · " + bi("Labs y herramientas", "Labs & tools"),
 
 <section class="section">
   <div class="wrap">
+    <h2 class="sr-only">{bi("Todas las historias", "All stories")}</h2>
     <div class="cards">
 {cards}
     </div>
@@ -1231,6 +1232,7 @@ for lk, L in LEVELS.items():
 
 <section class="section">
   <div class="wrap">
+    <h2 class="sr-only">{bi("Temas y guías", "Topics and guides")}</h2>
     <div class="guide-levels three">
 {chr(10).join(topic_block(t) for t in lt)}
     </div>
