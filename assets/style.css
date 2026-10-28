@@ -479,3 +479,5 @@ a.practice-desk span:last-child{font-family:var(--mono)}
 .practice-strip span{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--accent)}
 .practice-strip:hover span{text-decoration-thickness:2px}
 @media (prefers-reduced-motion:reduce){.practice-cmd::after{animation:none}a.practice-desk{transition:none}}
+
+.spec-row dd a{color:inherit;text-decoration:underline;text-underline-offset:3px}.spec-row dd .dd-note{display:block;margin-top:6px;font-size:15px;font-weight:400;line-height:1.55;color:var(--muted)}
