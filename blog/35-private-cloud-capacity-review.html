@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="The cluster looked fine at 74%: a monthly capacity and availability review of a private cloud · Iñigo González" data-title-es="El clúster parecía ir bien al 74%: una revisión mensual de capacidad y disponibilidad de una nube privada · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>The cluster looked fine at 74%: a monthly capacity and availability review of a private cloud · Iñigo González</title>
+<meta name="description" content="For every vSphere and Nutanix cluster: the CPU and RAM left after a host failure, the vCPU ratio, a 12-month trend with the approved projects and the reclaim list, the month it crosses its N+1 limit against the purchase lead time, datastores, and the month&#x27;s availability.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/35-private-cloud-capacity-review.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The cluster looked fine at 74%: a monthly capacity and availability review of a private cloud · Iñigo González">
+<meta property="og:description" content="For every vSphere and Nutanix cluster: the CPU and RAM left after a host failure, the vCPU ratio, a 12-month trend with the approved projects and the reclaim list, the month it crosses its N+1 limit against the purchase lead time, datastores, and the month&#x27;s availability.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/35-private-cloud-capacity-review.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/35-private-cloud-capacity-review.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The cluster looked fine at 74%: a monthly capacity and availability review of a private cloud · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"The cluster looked fine at 74%: a monthly capacity and availability review of a private cloud","alternativeHeadline":"El clúster parecía ir bien al 74%: una revisión mensual de capacidad y disponibilidad de una nube privada","description":"For every vSphere and Nutanix cluster: the CPU and RAM left after a host failure, the vCPU ratio, a 12-month trend with the approved projects and the reclaim list, the month it crosses its N+1 limit against the purchase lead time, datastores, and the month's availability.","datePublished":"2026-10-27","dateModified":"2026-10-27","inLanguage":"en","image":"https://inigogonzalezgarcia.github.io/assets/og/35-private-cloud-capacity-review.png","url":"https://inigogonzalezgarcia.github.io/blog/35-private-cloud-capacity-review.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/blog/35-private-cloud-capacity-review.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/blog/#blog"},"articleSection":"IT Ops tools"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/blog/"},{"@type":"ListItem","position":3,"name":"The cluster looked fine at 74%: a monthly capacity and availability review of a private cloud","item":"https://inigogonzalezgarcia.github.io/blog/35-private-cloud-capacity-review.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 35</p>
+    <h1><span class="es">El clúster parecía ir bien al 74%: una revisión mensual de capacidad y disponibilidad de una nube privada</span><span class="en">The cluster looked fine at 74%: a monthly capacity and availability review of a private cloud</span></h1>
+    <p class="lede"><span class="es">Para cada clúster vSphere y Nutanix: la CPU y la RAM que quedan tras caer un host, el ratio de vCPU, una tendencia de 12 meses con los proyectos aprobados y la lista de recuperación, el mes en que cruza su límite N+1 frente al plazo de compra, los datastores y la disponibilidad del mes.</span><span class="en">For every vSphere and Nutanix cluster: the CPU and RAM left after a host failure, the vCPU ratio, a 12-month trend with the approved projects and the reclaim list, the month it crosses its N+1 limit against the purchase lead time, datastores, and the month&#x27;s availability.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span> · <span class="es">27 oct 2026</span><span class="en">27 Oct 2026</span> · <span class="es">3 min</span><span class="en">3 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>El problema</h2>
+<p>La capacidad es una fecha, no un porcentaje. Un clúster al 74% de su RAM parece sano en el panel. Pero si quitas el host que HA necesita de reserva, está al 85% de lo que queda. Crece medio punto al mes, y hay dos proyectos aprobados que llegan en enero y en marzo. Juntando las tres cosas, el clúster cruza su límite N+1 en enero. Pedir, recibir y añadir hosts nuevos al clúster lleva cuatro meses, así que la decisión había que tomarla en septiembre. Los datos están en sitios distintos: capacidad y uso en vCenter y Prism Central, proyectos en la cartera, máquinas apagadas y snapshots olvidados en el inventario, caídas en los registros de incidencias. La revisión mensual de capacidad es donde se juntan.</p>
+<h2>Qué he hecho</h2>
+<ul><li>Margen tras caer un host: la CPU y la RAM que quedan si cae el host más grande, el ratio vCPU:pCPU frente a la política, la sobreasignación de vRAM y los hosts en mantenimiento.</li><li>Autonomía: el último p95 más una tendencia lineal de 12 meses, sumando los proyectos aprobados en su mes de puesta en marcha y restando la lista de recuperación. El resultado es el mes en que cada clúster cruza su límite, el mes límite para pedir y los hosts a añadir.</li><li>Recuperación: máquinas apagadas desde hace 30 o 90 días, máquinas ociosas, máquinas sobredimensionadas según su p95 con el tamaño recomendado, snapshots antiguos y máquinas sin responsable, con la RAM y el almacenamiento que devuelve cada una.</li><li>Almacenamiento y disponibilidad: datastores por debajo del umbral de espacio libre, thin provisioning, caídas de clúster frente al objetivo de disponibilidad, fallos de host y reinicios de HA, y hosts sin soporte del fabricante.</li><li><code>report.html</code> con una tarjeta y una gráfica de autonomía por clúster, <code>capacity-review.md</code> con la tabla de decisiones para la reunión, y CSV de clústeres, previsión, recuperación, datastores y demanda.</li><li>Un exportador de solo lectura en PowerShell para vCenter con PowerCLI y para Nutanix Prism Central con su API REST.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python solo con la librería estándar. La demo es una empresa de ingeniería inventada con una nube privada en Madrid y Guadalajara: dos clústeres vSphere de producción, un clúster Nutanix AHV, un clúster de gestión, 23 hosts, 458 máquinas virtuales, 13 meses de uso y siete peticiones de demanda. Los problemas están puestos a propósito. El clúster de producción de Madrid cruza su límite N+1 en enero al contar los proyectos aprobados, y la lista de recuperación mueve esa fecha a marzo, lo justo para pedir los hosts en noviembre. 15 tests, un runbook para la reunión mensual y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.</p>
+<h2>Qué aprendí</h2>
+<p>De gestionar infraestructura de nube privada con vCenter y vSphere, VMware VCF con vSAN y NSX-T, Nutanix, OpenShift y HPE GreenLake, sobre servidores Dell, HP y Supermicro con almacenamiento SAN, NAS y NetApp, y de la gestión formal de capacidad y disponibilidad con métricas, tendencias y planes de disponibilidad. El ajuste de tamaños y las reservas en Azure me enseñaron lo mismo desde el lado del coste. La lección que da forma a la herramienta: la reunión de capacidad tiene que acabar con fechas y responsables, no con porcentajes. La autonomía se compara con el plazo de compra, y la lista de recuperación solo cuenta si mueve la fecha.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Ejecutarlo con los últimos 12 meses de datos de vCenter y Prism Central, y revisar los límites N+1 y la política de vCPU con el equipo de plataforma antes de la primera reunión.</li><li>Pasar cada mes la cartera de proyectos al fichero de demanda, y enviar a cada responsable de servicio sus filas de recuperación una semana antes de la reunión.</li><li>Guardar la salida de cada mes, para que la siguiente revisión compare la previsión con lo que pasó de verdad.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>The problem</h2>
+<p>Capacity is a date, not a percentage. A cluster at 74% of its RAM looks healthy on the dashboard. Take away the host that HA needs as a spare, though, and it is at 85% of what is left. It grows half a point a month, and two approved projects land in January and March. Put the three facts together and the cluster crosses its N+1 limit in January. New hosts take four months to order, deliver and add to the cluster, so the decision was due in September. The facts live in different places: capacity and utilisation in vCenter and Prism Central, projects in the portfolio, powered-off VMs and forgotten snapshots in the inventory, outages in the incident records. The monthly capacity review is where they meet.</p>
+<h2>What I built</h2>
+<ul><li>Headroom after a host failure: the CPU and RAM left when the largest host fails, the vCPU:pCPU ratio against the policy, vRAM overcommit, and hosts in maintenance.</li><li>Runway: the latest p95 plus a linear trend over 12 months, with the approved projects added at their go-live month and the reclaim list taken away. The result is the month each cluster crosses its limit, the month to order by and the hosts to add.</li><li>Reclaim: VMs powered off for 30 or 90 days, idle VMs, VMs oversized against their p95 with the recommended size, old snapshots, and VMs without an owner, with the RAM and storage each one gives back.</li><li>Storage and availability: datastores below the free space threshold, thin provisioning, cluster outages against the availability target, host failures and HA restarts, and hosts out of vendor support.</li><li><code>report.html</code> with a card and a runway chart per cluster, <code>capacity-review.md</code> with the decisions table for the meeting, and CSVs for clusters, forecast, reclaim, datastores and demand.</li><li>A read-only PowerShell exporter for vCenter with PowerCLI and for Nutanix Prism Central through its REST API.</li></ul>
+<h2>How it is built</h2>
+<p>Python with the standard library only. The demo is a made-up engineering company with a private cloud in Madrid and Guadalajara: two vSphere production clusters, a Nutanix AHV cluster, a management cluster, 23 hosts, 458 VMs, 13 months of utilisation and seven demand items. The problems are placed on purpose. The Madrid production cluster crosses its N+1 limit in January once the approved projects are counted, and the reclaim list moves that date to March, enough to order the hosts in November. 15 tests, a runbook for the monthly meeting, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.</p>
+<h2>What I learned</h2>
+<p>From running private cloud infrastructure on vCenter and vSphere, VMware VCF with vSAN and NSX-T, Nutanix, OpenShift and HPE GreenLake, on Dell, HP and Supermicro servers with SAN, NAS and NetApp storage, and from formal capacity and availability management with metrics, trends and availability plans. Right-sizing and reservations in Azure taught me the same lesson on the cost side. The lesson that shaped the tool: the capacity meeting should end with dates and owners, not percentages. The runway is set against the purchase lead time, and the reclaim list only counts when it moves the date.</p>
+<h2>Next steps</h2>
+<ul><li>Run it with the last 12 months of vCenter and Prism Central data, and check the N+1 limits and the vCPU policy with the platform team before the first meeting.</li><li>Put the project portfolio into the demand file every month, and send each service owner their reclaim rows a week before the meeting.</li><li>Keep each month&#x27;s output, so the next review compares the forecast with what actually happened.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
+      <p class="repo-name">35-private-cloud-capacity-review</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/35-private-cloud-capacity-review" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="es">Compartir</span><span class="en">Share</span></p>
+        <div class="share-row es" lang="es"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F35-private-cloud-capacity-review.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F35-private-cloud-capacity-review.html&amp;text=El%20cl%C3%BAster%20parec%C3%ADa%20ir%20bien%20al%2074%25%3A%20una%20revisi%C3%B3n%20mensual%20de%20capacidad%20y%20disponibilidad%20de%20una%20nube%20privada%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">X</a><a class="share-btn" href="https://wa.me/?text=El%20cl%C3%BAster%20parec%C3%ADa%20ir%20bien%20al%2074%25%3A%20una%20revisi%C3%B3n%20mensual%20de%20capacidad%20y%20disponibilidad%20de%20una%20nube%20privada%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F35-private-cloud-capacity-review.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=El%20cl%C3%BAster%20parec%C3%ADa%20ir%20bien%20al%2074%25%3A%20una%20revisi%C3%B3n%20mensual%20de%20capacidad%20y%20disponibilidad%20de%20una%20nube%20privada%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F35-private-cloud-capacity-review.html" aria-label="Compartir en Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/35-private-cloud-capacity-review.html" data-copied="Enlace copiado">Copiar enlace</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/35-private-cloud-capacity-review.html" data-title="El clúster parecía ir bien al 74%: una revisión mensual de capacidad y disponibilidad de una nube privada" hidden>Más…</button></div>
+        <div class="share-row en" lang="en"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F35-private-cloud-capacity-review.html" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F35-private-cloud-capacity-review.html&amp;text=The%20cluster%20looked%20fine%20at%2074%25%3A%20a%20monthly%20capacity%20and%20availability%20review%20of%20a%20private%20cloud%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Share on X">X</a><a class="share-btn" href="https://wa.me/?text=The%20cluster%20looked%20fine%20at%2074%25%3A%20a%20monthly%20capacity%20and%20availability%20review%20of%20a%20private%20cloud%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F35-private-cloud-capacity-review.html" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=The%20cluster%20looked%20fine%20at%2074%25%3A%20a%20monthly%20capacity%20and%20availability%20review%20of%20a%20private%20cloud%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F35-private-cloud-capacity-review.html" aria-label="Share on Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/35-private-cloud-capacity-review.html" data-copied="Link copied">Copy link</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/35-private-cloud-capacity-review.html" data-title="The cluster looked fine at 74%: a monthly capacity and availability review of a private cloud" hidden>More…</button></div>
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="34-venue-service-readiness.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">La única impresora de cocina llevaba caída desde ayer: una revisión de cada mañana para un local de hostelería</span><span class="en">The only kitchen printer had been down since yesterday: a morning readiness check for a hospitality venue</span></span></a>
+    <a class="post-nav-link next" href="36-major-incident-command-kit.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Los usuarios nos avisaron 40 minutos antes que la monitorización: un kit para dirigir y revisar incidentes mayores</span><span class="en">Users told us 40 minutes before monitoring did: a kit to run and review major incidents</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
