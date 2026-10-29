@@ -364,6 +364,8 @@ def g(**k): GUIDES.append(k)
 g(slug="active-directory-alta-usuario-grupos", topic="active-directory", date="2026-10-21",
   title_es="Alta de un usuario en Active Directory y sus grupos",
   title_en="Creating a user in Active Directory and adding them to groups",
+  seo_title_en="Active Directory: create a user and groups · Iñigo González",
+  seo_title_es="Active Directory: alta de usuario y grupos · Iñigo González",
   dek_es="Crear la cuenta, ponerla en la OU correcta, añadir los grupos y comprobar que todo está bien antes de avisar al usuario.",
   dek_en="Create the account, place it in the right OU, add the groups and check everything before telling the user.",
   es="""
@@ -547,6 +549,8 @@ If an account locks again and again, the cause is usually an old password saved 
 g(slug="android-perfil-de-trabajo-intune", topic="android", date="2026-10-21",
   title_es="Enrolar un Android con perfil de trabajo en Intune",
   title_en="Enrolling an Android phone with a work profile in Intune",
+  seo_title_en="Android work profile enrolment in Intune · Iñigo González",
+  seo_title_es="Android con perfil de trabajo en Intune · Iñigo González",
   dek_es="Qué le pides al usuario, qué hace el Portal de empresa y cómo compruebas que el perfil de trabajo recibe las políticas y las aplicaciones.",
   dek_en="What you ask the user to do, what Company Portal does, and how you check that the work profile receives its policies and apps.",
   es="""
@@ -684,6 +688,8 @@ From Intune, **Retire** removes only the work profile: email, apps and company d
 g(slug="bitlocker-estado-y-clave-de-recuperacion", topic="bitlocker", date="2026-10-21",
   title_es="BitLocker: comprobar el cifrado y recuperar un equipo que pide la clave",
   title_en="BitLocker: checking encryption and recovering a device that asks for the key",
+  seo_title_en="BitLocker: status and recovery key · Iñigo González",
+  seo_title_es="BitLocker: estado y clave de recuperación · Iñigo González",
   dek_es="Ver si el disco está cifrado, dónde está guardada la clave de recuperación y qué hacer cuando un portátil arranca en la pantalla azul de BitLocker.",
   dek_en="See whether the disk is encrypted, where the recovery key is stored, and what to do when a laptop boots into the blue BitLocker screen.",
   es="""
@@ -867,6 +873,8 @@ In Intune, the report **Devices → Monitor → Encryption report** gives the re
 g(slug="anyconnect-instalar-y-diagnosticar-vpn", topic="anyconnect", date="2026-10-21",
   title_es="Cisco AnyConnect: instalar el cliente y diagnosticar una VPN que no conecta",
   title_en="Cisco AnyConnect: installing the client and diagnosing a VPN that won't connect",
+  seo_title_en="Cisco AnyConnect: install and fix the VPN · Iñigo González",
+  seo_title_es="Cisco AnyConnect: instalar y diagnosticar la VPN · Iñigo González",
   dek_es="Instalar Secure Client, conectar, y seguir un orden fijo cuando falla: red, DNS, certificado, credenciales o el propio cliente.",
   dek_en="Install Secure Client, connect, and follow a fixed order when it fails: network, DNS, certificate, credentials or the client itself.",
   es="""
@@ -1070,6 +1078,8 @@ The client's exact message, the network they connect from (home, hotel, mobile d
 g(slug="impresoras-instalar-impresora-de-red-y-cola-atascada", topic="impresoras", date="2026-10-21",
   title_es="Impresoras: instalar una impresora de red y desatascar la cola",
   title_en="Printers: installing a network printer and clearing a stuck queue",
+  seo_title_en="Network printer setup and stuck print queue · Iñigo González",
+  seo_title_es="Impresora de red y cola de impresión atascada · Iñigo González",
   dek_es="Añadir una impresora por IP o desde el servidor de impresión, y los tres arreglos que resuelven casi todas las incidencias de impresión.",
   dek_en="Add a printer by IP or from the print server, and the three fixes that resolve almost every printing ticket.",
   es="""
@@ -1263,6 +1273,8 @@ Printer name, IP, which device, which application, and the result of the test pa
 g(slug="iphone-ipad-enrolar-en-intune", topic="ios", date="2026-10-21",
   title_es="iPhone y iPad: enrolar en Intune y comprobar que llegan las políticas",
   title_en="iPhone and iPad: enrolling in Intune and checking that policies arrive",
+  seo_title_en="iPhone and iPad: enrol in Intune · Iñigo González",
+  seo_title_es="iPhone y iPad: enrolar en Intune · Iñigo González",
   dek_es="El camino del usuario con el Portal de empresa, qué cambia si el dispositivo viene por Apple Business Manager, y cómo verificar correo, Wi-Fi y apps.",
   dek_en="The user's path with Company Portal, what changes when the device comes through Apple Business Manager, and how to verify email, Wi-Fi and apps.",
   es="""
@@ -1402,6 +1414,8 @@ If a corporate iPhone powers on and does not show that screen, it is usually not
 g(slug="jira-service-management-un-ticket-bien-hecho", topic="jira", date="2026-10-21",
   title_es="Jira Service Management: un ticket bien hecho, de principio a fin",
   title_en="Jira Service Management: a well-made ticket, from start to finish",
+  seo_title_en="Jira Service Management: a good ticket · Iñigo González",
+  seo_title_es="Jira Service Management: un ticket bien hecho · Iñigo González",
   dek_es="Clasificar, priorizar, escribir para el siguiente, escalar y cerrar. Y las búsquedas JQL que usarás cada día.",
   dek_en="Classify, prioritise, write for the next person, escalate and close. Plus the JQL searches you'll use every day.",
   es="""
@@ -1573,6 +1587,8 @@ Save the first two as filters and put them on your board: the queue stops being 
 g(slug="microsoft-365-asignar-y-retirar-licencias", topic="m365", date="2026-10-21",
   title_es="Microsoft 365: asignar y retirar licencias, y saber qué incluye cada una",
   title_en="Microsoft 365: assigning and removing licences, and knowing what each one includes",
+  seo_title_en="Microsoft 365: assign and remove licences · Iñigo González",
+  seo_title_es="Microsoft 365: asignar y retirar licencias · Iñigo González",
   dek_es="Desde el centro de administración y desde PowerShell con Microsoft Graph, con los errores típicos y la baja de un usuario sin perder su buzón.",
   dek_en="From the admin centre and from PowerShell with Microsoft Graph, with the typical errors and a leaver's offboarding without losing their mailbox.",
   es="""
@@ -1752,6 +1768,8 @@ The classic mistake is removing the licence on day one and discovering the mailb
 g(slug="teams-los-problemas-mas-comunes", topic="teams", date="2026-10-21",
   title_es="Microsoft Teams: los cinco problemas que más llegan y cómo resolverlos",
   title_en="Microsoft Teams: the five issues that come up most and how to fix them",
+  seo_title_en="Microsoft Teams: five common issues fixed · Iñigo González",
+  seo_title_es="Microsoft Teams: los 5 problemas más comunes · Iñigo González",
   dek_es="No abre o va lento, no se oye, el estado no cambia, no aparece un equipo o un canal, y la cámara no funciona en la reunión.",
   dek_en="Won't open or runs slow, no audio, the status won't change, a team or channel is missing, and the camera fails in the meeting.",
   es="""
@@ -1905,6 +1923,8 @@ Teams version (Settings → About), whether it happens in the browser (`teams.mi
 g(slug="outlook-exchange-online-buzon-compartido-permisos-autorespuesta", topic="outlook", date="2026-10-21",
   title_es="Outlook y Exchange Online: buzón compartido, permisos y respuesta automática",
   title_en="Outlook and Exchange Online: shared mailbox, permissions and automatic replies",
+  seo_title_en="Exchange Online: shared mailbox and permissions · Iñigo González",
+  seo_title_es="Exchange Online: buzón compartido y permisos · Iñigo González",
   dek_es="Las tres peticiones de correo más frecuentes resueltas con PowerShell, y qué hacer con un Outlook que no abre o no sincroniza.",
   dek_en="The three most frequent email requests solved with PowerShell, and what to do with an Outlook that won't open or sync.",
   es="""
@@ -2064,6 +2084,8 @@ In order, stopping at the first that works:
 g(slug="windows-diagnostico-basico-equipo-lento-o-con-errores", topic="windows", date="2026-10-21",
   title_es="Windows 10 y 11: diagnóstico básico de un equipo lento, con errores o que no sincroniza con Intune",
   title_en="Windows 10 and 11: basic diagnosis of a slow device, one with errors, or one not syncing with Intune",
+  seo_title_en="Windows 10/11: diagnose a slow PC · Iñigo González",
+  seo_title_es="Windows 10/11: diagnosticar un equipo lento · Iñigo González",
   dek_es="Diez minutos de comprobaciones con un orden fijo: versión y actualizaciones, disco y memoria, integridad del sistema, eventos, y el estado de Entra ID e Intune.",
   dek_en="Ten minutes of checks in a fixed order: version and updates, disk and memory, system integrity, events, and the Entra ID and Intune state.",
   es="""
@@ -2320,6 +2342,8 @@ Name and model, Windows build, last reboot, free disk, the critical events from 
 g(slug="azure-ad-connect-forzar-sincronizacion-y-objetos-que-no-pasan", topic="azure-ad-connect", date="2026-10-21",
   title_es="Azure AD Connect: forzar una sincronización y arreglar un objeto que no pasa a Entra ID",
   title_en="Azure AD Connect: forcing a sync and fixing an object that won't reach Entra ID",
+  seo_title_en="Azure AD Connect: force a sync, fix objects · Iñigo González",
+  seo_title_es="Azure AD Connect: forzar sincronización · Iñigo González",
   dek_es="Dónde mirar cuando un usuario nuevo no aparece en Microsoft 365, cómo forzar el ciclo y cómo leer los errores de exportación.",
   dek_en="Where to look when a new user doesn't appear in Microsoft 365, how to force the cycle, and how to read export errors.",
   es="""
@@ -2475,6 +2499,8 @@ Time of the last cycle, the connector that errored, the object name and the erro
 g(slug="bash-primer-script-de-comprobacion-de-un-servidor", topic="bash", date="2026-10-21",
   title_es="Bash: tu primer script de comprobación de un servidor Linux",
   title_en="Bash: your first health-check script for a Linux server",
+  seo_title_en="Bash: a Linux server health-check script · Iñigo González",
+  seo_title_es="Bash: script de comprobación de un servidor · Iñigo González",
   dek_es="Un script que mira disco, memoria, carga y servicios, avisa si algo pasa de un umbral y se programa en cron. Con las cinco reglas que evitan sustos.",
   dek_en="A script that checks disk, memory, load and services, warns when something crosses a threshold, and runs from cron. With the five rules that avoid nasty surprises.",
   es="""
@@ -2666,6 +2692,8 @@ Cron has neither your `PATH` nor your aliases: use full paths and test the scrip
 g(slug="citrix-vdi-publicar-aplicacion-y-sesion-que-no-abre", topic="citrix-vdi", date="2026-10-21",
   title_es="Citrix VDI: publicar una aplicación y diagnosticar una sesión que no abre",
   title_en="Citrix VDI: publishing an application and diagnosing a session that won't launch",
+  seo_title_en="Citrix VDI: publish an app, fix a session · Iñigo González",
+  seo_title_es="Citrix VDI: publicar app y sesión que no abre · Iñigo González",
   dek_es="Los cuatro objetos que hay que entender (catálogo, grupo de entrega, VDA, StoreFront), cómo publicar una app y el orden para resolver 'no me abre'.",
   dek_en="The four objects you need to understand (catalog, delivery group, VDA, StoreFront), how to publish an app, and the order for solving 'it won't open'.",
   es="""
@@ -2845,6 +2873,8 @@ App name, delivery group, the `Get-BrokerMachine` output, which step it gets stu
 g(slug="confluence-espacio-de-it-y-runbooks-que-se-usan", topic="confluence", date="2026-10-21",
   title_es="Confluence: montar el espacio de IT y escribir runbooks que el equipo use",
   title_en="Confluence: setting up the IT space and writing runbooks the team actually uses",
+  seo_title_en="Confluence: an IT space and useful runbooks · Iñigo González",
+  seo_title_es="Confluence: espacio de IT y runbooks útiles · Iñigo González",
   dek_es="Estructura del espacio, permisos, una plantilla de runbook con los campos que importan, y cómo enlazarlo con los tickets de Jira.",
   dek_en="Space structure, permissions, a runbook template with the fields that matter, and how to link it to Jira tickets.",
   es="""
@@ -2992,6 +3022,8 @@ Pages with sensitive information (network diagrams with IPs, emergency procedure
 g(slug="git-scripts-del-equipo-bajo-control-de-versiones", topic="git", date="2026-10-21",
   title_es="Git: poner los scripts del equipo bajo control de versiones",
   title_en="Git: putting the team's scripts under version control",
+  seo_title_en="Git for IT teams: scripts under version control · Iñigo González",
+  seo_title_es="Git para equipos de IT: scripts versionados · Iñigo González",
   dek_es="Repositorio, ramas, commits que se entienden, pull request con revisión, y lo que nunca debe entrar en un repo.",
   dek_en="Repository, branches, commits that make sense, pull requests with review, and what must never go into a repo.",
   es="""
@@ -3201,6 +3233,8 @@ $ git checkout 3f2a9c1 -- bash/check-server.sh
 g(slug="jamf-pro-enrolar-un-mac-y-desplegar-una-politica", topic="jamf-pro", date="2026-10-21",
   title_es="Jamf Pro: enrolar un Mac y desplegar una política con un grupo inteligente",
   title_en="Jamf Pro: enrolling a Mac and deploying a policy with a smart group",
+  seo_title_en="Jamf Pro: enrol a Mac and deploy a policy · Iñigo González",
+  seo_title_es="Jamf Pro: enrolar un Mac y desplegar una política · Iñigo González",
   dek_es="Enrolamiento automatizado o por el usuario, el inventario que lo alimenta todo, un grupo inteligente y una política que instala y configura. Más los comandos del día a día.",
   dek_en="Automated or user-initiated enrolment, the inventory that feeds everything, a smart group and a policy that installs and configures. Plus the everyday commands.",
   es="""
@@ -3404,6 +3438,8 @@ $ sudo jamf policy -event install-crm   # if the policy has a custom trigger
 g(slug="mecm-sccm-empaquetar-una-aplicacion-y-desplegarla", topic="mecm-sccm", date="2026-10-21",
   title_es="MECM / SCCM: empaquetar una aplicación y desplegarla a una colección",
   title_en="MECM / SCCM: packaging an application and deploying it to a collection",
+  seo_title_en="MECM / SCCM: package and deploy an app · Iñigo González",
+  seo_title_es="MECM / SCCM: empaquetar y desplegar una app · Iñigo González",
   dek_es="El modelo de aplicación paso a paso: instalación silenciosa, método de detección, distribución de contenido, despliegue y los logs del cliente que dicen la verdad.",
   dek_en="The application model step by step: silent install, detection method, content distribution, deployment, and the client logs that tell the truth.",
   es="""
@@ -3603,6 +3639,8 @@ Application name, collection, device name and the `AppDiscovery` and `AppEnforce
 g(slug="teams-rooms-poner-en-marcha-una-sala", topic="teams-rooms", date="2026-10-21",
   title_es="Microsoft Teams Rooms: poner en marcha una sala y supervisarla",
   title_en="Microsoft Teams Rooms: bringing a room online and keeping an eye on it",
+  seo_title_en="Microsoft Teams Rooms: set up a room · Iñigo González",
+  seo_title_es="Microsoft Teams Rooms: poner en marcha una sala · Iñigo González",
   dek_es="Cuenta de recurso, licencia, inicio de sesión del dispositivo, periféricos y el Pro Management Portal. Y los fallos típicos de una sala el lunes por la mañana.",
   dek_en="Resource account, licence, device sign-in, peripherals and the Pro Management Portal. Plus the typical Monday-morning room failures.",
   es="""
@@ -3762,6 +3800,8 @@ A **ticket** opens in the portal on its own when a peripheral stops responding o
 g(slug="pdq-y-mdt-desplegar-software-en-lote-e-instalar-windows", topic="pdq-mdt", date="2026-10-21",
   title_es="PDQ y MDT: desplegar software en lote e instalar Windows desde cero",
   title_en="PDQ and MDT: deploying software in bulk and installing Windows from scratch",
+  seo_title_en="PDQ and MDT: deploy software and Windows · Iñigo González",
+  seo_title_es="PDQ y MDT: desplegar software e instalar Windows · Iñigo González",
   dek_es="PDQ Deploy e Inventory para empujar un instalador a 50 equipos esta tarde, y MDT para una instalación limpia de Windows con un recurso compartido de implementación. Cuándo sigue teniendo sentido frente a Intune.",
   dek_en="PDQ Deploy and Inventory to push an installer to 50 devices this afternoon, and MDT for a clean Windows install from a deployment share. When it still makes sense next to Intune.",
   es="""
@@ -3927,6 +3967,8 @@ PDQ and MDT are still useful in offices with devices on the LAN, without MECM, a
 g(slug="powershell-script-de-inventario-remoto-con-csv", topic="powershell", date="2026-10-21",
   title_es="PowerShell: un script de inventario que corre en remoto, maneja errores y deja un CSV",
   title_en="PowerShell: an inventory script that runs remotely, handles errors and leaves a CSV",
+  seo_title_en="PowerShell: remote inventory script to CSV · Iñigo González",
+  seo_title_es="PowerShell: inventario remoto a CSV · Iñigo González",
   dek_es="Objetos en lugar de texto, Invoke-Command sobre una lista de equipos, try/catch para los que no responden, y un CSV que abre Excel. Con la política de ejecución y la firma explicadas.",
   dek_en="Objects instead of text, Invoke-Command over a list of devices, try/catch for the ones that don't answer, and a CSV Excel can open. With execution policy and signing explained.",
   es="""
@@ -4182,6 +4224,8 @@ $ Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 g(slug="rhel-registrar-parchear-servicios-firewall-selinux", topic="rhel", date="2026-10-21",
   title_es="Red Hat Enterprise Linux: registrar, parchear y controlar servicios, firewall y SELinux",
   title_en="Red Hat Enterprise Linux: registering, patching, and managing services, the firewall and SELinux",
+  seo_title_en="RHEL: register, patch, firewalld and SELinux · Iñigo González",
+  seo_title_es="RHEL: registrar, parchear, firewalld y SELinux · Iñigo González",
   dek_es="Lo que haces en un RHEL recién entregado y lo que repites cada mes: suscripción, dnf, systemd, journalctl, firewalld y los dos comandos de SELinux que evitan desactivarlo.",
   dek_en="What you do on a freshly delivered RHEL and what you repeat every month: subscription, dnf, systemd, journalctl, firewalld, and the two SELinux commands that save you from turning it off.",
   es="""
@@ -4401,6 +4445,8 @@ The two commands that solve 90%: `semanage port` for ports and `restorecon -Rv /
 g(slug="sharepoint-sitio-de-equipo-permisos-y-uso-compartido", topic="sharepoint", date="2026-10-21",
   title_es="SharePoint Online: crear un sitio de equipo, dar permisos bien y entender el uso compartido",
   title_en="SharePoint Online: creating a team site, granting permissions properly and understanding sharing",
+  seo_title_en="SharePoint Online: team site and permissions · Iñigo González",
+  seo_title_es="SharePoint Online: sitio de equipo y permisos · Iñigo González",
   dek_es="Sitio de equipo con grupo de Microsoft 365, los tres niveles de permiso, el uso compartido externo, versiones y papelera. Con PowerShell para no hacerlo a mano cien veces.",
   dek_en="A team site with a Microsoft 365 group, the three permission levels, external sharing, versioning and the recycle bin. With PowerShell so you don't do it by hand a hundred times.",
   es="""
@@ -4570,6 +4616,8 @@ A site can never be more open than the tenant. If a user says "it won't let me s
 g(slug="ubuntu-server-usuarios-ssh-firewall-y-actualizaciones", topic="ubuntu", date="2026-10-21",
   title_es="Ubuntu Server: los primeros 30 minutos tras la instalación",
   title_en="Ubuntu Server: the first 30 minutes after installation",
+  seo_title_en="Ubuntu Server: first 30 minutes after install · Iñigo González",
+  seo_title_es="Ubuntu Server: primeros 30 minutos · Iñigo González",
   dek_es="Usuario con sudo, SSH solo con claves, ufw, actualizaciones automáticas de seguridad, hora y nombre. Lo que convierte un Ubuntu recién instalado en un servidor que puedes dejar solo.",
   dek_en="A sudo user, SSH with keys only, ufw, automatic security updates, time and hostname. What turns a fresh Ubuntu into a server you can leave alone.",
   es="""
@@ -4811,6 +4859,8 @@ $ sudo journalctl -p err -b --no-pager | tail -n 5
 g(slug="veeam-crear-un-job-comprobar-copias-y-restaurar", topic="veeam", date="2026-10-21",
   title_es="Veeam Backup: crear un trabajo, comprobar que termina bien y hacer una restauración de prueba",
   title_en="Veeam Backup: creating a job, checking it completes, and running a test restore",
+  seo_title_en="Veeam Backup: create a job and test a restore · Iñigo González",
+  seo_title_es="Veeam Backup: crear un job y probar restauración · Iñigo González",
   dek_es="Repositorio, trabajo de copia con retención, los avisos que no hay que ignorar, y la restauración de un fichero y de una máquina entera. Porque una copia sin restaurar no es una copia.",
   dek_en="Repository, backup job with retention, the warnings you must not ignore, and restoring a file and a whole machine. Because a backup you never restored is not a backup.",
   es="""
@@ -4994,6 +5044,8 @@ Job name, VM, restore point used, where it was restored, how long it took and th
 g(slug="vmware-horizon-pool-de-escritorios-y-conexion-que-falla", topic="vmware-horizon", date="2026-10-21",
   title_es="VMware Horizon: un pool de escritorios desde una imagen maestra y la conexión que falla",
   title_en="VMware Horizon: a desktop pool from a golden image, and the connection that fails",
+  seo_title_en="VMware Horizon: desktop pool and failed login · Iñigo González",
+  seo_title_es="VMware Horizon: pool de escritorios y conexión · Iñigo González",
   dek_es="Imagen maestra con el agente, pool de clones instantáneos, asignación a un grupo, y el orden para diagnosticar 'el escritorio no conecta' con Horizon Console y los logs del cliente.",
   dek_en="Golden image with the agent, an instant-clone pool, entitlement to a group, and the order for diagnosing 'the desktop won't connect' with Horizon Console and the client logs.",
   es="""
@@ -5155,6 +5207,8 @@ Changing something in the pool (a patch, a new application) means: power on the 
 g(slug="windows-server-instalar-rol-parchear-y-leer-eventos", topic="windows-server", date="2026-10-21",
   title_es="Windows Server: instalar un rol, parchear sin cortar el servicio y leer los eventos que importan",
   title_en="Windows Server: installing a role, patching without cutting the service, and reading the events that matter",
+  seo_title_en="Windows Server: roles, patching and events · Iñigo González",
+  seo_title_es="Windows Server: roles, parches y eventos · Iñigo González",
   dek_es="Roles y características con PowerShell, la rutina de parcheo con ventana y comprobación, y las tres consultas al visor de eventos que resuelven la mayoría de los 'el servidor va raro'.",
   dek_en="Roles and features with PowerShell, the patching routine with a window and a check, and the three Event Viewer queries that solve most 'the server is acting up' tickets.",
   es="""
@@ -5364,6 +5418,8 @@ The three queries cover almost everything: **what repeats** (the first), **why i
 g(slug="ansible-primer-playbook-parchear-servidores-linux", topic="ansible", date="2026-10-22",
   title_es="Ansible: el primer playbook para parchear servidores Linux uno a uno",
   title_en="Ansible: your first playbook to patch Linux servers one at a time",
+  seo_title_en="Ansible: a playbook to patch Linux servers · Iñigo González",
+  seo_title_es="Ansible: playbook para parchear servidores Linux · Iñigo González",
   dek_es="Inventario, conexión por SSH, un playbook que actualiza, reinicia solo si hace falta y comprueba el servicio, ejecutado servidor a servidor con `serial`.",
   dek_en="Inventory, SSH connection, a playbook that updates, reboots only when needed and checks the service, run one server at a time with `serial`.",
   es="""
@@ -5665,6 +5721,8 @@ The `PLAY RECAP` with `failed=0` and the log from `tee` are the evidence you att
 g(slug="docker-contenedores-en-un-servidor-de-operaciones", topic="docker", date="2026-10-22",
   title_es="Docker: montar y mantener contenedores en un servidor de operaciones",
   title_en="Docker: running and maintaining containers on an operations server",
+  seo_title_en="Docker on an IT operations server · Iñigo González",
+  seo_title_es="Docker en un servidor de operaciones · Iñigo González",
   dek_es="Instalar Docker, arrancar una herramienta interna con Compose, dejar los datos en volúmenes y saber qué mirar cuando un contenedor se reinicia solo.",
   dek_en="Install Docker, start an internal tool with Compose, keep the data in volumes and know what to look at when a container keeps restarting.",
   es="""
@@ -5944,6 +6002,8 @@ Images          3         3         1.4GB     0B (0%)
 g(slug="elk-centralizar-logs-de-servidores-y-buscar-un-error-en-kibana", topic="elk", date="2026-10-22",
   title_es="Elasticsearch, Logstash y Kibana: centralizar los logs de los servidores y buscar un error",
   title_en="Elasticsearch, Logstash and Kibana: centralising server logs and finding an error",
+  seo_title_en="ELK: centralise server logs, search in Kibana · Iñigo González",
+  seo_title_es="ELK: centralizar logs y buscar en Kibana · Iñigo González",
   dek_es="Un nodo de Elasticsearch, Filebeat en los servidores, el pipeline de Logstash que da forma a los eventos y la búsqueda en Kibana que sustituye a veinte sesiones SSH.",
   dek_en="One Elasticsearch node, Filebeat on the servers, the Logstash pipeline that shapes events, and the Kibana search that replaces twenty SSH sessions.",
   es="""
@@ -6227,6 +6287,8 @@ With a single node, `number_of_replicas: 0` stops the cluster from being permane
 g(slug="entra-conditional-access-politicas-base-y-usuario-bloqueado", topic="conditional-access", date="2026-10-22",
   title_es="Entra ID Conditional Access: las políticas base, el modo solo informe y un usuario bloqueado",
   title_en="Entra ID Conditional Access: the baseline policies, report-only mode and a blocked user",
+  seo_title_en="Conditional Access: baseline policies · Iñigo González",
+  seo_title_es="Conditional Access: políticas base y bloqueos · Iñigo González",
   dek_es="Las cuatro políticas con las que empieza todo tenant, cómo probarlas sin bloquear a nadie, las cuentas de emergencia excluidas y cómo leer en el registro de inicios de sesión por qué alguien no entra.",
   dek_en="The four policies every tenant starts with, how to test them without locking anyone out, the excluded emergency accounts, and how to read in the sign-in log why someone can't get in.",
   es="""
@@ -6432,6 +6494,8 @@ Codes you will see often: **53000/53001** (device not compliant or not joined), 
 g(slug="entra-sso-saml-dar-de-alta-una-aplicacion-y-login-que-falla", topic="entra-sso", date="2026-10-22",
   title_es="Entra ID SSO con SAML: dar de alta una aplicación, asignar usuarios y arreglar un inicio de sesión que falla",
   title_en="Entra ID SSO with SAML: onboarding an application, assigning users and fixing a sign-in that fails",
+  seo_title_en="Entra ID SAML SSO: add an app, fix sign-in · Iñigo González",
+  seo_title_es="SSO SAML en Entra ID: alta de app y login · Iñigo González",
   dek_es="La aplicación empresarial, los identificadores y la URL de respuesta, las reclamaciones, la asignación por grupo, el certificado que caduca y los tres errores que verás en el registro de inicios de sesión.",
   dek_en="The enterprise application, identifiers and reply URL, claims, group-based assignment, the certificate that expires, and the three errors you will see in the sign-in log.",
   es="""
@@ -6623,6 +6687,8 @@ If Entra says **Success** and the error comes from the application ("user not fo
 g(slug="grafana-origen-de-datos-primer-panel-y-alerta-al-canal", topic="grafana", date="2026-10-22",
   title_es="Grafana: un origen de datos, el primer panel y una alerta que avisa al canal del equipo",
   title_en="Grafana: a data source, your first dashboard and an alert that notifies the team channel",
+  seo_title_en="Grafana: data source, dashboard and alert · Iñigo González",
+  seo_title_es="Grafana: origen de datos, panel y alerta · Iñigo González",
   dek_es="Prometheus con node_exporter en los servidores, el panel de disco y CPU que mira todo el equipo, y la regla de alerta que llega a Teams antes de que llame el usuario.",
   dek_en="Prometheus with node_exporter on the servers, the disk and CPU dashboard the whole team looks at, and the alert rule that reaches Teams before the user calls.",
   es="""
@@ -6890,6 +6956,8 @@ The 10-minute **pending period** is what avoids an alert for a spike from a `tar
 g(slug="hyper-v-crear-vm-conmutador-virtual-puntos-de-control-y-exportar", topic="hyper-v", date="2026-10-22",
   title_es="Hyper-V: crear una máquina virtual, el conmutador virtual, puntos de control y exportación",
   title_en="Hyper-V: creating a virtual machine, the virtual switch, checkpoints and export",
+  seo_title_en="Hyper-V: VM, virtual switch and checkpoints · Iñigo González",
+  seo_title_es="Hyper-V: VM, conmutador virtual y puntos de control · Iñigo González",
   dek_es="El rol en Windows Server, el conmutador externo que no te deja sin red, una VM de generación 2 con PowerShell, puntos de control antes de un cambio y la exportación como copia fría.",
   dek_en="The role on Windows Server, the external switch that doesn't cut your network, a generation 2 VM with PowerShell, checkpoints before a change and export as a cold backup.",
   es="""
@@ -7111,6 +7179,8 @@ $ Import-VM -Path "E:\\Export\\2026-10-22\\srv-test-01\\Virtual Machines\\<GUID>
 g(slug="intune-perfiles-y-cumplimiento-en-windows-macos-ios-android-y-dispositivo-que-no-cumple", topic="intune", date="2026-10-22",
   title_es="Intune en Windows, macOS, iOS y Android: perfiles de configuración, cumplimiento y un dispositivo que no cumple",
   title_en="Intune on Windows, macOS, iOS and Android: configuration profiles, compliance and a device that is non-compliant",
+  seo_title_en="Intune: profiles and compliance on 4 platforms · Iñigo González",
+  seo_title_es="Intune: perfiles y cumplimiento en 4 plataformas · Iñigo González",
   dek_es="La estructura de grupos y filtros que vale para las cuatro plataformas, una política de cumplimiento por sistema, el perfil de configuración con el catálogo de ajustes y la rutina para el dispositivo que aparece en rojo.",
   dek_en="The group and filter structure that works for all four platforms, one compliance policy per OS, the configuration profile with the Settings Catalog, and the routine for the device that shows up red.",
   es="""
@@ -7330,6 +7400,8 @@ For macOS, `sudo profiles list` and `Company Portal → Check status`; for iOS/A
 g(slug="intune-epm-quitar-administrador-local-y-elevar-solo-lo-necesario", topic="intune-epm", date="2026-10-22",
   title_es="Intune EPM: quitar el administrador local y elevar solo lo que hace falta",
   title_en="Intune EPM: removing local admin and elevating only what is needed",
+  seo_title_en="Intune EPM: remove local admin rights · Iñigo González",
+  seo_title_es="Intune EPM: quitar el administrador local · Iñigo González",
   dek_es="La política de elevación, las reglas por aplicación con hash o certificado, el modo de solo informe para descubrir qué eleva la gente, y el informe que convence al negocio de que nadie necesita ser administrador.",
   dek_en="The elevation policy, per-application rules by hash or certificate, report-only mode to discover what people actually elevate, and the report that convinces the business nobody needs to be an administrator.",
   es="""
@@ -7579,6 +7651,8 @@ The number that matters: **in 30 days, 30 users needed 412 elevations and 14 wer
 g(slug="jenkins-pipeline-que-prueba-los-scripts-del-equipo-en-cada-cambio", topic="jenkins", date="2026-10-22",
   title_es="Jenkins: un pipeline que prueba los scripts del equipo en cada cambio",
   title_en="Jenkins: a pipeline that tests the team's scripts on every change",
+  seo_title_en="Jenkins: a pipeline to test IT scripts · Iñigo González",
+  seo_title_es="Jenkins: pipeline que prueba los scripts · Iñigo González",
   dek_es="Jenkins en Docker, el repositorio de scripts de Git conectado, un Jenkinsfile que pasa PSScriptAnalyzer y Pester a los scripts de PowerShell y shellcheck a los de Bash, y el aviso al canal cuando algo se rompe.",
   dek_en="Jenkins in Docker, the Git scripts repository connected, a Jenkinsfile that runs PSScriptAnalyzer and Pester on the PowerShell scripts and shellcheck on the Bash ones, and the channel notification when something breaks.",
   es="""
@@ -7884,6 +7958,8 @@ The pipeline did its job: someone changed the CSV columns and the test caught it
 g(slug="linux-unir-un-servidor-a-active-directory-con-sssd", topic="linux-ad", date="2026-10-22",
   title_es="Linux integrado con Active Directory: unir un servidor al dominio con SSSD",
   title_en="Linux joined to Active Directory: joining a server to the domain with SSSD",
+  seo_title_en="Join Linux to Active Directory with SSSD · Iñigo González",
+  seo_title_es="Unir Linux a Active Directory con SSSD · Iñigo González",
   dek_es="realm join, SSSD con los grupos de AD, sudo para el grupo de administradores de Linux, SSH solo para quien está autorizado, y los tres comandos de diagnóstico cuando el login de dominio deja de funcionar.",
   dek_en="realm join, SSSD with AD groups, sudo for the Linux admins group, SSH only for those authorised, and the three diagnostic commands when domain login stops working.",
   es="""
@@ -8161,6 +8237,8 @@ The three commands: `sssctl domain-status` (can it see the domain?), `journalctl
 g(slug="microsoft-graph-primeras-consultas-con-powershell-y-un-informe-que-no-existe-en-el-portal", topic="graph", date="2026-10-22",
   title_es="Microsoft Graph con PowerShell: las primeras consultas y un informe que no existe en el portal",
   title_en="Microsoft Graph with PowerShell: your first queries and a report the portal doesn't have",
+  seo_title_en="Microsoft Graph with PowerShell: first queries · Iñigo González",
+  seo_title_es="Microsoft Graph con PowerShell: primeros pasos · Iñigo González",
   dek_es="El SDK, los ámbitos de permiso y por qué pedir los mínimos, Graph Explorer para encontrar la consulta, paginación, y el informe de dispositivos sin check-in con su usuario y su manager en un CSV.",
   dek_en="The SDK, permission scopes and why to ask for the minimum, Graph Explorer to find the query, paging, and the report of devices with no check-in together with their user and manager in a CSV.",
   es="""
@@ -8448,6 +8526,8 @@ For the scheduled task, the script uses a **certificate**, not a client secret: 
 g(slug="ndes-y-cloud-pki-certificados-a-los-dispositivos-desde-intune", topic="ndes-pki", date="2026-10-22",
   title_es="NDES y Cloud PKI: certificados a los dispositivos desde Intune para Wi-Fi y VPN",
   title_en="NDES and Cloud PKI: certificates to devices from Intune for Wi-Fi and VPN",
+  seo_title_en="NDES and Cloud PKI: certificates via Intune · Iñigo González",
+  seo_title_es="NDES y Cloud PKI: certificados desde Intune · Iñigo González",
   dek_es="Las dos formas de dar certificados con Intune (NDES con tu CA de Windows o Microsoft Cloud PKI), los perfiles de certificado raíz y SCEP, el perfil de Wi-Fi que los usa y el certificado que nunca llega.",
   dek_en="The two ways of issuing certificates with Intune (NDES with your Windows CA or Microsoft Cloud PKI), the root and SCEP certificate profiles, the Wi-Fi profile that uses them, and the certificate that never arrives.",
   es="""
@@ -8713,6 +8793,8 @@ What you don't do: reissue by hand from the CA. If the device cannot request it 
 g(slug="postgresql-mysql-sql-server-tareas-de-operaciones-copia-restauracion-espacio-y-consulta-lenta", topic="databases", date="2026-10-22",
   title_es="PostgreSQL, MySQL y SQL Server: las tareas de operaciones, de la copia a la consulta lenta",
   title_en="PostgreSQL, MySQL and SQL Server: the operations tasks, from backup to slow query",
+  seo_title_en="PostgreSQL, MySQL, SQL Server: ops tasks · Iñigo González",
+  seo_title_es="PostgreSQL, MySQL y SQL Server: operaciones · Iñigo González",
   dek_es="Lo que te piden de una base de datos sin ser DBA: conectar y ver qué hay, copia y restauración probada, espacio y crecimiento, altas y bajas de usuarios y qué consulta está bloqueando la aplicación, en los tres motores a la vez.",
   dek_en="What you are asked to do with a database without being a DBA: connect and see what is there, tested backup and restore, disk space and growth, user joiners and leavers, and which query is blocking the application, across the three engines side by side.",
   es="""
@@ -8988,6 +9070,8 @@ The pattern is identical in all three: an **idle session with an open transactio
 g(slug="solarwinds-anadir-un-nodo-afinar-una-alerta-y-leer-que-paso-antes-de-la-caida", topic="solarwinds", date="2026-10-22",
   title_es="SolarWinds: añadir un nodo, afinar una alerta que salta demasiado y leer qué pasó antes de la caída",
   title_en="SolarWinds: adding a node, tuning an alert that fires too much and reading what happened before the outage",
+  seo_title_en="SolarWinds: add a node and tune alerts · Iñigo González",
+  seo_title_es="SolarWinds: añadir nodos y afinar alertas · Iñigo González",
   dek_es="Un servidor nuevo en la plataforma con SNMP o agente, los umbrales por nodo en lugar de globales, la alerta con condición sostenida y la vista de PerfStack para la pregunta de la reunión: ¿qué pasó a las 03:12?",
   dek_en="A new server on the platform via SNMP or agent, per-node thresholds instead of global ones, the alert with a sustained condition, and the PerfStack view for the meeting question: what happened at 03:12?",
   es="""
@@ -9239,6 +9323,8 @@ PerfStack puts on one timeline what was scattered: the Java process memory spike
 g(slug="ubuntu-landscape-registrar-la-flota-y-parchear-por-grupos-con-ventana", topic="landscape", date="2026-10-22",
   title_es="Ubuntu Landscape: registrar la flota de Ubuntu y parchear por grupos con ventana",
   title_en="Ubuntu Landscape: registering the Ubuntu fleet and patching by group within a window",
+  seo_title_en="Ubuntu Landscape: patch the fleet by group · Iñigo González",
+  seo_title_es="Ubuntu Landscape: parchear la flota por grupos · Iñigo González",
   dek_es="El cliente de Landscape con Ubuntu Pro, grupos de acceso y etiquetas, el perfil de actualizaciones que parchea cada grupo en su ventana, los reinicios pendientes y el informe de CVE para la reunión de parcheo.",
   dek_en="The Landscape client with Ubuntu Pro, access groups and tags, the upgrade profile that patches each group in its window, pending reboots and the CVE report for the patching meeting.",
   es="""
@@ -9474,6 +9560,8 @@ Three numbers and a list: **patched / pending / reboot**, and the critical CVE w
 g(slug="vsphere-vcenter-crear-vm-snapshots-con-caducidad-y-host-en-mantenimiento", topic="vsphere", date="2026-10-22",
   title_es="VMware vSphere y vCenter: crear una VM, snapshots con caducidad y un host en mantenimiento sin cortar nada",
   title_en="VMware vSphere and vCenter: creating a VM, snapshots with an expiry and a host in maintenance without cutting anything",
+  seo_title_en="vSphere and vCenter: VMs, snapshots, hosts · Iñigo González",
+  seo_title_es="vSphere y vCenter: VMs, snapshots y hosts · Iñigo González",
   dek_es="La VM desde plantilla con PowerCLI, la regla de los snapshots (cortos, con nombre y fecha), vMotion y el modo de mantenimiento para parchear un host con las VMs en marcha, y lo que miras cuando un datastore se queda sin espacio.",
   dek_en="The VM from a template with PowerCLI, the snapshot rule (short, named and dated), vMotion and maintenance mode to patch a host with the VMs running, and what you look at when a datastore runs out of space.",
   es="""
@@ -9731,6 +9819,8 @@ The three places to look: **snapshots** on the datastore (412 GB here, 90% of th
 g(slug="azure-virtual-desktop-y-windows-365-host-pool-cloud-pc-y-conexion-que-falla", topic="avd-w365", date="2026-10-27",
   title_es="Azure Virtual Desktop y Windows 365: cuál elegir, un host pool con FSLogix y una conexión que falla",
   title_en="Azure Virtual Desktop and Windows 365: which one to choose, a host pool with FSLogix and a connection that fails",
+  seo_title_en="Azure Virtual Desktop vs Windows 365 · Iñigo González",
+  seo_title_es="Azure Virtual Desktop o Windows 365 · Iñigo González",
   dek_es="Cuándo encaja cada uno, un host pool multisesión unido a Entra ID con perfiles en FSLogix y escalado automático, un Cloud PC de Windows 365 en tres pasos, y cómo leer por qué un usuario no llega a su escritorio.",
   dek_en="When each one fits, a multi-session host pool joined to Entra ID with FSLogix profiles and autoscaling, a Windows 365 Cloud PC in three steps, and how to read why a user can't reach their desktop.",
   es="""
@@ -10012,6 +10102,8 @@ TimeGenerated         CodeSymbolic                              Source        Me
 g(slug="dr-bcp-rpo-y-rto-por-servicio-plan-de-recuperacion-y-prueba-completa", topic="dr-bcp", date="2026-10-27",
   title_es="DR/BCP: RPO y RTO por servicio, el plan de recuperación y una prueba completa",
   title_en="DR/BCP: RPO and RTO per service, the recovery plan and a full test",
+  seo_title_en="DR/BCP: RPO, RTO and a full recovery test · Iñigo González",
+  seo_title_es="DR/BCP: RPO, RTO y prueba de recuperación · Iñigo González",
   dek_es="El análisis de impacto que fija cuánto dato y cuánto tiempo puede perder cada servicio, la regla 3-2-1-1-0 con una copia inmutable, el runbook con el orden de arranque, y una prueba de recuperación medida con informe y acciones.",
   dek_en="The impact analysis that sets how much data and how much time each service can lose, the 3-2-1-1-0 rule with an immutable copy, the runbook with the start-up order, and a measured recovery test with a report and actions.",
   es="""
@@ -10257,6 +10349,8 @@ The ERP missed its RTO because of something no backup fixes: the licence. That i
 g(slug="cisco-vlans-troncales-router-de-la-sede-y-un-puerto-que-no-da-red", topic="cisco", date="2026-10-27",
   title_es="Cisco: VLANs, troncales, el router de la sede y un puerto que no da red",
   title_en="Cisco: VLANs, trunks, the site router and a port that gives no network",
+  seo_title_en="Cisco: VLANs, trunks and a dead port · Iñigo González",
+  seo_title_es="Cisco: VLANs, troncales y un puerto sin red · Iñigo González",
   dek_es="Leer un switch Catalyst antes de tocarlo, configurar puertos de acceso y troncales sin cortar una planta, la ruta por defecto con respaldo automático en el router, el diagnóstico de un puerto en err-disabled y cómo hacer cambios en remoto con red de seguridad.",
   dek_en="Read a Catalyst switch before touching it, configure access ports and trunks without cutting off a floor, the default route with automatic failover on the router, diagnosing a port in err-disabled, and how to make remote changes with a safety net.",
   es="""
@@ -10580,6 +10674,8 @@ $ copy running-config startup-config
 g(slug="microsoft-365-roles-de-administracion-pim-y-cuentas-de-emergencia", topic="m365-pim", date="2026-10-27",
   title_es="Microsoft 365: los roles de administración, PIM y las cuentas de emergencia",
   title_en="Microsoft 365: admin roles, PIM and the emergency accounts",
+  seo_title_en="Microsoft 365 admin roles, PIM, break-glass · Iñigo González",
+  seo_title_es="Microsoft 365: roles de admin, PIM y emergencia · Iñigo González",
   dek_es="Inventariar quién es administrador hoy, pasar cada tarea al rol mínimo, dejar dos cuentas de emergencia bien guardadas, convertir el resto en asignaciones elegibles con PIM (MFA, justificación y aprobación), y las revisiones y alertas que lo mantienen así.",
   dek_en="Inventory who is an administrator today, move each task to the least-privileged role, keep two well-guarded emergency accounts, turn the rest into eligible assignments with PIM (MFA, justification and approval), and the reviews and alerts that keep it that way.",
   es="""
@@ -10819,6 +10915,8 @@ Action : selfActivate
 g(slug="microsoft-sentinel-conectores-una-regla-en-kql-y-un-incidente-de-principio-a-fin", topic="sentinel", date="2026-10-27",
   title_es="Microsoft Sentinel: conectores, una regla en KQL y un incidente de principio a fin",
   title_en="Microsoft Sentinel: connectors, a KQL rule and an incident from start to finish",
+  seo_title_en="Microsoft Sentinel: connectors and KQL rules · Iñigo González",
+  seo_title_es="Microsoft Sentinel: conectores y reglas KQL · Iñigo González",
   dek_es="El área de trabajo y los conectores que importan (Entra ID, Microsoft 365, Defender, servidores), la primera regla de análisis que avisa cuando entra una cuenta de emergencia, la automatización que asigna y avisa, la investigación de un incidente con KQL y cómo no arruinarse con la ingesta.",
   dek_en="The workspace and the connectors that matter (Entra ID, Microsoft 365, Defender, servers), the first analytics rule that alerts when an emergency account signs in, the automation that assigns and notifies, investigating an incident with KQL, and how not to go broke on ingestion.",
   es="""
@@ -11116,6 +11214,8 @@ Syslog                            19.8
 g(slug="migracion-de-tenant-microsoft-365-inventario-identidades-buzones-onedrive-y-dia-del-corte", topic="tenant-migration", date="2026-10-27",
   title_es="Migraciones de tenant de Microsoft 365: inventario, identidades, buzones, OneDrive y el día del corte",
   title_en="Microsoft 365 tenant migrations: inventory, identities, mailboxes, OneDrive and cutover day",
+  seo_title_en="Microsoft 365 tenant-to-tenant migration · Iñigo González",
+  seo_title_es="Migración de tenant de Microsoft 365 · Iñigo González",
   dek_es="Fusiones, escisiones y cambios de dominio: qué se mueve y qué se rehace, el inventario que evita sorpresas, la migración de buzones entre tenants sin respuestas que rebotan, OneDrive, los dispositivos, y el runbook del fin de semana del corte con su semana de soporte posterior.",
   dek_en="Mergers, divestitures and domain changes: what moves and what gets rebuilt, the inventory that avoids surprises, cross-tenant mailbox migration without bouncing replies, OneDrive, the devices, and the runbook for the cutover weekend with the week of support after it.",
   es="""
@@ -11359,6 +11459,8 @@ $ Get-Recipient -ResultSize Unlimited | Where-Object { $_.EmailAddresses -match 
 g(slug="amazon-aws-cuentas-iam-vpc-con-vpn-a-la-oficina-y-un-servidor-que-no-llega-al-recurso-compartido", topic="aws", date="2026-10-28",
   title_es="Amazon AWS: cuentas, IAM, una VPC con VPN a la oficina y un servidor que no llega al recurso compartido",
   title_en="Amazon AWS: accounts, IAM, a VPC with VPN to the office and a server that can't reach the file share",
+  seo_title_en="AWS for IT ops: IAM, VPC and site VPN · Iñigo González",
+  seo_title_es="AWS para IT: IAM, VPC y VPN con la oficina · Iñigo González",
   dek_es="AWS Organizations y IAM Identity Center con Entra ID como origen de identidades, la cuenta raíz guardada bajo llave, una VPC privada con VPN de sitio a sitio, un servidor EC2 administrado con Session Manager en lugar de RDP abierto, AWS Backup, alertas de coste con etiquetas y el diagnóstico de un servidor que no ve la oficina.",
   dek_en="AWS Organizations and IAM Identity Center with Entra ID as the identity source, the root user locked away, a private VPC with a site-to-site VPN, an EC2 server managed with Session Manager instead of open RDP, AWS Backup, cost alerts with tags, and diagnosing a server that can't see the office.",
   es="""
@@ -11604,6 +11706,8 @@ $ aws ec2 enable-vgw-route-propagation --route-table-id rtb-0d4c3b2a1f0e9d8c7 --
 g(slug="azure-monitor-y-log-analytics-area-de-trabajo-reglas-de-recopilacion-alertas-y-un-servidor-que-deja-de-enviar-datos", topic="azure-monitor", date="2026-10-28",
   title_es="Azure Monitor y Log Analytics: el área de trabajo, el agente, las alertas y un servidor que deja de enviar datos",
   title_en="Azure Monitor and Log Analytics: the workspace, the agent, alerts and a server that stops sending data",
+  seo_title_en="Azure Monitor and Log Analytics: alerts · Iñigo González",
+  seo_title_es="Azure Monitor y Log Analytics: agente y alertas · Iñigo González",
   dek_es="Cómo diseñar un área de trabajo, recoger eventos, contadores y syslog con el agente de Azure Monitor y reglas de recopilación, traer los servidores locales con Azure Arc, consultar con KQL, alertar con un grupo de acciones, controlar retención y coste, y resolver el ticket de un servidor que ya no informa.",
   dek_en="How to design a workspace, collect events, counters and syslog with the Azure Monitor agent and data collection rules, bring on-prem servers in with Azure Arc, query with KQL, alert through an action group, keep retention and cost under control, and solve the ticket for a server that no longer reports.",
   es="""
@@ -11859,6 +11963,8 @@ $ az monitor data-collection rule association list --resource "/subscriptions/<i
 g(slug="iso-27001-nis2-y-rgpd-en-it-controles-evidencias-plazos-y-un-portatil-perdido", topic="compliance", date="2026-10-28",
   title_es="ISO 27001, NIS2 y RGPD en IT: controles, evidencias, plazos y un portátil perdido",
   title_en="ISO 27001, NIS2 and GDPR in IT: controls, evidence, deadlines and a lost laptop",
+  seo_title_en="ISO 27001, NIS2 and GDPR for IT teams · Iñigo González",
+  seo_title_es="ISO 27001, NIS2 y RGPD para equipos de IT · Iñigo González",
   dek_es="Lo que significan para un equipo de operaciones en España en 2026: el SGSI de ISO 27001:2022 y su declaración de aplicabilidad, quién entra en NIS2 y los plazos de notificación, el RGPD desde IT, una tabla de tareas frente a controles, la carpeta de evidencias, la auditoría y un portátil perdido.",
   dek_en="What they mean for an operations team in Spain in 2026: the ISO 27001:2022 ISMS and its Statement of Applicability, who is in NIS2 and the reporting deadlines, GDPR from IT's side, a table of tasks against controls, the evidence folder, the audit and a lost laptop.",
   es="""
@@ -12062,6 +12168,8 @@ PT-0231      Marta Gil         True          compliant         27/10/2026 19:42:
 g(slug="cyberark-safes-rotacion-automatica-sesiones-grabadas-y-una-cuenta-que-el-cpm-no-cambia", topic="cyberark", date="2026-10-28",
   title_es="CyberArk: safes, rotación automática, sesiones grabadas y una cuenta que el CPM no cambia",
   title_en="CyberArk: safes, automatic rotation, recorded sessions and an account the CPM can't change",
+  seo_title_en="CyberArk: safes, password rotation, sessions · Iñigo González",
+  seo_title_es="CyberArk: safes, rotación y sesiones grabadas · Iñigo González",
   dek_es="Diseñar safes y sus miembros, dar de alta una cuenta de administrador de dominio, una local y una de servicio con su plataforma, que el CPM rote, verifique y reconcilie, conectarse por PSM sin ver la contraseña, la doble aprobación con ticket, revisar grabaciones y el ticket de la cuenta que se queda en fallo.",
   dek_en="Designing safes and their members, onboarding a domain admin, a local admin and a service account with their platform, having the CPM rotate, verify and reconcile, connecting through PSM without seeing the password, dual control with a ticket, reviewing recordings, and the ticket of the account stuck in failure.",
   es="""
@@ -12309,6 +12417,8 @@ Each month:
 g(slug="fortigate-politicas-con-minimo-privilegio-vpn-con-entra-id-tuneles-entre-sedes-y-un-usuario-que-no-llega", topic="fortigate", date="2026-10-28",
   title_es="Fortinet FortiGate: políticas con mínimo privilegio, VPN con Entra ID, túneles entre sedes y un usuario que no llega",
   title_en="Fortinet FortiGate: least-privilege policies, VPN with Entra ID, site tunnels and a user who can't get through",
+  seo_title_en="FortiGate: policies, VPN with Entra ID · Iñigo González",
+  seo_title_es="FortiGate: políticas y VPN con Entra ID · Iñigo González",
   dek_es="Interfaces, zonas y objetos con nombre, una política que solo deja pasar lo necesario y lo registra, la VPN de usuarios autenticada contra Entra ID con grupos que deciden qué ve cada uno, un túnel IPsec entre sedes, dos circuitos con SD-WAN, la actualización de firmware y el diagnóstico de un usuario de VPN que no llega a una aplicación.",
   dek_en="Interfaces, zones and named objects, a policy that lets through only what is needed and logs it, user VPN authenticated against Entra ID with groups deciding what each person sees, a site-to-site IPsec tunnel, two circuits with SD-WAN, firmware upgrades and diagnosing a VPN user who can't reach an application.",
   es="""
@@ -12668,6 +12778,8 @@ If the policy does match and the application doesn't respond, `diagnose sniffer 
 g(slug="kubernetes-de-docker-compose-a-un-cluster-gestionado-despliegue-y-un-pod-en-crashloopbackoff", topic="kubernetes", date="2026-10-28",
   title_es="Kubernetes: de Docker Compose a un clúster gestionado, un despliegue y un pod en CrashLoopBackOff",
   title_en="Kubernetes: from Docker Compose to a managed cluster, a deployment and a pod in CrashLoopBackOff",
+  seo_title_en="Kubernetes: from Compose to CrashLoopBackOff · Iñigo González",
+  seo_title_es="Kubernetes: de Compose a un pod en CrashLoopBackOff · Iñigo González",
   dek_es="Cuándo compensa el salto desde Compose en un servidor y cuándo no, un clúster AKS o EKS, una herramienta interna con Deployment, Service y Gateway API, configuración y secretos, peticiones y límites de recursos, una actualización progresiva con vuelta atrás y cómo leer un pod que no arranca.",
   dek_en="When the jump from Compose on one server pays off and when it doesn't, an AKS or EKS cluster, an internal tool with Deployment, Service and Gateway API, configuration and secrets, resource requests and limits, a rolling update with rollback, and how to read a pod that won't start.",
   es="""
@@ -13017,6 +13129,8 @@ Here version 1.5.0 renamed a variable and nobody updated the ConfigMap. `DATABAS
 g(slug="nutanix-ahv-para-quien-viene-de-vsphere-prism-proteccion-lcm-y-un-disco-caido", topic="nutanix", date="2026-10-28",
   title_es="Nutanix AHV para quien viene de vSphere: Prism, protección, LCM y un disco caído",
   title_en="Nutanix AHV for vSphere people: Prism, protection, LCM and a failed disk",
+  seo_title_en="Nutanix AHV for vSphere admins · Iñigo González",
+  seo_title_es="Nutanix AHV para quien viene de vSphere · Iñigo González",
   dek_es="Prism Element frente a Prism Central, qué hacen la CVM, los contenedores de almacenamiento y el factor de replicación, crear una VM en AHV, snapshots y políticas de protección con réplica a una segunda sede, actualizar con LCM, poner un host en mantenimiento y leer una alerta de disco o una VM lenta con ncli, acli y NCC.",
   dek_en="Prism Element versus Prism Central, what the CVM, storage containers and replication factor do, creating a VM in AHV, snapshots and protection policies replicating to a second site, upgrading with LCM, putting a host into maintenance, and reading a disk alert or a slow VM with ncli, acli and NCC.",
   es="""
@@ -13308,6 +13422,8 @@ $ ncli disk get-remove-status
 g(slug="openshift-proyectos-routes-scc-acceso-por-grupos-y-actualizaciones-por-canal", topic="openshift", date="2026-10-28",
   title_es="Red Hat OpenShift: proyectos, Routes, SCC, acceso por grupos y actualizaciones por canal",
   title_en="Red Hat OpenShift: projects, Routes, SCCs, group access and channel upgrades",
+  seo_title_en="Red Hat OpenShift: Routes, SCCs, upgrades · Iñigo González",
+  seo_title_es="Red Hat OpenShift: Routes, SCC y actualizaciones · Iñigo González",
   dek_es="Qué añade OpenShift a Kubernetes, entrar con oc y desplegar una aplicación interna con Deployment, Service y Route, dar acceso a un equipo con grupos de Entra ID y RoleBindings, actualizar el clúster por canales y resolver el pod que no arranca por la SCC o la Route que devuelve 503.",
   dek_en="What OpenShift adds to Kubernetes, signing in with oc and deploying an internal app with a Deployment, Service and Route, giving a team access with Entra ID groups and RoleBindings, upgrading the cluster through channels, and fixing the pod blocked by its SCC or the Route that returns 503.",
   es="""
@@ -13597,6 +13713,8 @@ The pod runs with a UID from the project's range, not as root, and the image exp
 g(slug="microsoft-purview-etiquetas-de-confidencialidad-retencion-dlp-y-un-documento-cifrado-que-no-abre", topic="purview", date="2026-10-28",
   title_es="Microsoft Purview: etiquetas de confidencialidad, retención, DLP y un documento cifrado que no abre",
   title_en="Microsoft Purview: sensitivity labels, retention, DLP and an encrypted document that won't open",
+  seo_title_en="Microsoft Purview: labels, retention and DLP · Iñigo González",
+  seo_title_es="Microsoft Purview: etiquetas, retención y DLP · Iñigo González",
   dek_es="Un esquema de etiquetas que la gente entiende y que cifra donde hace falta, la directiva que las publica con etiqueta por defecto, el etiquetado automático, retención por directiva y por etiqueta, una directiva DLP en simulación antes de bloquear, búsquedas de eDiscovery, los roles, y el ticket del documento de un socio que no se abre.",
   dek_en="A label scheme people understand that encrypts where it must, the policy that publishes it with a default label, auto-labelling, retention by policy and by label, a DLP policy in simulation before it blocks, eDiscovery searches, the roles, and the ticket for a partner's document that won't open.",
   es="""
@@ -13808,6 +13926,8 @@ Javier Ruiz receives an Excel file from Fabrikam with their *Highly confidential
 g(slug="qualys-agentes-etiquetas-priorizacion-y-la-vulnerabilidad-que-sigue-tras-parchear", topic="qualys", date="2026-10-28",
   title_es="Qualys: agentes, etiquetas, priorización y la vulnerabilidad que sigue ahí tras parchear",
   title_en="Qualys: agents, tags, prioritisation and the vulnerability still there after patching",
+  seo_title_en="Qualys: agents, tags and prioritisation · Iñigo González",
+  seo_title_es="Qualys: agentes, etiquetas y priorización · Iñigo González",
   dek_es="Desplegar Cloud Agent con Intune o MECM, etiquetar activos por criticidad, cuándo usar escaneo autenticado y cuándo agente, leer una detección (QDS, severidad, CVE, resultados), priorizar por exposición, KEV y criticidad, el ciclo de parcheo y reescaneo con SLA y excepciones, y el ticket de la vulnerabilidad que no se va.",
   dek_en="Deploying Cloud Agent with Intune or MECM, tagging assets by criticality, when to use an authenticated scan and when the agent, reading a detection (QDS, severity, CVE, results), prioritising by exposure, KEV and criticality, the patch-and-rescan loop with SLAs and exceptions, and the ticket about the vulnerability that won't go away.",
   es="""
@@ -14061,6 +14181,8 @@ $ Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Qualys\\QualysAgent\\ScanOnDemand\\Vu
 g(slug="terraform-modulo-estado-remoto-plan-en-el-pipeline-deriva-e-importacion", topic="terraform", date="2026-10-28",
   title_es="Terraform: un módulo, estado remoto, el plan en el pipeline y alguien que lo cambió en el portal",
   title_en="Terraform: a module, remote state, the plan in the pipeline and someone who changed it in the portal",
+  seo_title_en="Terraform: modules, remote state and drift · Iñigo González",
+  seo_title_es="Terraform: módulos, estado remoto y deriva · Iñigo González",
   dek_es="Infraestructura como código para un equipo de sistemas: un módulo pequeño en Azure (grupo de recursos, red y VM), estado remoto con bloqueo, plan y apply en un pipeline con revisión, qué hacer con la deriva, cómo importar lo que ya existe y cómo mantener el estado limpio y los secretos fuera del repositorio.",
   dek_en="Infrastructure as code for an IT team: a small module on Azure (resource group, network and VM), remote state with locking, plan and apply in a pipeline with review, what to do about drift, how to import what already exists, and how to keep state clean and secrets out of the repository.",
   es="""
@@ -14406,6 +14528,8 @@ Plan: 1 to import, 0 to add, 0 to change, 0 to destroy.
 g(slug="hotel-en-pre-apertura-checklist-de-it-hasta-el-dia-de-apertura", topic="hotel-preopening", date="2026-10-27",
   title_es="Hotel en pre-apertura: el checklist de IT desde la obra hasta el día de apertura",
   title_en="Hotel pre-opening: the IT checklist from the building site to opening day",
+  seo_title_en="Hotel pre-opening IT checklist · Iñigo González",
+  seo_title_es="Checklist de IT para la pre-apertura de un hotel · Iñigo González",
   dek_es="El calendario hacia atrás desde la fecha de apertura, la red separada por usos, los circuitos que hay que pedir antes que nada, el mapa de interfaces con el PMS, la semana de pruebas con huéspedes simulados y el soporte del primer día.",
   dek_en="The calendar counted back from the opening date, the network split by use, the circuits to order before anything else, the map of interfaces with the PMS, the test week with simulated guests and support on day one.",
   es="""
@@ -14605,6 +14729,8 @@ Each interface has two vendors, and in every test each one says the fault is the
 g(slug="icg-y-hiopos-puesta-en-marcha-de-un-tpv-red-impresoras-de-cocina-y-cierre", topic="icg-hiopos", date="2026-10-27",
   title_es="ICG y HIOPOS: puesta en marcha de un TPV, con la red, las impresoras de cocina y el cierre de caja",
   title_en="ICG and HIOPOS: setting up a POS, with the network, kitchen printers and end-of-day close",
+  seo_title_en="ICG and HIOPOS: setting up a POS · Iñigo González",
+  seo_title_es="ICG y HIOPOS: puesta en marcha de un TPV · Iñigo González",
   dek_es="Qué parte del trabajo es de IT y qué parte del integrador, el inventario de un local, las IP fijas que evitan la mitad de los tickets, cómo llega cada plato a su impresora o pantalla de cocina, la prueba antes de abrir y el ticket de \"no imprime en cocina\".",
   dek_en="Which part of the work belongs to IT and which to the integrator, a venue's inventory, the fixed IPs that prevent half the tickets, how each dish reaches its kitchen printer or screen, the test before opening and the \"kitchen isn't printing\" ticket.",
   es="""
@@ -14836,6 +14962,8 @@ $ arp -a | Select-String "10.40.30.52"
 g(slug="cashdro-integracion-con-el-tpv-red-cobro-en-efectivo-y-arqueo", topic="cashdro", date="2026-10-27",
   title_es="CashDro: integración con el TPV, el cobro en efectivo y el arqueo que cuadra",
   title_en="CashDro: integration with the POS, cash payments and a cash count that balances",
+  seo_title_en="CashDro: POS integration and cash count · Iñigo González",
+  seo_title_es="CashDro: integración con el TPV y arqueo · Iñigo González",
   dek_es="Cómo funciona un cajón de cobro automático conectado al TPV, la red y las credenciales que necesita, el flujo de un cobro, la rutina diaria de fondo, retirada y arqueo, y qué mirar cuando el TPV no conecta o el arqueo no cuadra.",
   dek_en="How an automatic cash machine connected to the POS works, the network and credentials it needs, the flow of a payment, the daily routine of float, collection and cash count, and what to check when the POS won't connect or the count doesn't balance.",
   es="""
@@ -15031,6 +15159,8 @@ The POS has an address from **VLAN 20** (offices), not 30: someone moved it to a
 g(slug="pms-hotelero-soporte-interfaces-y-cargo-a-habitacion-desde-el-tpv", topic="pms-hotel", date="2026-10-27",
   title_es="PMS hotelero: soporte, interfaces y el cargo a habitación desde el TPV",
   title_en="Hotel PMS: support, interfaces and room charges from the POS",
+  seo_title_en="Hotel PMS: interfaces and room charges · Iñigo González",
+  seo_title_es="PMS hotelero: interfaces y cargo a habitación · Iñigo González",
   dek_es="Qué es el PMS y por qué todo el hotel depende de él, cómo viaja un cargo del restaurante al folio del huésped, la tabla de correspondencias entre puntos de venta y códigos de transacción, los motivos por los que un cargo se rechaza y qué revisar antes de la auditoría nocturna.",
   dek_en="What the PMS is and why the whole hotel depends on it, how a restaurant charge travels to the guest's folio, the mapping table between outlets and transaction codes, the reasons a charge is rejected and what to check before the night audit.",
   es="""
@@ -15212,6 +15342,8 @@ IPTV                Connected       Last message: 27/10/2026 14:04:02
 g(slug="iptv-en-hotel-diagnostico-de-canales-multicast-y-televisores-de-habitacion", topic="iptv-hotel", date="2026-10-27",
   title_es="IPTV en hotel: diagnóstico de canales, la red multicast y los televisores de habitación",
   title_en="Hotel IPTV: troubleshooting channels, the multicast network and in-room TVs",
+  seo_title_en="Hotel IPTV: channels, multicast and TVs · Iñigo González",
+  seo_title_es="IPTV en hotel: canales, multicast y televisores · Iñigo González",
   dek_es="Cómo llega un canal desde la cabecera hasta la habitación, la configuración de IGMP snooping y del querier que evita la mitad de las averías, la tabla de síntomas para saber dónde mirar, y el diagnóstico de una habitación sin canales y de canales que se cortan cada pocos minutos.",
   dek_en="How a channel gets from the headend to the room, the IGMP snooping and querier setup that prevents half the faults, the symptom table that tells you where to look, and troubleshooting a room with no channels and channels that cut out every few minutes.",
   es="""
@@ -15437,6 +15569,8 @@ No querier: after a change on the core, someone removed `ip igmp snooping querie
 g(slug="alta-de-usuario-en-retail-red-correo-y-aplicaciones-de-negocio", topic="alta-usuario", date="2026-10-28",
   title_es="Alta de usuario: red, correo y aplicaciones de negocio en tiendas y oficina central",
   title_en="New starter: network, email and business apps in stores and head office",
+  seo_title_en="Retail new starter: network, email, apps · Iñigo González",
+  seo_title_es="Alta de usuario en retail: red, correo y apps · Iñigo González",
   dek_es="La incorporación completa en una cadena de tiendas: la petición de RR. HH. con plazo, la cuenta y la licencia según el rol, buzones y buzones compartidos, la red de tienda y la VPN de oficina, el usuario del TPV y del ERP, la entrega del equipo y el encargado que no puede entrar en el TPV el primer día.",
   dek_en="The complete onboarding in a store chain: the HR request with lead time, the account and licence by role, mailboxes and shared mailboxes, the store network and the head office VPN, the POS and ERP user, the device handover and the store manager who can't log in to the POS on day one.",
   es="""
@@ -15658,6 +15792,8 @@ Saturday, 9:45, the store opens at 10:00. The new manager types her code and the
 g(slug="as400-alta-y-gestion-de-usuarios-en-ibm-i", topic="as400", date="2026-10-28",
   title_es="AS400: alta y gestión de usuarios en IBM i",
   title_en="AS400: creating and managing users on IBM i",
+  seo_title_en="AS400 / IBM i: create and manage users · Iñigo González",
+  seo_title_es="AS400 / IBM i: alta y gestión de usuarios · Iñigo González",
   dek_es="Cómo se crea un perfil de usuario en IBM i para el ERP de una cadena de tiendas: clases de usuario y autorizaciones especiales, perfiles de grupo, programa inicial, restablecer contraseñas, perfiles inhabilitados por QMAXSIGN, el emulador 5250 de Access Client Solutions y las bajas.",
   dek_en="How to create an IBM i user profile for a store chain's ERP: user classes and special authorities, group profiles, initial program, password resets, profiles disabled by QMAXSIGN, the Access Client Solutions 5250 emulator and leavers.",
   es="""
@@ -15879,6 +16015,8 @@ Each month:
 g(slug="backup-en-cinta-rotacion-gfs-custodia-y-comprobacion-de-copias", topic="backup-cinta", date="2026-10-28",
   title_es="Backup en cinta: rotación, custodia y comprobación de las copias",
   title_en="Tape backup: rotation, custody and checking the copies",
+  seo_title_en="Tape backup: GFS rotation and checks · Iñigo González",
+  seo_title_es="Backup en cinta: rotación GFS y comprobación · Iñigo González",
   dek_es="Cómo se lleva la copia en cinta LTO de una oficina central: rotación diaria, semanal y mensual, etiquetas, custodia fuera de la oficina, cifrado, la revisión de los trabajos, la prueba de restauración mensual, la limpieza de la unidad y el trabajo que falla porque la cinta está protegida, sin caducar o fuera de la librería.",
   dek_en="How to run LTO tape backup at a head office: daily, weekly and monthly rotation, labels, off-site custody, encryption, checking the jobs, the monthly restore test, drive cleaning and the job that fails because the tape is write-protected, not expired or not in the library.",
   es="""
@@ -16094,6 +16232,8 @@ Restore time is the figure management will ask for when there's a real problem. 
 g(slug="cisco-anyconnect-resolver-problemas-de-conexion-vpn-en-tiendas-y-viajes", topic="anyconnect-retail", date="2026-10-28",
   title_es="Cisco AnyConnect: resolver problemas de conexión VPN en tiendas, hoteles y viajes",
   title_en="Cisco AnyConnect: troubleshooting VPN connections from stores, hotels and on the road",
+  seo_title_en="Cisco AnyConnect: VPN problems on the road · Iñigo González",
+  seo_title_es="Cisco AnyConnect: problemas de VPN fuera · Iñigo González",
   dek_es="Los fallos de VPN que llegan de quien no trabaja en la oficina: jefes de área que van de tienda en tienda, Wi-Fi de hotel con portal cautivo, certificados caducados, avisos de MFA, el túnel dividido que no lleva al ERP y el paquete DART para diagnosticar sin estar allí.",
   dek_en="The VPN faults that come from people who don't work at the office: area managers going from store to store, hotel Wi-Fi with captive portals, expired certificates, MFA prompts, the split tunnel that doesn't reach the ERP and the DART bundle to diagnose without being there.",
   es="""
@@ -16295,6 +16435,8 @@ Each month:
 g(slug="impresoras-de-tienda-etiquetas-tickets-y-multifuncion-sin-it-en-sitio", topic="impresoras-tienda", date="2026-10-28",
   title_es="Impresoras de tienda: instalación y mantenimiento de etiquetas, tickets y multifunción sin IT en sitio",
   title_en="Store printers: installing and maintaining label, receipt and multifunction printers with no IT on site",
+  seo_title_en="Store printers: labels, receipts, MFPs · Iñigo González",
+  seo_title_es="Impresoras de tienda: etiquetas, tickets y MFP · Iñigo González",
   dek_es="Los tres tipos de impresora de una tienda, cómo desplegar drivers y colas desde la central, por qué cada impresora necesita una IP reservada, quién se ocupa de los consumibles, cómo guiar por teléfono a quien no es técnico y qué hacer cuando la tienda no puede imprimir etiquetas antes de abrir.",
   dek_en="The three kinds of printer in a store, how to deploy drivers and queues from head office, why every printer needs a reserved IP, who handles consumables, how to guide a non-technical person over the phone and what to do when the store can't print labels before opening.",
   es="""
@@ -16538,6 +16680,8 @@ TcpTestSucceeded
 g(slug="licencias-office-365-por-perfil-con-el-service-desk-tiendas-y-oficina-central", topic="o365-licencias", date="2026-10-28",
   title_es="Office 365: asignación de licencias por perfil con el service desk, de la tienda a la oficina central",
   title_en="Office 365: assigning licences by role through the service desk, from the store to head office",
+  seo_title_en="Office 365 licences by role in retail · Iñigo González",
+  seo_title_es="Licencias de Office 365 por perfil en retail · Iñigo González",
   dek_es="Qué licencia lleva cada perfil en una cadena con tiendas y oficina central, cómo asignarlas por grupo en Entra ID, el flujo de petición, aprobación, asignación y recuperación en las bajas, la conciliación mensual y qué mirar cuando el usuario no tiene Outlook o Teams tras asignarle la licencia.",
   dek_en="Which licence each role gets in a chain with stores and a head office, how to assign them by group in Entra ID, the request, approval, assignment and reclaim flow for leavers, the monthly reconciliation and what to check when the user has no Outlook or Teams after the licence was assigned.",
   es="""
@@ -16795,6 +16939,8 @@ If there were licences, the other usual causes:
 g(slug="salas-de-videoconferencia-poly-en-la-oficina-central-aprovisionamiento-y-soporte", topic="poly-salas", date="2026-10-28",
   title_es="Poly: salas de videoconferencia de la oficina central, del aprovisionamiento al consejo que empieza en cinco minutos",
   title_en="Poly: head-office video conferencing rooms, from provisioning to the board meeting that starts in five minutes",
+  seo_title_en="Poly video conference rooms: setup, support · Iñigo González",
+  seo_title_es="Salas Poly de videoconferencia: alta y soporte · Iñigo González",
   dek_es="Qué equipo Poly poner en cada sala, cuándo Teams Rooms en Android y cuándo una barra USB para el portátil, cómo aprovisionar con Poly Lens y el centro de administración de Teams, la cuenta de sala y su calendario, el firmware sin sustos y qué hacer cuando la sala sale desconectada justo antes del consejo.",
   dek_en="Which Poly device goes in each room, when to use Teams Rooms on Android and when a USB bar for the laptop, how to provision with Poly Lens and the Teams admin center, the room account and its calendar, firmware without surprises and what to do when the room shows offline just before the board meeting.",
   es="""
@@ -17018,6 +17164,8 @@ Sala Formación P1 DisablePasswordExpiration   03/02/2026 16:47:09
 g(slug="citrix-publicar-aplicacion-clinica-y-dar-soporte-en-planta", topic="citrix-apps", date="2026-10-28",
   title_es="Citrix VDI: publicar una aplicación clínica y darle soporte en las plantas",
   title_en="Citrix VDI: publishing a clinical application and supporting it on the wards",
+  seo_title_en="Citrix VDI: publish a clinical app · Iñigo González",
+  seo_title_es="Citrix VDI: publicar una aplicación clínica · Iñigo González",
   dek_es="Cómo publicar una aplicación clínica en Citrix Virtual Apps and Desktops para que llegue a quien debe, la sesión que sigue a la enfermera de un puesto a otro, el acceso con tarjeta, Director para el soporte y qué mirar cuando la aplicación abre en un PC de planta y no en otro.",
   dek_en="How to publish a clinical application in Citrix Virtual Apps and Desktops so it reaches the right people, the session that follows the nurse from one PC to the next, badge access, Director for support, and what to check when the app opens on one ward PC but not another.",
   es="""
@@ -17205,6 +17353,8 @@ The session is disconnected from the station PC and the application is published
 g(slug="entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas", topic="entornos-prueba", date="2026-10-28",
   title_es="Entornos de prueba: preparar una preproducción para validar cambios en plataformas críticas",
   title_en="Test environments: preparing a pre-production to validate changes on critical platforms",
+  seo_title_en="Test environment for critical platforms · Iñigo González",
+  seo_title_es="Entorno de pruebas para plataformas críticas · Iñigo González",
   dek_es="Qué tiene que ser igual que producción, cómo refrescar los datos sin llevar información de pacientes, la red aislada, el plan de pruebas con el responsable de la aplicación, el visto bueno antes del CAB y qué hacer cuando funcionó en pruebas y falló en producción.",
   dek_en="What has to match production, how to refresh data without carrying patient information, the isolated network, the test plan with the application owner, sign-off before CAB, and what to do when it worked in test and failed in production.",
   es="""
@@ -17418,6 +17568,8 @@ Production has a patch pre-production doesn't. Apply it in pre-production, repea
 g(slug="monitorizacion-desplegar-alarmas-y-responder-en-plataformas-24x7", topic="monitorizacion-alarmas", date="2026-10-28",
   title_es="Monitorización: desplegar alarmas y responder a ellas en una plataforma 24x7",
   title_en="Monitoring: deploying alarms and responding to them on a 24x7 platform",
+  seo_title_en="Monitoring alarms on a 24x7 platform · Iñigo González",
+  seo_title_es="Alarmas de monitorización en una plataforma 24x7 · Iñigo González",
   dek_es="Qué vigilar en una plataforma que no puede pararse, cómo fijar umbrales y severidades, a quién despierta cada alarma, el runbook dentro del aviso, las ventanas de mantenimiento, la revisión del ruido y una alarma de madrugada desde el aviso hasta el cierre.",
   dek_en="What to watch on a platform that can't stop, how to set thresholds and severities, who each alarm wakes up, the runbook inside the alert, maintenance windows, the noise review, and a night-time alarm from page to closure.",
   es="""
@@ -17635,6 +17787,8 @@ Each month, with the tool's alarm report:
 g(slug="oracle-cambiar-hardware-y-sistema-operativo-del-servidor-de-base-de-datos", topic="oracle-upgrade", date="2026-10-28",
   title_es="Oracle: cambiar el hardware y el sistema operativo del servidor de base de datos sin parar el hospital",
   title_en="Oracle: replacing the database server's hardware and operating system without stopping the hospital",
+  seo_title_en="Oracle database server hardware and OS upgrade · Iñigo González",
+  seo_title_es="Oracle: cambiar hardware y SO del servidor · Iñigo González",
   dek_es="La matriz de certificación, el aviso sobre licencias por núcleo, el plan con el DBA, los prerrequisitos del nuevo servidor, el paso con Data Guard o con RMAN, la vuelta atrás, la validación con el responsable de la aplicación y qué mirar cuando tras el cambio todo va lento.",
   dek_en="The certification matrix, the warning about per-core licensing, the plan with the DBA, the new server's prerequisites, the move with Data Guard or RMAN, the rollback, validation with the application owner and what to check when everything is slow after the change.",
   es="""
@@ -17848,6 +18002,8 @@ Monday, 8:30. Outpatients say opening a record takes three times as long as on F
 g(slug="red-hat-ajuste-de-rendimiento-de-un-servidor-critico", topic="rhel-rendimiento", date="2026-10-28",
   title_es="Red Hat: ajuste de rendimiento de un servidor que no puede parar",
   title_en="Red Hat: performance tuning of a server that can't stop",
+  seo_title_en="Red Hat: performance tuning a critical server · Iñigo González",
+  seo_title_es="Red Hat: rendimiento de un servidor crítico · Iñigo González",
   dek_es="Un método para no ajustar a ciegas: la línea base con sysstat, cómo leer top, vmstat, iostat y sar, los perfiles de tuned, la memoria y el swap, el planificador de E/S, los sistemas de ficheros, los límites, journald y el ticket del servidor lento desde primera hora.",
   dek_en="A method so you don't tune blind: the baseline with sysstat, how to read top, vmstat, iostat and sar, tuned profiles, memory and swap, the I/O scheduler, file systems, limits, journald and the ticket about the server that has been slow since first thing.",
   es="""
@@ -18047,6 +18203,8 @@ The data disk (`sdb`) is saturated, when yesterday at the same time it was at 12
 g(slug="windows-server-actualizaciones-planificadas-sin-cortar-el-servicio", topic="winserver-parches", date="2026-10-28",
   title_es="Windows Server: actualizaciones planificadas sin cortar el servicio",
   title_en="Windows Server: planned updates without interrupting the service",
+  seo_title_en="Windows Server patching without downtime · Iñigo González",
+  seo_title_es="Parches de Windows Server sin cortar el servicio · Iñigo González",
   dek_es="Cómo parchear cada mes los servidores de un hospital que funciona 24x7: anillos, ventanas acordadas con los responsables clínicos, clústeres con Cluster-Aware Updating, pares balanceados de uno en uno, comprobaciones antes y después, WSUS, MECM o Azure Update Manager, la vuelta atrás y el servidor que no volvió tras el Patch Tuesday.",
   dek_en="How to patch a 24x7 hospital's servers every month: rings, windows agreed with clinical owners, clusters with Cluster-Aware Updating, balanced pairs one at a time, checks before and after, WSUS, MECM or Azure Update Manager, rollback and the server that didn't come back after Patch Tuesday.",
   es="""
@@ -18238,6 +18396,8 @@ C:       18.4
 g(slug="lan-wan-y-wifi-conectar-plantas-y-sedes-de-varios-paises", topic="lan-wan-wifi", date="2026-10-28",
   title_es="LAN, WAN y WiFi: conectar plantas y sedes de varios países",
   title_en="LAN, WAN and Wi-Fi: connecting plants and offices in several countries",
+  seo_title_en="LAN, WAN and Wi-Fi for multi-country sites · Iñigo González",
+  seo_title_es="LAN, WAN y Wi-Fi entre sedes de varios países · Iñigo González",
   dek_es="Un diseño de sede que se repite en cada país, la red de planta (OT) separada de la de oficina, MPLS frente a SD-WAN con circuito de respaldo, la WiFi con 802.1X y la de invitados, los operadores locales y sus plazos, y el ticket de la planta que va lenta al ERP.",
   dek_en="A site design repeated in every country, the plant (OT) network kept apart from the office one, MPLS versus SD-WAN with a backup circuit, Wi-Fi with 802.1X and for guests, local carriers and their lead times, and the ticket about the plant that is slow to reach the ERP.",
   es="""
@@ -18503,6 +18663,8 @@ The primary circuit fails the SLA (`sla_map=0x0`), but the rule keeps using it: 
 g(slug="mdm-gestion-de-moviles-corporativos-en-plantas-y-sedes-de-varios-paises", topic="mdm-moviles", date="2026-10-28",
   title_es="MDM: gestión de móviles corporativos en plantas y sedes de varios países",
   title_en="MDM: managing corporate phones across plants and offices in several countries",
+  seo_title_en="MDM for corporate phones across countries · Iñigo González",
+  seo_title_es="MDM de móviles corporativos en varios países · Iñigo González",
   dek_es="Cómo llegan los móviles de jefes de planta y comerciales ya gestionados por Intune, con Android Enterprise totalmente gestionado y Apple Business Manager con ADE, la protección de apps, el cumplimiento, las SIM de cada país, el móvil perdido, las bajas y el ticket del móvil que se queda en la configuración inicial.",
   dek_en="How phones for plant managers and sales staff arrive already managed by Intune, with Android Enterprise fully managed and Apple Business Manager with ADE, app protection, compliance, each country's SIMs, the lost phone, leavers and the ticket about the phone stuck on initial setup.",
   es="""
@@ -18720,6 +18882,8 @@ If it appears and is compliant, enrolment finished and the problem is apps or co
 g(slug="presupuesto-de-it-preparar-y-seguir-el-presupuesto-anual-en-una-empresa-multisede", topic="presupuesto-it", date="2026-10-28",
   title_es="Presupuesto de IT: preparar y seguir el presupuesto anual de una empresa con sedes en varios países",
   title_en="IT budget: preparing and tracking the annual budget of a company with sites in several countries",
+  seo_title_en="IT budget: prepare and track the annual plan · Iñigo González",
+  seo_title_es="Presupuesto de IT: preparar y seguir el anual · Iñigo González",
   dek_es="Cómo separar run y change, qué es CAPEX y qué es OPEX, el calendario de contratos y renovaciones, las licencias por plantilla, el ciclo de renovación de equipos, el reparto por país y moneda, el seguimiento mensual frente al real y cómo responder cuando el CFO pregunta por qué vais un 12 % por encima en el tercer trimestre.",
   dek_en="How to split run and change, what is CAPEX and what is OPEX, the contracts and renewals calendar, licences by headcount, the hardware refresh cycle, allocation by country and currency, monthly tracking against actuals and how to answer when the CFO asks why you are 12% over in Q3.",
   es="""
@@ -18975,6 +19139,8 @@ How to prepare before the meeting:
 g(slug="sap-soporte-a-usuarios-desde-it-sin-ser-consultor-sap", topic="sap-soporte", date="2026-10-28",
   title_es="SAP: soporte a usuarios desde IT sin ser consultor de SAP",
   title_en="SAP: supporting users from IT without being an SAP consultant",
+  seo_title_en="SAP user support from IT · Iñigo González",
+  seo_title_es="Soporte a usuarios de SAP desde IT · Iñigo González",
   dek_es="Lo que hace el primer y segundo nivel de IT con los usuarios de SAP: instalar SAP GUI y sus conexiones, desbloquear usuarios cuando IT está autorizado, leer un SU53, entender la impresión con SPAD y SP01, mirar SM04 y SM21 si hay acceso, saber cuándo escalar y el ticket del almacén que no imprime albaranes.",
   dek_en="What first- and second-line IT does for SAP users: installing SAP GUI and its connections, unlocking users when IT is authorised, reading an SU53, understanding printing with SPAD and SP01, checking SM04 and SM21 if you have access, knowing when to escalate and the ticket about the warehouse that can't print delivery notes.",
   es="""
@@ -19226,6 +19392,8 @@ If you have read access:
 g(slug="sql-server-copias-y-restauracion-de-la-base-de-datos-del-erp", topic="sqlserver-backup", date="2026-10-28",
   title_es="SQL Server: copias de seguridad del ERP, restauración a un punto en el tiempo y unas filas borradas",
   title_en="SQL Server: ERP backups, point-in-time restore and some deleted rows",
+  seo_title_en="SQL Server: ERP backup and point-in-time restore · Iñigo González",
+  seo_title_es="SQL Server: copias y restauración del ERP · Iñigo González",
   dek_es="El modelo de recuperación que necesita la base de datos del ERP, la pauta de copias completas, diferenciales y de log, la copia a un recurso compartido o a una URL con checksum, la retención, la cadena de restauración con NORECOVERY y STOPAT en un servidor de pruebas, el historial de msdb y cómo recuperar unas filas borradas a las 10:40 en una planta de otro país.",
   dek_en="The recovery model the ERP database needs, the schedule of full, differential and log backups, backing up to a share or a URL with checksum, retention, the restore chain with NORECOVERY and STOPAT on a test server, msdb history, and how to get back rows deleted at 10:40 in a plant in another country.",
   es="""
@@ -19463,6 +19631,8 @@ Tuesday. A plant in another country reports that purchase order lines for one su
 g(slug="veeam-planificar-y-probar-restauraciones-en-plantas-y-sedes", topic="veeam-restauraciones", date="2026-10-28",
   title_es="Veeam: planificar y probar restauraciones en plantas y sedes, y un servidor de ficheros cifrado",
   title_en="Veeam: planning and testing restores across plants and sites, and an encrypted file server",
+  seo_title_en="Veeam: plan and test restores across sites · Iñigo González",
+  seo_title_es="Veeam: planificar y probar restauraciones · Iñigo González",
   dek_es="Qué tipo de restauración elegir para cada necesidad, pruebas automáticas con SureBackup y laboratorio virtual, un calendario trimestral de pruebas por planta, cómo documentar el tiempo real frente al RTO, la copia a otra sede y a un repositorio inmutable, y qué hacer cuando el servidor de ficheros de una planta aparece cifrado.",
   dek_en="Which restore type to choose for each need, automated tests with SureBackup and a virtual lab, a quarterly test calendar per plant, how to record real restore times against the RTO, copies to another site and to an immutable repository, and what to do when a plant's file server turns up encrypted.",
   es="""
@@ -19680,6 +19850,8 @@ srv-p2-fs01   24/10/2026 22:00:16  Full
 g(slug="vmware-mantenimiento-de-hosts-y-maquinas-virtuales-en-varias-plantas", topic="vmware-mantenimiento", date="2026-10-28",
   title_es="VMware: mantenimiento de hosts y máquinas virtuales en los clústeres de varias plantas",
   title_en="VMware: host and virtual machine maintenance across several plants' clusters",
+  seo_title_en="VMware host and VM maintenance · Iñigo González",
+  seo_title_es="VMware: mantenimiento de hosts y VMs · Iñigo González",
   dek_es="La rutina de mantenimiento de los clústeres vSphere de cada sede: imágenes de vSphere Lifecycle Manager, modo mantenimiento con DRS, VMware Tools y versiones de hardware virtual, higiene de snapshots, capacidad de datastores, certificados, salud del hardware, un calendario coordinado con los turnos de planta y qué mirar cuando un host no entra en modo mantenimiento.",
   dek_en="The maintenance routine for each site's vSphere clusters: vSphere Lifecycle Manager images, maintenance mode with DRS, VMware Tools and virtual hardware versions, snapshot hygiene, datastore capacity, certificates, hardware health, a calendar coordinated with plant shifts and what to check when a host won't enter maintenance mode.",
   es="""
@@ -19911,6 +20083,8 @@ srv-p1-lic01    USB 2.0 Licence Dongle
 g(slug="cisco-salas-de-comunicaciones-de-una-sede-con-sala-de-trading", topic="cisco-sede", date="2026-10-28",
   title_es="Cisco: switches, routers y salas de comunicaciones de una sede con sala de trading",
   title_en="Cisco: switches, routers and comms rooms of a site with a trading floor",
+  seo_title_en="Cisco comms rooms on a trading-floor site · Iñigo González",
+  seo_title_es="Cisco en una sede con sala de trading · Iñigo González",
   dek_es="Cómo se monta y se mantiene la sala de comunicaciones de una sede financiera: energía doble y SAI, núcleo redundante, pilas de acceso, etiquetado, consola fuera de banda, copias de configuración, cambios fuera del horario de mercado, visitas de operadoras y una mesa sin red a las 8:55.",
   dek_en="How the comms room of a financial site is built and maintained: dual power and UPS, a redundant core, access stacks, labelling, out-of-band console, configuration backups, changes outside market hours, carrier visits and a desk with no network at 8:55.",
   es="""
@@ -20148,6 +20322,8 @@ Oct 28 08:53:12: %STACKMGR-6-SWITCH_REMOVED: Switch 1 R0/0: stack_mgr: Switch 3 
 g(slug="conditional-access-politicas-para-una-sede-con-sala-de-trading", topic="ca-sede", date="2026-10-28",
   title_es="Conditional Access: políticas pensadas para una sede con sala de trading",
   title_en="Conditional Access: policies designed for a site with a trading floor",
+  seo_title_en="Conditional Access for a trading-floor site · Iñigo González",
+  seo_title_es="Conditional Access para una sede con trading · Iñigo González",
   dek_es="Cómo diseñar el acceso condicional alrededor de una sede: las IP de salida como ubicación con nombre, dispositivo conforme, reglas más estrictas para las aplicaciones de trading y de administración, cuentas de emergencia excluidas, el modo solo informe y qué pasa cuando cambia la IP de salida.",
   dek_en="How to design Conditional Access around a site: the egress IPs as a named location, compliant devices, stricter rules for trading and admin apps, excluded break-glass accounts, report-only mode and what happens when the egress IP changes.",
   es="""
@@ -20365,6 +20541,8 @@ $ $loc.AdditionalProperties.ipRanges.cidrAddress
 g(slug="dr-bcp-preparar-y-supervisar-una-prueba-de-recuperacion-en-una-sede-financiera", topic="dr-prueba", date="2026-10-28",
   title_es="DR/BCP: preparar y supervisar una prueba de recuperación en una sede financiera",
   title_en="DR/BCP: preparing and supervising a recovery test at a financial site",
+  seo_title_en="DR/BCP: run a recovery test at a financial site · Iñigo González",
+  seo_title_es="DR/BCP: prueba de recuperación en una sede financiera · Iñigo González",
   dek_es="Cómo se organiza una prueba de recuperación en una entidad financiera: alcance y escenario, lo que espera la regulación de resiliencia, roles y go/no-go, el calendario de un fin de semana, cómo medir RTO y RPO de verdad, la validación del negocio, el registro de incidencias y el informe con su plan de remediación.",
   dek_en="How a recovery test is organised at a financial firm: scope and scenario, what resilience regulation expects, roles and go/no-go, a weekend timeline, how to measure RTO and RPO properly, business sign-off, the issues log and the report with its remediation plan.",
   es="""
@@ -20622,6 +20800,8 @@ Saturday, 08:40. The order platform is up at the alternate site and the business
 g(slug="microsoft-teams-rooms-salas-sobre-crestron-en-una-sede-financiera", topic="teams-rooms-crestron", date="2026-10-28",
   title_es="Microsoft Teams Rooms: salas sobre Crestron en una sede con sala de trading",
   title_en="Microsoft Teams Rooms: rooms on Crestron at a site with a trading floor",
+  seo_title_en="Microsoft Teams Rooms on Crestron · Iñigo González",
+  seo_title_es="Microsoft Teams Rooms sobre Crestron · Iñigo González",
   dek_es="Qué hay en una sala con kit Crestron Flex para Teams Rooms, la cuenta de recurso y su acceso condicional, el aprovisionamiento, el portal de gestión de Teams Rooms Pro, las actualizaciones fuera de horario, la revisión de salas antes de las reuniones de apertura y qué hacer cuando la consola dice que no hay sesión iniciada.",
   dek_en="What's in a room with a Crestron Flex kit for Teams Rooms, the resource account and its Conditional Access, provisioning, the Teams Rooms Pro Management portal, updates outside hours, room checks before market open meetings and what to do when the console says it isn't signed in.",
   es="""
@@ -20841,6 +21021,8 @@ CreatedDateTime      IpAddress      Error ConditionalAccessStatus
 g(slug="pim-acceso-just-in-time-para-administradores-de-una-sede-financiera", topic="pim-jit", date="2026-10-28",
   title_es="PIM: acceso just-in-time para los administradores de la sede, con ticket, aprobación y revisiones",
   title_en="PIM: just-in-time access for site administrators, with ticket, approval and reviews",
+  seo_title_en="PIM: just-in-time admin access · Iñigo González",
+  seo_title_es="PIM: acceso just-in-time para administradores · Iñigo González",
   dek_es="Cómo dar al IT local de una sede con sala de trading roles elegibles en lugar de permanentes, qué pedir al activar, cuánto dura cada rol, PIM para grupos para servidores y aplicaciones, las revisiones trimestrales que pide auditoría y qué hacer cuando nadie puede activar su rol a las 7:30.",
   dek_en="How to give local IT at a site with a trading floor eligible roles instead of permanent ones, what to ask for on activation, how long each role lasts, PIM for Groups for servers and applications, the quarterly reviews audit asks for and what to do when nobody can activate their role at 7:30.",
   es="""
@@ -21060,6 +21242,8 @@ When each review closes, download the results and keep them with the quarter's a
 g(slug="proveedores-de-conectividad-inventario-de-circuitos-averias-y-sla", topic="proveedores-conectividad", date="2026-10-28",
   title_es="Proveedores de conectividad: el inventario de circuitos, las averías con el operador y el SLA de cada mes",
   title_en="Connectivity providers: the circuit inventory, faults with the carrier and the monthly SLA",
+  seo_title_en="Connectivity providers: circuits, faults, SLA · Iñigo González",
+  seo_title_es="Operadores: circuitos, averías y SLA · Iñigo González",
   dek_es="Qué tiene que tener el inventario de circuitos de una sede con sala de trading, cómo comprobar que las rutas son diversas de verdad, qué son las líneas de datos de mercado, qué dar al operador al abrir una avería, cómo seguirla y escalarla, la revisión mensual del SLA y el circuito principal caído a las 8:00.",
   dek_en="What the circuit inventory of a site with a trading floor must hold, how to check routes are really diverse, what market data lines are, what to give the carrier when raising a fault, how to track and escalate it, the monthly SLA review and the primary circuit down at 8:00.",
   es="""
@@ -21319,6 +21503,8 @@ The default route already goes over the backup (`198.51.100.9`, administrative d
 g(slug="windows-11-migrar-los-equipos-de-una-sede-con-sala-de-trading", topic="windows11-migracion", date="2026-10-28",
   title_es="Windows 11: migrar los equipos de una sede con sala de trading sin tocar el horario de mercado",
   title_en="Windows 11: migrating a site's PCs with a trading floor without touching market hours",
+  seo_title_en="Windows 11 migration of a trading-floor site · Iñigo González",
+  seo_title_es="Migración a Windows 11 de una sede con trading · Iñigo González",
   dek_es="Comprobar TPM 2.0 y procesador, validar las aplicaciones de trading y de negocio, hacer un piloto con usuarios reales, elegir entre actualización in situ (Intune o MECM) y reinstalación con Autopilot, planificar por mesas fuera de horario, cuidar los puestos multimonitor, la ventana de vuelta atrás y el puesto que pierde sus cuatro pantallas.",
   dek_en="Check TPM 2.0 and CPU, validate trading and business applications, run a pilot with real users, choose between in-place upgrade (Intune or MECM) and wipe-and-load with Autopilot, schedule by desk outside market hours, look after multi-monitor desks, the rollback window and the desk that loses its four screens.",
   es="""

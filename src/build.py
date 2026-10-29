@@ -1269,7 +1269,8 @@ for i, q in enumerate(G_ORDER):
   </div>
 </section>"""
     sizes[f"guias/{q['slug']}.html"] = write(f"guias/{q['slug']}.html", layout(R="../", path=f"guias/{q['slug']}.html", active="guides",
-        title_en=f'{q["title_en"]} · Iñigo González', title_es=f'{q["title_es"]} · Iñigo González',
+        title_en=q.get("seo_title_en") or f'{q["title_en"]} · Iñigo González',
+        title_es=q.get("seo_title_es") or f'{q["title_es"]} · Iñigo González',
         desc=q["dek_en"], body=body, og_type="article",
         ld=[{"@type": "TechArticle", "headline": q["title_en"], "alternativeHeadline": q["title_es"], "description": q["dek_en"],
              "datePublished": q["date"], "dateModified": q["date"], "inLanguage": "en", "proficiencyLevel": "Beginner" if t[0] == "nivel-1" else "Expert",
@@ -1313,7 +1314,8 @@ for lk, L in LEVELS.items():
   </div>
 </section>"""
     sizes[f"guias/{lk}.html"] = write(f"guias/{lk}.html", layout(R="../", path=f"guias/{lk}.html", active="guides",
-        title_en=f'{L["n_en"]} · {L["t_en"]} · IT guides · Iñigo González', title_es=f'{L["n_es"]} · {L["t_es"]} · Guías IT · Iñigo González',
+        title_en=(f'{L["t_en"]} · IT guides · Iñigo González' if L["key"].startswith("sector") else f'{L["n_en"]} · {L["t_en"]} · IT guides · Iñigo González'),
+        title_es=(f'{L["t_es"]} · Guías IT · Iñigo González' if L["key"].startswith("sector") else f'{L["n_es"]} · {L["t_es"]} · Guías IT · Iñigo González'),
         desc=L["seo"],
         body=lbody, ld=[{"@type": "CollectionPage", "@id": SITE_URL + f"guias/{lk}.html", "url": SITE_URL + f"guias/{lk}.html",
                          "name": f'{L["n_en"]} · {L["t_en"]}', "inLanguage": "en", "isPartOf": {"@id": SITE_URL + "#website"},
