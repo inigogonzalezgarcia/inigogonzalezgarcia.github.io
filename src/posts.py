@@ -10,6 +10,8 @@ CATS = {
 POSTS = [
 dict(n="01", repo="01-finops-cloud-cost-dashboard", date="2026-09-03", cat="tools",
  title_en="Catching cloud cost drift before the invoice does", title_es="Ver la deriva del gasto cloud antes que la factura",
+ seo_title_en="Cloud cost anomalies in AWS and Azure · Iñigo González",
+ seo_title_es="Desvíos de coste cloud en AWS y Azure · Iñigo González",
  dek_en="A small Streamlit dashboard for AWS and Azure spend that flags the week that looks wrong.",
  dek_es="Un panel pequeño en Streamlit para el gasto de AWS y Azure que señala la semana que no cuadra.",
  en="""
@@ -53,6 +55,8 @@ Python, pandas, Plotly y Streamlit. `data_generator.py` crea 90 días de factura
 
 dict(n="02", repo="02-intune-compliance-report", date="2026-09-30", cat="tools",
  title_en="An Intune compliance report you can hand to a manager", title_es="Un informe de cumplimiento de Intune que se puede enseñar a dirección",
+ seo_title_en="Intune compliance report with Microsoft Graph · Iñigo González",
+ seo_title_es="Informe de cumplimiento de Intune con Graph · Iñigo González",
  dek_en="PowerShell pulls the devices from Microsoft Graph, Python turns them into a report and an action list.",
  dek_es="PowerShell saca los dispositivos de Microsoft Graph y Python los convierte en un informe y una lista de acciones.",
  en="""
@@ -98,6 +102,8 @@ Separar la exportación del análisis compensa: la parte de PowerShell solo nece
 
 dict(n="03", repo="03-entra-id-hygiene-audit", date="2026-09-30", cat="tools",
  title_en="Auditing Entra ID hygiene: MFA gaps and forgotten accounts", title_es="Auditar la higiene de Entra ID: huecos de MFA y cuentas olvidadas",
+ seo_title_en="Entra ID audit: MFA gaps and stale accounts · Iñigo González",
+ seo_title_es="Auditoría de Entra ID: MFA y cuentas olvidadas · Iñigo González",
  dek_en="Admins without MFA, inactive members and stale guests, found in one pass.",
  dek_es="Administradores sin MFA, miembros inactivos e invitados obsoletos, en una sola pasada.",
  en="""
@@ -147,6 +153,8 @@ Casi todo el trabajo está en decidir qué significa "inactivo" y "obsoleto" y d
 
 dict(n="04", repo="04-itsm-kpi-dashboard", date="2026-09-30", cat="tools",
  title_en="Service desk KPIs from a plain ticket export", title_es="KPIs de service desk a partir de una exportación de tickets",
+ seo_title_en="Service desk KPIs: SLA, MTTR and backlog · Iñigo González",
+ seo_title_es="KPIs del service desk: SLA, MTTR y backlog · Iñigo González",
  dek_en="SLA by priority and team, time to resolve, weekly trend and the open tickets already out of SLA.",
  dek_es="SLA por prioridad y por equipo, tiempo de resolución, tendencia semanal y los tickets abiertos ya fuera de SLA.",
  en="""
@@ -196,6 +204,8 @@ La mediana cuenta otra historia que la media: unos pocos tickets muy largos muev
 
 dict(n="05", repo="05-it-ops-console", date="2026-09-30", cat="tools",
  title_en="Rebuilding an on-site IT operations console from scratch", title_es="Rehacer desde cero una consola de operaciones IT de sede",
+ seo_title_en="On-site IT ops console: Flask + PowerShell · Iñigo González",
+ seo_title_es="Consola de operaciones IT: Flask + PowerShell · Iñigo González",
  dek_en="Assets, warranties, room checklists, joiners and leavers, shifts and service health in one Flask app.",
  dek_es="Activos, garantías, checklists de salas, altas y bajas, turnos y salud de servicios en una app Flask.",
  en="""
@@ -239,6 +249,8 @@ Flask y SQLite, con PowerShell por CIM/WinRM para las consultas remotas. ARCHITE
 
 dict(n="06", repo="06-kubernetes-ingress-lab", date="2026-10-01", cat="cloud",
  title_en="A Kubernetes ingress lab built from zero in every CI run", title_es="Un laboratorio de ingress en Kubernetes que la CI construye desde cero",
+ seo_title_en="Kubernetes ingress lab: Cilium and Envoy · Iñigo González",
+ seo_title_es="Laboratorio de ingress en Kubernetes: Cilium y Envoy · Iñigo González",
  dek_en="Cilium, Envoy Gateway, cert-manager and external-dns on kind, with nine end-to-end checks.",
  dek_es="Cilium, Envoy Gateway, cert-manager y external-dns sobre kind, con nueve pruebas de punta a punta.",
  en="""
@@ -282,6 +294,8 @@ Un workflow de GitHub Actions construye el clúster desde cero y pasa nueve prue
 
 dict(n="07", repo="07-aws-private-connectivity", date="2026-10-01", cat="cloud",
  title_en="Private connectivity on AWS with Terraform, and the bug CI caught", title_es="Conectividad privada en AWS con Terraform, y el fallo que pilló la CI",
+ seo_title_en="AWS PrivateLink and private DNS with Terraform · Iñigo González",
+ seo_title_es="AWS PrivateLink y DNS privado con Terraform · Iñigo González",
  dek_en="PrivateLink, private DNS and SSM endpoints in five modules, tested without an AWS account.",
  dek_es="PrivateLink, DNS privado y endpoints de SSM en cinco módulos, probados sin cuenta de AWS.",
  en="""
@@ -333,6 +347,8 @@ La CI con Terraform encontró un fallo real que OpenTofu no marcó: un `for_each
 
 dict(n="08", repo="08-edge-health-slo-monitor", date="2026-10-01", cat="cloud",
  title_en="SLOs and burn-rate alerts for the edge, in plain Python", title_es="SLO y alertas por burn rate para el edge, en Python sin dependencias",
+ seo_title_en="SLOs and burn-rate alerts in Python · Iñigo González",
+ seo_title_es="SLO y alertas por burn rate en Python · Iñigo González",
  dek_en="DNS, TLS, HTTP and TCP probes, an error budget and a fictional postmortem.",
  dek_es="Sondas DNS, TLS, HTTP y TCP, un presupuesto de error y un postmortem ficticio.",
  en="""
@@ -374,6 +390,8 @@ Python 3.11, solo librería estándar, 14 tests.
 
 dict(n="09", repo="09-gpu-node-remediation", date="2026-10-01", cat="gpu",
  title_en="Teaching a Kubernetes controller to drain, repair or quarantine GPU nodes", title_es="Un controlador de Kubernetes que drena, repara o pone en cuarentena nodos GPU",
+ seo_title_en="Kubernetes GPU node remediation controller · Iñigo González",
+ seo_title_es="Controlador de remediación de nodos GPU · Iñigo González",
  dek_en="First GPU lab: XID errors, ECC and temperature drive each node through a state machine.",
  dek_es="Primer laboratorio de GPU: los XID, el ECC y la temperatura llevan cada nodo por una máquina de estados.",
  en="""
@@ -417,6 +435,8 @@ Un simulador `gpu-sim` hace de dcgm-exporter. La CI pasa tests unitarios, shellc
 
 dict(n="10", repo="10-gpu-fleet-observability", date="2026-10-01", cat="gpu",
  title_en="Observability for a GPU fleet: alerts that say what to do", title_es="Observabilidad de una flota de GPU: alertas que dicen qué hacer",
+ seo_title_en="GPU fleet observability with dcgm-exporter · Iñigo González",
+ seo_title_es="Observabilidad de una flota GPU con dcgm-exporter · Iñigo González",
  dek_en="Recording rules, alerts with runbooks, Alertmanager routing and a Grafana dashboard on DCGM metrics.",
  dek_es="Recording rules, alertas con runbook, rutas de Alertmanager y un dashboard de Grafana sobre métricas DCGM.",
  en="""
@@ -464,6 +484,8 @@ La comprobación de energía frente a potencia daba falsos fallos con una sola m
 
 dict(n="11", repo="11-gpu-fleet-lifecycle", date="2026-10-02", cat="gpu",
  title_en="Rolling a GPU driver across a fleet: canary, approval, rollback", title_es="Desplegar un driver de GPU por la flota: canary, aprobación y rollback",
+ seo_title_en="GPU driver rollout: canary and rollback · Iñigo González",
+ seo_title_es="Despliegue de drivers GPU: canary y rollback · Iñigo González",
  dek_en="A Go controller that upgrades nodes in batches and backs out on its own when something breaks.",
  dek_es="Un controlador en Go que actualiza nodos por lotes y da marcha atrás solo cuando algo falla.",
  en="""
@@ -507,6 +529,8 @@ El plan vive en un ConfigMap validado donde los campos desconocidos son error. L
 
 dict(n="12", repo="12-gpu-goodput-mtbi", date="2026-10-02", cat="gpu",
  title_en="Where do the GPU-hours go? A goodput simulator", title_es="¿Adónde van las GPU-horas? Un simulador de goodput",
+ seo_title_en="GPU goodput and MTBI simulator · Iñigo González",
+ seo_title_es="Simulador de goodput y MTBI en GPU · Iñigo González",
  dek_en="A 1,024-GPU training job, simulated with failures, to see what checkpoints, spares and fast detection are worth.",
  dek_es="Un entrenamiento de 1.024 GPU simulado con fallos, para ver cuánto valen los checkpoints, los spares y la detección rápida.",
  en="""
@@ -552,6 +576,8 @@ Siete escenarios con 20 semillas cada uno: base 79,6 %, intervalo de Daly 85,1 %
 
 dict(n="13", repo="13-cluster-acceptance-burnin", date="2026-10-04", cat="gpu",
  title_en="From handover to sign-off: accepting a new GPU cluster", title_es="Del handover a la firma: aceptar un clúster de GPU nuevo",
+ seo_title_en="GPU cluster acceptance and burn-in tests · Iñigo González",
+ seo_title_es="Aceptación y burn-in de un clúster GPU · Iñigo González",
  dek_en="Inventory, diagnostics, NCCL tests and a 72-hour burn-in, ending in a report a customer can sign.",
  dek_es="Inventario, diagnósticos, pruebas NCCL y un burn-in de 72 horas, con un informe que el cliente puede firmar.",
  en="""
@@ -601,6 +627,8 @@ Un clúster ficticio de 4 racks × 8 nodos × 8 GPU con 8 defectos. La ronda 1 a
 
 dict(n="14", repo="14-slurm-gpu-ops", date="2026-10-04", cat="gpu",
  title_en="A real Slurm cluster in Docker Compose, with GPU health checks", title_es="Un clúster Slurm real en Docker Compose, con health checks de GPU",
+ seo_title_en="Slurm GPU cluster in Docker with health checks · Iñigo González",
+ seo_title_es="Clúster Slurm con GPU en Docker y health checks · Iñigo González",
  dek_en="Drain, requeue and validate, and four CI iterations to get cgroups v2 working.",
  dek_es="Drain, requeue y validate, y cuatro iteraciones de CI para que funcionen los cgroups v2.",
  en="""
@@ -650,6 +678,8 @@ Hicieron falta cuatro iteraciones de CI para que funcionaran los cgroups v2 sin 
 
 dict(n="15", repo="15-multi-tenant-gpu-scheduling", date="2026-10-05", cat="gpu",
  title_en="Sharing GPUs between teams with Kueue and KAI Scheduler", title_es="Repartir GPU entre equipos con Kueue y KAI Scheduler",
+ seo_title_en="Multi-tenant GPU scheduling: Kueue and KAI · Iñigo González",
+ seo_title_es="GPU compartidas entre equipos: Kueue y KAI · Iñigo González",
  dek_en="One quota agreement in a TOML file, rendered into both schedulers and tested on kind.",
  dek_es="Un acuerdo de cuotas en un fichero TOML, traducido a los dos planificadores y probado en kind.",
  en="""
@@ -695,6 +725,8 @@ Tres rondas de arreglos tras la primera CI, explicadas en docs/decisions.md: el 
 
 dict(n="16", repo="16-gitops-gpu-fleet", date="2026-10-09", cat="gpu",
  title_en="Promoting GPU Operator releases from staging to prod with Flux", title_es="Promocionar versiones del GPU Operator de staging a prod con Flux",
+ seo_title_en="GitOps GPU fleet: GPU Operator with Flux · Iñigo González",
+ seo_title_es="Flota GPU con GitOps: GPU Operator y Flux · Iñigo González",
  dek_en="One file defines releases and clusters; Git and Flux do the rest, with a gate before production.",
  dek_es="Un fichero define versiones y clústeres; Git y Flux hacen el resto, con una puerta antes de producción.",
  en="""
@@ -938,6 +970,8 @@ De integrar aplicaciones SaaS en Entra ID: lo difícil no es configurar el SSO, 
 
 dict(n="21", repo="21-apple-fleet-audit", date="2026-10-17", cat="tools",
  title_en="A weekly review for a Jamf Pro Apple fleet", title_es="Una revisión semanal para una flota Apple en Jamf Pro",
+ seo_title_en="Jamf Pro weekly audit for an Apple fleet · Iñigo González",
+ seo_title_es="Auditoría semanal de Jamf Pro (flota Apple) · Iñigo González",
  dek_en="Push certificate and tokens, OS currency, FileVault, SIP, bootstrap token, passcodes, stale devices and full disks, with the executives' devices first.",
  dek_es="Certificado push y tokens, versiones de sistema, FileVault, SIP, bootstrap token, códigos de acceso, equipos que no se conectan y discos llenos, con los dispositivos de dirección primero.",
  en="""
@@ -983,6 +1017,8 @@ De gestionar MacBooks, iPhones e iPads con Jamf Pro y dar soporte a usuarios VIP
 
 dict(n="22", repo="22-dex-experience-score", date="2026-10-17", cat="tools",
  title_en="A 0-10 experience score for every laptop", title_es="Una nota de 0 a 10 para la experiencia de cada portátil",
+ seo_title_en="DEX score: a 0-10 experience per laptop · Iñigo González",
+ seo_title_es="Puntuación DEX de 0 a 10 por portátil · Iñigo González",
  dek_en="A lab that turns endpoint telemetry into a score per device, site and department, and ranks the five fixes that would raise it most.",
  dek_es="Un laboratorio que convierte la telemetría de los equipos en una nota por dispositivo, sede y departamento, y ordena los cinco arreglos que más la subirían.",
  en="""
@@ -1033,6 +1069,8 @@ Explicar la nota importa más que el número: cada punto perdido tiene que lleva
 - Hablar antes con tu delegado de protección de datos e informar por sede y departamento."""),
 dict(n="23", repo="23-it-vendor-contract-tracker", date="2026-10-18", cat="tools",
  title_en="Every IT contract renewal, notice deadline and saving in one monthly review", title_es="Cada renovación, preaviso y ahorro de los contratos de IT en una revisión mensual",
+ seo_title_en="IT vendor contract and renewal tracker · Iñigo González",
+ seo_title_es="Contratos y renovaciones de IT en una revisión · Iñigo González",
  dek_en="A tracker that reads the contract register and finds the notice deadlines, unused licences, budget overruns and missed SLAs before they cost money.",
  dek_es="Un tracker que lee el registro de contratos y encuentra los preavisos, licencias sin usar, desviaciones de presupuesto y SLA incumplidos antes de que cuesten dinero.",
  en="""
@@ -1077,6 +1115,8 @@ De gestionar proveedores, renovaciones y presupuesto de IT: la fecha más cara d
 - Importar `renewals.ics` en el calendario del equipo."""),
 dict(n="24", repo="24-hospitality-it-preopening", date="2026-10-18", cat="tools",
  title_en="Will IT be ready before the hotel opens? A pre-opening tracker", title_es="¿Estará IT lista antes de que abra el hotel? Un tracker de pre-apertura",
+ seo_title_en="Hotel IT pre-opening tracker and checklist · Iñigo González",
+ seo_title_es="Pre-apertura de hotel: plan y checklist de IT · Iñigo González",
  dek_en="A plan with lead times and dependencies that calculates the critical path, the gates at risk and the work that must start this week.",
  dek_es="Un plan con plazos de entrega y dependencias que calcula el camino crítico, los hitos en riesgo y lo que tiene que empezar esta semana.",
  en="""
@@ -1121,6 +1161,8 @@ De años dando soporte a TPV, PMS hotelero e IPTV en una consultora tecnológica
 - Ejecutarlo antes de cada reunión semanal, a diario desde T-7, e imprimir la lista de comprobación para el ensayo general."""),
 dict(n="25", repo="25-security-controls-evidence", date="2026-10-19", cat="tools",
  title_en="What will the auditor ask for that you cannot show yet? One register for ISO 27001, NIS2 and GDPR", title_es="¿Qué te pedirá el auditor que aún no puedes enseñar? Un registro para ISO 27001, NIS2 y RGPD",
+ seo_title_en="ISO 27001, NIS2 and GDPR evidence tracker · Iñigo González",
+ seo_title_es="Evidencias para ISO 27001, NIS2 y RGPD · Iñigo González",
  dek_en="One control register mapped to three frameworks that finds missing, late or failing evidence, expired exceptions and how ready each framework is for the audit date.",
  dek_es="Un registro de controles mapeado a tres marcos que encuentra evidencias que faltan, llegan tarde o fallan, excepciones caducadas y cómo de listo está cada marco para la fecha de auditoría.",
  en="""
@@ -1165,6 +1207,8 @@ De aplicar ISO 27001, NIS2 y RGPD en operaciones de IT, preparando evidencias y 
 - Importar `evidence-calendar.ics` en el calendario del equipo y ejecutarlo antes de cada revisión de seguridad."""),
 dict(n="26", repo="26-ot-segmentation-lab", date="2026-10-20", cat="tools",
  title_en="Which paths into the plant network should not exist? A Purdue and IEC 62443 segmentation lab", title_es="¿Qué caminos hacia la red de planta no deberían existir? Un laboratorio de segmentación Purdue e IEC 62443",
+ seo_title_en="OT segmentation lab: Purdue and IEC 62443 · Iñigo González",
+ seo_title_es="Segmentación OT: Purdue e IEC 62443 · Iñigo González",
  dek_en="Zones, assets, firewall rules and observed traffic side by side: risky paths into OT, remote access that skips the jump host, and a tighter rule set built from what the plant really uses.",
  dek_es="Zonas, activos, reglas de firewall y tráfico observado juntos: caminos de riesgo hacia OT, accesos remotos que se saltan el jump host y un conjunto de reglas más ajustado a partir de lo que la planta usa de verdad.",
  en="""
@@ -1209,6 +1253,8 @@ De años dando soporte a centro de datos e integración IT-OT: switches y router
 - Profundizar en la evaluación de riesgos de IEC 62443-3-2 y los niveles de seguridad por zona."""),
 dict(n="27", repo="27-m365-tenant-governance-review", date="2026-10-21", cat="tools",
  title_en="Is the tenant still governed the way we agreed? A monthly Microsoft 365 review", title_es="¿Sigue el tenant gobernado como acordamos? Una revisión mensual de Microsoft 365",
+ seo_title_en="Microsoft 365 tenant governance review · Iñigo González",
+ seo_title_es="Revisión de gobierno del tenant Microsoft 365 · Iñigo González",
  dek_en="Admin roles and PIM, emergency accounts, Conditional Access basics, settings drift, licences to reclaim, and admin changes matched to change tickets, including the provider's.",
  dek_es="Roles de administración y PIM, cuentas de emergencia, lo básico de Acceso condicional, desviaciones de configuración, licencias a recuperar y cambios de administración cruzados con los tickets de cambio, también los del proveedor.",
  en="""
@@ -1253,6 +1299,8 @@ De administrar Microsoft 365 como Global Administrator: PIM y acceso just-in-tim
 - Pedir al proveedor que ponga la referencia del cambio en cada sesión de administración, para que el cruce con los cambios sea un trámite."""),
 dict(n="28", repo="28-euc-provider-service-review", date="2026-10-22", cat="tools",
  title_en="The provider says 96% and the users say it is slow: a monthly EUC service review from the tickets", title_es="El proveedor dice 96% y los usuarios dicen que va lento: una revisión mensual del servicio EUC desde los tickets",
+ seo_title_en="EUC provider service review: SLA and OLA · Iñigo González",
+ seo_title_es="Revisión del servicio EUC del proveedor: SLA y OLA · Iñigo González",
  dek_en="SLA scorecard with the breach list, backlog and ageing, escalations and the OLAs we owe the provider, out-of-hours coverage, the quality signals a compliance figure hides, and the service credits nobody has claimed.",
  dek_es="Cuadro de SLA con la lista de incumplimientos, backlog y antigüedad, escalados y las OLAs que le debemos al proveedor, cobertura fuera de horario, las señales de calidad que un porcentaje esconde y los créditos de servicio que nadie ha reclamado.",
  en="""
@@ -1297,6 +1345,8 @@ De gestionar servicios de puesto de trabajo con proveedores: SLAs y OLAs definid
 - Guardar la salida de cada mes para que la tercera revisión pueda enseñar la tendencia."""),
 dict(n="29", repo="29-tenant-separation-cutover-planner", date="2026-10-23", cat="tools",
  title_en="The plan says wave 3 on the 30th; the inventory says no: readiness for a Microsoft 365 tenant separation", title_es="El plan dice ola 3 el día 30; el inventario dice que no: preparación de una separación de tenant de Microsoft 365",
+ seo_title_en="Microsoft 365 tenant separation planner · Iñigo González",
+ seo_title_es="Separación de tenant Microsoft 365: plan de olas · Iñigo González",
  dek_en="Devices that cannot be reset into the target, users who will fail on day 1, applications without a decision, and a go or no-go per wave with the reason, from the source tenant's own exports.",
  dek_es="Equipos que no se pueden resetear al tenant destino, usuarios que van a fallar el primer día, aplicaciones sin decisión y un go o no-go por ola con su motivo, a partir de las exportaciones del propio tenant origen.",
  en="""
@@ -1345,6 +1395,8 @@ De migraciones tenant a tenant y la administración de Microsoft 365 que hay det
 - Acordar las reglas de las olas y el calendario de congelación con el comité de cambios antes de la primera ejecución, no después."""),
 dict(n="30", repo="30-jira-confluence-admin-kit", date="2026-10-24", cat="tools",
  title_en="128 licences nobody uses and a sprint still open nine days late: a monthly review of a Jira and Confluence site", title_es="128 licencias que nadie usa y un sprint abierto nueve días tarde: una revisión mensual de un sitio de Jira y Confluence",
+ seo_title_en="Jira and Confluence admin review · Iñigo González",
+ seo_title_es="Revisión de admin de Jira y Confluence · Iñigo González",
  dek_en="Licences to reclaim with the saving, admins who should not be admins, external users and service accounts without an owner, projects, spaces and custom fields to clean up, and the agile health of every Scrum board, from the site's own exports.",
  dek_es="Licencias a recuperar con el ahorro, administradores que no deberían serlo, usuarios externos y cuentas de servicio sin responsable, proyectos, espacios y campos personalizados que limpiar, y la salud ágil de cada tablero Scrum, a partir de las exportaciones del propio sitio.",
  en="""
@@ -1449,6 +1501,8 @@ De trabajar con sistemas de gestión de concesionarios (DMS) y redes de concesio
 dict(n="32", repo="32-backup-restore-test-tracker", date="2026-10-25", cat="tools",
  title_en="The backup ran every night, but would it bring the system back? A monthly review of backups, restore tests and DR",
  title_es="El backup corrió cada noche, pero ¿devolvería el sistema? Una revisión mensual de backups, pruebas de restauración y DR",
+ seo_title_en="Backup restore tests and DR review · Iñigo González",
+ seo_title_es="Pruebas de restauración de backups y DR · Iñigo González",
  dek_en="The last good backup of each system against its RPO, offsite and immutable copies that actually ran, restore tests against the plan and the RTO, and the DR exercises and their actions, per system and tier, in red, amber or green.",
  dek_es="El último backup bueno de cada sistema frente a su RPO, las copias offsite e inmutables que de verdad se hicieron, las pruebas de restauración frente al plan y al RTO, y los ejercicios de DR y sus acciones, por sistema y nivel, en rojo, ámbar o verde.",
  en="""
@@ -1498,6 +1552,8 @@ De mi trabajo con Veeam Backup y Commvault, y antes con backups en cinta, diseñ
 dict(n="33", repo="33-executive-meeting-readiness", date="2026-10-25", cat="tools",
  title_en="The chair's iPad had not synced for twelve days: a readiness check for board and executive meetings",
  title_es="El iPad del presidente llevaba doce días sin sincronizar: una revisión de preparación para consejos y comités",
+ seo_title_en="Board meeting IT readiness: Teams Rooms, VIP · Iñigo González",
+ seo_title_es="Preparación IT de consejos: Teams Rooms y VIP · Iñigo González",
  dek_en="For every board, committee and executive meeting in the next two weeks: the tech check, the Teams Room and its peripherals, updates inside the freeze, the VIP devices and the support engineer, with a verdict per meeting.",
  dek_es="Para cada consejo, comité y reunión de dirección de las próximas dos semanas: la prueba técnica, la sala Teams Rooms y sus periféricos, actualizaciones dentro de la congelación, los dispositivos VIP y el técnico de soporte, con un veredicto por reunión.",
  en="""
@@ -1547,6 +1603,8 @@ De dar soporte a consejos y comités de dirección: Teams Rooms sobre Crestron c
 dict(n="34", repo="34-venue-service-readiness", date="2026-10-26", cat="tools",
  title_en="The only kitchen printer had been down since yesterday: a morning readiness check for a hospitality venue",
  title_es="La única impresora de cocina llevaba caída desde ayer: una revisión de cada mañana para un local de hostelería",
+ seo_title_en="Hospitality IT opening check: POS and Wi-Fi · Iñigo González",
+ seo_title_es="Revisión IT de apertura en hostelería: TPV y Wi-Fi · Iñigo González",
  dek_en="For every service in the next week, in a restaurant, a pool club, a bar and a hotel: the opening check, enough working tills and handhelds, kitchen printers, card terminals and cash machines, the network and the failover, the PMS and IPTV, and the vendor who would fix each of them, with a verdict per service.",
  dek_es="Para cada servicio de la próxima semana, en un restaurante, un pool club, un bar y un hotel: la prueba de apertura, suficientes TPV y comanderos funcionando, impresoras de cocina, datáfonos y cajones de efectivo, la red y su respaldo, el PMS y la IPTV, y el proveedor que arreglaría cada cosa, con un veredicto por servicio.",
  en="""
@@ -1598,6 +1656,8 @@ De mis primeros años en IT dando soporte a clientes de hostelería, con TPV com
 dict(n="35", repo="35-private-cloud-capacity-review", date="2026-10-27", cat="tools",
  title_en="The cluster looked fine at 74%: a monthly capacity and availability review of a private cloud",
  title_es="El clúster parecía ir bien al 74%: una revisión mensual de capacidad y disponibilidad de una nube privada",
+ seo_title_en="Private cloud capacity: vSphere and Nutanix · Iñigo González",
+ seo_title_es="Capacidad de nube privada: vSphere y Nutanix · Iñigo González",
  dek_en="For every vSphere and Nutanix cluster: the CPU and RAM left after a host failure, the vCPU ratio, a 12-month trend with the approved projects and the reclaim list, the month it crosses its N+1 limit against the purchase lead time, datastores, and the month's availability.",
  dek_es="Para cada clúster vSphere y Nutanix: la CPU y la RAM que quedan tras caer un host, el ratio de vCPU, una tendencia de 12 meses con los proyectos aprobados y la lista de recuperación, el mes en que cruza su límite N+1 frente al plazo de compra, los datastores y la disponibilidad del mes.",
  en="""
@@ -1649,6 +1709,8 @@ De gestionar infraestructura de nube privada con vCenter y vSphere, VMware VCF c
 dict(n="36", repo="36-major-incident-command-kit", date="2026-10-28", cat="tools",
  title_en="Users told us 40 minutes before monitoring did: a kit to run and review major incidents",
  title_es="Los usuarios nos avisaron 40 minutos antes que la monitorización: un kit para dirigir y revisar incidentes mayores",
+ seo_title_en="Major incident review kit: MTTA, MTTR, PIR · Iñigo González",
+ seo_title_es="Kit de incidentes graves: MTTA, MTTR y revisión · Iñigo González",
  dek_en="For every P1 and P2 of the quarter: the first alert against the first user report, time to acknowledge, mitigate and resolve against target, who ran it, the gaps in stakeholder updates, the change the night before, the review, the root cause and the overdue actions, with a timeline and a draft post-incident review per incident.",
  dek_es="Para cada P1 y P2 del trimestre: la primera alerta frente al primer aviso de los usuarios, el tiempo de respuesta, mitigación y resolución frente al objetivo, quién lo dirigió, los huecos en las comunicaciones, el cambio de la noche anterior, la revisión, la causa raíz y las acciones vencidas, con una línea de tiempo y un borrador de revisión post-incidente por incidente.",
  en="""
