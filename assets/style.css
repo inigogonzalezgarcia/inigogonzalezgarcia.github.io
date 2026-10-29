@@ -287,6 +287,7 @@ footer a{color:var(--on-ink)}
 .card-thumb::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(169,179,187,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(169,179,187,.12) 1px,transparent 1px);background-size:32px 32px}
 .cat-cloud .card-thumb{background:var(--ink-2)}
 .cat-gpu .card-thumb{background:#2a1d14}
+.cat-sim .card-thumb{background:#0f2a24}
 .card-n{font-size:clamp(64px,7vw,96px);font-weight:800;letter-spacing:-.04em;line-height:1;position:relative;z-index:1}
 .card-cat{position:relative;z-index:1;color:#e7a571;font-size:11px;align-self:flex-end}
 .post-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:48px}
