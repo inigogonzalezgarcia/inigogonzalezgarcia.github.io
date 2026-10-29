@@ -742,6 +742,8 @@ Una iteración de CI: el plan de rollout se aplicaba antes que los objetos NVIDI
 
 dict(n="17", repo="17-teams-rooms-fleet-health", date="2026-10-15", cat="tools",
  title_en="Which meeting rooms will fail today, and in what order to fix them", title_es="Qué salas de reuniones van a fallar hoy y en qué orden arreglarlas",
+ seo_title_en="Teams Rooms health check with Microsoft Graph · Iñigo González",
+ seo_title_es="Salud de Teams Rooms con Microsoft Graph · Iñigo González",
  dek_en="Teams Rooms health from Microsoft Graph, a room register and today's bookings, turned into a morning walk-round.",
  dek_es="La salud de Teams Rooms desde Microsoft Graph, un registro de salas y las reservas del día, convertidos en la ronda de primera hora.",
  en="""
@@ -789,6 +791,8 @@ Casi todo el valor está en el orden de la lista, no en la detección. Y una con
 
 dict(n="18", repo="18-mecm-intune-comanagement-tracker", date="2026-10-15", cat="tools",
  title_en="A go/no-go for the next co-management slider move", title_es="Un go/no-go para el siguiente paso del slider de co-management",
+ seo_title_en="MECM + Intune co-management tracker · Iñigo González",
+ seo_title_es="Seguimiento de co-management MECM + Intune · Iñigo González",
  dek_en="MECM and Intune joined in one report: real co-management state, workload authority against the plan and Windows 11 waves.",
  dek_es="MECM e Intune en un solo informe: estado real de co-management, autoridad por workload frente al plan y olas de Windows 11.",
  en="""
@@ -838,6 +842,8 @@ De la migración a Windows 11 que lideré: casi todo el esfuerzo no está en la 
 
 dict(n="19", repo="19-ad-infra-health-check", date="2026-10-16", cat="tools",
  title_en="A Monday-morning health check for Active Directory", title_es="Un chequeo de los lunes para Active Directory",
+ seo_title_en="Active Directory health check with PowerShell · Iñigo González",
+ seo_title_es="Chequeo de salud de Active Directory con PowerShell · Iñigo González",
  dek_en="Domain controllers, replication, DHCP, Group Policy and admin accounts from one read-only export, ordered by what to fix today.",
  dek_es="Controladores de dominio, replicación, DHCP, directivas de grupo y cuentas de administrador desde una exportación de solo lectura, ordenados por lo que hay que arreglar hoy.",
  en="""
@@ -885,6 +891,8 @@ Un DC que no responde debe dar un hallazgo, no diez. Y casi todo el valor está 
 
 dict(n="20", repo="20-entra-sso-app-audit", date="2026-10-16", cat="tools",
  title_en="Which SSO app will break next, and which one nobody is watching", title_es="Qué app con SSO va a fallar la próxima y cuál no vigila nadie",
+ seo_title_en="Entra ID SSO audit: SAML certificate expiry · Iñigo González",
+ seo_title_es="Auditoría SSO de Entra ID: caducidad de certificados SAML · Iñigo González",
  dek_en="Enterprise apps and app registrations in Entra ID: certificates and secrets about to expire, owners, MFA coverage, risky permissions and SCIM.",
  dek_es="Aplicaciones empresariales y registros de aplicaciones en Entra ID: certificados y secretos a punto de caducar, propietarios, cobertura de MFA, permisos de riesgo y SCIM.",
  en="""
@@ -1387,6 +1395,9 @@ De administrar Jira y Confluence y llevar la relación con Atlassian, de trabaja
 - Guardar la salida de cada mes, para que la siguiente revisión empiece por lo que ha cambiado desde la anterior."""),
 dict(n="31", repo="31-dealer-systems-health", date="2026-10-25", cat="tools",
  title_en="The warranty feed stopped on Thursday and the dealer found out on Tuesday: a weekly review of a dealer network's systems", title_es="El feed de garantías se paró el jueves y el concesionario se enteró el martes: una revisión semanal de los sistemas de una red de concesionarios",
+ seo_title_en="Dealer network systems: weekly health review · Iñigo González",
+ seo_title_es="Sistemas de una red de concesionarios: revisión semanal · Iñigo González",
+ seo_desc="Weekly review of a dealer network: stopped DMS feeds, warranty claims near the deadline, parts and price files per dealer, in red, amber or green.",
  dek_en="DMS feeds that stopped or send nothing, warranty claims about to miss the deadline and why they are rejected, the parts catalogue and price file each dealer really uses, and the dealers opening or leaving, per dealer and in red, amber or green.",
  dek_es="Feeds del DMS parados o vacíos, garantías a punto de caducar y por qué se rechazan, el catálogo de recambios y la tarifa que usa de verdad cada concesionario, y los concesionarios que abren o se van, por concesionario y en rojo, ámbar o verde.",
  en="""
