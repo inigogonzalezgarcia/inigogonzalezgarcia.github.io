@@ -219,7 +219,7 @@ def minutes(text):
 def card(p, cats, R):
     c = cats[p["cat"]]
     return f'''      <article class="card reveal cat-{p["cat"]}">
-        <a class="card-thumb" href="{R}blog/{p["repo"]}.html" tabindex="-1" aria-hidden="true"><span class="card-n">{p["n"]}</span><span class="card-cat label">{bi(*c)}</span></a>
+        <a class="card-thumb" href="{R}blog/{p["repo"]}.html" tabindex="-1" aria-hidden="true"><span class="card-n">{p.get("label", p["n"])}</span><span class="card-cat label">{bi(*c)}</span></a>
         <p class="label card-meta">{bi(*c)} · {fdate(p["date"])}</p>
         <h3><a href="{R}blog/{p["repo"]}.html">{bi(html.escape(p["title_es"]), html.escape(p["title_en"]))}</a></h3>
         <p class="muted">{bi(html.escape(p["dek_es"]), html.escape(p["dek_en"]))}</p>
