@@ -1759,4 +1759,58 @@ De liderar la respuesta técnica en incidentes mayores y los post-mortems que vi
 - Ejecutarlo con las exportaciones reales del último trimestre y ajustar los objetivos, el intervalo de comunicaciones y los días para la revisión con los responsables de incidentes mayores.
 - Leer las alertas de las APIs de monitorización y las comunicaciones del plan de comunicación en lugar de dos CSV.
 - Escribir el borrador de revisión en el registro de problema, y llevar los puntos ciegos y las acciones vencidas a la revisión mensual de servicio."""),
+dict(n="37", repo="37-iam-access-review", date="2026-10-29", cat="tools",
+ title_en="He left three weeks ago and is still in Domain Admins: a monthly access review for joiners, movers, leavers and privileged access",
+ title_es="Se fue hace tres semanas y sigue en Domain Admins: una revisión mensual de accesos para altas, cambios, bajas y accesos privilegiados",
+ seo_title_en="IAM access review: joiners, movers, leavers · Iñigo González",
+ seo_title_es="Revisión de accesos IAM: altas, cambios y bajas · Iñigo González",
+ seo_desc="Monthly IAM review from HR, AD and Entra ID exports: leavers still enabled, movers keeping access, orphan accounts, standing admin roles and recertification.",
+ dek_en="From the HR roster and the Active Directory, Entra ID, PAM and recertification exports: leavers still enabled, movers who kept their old access, accounts nobody owns, standing roles outside PIM, passwords the vault never rotated, service accounts whose owner left, and reviewers who approved everything in minutes, with a status per area and a pack the auditor can test.",
+ dek_es="A partir de la plantilla de RR. HH. y de las exportaciones de Active Directory, Entra ID, la bóveda PAM y la recertificación: bajas todavía habilitadas, cambios de puesto que conservan el acceso anterior, cuentas sin dueño, roles permanentes fuera de PIM, contraseñas que la bóveda no ha rotado, cuentas de servicio cuyo responsable se fue y revisores que lo aprueban todo en minutos, con un estado por área y un informe que el auditor puede comprobar.",
+ en="""
+
+## The problem
+Access reviews are usually a spreadsheet sent to managers once a quarter and a box ticked for the auditor. Meanwhile the things that would turn into an incident are in plain sight in the exports. A systems administrator left three weeks ago and his admin account is still enabled and in Domain Admins. A trader signed in four days after his last day. Someone moved from trading to finance in August and kept the trading platform, and the platform owner approved it in the campaign. A Global Administrator was assigned permanently, outside PIM. A service account password in the vault has not changed in 200 days, and the batch account belongs to someone who left and is still used interactively. One reviewer approved 140 items in three minutes, and three revokes were never actioned. HR knows who left and who moved, the directories know who can still sign in, the vault knows what was rotated and the campaign knows who said what; the review that matters joins them per person and per account, every month.
+
+## What I built
+- Leavers: accounts still enabled after the end date and its grace, sign-ins after leaving, and the groups, admin accounts and directory roles they still hold.
+- Movers and joiners: access of the previous department kept beyond the grace, access before the start date, joiners without a manager.
+- Accounts: enabled accounts with no HR record, duplicate employee IDs, accounts unused for 90 days and human passwords that never expire.
+- Privileged access: standing Entra ID roles outside PIM, privileged users without MFA or unused, Tier 0 members beyond the approved list, vaulted passwords not rotated and admin accounts not vaulted; service accounts without an owner in employment or signing in interactively, and guests without a sponsor or inactive.
+- Recertification: items not reviewed on time, revokes not actioned, rubber-stamping, and entitlements overdue for review by sensitivity tier.
+- `report.html` with a status per area and an overall status, `access-review.md` as the pack for the monthly IAM service review with 13 controls written the way an auditor tests them, CSVs for leavers, movers, orphans, privileged access, service accounts and the campaign, and a read-only PowerShell exporter for Active Directory and Microsoft Graph.
+
+## How it is built
+Python with the standard library only. The demo is a made-up clearing house of 600 people reviewed for one month: Active Directory and Entra ID accounts, group memberships over a catalogue of entitlements by tier, Entra ID roles active and eligible, the PAM vault, the service account register and a recertification campaign of 446 items, with the problems placed on purpose. 18 tests, a runbook for the day of the review and the monthly service review, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+
+## What I learned
+From administering Active Directory and Entra ID, with PIM and just-in-time access for the admin roles, managing privileged accounts in CyberArk and ManageEngine Password Manager Pro, owning the joiner process, and answering audits under ISO 27001. The lessons that shaped the tool are that a leaver's account is a finding even if nobody used it; that admin accounts must leave with their owner, which only works if they carry the owner's employee ID; that a move is the moment access goes wrong, not the next campaign; that standing should be the exception and eligible the rule; and that an approval in seconds is not a review, so the pack measures how the campaign was done, not only whether it was finished.
+
+## Next steps
+- Run it on last month's real exports and tune the grace periods, the thresholds, the PIM roles and the approved Tier 0 list with the IAM and infrastructure leads.
+- Read the HR roster and the vault from their APIs instead of two CSVs, and compare each month with the previous one in the pack.
+- Generate the next campaign from the catalogue, with the last sign-in and the department next to each item so reviewers see what they approve.""",
+ es="""
+
+## El problema
+Las revisiones de accesos suelen ser una hoja de cálculo que se manda a los responsables una vez al trimestre y una casilla marcada para el auditor. Mientras tanto, lo que acabaría siendo un incidente está a la vista en las exportaciones. Un administrador de sistemas se fue hace tres semanas y su cuenta de administración sigue habilitada y en Domain Admins. Un trader inició sesión cuatro días después de su último día. Alguien pasó de trading a finanzas en agosto y conservó la plataforma de trading, y el responsable de la plataforma lo aprobó en la campaña. Un Global Administrator se asignó de forma permanente, fuera de PIM. La contraseña de una cuenta de servicio en la bóveda lleva 200 días sin cambiar, y la cuenta del batch es de alguien que se fue y se sigue usando de forma interactiva. Un revisor aprobó 140 elementos en tres minutos y tres revocaciones no se llegaron a ejecutar. RR. HH. sabe quién se fue y quién cambió de puesto, los directorios saben quién puede seguir entrando, la bóveda sabe qué se rotó y la campaña sabe quién dijo qué; la revisión que importa los junta por persona y por cuenta, todos los meses.
+
+## Qué he hecho
+- Bajas: cuentas todavía habilitadas pasada la fecha de baja y su margen, inicios de sesión después de irse, y los grupos, cuentas de administración y roles de directorio que conservan.
+- Cambios de puesto y altas: acceso del departamento anterior mantenido más allá del margen, accesos antes de la fecha de incorporación y altas sin responsable.
+- Cuentas: cuentas habilitadas sin registro en RR. HH., IDs de empleado duplicados, cuentas sin uso en 90 días y contraseñas de personas que nunca caducan.
+- Accesos privilegiados: roles permanentes de Entra ID fuera de PIM, usuarios privilegiados sin MFA o sin uso, miembros de Tier 0 fuera de la lista aprobada, contraseñas en bóveda sin rotar y cuentas de administración fuera de la bóveda; cuentas de servicio sin un responsable en plantilla o con inicio de sesión interactivo, e invitados sin patrocinador o inactivos.
+- Recertificación: elementos sin revisar a tiempo, revocaciones sin ejecutar, aprobaciones en bloque y derechos con la revisión vencida según su nivel de sensibilidad.
+- `report.html` con un estado por área y un estado global, `access-review.md` como informe para la revisión mensual del servicio de IAM con 13 controles redactados como los prueba un auditor, CSV de bajas, cambios de puesto, cuentas huérfanas, accesos privilegiados, cuentas de servicio y la campaña, y un exportador de solo lectura en PowerShell para Active Directory y Microsoft Graph.
+
+## Cómo está hecho
+Python solo con la librería estándar. La demo es una cámara de compensación inventada de 600 personas revisada durante un mes: cuentas de Active Directory y Entra ID, pertenencias a grupos sobre un catálogo de derechos por nivel, roles de Entra ID activos y elegibles, la bóveda PAM, el registro de cuentas de servicio y una campaña de recertificación de 446 elementos, con los problemas puestos a propósito. 18 tests, un runbook para el día de la revisión y la revisión mensual del servicio, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+
+## Qué aprendí
+De administrar Active Directory y Entra ID, con PIM y acceso just-in-time para los roles de administración, gestionando cuentas privilegiadas en CyberArk y ManageEngine Password Manager Pro, siendo responsable del proceso de altas y respondiendo a auditorías bajo ISO 27001. Las lecciones que dan forma a la herramienta son que la cuenta de una baja es un hallazgo aunque nadie la haya usado; que las cuentas de administración tienen que irse con su dueño, y eso solo funciona si llevan su ID de empleado; que el cambio de puesto es el momento en que el acceso se tuerce, no la siguiente campaña; que lo permanente debe ser la excepción y lo elegible la norma; y que una aprobación en segundos no es una revisión, así que el informe mide cómo se hizo la campaña, no solo si se terminó.
+
+## Siguientes pasos
+- Ejecutarlo con las exportaciones reales del último mes y ajustar los márgenes, los umbrales, los roles de PIM y la lista aprobada de Tier 0 con los responsables de IAM e infraestructura.
+- Leer la plantilla de RR. HH. y la bóveda desde sus APIs en lugar de dos CSV, y comparar cada mes con el anterior en el informe.
+- Generar la siguiente campaña desde el catálogo, con el último inicio de sesión y el departamento junto a cada elemento para que los revisores vean lo que aprueban."""),
 ]
