@@ -383,10 +383,10 @@ def share_html(p):
 
 # ---------- "Related": each guide topic points to the posts (repos) that use it, and each post back to its guides
 RELATED = {
-    "active-directory": ["19-ad-infra-health-check"], "android": ["02-intune-compliance-report"], "bitlocker": ["02-intune-compliance-report"],
+    "active-directory": ["19-ad-infra-health-check", "sysadmindesksbyigg"], "android": ["02-intune-compliance-report"], "bitlocker": ["02-intune-compliance-report"],
     "ios": ["21-apple-fleet-audit"], "jira": ["30-jira-confluence-admin-kit", "04-itsm-kpi-dashboard"], "m365": ["27-m365-tenant-governance-review"],
-    "teams": ["22-dex-experience-score"], "outlook": ["27-m365-tenant-governance-review"],
-    "windows": ["22-dex-experience-score", "18-mecm-intune-comanagement-tracker"],
+    "teams": ["22-dex-experience-score"], "outlook": ["27-m365-tenant-governance-review", "sysadmindesksbyigg"],
+    "windows": ["22-dex-experience-score", "18-mecm-intune-comanagement-tracker", "sysadmindesksbyigg"],
     "azure-ad-connect": ["03-entra-id-hygiene-audit", "19-ad-infra-health-check"], "confluence": ["30-jira-confluence-admin-kit"],
     "git": ["16-gitops-gpu-fleet"], "jamf-pro": ["21-apple-fleet-audit"], "mecm-sccm": ["18-mecm-intune-comanagement-tracker", "29-tenant-separation-cutover-planner"],
     "teams-rooms": ["17-teams-rooms-fleet-health", "33-executive-meeting-readiness"], "powershell": ["05-it-ops-console"],
@@ -433,7 +433,7 @@ def related_html(items):
     return (f'\n  <div class="wrap related">\n    <h2 class="label kicker related-h">{bi("Relacionado", "Related")}</h2>\n'
             f'    <div class="related-grid">{links}</div>\n  </div>')
 def related_for_guide(topic):
-    return related_html([(f'../blog/{r}.html', f'Blog · {_POST_BY_REPO[r]["n"]}', f'Blog · {_POST_BY_REPO[r]["n"]}',
+    return related_html([(f'../blog/{r}.html', f'Blog · {_POST_BY_REPO[r].get("label", _POST_BY_REPO[r]["n"])}', f'Blog · {_POST_BY_REPO[r].get("label", _POST_BY_REPO[r]["n"])}',
                           _POST_BY_REPO[r]["title_es"], _POST_BY_REPO[r]["title_en"]) for r in RELATED.get(topic, [])])
 def related_for_post(repo):
     out = []
@@ -451,7 +451,7 @@ for i, p in enumerate(order):
         if not q: return "<span></span>"
         return f'<a class="post-nav-link {cls}" href="{q["repo"]}.html"><span class="label muted">{bi(label_es, label_en)}</span><span>{bi(html.escape(q["title_es"]), html.escape(q["title_en"]))}</span></a>'
     meta = f'{bi(*c)} · {fdate(p["date"])} · {bi(str(minutes(p["es"])) + " min", str(minutes(p["en"])) + " min read")}'
-    body = page_hero(f'<a href="./">Blog</a> · {p["n"]}', bi(html.escape(p["title_es"]), html.escape(p["title_en"])),
+    body = page_hero(f'<a href="./">Blog</a> · {p.get("label", p["n"])}', bi(html.escape(p["title_es"]), html.escape(p["title_en"])),
                      bi(html.escape(p["dek_es"]), html.escape(p["dek_en"])), f'<p class="label post-meta">{meta}</p>').replace('class="page-hero"', 'class="page-hero post-hero"', 1) + f'''
 
 <section class="section post">
@@ -474,7 +474,8 @@ for i, p in enumerate(order):
     <aside class="post-aside">
       <p class="label muted">{bi("El repositorio", "The repository")}</p>
       <p class="repo-name">{p["repo"]}</p>
-      <a class="btn" href="{GITHUB}/{p["repo"]}" target="_blank" rel="noopener">{bi("Ver en GitHub", "View on GitHub")} ↗</a>
+      <a class="btn" href="{GITHUB}/{p["repo"]}" target="_blank" rel="noopener">{bi("Ver en GitHub", "View on GitHub")} ↗</a>{f"""
+      <p class="u-mt22"><a class="arrow-link" href="{p['app']}" target="_blank" rel="noopener noreferrer">{bi("Abrir el simulador", "Open the simulator")} ↗</a></p>""" if p.get("app") else ""}
       <p class="muted small">{bi("Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.", "Synthetic data. No employer code, data or systems.")}</p>
       {share_html(p)}
     </aside>

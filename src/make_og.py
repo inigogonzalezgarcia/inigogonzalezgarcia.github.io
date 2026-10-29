@@ -91,7 +91,7 @@ def build(site, posts, cats, only_missing=False):
     for p in posts:
         rel = f"assets/og/{p['repo']}.png"
         if todo(site / rel):
-            card(site, site / rel, "Blog · " + cats[p["cat"]][1], p["title_en"], f"inigogonzalezgarcia.github.io/blog · {p['n']}")
+            card(site, site / rel, "Blog · " + cats[p["cat"]][1], p["title_en"], f"inigogonzalezgarcia.github.io/blog · {p.get('label', p['n'])}")
         out[p["repo"]] = rel
     return out
 
