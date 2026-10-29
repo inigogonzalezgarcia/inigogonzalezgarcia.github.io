@@ -306,6 +306,11 @@ footer a{color:var(--on-ink)}
 .share-btn{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:9px 12px;border:1px solid var(--ink);background:transparent;color:var(--ink);text-decoration:none;cursor:pointer;line-height:1.2}.share-btn:focus-visible{background:var(--ink);color:var(--paper)}
 .share-btn[hidden]{display:none}
 .share-msg{min-height:1.4em;margin:10px 0 0}
+.related{margin-top:72px;padding-top:28px;border-top:1px solid var(--line)}
+.related-h{margin:0 0 16px}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:12px}
+.related-link{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border:1px solid var(--line);text-decoration:none;font-weight:700;line-height:1.25;min-height:44px;transition:border-color .2s var(--ease-out),color .2s var(--ease-out)}
+.related + .post-nav{margin-top:40px}
 .post-nav{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:72px;padding-top:28px;border-top:1px solid var(--line)}
 .post-nav-link{display:flex;flex-direction:column;gap:6px;text-decoration:none;font-weight:700;line-height:1.25}
 .post-nav-link.next{text-align:right}
@@ -479,7 +484,7 @@ a.practice-desk span:last-child{font-family:var(--mono)}
 .card h3 a:hover{color:var(--accent)}
 .card-thumb:hover .card-n{color:#e7a571}
 .share-btn:hover{background:var(--ink);color:var(--paper)}
-.post-nav-link:hover{color:var(--accent)}.link-btn:hover .link-d{color:inherit;opacity:.8}
+.post-nav-link:hover,.related-link:hover{color:var(--accent)}.related-link:hover{border-color:var(--accent)}.link-btn:hover .link-d{color:inherit;opacity:.8}
 .link-btn:hover{background:var(--ink);color:var(--on-ink)}
 .slot-btn:hover{border-color:var(--accent)}
 .guide-card:hover h3{color:var(--accent)}
