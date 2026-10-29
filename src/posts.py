@@ -1836,10 +1836,10 @@ Most people learn support on the job, with real users waiting. Labs teach the co
 - A "Practise it" box in 17 of the guides on this website, which opens the matching ticket in the right language.
 
 ## How it is built
-A static site on Cloudflare Pages with plain JavaScript, and Pages Functions with a D1 database for accounts and the best result per ticket. Sign-up with email or Google; passwords hashed with PBKDF2, an HttpOnly session cookie and a lockout after repeated failures. The scenario engine has no DOM, so it is tested on its own: 57 tests in GitHub Actions, one per new ticket checking that the tempting fix does not close it. Everything is fictional: a made-up company called Contoso, no real systems, no vendor relationship. It is practice, not work experience, and the about page says so.
+A static site with plain JavaScript and a small database for accounts and results. Every ticket has automated tests, so the tempting fix can never close it. Everything is fictional: a made-up company, no real systems. It is practice, not work experience.
 
 ## What I learned
-From running an office site with two engineers, owning the incident process and training people on how to work a ticket. The lessons that shaped the simulator are that the work note is part of the fix, because it is what the next person reads at 8 in the morning; that a ticket is not closed until the user has confirmed it works; that the fix that looks right is the most common way to reopen a ticket; and that people learn faster when the tool tells them exactly what was missing, not just a score.
+From working tickets and teaching others to work them: the work note is part of the fix, a ticket is not closed until the user confirms it works, and the fix that looks right is the most common way to reopen one.
 
 ## Next steps
 - Contact the requester from the ticket with scripted questions, where some clues only come out by asking, and mark the note to the user apart from the work note.
@@ -1860,10 +1860,10 @@ Casi todo el mundo aprende soporte trabajando, con usuarios reales esperando. Lo
 - Un bloque «Practícalo» en 17 de las guías de esta web, que abre el ticket correspondiente en el idioma de la guía.
 
 ## Cómo está hecho
-Un sitio estático en Cloudflare Pages con JavaScript sin frameworks, y Pages Functions con una base de datos D1 para las cuentas y el mejor resultado por ticket. Alta con email o con Google; contraseñas con PBKDF2, cookie de sesión HttpOnly y bloqueo tras varios fallos. El motor de los casos no depende de la página, así que se prueba por separado: 57 tests en GitHub Actions, uno por ticket nuevo que comprueba que el arreglo tentador no lo cierra. Todo es ficticio: una empresa inventada, Contoso, sin sistemas reales y sin relación con ningún fabricante. Es práctica, no experiencia laboral, y la página «Qué es» lo dice.
+Un sitio estático con JavaScript sin frameworks y una pequeña base de datos para las cuentas y los resultados. Cada ticket tiene tests automáticos, para que el arreglo tentador nunca pueda cerrarlo. Todo es ficticio: una empresa inventada y ningún sistema real. Es práctica, no experiencia laboral.
 
 ## Qué aprendí
-De llevar el site de una oficina con dos ingenieros, ser responsable del proceso de incidencias y formar a otros en cómo se trabaja un ticket. Lo que ha dado forma al simulador es que la nota de trabajo es parte del arreglo, porque es lo que lee el siguiente a las 8 de la mañana; que un ticket no está cerrado hasta que el usuario confirma que funciona; que el arreglo que parece bueno es la forma más habitual de reabrir un ticket; y que se aprende más rápido cuando la herramienta te dice exactamente qué faltó, no solo una nota.
+De trabajar tickets y enseñar a otros a trabajarlos: la nota de trabajo es parte del arreglo, un ticket no está cerrado hasta que el usuario confirma que funciona, y el arreglo que parece bueno es la forma más habitual de reabrirlo.
 
 ## Siguientes pasos
 - Contactar con el solicitante desde el ticket con preguntas guionizadas, donde algunas pistas solo salen preguntando, y corregir la nota al usuario aparte de la nota de trabajo.
