@@ -486,8 +486,9 @@ for i, p in enumerate(order):
   </div>
 </section>'''
     sizes[f"blog/{p['repo']}.html"] = write(f"blog/{p['repo']}.html", layout(R="../", path=f"blog/{p['repo']}.html", active="blog",
-        title_en=f'{p["title_en"]} · Iñigo González', title_es=f'{p["title_es"]} · Iñigo González',
-        desc=p["dek_en"], body=body, og_type="article", og_image=OG[p["repo"]],
+        title_en=p.get("seo_title_en") or f'{p["title_en"]} · Iñigo González',
+        title_es=p.get("seo_title_es") or f'{p["title_es"]} · Iñigo González',
+        desc=p.get("seo_desc") or p["dek_en"], body=body, og_type="article", og_image=OG[p["repo"]],
         ld=[{"@type": "BlogPosting", "headline": p["title_en"], "alternativeHeadline": p["title_es"], "description": p["dek_en"],
              "datePublished": p["date"], "dateModified": p["date"], "inLanguage": "en", "image": SITE_URL + OG[p["repo"]],
              "url": f'{SITE_URL}blog/{p["repo"]}.html', "mainEntityOfPage": f'{SITE_URL}blog/{p["repo"]}.html',
