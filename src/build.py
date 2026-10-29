@@ -380,6 +380,68 @@ def share_html(p):
             '        <p class="share-msg small muted" role="status" aria-live="polite"></p>\n'
             '      </div>')
 
+
+# ---------- "Related": each guide topic points to the posts (repos) that use it, and each post back to its guides
+RELATED = {
+    "active-directory": ["19-ad-infra-health-check"], "android": ["02-intune-compliance-report"], "bitlocker": ["02-intune-compliance-report"],
+    "ios": ["21-apple-fleet-audit"], "jira": ["30-jira-confluence-admin-kit", "04-itsm-kpi-dashboard"], "m365": ["27-m365-tenant-governance-review"],
+    "teams": ["22-dex-experience-score"], "outlook": ["27-m365-tenant-governance-review"],
+    "windows": ["22-dex-experience-score", "18-mecm-intune-comanagement-tracker"],
+    "azure-ad-connect": ["03-entra-id-hygiene-audit", "19-ad-infra-health-check"], "confluence": ["30-jira-confluence-admin-kit"],
+    "git": ["16-gitops-gpu-fleet"], "jamf-pro": ["21-apple-fleet-audit"], "mecm-sccm": ["18-mecm-intune-comanagement-tracker", "29-tenant-separation-cutover-planner"],
+    "teams-rooms": ["17-teams-rooms-fleet-health", "33-executive-meeting-readiness"], "powershell": ["05-it-ops-console"],
+    "sharepoint": ["27-m365-tenant-governance-review"], "veeam": ["32-backup-restore-test-tracker"], "windows-server": ["19-ad-infra-health-check"],
+    "docker": ["10-gpu-fleet-observability", "14-slurm-gpu-ops"], "elk": ["08-edge-health-slo-monitor"],
+    "conditional-access": ["27-m365-tenant-governance-review", "03-entra-id-hygiene-audit"], "entra-sso": ["20-entra-sso-app-audit"],
+    "grafana": ["10-gpu-fleet-observability", "36-major-incident-command-kit"], "hyper-v": ["35-private-cloud-capacity-review"],
+    "intune": ["02-intune-compliance-report", "18-mecm-intune-comanagement-tracker", "29-tenant-separation-cutover-planner"],
+    "graph": ["17-teams-rooms-fleet-health", "20-entra-sso-app-audit"], "databases": ["32-backup-restore-test-tracker"],
+    "solarwinds": ["36-major-incident-command-kit"], "vsphere": ["35-private-cloud-capacity-review"],
+    "aws": ["07-aws-private-connectivity", "01-finops-cloud-cost-dashboard"], "azure-monitor": ["36-major-incident-command-kit"],
+    "dr-bcp": ["32-backup-restore-test-tracker"], "cisco": ["26-ot-segmentation-lab"], "fortigate": ["26-ot-segmentation-lab"],
+    "compliance": ["25-security-controls-evidence"], "kubernetes": ["06-kubernetes-ingress-lab", "15-multi-tenant-gpu-scheduling", "09-gpu-node-remediation"],
+    "m365-pim": ["27-m365-tenant-governance-review"], "purview": ["25-security-controls-evidence"], "tenant-migration": ["29-tenant-separation-cutover-planner"],
+    "nutanix": ["35-private-cloud-capacity-review"], "qualys": ["25-security-controls-evidence"], "openshift": ["35-private-cloud-capacity-review"],
+    "terraform": ["07-aws-private-connectivity"],
+    "cashdro": ["34-venue-service-readiness"], "hotel-preopening": ["24-hospitality-it-preopening"], "icg-hiopos": ["34-venue-service-readiness"],
+    "iptv-hotel": ["34-venue-service-readiness"], "pms-hotel": ["34-venue-service-readiness", "24-hospitality-it-preopening"],
+    "alta-usuario": ["03-entra-id-hygiene-audit"], "backup-cinta": ["32-backup-restore-test-tracker"], "o365-licencias": ["27-m365-tenant-governance-review"],
+    "poly-salas": ["33-executive-meeting-readiness", "17-teams-rooms-fleet-health"],
+    "monitorizacion-alarmas": ["36-major-incident-command-kit", "08-edge-health-slo-monitor"],
+    "mdm-moviles": ["02-intune-compliance-report", "21-apple-fleet-audit"], "presupuesto-it": ["23-it-vendor-contract-tracker", "01-finops-cloud-cost-dashboard"],
+    "sqlserver-backup": ["32-backup-restore-test-tracker"], "veeam-restauraciones": ["32-backup-restore-test-tracker"],
+    "vmware-mantenimiento": ["35-private-cloud-capacity-review"], "ca-sede": ["27-m365-tenant-governance-review", "03-entra-id-hygiene-audit"],
+    "dr-prueba": ["32-backup-restore-test-tracker"], "teams-rooms-crestron": ["17-teams-rooms-fleet-health", "33-executive-meeting-readiness"],
+    "pim-jit": ["27-m365-tenant-governance-review"], "proveedores-conectividad": ["23-it-vendor-contract-tracker", "28-euc-provider-service-review"],
+    "windows11-migracion": ["18-mecm-intune-comanagement-tracker", "29-tenant-separation-cutover-planner"],
+}
+from guides import GUIDES as _GR, TOPICS as _TR, LEVELS as _LR
+_POST_BY_REPO = {q["repo"]: q for q in POSTS}
+_TOPIC_R = {t[1]: t for t in _TR}
+assert all(t in _TOPIC_R for t in RELATED), [t for t in RELATED if t not in _TOPIC_R]
+assert all(r in _POST_BY_REPO for rs in RELATED.values() for r in rs), [r for rs in RELATED.values() for r in rs if r not in _POST_BY_REPO]
+_TORDER = [t[1] for t in _TR]
+GUIDES_FOR_POST = {}
+for _g in sorted(_GR, key=lambda q: (_TORDER.index(q["topic"]), q["slug"])):
+    for _r in RELATED.get(_g["topic"], []):
+        GUIDES_FOR_POST.setdefault(_r, []).append(_g)
+def related_html(items):
+    """items: (href, kicker_es, kicker_en, title_es, title_en)"""
+    if not items: return ""
+    links = "".join(f'<a class="related-link" href="{h}"><span class="label muted">{bi(ke, ken)}</span>'
+                    f'<span class="related-t">{bi(html.escape(te), html.escape(ten))}</span></a>' for h, ke, ken, te, ten in items)
+    return (f'\n  <div class="wrap related">\n    <h2 class="label kicker related-h">{bi("Relacionado", "Related")}</h2>\n'
+            f'    <div class="related-grid">{links}</div>\n  </div>')
+def related_for_guide(topic):
+    return related_html([(f'../blog/{r}.html', f'Blog · {_POST_BY_REPO[r]["n"]}', f'Blog · {_POST_BY_REPO[r]["n"]}',
+                          _POST_BY_REPO[r]["title_es"], _POST_BY_REPO[r]["title_en"]) for r in RELATED.get(topic, [])])
+def related_for_post(repo):
+    out = []
+    for g in GUIDES_FOR_POST.get(repo, [])[:4]:
+        L = _LR[_TOPIC_R[g["topic"]][0]]
+        out.append((f'../guias/{g["slug"]}.html', f'Guía · {L["n_es"]}', f'Guide · {L["n_en"]}', g["title_es"], g["title_en"]))
+    return related_html(out)
+
 order = sorted(POSTS, key=lambda p: p["n"])
 for i, p in enumerate(order):
     c = CATS[p["cat"]]
@@ -417,6 +479,7 @@ for i, p in enumerate(order):
       {share_html(p)}
     </aside>
   </div>
+  {related_for_post(p["repo"])}
   <div class="wrap post-nav">
     {nav_link(prev, "Anterior", "Previous", "prev")}
     {nav_link(nxt, "Siguiente", "Next", "next")}
@@ -1198,6 +1261,7 @@ for i, q in enumerate(G_ORDER):
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>
+  {related_for_guide(q["topic"])}
   <div class="wrap post-nav">
     {gnav(prev, "Anterior", "Previous", "prev")}
     {gnav(nxt, "Siguiente", "Next", "next")}
