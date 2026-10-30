@@ -388,7 +388,7 @@ RELATED = {
     "teams": ["22-dex-experience-score"], "outlook": ["27-m365-tenant-governance-review", "sysadmindesksbyigg"],
     "windows": ["22-dex-experience-score", "18-mecm-intune-comanagement-tracker", "sysadmindesksbyigg"],
     "azure-ad-connect": ["03-entra-id-hygiene-audit", "19-ad-infra-health-check"], "confluence": ["30-jira-confluence-admin-kit"],
-    "git": ["16-gitops-gpu-fleet"], "jamf-pro": ["21-apple-fleet-audit"], "mecm-sccm": ["18-mecm-intune-comanagement-tracker", "29-tenant-separation-cutover-planner"],
+    "git": ["16-gitops-gpu-fleet"], "jamf-pro": ["21-apple-fleet-audit", "38-it-asset-lifecycle-planner"], "mecm-sccm": ["18-mecm-intune-comanagement-tracker", "29-tenant-separation-cutover-planner"],
     "teams-rooms": ["17-teams-rooms-fleet-health", "33-executive-meeting-readiness"], "powershell": ["05-it-ops-console"],
     "sharepoint": ["27-m365-tenant-governance-review"], "veeam": ["32-backup-restore-test-tracker"], "windows-server": ["19-ad-infra-health-check"],
     "docker": ["10-gpu-fleet-observability", "14-slurm-gpu-ops"], "elk": ["08-edge-health-slo-monitor"],
@@ -412,7 +412,7 @@ RELATED = {
     "sqlserver-backup": ["32-backup-restore-test-tracker"], "veeam-restauraciones": ["32-backup-restore-test-tracker"],
     "vmware-mantenimiento": ["35-private-cloud-capacity-review"], "ca-sede": ["27-m365-tenant-governance-review", "03-entra-id-hygiene-audit"],
     "dr-prueba": ["32-backup-restore-test-tracker"], "teams-rooms-crestron": ["17-teams-rooms-fleet-health", "33-executive-meeting-readiness"],
-    "pim-jit": ["27-m365-tenant-governance-review"], "proveedores-conectividad": ["23-it-vendor-contract-tracker", "28-euc-provider-service-review"],
+    "pim-jit": ["27-m365-tenant-governance-review"], "device42": ["38-it-asset-lifecycle-planner"], "proveedores-conectividad": ["23-it-vendor-contract-tracker", "28-euc-provider-service-review"],
     "windows11-migracion": ["18-mecm-intune-comanagement-tracker", "29-tenant-separation-cutover-planner"],
 }
 from guides import GUIDES as _GR, TOPICS as _TR, LEVELS as _LR

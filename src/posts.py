@@ -1870,4 +1870,58 @@ De trabajar tickets y enseñar a otros a trabajarlos: la nota de trabajo es part
 - Estados de flujo (pendiente del usuario, pendiente del proveedor) con el SLA en pausa, y restablecer la contraseña de la cuenta por email.
 - Una sala de red con switches, routers y cortafuegos, una CLI de switch y tickets de red; después, envíos y RMA ligados a los tickets.
 """),
+dict(n="38", repo="38-it-asset-lifecycle-planner", date="2026-10-30", cat="tools",
+ title_en="Nine laptops nobody registered and half the budget in one quarter: one inventory and a refresh plan for the office hardware",
+ title_es="Nueve portátiles que nadie registró y medio presupuesto en un trimestre: un inventario único y un plan de renovación para el hardware de la oficina",
+ seo_title_en="IT asset inventory and refresh forecast · Iñigo González",
+ seo_title_es="Inventario de hardware y plan de renovación · Iñigo González",
+ seo_desc="Monthly IT asset review from Device42, Intune, Jamf and purchases: one inventory by serial, leavers' devices, stock and a refresh forecast by quarter.",
+ dek_en="From the Device42 export of the comms rooms, Intune and Jamf Pro, the vendor's purchases, the office register, HR and the stock: devices nobody registered, laptops not seen for weeks, switches past end of support, leavers who kept their laptop, stock below the minimum, and the replacements by quarter with their cost, ready for the budget.",
+ dek_es="A partir de la exportación de Device42 de las salas de comunicaciones, Intune y Jamf Pro, las compras al fabricante, el registro de la oficina, RR. HH. y el almacén: equipos que nadie registró, portátiles que no se ven desde hace semanas, switches sin soporte del fabricante, bajas que se quedaron el portátil, almacén por debajo del mínimo y las renovaciones por trimestre con su coste, listas para el presupuesto.",
+ en="""
+
+## The problem
+In many offices the inventory is split by who looks after it. The comms rooms are in Device42, the laptops and phones in Intune and Jamf, the monitors and docks in a spreadsheet, and the warranties in the vendor's portal. Each list looks complete on its own. Put together, the gaps show: laptops in Intune that nobody registered because they were bought outside the usual channel, a laptop that has not synced for months, a leaver's laptop still checking in weeks after the last day, access switches past end of support and the core switch's warranty ending in six weeks. And when the budget comes, the question "what do we have to buy next year" is answered from memory, until someone notices that the laptops of a big refresh and the trading floor desktops all fall due in the same quarter.
+
+## What I built
+- Coverage: one inventory joined by serial number from Device42, the purchases, the office register and MDM; devices in Intune or Jamf with no inventory record, devices not seen for 30 days, duplicate and mismatched serials, and items without owner or site.
+- Comms rooms: devices past end of support or out of warranty, warranties ending in the next 90 days, devices without rack position or owner, and firmware not recorded.
+- Lifecycle: one state for every item (in stock, deployed, in repair, to be retired, retired) and one replacement date from the refresh policy, with what is overdue and what is due in the next two quarters.
+- People and stock: devices assigned to leavers and not returned after 14 days, more devices than the policy allows, people without a computer, and stock per site against the minimum and against next quarter's replacements.
+- Forecast: replacements for the next four quarters by category and site, with units and cost, and the overdue backlog apart.
+- `report.html` with a status per area and an overall verdict, `asset-review.md` as the pack for the monthly review with the forecast ready for the budget, CSVs for every area, and a read-only PowerShell exporter for Device42, Intune (Microsoft Graph) and Jamf Pro.
+
+## How it is built
+Python with the standard library only. The demo is a made-up broker with offices in Madrid, Paris and Amsterdam and two comms rooms: 51 devices in Device42, about 300 devices in Intune and Jamf, 740 purchase lines and 457 register lines, 198 people and the stock of the three sites, with the problems placed on purpose. 14 tests, a runbook for the monthly review, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+
+## What I learned
+From running an office IT site, where I use Device42 for the inventory of the comms rooms (racks, network equipment and servers) and an operations console with PowerShell for inventory and asset control; from managing macOS, iOS, Android and Windows with Intune and Jamf Pro; from the relationship with Dell for hardware and renewals; and from preparing and tracking the annual IT budget in a multi-site company. The lessons that shaped the tool are that the serial number is the only key every system shares; that a device MDM sees and nobody bought is still yours, with no warranty and no replacement date; that a laptop not seen for weeks is an answer waiting for a question; that for the comms rooms end of support beats age; and that a budget built from purchase dates shows the waves before they arrive.
+
+## Next steps
+- Run it on the real exports of one site and tune the refresh policy, the unit costs and the device policy with the site and finance leads.
+- Read purchases and warranties from the vendor's API by service tag instead of a CSV.
+- Write the end-user devices back to Device42 by serial, so that it becomes the one inventory for the whole office and this report checks it instead of building it.""",
+ es="""
+
+## El problema
+En muchas oficinas el inventario está repartido según quién lo cuida. Las salas de comunicaciones están en Device42, los portátiles y los móviles en Intune y Jamf, los monitores y las bases en una hoja de cálculo y las garantías en el portal del fabricante. Cada lista parece completa por separado. Juntas, aparecen los huecos: portátiles en Intune que nadie registró porque se compraron fuera del canal habitual, un portátil que no sincroniza desde hace meses, el portátil de una baja que sigue conectándose semanas después de su último día, switches de acceso sin soporte del fabricante y la garantía del switch de núcleo a seis semanas de vencer. Y cuando llega el presupuesto, la pregunta «qué tenemos que comprar el año que viene» se responde de memoria, hasta que alguien se da cuenta de que los portátiles de una renovación grande y los equipos de sobremesa de la sala de trading vencen todos en el mismo trimestre.
+
+## Qué he hecho
+- Cobertura: un inventario único cruzado por número de serie entre Device42, las compras, el registro de la oficina y el MDM; equipos en Intune o Jamf sin registro en el inventario, equipos que no se ven desde hace 30 días, números de serie duplicados o que no cuadran y equipos sin responsable o sin sede.
+- Salas de comunicaciones: equipos sin soporte del fabricante o fuera de garantía, garantías que vencen en los próximos 90 días, equipos sin posición en el rack o sin responsable, y firmware sin registrar.
+- Ciclo de vida: un estado para cada equipo (en almacén, desplegado, en reparación, para retirar, retirado) y una fecha de renovación según la política, con lo que está vencido y lo que vence en los dos próximos trimestres.
+- Personas y almacén: equipos asignados a bajas y no devueltos a los 14 días, más equipos de los que permite la política, personas sin ordenador, y el almacén de cada sede frente al mínimo y frente a las renovaciones del próximo trimestre.
+- Previsión: las renovaciones de los cuatro próximos trimestres por categoría y sede, con unidades y coste, y lo atrasado aparte.
+- `report.html` con un estado por área y un veredicto global, `asset-review.md` como informe para la revisión mensual con la previsión lista para el presupuesto, CSV de cada área y un exportador de solo lectura en PowerShell para Device42, Intune (Microsoft Graph) y Jamf Pro.
+
+## Cómo está hecho
+Python solo con la librería estándar. La demo es un bróker inventado con oficinas en Madrid, París y Ámsterdam y dos salas de comunicaciones: 51 equipos en Device42, unos 300 equipos en Intune y Jamf, 740 líneas de compra y 457 del registro, 198 personas y el almacén de las tres sedes, con los problemas puestos a propósito. 14 tests, un runbook para la revisión mensual y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+
+## Qué aprendí
+De llevar la IT de una sede, donde uso Device42 para el inventario de las salas de comunicaciones (racks, equipos de red y servidores) y una consola de operaciones con PowerShell para el inventario y el control de activos; de gestionar macOS, iOS, Android y Windows con Intune y Jamf Pro; de la relación con Dell para el hardware y las renovaciones; y de preparar y seguir el presupuesto anual de IT en una empresa con varias sedes. Las lecciones que dan forma a la herramienta son que el número de serie es la única clave que comparten todos los sistemas; que un equipo que el MDM ve y nadie compró sigue siendo tuyo, sin garantía y sin fecha de renovación; que un portátil que no se ve desde hace semanas es una respuesta esperando una pregunta; que en las salas de comunicaciones el fin de soporte manda sobre la antigüedad; y que un presupuesto hecho con las fechas de compra enseña las olas antes de que lleguen.
+
+## Siguientes pasos
+- Ejecutarlo con las exportaciones reales de una sede y ajustar la política de renovación, los costes unitarios y la política de equipos por persona con los responsables de la sede y de finanzas.
+- Leer las compras y las garantías desde la API del fabricante por número de serie en lugar de un CSV.
+- Volcar los equipos de usuario en Device42 por número de serie, para que sea el inventario único de toda la oficina y este informe lo compruebe en lugar de construirlo."""),
 ]

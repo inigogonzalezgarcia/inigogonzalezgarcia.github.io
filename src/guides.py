@@ -65,9 +65,9 @@ LEVELS = {
                     h_es="Servicios financieros<br>y trading.", h_en="Financial services<br>and trading.",
                     d_es="Una sede con sala de trading que no puede parar: red, acceso, salas y continuidad.",
                     d_en="A site with a trading floor that can't stop: network, access, rooms and continuity.",
-                    l_es="Siete guías para una sede con sala de trading: salas de comunicaciones, acceso condicional, una prueba de recuperación, salas de Teams sobre Crestron, PIM, operadores de conectividad y la migración a Windows 11.",
-                    l_en="Seven guides for a site with a trading floor: comms rooms, Conditional Access, a recovery test, Teams rooms on Crestron, PIM, connectivity providers and the move to Windows 11.",
-                    seo="IT guides for financial services and trading floors: comms rooms, Conditional Access for a site, DR test, Teams Rooms on Crestron, PIM just-in-time, connectivity providers and Windows 11 migration."),
+                    l_es="Ocho guías para una sede con sala de trading: salas de comunicaciones, su inventario en Device42, acceso condicional, una prueba de recuperación, salas de Teams sobre Crestron, PIM, operadores de conectividad y la migración a Windows 11.",
+                    l_en="Eight guides for a site with a trading floor: comms rooms, their inventory in Device42, Conditional Access, a recovery test, Teams rooms on Crestron, PIM, connectivity providers and the move to Windows 11.",
+                    seo="IT guides for financial services and trading floors: comms rooms, Device42 inventory, Conditional Access for a site, DR test, Teams Rooms on Crestron, PIM just-in-time, connectivity providers and Windows 11 migration."),
 }
 LEVEL1 = LEVELS["nivel-1"]
 
@@ -352,6 +352,9 @@ TOPICS = [
     ("sector-5", "proveedores-conectividad", "Proveedores de conectividad - Gestión de circuitos y averías", "Connectivity providers - Managing circuits and faults",
      "Inventario de circuitos con SLA y escalado, rutas diversas, líneas de datos de mercado, abrir una avería y el circuito caído a las 8:00.",
      "Circuit inventory with SLA and escalation, diverse routing, market data lines, raising a fault and the circuit down at 8:00."),
+    ("sector-5", "device42", "Device42 - Inventario de la sala de comunicaciones", "Device42 - Comms room inventory",
+     "Edificios, salas, racks y posiciones U, descubrimiento, PDU y parcheo, garantía y fin de soporte, y el switch caído antes de la apertura.",
+     "Buildings, rooms, racks and U positions, discovery, PDUs and patching, warranty and end of support, and the switch down before the open."),
     ("sector-5", "windows11-migracion", "Windows 11 - Migrar los equipos de una sede", "Windows 11 - Migrating a site's devices",
      "Hardware listo, compatibilidad de las aplicaciones de trading, piloto, actualización in situ o reinstalación y puestos de cuatro monitores.",
      "Hardware readiness, trading app compatibility, pilot, in-place upgrade or wipe-and-load, and four-monitor desks."),
@@ -21770,4 +21773,245 @@ If it's an Excel add-in, look at **File › Options › Add-ins**: Excel may hav
 - The Level 1 **Windows 10 and 11** guide covers day-to-day desk support.
 - The Level 3 **Intune** guide explains policies, groups and update rings.
 - The **MECM / SCCM** guide covers task sequences if the site is still co-managed.
+""")
+# ---------------------------------------------------------------- Sector 5 · Device42
+
+g(slug="device42-inventario-de-racks-y-equipos-de-la-sala-de-comunicaciones", topic="device42", date="2026-10-30",
+  title_es="Device42: el inventario de racks y equipos de la sala de comunicaciones de una sede con sala de trading",
+  title_en="Device42: the rack and equipment inventory of the comms room in a site with a trading floor",
+  seo_title_en="Device42: comms room racks and inventory · Iñigo González",
+  seo_title_es="Device42: inventario de racks y sala técnica · Iñigo González",
+  dek_es="Cómo montar en Device42 el inventario de la sala de comunicaciones de una sede con sala de trading: edificios, salas, racks y posiciones U, qué se descubre y qué se da de alta a mano, tipos de equipo, PDU y paneles de parcheo, garantía y fin de soporte, la exportación mensual que lo mantiene al día y el switch caído a las 7:40.",
+  dek_en="How to build the comms room inventory of a site with a trading floor in Device42: buildings, rooms, racks and U positions, what discovery finds and what is entered by hand, device types, PDUs and patch panels, warranty and end of support, the monthly export that keeps it honest, and the switch down at 7:40.",
+  es="""
+## Qué vas a conseguir
+
+Que la sala de comunicaciones esté en Device42 tal como está de verdad: cada equipo en su rack y su U, con su modelo, su número de serie, quién es el responsable, a qué PDU está enchufado, qué puertos del panel de parcheo salen de él y hasta cuándo tiene garantía y soporte del fabricante. En una sede con sala de trading eso no es documentación para una auditoría: es lo que permite cambiar un switch antes de la apertura del mercado sin buscar nada.
+
+## Antes de empezar
+
+- Acceso a Device42 con un usuario con permisos de edición en la sede, y otro de **solo lectura** para las exportaciones.
+- El plano de la sala: filas, racks, cuadros eléctricos y por dónde entra cada circuito.
+- Las credenciales de descubrimiento: una comunidad SNMP de solo lectura (mejor SNMPv3) para los equipos de red y una **cuenta dedicada** para los servidores, nunca la de un administrador.
+- Los pedidos y contratos de soporte de los equipos (fabricante, número de contrato, fecha de fin).
+
+## 1. Edificios, salas y racks: el esqueleto
+
+En Device42 todo cuelga de la jerarquía **edificio → sala → rack**. Créala antes de dar de alta un solo equipo:
+
+| Objeto | Ejemplo | Lo que conviene rellenar |
+|---|---|---|
+| Edificio | `MAD-HQ` | Dirección, contacto de seguridad del edificio para el acceso de técnicos |
+| Sala | `Sala técnica CR-1` | Planta, quién tiene llave o tarjeta |
+| Rack | `R03` | Tamaño en U (42 por defecto), fila, numeración desde abajo |
+| Equipo en rack | `mad-acc-sw01` | Modelo, U de inicio (*Start at*), orientación (frontal o trasera) |
+
+- El **modelo de hardware** (la plantilla) define el tamaño en U y la profundidad. Sin un modelo con tamaño, el equipo no se puede colocar en el rack: quedará a un lado.
+- Usa **Find next slot** para buscar hueco y la vista **Rack Layout** para comprobar delante y detrás. Mover un equipo de rack quita sus conexiones de red y de alimentación: revísalas después.
+- Nombres coherentes con la etiqueta física: lo que pone el equipo es lo que pone Device42.
+
+## 2. Descubrir o dar de alta a mano
+
+El descubrimiento automático rellena lo que el equipo sabe de sí mismo; lo físico lo sabe quien está en la sala.
+
+- **Red** (switches, routers, cortafuegos): descubrimiento SNMP. Trae inventario, VLAN y subredes, y la tabla de MAC por puerto del switch.
+- **Windows**: WMI (y WinRM para Hyper-V). **Linux**: SSH. **VMware**: a través de vCenter.
+- **iDRAC e iLO**: descubrimiento IPMI de las controladoras de los servidores.
+- Si la sala de trading está en un segmento aislado, un **Remote Collector** dentro de ese segmento hace los trabajos sin abrir la red entera al appliance.
+- Programa cada trabajo (semanal basta para inventario) y revisa los errores: una credencial caducada deja el inventario congelado sin avisar.
+
+Lo que ningún descubrimiento sabe y se da de alta a mano: el **rack y la U**, el **responsable**, los **paneles de parcheo**, la toma de la **PDU** y la **fecha de fin de soporte** si tu Device42 no la tiene para ese modelo.
+
+> Descubrimiento primero y mano después: si das de alta a mano y luego descubres, acabarás con duplicados que solo se distinguen por el número de serie.
+
+## 3. Tipos de equipo, alimentación y parcheo
+
+Cada equipo con su tipo y su responsable (*customer* en Device42: Red, Infraestructura, Tecnología de Trading). Lo que una sala de sede suele tener:
+
+- **Switches de núcleo y de acceso**, routers y cortafuegos.
+- **Servidores** de la sede: virtualización, ficheros, el servidor de datos de mercado que mantiene el equipo de trading.
+- **PDU**: se dan de alta como *Power Unit* con su modelo; los puertos se crean a partir del modelo al guardar, así que elige bien el modelo antes. Enlaza la PDU con un dispositivo para tener su número de serie, compra y ciclo de vida.
+- **SAI (UPS)**: también como *Power Unit*. Apunta la fecha de la última sustitución de baterías.
+- **Paneles de parcheo**: con sus puertos y lo que conecta cada uno (puerto del switch → puerto del panel → toma del puesto).
+
+En una sala de trading cada equipo crítico tiene **dos fuentes a dos PDU distintas** (alimentación A y B). Si Device42 tiene las dos tomas, comprobar que una intervención en la PDU A no deja nada sin corriente es una consulta, no una visita.
+
+## 4. Garantía y fin de soporte
+
+Dos fechas distintas que se confunden a menudo:
+
+- **Fin de garantía o de contrato de soporte**: lo que pagas al fabricante o al integrador. Se renueva o se deja caer.
+- **Fin de soporte del fabricante** (*last date of support*): a partir de ahí no hay correcciones ni parches de seguridad, pagues lo que pagues.
+
+:::ui Device42 · Purchases · línea de contrato
+> Purchases › DLL-2021-SW118 › Line items
+= Tipo: Contrato de soporte
+= Dispositivos: mad-core-sw01, mad-core-sw02
+= Contrato: SN-4471-0928
+= Inicio: 2021-12-13
+= Fin: 2026-12-11
+= Notas: Renovación con el integrador, 60 días antes
+[Save]
+:::
+
+- Revisa cada mes lo que vence en los próximos **90 días**: el equipo de núcleo primero.
+- Las fechas de fin de soporte salen de los avisos de fin de vida del fabricante. Si no están en Device42 para ese modelo, anótalas en un campo personalizado.
+
+## 5. La exportación que lo mantiene honesto
+
+Un inventario que nadie contrasta se degrada solo. Una vez al mes, exporta los dispositivos por la API (solo lectura) y busca lo que falta:
+
+:::term PowerShell · exportación de solo lectura
+$ $cred = Get-Credential
+$ $r = Invoke-RestMethod -Uri 'https://device42.corp.example/api/1.0/devices/all/?limit=500&offset=0' -Authentication Basic -Credential $cred
+$ $r.total_count
+51
+$ $r.Devices | Where-Object { -not $_.rack -or -not $_.start_at } | Select-Object name, hw_model, room
+name           hw_model                    room
+----           --------                    ----
+mad-pdu-r03b   APC AP8941 Rack PDU         Sala técnica CR-1
+mad-pp-r04-2   Cat6A 24-port patch panel   Sala técnica CR-1
+:::
+
+Pagina con `limit` y `offset` hasta llegar a `total_count`. Lo que conviene sacar cada mes:
+
+- Equipos **sin rack o sin U**, y equipos **sin responsable**.
+- Equipos de red y servidores **sin versión de firmware o de sistema**: sin ella no sabes a cuáles afecta un aviso de seguridad.
+- **Garantías** vencidas o que vencen en 90 días, y equipos pasado su **fin de soporte**.
+- Equipos que el descubrimiento no ha visto en semanas: apagados, retirados o fuera de la red.
+
+## 6. El ticket: "se ha caído un switch de acceso de la sala de trading a las 7:40"
+
+Martes, 7:40. Una fila de puestos de trading sin red. El mercado abre a las 9:00.
+
+1. **Qué equipo es**: desde el puesto afectado, el panel de parcheo lleva a `mad-acc-sw02`, rack `R03`, U36. Nadie tiene que seguir un cable con la linterna.
+2. **Qué hay alrededor**: Device42 muestra sus dos fuentes en `mad-pdu-r03a` y `mad-pdu-r03b`. Las dos PDU tienen corriente: no es la alimentación.
+3. **Hay repuesto**: un switch del mismo modelo en `R04`, marcado como no en servicio. Mismo tamaño, misma configuración de base.
+4. **Cambio**: el técnico va directo a la U36, cambia el equipo, recoloca los latiguillos según los puertos del panel que lista Device42 y carga la configuración guardada. A las 8:25 la fila tiene red.
+5. **El caso con el fabricante**: con el número de serie y el contrato de la ficha se abre la RMA sin buscar el pedido.
+6. **Después**: actualizar Device42 (el equipo averiado pasa a reparación, el repuesto a producción) y anotar en la revisión mensual que el modelo está **pasado su fin de soporte**: es candidato a sustitución, no a otra reparación.
+
+! Si la ficha dice una U y el equipo está en otra, corrígelo ese mismo día. Un inventario que acierta nueve de cada diez veces obliga a comprobarlo todo.
+
+## Siguientes pasos
+
+- La guía de **Cisco: switches, routers y salas de comunicaciones de una sede** cubre la configuración de esos equipos y el acceso de consola.
+- La guía de **Proveedores de conectividad** cubre el inventario de circuitos, que vive al lado de este.
+- El siguiente paso es **un solo inventario para todo el hardware de la oficina**: portátiles, monitores, bases, salas de reuniones e impresoras, junto con la sala de comunicaciones, cruzados por número de serie con Intune, Jamf, las compras y RR. HH. Es la idea del repositorio **38-it-asset-lifecycle-planner** de mi GitHub, que además calcula qué toca renovar cada trimestre y cuánto cuesta.
+""",
+  en="""
+## What you'll get
+
+The comms room in Device42 as it really is: every device in its rack and U, with its model, serial number, owner, the PDU it is plugged into, the patch panel ports that leave it, and how long the warranty and the vendor's support last. At a site with a trading floor that is not paperwork for an audit: it is what lets you swap a switch before the market opens without looking for anything.
+
+## Before you start
+
+- A Device42 user with edit rights for the site, and a **read-only** one for exports.
+- The room plan: rows, racks, power panels and where each circuit comes in.
+- Discovery credentials: a read-only SNMP community (SNMPv3 is better) for network devices and a **dedicated account** for servers, never an administrator's.
+- The orders and support contracts for the equipment (vendor, contract number, end date).
+
+## 1. Buildings, rooms and racks: the skeleton
+
+In Device42 everything hangs off the **building → room → rack** hierarchy. Create it before adding a single device:
+
+| Object | Example | What to fill in |
+|---|---|---|
+| Building | `MAD-HQ` | Address, building security contact for engineers' access |
+| Room | `Comms room CR-1` | Floor, who has a key or badge |
+| Rack | `R03` | Size in U (42 by default), row, numbering from the bottom |
+| Racked device | `mad-acc-sw01` | Model, starting U (*Start at*), orientation (front or back) |
+
+- The **hardware model** (the template) sets the size in U and the depth. Without a model with a size the device cannot be placed in the rack: it ends up at the side.
+- Use **Find next slot** to find space and the **Rack Layout** view to check front and back. Moving a device to another rack removes its network and power connections: review them afterwards.
+- Names that match the physical label: what is on the device is what is in Device42.
+
+## 2. Discover or enter by hand
+
+Auto-discovery fills in what the device knows about itself; the physical facts are known by whoever is in the room.
+
+- **Network** (switches, routers, firewalls): SNMP discovery. It brings inventory, VLANs and subnets, and the MAC table per switch port.
+- **Windows**: WMI (and WinRM for Hyper-V). **Linux**: SSH. **VMware**: through vCenter.
+- **iDRAC and iLO**: IPMI discovery of the server management controllers.
+- If the trading floor network is an isolated segment, a **Remote Collector** inside that segment runs the jobs without opening the whole network to the appliance.
+- Schedule each job (weekly is enough for inventory) and review the errors: an expired credential freezes the inventory without warning.
+
+What no discovery knows, and is entered by hand: the **rack and U**, the **owner**, the **patch panels**, the **PDU** outlet and the **end-of-support date** if your Device42 does not have it for that model.
+
+> Discovery first and hands later: if you enter devices by hand and then discover, you will end up with duplicates that differ only by serial number.
+
+## 3. Device types, power and patching
+
+Every device with its type and its owner (*customer* in Device42: Network, Infrastructure, Trading Technology). What a site comms room usually holds:
+
+- **Core and access switches**, routers and firewalls.
+- The site's **servers**: virtualisation, file services, the market data server the trading technology team looks after.
+- **PDUs**: added as a *Power Unit* with their model; ports are created from the model when you save, so choose the model carefully first. Link the PDU to a device to keep its serial number, purchase and lifecycle.
+- **UPS**: also a *Power Unit*. Record the date of the last battery replacement.
+- **Patch panels**: with their ports and what each one connects (switch port → panel port → desk outlet).
+
+In a trading room every critical device has **two power supplies on two different PDUs** (A and B feeds). If Device42 holds both outlets, checking that work on PDU A leaves nothing without power is a query, not a visit.
+
+## 4. Warranty and end of support
+
+Two different dates that are often confused:
+
+- **Warranty or support contract end**: what you pay the vendor or the integrator. It is renewed or left to lapse.
+- **Vendor end of support** (*last date of support*): after it there are no fixes or security patches, whatever you pay.
+
+:::ui Device42 · Purchases · contract line
+> Purchases › DLL-2021-SW118 › Line items
+= Type: Support contract
+= Devices: mad-core-sw01, mad-core-sw02
+= Contract: SN-4471-0928
+= Start: 2021-12-13
+= End: 2026-12-11
+= Notes: Renewal with the integrator, 60 days before
+[Save]
+:::
+
+- Review every month what ends in the next **90 days**: core equipment first.
+- End-of-support dates come from the vendor's end-of-life notices. If Device42 does not have them for that model, record them in a custom field.
+
+## 5. The export that keeps it honest
+
+An inventory nobody checks degrades on its own. Once a month, export the devices through the API (read-only) and look for what is missing:
+
+:::term PowerShell · read-only export
+$ $cred = Get-Credential
+$ $r = Invoke-RestMethod -Uri 'https://device42.corp.example/api/1.0/devices/all/?limit=500&offset=0' -Authentication Basic -Credential $cred
+$ $r.total_count
+51
+$ $r.Devices | Where-Object { -not $_.rack -or -not $_.start_at } | Select-Object name, hw_model, room
+name           hw_model                    room
+----           --------                    ----
+mad-pdu-r03b   APC AP8941 Rack PDU         Comms room CR-1
+mad-pp-r04-2   Cat6A 24-port patch panel   Comms room CR-1
+:::
+
+Page with `limit` and `offset` until you reach `total_count`. What to pull out every month:
+
+- Devices **without rack or U**, and devices **without an owner**.
+- Network devices and servers **without a firmware or OS version**: without it you cannot tell which ones a security advisory affects.
+- **Warranties** ended or ending within 90 days, and devices past their **end of support**.
+- Devices discovery has not seen for weeks: switched off, retired or off the network.
+
+## 6. The ticket: "an access switch on the trading floor is down at 7:40"
+
+Tuesday, 7:40. A row of trading desks has no network. The market opens at 9:00.
+
+1. **Which device**: from the affected desk, the patch panel leads to `mad-acc-sw02`, rack `R03`, U36. Nobody has to follow a cable with a torch.
+2. **What is around it**: Device42 shows its two power supplies on `mad-pdu-r03a` and `mad-pdu-r03b`. Both PDUs have power: it is not the power.
+3. **There is a spare**: a switch of the same model in `R04`, marked as not in service. Same size, same base configuration.
+4. **Swap**: the engineer goes straight to U36, swaps the device, re-patches according to the panel ports Device42 lists and loads the saved configuration. At 8:25 the row has network.
+5. **The case with the vendor**: with the serial number and the contract on the record, the RMA is raised without looking for the order.
+6. **Afterwards**: update Device42 (the failed unit goes to repair, the spare to production) and note in the monthly review that the model is **past its end of support**: it is a candidate for replacement, not another repair.
+
+! If the record says one U and the device is in another, fix it the same day. An inventory that is right nine times out of ten forces you to check everything.
+
+## Next steps
+
+- The **Cisco: switches, routers and comms rooms on a site** guide covers the configuration of that equipment and console access.
+- The **Connectivity providers** guide covers the circuit inventory, which lives next to this one.
+- The next step is **one inventory for all the office hardware**: laptops, monitors, docks, meeting rooms and printers alongside the comms room, matched by serial number with Intune, Jamf, the purchases and HR. That is the idea behind the **38-it-asset-lifecycle-planner** repository on my GitHub, which also works out what is due for replacement each quarter and what it costs.
 """)
