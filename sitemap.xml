@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://inigogonzalezgarcia.github.io/</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/about.html</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/guias.html</loc><lastmod>2026-10-28</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/journey.html</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/links.html</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/recursos.html</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/store.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/about.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/journey.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/links.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/recursos.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/store.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/blog/01-finops-cloud-cost-dashboard.html</loc><lastmod>2026-09-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/blog/02-intune-compliance-report.html</loc><lastmod>2026-09-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/blog/03-entra-id-hygiene-audit.html</loc><lastmod>2026-09-30</lastmod></url>
@@ -44,7 +44,8 @@
   <url><loc>https://inigogonzalezgarcia.github.io/blog/35-private-cloud-capacity-review.html</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/blog/36-major-incident-command-kit.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/blog/37-iam-access-review.html</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/blog/</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/blog/38-it-asset-lifecycle-planner.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/blog/</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/blog/sysadmindesksbyigg.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/active-directory-alta-usuario-grupos.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/alta-de-usuario-en-retail-red-correo-y-aplicaciones-de-negocio.html</loc><lastmod>2026-10-28</lastmod></url>
@@ -68,6 +69,7 @@
   <url><loc>https://inigogonzalezgarcia.github.io/guias/conditional-access-politicas-para-una-sede-con-sala-de-trading.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/confluence-espacio-de-it-y-runbooks-que-se-usan.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/cyberark-safes-rotacion-automatica-sesiones-grabadas-y-una-cuenta-que-el-cpm-no-cambia.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/device42-inventario-de-racks-y-equipos-de-la-sala-de-comunicaciones.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/docker-contenedores-en-un-servidor-de-operaciones.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/dr-bcp-preparar-y-supervisar-una-prueba-de-recuperacion-en-una-sede-financiera.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/dr-bcp-rpo-y-rto-por-servicio-plan-de-recuperacion-y-prueba-completa.html</loc><lastmod>2026-10-27</lastmod></url>
@@ -130,7 +132,7 @@
   <url><loc>https://inigogonzalezgarcia.github.io/guias/sector-2.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/sector-3.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/sector-4.html</loc><lastmod>2026-10-28</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/guias/sector-5.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/sector-5.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/sharepoint-sitio-de-equipo-permisos-y-uso-compartido.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/solarwinds-anadir-un-nodo-afinar-una-alerta-y-leer-que-paso-antes-de-la-caida.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/sql-server-copias-y-restauracion-de-la-base-de-datos-del-erp.html</loc><lastmod>2026-10-28</lastmod></url>
