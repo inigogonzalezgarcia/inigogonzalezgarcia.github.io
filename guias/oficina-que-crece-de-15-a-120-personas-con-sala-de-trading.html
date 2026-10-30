@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Scaling office IT from 15 to 120 people · Iñigo González" data-title-es="IT de una oficina que pasa de 15 a 120 · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Scaling office IT from 15 to 120 people · Iñigo González</title>
+<meta name="description" content="The growth phases of a site with a trading floor: desks, network and comms room, Wi-Fi, meeting rooms, printers, licences, onboarding process, stock, support model and team, vendors and budget, what breaks at each size and the metrics that warn you first.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/oficina-que-crece-de-15-a-120-personas-con-sala-de-trading.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scaling office IT from 15 to 120 people · Iñigo González">
+<meta property="og:description" content="The growth phases of a site with a trading floor: desks, network and comms room, Wi-Fi, meeting rooms, printers, licences, onboarding process, stock, support model and team, vendors and budget, what breaks at each size and the metrics that warn you first.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/oficina-que-crece-de-15-a-120-personas-con-sala-de-trading.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Scaling office IT from 15 to 120 people · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"An office growing from 15 to 120 people with a trading floor: what each phase needs","alternativeHeadline":"Una oficina que crece de 15 a 120 personas con sala de trading: qué hace falta en cada fase","description":"The growth phases of a site with a trading floor: desks, network and comms room, Wi-Fi, meeting rooms, printers, licences, onboarding process, stock, support model and team, vendors and budget, what breaks at each size and the metrics that warn you first.","datePublished":"2026-10-30","dateModified":"2026-10-30","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/oficina-que-crece-de-15-a-120-personas-con-sala-de-trading.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/oficina-que-crece-de-15-a-120-personas-con-sala-de-trading.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Site growth - From 15 to 120 people"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 5","item":"https://inigogonzalezgarcia.github.io/guias/sector-5.html"},{"@type":"ListItem","position":4,"name":"An office growing from 15 to 120 people with a trading floor: what each phase needs","item":"https://inigogonzalezgarcia.github.io/guias/oficina-que-crece-de-15-a-120-personas-con-sala-de-trading.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="sector-5.html"><span class="es">Sector 5</span><span class="en">Sector 5</span></a></p>
+    <h1><span class="es">Una oficina que crece de 15 a 120 personas con sala de trading: qué hace falta en cada fase</span><span class="en">An office growing from 15 to 120 people with a trading floor: what each phase needs</span></h1>
+    <p class="lede"><span class="es">Las fases de crecimiento de una sede con sala de trading: puestos, red y sala de comunicaciones, Wi-Fi, salas de reuniones, impresoras, licencias, proceso de incorporación, stock, modelo y equipo de soporte, proveedores y presupuesto, qué se rompe en cada tamaño y las métricas que avisan antes.</span><span class="en">The growth phases of a site with a trading floor: desks, network and comms room, Wi-Fi, meeting rooms, printers, licences, onboarding process, stock, support model and team, vendors and budget, what breaks at each size and the metrics that warn you first.</span></p><p class="label post-meta"><span class="es">Sector 5</span><span class="en">Sector 5</span> · <span class="es">Crecimiento de sede - De 15 a 120 personas</span><span class="en">Site growth - From 15 to 120 people</span> · <span class="es">6 min</span><span class="en">5 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">30 oct 2026</span><span class="en">30 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Que la oficina pase de quince personas a más de cien sin que IT vaya siempre un paso por detrás. Una sede pequeña funciona con una persona que lo sabe todo de memoria; a partir de cierto tamaño, lo que estaba en la cabeza de alguien tiene que estar en un proceso, un inventario y un presupuesto. Con sala de trading el margen es menor: cada puesto nuevo lleva varios monitores, voz y datos de mercado, y llega con fecha de incorporación fija.</p>
+<h2>Antes de empezar</h2>
+<ul><li>El <strong>plan de contratación</strong> del negocio para los próximos doce o dieciocho meses, por mesa y por trimestre. Sin él, todo lo demás es adivinar.</li><li>El <strong>plano</strong> de la oficina actual y de cualquier ampliación: puestos, salas, sala de comunicaciones, cuadros eléctricos.</li><li>El inventario actual de equipos, licencias y contratos.</li><li>Quién decide el presupuesto de IT de la sede y en qué fechas se prepara.</li></ul>
+<h2>1. Las fases y lo que se rompe en cada una</h2>
+<div class="g-table"><table><thead><tr><th>Tamaño</th><th>Cómo funciona</th><th>Qué se rompe</th></tr></thead><tbody><tr><td>~15 personas</td><td>Una persona de IT o soporte remoto, todo improvisado</td><td>Nada todavía: el conocimiento está en una cabeza</td></tr><tr><td>~40 personas</td><td>Llegan las primeras mesas completas</td><td>Las incorporaciones se preparan la víspera; falta stock; la sala de comunicaciones se llena</td></tr><tr><td>~80 personas</td><td>Varias mesas, más salas, más proveedores</td><td>Los puertos del switch, la Wi-Fi en las horas punta, las licencias sin control, el soporte sin turnos</td></tr><tr><td>120+ personas</td><td>Una sede con equipo de IT propio</td><td>Lo que no esté en un proceso: cambios, inventario, proveedores, presupuesto</td></tr></tbody></table></div>
+<h2>2. Puestos, red y sala de comunicaciones</h2>
+<ul><li><strong>Puesto de trading</strong>: dos a cuatro monitores (o más), turret de voz, dos tomas de red como mínimo y alimentación suficiente. Calcula el consumo eléctrico por puesto con el instalador, no al final.</li><li><strong>Switches de acceso</strong>: deja al menos un <strong>20 %</strong> de puertos libres después de cada ampliación. Cuando bajas de eso, la siguiente mesa ya no cabe.</li><li><strong>Sala de comunicaciones</strong>: espacio en racks (unidades libres), carga del <strong>SAI</strong> en porcentaje y autonomía real, climatización y doble alimentación. Con 15 personas cabe en un rack; con 120 y sala de trading, el diseño pasa a ser de núcleo redundante (guía <strong>Cisco: switches, routers y salas de comunicaciones de una sede</strong>).</li><li><strong>Circuitos</strong>: Internet y la conexión con el centro de datos crecen con la plantilla y con los datos de mercado. Un circuito nuevo tarda semanas o meses: pídelo con el plan de contratación, no con la gente ya sentada.</li></ul>
+<h2>3. Wi-Fi, salas e impresoras</h2>
+<ul><li><strong>Wi-Fi</strong>: dimensionar por número de dispositivos simultáneos, no por metros cuadrados. Con la plantilla, los portátiles, los móviles y las salas, la densidad se multiplica. Una medición de cobertura tras cada ampliación.</li><li><strong>Salas de reuniones</strong>: de una sala con pantalla a varias salas con videoconferencia que tienen que funcionar a las 8:00. A partir de unas pocas, conviene un estándar único y su gestión central (guía <strong>Microsoft Teams Rooms sobre Crestron</strong>).</li><li><strong>Impresoras</strong>: pocas y gestionadas, con impresión segura por tarjeta o PIN. Con más gente, más documentos confidenciales olvidados en la bandeja.</li></ul>
+<h2>4. Licencias y datos de mercado</h2>
+<ul><li><strong>Microsoft 365 y aplicaciones</strong>: licencia por perfil, asignada por grupo, y una revisión mensual de licencias asignadas a cuentas inactivas.</li><li><strong>Datos de mercado</strong>: las licencias de terminales y fuentes de datos son por usuario, caras y auditadas por el proveedor. Alta y baja ligadas al proceso de incorporación y salida, y una revisión trimestral con cada mesa.</li><li><strong>Contratos</strong> con fecha de renovación en un calendario: con más proveedores, alguno se renueva solo si nadie mira.</li></ul>
+<h2>5. El proceso de incorporación</h2>
+<p>A partir de unas cuarenta personas, una incorporación preparada la víspera es una incorporación que falla:</p>
+<ol><li>Recursos humanos avisa con <strong>dos semanas</strong> como mínimo, con mesa, puesto y perfil.</li><li>IT prepara cuenta, licencias, grupos y accesos según el perfil.</li><li>El equipo se prepara con Autopilot o la imagen de la sede y se deja en el puesto el día antes, con monitores y turret probados.</li><li>El primer día alguien de IT pasa por el puesto en la primera hora.</li><li>La <strong>baja</strong> sigue el mismo camino al revés, el mismo día de la salida.</li></ol>
+<h2>6. Stock y proveedores</h2>
+<ul><li><strong>Stock de reserva</strong>: portátiles, monitores, bases, auriculares y teclados para cubrir las incorporaciones del mes siguiente más un margen para averías. Como referencia, unas semanas de cobertura según el plan de contratación.</li><li><strong>Plazos de entrega</strong> reales de cada proveedor, sobre todo en monitores y equipos de red.</li><li><strong>Proveedores</strong> con contacto, contrato, SLA y revisión periódica: hardware, cableado, operadores, turrets, salas, impresión.</li></ul>
+<h2>7. El modelo y el equipo de soporte</h2>
+<ul><li><strong>~15</strong>: una persona generalista o soporte remoto, con el service desk global para lo básico.</li><li><strong>~40-80</strong>: un responsable de IT en sitio y un segundo técnico. Hace falta cubrir la apertura del mercado y las vacaciones.</li><li><strong>120+</strong>: un responsable de sede con dos o más técnicos, turnos para cubrir desde antes de la apertura hasta el cierre, y el service desk global como primer nivel con escalado claro.</li><li><strong>Documentación</strong>: procedimientos en Confluence o la base de conocimiento, para que cualquiera del equipo resuelva lo mismo de la misma forma.</li></ul>
+<h2>8. Presupuesto</h2>
+<ul><li><strong>Coste por puesto nuevo</strong>: equipo, monitores, voz, licencias, datos de mercado y la parte proporcional de red. Multiplicado por el plan de contratación, es la base del presupuesto.</li><li><strong>Inversiones por escalón</strong>: un switch más, un rack, un SAI mayor, un circuito nuevo. No llegan en proporción: llegan de golpe cuando se cruza un umbral.</li><li><strong>Renovación</strong> del equipamiento existente por antigüedad y fin de soporte (guía <strong>Presupuesto de IT</strong>).</li></ul>
+<h2>9. Las métricas que avisan antes</h2>
+<ul><li><strong>Puertos libres</strong> en los switches de acceso y <strong>unidades libres</strong> en los racks.</li><li><strong>Carga del SAI</strong> y autonomía.</li><li><strong>Clientes por punto de acceso</strong> en las horas punta.</li><li><strong>Incorporaciones listas el primer día</strong> (porcentaje) y días de aviso de recursos humanos.</li><li><strong>Tickets por usuario al mes</strong> y tiempo de resolución por mesa.</li><li><strong>Licencias asignadas frente a usadas</strong>, incluidas las de datos de mercado.</li><li><strong>Semanas de cobertura</strong> del stock frente al plan de contratación.</li></ul>
+<p class="g-tip">Revisa estas cifras cada mes con el plan de contratación delante. Cuando una se acerca al límite, la compra o el cambio ya tiene que estar pedido.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía <strong>Device42: inventario de la sala de comunicaciones</strong> cubre el inventario que hace falta para saber cuánto espacio queda.</li><li>La guía <strong>Alta de usuario</strong> detalla la incorporación de punta a punta.</li><li>El repositorio <strong>38-it-asset-lifecycle-planner</strong> de mi GitHub calcula qué equipos tocan renovar cada trimestre y cuánto cuestan, y <strong>04-itsm-kpi-dashboard</strong> reúne las métricas de soporte.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>The office goes from fifteen people to more than a hundred without IT always one step behind. A small site runs on one person who knows everything by heart; past a certain size, what was in someone&#x27;s head has to be in a process, an inventory and a budget. With a trading floor the margin is smaller: every new desk brings several monitors, voice and market data, and arrives with a fixed start date.</p>
+<h2>Before you start</h2>
+<ul><li>The business&#x27;s <strong>hiring plan</strong> for the next twelve to eighteen months, by desk and by quarter. Without it, everything else is guesswork.</li><li>The <strong>floor plan</strong> of the current office and any expansion: desks, rooms, comms room, electrical boards.</li><li>The current inventory of devices, licences and contracts.</li><li>Who decides the site&#x27;s IT budget and when it&#x27;s prepared.</li></ul>
+<h2>1. The phases and what breaks in each</h2>
+<div class="g-table"><table><thead><tr><th>Size</th><th>How it works</th><th>What breaks</th></tr></thead><tbody><tr><td>~15 people</td><td>One IT person or remote support, everything improvised</td><td>Nothing yet: the knowledge is in one head</td></tr><tr><td>~40 people</td><td>The first full desks arrive</td><td>Onboardings prepared the day before; stock runs short; the comms room fills up</td></tr><tr><td>~80 people</td><td>Several desks, more rooms, more vendors</td><td>Switch ports, Wi-Fi at peak times, uncontrolled licences, support without shifts</td></tr><tr><td>120+ people</td><td>A site with its own IT team</td><td>Whatever isn&#x27;t in a process: changes, inventory, vendors, budget</td></tr></tbody></table></div>
+<h2>2. Desks, network and comms room</h2>
+<ul><li><strong>Trading desk</strong>: two to four monitors (or more), voice turret, at least two network points and enough power. Work out the power draw per desk with the installer, not at the end.</li><li><strong>Access switches</strong>: keep at least <strong>20%</strong> of ports free after each expansion. Below that, the next desk no longer fits.</li><li><strong>Comms room</strong>: rack space (free units), <strong>UPS</strong> load as a percentage and real runtime, cooling and dual power. With 15 people it fits in one rack; with 120 and a trading floor, the design becomes a redundant core (<strong>Cisco: switches, routers and comms rooms on a site</strong> guide).</li><li><strong>Circuits</strong>: Internet and the link to the data centre grow with headcount and market data. A new circuit takes weeks or months: order it with the hiring plan, not when people are already sitting down.</li></ul>
+<h2>3. Wi-Fi, rooms and printers</h2>
+<ul><li><strong>Wi-Fi</strong>: sized by number of simultaneous devices, not square metres. With headcount, laptops, phones and rooms, density multiplies. A coverage survey after each expansion.</li><li><strong>Meeting rooms</strong>: from one room with a screen to several video conference rooms that must work at 8:00. Past a few rooms, a single standard and central management pay off (<strong>Microsoft Teams Rooms on Crestron</strong> guide).</li><li><strong>Printers</strong>: few and managed, with secure release by card or PIN. More people means more confidential documents left in the tray.</li></ul>
+<h2>4. Licences and market data</h2>
+<ul><li><strong>Microsoft 365 and applications</strong>: a licence per role, assigned by group, and a monthly review of licences assigned to inactive accounts.</li><li><strong>Market data</strong>: terminal and data feed licences are per user, expensive and audited by the provider. Joiners and leavers tied to the onboarding and offboarding process, and a quarterly review with each desk.</li><li><strong>Contracts</strong> with renewal dates in a calendar: with more vendors, one renews by itself if nobody is watching.</li></ul>
+<h2>5. The onboarding process</h2>
+<p>From around forty people, an onboarding prepared the day before is an onboarding that fails:</p>
+<ol><li>HR gives at least <strong>two weeks&#x27;</strong> notice, with desk, position and role.</li><li>IT prepares the account, licences, groups and access for the role.</li><li>The device is prepared with Autopilot or the site image and left on the desk the day before, with monitors and turret tested.</li><li>On day one someone from IT stops by the desk in the first hour.</li><li>The <strong>leaver</strong> follows the same path in reverse, on the day they leave.</li></ol>
+<h2>6. Stock and vendors</h2>
+<ul><li><strong>Spare stock</strong>: laptops, monitors, docks, headsets and keyboards to cover the next month&#x27;s joiners plus a margin for failures. As a reference, a few weeks of cover against the hiring plan.</li><li>Real <strong>lead times</strong> from each vendor, especially for monitors and network equipment.</li><li><strong>Vendors</strong> with contact, contract, SLA and regular review: hardware, cabling, carriers, turrets, rooms, printing.</li></ul>
+<h2>7. The support model and team</h2>
+<ul><li><strong>~15</strong>: one generalist or remote support, with the global service desk for the basics.</li><li><strong>~40-80</strong>: an on-site IT lead and a second engineer. Market open and holidays need covering.</li><li><strong>120+</strong>: a site lead with two or more engineers, shifts covering from before the open to the close, and the global service desk as first line with clear escalation.</li><li><strong>Documentation</strong>: procedures in Confluence or the knowledge base, so anyone on the team solves the same thing the same way.</li></ul>
+<h2>8. Budget</h2>
+<ul><li><strong>Cost per new desk</strong>: device, monitors, voice, licences, market data and a share of the network. Multiplied by the hiring plan, it&#x27;s the base of the budget.</li><li><strong>Step investments</strong>: another switch, a rack, a bigger UPS, a new circuit. They don&#x27;t arrive in proportion: they arrive all at once when a threshold is crossed.</li><li><strong>Refresh</strong> of existing equipment by age and end of support (<strong>IT budget</strong> guide).</li></ul>
+<h2>9. The metrics that warn you first</h2>
+<ul><li><strong>Free ports</strong> on access switches and <strong>free units</strong> in racks.</li><li><strong>UPS load</strong> and runtime.</li><li><strong>Clients per access point</strong> at peak times.</li><li><strong>Joiners ready on day one</strong> (percentage) and days of notice from HR.</li><li><strong>Tickets per user per month</strong> and resolution time per desk.</li><li><strong>Licences assigned versus used</strong>, including market data.</li><li><strong>Weeks of cover</strong> of stock against the hiring plan.</li></ul>
+<p class="g-tip">Review these figures every month with the hiring plan in front of you. When one nears its limit, the purchase or change should already be ordered.</p>
+<h2>Next steps</h2>
+<ul><li>The <strong>Device42: comms room inventory</strong> guide covers the inventory you need to know how much room is left.</li><li>The <strong>New starter</strong> guide details onboarding end to end.</li><li>The <strong>38-it-asset-lifecycle-planner</strong> repository on my GitHub works out which devices are due for refresh each quarter and what they cost, and <strong>04-itsm-kpi-dashboard</strong> brings the support metrics together.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Sector 5</span><span class="en">Sector 5</span> · <span class="es">Crecimiento de sede - De 15 a 120 personas</span><span class="en">Site growth - From 15 to 120 people</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="sector-5.html"><span class="es">Todas las guías del Sector 5</span><span class="en">All Sector 5 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/38-it-asset-lifecycle-planner.html"><span class="label muted"><span class="es">Blog · 38</span><span class="en">Blog · 38</span></span><span class="related-t"><span class="es">Nueve portátiles que nadie registró y medio presupuesto en un trimestre: un inventario único y un plan de renovación para el hardware de la oficina</span><span class="en">Nine laptops nobody registered and half the budget in one quarter: one inventory and a refresh plan for the office hardware</span></span></a><a class="related-link" href="../blog/04-itsm-kpi-dashboard.html"><span class="label muted"><span class="es">Blog · 04</span><span class="en">Blog · 04</span></span><span class="related-t"><span class="es">KPIs de service desk a partir de una exportación de tickets</span><span class="en">Service desk KPIs from a plain ticket export</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="linea-de-voz-con-un-banco-caida-private-wire-turrets-y-grabacion.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Línea de voz con un banco caída: private wires, turrets y la grabación que no puede faltar</span><span class="en">A voice line to a bank is down: private wires, turrets and the recording that can&#x27;t be missing</span></span></a>
+    <a class="post-nav-link next" href="sai-de-la-sala-de-comunicaciones-dimensionado-pruebas-apagado-ordenado-y-un-corte-antes-de-la-apertura.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">SAI de la sala de comunicaciones: dimensionado, alimentación A/B, baterías, pruebas, apagado ordenado y un corte de luz antes de la apertura</span><span class="en">The comms room UPS: sizing, A/B power, batteries, tests, orderly shutdown and a power cut before the market opens</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

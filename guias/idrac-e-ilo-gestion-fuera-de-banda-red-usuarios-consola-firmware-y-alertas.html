@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="iDRAC and iLO: out-of-band management · Iñigo González" data-title-es="iDRAC e iLO: gestión fuera de banda · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>iDRAC and iLO: out-of-band management · Iñigo González</title>
+<meta name="description" content="The management controller of Dell and HPE servers: dedicated or shared port and a management VLAN, local and directory users, virtual console and media, firmware updates, alerts over SNMP, email and Redfish, the SEL and IML logs, licences, and what to do with a server that won&#x27;t boot remotely.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/idrac-e-ilo-gestion-fuera-de-banda-red-usuarios-consola-firmware-y-alertas.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iDRAC and iLO: out-of-band management · Iñigo González">
+<meta property="og:description" content="The management controller of Dell and HPE servers: dedicated or shared port and a management VLAN, local and directory users, virtual console and media, firmware updates, alerts over SNMP, email and Redfish, the SEL and IML logs, licences, and what to do with a server that won&#x27;t boot remotely.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/idrac-e-ilo-gestion-fuera-de-banda-red-usuarios-consola-firmware-y-alertas.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="iDRAC and iLO: out-of-band management · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Dell iDRAC and HPE iLO: management network, users, remote console, firmware, alerts and a server that won't boot","alternativeHeadline":"Dell iDRAC y HPE iLO: red de gestión, usuarios, consola remota, firmware, alertas y un servidor que no arranca","description":"The management controller of Dell and HPE servers: dedicated or shared port and a management VLAN, local and directory users, virtual console and media, firmware updates, alerts over SNMP, email and Redfish, the SEL and IML logs, licences, and what to do with a server that won't boot remotely.","datePublished":"2026-10-30","dateModified":"2026-10-30","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/idrac-e-ilo-gestion-fuera-de-banda-red-usuarios-consola-firmware-y-alertas.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/idrac-e-ilo-gestion-fuera-de-banda-red-usuarios-consola-firmware-y-alertas.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Dell iDRAC and HPE iLO"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 2","item":"https://inigogonzalezgarcia.github.io/guias/nivel-2.html"},{"@type":"ListItem","position":4,"name":"Dell iDRAC and HPE iLO: management network, users, remote console, firmware, alerts and a server that won't boot","item":"https://inigogonzalezgarcia.github.io/guias/idrac-e-ilo-gestion-fuera-de-banda-red-usuarios-consola-firmware-y-alertas.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="nivel-2.html"><span class="es">Nivel 2</span><span class="en">Level 2</span></a></p>
+    <h1><span class="es">Dell iDRAC y HPE iLO: red de gestión, usuarios, consola remota, firmware, alertas y un servidor que no arranca</span><span class="en">Dell iDRAC and HPE iLO: management network, users, remote console, firmware, alerts and a server that won&#x27;t boot</span></h1>
+    <p class="lede"><span class="es">La controladora de gestión de los servidores Dell y HPE: puerto dedicado o compartido y VLAN de gestión, usuarios locales y de directorio, consola y medios virtuales, actualizar firmware, alertas por SNMP, correo y Redfish, los registros SEL e IML, las licencias y qué hacer con un servidor que no arranca a distancia.</span><span class="en">The management controller of Dell and HPE servers: dedicated or shared port and a management VLAN, local and directory users, virtual console and media, firmware updates, alerts over SNMP, email and Redfish, the SEL and IML logs, licences, and what to do with a server that won&#x27;t boot remotely.</span></p><p class="label post-meta"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">Dell iDRAC y HPE iLO</span><span class="en">Dell iDRAC and HPE iLO</span> · <span class="es">6 min</span><span class="en">5 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">30 oct 2026</span><span class="en">30 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Poder encender, ver la pantalla, montar una ISO y leer los errores de hardware de cualquier servidor físico sin ir a la sala. iDRAC (Dell) e iLO (HPE) son una pequeña controladora dentro del servidor con su propia red y su propio sistema: funciona aunque el sistema operativo esté colgado o el servidor apagado, siempre que tenga corriente.</p>
+<h2>Antes de empezar</h2>
+<ul><li>La etiqueta del servidor: el número de servicio (Dell) o de serie (HPE) y la <strong>contraseña de fábrica</strong> de la controladora. Los Dell recientes traen una contraseña única en la pestaña extraíble (<em>information tag</em>); los antiguos venían con <code>root</code> / <code>calvin</code>. Los HPE traen el usuario <code>Administrator</code> con una contraseña aleatoria en la etiqueta.</li><li>Una <strong>IP en la red de gestión</strong> reservada por servidor, con su nombre en DNS (<code>srv-erp-01-idrac</code>, <code>srv-erp-01-ilo</code>).</li><li>Un puesto o servidor de salto con acceso a esa red. La red de gestión no se publica a la red de usuarios.</li></ul>
+<h2>1. La red de gestión</h2>
+<p>Dos formas de conectar la controladora:</p>
+<ul><li><strong>Puerto dedicado</strong>: un RJ45 propio en la parte trasera, marcado como iDRAC o iLO. Es la opción buena: si la tarjeta de red del servidor falla, la gestión sigue.</li><li><strong>Puerto compartido</strong> (<em>shared LOM</em> en Dell, <em>shared network port</em> en HPE): la controladora usa una de las tarjetas del servidor. Ahorra un cable, pero un cambio en esa tarjeta o en el switch te deja sin gestión.</li></ul>
+<p>En los dos casos, la controladora va en una <strong>VLAN de gestión</strong> separada, con acceso solo desde el salto y la monitorización. Puertos que hay que permitir: 443 (web y Redfish), 22 (SSH), 623/UDP (IPMI, si lo usas) y el de la consola (5900 en iDRAC; 17990 para consola y 17988 para medios virtuales en iLO).</p>
+<p>La IP se pone la primera vez desde la configuración de arranque (F2 › iDRAC Settings › Network en Dell; F9 › System Configuration › iLO Configuration Utility en HPE) o desde racadm:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">racadm · iDRAC9 · red de gestión</span><button class="t-copy" type="button" data-copy="racadm set iDRAC.NIC.Selection Dedicated&#10;racadm set iDRAC.IPv4.DHCPEnable Disabled&#10;racadm set iDRAC.IPv4.Address 10.10.90.21&#10;racadm set iDRAC.IPv4.Netmask 255.255.255.0&#10;racadm set iDRAC.IPv4.Gateway 10.10.90.1&#10;racadm get iDRAC.NIC.Selection" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm set iDRAC.NIC.Selection Dedicated</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm set iDRAC.IPv4.DHCPEnable Disabled</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm set iDRAC.IPv4.Address 10.10.90.21</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm set iDRAC.IPv4.Netmask 255.255.255.0</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm set iDRAC.IPv4.Gateway 10.10.90.1</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm get iDRAC.NIC.Selection</span><span class="t-out">[Key=iDRAC.Embedded.1#NIC.1]</span><span class="t-out">Selection=Dedicated</span></code></pre></figure>
+<h2>2. Usuarios y autenticación con el directorio</h2>
+<ul><li><strong>Cambia la contraseña de fábrica</strong> el primer día y guárdala en el gestor de contraseñas del equipo (o en el PAM, si lo hay). Es la cuenta de emergencia.</li><li>El resto entra con su usuario del <strong>directorio</strong>: Active Directory o LDAP, con grupos que dan el rol (administrador, operador, solo lectura). Así una baja en AD quita el acceso a todas las controladoras a la vez.</li><li>En iDRAC se configura en iDRAC Settings › Users › Directory Services; en iLO, en Security › Directory. Comprueba la licencia: en ambos fabricantes la autenticación por directorio es de las funciones que piden la licencia avanzada.</li></ul>
+<h2>3. Consola virtual y medios virtuales</h2>
+<p>La <strong>consola virtual</strong> muestra la pantalla del servidor en el navegador (HTML5) desde la POST: sirve para entrar en la BIOS, ver un pantallazo azul o un Linux que pide <code>fsck</code>. Los <strong>medios virtuales</strong> montan una ISO de tu equipo como si fuera un DVD del servidor.</p>
+<ul><li>En <strong>iDRAC9</strong>, la consola y los medios virtuales en servidores de rack requieren la licencia <strong>Enterprise</strong> (o Datacenter).</li><li>En <strong>iLO</strong>, sin licencia la consola funciona solo hasta que arranca el sistema operativo; con <strong>iLO Advanced</strong> tienes consola con el sistema cargado y medios virtuales.</li></ul>
+<h2>4. Firmware y Lifecycle Controller</h2>
+<p>El firmware de BIOS, controladora RAID, tarjetas de red, discos y la propia iDRAC o iLO se actualiza desde la controladora, sin sistema operativo:</p>
+<ul><li><strong>Dell</strong>: Maintenance › System Update, con el paquete descargado o un catálogo. El <strong>Lifecycle Controller</strong> (F10 al arrancar) hace lo mismo en local. Las tareas quedan en la cola de trabajos (<code>racadm jobqueue view</code>) y muchas se aplican en el siguiente reinicio.</li><li><strong>HPE</strong>: Firmware &amp; OS Software › Update Firmware, o el <strong>Service Pack for ProLiant (SPP)</strong> para llevar todo el servidor a una versión probada en conjunto.</li><li>Para muchos servidores, una consola central: <strong>OpenManage Enterprise</strong> en Dell o <strong>HPE OneView</strong> en HPE, con una línea base y un informe de quién se ha quedado atrás.</li></ul>
+<p>Actualiza primero la propia controladora, luego BIOS y el resto, siempre en ventana de cambio y un nodo de cada clúster cada vez.</p>
+<h2>5. Alertas y registros</h2>
+<ul><li><strong>Alertas</strong>: SNMP (traps a la monitorización, mejor SNMPv3), correo y suscripciones de eventos <strong>Redfish</strong>. Activa como mínimo fuente de alimentación, ventiladores, temperatura, memoria y discos. En iDRAC9: Configuration › System Settings › Alert Configuration.</li><li><strong>SEL</strong> (System Event Log, Dell) e <strong>IML</strong> (Integrated Management Log, HPE): los errores de hardware con fecha.</li><li>Para el caso con el fabricante: el <strong>SupportAssist Collection</strong> (Dell) o el <strong>Active Health System Log</strong> (HPE). Es lo primero que pide soporte.</li></ul>
+<h2>6. El ticket: &quot;el servidor no arranca y estoy en remoto&quot;</h2>
+<ol><li><strong>¿Tiene corriente y está encendido?</strong></li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">racadm · estado y registro de eventos</span><button class="t-copy" type="button" data-copy="racadm serveraction powerstatus&#10;racadm getsel -i&#10;racadm getsel" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm serveraction powerstatus</span><span class="t-out">Server power status: ON</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm getsel -i</span><span class="t-out">Total Records: 4</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm getsel</span><span class="t-out">Record:      4</span><span class="t-out">Date/Time:   10/30/2026 06:41:12</span><span class="t-out">Source:      system</span><span class="t-out">Severity:    Critical</span><span class="t-out">Description: Multi-bit memory errors detected on a memory device at location(s) DIMM_A3.</span></code></pre></figure>
+<ol><li><strong>Lee el SEL o el IML</strong>: un error de memoria, de fuente o de controladora RAID explica casi siempre una parada en la POST. Con un DIMM averiado, el caso con el fabricante va con el registro.</li><li><strong>Abre la consola virtual</strong>: ¿se queda en la POST, en &quot;No boot device&quot; o en el sistema operativo? Si no ve el disco, revisa la controladora RAID y los discos virtuales en la sección de almacenamiento.</li><li><strong>Reinicio en frío</strong> si la pantalla está congelada: <code>racadm serveraction powercycle</code> en Dell, o Momentary Press / Cold Boot en Power &amp; Thermal de iLO. Por Redfish, el mismo POST a <code>ComputerSystem.Reset</code> con <code>ForceRestart</code> en los dos.</li><li><strong>Arranque de rescate</strong>: monta la ISO por medios virtuales y fuerza un arranque único desde el DVD virtual.</li></ol>
+<p class="g-warn">Si la controladora no responde por web, reiníciala a ella (<code>racadm racreset</code>, o Diagnostics › Reset iLO): no apaga el servidor. Si tampoco responde así, toca ir a la sala.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <strong>Windows Server</strong> cubre lo que pasa después de que el servidor arranca.</li><li>La guía de <strong>VMware vSphere y vCenter</strong> explica cómo poner un host en mantenimiento antes de actualizar su firmware.</li><li>Las alertas de la controladora llegan a la monitorización de la guía de <strong>SolarWinds</strong> o de <strong>Grafana</strong>.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>Being able to power on, see the screen, mount an ISO and read the hardware errors of any physical server without going to the room. iDRAC (Dell) and iLO (HPE) are a small controller inside the server with its own network and its own system: it works even if the operating system is hung or the server is off, as long as it has power.</p>
+<h2>Before you start</h2>
+<ul><li>The server&#x27;s label: the service tag (Dell) or serial number (HPE) and the controller&#x27;s <strong>factory password</strong>. Recent Dell servers ship with a unique password on the pull-out information tag; older ones came with <code>root</code> / <code>calvin</code>. HPE servers ship with the <code>Administrator</code> user and a random password on the tag.</li><li>An <strong>IP on the management network</strong> reserved for each server, with its name in DNS (<code>srv-erp-01-idrac</code>, <code>srv-erp-01-ilo</code>).</li><li>A jump host or workstation with access to that network. The management network is not exposed to the user network.</li></ul>
+<h2>1. The management network</h2>
+<p>Two ways to connect the controller:</p>
+<ul><li><strong>Dedicated port</strong>: its own RJ45 at the back, marked iDRAC or iLO. It is the good option: if the server&#x27;s network card fails, management keeps working.</li><li><strong>Shared port</strong> (<em>shared LOM</em> on Dell, <em>shared network port</em> on HPE): the controller uses one of the server&#x27;s network cards. It saves a cable, but a change on that card or on the switch leaves you without management.</li></ul>
+<p>Either way, the controller goes in a separate <strong>management VLAN</strong>, reachable only from the jump host and monitoring. Ports to allow: 443 (web and Redfish), 22 (SSH), 623/UDP (IPMI, if you use it) and the console port (5900 on iDRAC; 17990 for the console and 17988 for virtual media on iLO).</p>
+<p>The IP is set the first time from the boot setup (F2 › iDRAC Settings › Network on Dell; F9 › System Configuration › iLO Configuration Utility on HPE) or with racadm:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">racadm · iDRAC9 · management network</span><button class="t-copy" type="button" data-copy="racadm set iDRAC.NIC.Selection Dedicated&#10;racadm set iDRAC.IPv4.DHCPEnable Disabled&#10;racadm set iDRAC.IPv4.Address 10.10.90.21&#10;racadm set iDRAC.IPv4.Netmask 255.255.255.0&#10;racadm set iDRAC.IPv4.Gateway 10.10.90.1&#10;racadm get iDRAC.NIC.Selection" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm set iDRAC.NIC.Selection Dedicated</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm set iDRAC.IPv4.DHCPEnable Disabled</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm set iDRAC.IPv4.Address 10.10.90.21</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm set iDRAC.IPv4.Netmask 255.255.255.0</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm set iDRAC.IPv4.Gateway 10.10.90.1</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm get iDRAC.NIC.Selection</span><span class="t-out">[Key=iDRAC.Embedded.1#NIC.1]</span><span class="t-out">Selection=Dedicated</span></code></pre></figure>
+<h2>2. Users and directory authentication</h2>
+<ul><li><strong>Change the factory password</strong> on day one and store it in the team&#x27;s password manager (or in the PAM, if there is one). It is the emergency account.</li><li>Everyone else signs in with their <strong>directory</strong> user: Active Directory or LDAP, with groups that grant the role (administrator, operator, read-only). That way a leaver in AD loses access to every controller at once.</li><li>On iDRAC it is configured in iDRAC Settings › Users › Directory Services; on iLO, in Security › Directory. Check the licence: for both vendors, directory authentication is one of the features that needs the advanced licence.</li></ul>
+<h2>3. Virtual console and virtual media</h2>
+<p>The <strong>virtual console</strong> shows the server&#x27;s screen in the browser (HTML5) from POST onwards: you use it to enter the BIOS, see a blue screen or a Linux box asking for <code>fsck</code>. <strong>Virtual media</strong> mounts an ISO from your machine as if it were a DVD drive in the server.</p>
+<ul><li>On <strong>iDRAC9</strong>, the virtual console and virtual media on rack servers require the <strong>Enterprise</strong> (or Datacenter) licence.</li><li>On <strong>iLO</strong>, without a licence the console only works until the operating system boots; with <strong>iLO Advanced</strong> you get the console with the OS running and virtual media.</li></ul>
+<h2>4. Firmware and Lifecycle Controller</h2>
+<p>The firmware for the BIOS, RAID controller, network cards, disks and the iDRAC or iLO itself is updated from the controller, with no operating system:</p>
+<ul><li><strong>Dell</strong>: Maintenance › System Update, with a downloaded package or a catalog. The <strong>Lifecycle Controller</strong> (F10 at boot) does the same locally. Tasks go into the job queue (<code>racadm jobqueue view</code>) and many apply at the next reboot.</li><li><strong>HPE</strong>: Firmware &amp; OS Software › Update Firmware, or the <strong>Service Pack for ProLiant (SPP)</strong> to bring the whole server to a set of versions tested together.</li><li>For many servers, a central console: <strong>OpenManage Enterprise</strong> for Dell or <strong>HPE OneView</strong> for HPE, with a baseline and a report of which servers have fallen behind.</li></ul>
+<p>Update the controller itself first, then the BIOS and the rest, always in a change window and one node of each cluster at a time.</p>
+<h2>5. Alerts and logs</h2>
+<ul><li><strong>Alerts</strong>: SNMP (traps to monitoring, SNMPv3 preferably), email and <strong>Redfish</strong> event subscriptions. At a minimum enable power supply, fans, temperature, memory and disks. On iDRAC9: Configuration › System Settings › Alert Configuration.</li><li><strong>SEL</strong> (System Event Log, Dell) and <strong>IML</strong> (Integrated Management Log, HPE): hardware errors with their date.</li><li>For the case with the vendor: the <strong>SupportAssist Collection</strong> (Dell) or the <strong>Active Health System Log</strong> (HPE). It is the first thing support asks for.</li></ul>
+<h2>6. The ticket: &quot;the server won&#x27;t boot and I&#x27;m remote&quot;</h2>
+<ol><li><strong>Does it have power and is it on?</strong></li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">racadm · power state and event log</span><button class="t-copy" type="button" data-copy="racadm serveraction powerstatus&#10;racadm getsel -i&#10;racadm getsel" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm serveraction powerstatus</span><span class="t-out">Server power status: ON</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm getsel -i</span><span class="t-out">Total Records: 4</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm getsel</span><span class="t-out">Record:      4</span><span class="t-out">Date/Time:   10/30/2026 06:41:12</span><span class="t-out">Source:      system</span><span class="t-out">Severity:    Critical</span><span class="t-out">Description: Multi-bit memory errors detected on a memory device at location(s) DIMM_A3.</span></code></pre></figure>
+<ol><li><strong>Read the SEL or IML</strong>: a memory, power supply or RAID controller error explains almost every stop at POST. With a failed DIMM, the case with the vendor goes in with the log.</li><li><strong>Open the virtual console</strong>: does it stop at POST, at &quot;No boot device&quot; or in the operating system? If it doesn&#x27;t see the disk, check the RAID controller and the virtual disks in the storage section.</li><li><strong>Cold restart</strong> if the screen is frozen: <code>racadm serveraction powercycle</code> on Dell, or Momentary Press / Cold Boot under Power &amp; Thermal on iLO. Over Redfish, the same POST to <code>ComputerSystem.Reset</code> with <code>ForceRestart</code> on both.</li><li><strong>Rescue boot</strong>: mount the ISO through virtual media and force a one-time boot from the virtual DVD.</li></ol>
+<p class="g-warn">If the controller doesn&#x27;t answer over the web, reset the controller itself (<code>racadm racreset</code>, or Diagnostics › Reset iLO): it does not power off the server. If that doesn&#x27;t work either, someone has to go to the room.</p>
+<h2>Next steps</h2>
+<ul><li>The <strong>Windows Server</strong> guide covers what happens after the server boots.</li><li>The <strong>VMware vSphere and vCenter</strong> guide explains how to put a host into maintenance before updating its firmware.</li><li>Controller alerts reach the monitoring in the <strong>SolarWinds</strong> or <strong>Grafana</strong> guides.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">Dell iDRAC y HPE iLO</span><span class="en">Dell iDRAC and HPE iLO</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span><span class="en">All Level 2 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/35-private-cloud-capacity-review.html"><span class="label muted"><span class="es">Blog · 35</span><span class="en">Blog · 35</span></span><span class="related-t"><span class="es">El clúster parecía ir bien al 74%: una revisión mensual de capacidad y disponibilidad de una nube privada</span><span class="en">The cluster looked fine at 74%: a monthly capacity and availability review of a private cloud</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="dns-y-dhcp-en-windows-server-zonas-ambitos-conmutacion-y-un-equipo-sin-ip.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">DNS y DHCP en Windows Server: zonas, registros, ámbitos, conmutación por error y un equipo sin IP</span><span class="en">DNS and DHCP on Windows Server: zones, records, scopes, failover and a device with no IP</span></span></a>
+    <a class="post-nav-link next" href="iis-sitios-enlaces-grupos-de-aplicaciones-certificados-y-un-503.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">IIS: sitios, enlaces, grupos de aplicaciones, certificados HTTPS y un 503 Service Unavailable</span><span class="en">IIS: sites, bindings, application pools, HTTPS certificates and a 503 Service Unavailable</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="IT business case: costs, ROI, NPV and TCO · Iñigo González" data-title-es="Business case de IT: costes, ROI, VAN y TCO · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>IT business case: costs, ROI, NPV and TCO · Iñigo González</title>
+<meta name="description" content="How to write an IT business case a committee can approve: the problem, the options including doing nothing, CAPEX and OPEX, one-off and recurring costs, licences and people, benefits you can measure, ROI, payback and NPV, risks, five-year TCO, timeline, the specific decision, and tracking benefits after approval.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/business-case-de-it-opciones-costes-beneficios-medibles-y-la-decision-del-comite.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IT business case: costs, ROI, NPV and TCO · Iñigo González">
+<meta property="og:description" content="How to write an IT business case a committee can approve: the problem, the options including doing nothing, CAPEX and OPEX, one-off and recurring costs, licences and people, benefits you can measure, ROI, payback and NPV, risks, five-year TCO, timeline, the specific decision, and tracking benefits after approval.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/business-case-de-it-opciones-costes-beneficios-medibles-y-la-decision-del-comite.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="IT business case: costs, ROI, NPV and TCO · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"IT business case: options, costs, measurable benefits, five-year TCO and the decision you ask the committee for","alternativeHeadline":"Business case de IT: opciones, costes, beneficios medibles, TCO a cinco años y la decisión que pides al comité","description":"How to write an IT business case a committee can approve: the problem, the options including doing nothing, CAPEX and OPEX, one-off and recurring costs, licences and people, benefits you can measure, ROI, payback and NPV, risks, five-year TCO, timeline, the specific decision, and tracking benefits after approval.","datePublished":"2026-10-30","dateModified":"2026-10-30","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/business-case-de-it-opciones-costes-beneficios-medibles-y-la-decision-del-comite.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/business-case-de-it-opciones-costes-beneficios-medibles-y-la-decision-del-comite.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"IT business case"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 4","item":"https://inigogonzalezgarcia.github.io/guias/nivel-4.html"},{"@type":"ListItem","position":4,"name":"IT business case: options, costs, measurable benefits, five-year TCO and the decision you ask the committee for","item":"https://inigogonzalezgarcia.github.io/guias/business-case-de-it-opciones-costes-beneficios-medibles-y-la-decision-del-comite.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="nivel-4.html"><span class="es">Nivel 4</span><span class="en">Level 4</span></a></p>
+    <h1><span class="es">Business case de IT: opciones, costes, beneficios medibles, TCO a cinco años y la decisión que pides al comité</span><span class="en">IT business case: options, costs, measurable benefits, five-year TCO and the decision you ask the committee for</span></h1>
+    <p class="lede"><span class="es">Cómo escribir un business case de IT que un comité pueda aprobar: el problema, las opciones incluida no hacer nada, CAPEX y OPEX, costes únicos y recurrentes, licencias y personas, beneficios que se pueden medir, ROI, periodo de recuperación y VAN, riesgos, TCO a cinco años, calendario, la decisión concreta y el seguimiento de beneficios después de la aprobación.</span><span class="en">How to write an IT business case a committee can approve: the problem, the options including doing nothing, CAPEX and OPEX, one-off and recurring costs, licences and people, benefits you can measure, ROI, payback and NPV, risks, five-year TCO, timeline, the specific decision, and tracking benefits after approval.</span></p><p class="label post-meta"><span class="es">Nivel 4</span><span class="en">Level 4</span> · <span class="es">Business case de IT</span><span class="en">IT business case</span> · <span class="es">8 min</span><span class="en">8 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">30 oct 2026</span><span class="en">30 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Un documento de cuatro o cinco páginas con el que un comité de inversiones o de dirección puede decir sí, no o &quot;vuelve con esto&quot; en una sola reunión. No es un argumento a favor de lo que IT ya ha decidido: es la comparación honesta de varias opciones, con cifras que finanzas puede comprobar y beneficios que alguien va a medir después.</p>
+<p>El ejemplo de toda la guía: los cinco servidores físicos de la sede llegan al fin de soporte del fabricante en marzo y alojan el ERP, los ficheros y la impresión.</p>
+<h2>Antes de empezar</h2>
+<ul><li><strong>Quién decide</strong> y con qué umbral: muchas organizaciones tienen un importe a partir del cual la inversión va a comité, y un formato propio. Si existe plantilla, úsala.</li><li>Un <strong>patrocinador de negocio</strong> que defienda el caso contigo. Un business case que solo firma IT se lee como una petición de presupuesto.</li><li>Los datos de partida: inventario y contratos (fechas de fin de soporte, renovaciones), incidencias de los últimos 12 meses, horas del equipo y el coste por hora interno que usa finanzas.</li><li>Una conversación previa con <strong>control de gestión</strong>: qué tasa de descuento usan, a cuántos años amortizan el hardware y qué consideran CAPEX.</li></ul>
+<h2>1. El problema, en una página</h2>
+<p>El primer apartado se escribe para quien solo va a leer ese: qué pasa, desde cuándo, a quién afecta y qué ocurre si no se hace nada.</p>
+<ul><li><strong>Hecho</strong>: &quot;Los cinco servidores de la sede quedan sin soporte del fabricante el 31 de marzo. Alojan el ERP, los ficheros y la impresión de 180 personas.&quot;</li><li><strong>Consecuencia</strong>: sin parches de firmware ni repuestos garantizados; una avería de placa puede dejar el ERP parado días, no horas.</li><li><strong>Evidencia</strong>: 14 incidencias de hardware en 12 meses, 300 horas del equipo dedicadas a ellas.</li><li><strong>Urgencia</strong>: el plazo de entrega del hardware es de 8 a 10 semanas. Decidir en diciembre o en febrero no es lo mismo.</li></ul>
+<p class="g-tip">Si el problema no se entiende sin saber qué es un hipervisor, reescríbelo. El comité decide sobre riesgo y dinero, no sobre tecnología.</p>
+<h2>2. Las opciones, siempre con &quot;no hacer nada&quot;</h2>
+<p>Entre dos y cuatro opciones, y una de ellas es <strong>no hacer nada</strong> (o el mínimo imprescindible). Es la referencia contra la que se mide todo lo demás: sin ella no hay ahorro ni beneficio que calcular.</p>
+<div class="g-table"><table><thead><tr><th>Opción</th><th>Qué es</th><th>A favor</th><th>En contra</th></tr></thead><tbody><tr><td>A. No hacer nada</td><td>Soporte extendido de un tercero y seguir con el hardware actual</td><td>Sin inversión</td><td>Coste anual alto y creciente, riesgo de avería sin repuesto</td></tr><tr><td>B. Renovar en local</td><td>Clúster nuevo de tres nodos con virtualización</td><td>Menor TCO a cinco años, control</td><td>Inversión inicial y proyecto de migración</td></tr><tr><td>C. Mover a la nube (IaaS)</td><td>Las máquinas del ERP y ficheros en la nube</td><td>Sin hardware, escala fácil</td><td>Coste recurrente mayor, latencia del ERP por validar</td></tr></tbody></table></div>
+<p>Cada opción con el mismo nivel de detalle. Una opción &quot;de relleno&quot; descrita en dos líneas resta credibilidad a la buena.</p>
+<h2>3. Los costes: lo que se paga una vez y lo que se paga cada año</h2>
+<p>Separa siempre dos ejes: <strong>CAPEX u OPEX</strong> (cómo lo trata contabilidad) y <strong>único o recurrente</strong> (cuándo sale el dinero). No coinciden: la implantación de un servicio en la nube es un coste único que suele ir a OPEX.</p>
+<p>Para la opción B:</p>
+<div class="g-table"><table><thead><tr><th>Concepto</th><th>Tipo</th><th>Importe</th></tr></thead><tbody><tr><td>Hardware (3 nodos, almacenamiento, red)</td><td>Único · CAPEX</td><td>160.000 €</td></tr><tr><td>Servicios de implantación del integrador</td><td>Único · CAPEX o OPEX según política</td><td>30.000 €</td></tr><tr><td>Esfuerzo interno: 400 h × 45 €/h</td><td>Único</td><td>18.000 €</td></tr><tr><td>Mantenimiento del hardware</td><td>Recurrente · OPEX</td><td>12.000 €/año</td></tr><tr><td>Licencias de virtualización (suscripción)</td><td>Recurrente · OPEX</td><td>20.000 €/año</td></tr><tr><td>Energía de la sala</td><td>Recurrente · OPEX</td><td>8.000 €/año</td></tr><tr><td>Horas de incidencias: 80 h × 45 €/h</td><td>Recurrente</td><td>3.600 €/año</td></tr></tbody></table></div>
+<ul><li>Las <strong>licencias</strong> con su modelo exacto (por núcleo, por usuario, suscripción anual) y la subida prevista en la renovación. Es la partida que más se equivoca.</li><li>Las <strong>personas</strong>: horas internas aunque no generen factura, y si hace falta contratar o externalizar algo. Si el equipo no tiene tiempo, dilo y cuéntalo como coste.</li><li>Un <strong>margen de contingencia</strong> explícito (10-15 % sobre lo único) mejor que unas cifras infladas en silencio.</li><li>El CAPEX se <strong>amortiza</strong>: 160.000 € a cinco años son 32.000 € al año en la cuenta de resultados. El plazo lo fija finanzas, no IT.</li></ul>
+<h2>4. Beneficios que se pueden medir</h2>
+<p>Un beneficio entra en el cálculo si tiene <strong>línea base, métrica, dueño y fecha</strong>. Lo que no cumple eso va en una lista aparte de beneficios cualitativos, sin euros.</p>
+<div class="g-table"><table><thead><tr><th>Beneficio</th><th>Línea base</th><th>Objetivo</th><th>Cómo se mide</th><th>Dueño</th></tr></thead><tbody><tr><td>Coste de soporte evitado</td><td>52.000 €/año de soporte extendido</td><td>0</td><td>Facturas</td><td>IT</td></tr><tr><td>Horas de incidencias de hardware</td><td>300 h/año</td><td>80 h/año</td><td>Tickets con categoría hardware</td><td>Responsable de infraestructura</td></tr><tr><td>Energía de la sala</td><td>14.000 €/año</td><td>8.000 €/año</td><td>Lectura de las PDU</td><td>Servicios generales</td></tr><tr><td>Tiempo de cierre contable del ERP</td><td>3 h por proceso</td><td>1,5 h</td><td>Registro del proceso de cierre</td><td>Finanzas</td></tr></tbody></table></div>
+<p class="g-tip">Las horas ahorradas del equipo no son dinero que se ahorra si nadie sale de la plantilla: son capacidad que se libera. Escríbelo así (&quot;300 horas para el proyecto de Windows 11&quot;) y el comité te creerá el resto.</p>
+<h2>5. ROI, periodo de recuperación y VAN</h2>
+<p>Con &quot;no hacer nada&quot; costando 99.500 € al año (52.000 de soporte, 20.000 de licencias, 14.000 de energía y 13.500 de horas de incidencias) y la opción B costando 43.600 € al año, el <strong>ahorro anual</strong> es de 55.900 € frente a una inversión inicial de 208.000 €.</p>
+<ul><li><strong>Periodo de recuperación (payback)</strong>: inversión ÷ ahorro anual = 208.000 ÷ 55.900 ≈ <strong>3,7 años</strong>.</li><li><strong>ROI a cinco años</strong>: (ahorro acumulado − inversión) ÷ inversión = (279.500 − 208.000) ÷ 208.000 ≈ <strong>34 %</strong>.</li><li><strong>VAN (valor actual neto)</strong> al 8 %: cada ahorro anual se descuenta, <code>ahorro ÷ (1 + 0,08)^año</code>, y se resta la inversión. Cinco años de 55.900 € valen hoy unos 223.200 €; el VAN es de unos <strong>+15.200 €</strong>. Positivo, pero ajustado.</li></ul>
+<p>Un VAN pequeño no es un mal caso: dice que la opción B se paga sola y que el argumento principal es el <strong>riesgo</strong> que elimina. Escríbelo así en vez de estirar los beneficios hasta que salga un número bonito. Si el comité usa la <strong>TIR</strong>, la calcula finanzas con los mismos flujos.</p>
+<h2>6. TCO a cinco años</h2>
+<p>El coste total de propiedad compara las opciones en el mismo horizonte, sumando lo único y lo recurrente:</p>
+<div class="g-table"><table><thead><tr><th>Opción</th><th>Año 0</th><th>Años 1-5</th><th>TCO 5 años</th></tr></thead><tbody><tr><td>A. No hacer nada</td><td>0 €</td><td>99.500 €/año</td><td>497.500 €</td></tr><tr><td>B. Renovar en local</td><td>208.000 €</td><td>43.600 €/año</td><td>426.000 €</td></tr><tr><td>C. Nube (IaaS)</td><td>60.000 €</td><td>95.000 €/año</td><td>535.000 €</td></tr></tbody></table></div>
+<ul><li>El horizonte de <strong>tres a cinco años</strong> coincide con la vida útil del hardware; más allá, las cifras son adivinanzas.</li><li>Indica las hipótesis: precios sin IVA, sin subida de licencias, soporte extendido disponible los cinco años (no siempre lo está).</li><li>La opción C sale más cara en este horizonte, pero puede ganar si la sede se va a cerrar o cambiar en dos años. Eso es una pregunta para el comité, no una conclusión de IT.</li></ul>
+<h2>7. Riesgos, calendario y la decisión</h2>
+<p><strong>Riesgos</strong>, de cada opción y del proyecto, con probabilidad, impacto y mitigación:</p>
+<ul><li>A: avería sin repuesto del servidor del ERP. Probabilidad media, impacto alto. Sin mitigación real.</li><li>B: retraso de entrega del hardware. Mitigación: pedido antes del 15 de diciembre, soporte extendido de tres meses como puente.</li><li>B: migración del ERP con corte. Mitigación: ventana de fin de semana, prueba previa, plan de vuelta atrás aprobado en el CAB.</li></ul>
+<p><strong>Calendario</strong>: aprobación en diciembre, pedido en la misma semana, entrega en febrero, migración por servicios en dos fines de semana de marzo, retirada del hardware viejo en abril.</p>
+<p><strong>La decisión que pides</strong>, en una frase al principio y al final del documento:</p>
+<p class="g-tip">&quot;Se solicita aprobar la opción B: 208.000 € de inversión con cargo al presupuesto de este año y 43.600 € anuales de gasto recurrente a partir del año próximo, con decisión antes del 15 de diciembre para cumplir el plazo de soporte.&quot;</p>
+<h2>8. Después de la aprobación: seguir los beneficios</h2>
+<p>Aprobar el caso es el principio. Sin seguimiento, el siguiente business case se leerá con más desconfianza.</p>
+<ul><li>Un <strong>registro de beneficios</strong> con las líneas del apartado 4, el dueño de cada una y la fecha de medición.</li><li>Revisión <strong>trimestral</strong> del coste real frente al aprobado: desviaciones de más del 10 % se explican.</li><li><strong>Revisión posterior a la implantación</strong> a los 6 y 12 meses: qué beneficios se han conseguido, cuáles no y por qué.</li><li>Si un beneficio no llega, se dice. Si cambia el contexto (la sede se amplía, cambian las licencias), se actualiza el caso, no se esconde.</li></ul>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <strong>Presupuesto de IT</strong> del Sector 4 explica cómo entra esta inversión en el presupuesto anual y cómo se explica una desviación.</li><li>La guía de <strong>Backup y recuperación ante desastres (DR/BCP)</strong> ayuda a cuantificar el riesgo de &quot;no hacer nada&quot; con RTO y RPO reales.</li><li>Los costes recurrentes viven en contratos: el repositorio <strong>23-it-vendor-contract-tracker</strong> de mi GitHub sigue renovaciones, plazos de preaviso y ahorros, y el <strong>01-finops-cloud-cost-dashboard</strong> vigila el gasto de nube si eliges la opción C.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>A four or five page document an investment or management committee can say yes, no or &quot;come back with this&quot; to in a single meeting. It is not an argument for what IT has already decided: it is an honest comparison of several options, with figures finance can check and benefits someone will measure afterwards.</p>
+<p>The example throughout the guide: the site&#x27;s five physical servers reach the manufacturer&#x27;s end of support in March and host the ERP, file shares and printing.</p>
+<h2>Before you start</h2>
+<ul><li><strong>Who decides</strong> and above what threshold: many organisations have an amount above which an investment goes to committee, and their own format. If there is a template, use it.</li><li>A <strong>business sponsor</strong> who defends the case with you. A business case signed only by IT reads like a budget request.</li><li>The baseline data: inventory and contracts (end-of-support dates, renewals), incidents over the last 12 months, team hours and the internal hourly cost finance uses.</li><li>A prior conversation with <strong>financial control</strong>: which discount rate they use, over how many years they depreciate hardware and what they treat as CAPEX.</li></ul>
+<h2>1. The problem, on one page</h2>
+<p>The first section is written for the person who will only read that one: what is happening, since when, who it affects and what happens if nothing is done.</p>
+<ul><li><strong>Fact</strong>: &quot;The site&#x27;s five servers lose manufacturer support on 31 March. They host the ERP, file shares and printing for 180 people.&quot;</li><li><strong>Consequence</strong>: no firmware patches or guaranteed spare parts; a motherboard failure can leave the ERP down for days, not hours.</li><li><strong>Evidence</strong>: 14 hardware incidents in 12 months, 300 team hours spent on them.</li><li><strong>Urgency</strong>: hardware lead time is 8 to 10 weeks. Deciding in December or in February is not the same.</li></ul>
+<p class="g-tip">If the problem can&#x27;t be understood without knowing what a hypervisor is, rewrite it. The committee decides on risk and money, not technology.</p>
+<h2>2. The options, always with &quot;do nothing&quot;</h2>
+<p>Between two and four options, and one of them is <strong>do nothing</strong> (or the bare minimum). It is the baseline everything else is measured against: without it there is no saving or benefit to calculate.</p>
+<div class="g-table"><table><thead><tr><th>Option</th><th>What it is</th><th>For</th><th>Against</th></tr></thead><tbody><tr><td>A. Do nothing</td><td>Third-party extended support and keep the current hardware</td><td>No investment</td><td>High and rising annual cost, risk of a failure with no spare</td></tr><tr><td>B. Renew on premises</td><td>New three-node cluster with virtualisation</td><td>Lowest five-year TCO, control</td><td>Upfront investment and a migration project</td></tr><tr><td>C. Move to cloud (IaaS)</td><td>ERP and file server machines in the cloud</td><td>No hardware, easy to scale</td><td>Higher recurring cost, ERP latency to be validated</td></tr></tbody></table></div>
+<p>Every option at the same level of detail. A &quot;filler&quot; option described in two lines takes credibility away from the good one.</p>
+<h2>3. Costs: what you pay once and what you pay every year</h2>
+<p>Always separate two axes: <strong>CAPEX or OPEX</strong> (how accounting treats it) and <strong>one-off or recurring</strong> (when the money goes out). They don&#x27;t coincide: implementing a cloud service is a one-off cost that usually goes to OPEX.</p>
+<p>For option B:</p>
+<div class="g-table"><table><thead><tr><th>Item</th><th>Type</th><th>Amount</th></tr></thead><tbody><tr><td>Hardware (3 nodes, storage, network)</td><td>One-off · CAPEX</td><td>€160,000</td></tr><tr><td>Integrator implementation services</td><td>One-off · CAPEX or OPEX depending on policy</td><td>€30,000</td></tr><tr><td>Internal effort: 400 h × €45/h</td><td>One-off</td><td>€18,000</td></tr><tr><td>Hardware maintenance</td><td>Recurring · OPEX</td><td>€12,000/year</td></tr><tr><td>Virtualisation licences (subscription)</td><td>Recurring · OPEX</td><td>€20,000/year</td></tr><tr><td>Comms room energy</td><td>Recurring · OPEX</td><td>€8,000/year</td></tr><tr><td>Incident hours: 80 h × €45/h</td><td>Recurring</td><td>€3,600/year</td></tr></tbody></table></div>
+<ul><li><strong>Licences</strong> with their exact model (per core, per user, annual subscription) and the expected increase at renewal. It is the line most often wrong.</li><li><strong>People</strong>: internal hours even if they generate no invoice, and whether something needs hiring or outsourcing. If the team has no time, say so and count it as a cost.</li><li>An explicit <strong>contingency margin</strong> (10-15% on the one-off costs) rather than quietly inflated figures.</li><li>CAPEX is <strong>depreciated</strong>: €160,000 over five years is €32,000 a year in the income statement. The period is set by finance, not IT.</li></ul>
+<h2>4. Benefits you can measure</h2>
+<p>A benefit goes into the calculation if it has a <strong>baseline, metric, owner and date</strong>. Whatever doesn&#x27;t meet that goes on a separate list of qualitative benefits, with no euros attached.</p>
+<div class="g-table"><table><thead><tr><th>Benefit</th><th>Baseline</th><th>Target</th><th>How it is measured</th><th>Owner</th></tr></thead><tbody><tr><td>Support cost avoided</td><td>€52,000/year extended support</td><td>0</td><td>Invoices</td><td>IT</td></tr><tr><td>Hardware incident hours</td><td>300 h/year</td><td>80 h/year</td><td>Tickets with hardware category</td><td>Infrastructure lead</td></tr><tr><td>Comms room energy</td><td>€14,000/year</td><td>€8,000/year</td><td>PDU readings</td><td>Facilities</td></tr><tr><td>ERP month-end close time</td><td>3 h per run</td><td>1.5 h</td><td>Close process log</td><td>Finance</td></tr></tbody></table></div>
+<p class="g-tip">Team hours saved are not money saved if nobody leaves the payroll: they are capacity freed up. Write it that way (&quot;300 hours for the Windows 11 project&quot;) and the committee will believe the rest.</p>
+<h2>5. ROI, payback and NPV</h2>
+<p>With &quot;do nothing&quot; costing €99,500 a year (52,000 support, 20,000 licences, 14,000 energy and 13,500 incident hours) and option B costing €43,600 a year, the <strong>annual saving</strong> is €55,900 against an upfront investment of €208,000.</p>
+<ul><li><strong>Payback period</strong>: investment ÷ annual saving = 208,000 ÷ 55,900 ≈ <strong>3.7 years</strong>.</li><li><strong>Five-year ROI</strong>: (cumulative saving − investment) ÷ investment = (279,500 − 208,000) ÷ 208,000 ≈ <strong>34%</strong>.</li><li><strong>NPV (net present value)</strong> at 8%: each annual saving is discounted, <code>saving ÷ (1 + 0.08)^year</code>, and the investment is subtracted. Five years of €55,900 are worth about €223,200 today; the NPV is about <strong>+€15,200</strong>. Positive, but tight.</li></ul>
+<p>A small NPV is not a bad case: it says option B pays for itself and that the main argument is the <strong>risk</strong> it removes. Write it that way instead of stretching the benefits until a nice number comes out. If the committee uses <strong>IRR</strong>, finance calculates it from the same cash flows.</p>
+<h2>6. Five-year TCO</h2>
+<p>Total cost of ownership compares the options over the same horizon, adding one-off and recurring costs:</p>
+<div class="g-table"><table><thead><tr><th>Option</th><th>Year 0</th><th>Years 1-5</th><th>5-year TCO</th></tr></thead><tbody><tr><td>A. Do nothing</td><td>€0</td><td>€99,500/year</td><td>€497,500</td></tr><tr><td>B. Renew on premises</td><td>€208,000</td><td>€43,600/year</td><td>€426,000</td></tr><tr><td>C. Cloud (IaaS)</td><td>€60,000</td><td>€95,000/year</td><td>€535,000</td></tr></tbody></table></div>
+<ul><li>A horizon of <strong>three to five years</strong> matches the hardware&#x27;s useful life; beyond that, the figures are guesses.</li><li>State the assumptions: prices excluding VAT, no licence increase, extended support available for all five years (it isn&#x27;t always).</li><li>Option C comes out more expensive over this horizon, but it can win if the site is going to close or change in two years. That is a question for the committee, not an IT conclusion.</li></ul>
+<h2>7. Risks, timeline and the decision</h2>
+<p><strong>Risks</strong>, for each option and for the project, with likelihood, impact and mitigation:</p>
+<ul><li>A: failure with no spare on the ERP server. Medium likelihood, high impact. No real mitigation.</li><li>B: hardware delivery delay. Mitigation: order before 15 December, three months of extended support as a bridge.</li><li>B: ERP migration with downtime. Mitigation: weekend window, prior rehearsal, rollback plan approved at CAB.</li></ul>
+<p><strong>Timeline</strong>: approval in December, order the same week, delivery in February, migration by service over two weekends in March, old hardware retired in April.</p>
+<p><strong>The decision you ask for</strong>, in one sentence at the start and at the end of the document:</p>
+<p class="g-tip">&quot;Approval is requested for option B: €208,000 of investment from this year&#x27;s budget and €43,600 of annual recurring spend from next year, with a decision before 15 December to meet the end-of-support date.&quot;</p>
+<h2>8. After approval: tracking the benefits</h2>
+<p>Getting the case approved is the beginning. Without follow-up, the next business case will be read with more suspicion.</p>
+<ul><li>A <strong>benefits register</strong> with the lines from section 4, the owner of each and the measurement date.</li><li><strong>Quarterly</strong> review of actual cost against approved cost: variances above 10% are explained.</li><li><strong>Post-implementation review</strong> at 6 and 12 months: which benefits were achieved, which weren&#x27;t and why.</li><li>If a benefit doesn&#x27;t arrive, say so. If the context changes (the site grows, licensing changes), update the case, don&#x27;t hide it.</li></ul>
+<h2>Next steps</h2>
+<ul><li>The <strong>IT budget</strong> guide in Sector 4 explains how this investment enters the annual budget and how to explain a variance.</li><li>The <strong>Backup and disaster recovery (DR/BCP)</strong> guide helps quantify the risk of &quot;doing nothing&quot; with real RTO and RPO.</li><li>Recurring costs live in contracts: the <strong>23-it-vendor-contract-tracker</strong> repository on my GitHub tracks renewals, notice deadlines and savings, and <strong>01-finops-cloud-cost-dashboard</strong> watches cloud spend if you choose option C.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Nivel 4</span><span class="en">Level 4</span> · <span class="es">Business case de IT</span><span class="en">IT business case</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-4.html"><span class="es">Todas las guías del Nivel 4</span><span class="en">All Level 4 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/23-it-vendor-contract-tracker.html"><span class="label muted"><span class="es">Blog · 23</span><span class="en">Blog · 23</span></span><span class="related-t"><span class="es">Cada renovación, preaviso y ahorro de los contratos de IT en una revisión mensual</span><span class="en">Every IT contract renewal, notice deadline and saving in one monthly review</span></span></a><a class="related-link" href="../blog/01-finops-cloud-cost-dashboard.html"><span class="label muted"><span class="es">Blog · 01</span><span class="en">Blog · 01</span></span><span class="related-t"><span class="es">Ver la deriva del gasto cloud antes que la factura</span><span class="en">Catching cloud cost drift before the invoice does</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="azure-cost-management-ambitos-presupuestos-etiquetas-reservas-focus-y-la-factura-que-se-dispara.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Azure Cost Management: ámbitos, presupuestos, etiquetas, reservas, exportación FOCUS y el mes en que la factura se dispara</span><span class="en">Azure Cost Management: scopes, budgets, tags, reservations, FOCUS export and the month the bill jumps</span></span></a>
+    <a class="post-nav-link next" href="reglamento-europeo-de-ia-ai-act-riesgos-roles-calendario-y-registro-de-casos-de-uso.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">El Reglamento Europeo de IA (AI Act) en un departamento de IT: niveles de riesgo, roles, calendario, registro de casos de uso y una herramienta no aprobada</span><span class="en">The EU AI Act for an IT department: risk levels, roles, timeline, a use-case register and an unapproved tool</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
