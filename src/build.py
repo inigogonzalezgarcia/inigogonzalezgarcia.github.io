@@ -442,6 +442,17 @@ def related_for_post(repo):
         out.append((f'../guias/{g["slug"]}.html', f'Guía · {L["n_es"]}', f'Guide · {L["n_en"]}', g["title_es"], g["title_en"]))
     return related_html(out)
 
+def aside_cta(p):
+    if p.get("app"):
+        return f"""<p class="label muted">{bi("Pruébalo", "Try it")}</p>
+      <p class="repo-name">SysAdmin Desks</p>
+      <a class="btn" href="{p['app']}" target="_blank" rel="noopener noreferrer">{bi("Ir a SysAdmin Desks", "Go to SysAdmin Desks")} ↗</a>
+      <p class="muted small">{bi("Gratis, en español e inglés. Empresa y personas ficticias.", "Free, in English and Spanish. Fictional company and people.")}</p>"""
+    return f"""<p class="label muted">{bi("El repositorio", "The repository")}</p>
+      <p class="repo-name">{p["repo"]}</p>
+      <a class="btn" href="{GITHUB}/{p["repo"]}" target="_blank" rel="noopener">{bi("Ver en GitHub", "View on GitHub")} ↗</a>
+      <p class="muted small">{bi("Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.", "Synthetic data. No employer code, data or systems.")}</p>"""
+
 order = sorted(POSTS, key=lambda p: p["n"])
 for i, p in enumerate(order):
     c = CATS[p["cat"]]
@@ -472,11 +483,7 @@ for i, p in enumerate(order):
       </div>
     </article>
     <aside class="post-aside">
-      <p class="label muted">{bi("El repositorio", "The repository")}</p>
-      <p class="repo-name">{p["repo"]}</p>
-      <a class="btn" href="{GITHUB}/{p["repo"]}" target="_blank" rel="noopener">{bi("Ver en GitHub", "View on GitHub")} ↗</a>{f"""
-      <p class="u-mt22"><a class="arrow-link" href="{p['app']}" target="_blank" rel="noopener noreferrer">{bi("Abrir el simulador", "Open the simulator")} ↗</a></p>""" if p.get("app") else ""}
-      <p class="muted small">{bi("Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.", "Synthetic data. No employer code, data or systems.")}</p>
+      {aside_cta(p)}
       {share_html(p)}
     </aside>
   </div>
