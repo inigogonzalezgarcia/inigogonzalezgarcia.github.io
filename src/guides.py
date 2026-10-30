@@ -16,22 +16,22 @@ LEVELS = {
                     h_es="Servidores, despliegues<br>y los primeros scripts.", h_en="Servers, deployments<br>and your first scripts.",
                     d_es="Servidores, despliegue de aplicaciones y los primeros scripts.",
                     d_en="Servers, app deployment and your first scripts.",
-                    l_es="Dieciséis temas para pasar del puesto de usuario a lo que hay detrás: servidores Windows y Linux, despliegue de aplicaciones, copias, escritorios virtuales, salas y los primeros scripts en PowerShell y Bash.",
-                    l_en="Sixteen topics to move from the user's device to what sits behind it: Windows and Linux servers, app deployment, backups, virtual desktops, meeting rooms and your first PowerShell and Bash scripts.",
+                    l_es="Veinticinco temas para pasar del puesto de usuario a lo que hay detrás: servidores Windows y Linux, DNS y DHCP, IIS, switches Cisco y HP, gestión fuera de banda, despliegue de aplicaciones, copias, escritorios virtuales, salas, GLPI y los primeros scripts en PowerShell, Python y Bash.",
+                    l_en="Twenty-five topics to move from the user's device to what sits behind it: Windows and Linux servers, DNS and DHCP, IIS, Cisco and HP switches, out-of-band management, app deployment, backups, virtual desktops, meeting rooms, GLPI and your first PowerShell, Python and Bash scripts.",
                     seo="Intermediate IT guides: Azure AD Connect, Bash, Citrix, Confluence, Git, Jamf Pro, MECM/SCCM, Microsoft Teams Rooms, PDQ and MDT, PowerShell, Red Hat, SharePoint, Ubuntu, Veeam, VMware Horizon and Windows Server."),
     "nivel-3": dict(key="nivel-3", n_es="Nivel 3", n_en="Level 3", t_es="Avanzado", t_en="Advanced",
                     h_es="Gestión moderna, identidad<br>y automatización.", h_en="Modern management, identity<br>and automation.",
                     d_es="Gestión moderna del puesto, identidad, virtualización y automatización.",
                     d_en="Modern device management, identity, virtualisation and automation.",
-                    l_es="Diecisiete temas para quien ya administra: Intune en todas las plataformas, Entra ID y certificados, hipervisores, bases de datos, monitorización y logs, y la automatización con Ansible, Docker, Jenkins y Microsoft Graph.",
-                    l_en="Seventeen topics for people who already administer: Intune on every platform, Entra ID and certificates, hypervisors, databases, monitoring and logs, and automation with Ansible, Docker, Jenkins and Microsoft Graph.",
+                    l_es="Veinticinco temas para quien ya administra: Intune y sus anillos de actualización, Entra ID y certificados, GPO de seguridad y Defender, Tanium, Copilot, hipervisores, bases de datos, servidores web, CMDB, monitorización y logs, y la automatización con Ansible, Docker, Jenkins y Microsoft Graph.",
+                    l_en="Twenty-five topics for people who already administer: Intune and its update rings, Entra ID and certificates, security GPOs and Defender, Tanium, Copilot, hypervisors, databases, web servers, the CMDB, monitoring and logs, and automation with Ansible, Docker, Jenkins and Microsoft Graph.",
                     seo="Advanced IT guides: Ansible, Docker, Elasticsearch and Kibana, Entra ID Conditional Access and SSO, Grafana, Hyper-V, Intune, Intune EPM, Jenkins, Linux joined to Active Directory, Microsoft Graph, NDES and Cloud PKI, PostgreSQL, MySQL and SQL Server, SolarWinds, Ubuntu Landscape, VMware vSphere."),
     "nivel-4": dict(key="nivel-4", n_es="Nivel 4", n_en="Level 4", t_es="Experto", t_en="Expert",
                     h_es="Infraestructura híbrida,<br>seguridad y continuidad.", h_en="Hybrid infrastructure,<br>security and continuity.",
                     d_es="Infraestructura híbrida, redes, seguridad y continuidad de negocio.",
                     d_en="Hybrid infrastructure, networking, security and business continuity.",
-                    l_es="Diecisiete temas para quien diseña, decide y responde cuando algo grande falla: nube e infraestructura como código, contenedores, redes y cortafuegos, acceso privilegiado, detección y vulnerabilidades, protección de datos, cumplimiento normativo y recuperación ante desastres.",
-                    l_en="Seventeen topics for people who design, decide and respond when something big fails: cloud and infrastructure as code, containers, networks and firewalls, privileged access, detection and vulnerabilities, data protection, compliance and disaster recovery.",
+                    l_es="Veinte temas para quien diseña, decide y responde cuando algo grande falla: nube e infraestructura como código, contenedores, redes y cortafuegos, acceso privilegiado, detección y vulnerabilidades, protección de datos, cumplimiento normativo y el AI Act, costes de Azure, el business case y la recuperación ante desastres.",
+                    l_en="Twenty topics for people who design, decide and respond when something big fails: cloud and infrastructure as code, containers, networks and firewalls, privileged access, detection and vulnerabilities, data protection, compliance and the AI Act, Azure costs, the business case and disaster recovery.",
                     seo="Step-by-step expert IT guides: AWS, Azure Virtual Desktop, Sentinel, Purview, CyberArk, FortiGate, Kubernetes, Terraform, DR/BCP and ISO 27001/NIS2.",
                     seo_title_en="Expert IT guides: AWS, Sentinel, CyberArk, Terraform · Iñigo González",
                     seo_title_es="Guías IT nivel experto: AWS, Sentinel, CyberArk y Terraform · Iñigo González"),
@@ -39,22 +39,22 @@ LEVELS = {
                     h_es="Hostelería<br>y punto de venta.", h_en="Hospitality<br>and point of sale.",
                     d_es="TPV, sistemas de hotel y la puesta en marcha de un establecimiento.",
                     d_en="POS, hotel systems and getting a new venue up and running.",
-                    l_es="Cinco guías desde el día a día de IT en hoteles y restaurantes: la pre-apertura de un hotel, el punto de venta con ICG y HIOPOS, el cobro en efectivo con CashDro, el cargo a habitación en el PMS y la televisión por IPTV.",
-                    l_en="Five guides from everyday IT in hotels and restaurants: a hotel's pre-opening, the point of sale with ICG and HIOPOS, cash payments with CashDro, room charges in the PMS and IPTV television.",
-                    seo="IT guides for hospitality: hotel pre-opening IT checklist, ICG and HIOPOS POS setup, CashDro integration, hotel PMS interfaces and room charges, and hotel IPTV troubleshooting."),
+                    l_es="Siete guías desde el día a día de IT en hoteles y restaurantes: la pre-apertura de un hotel, el punto de venta con ICG y HIOPOS, el cobro en efectivo con CashDro, el cargo a habitación en el PMS, la televisión por IPTV, la red y la WiFi con MikroTik y TP-Link, y la monitorización con Zabbix.",
+                    l_en="Seven guides from everyday IT in hotels and restaurants: a hotel's pre-opening, the point of sale with ICG and HIOPOS, cash payments with CashDro, room charges in the PMS, IPTV television, the network and WiFi with MikroTik and TP-Link, and monitoring with Zabbix.",
+                    seo="IT guides for hospitality: hotel pre-opening IT checklist, ICG and HIOPOS POS setup, CashDro integration, hotel PMS interfaces and room charges, hotel IPTV troubleshooting, MikroTik and TP-Link Omada networks and Zabbix monitoring."),
     "sector-2": dict(key="sector-2", n_es="Sector 2", n_en="Sector 2", t_es="Retail y oficinas corporativas", t_en="Retail and corporate offices",
                     h_es="Retail y<br>oficinas corporativas.", h_en="Retail and<br>corporate offices.",
                     d_es="El día a día de IT en oficinas y tiendas: usuarios, licencias, impresión y copias.",
                     d_en="Everyday IT in offices and stores: users, licences, printing and backups.",
-                    l_es="Siete guías para dar soporte a tiendas sin IT en sitio y a una oficina central: el alta de un usuario de punta a punta, AS400, copias en cinta, la VPN de quien visita tiendas, impresoras de tienda, licencias de Office 365 por perfil y salas Poly.",
-                    l_en="Seven guides for supporting stores with no IT on site and a head office: a new starter end to end, AS400, tape backups, VPN for people visiting stores, store printers, Office 365 licences by role and Poly rooms.",
-                    seo="IT guides for retail and corporate offices: new starter checklist, IBM i AS400 user profiles, LTO tape rotation, Cisco Secure Client VPN troubleshooting, store printers, Office 365 licensing with the service desk and Poly video conference rooms."),
+                    l_es="Nueve guías para dar soporte a tiendas sin IT en sitio y a una oficina central: la pre-apertura de un corner en un gran almacén, la conexión que cae antes de abrir, el alta de un usuario de punta a punta, AS400, copias en cinta, la VPN de quien visita tiendas, impresoras de tienda, licencias de Office 365 por perfil y salas Poly.",
+                    l_en="Nine guides for supporting stores with no IT on site and a head office: a department store corner's pre-opening, the connection that drops before opening, a new starter end to end, AS400, tape backups, VPN for people visiting stores, store printers, Office 365 licences by role and Poly rooms.",
+                    seo="IT guides for retail and corporate offices: department store corner pre-opening, 4G backup router, new starter checklist, IBM i AS400 user profiles, LTO tape rotation, Cisco Secure Client VPN troubleshooting, store printers, Office 365 licensing with the service desk and Poly video conference rooms."),
     "sector-3": dict(key="sector-3", n_es="Sector 3", n_en="Sector 3", t_es="Sanidad y plataformas críticas", t_en="Healthcare and critical platforms",
                     h_es="Sanidad y<br>plataformas críticas.", h_en="Healthcare and<br>critical platforms.",
                     d_es="Servidores que no pueden parar: rendimiento, actualizaciones y monitorización.",
                     d_en="Servers that can't stop: performance, upgrades and monitoring.",
-                    l_es="Seis guías para plataformas que funcionan 24x7: publicar aplicaciones clínicas en Citrix, entornos de prueba que se parecen a producción, alarmas que llegan a alguien, Oracle en hardware nuevo, rendimiento en Red Hat y parches de Windows Server sin corte.",
-                    l_en="Six guides for platforms that run 24x7: publishing clinical apps in Citrix, test environments that look like production, alarms that reach someone, Oracle on new hardware, Red Hat performance and Windows Server patching without downtime.",
+                    l_es="Siete guías para plataformas que funcionan 24x7: publicar aplicaciones clínicas en Citrix, entornos de prueba que se parecen a producción, alarmas que llegan a alguien, Oracle en hardware nuevo, rendimiento en Red Hat parches de Windows Server sin corte y las colas de RabbitMQ de la capa de integración.",
+                    l_en="Seven guides for platforms that run 24x7: publishing clinical apps in Citrix, test environments that look like production, alarms that reach someone, Oracle on new hardware, Red Hat performance, Windows Server patching without downtime and RabbitMQ queues in the integration layer.",
                     seo="IT guides for healthcare and critical platforms: Citrix app publishing, test environments, monitoring and alarms, Oracle server hardware and OS upgrade, Red Hat performance tuning and Windows Server patching without downtime."),
     "sector-4": dict(key="sector-4", n_es="Sector 4", n_en="Sector 4", t_es="Industria multinacional", t_en="Multinational manufacturing",
                     h_es="Industria<br>multinacional.", h_en="Multinational<br>manufacturing.",
@@ -67,9 +67,9 @@ LEVELS = {
                     h_es="Servicios financieros<br>y trading.", h_en="Financial services<br>and trading.",
                     d_es="Una sede con sala de trading que no puede parar: red, acceso, salas y continuidad.",
                     d_en="A site with a trading floor that can't stop: network, access, rooms and continuity.",
-                    l_es="Ocho guías para una sede con sala de trading: salas de comunicaciones, su inventario en Device42, acceso condicional, una prueba de recuperación, salas de Teams sobre Crestron, PIM, operadores de conectividad y la migración a Windows 11.",
-                    l_en="Eight guides for a site with a trading floor: comms rooms, their inventory in Device42, Conditional Access, a recovery test, Teams rooms on Crestron, PIM, connectivity providers and the move to Windows 11.",
-                    seo="IT guides for financial services and trading floors: comms rooms, Device42 inventory, Conditional Access for a site, DR test, Teams Rooms on Crestron, PIM just-in-time, connectivity providers and Windows 11 migration."),
+                    l_es="Once guías para una sede con sala de trading: salas de comunicaciones, su inventario en Device42, el SAI, una línea de voz caída, una oficina que crece de 15 a 120 personas, acceso condicional, una prueba de recuperación, salas de Teams sobre Crestron, PIM, operadores de conectividad y la migración a Windows 11.",
+                    l_en="Eleven guides for a site with a trading floor: comms rooms, their inventory in Device42, the UPS, a voice line down, an office growing from 15 to 120 people, Conditional Access, a recovery test, Teams rooms on Crestron, PIM, connectivity providers and the move to Windows 11.",
+                    seo="IT guides for financial services and trading floors: comms rooms, Device42 inventory, UPS, voice lines, office growth, Conditional Access for a site, DR test, Teams Rooms on Crestron, PIM just-in-time, connectivity providers and Windows 11 migration."),
 }
 LEVEL1 = LEVELS["nivel-1"]
 
@@ -157,6 +157,33 @@ TOPICS = [
     ("nivel-2", "windows-server", "Windows Server", "Windows Server",
      "Instalar un rol, parchear sin cortar el servicio y leer los eventos que importan.",
      "Install a role, patch without cutting the service, and read the events that matter."),
+    ("nivel-2", "python-it", "Python: scripts para operaciones IT", "Python: scripts for IT operations",
+     "Entorno virtual, un CSV, una API REST con el token fuera del código, un informe programado y el script que falla por codificación o proxy.",
+     "Virtual environment, a CSV, a REST API with the token kept out of the code, a scheduled report and the script that fails on encoding or proxy."),
+    ("nivel-2", "ad-delegacion", "Active Directory: delegación y auditoría", "Active Directory: delegation and auditing",
+     "Delegar en una OU con el asistente y dsacls, la papelera de reciclaje, quién borró o cambió un usuario y MachineAccountQuota.",
+     "Delegating on an OU with the wizard and dsacls, the Recycle Bin, who deleted or changed a user, and MachineAccountQuota."),
+    ("nivel-2", "cisco-basico", "Cisco: primeros comandos en un switch", "Cisco: first commands on a switch",
+     "Entrar por consola o SSH, los show que responden casi cualquier ticket, copiar la configuración y un puerto en err-disabled.",
+     "Getting in by console or SSH, the show commands that answer almost any ticket, backing up the config and a port in err-disabled."),
+    ("nivel-2", "powershell-altas", "PowerShell: altas y bajas en Active Directory", "PowerShell: AD starters and leavers",
+     "Altas masivas desde un CSV con -WhatIf, contraseñas seguras y registro, y bajas con grupos exportados y revisión previa.",
+     "Bulk starters from a CSV with -WhatIf, safe passwords and a log, and leavers with exported groups and a review step."),
+    ("nivel-2", "dns-dhcp", "DNS y DHCP en Windows Server", "DNS and DHCP on Windows Server",
+     "Zonas integradas en AD, registros y reenviadores, ámbitos con sus opciones, reservas, conmutación por error y un equipo con IP 169.254.",
+     "AD-integrated zones, records and forwarders, scopes with their options, reservations, failover and a device with a 169.254 IP."),
+    ("nivel-2", "idrac-ilo", "Dell iDRAC y HPE iLO", "Dell iDRAC and HPE iLO",
+     "Gestión fuera de banda: red y VLAN de gestión, usuarios de AD, consola y medios virtuales, firmware, alertas y un servidor que no arranca.",
+     "Out-of-band management: management network and VLAN, AD users, virtual console and media, firmware, alerts and a server that won't boot."),
+    ("nivel-2", "iis", "IIS", "IIS",
+     "Sitios y enlaces, grupos de aplicaciones, el certificado HTTPS, los logs que importan y un 503 Service Unavailable.",
+     "Sites and bindings, application pools, the HTTPS certificate, the logs that matter and a 503 Service Unavailable."),
+    ("nivel-2", "switch-hp", "Switches HP: vLANs, configuración y firmware", "HP switches: vLANs, configuration and firmware",
+     "ProCurve y ArubaOS-Switch: comandos básicos, VLANs tagged y untagged, write memory, copia por TFTP o SCP, firmware y un puerto a 100 Mb.",
+     "ProCurve and ArubaOS-Switch: basic commands, tagged and untagged VLANs, write memory, TFTP or SCP backup, firmware and a port at 100 Mb."),
+    ("nivel-2", "glpi", "GLPI: inventario y helpdesk", "GLPI: inventory and helpdesk",
+     "Instalación, inventario nativo con GLPI Agent, entidades y perfiles, tickets con SLA, notificaciones, plugins, copias y un equipo que no reporta.",
+     "Installation, native inventory with GLPI Agent, entities and profiles, tickets with SLAs, notifications, plugins, backups and a silent device."),
     # ---- Level 3
     ("nivel-3", "ansible", "Ansible", "Ansible",
      "El primer playbook: inventario, parcheo de servidores Linux servidor a servidor y comprobación.",
@@ -209,6 +236,30 @@ TOPICS = [
     ("nivel-3", "vsphere", "VMware vSphere y vCenter", "VMware vSphere and vCenter",
      "Crear una máquina virtual, snapshots con fecha de caducidad y poner un host en mantenimiento sin cortar nada.",
      "Create a virtual machine, snapshots with an expiry date, and put a host into maintenance without cutting anything."),
+    ("nivel-3", "tanium", "Tanium: operaciones de endpoint", "Tanium: endpoint operations",
+     "Desplegar el cliente, preguntas de Interact, parches con ventanas de mantenimiento, software con Deploy, Comply y un equipo con datos antiguos.",
+     "Deploying the client, Interact questions, patching with maintenance windows, software with Deploy, Comply and a device with stale data."),
+    ("nivel-3", "intune-anillos", "Intune: anillos de Windows Update", "Intune: windows Update rings",
+     "Anillos piloto, general y de trading, plazos y gracia, versiones, parches acelerados, controladores y el equipo que nunca se actualiza.",
+     "Pilot, broad and trading rings, deadlines and grace, versions, expedited patches, drivers and the device that never updates."),
+    ("nivel-3", "copilot-m365", "Microsoft 365 Copilot: despliegue y permisos", "Microsoft 365 Copilot: rollout and permissions",
+     "Requisitos, sobreexposición en SharePoint antes de activar, Purview, piloto, uso, agentes de Copilot Studio y un documento que no debía verse.",
+     "Prerequisites, SharePoint oversharing before enabling, Purview, pilot, usage, Copilot Studio agents and a document that shouldn't be seen."),
+    ("nivel-3", "gpo-seguridad", "GPO de seguridad", "Security GPOs",
+     "NTLMv1, LLMNR, firma SMB, LAPS, registro de PowerShell y Credential Guard, con baseline de Microsoft, piloto y marcha atrás.",
+     "NTLMv1, LLMNR, SMB signing, LAPS, PowerShell logging and Credential Guard, with Microsoft's baseline, a pilot and rollback."),
+    ("nivel-3", "defender-asr", "Microsoft Defender Antivirus y reglas ASR", "Microsoft Defender Antivirus and ASR rules",
+     "Reglas ASR de auditoría a bloqueo, protección de red, acceso controlado a carpetas, exclusiones mínimas y una aplicación bloqueada.",
+     "ASR rules from audit to block, network protection, controlled folder access, minimal exclusions and an app that gets blocked."),
+    ("nivel-3", "cmdb", "CMDB: gestión de la configuración", "CMDB: configuration management",
+     "Clases de CI y atributos mínimos, relaciones de servicio a servidor, reconciliación de fuentes, huérfanos y duplicados, y auditorías.",
+     "CI classes and minimum attributes, service-to-server relationships, source reconciliation, orphans and duplicates, and audits."),
+    ("nivel-3", "nginx-apache", "Nginx y Apache", "Nginx and Apache",
+     "Publicar una aplicación interna como proxy inverso con TLS y cabeceras, probar la configuración y resolver un 502 o un 504.",
+     "Publish an internal app as a reverse proxy with TLS and headers, test the configuration and fix a 502 or a 504."),
+    ("nivel-3", "wordpress-docker", "WordPress en Docker: web corporativa en contenedores", "WordPress on Docker: a corporate site in containers",
+     "Compose con MariaDB y volúmenes, secretos fuera de git, proxy con TLS, actualizaciones, copias con prueba de restauración y bastionado.",
+     "Compose with MariaDB and volumes, secrets out of git, a TLS proxy, updates, backups with a restore test and hardening."),
     # ---- Level 4
     ("nivel-4", "aws", "Amazon AWS", "Amazon AWS",
      'Cuentas e IAM bien hechos, una VPC con VPN a la oficina, servidores sin RDP abierto, copias y alertas de coste.',
@@ -261,6 +312,15 @@ TOPICS = [
     ("nivel-4", "terraform", "Terraform", "Terraform",
      'Un módulo pequeño, estado remoto con bloqueo, plan revisado en el pipeline, deriva, importación y secretos fuera del código.',
      'A small module, remote state with locking, a reviewed plan in the pipeline, drift, import and secrets out of the code.'),
+    ("nivel-4", "azure-costes", "Azure Cost Management: costes de la nube", "Azure Cost Management: cloud costs",
+     "Ámbitos, presupuestos, etiquetas para showback y chargeback, Advisor, reservas o planes de ahorro, FOCUS y la factura que se dispara.",
+     "Scopes, budgets, tags for showback and chargeback, Advisor, reservations or savings plans, FOCUS and the bill that suddenly jumps."),
+    ("nivel-4", "business-case", "Business case de IT", "IT business case",
+     "Problema y opciones con no hacer nada, CAPEX y OPEX, beneficios medibles, ROI, VAN y TCO a cinco años, y el seguimiento tras la aprobación.",
+     "Problem and options including doing nothing, CAPEX and OPEX, measurable benefits, ROI, NPV and five-year TCO, and tracking after approval."),
+    ("nivel-4", "ai-act", "Reglamento Europeo de IA (AI Act)", "EU AI Act",
+     "Niveles de riesgo, proveedor y responsable del despliegue, alfabetización y transparencia, calendario, registro de casos de uso y RGPD.",
+     "Risk levels, provider and deployer, AI literacy and transparency, timeline, a use-case register and GDPR."),
     ("sector-1", "cashdro", "CashDro - Integración con el TPV", "CashDro - Integration with the POS",
      "El cobro en efectivo automático: red, credenciales, la rutina diaria y el arqueo.",
      "Automatic cash payments: network, credentials, the daily routine and the cash count."),
@@ -276,6 +336,12 @@ TOPICS = [
     ("sector-1", "pms-hotel", "PMS hotelero - Soporte e interfaces con el TPV", "Hotel PMS - Support and POS interfaces",
      "Cómo viaja un cargo a habitación, las correspondencias y por qué se rechaza un cargo.",
      "How a room charge travels, the mappings and why a charge is rejected."),
+    ("sector-1", "zabbix-local", "Zabbix - Monitorizar un restaurante o un hotel", "Zabbix - Monitoring a restaurant or hotel",
+     "Servidor y proxy, ICMP para TPV e impresoras de cocina, SNMP para red y SAI, avisos por Telegram y una tormenta de alertas en pleno servicio.",
+     "Server and proxy, ICMP for tills and kitchen printers, SNMP for network and UPS, Telegram alerts and an alert storm in the middle of service."),
+    ("sector-1", "mikrotik-tplink", "MikroTik y TP-Link - Red y WiFi de un restaurante u hotel", "MikroTik and TP-Link - Network and WiFi for a restaurant or hotel",
+     "VLAN para TPV, pagos, personal y clientes, WiFi de clientes con portal y límites, 4G de respaldo y la WiFi lenta en mitad de un evento.",
+     "VLANs for POS, payments, staff and guests, guest WiFi with a portal and limits, 4G backup and the slow WiFi in the middle of an event."),
     ("sector-2", "alta-usuario", "Alta de usuario - Red, correo y aplicaciones de negocio", "New starter - Network, email and business apps",
      "La incorporación de punta a punta: plazo con RR. HH., cuenta y licencia por rol, red, TPV y ERP, y el primer día en tienda.",
      "Onboarding end to end: lead time with HR, account and licence by role, network, POS and ERP, and day one in the store."),
@@ -297,6 +363,12 @@ TOPICS = [
     ("sector-2", "poly-salas", "Poly - Salas de videoconferencia", "Poly - Video conference rooms",
      "Salas de la oficina central con HP Poly: Teams Rooms en Android o barra USB, Poly Lens, cuenta de sala y la sala caída antes del consejo.",
      "Head-office rooms with HP Poly: Teams Rooms on Android or a USB bar, Poly Lens, the room account and the room down before the board meeting."),
+    ("sector-2", "corner-preapertura", "Corner en gran almacén - Checklist de IT de la pre-apertura", "Department store corner - Pre-opening IT checklist",
+     "Qué pone el gran almacén y qué pone la marca, punto de red, TPV, datáfonos e impresoras, respaldo 4G, día de pruebas y entrega.",
+     "What the department store provides and what the brand provides, network point, POS, payment terminals, 4G backup, test day and handover."),
+    ("sector-2", "router-4g", "Router 4G - La tienda sin conexión antes de abrir", "4G router - The store offline before opening",
+     "Enlace, puerto, VLAN y DHCP, la sala de comunicaciones de la planta, un router 4G como plan B, qué funciona por él y su seguridad.",
+     "Link, port, VLAN and DHCP, the floor's comms room, a 4G router as plan B, what works through it and how to secure it."),
     ("sector-3", "citrix-apps", "Citrix VDI - Publicar y dar soporte a aplicaciones", "Citrix VDI - Publishing and supporting apps",
      "Publicar una aplicación clínica en Citrix, la sesión que sigue al profesional entre puestos y el arranque que se cuelga.",
      "Publishing a clinical app in Citrix, the session that follows staff between ward PCs, and the launch that hangs."),
@@ -315,6 +387,9 @@ TOPICS = [
     ("sector-3", "winserver-parches", "Windows Server - Actualizaciones planificadas sin cortar el servicio", "Windows Server - Planned updates without service downtime",
      "Parchear servidores Windows críticos sin parar el servicio: anillos, ventanas con los clínicos, CAU, pares balanceados y vuelta atrás.",
      "Patching critical Windows servers without stopping the service: rings, windows with clinicians, CAU, balanced pairs and rollback."),
+    ("sector-3", "rabbitmq-clinica", "RabbitMQ - Colas de la capa de integración clínica", "RabbitMQ - Queues in the clinical integration layer",
+     "Colas, consumidores y dead-letter, alarmas de profundidad, y los resultados que no llegan a la historia clínica porque se paró un consumidor.",
+     "Queues, consumers and dead-letter, depth alarms, and the results that never reach the patient record because a consumer stopped."),
     ("sector-4", "lan-wan-wifi", "LAN, WAN y WiFi - Conectar sedes de varios países", "LAN, WAN and WiFi - Connecting sites in several countries",
      "La sede tipo, la WAN con MPLS o SD-WAN y su respaldo 4G, la WiFi con 802.1X y la planta lejana que va lenta al ERP.",
      "The standard site, a WAN on MPLS or SD-WAN with 4G backup, Wi-Fi with 802.1X and the distant plant that is slow to the ERP."),
@@ -360,6 +435,15 @@ TOPICS = [
     ("sector-5", "windows11-migracion", "Windows 11 - Migrar los equipos de una sede", "Windows 11 - Migrating a site's devices",
      "Hardware listo, compatibilidad de las aplicaciones de trading, piloto, actualización in situ o reinstalación y puestos de cuatro monitores.",
      "Hardware readiness, trading app compatibility, pilot, in-place upgrade or wipe-and-load, and four-monitor desks."),
+    ("sector-5", "linea-voz", "Líneas de voz - Private wire con un banco caída", "Voice lines - A private wire to a bank down",
+     "Turrets, ringdown y hoot-n-holler, triaje con la mesa, de qué lado es la caída, alternativa grabada por MiFID II y el RCA.",
+     "Turrets, ringdown and hoot-n-holler, triage with the desk, which side is down, a recorded workaround under MiFID II and the RCA."),
+    ("sector-5", "oficina-crece", "Crecimiento de sede - De 15 a 120 personas", "Site growth - From 15 to 120 people",
+     "Puestos, sala de comunicaciones, Wi-Fi, licencias, incorporaciones, stock, equipo de soporte y presupuesto, y qué se rompe en cada fase.",
+     "Desks, comms room, Wi-Fi, licences, onboarding, stock, support team and budget, and what breaks at each phase."),
+    ("sector-5", "sai-sala", "SAI - Alimentación de la sala de comunicaciones", "UPS - Powering the comms room",
+     "Carga y autonomía, PDU A y B, baterías, pruebas mensuales y anuales, SNMP, orden de apagado, grupo electrógeno y un corte antes de la apertura.",
+     "Load and runtime, A and B PDUs, batteries, monthly and annual tests, SNMP, shutdown order, generator and a power cut before the open."),
 ]
 
 GUIDES = []
@@ -22016,4 +22100,6914 @@ Tuesday, 7:40. A row of trading desks has no network. The market opens at 9:00.
 - The **Cisco: switches, routers and comms rooms on a site** guide covers the configuration of that equipment and console access.
 - The **Connectivity providers** guide covers the circuit inventory, which lives next to this one.
 - The next step is **one inventory for all the office hardware**: laptops, monitors, docks, meeting rooms and printers alongside the comms room, matched by serial number with Intune, Jamf, the purchases and HR. That is the idea behind the **38-it-asset-lifecycle-planner** repository on my GitHub, which also works out what is due for replacement each quarter and what it costs.
+""")
+
+# ---------------------------------------------------------------- batch a · Tanium, Python, Intune rings, Azure costs, Copilot
+g(slug="tanium-cliente-preguntas-parches-software-y-un-equipo-con-datos-antiguos", topic="tanium", date="2026-10-30",
+  title_es="Tanium: desplegar el cliente, preguntar en tiempo real, parchear, instalar software y un equipo que devuelve datos antiguos",
+  title_en="Tanium: deploying the client, asking in real time, patching, installing software and a device that returns stale data",
+  seo_title_en="Tanium: client, Interact, Patch, stale data · Iñigo González",
+  seo_title_es="Tanium: cliente, Interact, Patch y Deploy · Iñigo González",
+  dek_es="Desplegar el Tanium Client con MECM o Intune, preguntas de Interact con sensores para el inventario en tiempo real, listas de parches, despliegues y ventanas de mantenimiento en Patch, paquetes con Deploy, lo básico de Comply y el equipo que responde con datos de hace semanas.",
+  dek_en="Deploying the Tanium Client with MECM or Intune, Interact questions with sensors for real-time inventory, patch lists, deployments and maintenance windows in Patch, packages with Deploy, the basics of Comply, and the device that answers with weeks-old data.",
+  es="""
+## Qué vas a conseguir
+
+Un Tanium en el que todos los equipos tienen el cliente sano, en el que preguntas "qué equipos tienen esta versión de esta aplicación" y te responde en segundos, en el que los parches se instalan en ventanas acordadas y el software se despliega sin pasar por otra herramienta. Y el método para el ticket que más confunde al principio: un equipo que aparece en Tanium, pero con datos que no cuadran con lo que tiene de verdad.
+
+## Antes de empezar
+
+- Un usuario de la consola con un rol que permita preguntar, desplegar acciones y administrar Patch y Deploy en los grupos de equipos que te tocan (en Tanium los permisos se dan por rol y por **computer group**).
+- Salida de los equipos al servidor o a Tanium Cloud por el puerto **TCP 17472**, que es el que usa el cliente. Si hay proxy o cortafuegos de por medio, este puerto se abre explícitamente.
+- Los **computer groups** definidos: por sistema operativo, por sede, por función (servidores, puestos, equipos de sala de trading). Todo lo que haces después se apunta a un grupo.
+
+## 1. Desplegar el cliente
+
+El instalador de Windows necesita, además del ejecutable, el fichero **tanium-init.dat**, que lleva la dirección del servidor y la clave pública para confiar en él. Se descargan juntos desde **Client Management** en la consola (o desde la página de despliegue de clientes de Tanium Cloud).
+
+:::term PowerShell · instalación silenciosa (MECM, Intune Win32 o script)
+$ .\\SetupClient.exe /S /ServerAddress=tanium.contoso.local /ServerPort=17472
+# tanium-init.dat tiene que estar en la misma carpeta que SetupClient.exe
+$ Get-Service "Tanium Client" | Select-Object Status, StartType
+Status  StartType
+------  ---------
+Running Automatic
+:::
+
+- En **Intune**, se empaqueta como aplicación Win32 con los dos ficheros y la regla de detección es el servicio o la carpeta `C:\\Program Files (x86)\\Tanium\\Tanium Client`.
+- En **MECM**, una aplicación con el mismo comando y un despliegue *Required* al grupo de recopilación de todos los equipos sin cliente.
+- **Client Management** también puede instalar el cliente desde la consola en equipos que ya ve en la red, y es donde se mira la salud: versión del cliente, último registro y equipos que no se registran.
+
+> Si el cliente forma parte de la **imagen maestra** (MDT, OSD, plantilla de VM), hay que prepararlo antes de capturarla: parar el servicio y quitar su identificador único. Si no, todos los equipos clonados se presentan al servidor como el mismo. Es la causa número uno del problema de la sección 6.
+
+## 2. Interact: preguntas con sensores
+
+Un **sensor** es un pequeño script que el cliente ejecuta y que devuelve un valor: nombre del equipo, sistema operativo, aplicaciones instaladas, último usuario, espacio libre. Una **pregunta** combina sensores y filtros, y la responden todos los equipos a la vez en segundos, porque el resultado viaja de equipo a equipo en el *linear chain* en vez de pasar cada uno por el servidor.
+
+:::ui Tanium · Interact › Ask a question
+= Pregunta: Get Computer Name and Installed Applications and Last Logged In User from all machines with Installed Applications contains "Zoom"
+> Results · 1.842 de 1.851 equipos han respondido
+= MAD-PC-0412 · Zoom Workplace 6.1.11 · laura.prado
+= MAD-PC-0419 · Zoom Workplace 5.17.5 · carlos.ruiz
+= MAD-TRD-0031 · Zoom Workplace 5.17.5 · ana.gil
+[Merge] [Deploy Action] [Save Question]
+:::
+
+- El contador **de N equipos han respondido** es parte de la respuesta: los que faltan están apagados o sin conexión, y no aparecen en el resultado.
+- Una pregunta útil se guarda como **Saved Question** y se programa para que recoja resultados: es la base de los informes.
+- Desde un resultado se lanza una **acción** (un *package*) a esos equipos: reiniciar un servicio, recoger un log, desinstalar una versión. La acción queda registrada con quién la lanzó y a qué equipos.
+
+> Antes de lanzar una acción a "todos los equipos del resultado", filtra por un **computer group** concreto y prueba con dos o tres. Una acción mal escrita llega a mil equipos con la misma rapidez que una buena.
+
+## 3. Patch: listas, despliegues y ventanas de mantenimiento
+
+Patch trabaja con cuatro piezas que conviene separar:
+
+- **Patch lists**: qué parches se instalan. Por ejemplo, "Windows 11 - acumulativas del mes" construida con reglas (gravedad, producto, fecha de publicación).
+- **Block lists**: qué parches no se instalan nunca en ciertos equipos (un controlador que rompe una aplicación de trading, una versión de .NET que una aplicación no admite todavía).
+- **Deployments**: cuándo y a qué grupo se aplica una lista, con su hora de inicio, su fin y lo que se hace con los reinicios.
+- **Maintenance windows**: las horas en las que un grupo puede instalar y reiniciar. Fuera de ellas, Patch no instala aunque haya un despliegue activo.
+
+:::ui Tanium · Patch › Deployments › Create
+= Nombre: W11 · acumulativa octubre · puestos de trading
+= Patch list: Windows 11 - acumulativas del mes
+= Computer groups: MAD-Trading-Puestos
+= Inicio: 25/10/2026 18:30 · Fin: 27/10/2026 06:00 (hora local del equipo)
+= [x] Respetar ventanas de mantenimiento
+= [x] Reiniciar si hace falta · [x] Avisar al usuario (End-User Notifications) · Aplazamiento máximo: 2 horas
+[Deploy]
+:::
+
+Un orden de anillos que funciona: equipos de IT el martes de parches, un piloto de cada departamento a los tres días, el resto la semana siguiente y la sala de trading en su ventana de fin de semana. El informe de **cumplimiento** por grupo (equipos con parches pendientes por antigüedad) es lo que llevas a la reunión semanal.
+
+## 4. Deploy: software sin pasar por otra herramienta
+
+Deploy instala, actualiza y desinstala aplicaciones con **software packages** (el instalador, el comando y la regla de detección) y despliegues a computer groups, igual que Patch. Tanium ofrece una **galería** de paquetes de aplicaciones conocidas que se importan ya preparados, y tú añades los propios.
+
+- La regla de detección decide si la aplicación "está": si es floja (solo la carpeta), Deploy da por instalada una versión rota.
+- Para el caso de Zoom de la sección 2: un despliegue de actualización a los equipos que respondieron con una versión anterior, en lugar de a toda la empresa.
+
+## 5. Comply: lo básico
+
+Comply evalúa los equipos contra **estándares de configuración** (benchmarks de CIS o de DISA) y busca **vulnerabilidades** por CVE. Los resultados se ven por equipo, por regla y por CVE, y se cruzan con Patch: muchas vulnerabilidades de Windows se cierran con la acumulativa que ya tienes en una lista.
+
+- Empieza con un estándar y un grupo pequeño: un benchmark completo sobre todos los equipos genera miles de hallazgos que nadie va a leer.
+- Si ya usas otro escáner (Qualys, por ejemplo), decide cuál es la fuente de verdad para vulnerabilidades y usa el otro para contrastar. Dos cifras distintas en la misma reunión no ayudan.
+
+## 6. El ticket: "en Tanium este equipo sale con datos que no son"
+
+Un técnico pregunta por `MAD-PC-0419` y Tanium dice que tiene Windows 10 y Zoom 5.17. El usuario jura que le actualizaron a Windows 11 la semana pasada. Se mira en este orden:
+
+1. **¿Ha respondido ahora o es un dato recogido?** Si la respuesta viene de datos guardados (resultados recogidos de una Saved Question o del servicio de datos de Tanium), puede ser del último día que el equipo estuvo encendido. Mira la fecha del dato y pregunta en directo con el equipo encendido.
+2. **¿El cliente se registra?** En Client Management, la hora del **último registro**. Si es de hace días, el equipo no llega al servidor: el puerto 17472, el proxy o la VPN.
+3. **¿Hay dos equipos con la misma identidad?** Si el equipo salió de una imagen con el cliente sin preparar, dos o más equipos comparten identificador y sus datos se pisan: un día responde uno y otro día el otro. Se ve porque el mismo nombre o la misma identidad aparece con IP y usuarios que cambian.
+4. **¿El cliente funciona en el propio equipo?** Servicio arrancado, versión y servidor al que apunta.
+
+:::term PowerShell · en el equipo afectado (como administrador)
+$ cd "C:\\Program Files (x86)\\Tanium\\Tanium Client"
+$ .\\TaniumClient.exe config get ServerNameList
+tanium.contoso.local
+$ .\\TaniumClient.exe config get ComputerID
+1438845210
+$ Get-Content .\\Logs\\log0.txt -Tail 20
+# busca errores de conexión o de registro en las últimas líneas
+:::
+
+Si el identificador está duplicado, la solución es la misma que en la imagen: parar el servicio, borrar el identificador y arrancarlo, para que el cliente se registre como nuevo.
+
+:::term PowerShell · regenerar la identidad del cliente
+$ Stop-Service "Tanium Client"
+$ .\\TaniumClient.exe config remove ComputerID
+$ Start-Service "Tanium Client"
+:::
+
+! No lo hagas en todos los equipos "por si acaso": se pierde la relación con el historial del equipo en algunos módulos. Solo en los que tienen la identidad duplicada, y corrige la imagen para que no vuelva a pasar.
+
+## Siguientes pasos
+
+- La guía de **Qualys** cubre el escaneo de vulnerabilidades con agente y la priorización con KEV; con Tanium al lado, decide cuál es la fuente de verdad.
+- **MECM / SCCM: empaquetado de aplicaciones** es útil para el instalador del cliente y para comparar Deploy con lo que ya haces en MECM.
+- El informe de cumplimiento de parches por grupo es evidencia de auditoría. Es la idea del repositorio **25-security-controls-evidence** de mi GitHub: reunir en un sitio la prueba de que cada control se cumple.
+""",
+  en="""
+## What you'll get
+
+A Tanium where every device has a healthy client, where you ask "which devices have this version of this application" and get the answer in seconds, where patches install in agreed windows and software is deployed without going through another tool. And the method for the ticket that confuses people most at first: a device that shows up in Tanium, but with data that doesn't match what it really has.
+
+## Before you start
+
+- A console user with a role that allows asking questions, deploying actions and administering Patch and Deploy on the device groups you are responsible for (in Tanium, permissions are granted by role and by **computer group**).
+- Outbound access from devices to the server or to Tanium Cloud on **TCP 17472**, which is the port the client uses. If there is a proxy or firewall in the way, this port is opened explicitly.
+- The **computer groups** defined: by operating system, by site, by function (servers, desktops, trading floor devices). Everything you do afterwards targets a group.
+
+## 1. Deploying the client
+
+Besides the executable, the Windows installer needs the **tanium-init.dat** file, which carries the server address and the public key to trust it. They are downloaded together from **Client Management** in the console (or from the client deployment page in Tanium Cloud).
+
+:::term PowerShell · silent install (MECM, Intune Win32 or script)
+$ .\\SetupClient.exe /S /ServerAddress=tanium.contoso.local /ServerPort=17472
+# tanium-init.dat must be in the same folder as SetupClient.exe
+$ Get-Service "Tanium Client" | Select-Object Status, StartType
+Status  StartType
+------  ---------
+Running Automatic
+:::
+
+- In **Intune**, it is packaged as a Win32 app with both files and the detection rule is the service or the folder `C:\\Program Files (x86)\\Tanium\\Tanium Client`.
+- In **MECM**, an application with the same command and a *Required* deployment to the collection of all devices without the client.
+- **Client Management** can also install the client from the console on devices it already sees on the network, and it is where you check health: client version, last registration and devices that don't register.
+
+> If the client is part of the **golden image** (MDT, OSD, VM template), it has to be prepared before capture: stop the service and remove its unique identifier. Otherwise every cloned device presents itself to the server as the same one. It is the number one cause of the problem in section 6.
+
+## 2. Interact: questions with sensors
+
+A **sensor** is a small script the client runs that returns a value: computer name, operating system, installed applications, last user, free space. A **question** combines sensors and filters, and every device answers at once within seconds, because the result travels from device to device along the *linear chain* instead of each one going through the server.
+
+:::ui Tanium · Interact › Ask a question
+= Question: Get Computer Name and Installed Applications and Last Logged In User from all machines with Installed Applications contains "Zoom"
+> Results · 1,842 of 1,851 devices have answered
+= MAD-PC-0412 · Zoom Workplace 6.1.11 · laura.prado
+= MAD-PC-0419 · Zoom Workplace 5.17.5 · carlos.ruiz
+= MAD-TRD-0031 · Zoom Workplace 5.17.5 · ana.gil
+[Merge] [Deploy Action] [Save Question]
+:::
+
+- The **N devices have answered** counter is part of the answer: the missing ones are off or offline, and they don't appear in the result.
+- A useful question is saved as a **Saved Question** and scheduled to collect results: it is the basis for reports.
+- From a result you launch an **action** (a *package*) on those devices: restart a service, collect a log, uninstall a version. The action is logged with who launched it and on which devices.
+
+> Before launching an action on "every device in the result", filter by a specific **computer group** and test on two or three. A badly written action reaches a thousand devices just as fast as a good one.
+
+## 3. Patch: lists, deployments and maintenance windows
+
+Patch works with four pieces worth keeping apart:
+
+- **Patch lists**: which patches get installed. For example, "Windows 11 - monthly cumulative" built from rules (severity, product, release date).
+- **Block lists**: which patches never get installed on certain devices (a driver that breaks a trading application, a .NET version an application doesn't support yet).
+- **Deployments**: when and to which group a list applies, with its start time, its end and what happens with restarts.
+- **Maintenance windows**: the hours in which a group may install and restart. Outside them, Patch doesn't install even if a deployment is active.
+
+:::ui Tanium · Patch › Deployments › Create
+= Name: W11 · October cumulative · trading desks
+= Patch list: Windows 11 - monthly cumulative
+= Computer groups: MAD-Trading-Desks
+= Start: 25/10/2026 18:30 · End: 27/10/2026 06:00 (device local time)
+= [x] Honour maintenance windows
+= [x] Restart if needed · [x] Notify the user (End-User Notifications) · Maximum postponement: 2 hours
+[Deploy]
+:::
+
+A ring order that works: IT devices on Patch Tuesday, a pilot from each department three days later, everyone else the following week and the trading floor in its weekend window. The **compliance** report per group (devices with pending patches by age) is what you take to the weekly meeting.
+
+## 4. Deploy: software without another tool
+
+Deploy installs, updates and uninstalls applications with **software packages** (the installer, the command and the detection rule) and deployments to computer groups, just like Patch. Tanium offers a **gallery** of packages for well-known applications that are imported ready-made, and you add your own.
+
+- The detection rule decides whether the application "is there": if it is weak (just the folder), Deploy considers a broken version installed.
+- For the Zoom case in section 2: an update deployment to the devices that answered with an older version, rather than to the whole company.
+
+## 5. Comply: the basics
+
+Comply assesses devices against **configuration standards** (CIS or DISA benchmarks) and looks for **vulnerabilities** by CVE. Results are shown by device, by rule and by CVE, and they cross over with Patch: many Windows vulnerabilities are closed by the cumulative update you already have in a list.
+
+- Start with one standard and a small group: a full benchmark on every device produces thousands of findings nobody will read.
+- If you already use another scanner (Qualys, for example), decide which is the source of truth for vulnerabilities and use the other to cross-check. Two different numbers in the same meeting don't help.
+
+## 6. The ticket: "Tanium shows this device with data that isn't right"
+
+A technician asks about `MAD-PC-0419` and Tanium says it has Windows 10 and Zoom 5.17. The user swears it was upgraded to Windows 11 last week. Check in this order:
+
+1. **Did it answer just now, or is it collected data?** If the answer comes from stored data (collected results of a Saved Question or Tanium's data service), it may be from the last day the device was on. Look at the date of the data and ask live with the device switched on.
+2. **Is the client registering?** In Client Management, the time of the **last registration**. If it is days old, the device isn't reaching the server: port 17472, the proxy or the VPN.
+3. **Are two devices sharing the same identity?** If the device came from an image with an unprepared client, two or more devices share an identifier and overwrite each other's data: one day one answers and the next day the other. You spot it because the same name or identity shows up with changing IPs and users.
+4. **Does the client work on the device itself?** Service running, version and the server it points to.
+
+:::term PowerShell · on the affected device (as administrator)
+$ cd "C:\\Program Files (x86)\\Tanium\\Tanium Client"
+$ .\\TaniumClient.exe config get ServerNameList
+tanium.contoso.local
+$ .\\TaniumClient.exe config get ComputerID
+1438845210
+$ Get-Content .\\Logs\\log0.txt -Tail 20
+# look for connection or registration errors in the last lines
+:::
+
+If the identifier is duplicated, the fix is the same as for the image: stop the service, delete the identifier and start it, so the client registers as new.
+
+:::term PowerShell · regenerate the client identity
+$ Stop-Service "Tanium Client"
+$ .\\TaniumClient.exe config remove ComputerID
+$ Start-Service "Tanium Client"
+:::
+
+! Don't do it on every device "just in case": some modules lose the link to the device's history. Only on the ones with a duplicated identity, and fix the image so it doesn't happen again.
+
+## Next steps
+
+- The **Qualys** guide covers agent-based vulnerability scanning and prioritising with KEV; with Tanium alongside, decide which one is the source of truth.
+- **MECM / SCCM: app packaging** helps with the client installer and with comparing Deploy to what you already do in MECM.
+- The patch compliance report per group is audit evidence. That is the idea behind the **25-security-controls-evidence** repository on my GitHub: gathering in one place the proof that each control is met.
+""")
+
+g(slug="python-para-it-entorno-virtual-csv-api-informe-programado-y-un-script-que-falla", topic="python-it", date="2026-10-30",
+  title_es="Python para IT: entorno virtual, un CSV, una API con token, un informe programado y el script que falla en el servidor",
+  title_en="Python for IT: virtual environment, a CSV, an API with a token, a scheduled report and the script that fails on the server",
+  seo_title_en="Python for IT ops: CSV, REST API and reports · Iñigo González",
+  seo_title_es="Python para IT: CSV, API REST e informes · Iñigo González",
+  dek_es="Un entorno virtual por script, leer un CSV con el módulo csv, llamar a una API REST con el token en una variable de entorno, escribir el informe en CSV y HTML, logging, programarlo con el Programador de tareas o cron, y el script que funciona a mano pero falla por codificación o por el proxy.",
+  dek_en="One virtual environment per script, reading a CSV with the csv module, calling a REST API with the token in an environment variable, writing the report as CSV and HTML, logging, scheduling it with Task Scheduler or cron, and the script that works by hand but fails on encoding or the proxy.",
+  es="""
+## Qué vas a conseguir
+
+Un script de Python que lee la lista de equipos de un CSV, pregunta a una API REST el estado de cada uno, escribe un informe en CSV y en HTML, deja un log de lo que ha hecho y se ejecuta solo cada mañana. Es el patrón de casi cualquier automatización de operaciones: entrada, consulta, informe, programación. Y lo que hacer cuando funciona en tu equipo y falla en el servidor.
+
+## Antes de empezar
+
+- **Python 3** de python.org (en Windows, con el lanzador `py`) o el del sistema en Linux.
+- Una carpeta para el script, por ejemplo `C:\\scripts\\informe-equipos` o `/opt/informe-equipos`.
+- La URL de la API y un **token** con permisos de solo lectura, pedido a quien la administra.
+- Si la empresa usa proxy con inspección TLS, el **certificado de la CA corporativa** en formato PEM (te lo da el equipo de red o seguridad).
+
+## 1. Un entorno virtual por script
+
+Cada script con sus propias librerías, sin tocar el Python del sistema:
+
+:::term PowerShell · crear el entorno e instalar requests
+$ cd C:\\scripts\\informe-equipos
+$ py -m venv .venv
+$ .\\.venv\\Scripts\\Activate.ps1
+$ pip install requests
+$ pip freeze > requirements.txt
+:::
+
+En Linux, `python3 -m venv .venv` y `source .venv/bin/activate`. Con `requirements.txt` el entorno se rehace en otro servidor (`pip install -r requirements.txt`); `.venv` no se copia ni va a Git.
+
+## 2. El script
+
+:::term informe.py
+import csv
+import html
+import logging
+import os
+from datetime import date
+
+import requests
+
+API = "https://api.contoso.local/v1/devices"
+TOKEN = os.environ["INVENTARIO_TOKEN"]  # nunca escrito en el código
+logging.basicConfig(filename="informe.log", level=logging.INFO, encoding="utf-8",
+                    format="%(asctime)s %(levelname)s %(message)s")
+
+def estado(equipo):
+    r = requests.get(f"{API}/{equipo}", headers={"Authorization": f"Bearer {TOKEN}"}, timeout=15)
+    r.raise_for_status()
+    return r.json()
+
+filas = []
+with open("equipos.csv", newline="", encoding="utf-8-sig") as f:
+    for linea in csv.DictReader(f):
+        nombre = linea["Equipo"]
+        try:
+            d = estado(nombre)
+            filas.append({"Equipo": nombre, "SO": d.get("os"), "Ultimo contacto": d.get("lastSeen")})
+        except requests.RequestException as e:
+            logging.warning("%s: %s", nombre, e)
+            filas.append({"Equipo": nombre, "SO": "", "Ultimo contacto": "ERROR"})
+logging.info("%d equipos procesados", len(filas))
+
+salida = f"informe-{date.today()}.csv"
+with open(salida, "w", newline="", encoding="utf-8-sig") as f:
+    w = csv.DictWriter(f, fieldnames=["Equipo", "SO", "Ultimo contacto"])
+    w.writeheader()
+    w.writerows(filas)
+
+celdas = "".join(f"<tr><td>{html.escape(str(x['Equipo']))}</td><td>{html.escape(str(x['SO']))}</td>"
+                 f"<td>{html.escape(str(x['Ultimo contacto']))}</td></tr>" for x in filas)
+with open(salida.replace(".csv", ".html"), "w", encoding="utf-8") as f:
+    f.write(f"<meta charset='utf-8'><table><tr><th>Equipo</th><th>SO</th><th>Último contacto</th></tr>{celdas}</table>")
+:::
+
+Lo que importa de cada parte:
+
+- `encoding="utf-8-sig"` al leer: Excel guarda los CSV en UTF-8 con **BOM**, y sin `-sig` la primera columna se llama `\\ufeffEquipo` y el `KeyError` desconcierta. Al escribir, el BOM hace que Excel abra bien las tildes.
+- `timeout=15`: sin él, una API que no responde deja el script colgado para siempre, y la tarea programada nunca termina.
+- `raise_for_status()` convierte un 401 o un 500 en una excepción que el `try` recoge: un equipo que falla no tumba el informe entero, y queda en el log.
+
+## 3. El token, en una variable de entorno
+
+El token es una contraseña. No va en el script, ni en el CSV, ni en Git. Se pone en una variable de entorno del usuario que ejecuta el script:
+
+:::term PowerShell · variable de entorno para el usuario actual
+$ [Environment]::SetEnvironmentVariable("INVENTARIO_TOKEN", "pega-aqui-el-token", "User")
+# abre una consola nueva para que la vea
+$ py -c "import os; print('INVENTARIO_TOKEN' in os.environ)"
+True
+:::
+
+En Linux, en un fichero `chmod 600` de la cuenta de servicio. Con un almacén de secretos (Key Vault, CyberArk), el token se lee de ahí.
+
+## 4. Programarlo
+
+En Windows, con el **Programador de tareas**, usando el Python del entorno virtual y la carpeta del script como directorio de inicio:
+
+:::term PowerShell · tarea diaria a las 07:00 con una cuenta de servicio
+$ $a = New-ScheduledTaskAction -Execute "C:\\scripts\\informe-equipos\\.venv\\Scripts\\python.exe" -Argument "informe.py" -WorkingDirectory "C:\\scripts\\informe-equipos"
+$ $t = New-ScheduledTaskTrigger -Daily -At 07:00
+$ Register-ScheduledTask -TaskName "IT\\Informe equipos" -Action $a -Trigger $t -User "CONTOSO\\svc-informes" -Password (Read-Host "Contraseña")
+:::
+
+En Linux, con `crontab -e` del usuario de servicio:
+
+:::term crontab · de lunes a viernes a las 07:00
+0 7 * * 1-5 cd /opt/informe-equipos && . ./token.env && .venv/bin/python informe.py
+:::
+
+> Sin `-WorkingDirectory` (o el `cd` en cron), el script busca `equipos.csv` en `C:\\Windows\\System32` o en el home, y falla con *FileNotFoundError* aunque a mano funcionara.
+
+## 5. El ticket: "a mano funciona, programado falla"
+
+El log de la tarea dice una de estas tres cosas:
+
+1. **`KeyError: 'INVENTARIO_TOKEN'`**: la tarea corre con otra cuenta (`svc-informes`) y la variable se definió para tu usuario. Se define para la cuenta de servicio, o a nivel de máquina si la política lo permite.
+2. **`UnicodeDecodeError: 'utf-8' codec can't decode byte 0xf1`**: el CSV lo ha guardado alguien como *CSV (delimitado por comas)* en lugar de *CSV UTF-8*, y viene en cp1252. La solución buena es pedir el fichero en UTF-8; mientras tanto, `encoding="cp1252"` para ese origen concreto. Si el error es `UnicodeEncodeError` al imprimir, es la consola de Windows: la variable `PYTHONUTF8=1` en la tarea lo evita.
+3. **`ProxyError` o `SSLError: CERTIFICATE_VERIFY_FAILED`**: en tu sesión el proxy se toma de la configuración del usuario y en la tarea no. `requests` usa las variables `HTTPS_PROXY` y `NO_PROXY`; y si el proxy inspecciona TLS, necesita la CA corporativa en `REQUESTS_CA_BUNDLE`.
+
+:::term PowerShell · variables de máquina para la cuenta de servicio (como administrador)
+$ [Environment]::SetEnvironmentVariable("HTTPS_PROXY", "http://proxy.contoso.local:8080", "Machine")
+$ [Environment]::SetEnvironmentVariable("NO_PROXY", "localhost,.contoso.local", "Machine")
+$ [Environment]::SetEnvironmentVariable("REQUESTS_CA_BUNDLE", "C:\\scripts\\ca\\contoso-root.pem", "Machine")
+:::
+
+! `verify=False` hace que el error desaparezca y deja la conexión abierta a cualquiera que se ponga en medio, con el token viajando dentro. No se usa, tampoco "para probar".
+
+## Siguientes pasos
+
+- La guía de **PowerShell** cubre lo mismo en el lenguaje nativo de Windows; muchas tareas de IT se hacen mejor en uno u otro, y conviene conocer los dos.
+- **Microsoft Graph**: la misma estructura de script sirve para leer equipos de Intune o usuarios de Entra ID, con un token de aplicación en lugar de uno fijo.
+- Cuando tienes varios de estos scripts, el siguiente paso es una consola que los reúna. Es la idea del repositorio **05-it-ops-console** de mi GitHub.
+""",
+  en="""
+## What you'll get
+
+A Python script that reads a list of devices from a CSV, asks a REST API for each one's status, writes a report as CSV and HTML, leaves a log of what it did and runs by itself every morning. It is the pattern of almost any operations automation: input, query, report, schedule. And what to do when it works on your machine and fails on the server.
+
+## Before you start
+
+- **Python 3** from python.org (on Windows, with the `py` launcher) or the system one on Linux.
+- A folder for the script, for example `C:\\scripts\\device-report` or `/opt/device-report`.
+- The API URL and a read-only **token**, requested from whoever administers it.
+- If the company uses a proxy with TLS inspection, the **corporate CA certificate** in PEM format (the network or security team will give it to you).
+
+## 1. One virtual environment per script
+
+Each script with its own libraries, without touching the system Python:
+
+:::term PowerShell · create the environment and install requests
+$ cd C:\\scripts\\device-report
+$ py -m venv .venv
+$ .\\.venv\\Scripts\\Activate.ps1
+$ pip install requests
+$ pip freeze > requirements.txt
+:::
+
+On Linux, `python3 -m venv .venv` and `source .venv/bin/activate`. With `requirements.txt` the environment is rebuilt on another server (`pip install -r requirements.txt`); `.venv` is not copied or put in Git.
+
+## 2. The script
+
+:::term report.py
+import csv
+import html
+import logging
+import os
+from datetime import date
+
+import requests
+
+API = "https://api.contoso.local/v1/devices"
+TOKEN = os.environ["INVENTORY_TOKEN"]  # never written in the code
+logging.basicConfig(filename="report.log", level=logging.INFO, encoding="utf-8",
+                    format="%(asctime)s %(levelname)s %(message)s")
+
+def status(device):
+    r = requests.get(f"{API}/{device}", headers={"Authorization": f"Bearer {TOKEN}"}, timeout=15)
+    r.raise_for_status()
+    return r.json()
+
+rows = []
+with open("devices.csv", newline="", encoding="utf-8-sig") as f:
+    for line in csv.DictReader(f):
+        name = line["Device"]
+        try:
+            d = status(name)
+            rows.append({"Device": name, "OS": d.get("os"), "Last seen": d.get("lastSeen")})
+        except requests.RequestException as e:
+            logging.warning("%s: %s", name, e)
+            rows.append({"Device": name, "OS": "", "Last seen": "ERROR"})
+logging.info("%d devices processed", len(rows))
+
+out = f"report-{date.today()}.csv"
+with open(out, "w", newline="", encoding="utf-8-sig") as f:
+    w = csv.DictWriter(f, fieldnames=["Device", "OS", "Last seen"])
+    w.writeheader()
+    w.writerows(rows)
+
+cells = "".join(f"<tr><td>{html.escape(str(x['Device']))}</td><td>{html.escape(str(x['OS']))}</td>"
+                f"<td>{html.escape(str(x['Last seen']))}</td></tr>" for x in rows)
+with open(out.replace(".csv", ".html"), "w", encoding="utf-8") as f:
+    f.write(f"<meta charset='utf-8'><table><tr><th>Device</th><th>OS</th><th>Last seen</th></tr>{cells}</table>")
+:::
+
+What matters in each part:
+
+- `encoding="utf-8-sig"` when reading: Excel saves CSVs as UTF-8 with a **BOM**, and without `-sig` the first column is called `\\ufeffDevice` and the `KeyError` is baffling. When writing, the BOM makes Excel open accented characters correctly.
+- `timeout=15`: without it, an API that doesn't respond leaves the script hanging forever, and the scheduled task never finishes.
+- `raise_for_status()` turns a 401 or a 500 into an exception the `try` catches: one failing device doesn't bring down the whole report, and it ends up in the log.
+
+## 3. The token, in an environment variable
+
+The token is a password. It doesn't go in the script, the CSV or Git. It goes in an environment variable of the user who runs the script:
+
+:::term PowerShell · environment variable for the current user
+$ [Environment]::SetEnvironmentVariable("INVENTORY_TOKEN", "paste-the-token-here", "User")
+# open a new console so it picks it up
+$ py -c "import os; print('INVENTORY_TOKEN' in os.environ)"
+True
+:::
+
+On Linux, in a `chmod 600` file owned by the service account. With a secrets store (Key Vault, CyberArk), the token is read from there.
+
+## 4. Scheduling it
+
+On Windows, with **Task Scheduler**, using the virtual environment's Python and the script folder as the start directory:
+
+:::term PowerShell · daily task at 07:00 with a service account
+$ $a = New-ScheduledTaskAction -Execute "C:\\scripts\\device-report\\.venv\\Scripts\\python.exe" -Argument "report.py" -WorkingDirectory "C:\\scripts\\device-report"
+$ $t = New-ScheduledTaskTrigger -Daily -At 07:00
+$ Register-ScheduledTask -TaskName "IT\\Device report" -Action $a -Trigger $t -User "CONTOSO\\svc-reports" -Password (Read-Host "Password")
+:::
+
+On Linux, with the service user's `crontab -e`:
+
+:::term crontab · Monday to Friday at 07:00
+0 7 * * 1-5 cd /opt/device-report && . ./token.env && .venv/bin/python report.py
+:::
+
+> Without `-WorkingDirectory` (or the `cd` in cron), the script looks for `devices.csv` in `C:\\Windows\\System32` or the home folder, and fails with *FileNotFoundError* even though it worked by hand.
+
+## 5. The ticket: "it works by hand, it fails when scheduled"
+
+The task's log says one of these three things:
+
+1. **`KeyError: 'INVENTORY_TOKEN'`**: the task runs under another account (`svc-reports`) and the variable was defined for your user. Define it for the service account, or at machine level if policy allows.
+2. **`UnicodeDecodeError: 'utf-8' codec can't decode byte 0xf1`**: someone saved the CSV as *CSV (Comma delimited)* instead of *CSV UTF-8*, and it comes in cp1252. The proper fix is to ask for the file in UTF-8; in the meantime, `encoding="cp1252"` for that specific source. If the error is `UnicodeEncodeError` when printing, it is the Windows console: the `PYTHONUTF8=1` variable on the task avoids it.
+3. **`ProxyError` or `SSLError: CERTIFICATE_VERIFY_FAILED`**: in your session the proxy comes from the user's settings and in the task it doesn't. `requests` uses the `HTTPS_PROXY` and `NO_PROXY` variables; and if the proxy inspects TLS, it needs the corporate CA in `REQUESTS_CA_BUNDLE`.
+
+:::term PowerShell · machine variables for the service account (as administrator)
+$ [Environment]::SetEnvironmentVariable("HTTPS_PROXY", "http://proxy.contoso.local:8080", "Machine")
+$ [Environment]::SetEnvironmentVariable("NO_PROXY", "localhost,.contoso.local", "Machine")
+$ [Environment]::SetEnvironmentVariable("REQUESTS_CA_BUNDLE", "C:\\scripts\\ca\\contoso-root.pem", "Machine")
+:::
+
+! `verify=False` makes the error go away and leaves the connection open to anyone who sits in the middle, with the token travelling inside it. It is not used, not even "to test".
+
+## Next steps
+
+- The **PowerShell** guide covers the same in Windows' native language; many IT tasks are better done in one or the other, and it pays to know both.
+- **Microsoft Graph**: the same script structure works for reading Intune devices or Entra ID users, with an application token instead of a fixed one.
+- Once you have several of these scripts, the next step is a console that brings them together. That is the idea behind the **05-it-ops-console** repository on my GitHub.
+""")
+
+g(slug="intune-anillos-de-windows-update-plazos-actualizaciones-urgentes-y-un-equipo-que-no-se-parchea", topic="intune-anillos", date="2026-10-30",
+  title_es="Intune: anillos de Windows Update, plazos, actualizaciones urgentes y un equipo que nunca se parchea",
+  title_en="Intune: Windows Update rings, deadlines, expedited updates and a device that never patches",
+  seo_title_en="Intune update rings: deadlines and expedite · Iñigo González",
+  seo_title_es="Intune: anillos de Windows Update y plazos · Iñigo González",
+  dek_es="Diseñar los anillos (piloto, general y puestos críticos de trading), aplazamientos, plazos y periodos de gracia, la política de actualizaciones de características, acelerar un parche urgente, la política de controladores, los informes y el equipo que nunca se actualiza: servicio de Windows Update, GPO, carga de trabajo de MECM en co-gestión.",
+  dek_en="Designing the rings (pilot, broad and critical trading desks), deferrals, deadlines and grace periods, the feature update policy, expediting an urgent patch, the driver policy, the reports and the device that never updates: Windows Update service, GPO, MECM co-management workload.",
+  es="""
+## Qué vas a conseguir
+
+Los equipos Windows gestionados por Intune reciben las actualizaciones mensuales en olas (primero IT, luego la mayoría, al final los puestos que no pueden fallar), con plazos que garantizan que se instalan aunque el usuario no reinicie nunca, la versión de Windows controlada, una forma de acelerar un parche de día cero y los controladores aprobados. Y el método para el equipo que lleva tres meses sin actualizar.
+
+Todo esto es **Windows Update for Business**: Intune no distribuye los parches, le dice a cada equipo cuándo y cómo descargarlos de Windows Update. En el centro de administración de Intune está en **Dispositivos › Administrar actualizaciones › Actualizaciones de Windows**, con pestañas para anillos, características, calidad y controladores.
+
+## Antes de empezar
+
+- Rol de **Intune Administrator** o un rol personalizado con permisos sobre actualizaciones de software.
+- Grupos de Entra ID de dispositivos para cada anillo: `GD-WU-Piloto`, `GD-WU-General`, `GD-WU-Trading`. Que un equipo esté en **un solo** anillo.
+- Para las políticas de características, aceleradas y de controladores: licencia de Windows que las incluya (Windows Enterprise E3/E5, Microsoft 365 E3/E5, Business Premium y equivalentes) y en **Administración de inquilinos › Conectores y tokens › Datos de Windows**, activadas las características que requieren datos de diagnóstico de Windows. Sin eso, la política se crea y los informes se quedan vacíos.
+- Si hay **co-gestión** con MECM: saber en qué posición está la carga de trabajo **Directivas de Windows Update**. Si está en Configuration Manager, nada de esta guía aplica a esos equipos.
+
+## 1. Diseñar los anillos
+
+| Anillo | Quién | Aplazamiento calidad | Plazo calidad | Gracia | Reinicio |
+|---|---|---|---|---|---|
+| Piloto | IT y 2-3 usuarios por departamento | 0 días | 2 días | 1 día | Automático fuera de horas activas |
+| General | El resto de oficina | 3 días | 3 días | 2 días | Automático fuera de horas activas |
+| Trading | Puestos de sala, críticos | 7 días | 3 días | 2 días | Horas activas amplias, reinicio el fin de semana |
+
+- El **aplazamiento** cuenta desde que Microsoft publica el parche; el **plazo** cuenta desde que el equipo lo ve; el **periodo de gracia** son los días mínimos que tiene el usuario, una vez vencido el plazo, antes de que el reinicio sea forzoso (pensado para el equipo que estuvo apagado durante el plazo). Juntos dicen "como muy tarde, esto está instalado en N días".
+- Las **horas activas** evitan reinicios en horario de trabajo hasta que se cumple el plazo. En los puestos de trading se ponen amplias (por ejemplo, de 6:00 a 22:00) y el plazo se calcula para que caiga en fin de semana.
+- El anillo de trading no es "no actualizar": es actualizar cuando el piloto ya ha probado las aplicaciones de mercado.
+
+:::ui Intune · Dispositivos › Administrar actualizaciones › Actualizaciones de Windows › Anillos de actualización › Crear
+= Nombre: WU · Anillo General
+= Período de aplazamiento de actualizaciones de calidad (días): 3
+= Período de aplazamiento de actualizaciones de características (días): 0
+= Controladores de Windows: Permitir
+= Comportamiento de las actualizaciones automáticas: Restablecer valores predeterminados
+= Opción para pausar las actualizaciones de Windows: Deshabilitar
+= Usar la configuración de fecha límite: Permitir
+= Fecha límite para actualizaciones de calidad: 3 · Período de gracia: 2
+= Reinicio automático antes de la fecha límite: Sí
+> Asignaciones › Incluir: GD-WU-General
+[Crear]
+:::
+
+> Si usas una **política de actualizaciones de características** (sección 2), el aplazamiento de características del anillo va a **0**: la versión la decide la política, y dos sitios decidiendo lo mismo es el origen de muchos "no sé por qué se ha actualizado".
+
+## 2. La versión de Windows: política de actualizaciones de características
+
+En **Actualizaciones de características › Crear** eliges la versión en la que quieres que se queden los equipos (por ejemplo, Windows 11, versión 25H2). Un equipo con una versión anterior sube a esa y no pasa de ahí hasta que cambies la política. Se puede ofrecer cuanto antes, desde una fecha o en un **despliegue gradual** por grupos de días.
+
+## 3. El parche urgente: actualizaciones aceleradas
+
+Cuando sale un parche fuera de ciclo para una vulnerabilidad explotada, no esperas al aplazamiento del anillo. En **Actualizaciones de calidad** creas una política de **aceleración**: eliges el parche por su fecha de publicación (se ofrecen las dos actualizaciones de seguridad más recientes) y los días antes de forzar el reinicio, **de 0 a 2**.
+
+- Solo lo reciben los equipos que no tienen ese parche o uno más nuevo.
+- Con **0 días**, el equipo reinicia en cuanto termina con un aviso corto: no para la sala de trading en horario de mercado.
+- Pasa por encima del aplazamiento del anillo, pero no lo cambia: cuando el parche está en todos, se elimina la política y los anillos siguen como estaban.
+
+## 4. Controladores
+
+Por defecto, los controladores llegan con las actualizaciones de calidad si el anillo los permite. Una política de **actualizaciones de controladores** cambia eso: Intune enseña qué controladores aplican a los equipos asignados y los apruebas tú (manual) o se aprueban solos tras unos días (automático). En equipos con hardware delicado (puestos de cuatro monitores con su tarjeta gráfica, bases de conexión), la aprobación manual evita que un controlador nuevo de gráfica llegue un martes a la sala.
+
+## 5. Los informes
+
+- **Informes › Actualizaciones de Windows**: estado por política, con los equipos en error, pendientes de reinicio o sin informar.
+- **Windows Update for Business reports** (en Azure Monitor, con un área de trabajo de Log Analytics) da el detalle más fino: equipos que llevan días sin buscar actualizaciones, alertas por equipo y el porcentaje de cumplimiento por versión. Es la cifra que llevas a la reunión de riesgos.
+
+## 6. El ticket: "este equipo no se ha actualizado desde julio"
+
+`MAD-PC-0233` aparece con la acumulativa de julio. Intune dice que el anillo está asignado y que el perfil se aplicó. Se mira de fuera hacia dentro:
+
+1. **¿Quién manda en las actualizaciones de este equipo?** Si está en co-gestión, en el portal de Intune el dispositivo muestra la autoridad de cada carga de trabajo, y en el equipo, `C:\\Windows\\CCM\\Logs\\CoManagementHandler.log`. Si **Directivas de Windows Update** sigue en Configuration Manager para su colección, Intune no manda: o lo parcheas por MECM o mueves la carga de trabajo (o su colección piloto).
+2. **¿Hay una GPO de WSUS?** Una directiva antigua que apunta a un servidor WSUS que ya no existe deja al equipo buscando en un sitio que no responde.
+3. **¿Está funcionando el servicio?** `wuauserv` deshabilitado por una herramienta de "optimización" o por un script antiguo.
+4. **¿Ha llegado la directiva de MDM?** Los valores del anillo tienen que estar en el registro de `PolicyManager`.
+
+:::term PowerShell · en el equipo afectado (como administrador)
+$ Get-ItemProperty HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate -ErrorAction SilentlyContinue | Select-Object WUServer, WUStatusServer
+WUServer               WUStatusServer
+--------               --------------
+http://wsus01.contoso.local:8530 http://wsus01.contoso.local:8530
+$ Get-ItemProperty HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU | Select-Object UseWUServer, NoAutoUpdate
+UseWUServer NoAutoUpdate
+----------- ------------
+          1            0
+$ Get-ItemProperty HKLM:\\SOFTWARE\\Microsoft\\PolicyManager\\current\\device\\Update | Select-Object DeferQualityUpdatesPeriodInDays, ConfigureDeadlineForQualityUpdates
+DeferQualityUpdatesPeriodInDays ConfigureDeadlineForQualityUpdates
+------------------------------- ----------------------------------
+                              3                                  3
+$ Get-Service wuauserv, UsoSvc | Select-Object Name, Status, StartType
+:::
+
+Aquí el caso está claro: la directiva de Intune ha llegado, pero una GPO sigue diciendo **`UseWUServer = 1`** y el equipo busca en `wsus01`, que se apagó hace meses. La solución es quitar esa GPO de la OU de los equipos gestionados por Intune (o, en el período de transición, configurar el origen de las actualizaciones por clase para que la calidad venga de Windows Update), forzar `gpupdate /force`, sincronizar desde **Configuración › Cuentas › Acceso al trabajo o la escuela › Información › Sincronizar** y comprobar que busca.
+
+Si ni la GPO ni MECM explican nada, `Get-WindowsUpdateLog` genera en el escritorio un `WindowsUpdate.log` legible con el error de la última búsqueda, y la mitad de las veces es falta de espacio en disco o una conexión que el proxy corta.
+
+! No metas un equipo en dos anillos "para que se actualice antes". Con dos políticas con valores distintos para el mismo ajuste, Intune marca conflicto y el equipo no aplica ninguno de los dos.
+
+## Siguientes pasos
+
+- **MECM / SCCM: empaquetado de aplicaciones** y la guía de **Windows 11 - Migrar los equipos de una sede** cubren el otro lado: qué sigue en MECM durante la co-gestión y cómo se mueve una sede entera de versión.
+- **Intune: Windows, macOS, iOS y Android**: el cumplimiento puede exigir una versión mínima del sistema operativo, y un equipo sin parchear acaba sin acceso por acceso condicional.
+- Saber qué carga de trabajo está en cada lado y para qué colección es la mitad de este ticket. Es lo que lleva el repositorio **18-mecm-intune-comanagement-tracker** de mi GitHub, y el informe de cumplimiento por equipo está en **02-intune-compliance-report**.
+""",
+  en="""
+## What you'll get
+
+Windows devices managed by Intune get the monthly updates in waves (IT first, then the majority, last the desks that can't fail), with deadlines that guarantee installation even if the user never restarts, the Windows version under control, a way to expedite a zero-day patch, and approved drivers. And the method for the device that hasn't updated in three months.
+
+All of this is **Windows Update for Business**: Intune doesn't distribute the patches, it tells each device when and how to download them from Windows Update. In the Intune admin center it lives under **Devices › Manage updates › Windows updates**, with tabs for rings, feature, quality and driver updates.
+
+## Before you start
+
+- The **Intune Administrator** role or a custom role with software update permissions.
+- Entra ID device groups for each ring: `GD-WU-Pilot`, `GD-WU-Broad`, `GD-WU-Trading`. Each device in **one** ring only.
+- For feature, expedited and driver policies: a Windows licence that includes them (Windows Enterprise E3/E5, Microsoft 365 E3/E5, Business Premium and equivalents) and, under **Tenant administration › Connectors and tokens › Windows data**, the features that require Windows diagnostic data turned on. Without it, the policy gets created and the reports stay empty.
+- If there is **co-management** with MECM: know where the **Windows Update policies** workload sits. If it is on Configuration Manager, nothing in this guide applies to those devices.
+
+## 1. Designing the rings
+
+| Ring | Who | Quality deferral | Quality deadline | Grace | Restart |
+|---|---|---|---|---|---|
+| Pilot | IT and 2-3 users per department | 0 days | 2 days | 1 day | Automatic outside active hours |
+| Broad | The rest of the office | 3 days | 3 days | 2 days | Automatic outside active hours |
+| Trading | Trading floor desks, critical | 7 days | 3 days | 2 days | Wide active hours, restart at the weekend |
+
+- The **deferral** counts from when Microsoft releases the patch; the **deadline** counts from when the device sees it; the **grace period** is the minimum days the user gets, once the deadline has passed, before the restart is forced (meant for the device that was off during the deadline). Together they say "at the latest, this is installed in N days".
+- **Active hours** prevent restarts during working time until the deadline is reached. On trading desks they are set wide (for example, 6:00 to 22:00) and the deadline is worked out so it lands at the weekend.
+- The trading ring is not "don't update": it is updating once the pilot has tested the market applications.
+
+:::ui Intune · Devices › Manage updates › Windows updates › Update rings › Create
+= Name: WU · Broad ring
+= Quality update deferral period (days): 3
+= Feature update deferral period (days): 0
+= Windows drivers: Allow
+= Automatic update behavior: Reset to default
+= Option to pause Windows updates: Disable
+= Use deadline settings: Allow
+= Deadline for quality updates: 3 · Grace period: 2
+= Auto reboot before deadline: Yes
+> Assignments › Include: GD-WU-Broad
+[Create]
+:::
+
+> If you use a **feature update policy** (section 2), the ring's feature deferral goes to **0**: the policy decides the version, and two places deciding the same thing is the source of many "I don't know why it upgraded".
+
+## 2. The Windows version: feature update policy
+
+Under **Feature updates › Create** you choose the version you want devices to stay on (for example, Windows 11, version 25H2). A device on an earlier version moves up to that one and goes no further until you change the policy. It can be offered as soon as possible, from a date, or as a **gradual rollout** in groups of days.
+
+## 3. The urgent patch: expedited updates
+
+When an out-of-band patch ships for an exploited vulnerability, you don't wait for the ring's deferral. Under **Quality updates** you create an **expedite** policy: you pick the patch by its release date (the two most recent security updates are offered) and the days before a restart is forced, **from 0 to 2**.
+
+- Only devices without that patch or a newer one receive it.
+- With **0 days**, the device restarts as soon as it finishes, with a short warning: not for the trading floor during market hours.
+- It overrides the ring's deferral but doesn't change it: once the patch is everywhere, you delete the policy and the rings carry on as before.
+
+## 4. Drivers
+
+By default, drivers arrive with quality updates if the ring allows them. A **driver updates** policy changes that: Intune shows which drivers apply to the assigned devices and you approve them (manual) or they approve themselves after some days (automatic). On devices with sensitive hardware (four-monitor desks with their graphics card, docking stations), manual approval keeps a new graphics driver from reaching the trading floor on a Tuesday.
+
+## 5. The reports
+
+- **Reports › Windows updates**: status per policy, with devices in error, pending restart or not reporting.
+- **Windows Update for Business reports** (in Azure Monitor, with a Log Analytics workspace) gives the finest detail: devices that haven't scanned for updates in days, per-device alerts and the compliance percentage by version. It is the figure you take to the risk meeting.
+
+## 6. The ticket: "this device hasn't updated since July"
+
+`MAD-PC-0233` shows the July cumulative. Intune says the ring is assigned and the profile applied. Look from the outside in:
+
+1. **Who is in charge of updates on this device?** If it is co-managed, the Intune portal shows each workload's authority for the device, and on the device, `C:\\Windows\\CCM\\Logs\\CoManagementHandler.log`. If **Windows Update policies** is still on Configuration Manager for its collection, Intune isn't in charge: either patch it through MECM or move the workload (or its pilot collection).
+2. **Is there a WSUS GPO?** An old policy pointing at a WSUS server that no longer exists leaves the device scanning a place that doesn't answer.
+3. **Is the service running?** `wuauserv` disabled by an "optimisation" tool or an old script.
+4. **Has the MDM policy arrived?** The ring's values must be in the `PolicyManager` registry.
+
+:::term PowerShell · on the affected device (as administrator)
+$ Get-ItemProperty HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate -ErrorAction SilentlyContinue | Select-Object WUServer, WUStatusServer
+WUServer               WUStatusServer
+--------               --------------
+http://wsus01.contoso.local:8530 http://wsus01.contoso.local:8530
+$ Get-ItemProperty HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU | Select-Object UseWUServer, NoAutoUpdate
+UseWUServer NoAutoUpdate
+----------- ------------
+          1            0
+$ Get-ItemProperty HKLM:\\SOFTWARE\\Microsoft\\PolicyManager\\current\\device\\Update | Select-Object DeferQualityUpdatesPeriodInDays, ConfigureDeadlineForQualityUpdates
+DeferQualityUpdatesPeriodInDays ConfigureDeadlineForQualityUpdates
+------------------------------- ----------------------------------
+                              3                                  3
+$ Get-Service wuauserv, UsoSvc | Select-Object Name, Status, StartType
+:::
+
+Here the case is clear: the Intune policy has arrived, but a GPO still says **`UseWUServer = 1`** and the device scans `wsus01`, which was switched off months ago. The fix is to remove that GPO from the OU of Intune-managed devices (or, during the transition, configure the update source per class so quality updates come from Windows Update), run `gpupdate /force`, sync from **Settings › Accounts › Access work or school › Info › Sync** and check that it scans.
+
+If neither the GPO nor MECM explains anything, `Get-WindowsUpdateLog` writes a readable `WindowsUpdate.log` to the desktop with the error from the last scan, and half the time it is low disk space or a connection the proxy cuts.
+
+! Don't put a device in two rings "so it updates sooner". With two policies holding different values for the same setting, Intune flags a conflict and the device applies neither.
+
+## Next steps
+
+- **MECM / SCCM: app packaging** and the **Windows 11 - Migrating a site's devices** guide cover the other side: what stays in MECM during co-management and how a whole site moves version.
+- **Intune: Windows, macOS, iOS and Android**: compliance can require a minimum OS version, and an unpatched device ends up without access through Conditional Access.
+- Knowing which workload sits on which side, and for which collection, is half of this ticket. That is what the **18-mecm-intune-comanagement-tracker** repository on my GitHub keeps track of, and the per-device compliance report is in **02-intune-compliance-report**.
+""")
+
+g(slug="azure-cost-management-ambitos-presupuestos-etiquetas-reservas-focus-y-la-factura-que-se-dispara", topic="azure-costes", date="2026-10-30",
+  title_es="Azure Cost Management: ámbitos, presupuestos, etiquetas, reservas, exportación FOCUS y el mes en que la factura se dispara",
+  title_en="Azure Cost Management: scopes, budgets, tags, reservations, FOCUS export and the month the bill jumps",
+  seo_title_en="Azure Cost Management: budgets, tags, FOCUS · Iñigo González",
+  seo_title_es="Azure Cost Management: presupuestos y FOCUS · Iñigo González",
+  dek_es="Ámbitos y roles, presupuestos con alertas reales y previstas, análisis de costes por etiqueta y grupo de recursos, ajuste de tamaño con Advisor, cuándo comprar reservas y cuándo un plan de ahorro, showback y chargeback con etiquetas, la exportación en FOCUS y cómo encontrar la causa del mes en que la factura sube un 40 %.",
+  dek_en="Scopes and roles, budgets with actual and forecast alerts, cost analysis by tag and resource group, right-sizing with Advisor, when to buy reservations and when a savings plan, showback and chargeback with tags, the FOCUS export, and how to find the cause of the month the bill goes up 40%.",
+  es="""
+## Qué vas a conseguir
+
+Una nube en la que cada euro tiene dueño: presupuestos que avisan antes de que el gasto se pase, cada recurso etiquetado con su centro de coste, un informe mensual por equipo que se puede enseñar (showback) o facturar (chargeback), compromisos de uso comprados con datos y no con intuición, y los datos de coste exportados en un formato abierto para cruzarlos con lo demás. Y el método para la reunión que nadie quiere: "la factura de Azure ha subido un 40 % este mes, ¿qué ha pasado?".
+
+## Antes de empezar
+
+- Saber qué **contrato** tiene la organización con Microsoft: Enterprise Agreement (EA), Microsoft Customer Agreement (MCA) o a través de un partner (CSP). Cambia los ámbitos de facturación y quién puede ver qué.
+- Rol de **Cost Management Reader** (o **Contributor** para crear presupuestos y exportaciones) en las suscripciones, y un rol de facturación si vas a ver el contrato entero.
+- Una **cuenta de almacenamiento** para las exportaciones, en una suscripción de plataforma.
+- La lista de **centros de coste** y de responsables de cada aplicación, que te dará Finanzas. Sin ella, las etiquetas son nombres inventados.
+
+## 1. Ámbitos: dónde se mira cada coste
+
+Cost Management muestra los costes del **ámbito** que eliges arriba a la izquierda:
+
+- **Ámbitos de facturación**: la cuenta de facturación y, según el contrato, departamentos y cuentas de inscripción (EA) o perfiles de facturación y secciones de factura (MCA). Es donde se ven las compras: reservas, planes de ahorro, Marketplace.
+- **Ámbitos de Azure RBAC**: grupos de administración, suscripciones y grupos de recursos. Es donde trabaja cada equipo, y donde se dan permisos con roles normales de Azure.
+
+Un diseño que funciona: un **grupo de administración** por área (Plataforma, Aplicaciones de negocio, Datos), las suscripciones de producción y no producción separadas, y Finanzas con lectura en el ámbito de facturación. Cada responsable ve su suscripción y nada más.
+
+## 2. Presupuestos y alertas
+
+Un presupuesto no para nada: **avisa**. Se crea en el ámbito que quieras vigilar con un importe, un periodo (mensual, trimestral o anual) y umbrales sobre el coste **real** o el **previsto**.
+
+:::ui Azure · Cost Management › Budgets › Add
+= Ámbito: suscripción SUB-APP-PROD
+= Nombre: PRE-APP-PROD-mensual · Periodo de restablecimiento: Billing month
+= Importe: 18.000 €
+> Alert conditions
+= Actual · 80 % · correo al responsable de la aplicación
+= Actual · 100 % · correo al responsable y a FinOps
+= Forecasted · 110 % · action group AG-FinOps (correo y Teams)
+[Create]
+:::
+
+- La alerta sobre el **previsto** es la útil: avisa el día 10 de que, a este ritmo, el mes acabará en 20.000 €, cuando todavía se puede hacer algo.
+- Además de los presupuestos, crea una **alerta de anomalías** en cada suscripción importante (Cost alerts › Anomaly alert): avisa de un cambio brusco en el gasto diario sin que tengas que fijar un importe.
+- Un **action group** puede lanzar un runbook o una aplicación lógica que, en un entorno de pruebas, apague máquinas al llegar al 100 %. En producción, no: ahí solo se avisa.
+
+## 3. Etiquetas: showback y chargeback
+
+Sin etiquetas, el coste se reparte por suscripción y grupo de recursos y no hay más. Con ellas, por lo que quiera Finanzas. Un juego mínimo:
+
+| Etiqueta | Ejemplo | Para qué |
+|---|---|---|
+| `CentroCoste` | `CC-4120` | El chargeback: a qué presupuesto va |
+| `Aplicacion` | `crm-ventas` | Agrupar todo lo de una aplicación aunque esté en varios grupos de recursos |
+| `Entorno` | `prod`, `pre`, `dev` | Separar lo que se puede apagar de noche |
+| `Responsable` | `equipo-crm` | A quién se le pregunta |
+
+Para que existan de verdad:
+
+- **Azure Policy**: *Require a tag on resource groups* en los grupos de recursos, e *Inherit a tag from the resource group if missing* para que los recursos la hereden.
+- **Herencia de etiquetas** en Cost Management (Settings › Tag inheritance, en EA y MCA): aplica las etiquetas de la suscripción y del grupo de recursos a los registros de coste, incluso de recursos que no admiten etiquetas.
+- **Reglas de asignación de costes** para lo compartido (la red central, el firewall, Log Analytics de plataforma): se reparte entre los centros de coste por un porcentaje o en proporción a su gasto.
+
+:::term Azure CLI · recursos sin la etiqueta CentroCoste (Resource Graph)
+$ az graph query -q "Resources | where isnull(tags['CentroCoste']) | summarize total=count() by resourceGroup, subscriptionId | order by total desc" --first 20
+:::
+
+**Showback** es enseñar a cada área lo que gasta; **chargeback**, cargárselo en su presupuesto. Se empieza siempre por el primero, unos meses, hasta que las cifras se aceptan. Facturar con un 30 % de coste sin etiquetar solo genera discusiones.
+
+## 4. Análisis de costes
+
+En **Cost analysis**, las vistas que más se usan:
+
+- **Daily costs** agrupado por **Service name**: un pico se ve como una columna que destaca.
+- **Cost by resource**: los recursos más caros del ámbito, con su tipo y grupo de recursos.
+- **Group by › Tag › CentroCoste**: el informe de showback en un clic, que se guarda como vista y se programa por correo.
+- **Actual cost** frente a **Amortized cost**: en el real, una reserva anual pagada por adelantado aparece entera el mes de la compra; en el amortizado, repartida por días entre los recursos que la usan. Para showback, siempre amortizado.
+
+## 5. Ajustar tamaño con Advisor
+
+**Advisor › Cost** propone apagar o reducir máquinas virtuales infrautilizadas, quitar discos e IP públicas sin asociar, y comprar reservas. En la configuración de Advisor se ajusta el umbral de CPU y el periodo que mira para las recomendaciones de máquinas virtuales.
+
+- Antes de reducir una máquina, mira la memoria y los picos, no solo la media de CPU: un servidor de informes que trabaja el día 1 de cada mes parece ocioso los otros 29.
+- Los discos sin asociar y las instantáneas antiguas son el ahorro sin riesgo: se revisan cada mes.
+- Los entornos de desarrollo con **apagado automático** fuera de horario ahorran más que cualquier reserva.
+
+## 6. Reservas o plan de ahorro
+
+| | Reserva | Plan de ahorro para proceso |
+|---|---|---|
+| Compromiso | Un tipo de recurso concreto (familia de VM, región) durante 1 o 3 años | Un importe por hora en proceso durante 1 o 3 años |
+| Flexibilidad | Dentro de la familia y región (flexibilidad de tamaño); se puede cambiar o devolver con límites | Cualquier familia, región y servicios de proceso compatibles |
+| Descuento | El mayor | Algo menor |
+| Cuándo | Cargas estables que no van a cambiar: controladores de dominio, bases de datos, la VDI de la oficina | Cargas que cambian de tamaño o de región, o una mezcla de servicios |
+
+- Primero se **ajusta el tamaño**, después se compra: reservar una máquina que sobra la deja sobrando tres años.
+- Se aplica primero la reserva y después el plan de ahorro; muchas organizaciones combinan reservas para la base fija y un plan de ahorro para el resto.
+- El ámbito de la reserva (compartido, una suscripción, un grupo de recursos o un grupo de administración) decide quién se beneficia. **Compartido** aprovecha mejor la compra; para chargeback, el coste amortizado la reparte entre quien la usa.
+- Se mira la **utilización** de cada reserva cada mes en *Reservations*: una reserva al 40 % es dinero que se paga por nada.
+
+## 7. Exportar en FOCUS
+
+**FOCUS** (FinOps Open Cost and Usage Specification) es un esquema abierto de datos de coste: las mismas columnas para Azure, AWS u otros, con el coste facturado y el efectivo (amortizado) en el mismo fichero.
+
+:::ui Azure · Cost Management › Exports › Create
+= Plantilla: Cost and usage (FOCUS)
+= Ámbito: cuenta de facturación (o suscripción)
+= Frecuencia: Daily export of month-to-date costs
+= Destino: stfinopsexports / contenedor msexports / carpeta focus
+= Formato: Parquet · Compresión: Snappy · [x] Overwrite data
+[Create]
+:::
+
+Columnas como `BilledCost`, `EffectiveCost`, `ServiceName`, `ResourceName`, `RegionName`, `SubAccountName` y `Tags` dejan hacer el showback en Power BI o en Fabric sin traducir el formato de cada proveedor. La exportación FOCUS no admite el ámbito de grupo de administración: en EA se hace en la cuenta de facturación o en cada suscripción.
+
+## 8. El ticket: "la factura ha subido un 40 % este mes"
+
+Se busca en este orden, de lo más fácil de confirmar a lo más difícil:
+
+1. **¿Es una compra?** Cambia la vista a **Actual cost** y filtra por *Charge type = Purchase*. Una reserva de tres años o una licencia de Marketplace aparece entera en un mes. Si es eso, en amortizado no hay subida y la conversación termina.
+2. **¿Qué servicio ha subido?** **Daily costs** agrupado por servicio, este mes frente al anterior. Los sospechosos habituales: *Log Analytics* (alguien activó registros de diagnóstico detallados), *Bandwidth* (salida de datos a internet o entre regiones), *Virtual Machines* (una máquina nueva o más grande), *Microsoft Defender for Cloud* (un plan activado en todas las suscripciones), *Backup* y *Storage* (instantáneas que nadie borra).
+3. **¿Qué recurso, y desde qué día?** Filtra por ese servicio y agrupa por recurso: la columna del día en que empezó señala el cambio.
+4. **¿Quién y por qué?** El **registro de actividad** del recurso dice quién lo creó o lo cambió de tamaño ese día. Con eso se habla con el responsable, no con toda la empresa.
+
+:::term Azure CLI · coste del mes por servicio con la API de Cost Management
+$ az rest --method post --url "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/query?api-version=2023-03-01" --body @consulta.json --query "properties.rows" -o table
+# consulta.json:
+# {"type":"AmortizedCost","timeframe":"Custom","timePeriod":{"from":"2026-09-01","to":"2026-09-30"},
+#  "dataset":{"granularity":"None","aggregation":{"total":{"name":"Cost","function":"Sum"}},
+#             "grouping":[{"type":"Dimension","name":"ServiceName"}]}}
+$ az monitor activity-log list --resource-group rg-crm-prod --start-time 2026-09-12 --query "[?contains(operationName.value,'write')].{quien:caller,que:operationName.value,cuando:eventTimestamp}" -o table
+:::
+
+La respuesta que se lleva a la reunión: cuánto subió, por qué (una frase), quién lo decidió, si es puntual o se queda, y qué se hace (borrarlo, reducir la retención de registros, mover la salida de datos, reservar si es permanente). Y una alerta de anomalía o un presupuesto nuevo para que el siguiente se vea en dos días y no a fin de mes.
+
+! No borres un recurso caro solo porque nadie responde en una hora. Etiquétalo, avisa al responsable de la suscripción y apágalo (no lo borres) si el coste lo justifica: una máquina detenida y desasignada deja de costar en proceso; los discos se siguen pagando.
+
+## Siguientes pasos
+
+- **Azure Monitor y Log Analytics**: la retención y las tablas que más ingieren son, muchas veces, la primera línea de la factura que nadie mira.
+- **Terraform**: las etiquetas se ponen en el código y las revisa el pipeline antes de crear nada; es más barato que perseguirlas después.
+- Juntar Azure y AWS en un solo informe por centro de coste es lo que permite FOCUS. Es la idea del repositorio **01-finops-cloud-cost-dashboard** de mi GitHub.
+""",
+  en="""
+## What you'll get
+
+A cloud where every euro has an owner: budgets that warn before spending overshoots, every resource tagged with its cost centre, a monthly report per team that can be shown (showback) or charged (chargeback), usage commitments bought on data rather than gut feeling, and cost data exported in an open format to combine with everything else. And the method for the meeting nobody wants: "the Azure bill went up 40% this month, what happened?".
+
+## Before you start
+
+- Know which **agreement** the organisation has with Microsoft: Enterprise Agreement (EA), Microsoft Customer Agreement (MCA) or through a partner (CSP). It changes the billing scopes and who can see what.
+- The **Cost Management Reader** role (or **Contributor** to create budgets and exports) on the subscriptions, and a billing role if you are going to see the whole agreement.
+- A **storage account** for exports, in a platform subscription.
+- The list of **cost centres** and of owners of each application, which Finance will give you. Without it, tags are made-up names.
+
+## 1. Scopes: where each cost is viewed
+
+Cost Management shows the costs of the **scope** you pick at the top left:
+
+- **Billing scopes**: the billing account and, depending on the agreement, departments and enrollment accounts (EA) or billing profiles and invoice sections (MCA). This is where purchases show up: reservations, savings plans, Marketplace.
+- **Azure RBAC scopes**: management groups, subscriptions and resource groups. This is where each team works, and where permissions are granted with normal Azure roles.
+
+A design that works: one **management group** per area (Platform, Business applications, Data), production and non-production subscriptions kept apart, and Finance with read access at the billing scope. Each owner sees their subscription and nothing else.
+
+## 2. Budgets and alerts
+
+A budget doesn't stop anything: it **warns**. It is created at the scope you want to watch with an amount, a period (monthly, quarterly or yearly) and thresholds on **actual** or **forecasted** cost.
+
+:::ui Azure · Cost Management › Budgets › Add
+= Scope: subscription SUB-APP-PROD
+= Name: BUD-APP-PROD-monthly · Reset period: Billing month
+= Amount: €18,000
+> Alert conditions
+= Actual · 80% · email to the application owner
+= Actual · 100% · email to the owner and FinOps
+= Forecasted · 110% · action group AG-FinOps (email and Teams)
+[Create]
+:::
+
+- The **forecasted** alert is the useful one: on the 10th it warns that, at this pace, the month will end at €20,000, while there is still time to act.
+- Besides budgets, create an **anomaly alert** on each important subscription (Cost alerts › Anomaly alert): it warns of a sharp change in daily spend without you having to set an amount.
+- An **action group** can trigger a runbook or a logic app that, in a test environment, shuts machines down at 100%. In production, no: there it only warns.
+
+## 3. Tags: showback and chargeback
+
+Without tags, cost is split by subscription and resource group and that's it. With them, by whatever Finance wants. A minimum set:
+
+| Tag | Example | What for |
+|---|---|---|
+| `CostCentre` | `CC-4120` | Chargeback: which budget it goes to |
+| `Application` | `crm-sales` | Grouping everything for an application even across several resource groups |
+| `Environment` | `prod`, `pre`, `dev` | Separating what can be switched off at night |
+| `Owner` | `crm-team` | Who to ask |
+
+To make them real:
+
+- **Azure Policy**: *Require a tag on resource groups* on resource groups, and *Inherit a tag from the resource group if missing* so resources inherit it.
+- **Tag inheritance** in Cost Management (Settings › Tag inheritance, on EA and MCA): applies subscription and resource group tags to cost records, even for resources that don't support tags.
+- **Cost allocation rules** for shared items (the central network, the firewall, the platform Log Analytics): split between cost centres by a percentage or in proportion to their spend.
+
+:::term Azure CLI · resources missing the CostCentre tag (Resource Graph)
+$ az graph query -q "Resources | where isnull(tags['CostCentre']) | summarize total=count() by resourceGroup, subscriptionId | order by total desc" --first 20
+:::
+
+**Showback** is showing each area what it spends; **chargeback**, charging it to their budget. You always start with the first one, for a few months, until the figures are accepted. Charging with 30% of cost untagged only creates arguments.
+
+## 4. Cost analysis
+
+In **Cost analysis**, the most used views:
+
+- **Daily costs** grouped by **Service name**: a spike shows up as a column that stands out.
+- **Cost by resource**: the most expensive resources in the scope, with their type and resource group.
+- **Group by › Tag › CostCentre**: the showback report in one click, saved as a view and scheduled by email.
+- **Actual cost** versus **Amortized cost**: in actual, a yearly reservation paid upfront shows in full in the month of purchase; in amortized, spread by day across the resources that use it. For showback, always amortized.
+
+## 5. Right-sizing with Advisor
+
+**Advisor › Cost** suggests shutting down or resizing underused virtual machines, removing unattached disks and public IPs, and buying reservations. In Advisor's configuration you set the CPU threshold and the lookback period for virtual machine recommendations.
+
+- Before downsizing a machine, look at memory and peaks, not just average CPU: a reporting server that works on the 1st of every month looks idle the other 29 days.
+- Unattached disks and old snapshots are risk-free savings: they get reviewed every month.
+- Development environments with **auto-shutdown** out of hours save more than any reservation.
+
+## 6. Reservations or a savings plan
+
+| | Reservation | Savings plan for compute |
+|---|---|---|
+| Commitment | A specific resource type (VM family, region) for 1 or 3 years | An hourly amount of compute for 1 or 3 years |
+| Flexibility | Within the family and region (instance size flexibility); can be exchanged or refunded within limits | Any family, region and eligible compute services |
+| Discount | The highest | Somewhat lower |
+| When | Stable workloads that won't change: domain controllers, databases, the office VDI | Workloads that change size or region, or a mix of services |
+
+- **Right-size** first, then buy: reserving a machine that is oversized keeps it oversized for three years.
+- The reservation is applied first and then the savings plan; many organisations combine reservations for the fixed baseline and a savings plan for the rest.
+- The reservation's scope (shared, one subscription, one resource group or a management group) decides who benefits. **Shared** gets the most out of the purchase; for chargeback, amortized cost spreads it across whoever uses it.
+- Check each reservation's **utilisation** every month in *Reservations*: a reservation at 40% is money paid for nothing.
+
+## 7. Exporting in FOCUS
+
+**FOCUS** (FinOps Open Cost and Usage Specification) is an open cost data schema: the same columns for Azure, AWS and others, with billed cost and effective (amortized) cost in the same file.
+
+:::ui Azure · Cost Management › Exports › Create
+= Template: Cost and usage (FOCUS)
+= Scope: billing account (or subscription)
+= Frequency: Daily export of month-to-date costs
+= Destination: stfinopsexports / container msexports / folder focus
+= Format: Parquet · Compression: Snappy · [x] Overwrite data
+[Create]
+:::
+
+Columns such as `BilledCost`, `EffectiveCost`, `ServiceName`, `ResourceName`, `RegionName`, `SubAccountName` and `Tags` let you build showback in Power BI or Fabric without translating each provider's format. The FOCUS export doesn't support the management group scope: on EA it is done at the billing account or on each subscription.
+
+## 8. The ticket: "the bill went up 40% this month"
+
+Search in this order, from easiest to confirm to hardest:
+
+1. **Is it a purchase?** Switch the view to **Actual cost** and filter by *Charge type = Purchase*. A three-year reservation or a Marketplace licence shows in full in one month. If that's it, amortized shows no increase and the conversation is over.
+2. **Which service went up?** **Daily costs** grouped by service, this month against last. The usual suspects: *Log Analytics* (someone enabled verbose diagnostic logs), *Bandwidth* (data egress to the internet or between regions), *Virtual Machines* (a new or bigger machine), *Microsoft Defender for Cloud* (a plan enabled on every subscription), *Backup* and *Storage* (snapshots nobody deletes).
+3. **Which resource, and since which day?** Filter by that service and group by resource: the column for the day it started points at the change.
+4. **Who and why?** The resource's **activity log** says who created or resized it that day. With that you talk to the owner, not the whole company.
+
+:::term Azure CLI · month's cost by service with the Cost Management API
+$ az rest --method post --url "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/query?api-version=2023-03-01" --body @query.json --query "properties.rows" -o table
+# query.json:
+# {"type":"AmortizedCost","timeframe":"Custom","timePeriod":{"from":"2026-09-01","to":"2026-09-30"},
+#  "dataset":{"granularity":"None","aggregation":{"total":{"name":"Cost","function":"Sum"}},
+#             "grouping":[{"type":"Dimension","name":"ServiceName"}]}}
+$ az monitor activity-log list --resource-group rg-crm-prod --start-time 2026-09-12 --query "[?contains(operationName.value,'write')].{who:caller,what:operationName.value,when:eventTimestamp}" -o table
+:::
+
+The answer you take to the meeting: how much it went up, why (one sentence), who decided it, whether it is one-off or here to stay, and what happens next (delete it, cut log retention, move the egress, reserve if it is permanent). And an anomaly alert or a new budget so the next one is seen in two days and not at month end.
+
+! Don't delete an expensive resource just because nobody answers within an hour. Tag it, warn the subscription owner and stop it (don't delete it) if the cost justifies it: a stopped and deallocated machine stops costing compute; its disks are still charged.
+
+## Next steps
+
+- **Azure Monitor and Log Analytics**: retention and the tables that ingest the most are often the first line of the bill nobody looks at.
+- **Terraform**: tags go in the code and the pipeline checks them before anything is created; it is cheaper than chasing them afterwards.
+- Bringing Azure and AWS together in a single report per cost centre is what FOCUS makes possible. That is the idea behind the **01-finops-cloud-cost-dashboard** repository on my GitHub.
+""")
+
+g(slug="microsoft-365-copilot-sobreexposicion-piloto-agentes-y-un-documento-que-no-deberia-ver", topic="copilot-m365", date="2026-10-30",
+  title_es="Microsoft 365 Copilot: requisitos, sobreexposición en SharePoint, piloto, agentes y un usuario que ve un documento que no debería",
+  title_en="Microsoft 365 Copilot: prerequisites, oversharing in SharePoint, pilot, agents and a user who sees a document they shouldn't",
+  seo_title_en="Microsoft 365 Copilot: oversharing, rollout · Iñigo González",
+  seo_title_es="Microsoft 365 Copilot: despliegue y permisos · Iñigo González",
+  dek_es="Licencias y requisitos, revisar la sobreexposición en SharePoint y OneDrive antes de activar (informes de SharePoint Advanced Management, Restricted Content Discovery, etiquetas de confidencialidad en Purview), grupos piloto, informes de uso, formación, gobierno de agentes de Copilot Studio y el ticket del usuario al que Copilot le enseña un documento que no debería ver.",
+  dek_en="Licences and prerequisites, reviewing oversharing in SharePoint and OneDrive before enabling (SharePoint Advanced Management reports, Restricted Content Discovery, Purview sensitivity labels), pilot groups, usage reports, training, governance of Copilot Studio agents, and the ticket of the user Copilot shows a document they shouldn't see.",
+  es="""
+## Qué vas a conseguir
+
+Un despliegue de Microsoft 365 Copilot (Microsoft lo está renombrando como Microsoft Copilot en su documentación) que empieza por los permisos y no por las licencias, pasa por un piloto con objetivos medibles, forma a la gente para usarlo bien y mantiene los agentes bajo control. Y la respuesta al primer ticket serio que llega casi siempre: "Copilot me ha resumido un documento de RR. HH. que yo no debería poder ver".
+
+La idea que lo ordena todo: **Copilot solo enseña lo que el usuario ya puede abrir**. No salta permisos; los hace visibles. Un fichero compartido con toda la empresa hace tres años, que nadie encontraba, aparece ahora en una respuesta. Por eso el trabajo serio está antes de activar.
+
+## Antes de empezar
+
+- Licencias base que admitan el complemento de Copilot (Microsoft 365 E3/E5, Office 365 E1/E3/E5, Business Standard o Premium, entre otras) y las licencias de Copilot compradas.
+- Usuarios en **Entra ID** con buzón de **Exchange Online** y **OneDrive**; Microsoft 365 Apps en un canal admitido (Current o Monthly Enterprise reciben antes las novedades); el nuevo Outlook y Teams actualizados.
+- La red permite los dominios de Microsoft 365 y de Copilot (incluido `*.cloud.microsoft`) y las conexiones WebSocket, también a través del proxy.
+- Roles: **SharePoint Administrator** para los informes y la configuración de sitios, administrador de **Purview** para etiquetas y DLP, y **AI Administrator** o equivalente para la configuración de Copilot y los agentes.
+
+## 1. La sobreexposición: lo primero
+
+Los informes de **SharePoint Advanced Management** (incluido con las licencias de Copilot) en el centro de administración de SharePoint, en **Informes › Gobierno del acceso a los datos**:
+
+- **Vínculos de uso compartido**: sitios con vínculos *Cualquier persona* y *Personas de su organización*. Un vínculo de organización sobre una carpeta de nóminas es exactamente lo que Copilot va a encontrar.
+- **Contenido compartido con "Todos excepto los usuarios externos"**: el grupo que mete a toda la empresa en un sitio con un clic.
+- **Permisos del sitio**: sitios con muchos usuarios con acceso, herencia rota o sin propietario.
+
+Con la lista de sitios de riesgo, tres herramientas, de menos a más drásticas:
+
+- **Revisión de acceso del sitio**: SharePoint pide al propietario que revise y quite permisos. Es la solución de verdad y la más lenta.
+- **Restricted Content Discovery** (en el sitio: *Restringir contenido de Microsoft Copilot*): el sitio sigue accesible para quien tiene permiso, pero no aparece en las respuestas de Copilot ni en la búsqueda de toda la organización. Es temporal, mientras se revisan los permisos.
+- **Control de acceso restringido**: solo los miembros de un grupo concreto pueden entrar en el sitio, tengan el vínculo que tengan.
+
+:::term PowerShell · SharePoint Online · apartar un sitio de Copilot mientras se revisa
+$ Connect-SPOService -Url https://contoso-admin.sharepoint.com
+$ Set-SPOSite -Identity https://contoso.sharepoint.com/sites/RRHH-Nominas -RestrictContentOrgWideSearch $true
+$ Get-SPOSite -Identity https://contoso.sharepoint.com/sites/RRHH-Nominas | Select-Object Url, RestrictContentOrgWideSearch
+Url                                              RestrictContentOrgWideSearch
+---                                              ----------------------------
+https://contoso.sharepoint.com/sites/RRHH-Nominas                        True
+:::
+
+> **Restricted SharePoint Search** (una lista de hasta 100 sitios permitidos para toda la empresa) fue la solución de urgencia de los primeros despliegues. Microsoft la está retirando: desde el 31 de julio de 2026 ya no se puede activar si no estaba activada. Para un despliegue de hoy, Restricted Content Discovery por sitio.
+
+## 2. Purview: etiquetas y DLP
+
+- **Etiquetas de confidencialidad** con cifrado en lo sensible (*Confidencial - RR. HH.*, *Restringido - Comité*). Copilot respeta el cifrado: si el usuario no tiene los derechos de uso para ver y extraer el contenido, Copilot no lo usa. La etiqueta viaja con el fichero aunque alguien lo comparta mal.
+- **Etiqueta predeterminada** en las bibliotecas de los sitios sensibles, para no depender de que cada persona etiquete.
+- Una **directiva de DLP** con la ubicación de Microsoft 365 Copilot que excluye del procesamiento los ficheros con ciertas etiquetas.
+- **Auditoría** activada: cada interacción con Copilot queda registrada como `CopilotInteraction`, con los recursos a los que accedió para responder.
+
+## 3. El piloto
+
+- Un grupo de Entra ID `GG-Copilot-Piloto` con **licencias asignadas por grupo**: 30-50 personas de varios departamentos, con algún responsable y alguien escéptico, no solo entusiastas.
+- Objetivos medibles antes de empezar: tiempo para preparar un informe semanal, actas de reunión, primeros borradores. Una encuesta corta al principio y a las seis semanas.
+- Un **canal de Teams** del piloto para dudas y ejemplos, y un par de **champions** que responden ahí.
+- Los sitios de riesgo ya revisados o apartados con Restricted Content Discovery **antes** del primer día.
+
+## 4. Informes de uso
+
+- **Centro de administración de Microsoft 365 › Informes › Uso › Microsoft 365 Copilot**: usuarios activos, uso por aplicación (Teams, Outlook, Word, Excel, PowerPoint) y licencias asignadas sin uso.
+- El informe de **preparación** de Copilot dice qué usuarios cumplen los requisitos técnicos.
+- Una licencia sin uso en 30 días vuelve al grupo de espera; una lista de espera vale más que licencias olvidadas.
+
+## 5. Formación
+
+Lo que funciona es corto y del trabajo de cada uno: cómo pedir (contexto, objetivo, formato, fuentes), cómo pedir que cite de dónde saca cada dato, y **revisar siempre** lo que devuelve antes de mandarlo. Sesiones de 45 minutos por departamento con sus casos (resumir un hilo de correo largo, preparar una reunión a partir de los documentos compartidos, un primer borrador en Word) funcionan mejor que una formación general.
+
+También hay que decir qué no hacer: no pegar datos de clientes en herramientas de IA no autorizadas, y avisar si Copilot enseña algo que no debería (sección 7).
+
+## 6. Agentes y Copilot Studio
+
+Los agentes extienden Copilot con instrucciones, conocimiento (sitios, ficheros) y acciones. Sin gobierno, en tres meses hay doscientos agentes y nadie sabe qué datos usa cada uno.
+
+- **Quién crea**: los agentes sencillos del generador de agentes pueden estar abiertos a todos; **Copilot Studio** para quien tenga un caso aprobado.
+- **Dónde**: en el centro de administración de Power Platform, los **entornos**: uno de desarrollo personal o de equipo para crear y uno de producción para lo publicado, con **directivas de datos** que bloquean los conectores no aprobados.
+- **Qué se publica**: en el centro de administración de Microsoft 365, el inventario de **agentes**, donde se aprueban, se bloquean y se asignan a usuarios o grupos.
+- **Revisión**: cada agente publicado con un propietario, un propósito escrito y las fuentes que usa. Los que llevan 90 días sin uso se retiran.
+
+! Un agente con conocimiento de un sitio responde con lo que puede ver **quien lo usa**, pero un agente con acciones que usan las credenciales de su autor puede hacer cosas en nombre de otros. Revisa con qué identidad se ejecuta cada conector antes de publicarlo.
+
+## 7. El ticket: "Copilot me ha enseñado un documento que no debería ver"
+
+Una persona del piloto pregunta a Copilot por "las subidas salariales previstas" y la respuesta cita un Excel de RR. HH. Lo primero, decirle que ha hecho bien en avisar. Después:
+
+1. **¿Qué fichero es?** La respuesta de Copilot cita sus fuentes: con el enlace, se abre el fichero como administrador y se mira **Administrar acceso**.
+2. **¿Por qué puede verlo?** Casi siempre es una de tres: un **vínculo de "Personas de su organización"** creado hace tiempo, el grupo **"Todos excepto los usuarios externos"** con permiso en el sitio o la carpeta, o una **herencia rota** en una carpeta concreta. Copilot no ha saltado nada: esa persona podía abrir el fichero desde el navegador.
+3. **Cerrar el acceso**: quitar el vínculo o el permiso, poner la etiqueta de confidencialidad con cifrado y, si el sitio entero está mal, **Restricted Content Discovery** mientras su propietario lo revisa.
+4. **¿Quién más lo ha visto?** En **Purview › Auditoría**, buscar los accesos al fichero y las interacciones `CopilotInteraction` que lo usaron como recurso, en el periodo en que estuvo abierto. Si es un dato personal, se avisa al delegado de protección de datos y él decide si hay brecha que notificar.
+5. **Buscar los parecidos**: el mismo vínculo o grupo suele estar en más sitios. Se vuelve al informe de vínculos de uso compartido filtrando por ese sitio y los de RR. HH. y Finanzas.
+
+## Siguientes pasos
+
+- **Microsoft Purview** cubre en profundidad etiquetas, DLP y auditoría, que son la mitad de un despliegue de Copilot bien hecho.
+- **SharePoint**: permisos de sitios, grupos y uso compartido; la revisión de sobreexposición es, en el fondo, una limpieza de SharePoint pendiente.
+- Revisar el inquilino antes y después del despliegue (uso compartido externo, propietarios, licencias sin uso) es la idea del repositorio **27-m365-tenant-governance-review** de mi GitHub.
+""",
+  en="""
+## What you'll get
+
+A Microsoft 365 Copilot rollout (Microsoft is renaming it Microsoft Copilot in its documentation) that starts with permissions rather than licences, goes through a pilot with measurable goals, teaches people to use it well and keeps agents under control. And the answer to the first serious ticket, which almost always arrives: "Copilot summarised an HR document for me that I shouldn't be able to see".
+
+The idea that orders everything: **Copilot only shows what the user can already open**. It doesn't bypass permissions; it makes them visible. A file shared with the whole company three years ago, which nobody could find, now turns up in an answer. That's why the serious work happens before enabling it.
+
+## Before you start
+
+- Base licences that support the Copilot add-on (Microsoft 365 E3/E5, Office 365 E1/E3/E5, Business Standard or Premium, among others) and the Copilot licences purchased.
+- Users in **Entra ID** with an **Exchange Online** mailbox and **OneDrive**; Microsoft 365 Apps on a supported channel (Current or Monthly Enterprise get new features first); new Outlook and Teams up to date.
+- The network allows Microsoft 365 and Copilot domains (including `*.cloud.microsoft`) and WebSocket connections, through the proxy too.
+- Roles: **SharePoint Administrator** for reports and site settings, a **Purview** administrator for labels and DLP, and **AI Administrator** or equivalent for Copilot settings and agents.
+
+## 1. Oversharing: first things first
+
+The **SharePoint Advanced Management** reports (included with Copilot licences) in the SharePoint admin center, under **Reports › Data access governance**:
+
+- **Sharing links**: sites with *Anyone* and *People in your organization* links. An organisation link on a payroll folder is exactly what Copilot is going to find.
+- **Content shared with "Everyone except external users"**: the group that puts the whole company into a site with one click.
+- **Site permissions**: sites with many users with access, broken inheritance or no owner.
+
+With the list of risky sites, three tools, from least to most drastic:
+
+- **Site access review**: SharePoint asks the owner to review and remove permissions. It is the real fix and the slowest.
+- **Restricted Content Discovery** (on the site: *Restrict content from Microsoft Copilot*): the site stays accessible to whoever has permission, but doesn't appear in Copilot answers or organisation-wide search. It is temporary, while permissions are reviewed.
+- **Restricted access control**: only members of a specific group can get into the site, whatever link they have.
+
+:::term PowerShell · SharePoint Online · keep a site out of Copilot while it is reviewed
+$ Connect-SPOService -Url https://contoso-admin.sharepoint.com
+$ Set-SPOSite -Identity https://contoso.sharepoint.com/sites/HR-Payroll -RestrictContentOrgWideSearch $true
+$ Get-SPOSite -Identity https://contoso.sharepoint.com/sites/HR-Payroll | Select-Object Url, RestrictContentOrgWideSearch
+Url                                             RestrictContentOrgWideSearch
+---                                             ----------------------------
+https://contoso.sharepoint.com/sites/HR-Payroll                         True
+:::
+
+> **Restricted SharePoint Search** (an allow list of up to 100 sites for the whole company) was the emergency fix of early rollouts. Microsoft is retiring it: since 31 July 2026 it can't be newly enabled. For a rollout today, Restricted Content Discovery per site.
+
+## 2. Purview: labels and DLP
+
+- **Sensitivity labels** with encryption on what's sensitive (*Confidential - HR*, *Restricted - Board*). Copilot honours encryption: if the user doesn't have the usage rights to view and extract the content, Copilot doesn't use it. The label travels with the file even if someone shares it badly.
+- A **default label** on the libraries of sensitive sites, so it doesn't depend on each person labelling.
+- A **DLP policy** with the Microsoft 365 Copilot location that excludes files with certain labels from processing.
+- **Auditing** on: every Copilot interaction is logged as `CopilotInteraction`, with the resources it accessed to answer.
+
+## 3. The pilot
+
+- An Entra ID group `GG-Copilot-Pilot` with **group-based licensing**: 30-50 people from several departments, with a manager or two and a sceptic, not only enthusiasts.
+- Measurable goals before starting: time to prepare a weekly report, meeting minutes, first drafts. A short survey at the start and at six weeks.
+- A pilot **Teams channel** for questions and examples, and a couple of **champions** who answer there.
+- Risky sites already reviewed or set aside with Restricted Content Discovery **before** day one.
+
+## 4. Usage reports
+
+- **Microsoft 365 admin center › Reports › Usage › Microsoft 365 Copilot**: active users, usage by app (Teams, Outlook, Word, Excel, PowerPoint) and assigned licences with no usage.
+- The Copilot **readiness** report shows which users meet the technical prerequisites.
+- A licence unused for 30 days goes back to the waiting list; a waiting list is worth more than forgotten licences.
+
+## 5. Training
+
+What works is short and about each person's own work: how to ask (context, goal, format, sources), how to ask it to cite where each figure comes from, and **always reviewing** what it returns before sending it. 45-minute sessions per department with their own cases (summarising a long email thread, preparing a meeting from the shared documents, a first draft in Word) work better than general training.
+
+You also have to say what not to do: don't paste client data into unapproved AI tools, and report it if Copilot shows something it shouldn't (section 7).
+
+## 6. Agents and Copilot Studio
+
+Agents extend Copilot with instructions, knowledge (sites, files) and actions. Without governance, in three months there are two hundred agents and nobody knows which data each one uses.
+
+- **Who builds**: simple agents from the agent builder can be open to everyone; **Copilot Studio** for people with an approved use case.
+- **Where**: in the Power Platform admin center, **environments**: a personal or team development one for building and a production one for what's published, with **data policies** that block unapproved connectors.
+- **What gets published**: in the Microsoft 365 admin center, the **agents** inventory, where they are approved, blocked and assigned to users or groups.
+- **Review**: every published agent with an owner, a written purpose and the sources it uses. Those unused for 90 days are retired.
+
+! An agent with knowledge from a site answers with what **the person using it** can see, but an agent with actions that use its author's credentials can do things on behalf of others. Check which identity each connector runs as before publishing.
+
+## 7. The ticket: "Copilot showed me a document I shouldn't see"
+
+Someone in the pilot asks Copilot about "the planned salary increases" and the answer cites an HR Excel file. First, tell them they did the right thing by reporting it. Then:
+
+1. **Which file is it?** Copilot's answer cites its sources: with the link, open the file as an administrator and look at **Manage access**.
+2. **Why can they see it?** It is almost always one of three: an old **"People in your organization" link**, the **"Everyone except external users"** group with permission on the site or folder, or **broken inheritance** on a specific folder. Copilot hasn't bypassed anything: that person could open the file from the browser.
+3. **Close the access**: remove the link or the permission, apply the sensitivity label with encryption and, if the whole site is wrong, **Restricted Content Discovery** while its owner reviews it.
+4. **Who else has seen it?** In **Purview › Audit**, search for access to the file and the `CopilotInteraction` events that used it as a resource, over the period it was open. If it is personal data, inform the data protection officer, who decides whether there is a breach to notify.
+5. **Find the lookalikes**: the same link or group is usually on more sites. Go back to the sharing links report filtering by that site and the HR and Finance ones.
+
+## Next steps
+
+- **Microsoft Purview** covers labels, DLP and auditing in depth, which are half of a well-done Copilot rollout.
+- **SharePoint**: site permissions, groups and sharing; the oversharing review is, at heart, an overdue SharePoint clean-up.
+- Reviewing the tenant before and after the rollout (external sharing, owners, unused licences) is the idea behind the **27-m365-tenant-governance-review** repository on my GitHub.
+""")
+
+# ---------------------------------------------------------------- Sector 2 · Brand corner pre-opening
+g(slug="corner-de-marca-en-gran-almacen-checklist-de-it-de-la-pre-apertura", topic="corner-preapertura", date="2026-10-30",
+  title_es="Corner de marca en un gran almacén: el checklist de IT desde la obra hasta el día de apertura",
+  title_en="A brand corner inside a department store: the IT checklist from fit-out to opening day",
+  seo_title_en="Brand corner pre-opening IT checklist · Iñigo González",
+  seo_title_es="Pre-apertura de un corner: checklist IT · Iñigo González",
+  dek_es="Qué pone el equipo de IT y telecomunicaciones del gran almacén y qué pone la marca, el punto de red y la sala de comunicaciones de la planta, TPV, datáfonos e impresoras, el respaldo por Wi-Fi o 4G, usuarios y cuentas, el día de pruebas, el soporte del día de apertura y la entrega a quien da soporte después.",
+  dek_en="What the department store's IT and telecom team provides and what the brand provides, the network point and the floor's comms room, POS, payment terminals and printers, Wi-Fi or 4G backup, users and accounts, test day, opening day support and the handover to whoever supports it afterwards.",
+  es="""
+## Qué vas a conseguir
+
+Que un corner de marca dentro de un gran almacén abra a su hora con todo funcionando: el TPV vende, el datáfono cobra, la impresora saca el ticket y el personal entra con su usuario. Un corner es pequeño, pero depende de dos organizaciones a la vez: el gran almacén, dueño del edificio, la red y la sala de comunicaciones de cada planta, y la marca, dueña de sus equipos, sus aplicaciones y su forma de cobrar. La mayoría de los problemas del día de apertura vienen de algo que cada lado creía que ponía el otro.
+
+## Antes de empezar
+
+- La **fecha de apertura** y el calendario de obra: cuándo termina el montaje del mobiliario y cuándo puede entrar IT.
+- El contacto del **equipo de IT y telecomunicaciones del gran almacén** y su procedimiento para pedir un punto de red, normalmente con varias semanas de antelación.
+- El **plano del corner** con la posición de la caja, el mostrador y las tomas eléctricas y de red.
+- El **modelo de cobro** acordado: si las ventas pasan por las cajas del gran almacén o si el corner tiene TPV y datáfono propios de la marca. Todo lo demás depende de esto.
+- El kit de equipos preparado y probado en la oficina de la marca antes de viajar: nada se configura por primera vez en la planta.
+
+## 1. Quién pone qué
+
+Una tabla firmada por los dos lados antes de empezar evita la mitad de las incidencias:
+
+| Elemento | Gran almacén | Marca |
+|---|---|---|
+| Punto de red en el corner | Cableado, toma y parcheo en la sala de planta | Indica la posición y cuántos puntos |
+| Puerto en el switch de planta y VLAN | Lo configura y lo documenta | Pide la VLAN de concesiones o de marca |
+| Salida a Internet o a la red de la marca | Según el contrato: Internet del edificio o circuito propio | VPN hacia su red, si la usa |
+| Router o cortafuegos del corner | Rara vez | Lo suministra y lo gestiona |
+| TPV, datáfono, impresoras | Solo si el cobro es por sus cajas | Si el corner tiene cobro propio |
+| Wi-Fi para tabletas del personal | A veces una red de concesiones | Si no hay, punto de acceso propio |
+| Acceso a la sala de comunicaciones | Acompaña al técnico | Pide el acceso con antelación |
+
+! No des por hecho que puedes entrar en la sala de comunicaciones de la planta. Es del edificio: se entra acompañado por sus técnicos y con cita.
+
+## 2. La red del corner
+
+- **Puntos de red**: como mínimo uno por equipo fijo (TPV, datáfono si va por cable, impresora) más uno libre. Un switch pequeño debajo del mostrador sirve, pero cuenta con él en el plan y deja el puerto de subida etiquetado.
+- **Etiquetado** en los dos extremos: la toma del corner y la posición del panel de parcheo en la sala de planta. Anota también el puerto del switch del gran almacén.
+- **VLAN y direccionamiento**: pregunta si el gran almacén da DHCP en esa VLAN o si hay que poner IP fija, y qué tráfico deja salir. Muchos edificios solo abren lo que se pide por escrito.
+- **Respaldo**: un router 4G o 5G con su SIM, configurado y probado en la oficina, o un datáfono con SIM propia. Si la red del edificio falla el día de apertura, es lo que mantiene el cobro. La guía **Router 4G** cuenta cómo usarlo cuando la conexión cae a dos horas de abrir.
+
+## 3. TPV, datáfonos e impresoras
+
+- **TPV**: equipo con la imagen de la marca, la tienda dada de alta en el sistema de ventas con su código de punto de venta y los artículos y precios cargados. Comprueba que el **inventario de la tienda** está en el sistema, no solo el catálogo.
+- **Datáfono**: dado de alta por la entidad de cobro con su **código de comercio** y su **número de terminal**. Pide la fecha de activación por escrito y comprueba que el terminal está vinculado al TPV si la venta pasa el importe automáticamente.
+- **Impresora de tickets**: térmica de 80 mm, con su rollo de repuesto y el logotipo cargado si la marca lo usa. Una impresora de etiquetas si el corner etiqueta en sitio (guía **Impresoras de tienda**).
+- **Cajón portamonedas** si hay cobro en efectivo, conectado a la impresora y probado con una venta.
+- Todos los números de serie apuntados en el inventario antes de salir de la oficina.
+
+## 4. Usuarios y cuentas
+
+- **Personal del corner**: usuario en el TPV para cada vendedor con su perfil (vendedor, responsable), creado con la fecha de incorporación. Sin usuarios compartidos: las devoluciones y anulaciones tienen que quedar a nombre de alguien.
+- **Correo y Teams** para el responsable, si la marca lo da, siguiendo el proceso de alta (guía **Alta de usuario**).
+- **Acceso del personal del gran almacén**, si cobra en vuestro TPV en ausencias: decídelo antes, no el primer sábado.
+- **Contraseñas iniciales** entregadas en persona o por un canal seguro, con el cambio obligatorio en el primer acceso.
+
+## 5. El día de pruebas
+
+Uno o dos días antes de abrir, con el mobiliario montado y el personal presente:
+
+1. Cada equipo enciende, toma IP y llega a sus servicios: ventas, entidad de cobro, VPN si la hay.
+2. **Venta de prueba completa**: artículo escaneado, cobro con tarjeta, ticket impreso. Después una **devolución** de esa venta y el **cierre de caja** del día para comprobar que los totales cuadran.
+3. Cobro en efectivo con apertura del cajón, si aplica.
+4. **Prueba del respaldo**: desconecta el cable de subida y repite una venta por el router 4G. Si no lo pruebas aquí, el día de apertura no sabrás si funciona.
+5. Cada vendedor entra con su usuario y cambia la contraseña.
+6. Apunta lo que falta en una lista con responsable y hora. Lo que dependa del gran almacén, por su canal de peticiones, con número.
+
+> Haz la venta de prueba con una tarjeta real y un importe pequeño, y anúlala o devuélvela después. Es la única forma de saber que el comercio está activo de verdad.
+
+## 6. El día de apertura y la entrega
+
+- **Presencia física** desde una o dos horas antes de abrir hasta pasada la primera hora de venta. La mayoría de los fallos aparecen al encender todo a la vez.
+- A mano: el teléfono de los técnicos del gran almacén, el de la entidad de cobro, el router de respaldo cargado y un cable de red largo.
+- Primera venta real vigilada: ticket, cobro y que aparece en el sistema de ventas.
+- **La entrega** al soporte que se ocupa después (central, proveedor o servicio de soporte): ficha del corner con puntos de red y su etiqueta, IP, modelos y números de serie, códigos de comercio y terminal, contactos del gran almacén y la lista de pendientes con su fecha.
+- Al cerrar el primer día, el cierre de caja cuadra. Si no cuadra, se mira esa misma noche.
+
+## Siguientes pasos
+
+- La guía **Router 4G** cubre el caso de la conexión que cae justo antes de abrir y cómo trabajar con los técnicos del edificio.
+- La guía **Impresoras de tienda** detalla impresoras de tickets y etiquetas sin IT en sitio.
+- La guía **Hotel en pre-apertura** usa el mismo calendario hacia atrás para un proyecto más grande, y el repositorio **24-hospitality-it-preopening** de mi GitHub lo convierte en un seguimiento de tareas por fecha.
+""",
+  en="""
+## What you'll get
+
+A brand corner inside a department store that opens on time with everything working: the POS sells, the payment terminal takes cards, the printer prints the receipt and staff sign in with their own user. A corner is small, but it depends on two organisations at once: the department store, which owns the building, the network and the comms room on each floor, and the brand, which owns its devices, its applications and the way it takes payments. Most opening-day problems come from something each side thought the other was providing.
+
+## Before you start
+
+- The **opening date** and the fit-out schedule: when the furniture is finished and when IT can get in.
+- The contact for the **department store's IT and telecom team** and its process for requesting a network point, usually several weeks ahead.
+- The **corner plan** showing where the till, the counter and the power and network sockets go.
+- The agreed **payment model**: whether sales go through the department store's tills or the corner has the brand's own POS and payment terminal. Everything else depends on this.
+- The equipment kit prepared and tested at the brand's office before travelling: nothing is configured for the first time on the shop floor.
+
+## 1. Who provides what
+
+A table signed by both sides before work starts prevents half the incidents:
+
+| Item | Department store | Brand |
+|---|---|---|
+| Network point in the corner | Cabling, socket and patching in the floor comms room | States the position and how many points |
+| Port on the floor switch and VLAN | Configures and documents it | Asks for the concessions or brand VLAN |
+| Internet or brand network access | Per the contract: building Internet or own circuit | VPN to its network, if used |
+| Corner router or firewall | Rarely | Supplies and manages it |
+| POS, payment terminal, printers | Only if payments go through its tills | If the corner takes its own payments |
+| Wi-Fi for staff tablets | Sometimes a concessions network | If not, its own access point |
+| Access to the comms room | Escorts the engineer | Requests access in advance |
+
+! Don't assume you can walk into the floor's comms room. It belongs to the building: you go in escorted by its technicians and by appointment.
+
+## 2. The corner's network
+
+- **Network points**: at least one per fixed device (POS, payment terminal if wired, printer) plus a spare. A small switch under the counter is fine, but include it in the plan and keep the uplink port labelled.
+- **Labelling** at both ends: the socket in the corner and the patch panel position in the floor comms room. Note the department store switch port too.
+- **VLAN and addressing**: ask whether the department store provides DHCP on that VLAN or a static IP is needed, and what traffic it lets out. Many buildings only open what is requested in writing.
+- **Backup**: a 4G or 5G router with its SIM, configured and tested at the office, or a payment terminal with its own SIM. If the building's network fails on opening day, that is what keeps payments going. The **4G router** guide covers using it when the connection drops two hours before opening.
+
+## 3. POS, payment terminals and printers
+
+- **POS**: a device with the brand's image, the store set up in the sales system with its point-of-sale code, and items and prices loaded. Check that the **store's stock** is in the system, not just the catalogue.
+- **Payment terminal**: set up by the acquirer with its **merchant ID** and **terminal ID**. Ask for the activation date in writing and check the terminal is linked to the POS if the sale passes the amount automatically.
+- **Receipt printer**: 80 mm thermal, with a spare roll and the logo loaded if the brand uses one. A label printer if the corner labels on site (**Store printers** guide).
+- **Cash drawer** if cash is taken, connected to the printer and tested with a sale.
+- Every serial number recorded in the inventory before leaving the office.
+
+## 4. Users and accounts
+
+- **Corner staff**: a POS user for each sales associate with their profile (associate, manager), created for their start date. No shared users: refunds and voids must be in someone's name.
+- **Email and Teams** for the manager, if the brand provides them, following the new starter process (**New starter** guide).
+- **Access for department store staff**, if they take payments on your POS when you're short-staffed: decide it beforehand, not on the first Saturday.
+- **Initial passwords** handed over in person or through a secure channel, with a forced change at first sign-in.
+
+## 5. Test day
+
+One or two days before opening, with the furniture in place and staff present:
+
+1. Every device powers on, gets an IP and reaches its services: sales, acquirer, VPN if any.
+2. **A full test sale**: item scanned, card payment, receipt printed. Then a **refund** of that sale and the **end-of-day close** to check the totals match.
+3. A cash sale that opens the drawer, if applicable.
+4. **Backup test**: unplug the uplink cable and repeat a sale over the 4G router. If you don't test it here, on opening day you won't know whether it works.
+5. Every associate signs in with their user and changes the password.
+6. Write down what's missing in a list with owner and time. Anything that depends on the department store goes through its request channel, with a number.
+
+> Make the test sale with a real card and a small amount, then void or refund it. It's the only way to know the merchant account is really active.
+
+## 6. Opening day and the handover
+
+- **On site** from one or two hours before opening until after the first hour of trading. Most failures show up when everything is switched on at once.
+- To hand: the phone number of the department store's technicians and of the acquirer, the backup router charged and a long network cable.
+- The first real sale watched: receipt, payment and that it shows up in the sales system.
+- **The handover** to whoever supports it afterwards (head office, provider or service desk): a corner sheet with network points and their labels, IPs, models and serial numbers, merchant and terminal IDs, department store contacts and the list of open items with dates.
+- At the end of the first day, the till close matches. If it doesn't, it is looked at that same evening.
+
+## Next steps
+
+- The **4G router** guide covers the connection that drops just before opening and how to work with the building's technicians.
+- The **Store printers** guide details receipt and label printers with no IT on site.
+- The **Hotel pre-opening** guide uses the same countdown calendar for a larger project, and the **24-hospitality-it-preopening** repository on my GitHub turns it into a task tracker by date.
+""")
+
+# ---------------------------------------------------------------- Sector 2 · Connectivity down before opening, 4G router
+g(slug="router-4g-la-conexion-de-la-tienda-cae-dos-horas-antes-de-abrir", topic="router-4g", date="2026-10-30",
+  title_es="Router 4G: la conexión de la tienda cae dos horas antes de abrir",
+  title_en="4G router: the store's connection drops two hours before opening",
+  seo_title_en="Store offline before opening: 4G plan B · Iñigo González",
+  seo_title_es="Tienda sin conexión antes de abrir: plan B 4G · Iñigo González",
+  dek_es="Cómo localizar el corte en orden (enlace, puerto del switch, VLAN, DHCP y la sala de comunicaciones de la planta), montar un router 4G o 5G como plan B, qué funciona a través de él (TPV, datáfonos, VPN) y qué no, cómo asegurar el enlace temporal y el seguimiento con los técnicos del edificio y el operador.",
+  dek_en="How to locate the fault in order (link, switch port, VLAN, DHCP and the floor's comms room), set up a 4G or 5G router as plan B, what works through it (POS, payment terminals, VPN) and what doesn't, how to secure the temporary link, and the follow-up with the building's technicians and the carrier.",
+  es="""
+## Qué vas a conseguir
+
+Que una tienda o un corner sin conexión a dos horas de abrir abra igualmente y cobrando. Son dos trabajos en paralelo: encontrar dónde está el corte y, mientras tanto, dar servicio por otro camino. Si esperas a resolver la avería para tener el plan B, llegas tarde a la apertura.
+
+## Antes de empezar
+
+- La **ficha de la tienda**: puntos de red y su etiqueta, IP del router o cortafuegos, VLAN, y el contacto de los técnicos del edificio o del gran almacén.
+- Un **router 4G o 5G** (o un módem USB que el router de la tienda acepte como salida de respaldo) con SIM de datos activa, configurado y probado antes. En una apertura viaja en el kit.
+- Un portátil con cable de red y un cable largo de repuesto.
+- Saber qué necesita salir de la tienda: el TPV hacia su servidor de ventas, el datáfono hacia la entidad de cobro, la VPN hacia la red central.
+
+## 1. Los primeros diez minutos: dónde está el corte
+
+Ve de lo físico a lo lógico, y apunta la hora de cada comprobación:
+
+1. **Enlace**: ¿hay luz en el puerto del router o del switch del mostrador? Sin luz, el problema está en el cable, la toma o el otro extremo.
+2. **Cable y toma**: prueba con tu cable y tu portátil directamente en la toma de la pared. Descarta el switch pequeño de debajo del mostrador.
+3. **IP**: si hay enlace, mira qué recibe el portátil.
+
+:::term PowerShell · portátil conectado a la toma del corner
+$ ipconfig | Select-String "IPv4|Autoconfig|Puerta"
+   Dirección IPv4 de configuración automática: 169.254.88.14
+   Puerta de enlace predeterminada . . . . . :
+$ Get-NetAdapter -Name Ethernet | Select-Object Status, LinkSpeed
+Status LinkSpeed
+------ ---------
+Up     1 Gbps
+:::
+
+Hay enlace a 1 Gbps pero la dirección es `169.254.x.x`: el equipo no recibe DHCP. Eso apunta a la **VLAN** del puerto del switch del edificio o al servidor DHCP, no al cable.
+
+4. **Con IP fija conocida**: si la tienda usa direccionamiento fijo, pon la IP del TPV en el portátil (con el TPV desconectado) y haz `ping` a la puerta de enlace. Si no responde, el tráfico no llega a la red de la tienda.
+5. **El router de la tienda**: si llega a la puerta de enlace pero no a Internet, el problema está en la salida (circuito, operador, cortafuegos).
+
+! No reinicies equipos del edificio ni desenchufes nada en su sala. Tu trabajo ahí es enseñarles qué toma es y qué ves.
+
+## 2. La sala de comunicaciones de la planta, con sus técnicos
+
+Con el diagnóstico de arriba, la conversación con los técnicos del gran almacén es corta:
+
+- **La etiqueta de la toma** del corner y la posición del **panel de parcheo**. Siguen el latiguillo hasta su switch.
+- **El puerto del switch**: estado, VLAN asignada y si tiene seguridad de puerto o 802.1X que bloquee un equipo nuevo. Un cambio de mobiliario o una obra en la planta a veces deja un latiguillo suelto o un puerto movido a otra VLAN.
+- **El DHCP** de esa VLAN, si lo dan ellos: si tiene direcciones libres y si la reserva del TPV sigue ahí.
+- **Un cambio reciente**: pregunta si ha habido trabajos en la sala esa semana. Es la causa más habitual.
+
+Mientras ellos miran, tú ya estás montando el plan B.
+
+## 3. El plan B: un router 4G o 5G
+
+- **Dónde ponerlo**: cerca de una ventana o de un pasillo amplio, lejos de estructuras metálicas. Dentro de un gran almacén la cobertura cambia mucho de un punto a otro: mira las barras antes de fijarlo.
+- **Cómo conectarlo**: lo más limpio es como **salida de respaldo** del router o cortafuegos de la tienda (WAN secundaria o módem USB, si lo admite). Así la red interna no cambia y los equipos no se tocan. Si no, conecta el switch del mostrador al router 4G y deja que dé DHCP en el mismo rango, después de desconectar el cable de subida al edificio para que no haya dos salidas.
+- **Comprueba** desde el portátil: IP, puerta de enlace, `ping` a una dirección externa y resolución de nombres.
+
+## 4. Qué funciona por él y qué no
+
+- **TPV en la nube o contra un servidor central**: funciona, porque las conexiones salen de la tienda. Puede ir algo más lento.
+- **Datáfono**: la mayoría se conecta a la entidad de cobro con conexión cifrada de salida, así que funciona por el 4G. Haz una venta de prueba con importe pequeño y anúlala.
+- **VPN de sitio a sitio**: funciona si la tienda **inicia** el túnel. Una red móvil suele poner la SIM detrás de un NAT del operador (CGNAT), así que IPsec necesita NAT-T (UDP 4500). La central no podrá iniciar la conexión hacia la tienda.
+- **Lo que no funciona**: cualquier cosa que entre desde fuera hacia la tienda (acceso remoto al TPV desde la central, una cámara consultada desde fuera) y lo que dependa de la IP pública fija de la tienda, como una lista blanca en un proveedor.
+- **Consumo**: aplaza actualizaciones y sincronizaciones grandes. La tarifa de datos tiene límite.
+
+## 5. Seguridad del enlace temporal
+
+- **Contraseña de administración** del router cambiada antes de que salga de la oficina. Nunca la que trae de fábrica.
+- **Wi-Fi**: si no se usa, desactivada. Si se usa, WPA2 o WPA3 con una clave larga y WPS apagado. Que el personal no la comparta con nadie para el móvil.
+- **Solo los equipos de la tienda** detrás del router: ni clientes ni el personal del edificio.
+- El tráfico de cobro va cifrado de extremo a extremo, pero la red de pago sigue sin mezclarse con otras redes: lo que pida tu política de PCI DSS sigue vigente con el enlace temporal.
+- Apunta en el ticket **cuándo se conectó y cuándo se retiró**. Un router de respaldo olvidado sigue siendo una salida a Internet que nadie vigila.
+
+## 6. El ticket: \"el corner no tiene red y abrimos a las 10:00\"
+
+Sábado, 8:00. El TPV no conecta y el datáfono marca error de comunicación.
+
+1. **8:05** El portátil en la toma da enlace y `169.254.x.x`: no hay DHCP. Aviso a los técnicos del gran almacén con la etiqueta de la toma.
+2. **8:15** Router 4G conectado como salida de respaldo del router del corner. Venta de prueba con datáfono: aprobada. El TPV sincroniza con el servidor de ventas.
+3. **8:30** En la sala de la planta, el técnico encuentra el puerto movido a otra VLAN tras un trabajo de la semana anterior. Lo devuelve a la VLAN de concesiones.
+4. **8:45** Cable de subida reconectado, el portátil recibe IP del rango correcto, el router del corner vuelve a su salida principal.
+5. **9:00** Venta de prueba por la red del edificio. El router 4G se queda conectado pero en reserva hasta pasada la primera hora de venta.
+6. **10:00** La tienda abre. Después: retirar el router, cerrar el ticket con la causa y pedir al gran almacén que el puerto quede documentado con su VLAN.
+
+> Si la causa está en el circuito del operador y no en el edificio, abre la avería con el ID de circuito y la hora de inicio, como se explica en la guía **Proveedores de conectividad**.
+
+## Siguientes pasos
+
+- La guía **Corner de marca en un gran almacén** explica la pre-apertura en la que este plan B ya viene preparado.
+- La guía **Cisco AnyConnect en tiendas** cubre la VPN de quien visita tiendas cuando la conexión es la del móvil.
+- La guía **Proveedores de conectividad** detalla cómo abrir y escalar una avería con el operador.
+""",
+  en="""
+## What you'll get
+
+A store or corner with no connection two hours before opening still opens, and takes payments. It's two jobs in parallel: finding where the fault is and, meanwhile, providing service another way. If you wait to fix the fault before setting up plan B, you're late for the opening.
+
+## Before you start
+
+- The **store sheet**: network points and their labels, IP of the router or firewall, VLAN, and the contact for the building's or department store's technicians.
+- A **4G or 5G router** (or a USB modem the store router accepts as a backup uplink) with an active data SIM, configured and tested beforehand. For an opening, it travels in the kit.
+- A laptop with a network cable and a long spare cable.
+- Knowing what needs to get out of the store: the POS to its sales server, the payment terminal to the acquirer, the VPN to the central network.
+
+## 1. The first ten minutes: where the fault is
+
+Go from physical to logical, and note the time of each check:
+
+1. **Link**: is there a light on the port of the router or the counter switch? No light means the problem is in the cable, the socket or the far end.
+2. **Cable and socket**: test with your cable and laptop straight into the wall socket. Rule out the small switch under the counter.
+3. **IP**: if there's link, see what the laptop gets.
+
+:::term PowerShell · laptop plugged into the corner socket
+$ ipconfig | Select-String "IPv4|Autoconfiguration|Gateway"
+   Autoconfiguration IPv4 Address. . : 169.254.88.14
+   Default Gateway . . . . . . . . . :
+$ Get-NetAdapter -Name Ethernet | Select-Object Status, LinkSpeed
+Status LinkSpeed
+------ ---------
+Up     1 Gbps
+:::
+
+There's link at 1 Gbps but the address is `169.254.x.x`: the device isn't getting DHCP. That points to the **VLAN** on the building's switch port or to the DHCP server, not to the cable.
+
+4. **With a known static IP**: if the store uses static addressing, put the POS IP on the laptop (with the POS disconnected) and `ping` the gateway. If it doesn't answer, traffic isn't reaching the store network.
+5. **The store router**: if you reach the gateway but not the Internet, the problem is on the way out (circuit, carrier, firewall).
+
+! Don't reboot the building's equipment or unplug anything in its room. Your job there is to show them which socket it is and what you see.
+
+## 2. The floor comms room, with its technicians
+
+With the diagnosis above, the conversation with the department store's technicians is short:
+
+- **The label on the corner socket** and the **patch panel** position. They follow the patch lead to their switch.
+- **The switch port**: status, assigned VLAN and whether it has port security or 802.1X blocking a new device. A furniture change or works on the floor sometimes leave a patch lead loose or a port moved to another VLAN.
+- **The DHCP** for that VLAN, if they provide it: whether it has free addresses and whether the POS reservation is still there.
+- **A recent change**: ask whether there was work in the room that week. It's the most common cause.
+
+While they look, you're already setting up plan B.
+
+## 3. Plan B: a 4G or 5G router
+
+- **Where to put it**: near a window or a wide aisle, away from metal structures. Inside a department store, coverage changes a lot from one spot to another: check the bars before fixing it in place.
+- **How to connect it**: the cleanest way is as a **backup uplink** on the store's router or firewall (secondary WAN or USB modem, if supported). The internal network doesn't change and devices aren't touched. If not, connect the counter switch to the 4G router and let it serve DHCP in the same range, after unplugging the uplink to the building so there aren't two exits.
+- **Check** from the laptop: IP, gateway, `ping` to an external address and name resolution.
+
+## 4. What works through it and what doesn't
+
+- **Cloud POS or POS against a central server**: works, because connections go out from the store. It may be somewhat slower.
+- **Payment terminal**: most connect to the acquirer over an encrypted outbound connection, so it works over 4G. Make a small test sale and void it.
+- **Site-to-site VPN**: works if the store **initiates** the tunnel. A mobile network usually puts the SIM behind the carrier's NAT (CGNAT), so IPsec needs NAT-T (UDP 4500). Head office won't be able to start a connection towards the store.
+- **What doesn't work**: anything coming into the store from outside (remote access to the POS from head office, a camera viewed from outside) and anything relying on the store's fixed public IP, such as an allow list at a provider.
+- **Data usage**: defer updates and large syncs. The data plan has a cap.
+
+## 5. Securing the temporary link
+
+- The router's **admin password** changed before it leaves the office. Never the factory one.
+- **Wi-Fi**: off if not used. If used, WPA2 or WPA3 with a long key and WPS off. Staff mustn't share it with anyone for their phones.
+- **Only the store's devices** behind the router: no customers and no building staff.
+- Payment traffic is encrypted end to end, but the payment network still isn't mixed with other networks: whatever your PCI DSS policy requires still applies with the temporary link.
+- Note in the ticket **when it was connected and when it was removed**. A forgotten backup router is still an Internet exit nobody watches.
+
+## 6. The ticket: \"the corner has no network and we open at 10:00\"
+
+Saturday, 8:00. The POS won't connect and the payment terminal shows a communication error.
+
+1. **8:05** The laptop in the socket gets link and `169.254.x.x`: no DHCP. The department store's technicians are told, with the socket label.
+2. **8:15** 4G router connected as the backup uplink on the corner router. Test sale on the payment terminal: approved. The POS syncs with the sales server.
+3. **8:30** In the floor room, the technician finds the port moved to another VLAN after work the week before. He puts it back on the concessions VLAN.
+4. **8:45** Uplink cable plugged back in, the laptop gets an IP in the right range, the corner router returns to its primary uplink.
+5. **9:00** Test sale over the building's network. The 4G router stays connected but on standby until after the first hour of trading.
+6. **10:00** The store opens. Afterwards: remove the router, close the ticket with the cause and ask the department store to document the port with its VLAN.
+
+> If the cause is in the carrier's circuit and not in the building, raise the fault with the circuit ID and start time, as explained in the **Connectivity providers** guide.
+
+## Next steps
+
+- The **Brand corner inside a department store** guide explains the pre-opening where this plan B is already prepared.
+- The **Cisco AnyConnect in stores** guide covers VPN for people visiting stores when the connection is the phone's.
+- The **Connectivity providers** guide details how to raise and escalate a fault with the carrier.
+""")
+
+# ---------------------------------------------------------------- Sector 5 · Voice line to a counterparty down
+g(slug="linea-de-voz-con-un-banco-caida-private-wire-turrets-y-grabacion", topic="linea-voz", date="2026-10-30",
+  title_es="Línea de voz con un banco caída: private wires, turrets y la grabación que no puede faltar",
+  title_en="A voice line to a bank is down: private wires, turrets and the recording that can't be missing",
+  seo_title_en="Trading voice line down: triage and backup · Iñigo González",
+  seo_title_es="Línea de voz de trading caída: qué hacer · Iñigo González",
+  dek_es="Qué son las private wires, las líneas de ringdown y el hoot-n-holler de un turret, cómo hacer el triaje con la mesa, saber de qué lado está la caída, qué dar al operador y al fabricante del turret, la alternativa temporal con líneas grabadas por MiFID II, cómo informar a la mesa y el RCA.",
+  dek_en="What private wires, ringdown lines and a turret's hoot-n-holler are, how to triage with the desk, work out which side is down, what to give the carrier and the turret vendor, the temporary workaround on recorded lines under MiFID II, how to keep the desk informed and the RCA.",
+  es="""
+## Qué vas a conseguir
+
+Que cuando una mesa de derivados pierde la línea directa con un banco, sepas en cinco minutos si el problema es vuestro, del banco o del operador, que la mesa siga hablando con ese banco por una línea **grabada** mientras se arregla y que al final quede un análisis de causa que evite la siguiente. Para un bróker, esa línea es por donde se negocian los precios: cada minuto sin ella es negocio que se va por otro lado.
+
+## Antes de empezar
+
+- El **inventario de líneas de voz** de la sede: cada private wire con su contraparte, la mesa que la usa, el botón del turret, el ID de circuito en cada extremo, el operador y quién la pidió.
+- El contrato y el teléfono de soporte del **fabricante del turret** y del **operador** que da los circuitos.
+- El contacto del equipo de voz de cada contraparte (su \"voice desk\"), no solo el del operador del banco.
+- Acceso de lectura al **sistema de grabación** de voz para comprobar que una línea graba.
+- La política de cumplimiento sobre grabación de comunicaciones y qué canales están aprobados.
+
+## 1. El vocabulario: qué hay en una mesa
+
+- **Turret**: el terminal de voz de la mesa de trading. Muchos botones de línea, dos auriculares o altavoces, y cada botón es una línea o un grupo de líneas.
+- **Private wire**: un circuito de voz punto a punto y permanente entre un botón de vuestro turret y uno de la contraparte. No se marca un número.
+- **Ringdown**: al pulsar el botón, suena en el otro extremo. Automático (ARD) si suena al descolgar o pulsar; manual si hay que dar una señal.
+- **Hoot-n-holler**: un canal de altavoz siempre abierto, a menudo multipunto, para difundir precios o avisos entre oficinas o entre mesas.
+- **Líneas de marcación**: líneas telefónicas normales que salen por el turret o el teléfono y también se graban.
+- Hoy muchas private wires viajan por la red de voz gestionada de un operador, sobre IP, y no por un circuito físico dedicado de extremo a extremo. Para el diagnóstico da igual: hay un tramo vuestro, un tramo del operador y un tramo de la contraparte.
+
+## 2. El triaje con la mesa
+
+Lo que preguntas al operador de la mesa en el primer minuto:
+
+1. **¿Qué botón y qué contraparte?** Con el inventario lo conviertes en ID de circuito.
+2. **¿Qué ve en el turret?** El botón no se ilumina, se ilumina pero no suena al otro lado, se oye ruido o silencio, o se cuelga sola.
+3. **¿Desde cuándo?** La hora exacta de la última conversación buena.
+4. **¿Es solo esa línea?** Prueba otra private wire del mismo turret y la misma línea desde otro puesto de la mesa.
+
+El resultado te dice por dónde empezar:
+
+- **Una línea, en todos los puestos**: circuito, operador o lado de la contraparte.
+- **Todas las líneas de un puesto**: el turret de ese puesto o su conexión. Es del fabricante del turret.
+- **Muchas líneas a la vez**: el sistema central de turrets, su pasarela o el enlace con el operador. Es un incidente mayor.
+
+## 3. ¿De qué lado está la caída?
+
+- **Llama a la contraparte por una línea grabada** (marcación desde el turret) y pregunta si ven la línea caída en su lado. Si a ellos también les falla, que abran incidencia con su equipo de voz y te den el número.
+- **El sistema de gestión del turret** suele mostrar el estado de cada línea. Si tu lado está en servicio y la línea no tiene señal, el corte está en el operador o más allá.
+- **El operador** puede hacer una prueba del circuito de extremo a extremo y decirte en qué tramo se pierde.
+- Si ninguno de los dos extremos ha cambiado nada y la prueba del operador falla, la avería es suya.
+
+> Un private wire tiene dos extremos y a veces dos clientes del mismo operador. Que tú y la contraparte abráis la avería con el mismo ID de circuito ahorra que el operador investigue dos veces.
+
+## 4. Abrir las averías y escalar
+
+**Al operador**: ID de circuito, extremos A y B, contraparte, hora de inicio, síntoma, lo que ya habéis descartado en cada lado y el impacto (\"línea de negociación de una mesa en horario de mercado\"). Pide prioridad máxima y una hora estimada.
+
+**Al fabricante del turret**, si el triaje apunta a vuestro lado: puesto, botón, configuración de la línea y desde cuándo.
+
+**Escalado**: si a los treinta minutos no hay hora estimada, al siguiente nivel de la matriz del operador. Avisa también al responsable de la mesa y a tu responsable: si la caída se alarga, puede afectar a varias contrapartes y ya es un incidente mayor.
+
+## 5. La alternativa mientras tanto: siempre grabada
+
+MiFID II obliga a **grabar** las conversaciones que llevan o pueden llevar a operaciones y a conservarlas **cinco años** (hasta siete si el supervisor lo pide). La alternativa temporal tiene que cumplir eso:
+
+- **Línea de marcación desde el turret** al número directo de la mesa de la contraparte. Es la opción normal: se graba igual que la private wire.
+- **Teléfono fijo grabado** de la sede, si el turret no puede.
+- **Móvil corporativo** solo si está dentro de la solución de grabación aprobada.
+- **Nunca** un móvil personal, una aplicación de mensajería o un canal que cumplimiento no haya aprobado. Las sanciones por comunicaciones fuera de canales grabados son reales.
+
+Antes de decir a la mesa \"usad esta línea\", haz una **llamada de prueba** y comprueba en el sistema de grabación que aparece y se oye. Apunta en el ticket qué alternativa se usó y durante cuánto tiempo: cumplimiento puede pedirlo.
+
+! Si la caída afecta también a la grabación, la mesa no debe negociar por voz hasta que vuelva o hasta que cumplimiento decida. No lo decide IT.
+
+## 6. Comunicar a la mesa
+
+Mensajes cortos y con hora, al responsable de la mesa y por el canal que usen:
+
+- **Al abrir**: \"La línea directa con el banco B está caída desde las 9:12. Usad la marcación del botón 24, que está grabada. Avería abierta con el operador.\"
+- **Cada 30 minutos**: estado y hora estimada, aunque no haya novedades.
+- **Al cerrar**: \"Línea restablecida a las 10:47. Por favor, haced una llamada por la private wire para confirmarlo.\" Cierra solo cuando la mesa lo confirme.
+
+## 7. El RCA
+
+- **Cronología**: hora de inicio, de detección, de la alternativa, de la reparación y de la confirmación de la mesa.
+- **Causa**: el informe del operador o del fabricante, por escrito.
+- **Impacto**: qué mesa, qué contraparte, cuánto tiempo y si hubo alguna conversación fuera de línea grabada.
+- **Acciones**: rutas diversas para las líneas críticas, una línea de marcación de respaldo documentada para cada contraparte, una prueba mensual de las private wires con la mesa y el inventario corregido si faltaba algo.
+
+## Siguientes pasos
+
+- La guía **Proveedores de conectividad** cubre el inventario de circuitos, la matriz de escalado y la revisión del SLA del operador.
+- La guía **DR/BCP: preparar una prueba de recuperación** sitúa la voz de la mesa dentro del plan de continuidad.
+- El repositorio **36-major-incident-command-kit** de mi GitHub sirve de plantilla para la cronología, los mensajes y el RCA cuando una caída de voz se convierte en incidente mayor.
+""",
+  en="""
+## What you'll get
+
+When a derivatives desk loses its direct line to a bank, you know within five minutes whether the problem is yours, the bank's or the carrier's, the desk keeps talking to that bank on a **recorded** line while it's fixed, and at the end there is a root cause analysis that prevents the next one. For a broker, that line is where prices are negotiated: every minute without it is business going elsewhere.
+
+## Before you start
+
+- The site's **voice line inventory**: each private wire with its counterparty, the desk that uses it, the turret button, the circuit ID at each end, the carrier and who ordered it.
+- The contract and support number of the **turret vendor** and of the **carrier** providing the circuits.
+- The contact for each counterparty's voice team (their voice desk), not just the bank's trader.
+- Read access to the voice **recording system** to check a line is recording.
+- The compliance policy on recording communications and which channels are approved.
+
+## 1. The vocabulary: what's on a desk
+
+- **Turret**: the trading desk's voice terminal. Many line buttons, two handsets or speakers, and each button is a line or a group of lines.
+- **Private wire**: a permanent point-to-point voice circuit between a button on your turret and one at the counterparty. No number is dialled.
+- **Ringdown**: pressing the button rings the far end. Automatic (ARD) if it rings when you lift or press; manual if a signal has to be given.
+- **Hoot-n-holler**: an always-open speaker channel, often multipoint, for broadcasting prices or announcements between offices or desks.
+- **Dial lines**: ordinary phone lines that go out through the turret or phone and are also recorded.
+- Today many private wires travel over a carrier's managed voice network, over IP, rather than a dedicated physical circuit end to end. For diagnosis it makes no difference: there is your segment, the carrier's segment and the counterparty's segment.
+
+## 2. Triage with the desk
+
+What you ask the trader in the first minute:
+
+1. **Which button and which counterparty?** With the inventory you turn it into a circuit ID.
+2. **What does the turret show?** The button doesn't light, lights but doesn't ring at the far end, there's noise or silence, or it drops by itself.
+3. **Since when?** The exact time of the last good conversation.
+4. **Is it only that line?** Try another private wire on the same turret and the same line from another position on the desk.
+
+The result tells you where to start:
+
+- **One line, at every position**: circuit, carrier or the counterparty's side.
+- **Every line at one position**: that position's turret or its connection. It's for the turret vendor.
+- **Many lines at once**: the central turret system, its gateway or the link to the carrier. It's a major incident.
+
+## 3. Which side is down?
+
+- **Call the counterparty on a recorded line** (dial-out from the turret) and ask whether they see the line down on their side. If it's failing for them too, they raise it with their voice team and give you the number.
+- **The turret management system** usually shows each line's status. If your side is in service and the line has no signal, the break is at the carrier or beyond.
+- **The carrier** can run an end-to-end test on the circuit and tell you in which segment it's lost.
+- If neither end has changed anything and the carrier's test fails, the fault is theirs.
+
+> A private wire has two ends and sometimes two customers of the same carrier. You and the counterparty raising the fault with the same circuit ID saves the carrier investigating twice.
+
+## 4. Raising the faults and escalating
+
+**To the carrier**: circuit ID, A and B ends, counterparty, start time, symptom, what each side has already ruled out, and the impact (\"a desk's trading line during market hours\"). Ask for top priority and an estimated time.
+
+**To the turret vendor**, if triage points to your side: position, button, line configuration and since when.
+
+**Escalation**: if after thirty minutes there's no estimated time, go to the next level of the carrier's matrix. Also tell the desk head and your manager: if the outage drags on, it may affect several counterparties and it's already a major incident.
+
+## 5. The workaround in the meantime: always recorded
+
+MiFID II requires firms to **record** conversations that lead or may lead to transactions and to keep them for **five years** (up to seven if the regulator asks). The temporary workaround has to meet that:
+
+- **A dial line from the turret** to the counterparty desk's direct number. It's the normal option: it's recorded just like the private wire.
+- **A recorded landline** at the site, if the turret can't.
+- **A corporate mobile** only if it's inside the approved recording solution.
+- **Never** a personal mobile, a messaging app or a channel compliance hasn't approved. Fines for communications outside recorded channels are real.
+
+Before telling the desk \"use this line\", make a **test call** and check in the recording system that it appears and can be heard. Note in the ticket which workaround was used and for how long: compliance may ask for it.
+
+! If the outage also affects recording, the desk must not trade by voice until it's back or until compliance decides. IT doesn't decide that.
+
+## 6. Keeping the desk informed
+
+Short, timed messages to the desk head, on the channel they use:
+
+- **On opening**: \"The direct line to bank B has been down since 9:12. Use the dial line on button 24, which is recorded. Fault raised with the carrier.\"
+- **Every 30 minutes**: status and estimated time, even if there's nothing new.
+- **On closing**: \"Line restored at 10:47. Please make a call on the private wire to confirm.\" Close only when the desk confirms.
+
+## 7. The RCA
+
+- **Timeline**: start time, detection, workaround, repair and the desk's confirmation.
+- **Cause**: the carrier's or vendor's report, in writing.
+- **Impact**: which desk, which counterparty, how long, and whether any conversation took place outside a recorded line.
+- **Actions**: diverse routing for critical lines, a documented backup dial line for each counterparty, a monthly test of the private wires with the desk, and the inventory corrected if anything was missing.
+
+## Next steps
+
+- The **Connectivity providers** guide covers the circuit inventory, the escalation matrix and the carrier's SLA review.
+- The **DR/BCP: preparing a recovery test** guide places the desk's voice within the continuity plan.
+- The **36-major-incident-command-kit** repository on my GitHub works as a template for the timeline, messages and RCA when a voice outage becomes a major incident.
+""")
+
+# ---------------------------------------------------------------- Sector 5 · Growing an office from 15 to 120
+g(slug="oficina-que-crece-de-15-a-120-personas-con-sala-de-trading", topic="oficina-crece", date="2026-10-30",
+  title_es="Una oficina que crece de 15 a 120 personas con sala de trading: qué hace falta en cada fase",
+  title_en="An office growing from 15 to 120 people with a trading floor: what each phase needs",
+  seo_title_en="Scaling office IT from 15 to 120 people · Iñigo González",
+  seo_title_es="IT de una oficina que pasa de 15 a 120 · Iñigo González",
+  dek_es="Las fases de crecimiento de una sede con sala de trading: puestos, red y sala de comunicaciones, Wi-Fi, salas de reuniones, impresoras, licencias, proceso de incorporación, stock, modelo y equipo de soporte, proveedores y presupuesto, qué se rompe en cada tamaño y las métricas que avisan antes.",
+  dek_en="The growth phases of a site with a trading floor: desks, network and comms room, Wi-Fi, meeting rooms, printers, licences, onboarding process, stock, support model and team, vendors and budget, what breaks at each size and the metrics that warn you first.",
+  es="""
+## Qué vas a conseguir
+
+Que la oficina pase de quince personas a más de cien sin que IT vaya siempre un paso por detrás. Una sede pequeña funciona con una persona que lo sabe todo de memoria; a partir de cierto tamaño, lo que estaba en la cabeza de alguien tiene que estar en un proceso, un inventario y un presupuesto. Con sala de trading el margen es menor: cada puesto nuevo lleva varios monitores, voz y datos de mercado, y llega con fecha de incorporación fija.
+
+## Antes de empezar
+
+- El **plan de contratación** del negocio para los próximos doce o dieciocho meses, por mesa y por trimestre. Sin él, todo lo demás es adivinar.
+- El **plano** de la oficina actual y de cualquier ampliación: puestos, salas, sala de comunicaciones, cuadros eléctricos.
+- El inventario actual de equipos, licencias y contratos.
+- Quién decide el presupuesto de IT de la sede y en qué fechas se prepara.
+
+## 1. Las fases y lo que se rompe en cada una
+
+| Tamaño | Cómo funciona | Qué se rompe |
+|---|---|---|
+| ~15 personas | Una persona de IT o soporte remoto, todo improvisado | Nada todavía: el conocimiento está en una cabeza |
+| ~40 personas | Llegan las primeras mesas completas | Las incorporaciones se preparan la víspera; falta stock; la sala de comunicaciones se llena |
+| ~80 personas | Varias mesas, más salas, más proveedores | Los puertos del switch, la Wi-Fi en las horas punta, las licencias sin control, el soporte sin turnos |
+| 120+ personas | Una sede con equipo de IT propio | Lo que no esté en un proceso: cambios, inventario, proveedores, presupuesto |
+
+## 2. Puestos, red y sala de comunicaciones
+
+- **Puesto de trading**: dos a cuatro monitores (o más), turret de voz, dos tomas de red como mínimo y alimentación suficiente. Calcula el consumo eléctrico por puesto con el instalador, no al final.
+- **Switches de acceso**: deja al menos un **20 %** de puertos libres después de cada ampliación. Cuando bajas de eso, la siguiente mesa ya no cabe.
+- **Sala de comunicaciones**: espacio en racks (unidades libres), carga del **SAI** en porcentaje y autonomía real, climatización y doble alimentación. Con 15 personas cabe en un rack; con 120 y sala de trading, el diseño pasa a ser de núcleo redundante (guía **Cisco: switches, routers y salas de comunicaciones de una sede**).
+- **Circuitos**: Internet y la conexión con el centro de datos crecen con la plantilla y con los datos de mercado. Un circuito nuevo tarda semanas o meses: pídelo con el plan de contratación, no con la gente ya sentada.
+
+## 3. Wi-Fi, salas e impresoras
+
+- **Wi-Fi**: dimensionar por número de dispositivos simultáneos, no por metros cuadrados. Con la plantilla, los portátiles, los móviles y las salas, la densidad se multiplica. Una medición de cobertura tras cada ampliación.
+- **Salas de reuniones**: de una sala con pantalla a varias salas con videoconferencia que tienen que funcionar a las 8:00. A partir de unas pocas, conviene un estándar único y su gestión central (guía **Microsoft Teams Rooms sobre Crestron**).
+- **Impresoras**: pocas y gestionadas, con impresión segura por tarjeta o PIN. Con más gente, más documentos confidenciales olvidados en la bandeja.
+
+## 4. Licencias y datos de mercado
+
+- **Microsoft 365 y aplicaciones**: licencia por perfil, asignada por grupo, y una revisión mensual de licencias asignadas a cuentas inactivas.
+- **Datos de mercado**: las licencias de terminales y fuentes de datos son por usuario, caras y auditadas por el proveedor. Alta y baja ligadas al proceso de incorporación y salida, y una revisión trimestral con cada mesa.
+- **Contratos** con fecha de renovación en un calendario: con más proveedores, alguno se renueva solo si nadie mira.
+
+## 5. El proceso de incorporación
+
+A partir de unas cuarenta personas, una incorporación preparada la víspera es una incorporación que falla:
+
+1. Recursos humanos avisa con **dos semanas** como mínimo, con mesa, puesto y perfil.
+2. IT prepara cuenta, licencias, grupos y accesos según el perfil.
+3. El equipo se prepara con Autopilot o la imagen de la sede y se deja en el puesto el día antes, con monitores y turret probados.
+4. El primer día alguien de IT pasa por el puesto en la primera hora.
+5. La **baja** sigue el mismo camino al revés, el mismo día de la salida.
+
+## 6. Stock y proveedores
+
+- **Stock de reserva**: portátiles, monitores, bases, auriculares y teclados para cubrir las incorporaciones del mes siguiente más un margen para averías. Como referencia, unas semanas de cobertura según el plan de contratación.
+- **Plazos de entrega** reales de cada proveedor, sobre todo en monitores y equipos de red.
+- **Proveedores** con contacto, contrato, SLA y revisión periódica: hardware, cableado, operadores, turrets, salas, impresión.
+
+## 7. El modelo y el equipo de soporte
+
+- **~15**: una persona generalista o soporte remoto, con el service desk global para lo básico.
+- **~40-80**: un responsable de IT en sitio y un segundo técnico. Hace falta cubrir la apertura del mercado y las vacaciones.
+- **120+**: un responsable de sede con dos o más técnicos, turnos para cubrir desde antes de la apertura hasta el cierre, y el service desk global como primer nivel con escalado claro.
+- **Documentación**: procedimientos en Confluence o la base de conocimiento, para que cualquiera del equipo resuelva lo mismo de la misma forma.
+
+## 8. Presupuesto
+
+- **Coste por puesto nuevo**: equipo, monitores, voz, licencias, datos de mercado y la parte proporcional de red. Multiplicado por el plan de contratación, es la base del presupuesto.
+- **Inversiones por escalón**: un switch más, un rack, un SAI mayor, un circuito nuevo. No llegan en proporción: llegan de golpe cuando se cruza un umbral.
+- **Renovación** del equipamiento existente por antigüedad y fin de soporte (guía **Presupuesto de IT**).
+
+## 9. Las métricas que avisan antes
+
+- **Puertos libres** en los switches de acceso y **unidades libres** en los racks.
+- **Carga del SAI** y autonomía.
+- **Clientes por punto de acceso** en las horas punta.
+- **Incorporaciones listas el primer día** (porcentaje) y días de aviso de recursos humanos.
+- **Tickets por usuario al mes** y tiempo de resolución por mesa.
+- **Licencias asignadas frente a usadas**, incluidas las de datos de mercado.
+- **Semanas de cobertura** del stock frente al plan de contratación.
+
+> Revisa estas cifras cada mes con el plan de contratación delante. Cuando una se acerca al límite, la compra o el cambio ya tiene que estar pedido.
+
+## Siguientes pasos
+
+- La guía **Device42: inventario de la sala de comunicaciones** cubre el inventario que hace falta para saber cuánto espacio queda.
+- La guía **Alta de usuario** detalla la incorporación de punta a punta.
+- El repositorio **38-it-asset-lifecycle-planner** de mi GitHub calcula qué equipos tocan renovar cada trimestre y cuánto cuestan, y **04-itsm-kpi-dashboard** reúne las métricas de soporte.
+""",
+  en="""
+## What you'll get
+
+The office goes from fifteen people to more than a hundred without IT always one step behind. A small site runs on one person who knows everything by heart; past a certain size, what was in someone's head has to be in a process, an inventory and a budget. With a trading floor the margin is smaller: every new desk brings several monitors, voice and market data, and arrives with a fixed start date.
+
+## Before you start
+
+- The business's **hiring plan** for the next twelve to eighteen months, by desk and by quarter. Without it, everything else is guesswork.
+- The **floor plan** of the current office and any expansion: desks, rooms, comms room, electrical boards.
+- The current inventory of devices, licences and contracts.
+- Who decides the site's IT budget and when it's prepared.
+
+## 1. The phases and what breaks in each
+
+| Size | How it works | What breaks |
+|---|---|---|
+| ~15 people | One IT person or remote support, everything improvised | Nothing yet: the knowledge is in one head |
+| ~40 people | The first full desks arrive | Onboardings prepared the day before; stock runs short; the comms room fills up |
+| ~80 people | Several desks, more rooms, more vendors | Switch ports, Wi-Fi at peak times, uncontrolled licences, support without shifts |
+| 120+ people | A site with its own IT team | Whatever isn't in a process: changes, inventory, vendors, budget |
+
+## 2. Desks, network and comms room
+
+- **Trading desk**: two to four monitors (or more), voice turret, at least two network points and enough power. Work out the power draw per desk with the installer, not at the end.
+- **Access switches**: keep at least **20%** of ports free after each expansion. Below that, the next desk no longer fits.
+- **Comms room**: rack space (free units), **UPS** load as a percentage and real runtime, cooling and dual power. With 15 people it fits in one rack; with 120 and a trading floor, the design becomes a redundant core (**Cisco: switches, routers and comms rooms on a site** guide).
+- **Circuits**: Internet and the link to the data centre grow with headcount and market data. A new circuit takes weeks or months: order it with the hiring plan, not when people are already sitting down.
+
+## 3. Wi-Fi, rooms and printers
+
+- **Wi-Fi**: sized by number of simultaneous devices, not square metres. With headcount, laptops, phones and rooms, density multiplies. A coverage survey after each expansion.
+- **Meeting rooms**: from one room with a screen to several video conference rooms that must work at 8:00. Past a few rooms, a single standard and central management pay off (**Microsoft Teams Rooms on Crestron** guide).
+- **Printers**: few and managed, with secure release by card or PIN. More people means more confidential documents left in the tray.
+
+## 4. Licences and market data
+
+- **Microsoft 365 and applications**: a licence per role, assigned by group, and a monthly review of licences assigned to inactive accounts.
+- **Market data**: terminal and data feed licences are per user, expensive and audited by the provider. Joiners and leavers tied to the onboarding and offboarding process, and a quarterly review with each desk.
+- **Contracts** with renewal dates in a calendar: with more vendors, one renews by itself if nobody is watching.
+
+## 5. The onboarding process
+
+From around forty people, an onboarding prepared the day before is an onboarding that fails:
+
+1. HR gives at least **two weeks'** notice, with desk, position and role.
+2. IT prepares the account, licences, groups and access for the role.
+3. The device is prepared with Autopilot or the site image and left on the desk the day before, with monitors and turret tested.
+4. On day one someone from IT stops by the desk in the first hour.
+5. The **leaver** follows the same path in reverse, on the day they leave.
+
+## 6. Stock and vendors
+
+- **Spare stock**: laptops, monitors, docks, headsets and keyboards to cover the next month's joiners plus a margin for failures. As a reference, a few weeks of cover against the hiring plan.
+- Real **lead times** from each vendor, especially for monitors and network equipment.
+- **Vendors** with contact, contract, SLA and regular review: hardware, cabling, carriers, turrets, rooms, printing.
+
+## 7. The support model and team
+
+- **~15**: one generalist or remote support, with the global service desk for the basics.
+- **~40-80**: an on-site IT lead and a second engineer. Market open and holidays need covering.
+- **120+**: a site lead with two or more engineers, shifts covering from before the open to the close, and the global service desk as first line with clear escalation.
+- **Documentation**: procedures in Confluence or the knowledge base, so anyone on the team solves the same thing the same way.
+
+## 8. Budget
+
+- **Cost per new desk**: device, monitors, voice, licences, market data and a share of the network. Multiplied by the hiring plan, it's the base of the budget.
+- **Step investments**: another switch, a rack, a bigger UPS, a new circuit. They don't arrive in proportion: they arrive all at once when a threshold is crossed.
+- **Refresh** of existing equipment by age and end of support (**IT budget** guide).
+
+## 9. The metrics that warn you first
+
+- **Free ports** on access switches and **free units** in racks.
+- **UPS load** and runtime.
+- **Clients per access point** at peak times.
+- **Joiners ready on day one** (percentage) and days of notice from HR.
+- **Tickets per user per month** and resolution time per desk.
+- **Licences assigned versus used**, including market data.
+- **Weeks of cover** of stock against the hiring plan.
+
+> Review these figures every month with the hiring plan in front of you. When one nears its limit, the purchase or change should already be ordered.
+
+## Next steps
+
+- The **Device42: comms room inventory** guide covers the inventory you need to know how much room is left.
+- The **New starter** guide details onboarding end to end.
+- The **38-it-asset-lifecycle-planner** repository on my GitHub works out which devices are due for refresh each quarter and what they cost, and **04-itsm-kpi-dashboard** brings the support metrics together.
+""")
+
+# ---------------------------------------------------------------- Nivel 2 · AD delegation, Recycle Bin and auditing
+g(slug="active-directory-delegar-permisos-papelera-y-quien-ha-cambiado-este-usuario", topic="ad-delegacion", date="2026-10-30",
+  title_es="Active Directory día a día: delegar permisos en una OU, la papelera de reciclaje y quién ha cambiado este usuario",
+  title_en="Active Directory day to day: delegating permissions on an OU, the Recycle Bin and who changed this user",
+  seo_title_en="AD delegation, Recycle Bin and auditing · Iñigo González",
+  seo_title_es="AD: delegar en OU, papelera y auditoría · Iñigo González",
+  dek_es="Delegar en una OU el restablecimiento de contraseñas, el desbloqueo y la creación de usuarios, equipos y grupos con el asistente y con dsacls, activar la papelera de reciclaje y restaurar con Restore-ADObject, encontrar quién borró o cambió un usuario con los eventos 4726, 4738, 4740 y 5136, y poner MachineAccountQuota a cero.",
+  dek_en="Delegate password resets, unlocks and creating users, computers and groups on an OU with the wizard and with dsacls, enable the Recycle Bin and restore with Restore-ADObject, find who deleted or changed a user with events 4726, 4738, 4740 and 5136, and set MachineAccountQuota to zero.",
+  es="""
+## Qué vas a conseguir
+
+Que el service desk restablezca contraseñas y desbloquee cuentas de su OU sin ser administrador del dominio, que un usuario borrado por error vuelva con sus grupos en un minuto, y que cuando alguien pregunte \"¿quién ha tocado esta cuenta?\" tengas la respuesta en los registros de los controladores de dominio. Es el día a día de AD después del alta de usuarios.
+
+## Antes de empezar
+
+- Una estructura de **OU** por sede o por tipo de objeto (`OU=Usuarios,OU=Madrid`, `OU=Equipos,OU=Madrid`). Se delega sobre OU, no sobre usuarios sueltos.
+- **Grupos de delegación** creados: por ejemplo `GG-AD-Helpdesk-Madrid` para restablecer y desbloquear, `GG-AD-Altas-Madrid` para crear usuarios. Se delega a grupos, nunca a personas.
+- El módulo **ActiveDirectory** de PowerShell (RSAT) y una cuenta con permisos de administración sobre esas OU.
+- En **Usuarios y equipos de Active Directory**, **Ver › Características avanzadas** activado para ver la pestaña **Seguridad**.
+
+## 1. Delegar con el asistente
+
+:::ui Usuarios y equipos de Active Directory · Delegación de control
+> contoso.local › Madrid › Usuarios › clic derecho › Delegar control…
+= Usuarios o grupos: CONTOSO\\GG-AD-Helpdesk-Madrid
+= Tareas comunes:
+[x] Restablecer contraseñas de usuario y forzar el cambio de contraseña en el siguiente inicio de sesión
+[ ] Crear, eliminar y administrar cuentas de usuario
+[ ] Crear, eliminar y administrar grupos
+[ ] Modificar la pertenencia a un grupo
+[Siguiente] [Finalizar]
+:::
+
+El **desbloqueo** no está en las tareas comunes. Se añade con **Crear una tarea personalizada para delegar › Solo los siguientes objetos de la carpeta › Objetos Usuario › Específicos de propiedad** y se marcan **Leer lockoutTime** y **Escribir lockoutTime**.
+
+Para que un grupo **una equipos** en la OU de equipos: tarea personalizada, **Objetos Equipo**, **Crear los objetos seleccionados en esta carpeta** (y **Eliminar**, si también da de baja), y después los permisos **Restablecer contraseña**, **Escritura validada en el nombre de host DNS**, **Escritura validada en el nombre principal de servicio** y **Escribir restricciones de cuenta**.
+
+> El asistente solo añade permisos; no sabe quitarlos. Para revisar o retirar una delegación, ve a **Propiedades › Seguridad › Opciones avanzadas** de la OU.
+
+## 2. Lo mismo con dsacls y PowerShell
+
+Para documentarlo en un cambio o repetirlo en otra sede, mejor por línea de comandos:
+
+:::term Símbolo del sistema (administrador) · delegaciones en OU=Usuarios,OU=Madrid
+# Restablecer contraseña y forzar cambio en el siguiente inicio (solo objetos hijos de tipo usuario)
+$ dsacls \"OU=Usuarios,OU=Madrid,DC=contoso,DC=local\" /I:S /G \"CONTOSO\\GG-AD-Helpdesk-Madrid:CA;Reset Password;user\"
+$ dsacls \"OU=Usuarios,OU=Madrid,DC=contoso,DC=local\" /I:S /G \"CONTOSO\\GG-AD-Helpdesk-Madrid:RPWP;pwdLastSet;user\"
+# Desbloquear
+$ dsacls \"OU=Usuarios,OU=Madrid,DC=contoso,DC=local\" /I:S /G \"CONTOSO\\GG-AD-Helpdesk-Madrid:RPWP;lockoutTime;user\"
+# Crear y borrar usuarios en la OU, y administrarlos
+$ dsacls \"OU=Usuarios,OU=Madrid,DC=contoso,DC=local\" /I:T /G \"CONTOSO\\GG-AD-Altas-Madrid:CCDC;user\"
+$ dsacls \"OU=Usuarios,OU=Madrid,DC=contoso,DC=local\" /I:S /G \"CONTOSO\\GG-AD-Altas-Madrid:GA;;user\"
+The command completed successfully
+:::
+
+`/I:T` aplica al objeto y a sus hijos, `/I:S` solo a los hijos. `CA` es un derecho extendido (Reset Password), `RPWP` leer y escribir una propiedad, `CCDC` crear y borrar hijos del tipo indicado, `GA` control total. Para grupos se usa `CCDC;group` y, para cambiar miembros, `RPWP;member;group`.
+
+Para comprobar después qué tiene delegado un grupo, `(Get-Acl \"AD:\\OU=Usuarios,OU=Madrid,DC=contoso,DC=local\").Access` lista cada permiso con su `IdentityReference` y su `ObjectType`.
+
+! Si el service desk no puede restablecer la contraseña de un usuario concreto, mira su atributo `adminCount`. Las cuentas que pertenecen o han pertenecido a grupos protegidos (Admins. del dominio, Operadores de cuentas…) reciben los permisos de **AdminSDHolder** y no heredan la delegación de la OU. Es intencionado.
+
+## 3. La papelera de reciclaje de AD
+
+Sin papelera, un usuario borrado se restaura desde una copia con restauración autoritativa. Con ella, se recupera con todos sus atributos y grupos. Requiere nivel funcional de bosque **Windows Server 2008 R2** o superior y, una vez activada, **no se puede desactivar**.
+
+:::term PowerShell (administrador de organización) · activar la papelera
+$ Enable-ADOptionalFeature -Identity 'Recycle Bin Feature' -Scope ForestOrConfigurationSet -Target 'contoso.local'
+# Pide confirmación: la acción es irreversible
+$ Get-ADOptionalFeature -Filter 'Name -like \"Recycle*\"' | Select-Object Name, EnabledScopes
+:::
+
+También se activa desde el **Centro de administración de Active Directory**: clic derecho en el dominio › **Habilitar papelera de reciclaje**.
+
+Restaurar un usuario borrado:
+
+:::term PowerShell · restaurar un usuario borrado
+$ Get-ADObject -Filter 'sAMAccountName -eq \"lprado\"' -IncludeDeletedObjects -Properties lastKnownParent, whenChanged | Select-Object Name, lastKnownParent, whenChanged
+Name                                           lastKnownParent                              whenChanged
+----                                           ---------------                              -----------
+Laura Prado DEL:5c1e9a0e-7a43-4f0b-9d2e-...    OU=Usuarios,OU=Madrid,DC=contoso,DC=local    30/10/2026 9:14:02
+$ Get-ADObject -Filter 'sAMAccountName -eq \"lprado\"' -IncludeDeletedObjects | Restore-ADObject
+$ Get-ADUser lprado -Properties MemberOf | Select-Object Enabled, @{n='Grupos';e={$_.MemberOf.Count}}
+:::
+
+- El objeto vuelve a su `lastKnownParent`. Si esa OU también se borró, restaura primero la OU.
+- El plazo para recuperar es `msDS-deletedObjectLifetime`, que por defecto toma el valor de `tombstoneLifetime` (180 días en los bosques actuales).
+
+## 4. ¿Quién ha borrado o cambiado este usuario?
+
+Los controladores de dominio solo lo registran si la **directiva de auditoría avanzada** está activa. En la GPO de los controladores de dominio: **Configuración del equipo › Directivas › Configuración de Windows › Configuración de seguridad › Configuración de directiva de auditoría avanzada › Directivas de auditoría**:
+
+- **Administración de cuentas › Auditar la administración de cuentas de usuario**: Correcto y Error.
+- **Acceso DS › Auditar cambios de servicio de directorio**: Correcto. Además necesita una entrada de **auditoría (SACL)** en la OU o el dominio para \"Todos\" con escritura de propiedades y eliminación.
+
+Los eventos que buscas en el registro de **Seguridad**:
+
+| Evento | Qué significa |
+|---|---|
+| 4720 | Se creó una cuenta de usuario |
+| 4726 | Se eliminó una cuenta de usuario |
+| 4738 | Se cambió una cuenta de usuario (indica qué atributos, no los valores anteriores) |
+| 4740 | Se bloqueó una cuenta (lo registra el DC con el rol de emulador de PDC) |
+| 4767 | Se desbloqueó una cuenta |
+| 5136 | Se modificó un objeto del directorio, con el valor anterior y el nuevo |
+
+Cada evento se registra **en el DC que hizo el cambio**. Para no adivinar cuál, pregunta a todos:
+
+:::term PowerShell · quién borró a lprado en los dos últimos días
+$ $dcs = (Get-ADDomainController -Filter *).HostName
+$ foreach ($dc in $dcs) { Get-WinEvent -ComputerName $dc -FilterHashtable @{LogName='Security'; Id=4726; StartTime=(Get-Date).AddDays(-2)} -ErrorAction SilentlyContinue | ForEach-Object { $d = @{}; ([xml]$_.ToXml()).Event.EventData.Data | ForEach-Object { $d[$_.Name] = $_.'#text' }; [pscustomobject]@{Hora=$_.TimeCreated; DC=$dc; Cuenta=$d.TargetUserName; Quien=$d.SubjectUserName} } }
+Hora                DC                   Cuenta  Quien
+----                --                   ------  -----
+30/10/2026 9:14:02  dc02.contoso.local   lprado  adm-jgarcia
+:::
+
+Para un cambio de atributo, `repadmin /showobjmeta` te dice en qué DC se originó y cuándo, y ahí buscas el 5136:
+
+:::term Símbolo del sistema · metadatos de replicación del usuario
+$ repadmin /showobjmeta dc01 \"CN=Laura Prado,OU=Usuarios,OU=Madrid,DC=contoso,DC=local\" | findstr /i \"department manager\"
+  41822  Madrid\\DC02  41822 2026-10-30 08:52:10  3 department
+:::
+
+> El registro de Seguridad de un DC se sobrescribe rápido. Aumenta su tamaño o reenvíalo a un SIEM: lo que no está guardado no se puede auditar.
+
+## 5. MachineAccountQuota a cero
+
+Por defecto, **cualquier usuario autenticado puede unir hasta 10 equipos** al dominio: lo marca el atributo `ms-DS-MachineAccountQuota` del dominio. Una vez delegada la unión de equipos a un grupo (apartado 1), ponlo a cero:
+
+:::term PowerShell (administrador del dominio)
+$ Get-ADObject (Get-ADDomain).DistinguishedName -Properties ms-DS-MachineAccountQuota | Select-Object ms-DS-MachineAccountQuota
+ms-DS-MachineAccountQuota
+-------------------------
+                       10
+$ Set-ADDomain -Identity contoso.local -Replace @{\"ms-DS-MachineAccountQuota\"=\"0\"}
+:::
+
+Antes de cambiarlo, comprueba qué cuentas unen equipos hoy (técnicos, la secuencia de tareas de MECM, el conector de Intune para unión híbrida) y que todas tienen la delegación en su OU.
+
+## Siguientes pasos
+
+- La guía **Active Directory: usuarios y grupos** cubre las altas, bajas y cuentas bloqueadas del día a día.
+- La guía **PowerShell** ayuda a convertir estas consultas en scripts programados.
+- El repositorio **19-ad-infra-health-check** de mi GitHub revisa la salud de los controladores de dominio, y **37-iam-access-review** sirve para revisar periódicamente quién tiene qué permisos.
+""",
+  en="""
+## What you'll get
+
+The service desk resets passwords and unlocks accounts in its OU without being a domain admin, a user deleted by mistake comes back with their groups in a minute, and when someone asks \"who touched this account?\" you have the answer in the domain controllers' logs. It's day-to-day AD after creating users.
+
+## Before you start
+
+- An **OU** structure by site or object type (`OU=Users,OU=Madrid`, `OU=Computers,OU=Madrid`). You delegate on OUs, not on individual users.
+- **Delegation groups** created: for example `GG-AD-Helpdesk-Madrid` to reset and unlock, `GG-AD-Joiners-Madrid` to create users. You delegate to groups, never to people.
+- The **ActiveDirectory** PowerShell module (RSAT) and an account with admin rights over those OUs.
+- In **Active Directory Users and Computers**, **View › Advanced Features** turned on to see the **Security** tab.
+
+## 1. Delegating with the wizard
+
+:::ui Active Directory Users and Computers · Delegation of Control
+> contoso.local › Madrid › Users › right-click › Delegate Control…
+= Users or groups: CONTOSO\\GG-AD-Helpdesk-Madrid
+= Common tasks:
+[x] Reset user passwords and force password change at next logon
+[ ] Create, delete, and manage user accounts
+[ ] Create, delete and manage groups
+[ ] Modify the membership of a group
+[Next] [Finish]
+:::
+
+**Unlocking** isn't among the common tasks. It's added with **Create a custom task to delegate › Only the following objects in the folder › User objects › Property-specific**, ticking **Read lockoutTime** and **Write lockoutTime**.
+
+For a group to **join computers** in the computers OU: custom task, **Computer objects**, **Create selected objects in this folder** (and **Delete**, if it also removes them), then the permissions **Reset password**, **Validated write to DNS host name**, **Validated write to service principal name** and **Write account restrictions**.
+
+> The wizard only adds permissions; it can't remove them. To review or withdraw a delegation, go to the OU's **Properties › Security › Advanced**.
+
+## 2. The same with dsacls and PowerShell
+
+To document it in a change or repeat it on another site, the command line is better:
+
+:::term Command Prompt (admin) · delegations on OU=Users,OU=Madrid
+# Reset password and force change at next logon (child user objects only)
+$ dsacls \"OU=Users,OU=Madrid,DC=contoso,DC=local\" /I:S /G \"CONTOSO\\GG-AD-Helpdesk-Madrid:CA;Reset Password;user\"
+$ dsacls \"OU=Users,OU=Madrid,DC=contoso,DC=local\" /I:S /G \"CONTOSO\\GG-AD-Helpdesk-Madrid:RPWP;pwdLastSet;user\"
+# Unlock
+$ dsacls \"OU=Users,OU=Madrid,DC=contoso,DC=local\" /I:S /G \"CONTOSO\\GG-AD-Helpdesk-Madrid:RPWP;lockoutTime;user\"
+# Create and delete users in the OU, and manage them
+$ dsacls \"OU=Users,OU=Madrid,DC=contoso,DC=local\" /I:T /G \"CONTOSO\\GG-AD-Joiners-Madrid:CCDC;user\"
+$ dsacls \"OU=Users,OU=Madrid,DC=contoso,DC=local\" /I:S /G \"CONTOSO\\GG-AD-Joiners-Madrid:GA;;user\"
+The command completed successfully
+:::
+
+`/I:T` applies to the object and its children, `/I:S` to children only. `CA` is an extended right (Reset Password), `RPWP` read and write a property, `CCDC` create and delete children of the given type, `GA` full control. For groups use `CCDC;group` and, to change members, `RPWP;member;group`.
+
+To check later what a group has been delegated, `(Get-Acl \"AD:\\OU=Users,OU=Madrid,DC=contoso,DC=local\").Access` lists each permission with its `IdentityReference` and `ObjectType`.
+
+! If the service desk can't reset a particular user's password, check their `adminCount` attribute. Accounts that are or were members of protected groups (Domain Admins, Account Operators…) get the **AdminSDHolder** permissions and don't inherit the OU delegation. That's by design.
+
+## 3. The AD Recycle Bin
+
+Without the Recycle Bin, a deleted user is restored from a backup with an authoritative restore. With it, the user comes back with all attributes and groups. It requires forest functional level **Windows Server 2008 R2** or higher and, once enabled, it **can't be disabled**.
+
+:::term PowerShell (Enterprise Admin) · enable the Recycle Bin
+$ Enable-ADOptionalFeature -Identity 'Recycle Bin Feature' -Scope ForestOrConfigurationSet -Target 'contoso.local'
+# It asks for confirmation: the action is irreversible
+$ Get-ADOptionalFeature -Filter 'Name -like \"Recycle*\"' | Select-Object Name, EnabledScopes
+:::
+
+It can also be enabled from **Active Directory Administrative Center**: right-click the domain › **Enable Recycle Bin**.
+
+Restoring a deleted user:
+
+:::term PowerShell · restore a deleted user
+$ Get-ADObject -Filter 'sAMAccountName -eq \"lprado\"' -IncludeDeletedObjects -Properties lastKnownParent, whenChanged | Select-Object Name, lastKnownParent, whenChanged
+Name                                           lastKnownParent                           whenChanged
+----                                           ---------------                           -----------
+Laura Prado DEL:5c1e9a0e-7a43-4f0b-9d2e-...    OU=Users,OU=Madrid,DC=contoso,DC=local    30/10/2026 9:14:02
+$ Get-ADObject -Filter 'sAMAccountName -eq \"lprado\"' -IncludeDeletedObjects | Restore-ADObject
+$ Get-ADUser lprado -Properties MemberOf | Select-Object Enabled, @{n='Groups';e={$_.MemberOf.Count}}
+:::
+
+- The object returns to its `lastKnownParent`. If that OU was also deleted, restore the OU first.
+- The window to recover is `msDS-deletedObjectLifetime`, which by default takes the value of `tombstoneLifetime` (180 days in current forests).
+
+## 4. Who deleted or changed this user?
+
+Domain controllers only log it if **advanced audit policy** is on. In the domain controllers' GPO: **Computer Configuration › Policies › Windows Settings › Security Settings › Advanced Audit Policy Configuration › Audit Policies**:
+
+- **Account Management › Audit User Account Management**: Success and Failure.
+- **DS Access › Audit Directory Service Changes**: Success. It also needs an **auditing entry (SACL)** on the OU or domain for Everyone with write property and delete.
+
+The events you look for in the **Security** log:
+
+| Event | What it means |
+|---|---|
+| 4720 | A user account was created |
+| 4726 | A user account was deleted |
+| 4738 | A user account was changed (says which attributes, not the old values) |
+| 4740 | An account was locked out (logged by the DC holding the PDC emulator role) |
+| 4767 | An account was unlocked |
+| 5136 | A directory object was modified, with the old and new value |
+
+Each event is logged **on the DC that made the change**. To avoid guessing which, ask all of them:
+
+:::term PowerShell · who deleted lprado in the last two days
+$ $dcs = (Get-ADDomainController -Filter *).HostName
+$ foreach ($dc in $dcs) { Get-WinEvent -ComputerName $dc -FilterHashtable @{LogName='Security'; Id=4726; StartTime=(Get-Date).AddDays(-2)} -ErrorAction SilentlyContinue | ForEach-Object { $d = @{}; ([xml]$_.ToXml()).Event.EventData.Data | ForEach-Object { $d[$_.Name] = $_.'#text' }; [pscustomobject]@{Time=$_.TimeCreated; DC=$dc; Account=$d.TargetUserName; Who=$d.SubjectUserName} } }
+Time                DC                   Account  Who
+----                --                   -------  ---
+30/10/2026 9:14:02  dc02.contoso.local   lprado   adm-jgarcia
+:::
+
+For an attribute change, `repadmin /showobjmeta` tells you which DC it originated on and when, and that's where you look for the 5136:
+
+:::term Command Prompt · the user's replication metadata
+$ repadmin /showobjmeta dc01 \"CN=Laura Prado,OU=Users,OU=Madrid,DC=contoso,DC=local\" | findstr /i \"department manager\"
+  41822  Madrid\\DC02  41822 2026-10-30 08:52:10  3 department
+:::
+
+> A DC's Security log is overwritten quickly. Increase its size or forward it to a SIEM: what isn't kept can't be audited.
+
+## 5. MachineAccountQuota to zero
+
+By default, **any authenticated user can join up to 10 computers** to the domain: it's set by the domain's `ms-DS-MachineAccountQuota` attribute. Once computer joins are delegated to a group (section 1), set it to zero:
+
+:::term PowerShell (Domain Admin)
+$ Get-ADObject (Get-ADDomain).DistinguishedName -Properties ms-DS-MachineAccountQuota | Select-Object ms-DS-MachineAccountQuota
+ms-DS-MachineAccountQuota
+-------------------------
+                       10
+$ Set-ADDomain -Identity contoso.local -Replace @{\"ms-DS-MachineAccountQuota\"=\"0\"}
+:::
+
+Before changing it, check which accounts join computers today (technicians, the MECM task sequence, the Intune connector for hybrid join) and that all of them have the delegation on their OU.
+
+## Next steps
+
+- The **Active Directory: users and groups** guide covers everyday joiners, leavers and locked accounts.
+- The **PowerShell** guide helps turn these queries into scheduled scripts.
+- The **19-ad-infra-health-check** repository on my GitHub checks the health of the domain controllers, and **37-iam-access-review** helps review regularly who holds which permissions.
+""")
+
+g(slug="cisco-primeros-comandos-copia-de-configuracion-y-un-puerto-err-disabled", topic="cisco-basico", date="2026-10-30",
+  title_es="Cisco: primeros comandos en un switch, copia de la configuración y un puerto en err-disabled",
+  title_en="Cisco: first commands on a switch, backing up the config and a port in err-disabled",
+  seo_title_en="Cisco switch: first commands and err-disabled · Iñigo González",
+  seo_title_es="Switch Cisco: comandos básicos y err-disabled · Iñigo González",
+  dek_es="Entrar por consola o SSH, los seis show que responden casi cualquier ticket, guardar y sacar una copia de la configuración, un puerto apagado por port-security o BPDU Guard y asignar la VLAN de acceso a un puesto.",
+  dek_en="Getting in by console or SSH, the six show commands that answer almost any ticket, saving and exporting the config, a port shut down by port-security or BPDU Guard, and assigning the access VLAN to a desk.",
+  es="""
+## Qué vas a conseguir
+
+Entrar en un switch Cisco Catalyst sin miedo a romper nada, leer qué hay conectado y dónde, guardar y copiar la configuración, y resolver los dos tickets de red que más llegan a soporte: un puerto que el switch ha apagado solo y un puesto que hay que poner en su VLAN.
+
+## Antes de empezar
+
+- Un usuario en el switch (nominal por TACACS+ o RADIUS si existe; la cuenta local es solo para emergencias) y saber si tienes nivel 15 o tienes que pasar a `enable`.
+- Para consola: un cable de consola RJ45 o USB y PuTTY o similar a **9600 baudios, 8 bits, sin paridad, 1 bit de parada y sin control de flujo**.
+- El plano básico de la sede: qué switch es qué armario, qué VLAN es de usuarios, de voz y de impresoras.
+
+! En modo `show` no cambias nada. Todo lo que empieza por `configure terminal` sí, y en un switch de producción va con un cambio aprobado o con permiso del responsable de red.
+
+## 1. Entrar: consola o SSH
+
+La consola es para un switch nuevo, uno sin IP o uno al que ya no llegas por red. Lo normal es **SSH** contra la IP de gestión:
+
+:::term Desde tu PC
+$ ssh adm-soporte@10.10.0.21
+SW-P1-01>enable
+Password:
+SW-P1-01#terminal length 0
+:::
+
+El símbolo `>` es modo usuario; `#` es modo privilegiado. `terminal length 0` quita el *--More--* para que las salidas largas salgan enteras y se puedan copiar al ticket.
+
+## 2. Los seis comandos que responden casi cualquier ticket
+
+:::term SW-P1-01 · Catalyst 9200 · solo lectura
+$ show interfaces status
+$ show mac address-table interface Gi1/0/14
+$ show vlan brief
+$ show cdp neighbors
+$ show logging | include Gi1/0/14
+$ show running-config interface Gi1/0/14
+Port      Name          Status       Vlan  Duplex  Speed Type
+Gi1/0/14  PUESTO 1.07   connected    20    a-full  a-1000 10/100/1000BaseTX
+          Mac Address Table
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+  20    00a0.c914.2b7e    DYNAMIC     Gi1/0/14
+:::
+
+- `show interfaces status`: una línea por puerto con estado (*connected*, *notconnect*, *err-disabled*, *disabled*), VLAN y velocidad. Es el primer vistazo.
+- `show mac address-table`: qué MAC ha aprendido el switch en cada puerto. Con la MAC del PC (`ipconfig /all`) sabes en qué puerto está, sin bajar al armario: `show mac address-table address 00a0.c914.2b7e`.
+- `show vlan brief`: qué VLAN existen y qué puertos de acceso hay en cada una.
+- `show cdp neighbors`: qué equipo Cisco hay al otro lado de cada enlace (otro switch, un teléfono, un punto de acceso).
+- `show logging`: los mensajes del switch. Un puerto que sube y baja, o que se apaga, deja rastro aquí.
+- `show running-config interface`: la configuración de ese puerto y nada más.
+
+## 3. Guardar y sacar una copia de la configuración
+
+El switch tiene dos configuraciones: la **running** (la que está funcionando, en memoria) y la **startup** (la que carga al arrancar). Un cambio que no se guarda se pierde en el siguiente reinicio.
+
+:::term SW-P1-01 · guardar y exportar
+$ copy running-config startup-config
+Destination filename [startup-config]?
+Building configuration...
+[OK]
+$ copy running-config scp://adm-soporte@10.10.0.50/backups/SW-P1-01-2026-10-30.cfg
+$ copy running-config tftp://10.10.0.50/SW-P1-01-2026-10-30.cfg
+:::
+
+- `copy running-config startup-config` (o su forma corta `write memory`) guarda. Se hace después de cada cambio que funciona, no antes.
+- Para una copia fuera del equipo, **SCP** va cifrado y pide usuario; **TFTP** no pide nada y viaja en claro, así que solo dentro de la red de gestión. Antes de un cambio, una copia a mano adjunta al ticket.
+
+## 4. El ticket: "el puesto 1.07 se ha quedado sin red"
+
+:::term SW-P1-01 · diagnóstico
+$ show interfaces status err-disabled
+$ show logging | include Gi1/0/14
+$ show port-security interface Gi1/0/14
+Port      Name          Status       Reason               Err-disabled Vlans
+Gi1/0/14  PUESTO 1.07   err-disabled psecure-violation
+%PORT_SECURITY-2-PSECURE_VIOLATION: Security violation occurred, caused by MAC address 3c52.82a1.0f44 on port GigabitEthernet1/0/14.
+%PM-4-ERR_DISABLE: psecure-violation error detected on Gi1/0/14, putting Gi1/0/14 in err-disable state
+Port Security              : Enabled
+Port Status                : Secure-shutdown
+Violation Mode             : Shutdown
+Maximum MAC Addresses      : 1
+Sticky MAC Addresses       : 1
+Security Violation Count   : 1
+:::
+
+**err-disabled** significa que el switch ha apagado el puerto a propósito, y la columna *Reason* dice por qué. Los dos motivos más habituales en un puerto de usuario:
+
+| Motivo | Qué pasó | Qué haces |
+|---|---|---|
+| **psecure-violation** | Port-security solo admite una MAC (aquí *sticky*, la primera que aprendió) y ha aparecido otra: un portátil nuevo, un PC cambiado de mesa | Confirmas que el equipo nuevo es legítimo, borras la MAC aprendida y reactivas el puerto |
+| **bpduguard** | Han conectado un switch pequeño o un equipo que habla spanning-tree en un puerto de usuario | Se retira el aparato y se reactiva el puerto. No se desactiva BPDU Guard |
+
+Aquí han cambiado el PC del puesto. Con el visto bueno de que el equipo es corporativo:
+
+:::term SW-P1-01 · reactivar el puerto
+$ clear port-security sticky interface Gi1/0/14
+$ configure terminal
+$ interface Gi1/0/14
+$  shutdown
+$  no shutdown
+$ end
+$ show interfaces Gi1/0/14 status
+$ copy running-config startup-config
+:::
+
+`shutdown` y `no shutdown` sacan el puerto de err-disabled. El nuevo equipo será la nueva MAC *sticky*, y como la sticky se guarda en la configuración, hay que guardar para que no vuelva la antigua tras un reinicio.
+
+> Algunos switches tienen **errdisable recovery**: el puerto se reactiva solo pasado un tiempo (300 segundos por defecto) para los motivos activados. `show errdisable recovery` dice cuáles. Pero un puerto que se recupera y vuelve a caer cada cinco minutos esconde el problema.
+
+## 5. Poner un puesto en su VLAN
+
+Un puesto nuevo, o uno que ha cambiado de departamento, necesita su puerto en la VLAN correcta:
+
+:::term SW-P1-01 · puerto de acceso
+$ show vlan brief | include 20|30
+$ configure terminal
+$ interface Gi1/0/22
+$  description PUESTO 1.15
+$  switchport mode access
+$  switchport access vlan 20
+$  switchport voice vlan 30
+$ end
+$ show interfaces Gi1/0/22 status
+$ copy running-config startup-config
+:::
+
+- La VLAN tiene que existir (`show vlan brief`). Si no aparece, no la crees tú: avisa a red, porque además tiene que llegar por la troncal.
+- Comprueba en el PC que coge una IP del rango de esa VLAN (`ipconfig /all`). Si sale una 169.254.x.x, el switch está bien y el problema es de DHCP.
+
+## 6. Qué poner en el ticket
+
+Switch y puerto, estado antes y después, el motivo del err-disabled sacado del log, qué se cambió y la confirmación de que la configuración está guardada.
+
+## Siguientes pasos
+
+- La guía de **Cisco: switches y routers** del Nivel 4 sigue desde aquí: troncales sin cortar una planta, el router con circuito de respaldo y cambios en remoto con red de seguridad.
+- La guía de **Cisco: switches, routers y salas de comunicaciones de una sede** lo aplica a una sede real con sala de comunicaciones.
+- Si el puesto coge una IP 169.254.x.x, sigue en la guía de **DNS y DHCP en Windows Server**.
+""",
+  en="""
+## What you'll get
+
+Getting into a Cisco Catalyst switch without fear of breaking anything, reading what is connected and where, saving and copying the configuration, and fixing the two network tickets that reach support most often: a port the switch has shut down on its own, and a desk that needs to go into its VLAN.
+
+## Before you start
+
+- A user on the switch (named, through TACACS+ or RADIUS if available; the local account is for emergencies only) and knowing whether you get level 15 or have to go into `enable`.
+- For console: an RJ45 or USB console cable and PuTTY or similar at **9600 baud, 8 data bits, no parity, 1 stop bit and no flow control**.
+- The site's basic map: which switch is in which cabinet, which VLAN is users, voice and printers.
+
+! In `show` mode you change nothing. Everything that starts with `configure terminal` does, and on a production switch it goes with an approved change or the network owner's OK.
+
+## 1. Getting in: console or SSH
+
+The console is for a new switch, one with no IP, or one you can no longer reach over the network. The normal way is **SSH** to the management IP:
+
+:::term From your PC
+$ ssh adm-support@10.10.0.21
+SW-P1-01>enable
+Password:
+SW-P1-01#terminal length 0
+:::
+
+The `>` symbol is user mode; `#` is privileged mode. `terminal length 0` removes the *--More--* so long outputs come out whole and can be copied into the ticket.
+
+## 2. The six commands that answer almost any ticket
+
+:::term SW-P1-01 · Catalyst 9200 · read only
+$ show interfaces status
+$ show mac address-table interface Gi1/0/14
+$ show vlan brief
+$ show cdp neighbors
+$ show logging | include Gi1/0/14
+$ show running-config interface Gi1/0/14
+Port      Name          Status       Vlan  Duplex  Speed Type
+Gi1/0/14  DESK 1.07     connected    20    a-full  a-1000 10/100/1000BaseTX
+          Mac Address Table
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+  20    00a0.c914.2b7e    DYNAMIC     Gi1/0/14
+:::
+
+- `show interfaces status`: one line per port with status (*connected*, *notconnect*, *err-disabled*, *disabled*), VLAN and speed. It is the first look.
+- `show mac address-table`: which MAC the switch has learned on each port. With the PC's MAC (`ipconfig /all`) you know which port it is on, without going down to the cabinet: `show mac address-table address 00a0.c914.2b7e`.
+- `show vlan brief`: which VLANs exist and which access ports are in each.
+- `show cdp neighbors`: which Cisco device sits at the other end of each link (another switch, a phone, an access point).
+- `show logging`: the switch's messages. A port flapping, or being shut down, leaves a trace here.
+- `show running-config interface`: that port's configuration and nothing else.
+
+## 3. Saving and exporting the configuration
+
+The switch has two configurations: the **running** one (what is working now, in memory) and the **startup** one (what it loads at boot). A change that is not saved is lost at the next reboot.
+
+:::term SW-P1-01 · save and export
+$ copy running-config startup-config
+Destination filename [startup-config]?
+Building configuration...
+[OK]
+$ copy running-config scp://adm-support@10.10.0.50/backups/SW-P1-01-2026-10-30.cfg
+$ copy running-config tftp://10.10.0.50/SW-P1-01-2026-10-30.cfg
+:::
+
+- `copy running-config startup-config` (or its short form `write memory`) saves. It is done after every change that works, not before.
+- For a copy off the device, **SCP** is encrypted and asks for a user; **TFTP** asks for nothing and travels in clear text, so only inside the management network. Before a change, a manual copy attached to the ticket.
+
+## 4. The ticket: "desk 1.07 has lost its network"
+
+:::term SW-P1-01 · diagnosis
+$ show interfaces status err-disabled
+$ show logging | include Gi1/0/14
+$ show port-security interface Gi1/0/14
+Port      Name          Status       Reason               Err-disabled Vlans
+Gi1/0/14  DESK 1.07     err-disabled psecure-violation
+%PORT_SECURITY-2-PSECURE_VIOLATION: Security violation occurred, caused by MAC address 3c52.82a1.0f44 on port GigabitEthernet1/0/14.
+%PM-4-ERR_DISABLE: psecure-violation error detected on Gi1/0/14, putting Gi1/0/14 in err-disable state
+Port Security              : Enabled
+Port Status                : Secure-shutdown
+Violation Mode             : Shutdown
+Maximum MAC Addresses      : 1
+Sticky MAC Addresses       : 1
+Security Violation Count   : 1
+:::
+
+**err-disabled** means the switch shut the port down on purpose, and the *Reason* column says why. The two most common reasons on a user port:
+
+| Reason | What happened | What you do |
+|---|---|---|
+| **psecure-violation** | Port-security allows only one MAC (here *sticky*, the first one it learned) and another has appeared: a new laptop, a PC moved to another desk | Confirm the new device is legitimate, clear the learned MAC and re-enable the port |
+| **bpduguard** | Someone plugged a small switch or a device that speaks spanning-tree into a user port | Remove the device and re-enable the port. BPDU Guard stays on |
+
+Here the desk's PC has been replaced. Once it is confirmed the device is corporate:
+
+:::term SW-P1-01 · re-enable the port
+$ clear port-security sticky interface Gi1/0/14
+$ configure terminal
+$ interface Gi1/0/14
+$  shutdown
+$  no shutdown
+$ end
+$ show interfaces Gi1/0/14 status
+$ copy running-config startup-config
+:::
+
+`shutdown` and `no shutdown` bring the port out of err-disabled. The new device becomes the new *sticky* MAC, and since sticky MACs are stored in the configuration, you have to save so the old one does not come back after a reboot.
+
+> Some switches have **errdisable recovery**: the port comes back by itself after a while (300 seconds by default) for the reasons enabled. `show errdisable recovery` says which. But a port that recovers and drops again every five minutes hides the problem.
+
+## 5. Putting a desk into its VLAN
+
+A new desk, or one that has changed department, needs its port in the right VLAN:
+
+:::term SW-P1-01 · access port
+$ show vlan brief | include 20|30
+$ configure terminal
+$ interface Gi1/0/22
+$  description DESK 1.15
+$  switchport mode access
+$  switchport access vlan 20
+$  switchport voice vlan 30
+$ end
+$ show interfaces Gi1/0/22 status
+$ copy running-config startup-config
+:::
+
+- The VLAN has to exist (`show vlan brief`). If it is not there, don't create it yourself: tell the network team, because it also has to come through the trunk.
+- Check on the PC that it gets an IP from that VLAN's range (`ipconfig /all`). If it shows a 169.254.x.x, the switch is fine and the problem is DHCP.
+
+## 6. What to put in the ticket
+
+Switch and port, status before and after, the err-disabled reason taken from the log, what was changed and confirmation that the configuration is saved.
+
+## Next steps
+
+- The Level 4 guide **Cisco switches and routers** picks up from here: trunks without cutting off a floor, the router with a backup circuit and remote changes with a safety net.
+- The guide **Cisco - Switches, routers and comms rooms on a site** applies it to a real site with a comms room.
+- If the desk gets a 169.254.x.x address, carry on with the guide **DNS and DHCP on Windows Server**.
+""")
+g(slug="powershell-altas-masivas-en-active-directory-desde-csv-y-bajas-con-revision", topic="powershell-altas", date="2026-10-30",
+  title_es="PowerShell: altas masivas en Active Directory desde un CSV y bajas con revisión previa",
+  title_en="PowerShell: bulk user creation in Active Directory from a CSV, and leavers with a review step",
+  seo_title_en="PowerShell: bulk AD users from CSV, leavers · Iñigo González",
+  seo_title_es="PowerShell: altas masivas en AD y bajas · Iñigo González",
+  dek_es="Un CSV bien hecho, New-ADUser con OU y grupos, contraseñas que no acaban en un correo, -WhatIf antes de crear nada, un script que se puede relanzar sin duplicar usuarios, un registro de lo hecho y las bajas con exportación de grupos y revisión antes de aplicar.",
+  dek_en="A well-built CSV, New-ADUser with OU and groups, passwords that never end up in an email, -WhatIf before creating anything, a script you can rerun without duplicating users, a log of what was done, and leavers with group export and a review before applying.",
+  es="""
+## Qué vas a conseguir
+
+Un script que crea en Active Directory los usuarios de un CSV (cada uno en su OU, con sus grupos y una contraseña temporal que nadie ve por correo), que se puede lanzar dos veces sin crear duplicados y que deja un registro de lo que hizo. Y su pareja para las bajas: primero un plan que alguien revisa, después la ejecución, y siempre con los grupos exportados para poder deshacer.
+
+## Antes de empezar
+
+- El módulo **ActiveDirectory** (RSAT en tu equipo o en un servidor de gestión) y una cuenta con permisos delegados para crear y mover usuarios en las OU de destino, no Domain Admin.
+- Las OU y los grupos ya creados, y la convención de nombres de la casa.
+- Si hay **Azure AD Connect** o Cloud Sync, saber qué OU están en el ámbito de sincronización: lo que hagas aquí aparece en Entra ID en el siguiente ciclo.
+
+## 1. El CSV
+
+Una fila por persona. Recursos Humanos o el responsable lo rellena; tú lo revisas.
+
+:::term altas-2026-11.csv
+Nombre;Apellidos;Usuario;Departamento;Puesto;OU;Grupos
+Laura;Prado Ruiz;laura.prado;Finanzas;Analista;OU=Finanzas,OU=Usuarios,DC=contoso,DC=local;GRP-Finanzas|GRP-VPN
+Marcos;Gil Soto;marcos.gil;Operaciones;Técnico;OU=Operaciones,OU=Usuarios,DC=contoso,DC=local;GRP-Operaciones
+:::
+
+- Separador `;` si el CSV sale de un Excel en español, y guardado como **CSV UTF-8** para que las tildes y la ñ lleguen bien.
+- Los grupos de una persona, separados por `|` dentro de la misma columna.
+- Ninguna contraseña en el CSV. Nunca.
+
+## 2. El script de altas
+
+:::term Nuevo-UsuariosAD.ps1
+[CmdletBinding(SupportsShouldProcess)]
+param([Parameter(Mandatory)][string]$Csv, [string]$Log = ".\\altas-$(Get-Date -Format yyyyMMdd-HHmm).csv")
+Import-Module ActiveDirectory
+function New-TempPassword {
+    $chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!#%+?'
+    $bytes = New-Object byte[] 16
+    [Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($bytes)
+    -join ($bytes | ForEach-Object { $chars[$_ % $chars.Length] })
+}
+$result = foreach ($r in Import-Csv $Csv -Delimiter ';' -Encoding UTF8) {
+    $sam = $r.Usuario.Trim().ToLower()
+    if (Get-ADUser -Filter "SamAccountName -eq '$sam'") {
+        [pscustomobject]@{ Usuario = $sam; Estado = 'Ya existe'; Detalle = 'No se toca' }; continue
+    }
+    try {
+        $pw = New-TempPassword
+        $p = @{ Name = "$($r.Nombre) $($r.Apellidos)"; GivenName = $r.Nombre; Surname = $r.Apellidos
+                SamAccountName = $sam; UserPrincipalName = "$sam@contoso.com"; DisplayName = "$($r.Nombre) $($r.Apellidos)"
+                Department = $r.Departamento; Title = $r.Puesto; Path = $r.OU; Enabled = $true
+                ChangePasswordAtLogon = $true; AccountPassword = (ConvertTo-SecureString $pw -AsPlainText -Force) }
+        New-ADUser @p -ErrorAction Stop
+        foreach ($g in $r.Grupos -split '\\|' | Where-Object { $_ }) { Add-ADGroupMember -Identity $g -Members $sam -ErrorAction Stop }
+        if (-not $WhatIfPreference) { Write-Host "$sam -> contraseña temporal: $pw" }
+        [pscustomobject]@{ Usuario = $sam; Estado = $(if ($WhatIfPreference) { 'Simulado' } else { 'Creado' }); Detalle = $r.Grupos }
+    } catch {
+        [pscustomobject]@{ Usuario = $sam; Estado = 'Error'; Detalle = $_.Exception.Message }
+    }
+}
+$result | Export-Csv $Log -NoTypeInformation -Encoding UTF8 -Delimiter ';'
+:::
+
+Lo que hace cada pieza:
+
+- **Idempotencia**: antes de crear, busca el usuario con `Get-ADUser -Filter`. Con `-Identity` daría error si no existe; con `-Filter` no devuelve nada. Así el script se puede relanzar tras corregir una fila sin duplicar a nadie.
+- **Contraseña**: una distinta por usuario, generada con un generador criptográfico, y con `ChangePasswordAtLogon` para que la persona ponga la suya el primer día.
+- **try/catch por usuario**: un fallo en una fila no para el resto.
+- **El registro**: un CSV con usuario, estado y detalle. Se adjunta al ticket, sin contraseñas.
+
+## 3. Siempre primero con -WhatIf
+
+:::term PowerShell · simulación y ejecución
+$ .\\Nuevo-UsuariosAD.ps1 -Csv .\\altas-2026-11.csv -WhatIf
+What if: Performing the operation "New" on target "CN=Laura Prado Ruiz,OU=Finanzas,OU=Usuarios,DC=contoso,DC=local".
+What if: Performing the operation "Set" on target "GRP-Finanzas".
+What if: Performing the operation "Set" on target "GRP-VPN".
+$ .\\Nuevo-UsuariosAD.ps1 -Csv .\\altas-2026-11.csv
+:::
+
+Como el script declara `SupportsShouldProcess`, `-WhatIf` pasa a `New-ADUser` y `Add-ADGroupMember`: enseñan lo que harían sin hacerlo.
+
+## 4. Entregar la contraseña
+
+La contraseña temporal sale una vez por pantalla y no se guarda. Opciones razonables:
+
+- Dársela al responsable en persona o por teléfono.
+- No entregarla: el primer día la persona llama al service desk, se verifica su identidad y se le hace un restablecimiento con cambio obligatorio.
+- Con **Entra ID**, un **Temporary Access Pass** para registrar MFA.
+
+! Nunca en el ticket, en un correo o en el mismo mensaje que el nombre de usuario. Y si usas `Read-Host -AsSecureString` para teclear una contraseña común para todo el lote, que sea solo para una prueba: una contraseña inicial igual para todos acaba siendo conocida por todos.
+
+## 5. Las bajas: plan, revisión y ejecución
+
+Para las bajas se cambia el orden: primero se genera un plan que **otra persona revisa**, y solo después se aplica.
+
+:::term PowerShell · plan de bajas
+$ $bajas = Import-Csv .\\bajas-2026-11.csv -Delimiter ';'
+$ $plan = foreach ($b in $bajas) { Get-ADUser -Filter "SamAccountName -eq '$($b.Usuario)'" -Properties MemberOf, Enabled, Department, LastLogonDate | Select-Object SamAccountName, Name, Department, Enabled, LastLogonDate, @{n='Grupos';e={$_.MemberOf.Count}} }
+$ $plan | Export-Csv .\\plan-bajas-2026-11.csv -NoTypeInformation -Encoding UTF8 -Delimiter ';'
+:::
+
+El revisor comprueba que son las personas correctas (no un homónimo) y que nadie sigue trabajando. Con su visto bueno en el ticket:
+
+:::term PowerShell · aplicar las bajas
+$ foreach ($u in $plan) {
+$   $user = Get-ADUser $u.SamAccountName -Properties MemberOf
+$   $user.MemberOf | Set-Content ".\\grupos-$($u.SamAccountName).txt" -Encoding UTF8
+$   Disable-ADAccount -Identity $user
+$   Set-ADUser -Identity $user -Description "Baja 2026-11-03 · ticket INC-48213"
+$   if ($user.MemberOf) { Remove-ADPrincipalGroupMembership -Identity $user -MemberOf $user.MemberOf -Confirm:$false }
+$   Move-ADObject -Identity $user.DistinguishedName -TargetPath "OU=Bajas,DC=contoso,DC=local"
+$ }
+:::
+
+- **Exportar los grupos primero**: si la baja era un error o la persona vuelve, con ese fichero se le devuelven los permisos en un minuto.
+- **Deshabilitar, no borrar**: el borrado se hace pasado el plazo acordado (30, 60 o 90 días), con la papelera de reciclaje de AD activada.
+- *Domain Users* es el grupo principal y no aparece en `MemberOf`, así que no se quita.
+
+! Si la OU **Bajas** está fuera del ámbito de sincronización de Azure AD Connect, mover el usuario allí hace que se borre en Entra ID en el siguiente ciclo (queda 30 días en usuarios eliminados) y con él su buzón y su OneDrive pasan a sus plazos de retención. Decídelo antes, no después.
+
+## Siguientes pasos
+
+- La guía de **PowerShell** de este mismo nivel explica el patrón de objetos, `try/catch` y CSV que usa este script.
+- La guía de **Azure AD Connect** explica el ámbito de sincronización y qué pasa en Entra ID con cada movimiento de OU.
+- Las cuentas que nadie dio de baja se encuentran con una revisión periódica. Es la idea de los repositorios **37-iam-access-review** y **03-entra-id-hygiene-audit** de mi GitHub.
+""",
+  en="""
+## What you'll get
+
+A script that creates in Active Directory the users in a CSV (each one in their OU, with their groups and a temporary password nobody sees by email), that can be run twice without creating duplicates and that leaves a log of what it did. And its counterpart for leavers: first a plan that someone reviews, then the run, and always with the groups exported so you can undo it.
+
+## Before you start
+
+- The **ActiveDirectory** module (RSAT on your device or on a management server) and an account with delegated permissions to create and move users in the target OUs, not Domain Admin.
+- The OUs and groups already created, and the organisation's naming convention.
+- If there is **Azure AD Connect** or Cloud Sync, knowing which OUs are in sync scope: whatever you do here shows up in Entra ID on the next cycle.
+
+## 1. The CSV
+
+One row per person. HR or the manager fills it in; you review it.
+
+:::term starters-2026-11.csv
+FirstName;LastName;User;Department;Title;OU;Groups
+Laura;Prado Ruiz;laura.prado;Finance;Analyst;OU=Finance,OU=Users,DC=contoso,DC=local;GRP-Finance|GRP-VPN
+Marcos;Gil Soto;marcos.gil;Operations;Technician;OU=Operations,OU=Users,DC=contoso,DC=local;GRP-Operations
+:::
+
+- A `;` separator if the CSV comes out of a Spanish-locale Excel, and saved as **CSV UTF-8** so accents and special characters arrive intact.
+- A person's groups separated by `|` inside the same column.
+- No passwords in the CSV. Ever.
+
+## 2. The starters script
+
+:::term New-ADUsers.ps1
+[CmdletBinding(SupportsShouldProcess)]
+param([Parameter(Mandatory)][string]$Csv, [string]$Log = ".\\starters-$(Get-Date -Format yyyyMMdd-HHmm).csv")
+Import-Module ActiveDirectory
+function New-TempPassword {
+    $chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!#%+?'
+    $bytes = New-Object byte[] 16
+    [Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($bytes)
+    -join ($bytes | ForEach-Object { $chars[$_ % $chars.Length] })
+}
+$result = foreach ($r in Import-Csv $Csv -Delimiter ';' -Encoding UTF8) {
+    $sam = $r.User.Trim().ToLower()
+    if (Get-ADUser -Filter "SamAccountName -eq '$sam'") {
+        [pscustomobject]@{ User = $sam; Status = 'Already exists'; Detail = 'Left untouched' }; continue
+    }
+    try {
+        $pw = New-TempPassword
+        $p = @{ Name = "$($r.FirstName) $($r.LastName)"; GivenName = $r.FirstName; Surname = $r.LastName
+                SamAccountName = $sam; UserPrincipalName = "$sam@contoso.com"; DisplayName = "$($r.FirstName) $($r.LastName)"
+                Department = $r.Department; Title = $r.Title; Path = $r.OU; Enabled = $true
+                ChangePasswordAtLogon = $true; AccountPassword = (ConvertTo-SecureString $pw -AsPlainText -Force) }
+        New-ADUser @p -ErrorAction Stop
+        foreach ($g in $r.Groups -split '\\|' | Where-Object { $_ }) { Add-ADGroupMember -Identity $g -Members $sam -ErrorAction Stop }
+        if (-not $WhatIfPreference) { Write-Host "$sam -> temporary password: $pw" }
+        [pscustomobject]@{ User = $sam; Status = $(if ($WhatIfPreference) { 'Simulated' } else { 'Created' }); Detail = $r.Groups }
+    } catch {
+        [pscustomobject]@{ User = $sam; Status = 'Error'; Detail = $_.Exception.Message }
+    }
+}
+$result | Export-Csv $Log -NoTypeInformation -Encoding UTF8 -Delimiter ';'
+:::
+
+What each piece does:
+
+- **Idempotency**: before creating, it looks the user up with `Get-ADUser -Filter`. With `-Identity` it would throw an error if the user does not exist; with `-Filter` it returns nothing. So the script can be rerun after fixing a row without duplicating anyone.
+- **Password**: a different one per user, made with a cryptographic generator, and with `ChangePasswordAtLogon` so the person sets their own on day one.
+- **try/catch per user**: a failure on one row does not stop the rest.
+- **The log**: a CSV with user, status and detail. It goes into the ticket, with no passwords.
+
+## 3. Always with -WhatIf first
+
+:::term PowerShell · dry run and real run
+$ .\\New-ADUsers.ps1 -Csv .\\starters-2026-11.csv -WhatIf
+What if: Performing the operation "New" on target "CN=Laura Prado Ruiz,OU=Finance,OU=Users,DC=contoso,DC=local".
+What if: Performing the operation "Set" on target "GRP-Finance".
+What if: Performing the operation "Set" on target "GRP-VPN".
+$ .\\New-ADUsers.ps1 -Csv .\\starters-2026-11.csv
+:::
+
+Because the script declares `SupportsShouldProcess`, `-WhatIf` flows down to `New-ADUser` and `Add-ADGroupMember`: they show what they would do without doing it.
+
+## 4. Handing over the password
+
+The temporary password appears once on screen and is not stored. Reasonable options:
+
+- Give it to the manager in person or by phone.
+- Don't hand it over: on day one the person calls the service desk, their identity is verified and they get a reset with a forced change.
+- With **Entra ID**, a **Temporary Access Pass** to register MFA.
+
+! Never in the ticket, in an email or in the same message as the username. And if you use `Read-Host -AsSecureString` to type one shared password for the whole batch, keep it to a test: an initial password that is the same for everyone ends up known by everyone.
+
+## 5. Leavers: plan, review and run
+
+For leavers the order changes: first you generate a plan that **someone else reviews**, and only then is it applied.
+
+:::term PowerShell · leavers plan
+$ $leavers = Import-Csv .\\leavers-2026-11.csv -Delimiter ';'
+$ $plan = foreach ($b in $leavers) { Get-ADUser -Filter "SamAccountName -eq '$($b.User)'" -Properties MemberOf, Enabled, Department, LastLogonDate | Select-Object SamAccountName, Name, Department, Enabled, LastLogonDate, @{n='Groups';e={$_.MemberOf.Count}} }
+$ $plan | Export-Csv .\\leavers-plan-2026-11.csv -NoTypeInformation -Encoding UTF8 -Delimiter ';'
+:::
+
+The reviewer checks they are the right people (not a namesake) and that nobody is still working. With their approval in the ticket:
+
+:::term PowerShell · apply the leavers
+$ foreach ($u in $plan) {
+$   $user = Get-ADUser $u.SamAccountName -Properties MemberOf
+$   $user.MemberOf | Set-Content ".\\groups-$($u.SamAccountName).txt" -Encoding UTF8
+$   Disable-ADAccount -Identity $user
+$   Set-ADUser -Identity $user -Description "Leaver 2026-11-03 · ticket INC-48213"
+$   if ($user.MemberOf) { Remove-ADPrincipalGroupMembership -Identity $user -MemberOf $user.MemberOf -Confirm:$false }
+$   Move-ADObject -Identity $user.DistinguishedName -TargetPath "OU=Leavers,DC=contoso,DC=local"
+$ }
+:::
+
+- **Export the groups first**: if the leaver was a mistake or the person comes back, that file gives them their access back in a minute.
+- **Disable, don't delete**: deletion happens after the agreed period (30, 60 or 90 days), with the AD Recycle Bin enabled.
+- *Domain Users* is the primary group and does not appear in `MemberOf`, so it is not removed.
+
+! If the **Leavers** OU is outside Azure AD Connect's sync scope, moving the user there deletes it in Entra ID on the next cycle (it stays 30 days in deleted users), and their mailbox and OneDrive move into their retention periods. Decide beforehand, not afterwards.
+
+## Next steps
+
+- The **PowerShell** guide at this same level explains the objects, `try/catch` and CSV pattern this script uses.
+- The **Azure AD Connect** guide explains sync scope and what happens in Entra ID with each OU move.
+- The accounts nobody offboarded are found with a periodic review. That is the idea behind the **37-iam-access-review** and **03-entra-id-hygiene-audit** repositories on my GitHub.
+""")
+g(slug="gpo-de-seguridad-base-ntlm-llmnr-smb-laps-y-despliegue-en-piloto", topic="gpo-seguridad", date="2026-10-30",
+  title_es="GPO de seguridad: NTLM, LLMNR, firma SMB, LAPS, registro de PowerShell y un despliegue con piloto y marcha atrás",
+  title_en="Security GPOs: NTLM, LLMNR, SMB signing, LAPS, PowerShell logging, and a rollout with pilot and rollback",
+  seo_title_en="Security GPOs: NTLM, LLMNR, SMB signing, LAPS · Iñigo González",
+  seo_title_es="GPO de seguridad: NTLM, LLMNR, SMB y LAPS · Iñigo González",
+  dek_es="Las directivas de base que cierran los ataques más repetidos en un dominio: LM y NTLMv1, LLMNR y NetBIOS, firma SMB, Windows LAPS, enumeración anónima, registro de PowerShell, Credential Guard y protección de LSA. Con las Security Baselines de Microsoft y Policy Analyzer, una OU piloto, gpresult y cómo volver atrás.",
+  dek_en="The baseline policies that close the most repeated attacks in a domain: LM and NTLMv1, LLMNR and NetBIOS, SMB signing, Windows LAPS, anonymous enumeration, PowerShell logging, Credential Guard and LSA protection. With Microsoft's Security Baselines and Policy Analyzer, a pilot OU, gpresult, and how to roll back.",
+  es="""
+## Qué vas a conseguir
+
+Un conjunto de GPO de seguridad que quita de en medio lo que un atacante con un portátil en la red prueba primero: capturar hashes por LLMNR, retransmitir autenticaciones por SMB sin firmar, reutilizar la contraseña de administrador local o sacar credenciales de LSASS. Desplegado con auditoría previa, una OU piloto, comprobación en el equipo y un camino de vuelta.
+
+## Antes de empezar
+
+- Permisos para crear y vincular GPO (delegados en las OU, no Domain Admin para el día a día) y la consola **GPMC**.
+- El **Microsoft Security Compliance Toolkit**: las *Security Baselines* de tu versión de Windows y Windows Server y **Policy Analyzer**.
+- Una **OU piloto** con equipos reales de varios departamentos (incluido el de IT) y un par de servidores no críticos.
+- El inventario de lo antiguo (multifunciones que escanean a carpeta, NAS, aplicaciones de terceros): es lo que rompen estas directivas.
+
+## 1. Empezar por la baseline, no por una hoja en blanco
+
+Las Security Baselines de Microsoft traen GPO ya hechas (equipo, usuario, controlador de dominio, Defender) y un script para importarlas. No se vinculan tal cual: se comparan con lo que ya tienes.
+
+:::ui Policy Analyzer · comparar la baseline con las GPO actuales
+> Add › Import GPO(s) › Windows 11 24H2 Security Baseline (GPOs)
+> Add › Import GPO(s) › Copia de seguridad de las GPO del dominio
+= Política: LAN Manager authentication level · Baseline: Send NTLMv2 response only. Refuse LM & NTLM · Dominio: (no configurada)
+= Política: Microsoft network server: Digitally sign communications (always) · Baseline: Enabled · Dominio: Disabled
+[View / Compare] [Export to Excel]
+:::
+
+Cada diferencia se decide: se adopta, se adopta más tarde o se documenta por qué no. Para importar una GPO de la baseline en tu dominio sin vincularla, `Import-GPO -BackupGpoName "MSFT Windows 11 24H2 - Computer" -Path .\\GPOs -TargetName "SEC-Equipos-Baseline" -CreateIfNeeded`.
+
+> Varias GPO pequeñas con nombre claro (`SEC-NTLM`, `SEC-LLMNR-NetBIOS`, `SEC-SMB-Firma`, `SEC-LAPS`) en lugar de una enorme.
+
+## 2. Las directivas, una a una
+
+Todas en **Configuración del equipo › Directivas**.
+
+**LM y NTLMv1.** En *Configuración de Windows › Configuración de seguridad › Directivas locales › Opciones de seguridad*:
+
+- *Seguridad de red: nivel de autenticación de LAN Manager* = **Enviar solo respuesta NTLMv2 y rechazar LM y NTLM** (valor 5).
+- *Seguridad de red: no almacenar el valor hash de LAN Manager en el próximo cambio de contraseña* = **Habilitada**.
+
+Antes de aplicarlo, busca quién usa todavía NTLMv1: en los controladores de dominio, el evento **4624** muestra *Paquete de autenticación: NTLM* y *Nombre del paquete (solo NTLM): NTLM V1*. Windows 11 24H2 y Windows Server 2025 ya no traen NTLMv1, pero los equipos antiguos y los dispositivos de terceros sí.
+
+**LLMNR y NetBIOS.** Cuando DNS no resuelve un nombre, Windows pregunta a toda la red por LLMNR y NetBIOS: cualquiera puede responder "soy yo" y recibir un hash.
+
+- LLMNR: *Plantillas administrativas › Red › Cliente DNS › Desactivar resolución de nombres de multidifusión* = **Habilitada**.
+- NetBIOS sobre TCP/IP no tiene una directiva clásica. Lo habitual es la opción de DHCP de Microsoft **001** (*Microsoft Disable Netbios Option* = `0x2`) en los ámbitos, o el valor `NetbiosOptions` = 2 en cada interfaz bajo `HKLM\\SYSTEM\\CurrentControlSet\\Services\\NetBT\\Parameters\\Interfaces` por preferencia de registro o script.
+
+**Firma SMB.** En *Opciones de seguridad*:
+
+- *Servidor de red Microsoft: firmar digitalmente las comunicaciones (siempre)* = **Habilitada**.
+- *Cliente de red Microsoft: firmar digitalmente las comunicaciones (siempre)* = **Habilitada**.
+
+Windows 11 24H2 (Pro, Enterprise y Education) ya exige firma de entrada y salida por defecto, y Windows Server 2025 la exige de salida. La GPO iguala al resto. Lo que suele fallar: NAS y escáneres antiguos y el acceso de invitado.
+
+**Enumeración anónima.** En *Opciones de seguridad*:
+
+- *Acceso de red: no permitir enumeraciones anónimas de cuentas SAM y recursos compartidos* = **Habilitada**.
+- *Acceso de red: restringir acceso anónimo a canalizaciones con nombre y recursos compartidos* = **Habilitada**.
+- *Acceso de red: permitir la aplicación de los permisos Todos a los usuarios anónimos* = **Deshabilitada**.
+
+**Windows LAPS.** Una contraseña de administrador local distinta en cada equipo, rotada y guardada en AD. Una vez por bosque, `Update-LapsADSchema`; por cada OU de equipos, `Set-LapsADComputerSelfPermission -Identity "OU=Equipos,DC=contoso,DC=local"`. Después, en *Plantillas administrativas › Sistema › LAPS*:
+
+- *Configurar el directorio de copia de seguridad de contraseñas* = **Active Directory**.
+- *Configuración de contraseña*: complejidad máxima, 20 caracteres, 30 días.
+- *Habilitar el cifrado de contraseñas* (requiere nivel funcional de dominio 2016) y *Configurar descifradores de contraseñas autorizados* con el grupo de soporte que puede leerlas.
+
+Para leerla desde soporte: `Get-LapsADPassword -Identity PC-0412 -AsPlainText`.
+
+**Registro de PowerShell.** En *Plantillas administrativas › Componentes de Windows › Windows PowerShell*:
+
+- *Activar el registro de bloques de script de PowerShell* = **Habilitada**. Cada script queda en el evento **4104** del registro *Microsoft-Windows-PowerShell/Operational*, incluido el código ofuscado una vez descifrado.
+- *Activar el registro de módulos* (evento **4103**) y, si hay dónde guardarla, la transcripción. Sube el tamaño del registro: con el de por defecto se sobrescribe en horas.
+
+**Credential Guard y protección de LSA.** En *Plantillas administrativas › Sistema*:
+
+- *Device Guard › Activar la seguridad basada en virtualización* = **Habilitada**, con *Configuración de Credential Guard* = **Habilitado sin bloqueo** para el piloto (con bloqueo UEFI ya no se quita por GPO).
+- *Autoridad de seguridad local › Configura LSASS para que se ejecute como un proceso protegido* = **Habilitado sin bloqueo UEFI**.
+
+En Windows 11 22H2 y posteriores, los dos vienen activos por defecto en equipos que cumplen requisitos; la GPO lo hace explícito para todos. Credential Guard bloquea el inicio de sesión único con NTLMv1, MS-CHAPv2 y la delegación sin restricciones de Kerberos: la WiFi o la VPN con PEAP-MSCHAPv2 es el primer sitio donde mirar.
+
+## 3. El piloto: aplicar y comprobar en el equipo
+
+Las GPO se vinculan primero a la OU piloto. En un equipo de esa OU, tras `gpupdate /force` y un reinicio (Credential Guard y LSA lo necesitan):
+
+:::term PowerShell (administrador) · PC-0412 en la OU piloto
+$ gpresult /scope computer /r
+$ gpresult /h C:\\Temp\\gpo-PC-0412.html
+$ Get-ItemProperty HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Lsa | Select-Object LmCompatibilityLevel, RunAsPPL
+$ Get-SmbServerConfiguration | Select-Object RequireSecuritySignature
+$ (Get-CimInstance -Namespace root\\Microsoft\\Windows\\DeviceGuard -ClassName Win32_DeviceGuard).SecurityServicesRunning
+$ Get-WinEvent -FilterHashtable @{LogName='System'; ProviderName='Microsoft-Windows-Wininit'; Id=12} -MaxEvents 1 | Select-Object -ExpandProperty Message
+Applied Group Policy Objects
+    SEC-NTLM
+    SEC-LLMNR-NetBIOS
+    SEC-SMB-Firma
+    SEC-LAPS
+LmCompatibilityLevel RunAsPPL
+-------------------- --------
+                   5        2
+RequireSecuritySignature : True
+{1, 2}
+LSASS.exe was started as a protected process with level: 4
+:::
+
+- `gpresult /r` dice qué GPO se aplicaron y cuáles se filtraron (y por qué: filtrado de seguridad, WMI o vínculo deshabilitado). El informe HTML de `/h` muestra cada valor y qué GPO lo ganó.
+- En `SecurityServicesRunning`, el **1** es Credential Guard y el **2** la integridad de código protegida por hipervisor. El evento 12 de Wininit confirma LSASS protegido.
+- Durante dos semanas, el piloto recoge lo que se rompe. Cada incidencia se resuelve arreglando el sistema antiguo o con una excepción documentada, no quitando la directiva para todos.
+
+## 4. Marcha atrás
+
+- Antes de cada vínculo: `Backup-GPO -All -Path \\\\srv-gestion\\GPO-Backups`. Con `Restore-GPO` se recupera una versión anterior.
+- La marcha atrás rápida es **deshabilitar el vínculo** (`Set-GPLink -Name "SEC-SMB-Firma" -Target "OU=Piloto,DC=contoso,DC=local" -LinkEnabled No`), no borrar la GPO.
+
+! Las directivas de *Opciones de seguridad* se quedan "tatuadas": al quitar la GPO, el equipo conserva el último valor. Para deshacer de verdad, se aplica una GPO con el valor contrario explícito (por ejemplo, firma SMB *Deshabilitada*), se comprueba con gpresult y después se retira. Credential Guard o LSA con bloqueo UEFI tampoco se quitan por GPO: por eso el piloto va sin bloqueo.
+
+## 5. El despliegue y lo que vigilas
+
+Del piloto a las OU por oleadas (IT, una planta, el resto, servidores al final y los controladores de dominio con su GPO de la baseline), avisando al service desk de qué síntomas esperar. Cada mes: Policy Analyzer contra la baseline nueva, equipos que no aplican las GPO, excepciones vencidas y eventos 4624 con NTLM V1.
+
+## Siguientes pasos
+
+- La guía de **Microsoft Defender Antivirus y reglas ASR** es la otra mitad de la base de seguridad del puesto, y la baseline de Microsoft trae su propia GPO de Defender.
+- La guía de **Windows Server** de Nivel 2 explica cómo leer los eventos que usas aquí para comprobar.
+- Cada GPO con su valor, la fecha de despliegue y el informe de gpresult son evidencia de control para una auditoría. Es la idea del repositorio **25-security-controls-evidence** de mi GitHub.
+""",
+  en="""
+## What you'll get
+
+A set of security GPOs that gets rid of what an attacker with a laptop on the network tries first: capturing hashes through LLMNR, relaying authentication over unsigned SMB, reusing the local admin password, or pulling credentials out of LSASS. Rolled out with prior auditing, a pilot OU, checks on the device and a way back.
+
+## Before you start
+
+- Permissions to create and link GPOs (delegated on the OUs, not Domain Admin for day-to-day work) and the **GPMC** console.
+- The **Microsoft Security Compliance Toolkit**: the *Security Baselines* for your Windows and Windows Server versions, and **Policy Analyzer**.
+- A **pilot OU** with real devices from several departments (IT included) and a couple of non-critical servers.
+- An inventory of the old stuff (multifunction printers that scan to a folder, NAS boxes, third-party apps): it is what these policies break.
+
+## 1. Start from the baseline, not a blank page
+
+Microsoft's Security Baselines come with ready-made GPOs (computer, user, domain controller, Defender) and a script to import them. You do not link them as they are: you compare them with what you already have.
+
+:::ui Policy Analyzer · comparing the baseline with the current GPOs
+> Add › Import GPO(s) › Windows 11 24H2 Security Baseline (GPOs)
+> Add › Import GPO(s) › Backup of the domain's GPOs
+= Policy: LAN Manager authentication level · Baseline: Send NTLMv2 response only. Refuse LM & NTLM · Domain: (not configured)
+= Policy: Microsoft network server: Digitally sign communications (always) · Baseline: Enabled · Domain: Disabled
+[View / Compare] [Export to Excel]
+:::
+
+Each difference is decided: adopt it, adopt it later, or document why not. To import a baseline GPO into your domain without linking it, `Import-GPO -BackupGpoName "MSFT Windows 11 24H2 - Computer" -Path .\\GPOs -TargetName "SEC-Computers-Baseline" -CreateIfNeeded`.
+
+> Several small GPOs with clear names (`SEC-NTLM`, `SEC-LLMNR-NetBIOS`, `SEC-SMB-Signing`, `SEC-LAPS`) instead of one huge one.
+
+## 2. The policies, one by one
+
+All under **Computer Configuration › Policies**.
+
+**LM and NTLMv1.** In *Windows Settings › Security Settings › Local Policies › Security Options*:
+
+- *Network security: LAN Manager authentication level* = **Send NTLMv2 response only. Refuse LM & NTLM** (value 5).
+- *Network security: Do not store LAN Manager hash value on next password change* = **Enabled**.
+
+Before applying it, find out who still uses NTLMv1: on the domain controllers, event **4624** shows *Authentication Package: NTLM* and *Package Name (NTLM only): NTLM V1*. Windows 11 24H2 and Windows Server 2025 no longer ship NTLMv1, but older devices and third-party equipment do.
+
+**LLMNR and NetBIOS.** When DNS cannot resolve a name, Windows asks the whole network through LLMNR and NetBIOS, and anyone can answer "that's me" and receive a hash.
+
+- LLMNR: *Administrative Templates › Network › DNS Client › Turn off multicast name resolution* = **Enabled**.
+- NetBIOS over TCP/IP has no classic policy. The usual route is Microsoft DHCP option **001** (*Microsoft Disable Netbios Option* = `0x2`) on the scopes, or the `NetbiosOptions` value = 2 on each interface under `HKLM\\SYSTEM\\CurrentControlSet\\Services\\NetBT\\Parameters\\Interfaces` through a registry preference or a script.
+
+**SMB signing.** In *Security Options*:
+
+- *Microsoft network server: Digitally sign communications (always)* = **Enabled**.
+- *Microsoft network client: Digitally sign communications (always)* = **Enabled**.
+
+Windows 11 24H2 (Pro, Enterprise and Education) already requires inbound and outbound signing by default, and Windows Server 2025 requires it outbound. The GPO brings everything else in line. What usually breaks: old NAS boxes and scanners, and guest access.
+
+**Anonymous enumeration.** In *Security Options*:
+
+- *Network access: Do not allow anonymous enumeration of SAM accounts and shares* = **Enabled**.
+- *Network access: Restrict anonymous access to Named Pipes and Shares* = **Enabled**.
+- *Network access: Let Everyone permissions apply to anonymous users* = **Disabled**.
+
+**Windows LAPS.** A different local admin password on every device, rotated and stored in AD. Once per forest, `Update-LapsADSchema`; for each computer OU, `Set-LapsADComputerSelfPermission -Identity "OU=Computers,DC=contoso,DC=local"`. Then, in *Administrative Templates › System › LAPS*:
+
+- *Configure password backup directory* = **Active Directory**.
+- *Password Settings*: maximum complexity, 20 characters, 30 days.
+- *Enable password encryption* (needs domain functional level 2016) and *Configure authorized password decryptors* with the support group allowed to read them.
+
+To read it from support: `Get-LapsADPassword -Identity PC-0412 -AsPlainText`.
+
+**PowerShell logging.** In *Administrative Templates › Windows Components › Windows PowerShell*:
+
+- *Turn on PowerShell Script Block Logging* = **Enabled**. Every script lands in event **4104** of the *Microsoft-Windows-PowerShell/Operational* log, including obfuscated code once decoded.
+- *Turn on Module Logging* (event **4103**) and, if there is somewhere to keep it, transcription. Increase the log size: at the default it is overwritten within hours.
+
+**Credential Guard and LSA protection.** In *Administrative Templates › System*:
+
+- *Device Guard › Turn On Virtualization Based Security* = **Enabled**, with *Credential Guard Configuration* = **Enabled without lock** for the pilot (with UEFI lock it can no longer be removed by GPO).
+- *Local Security Authority › Configures LSASS to run as a protected process* = **Enabled without UEFI Lock**.
+
+On Windows 11 22H2 and later, both are on by default on devices that meet the requirements; the GPO makes it explicit for everyone. Credential Guard blocks single sign-on with NTLMv1, MS-CHAPv2 and Kerberos unconstrained delegation: Wi-Fi or VPN with PEAP-MSCHAPv2 is the first place to look.
+
+## 3. The pilot: apply and check on the device
+
+The GPOs are linked to the pilot OU first. On a device in that OU, after `gpupdate /force` and a reboot (Credential Guard and LSA need it):
+
+:::term PowerShell (administrator) · PC-0412 in the pilot OU
+$ gpresult /scope computer /r
+$ gpresult /h C:\\Temp\\gpo-PC-0412.html
+$ Get-ItemProperty HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Lsa | Select-Object LmCompatibilityLevel, RunAsPPL
+$ Get-SmbServerConfiguration | Select-Object RequireSecuritySignature
+$ (Get-CimInstance -Namespace root\\Microsoft\\Windows\\DeviceGuard -ClassName Win32_DeviceGuard).SecurityServicesRunning
+$ Get-WinEvent -FilterHashtable @{LogName='System'; ProviderName='Microsoft-Windows-Wininit'; Id=12} -MaxEvents 1 | Select-Object -ExpandProperty Message
+Applied Group Policy Objects
+    SEC-NTLM
+    SEC-LLMNR-NetBIOS
+    SEC-SMB-Signing
+    SEC-LAPS
+LmCompatibilityLevel RunAsPPL
+-------------------- --------
+                   5        2
+RequireSecuritySignature : True
+{1, 2}
+LSASS.exe was started as a protected process with level: 4
+:::
+
+- `gpresult /r` says which GPOs were applied and which were filtered out (and why: security filtering, WMI or a disabled link). The `/h` HTML report shows every value and which GPO won it.
+- In `SecurityServicesRunning`, **1** is Credential Guard and **2** is hypervisor-protected code integrity. Wininit event 12 confirms LSASS is protected.
+- For two weeks, the pilot collects what breaks. Each issue is solved by fixing the old system or with a documented exception, not by removing the policy for everyone.
+
+## 4. Rollback
+
+- Before each link: `Backup-GPO -All -Path \\\\srv-mgmt\\GPO-Backups`. `Restore-GPO` brings back an earlier version.
+- The quick rollback is **disabling the link** (`Set-GPLink -Name "SEC-SMB-Signing" -Target "OU=Pilot,DC=contoso,DC=local" -LinkEnabled No`), not deleting the GPO.
+
+! *Security Options* settings stay "tattooed": when the GPO is removed, the device keeps the last value. To really undo, apply a GPO with the explicit opposite value (for example SMB signing *Disabled*), check it with gpresult, and then remove it. Credential Guard or LSA with UEFI lock cannot be removed by GPO either: that is why the pilot runs without lock.
+
+## 5. The rollout and what you watch
+
+From the pilot to the OUs in waves (IT, one floor, everyone else, servers at the end, and domain controllers with their baseline GPO), telling the service desk which symptoms to expect. Every month: Policy Analyzer against the new baseline, devices that don't apply the GPOs, expired exceptions and 4624 events with NTLM V1.
+
+## Next steps
+
+- The guide **Microsoft Defender Antivirus and ASR rules** is the other half of the device security baseline, and Microsoft's baseline ships its own Defender GPO.
+- The Level 2 **Windows Server** guide explains how to read the events you use here to check.
+- Each GPO with its value, the rollout date and the gpresult report are control evidence for an audit. That is the idea behind the **25-security-controls-evidence** repository on my GitHub.
+""")
+g(slug="defender-antivirus-y-reglas-asr-de-auditoria-a-bloqueo-y-una-aplicacion-bloqueada", topic="defender-asr", date="2026-10-30",
+  title_es="Microsoft Defender Antivirus y reglas ASR: de auditoría a bloqueo, exclusiones bien hechas y una aplicación bloqueada",
+  title_en="Microsoft Defender Antivirus and ASR rules: from audit to block, exclusions done right and a blocked app",
+  seo_title_en="Defender ASR rules: audit, block, exclusions · Iñigo González",
+  seo_title_es="Reglas ASR de Defender: auditoría y bloqueo · Iñigo González",
+  dek_es="Comprobar que Defender está sano, las reglas de reducción de la superficie de ataque con sus GUID, pasar de auditoría a bloqueo, protección de red y acceso controlado a carpetas, exclusiones mínimas y documentadas, gestión desde Intune o GPO, los eventos 1121 y 1122 y el ticket de la aplicación que una regla ASR no deja abrir.",
+  dek_en="Checking Defender is healthy, attack surface reduction rules with their GUIDs, moving from audit to block, network protection and controlled folder access, minimal documented exclusions, management from Intune or GPO, events 1121 and 1122, and the ticket of the app an ASR rule won't let run.",
+  es="""
+## Qué vas a conseguir
+
+Un Defender Antivirus que, además de buscar virus, corta los comportamientos que usan casi todos los ataques: Office lanzando procesos, scripts ofuscados, ejecutables por correo, robo de credenciales de LSASS. Activado primero en auditoría y después en bloqueo, con pocas exclusiones justificadas, y con la forma de resolver el ticket que llegará seguro: "la aplicación no abre".
+
+## Antes de empezar
+
+- Los equipos gestionados por **Intune** (directivas de *Seguridad de los puntos de conexión*) o por **GPO**. Uno de los dos para cada configuración, no ambos.
+- Defender como antivirus activo, no en modo pasivo detrás de otro producto: las reglas ASR necesitan Defender en tiempo real.
+- Si hay **Defender for Endpoint**, acceso al portal de Defender. Sin él, los eventos del equipo bastan.
+- Un grupo piloto con equipos de IT y de los departamentos con más macros y herramientas propias (Finanzas, Operaciones).
+
+## 1. Comprobar que Defender está sano
+
+:::term PowerShell (administrador) · PC-0412
+$ Get-MpComputerStatus | Select-Object AMRunningMode, AntivirusEnabled, RealTimeProtectionEnabled, IsTamperProtected, AntivirusSignatureLastUpdated, AMProductVersion
+$ Get-MpPreference | Select-Object AttackSurfaceReductionRules_Ids, AttackSurfaceReductionRules_Actions, EnableNetworkProtection, EnableControlledFolderAccess
+AMRunningMode                 : Normal
+AntivirusEnabled              : True
+RealTimeProtectionEnabled     : True
+IsTamperProtected             : True
+AntivirusSignatureLastUpdated : 30/10/2026 7:12:40
+AMProductVersion              : 4.18.26090.3
+AttackSurfaceReductionRules_Ids     : {}
+AttackSurfaceReductionRules_Actions : {}
+EnableNetworkProtection             : 0
+EnableControlledFolderAccess        : 0
+:::
+
+- **AMRunningMode** tiene que ser *Normal*. *Passive Mode* significa que otro antivirus manda y las reglas ASR no se aplican.
+- **IsTamperProtected** en *True*: la protección contra alteraciones impide que un usuario o un malware con permisos de administrador apague Defender.
+- Firmas de hoy y una versión de plataforma reciente.
+
+## 2. Las reglas ASR que importan
+
+Cada regla tiene un nombre y un GUID, y cuatro modos: **0** desactivada, **1** bloqueo, **2** auditoría y **6** advertencia (el usuario ve el aviso y puede continuar). Un buen primer lote:
+
+| Regla | GUID |
+|---|---|
+| Bloquear el robo de credenciales del subsistema de autoridad de seguridad local (lsass.exe) | `9e6c4e1f-7d60-472f-ba1a-a39ef669e4b2` |
+| Bloquear el abuso de controladores firmados vulnerables | `56a863a9-875e-4185-98a7-b882c64b5ce5` |
+| Bloquear la persistencia mediante suscripción a eventos WMI | `e6db77e5-3df2-4cf1-b95a-636979351e5b` |
+| Bloquear que todas las aplicaciones de Office creen procesos secundarios | `d4f940ab-401b-4efc-aadc-ad5f3c50688a` |
+| Bloquear que las aplicaciones de Office creen contenido ejecutable | `3b576869-a4ec-4529-8536-b80a7769e899` |
+| Bloquear contenido ejecutable del cliente de correo y del correo web | `be9ba2d9-53ea-4cdc-84e5-9b1eeee46550` |
+| Bloquear que JavaScript o VBScript ejecuten contenido descargado | `d3e037e1-3eb8-44c8-a917-57927947596d` |
+| Bloquear la ejecución de scripts potencialmente ofuscados | `5beb7efe-fd9a-4556-801d-275e5ffc04cc` |
+| Usar protección avanzada contra ransomware | `c1db55ab-c21a-4637-bb3f-a12568109d35` |
+
+Las tres primeras son las que Microsoft llama *de protección estándar*: casi nunca molestan y se pueden poner en bloqueo pronto. El resto, auditoría primero.
+
+! La regla *Bloquear creaciones de procesos procedentes de comandos PSExec y WMI* (`d1e49aac-8f56-4280-b9ba-993a6d77406c`) rompe el cliente de Configuration Manager, que depende de WMI. Si gestionas con MECM, no la actives fuera de una prueba en auditoría muy controlada.
+
+## 3. De auditoría a bloqueo
+
+En **Intune**: *Seguridad de los puntos de conexión › Reducción de la superficie expuesta a ataques › Crear directiva › Windows › Reglas de reducción de la superficie expuesta a ataques*, cada regla en **Auditoría**, asignada al grupo piloto. Por **GPO**: *Componentes de Windows › Antivirus de Microsoft Defender › Protección contra vulnerabilidades de Microsoft Defender › Reducción de la superficie expuesta a ataques › Configurar reglas de reducción de la superficie expuesta a ataques*, con el GUID como nombre y el modo como valor. En un equipo de laboratorio, para probar:
+
+:::term PowerShell (administrador) · equipo de pruebas
+$ Add-MpPreference -AttackSurfaceReductionRules_Ids d4f940ab-401b-4efc-aadc-ad5f3c50688a -AttackSurfaceReductionRules_Actions AuditMode
+$ Get-WinEvent -FilterHashtable @{LogName='Microsoft-Windows-Windows Defender/Operational'; Id=1121,1122} -MaxEvents 20 | Select-Object TimeCreated, Id, Message
+:::
+
+- **1121**: una regla en bloqueo ha bloqueado algo. **1122**: una regla en auditoría lo habría bloqueado. **5007**: ha cambiado la configuración (útil para saber cuándo llegó la directiva).
+- Dos a cuatro semanas en auditoría, con los 1122 revisados por regla y por aplicación (en el portal de Defender, *Informes › Reglas de reducción de la superficie expuesta a ataques*).
+- Después, regla a regla a **Bloqueo** en el piloto, y del piloto al resto por oleadas. Las reglas que admiten **Advertencia** son un paso intermedio útil para las de Office.
+
+## 4. Protección de red y acceso controlado a carpetas
+
+- **Protección de red** bloquea conexiones a dominios e IP de mala reputación desde cualquier proceso, no solo desde el navegador. `Set-MpPreference -EnableNetworkProtection AuditMode` y después `Enabled`; eventos **1125** (auditoría) y **1126** (bloqueo).
+- **Acceso controlado a carpetas** impide que aplicaciones no fiables escriban en Documentos, Escritorio, Imágenes y las carpetas que añadas. Buena defensa contra ransomware, y la que más tickets genera. Auditoría (`-EnableControlledFolderAccess AuditMode`, evento **1124**) antes que bloqueo (evento **1123**), y las aplicaciones legítimas con `Add-MpPreference -ControlledFolderAccessAllowedApplications`.
+
+## 5. Exclusiones bien hechas
+
+Cada exclusión es un agujero hecho a propósito, así que se hacen pocas, pequeñas y por escrito:
+
+- **La más pequeña posible**: un fichero concreto antes que una carpeta, una carpeta antes que una unidad. Nunca `C:\\Users`, `%TEMP%` ni un proceso de Office entero.
+- **Del tipo correcto**: una exclusión **por regla ASR** solo afecta a esa regla; una exclusión de antivirus deja el fichero sin analizar. Para un falso positivo de ASR no hace falta tocar el antivirus. Hay reglas que no respetan las exclusiones de antivirus, y todas respetan las exclusiones de ASR globales y por regla.
+- **Donde se gestiona la regla**: si la regla viene de Intune, la exclusión también. Las añadidas a mano en un equipo se pierden o, con protección contra alteraciones, pueden no aplicarse.
+- **Documentada**: qué se excluye, para qué regla, qué aplicación, quién la pidió, el ticket y una fecha de revisión.
+
+## 6. El ticket: "la herramienta de cierre mensual no arranca desde Excel"
+
+Finanzas usa un libro de Excel con macros que lanza un ejecutable interno para generar informes. Desde que *Bloquear que todas las aplicaciones de Office creen procesos secundarios* está en bloqueo, no hace nada y aparece un aviso de Seguridad de Windows.
+
+:::term PowerShell (administrador) · PC-0233
+$ Get-WinEvent -FilterHashtable @{LogName='Microsoft-Windows-Windows Defender/Operational'; Id=1121} -MaxEvents 1 | Format-List TimeCreated, Message
+TimeCreated : 30/10/2026 9:41:07
+Message     : Microsoft Defender Exploit Guard ha bloqueado una operación que no está permitida por su administrador de TI.
+              ID: D4F940AB-401B-4EFC-AADC-AD5F3C50688A
+              Usuario: CONTOSO\\laura.prado
+              Ruta de acceso: C:\\Program Files\\Contoso\\InformesCierre\\GenInforme.exe
+              Nombre del proceso: C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE
+:::
+
+Se lee así: el **ID** es la regla, **Nombre del proceso** quién intentó la acción (Excel) y **Ruta de acceso** el fichero bloqueado (el ejecutable interno).
+
+1. Confirma que es legítimo: firmado por quien dice, instalado por IT en `Program Files`, y que el responsable de la aplicación lo reconoce. Si nadie lo reconoce, no es un ticket de soporte: es un incidente de seguridad.
+2. Mira si pasa en más equipos (el informe de reglas ASR del portal o el mismo evento en otro equipo de Finanzas).
+3. Añade una **exclusión por regla** solo para `C:\\Program Files\\Contoso\\InformesCierre\\GenInforme.exe`, en la misma directiva de Intune que activa la regla, asignada a quien la necesita.
+4. Tras sincronizar la directiva, cierra y vuelve a abrir Excel (las exclusiones se aplican cuando arranca el proceso) y prueba con el usuario.
+5. Ticket con la regla, el fichero excluido, la justificación y una fecha de revisión.
+
+> Desactivar la regla para todos o volverla a auditoría "hasta que se arregle" es lo que deja la red abierta durante meses. Una exclusión concreta es más rápida y deja la regla funcionando para todo lo demás.
+
+## Siguientes pasos
+
+- La guía de **GPO de seguridad** completa la base de seguridad del puesto: NTLM, LLMNR, firma SMB, LAPS y protección de LSA.
+- La guía de **Intune EPM** reduce los administradores locales, que es lo que hace que un usuario pueda saltarse muchas de estas protecciones.
+- La guía de **Microsoft Sentinel** de Nivel 4 explica cómo llevar los eventos de Defender a alertas centralizadas.
+""",
+  en="""
+## What you'll get
+
+A Defender Antivirus that, besides looking for viruses, cuts off the behaviours almost every attack uses: Office launching processes, obfuscated scripts, executables by email, credential theft from LSASS. Switched on in audit first and then block, with few justified exclusions, and with a way to solve the ticket that is sure to arrive: "the app won't open".
+
+## Before you start
+
+- Devices managed by **Intune** (*Endpoint security* policies) or by **GPO**. One of the two for each setting, not both.
+- Defender as the active antivirus, not in passive mode behind another product: ASR rules need Defender in real time.
+- If you have **Defender for Endpoint**, access to the Defender portal. Without it, the device's events are enough.
+- A pilot group with IT devices and devices from the departments with the most macros and in-house tools (Finance, Operations).
+
+## 1. Check Defender is healthy
+
+:::term PowerShell (administrator) · PC-0412
+$ Get-MpComputerStatus | Select-Object AMRunningMode, AntivirusEnabled, RealTimeProtectionEnabled, IsTamperProtected, AntivirusSignatureLastUpdated, AMProductVersion
+$ Get-MpPreference | Select-Object AttackSurfaceReductionRules_Ids, AttackSurfaceReductionRules_Actions, EnableNetworkProtection, EnableControlledFolderAccess
+AMRunningMode                 : Normal
+AntivirusEnabled              : True
+RealTimeProtectionEnabled     : True
+IsTamperProtected             : True
+AntivirusSignatureLastUpdated : 30/10/2026 7:12:40
+AMProductVersion              : 4.18.26090.3
+AttackSurfaceReductionRules_Ids     : {}
+AttackSurfaceReductionRules_Actions : {}
+EnableNetworkProtection             : 0
+EnableControlledFolderAccess        : 0
+:::
+
+- **AMRunningMode** must be *Normal*. *Passive Mode* means another antivirus is in charge and ASR rules are not enforced.
+- **IsTamperProtected** at *True*: tamper protection stops a user or malware with admin rights from turning Defender off.
+- Today's signatures and a recent platform version.
+
+## 2. The ASR rules that matter
+
+Each rule has a name and a GUID, and four modes: **0** off, **1** block, **2** audit and **6** warn (the user sees the warning and can carry on). A good first batch:
+
+| Rule | GUID |
+|---|---|
+| Block credential stealing from the Windows local security authority subsystem (lsass.exe) | `9e6c4e1f-7d60-472f-ba1a-a39ef669e4b2` |
+| Block abuse of exploited vulnerable signed drivers | `56a863a9-875e-4185-98a7-b882c64b5ce5` |
+| Block persistence through WMI event subscription | `e6db77e5-3df2-4cf1-b95a-636979351e5b` |
+| Block all Office applications from creating child processes | `d4f940ab-401b-4efc-aadc-ad5f3c50688a` |
+| Block Office applications from creating executable content | `3b576869-a4ec-4529-8536-b80a7769e899` |
+| Block executable content from email client and webmail | `be9ba2d9-53ea-4cdc-84e5-9b1eeee46550` |
+| Block JavaScript or VBScript from launching downloaded executable content | `d3e037e1-3eb8-44c8-a917-57927947596d` |
+| Block execution of potentially obfuscated scripts | `5beb7efe-fd9a-4556-801d-275e5ffc04cc` |
+| Use advanced protection against ransomware | `c1db55ab-c21a-4637-bb3f-a12568109d35` |
+
+The first three are what Microsoft calls *standard protection* rules: they hardly ever get in the way and can go to block early. The rest, audit first.
+
+! The rule *Block process creations originating from PSExec and WMI commands* (`d1e49aac-8f56-4280-b9ba-993a6d77406c`) breaks the Configuration Manager client, which relies on WMI. If you manage with MECM, don't enable it outside a tightly controlled audit test.
+
+## 3. From audit to block
+
+In **Intune**: *Endpoint security › Attack surface reduction › Create policy › Windows › Attack Surface Reduction Rules*, each rule set to **Audit**, assigned to the pilot group. Through **GPO**: *Windows Components › Microsoft Defender Antivirus › Microsoft Defender Exploit Guard › Attack Surface Reduction › Configure Attack surface reduction rules*, with the GUID as the name and the mode as the value. On a lab device, to test:
+
+:::term PowerShell (administrator) · test device
+$ Add-MpPreference -AttackSurfaceReductionRules_Ids d4f940ab-401b-4efc-aadc-ad5f3c50688a -AttackSurfaceReductionRules_Actions AuditMode
+$ Get-WinEvent -FilterHashtable @{LogName='Microsoft-Windows-Windows Defender/Operational'; Id=1121,1122} -MaxEvents 20 | Select-Object TimeCreated, Id, Message
+:::
+
+- **1121**: a rule in block mode has blocked something. **1122**: a rule in audit mode would have blocked it. **5007**: the configuration changed (useful to know when the policy arrived).
+- Two to four weeks in audit, with the 1122s reviewed by rule and by application (in the Defender portal, *Reports › Attack surface reduction rules*).
+- Then, rule by rule to **Block** in the pilot, and from the pilot to everyone else in waves. Rules that support **Warn** are a useful intermediate step for the Office ones.
+
+## 4. Network protection and controlled folder access
+
+- **Network protection** blocks connections to bad-reputation domains and IPs from any process, not just the browser. `Set-MpPreference -EnableNetworkProtection AuditMode` and then `Enabled`; events **1125** (audit) and **1126** (block).
+- **Controlled folder access** stops untrusted applications writing to Documents, Desktop, Pictures and any folders you add. A good ransomware defence, and the one that generates the most tickets. Audit (`-EnableControlledFolderAccess AuditMode`, event **1124**) before block (event **1123**), and legitimate apps added with `Add-MpPreference -ControlledFolderAccessAllowedApplications`.
+
+## 5. Exclusions done right
+
+Every exclusion is a hole made on purpose, so they are few, small and written down:
+
+- **As small as possible**: a specific file rather than a folder, a folder rather than a drive. Never `C:\\Users`, `%TEMP%` or a whole Office process.
+- **Of the right type**: a **per-rule ASR** exclusion affects only that rule; an antivirus exclusion leaves the file unscanned. For an ASR false positive you don't need to touch the antivirus. Some rules don't honour antivirus exclusions, and all of them honour global and per-rule ASR exclusions.
+- **Where the rule is managed**: if the rule comes from Intune, so does the exclusion. Exclusions added by hand on a device get lost or, with tamper protection on, may not apply.
+- **Documented**: what is excluded, for which rule, which application, who asked for it, the ticket and a review date.
+
+## 6. The ticket: "the month-end tool won't start from Excel"
+
+Finance uses an Excel workbook with macros that launches an in-house executable to generate reports. Since *Block all Office applications from creating child processes* went to block, nothing happens and a Windows Security notification appears.
+
+:::term PowerShell (administrator) · PC-0233
+$ Get-WinEvent -FilterHashtable @{LogName='Microsoft-Windows-Windows Defender/Operational'; Id=1121} -MaxEvents 1 | Format-List TimeCreated, Message
+TimeCreated : 30/10/2026 9:41:07
+Message     : Microsoft Defender Exploit Guard has blocked an operation that is not allowed by your IT administrator.
+              ID: D4F940AB-401B-4EFC-AADC-AD5F3C50688A
+              User: CONTOSO\\laura.prado
+              Path: C:\\Program Files\\Contoso\\MonthEndReports\\GenReport.exe
+              Process Name: C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE
+:::
+
+It reads like this: the **ID** is the rule, **Process Name** is who attempted the action (Excel), and **Path** is the blocked file (the in-house executable).
+
+1. Confirm it is legitimate: signed by who it claims, installed by IT under `Program Files`, and recognised by the application owner. If nobody recognises it, it is not a support ticket: it is a security incident.
+2. Check whether it happens on other devices (the portal's ASR rules report or the same event on another Finance device).
+3. Add a **per-rule exclusion** for `C:\\Program Files\\Contoso\\MonthEndReports\\GenReport.exe` only, in the same Intune policy that enables the rule, assigned to those who need it.
+4. After the policy syncs, close and reopen Excel (exclusions apply when the process starts) and test with the user.
+5. Ticket with the rule, the excluded file, the justification and a review date.
+
+> Turning the rule off for everyone, or putting it back into audit "until it's fixed", is what leaves the network open for months. A specific exclusion is faster and keeps the rule working for everything else.
+
+## Next steps
+
+- The **Security GPOs** guide completes the device security baseline: NTLM, LLMNR, SMB signing, LAPS and LSA protection.
+- The **Intune EPM** guide cuts down local admins, which is what lets a user get around many of these protections.
+- The Level 4 **Microsoft Sentinel** guide explains how to turn Defender events into centralised alerts.
+""")
+g(slug="dns-y-dhcp-en-windows-server-zonas-ambitos-conmutacion-y-un-equipo-sin-ip", topic="dns-dhcp", date="2026-10-30",
+  title_es="DNS y DHCP en Windows Server: zonas, registros, ámbitos, conmutación por error y un equipo sin IP",
+  title_en="DNS and DHCP on Windows Server: zones, records, scopes, failover and a device with no IP",
+  seo_title_en="DNS and DHCP on Windows Server: 169.254 fix · Iñigo González",
+  seo_title_es="DNS y DHCP en Windows Server y la IP 169.254 · Iñigo González",
+  dek_es="Zonas integradas en Active Directory, registros A, CNAME y PTR, reenviadores, limpieza de registros antiguos, ámbitos DHCP con sus opciones 003, 006 y 015, reservas, conmutación por error entre dos servidores y el diagnóstico de un equipo con una IP 169.254.",
+  dek_en="Active Directory-integrated zones, A, CNAME and PTR records, forwarders, scavenging of stale records, DHCP scopes with options 003, 006 and 015, reservations, failover between two servers, and diagnosing a device with a 169.254 address.",
+  es="""
+## Qué vas a conseguir
+
+Los dos servicios que dan red a un equipo sin que nadie lo note: DHCP le da IP, puerta de enlace y DNS; DNS le dice dónde está cada servidor. Montados en Windows Server en un dominio, con dos servidores para que la caída de uno no deje sin red a la oficina, y el método para el ticket más típico: un equipo con una dirección 169.254.
+
+## Antes de empezar
+
+- Los roles **DNS Server** y **DHCP Server** instalados (en un dominio, DNS suele vivir en los controladores de dominio) y la consola o los módulos `DnsServer` y `DhcpServer` de PowerShell.
+- El plan de direccionamiento: qué subred es cada VLAN, cuál es su puerta de enlace y qué rango queda para IP fijas (servidores, impresoras, equipos de red).
+
+## 1. DNS: zonas y registros
+
+En un dominio, la zona es **integrada en Active Directory**: se replica con AD a todos los controladores de dominio, admite actualizaciones dinámicas seguras y no hay un servidor primario único que pueda caerse.
+
+:::term PowerShell · DNS en DC-01
+$ Get-DnsServerZone | Select-Object ZoneName, ZoneType, IsDsIntegrated, ReplicationScope
+$ Add-DnsServerPrimaryZone -NetworkId "10.20.0.0/16" -ReplicationScope Domain
+$ Add-DnsServerResourceRecordA -ZoneName contoso.local -Name srv-app-01 -IPv4Address 10.20.5.40 -CreatePtr
+$ Add-DnsServerResourceRecordCName -ZoneName contoso.local -Name intranet -HostNameAlias srv-app-01.contoso.local
+$ Resolve-DnsName intranet.contoso.local -Server DC-01
+intranet.contoso.local   CNAME  3600  Answer     srv-app-01.contoso.local
+Name       : srv-app-01.contoso.local
+IPAddress  : 10.20.5.40
+:::
+
+- **A**: nombre a IP. **PTR**: IP a nombre, en la zona inversa (`-CreatePtr` lo crea a la vez). **CNAME**: un alias que apunta a otro nombre; útil para que `intranet` sobreviva a un cambio de servidor.
+
+## 2. Reenviadores y limpieza
+
+Lo que no es de tu dominio, el DNS interno lo pregunta fuera. Los **reenviadores** dicen a quién:
+
+:::term PowerShell · reenviadores
+$ Get-DnsServerForwarder
+$ Set-DnsServerForwarder -IPAddress 10.0.0.53, 10.0.1.53
+:::
+
+La **limpieza** (*scavenging*) borra registros dinámicos de equipos que ya no existen. Sin ella, un nombre antiguo apunta a una IP que ahora tiene otro equipo.
+
+- Se activa en la zona (*Propiedades › General › Caducidad*) y en **un solo servidor** (`Set-DnsServerScavenging -ScavengingState $true -ScavengingInterval 7.00:00:00`).
+- Con los valores por defecto (7 días sin actualizar + 7 días de actualización), un registro que nadie renueva se borra pasados unos 14 días más el intervalo de limpieza.
+- Los registros estáticos no tienen marca de tiempo y no se limpian.
+
+## 3. DHCP: ámbito, exclusiones y opciones
+
+:::term PowerShell · DHCP en DHCP-01
+$ Add-DhcpServerInDC -DnsName dhcp-01.contoso.local -IPAddress 10.20.1.10
+$ Add-DhcpServerv4Scope -Name "VLAN20 Usuarios P1" -StartRange 10.20.20.1 -EndRange 10.20.20.254 -SubnetMask 255.255.255.0 -LeaseDuration 8.00:00:00 -State Active
+$ Add-DhcpServerv4ExclusionRange -ScopeId 10.20.20.0 -StartRange 10.20.20.1 -EndRange 10.20.20.20
+$ Set-DhcpServerv4OptionValue -ScopeId 10.20.20.0 -Router 10.20.20.1 -DnsServer 10.20.1.11, 10.20.1.12 -DnsDomain contoso.local
+$ Add-DhcpServerv4Reservation -ScopeId 10.20.20.0 -IPAddress 10.20.20.30 -ClientId "00-1B-A9-3C-44-10" -Description "Impresora P1 Finanzas"
+:::
+
+- En un dominio, el servidor DHCP tiene que estar **autorizado** en AD (`Add-DhcpServerInDC`); si no, no reparte.
+- La **exclusión** reserva el principio del rango para IP fijas, para que DHCP no las entregue.
+- Las tres opciones que necesita cualquier equipo: **003** puerta de enlace (`-Router`), **006** servidores DNS (`-DnsServer`) y **015** sufijo DNS (`-DnsDomain`). Un puesto con IP que no navega suele fallar en una de estas tres.
+- La **reserva** da siempre la misma IP a un equipo por su MAC: impresoras, terminales.
+
+## 4. Conmutación por error entre dos servidores
+
+Con **DHCP failover**, dos servidores comparten los ámbitos y sus concesiones. Si uno cae, el otro sigue repartiendo.
+
+:::term PowerShell · conmutación por error
+$ Add-DhcpServerv4Failover -ComputerName dhcp-01 -PartnerServer dhcp-02 -Name "DHCP01-DHCP02" -ScopeId 10.20.20.0 -LoadBalancePercent 50 -SharedSecret (Read-Host -AsSecureString "Secreto compartido")
+$ Get-DhcpServerv4Failover -ComputerName dhcp-01
+$ Invoke-DhcpServerv4FailoverReplication -ComputerName dhcp-01 -Name "DHCP01-DHCP02"
+:::
+
+- **Equilibrio de carga** (50/50) para dos servidores en la misma sede; **espera activa** (*hot standby*) cuando el segundo está en otro sitio y solo debe responder si cae el primero.
+- Las concesiones se sincronizan solas, pero **los cambios de configuración no**: una reserva o una opción nueva se hace en un servidor y luego se replica (`Invoke-DhcpServerv4FailoverReplication` o *Replicar ámbito* en la consola).
+
+## 5. El ticket: "el equipo tiene una IP 169.254 y no tiene red"
+
+Una dirección **169.254.x.x** (APIPA) significa que el equipo pidió IP por DHCP y nadie le contestó. El problema está entre el equipo y el servidor DHCP, no en el equipo.
+
+:::term Equipo PC-0233 y servidor DHCP-01
+$ ipconfig /all
+   Autoconfiguration IPv4 Address. . : 169.254.81.12(Preferred)
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Physical Address. . . . . . . . . : 3C-52-82-A1-0F-44
+$ Get-DhcpServerv4ScopeStatistics -ComputerName dhcp-01 | Select-Object ScopeId, Free, InUse, Reserved, PercentageInUse
+ScopeId       Free  InUse  Reserved  PercentageInUse
+-------       ----  -----  --------  ---------------
+10.20.20.0       0    234         1              100
+10.20.30.0      61    173         2            73,93
+$ Get-DhcpServerv4Lease -ComputerName dhcp-01 -ScopeId 10.20.20.0 | Sort-Object LeaseExpiryTime | Select-Object -First 5 IPAddress, HostName, ClientId, LeaseExpiryTime
+:::
+
+Se descarta en este orden:
+
+1. **El ámbito está lleno.** `Free 0` y 100 %. El servidor también deja el evento **1020** (*el ámbito está al X por ciento*) en el registro de DHCP Server. Si hay muchas concesiones de equipos que ya no están, reduce su duración; si el ámbito se ha quedado pequeño, ampliarlo es un cambio de red.
+2. **Una reserva mal hecha.** Si el equipo tiene reserva, comprueba que la MAC coincide con la de `ipconfig /all` y que la IP reservada no está ya usada por otro.
+3. **El relay.** El servidor DHCP está en otra VLAN: las peticiones llegan gracias al **ip helper-address** en la interfaz de esa VLAN del switch o del router. Si es una VLAN nueva y nadie lo configuró, **todos** los equipos de esa VLAN salen con 169.254.
+4. **El puerto del switch**, en la VLAN equivocada o en err-disabled.
+5. **Conflictos.** Si alguien puso a mano una IP del rango, el equipo detecta el duplicado y rechaza la dirección; en la consola aparece como **BAD_ADDRESS**. Se excluye esa IP del ámbito y, si se repite, `Set-DhcpServerv4Setting -ConflictDetectionAttempts 1` hace que el servidor haga ping antes de entregar.
+
+Cuando la causa está corregida, en el equipo `ipconfig /release` y `ipconfig /renew`, y `Resolve-DnsName srv-app-01` para confirmar que también resuelve.
+
+## Siguientes pasos
+
+- La guía de **Cisco: primeros comandos en un switch** cubre el puerto en err-disabled y la VLAN del puesto, los dos puntos de red de la lista anterior.
+- La guía de **Windows Server** de este mismo nivel explica cómo parchear los servidores DNS y DHCP sin cortar el servicio.
+- El repositorio **19-ad-infra-health-check** de mi GitHub reúne comprobaciones de salud de la infraestructura de AD.
+""",
+  en="""
+## What you'll get
+
+The two services that give a device a network without anyone noticing: DHCP gives it an IP, gateway and DNS; DNS tells it where every server is. Set up on Windows Server in a domain, with two servers so losing one does not leave the office without a network, and the method for the most typical ticket: a device with a 169.254 address.
+
+## Before you start
+
+- The **DNS Server** and **DHCP Server** roles installed (in a domain, DNS usually lives on the domain controllers) and the console or the `DnsServer` and `DhcpServer` PowerShell modules.
+- The addressing plan: which subnet each VLAN is, its gateway, and which range is kept for fixed IPs (servers, printers, network equipment).
+
+## 1. DNS: zones and records
+
+In a domain, the zone is **Active Directory-integrated**: it replicates with AD to every domain controller, supports secure dynamic updates, and there is no single primary server that can go down.
+
+:::term PowerShell · DNS on DC-01
+$ Get-DnsServerZone | Select-Object ZoneName, ZoneType, IsDsIntegrated, ReplicationScope
+$ Add-DnsServerPrimaryZone -NetworkId "10.20.0.0/16" -ReplicationScope Domain
+$ Add-DnsServerResourceRecordA -ZoneName contoso.local -Name srv-app-01 -IPv4Address 10.20.5.40 -CreatePtr
+$ Add-DnsServerResourceRecordCName -ZoneName contoso.local -Name intranet -HostNameAlias srv-app-01.contoso.local
+$ Resolve-DnsName intranet.contoso.local -Server DC-01
+intranet.contoso.local   CNAME  3600  Answer     srv-app-01.contoso.local
+Name       : srv-app-01.contoso.local
+IPAddress  : 10.20.5.40
+:::
+
+- **A**: name to IP. **PTR**: IP to name, in the reverse zone (`-CreatePtr` creates it at the same time). **CNAME**: an alias pointing to another name; handy so that `intranet` survives a server change.
+
+## 2. Forwarders and scavenging
+
+Whatever is not in your domain, internal DNS asks outside. **Forwarders** say who to ask:
+
+:::term PowerShell · forwarders
+$ Get-DnsServerForwarder
+$ Set-DnsServerForwarder -IPAddress 10.0.0.53, 10.0.1.53
+:::
+
+**Scavenging** deletes dynamic records of devices that no longer exist. Without it, an old name points at an IP another device now has.
+
+- It is enabled on the zone (*Properties › General › Aging*) and on **a single server** (`Set-DnsServerScavenging -ScavengingState $true -ScavengingInterval 7.00:00:00`).
+- With the default values (7 days no-refresh + 7 days refresh), a record nobody renews is deleted after about 14 days plus the scavenging interval.
+- Static records have no timestamp and are not scavenged.
+
+## 3. DHCP: scope, exclusions and options
+
+:::term PowerShell · DHCP on DHCP-01
+$ Add-DhcpServerInDC -DnsName dhcp-01.contoso.local -IPAddress 10.20.1.10
+$ Add-DhcpServerv4Scope -Name "VLAN20 Users F1" -StartRange 10.20.20.1 -EndRange 10.20.20.254 -SubnetMask 255.255.255.0 -LeaseDuration 8.00:00:00 -State Active
+$ Add-DhcpServerv4ExclusionRange -ScopeId 10.20.20.0 -StartRange 10.20.20.1 -EndRange 10.20.20.20
+$ Set-DhcpServerv4OptionValue -ScopeId 10.20.20.0 -Router 10.20.20.1 -DnsServer 10.20.1.11, 10.20.1.12 -DnsDomain contoso.local
+$ Add-DhcpServerv4Reservation -ScopeId 10.20.20.0 -IPAddress 10.20.20.30 -ClientId "00-1B-A9-3C-44-10" -Description "Printer F1 Finance"
+:::
+
+- In a domain, the DHCP server has to be **authorised** in AD (`Add-DhcpServerInDC`); otherwise it hands out nothing.
+- The **exclusion** keeps the start of the range for fixed IPs, so DHCP doesn't hand them out.
+- The three options every device needs: **003** gateway (`-Router`), **006** DNS servers (`-DnsServer`) and **015** DNS suffix (`-DnsDomain`). A desktop with an IP that can't browse usually fails on one of these three.
+- A **reservation** always gives the same IP to a device by its MAC: printers, terminals.
+
+## 4. Failover between two servers
+
+With **DHCP failover**, two servers share the scopes and their leases. If one goes down, the other keeps handing out addresses.
+
+:::term PowerShell · failover
+$ Add-DhcpServerv4Failover -ComputerName dhcp-01 -PartnerServer dhcp-02 -Name "DHCP01-DHCP02" -ScopeId 10.20.20.0 -LoadBalancePercent 50 -SharedSecret (Read-Host -AsSecureString "Shared secret")
+$ Get-DhcpServerv4Failover -ComputerName dhcp-01
+$ Invoke-DhcpServerv4FailoverReplication -ComputerName dhcp-01 -Name "DHCP01-DHCP02"
+:::
+
+- **Load balance** (50/50) for two servers on the same site; **hot standby** when the second one is elsewhere and should only answer if the first one fails.
+- Leases sync by themselves, but **configuration changes don't**: a new reservation or option is made on one server and then replicated (`Invoke-DhcpServerv4FailoverReplication` or *Replicate Scope* in the console).
+
+## 5. The ticket: "the device has a 169.254 IP and no network"
+
+A **169.254.x.x** address (APIPA) means the device asked for an IP over DHCP and nobody answered. The problem lies between the device and the DHCP server, not on the device.
+
+:::term Device PC-0233 and server DHCP-01
+$ ipconfig /all
+   Autoconfiguration IPv4 Address. . : 169.254.81.12(Preferred)
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Physical Address. . . . . . . . . : 3C-52-82-A1-0F-44
+$ Get-DhcpServerv4ScopeStatistics -ComputerName dhcp-01 | Select-Object ScopeId, Free, InUse, Reserved, PercentageInUse
+ScopeId       Free  InUse  Reserved  PercentageInUse
+-------       ----  -----  --------  ---------------
+10.20.20.0       0    234         1              100
+10.20.30.0      61    173         2            73.93
+$ Get-DhcpServerv4Lease -ComputerName dhcp-01 -ScopeId 10.20.20.0 | Sort-Object LeaseExpiryTime | Select-Object -First 5 IPAddress, HostName, ClientId, LeaseExpiryTime
+:::
+
+Rule things out in this order:
+
+1. **The scope is full.** `Free 0` and 100 %. The server also logs event **1020** (*scope is X percent full*) in the DHCP Server log. If many leases belong to devices no longer around, shorten the lease duration; if the scope has become too small, enlarging it is a network change.
+2. **A wrong reservation.** If the device has a reservation, check the MAC matches the one in `ipconfig /all` and that the reserved IP is not already used by something else.
+3. **The relay.** The DHCP server is in another VLAN: requests reach it thanks to the **ip helper-address** on that VLAN's interface on the switch or router. If it is a new VLAN and nobody configured it, **every** device in that VLAN gets 169.254.
+4. **The switch port**, in the wrong VLAN or in err-disabled.
+5. **Conflicts.** If someone set an IP from the range by hand, the device detects the duplicate and declines the address; in the console it shows as **BAD_ADDRESS**. Exclude that IP from the scope and, if it keeps happening, `Set-DhcpServerv4Setting -ConflictDetectionAttempts 1` makes the server ping before handing an address out.
+
+Once the cause is fixed, run `ipconfig /release` and `ipconfig /renew` on the device, and `Resolve-DnsName srv-app-01` to confirm it also resolves.
+
+## Next steps
+
+- The guide **Cisco: first commands on a switch** covers the port in err-disabled and the desk's VLAN, the two network points in the list above.
+- The **Windows Server** guide at this same level explains how to patch DNS and DHCP servers without cutting the service.
+- The **19-ad-infra-health-check** repository on my GitHub brings together AD infrastructure health checks.
+""")
+
+g(slug="business-case-de-it-opciones-costes-beneficios-medibles-y-la-decision-del-comite", topic="business-case", date="2026-10-30",
+  title_es="Business case de IT: opciones, costes, beneficios medibles, TCO a cinco años y la decisión que pides al comité",
+  title_en="IT business case: options, costs, measurable benefits, five-year TCO and the decision you ask the committee for",
+  seo_title_en="IT business case: costs, ROI, NPV and TCO · Iñigo González",
+  seo_title_es="Business case de IT: costes, ROI, VAN y TCO · Iñigo González",
+  dek_es="Cómo escribir un business case de IT que un comité pueda aprobar: el problema, las opciones incluida no hacer nada, CAPEX y OPEX, costes únicos y recurrentes, licencias y personas, beneficios que se pueden medir, ROI, periodo de recuperación y VAN, riesgos, TCO a cinco años, calendario, la decisión concreta y el seguimiento de beneficios después de la aprobación.",
+  dek_en="How to write an IT business case a committee can approve: the problem, the options including doing nothing, CAPEX and OPEX, one-off and recurring costs, licences and people, benefits you can measure, ROI, payback and NPV, risks, five-year TCO, timeline, the specific decision, and tracking benefits after approval.",
+  es="""
+## Qué vas a conseguir
+
+Un documento de cuatro o cinco páginas con el que un comité de inversiones o de dirección puede decir sí, no o "vuelve con esto" en una sola reunión. No es un argumento a favor de lo que IT ya ha decidido: es la comparación honesta de varias opciones, con cifras que finanzas puede comprobar y beneficios que alguien va a medir después.
+
+El ejemplo de toda la guía: los cinco servidores físicos de la sede llegan al fin de soporte del fabricante en marzo y alojan el ERP, los ficheros y la impresión.
+
+## Antes de empezar
+
+- **Quién decide** y con qué umbral: muchas organizaciones tienen un importe a partir del cual la inversión va a comité, y un formato propio. Si existe plantilla, úsala.
+- Un **patrocinador de negocio** que defienda el caso contigo. Un business case que solo firma IT se lee como una petición de presupuesto.
+- Los datos de partida: inventario y contratos (fechas de fin de soporte, renovaciones), incidencias de los últimos 12 meses, horas del equipo y el coste por hora interno que usa finanzas.
+- Una conversación previa con **control de gestión**: qué tasa de descuento usan, a cuántos años amortizan el hardware y qué consideran CAPEX.
+
+## 1. El problema, en una página
+
+El primer apartado se escribe para quien solo va a leer ese: qué pasa, desde cuándo, a quién afecta y qué ocurre si no se hace nada.
+
+- **Hecho**: "Los cinco servidores de la sede quedan sin soporte del fabricante el 31 de marzo. Alojan el ERP, los ficheros y la impresión de 180 personas."
+- **Consecuencia**: sin parches de firmware ni repuestos garantizados; una avería de placa puede dejar el ERP parado días, no horas.
+- **Evidencia**: 14 incidencias de hardware en 12 meses, 300 horas del equipo dedicadas a ellas.
+- **Urgencia**: el plazo de entrega del hardware es de 8 a 10 semanas. Decidir en diciembre o en febrero no es lo mismo.
+
+> Si el problema no se entiende sin saber qué es un hipervisor, reescríbelo. El comité decide sobre riesgo y dinero, no sobre tecnología.
+
+## 2. Las opciones, siempre con "no hacer nada"
+
+Entre dos y cuatro opciones, y una de ellas es **no hacer nada** (o el mínimo imprescindible). Es la referencia contra la que se mide todo lo demás: sin ella no hay ahorro ni beneficio que calcular.
+
+| Opción | Qué es | A favor | En contra |
+|---|---|---|---|
+| A. No hacer nada | Soporte extendido de un tercero y seguir con el hardware actual | Sin inversión | Coste anual alto y creciente, riesgo de avería sin repuesto |
+| B. Renovar en local | Clúster nuevo de tres nodos con virtualización | Menor TCO a cinco años, control | Inversión inicial y proyecto de migración |
+| C. Mover a la nube (IaaS) | Las máquinas del ERP y ficheros en la nube | Sin hardware, escala fácil | Coste recurrente mayor, latencia del ERP por validar |
+
+Cada opción con el mismo nivel de detalle. Una opción "de relleno" descrita en dos líneas resta credibilidad a la buena.
+
+## 3. Los costes: lo que se paga una vez y lo que se paga cada año
+
+Separa siempre dos ejes: **CAPEX u OPEX** (cómo lo trata contabilidad) y **único o recurrente** (cuándo sale el dinero). No coinciden: la implantación de un servicio en la nube es un coste único que suele ir a OPEX.
+
+Para la opción B:
+
+| Concepto | Tipo | Importe |
+|---|---|---|
+| Hardware (3 nodos, almacenamiento, red) | Único · CAPEX | 160.000 € |
+| Servicios de implantación del integrador | Único · CAPEX o OPEX según política | 30.000 € |
+| Esfuerzo interno: 400 h × 45 €/h | Único | 18.000 € |
+| Mantenimiento del hardware | Recurrente · OPEX | 12.000 €/año |
+| Licencias de virtualización (suscripción) | Recurrente · OPEX | 20.000 €/año |
+| Energía de la sala | Recurrente · OPEX | 8.000 €/año |
+| Horas de incidencias: 80 h × 45 €/h | Recurrente | 3.600 €/año |
+
+- Las **licencias** con su modelo exacto (por núcleo, por usuario, suscripción anual) y la subida prevista en la renovación. Es la partida que más se equivoca.
+- Las **personas**: horas internas aunque no generen factura, y si hace falta contratar o externalizar algo. Si el equipo no tiene tiempo, dilo y cuéntalo como coste.
+- Un **margen de contingencia** explícito (10-15 % sobre lo único) mejor que unas cifras infladas en silencio.
+- El CAPEX se **amortiza**: 160.000 € a cinco años son 32.000 € al año en la cuenta de resultados. El plazo lo fija finanzas, no IT.
+
+## 4. Beneficios que se pueden medir
+
+Un beneficio entra en el cálculo si tiene **línea base, métrica, dueño y fecha**. Lo que no cumple eso va en una lista aparte de beneficios cualitativos, sin euros.
+
+| Beneficio | Línea base | Objetivo | Cómo se mide | Dueño |
+|---|---|---|---|---|
+| Coste de soporte evitado | 52.000 €/año de soporte extendido | 0 | Facturas | IT |
+| Horas de incidencias de hardware | 300 h/año | 80 h/año | Tickets con categoría hardware | Responsable de infraestructura |
+| Energía de la sala | 14.000 €/año | 8.000 €/año | Lectura de las PDU | Servicios generales |
+| Tiempo de cierre contable del ERP | 3 h por proceso | 1,5 h | Registro del proceso de cierre | Finanzas |
+
+> Las horas ahorradas del equipo no son dinero que se ahorra si nadie sale de la plantilla: son capacidad que se libera. Escríbelo así ("300 horas para el proyecto de Windows 11") y el comité te creerá el resto.
+
+## 5. ROI, periodo de recuperación y VAN
+
+Con "no hacer nada" costando 99.500 € al año (52.000 de soporte, 20.000 de licencias, 14.000 de energía y 13.500 de horas de incidencias) y la opción B costando 43.600 € al año, el **ahorro anual** es de 55.900 € frente a una inversión inicial de 208.000 €.
+
+- **Periodo de recuperación (payback)**: inversión ÷ ahorro anual = 208.000 ÷ 55.900 ≈ **3,7 años**.
+- **ROI a cinco años**: (ahorro acumulado − inversión) ÷ inversión = (279.500 − 208.000) ÷ 208.000 ≈ **34 %**.
+- **VAN (valor actual neto)** al 8 %: cada ahorro anual se descuenta, `ahorro ÷ (1 + 0,08)^año`, y se resta la inversión. Cinco años de 55.900 € valen hoy unos 223.200 €; el VAN es de unos **+15.200 €**. Positivo, pero ajustado.
+
+Un VAN pequeño no es un mal caso: dice que la opción B se paga sola y que el argumento principal es el **riesgo** que elimina. Escríbelo así en vez de estirar los beneficios hasta que salga un número bonito. Si el comité usa la **TIR**, la calcula finanzas con los mismos flujos.
+
+## 6. TCO a cinco años
+
+El coste total de propiedad compara las opciones en el mismo horizonte, sumando lo único y lo recurrente:
+
+| Opción | Año 0 | Años 1-5 | TCO 5 años |
+|---|---|---|---|
+| A. No hacer nada | 0 € | 99.500 €/año | 497.500 € |
+| B. Renovar en local | 208.000 € | 43.600 €/año | 426.000 € |
+| C. Nube (IaaS) | 60.000 € | 95.000 €/año | 535.000 € |
+
+- El horizonte de **tres a cinco años** coincide con la vida útil del hardware; más allá, las cifras son adivinanzas.
+- Indica las hipótesis: precios sin IVA, sin subida de licencias, soporte extendido disponible los cinco años (no siempre lo está).
+- La opción C sale más cara en este horizonte, pero puede ganar si la sede se va a cerrar o cambiar en dos años. Eso es una pregunta para el comité, no una conclusión de IT.
+
+## 7. Riesgos, calendario y la decisión
+
+**Riesgos**, de cada opción y del proyecto, con probabilidad, impacto y mitigación:
+
+- A: avería sin repuesto del servidor del ERP. Probabilidad media, impacto alto. Sin mitigación real.
+- B: retraso de entrega del hardware. Mitigación: pedido antes del 15 de diciembre, soporte extendido de tres meses como puente.
+- B: migración del ERP con corte. Mitigación: ventana de fin de semana, prueba previa, plan de vuelta atrás aprobado en el CAB.
+
+**Calendario**: aprobación en diciembre, pedido en la misma semana, entrega en febrero, migración por servicios en dos fines de semana de marzo, retirada del hardware viejo en abril.
+
+**La decisión que pides**, en una frase al principio y al final del documento:
+
+> "Se solicita aprobar la opción B: 208.000 € de inversión con cargo al presupuesto de este año y 43.600 € anuales de gasto recurrente a partir del año próximo, con decisión antes del 15 de diciembre para cumplir el plazo de soporte."
+
+## 8. Después de la aprobación: seguir los beneficios
+
+Aprobar el caso es el principio. Sin seguimiento, el siguiente business case se leerá con más desconfianza.
+
+- Un **registro de beneficios** con las líneas del apartado 4, el dueño de cada una y la fecha de medición.
+- Revisión **trimestral** del coste real frente al aprobado: desviaciones de más del 10 % se explican.
+- **Revisión posterior a la implantación** a los 6 y 12 meses: qué beneficios se han conseguido, cuáles no y por qué.
+- Si un beneficio no llega, se dice. Si cambia el contexto (la sede se amplía, cambian las licencias), se actualiza el caso, no se esconde.
+
+## Siguientes pasos
+
+- La guía de **Presupuesto de IT** del Sector 4 explica cómo entra esta inversión en el presupuesto anual y cómo se explica una desviación.
+- La guía de **Backup y recuperación ante desastres (DR/BCP)** ayuda a cuantificar el riesgo de "no hacer nada" con RTO y RPO reales.
+- Los costes recurrentes viven en contratos: el repositorio **23-it-vendor-contract-tracker** de mi GitHub sigue renovaciones, plazos de preaviso y ahorros, y el **01-finops-cloud-cost-dashboard** vigila el gasto de nube si eliges la opción C.
+""",
+  en="""
+## What you'll get
+
+A four or five page document an investment or management committee can say yes, no or "come back with this" to in a single meeting. It is not an argument for what IT has already decided: it is an honest comparison of several options, with figures finance can check and benefits someone will measure afterwards.
+
+The example throughout the guide: the site's five physical servers reach the manufacturer's end of support in March and host the ERP, file shares and printing.
+
+## Before you start
+
+- **Who decides** and above what threshold: many organisations have an amount above which an investment goes to committee, and their own format. If there is a template, use it.
+- A **business sponsor** who defends the case with you. A business case signed only by IT reads like a budget request.
+- The baseline data: inventory and contracts (end-of-support dates, renewals), incidents over the last 12 months, team hours and the internal hourly cost finance uses.
+- A prior conversation with **financial control**: which discount rate they use, over how many years they depreciate hardware and what they treat as CAPEX.
+
+## 1. The problem, on one page
+
+The first section is written for the person who will only read that one: what is happening, since when, who it affects and what happens if nothing is done.
+
+- **Fact**: "The site's five servers lose manufacturer support on 31 March. They host the ERP, file shares and printing for 180 people."
+- **Consequence**: no firmware patches or guaranteed spare parts; a motherboard failure can leave the ERP down for days, not hours.
+- **Evidence**: 14 hardware incidents in 12 months, 300 team hours spent on them.
+- **Urgency**: hardware lead time is 8 to 10 weeks. Deciding in December or in February is not the same.
+
+> If the problem can't be understood without knowing what a hypervisor is, rewrite it. The committee decides on risk and money, not technology.
+
+## 2. The options, always with "do nothing"
+
+Between two and four options, and one of them is **do nothing** (or the bare minimum). It is the baseline everything else is measured against: without it there is no saving or benefit to calculate.
+
+| Option | What it is | For | Against |
+|---|---|---|---|
+| A. Do nothing | Third-party extended support and keep the current hardware | No investment | High and rising annual cost, risk of a failure with no spare |
+| B. Renew on premises | New three-node cluster with virtualisation | Lowest five-year TCO, control | Upfront investment and a migration project |
+| C. Move to cloud (IaaS) | ERP and file server machines in the cloud | No hardware, easy to scale | Higher recurring cost, ERP latency to be validated |
+
+Every option at the same level of detail. A "filler" option described in two lines takes credibility away from the good one.
+
+## 3. Costs: what you pay once and what you pay every year
+
+Always separate two axes: **CAPEX or OPEX** (how accounting treats it) and **one-off or recurring** (when the money goes out). They don't coincide: implementing a cloud service is a one-off cost that usually goes to OPEX.
+
+For option B:
+
+| Item | Type | Amount |
+|---|---|---|
+| Hardware (3 nodes, storage, network) | One-off · CAPEX | €160,000 |
+| Integrator implementation services | One-off · CAPEX or OPEX depending on policy | €30,000 |
+| Internal effort: 400 h × €45/h | One-off | €18,000 |
+| Hardware maintenance | Recurring · OPEX | €12,000/year |
+| Virtualisation licences (subscription) | Recurring · OPEX | €20,000/year |
+| Comms room energy | Recurring · OPEX | €8,000/year |
+| Incident hours: 80 h × €45/h | Recurring | €3,600/year |
+
+- **Licences** with their exact model (per core, per user, annual subscription) and the expected increase at renewal. It is the line most often wrong.
+- **People**: internal hours even if they generate no invoice, and whether something needs hiring or outsourcing. If the team has no time, say so and count it as a cost.
+- An explicit **contingency margin** (10-15% on the one-off costs) rather than quietly inflated figures.
+- CAPEX is **depreciated**: €160,000 over five years is €32,000 a year in the income statement. The period is set by finance, not IT.
+
+## 4. Benefits you can measure
+
+A benefit goes into the calculation if it has a **baseline, metric, owner and date**. Whatever doesn't meet that goes on a separate list of qualitative benefits, with no euros attached.
+
+| Benefit | Baseline | Target | How it is measured | Owner |
+|---|---|---|---|---|
+| Support cost avoided | €52,000/year extended support | 0 | Invoices | IT |
+| Hardware incident hours | 300 h/year | 80 h/year | Tickets with hardware category | Infrastructure lead |
+| Comms room energy | €14,000/year | €8,000/year | PDU readings | Facilities |
+| ERP month-end close time | 3 h per run | 1.5 h | Close process log | Finance |
+
+> Team hours saved are not money saved if nobody leaves the payroll: they are capacity freed up. Write it that way ("300 hours for the Windows 11 project") and the committee will believe the rest.
+
+## 5. ROI, payback and NPV
+
+With "do nothing" costing €99,500 a year (52,000 support, 20,000 licences, 14,000 energy and 13,500 incident hours) and option B costing €43,600 a year, the **annual saving** is €55,900 against an upfront investment of €208,000.
+
+- **Payback period**: investment ÷ annual saving = 208,000 ÷ 55,900 ≈ **3.7 years**.
+- **Five-year ROI**: (cumulative saving − investment) ÷ investment = (279,500 − 208,000) ÷ 208,000 ≈ **34%**.
+- **NPV (net present value)** at 8%: each annual saving is discounted, `saving ÷ (1 + 0.08)^year`, and the investment is subtracted. Five years of €55,900 are worth about €223,200 today; the NPV is about **+€15,200**. Positive, but tight.
+
+A small NPV is not a bad case: it says option B pays for itself and that the main argument is the **risk** it removes. Write it that way instead of stretching the benefits until a nice number comes out. If the committee uses **IRR**, finance calculates it from the same cash flows.
+
+## 6. Five-year TCO
+
+Total cost of ownership compares the options over the same horizon, adding one-off and recurring costs:
+
+| Option | Year 0 | Years 1-5 | 5-year TCO |
+|---|---|---|---|
+| A. Do nothing | €0 | €99,500/year | €497,500 |
+| B. Renew on premises | €208,000 | €43,600/year | €426,000 |
+| C. Cloud (IaaS) | €60,000 | €95,000/year | €535,000 |
+
+- A horizon of **three to five years** matches the hardware's useful life; beyond that, the figures are guesses.
+- State the assumptions: prices excluding VAT, no licence increase, extended support available for all five years (it isn't always).
+- Option C comes out more expensive over this horizon, but it can win if the site is going to close or change in two years. That is a question for the committee, not an IT conclusion.
+
+## 7. Risks, timeline and the decision
+
+**Risks**, for each option and for the project, with likelihood, impact and mitigation:
+
+- A: failure with no spare on the ERP server. Medium likelihood, high impact. No real mitigation.
+- B: hardware delivery delay. Mitigation: order before 15 December, three months of extended support as a bridge.
+- B: ERP migration with downtime. Mitigation: weekend window, prior rehearsal, rollback plan approved at CAB.
+
+**Timeline**: approval in December, order the same week, delivery in February, migration by service over two weekends in March, old hardware retired in April.
+
+**The decision you ask for**, in one sentence at the start and at the end of the document:
+
+> "Approval is requested for option B: €208,000 of investment from this year's budget and €43,600 of annual recurring spend from next year, with a decision before 15 December to meet the end-of-support date."
+
+## 8. After approval: tracking the benefits
+
+Getting the case approved is the beginning. Without follow-up, the next business case will be read with more suspicion.
+
+- A **benefits register** with the lines from section 4, the owner of each and the measurement date.
+- **Quarterly** review of actual cost against approved cost: variances above 10% are explained.
+- **Post-implementation review** at 6 and 12 months: which benefits were achieved, which weren't and why.
+- If a benefit doesn't arrive, say so. If the context changes (the site grows, licensing changes), update the case, don't hide it.
+
+## Next steps
+
+- The **IT budget** guide in Sector 4 explains how this investment enters the annual budget and how to explain a variance.
+- The **Backup and disaster recovery (DR/BCP)** guide helps quantify the risk of "doing nothing" with real RTO and RPO.
+- Recurring costs live in contracts: the **23-it-vendor-contract-tracker** repository on my GitHub tracks renewals, notice deadlines and savings, and **01-finops-cloud-cost-dashboard** watches cloud spend if you choose option C.
+""")
+g(slug="idrac-e-ilo-gestion-fuera-de-banda-red-usuarios-consola-firmware-y-alertas", topic="idrac-ilo", date="2026-10-30",
+  title_es="Dell iDRAC y HPE iLO: red de gestión, usuarios, consola remota, firmware, alertas y un servidor que no arranca",
+  title_en="Dell iDRAC and HPE iLO: management network, users, remote console, firmware, alerts and a server that won't boot",
+  seo_title_en="iDRAC and iLO: out-of-band management · Iñigo González",
+  seo_title_es="iDRAC e iLO: gestión fuera de banda · Iñigo González",
+  dek_es="La controladora de gestión de los servidores Dell y HPE: puerto dedicado o compartido y VLAN de gestión, usuarios locales y de directorio, consola y medios virtuales, actualizar firmware, alertas por SNMP, correo y Redfish, los registros SEL e IML, las licencias y qué hacer con un servidor que no arranca a distancia.",
+  dek_en="The management controller of Dell and HPE servers: dedicated or shared port and a management VLAN, local and directory users, virtual console and media, firmware updates, alerts over SNMP, email and Redfish, the SEL and IML logs, licences, and what to do with a server that won't boot remotely.",
+  es="""
+## Qué vas a conseguir
+
+Poder encender, ver la pantalla, montar una ISO y leer los errores de hardware de cualquier servidor físico sin ir a la sala. iDRAC (Dell) e iLO (HPE) son una pequeña controladora dentro del servidor con su propia red y su propio sistema: funciona aunque el sistema operativo esté colgado o el servidor apagado, siempre que tenga corriente.
+
+## Antes de empezar
+
+- La etiqueta del servidor: el número de servicio (Dell) o de serie (HPE) y la **contraseña de fábrica** de la controladora. Los Dell recientes traen una contraseña única en la pestaña extraíble (*information tag*); los antiguos venían con `root` / `calvin`. Los HPE traen el usuario `Administrator` con una contraseña aleatoria en la etiqueta.
+- Una **IP en la red de gestión** reservada por servidor, con su nombre en DNS (`srv-erp-01-idrac`, `srv-erp-01-ilo`).
+- Un puesto o servidor de salto con acceso a esa red. La red de gestión no se publica a la red de usuarios.
+
+## 1. La red de gestión
+
+Dos formas de conectar la controladora:
+
+- **Puerto dedicado**: un RJ45 propio en la parte trasera, marcado como iDRAC o iLO. Es la opción buena: si la tarjeta de red del servidor falla, la gestión sigue.
+- **Puerto compartido** (*shared LOM* en Dell, *shared network port* en HPE): la controladora usa una de las tarjetas del servidor. Ahorra un cable, pero un cambio en esa tarjeta o en el switch te deja sin gestión.
+
+En los dos casos, la controladora va en una **VLAN de gestión** separada, con acceso solo desde el salto y la monitorización. Puertos que hay que permitir: 443 (web y Redfish), 22 (SSH), 623/UDP (IPMI, si lo usas) y el de la consola (5900 en iDRAC; 17990 para consola y 17988 para medios virtuales en iLO).
+
+La IP se pone la primera vez desde la configuración de arranque (F2 › iDRAC Settings › Network en Dell; F9 › System Configuration › iLO Configuration Utility en HPE) o desde racadm:
+
+:::term racadm · iDRAC9 · red de gestión
+$ racadm set iDRAC.NIC.Selection Dedicated
+$ racadm set iDRAC.IPv4.DHCPEnable Disabled
+$ racadm set iDRAC.IPv4.Address 10.10.90.21
+$ racadm set iDRAC.IPv4.Netmask 255.255.255.0
+$ racadm set iDRAC.IPv4.Gateway 10.10.90.1
+$ racadm get iDRAC.NIC.Selection
+[Key=iDRAC.Embedded.1#NIC.1]
+Selection=Dedicated
+:::
+
+## 2. Usuarios y autenticación con el directorio
+
+- **Cambia la contraseña de fábrica** el primer día y guárdala en el gestor de contraseñas del equipo (o en el PAM, si lo hay). Es la cuenta de emergencia.
+- El resto entra con su usuario del **directorio**: Active Directory o LDAP, con grupos que dan el rol (administrador, operador, solo lectura). Así una baja en AD quita el acceso a todas las controladoras a la vez.
+- En iDRAC se configura en iDRAC Settings › Users › Directory Services; en iLO, en Security › Directory. Comprueba la licencia: en ambos fabricantes la autenticación por directorio es de las funciones que piden la licencia avanzada.
+
+## 3. Consola virtual y medios virtuales
+
+La **consola virtual** muestra la pantalla del servidor en el navegador (HTML5) desde la POST: sirve para entrar en la BIOS, ver un pantallazo azul o un Linux que pide `fsck`. Los **medios virtuales** montan una ISO de tu equipo como si fuera un DVD del servidor.
+
+- En **iDRAC9**, la consola y los medios virtuales en servidores de rack requieren la licencia **Enterprise** (o Datacenter).
+- En **iLO**, sin licencia la consola funciona solo hasta que arranca el sistema operativo; con **iLO Advanced** tienes consola con el sistema cargado y medios virtuales.
+
+## 4. Firmware y Lifecycle Controller
+
+El firmware de BIOS, controladora RAID, tarjetas de red, discos y la propia iDRAC o iLO se actualiza desde la controladora, sin sistema operativo:
+
+- **Dell**: Maintenance › System Update, con el paquete descargado o un catálogo. El **Lifecycle Controller** (F10 al arrancar) hace lo mismo en local. Las tareas quedan en la cola de trabajos (`racadm jobqueue view`) y muchas se aplican en el siguiente reinicio.
+- **HPE**: Firmware & OS Software › Update Firmware, o el **Service Pack for ProLiant (SPP)** para llevar todo el servidor a una versión probada en conjunto.
+- Para muchos servidores, una consola central: **OpenManage Enterprise** en Dell o **HPE OneView** en HPE, con una línea base y un informe de quién se ha quedado atrás.
+
+Actualiza primero la propia controladora, luego BIOS y el resto, siempre en ventana de cambio y un nodo de cada clúster cada vez.
+
+## 5. Alertas y registros
+
+- **Alertas**: SNMP (traps a la monitorización, mejor SNMPv3), correo y suscripciones de eventos **Redfish**. Activa como mínimo fuente de alimentación, ventiladores, temperatura, memoria y discos. En iDRAC9: Configuration › System Settings › Alert Configuration.
+- **SEL** (System Event Log, Dell) e **IML** (Integrated Management Log, HPE): los errores de hardware con fecha.
+- Para el caso con el fabricante: el **SupportAssist Collection** (Dell) o el **Active Health System Log** (HPE). Es lo primero que pide soporte.
+
+## 6. El ticket: "el servidor no arranca y estoy en remoto"
+
+1. **¿Tiene corriente y está encendido?**
+
+:::term racadm · estado y registro de eventos
+$ racadm serveraction powerstatus
+Server power status: ON
+$ racadm getsel -i
+Total Records: 4
+$ racadm getsel
+Record:      4
+Date/Time:   10/30/2026 06:41:12
+Source:      system
+Severity:    Critical
+Description: Multi-bit memory errors detected on a memory device at location(s) DIMM_A3.
+:::
+
+2. **Lee el SEL o el IML**: un error de memoria, de fuente o de controladora RAID explica casi siempre una parada en la POST. Con un DIMM averiado, el caso con el fabricante va con el registro.
+3. **Abre la consola virtual**: ¿se queda en la POST, en "No boot device" o en el sistema operativo? Si no ve el disco, revisa la controladora RAID y los discos virtuales en la sección de almacenamiento.
+4. **Reinicio en frío** si la pantalla está congelada: `racadm serveraction powercycle` en Dell, o Momentary Press / Cold Boot en Power & Thermal de iLO. Por Redfish, el mismo POST a `ComputerSystem.Reset` con `ForceRestart` en los dos.
+5. **Arranque de rescate**: monta la ISO por medios virtuales y fuerza un arranque único desde el DVD virtual.
+
+! Si la controladora no responde por web, reiníciala a ella (`racadm racreset`, o Diagnostics › Reset iLO): no apaga el servidor. Si tampoco responde así, toca ir a la sala.
+
+## Siguientes pasos
+
+- La guía de **Windows Server** cubre lo que pasa después de que el servidor arranca.
+- La guía de **VMware vSphere y vCenter** explica cómo poner un host en mantenimiento antes de actualizar su firmware.
+- Las alertas de la controladora llegan a la monitorización de la guía de **SolarWinds** o de **Grafana**.
+""",
+  en="""
+## What you'll get
+
+Being able to power on, see the screen, mount an ISO and read the hardware errors of any physical server without going to the room. iDRAC (Dell) and iLO (HPE) are a small controller inside the server with its own network and its own system: it works even if the operating system is hung or the server is off, as long as it has power.
+
+## Before you start
+
+- The server's label: the service tag (Dell) or serial number (HPE) and the controller's **factory password**. Recent Dell servers ship with a unique password on the pull-out information tag; older ones came with `root` / `calvin`. HPE servers ship with the `Administrator` user and a random password on the tag.
+- An **IP on the management network** reserved for each server, with its name in DNS (`srv-erp-01-idrac`, `srv-erp-01-ilo`).
+- A jump host or workstation with access to that network. The management network is not exposed to the user network.
+
+## 1. The management network
+
+Two ways to connect the controller:
+
+- **Dedicated port**: its own RJ45 at the back, marked iDRAC or iLO. It is the good option: if the server's network card fails, management keeps working.
+- **Shared port** (*shared LOM* on Dell, *shared network port* on HPE): the controller uses one of the server's network cards. It saves a cable, but a change on that card or on the switch leaves you without management.
+
+Either way, the controller goes in a separate **management VLAN**, reachable only from the jump host and monitoring. Ports to allow: 443 (web and Redfish), 22 (SSH), 623/UDP (IPMI, if you use it) and the console port (5900 on iDRAC; 17990 for the console and 17988 for virtual media on iLO).
+
+The IP is set the first time from the boot setup (F2 › iDRAC Settings › Network on Dell; F9 › System Configuration › iLO Configuration Utility on HPE) or with racadm:
+
+:::term racadm · iDRAC9 · management network
+$ racadm set iDRAC.NIC.Selection Dedicated
+$ racadm set iDRAC.IPv4.DHCPEnable Disabled
+$ racadm set iDRAC.IPv4.Address 10.10.90.21
+$ racadm set iDRAC.IPv4.Netmask 255.255.255.0
+$ racadm set iDRAC.IPv4.Gateway 10.10.90.1
+$ racadm get iDRAC.NIC.Selection
+[Key=iDRAC.Embedded.1#NIC.1]
+Selection=Dedicated
+:::
+
+## 2. Users and directory authentication
+
+- **Change the factory password** on day one and store it in the team's password manager (or in the PAM, if there is one). It is the emergency account.
+- Everyone else signs in with their **directory** user: Active Directory or LDAP, with groups that grant the role (administrator, operator, read-only). That way a leaver in AD loses access to every controller at once.
+- On iDRAC it is configured in iDRAC Settings › Users › Directory Services; on iLO, in Security › Directory. Check the licence: for both vendors, directory authentication is one of the features that needs the advanced licence.
+
+## 3. Virtual console and virtual media
+
+The **virtual console** shows the server's screen in the browser (HTML5) from POST onwards: you use it to enter the BIOS, see a blue screen or a Linux box asking for `fsck`. **Virtual media** mounts an ISO from your machine as if it were a DVD drive in the server.
+
+- On **iDRAC9**, the virtual console and virtual media on rack servers require the **Enterprise** (or Datacenter) licence.
+- On **iLO**, without a licence the console only works until the operating system boots; with **iLO Advanced** you get the console with the OS running and virtual media.
+
+## 4. Firmware and Lifecycle Controller
+
+The firmware for the BIOS, RAID controller, network cards, disks and the iDRAC or iLO itself is updated from the controller, with no operating system:
+
+- **Dell**: Maintenance › System Update, with a downloaded package or a catalog. The **Lifecycle Controller** (F10 at boot) does the same locally. Tasks go into the job queue (`racadm jobqueue view`) and many apply at the next reboot.
+- **HPE**: Firmware & OS Software › Update Firmware, or the **Service Pack for ProLiant (SPP)** to bring the whole server to a set of versions tested together.
+- For many servers, a central console: **OpenManage Enterprise** for Dell or **HPE OneView** for HPE, with a baseline and a report of which servers have fallen behind.
+
+Update the controller itself first, then the BIOS and the rest, always in a change window and one node of each cluster at a time.
+
+## 5. Alerts and logs
+
+- **Alerts**: SNMP (traps to monitoring, SNMPv3 preferably), email and **Redfish** event subscriptions. At a minimum enable power supply, fans, temperature, memory and disks. On iDRAC9: Configuration › System Settings › Alert Configuration.
+- **SEL** (System Event Log, Dell) and **IML** (Integrated Management Log, HPE): hardware errors with their date.
+- For the case with the vendor: the **SupportAssist Collection** (Dell) or the **Active Health System Log** (HPE). It is the first thing support asks for.
+
+## 6. The ticket: "the server won't boot and I'm remote"
+
+1. **Does it have power and is it on?**
+
+:::term racadm · power state and event log
+$ racadm serveraction powerstatus
+Server power status: ON
+$ racadm getsel -i
+Total Records: 4
+$ racadm getsel
+Record:      4
+Date/Time:   10/30/2026 06:41:12
+Source:      system
+Severity:    Critical
+Description: Multi-bit memory errors detected on a memory device at location(s) DIMM_A3.
+:::
+
+2. **Read the SEL or IML**: a memory, power supply or RAID controller error explains almost every stop at POST. With a failed DIMM, the case with the vendor goes in with the log.
+3. **Open the virtual console**: does it stop at POST, at "No boot device" or in the operating system? If it doesn't see the disk, check the RAID controller and the virtual disks in the storage section.
+4. **Cold restart** if the screen is frozen: `racadm serveraction powercycle` on Dell, or Momentary Press / Cold Boot under Power & Thermal on iLO. Over Redfish, the same POST to `ComputerSystem.Reset` with `ForceRestart` on both.
+5. **Rescue boot**: mount the ISO through virtual media and force a one-time boot from the virtual DVD.
+
+! If the controller doesn't answer over the web, reset the controller itself (`racadm racreset`, or Diagnostics › Reset iLO): it does not power off the server. If that doesn't work either, someone has to go to the room.
+
+## Next steps
+
+- The **Windows Server** guide covers what happens after the server boots.
+- The **VMware vSphere and vCenter** guide explains how to put a host into maintenance before updating its firmware.
+- Controller alerts reach the monitoring in the **SolarWinds** or **Grafana** guides.
+""")
+g(slug="cmdb-clases-de-ci-relaciones-reconciliacion-calidad-del-dato-y-auditorias", topic="cmdb", date="2026-10-30",
+  title_es="CMDB: clases de CI, relaciones, fuentes y reconciliación, calidad del dato y una CMDB que aguanta una auditoría",
+  title_en="CMDB: CI classes, relationships, sources and reconciliation, data quality and a CMDB that survives an audit",
+  seo_title_en="CMDB: CI classes, relationships and quality · Iñigo González",
+  seo_title_es="CMDB: clases de CI, relaciones y calidad · Iñigo González",
+  dek_es="Cómo montar una CMDB en la que la gente confía: qué clases de CI y qué atributos mínimos, las relaciones de servicio a aplicación y servidor, descubrimiento frente a alta manual y la reconciliación entre fuentes, quién es dueño de cada dato, las comprobaciones de huérfanos, duplicados y CI obsoletos, enlazar incidencias y cambios a los CI y qué pide una auditoría.",
+  dek_en="How to build a CMDB people trust: which CI classes and minimum attributes, relationships from service to application and server, discovery versus manual entry and reconciliation between sources, who owns each piece of data, checks for orphans, duplicates and stale CIs, linking incidents and changes to CIs, and what an audit asks for.",
+  es="""
+## Qué vas a conseguir
+
+Una CMDB que responde a tres preguntas sin que nadie tenga que comprobarlo después: **qué tenemos**, **de qué depende cada servicio** y **qué se rompe si toco esto**. La diferencia entre una CMDB útil y una lista de equipos no es la herramienta (ServiceNow, EasyVista, Jira Service Management Assets o la que haya): es tener pocas clases bien rellenas, relaciones mantenidas y alguien responsable de cada dato.
+
+## Antes de empezar
+
+- Un **dueño del proceso** de gestión de la configuración: decide qué entra, qué atributos son obligatorios y revisa la calidad cada mes. Sin esa persona, la CMDB se degrada en un trimestre.
+- La lista de **fuentes** que ya existen: AD y Entra ID, Intune o MECM, vCenter, la herramienta de descubrimiento, la nube, el inventario de la sala, compras.
+- El **catálogo de servicios**, aunque sea una hoja: las aplicaciones de negocio y quién responde de cada una.
+- Para qué se va a usar primero: análisis de impacto de cambios, incidencias o auditoría. Empieza por ahí, no por "todo".
+
+## 1. Clases de CI y atributos mínimos
+
+Pocas clases y bien rellenas valen más que cien vacías. Un punto de partida que cubre casi todo:
+
+| Clase | Atributos mínimos | Fuente principal |
+|---|---|---|
+| Servicio de negocio | Nombre, dueño de negocio, criticidad, horario de servicio | Manual (catálogo) |
+| Aplicación | Nombre, versión, dueño técnico, entorno (producción, pruebas) | Manual |
+| Servidor (físico o virtual) | Nombre, número de serie o UUID, sistema operativo, IP, ubicación, estado | Descubrimiento |
+| Base de datos | Motor, versión, instancia, servidor donde corre | Descubrimiento |
+| Equipo de red | Nombre, modelo, serie, firmware, rack | Descubrimiento SNMP |
+| Equipo de usuario | Nombre, serie, usuario asignado, estado | Intune o MECM |
+
+- Cada atributo obligatorio tiene que tener **una sola fuente que manda**. Si dos herramientas pueden escribir el sistema operativo, decide cuál gana.
+- **Estado** del ciclo de vida (pedido, en servicio, en reparación, retirado): sin él, un servidor apagado hace tres años sigue contando.
+- Fuera de la CMDB quedan los datos que cambian cada minuto (uso de CPU, sesiones): eso es monitorización.
+
+## 2. Relaciones: del servicio al servidor
+
+Las relaciones son lo que hace útil una CMDB. La cadena mínima:
+
+:::ui CMDB · Mapa de dependencias · Servicio "Nóminas"
+> Servicio de negocio: Nóminas · Criticidad: alta · Dueño: RR. HH.
+> depende de › Aplicación: app-nominas (producción) · Dueño técnico: equipo de aplicaciones
+> se ejecuta en › Servidor virtual: srv-nom-app-01 · Windows Server 2022
+> se ejecuta en › Servidor virtual: srv-nom-db-01 · SQL Server 2019
+> alojado en › Clúster: CL-MAD-01 (3 hosts)
+= Cambios abiertos que afectan: CHG-2041 (parches del clúster, sábado 22:00)
+:::
+
+- Relación **servicio → aplicación** y **aplicación → servidor o base de datos**: se mantiene a mano o con mapeo de servicios, y la revisa el dueño técnico cuando cambia la arquitectura.
+- Relación **servidor virtual → host o clúster**: la trae el descubrimiento desde vCenter o Hyper-V. No se escribe a mano porque cambia con cada vMotion.
+- Con esta cadena, un cambio sobre `CL-MAD-01` muestra que afecta a Nóminas, y el CAB lo ve antes de aprobar.
+
+## 3. Fuentes y reconciliación
+
+Descubrimiento y alta manual no compiten: cada uno aporta lo que sabe.
+
+- **Descubrimiento** (agentes, WMI, SSH, SNMP, APIs de vCenter y de la nube): lo técnico. Nombre, serie, sistema, IP, software.
+- **Alta manual**: lo que ningún escáner sabe. Dueño, servicio al que pertenece, criticidad, contrato de soporte.
+- **Reconciliación**: la regla que dice cómo se identifica un CI y qué fuente gana para cada atributo. La identificación va por atributos estables, en orden: **número de serie**, UUID del hipervisor, y solo al final nombre más dominio. El nombre cambia; la serie no.
+
+> Si una fuente no tiene permiso para escribir un atributo, no lo escribe. La CMDB que acepta lo último que llega acaba con el sistema operativo cambiando cada noche entre dos valores.
+
+## 4. Quién es dueño de cada dato
+
+- **Dueño del proceso**: define el modelo, las reglas y los informes de calidad.
+- **Dueño del CI** (un equipo, no una persona): responde de que sus CI estén bien. Los servidores de base de datos son del equipo de bases de datos, aunque los descubra otra herramienta.
+- **Dueño del servicio**: confirma, una o dos veces al año, que el mapa de dependencias de su servicio es correcto.
+- Un CI **sin dueño** es una alerta de calidad, no un estado aceptable.
+
+## 5. Comprobaciones de calidad cada mes
+
+Cuatro listas que salen cada mes y se reparten a los dueños:
+
+- **Huérfanos**: servidores sin relación con ninguna aplicación, aplicaciones sin servicio. O sobran, o falta la relación.
+- **Duplicados**: el mismo número de serie en dos CI, casi siempre un alta manual hecha antes del descubrimiento.
+- **Obsoletos**: CI en servicio que el descubrimiento no ve desde hace más de 30 días. Apagados, retirados o fuera del alcance del escáner.
+- **Incompletos**: sin dueño, sin estado o sin ubicación.
+
+Una comprobación cruzada sencilla: equipos activos en AD que no están en la CMDB.
+
+:::term PowerShell · AD frente a exportación de la CMDB
+$ $limite = (Get-Date).AddDays(-30)
+$ $ad = Get-ADComputer -Filter {Enabled -eq $true -and LastLogonDate -gt $limite} -Properties LastLogonDate, OperatingSystem
+$ $cmdb = Import-Csv .\\cmdb-servidores.csv
+$ $ad | Where-Object { $_.OperatingSystem -like "*Server*" -and $_.Name -notin $cmdb.Name } | Select-Object Name, OperatingSystem, LastLogonDate
+Name          OperatingSystem                LastLogonDate
+----          ---------------                -------------
+SRV-PRUEBA-07 Windows Server 2022 Standard   28/10/2026 23:14:02
+SRV-SCAN-02   Windows Server 2019 Standard   29/10/2026 06:02:51
+:::
+
+Dos servidores activos que la CMDB no conoce: o se dan de alta con su dueño, o se apagan. Lleva la cifra de cada lista mes a mes: que bajen es la prueba de que la CMDB mejora.
+
+## 6. Incidencias y cambios enlazados a CI
+
+- Cada **incidencia** se registra contra el CI afectado (el servicio o la aplicación, como mínimo). Así se ve qué CI dan más problemas y se alimentan los problemas recurrentes.
+- Cada **cambio** lista los CI que toca. El análisis de impacto sale de las relaciones, no de la memoria de quien lo propone.
+- Al cerrar un cambio, los atributos que ha modificado (versión, firmware, ubicación) se actualizan o los actualiza el siguiente descubrimiento. Un cambio cerrado con la CMDB desfasada es un cambio sin terminar.
+- Haz obligatorio el campo de CI en el formulario, pero con una lista que se pueda buscar. Si elegir el CI cuesta un minuto, todo acabará en "Otros".
+
+## 7. Lo que pide una auditoría
+
+Las auditorías (ISO 27001, auditoría interna, un regulador) suelen pedir lo mismo:
+
+- **Inventario de activos** con dueño y clasificación, y la prueba de que se mantiene: los informes de calidad de cada mes y las acciones tomadas.
+- Una **muestra**: eligen diez servidores de la CMDB y piden verlos, o eligen diez de la red y piden encontrarlos en la CMDB. Es la prueba que tumba una CMDB descuidada.
+- La **trazabilidad**: para un cambio concreto, qué CI tocó, quién lo aprobó y que la CMDB refleja el resultado.
+- El **procedimiento** escrito: quién da de alta, quién retira y cómo se reconcilia.
+
+Responde con datos de la herramienta y con el histórico de las comprobaciones. Una CMDB perfecta el día antes de la auditoría y descuidada el resto del año se nota en la muestra.
+
+## Siguientes pasos
+
+- La guía de **Device42** del Sector 5 baja al detalle de racks, posiciones y PDU, que alimentan los CI físicos.
+- La guía de **Jira Service Management** cubre las incidencias y cambios que se enlazan a estos CI.
+- El repositorio **38-it-asset-lifecycle-planner** de mi GitHub cruza el inventario de hardware por número de serie entre varias fuentes, la misma idea que la reconciliación de esta guía, y el **04-itsm-kpi-dashboard** saca indicadores de las incidencias por CI.
+""",
+  en="""
+## What you'll get
+
+A CMDB that answers three questions without anyone having to double-check afterwards: **what we have**, **what each service depends on** and **what breaks if I touch this**. The difference between a useful CMDB and a list of devices isn't the tool (ServiceNow, EasyVista, Jira Service Management Assets or whatever is in place): it is having a few well-populated classes, maintained relationships and someone accountable for each piece of data.
+
+## Before you start
+
+- A **process owner** for configuration management: decides what goes in, which attributes are mandatory and reviews quality every month. Without that person, the CMDB degrades within a quarter.
+- The list of **sources** that already exist: AD and Entra ID, Intune or MECM, vCenter, the discovery tool, the cloud, the comms room inventory, purchasing.
+- The **service catalogue**, even if it is a spreadsheet: the business applications and who answers for each one.
+- What it will be used for first: change impact analysis, incidents or audit. Start there, not with "everything".
+
+## 1. CI classes and minimum attributes
+
+A few well-populated classes are worth more than a hundred empty ones. A starting point that covers almost everything:
+
+| Class | Minimum attributes | Main source |
+|---|---|---|
+| Business service | Name, business owner, criticality, service hours | Manual (catalogue) |
+| Application | Name, version, technical owner, environment (production, test) | Manual |
+| Server (physical or virtual) | Name, serial number or UUID, operating system, IP, location, status | Discovery |
+| Database | Engine, version, instance, server it runs on | Discovery |
+| Network device | Name, model, serial, firmware, rack | SNMP discovery |
+| End-user device | Name, serial, assigned user, status | Intune or MECM |
+
+- Every mandatory attribute must have **a single authoritative source**. If two tools can write the operating system, decide which one wins.
+- Lifecycle **status** (ordered, in service, in repair, retired): without it, a server switched off three years ago still counts.
+- Data that changes every minute (CPU usage, sessions) stays out of the CMDB: that is monitoring.
+
+## 2. Relationships: from service to server
+
+Relationships are what make a CMDB useful. The minimum chain:
+
+:::ui CMDB · Dependency map · Service "Payroll"
+> Business service: Payroll · Criticality: high · Owner: HR
+> depends on › Application: app-payroll (production) · Technical owner: applications team
+> runs on › Virtual server: srv-pay-app-01 · Windows Server 2022
+> runs on › Virtual server: srv-pay-db-01 · SQL Server 2019
+> hosted on › Cluster: CL-MAD-01 (3 hosts)
+= Open changes affecting it: CHG-2041 (cluster patching, Saturday 22:00)
+:::
+
+- **Service → application** and **application → server or database** relationships: maintained by hand or with service mapping, and reviewed by the technical owner when the architecture changes.
+- **Virtual server → host or cluster** relationship: discovery brings it from vCenter or Hyper-V. It isn't written by hand because it changes with every vMotion.
+- With this chain, a change on `CL-MAD-01` shows that it affects Payroll, and the CAB sees it before approving.
+
+## 3. Sources and reconciliation
+
+Discovery and manual entry don't compete: each contributes what it knows.
+
+- **Discovery** (agents, WMI, SSH, SNMP, vCenter and cloud APIs): the technical side. Name, serial, OS, IP, software.
+- **Manual entry**: what no scanner knows. Owner, the service it belongs to, criticality, support contract.
+- **Reconciliation**: the rule that says how a CI is identified and which source wins for each attribute. Identification uses stable attributes, in order: **serial number**, hypervisor UUID, and only at the end name plus domain. Names change; serials don't.
+
+> If a source isn't allowed to write an attribute, it doesn't write it. A CMDB that accepts whatever arrives last ends up with the operating system flipping between two values every night.
+
+## 4. Who owns each piece of data
+
+- **Process owner**: defines the model, the rules and the quality reports.
+- **CI owner** (a team, not a person): answers for its CIs being right. Database servers belong to the database team, even if another tool discovers them.
+- **Service owner**: confirms, once or twice a year, that their service's dependency map is correct.
+- A CI **with no owner** is a quality alert, not an acceptable state.
+
+## 5. Monthly quality checks
+
+Four lists that come out every month and go to the owners:
+
+- **Orphans**: servers with no relationship to any application, applications with no service. Either they are surplus or the relationship is missing.
+- **Duplicates**: the same serial number on two CIs, almost always a manual entry made before discovery.
+- **Stale**: in-service CIs that discovery hasn't seen for more than 30 days. Switched off, retired or outside the scanner's reach.
+- **Incomplete**: no owner, no status or no location.
+
+A simple cross-check: active computers in AD that aren't in the CMDB.
+
+:::term PowerShell · AD against the CMDB export
+$ $limit = (Get-Date).AddDays(-30)
+$ $ad = Get-ADComputer -Filter {Enabled -eq $true -and LastLogonDate -gt $limit} -Properties LastLogonDate, OperatingSystem
+$ $cmdb = Import-Csv .\\cmdb-servers.csv
+$ $ad | Where-Object { $_.OperatingSystem -like "*Server*" -and $_.Name -notin $cmdb.Name } | Select-Object Name, OperatingSystem, LastLogonDate
+Name          OperatingSystem                LastLogonDate
+----          ---------------                -------------
+SRV-TEST-07   Windows Server 2022 Standard   28/10/2026 23:14:02
+SRV-SCAN-02   Windows Server 2019 Standard   29/10/2026 06:02:51
+:::
+
+Two active servers the CMDB doesn't know about: either they are registered with their owner, or they are switched off. Track the count of each list month by month: seeing them go down is the proof the CMDB is improving.
+
+## 6. Incidents and changes linked to CIs
+
+- Every **incident** is logged against the affected CI (the service or application, at least). That shows which CIs cause the most trouble and feeds recurring problems.
+- Every **change** lists the CIs it touches. Impact analysis comes from the relationships, not from the memory of whoever proposes it.
+- When a change closes, the attributes it modified (version, firmware, location) are updated, or the next discovery run updates them. A change closed with the CMDB out of date is an unfinished change.
+- Make the CI field mandatory on the form, but with a searchable list. If picking the CI takes a minute, everything will end up under "Other".
+
+## 7. What an audit asks for
+
+Audits (ISO 27001, internal audit, a regulator) usually ask for the same things:
+
+- An **asset inventory** with owner and classification, and proof that it is maintained: the monthly quality reports and the actions taken.
+- A **sample**: they pick ten servers from the CMDB and ask to see them, or pick ten from the network and ask to find them in the CMDB. It is the test that brings down a neglected CMDB.
+- **Traceability**: for a specific change, which CIs it touched, who approved it and that the CMDB reflects the result.
+- The written **procedure**: who registers, who retires and how reconciliation works.
+
+Answer with data from the tool and with the history of the checks. A CMDB that is perfect the day before the audit and neglected the rest of the year shows up in the sample.
+
+## Next steps
+
+- The **Device42** guide in Sector 5 goes into the detail of racks, positions and PDUs, which feed the physical CIs.
+- The **Jira Service Management** guide covers the incidents and changes linked to these CIs.
+- The **38-it-asset-lifecycle-planner** repository on my GitHub matches the hardware inventory by serial number across several sources, the same idea as reconciliation in this guide, and **04-itsm-kpi-dashboard** builds indicators from incidents per CI.
+""")
+g(slug="reglamento-europeo-de-ia-ai-act-riesgos-roles-calendario-y-registro-de-casos-de-uso", topic="ai-act", date="2026-10-30",
+  title_es="El Reglamento Europeo de IA (AI Act) en un departamento de IT: niveles de riesgo, roles, calendario, registro de casos de uso y una herramienta no aprobada",
+  title_en="The EU AI Act for an IT department: risk levels, roles, timeline, a use-case register and an unapproved tool",
+  seo_title_en="EU AI Act for IT: risk, roles, timeline · Iñigo González",
+  seo_title_es="AI Act en IT: riesgos, roles y calendario · Iñigo González",
+  dek_es="Qué significa el AI Act para una empresa que usa Copilot, chatbots y otras herramientas de IA: las cuatro categorías de riesgo, proveedor y responsable del despliegue, la obligación de alfabetización y la de transparencia, el calendario con los cambios del Ómnibus Digital, un registro de casos de uso, la aprobación y su relación con la EIPD del RGPD, y un empleado que mete datos de clientes en una herramienta no aprobada.",
+  dek_en="What the AI Act means for a company that uses Copilot, chatbots and other AI tools: the four risk categories, provider and deployer, the AI literacy and transparency obligations, the timeline with the Digital Omnibus changes, a use-case register, approval and its link with the GDPR DPIA, and an employee who puts customer data into an unapproved tool.",
+  es="""
+## Qué vas a conseguir
+
+Saber qué parte del Reglamento (UE) 2024/1689, el **AI Act**, afecta a tu organización cuando no fabrica modelos de IA pero los usa todos los días: Copilot en Microsoft 365, un chatbot en la web, una herramienta de selección de RR. HH., un asistente de código. Y montar lo mínimo que IT tiene que tener: un registro de casos de uso, un circuito de aprobación y una respuesta para cuando alguien usa una herramienta que nadie ha aprobado.
+
+Esta guía es un mapa práctico para IT, no asesoramiento jurídico: las decisiones de clasificación se toman con el área legal y el delegado de protección de datos (DPO).
+
+## Antes de empezar
+
+- Un **patrocinador** en dirección y un grupo pequeño con legal, DPO, seguridad, RR. HH. y IT. La IA entra por todas las áreas, no solo por IT.
+- El **inventario** de lo que ya se usa: licencias de Copilot, funciones de IA activadas en el SaaS que ya tienes (CRM, ITSM, RR. HH.), desarrollos propios con APIs de modelos y lo que la gente usa sin pedir permiso (los registros del proxy o de Defender for Cloud Apps lo enseñan).
+- La política de uso aceptable de IT, para añadirle la parte de IA en vez de crear otra.
+
+## 1. Las cuatro categorías de riesgo
+
+El reglamento no regula "la IA" en bloque: regula usos, según el riesgo.
+
+| Categoría | Qué es | Ejemplos | Qué implica |
+|---|---|---|---|
+| Prohibido | Prácticas no permitidas en la UE (artículo 5) | Puntuación social, manipulación que causa daño, reconocimiento de emociones en el trabajo o en la educación salvo por motivos médicos o de seguridad, recopilación indiscriminada de imágenes faciales | No se usa. Si aparece, se para |
+| Alto riesgo | Sistemas del anexo III o componentes de seguridad de productos regulados (anexo I) | Cribado de CV y decisiones sobre empleados, evaluación de solvencia de personas físicas, precios de seguros de vida y salud | Obligaciones fuertes para el proveedor y para quien lo despliega |
+| Riesgo limitado (transparencia) | Sistemas que interactúan con personas o generan contenido | Chatbots, contenido generado o manipulado (*deepfakes*) | Avisar a las personas |
+| Riesgo mínimo | El resto | Filtros de spam, resúmenes de reuniones, asistentes de código | Sin obligaciones específicas más allá de la alfabetización |
+
+> En una empresa típica, casi todo cae en mínimo o limitado. Lo que hay que vigilar son los usos de **RR. HH.** y de **evaluación de clientes**: ahí está el alto riesgo, aunque la herramienta la venda un tercero.
+
+## 2. Proveedor o responsable del despliegue
+
+- **Proveedor** (*provider*): quien desarrolla un sistema de IA y lo comercializa o lo pone en servicio con su nombre. Microsoft, para Copilot.
+- **Responsable del despliegue** (*deployer*): quien usa un sistema de IA bajo su autoridad en una actividad profesional. Tu empresa, cuando activa Copilot.
+- Ojo con los desarrollos propios: si tu equipo monta un chatbot para clientes sobre la API de un modelo y lo publica con vuestra marca, sois el **proveedor de ese sistema**, con las obligaciones de transparencia del proveedor.
+- Si modificas de forma sustancial un sistema de alto riesgo o le cambias la finalidad para convertirlo en uno, pasas a tener las obligaciones del proveedor.
+
+## 3. Lo que aplica a una empresa que usa Copilot o un chatbot
+
+**Alfabetización en IA (artículo 4)**, aplicable desde el 2 de febrero de 2025. Tras el Ómnibus Digital, la obligación es **adoptar medidas para apoyar** la alfabetización del personal y de quien use los sistemas en nombre de la empresa, sin exigir un nivel concreto a cada persona. En la práctica:
+
+- Una formación corta por perfil: qué puede y qué no puede hacer la herramienta, alucinaciones, qué datos no se meten y cómo revisar lo que produce.
+- Formación más profunda para quien configura o aprueba casos de uso.
+- Registro de quién la ha hecho: es lo que podrás enseñar.
+
+**Transparencia (artículo 50)**, aplicable desde el 2 de agosto de 2026:
+
+- Un **chatbot** que habla con clientes tiene que dejar claro que es una IA, salvo que sea evidente.
+- Si publicas **imágenes, audio o vídeo generados o manipulados** que parecen reales, hay que indicarlo.
+- Si usas reconocimiento de emociones o categorización biométrica (en los casos permitidos), hay que informar a las personas expuestas.
+
+**Si un caso de uso es de alto riesgo**, quien lo despliega tiene que, entre otras cosas, usarlo según las instrucciones del proveedor, asignar **supervisión humana** a personas con formación y autoridad, vigilar su funcionamiento, conservar los **registros** que genera durante al menos seis meses e **informar a los representantes de los trabajadores** antes de usarlo en el trabajo.
+
+## 4. El calendario
+
+| Fecha | Qué empieza a aplicar |
+|---|---|
+| 1 de agosto de 2024 | Entrada en vigor del reglamento |
+| 2 de febrero de 2025 | Prácticas prohibidas y alfabetización en IA |
+| 2 de agosto de 2025 | Obligaciones de los modelos de propósito general (GPAI) y régimen de gobernanza y sanciones |
+| 2 de agosto de 2026 | Aplicación general, incluida la transparencia del artículo 50 |
+| 2 de diciembre de 2027 | Alto riesgo del anexo III (empleo, solvencia, servicios esenciales…) |
+| 2 de agosto de 2028 | Alto riesgo del anexo I (IA en productos regulados) |
+
+Las dos últimas fechas son las del **Ómnibus Digital sobre IA**, el Reglamento (UE) 2026/1744, publicado en julio de 2026, que retrasó el alto riesgo (antes 2 de agosto de 2026 y 2027), suavizó la redacción de la alfabetización y añadió nuevas prohibiciones sobre imágenes íntimas no consentidas y material de abuso infantil desde el 2 de diciembre de 2026. Las obligaciones de alto riesgo son las mismas: solo se ha movido la fecha.
+
+En España, la autoridad de supervisión es la **AESIA** (Agencia Española de Supervisión de la Inteligencia Artificial). Los modelos de propósito general obligan a sus proveedores, no a quien usa Copilot.
+
+## 5. El registro de casos de uso
+
+Una tabla en la herramienta de GRC, en SharePoint o en la CMDB, con una fila por **caso de uso** (no por herramienta: Copilot para resumir reuniones y Copilot para evaluar candidatos son dos casos distintos):
+
+| Campo | Ejemplo |
+|---|---|
+| Caso de uso | Resumen de reuniones de Teams con Copilot |
+| Herramienta y proveedor | Microsoft 365 Copilot · Microsoft |
+| Dueño de negocio | Dirección de operaciones |
+| Rol de la empresa | Responsable del despliegue |
+| Datos que trata | Transcripciones internas; puede incluir datos personales |
+| Categoría de riesgo | Mínimo |
+| EIPD necesaria | Revisada por el DPO: cubierta por la de Microsoft 365 |
+| Controles | Etiquetas de confidencialidad de Purview, licencias por grupo, formación hecha |
+| Aprobado por / fecha | Comité de IA · 2026-09-15 · revisión anual |
+
+Lo que se revisa cada trimestre: casos nuevos, cambios de finalidad, herramientas que han añadido IA por su cuenta en una actualización y casos que han dejado de usarse.
+
+## 6. Aprobación y su relación con el RGPD
+
+Un circuito sencillo para cada caso de uso nuevo:
+
+1. **Solicitud** con la finalidad, los datos y quién lo va a usar.
+2. **Clasificación** de riesgo con legal. Si cae en prohibido, se para aquí.
+3. **Protección de datos**: si trata datos personales, el DPO decide si hace falta una **evaluación de impacto (EIPD)** según el artículo 35 del RGPD. Para un sistema de alto riesgo, la información que da el proveedor sirve para hacerla. Revisa también el contrato: dónde se procesan los datos, si se usan para entrenar y cuánto tiempo se guardan.
+4. **Seguridad**: acceso con la identidad corporativa, registro de actividad, etiquetas de confidencialidad y qué ve la herramienta (Copilot ve lo que el usuario puede abrir: un SharePoint con permisos de más es un problema antes de Copilot y más visible después).
+5. **Aprobación**, alta en el registro y formación de los usuarios antes de dar licencias.
+
+## 7. El caso: un empleado ha pegado datos de clientes en una herramienta de IA no aprobada
+
+Un analista ha pegado una exportación con nombres, correos y saldos de 300 clientes en un chatbot público con su cuenta personal para "ordenar la tabla". Lo detecta la alerta de DLP del navegador o lo cuenta él mismo.
+
+1. **Contener**: que deje de usarla, borre la conversación y, si la herramienta lo permite, desactive el uso de sus conversaciones para entrenar. Guarda capturas como evidencia antes de borrar.
+2. **Evaluar qué datos han salido**: hay datos personales de clientes, así que se avisa al **DPO** de inmediato. El DPO decide si es una violación de seguridad que hay que notificar a la AEPD en un máximo de **72 horas** desde que se tiene conocimiento (artículo 33 del RGPD). Se notifique o no, queda en el registro de violaciones de seguridad.
+3. **Revisar las condiciones** de la herramienta: dónde guarda los datos, durante cuánto tiempo y si los usa para entrenar. Eso cambia la valoración del riesgo.
+4. **Bloquear**: en Defender for Cloud Apps, marcar la aplicación como **no autorizada** (*Unsanctioned*); con la integración con Defender for Endpoint, el acceso queda bloqueado en los equipos gestionados. Lo mismo en el proxy si lo usas.
+5. **Dar la alternativa**: si la necesidad es real, una herramienta aprobada con la cuenta corporativa (Copilot con protección de datos empresariales, por ejemplo). Prohibir sin ofrecer nada aumenta el uso escondido.
+6. **Cerrar**: formación para la persona y su equipo, una línea en el registro de casos de uso si la necesidad se aprueba, y revisar qué otras herramientas de IA salen en los registros.
+
+! Lo que falla en este caso es la protección de datos y la confidencialidad, no el AI Act. Por eso la respuesta va por el proceso de incidentes de seguridad y el DPO, no por un comité de IA aparte.
+
+## Siguientes pasos
+
+- La guía de **ISO 27001, NIS2 y RGPD en IT** cubre la gestión de incidentes de seguridad y las notificaciones en las que se apoya el último apartado.
+- La guía de **Microsoft Purview** explica las etiquetas de confidencialidad y la DLP que limitan lo que Copilot puede ver y lo que sale de la empresa.
+- El repositorio **25-security-controls-evidence** de mi GitHub reúne en un registro la evidencia de controles que pide una auditoría; el registro de casos de uso de IA y la formación encajan como una línea más.
+""",
+  en="""
+## What you'll get
+
+Knowing which part of Regulation (EU) 2024/1689, the **AI Act**, affects your organisation when it doesn't build AI models but uses them every day: Copilot in Microsoft 365, a chatbot on the website, an HR screening tool, a coding assistant. And setting up the minimum IT needs to have: a use-case register, an approval flow and an answer for when someone uses a tool nobody has approved.
+
+This guide is a practical map for IT, not legal advice: classification decisions are made with legal and the data protection officer (DPO).
+
+## Before you start
+
+- A **sponsor** in management and a small group with legal, DPO, security, HR and IT. AI comes in through every department, not just IT.
+- The **inventory** of what is already in use: Copilot licences, AI features switched on in the SaaS you already have (CRM, ITSM, HR), in-house builds on model APIs, and what people use without asking (the proxy or Defender for Cloud Apps logs show it).
+- IT's acceptable use policy, to add the AI part to it rather than create another one.
+
+## 1. The four risk categories
+
+The regulation doesn't regulate "AI" as a whole: it regulates uses, according to risk.
+
+| Category | What it is | Examples | What it implies |
+|---|---|---|---|
+| Prohibited | Practices not allowed in the EU (Article 5) | Social scoring, manipulation that causes harm, emotion recognition at work or in education except for medical or safety reasons, untargeted scraping of facial images | Not used. If it shows up, it stops |
+| High risk | Annex III systems or safety components of regulated products (Annex I) | CV screening and decisions about employees, creditworthiness of natural persons, life and health insurance pricing | Heavy obligations for the provider and for whoever deploys it |
+| Limited risk (transparency) | Systems that interact with people or generate content | Chatbots, generated or manipulated content (*deepfakes*) | Tell people |
+| Minimal risk | Everything else | Spam filters, meeting summaries, coding assistants | No specific obligations beyond AI literacy |
+
+> In a typical company, almost everything falls into minimal or limited. What needs watching is **HR** and **customer assessment** uses: that is where high risk lives, even if a third party sells the tool.
+
+## 2. Provider or deployer
+
+- **Provider**: whoever develops an AI system and places it on the market or puts it into service under their own name. Microsoft, for Copilot.
+- **Deployer**: whoever uses an AI system under their authority in a professional activity. Your company, when it switches on Copilot.
+- Watch out for in-house builds: if your team builds a customer chatbot on a model's API and publishes it under your brand, you are the **provider of that system**, with the provider's transparency obligations.
+- If you substantially modify a high-risk system, or change its purpose so that it becomes one, you take on the provider's obligations.
+
+## 3. What applies to a company using Copilot or a chatbot
+
+**AI literacy (Article 4)**, applicable since 2 February 2025. After the Digital Omnibus, the obligation is to **take measures to support** the AI literacy of staff and of those using the systems on the company's behalf, without requiring a specific level from each person. In practice:
+
+- A short training per profile: what the tool can and can't do, hallucinations, which data doesn't go in and how to review what it produces.
+- Deeper training for those who configure or approve use cases.
+- A record of who has completed it: that is what you will be able to show.
+
+**Transparency (Article 50)**, applicable since 2 August 2026:
+
+- A **chatbot** talking to customers must make clear it is an AI, unless that is obvious.
+- If you publish **generated or manipulated images, audio or video** that look real, it has to be disclosed.
+- If you use emotion recognition or biometric categorisation (in the permitted cases), the people exposed must be informed.
+
+**If a use case is high risk**, the deployer must, among other things, use it according to the provider's instructions, assign **human oversight** to people with training and authority, monitor its operation, keep the **logs** it generates for at least six months and **inform workers' representatives** before using it in the workplace.
+
+## 4. The timeline
+
+| Date | What starts to apply |
+|---|---|
+| 1 August 2024 | The regulation enters into force |
+| 2 February 2025 | Prohibited practices and AI literacy |
+| 2 August 2025 | Obligations for general-purpose AI models (GPAI) and the governance and penalties regime |
+| 2 August 2026 | General application, including Article 50 transparency |
+| 2 December 2027 | Annex III high risk (employment, creditworthiness, essential services…) |
+| 2 August 2028 | Annex I high risk (AI in regulated products) |
+
+The last two dates come from the **Digital Omnibus on AI**, Regulation (EU) 2026/1744, published in July 2026, which delayed high risk (previously 2 August 2026 and 2027), softened the wording of AI literacy and added new prohibitions on non-consensual intimate imagery and child sexual abuse material from 2 December 2026. The high-risk obligations are the same: only the date has moved.
+
+In Spain, the supervisory authority is **AESIA** (the Spanish Agency for the Supervision of Artificial Intelligence). General-purpose model obligations fall on their providers, not on whoever uses Copilot.
+
+## 5. The use-case register
+
+A table in the GRC tool, in SharePoint or in the CMDB, with one row per **use case** (not per tool: Copilot to summarise meetings and Copilot to assess candidates are two different cases):
+
+| Field | Example |
+|---|---|
+| Use case | Teams meeting summaries with Copilot |
+| Tool and provider | Microsoft 365 Copilot · Microsoft |
+| Business owner | Head of operations |
+| Company's role | Deployer |
+| Data processed | Internal transcripts; may include personal data |
+| Risk category | Minimal |
+| DPIA needed | Reviewed by the DPO: covered by the Microsoft 365 one |
+| Controls | Purview sensitivity labels, licences by group, training completed |
+| Approved by / date | AI committee · 2026-09-15 · annual review |
+
+What gets reviewed every quarter: new cases, changes of purpose, tools that added AI on their own in an update, and cases no longer in use.
+
+## 6. Approval and its link with GDPR
+
+A simple flow for each new use case:
+
+1. **Request** with the purpose, the data and who will use it.
+2. Risk **classification** with legal. If it falls under prohibited, it stops here.
+3. **Data protection**: if it processes personal data, the DPO decides whether a **data protection impact assessment (DPIA)** is needed under Article 35 of the GDPR. For a high-risk system, the information the provider supplies is used to carry it out. Also review the contract: where the data is processed, whether it is used for training and how long it is kept.
+4. **Security**: access with the corporate identity, activity logging, sensitivity labels and what the tool can see (Copilot sees what the user can open: a SharePoint site with excessive permissions is a problem before Copilot and a more visible one after).
+5. **Approval**, entry in the register and user training before licences are assigned.
+
+## 7. The case: an employee has pasted customer data into an unapproved AI tool
+
+An analyst has pasted an export with names, emails and balances of 300 customers into a public chatbot with a personal account to "sort the table". The browser DLP alert catches it, or they report it themselves.
+
+1. **Contain**: they stop using it, delete the conversation and, if the tool allows it, switch off the use of their conversations for training. Keep screenshots as evidence before deleting.
+2. **Assess what data has left**: there is customer personal data, so the **DPO** is told immediately. The DPO decides whether it is a personal data breach to be notified to the supervisory authority (the AEPD in Spain) within **72 hours** of becoming aware (Article 33 of the GDPR). Whether notified or not, it goes in the breach register.
+3. **Review the tool's terms**: where it stores data, for how long and whether it uses it for training. That changes the risk assessment.
+4. **Block**: in Defender for Cloud Apps, mark the app as **Unsanctioned**; with the Defender for Endpoint integration, access is blocked on managed devices. The same in the proxy if you use one.
+5. **Offer the alternative**: if the need is real, an approved tool with the corporate account (Copilot with enterprise data protection, for example). Banning without offering anything increases hidden use.
+6. **Close**: training for the person and their team, a line in the use-case register if the need is approved, and a check on which other AI tools show up in the logs.
+
+! What fails in this case is data protection and confidentiality, not the AI Act. That is why the response goes through the security incident process and the DPO, not through a separate AI committee.
+
+## Next steps
+
+- The **ISO 27001, NIS2 and GDPR in IT** guide covers security incident management and the notifications the last section relies on.
+- The **Microsoft Purview** guide explains the sensitivity labels and DLP that limit what Copilot can see and what leaves the company.
+- The **25-security-controls-evidence** repository on my GitHub brings the control evidence an audit asks for into one register; the AI use-case register and the training fit in as one more line.
+""")
+g(slug="sai-de-la-sala-de-comunicaciones-dimensionado-pruebas-apagado-ordenado-y-un-corte-antes-de-la-apertura", topic="sai-sala", date="2026-10-30",
+  title_es="SAI de la sala de comunicaciones: dimensionado, alimentación A/B, baterías, pruebas, apagado ordenado y un corte de luz antes de la apertura",
+  title_en="The comms room UPS: sizing, A/B power, batteries, tests, orderly shutdown and a power cut before the market opens",
+  seo_title_en="Comms room UPS: sizing, tests and shutdown · Iñigo González",
+  seo_title_es="SAI de la sala técnica: pruebas y apagado · Iñigo González",
+  dek_es="El SAI de la sala de comunicaciones de una sede con sala de trading: cómo dimensionar carga y autonomía, la doble alimentación con PDU A y B, la vida de las baterías y su sustitución, las pruebas mensuales y anuales, la monitorización por tarjeta de red y SNMP, el orden de apagado, el grupo electrógeno del edificio y un corte de luz a las 7:15.",
+  dek_en="The UPS in the comms room of a site with a trading floor: how to size load and runtime, dual power with A and B PDUs, battery life and replacement, monthly and annual tests, monitoring through the network card and SNMP, the shutdown order, the building's generator and a power cut at 7:15.",
+  es="""
+## Qué vas a conseguir
+
+Que un corte de luz en la sede sea una alerta y no un incidente mayor. El SAI (sistema de alimentación ininterrumpida) de la sala de comunicaciones tiene un trabajo concreto: aguantar la carga hasta que arranque el grupo electrógeno o, si no arranca, dar tiempo para apagar en orden lo que no puede caerse de golpe. En una sede con sala de trading eso se decide antes de las 9:00, con el mercado a punto de abrir.
+
+## Antes de empezar
+
+- El **esquema eléctrico** de la sala: de qué cuadro sale cada línea, qué SAI alimenta cada PDU y qué circuitos cubre el grupo electrógeno del edificio.
+- El **contrato de mantenimiento** del SAI (visitas, sustitución de baterías, tiempo de respuesta) y el contacto de mantenimiento del edificio para el grupo.
+- Acceso a la **tarjeta de red** de cada SAI y a la monitorización de la sede.
+
+## 1. Dimensionar: carga y autonomía
+
+**Carga**: se mide, no se suma de las placas de características. Las PDU con medición dan el consumo real de cada rack; el panel del SAI, el total.
+
+- Trabaja en **kW**, no en kVA. Un SAI de 10 kVA con factor de potencia 0,9 da 9 kW; los modernos suelen dar 1,0.
+- Con **dos SAI, uno para la línea A y otro para la B**, cada uno tiene que poder con **toda** la carga si el otro falla. Con 6,4 kW de carga total, dos SAI de 10 kW van al 32 % cada uno y al 64 % si queda uno solo. Por encima del 80 % con uno solo, no queda margen para crecer.
+
+**Autonomía**: depende de para qué la quieras.
+
+- Con **grupo electrógeno** que cubre la sala, el SAI tiene que aguantar el arranque y la conmutación (segundos) más un margen por si el primer intento falla. 10-15 minutos es un objetivo habitual.
+- Sin grupo, o si el grupo falla, la autonomía tiene que cubrir el **apagado ordenado completo** con margen. Mide cuánto tarda (en la prueba anual) y suma la mitad.
+- La autonomía real baja con la edad de las baterías y con la temperatura. La del día de la instalación no es la de dentro de cuatro años.
+
+## 2. Doble alimentación con PDU A y B
+
+- Cada equipo crítico con **dos fuentes**: una a la PDU A y otra a la PDU B, cada PDU de un SAI distinto (o una de SAI y otra de red con su propia protección, según el diseño de la sala).
+- Los equipos con **una sola fuente** (algunos aparatos de operadores, consolas, equipos antiguos) van con un **conmutador de transferencia** (ATS) de rack, o se aceptan y se documentan como punto único de fallo.
+- Comprueba que **cada fuente lleva carga**. Una fuente desenchufada o averiada no se nota hasta que se corta la otra línea: las alertas de fuente redundante perdida de iDRAC, iLO y los switches tienen que llegar a alguien.
+- Cada PDU por debajo del 40-50 % de su capacidad en uso normal: si cae la otra línea, tiene que absorber toda la carga del rack.
+
+## 3. Baterías: vida y sustitución
+
+- Las baterías de plomo selladas (VRLA) de los SAI de sala suelen tener una **vida de diseño** de 5 años o de 10 en las de larga duración, pero la vida real suele ser menor y depende sobre todo de la **temperatura**: por encima de unos 25 °C, se acorta mucho.
+- Mantén la sala entre 20 y 25 °C y vigila la temperatura del propio SAI, no solo la del aire acondicionado.
+- Planifica la **sustitución** por fecha y por resultado de las pruebas, no esperando a la alarma de "replace battery". Anota la fecha de la última sustitución en el inventario.
+
+## 4. Pruebas: cada mes y cada año
+
+**Cada mes**:
+
+- **Autotest** de baterías desde la tarjeta de red o el panel, fuera del horario de mercado. Resultado y fecha en el registro.
+- Revisión de alarmas activas, carga de cada SAI y de cada PDU, temperatura y autonomía estimada.
+
+**Cada año**, con el mantenedor y en ventana de cambio aprobada:
+
+- **Prueba de descarga** o calibración de autonomía con carga real: cuántos minutos aguanta de verdad.
+- Prueba del **bypass** y de cada línea por separado: se corta la A y se comprueba que todo sigue en la B, y al revés. Es la prueba que encuentra la fuente desenchufada.
+- **Prueba con el grupo electrógeno** del edificio coordinada con la propiedad: corte de red, arranque, conmutación y vuelta.
+
+## 5. Monitorización: tarjeta de red y SNMP
+
+Cada SAI con su **tarjeta de gestión de red** en la VLAN de gestión, con la contraseña de fábrica cambiada y **SNMPv3** hacia la monitorización. Muchos SAI publican el MIB estándar de SAI (RFC 1628) además del suyo:
+
+:::term Linux · consulta SNMPv3 al SAI de la línea A
+$ snmpget -v3 -l authPriv -u mon-sai -a SHA -A "$AUTH" -x AES -X "$PRIV" sai-cr1-a.mgmt.local 1.3.6.1.2.1.33.1.4.1.0 1.3.6.1.2.1.33.1.2.1.0 1.3.6.1.2.1.33.1.2.3.0 1.3.6.1.2.1.33.1.2.4.0
+SNMPv2-SMI::mib-2.33.1.4.1.0 = INTEGER: 5
+SNMPv2-SMI::mib-2.33.1.2.1.0 = INTEGER: 2
+SNMPv2-SMI::mib-2.33.1.2.3.0 = INTEGER: 18
+SNMPv2-SMI::mib-2.33.1.2.4.0 = INTEGER: 71
+# 4.1 origen de la salida: 3 normal, 4 bypass, 5 batería
+# 2.1 estado de batería: 2 normal, 3 baja, 4 agotada
+# 2.3 minutos estimados de autonomía · 2.4 carga de batería en %
+:::
+
+Alertas que tienen que llegar al teléfono de guardia, no solo al correo: **en batería**, **batería baja**, **sustituir batería**, **sobrecarga**, **en bypass**, **temperatura alta** y **tarjeta sin respuesta** (si la monitorización no la ve, tampoco verá un corte).
+
+## 6. El orden de apagado
+
+Si el corte va a durar más que la batería, se apaga por capas, de fuera hacia dentro, y se enciende al revés:
+
+1. **Lo que no hace falta para operar**: entornos de prueba, servidores de impresión, equipos de sala de reuniones.
+2. **Aplicaciones**: máquinas virtuales de aplicación, antes que sus bases de datos.
+3. **Bases de datos**: con su parada limpia, para no arrancar después con una recuperación.
+4. **Almacenamiento compartido** y después los **hosts de virtualización**.
+5. **La red, al final**: núcleo, cortafuegos y la gestión fuera de banda siguen vivos hasta el último momento, porque son el camino por el que llegan las órdenes de apagado y por el que verás lo que pasa.
+
+- El software de apagado del fabricante (o un agente en cada hipervisor) puede lanzar cada capa al cruzar un umbral de autonomía o de tiempo en batería. **Los umbrales se fijan con la autonomía medida**, no con la del catálogo.
+- Los equipos de la sala de trading que gestiona su propio equipo (servidores de datos de mercado, aparatos de operadores) tienen su orden y su responsable: acuérdalo por escrito antes, no durante el corte.
+- Los **puestos de trading** suelen ir en tomas de la planta respaldadas por SAI, a menudo de otro color. Si no lo están, un corte apaga los puestos aunque la sala aguante.
+
+## 7. El grupo electrógeno y la propiedad del edificio
+
+En una oficina alquilada, el grupo suele ser **de la propiedad**:
+
+- Pide por escrito **qué circuitos cubre**: sala de comunicaciones, climatización de la sala (sin ella, el SAI aguanta pero la sala se calienta), plantas, ascensores.
+- **Tiempo de arranque y conmutación** del grupo y quién lo prueba, con qué frecuencia y si es con carga.
+- **Combustible**: horas de autonomía y contrato de reposición.
+- Contacto 24x7 del mantenimiento del edificio y aviso previo de los cortes programados, para moverlos fuera de mercado.
+
+## 8. El caso: corte de luz a las 7:15
+
+Martes, 7:15. Salta la alerta "en batería" de los dos SAI. La sala de trading empieza a llenarse a las 8:00; el mercado abre a las 9:00.
+
+1. **7:16 · ¿Ha arrancado el grupo?** Los SAI siguen en batería pasado un minuto: el grupo no ha entrado. Llamada al mantenimiento del edificio.
+2. **7:18 · Cuánto queda**: la tarjeta de red dice 18 minutos de autonomía y 71 % de carga en la línea A. El apagado ordenado completo tarda 12 minutos: el margen es corto.
+3. **7:19 · Primera capa**: se apagan los entornos de prueba y los equipos no críticos para ganar autonomía. Aviso al responsable de la sala de trading y a continuidad de negocio: "corte en el edificio, la sala aguanta con SAI, el grupo no ha arrancado; decisión a las 7:22".
+4. **7:21 · El grupo arranca**: el mantenimiento lo pone en marcha a mano. Los SAI vuelven a la entrada de red del grupo y empiezan a recargar.
+5. **7:30 · Comprobaciones**: los SAI en línea, cada PDU con las dos fuentes con carga, la climatización de la sala funcionando. Las baterías están al 60 %: si hay un segundo corte, no hay autonomía para otro apagado ordenado. Los equipos apagados siguen apagados hasta que la batería se recupere.
+6. **8:00 · Antes de la apertura**: los puestos de trading encienden y tienen red y datos de mercado. Si los puestos no estaban en tomas con SAI, se reinician y se comprueban fila a fila.
+7. **Después**: el informe con la hora de cada paso, la causa del fallo del grupo pedida por escrito a la propiedad, una nueva prueba del grupo con carga y la revisión de los umbrales de apagado con la autonomía que se ha visto.
+
+! Si el grupo no hubiera arrancado, a las 7:22 se habría lanzado el apagado ordenado completo y se habría activado el plan de continuidad: trasladar a los operadores al sitio alternativo antes de las 9:00 es una decisión de negocio que se toma con tiempo, no con el último minuto de batería.
+
+## Siguientes pasos
+
+- La guía de **Device42** del Sector 5 guarda qué equipo va a qué PDU, la base para comprobar que cortar una línea no deja nada sin corriente.
+- La guía de **DR/BCP: preparar y supervisar una prueba de recuperación** explica cómo llevar a los operadores al sitio alternativo si la sede no aguanta.
+- El repositorio **36-major-incident-command-kit** de mi GitHub sirve para llevar un corte así como incidente mayor: cronología, comunicaciones y revisión posterior.
+""",
+  en="""
+## What you'll get
+
+A power cut at the site that is an alert, not a major incident. The UPS (uninterruptible power supply) in the comms room has a specific job: carry the load until the generator starts or, if it doesn't, give you time to shut down in order whatever can't drop all at once. On a site with a trading floor that is decided before 9:00, with the market about to open.
+
+## Before you start
+
+- The room's **electrical diagram**: which board each line comes from, which UPS feeds each PDU and which circuits the building's generator covers.
+- The UPS **maintenance contract** (visits, battery replacement, response time) and the building maintenance contact for the generator.
+- Access to each UPS's **network card** and to the site's monitoring.
+
+## 1. Sizing: load and runtime
+
+**Load** is measured, not added up from rating plates. Metered PDUs give the real consumption of each rack; the UPS panel, the total.
+
+- Work in **kW**, not kVA. A 10 kVA UPS with a 0.9 power factor delivers 9 kW; modern ones usually deliver 1.0.
+- With **two UPS units, one for line A and one for line B**, each must be able to carry the **whole** load if the other fails. With 6.4 kW of total load, two 10 kW units run at 32% each and at 64% if only one is left. Above 80% on a single unit, there is no headroom to grow.
+
+**Runtime** depends on what you want it for.
+
+- With a **generator** covering the room, the UPS has to carry the start-up and transfer (seconds) plus a margin in case the first attempt fails. 10-15 minutes is a common target.
+- Without a generator, or if it fails, runtime has to cover the **complete orderly shutdown** with a margin. Measure how long it takes (in the annual test) and add half.
+- Real runtime drops with battery age and temperature. The figure on installation day is not the figure four years later.
+
+## 2. Dual power with A and B PDUs
+
+- Every critical device with **two power supplies**: one to PDU A and one to PDU B, each PDU fed by a different UPS (or one from UPS and one from mains with its own protection, depending on the room's design).
+- **Single-supply** devices (some carrier equipment, consoles, older kit) go on a rack **automatic transfer switch** (ATS), or are accepted and documented as a single point of failure.
+- Check that **each supply carries load**. An unplugged or failed supply goes unnoticed until the other line is cut: the lost-redundancy power supply alerts from iDRAC, iLO and the switches must reach someone.
+- Each PDU below 40-50% of its capacity in normal use: if the other line drops, it has to take the whole rack's load.
+
+## 3. Batteries: life and replacement
+
+- The sealed lead-acid (VRLA) batteries in comms room UPS units usually have a **design life** of 5 years, or 10 for long-life ones, but real life is usually shorter and depends above all on **temperature**: above about 25 °C, it shortens considerably.
+- Keep the room between 20 and 25 °C and watch the temperature of the UPS itself, not just the air conditioning.
+- Plan **replacement** by date and by test results, not by waiting for the "replace battery" alarm. Record the date of the last replacement in the inventory.
+
+## 4. Tests: monthly and annual
+
+**Every month**:
+
+- Battery **self-test** from the network card or the panel, outside market hours. Result and date in the log.
+- Review of active alarms, load on each UPS and each PDU, temperature and estimated runtime.
+
+**Every year**, with the maintainer and in an approved change window:
+
+- **Discharge test** or runtime calibration with real load: how many minutes it really lasts.
+- Test of the **bypass** and of each line separately: cut A and check everything stays up on B, and the other way round. It is the test that finds the unplugged supply.
+- **Generator test** coordinated with the landlord: mains cut, start, transfer and return.
+
+## 5. Monitoring: network card and SNMP
+
+Each UPS with its **network management card** on the management VLAN, with the factory password changed and **SNMPv3** to monitoring. Many UPS units publish the standard UPS MIB (RFC 1628) as well as their own:
+
+:::term Linux · SNMPv3 query to the line A UPS
+$ snmpget -v3 -l authPriv -u mon-ups -a SHA -A "$AUTH" -x AES -X "$PRIV" ups-cr1-a.mgmt.local 1.3.6.1.2.1.33.1.4.1.0 1.3.6.1.2.1.33.1.2.1.0 1.3.6.1.2.1.33.1.2.3.0 1.3.6.1.2.1.33.1.2.4.0
+SNMPv2-SMI::mib-2.33.1.4.1.0 = INTEGER: 5
+SNMPv2-SMI::mib-2.33.1.2.1.0 = INTEGER: 2
+SNMPv2-SMI::mib-2.33.1.2.3.0 = INTEGER: 18
+SNMPv2-SMI::mib-2.33.1.2.4.0 = INTEGER: 71
+# 4.1 output source: 3 normal, 4 bypass, 5 battery
+# 2.1 battery status: 2 normal, 3 low, 4 depleted
+# 2.3 estimated minutes of runtime · 2.4 battery charge in %
+:::
+
+Alerts that must reach the on-call phone, not just email: **on battery**, **low battery**, **replace battery**, **overload**, **on bypass**, **high temperature** and **card not responding** (if monitoring can't see it, it won't see a power cut either).
+
+## 6. The shutdown order
+
+If the cut will last longer than the battery, shut down in layers, from the outside in, and power up in reverse:
+
+1. **What isn't needed to operate**: test environments, print servers, meeting room equipment.
+2. **Applications**: application virtual machines, before their databases.
+3. **Databases**: with a clean stop, so they don't come back up into a recovery.
+4. **Shared storage** and then the **virtualisation hosts**.
+5. **The network, last**: core, firewalls and out-of-band management stay alive until the very end, because they are the path the shutdown commands travel and the way you will see what is happening.
+
+- The vendor's shutdown software (or an agent on each hypervisor) can trigger each layer when it crosses a runtime or time-on-battery threshold. **Thresholds are set from measured runtime**, not the catalogue figure.
+- Trading floor equipment managed by its own team (market data servers, carrier equipment) has its own order and owner: agree it in writing beforehand, not during the cut.
+- **Trading desks** usually sit on UPS-backed floor sockets, often a different colour. If they don't, a cut switches off the desks even if the room holds.
+
+## 7. The generator and the landlord
+
+In a leased office, the generator usually **belongs to the landlord**:
+
+- Ask in writing **which circuits it covers**: comms room, the room's cooling (without it, the UPS holds but the room heats up), floors, lifts.
+- The generator's **start and transfer time**, and who tests it, how often and whether it is under load.
+- **Fuel**: hours of runtime and the refuelling contract.
+- A 24x7 building maintenance contact and advance notice of planned outages, so they can be moved outside market hours.
+
+## 8. The case: a power cut at 7:15
+
+Tuesday, 7:15. Both UPS units raise the "on battery" alert. The trading floor starts filling up at 8:00; the market opens at 9:00.
+
+1. **7:16 · Has the generator started?** The UPS units are still on battery after a minute: the generator hasn't come in. Call building maintenance.
+2. **7:18 · How much is left**: the network card says 18 minutes of runtime and 71% charge on line A. The complete orderly shutdown takes 12 minutes: the margin is short.
+3. **7:19 · First layer**: test environments and non-critical equipment are shut down to gain runtime. Notice to the trading floor manager and business continuity: "building power cut, the room is holding on UPS, the generator hasn't started; decision at 7:22".
+4. **7:21 · The generator starts**: maintenance starts it by hand. The UPS units go back to the generator-fed input and start recharging.
+5. **7:30 · Checks**: UPS units online, each PDU with both supplies carrying load, the room's cooling running. Batteries are at 60%: if there is a second cut, there is no runtime for another orderly shutdown. The equipment that was shut down stays off until the battery recovers.
+6. **8:00 · Before the open**: trading desks power up and have network and market data. If the desks weren't on UPS-backed sockets, they are restarted and checked row by row.
+7. **Afterwards**: the report with the time of each step, the cause of the generator failure requested in writing from the landlord, a new generator test under load, and a review of the shutdown thresholds against the runtime actually seen.
+
+! If the generator hadn't started, at 7:22 the complete orderly shutdown would have been triggered and the continuity plan activated: moving the traders to the alternate site before 9:00 is a business decision taken with time to spare, not on the last minute of battery.
+
+## Next steps
+
+- The **Device42** guide in Sector 5 records which device goes to which PDU, the basis for checking that cutting one line leaves nothing without power.
+- The **DR/BCP: preparing and overseeing a recovery test** guide explains how to move the traders to the alternate site if the site can't hold.
+- The **36-major-incident-command-kit** repository on my GitHub helps run a cut like this as a major incident: timeline, communications and the post-incident review.
+""")
+
+g(slug="zabbix-monitorizar-un-restaurante-u-hotel-tpv-impresoras-de-cocina-e-internet", topic="zabbix-local", date="2026-10-30",
+  title_es="Zabbix: monitorizar un restaurante o un hotel, con los TPV, las impresoras de cocina e internet vigilados antes del servicio",
+  title_en="Zabbix: monitoring a restaurant or hotel, with the POS, kitchen printers and internet watched before service",
+  seo_title_en="Zabbix: monitoring a restaurant or hotel · Iñigo González",
+  seo_title_es="Zabbix: monitorizar un restaurante u hotel · Iñigo González",
+  dek_es="Cómo vigilar un local de hostelería con Zabbix 7.0 LTS: servidor y proxy, agentes en el servidor del TPV, ICMP para terminales e impresoras, SNMP para la red y el SAI, los triggers que importan antes de abrir, avisos por correo y Telegram, mantenimientos y una tormenta de alertas un sábado a las 13:05.",
+  dek_en="How to watch a hospitality venue with Zabbix 7.0 LTS: server and proxy, agents on the POS server, ICMP for tills and printers, SNMP for the network and UPS, the triggers that matter before opening, email and Telegram alerts, maintenance periods and an alert storm on a Saturday at 13:05.",
+  es="""
+## Qué vas a conseguir
+
+Que el móvil de la guardia suene antes que el teléfono del encargado: Zabbix vigilando internet, el servidor del TPV y su base de datos, las impresoras de cocina, los terminales, la red y el SAI del local. Con avisos que llegan solo cuando importan, y silencio mientras el local está cerrado.
+
+## Antes de empezar
+
+- **La versión**: Zabbix **7.0 LTS** (junio de 2024, soporte completo hasta junio de 2027). La 8.0 LTS está en *release candidate* a finales de octubre de 2026: para producción, 7.0 hasta su primera versión de correcciones. La 6.0 LTS ya solo tiene soporte limitado: planifica la actualización.
+- **Dónde va cada pieza**: un servidor central y un **Zabbix proxy** en cada local, en un equipo pequeño siempre encendido, que sigue recogiendo datos aunque se caiga internet. Con el servidor dentro del local, sus avisos dependen de la misma línea que vigila.
+- **El inventario del local** con IP fijas o reservas de DHCP (guía de ICG y HIOPOS).
+- **SNMP** de solo lectura, mejor **SNMPv3**; con v2c, nunca la comunidad `public`.
+- **Puertos**: 10050/TCP del proxy al agente y 10051/TCP hacia el servidor. Con el proxy en modo activo, el local solo necesita salida.
+- **El horario de servicio** (comidas, cenas, desayunos del hotel) y quién está de guardia cada día.
+
+## 1. Servidor, proxy y agentes
+
+El servidor central, en Ubuntu 24.04 con PostgreSQL y Nginx, desde el repositorio oficial:
+
+:::term Bash · servidor central (Ubuntu 24.04)
+$ wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.0+ubuntu24.04_all.deb
+$ sudo dpkg -i zabbix-release_latest_7.0+ubuntu24.04_all.deb && sudo apt update
+$ sudo apt install zabbix-server-pgsql zabbix-frontend-php php8.3-pgsql zabbix-nginx-conf zabbix-sql-scripts zabbix-agent2
+$ sudo -u postgres createuser --pwprompt zabbix
+$ sudo -u postgres createdb -O zabbix zabbix
+$ zcat /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz | sudo -u zabbix psql zabbix
+# DBPassword en /etc/zabbix/zabbix_server.conf; listen y server_name en /etc/nginx/conf.d/zabbix.conf
+$ sudo systemctl restart zabbix-server zabbix-agent2 nginx php8.3-fpm
+$ sudo systemctl enable zabbix-server zabbix-agent2 nginx php8.3-fpm
+:::
+
+En el local, el paquete `zabbix-proxy-sqlite3` y tres líneas que deciden casi todo en `/etc/zabbix/zabbix_proxy.conf`:
+
+:::term zabbix_proxy.conf · proxy del local
+ProxyMode=0
+Server=zabbix.corp.example
+Hostname=PRX-BRISA
+DBName=/var/lib/zabbix/zabbix_proxy.db
+ProxyOfflineBuffer=24
+:::
+
+- `ProxyMode=0` es **activo**: el proxy llama al servidor, no al revés. El `Hostname` tiene que coincidir con el nombre dado en **Administration › Proxies**.
+- `ProxyOfflineBuffer` son las horas que el proxy guarda datos sin conexión. Por defecto es **1**: un corte de internet de una tarde se pierde. Con 24 horas cubres una noche entera.
+- En el servidor del TPV (Windows), **Zabbix Agent 2** con el MSI: `Server` y `ServerActive` apuntan al proxy, y el 10050 abierto solo desde él.
+
+## 2. Plantillas: qué vigilar en cada equipo
+
+| Equipo | Cómo | Plantilla |
+|---|---|---|
+| Servidor del TPV (Windows) | Agente 2 | **Windows by Zabbix agent**, más el servicio de la base de datos |
+| Servidor Linux del local, si lo hay | Agente 2 | **Linux by Zabbix agent** |
+| Terminales TPV, comanderos, pantallas de cocina | ICMP | **ICMP Ping** |
+| Impresoras de cocina y de tickets | ICMP y puerto 9100 | **ICMP Ping** más una comprobación TCP |
+| Switches HP y TP-Link | SNMP | **HP Enterprise Switch by SNMP**, **TP-LINK by SNMP** o **Network Generic Device by SNMP** |
+| Router MikroTik | SNMP | Las plantillas de MikroTik por SNMP (una por familia de modelo) |
+| SAI | SNMP | **APC UPS by SNMP** o la del fabricante |
+
+- **ICMP Ping** necesita `fping` en el proxy. Da tres elementos (`icmpping`, `icmppingloss`, `icmppingsec`) y el trigger *Unavailable by ICMP ping*.
+- Una impresora puede responder al ping con la tapa abierta o sin papel. El elemento que de verdad dice si acepta comandas es el puerto de impresión: comprobación simple `net.tcp.service[tcp,,9100]` cada minuto, no más a menudo.
+- Los **datáfonos** van en su red de pagos. Solo se vigilan si la segmentación lo permite y está documentado en el alcance de PCI DSS; si no, se quedan fuera.
+- Un **grupo de hosts** por local (`Locales/Brisa`) y etiquetas (`servicio:tpv`, `servicio:sala`).
+
+## 3. Los triggers que importan antes del servicio
+
+Cinco problemas paran un servicio. Cada uno con un trigger claro y la severidad que le corresponde:
+
+:::ui Zabbix · Data collection › Hosts › triggers del local
+= Internet caído (High): max(/PRX-BRISA/icmpping[1.1.1.1],3m)=0 and max(/PRX-BRISA/icmpping[8.8.8.8],3m)=0
+= Proxy del local sin contacto (High): fuzzytime(/Zabbix server/zabbix[proxy,"PRX-BRISA",lastaccess],300)=0
+= Impresora de cocina sin servicio (High): max(/IMP-COC-CALIENTE/net.tcp.service[tcp,,9100],2m)=0
+= Base de datos del TPV parada (Disaster): last(/SRV-TPV-BRISA/service.info["MSSQL$TPV",state])<>0
+= SAI en batería (High): trigger de la plantilla del SAI
+:::
+
+- **Internet** se mide desde el local contra dos destinos a la vez: uno solo da falsas alarmas. El del proxy sin contacto salta en el servidor central cuando el local entero desaparece.
+- Con **4G de respaldo**, la caída de la fibra no corta el servicio, pero hay que saberlo: el trigger de enlace caído de la WAN en la plantilla del router, como *Warning*.
+- `service.info[...,state]` devuelve **0** con el servicio en marcha (6 es detenido, 255 que no existe). El nombre, como `MSSQL$TPV`, sale de `services.msc`.
+
+## 4. Avisos a la guardia: correo y Telegram
+
+Primero los tipos de medio, en **Alerts › Media types**:
+
+- **Email**: servidor SMTP, puerto 587 con STARTTLS y una cuenta propia para Zabbix.
+- **Telegram**: el tipo de medio viene incluido. Crea un bot con @BotFather, pega el token en el parámetro `api_token` y prueba con **Test**. En cada usuario, en **Users › Users › Media**, el tipo Telegram con el *chat ID* en **Send to**.
+
+En el medio de cada usuario, **When active** limita las horas (`1-7,11:00-24:00`) y las severidades que le llegan. Después la acción, en **Alerts › Actions › Trigger actions**:
+
+:::ui Zabbix · Alerts › Actions › Trigger actions › Locales en servicio
+= Conditions: Host group equals Locales/Brisa · Trigger severity is greater than or equals High
+> Operations
+= Paso 1 (0 min): enviar a Guardia IT por Telegram
+= Paso 2 (10 min): enviar a Responsable de operaciones por Telegram y correo · solo si no está reconocido
+[x] Pause operations for suppressed problems
+= Recovery operations: avisar a Guardia IT de que se ha resuelto
+[Update]
+:::
+
+- **Reconocer** (*acknowledge*) el problema corta el paso 2.
+- El mensaje lleva `{HOST.NAME}`, `{TRIGGER.NAME}` y `{EVENT.SEVERITY}`: local y equipo sin abrir el portátil.
+
+## 5. Mantenimientos: cierre, descanso semanal y cambios
+
+Un local cerrado no es una incidencia. Los mantenimientos, en **Data collection › Maintenance**:
+
+:::ui Zabbix · Data collection › Maintenance › Cierre nocturno Brisa
+= Maintenance type: With data collection
+= Active since: 2026-11-01 00:00 · Active till: 2027-12-31 23:59
+= Periods: Weekly · todos los días · desde 01:30 · duración 8 h
+= Periods: Weekly · lunes · desde 00:00 · duración 1 d (descanso semanal)
+= Host groups: Locales/Brisa · Tags: servicio:sala
+[Add]
+:::
+
+- *With data collection* sigue guardando datos: el martes ves qué pasó el lunes. Los problemas se marcan como suprimidos y, con **Pause operations for suppressed problems**, no avisan.
+
+! Un mantenimiento sin fecha de fin, o que abarca todo el local, esconde también la caída de verdad. Limítalo por etiquetas y ponle siempre final.
+
+## 6. El ticket: "una tormenta de alertas a las 13:05"
+
+Sábado, 13:05. A la guardia le llegan 47 mensajes de Telegram en dos minutos: todos los TPV, los comanderos, las impresoras y la pantalla de cocina de un mismo local, sin respuesta. La sala está llena.
+
+1. **El primero de la lista**: en **Monitoring › Problems**, filtrado por el local y ordenado por hora, el primero es `SW-BRISA-01: Unavailable by ICMP ping` a las 13:04:40. Lo demás es consecuencia: un problema real y 46 copias.
+2. **Confirmar en el local**: el switch está apagado; alguien ha desenchufado la regleta de la barra para una cafetera. A las 13:08 todo responde.
+3. **Reconocer el problema** con lo ocurrido: se para la escalada.
+4. **Dependencias de triggers**: cada trigger de TPV, impresora y pantalla del local depende del ping de `SW-BRISA-01`, y el switch depende de *Proxy del local sin contacto*. En los triggers que vienen de plantilla, la dependencia se añade en el host, en la pestaña **Dependencies**. Con eso, la próxima vez llega un único aviso: el del switch.
+5. **El ruido de los comanderos**: se apagan al cargarse cada noche y algunos se duermen a media tarde. Severidad *Warning*, sin aviso, y un trigger con recuperación separada: problema con `max(/CMD-01/icmpping,#5)=0` y recuperación con `min(/CMD-01/icmpping,#3)=1`, para que no abra y cierre cada minuto.
+6. **El cierre**: causa (regleta compartida), acción (switch al SAI) y mejora (dependencias en los demás locales).
+
+## Siguientes pasos
+
+- La guía de **ICG y HIOPOS** tiene el inventario de terminales e impresoras que alimenta a Zabbix.
+- La red que vigilas aquí, con sus VLAN y el 4G de respaldo, está en la guía de **MikroTik y TP-Link: red y WiFi de un restaurante u hotel**.
+- La revisión de cada mañana antes del servicio (terminales, comanderos, impresoras de cocina y la línea de respaldo) es la idea del repositorio **34-venue-service-readiness** de mi GitHub.
+""",
+  en="""
+## What you'll get
+
+The on-call phone rings before the manager's does: Zabbix watching the internet, the POS server and its database, the kitchen printers, the tills, the network and the venue's UPS. With alerts that arrive only when they matter, and silence while the venue is closed.
+
+## Before you start
+
+- **The version**: Zabbix **7.0 LTS** (June 2024, full support until June 2027). 8.0 LTS is at *release candidate* at the end of October 2026: for production, 7.0 until its first bug-fix release. 6.0 LTS now only has limited support: plan the upgrade.
+- **Where each piece goes**: a central server and a **Zabbix proxy** in each venue, on a small box that is always on, which keeps collecting data when internet drops. With the server inside the venue, its alerts depend on the same line it is watching.
+- **The venue's inventory** with fixed IPs or DHCP reservations (ICG and HIOPOS guide).
+- Read-only **SNMP**, preferably **SNMPv3**; with v2c, never the `public` community.
+- **Ports**: 10050/TCP from the proxy to the agent and 10051/TCP towards the server. With the proxy in active mode, the venue only needs outbound access.
+- **The service hours** (lunch, dinner, hotel breakfast) and who is on call each day.
+
+## 1. Server, proxy and agents
+
+The central server, on Ubuntu 24.04 with PostgreSQL and Nginx, from the official repository:
+
+:::term Bash · central server (Ubuntu 24.04)
+$ wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.0+ubuntu24.04_all.deb
+$ sudo dpkg -i zabbix-release_latest_7.0+ubuntu24.04_all.deb && sudo apt update
+$ sudo apt install zabbix-server-pgsql zabbix-frontend-php php8.3-pgsql zabbix-nginx-conf zabbix-sql-scripts zabbix-agent2
+$ sudo -u postgres createuser --pwprompt zabbix
+$ sudo -u postgres createdb -O zabbix zabbix
+$ zcat /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz | sudo -u zabbix psql zabbix
+# DBPassword in /etc/zabbix/zabbix_server.conf; listen and server_name in /etc/nginx/conf.d/zabbix.conf
+$ sudo systemctl restart zabbix-server zabbix-agent2 nginx php8.3-fpm
+$ sudo systemctl enable zabbix-server zabbix-agent2 nginx php8.3-fpm
+:::
+
+In the venue, the `zabbix-proxy-sqlite3` package and a few lines in `/etc/zabbix/zabbix_proxy.conf` that decide almost everything:
+
+:::term zabbix_proxy.conf · venue proxy
+ProxyMode=0
+Server=zabbix.corp.example
+Hostname=PRX-BRISA
+DBName=/var/lib/zabbix/zabbix_proxy.db
+ProxyOfflineBuffer=24
+:::
+
+- `ProxyMode=0` is **active**: the proxy calls the server, not the other way round. The `Hostname` must match the name given in **Administration › Proxies**.
+- `ProxyOfflineBuffer` is how many hours the proxy keeps data without a connection. The default is **1**: an afternoon internet outage is lost. With 24 hours you cover a whole night.
+- On the POS server (Windows), **Zabbix Agent 2** from the MSI: `Server` and `ServerActive` point to the proxy, and 10050 open only from it.
+
+## 2. Templates: what to watch on each device
+
+| Device | How | Template |
+|---|---|---|
+| POS server (Windows) | Agent 2 | **Windows by Zabbix agent**, plus the database service |
+| The venue's Linux server, if any | Agent 2 | **Linux by Zabbix agent** |
+| POS tills, handhelds, kitchen screens | ICMP | **ICMP Ping** |
+| Kitchen and receipt printers | ICMP and port 9100 | **ICMP Ping** plus a TCP check |
+| HP and TP-Link switches | SNMP | **HP Enterprise Switch by SNMP**, **TP-LINK by SNMP** or **Network Generic Device by SNMP** |
+| MikroTik router | SNMP | The MikroTik SNMP templates (one per model family) |
+| UPS | SNMP | **APC UPS by SNMP** or the vendor's own |
+
+- **ICMP Ping** needs `fping` on the proxy. It provides three items (`icmpping`, `icmppingloss`, `icmppingsec`) and the *Unavailable by ICMP ping* trigger.
+- A printer can answer ping with its lid open or out of paper. The item that really tells you whether it accepts orders is the print port: a simple check `net.tcp.service[tcp,,9100]` every minute, not more often.
+- **Card terminals** live on their payments network. They are only monitored if the segmentation allows it and it is documented in the PCI DSS scope; otherwise they stay out.
+- One **host group** per venue (`Venues/Brisa`) and tags (`service:pos`, `service:floor`).
+
+## 3. The triggers that matter before service
+
+Five problems stop a service. Each one with a clear trigger and the severity it deserves:
+
+:::ui Zabbix · Data collection › Hosts › venue triggers
+= Internet down (High): max(/PRX-BRISA/icmpping[1.1.1.1],3m)=0 and max(/PRX-BRISA/icmpping[8.8.8.8],3m)=0
+= Venue proxy not in contact (High): fuzzytime(/Zabbix server/zabbix[proxy,"PRX-BRISA",lastaccess],300)=0
+= Kitchen printer not accepting jobs (High): max(/IMP-COC-CALIENTE/net.tcp.service[tcp,,9100],2m)=0
+= POS database stopped (Disaster): last(/SRV-TPV-BRISA/service.info["MSSQL$TPV",state])<>0
+= UPS on battery (High): trigger from the UPS template
+:::
+
+- **Internet** is measured from the venue against two targets at once: a single one gives false alarms. The proxy-not-in-contact one fires on the central server when the whole venue disappears.
+- With **4G backup**, losing the fibre does not stop service, but you need to know: the WAN link-down trigger in the router template, as *Warning*.
+- `service.info[...,state]` returns **0** with the service running (6 is stopped, 255 that it does not exist). The name, such as `MSSQL$TPV`, comes from `services.msc`.
+
+## 4. Alerting the on-call: email and Telegram
+
+First the media types, in **Alerts › Media types**:
+
+- **Email**: SMTP server, port 587 with STARTTLS and a dedicated account for Zabbix.
+- **Telegram**: the media type is built in. Create a bot with @BotFather, paste the token into the `api_token` parameter and try it with **Test**. On each user, in **Users › Users › Media**, the Telegram type with the *chat ID* in **Send to**.
+
+On each user's media, **When active** limits the hours (`1-7,11:00-24:00`) and the severities they receive. Then the action, in **Alerts › Actions › Trigger actions**:
+
+:::ui Zabbix · Alerts › Actions › Trigger actions › Venues in service
+= Conditions: Host group equals Venues/Brisa · Trigger severity is greater than or equals High
+> Operations
+= Step 1 (0 min): send to IT On-call via Telegram
+= Step 2 (10 min): send to Operations Manager via Telegram and email · only if not acknowledged
+[x] Pause operations for suppressed problems
+= Recovery operations: tell IT On-call it has been resolved
+[Update]
+:::
+
+- **Acknowledging** the problem stops step 2.
+- The message carries `{HOST.NAME}`, `{TRIGGER.NAME}` and `{EVENT.SEVERITY}`: venue and device without opening a laptop.
+
+## 5. Maintenance periods: closing time, the weekly day off and changes
+
+A closed venue is not an incident. Maintenance periods, in **Data collection › Maintenance**:
+
+:::ui Zabbix · Data collection › Maintenance › Brisa night closure
+= Maintenance type: With data collection
+= Active since: 2026-11-01 00:00 · Active till: 2027-12-31 23:59
+= Periods: Weekly · every day · from 01:30 · duration 8 h
+= Periods: Weekly · Monday · from 00:00 · duration 1 d (weekly day off)
+= Host groups: Venues/Brisa · Tags: service:floor
+[Add]
+:::
+
+- *With data collection* keeps storing data: on Tuesday you can see what happened on Monday. Problems are marked as suppressed and, with **Pause operations for suppressed problems**, they do not alert.
+
+! A maintenance period with no end date, or one that covers the whole venue, also hides the real outage. Limit it by tags and always give it an end.
+
+## 6. The ticket: "an alert storm at 13:05"
+
+Saturday, 13:05. The on-call gets 47 Telegram messages in two minutes: every till, handheld, printer and the kitchen screen of the same venue, not responding. The dining room is full.
+
+1. **The first one on the list**: in **Monitoring › Problems**, filtered by the venue and sorted by time, the first is `SW-BRISA-01: Unavailable by ICMP ping` at 13:04:40. The rest are consequences: one real problem and 46 copies.
+2. **Confirm in the venue**: the switch is off; someone unplugged the bar's power strip for a coffee machine. By 13:08 everything responds.
+3. **Acknowledge the problem** with what happened: the escalation stops.
+4. **Trigger dependencies**: every till, printer and screen trigger in the venue depends on `SW-BRISA-01`'s ping, and the switch depends on *Venue proxy not in contact*. For triggers that come from a template, the dependency is added on the host, in the **Dependencies** tab. With that, next time a single alert arrives: the switch's.
+5. **The handheld noise**: they switch off while charging every night and some go to sleep mid-afternoon. *Warning* severity, no notification, and a trigger with a separate recovery: problem with `max(/CMD-01/icmpping,#5)=0` and recovery with `min(/CMD-01/icmpping,#3)=1`, so it does not open and close every minute.
+6. **Closing**: cause (shared power strip), action (switch on the UPS) and improvement (dependencies in the other venues).
+
+## Next steps
+
+- The **ICG and HIOPOS** guide has the inventory of tills and printers that feeds Zabbix.
+- The network you are watching here, with its VLANs and 4G backup, is in the **MikroTik and TP-Link: network and WiFi for a restaurant or hotel** guide.
+- The morning check before service (tills, handhelds, kitchen printers and the backup line) is the idea behind the **34-venue-service-readiness** repository on my GitHub.
+""")
+
+g(slug="mikrotik-y-tp-link-omada-red-y-wifi-de-un-restaurante-u-hotel", topic="mikrotik-tplink", date="2026-10-30",
+  title_es="MikroTik y TP-Link Omada: la red y la WiFi de un restaurante o un hotel, con VLAN, WiFi de clientes y 4G de respaldo",
+  title_en="MikroTik and TP-Link Omada: the network and WiFi of a restaurant or hotel, with VLANs, guest WiFi and 4G backup",
+  seo_title_en="MikroTik and Omada: restaurant and hotel WiFi · Iñigo González",
+  seo_title_es="MikroTik y Omada: red y WiFi de hostelería · Iñigo González",
+  dek_es="La red de un restaurante o un hotel pequeño con un router MikroTik y TP-Link Omada: VLAN para TPV, pagos, personal, IoT y clientes, WiFi de clientes con portal, aislamiento y límites, fibra con 4G de respaldo, el cortafuegos mínimo, copias, firmware y la WiFi lentísima en mitad de una boda.",
+  dek_en="The network of a restaurant or small hotel with a MikroTik router and TP-Link Omada: VLANs for POS, payments, staff, IoT and guests, guest WiFi with a portal, isolation and limits, fibre with 4G backup, the minimum firewall, backups, firmware and the painfully slow WiFi in the middle of a wedding.",
+  es="""
+## Qué vas a conseguir
+
+Una red de local en la que cada cosa va por su sitio: TPV, datáfonos, personal, cámaras y clientes en redes separadas, con la fibra respaldada por 4G, un cortafuegos que se entiende de un vistazo y la configuración guardada fuera del router. Y saber qué mirar cuando un salón lleno dice que la WiFi no va.
+
+## Antes de empezar
+
+- Un router **MikroTik** con **RouterOS 7** y una salida 4G: un router 4G en un puerto propio o un MikroTik con módem LTE integrado.
+- Switches y puntos de acceso **TP-Link Omada** con su controlador: software, hardware (OC200 u OC300) o en la nube. Las rutas de menú de esta guía son las del controlador 6.
+- El **plan de VLAN** de la guía de hotel en pre-apertura. Aquí se usan las mismas: 10 gestión, 20 personal, 30 TPV, 40 datáfonos, 70 IoT y 100 clientes.
+
+## 1. Las VLAN: una red por uso
+
+| VLAN | Uso | Subred | Puede llegar a |
+|---|---|---|---|
+| 10 | Gestión de red | 10.40.10.0/24 | Todos los equipos de red; solo IT |
+| 20 | Personal y oficina | 10.40.20.0/24 | Internet, impresoras de oficina |
+| 30 | TPV, comanderos, impresoras de cocina | 10.40.30.0/24 | Internet (integrador y nube del TPV) |
+| 40 | Datáfonos | 10.40.40.0/24 | Solo internet, hacia el proveedor de pagos |
+| 70 | IoT: cámaras, climatización, música | 10.40.70.0/24 | Internet; mejor, solo la nube de cada fabricante |
+| 100 | WiFi de clientes | 10.40.100.0/22 | Solo internet |
+
+En el MikroTik, un bridge con filtrado de VLAN y una interfaz con su IP por cada red. El puerto `ether5` es el troncal hacia el switch Omada:
+
+:::term RouterOS · terminal (Winbox › New Terminal)
+$ /interface bridge add name=bridge1 vlan-filtering=no
+$ /interface bridge port add bridge=bridge1 interface=ether5
+$ /interface bridge vlan add bridge=bridge1 tagged=bridge1,ether5 vlan-ids=10,20,30,40,70,100
+$ /interface vlan add interface=bridge1 name=vlan30-tpv vlan-id=30
+$ /ip address add address=10.40.30.1/24 interface=vlan30-tpv
+# lo mismo para 10, 20, 40, 70 y 100; después el DHCP de cada una
+$ /interface bridge set bridge1 vlan-filtering=yes
+:::
+
+! Activar `vlan-filtering` puede dejarte fuera. Hazlo con **Safe Mode** (Ctrl+X en el terminal): si se corta la sesión, el router deshace los cambios.
+
+En el controlador Omada, sin gateway Omada, cada red se crea **solo como VLAN** (el DHCP lo da el MikroTik), y perfiles de puerto: troncal hacia cada punto de acceso, la 30 sin etiquetar para un TPV y la 40 para un datáfono.
+
+## 2. La WiFi de clientes: portal, aislamiento y límites
+
+Tres SSID bastan; cada uno de más consume tiempo de aire con sus balizas:
+
+- **Brisa-Staff** en la VLAN 20, WPA2/WPA3 con clave que se cambia cuando alguien deja la empresa.
+- **Brisa-TPV** en la VLAN 30, para los comanderos, con clave que solo conoce IT.
+- **Brisa-Clientes** en la VLAN 100, con portal.
+
+:::ui Omada · Network Config › WLAN › Brisa-Clientes
+= Security: WPA2/WPA3-Personal (o abierta con portal, según la política del local)
+[x] Guest Network
+> Advanced Settings
+= VLAN: 100
+= Client Rate Limit: perfil Clientes · bajada 10 Mbps · subida 3 Mbps
+[Apply]
+:::
+
+- **Guest Network** aísla a los clientes de la red interna: navegan, pero no ven los TPV ni a otros clientes.
+- El portal está en **Network Config › Authentication › Portal**: sin autenticación con aceptación de condiciones, contraseña simple o vales (*voucher*) para el hotel. Pon un **Authentication Timeout** razonable (un día) para no pedir el portal en cada comida.
+- Sin gateway Omada, el portal funciona para los clientes inalámbricos. Elige **un** portal: el de Omada o el *Hotspot* del MikroTik, no los dos.
+- El límite por cliente lo pone Omada; el **total** de la red de clientes, el MikroTik, para que siempre quede ancho de banda para el TPV:
+
+:::term RouterOS · límite total de la WiFi de clientes
+$ /queue simple add name=clientes target=10.40.100.0/22 max-limit=40M/150M
+$ /ip dhcp-server set dhcp-clientes lease-time=2h
+:::
+
+`max-limit` es subida/bajada para todos los clientes juntos. Una /22 con concesiones de dos horas evita que un salón lleno agote las direcciones.
+
+## 3. Doble WAN: fibra y 4G
+
+Rutas recursivas: el router comprueba con un ping a un destino de internet que la fibra **llega**, no solo que el cable tiene luz.
+
+:::term RouterOS · fibra principal, 4G de respaldo
+$ /ip route add dst-address=1.0.0.1/32 gateway=203.0.113.1 scope=10 comment="sonda fibra"
+$ /ip route add dst-address=0.0.0.0/0 gateway=1.0.0.1 target-scope=11 check-gateway=ping distance=1 comment="fibra"
+$ /ip route add dst-address=0.0.0.0/0 gateway=192.168.8.1 distance=2 comment="4G"
+$ /ip firewall nat add chain=srcnat out-interface-list=WAN action=masquerade
+$ /tool netwatch add host=1.0.0.1 type=icmp interval=30s down-script=":log warning \\"fibra caida: trafico por 4G\\""
+:::
+
+- La IP de la sonda **siempre** sale por la fibra. No uses la misma que los servidores DNS del router: con la fibra caída, el router se quedaría sin DNS.
+- El 4G tiene datos limitados. Con la fibra caída, los datáfonos y el TPV sí; los clientes, no:
+
+:::term RouterOS · sin clientes por el 4G
+$ /ip firewall filter add chain=forward src-address=10.40.100.0/22 out-interface=ether2-4g action=drop comment="sin clientes por 4G" place-before=0
+:::
+
+- Prueba el respaldo de verdad una vez al mes: desconecta la fibra, cobra con tarjeta, imprime en cocina y vuelve a conectarla.
+
+## 4. El cortafuegos mínimo
+
+Parte de la configuración por defecto de RouterOS 7, que ya protege la entrada, y añade el reenvío entre redes:
+
+:::term RouterOS · reenvío entre VLAN (en este orden)
+$ /ip firewall filter add chain=forward connection-state=established,related action=accept
+$ /ip firewall filter add chain=forward connection-state=invalid action=drop
+$ /ip firewall filter add chain=forward in-interface-list=LAN-INTERNA out-interface-list=WAN action=accept
+$ /ip firewall filter add chain=forward in-interface=vlan100-clientes out-interface-list=WAN action=accept
+$ /ip firewall filter add chain=forward in-interface=vlan10-gestion action=accept comment="IT a todo"
+$ /ip firewall filter add chain=forward action=drop comment="entre VLAN, nada mas"
+:::
+
+- `LAN-INTERNA` es una lista de interfaces (**Interfaces › Interface List**) con las VLAN 20, 30, 40 y 70. Lo que no está permitido está prohibido: una regla nueva para el CashDro o el PMS se añade, con comentario, antes de la última.
+- La gestión del router, solo desde la VLAN 10: `/ip service set winbox address=10.40.10.0/24`, lo mismo para `ssh`, y `/ip service disable telnet,ftp,www,api` si no los usas.
+
+## 5. Copias de configuración y firmware
+
+:::term RouterOS · copia antes de cada cambio
+$ /export file=rtr-brisa-2026-10-30
+$ /system backup save name=rtr-brisa-2026-10-30 password=********
+$ /system scheduler add name=export-semanal interval=7d on-event="/export file=auto-export"
+:::
+
+- `/export` es texto y sirve para comparar versiones (oculta las claves salvo con `show-sensitive`); `/system backup` es binario, cifrado y solo para el mismo equipo.
+- Las dos copias **salen del router** (Winbox › Files o SFTP) y se guardan con el resto de la documentación del local.
+- En Omada, la copia del controlador, que incluye todos los sitios, y la copia automática programada. Sin ella, cambiar el controlador obliga a adoptar de nuevo cada equipo.
+- **Firmware**: RouterOS en el canal *stable* o *long-term* (`/system package update install`) y después `/system routerboard upgrade` con otro reinicio. En Omada, primero un punto de acceso y luego el resto, con un firmware compatible con la versión del controlador.
+
+## 6. El ticket: "la WiFi va lentísima en la boda"
+
+Sábado, 21:15. Boda de 220 invitados en el salón del hotel. Los invitados se quejan de la WiFi y, peor, los camareros dicen que los comanderos tardan en enviar comandas.
+
+1. **¿Es la WiFi o internet?** `/interface monitor-traffic ether1` muestra la fibra saturada de subida. `/tool torch interface=vlan100-clientes` lo explica: un equipo de la red de clientes sube a 80 Mbps, todo el vídeo de la boda a la nube.
+2. **¿Por qué no lo frenó la cola?** `/queue simple print stats` da la cola `clientes` casi a cero. Las conexiones van por **FastTrack**, y lo que va por FastTrack se salta las colas simples. Se excluye la red de clientes de la regla: `/ip firewall filter set [find action=fasttrack-connection] src-address=!10.40.100.0/22 dst-address=!10.40.100.0/22`. A los dos minutos la cola limita y la subida baja a 40 Mbps.
+3. **Descartar lo demás**: `/ip dhcp-server lease print count-only where server=dhcp-clientes` da 612 de 1.019 direcciones: no es el DHCP. En Omada, los dos puntos de acceso del salón tienen 140 clientes cada uno y el canal de 2,4 GHz muy ocupado.
+4. **Los comanderos** comparten tiempo de aire con los invitados. Esta noche, se baja el límite por cliente. Para la próxima: más puntos de acceso en el salón, clientes solo en 5 GHz en los eventos y canales de 20 o 40 MHz.
+5. **El cierre**: causa (FastTrack saltándose la cola), solución (regla corregida en todos los locales) y, para eventos, pedir al organizador el número de invitados una semana antes.
+
+> La subida es lo que se satura primero en un evento: cuando está llena, hasta la bajada se resiente.
+
+## Siguientes pasos
+
+- La guía de **hotel en pre-apertura** tiene el plan completo de VLAN de un hotel y los proveedores de cada una.
+- La de **Zabbix: monitorizar un restaurante o un hotel** vigila este router, sus dos salidas a internet y los switches.
+- La de **Cisco: switches y routers** del Nivel 4 explica las VLAN y los troncales con más detalle.
+- Comprobar cada mañana la línea de respaldo, con los TPV y las impresoras, es parte de la idea del repositorio **34-venue-service-readiness** de mi GitHub; la red de un hotel antes de abrir, de **24-hospitality-it-preopening**.
+""",
+  en="""
+## What you'll get
+
+A venue network where everything goes in its place: POS, card terminals, staff, cameras and guests on separate networks, with the fibre backed up by 4G, a firewall you can read at a glance and the configuration stored outside the router. And knowing what to look at when a full function room says the WiFi does not work.
+
+## Before you start
+
+- A **MikroTik** router running **RouterOS 7** and a 4G connection: a 4G router on its own port or a MikroTik with a built-in LTE modem.
+- **TP-Link Omada** switches and access points with their controller: software, hardware (OC200 or OC300) or cloud. The menu paths in this guide are those of controller 6.
+- The **VLAN plan** from the hotel pre-opening guide. The same ones are used here: 10 management, 20 staff, 30 POS, 40 card terminals, 70 IoT and 100 guests.
+
+## 1. VLANs: one network per use
+
+| VLAN | Use | Subnet | Can reach |
+|---|---|---|---|
+| 10 | Network management | 10.40.10.0/24 | All network devices; IT only |
+| 20 | Staff and office | 10.40.20.0/24 | Internet, office printers |
+| 30 | POS, handhelds, kitchen printers | 10.40.30.0/24 | Internet (integrator and POS cloud) |
+| 40 | Card terminals | 10.40.40.0/24 | Internet only, towards the payment provider |
+| 70 | IoT: cameras, air conditioning, music | 10.40.70.0/24 | Internet; better, only each vendor's cloud |
+| 100 | Guest WiFi | 10.40.100.0/22 | Internet only |
+
+On the MikroTik, a bridge with VLAN filtering and one interface with its IP per network. Port `ether5` is the trunk to the Omada switch:
+
+:::term RouterOS · terminal (Winbox › New Terminal)
+$ /interface bridge add name=bridge1 vlan-filtering=no
+$ /interface bridge port add bridge=bridge1 interface=ether5
+$ /interface bridge vlan add bridge=bridge1 tagged=bridge1,ether5 vlan-ids=10,20,30,40,70,100
+$ /interface vlan add interface=bridge1 name=vlan30-tpv vlan-id=30
+$ /ip address add address=10.40.30.1/24 interface=vlan30-tpv
+# the same for 10, 20, 40, 70 and 100; then each one's DHCP
+$ /interface bridge set bridge1 vlan-filtering=yes
+:::
+
+! Turning on `vlan-filtering` can lock you out. Do it with **Safe Mode** on (Ctrl+X in the terminal): if the session drops, the router undoes the changes.
+
+In the Omada controller, without an Omada gateway, each network is created **as a VLAN only** (the MikroTik provides DHCP), plus port profiles: a trunk to each access point, 30 untagged for a till and 40 for a card terminal.
+
+## 2. Guest WiFi: portal, isolation and limits
+
+Three SSIDs are enough; every extra one uses airtime with its beacons:
+
+- **Brisa-Staff** on VLAN 20, WPA2/WPA3 with a key that is changed when someone leaves the company.
+- **Brisa-POS** on VLAN 30, for the handhelds, with a key only IT knows.
+- **Brisa-Guests** on VLAN 100, with a portal.
+
+:::ui Omada · Network Config › WLAN › Brisa-Guests
+= Security: WPA2/WPA3-Personal (or open with a portal, depending on the venue's policy)
+[x] Guest Network
+> Advanced Settings
+= VLAN: 100
+= Client Rate Limit: Guests profile · download 10 Mbps · upload 3 Mbps
+[Apply]
+:::
+
+- **Guest Network** isolates guests from the internal network: they can browse, but they cannot see the tills or other guests.
+- The portal is in **Network Config › Authentication › Portal**: no authentication with terms acceptance, simple password or vouchers for the hotel. Set a sensible **Authentication Timeout** (one day) so the portal does not appear at every meal.
+- Without an Omada gateway, the portal works for wireless clients. Choose **one** portal: Omada's or the MikroTik *Hotspot*, not both.
+- Omada sets the per-client limit; the MikroTik sets the **total** for the guest network, so there is always bandwidth left for the POS:
+
+:::term RouterOS · total limit for guest WiFi
+$ /queue simple add name=guests target=10.40.100.0/22 max-limit=40M/150M
+$ /ip dhcp-server set dhcp-guests lease-time=2h
+:::
+
+`max-limit` is upload/download for all guests together. A /22 with two-hour leases stops a full function room from running out of addresses.
+
+## 3. Dual WAN: fibre and 4G
+
+Recursive routes: the router checks with a ping to an internet destination that the fibre **gets through**, not just that the cable has link.
+
+:::term RouterOS · main fibre, 4G backup
+$ /ip route add dst-address=1.0.0.1/32 gateway=203.0.113.1 scope=10 comment="fibre probe"
+$ /ip route add dst-address=0.0.0.0/0 gateway=1.0.0.1 target-scope=11 check-gateway=ping distance=1 comment="fibre"
+$ /ip route add dst-address=0.0.0.0/0 gateway=192.168.8.1 distance=2 comment="4G"
+$ /ip firewall nat add chain=srcnat out-interface-list=WAN action=masquerade
+$ /tool netwatch add host=1.0.0.1 type=icmp interval=30s down-script=":log warning \\"fibre down: traffic on 4G\\""
+:::
+
+- The probe IP **always** goes out through the fibre. Do not use the same one as the router's DNS servers: with the fibre down, the router would be left without DNS.
+- 4G has a data allowance. With the fibre down, card terminals and the POS yes; guests, no:
+
+:::term RouterOS · no guests over 4G
+$ /ip firewall filter add chain=forward src-address=10.40.100.0/22 out-interface=ether2-4g action=drop comment="no guests over 4G" place-before=0
+:::
+
+- Test the backup for real once a month: unplug the fibre, take a card payment, print in the kitchen and plug it back in.
+
+## 4. The minimum firewall
+
+Start from the RouterOS 7 default configuration, which already protects input, and add forwarding between networks:
+
+:::term RouterOS · forwarding between VLANs (in this order)
+$ /ip firewall filter add chain=forward connection-state=established,related action=accept
+$ /ip firewall filter add chain=forward connection-state=invalid action=drop
+$ /ip firewall filter add chain=forward in-interface-list=LAN-INTERNAL out-interface-list=WAN action=accept
+$ /ip firewall filter add chain=forward in-interface=vlan100-guests out-interface-list=WAN action=accept
+$ /ip firewall filter add chain=forward in-interface=vlan10-mgmt action=accept comment="IT to everything"
+$ /ip firewall filter add chain=forward action=drop comment="between VLANs, nothing else"
+:::
+
+- `LAN-INTERNAL` is an interface list (**Interfaces › Interface List**) with VLANs 20, 30, 40 and 70. What is not allowed is forbidden: a new rule for the CashDro or the PMS is added, with a comment, before the last one.
+- Router management only from VLAN 10: `/ip service set winbox address=10.40.10.0/24`, the same for `ssh`, and `/ip service disable telnet,ftp,www,api` if you do not use them.
+
+## 5. Configuration backups and firmware
+
+:::term RouterOS · backup before every change
+$ /export file=rtr-brisa-2026-10-30
+$ /system backup save name=rtr-brisa-2026-10-30 password=********
+$ /system scheduler add name=weekly-export interval=7d on-event="/export file=auto-export"
+:::
+
+- `/export` is text and good for comparing versions (it hides secrets unless you add `show-sensitive`); `/system backup` is binary, encrypted and only for the same device.
+- Both copies **leave the router** (Winbox › Files or SFTP) and are kept with the rest of the venue's documentation.
+- In Omada, the controller backup, which includes every site, and the scheduled automatic backup. Without it, replacing the controller means adopting every device again.
+- **Firmware**: RouterOS on the *stable* or *long-term* channel (`/system package update install`) and then `/system routerboard upgrade` with another reboot. In Omada, one access point first and then the rest, with firmware compatible with the controller version.
+
+## 6. The ticket: "the WiFi is painfully slow at the wedding"
+
+Saturday, 21:15. A wedding for 220 guests in the hotel's function room. The guests complain about the WiFi and, worse, the waiters say the handhelds are slow to send orders.
+
+1. **Is it the WiFi or the internet?** `/interface monitor-traffic ether1` shows the fibre's upload saturated. `/tool torch interface=vlan100-guests` explains it: one device on the guest network is uploading at 80 Mbps, the whole wedding video going to the cloud.
+2. **Why didn't the queue stop it?** `/queue simple print stats` shows the `guests` queue at almost zero. The connections go through **FastTrack**, and FastTracked traffic skips simple queues. The guest network is excluded from the rule: `/ip firewall filter set [find action=fasttrack-connection] src-address=!10.40.100.0/22 dst-address=!10.40.100.0/22`. Two minutes later the queue is limiting and the upload drops to 40 Mbps.
+3. **Rule out the rest**: `/ip dhcp-server lease print count-only where server=dhcp-guests` gives 612 of 1,019 addresses: it is not DHCP. In Omada, the room's two access points have 140 clients each and the 2.4 GHz channel is very busy.
+4. **The handhelds** share airtime with the guests. Tonight, the per-client limit is lowered. Next time: more access points in the room, guests on 5 GHz only at events and 20 or 40 MHz channels.
+5. **Closing**: cause (FastTrack skipping the queue), fix (rule corrected in every venue) and, for events, ask the organiser for the guest count a week before.
+
+> Upload is what saturates first at an event: when it is full, even download suffers.
+
+## Next steps
+
+- The **hotel pre-opening** guide has a hotel's full VLAN plan and the vendors behind each one.
+- The **Zabbix: monitoring a restaurant or hotel** guide watches this router, its two internet links and the switches.
+- The Level 4 **Cisco switches and routers** guide explains VLANs and trunks in more detail.
+- Checking the backup line every morning, with the tills and printers, is part of the idea behind the **34-venue-service-readiness** repository on my GitHub; a hotel's network before opening, of **24-hospitality-it-preopening**.
+""")
+
+g(slug="nginx-y-apache-proxy-inverso-tls-cabeceras-timeouts-y-un-502-bad-gateway", topic="nginx-apache", date="2026-10-30",
+  title_es="Nginx y Apache: publicar una aplicación interna como proxy inverso, con TLS, cabeceras, timeouts y un 502 Bad Gateway",
+  title_en="Nginx and Apache: publishing an internal app as a reverse proxy, with TLS, headers, timeouts and a 502 Bad Gateway",
+  seo_title_en="Nginx and Apache: reverse proxy, TLS and 502s · Iñigo González",
+  seo_title_es="Nginx y Apache: proxy inverso, TLS y el 502 · Iñigo González",
+  dek_es="Virtual hosts y server blocks, TLS con un certificado corporativo o de Let's Encrypt, proxy_pass y ProxyPass con sus cabeceras, timeouts, logs con el tiempo del backend, nginx -t y apachectl configtest, reload o restart, y un 502 y un 504 de principio a fin, SELinux incluido.",
+  dek_en="Virtual hosts and server blocks, TLS with a corporate or Let's Encrypt certificate, proxy_pass and ProxyPass with their headers, timeouts, logs with the backend's time, nginx -t and apachectl configtest, reload or restart, and a 502 and a 504 end to end, SELinux included.",
+  es="""
+## Qué vas a conseguir
+
+Publicar una aplicación interna (la de fichajes, en `127.0.0.1:8080`) detrás de Nginx o Apache: con su nombre, HTTPS, las cabeceras que la aplicación necesita, timeouts pensados y logs que dicen cuánto tardó el backend. Y, cuando aparezca el **502 Bad Gateway**, saber en cinco minutos si es la aplicación, SELinux o un timeout.
+
+## Antes de empezar
+
+- Un servidor **RHEL 9** (o Ubuntu) con Nginx **o** Apache: uno de los dos en el 443, no ambos.
+- Dónde está cada cosa: Nginx en `/etc/nginx/conf.d/*.conf` y logs en `/var/log/nginx/`. Apache en RHEL en `/etc/httpd/conf.d/` con logs en `/var/log/httpd/`; en Debian y Ubuntu en `/etc/apache2/sites-available/`, que se activa con `a2ensite`, y logs en `/var/log/apache2/`.
+- El nombre en DNS: `fichajes.corp.example` apuntando al servidor.
+- El certificado: de la **CA corporativa** (certificado, cadena intermedia y clave) para nombres internos, o de **Let's Encrypt** si el nombre es público.
+
+## 1. Un sitio por nombre: server blocks y virtual hosts
+
+Nginx elige el bloque `server` por `server_name`; Apache, el `VirtualHost` por `ServerName`. El puerto 80 solo redirige:
+
+:::term /etc/nginx/conf.d/fichajes.conf
+server {
+    listen 80;
+    server_name fichajes.corp.example;
+    return 301 https://$host$request_uri;
+}
+server {
+    listen 443 ssl;
+    server_name fichajes.corp.example;
+    ssl_certificate     /etc/pki/tls/certs/fichajes-fullchain.pem;
+    ssl_certificate_key /etc/pki/tls/private/fichajes.key;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    access_log /var/log/nginx/fichajes.access.log upstream;
+    error_log  /var/log/nginx/fichajes.error.log;
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        include /etc/nginx/proxy-headers.conf;
+    }
+}
+:::
+
+:::term /etc/httpd/conf.d/fichajes.conf
+<VirtualHost *:80>
+    ServerName fichajes.corp.example
+    Redirect permanent / https://fichajes.corp.example/
+</VirtualHost>
+<VirtualHost *:443>
+    ServerName fichajes.corp.example
+    SSLEngine on
+    SSLCertificateFile    /etc/pki/tls/certs/fichajes-fullchain.pem
+    SSLCertificateKeyFile /etc/pki/tls/private/fichajes.key
+    ProxyPreserveHost On
+    ProxyPass        / http://127.0.0.1:8080/ connectiontimeout=5 timeout=60
+    ProxyPassReverse / http://127.0.0.1:8080/
+    RequestHeader set X-Forwarded-Proto "https"
+    ErrorLog  /var/log/httpd/fichajes_error.log
+    CustomLog /var/log/httpd/fichajes_access.log proxy
+</VirtualHost>
+:::
+
+- Un nombre que no coincide con ningún sitio cae en el **sitio por defecto**: `default_server` en Nginx, el primer `VirtualHost` del puerto en Apache. `apachectl -S` los lista.
+- El formato `upstream` del log de acceso y el `proxy` de Apache se definen en el apartado 5: sin ellos, el test de configuración falla.
+
+## 2. TLS: certificado corporativo o Let's Encrypt
+
+- El fichero del certificado lleva **primero el del servidor y después los intermedios**. Sin el intermedio, el navegador de IT, que lo tiene en caché, funciona; el móvil de un usuario, no.
+- En Apache 2.4.8 y posteriores, `SSLCertificateFile` admite la cadena completa; `SSLCertificateChainFile` está obsoleto.
+- La clave privada con permisos `600`. En RHEL, Apache necesita `mod_ssl`.
+- **Let's Encrypt** con certbot: `certbot --nginx -d fichajes.example.com` (o `--apache`) emite, configura y deja programada la renovación. Hoy los certificados duran 90 días y Let's Encrypt ya ha anunciado que irán siendo más cortos: la renovación tiene que ser automática, nunca manual. Comprueba que funciona con `certbot renew --dry-run`.
+
+:::term Bash · qué certificado entrega el servidor
+$ openssl s_client -connect fichajes.corp.example:443 -servername fichajes.corp.example </dev/null 2>/dev/null | openssl x509 -noout -subject -issuer -enddate
+subject=CN = fichajes.corp.example
+issuer=CN = Contoso Issuing CA 01
+notAfter=Sep 14 23:59:59 2027 GMT
+:::
+
+Sin `-servername` (SNI) verás el certificado del sitio por defecto.
+
+## 3. El proxy inverso: las cabeceras
+
+La aplicación ve todas las peticiones llegar desde `127.0.0.1`. Para saber el nombre que pidió el usuario, su IP y que venía por HTTPS, el proxy se lo dice en cabeceras:
+
+:::term /etc/nginx/proxy-headers.conf
+proxy_set_header Host              $host;
+proxy_set_header X-Real-IP         $remote_addr;
+proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-Proto $scheme;
+proxy_http_version 1.1;
+:::
+
+- Sin `Host` y `X-Forwarded-Proto`, la aplicación redirige a `http://127.0.0.1:8080/login` y el usuario acaba en una página que no carga. En Apache, `ProxyPreserveHost On` pasa el `Host`, `ProxyPassReverse` reescribe las redirecciones y `mod_proxy` añade `X-Forwarded-For` por su cuenta.
+
+## 4. Timeouts
+
+| Qué controla | Nginx (por defecto) | Apache (por defecto) |
+|---|---|---|
+| Conectar con el backend | `proxy_connect_timeout` (60 s) | `connectiontimeout=` en `ProxyPass` |
+| Esperar la respuesta | `proxy_read_timeout` (60 s) | `timeout=` en `ProxyPass`, o `ProxyTimeout`; si no, `Timeout` (60 s) |
+| Tamaño máximo de una subida | `client_max_body_size` (1 MB) | `LimitRequestBody` |
+
+- La conexión, corta (5 segundos): si el backend no acepta en ese tiempo, no lo va a hacer. La lectura, la que necesite la página más lenta **de verdad**, y solo en la `location` de esa página, no en todo el sitio.
+- Un fichero de más de 1 MB en Nginx devuelve **413** antes de llegar a la aplicación.
+
+## 5. Logs que sirven
+
+El log de acceso por defecto no dice cuánto tardó el backend. Añádelo en `/etc/nginx/nginx.conf`, dentro de `http`:
+
+:::term nginx.conf · formato con el tiempo del backend
+log_format upstream '$remote_addr [$time_local] "$request" $status $body_bytes_sent '
+                    'rt=$request_time uct=$upstream_connect_time urt=$upstream_response_time '
+                    'us=$upstream_status ua=$upstream_addr';
+:::
+
+- `rt` es el tiempo total y `urt` el del backend: si `rt` es alto y `urt` bajo, el lento es el cliente o la red, no la aplicación. `us=-` indica que la petición ni siquiera llegó al backend.
+- En Apache, `%D` (microsegundos) da el tiempo total: `LogFormat "%h %t \\"%r\\" %>s %b %D" proxy`.
+- El log de errores (`error_log`, `ErrorLog`) es donde aparece la causa de un 502. Es lo primero que se abre.
+
+## 6. Probar y aplicar: configtest, reload o restart
+
+:::term Bash · antes de aplicar un cambio
+$ sudo nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+$ sudo systemctl reload nginx
+$ sudo apachectl configtest
+Syntax OK
+$ sudo systemctl reload httpd
+:::
+
+- **Siempre** el test antes. `nginx -T` vuelca la configuración completa con todos los `include`.
+- **reload** relee la configuración sin cortar: Nginx arranca procesos nuevos y deja terminar a los viejos; en Apache es un reinicio *graceful*. Si la configuración nueva tiene un error, Nginx sigue con la anterior.
+- **restart** para y arranca: corta las conexiones abiertas. Solo cuando el proceso no responde o tras una actualización del paquete.
+
+## 7. El ticket: "la aplicación de fichajes da 502 Bad Gateway"
+
+Lunes, 9:02. Toda la plantilla ficha a la vez y la página devuelve **502 Bad Gateway**. Un 502 lo genera el proxy: Nginx funciona, lo que falla es la conexión con el backend. El log de errores dice cuál de los casos es:
+
+:::term Bash · fichajes.error.log
+$ sudo tail -n 3 /var/log/nginx/fichajes.error.log
+2026/10/26 09:02:11 [error] 2211#2211: *8812 connect() failed (111: Connection refused) while connecting to upstream, client: 10.20.4.37, server: fichajes.corp.example, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/"
+$ ss -ltnp | grep 8080
+$ systemctl status fichajes --no-pager
+Active: failed (Result: oom-kill) since Mon 2026-10-26 08:58:40 CET
+:::
+
+1. **`111: Connection refused`**: nadie escucha en el 8080. `ss` no devuelve nada y el servicio de la aplicación ha muerto por falta de memoria. Se arranca, se confirma que responde (`curl -I http://127.0.0.1:8080/`) y se abre un ticket con el equipo de la aplicación con la hora del `oom-kill`.
+2. **`13: Permission denied` while connecting to upstream**, en un RHEL recién montado y con el backend escuchando: es **SELinux**. `ausearch -m avc -ts recent` muestra el `denied { name_connect }` de `nginx` (o `httpd`). La solución es `setsebool -P httpd_can_network_connect 1`, no `setenforce 0`. En Apache aparece como `(13)Permission denied: AH00957`.
+3. **504 Gateway Time-out**, solo en el informe mensual: `upstream timed out (110: Connection timed out) while reading response header from upstream` y `urt=60.001`. El backend tarda más que `proxy_read_timeout`: se sube a 300 s solo en `location /informes/` y se pide que el informe sea asíncrono. En Apache es `AH01102: error reading status line from remote server`.
+
+> Antes de tocar el proxy, `curl -I http://127.0.0.1:8080/` desde el propio servidor. Si el backend no responde ahí, el proxy no tiene nada que arreglar.
+
+## Siguientes pasos
+
+- La guía de **Red Hat Enterprise Linux** del Nivel 2 explica los servicios, el cortafuegos y SELinux que aparecen en el ticket.
+- La de **Docker** cubre las aplicaciones en contenedores que suelen estar detrás de este proxy.
+- La de **IIS** es la versión Windows de todo esto: sitios, enlaces, certificados y el 503.
+- Vigilar desde fuera que el certificado no caduca y que el sitio responde es lo que hacen las sondas TLS y HTTP del repositorio **08-edge-health-slo-monitor** de mi GitHub.
+""",
+  en="""
+## What you'll get
+
+Publishing an internal app (the timesheets one, on `127.0.0.1:8080`) behind Nginx or Apache: with its own name, HTTPS, the headers the app needs, sensible timeouts and logs that say how long the backend took. And, when the **502 Bad Gateway** shows up, knowing within five minutes whether it is the app, SELinux or a timeout.
+
+## Before you start
+
+- A **RHEL 9** (or Ubuntu) server with Nginx **or** Apache: one of them on 443, not both.
+- Where everything lives: Nginx in `/etc/nginx/conf.d/*.conf` with logs in `/var/log/nginx/`. Apache on RHEL in `/etc/httpd/conf.d/` with logs in `/var/log/httpd/`; on Debian and Ubuntu in `/etc/apache2/sites-available/`, enabled with `a2ensite`, and logs in `/var/log/apache2/`.
+- The DNS name: `fichajes.corp.example` pointing at the server.
+- The certificate: from the **corporate CA** (certificate, intermediate chain and key) for internal names, or from **Let's Encrypt** if the name is public.
+
+## 1. One site per name: server blocks and virtual hosts
+
+Nginx picks the `server` block by `server_name`; Apache picks the `VirtualHost` by `ServerName`. Port 80 only redirects:
+
+:::term /etc/nginx/conf.d/fichajes.conf
+server {
+    listen 80;
+    server_name fichajes.corp.example;
+    return 301 https://$host$request_uri;
+}
+server {
+    listen 443 ssl;
+    server_name fichajes.corp.example;
+    ssl_certificate     /etc/pki/tls/certs/fichajes-fullchain.pem;
+    ssl_certificate_key /etc/pki/tls/private/fichajes.key;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    access_log /var/log/nginx/fichajes.access.log upstream;
+    error_log  /var/log/nginx/fichajes.error.log;
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        include /etc/nginx/proxy-headers.conf;
+    }
+}
+:::
+
+:::term /etc/httpd/conf.d/fichajes.conf
+<VirtualHost *:80>
+    ServerName fichajes.corp.example
+    Redirect permanent / https://fichajes.corp.example/
+</VirtualHost>
+<VirtualHost *:443>
+    ServerName fichajes.corp.example
+    SSLEngine on
+    SSLCertificateFile    /etc/pki/tls/certs/fichajes-fullchain.pem
+    SSLCertificateKeyFile /etc/pki/tls/private/fichajes.key
+    ProxyPreserveHost On
+    ProxyPass        / http://127.0.0.1:8080/ connectiontimeout=5 timeout=60
+    ProxyPassReverse / http://127.0.0.1:8080/
+    RequestHeader set X-Forwarded-Proto "https"
+    ErrorLog  /var/log/httpd/fichajes_error.log
+    CustomLog /var/log/httpd/fichajes_access.log proxy
+</VirtualHost>
+:::
+
+- A name that matches no site lands on the **default site**: `default_server` in Nginx, the first `VirtualHost` on the port in Apache. `apachectl -S` lists them.
+- The `upstream` access log format and Apache's `proxy` format are defined in section 5: without them, the configuration test fails.
+
+## 2. TLS: corporate certificate or Let's Encrypt
+
+- The certificate file holds **the server's certificate first and then the intermediates**. Without the intermediate, IT's browser, which has it cached, works; a user's phone does not.
+- In Apache 2.4.8 and later, `SSLCertificateFile` accepts the full chain; `SSLCertificateChainFile` is obsolete.
+- The private key with `600` permissions. On RHEL, Apache needs `mod_ssl`.
+- **Let's Encrypt** with certbot: `certbot --nginx -d fichajes.example.com` (or `--apache`) issues, configures and schedules renewal. Today certificates last 90 days and Let's Encrypt has already announced they will get shorter: renewal must be automatic, never manual. Check it works with `certbot renew --dry-run`.
+
+:::term Bash · which certificate the server presents
+$ openssl s_client -connect fichajes.corp.example:443 -servername fichajes.corp.example </dev/null 2>/dev/null | openssl x509 -noout -subject -issuer -enddate
+subject=CN = fichajes.corp.example
+issuer=CN = Contoso Issuing CA 01
+notAfter=Sep 14 23:59:59 2027 GMT
+:::
+
+Without `-servername` (SNI) you see the default site's certificate.
+
+## 3. The reverse proxy: headers
+
+The app sees every request arriving from `127.0.0.1`. To know the name the user asked for, their IP and that they came in over HTTPS, the proxy tells it in headers:
+
+:::term /etc/nginx/proxy-headers.conf
+proxy_set_header Host              $host;
+proxy_set_header X-Real-IP         $remote_addr;
+proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-Proto $scheme;
+proxy_http_version 1.1;
+:::
+
+- Without `Host` and `X-Forwarded-Proto`, the app redirects to `http://127.0.0.1:8080/login` and the user ends up on a page that does not load. In Apache, `ProxyPreserveHost On` passes the `Host`, `ProxyPassReverse` rewrites redirects and `mod_proxy` adds `X-Forwarded-For` on its own.
+
+## 4. Timeouts
+
+| What it controls | Nginx (default) | Apache (default) |
+|---|---|---|
+| Connecting to the backend | `proxy_connect_timeout` (60 s) | `connectiontimeout=` on `ProxyPass` |
+| Waiting for the response | `proxy_read_timeout` (60 s) | `timeout=` on `ProxyPass`, or `ProxyTimeout`; otherwise `Timeout` (60 s) |
+| Maximum upload size | `client_max_body_size` (1 MB) | `LimitRequestBody` |
+
+- Connecting, short (5 seconds): if the backend does not accept in that time, it is not going to. Reading, whatever the slowest page **really** needs, and only in that page's `location`, not the whole site.
+- A file over 1 MB in Nginx returns **413** before it reaches the app.
+
+## 5. Logs that help
+
+The default access log does not say how long the backend took. Add it in `/etc/nginx/nginx.conf`, inside `http`:
+
+:::term nginx.conf · format with the backend's time
+log_format upstream '$remote_addr [$time_local] "$request" $status $body_bytes_sent '
+                    'rt=$request_time uct=$upstream_connect_time urt=$upstream_response_time '
+                    'us=$upstream_status ua=$upstream_addr';
+:::
+
+- `rt` is the total time and `urt` the backend's: if `rt` is high and `urt` low, the slow part is the client or the network, not the app. `us=-` means the request never even reached the backend.
+- In Apache, `%D` (microseconds) gives the total time: `LogFormat "%h %t \\"%r\\" %>s %b %D" proxy`.
+- The error log (`error_log`, `ErrorLog`) is where the cause of a 502 shows up. It is the first thing you open.
+
+## 6. Test and apply: configtest, reload or restart
+
+:::term Bash · before applying a change
+$ sudo nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+$ sudo systemctl reload nginx
+$ sudo apachectl configtest
+Syntax OK
+$ sudo systemctl reload httpd
+:::
+
+- **Always** the test first. `nginx -T` dumps the full configuration with every `include`.
+- **reload** rereads the configuration without cutting anyone off: Nginx starts new processes and lets the old ones finish; in Apache it is a *graceful* restart. If the new configuration has an error, Nginx carries on with the old one.
+- **restart** stops and starts: it drops open connections. Only when the process does not respond or after a package update.
+
+## 7. The ticket: "the timesheets app gives 502 Bad Gateway"
+
+Monday, 9:02. The whole workforce clocks in at once and the page returns **502 Bad Gateway**. A 502 is generated by the proxy: Nginx is working, what fails is the connection to the backend. The error log says which case it is:
+
+:::term Bash · fichajes.error.log
+$ sudo tail -n 3 /var/log/nginx/fichajes.error.log
+2026/10/26 09:02:11 [error] 2211#2211: *8812 connect() failed (111: Connection refused) while connecting to upstream, client: 10.20.4.37, server: fichajes.corp.example, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/"
+$ ss -ltnp | grep 8080
+$ systemctl status fichajes --no-pager
+Active: failed (Result: oom-kill) since Mon 2026-10-26 08:58:40 CET
+:::
+
+1. **`111: Connection refused`**: nothing is listening on 8080. `ss` returns nothing and the app's service has died for lack of memory. It is started, you confirm it responds (`curl -I http://127.0.0.1:8080/`) and a ticket goes to the app team with the time of the `oom-kill`.
+2. **`13: Permission denied` while connecting to upstream**, on a freshly built RHEL with the backend listening: it is **SELinux**. `ausearch -m avc -ts recent` shows the `denied { name_connect }` for `nginx` (or `httpd`). The fix is `setsebool -P httpd_can_network_connect 1`, not `setenforce 0`. In Apache it shows up as `(13)Permission denied: AH00957`.
+3. **504 Gateway Time-out**, only on the monthly report: `upstream timed out (110: Connection timed out) while reading response header from upstream` and `urt=60.001`. The backend takes longer than `proxy_read_timeout`: it is raised to 300 s only in `location /informes/` and the report is asked to become asynchronous. In Apache it is `AH01102: error reading status line from remote server`.
+
+> Before touching the proxy, `curl -I http://127.0.0.1:8080/` from the server itself. If the backend does not answer there, the proxy has nothing to fix.
+
+## Next steps
+
+- The Level 2 **Red Hat Enterprise Linux** guide explains the services, firewall and SELinux that appear in the ticket.
+- The **Docker** guide covers the containerised apps that often sit behind this proxy.
+- The **IIS** guide is the Windows version of all this: sites, bindings, certificates and the 503.
+- Checking from outside that the certificate is not about to expire and that the site responds is what the TLS and HTTP probes in the **08-edge-health-slo-monitor** repository on my GitHub do.
+""")
+
+g(slug="iis-sitios-enlaces-grupos-de-aplicaciones-certificados-y-un-503", topic="iis", date="2026-10-30",
+  title_es="IIS: sitios, enlaces, grupos de aplicaciones, certificados HTTPS y un 503 Service Unavailable",
+  title_en="IIS: sites, bindings, application pools, HTTPS certificates and a 503 Service Unavailable",
+  seo_title_en="IIS: sites, app pools and the 503 error · Iñigo González",
+  seo_title_es="IIS: sitios, grupos de aplicaciones y el 503 · Iñigo González",
+  dek_es="Sitios y enlaces con encabezado de host, grupos de aplicaciones (identidad, reciclado y versión de .NET CLR), el certificado HTTPS en el enlace, los logs W3C y HTTPERR, Failed Request Tracing, appcmd y PowerShell, y un 503 por un grupo detenido por la protección contra errores rápidos o por una contraseña caducada.",
+  dek_en="Sites and bindings with host headers, application pools (identity, recycling and .NET CLR version), the HTTPS certificate on the binding, W3C and HTTPERR logs, Failed Request Tracing, appcmd and PowerShell, and a 503 from a pool stopped by rapid-fail protection or by an expired password.",
+  es="""
+## Qué vas a conseguir
+
+Dar soporte a las aplicaciones web que corren en IIS: saber qué sitio responde a qué nombre, en qué grupo de aplicaciones corre y con qué cuenta, qué certificado entrega, dónde está el log de cada petición y qué hacer cuando la página dice **HTTP Error 503. The service is unavailable**.
+
+## Antes de empezar
+
+- Windows Server 2022 o 2025 con IIS 10 y permisos de administrador local.
+- Las características que esta guía usa: `Install-WindowsFeature Web-Server, Web-Mgmt-Console, Web-Scripting-Tools, Web-Http-Tracing`.
+- PowerShell como administrador, con **WebAdministration** (la unidad `IIS:\\`) o **IISAdministration** (`Get-IISSite`, `Get-IISAppPool`). Los dos sirven; no los mezcles en el mismo script.
+
+## 1. Sitios, enlaces y encabezados de host
+
+Un **sitio** es una carpeta con uno o varios **enlaces** (*bindings*): protocolo, IP, puerto y nombre de host. Varios sitios comparten la IP y el puerto 443 si cada uno tiene su nombre:
+
+:::ui Administrador de IIS · Sites › Add Website
+= Site name: Reservas
+= Application pool: Reservas
+= Physical path: D:\\Sites\\Reservas
+= Binding: https · IP address: All Unassigned · Port: 443
+= Host name: reservas.corp.example
+[x] Require Server Name Indication
+= SSL certificate: reservas.corp.example (Contoso Issuing CA 01)
+[OK]
+:::
+
+- Con HTTPS y varios sitios en el mismo puerto hace falta **SNI** (*Require Server Name Indication*): el navegador dice el nombre antes de recibir el certificado.
+- Cada sitio tiene un **ID**: su carpeta de logs se llama `W3SVC<ID>`. Apúntalo en la ficha de la aplicación.
+
+`Get-IISSite` o `appcmd list sites` listan los sitios con su ID, su estado y sus enlaces.
+
+## 2. Grupos de aplicaciones
+
+El **grupo de aplicaciones** (*application pool*) es el proceso `w3wp.exe` que ejecuta el sitio. Un grupo por aplicación: si una se cuelga o se recicla, las demás siguen.
+
+- **Identidad**: por defecto, **ApplicationPoolIdentity**, una cuenta virtual llamada `IIS AppPool\\Reservas` a la que se dan permisos NTFS sobre la carpeta. Si la aplicación necesita entrar en SQL Server o en un recurso compartido con autenticación de Windows, una cuenta de dominio; mejor una **gMSA** (`CONTOSO\\gmsa-reservas$`, sin contraseña que caduque).
+- **Versión de .NET CLR**: `v4.0` para ASP.NET 4.x; **No Managed Code** para ASP.NET Core, que lleva su propio runtime. Modo de canalización: *Integrated*.
+- **Reciclado**: por defecto, cada **1.740 minutos** (29 horas), así que cada día a una hora distinta. Mejor una hora fija sin uso, como las 4:00. El **Idle Time-out** (20 minutos) apaga el proceso si nadie entra.
+- **Rapid-Fail Protection**: si el proceso falla **5 veces en 5 minutos**, IIS detiene el grupo. Es el origen del 503 más frecuente.
+
+`Get-IISAppPool` muestra el estado, la versión de CLR y la identidad de cada grupo; `appcmd list wp`, el PID de cada `w3wp.exe`, el que buscas en el Administrador de tareas cuando un proceso consume CPU.
+
+## 3. El certificado HTTPS
+
+- El certificado va en el almacén del equipo, **Local Machine › Personal**, con su clave privada: `Import-PfxCertificate -FilePath .\\reservas.pfx -CertStoreLocation Cert:\\LocalMachine\\My -Password $pwd`.
+- El enlace guarda la **huella** (*thumbprint*) del certificado. Al renovarlo, el nuevo tiene otra huella y el enlace sigue con el viejo hasta que lo cambias.
+
+:::term PowerShell · cambiar el certificado del enlace
+$ $thumb = (Get-ChildItem Cert:\\LocalMachine\\My | Where-Object Subject -like "*reservas.corp.example*" | Sort-Object NotAfter -Descending | Select-Object -First 1).Thumbprint
+$ Import-Module WebAdministration
+$ (Get-WebBinding -Name "Reservas" -Protocol https).AddSslCertificate($thumb, "My")
+$ netsh http show sslcert hostnameport=reservas.corp.example:443
+:::
+
+`netsh` muestra lo que HTTP.sys tiene de verdad asociado a ese nombre y puerto.
+
+## 4. Logs: W3C y HTTPERR
+
+- **Logs de IIS** en `%SystemDrive%\\inetpub\\logs\\LogFiles\\W3SVC<ID>\\`, un fichero `u_exAAMMDD.log` por día en formato W3C. Las horas están en **UTC**: en Madrid, una o dos horas menos que el reloj.
+- Los campos clave: `sc-status`, `sc-substatus` y `time-taken` (milisegundos).
+- **HTTPERR** en `%SystemRoot%\\System32\\LogFiles\\HTTPERR\\`: lo que HTTP.sys rechazó antes de pasarlo a IIS. Un 503 con el grupo detenido aparece aquí, no en el log del sitio. El último campo es el motivo: `AppOffline` (los errores de la aplicación la han dejado fuera de servicio), `Disabled` (un administrador la ha detenido) o `QueueFull` (la cola está llena).
+
+
+## 5. Failed Request Tracing
+
+Cuando el log dice 500 y no se sabe qué módulo lo produce, **Failed Request Tracing** (FREB) guarda el recorrido completo de la petición:
+
+1. En el sitio, **Actions › Failed Request Tracing...** y marcar **Enable** (por defecto guarda hasta 50 ficheros).
+2. En **Failed Request Tracing Rules**, una regla: *All content*, códigos `500-599` o un tiempo mayor que 30 segundos.
+3. Reproducir el error. Los ficheros quedan en `%SystemDrive%\\inetpub\\logs\\FailedReqLogFiles\\W3SVC<ID>\\` y se abren con el navegador. Desactívalo al acabar.
+
+! Un 503 de un grupo detenido no deja traza en FREB: la petición se queda en HTTP.sys y nunca entra en IIS. Para ese caso, HTTPERR y el registro de eventos.
+
+## 6. El ticket: "la aplicación de reservas da 503 Service Unavailable"
+
+Lunes, 8:30. Recepción no puede abrir la aplicación de reservas: **HTTP Error 503. The service is unavailable**.
+
+1. **El grupo**: en el Administrador de IIS, *Application Pools*, `Reservas` aparece **Stopped**. HTTPERR lo confirma con `503 ... AppOffline Reservas`.
+2. **Por qué se detuvo**: en el **Visor de eventos › Registros de Windows › Sistema**, origen **WAS**. Uno de estos dos eventos:
+
+- **5021**: *The identity of application pool Reservas is invalid*. La contraseña de la cuenta `CONTOSO\\svc-reservas` ha caducado o alguien la ha cambiado en el directorio activo. Tras varios intentos fallidos, WAS deshabilita el grupo.
+- **5002**: *Application pool 'Reservas' is being automatically disabled due to a series of failures*. Es la protección contra errores rápidos: el proceso arranca y se cae. En el registro **Aplicación**, el error de `w3wp.exe` (evento 1000) o de .NET Runtime dice por qué, a menudo un despliegue del viernes.
+
+**Si es el 5021, la contraseña**: comprobar la cuenta con `Get-ADUser svc-reservas -Properties PasswordExpired, LockedOut`, pedir el cambio de contraseña al responsable de la cuenta y ponerla en el grupo:
+
+:::term PowerShell · actualizar la identidad y arrancar el grupo
+$ $cred = Get-Credential CONTOSO\\svc-reservas
+$ Import-Module WebAdministration
+$ Set-ItemProperty IIS:\\AppPools\\Reservas -Name processModel -Value @{userName=$cred.UserName; password=$cred.GetNetworkCredential().Password; identityType=3}
+$ Start-WebAppPool -Name "Reservas"
+$ (Invoke-WebRequest https://reservas.corp.example -UseBasicParsing).StatusCode
+200
+:::
+
+**Si es el 5002, los errores rápidos**: arrancar el grupo no basta: se volverá a parar a los cinco fallos, y desactivar la protección solo esconde el problema. Primero la causa (deshacer el despliegue, la dependencia que falta, el `web.config` roto) y después `Start-WebAppPool`.
+Para que no se repita, el grupo pasa a una **gMSA**.
+
+En el ticket: grupo, evento de WAS, causa, cambio y la comprobación final (200 desde fuera del servidor).
+
+## Siguientes pasos
+
+- La guía de **Windows Server** cubre los roles, los parches y los eventos del sistema que has usado aquí.
+- La de **Nginx y Apache** del Nivel 3 es lo mismo en Linux: sitios por nombre, certificados, proxy inverso y el 502.
+""",
+  en="""
+## What you'll get
+
+Supporting the web applications that run on IIS: knowing which site answers to which name, which application pool it runs in and under which account, which certificate it presents, where each request's log is and what to do when the page says **HTTP Error 503. The service is unavailable**.
+
+## Before you start
+
+- Windows Server 2022 or 2025 with IIS 10 and local administrator rights.
+- The features this guide uses: `Install-WindowsFeature Web-Server, Web-Mgmt-Console, Web-Scripting-Tools, Web-Http-Tracing`.
+- PowerShell as administrator, with **WebAdministration** (the `IIS:\\` drive) or **IISAdministration** (`Get-IISSite`, `Get-IISAppPool`). Both work; do not mix them in the same script.
+
+## 1. Sites, bindings and host headers
+
+A **site** is a folder with one or more **bindings**: protocol, IP, port and host name. Several sites share the IP and port 443 if each has its own name:
+
+:::ui IIS Manager · Sites › Add Website
+= Site name: Reservas
+= Application pool: Reservas
+= Physical path: D:\\Sites\\Reservas
+= Binding: https · IP address: All Unassigned · Port: 443
+= Host name: reservas.corp.example
+[x] Require Server Name Indication
+= SSL certificate: reservas.corp.example (Contoso Issuing CA 01)
+[OK]
+:::
+
+- With HTTPS and several sites on the same port you need **SNI** (*Require Server Name Indication*): the browser states the name before it receives the certificate.
+- Each site has an **ID**: its log folder is called `W3SVC<ID>`. Note it on the application's record.
+
+`Get-IISSite` or `appcmd list sites` lists the sites with their ID, state and bindings.
+
+## 2. Application pools
+
+The **application pool** is the `w3wp.exe` process that runs the site. One pool per application: if one hangs or recycles, the others carry on.
+
+- **Identity**: by default, **ApplicationPoolIdentity**, a virtual account called `IIS AppPool\\Reservas` that is given NTFS permissions on the folder. If the app needs to reach SQL Server or a share with Windows authentication, a domain account; better a **gMSA** (`CONTOSO\\gmsa-reservas$`, with no password to expire).
+- **.NET CLR version**: `v4.0` for ASP.NET 4.x; **No Managed Code** for ASP.NET Core, which brings its own runtime. Pipeline mode: *Integrated*.
+- **Recycling**: by default every **1,740 minutes** (29 hours), so at a different time each day. Better a fixed quiet time, such as 4:00. The **Idle Time-out** (20 minutes) shuts the process down if nobody uses it.
+- **Rapid-Fail Protection**: if the process fails **5 times in 5 minutes**, IIS stops the pool. It is the source of the most common 503.
+
+`Get-IISAppPool` shows each pool's state, CLR version and identity; `appcmd list wp`, the PID of each `w3wp.exe`, the one you look for in Task Manager when a process is eating CPU.
+
+## 3. The HTTPS certificate
+
+- The certificate goes in the computer store, **Local Machine › Personal**, with its private key: `Import-PfxCertificate -FilePath .\\reservas.pfx -CertStoreLocation Cert:\\LocalMachine\\My -Password $pwd`.
+- The binding stores the certificate's **thumbprint**. When it is renewed, the new one has a different thumbprint and the binding keeps the old one until you change it.
+
+:::term PowerShell · change the binding's certificate
+$ $thumb = (Get-ChildItem Cert:\\LocalMachine\\My | Where-Object Subject -like "*reservas.corp.example*" | Sort-Object NotAfter -Descending | Select-Object -First 1).Thumbprint
+$ Import-Module WebAdministration
+$ (Get-WebBinding -Name "Reservas" -Protocol https).AddSslCertificate($thumb, "My")
+$ netsh http show sslcert hostnameport=reservas.corp.example:443
+:::
+
+`netsh` shows what HTTP.sys really has associated with that name and port.
+
+## 4. Logs: W3C and HTTPERR
+
+- **IIS logs** in `%SystemDrive%\\inetpub\\logs\\LogFiles\\W3SVC<ID>\\`, one `u_exYYMMDD.log` file per day in W3C format. Times are in **UTC**: in Madrid, one or two hours behind the clock.
+- The key fields: `sc-status`, `sc-substatus` and `time-taken` (milliseconds).
+- **HTTPERR** in `%SystemRoot%\\System32\\LogFiles\\HTTPERR\\`: what HTTP.sys rejected before passing it to IIS. A 503 with the pool stopped shows up here, not in the site log. The last field is the reason: `AppOffline` (application errors have taken it offline), `Disabled` (an administrator has stopped it) or `QueueFull` (the queue is full).
+
+
+## 5. Failed Request Tracing
+
+When the log says 500 and nobody knows which module produces it, **Failed Request Tracing** (FREB) records the request's full path:
+
+1. On the site, **Actions › Failed Request Tracing...** and tick **Enable** (by default it keeps up to 50 files).
+2. In **Failed Request Tracing Rules**, a rule: *All content*, status codes `500-599` or time taken over 30 seconds.
+3. Reproduce the error. The files land in `%SystemDrive%\\inetpub\\logs\\FailedReqLogFiles\\W3SVC<ID>\\` and open in the browser. Turn it off when you are done.
+
+! A 503 from a stopped pool leaves no FREB trace: the request stays in HTTP.sys and never enters IIS. For that case, HTTPERR and the event log.
+
+## 6. The ticket: "the bookings app gives 503 Service Unavailable"
+
+Monday, 8:30. Reception cannot open the bookings app: **HTTP Error 503. The service is unavailable**.
+
+1. **The pool**: in IIS Manager, *Application Pools*, `Reservas` shows **Stopped**. HTTPERR confirms it with `503 ... AppOffline Reservas`.
+2. **Why it stopped**: in **Event Viewer › Windows Logs › System**, source **WAS**. One of these two events:
+
+- **5021**: *The identity of application pool Reservas is invalid*. The password of the `CONTOSO\\svc-reservas` account has expired or someone changed it in Active Directory. After several failed attempts, WAS disables the pool.
+- **5002**: *Application pool 'Reservas' is being automatically disabled due to a series of failures*. That is rapid-fail protection: the process starts and crashes. In the **Application** log, the `w3wp.exe` error (event 1000) or the .NET Runtime error says why, often a Friday deployment.
+
+**If it is 5021, the password**: check the account with `Get-ADUser svc-reservas -Properties PasswordExpired, LockedOut`, ask the account owner for the password change and set it on the pool:
+
+:::term PowerShell · update the identity and start the pool
+$ $cred = Get-Credential CONTOSO\\svc-reservas
+$ Import-Module WebAdministration
+$ Set-ItemProperty IIS:\\AppPools\\Reservas -Name processModel -Value @{userName=$cred.UserName; password=$cred.GetNetworkCredential().Password; identityType=3}
+$ Start-WebAppPool -Name "Reservas"
+$ (Invoke-WebRequest https://reservas.corp.example -UseBasicParsing).StatusCode
+200
+:::
+
+**If it is 5002, rapid-fail**: starting the pool is not enough: it will stop again after five failures, and turning off the protection only hides the problem. First the cause (roll back the deployment, the missing dependency, the broken `web.config`) and then `Start-WebAppPool`.
+So it does not happen again, the pool moves to a **gMSA**.
+
+In the ticket: pool, WAS event, cause, change and the final check (200 from outside the server).
+
+## Next steps
+
+- The **Windows Server** guide covers the roles, patching and system events you used here.
+- The Level 3 **Nginx and Apache** guide is the same on Linux: sites by name, certificates, reverse proxy and the 502.
+""")
+
+# ---------------------------------------------------------------- 2.x · HP / Aruba switches
+g(slug="switches-hp-aruba-vlans-copia-de-configuracion-firmware-y-puerto-a-100-mb", topic="switch-hp", date="2026-10-30",
+  title_es="Switches HP y Aruba: VLANs tagged y untagged, copia de la configuración, firmware y un puerto que negocia a 100 Mb",
+  title_en="HP and Aruba switches: tagged and untagged VLANs, config backup, firmware and a port that negotiates at 100 Mb",
+  seo_title_en="HP switches: VLANs, backup and port errors · Iñigo González",
+  seo_title_es="Switches HP: VLANs, copia y errores de puerto · Iñigo González",
+  dek_es="Los comandos básicos de un switch HP ProCurve o ArubaOS-Switch, las VLANs con la terminología de HP frente a la de Cisco, guardar con write memory, la copia por TFTP o SCP, la actualización de firmware con dos imágenes y el puerto que va a 100 Mb o acumula errores.",
+  dek_en="The basic commands of an HP ProCurve or ArubaOS-Switch switch, VLANs in HP terms versus Cisco's, saving with write memory, backup over TFTP or SCP, a firmware update with two images, and the port that runs at 100 Mb or keeps piling up errors.",
+  es="""
+## Qué vas a conseguir
+
+Moverte con soltura en un switch de acceso HP de la familia ProCurve / ArubaOS-Switch (series 2530, 2930F, 3810 y similares): leer la configuración, ver puertos, VLANs, direcciones MAC y vecinos, crear una VLAN con la terminología de HP, guardar, sacar una copia fuera del equipo, actualizar el firmware sin quedarte sin vuelta atrás y diagnosticar el puerto de un usuario que va lento.
+
+## Antes de empezar
+
+- Acceso por **SSH** a la IP de gestión, o un **cable de consola** si el equipo no tiene red. En ArubaOS-Switch hay dos niveles: *operator* (solo lectura) y *manager*, al que se pasa con `enable`.
+- Un servidor **TFTP** o **SCP** en la red de gestión para las copias y el firmware.
+- Saber qué familia tienes delante. **ArubaOS-Switch** (el antiguo ProCurve) y **AOS-CX** (series 6100, 6200, 6300, 8xxx) son sistemas distintos con comandos distintos. `show version` lo dice en la primera línea; esta guía usa la sintaxis de ArubaOS-Switch y señala las diferencias de CX.
+
+## 1. Los comandos de cada día
+
+:::term sw-p2-acc01 · ArubaOS-Switch
+$ show interfaces brief
+  Port   Type      | Alert Enabled Status Mode     Flow Ctrl
+  ------ --------- + ----- ------- ------ -------- ---------
+  11     100/1000T | No    Yes     Up     1000FDx  off
+  12     100/1000T | No    Yes     Up     100FDx   off
+  13     100/1000T | No    Yes     Down   1000FDx  off
+$ show vlans
+  VLAN ID Name                 | Status     Voice Jumbo
+  ------- -------------------- + ---------- ----- -----
+  1       DEFAULT_VLAN         | Port-based No    No
+  20      USUARIOS             | Port-based No    No
+  30      VOZ                  | Port-based Yes   No
+$ show mac-address 12
+  MAC Address   VLANs
+  ------------- ------
+  a0b3cc-4f12d8 20
+$ show lldp info remote-device
+  LocalPort | ChassisId     PortId SysName
+  --------- + ------------- ------ -----------
+  49        | 9c8cd8-11aa00 1/0/24 sw-core-01
+:::
+
+- `show running-config` es la configuración en memoria; `show config` es la guardada (la que carga al arrancar). Si difieren, hay cambios sin guardar.
+- `show vlans ports 12` dice en qué VLANs está un puerto y `show vlans 20` qué puertos tiene una VLAN.
+- `show mac-address a0b3cc-4f12d8` busca una MAC concreta: el formato de HP es `xxxxxx-xxxxxx`.
+- `show lldp info remote-device` es el equivalente de `show lldp neighbors` de Cisco: con él sabes a qué switch o teléfono lleva cada puerto. Añade `detail` y el número de puerto para ver la IP de gestión del vecino.
+- `show logging -r` muestra el registro con lo más reciente arriba: caídas de enlace, bucles, fallos de fuente.
+
+## 2. VLANs: tagged y untagged
+
+HP y Cisco hablan de lo mismo con palabras distintas, y la confusión más peligrosa es **trunk**:
+
+| Lo que quieres | Cisco IOS | HP ArubaOS-Switch |
+|---|---|---|
+| Puerto de usuario en la VLAN 20 | `switchport access vlan 20` | puerto **untagged** en la VLAN 20 |
+| Enlace que lleva varias VLANs | troncal (`switchport mode trunk`) | puerto **tagged** en cada VLAN |
+| VLAN sin etiqueta en ese enlace | VLAN nativa | la VLAN en la que el puerto es untagged |
+| Varios cables agregados | EtherChannel / port-channel | **trunk** (`trk1`) |
+
+En HP la VLAN se configura desde la propia VLAN, no desde el puerto:
+
+:::term sw-p2-acc01 · crear la VLAN de usuarios y la de voz
+$ configure terminal
+$ vlan 20
+$ name USUARIOS
+$ untagged 1-24
+$ tagged 49-50
+$ exit
+$ vlan 30
+$ name VOZ
+$ voice
+$ tagged 1-24,49-50
+$ exit
+:::
+
+- Un puerto solo puede ser **untagged en una VLAN**. Al hacerlo untagged en la 20 sale de la `DEFAULT_VLAN` (la 1) solo.
+- El teléfono IP marca su tráfico en la VLAN 30 (tagged) y el PC que cuelga de él va sin marcar en la 20: un cable, dos redes.
+- Si los puertos 49 y 50 forman una agregación (`trunk 49-50 trk1 lacp`), las VLANs se asignan a `trk1`, no a los puertos sueltos.
+
+! Antes de quitar una VLAN de un enlace de subida (`no tagged 49`), comprueba por cuál te has conectado. Si tu SSH va por esa VLAN, te quedas fuera y toca ir con el cable de consola.
+
+En **AOS-CX** se hace desde la interfaz, más parecido a Cisco: `interface 1/1/12` y `vlan access 20` para un usuario; `vlan trunk native 1` y `vlan trunk allowed 20,30` para un enlace de subida.
+
+## 3. Guardar la configuración
+
+Los cambios se aplican al instante pero viven en memoria: un reinicio o un corte de luz los borra.
+
+:::term sw-p2-acc01
+$ write memory
+$ show config
+:::
+
+`write memory` copia la configuración en uso a la de arranque. En AOS-CX también existe `write memory` (o `copy running-config startup-config`), y además puntos de restauración (*checkpoints*) con los que volver a una configuración anterior.
+
+## 4. Copia de la configuración fuera del switch
+
+Un switch averiado se cambia en minutos si su configuración está en un servidor. Por **TFTP**:
+
+:::term sw-p2-acc01 · copia por TFTP
+$ copy running-config tftp 10.10.99.20 sw-p2-acc01-2026-10-30.cfg
+$ copy startup-config tftp 10.10.99.20 sw-p2-acc01-startup.cfg
+:::
+
+TFTP no cifra ni autentica. Mejor **SCP**, con el switch como servidor y la copia iniciada desde el servidor de gestión:
+
+:::term sw-p2-acc01 · habilitar transferencia por SSH
+$ configure terminal
+$ ip ssh filetransfer
+$ exit
+# desde el servidor de copias:
+$ scp manager@10.10.99.11:/cfg/startup-config ./sw-p2-acc01-startup.cfg
+:::
+
+Al activar `ip ssh filetransfer` el switch desactiva TFTP. Programa la copia (un script nocturno o la herramienta de red que uses) y guarda varias versiones: la de ayer es la que querrás cuando alguien cambie algo hoy.
+
+## 5. Actualizar el firmware
+
+ArubaOS-Switch guarda dos imágenes en flash, **primary** y **secondary**. Eso permite actualizar dejando la buena como vuelta atrás:
+
+:::term sw-p2-acc01 · actualización con vuelta atrás
+$ show flash
+Image           Size (bytes) Date     Version
+--------------- ------------ -------- ----------
+Primary Image   :   32103550 03/02/25 WC.16.10.0025
+Secondary Image :   32103550 03/02/25 WC.16.10.0025
+Default Boot Image   : Primary
+$ copy tftp flash 10.10.99.20 WC_16_11_0021.swi secondary
+$ boot system flash secondary
+:::
+
+- Lee las **notas de la versión** antes: requisitos de versión intermedia, cambios de comportamiento y si actualiza también la *BootROM*. Si la actualiza, no se corta la corriente durante el primer arranque.
+- Hazlo en una ventana de cambio y un switch cada vez. El reinicio corta la red de todos los puertos durante unos minutos.
+- Si la nueva falla, `boot system flash primary` vuelve a la anterior. Cuando lleve unos días estable, copia la nueva también a primary.
+- Comprueba con `show version` que arranca la imagen esperada y guarda una copia de la configuración justo antes.
+
+## 6. El ticket: "mi equipo va lento con la red"
+
+Un puesto en el puerto 12. El portátil tiene tarjeta de 1 Gb y en el paso 1 ya se veía `100FDx`.
+
+:::term sw-p2-acc01 · contadores del puerto
+$ show interfaces 12
+ Status and Counters - Port Counters for port 12
+  Link Status     : Up
+  Errors (Since boot or last clear) :
+   FCS Rx          : 4,812            Drops Tx        : 0
+   Alignment Rx    : 0                Collisions Tx   : 0
+   Runts Rx        : 0                Late Colln Tx   : 0
+   Giants Rx       : 0                Excessive Colln : 0
+$ clear statistics 12
+:::
+
+Cómo se lee:
+
+- **A 100 Mb con una tarjeta de 1 Gb**: Gigabit Ethernet necesita los **cuatro pares** del cable y 100 Mb solo usa dos. Un par roto en el latiguillo, la roseta o el panel hace que el enlace baje a 100. Casi siempre es cableado.
+- **FCS Rx** creciendo: tramas que llegan dañadas. Cable, conector o interferencia.
+- **Collisions** o **Late Colln** en un enlace full dúplex: hay un **desajuste de dúplex**. Un extremo está fijado (por ejemplo, `100-full` en la tarjeta) y el otro negocia en automático, se queda en half dúplex y empiezan las colisiones tardías.
+
+Pasos:
+
+1. Pon los contadores a cero (`clear statistics 12`) y mira si siguen subiendo con el usuario trabajando.
+2. Cambia el **latiguillo** del puesto y, si sigue igual, el del panel. Es lo más rápido y lo que más veces lo resuelve.
+3. Prueba el cable desde el switch con `test cable-diagnostics 12` y lee el resultado con `show cable-diagnostics`. Corta el puerto unos segundos: avisa al usuario.
+4. Comprueba que el puerto está en automático (`speed-duplex auto` en la interfaz) y la tarjeta del portátil también. No fijes la velocidad solo en un extremo.
+5. Si el cable entre panel y roseta está mal, es una reparación de cableado: anótalo con el número de roseta y el puerto del panel.
+
+En el ticket: puerto, velocidad y errores antes y después, qué se cambió y el resultado.
+
+## Siguientes pasos
+
+- La guía de **Cisco: switches y routers** cubre lo mismo con IOS: VLANs, troncales y el puerto que no da red.
+- La guía de **Device42** explica cómo tener inventariado cada switch con su rack, su U y su contrato de soporte.
+- La guía de **SolarWinds** sirve para vigilar por SNMP los errores de los puertos y enterarte antes que el usuario.
+""",
+  en="""
+## What you'll get
+
+Working comfortably on an HP access switch from the ProCurve / ArubaOS-Switch family (2530, 2930F, 3810 series and similar): reading the configuration, checking ports, VLANs, MAC addresses and neighbours, creating a VLAN in HP terms, saving, keeping a copy off the device, updating the firmware without losing your way back, and diagnosing the port of a user whose network is slow.
+
+## Before you start
+
+- **SSH** access to the management IP, or a **console cable** if the device has no network. ArubaOS-Switch has two levels: *operator* (read-only) and *manager*, which you reach with `enable`.
+- A **TFTP** or **SCP** server on the management network for backups and firmware.
+- Knowing which family is in front of you. **ArubaOS-Switch** (formerly ProCurve) and **AOS-CX** (6100, 6200, 6300, 8xxx series) are different systems with different commands. `show version` tells you on the first line; this guide uses ArubaOS-Switch syntax and points out where CX differs.
+
+## 1. The everyday commands
+
+:::term sw-p2-acc01 · ArubaOS-Switch
+$ show interfaces brief
+  Port   Type      | Alert Enabled Status Mode     Flow Ctrl
+  ------ --------- + ----- ------- ------ -------- ---------
+  11     100/1000T | No    Yes     Up     1000FDx  off
+  12     100/1000T | No    Yes     Up     100FDx   off
+  13     100/1000T | No    Yes     Down   1000FDx  off
+$ show vlans
+  VLAN ID Name                 | Status     Voice Jumbo
+  ------- -------------------- + ---------- ----- -----
+  1       DEFAULT_VLAN         | Port-based No    No
+  20      USERS                | Port-based No    No
+  30      VOICE                | Port-based Yes   No
+$ show mac-address 12
+  MAC Address   VLANs
+  ------------- ------
+  a0b3cc-4f12d8 20
+$ show lldp info remote-device
+  LocalPort | ChassisId     PortId SysName
+  --------- + ------------- ------ -----------
+  49        | 9c8cd8-11aa00 1/0/24 sw-core-01
+:::
+
+- `show running-config` is the configuration in memory; `show config` is the saved one (the one loaded at boot). If they differ, there are unsaved changes.
+- `show vlans ports 12` tells you which VLANs a port is in, and `show vlans 20` which ports a VLAN has.
+- `show mac-address a0b3cc-4f12d8` looks up a specific MAC: HP's format is `xxxxxx-xxxxxx`.
+- `show lldp info remote-device` is the equivalent of Cisco's `show lldp neighbors`: it tells you which switch or phone each port leads to. Add `detail` and the port number to see the neighbour's management IP.
+- `show logging -r` shows the log with the newest entries on top: link drops, loops, power supply failures.
+
+## 2. VLANs: tagged and untagged
+
+HP and Cisco talk about the same things with different words, and the most dangerous mix-up is **trunk**:
+
+| What you want | Cisco IOS | HP ArubaOS-Switch |
+|---|---|---|
+| User port in VLAN 20 | `switchport access vlan 20` | port **untagged** in VLAN 20 |
+| Link carrying several VLANs | trunk (`switchport mode trunk`) | port **tagged** in each VLAN |
+| Untagged VLAN on that link | native VLAN | the VLAN in which the port is untagged |
+| Several cables aggregated | EtherChannel / port-channel | **trunk** (`trk1`) |
+
+On HP the VLAN is configured from the VLAN itself, not from the port:
+
+:::term sw-p2-acc01 · create the user and voice VLANs
+$ configure terminal
+$ vlan 20
+$ name USERS
+$ untagged 1-24
+$ tagged 49-50
+$ exit
+$ vlan 30
+$ name VOICE
+$ voice
+$ tagged 1-24,49-50
+$ exit
+:::
+
+- A port can only be **untagged in one VLAN**. Making it untagged in 20 takes it out of `DEFAULT_VLAN` (VLAN 1) on its own.
+- The IP phone tags its traffic on VLAN 30 and the PC hanging off it goes untagged on 20: one cable, two networks.
+- If ports 49 and 50 form an aggregation (`trunk 49-50 trk1 lacp`), VLANs are assigned to `trk1`, not to the individual ports.
+
+! Before removing a VLAN from an uplink (`no tagged 49`), check which one you are connected through. If your SSH session runs over that VLAN you are locked out, and it is a trip with the console cable.
+
+On **AOS-CX** it is done from the interface, closer to Cisco: `interface 1/1/12` and `vlan access 20` for a user; `vlan trunk native 1` and `vlan trunk allowed 20,30` for an uplink.
+
+## 3. Saving the configuration
+
+Changes apply instantly but live in memory: a reboot or a power cut wipes them.
+
+:::term sw-p2-acc01
+$ write memory
+$ show config
+:::
+
+`write memory` copies the running configuration to the startup one. AOS-CX also has `write memory` (or `copy running-config startup-config`), plus *checkpoints* that let you go back to an earlier configuration.
+
+## 4. Backing up the configuration off the switch
+
+A failed switch is swapped in minutes if its configuration is on a server. Over **TFTP**:
+
+:::term sw-p2-acc01 · backup over TFTP
+$ copy running-config tftp 10.10.99.20 sw-p2-acc01-2026-10-30.cfg
+$ copy startup-config tftp 10.10.99.20 sw-p2-acc01-startup.cfg
+:::
+
+TFTP neither encrypts nor authenticates. **SCP** is better, with the switch as the server and the copy started from the management server:
+
+:::term sw-p2-acc01 · enable transfer over SSH
+$ configure terminal
+$ ip ssh filetransfer
+$ exit
+# from the backup server:
+$ scp manager@10.10.99.11:/cfg/startup-config ./sw-p2-acc01-startup.cfg
+:::
+
+Enabling `ip ssh filetransfer` makes the switch disable TFTP. Schedule the copy (a nightly script or whatever network tool you use) and keep several versions: yesterday's is the one you will want when someone changes something today.
+
+## 5. Updating the firmware
+
+ArubaOS-Switch keeps two images in flash, **primary** and **secondary**. That lets you update while keeping the good one as the way back:
+
+:::term sw-p2-acc01 · update with a way back
+$ show flash
+Image           Size (bytes) Date     Version
+--------------- ------------ -------- ----------
+Primary Image   :   32103550 03/02/25 WC.16.10.0025
+Secondary Image :   32103550 03/02/25 WC.16.10.0025
+Default Boot Image   : Primary
+$ copy tftp flash 10.10.99.20 WC_16_11_0021.swi secondary
+$ boot system flash secondary
+:::
+
+- Read the **release notes** first: intermediate version requirements, behaviour changes and whether it also updates the *BootROM*. If it does, nobody cuts the power during the first boot.
+- Do it in a change window and one switch at a time. The reboot takes the network down on every port for a few minutes.
+- If the new one fails, `boot system flash primary` goes back to the previous one. Once it has been stable for a few days, copy the new image to primary as well.
+- Check with `show version` that the expected image booted, and save a copy of the configuration right before.
+
+## 6. The ticket: "my computer is slow on the network"
+
+A desk on port 12. The laptop has a 1 Gb card and step 1 already showed `100FDx`.
+
+:::term sw-p2-acc01 · port counters
+$ show interfaces 12
+ Status and Counters - Port Counters for port 12
+  Link Status     : Up
+  Errors (Since boot or last clear) :
+   FCS Rx          : 4,812            Drops Tx        : 0
+   Alignment Rx    : 0                Collisions Tx   : 0
+   Runts Rx        : 0                Late Colln Tx   : 0
+   Giants Rx       : 0                Excessive Colln : 0
+$ clear statistics 12
+:::
+
+How to read it:
+
+- **At 100 Mb with a 1 Gb card**: Gigabit Ethernet needs **all four pairs** of the cable and 100 Mb only uses two. One broken pair in the patch cable, the wall outlet or the panel drops the link to 100. It is almost always cabling.
+- **FCS Rx** climbing: frames arriving damaged. Cable, connector or interference.
+- **Collisions** or **Late Colln** on a full-duplex link: there is a **duplex mismatch**. One end is fixed (say `100-full` on the card) and the other auto-negotiates, falls back to half duplex, and late collisions start.
+
+Steps:
+
+1. Reset the counters (`clear statistics 12`) and see whether they keep climbing while the user works.
+2. Swap the desk **patch cable** and, if nothing changes, the one at the panel. It is the quickest step and the one that fixes it most often.
+3. Test the cable from the switch with `test cable-diagnostics 12` and read the result with `show cable-diagnostics`. It drops the port for a few seconds: warn the user.
+4. Check the port is on auto (`speed-duplex auto` on the interface) and the laptop's card too. Never fix the speed on one end only.
+5. If the run between panel and outlet is bad, it is a cabling repair: record it with the outlet number and the panel port.
+
+In the ticket: port, speed and errors before and after, what was changed and the result.
+
+## Next steps
+
+- The **Cisco: switches and routers** guide covers the same with IOS: VLANs, trunks and the port that gives no network.
+- The **Device42** guide explains how to keep every switch inventoried with its rack, its U and its support contract.
+- The **SolarWinds** guide helps you watch port errors over SNMP and find out before the user does.
+""")
+
+# ---------------------------------------------------------------- 3.x · WordPress on Docker
+g(slug="wordpress-en-docker-compose-copias-bastionado-y-un-plugin-que-tumba-la-web", topic="wordpress-docker", date="2026-10-30",
+  title_es="WordPress en Docker: la web corporativa con Compose, copias que se restauran, bastionado y un plugin que tumba la web",
+  title_en="WordPress on Docker: the corporate site with Compose, backups that restore, hardening and a plugin that takes the site down",
+  seo_title_en="WordPress on Docker: backups and hardening · Iñigo González",
+  seo_title_es="WordPress en Docker: copias y bastionado · Iñigo González",
+  dek_es="WordPress y MariaDB con Docker Compose y volúmenes, las contraseñas en un fichero que no va a git, el proxy inverso con TLS, cómo se actualizan núcleo, plugins e imagen, la copia de la base de datos y de wp-content con su prueba de restauración, el bastionado básico y la web caída después de actualizar un plugin.",
+  dek_en="WordPress and MariaDB with Docker Compose and volumes, passwords in a file that never reaches git, the reverse proxy with TLS, how core, plugins and image are updated, backing up the database and wp-content with a restore test, basic hardening, and the site down after a plugin update.",
+  es="""
+## Qué vas a conseguir
+
+La web corporativa en WordPress corriendo en contenedores en un servidor Linux: WordPress y su base de datos definidos en un fichero, los datos en volúmenes, las contraseñas fuera del repositorio, HTTPS delante, una copia diaria que sabes restaurar porque lo has probado y la rutina para cuando una actualización deja la web en blanco.
+
+## Antes de empezar
+
+- Un servidor con Docker y el plugin de Compose (guía de **Docker**), con espacio para los volúmenes y las copias.
+- El nombre de la web en DNS apuntando al servidor y un certificado (Let's Encrypt o el de la CA corporativa).
+- Un segundo servidor o máquina de pruebas donde restaurar.
+
+## 1. El compose: WordPress, MariaDB y volúmenes
+
+:::term compose.yaml
+services:
+  db:
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 30s
+      retries: 5
+
+  wordpress:
+    image: wordpress:6.9-php8.3-apache
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+      WORDPRESS_CONFIG_EXTRA: |
+        define('DISALLOW_FILE_EDIT', true);
+    volumes:
+      - wp_html:/var/www/html
+    ports:
+      - "127.0.0.1:8080:80"
+
+  wpcli:
+    image: wordpress:cli-php8.3
+    profiles: ["tools"]
+    user: "33:33"
+    environment:
+      HOME: /tmp
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - wp_html:/var/www/html
+
+volumes:
+  db_data:
+  wp_html:
+:::
+
+- **Etiquetas fijas**, nunca `latest`: así sabes qué versión corre y una actualización es un cambio que decides tú. La de WordPress que toque cuando lo leas, con su versión de PHP.
+- El puerto se publica solo en `127.0.0.1`: a WordPress se llega por el proxy, no directamente.
+- `wpcli` está en un *profile*: no arranca con `docker compose up`, solo cuando lo llamas. Usa el usuario 33 porque es el `www-data` de la imagen Debian de WordPress; la imagen de WP-CLI usa otro por defecto y daría problemas de permisos.
+
+## 2. Las contraseñas, fuera de git
+
+Compose lee las variables `${DB_PASSWORD}` de un fichero `.env` junto al `compose.yaml`. Ese fichero no se sube nunca:
+
+:::term servidor web01 · /srv/web-corporativa
+$ cat .gitignore
+.env
+backups/
+$ chmod 600 .env
+$ git check-ignore -v .env
+.gitignore:1:.env	.env
+:::
+
+- En el repositorio va un `.env.example` con los nombres de las variables y sin valores.
+- `docker compose config` muestra el fichero con las variables resueltas: **incluidas las contraseñas**. No lo pegues en un ticket.
+- Las variables `MARIADB_*` solo se aplican cuando el volumen de datos está vacío, la primera vez. Cambiar la contraseña en `.env` después no la cambia en la base de datos: hay que hacerlo con `ALTER USER` y luego en `.env`.
+
+! Si una contraseña llegó a un commit, cámbiala. Borrarla del historial no deshace que alguien la haya clonado.
+
+## 3. Proxy inverso con TLS
+
+Un Nginx en el propio servidor termina HTTPS y reenvía a WordPress. Traefik o Caddy sirven igual; lo importante son las cabeceras:
+
+:::term /etc/nginx/conf.d/web-corporativa.conf
+server {
+    listen 80;
+    server_name www.contoso.example;
+    return 301 https://$host$request_uri;
+}
+server {
+    listen 443 ssl;
+    server_name www.contoso.example;
+    ssl_certificate     /etc/letsencrypt/live/www.contoso.example/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/www.contoso.example/privkey.pem;
+    client_max_body_size 64m;
+
+    location = /xmlrpc.php { deny all; }
+    location ~* ^/wp-content/uploads/.*\\.php$ { deny all; }
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+:::
+
+- La imagen oficial ya añade a `wp-config.php` el código que lee `X-Forwarded-Proto`. Sin esa cabecera WordPress cree que está en HTTP y aparecen bucles de redirección o contenido mixto.
+- Detrás del proxy, Apache ve la IP del proxy. Si un plugin de seguridad bloquea por IP, necesita saber leer `X-Forwarded-For`, o bloqueará al proxy entero.
+
+## 4. Actualizaciones: núcleo, plugins, temas e imagen
+
+Con el volumen montado en `/var/www/html`, la imagen solo copia WordPress la primera vez, cuando el volumen está vacío. A partir de ahí WordPress se gestiona a sí mismo dentro del volumen. Por eso:
+
+- **Cambiar la etiqueta de la imagen** actualiza PHP, Apache y las extensiones, **no** el núcleo de WordPress.
+- **El núcleo, los plugins y los temas** se actualizan desde *Escritorio › Actualizaciones* o con WP-CLI.
+
+:::term servidor web01 · revisar qué hay pendiente
+$ docker compose run --rm wpcli wp core check-update
+$ docker compose run --rm wpcli wp plugin list --update=available
+name            status   update     version
+galeria-pro     active   available  3.4.1
+formularios-xy  active   available  2.8.0
+$ docker compose run --rm wpcli wp plugin update formularios-xy
+:::
+
+La rutina que evita sustos:
+
+1. **Copia** (apartado 5) justo antes.
+2. Actualizar primero en **pruebas** y abrir las páginas que importan.
+3. En producción, **un plugin cada vez**, comprobando la web entre uno y otro.
+4. Plugins y temas que no se usan, **fuera**: desactivados siguen siendo código que se puede atacar. Deja un tema por defecto como reserva.
+5. La imagen: cambiar la etiqueta en `compose.yaml`, `docker compose pull` y `docker compose up -d`. Para un salto de versión mayor de MariaDB, la variable `MARIADB_AUTO_UPGRADE=1` hace que la imagen ejecute la actualización de tablas al arrancar.
+
+## 5. Copias de la base de datos y de wp-content, y la prueba de restauración
+
+Lo que hay que guardar: la **base de datos** (entradas, páginas, usuarios, ajustes) y **wp-content** (subidas, plugins, temas). Más `compose.yaml` y `.env`, en un sitio seguro.
+
+:::term servidor web01 · copia diaria
+$ docker compose exec -T db sh -c 'exec mariadb-dump --single-transaction -uroot -p"$MARIADB_ROOT_PASSWORD" wordpress' | gzip > backups/wp-db-$(date +%F).sql.gz
+$ docker compose exec -T wordpress tar -C /var/www/html -czf - wp-content > backups/wp-content-$(date +%F).tar.gz
+$ ls -lh backups/
+-rw-r--r-- 1 root root  18M Oct 30 02:00 wp-db-2026-10-30.sql.gz
+-rw-r--r-- 1 root root 2.1G Oct 30 02:01 wp-content-2026-10-30.tar.gz
+:::
+
+- `--single-transaction` hace una copia coherente sin bloquear la web. Las imágenes recientes de MariaDB traen `mariadb-dump`, no `mysqldump`.
+- Las copias, **fuera del servidor**: si se pierde la máquina, se pierden con ella.
+
+La prueba de restauración, una vez al mes en el servidor de pruebas con el mismo `compose.yaml`:
+
+:::term servidor de pruebas · restaurar
+$ docker compose up -d db wordpress
+$ gunzip -c wp-db-2026-10-30.sql.gz | docker compose exec -T db sh -c 'exec mariadb -uroot -p"$MARIADB_ROOT_PASSWORD" wordpress'
+$ docker compose exec -T wordpress tar -C /var/www/html -xzf - < wp-content-2026-10-30.tar.gz
+:::
+
+Apunta en tu fichero `hosts` el nombre de la web a la IP de pruebas y comprueba: la portada carga, puedes iniciar sesión, la última entrada publicada está, las imágenes se ven y el formulario de contacto envía. Anota cuánto ha tardado: ese es tu tiempo real de recuperación.
+
+## 6. Bastionado básico
+
+- **xmlrpc.php** bloqueado en el proxy (apartado 3), salvo que una aplicación lo use de verdad. Es la puerta favorita de los ataques de fuerza bruta.
+- **Ningún usuario llamado admin**, pocos administradores y con segundo factor. Quien solo publica, con el rol *Editor*. Revisa la lista con `wp user list --role=administrator`.
+- **Edición de ficheros desactivada** con `DISALLOW_FILE_EDIT`: nadie edita PHP desde el navegador. Si todas las actualizaciones las haces tú por WP-CLI, `DISALLOW_FILE_MODS` también impide instalar o actualizar plugins desde el escritorio.
+- **wp-admin** restringido a la VPN o a las IPs de la oficina en el proxy, dejando público `admin-ajax.php`, que usan muchos temas.
+- **PHP en uploads** bloqueado: un fichero subido nunca debe ejecutarse.
+- **WAF**: ModSecurity con las reglas OWASP CRS en el proxy, el WAF de la CDN si la hay, o un plugin de seguridad. Empieza en modo detección, revisa los falsos positivos y luego bloquea.
+
+## 7. El ticket: "la web está caída después de actualizar un plugin"
+
+Marketing actualizó un plugin desde el escritorio. La web muestra *Ha habido un error crítico en esta web*.
+
+1. **Qué ha fallado**: el error está en el registro del contenedor.
+
+:::term servidor web01 · buscar el error
+$ docker compose logs --since 30m wordpress | grep -i "fatal"
+PHP Fatal error:  Uncaught Error: Call to undefined function galeria_pro_init() in /var/www/html/wp-content/plugins/galeria-pro/galeria-pro.php:48
+$ docker compose run --rm wpcli wp plugin deactivate galeria-pro --skip-plugins
+Plugin 'galeria-pro' deactivated.
+:::
+
+2. **Desactívalo**. `--skip-plugins` hace que WP-CLI no cargue los plugins, porque el roto también lo tumbaría. Sin WP-CLI vale renombrar la carpeta: `docker compose exec wordpress mv wp-content/plugins/galeria-pro wp-content/plugins/galeria-pro.off`.
+3. **Vuelve a la versión anterior** si hace falta la funcionalidad: `wp plugin install galeria-pro --version=3.4.1 --force --skip-plugins` y actívalo.
+4. Si la actualización **cambió la base de datos**, la versión anterior puede no entenderla: entonces se restaura la copia de antes de la actualización, la del apartado 5.
+5. **Después**: aviso al proveedor del plugin, el plugin fuera de las actualizaciones automáticas hasta que lo corrijan, y la regla de que las actualizaciones pasan por pruebas.
+
+## Siguientes pasos
+
+- La guía de **Docker** cubre la base: volúmenes, registros y qué hacer cuando un contenedor se reinicia solo.
+- La guía de **PostgreSQL/MySQL/SQL Server** profundiza en copias y restauraciones de bases de datos.
+- Para llevar el registro de cada prueba de restauración (qué se restauró, cuándo, cuánto tardó y si funcionó), el repositorio **32-backup-restore-test-tracker** de mi GitHub sigue esa misma idea.
+""",
+  en="""
+## What you'll get
+
+The corporate WordPress site running in containers on a Linux server: WordPress and its database defined in one file, data in volumes, passwords kept out of the repository, HTTPS in front, a daily backup you know how to restore because you have tried it, and the routine for when an update leaves the site blank.
+
+## Before you start
+
+- A server with Docker and the Compose plugin (see the **Docker** guide), with space for the volumes and the backups.
+- The site's name in DNS pointing at the server and a certificate (Let's Encrypt or the corporate CA's).
+- A second server or test machine to restore onto.
+
+## 1. The compose file: WordPress, MariaDB and volumes
+
+:::term compose.yaml
+services:
+  db:
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 30s
+      retries: 5
+
+  wordpress:
+    image: wordpress:6.9-php8.3-apache
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+      WORDPRESS_CONFIG_EXTRA: |
+        define('DISALLOW_FILE_EDIT', true);
+    volumes:
+      - wp_html:/var/www/html
+    ports:
+      - "127.0.0.1:8080:80"
+
+  wpcli:
+    image: wordpress:cli-php8.3
+    profiles: ["tools"]
+    user: "33:33"
+    environment:
+      HOME: /tmp
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - wp_html:/var/www/html
+
+volumes:
+  db_data:
+  wp_html:
+:::
+
+- **Pinned tags**, never `latest`: that way you know which version runs and an update is a change you decide on. Use whichever WordPress tag is current when you read this, with its PHP version.
+- The port is published on `127.0.0.1` only: WordPress is reached through the proxy, not directly.
+- `wpcli` sits in a *profile*: it does not start with `docker compose up`, only when you call it. It runs as user 33 because that is `www-data` in the Debian-based WordPress image; the WP-CLI image uses a different one by default and would cause permission problems.
+
+## 2. Passwords out of git
+
+Compose reads the `${DB_PASSWORD}` variables from an `.env` file next to `compose.yaml`. That file is never pushed:
+
+:::term server web01 · /srv/corporate-site
+$ cat .gitignore
+.env
+backups/
+$ chmod 600 .env
+$ git check-ignore -v .env
+.gitignore:1:.env	.env
+:::
+
+- The repository holds an `.env.example` with the variable names and no values.
+- `docker compose config` prints the file with the variables resolved: **passwords included**. Do not paste it into a ticket.
+- The `MARIADB_*` variables only apply when the data volume is empty, the first time. Changing the password in `.env` later does not change it in the database: do it with `ALTER USER` and then in `.env`.
+
+! If a password ever reached a commit, change it. Removing it from the history does not undo someone having cloned it.
+
+## 3. Reverse proxy with TLS
+
+An Nginx on the server itself terminates HTTPS and forwards to WordPress. Traefik or Caddy work just as well; what matters is the headers:
+
+:::term /etc/nginx/conf.d/corporate-site.conf
+server {
+    listen 80;
+    server_name www.contoso.example;
+    return 301 https://$host$request_uri;
+}
+server {
+    listen 443 ssl;
+    server_name www.contoso.example;
+    ssl_certificate     /etc/letsencrypt/live/www.contoso.example/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/www.contoso.example/privkey.pem;
+    client_max_body_size 64m;
+
+    location = /xmlrpc.php { deny all; }
+    location ~* ^/wp-content/uploads/.*\\.php$ { deny all; }
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+:::
+
+- The official image already adds to `wp-config.php` the code that reads `X-Forwarded-Proto`. Without that header WordPress thinks it is on HTTP and you get redirect loops or mixed content.
+- Behind the proxy, Apache sees the proxy's IP. If a security plugin blocks by IP it needs to read `X-Forwarded-For`, or it will block the whole proxy.
+
+## 4. Updates: core, plugins, themes and image
+
+With the volume mounted on `/var/www/html`, the image only copies WordPress the first time, when the volume is empty. From then on WordPress manages itself inside the volume. So:
+
+- **Changing the image tag** updates PHP, Apache and the extensions, **not** the WordPress core.
+- **Core, plugins and themes** are updated from *Dashboard › Updates* or with WP-CLI.
+
+:::term server web01 · check what is pending
+$ docker compose run --rm wpcli wp core check-update
+$ docker compose run --rm wpcli wp plugin list --update=available
+name            status   update     version
+galeria-pro     active   available  3.4.1
+formularios-xy  active   available  2.8.0
+$ docker compose run --rm wpcli wp plugin update formularios-xy
+:::
+
+The routine that avoids surprises:
+
+1. **Backup** (section 5) right before.
+2. Update in **test** first and open the pages that matter.
+3. In production, **one plugin at a time**, checking the site between each.
+4. Plugins and themes nobody uses, **removed**: deactivated, they are still code that can be attacked. Keep one default theme as a fallback.
+5. The image: change the tag in `compose.yaml`, `docker compose pull` and `docker compose up -d`. For a major MariaDB version jump, the `MARIADB_AUTO_UPGRADE=1` variable makes the image run the table upgrade on start.
+
+## 5. Backing up the database and wp-content, and the restore test
+
+What to keep: the **database** (posts, pages, users, settings) and **wp-content** (uploads, plugins, themes). Plus `compose.yaml` and `.env`, somewhere safe.
+
+:::term server web01 · daily backup
+$ docker compose exec -T db sh -c 'exec mariadb-dump --single-transaction -uroot -p"$MARIADB_ROOT_PASSWORD" wordpress' | gzip > backups/wp-db-$(date +%F).sql.gz
+$ docker compose exec -T wordpress tar -C /var/www/html -czf - wp-content > backups/wp-content-$(date +%F).tar.gz
+$ ls -lh backups/
+-rw-r--r-- 1 root root  18M Oct 30 02:00 wp-db-2026-10-30.sql.gz
+-rw-r--r-- 1 root root 2.1G Oct 30 02:01 wp-content-2026-10-30.tar.gz
+:::
+
+- `--single-transaction` takes a consistent copy without locking the site. Recent MariaDB images ship `mariadb-dump`, not `mysqldump`.
+- Backups go **off the server**: if the machine is lost, they are lost with it.
+
+The restore test, once a month on the test server with the same `compose.yaml`:
+
+:::term test server · restore
+$ docker compose up -d db wordpress
+$ gunzip -c wp-db-2026-10-30.sql.gz | docker compose exec -T db sh -c 'exec mariadb -uroot -p"$MARIADB_ROOT_PASSWORD" wordpress'
+$ docker compose exec -T wordpress tar -C /var/www/html -xzf - < wp-content-2026-10-30.tar.gz
+:::
+
+Point the site's name at the test IP in your `hosts` file and check: the home page loads, you can sign in, the latest post is there, images show and the contact form sends. Write down how long it took: that is your real recovery time.
+
+## 6. Basic hardening
+
+- **xmlrpc.php** blocked at the proxy (section 3), unless an application really uses it. It is the favourite door for brute-force attacks.
+- **No user called admin**, few administrators and all with a second factor. People who only publish get the *Editor* role. Review the list with `wp user list --role=administrator`.
+- **File editing off** with `DISALLOW_FILE_EDIT`: nobody edits PHP from the browser. If you do every update yourself with WP-CLI, `DISALLOW_FILE_MODS` also stops plugins being installed or updated from the dashboard.
+- **wp-admin** restricted to the VPN or office IPs at the proxy, leaving `admin-ajax.php` public, because many themes use it.
+- **PHP in uploads** blocked: an uploaded file must never run.
+- **WAF**: ModSecurity with the OWASP CRS rules at the proxy, the CDN's WAF if there is one, or a security plugin. Start in detection mode, review the false positives, then block.
+
+## 7. The ticket: "the site is down after a plugin update"
+
+Marketing updated a plugin from the dashboard. The site shows *There has been a critical error on this website*.
+
+1. **What failed**: the error is in the container log.
+
+:::term server web01 · find the error
+$ docker compose logs --since 30m wordpress | grep -i "fatal"
+PHP Fatal error:  Uncaught Error: Call to undefined function galeria_pro_init() in /var/www/html/wp-content/plugins/galeria-pro/galeria-pro.php:48
+$ docker compose run --rm wpcli wp plugin deactivate galeria-pro --skip-plugins
+Plugin 'galeria-pro' deactivated.
+:::
+
+2. **Deactivate it**. `--skip-plugins` stops WP-CLI loading plugins, because the broken one would take it down too. Without WP-CLI, renaming the folder works: `docker compose exec wordpress mv wp-content/plugins/galeria-pro wp-content/plugins/galeria-pro.off`.
+3. **Go back to the previous version** if the feature is needed: `wp plugin install galeria-pro --version=3.4.1 --force --skip-plugins` and activate it.
+4. If the update **changed the database**, the old version may not understand it: then you restore the pre-update backup from section 5.
+5. **Afterwards**: tell the plugin vendor, take the plugin out of automatic updates until they fix it, and keep the rule that updates go through test.
+
+## Next steps
+
+- The **Docker** guide covers the basics: volumes, logs and what to do when a container keeps restarting.
+- The **PostgreSQL/MySQL/SQL Server** guide goes deeper into database backups and restores.
+- To keep a record of each restore test (what was restored, when, how long it took and whether it worked), the **32-backup-restore-test-tracker** repository on my GitHub follows that same idea.
+""")
+
+# ---------------------------------------------------------------- Sector 3 · RabbitMQ in the clinical integration layer
+g(slug="rabbitmq-colas-de-integracion-clinica-y-un-consumidor-parado", topic="rabbitmq-clinica", date="2026-10-30",
+  title_es="RabbitMQ en la capa de integración de una plataforma clínica: colas, consumidores, dead-letter y los resultados que no llegan a la historia clínica",
+  title_en="RabbitMQ in a clinical platform's integration layer: queues, consumers, dead-letter and the results that never reach the patient record",
+  seo_title_en="RabbitMQ: clinical queues and a dead consumer · Iñigo González",
+  seo_title_es="RabbitMQ: colas clínicas y consumidor parado · Iñigo González",
+  dek_es="Cómo viaja un mensaje entre sistemas clínicos por RabbitMQ, qué mirar en la interfaz de gestión y con rabbitmqctl, qué alarmas poner sobre profundidad de cola y consumidores, para qué sirve una cola dead-letter, la cola que crece porque se paró un consumidor y los resultados de laboratorio no llegan a la historia clínica, cómo recuperarlo sin perder ni duplicar mensajes y cómo contárselo a los equipos clínicos.",
+  dek_en="How a message travels between clinical systems through RabbitMQ, what to look at in the management UI and with rabbitmqctl, which alarms to set on queue depth and consumers, what a dead-letter queue is for, the queue that grows because a consumer stopped and lab results never reach the patient record, how to recover without losing or duplicating messages, and how to tell the clinical teams.",
+  es="""
+## Qué vas a conseguir
+
+Entender lo bastante la capa de mensajería de una plataforma clínica para vigilarla y para actuar cuando algo se atasca. Entre el sistema de laboratorio, el de admisiones y la historia clínica electrónica viajan mensajes (normalmente HL7) que pasan por un motor de integración y por RabbitMQ. Si una cola deja de vaciarse, en planta no se ven resultados. La guía cubre cómo se monta, qué se mira, qué alarmas poner y cómo recuperar un consumidor parado sin perder ni duplicar un solo mensaje.
+
+## Antes de empezar
+
+- Un usuario de la **interfaz de gestión** (puerto 15672) con la etiqueta *monitoring* para el equipo de operaciones; *administrator* solo para quien cambia la configuración.
+- Acceso al servidor de RabbitMQ para `rabbitmqctl` y `rabbitmq-diagnostics` (necesitan los permisos del usuario del servicio).
+- El **mapa de interfaces**: qué sistema publica en qué exchange, qué cola lee cada consumidor y quién es el responsable de cada uno (equipo de integración, proveedor, operaciones).
+- El **procedimiento de contingencia** clínico: qué hace el laboratorio o la planta cuando los resultados no llegan por la vía normal. No lo decide IT, pero IT tiene que saber cuándo activarlo.
+
+## 1. Cómo viaja un resultado
+
+Un resultado validado en el laboratorio sale como mensaje, pasa por el motor de integración y llega a la historia clínica:
+
+1. El **motor de integración** recibe el mensaje del sistema de laboratorio y lo **publica** en un *exchange* (`clinico.resultados`) con una clave de enrutado (`lab.resultado`).
+2. El exchange, según sus **bindings**, lo deja en una o varias **colas**: `lab.resultados.hce` para la historia clínica, y quizá otra para un sistema de archivo.
+3. Un **consumidor** (el servicio de integración de la historia clínica) lee de la cola, entrega el mensaje y, cuando la historia clínica lo ha aceptado, envía el **ack**. Solo entonces RabbitMQ lo borra.
+
+| Pieza | Ejemplo | Lo que conviene saber |
+|---|---|---|
+| Virtual host | `clinico` | Separa entornos y permisos: producción y pruebas no comparten vhost |
+| Exchange | `clinico.resultados` (topic) | No guarda nada: si no hay cola enlazada, el mensaje se pierde |
+| Cola | `lab.resultados.hce` (quorum) | Duradera y replicada en el clúster; los mensajes, persistentes |
+| Consumidor | servicio de integración HCE | Ack manual y *prefetch* bajo (por ejemplo, 10) |
+| Dead-letter | `lab.resultados.dlq` | Donde van los mensajes que no se pueden entregar |
+
+## 2. Mirar el estado: interfaz de gestión y rabbitmqctl
+
+En la interfaz de gestión, la pestaña de colas muestra por cada una: **Ready** (esperando consumidor), **Unacked** (entregados y sin confirmar), **Total**, las tasas de entrada, entrega y ack, y el número de **consumidores**. Desde la línea de comandos:
+
+:::term rabbit01 · estado de las colas
+$ rabbitmqctl list_queues -p clinico name type messages_ready messages_unacknowledged consumers
+Timeout: 60.0 seconds ...
+Listing queues for vhost clinico ...
+name                 type     messages_ready  messages_unacknowledged  consumers
+lab.resultados.hce   quorum   0               3                        1
+adt.eventos.hce      quorum   0               0                        1
+lab.resultados.dlq   quorum   0               0                        0
+$ rabbitmqctl list_consumers -p clinico
+$ rabbitmq-diagnostics alarms
+Node rabbit@rabbit01 reported no alarms, local or clustered
+:::
+
+- **Ready bajo, Unacked bajo y un consumidor**: la cola se vacía al ritmo al que llega. Es lo normal.
+- **Ready creciendo y 0 consumidores**: nadie está leyendo. Es el caso del apartado 5.
+- **Ready creciendo, Unacked igual al prefetch y la tasa de ack a cero**: el consumidor está conectado pero **atascado**, esperando a la historia clínica o colgado.
+- `rabbitmq-diagnostics alarms` muestra las alarmas de **memoria y disco**. Con una activa, RabbitMQ **bloquea a los publicadores**: el problema ya no es una cola, es todo el nodo.
+
+## 3. Qué monitorizar
+
+- **Profundidad de cola** (`messages_ready`) por encima de un umbral durante unos minutos. El umbral depende de la cola: una de resultados que suele estar a cero no es igual que una de carga nocturna.
+- **Consumidores = 0** en las colas que siempre deben tener uno: alarma inmediata, sin esperar a que crezca.
+- **Unacked atascado** al nivel del prefetch sin acks durante varios minutos.
+- **Mensajes en la dead-letter** mayor que cero: cada uno es un resultado o un evento que no ha llegado.
+
+El plugin de Prometheus (puerto 15692) expone métricas como `rabbitmq_queue_messages_ready` y `rabbitmq_queue_consumers`; para tenerlas por cola, el endpoint `/metrics/per-object` o `/metrics/detailed`. Desde ahí, Grafana o la herramienta de monitorización de la plataforma, con la alarma enviada a la guardia.
+
+## 4. Dead-letter: los mensajes que no se pueden entregar
+
+Un mensaje va a la dead-letter cuando el consumidor lo **rechaza sin reencolar**, cuando **caduca** por TTL, cuando la cola supera su **longitud máxima** o, en colas quorum, cuando supera su **límite de entregas** (un mensaje que hace fallar al consumidor una y otra vez). Se configura con una política:
+
+:::term rabbit01 · política de dead-letter para las colas de laboratorio
+$ rabbitmqctl set_policy -p clinico DLX-lab "^lab\\.resultados\\.hce$" '{"dead-letter-exchange":"clinico.dlx"}' --apply-to queues
+$ rabbitmqctl list_policies -p clinico
+:::
+
+Con el exchange `clinico.dlx` enlazado a `lab.resultados.dlq`. Cada mensaje en la dead-letter lleva la cabecera `x-death` con el motivo y la cola de origen.
+
+- La dead-letter **se revisa, no se purga**. Cada mensaje es un dato clínico que no ha llegado a su destino.
+- Corregida la causa (un código de prueba que la historia clínica no conocía, un paciente sin dar de alta), el equipo de integración decide reprocesarlo. La interfaz de gestión puede **mover** los mensajes de vuelta a la cola original si están activos los plugins de *shovel*.
+
+! A una cola solo se le aplica **una política** (la de mayor prioridad). Una política nueva que coincida con una cola puede sustituir a la que ya tenía, con su TTL o su límite de longitud. Revisa `list_policies` antes de crear otra, y nunca pongas un TTL o una longitud máxima en una cola clínica sin dead-letter: los mensajes se descartarían en silencio.
+
+## 5. El ticket: "los resultados de laboratorio no llegan a la historia clínica"
+
+Martes, 10:35. Una supervisora de urgencias llama: hay analíticas validadas en el laboratorio que no aparecen en la historia clínica.
+
+:::term rabbit01 · la cola de resultados
+$ rabbitmqctl list_queues -p clinico name messages_ready messages_unacknowledged consumers
+name                 messages_ready  messages_unacknowledged  consumers
+lab.resultados.hce   1842            0                        0
+adt.eventos.hce      0               0                        1
+lab.resultados.dlq   0               0                        0
+:::
+
+1.842 resultados esperando y **ningún consumidor**. Los mensajes están a salvo en la cola: nada se ha perdido todavía.
+
+1. **Avisa a los equipos clínicos primero** (apartado 6). Ahora mismo hay pacientes cuyos resultados no se ven.
+2. **Por qué se paró el consumidor**: el servidor del servicio de integración se reinició a las 10:02 en la ventana de parches y el servicio no arrancó. La interfaz de gestión lo confirma: la cola empezó a crecer a las 10:02.
+3. **Antes de arrancarlo**: comprueba que la historia clínica acepta mensajes (su servicio de entrada responde) y avisa a su equipo de que va a llegar un volumen alto. El prefetch bajo hace que el consumidor procese a un ritmo que la historia clínica aguanta.
+4. **Arranca el consumidor** y mira cómo baja la cola: `Ready` disminuye, `Unacked` se mantiene en torno al prefetch y la tasa de ack es constante.
+5. **Comprueba duplicados**. Si el consumidor se cortó con mensajes sin confirmar, RabbitMQ los devuelve a la cola marcados como *redelivered* y se entregan otra vez. El consumidor debe ser **idempotente**: descartar un mensaje cuyo identificador de control HL7 (MSH-10) ya procesó.
+6. **Concilia**: número de resultados que el laboratorio envió entre las 10:02 y el final de la recuperación frente a los recibidos en la historia clínica, y dead-letter vacía o revisada.
+7. **Cierra con los equipos clínicos** y deja anotado: hora de inicio, de detección y de fin, número de mensajes retrasados, causa y acción. La acción obvia: el servicio en arranque automático y la alarma de **consumidores = 0**, que tenía que haber saltado a las 10:03 y no a las 10:35 por una llamada.
+
+Lo que **no** se hace para "desatascar":
+
+- **Purgar** la cola: borra resultados clínicos sin vuelta atrás.
+- Borrar y recrear la cola, o reiniciar el nodo de RabbitMQ: no arregla un consumidor parado y arriesga lo que hay dentro.
+
+## 6. Comunicar con los equipos clínicos
+
+Lo que necesitan saber, en su idioma y no en el de la cola:
+
+- **Qué está afectado**: "los resultados de laboratorio validados desde las 10:02 no se están volcando en la historia clínica". Qué **no** lo está: imagen, prescripción, admisiones.
+- **Que no se han perdido**: están guardados y llegarán con su hora original de validación.
+- **Qué hacer mientras tanto**: consultar el visor del laboratorio y seguir el procedimiento de contingencia para los valores críticos, que el laboratorio comunica por teléfono.
+- **Cuándo es la próxima actualización**, aunque no haya novedades. No prometas una hora de solución que no controlas.
+- **Al cerrar**: "todos los resultados están ya en la historia clínica; los validados entre las 10:02 y las 11:10 llegaron con retraso". Si algún servicio debe revisar resultados de esa franja, que lo sepa ahora.
+
+## Siguientes pasos
+
+- La guía de **Monitorización** de este sector cubre cómo desplegar alarmas que lleguen a alguien y cómo responder a ellas.
+- La guía de **Windows Server: actualizaciones planificadas sin cortar el servicio** encaja con la causa del ticket: qué comprobar después de reiniciar un servidor que da servicio a otros.
+- Para coordinar un incidente con impacto clínico (roles, cronología, comunicaciones y revisión posterior), el repositorio **36-major-incident-command-kit** de mi GitHub sigue esa idea.
+""",
+  en="""
+## What you'll get
+
+Understanding the messaging layer of a clinical platform well enough to watch it and to act when something gets stuck. Between the lab system, the admissions system and the electronic patient record travel messages (usually HL7) that go through an integration engine and through RabbitMQ. If a queue stops draining, nobody on the ward sees results. The guide covers how it is put together, what to look at, which alarms to set and how to recover a stopped consumer without losing or duplicating a single message.
+
+## Before you start
+
+- A **management UI** user (port 15672) with the *monitoring* tag for the operations team; *administrator* only for whoever changes the configuration.
+- Access to the RabbitMQ server for `rabbitmqctl` and `rabbitmq-diagnostics` (they need the service user's permissions).
+- The **interface map**: which system publishes to which exchange, which queue each consumer reads and who owns each one (integration team, vendor, operations).
+- The clinical **contingency procedure**: what the lab or the ward does when results do not arrive the normal way. IT does not decide it, but IT has to know when to trigger it.
+
+## 1. How a result travels
+
+A result validated in the lab leaves as a message, goes through the integration engine and reaches the patient record:
+
+1. The **integration engine** receives the message from the lab system and **publishes** it to an *exchange* (`clinico.resultados`) with a routing key (`lab.resultado`).
+2. The exchange, according to its **bindings**, drops it into one or more **queues**: `lab.resultados.hce` for the patient record, and perhaps another for an archive system.
+3. A **consumer** (the patient record's integration service) reads from the queue, delivers the message and, once the patient record has accepted it, sends the **ack**. Only then does RabbitMQ delete it.
+
+| Piece | Example | What is worth knowing |
+|---|---|---|
+| Virtual host | `clinico` | Separates environments and permissions: production and test never share a vhost |
+| Exchange | `clinico.resultados` (topic) | Stores nothing: if no queue is bound, the message is lost |
+| Queue | `lab.resultados.hce` (quorum) | Durable and replicated across the cluster; messages persistent |
+| Consumer | patient record integration service | Manual ack and a low *prefetch* (say, 10) |
+| Dead-letter | `lab.resultados.dlq` | Where the messages that cannot be delivered go |
+
+## 2. Checking the state: management UI and rabbitmqctl
+
+In the management UI, the queues tab shows for each one: **Ready** (waiting for a consumer), **Unacked** (delivered and not yet confirmed), **Total**, the incoming, deliver and ack rates, and the number of **consumers**. From the command line:
+
+:::term rabbit01 · queue status
+$ rabbitmqctl list_queues -p clinico name type messages_ready messages_unacknowledged consumers
+Timeout: 60.0 seconds ...
+Listing queues for vhost clinico ...
+name                 type     messages_ready  messages_unacknowledged  consumers
+lab.resultados.hce   quorum   0               3                        1
+adt.eventos.hce      quorum   0               0                        1
+lab.resultados.dlq   quorum   0               0                        0
+$ rabbitmqctl list_consumers -p clinico
+$ rabbitmq-diagnostics alarms
+Node rabbit@rabbit01 reported no alarms, local or clustered
+:::
+
+- **Low Ready, low Unacked and one consumer**: the queue drains as fast as messages arrive. That is normal.
+- **Ready growing and 0 consumers**: nobody is reading. That is the case in section 5.
+- **Ready growing, Unacked equal to the prefetch and the ack rate at zero**: the consumer is connected but **stuck**, waiting on the patient record or hung.
+- `rabbitmq-diagnostics alarms` shows the **memory and disk** alarms. With one active, RabbitMQ **blocks publishers**: the problem is no longer one queue, it is the whole node.
+
+## 3. What to monitor
+
+- **Queue depth** (`messages_ready`) above a threshold for a few minutes. The threshold depends on the queue: a results queue that usually sits at zero is not the same as a night-time batch queue.
+- **Consumers = 0** on the queues that must always have one: an immediate alarm, without waiting for it to grow.
+- **Unacked stuck** at the prefetch level with no acks for several minutes.
+- **Messages in the dead-letter** above zero: each one is a result or an event that has not arrived.
+
+The Prometheus plugin (port 15692) exposes metrics such as `rabbitmq_queue_messages_ready` and `rabbitmq_queue_consumers`; to get them per queue, use the `/metrics/per-object` or `/metrics/detailed` endpoint. From there, Grafana or the platform's monitoring tool, with the alarm sent to the on-call person.
+
+## 4. Dead-letter: the messages that cannot be delivered
+
+A message goes to the dead-letter when the consumer **rejects it without requeueing**, when it **expires** through TTL, when the queue exceeds its **maximum length** or, on quorum queues, when it exceeds its **delivery limit** (a message that makes the consumer fail over and over). It is configured with a policy:
+
+:::term rabbit01 · dead-letter policy for the lab queues
+$ rabbitmqctl set_policy -p clinico DLX-lab "^lab\\.resultados\\.hce$" '{"dead-letter-exchange":"clinico.dlx"}' --apply-to queues
+$ rabbitmqctl list_policies -p clinico
+:::
+
+With the `clinico.dlx` exchange bound to `lab.resultados.dlq`. Every message in the dead-letter carries the `x-death` header with the reason and the source queue.
+
+- The dead-letter **is reviewed, not purged**. Each message is clinical data that has not reached its destination.
+- Once the cause is fixed (a test code the patient record did not know, a patient not yet registered), the integration team decides whether to reprocess it. The management UI can **move** messages back to the original queue if the *shovel* plugins are enabled.
+
+! Only **one policy** applies to a queue (the one with the highest priority). A new policy that matches a queue can replace the one it already had, with its TTL or length limit. Check `list_policies` before creating another, and never put a TTL or a maximum length on a clinical queue without a dead-letter: messages would be dropped silently.
+
+## 5. The ticket: "lab results are not reaching the patient record"
+
+Tuesday, 10:35. An emergency department supervisor calls: there are blood tests validated in the lab that do not show up in the patient record.
+
+:::term rabbit01 · the results queue
+$ rabbitmqctl list_queues -p clinico name messages_ready messages_unacknowledged consumers
+name                 messages_ready  messages_unacknowledged  consumers
+lab.resultados.hce   1842            0                        0
+adt.eventos.hce      0               0                        1
+lab.resultados.dlq   0               0                        0
+:::
+
+1,842 results waiting and **no consumer**. The messages are safe in the queue: nothing has been lost yet.
+
+1. **Tell the clinical teams first** (section 6). Right now there are patients whose results cannot be seen.
+2. **Why the consumer stopped**: the integration service's server rebooted at 10:02 in the patching window and the service did not start. The management UI confirms it: the queue started growing at 10:02.
+3. **Before starting it**: check that the patient record accepts messages (its inbound service responds) and warn its team that a high volume is coming. The low prefetch keeps the consumer at a pace the patient record can take.
+4. **Start the consumer** and watch the queue drain: `Ready` goes down, `Unacked` stays around the prefetch and the ack rate is steady.
+5. **Check for duplicates**. If the consumer was cut off with unconfirmed messages, RabbitMQ returns them to the queue marked as *redelivered* and they are delivered again. The consumer must be **idempotent**: drop a message whose HL7 control ID (MSH-10) it has already processed.
+6. **Reconcile**: number of results the lab sent between 10:02 and the end of the recovery against those received in the patient record, and a dead-letter that is empty or reviewed.
+7. **Close with the clinical teams** and write it down: start, detection and end times, number of delayed messages, cause and action. The obvious action: the service set to start automatically, and the **consumers = 0** alarm, which should have fired at 10:03 and not at 10:35 through a phone call.
+
+What you **do not** do to "unblock" it:
+
+- **Purge** the queue: it deletes clinical results with no way back.
+- Delete and recreate the queue, or restart the RabbitMQ node: it does not fix a stopped consumer and puts what is inside at risk.
+
+## 6. Communicating with the clinical teams
+
+What they need to know, in their language rather than the queue's:
+
+- **What is affected**: "lab results validated since 10:02 are not being written to the patient record". What is **not**: imaging, prescribing, admissions.
+- **That nothing has been lost**: the results are stored and will arrive with their original validation time.
+- **What to do in the meantime**: check the lab viewer and follow the contingency procedure for critical values, which the lab phones through.
+- **When the next update is**, even if there is no news. Do not promise a fix time you do not control.
+- **On closing**: "all results are now in the patient record; those validated between 10:02 and 11:10 arrived late". If any department needs to review results from that window, they should know now.
+
+## Next steps
+
+- This sector's **Monitoring** guide covers how to deploy alarms that reach someone and how to respond to them.
+- The **Windows Server: planned updates without interrupting the service** guide fits the cause of this ticket: what to check after rebooting a server other systems depend on.
+- To coordinate an incident with clinical impact (roles, timeline, communications and the review afterwards), the **36-major-incident-command-kit** repository on my GitHub follows that idea.
+""")
+
+# ---------------------------------------------------------------- 2.x · GLPI
+g(slug="glpi-inventario-con-glpi-agent-tickets-sla-y-un-equipo-que-deja-de-reportar", topic="glpi", date="2026-10-30",
+  title_es="GLPI: inventario con GLPI Agent, tickets con SLA y un equipo que deja de reportar",
+  title_en="GLPI: inventory with GLPI Agent, tickets with SLAs and a device that stops reporting",
+  seo_title_en="GLPI: inventory, helpdesk and SLA · Iñigo González",
+  seo_title_es="GLPI: inventario, tickets y SLA · Iñigo González",
+  dek_es="Lo básico para instalar GLPI, el inventario nativo con GLPI Agent, entidades y perfiles, tickets con SLA, activos vinculados a los tickets, notificaciones por correo, plugins con cuidado, las copias y qué mirar cuando un equipo deja de enviar inventario.",
+  dek_en="The basics of installing GLPI, native inventory with GLPI Agent, entities and profiles, tickets with SLAs, assets linked to tickets, email notifications, plugins with care, backups, and what to check when a device stops sending inventory.",
+  es="""
+## Qué vas a conseguir
+
+Un GLPI que sirve para las dos cosas que se le piden: saber qué equipos hay y dónde, y llevar los tickets del soporte con tiempos que se cumplen. Inventario automático con GLPI Agent, usuarios que ven solo lo suyo, tickets con SLA y el equipo afectado enlazado, correos que salen y una copia que te deja actualizar sin miedo.
+
+## Antes de empezar
+
+- La **versión**. La rama actual es la 11.0; la 10.0 termina con la 10.0.28 y deja de recibir correcciones cuando salga la 12.0. Mira los requisitos de la versión que vas a instalar en la documentación oficial: para GLPI 11, **PHP 8.2** o superior y **MySQL 8.0** o **MariaDB 10.6** como mínimo, con extensiones como `intl`, `gd`, `curl`, `mysqli`, `bcmath` y `mbstring`.
+- Un servidor Linux con Apache o Nginx y PHP-FPM, y una base de datos con un usuario solo para GLPI.
+- El nombre en DNS (`glpi.contoso.example`) y un certificado: los agentes enviarán el inventario por HTTPS.
+
+## 1. Instalación: lo que no hay que saltarse
+
+- La raíz del servidor web apunta a la carpeta **`public`** de GLPI (`/var/www/glpi/public`), no a la carpeta de GLPI. Así los ficheros de configuración y los datos no quedan expuestos.
+- La base de datos se crea desde el asistente web o por consola con `php bin/console db:install`.
+- Al terminar, GLPI avisa en la página de inicio de dos cosas que se arreglan el primer día: las **cuentas por defecto** (`glpi`, `tech`, `normal`, `post-only`) con su contraseña de fábrica, que se cambian o se desactivan, y el fichero `install/install.php`, que se borra.
+- Las **acciones automáticas** (envío de correos, SLA, limpiezas) necesitan el cron. En la crontab del usuario del servidor web:
+
+:::term glpi01 · crontab de www-data
+$ crontab -u www-data -e
+* * * * * php /var/www/glpi/front/cron.php
+:::
+
+Y en *Configuración › Acciones automáticas*, las importantes en modo **CLI**. En modo GLPI solo se ejecutan cuando alguien navega por la aplicación.
+
+## 2. Entidades y perfiles
+
+- Las **entidades** son el árbol de la organización: `Contoso › Madrid`, `Contoso › Bilbao`. Cada equipo y cada ticket pertenece a una. Sirven para que el técnico de una sede vea su sede, no todo.
+- Los **perfiles** dicen qué puede hacer cada uno. Los de fábrica cubren casi todo: *Super-Admin*, *Admin*, *Supervisor*, *Technician*, *Hotliner*, *Observer*, *Self-Service* y *Read-Only*.
+- Una **habilitación** une usuario, perfil y entidad, con la opción **recursiva** para que incluya las entidades hijas.
+- Con LDAP configurado (*Configuración › Autenticación › Directorios LDAP*), las **reglas de asignación de habilitaciones** dan a cada usuario su perfil y su entidad según su grupo o su OU. Los usuarios entran con *Self-Service*: abren tickets y ven los suyos.
+
+## 3. Inventario con GLPI Agent
+
+Desde GLPI 10 el inventario es **nativo**: ya no hace falta el plugin FusionInventory. El plugin *GLPI Inventory* solo se instala si necesitas descubrimiento de red, despliegue de software o inventario de ESX.
+
+1. Actívalo en *Administración › Inventario*, casilla **Activar inventario**. Sin ella, GLPI rechaza todo lo que envían los agentes.
+2. Instala el agente en los equipos con la dirección del servidor:
+
+:::term PowerShell · instalación silenciosa en Windows
+$ msiexec /i GLPI-Agent-x64.msi /quiet SERVER="https://glpi.contoso.example/" RUNNOW=1 TAG="madrid"
+:::
+
+En Linux, el paquete de la distribución o el instalador oficial, con `server = https://glpi.contoso.example/` en su configuración. En la flota, el MSI se reparte con Intune, MECM o una GPO.
+
+3. **Reglas**. En *Administración › Reglas*, las reglas de importación y vinculación deciden si un envío crea un equipo nuevo o actualiza uno existente (por número de serie, UUID o nombre). Las de asignación de entidad pueden usar la **etiqueta** (`TAG`) del agente para dejar cada equipo en su sede.
+4. Comprueba la ficha de un equipo: modelo, número de serie, sistema operativo, discos, software, y la fecha del **último inventario**.
+
+> El agente tiene una página local en `http://127.0.0.1:62354` con un enlace para forzar el inventario. Es la forma más rápida de probar desde el propio equipo.
+
+## 4. Tickets y SLA
+
+- **Categorías** pensadas para quien abre el ticket (*Correo*, *Impresoras*, *Acceso a aplicaciones*), no para el organigrama de IT.
+- **Prioridad** calculada a partir de urgencia e impacto, con la matriz de *Configuración › General › Asistencia*.
+- **Calendario** laboral con festivos (en los desplegables de configuración): un SLA de 8 horas no debe contar la noche.
+- **SLA** en *Configuración › Niveles de servicio*: un nivel de servicio con su calendario y dentro los dos tiempos, **TTO** (tiempo para hacerse cargo) y **TTR** (tiempo de resolución), con niveles de escalado si quieres que avise antes de vencer.
+- **Reglas de negocio para tickets** (*Administración › Reglas*) que asignan el SLA, el grupo técnico y la categoría según el origen o el tipo. Así nadie elige el SLA a mano.
+
+## 5. Activos vinculados a los tickets
+
+Un ticket con el equipo enlazado (pestaña **Elementos**) deja historial: en la ficha del portátil se ven todos sus tickets.
+
+- En el perfil *Self-Service*, el permiso para vincular elementos al crear el ticket deja que el usuario elija **Mis dispositivos**: los equipos que el inventario le ha asignado.
+- Para que eso funcione, el campo **usuario** del equipo tiene que estar bien. El agente lo rellena con el último usuario que inició sesión; revisa las reglas si llega vacío.
+
+## 6. Notificaciones
+
+1. *Configuración › Notificaciones*: activa las notificaciones y las de **correo**.
+2. Configura el remitente y el servidor SMTP en la configuración de seguimiento por correo, y usa **Enviar un correo de prueba al administrador**.
+3. Revisa qué eventos avisan a quién: nuevo ticket, seguimiento, solución, SLA a punto de vencer. Menos y útiles: si los técnicos reciben veinte correos por ticket, dejan de leerlos.
+4. Los correos salen por la cola de notificaciones, que vacía una acción automática. Si no sale ninguno, lo primero es el cron del apartado 1.
+
+## 7. Plugins, con cuidado
+
+- Cada plugin es código de terceros dentro de tu helpdesk. Instala solo los que resuelven algo concreto y desde el **Marketplace** (*Configuración › Plugins*).
+- Antes de actualizar GLPI, comprueba que **cada plugin** tiene versión compatible. En los saltos de versión mayor (de 10 a 11) muchos tardan semanas en estar listos, y un plugin incompatible se desactiva.
+- **Desactivar** no es **desinstalar**: desinstalar suele borrar las tablas del plugin y sus datos.
+
+## 8. Copias
+
+Dos partes: la **base de datos** y las carpetas con datos y configuración.
+
+:::term glpi01 · copia diaria
+$ mysqldump --single-transaction -u glpi_backup -p glpi | gzip > /backup/glpi-db-$(date +%F).sql.gz
+$ tar -C /var/www/glpi -czf /backup/glpi-files-$(date +%F).tar.gz config files marketplace plugins
+:::
+
+- `config` tiene la conexión a la base de datos y la clave de cifrado (`glpicrypt.key`). Sin esa clave, las contraseñas guardadas (LDAP, SMTP, receptores) no se pueden descifrar al restaurar.
+- `files` guarda los documentos adjuntos a los tickets.
+- Copia **siempre** antes de actualizar GLPI o un plugin, y restaura en pruebas de vez en cuando: un GLPI que arranca, con tickets y adjuntos, es la prueba.
+
+## 9. El ticket: "este portátil no actualiza el inventario desde hace un mes"
+
+La ficha de `PC-MAD-0142` dice que su último inventario fue hace 34 días.
+
+1. **En GLPI, antes de tocar el equipo**: busca por **número de serie**, no por nombre. Si el portátil se reinstaló con otro nombre, puede que esté enviando inventario a otra ficha, y lo que tienes es un duplicado. Mira también *Equipos rechazados* en el inventario: las reglas pueden estar rechazando sus envíos.
+2. **En el equipo**: el servicio del agente en marcha, y un inventario forzado con detalle:
+
+:::term PowerShell · en PC-MAD-0142
+$ Get-Service -Name glpi-agent
+Status   Name         DisplayName
+------   ----         -----------
+Running  glpi-agent   GLPI Agent
+$ & "C:\\Program Files\\GLPI-Agent\\glpi-agent.bat" --force --debug
+[info] target server0: server https://glpi-old.contoso.example/plugins/fusioninventory/
+[error] [http client] communication error: 500 Can't connect to glpi-old.contoso.example:443
+:::
+
+3. **Lee el error**. Aquí está claro: el agente sigue apuntando al **servidor antiguo** con la ruta de FusionInventory. Las causas habituales:
+
+| Lo que dice el agente | Causa probable |
+|---|---|
+| No conecta con el servidor | URL antigua o mal escrita, DNS, cortafuegos o proxy |
+| Error de certificado | Certificado renovado con una CA que el equipo no conoce |
+| Conecta, pero GLPI no lo guarda | Inventario desactivado, o una regla lo rechaza (*Equipos rechazados*) |
+| Todo bien, pero no lo ves | Se ha guardado en otra entidad o en otra ficha (duplicado) |
+
+4. **Corrige** la dirección (en Windows, el valor `server` en `HKLM\\SOFTWARE\\GLPI-Agent`, o reinstalando el MSI con `SERVER=`), fuerza otro inventario y comprueba que cambia la fecha en la ficha.
+5. **Busca si hay más**: una búsqueda de equipos con último inventario de hace más de 30 días saca todos los que se quedaron atrás en la migración. Corrígelos con la herramienta de despliegue, no uno a uno.
+
+## Siguientes pasos
+
+- La guía de **Jira Service Management** cubre qué tiene que tener un ticket bien hecho, sea cual sea la herramienta.
+- La guía de **Device42** sigue la misma idea de inventario para la sala de comunicaciones: racks, U y contratos.
+- Con el inventario y los tickets en GLPI, el siguiente paso es medir: tiempos frente al SLA, reaperturas y volumen por categoría. Es lo que hace el repositorio **04-itsm-kpi-dashboard** de mi GitHub, y **38-it-asset-lifecycle-planner** aprovecha el inventario para planificar qué equipos toca renovar.
+""",
+  en="""
+## What you'll get
+
+A GLPI that does the two things it is asked to do: tell you which devices there are and where, and run the support tickets with times that are met. Automatic inventory with GLPI Agent, users who only see their own things, tickets with SLAs and the affected device linked, emails that go out and a backup that lets you upgrade without fear.
+
+## Before you start
+
+- The **version**. The current branch is 11.0; 10.0 ends with 10.0.28 and stops getting fixes when 12.0 comes out. Check the requirements of the version you are installing in the official documentation: for GLPI 11, **PHP 8.2** or later and at least **MySQL 8.0** or **MariaDB 10.6**, with extensions such as `intl`, `gd`, `curl`, `mysqli`, `bcmath` and `mbstring`.
+- A Linux server with Apache or Nginx and PHP-FPM, and a database with a user just for GLPI.
+- The DNS name (`glpi.contoso.example`) and a certificate: the agents will send inventory over HTTPS.
+
+## 1. Installation: what not to skip
+
+- The web server's document root points to GLPI's **`public`** folder (`/var/www/glpi/public`), not to the GLPI folder. That way the configuration files and the data are not exposed.
+- The database is created from the web wizard or from the console with `php bin/console db:install`.
+- Once done, GLPI warns on the home page about two things you fix on day one: the **default accounts** (`glpi`, `tech`, `normal`, `post-only`) with their factory passwords, which you change or disable, and the `install/install.php` file, which you delete.
+- **Automatic actions** (sending emails, SLAs, clean-ups) need cron. In the web server user's crontab:
+
+:::term glpi01 · www-data crontab
+$ crontab -u www-data -e
+* * * * * php /var/www/glpi/front/cron.php
+:::
+
+And in *Setup › Automatic actions*, the important ones in **CLI** mode. In GLPI mode they only run when someone is browsing the application.
+
+## 2. Entities and profiles
+
+- **Entities** are the organisation tree: `Contoso › Madrid`, `Contoso › Bilbao`. Every device and every ticket belongs to one. They let a site's technician see their site, not everything.
+- **Profiles** say what each person can do. The built-in ones cover almost everything: *Super-Admin*, *Admin*, *Supervisor*, *Technician*, *Hotliner*, *Observer*, *Self-Service* and *Read-Only*.
+- An **authorisation** ties user, profile and entity together, with the **recursive** option so it includes child entities.
+- With LDAP configured (*Setup › Authentication › LDAP directories*), the **authorisation assignment rules** give each user their profile and entity based on their group or OU. Users come in with *Self-Service*: they open tickets and see their own.
+
+## 3. Inventory with GLPI Agent
+
+Since GLPI 10 inventory is **native**: the FusionInventory plugin is no longer needed. The *GLPI Inventory* plugin is only installed if you need network discovery, software deployment or ESX inventory.
+
+1. Turn it on in *Administration › Inventory*, the **Enable inventory** box. Without it, GLPI rejects everything the agents send.
+2. Install the agent on the devices with the server address:
+
+:::term PowerShell · silent install on Windows
+$ msiexec /i GLPI-Agent-x64.msi /quiet SERVER="https://glpi.contoso.example/" RUNNOW=1 TAG="madrid"
+:::
+
+On Linux, the distribution package or the official installer, with `server = https://glpi.contoso.example/` in its configuration. Across the fleet, the MSI goes out with Intune, MECM or a GPO.
+
+3. **Rules**. In *Administration › Rules*, the import and link rules decide whether a submission creates a new device or updates an existing one (by serial number, UUID or name). The entity assignment rules can use the agent's **tag** (`TAG`) to place each device in its site.
+4. Check a device's record: model, serial number, operating system, disks, software, and the date of the **last inventory**.
+
+> The agent has a local page at `http://127.0.0.1:62354` with a link to force an inventory. It is the quickest way to test from the device itself.
+
+## 4. Tickets and SLAs
+
+- **Categories** designed for the person opening the ticket (*Email*, *Printers*, *Application access*), not for IT's org chart.
+- **Priority** calculated from urgency and impact, with the matrix in *Setup › General › Assistance*.
+- A working **calendar** with public holidays (in the setup dropdowns): an 8-hour SLA should not count the night.
+- **SLAs** in *Setup › Service levels*: a service level with its calendar and, inside it, the two times, **TTO** (time to own) and **TTR** (time to resolve), with escalation levels if you want a warning before they expire.
+- **Business rules for tickets** (*Administration › Rules*) that assign the SLA, the technician group and the category based on the source or the type. That way nobody picks the SLA by hand.
+
+## 5. Assets linked to tickets
+
+A ticket with the device linked (the **Items** tab) leaves a history: the laptop's record shows all its tickets.
+
+- In the *Self-Service* profile, the right to link items when creating a ticket lets users pick **My devices**: the devices the inventory has assigned to them.
+- For that to work, the device's **user** field has to be right. The agent fills it with the last user who signed in; check the rules if it arrives empty.
+
+## 6. Notifications
+
+1. *Setup › Notifications*: turn on notifications and **email** notifications.
+2. Set the sender and the SMTP server in the email followups configuration, and use **Send a test email to the administrator**.
+3. Review which events notify whom: new ticket, followup, solution, SLA about to expire. Fewer and useful: if technicians get twenty emails per ticket they stop reading them.
+4. Emails leave through the notification queue, which an automatic action empties. If none go out, the first thing to check is the cron from section 1.
+
+## 7. Plugins, with care
+
+- Every plugin is third-party code inside your helpdesk. Install only the ones that solve something specific, and from the **Marketplace** (*Setup › Plugins*).
+- Before upgrading GLPI, check that **every plugin** has a compatible version. On major version jumps (10 to 11) many take weeks to be ready, and an incompatible plugin gets disabled.
+- **Disabling** is not **uninstalling**: uninstalling usually drops the plugin's tables and its data.
+
+## 8. Backups
+
+Two parts: the **database** and the folders with data and configuration.
+
+:::term glpi01 · daily backup
+$ mysqldump --single-transaction -u glpi_backup -p glpi | gzip > /backup/glpi-db-$(date +%F).sql.gz
+$ tar -C /var/www/glpi -czf /backup/glpi-files-$(date +%F).tar.gz config files marketplace plugins
+:::
+
+- `config` holds the database connection and the encryption key (`glpicrypt.key`). Without that key, the stored passwords (LDAP, SMTP, receivers) cannot be decrypted after a restore.
+- `files` holds the documents attached to tickets.
+- Back up **every time** before upgrading GLPI or a plugin, and restore to test now and then: a GLPI that starts, with tickets and attachments, is the proof.
+
+## 9. The ticket: "this laptop has not updated its inventory for a month"
+
+The record for `PC-MAD-0142` says its last inventory was 34 days ago.
+
+1. **In GLPI, before touching the device**: search by **serial number**, not by name. If the laptop was reimaged with another name, it may be sending inventory to another record, and what you have is a duplicate. Also check *Refused equipment* in the inventory: the rules may be rejecting its submissions.
+2. **On the device**: the agent service running, and a forced inventory with detail:
+
+:::term PowerShell · on PC-MAD-0142
+$ Get-Service -Name glpi-agent
+Status   Name         DisplayName
+------   ----         -----------
+Running  glpi-agent   GLPI Agent
+$ & "C:\\Program Files\\GLPI-Agent\\glpi-agent.bat" --force --debug
+[info] target server0: server https://glpi-old.contoso.example/plugins/fusioninventory/
+[error] [http client] communication error: 500 Can't connect to glpi-old.contoso.example:443
+:::
+
+3. **Read the error**. Here it is clear: the agent still points at the **old server** with the FusionInventory path. The usual causes:
+
+| What the agent says | Likely cause |
+|---|---|
+| Cannot connect to the server | Old or mistyped URL, DNS, firewall or proxy |
+| Certificate error | Certificate renewed with a CA the device does not know |
+| Connects, but GLPI does not store it | Inventory disabled, or a rule rejects it (*Refused equipment*) |
+| All fine, but you cannot see it | Stored in another entity or another record (duplicate) |
+
+4. **Fix** the address (on Windows, the `server` value in `HKLM\\SOFTWARE\\GLPI-Agent`, or reinstall the MSI with `SERVER=`), force another inventory and check the date changes on the record.
+5. **Look for others**: a search for devices whose last inventory is more than 30 days old brings up every one left behind in the migration. Fix them with the deployment tool, not one by one.
+
+## Next steps
+
+- The **Jira Service Management** guide covers what a well-made ticket needs, whatever the tool.
+- The **Device42** guide follows the same inventory idea for the comms room: racks, U positions and contracts.
+- With inventory and tickets in GLPI, the next step is measuring: times against SLA, reopenings and volume by category. That is what the **04-itsm-kpi-dashboard** repository on my GitHub does, and **38-it-asset-lifecycle-planner** uses the inventory to plan which devices are due for replacement.
 """)
