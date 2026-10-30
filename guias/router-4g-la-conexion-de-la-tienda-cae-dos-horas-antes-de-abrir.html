@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Store offline before opening: 4G plan B · Iñigo González" data-title-es="Tienda sin conexión antes de abrir: plan B 4G · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Store offline before opening: 4G plan B · Iñigo González</title>
+<meta name="description" content="How to locate the fault in order (link, switch port, VLAN, DHCP and the floor&#x27;s comms room), set up a 4G or 5G router as plan B, what works through it (POS, payment terminals, VPN) and what doesn&#x27;t, how to secure the temporary link, and the follow-up with the building&#x27;s technicians and the carrier.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/router-4g-la-conexion-de-la-tienda-cae-dos-horas-antes-de-abrir.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Store offline before opening: 4G plan B · Iñigo González">
+<meta property="og:description" content="How to locate the fault in order (link, switch port, VLAN, DHCP and the floor&#x27;s comms room), set up a 4G or 5G router as plan B, what works through it (POS, payment terminals, VPN) and what doesn&#x27;t, how to secure the temporary link, and the follow-up with the building&#x27;s technicians and the carrier.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/router-4g-la-conexion-de-la-tienda-cae-dos-horas-antes-de-abrir.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Store offline before opening: 4G plan B · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"4G router: the store's connection drops two hours before opening","alternativeHeadline":"Router 4G: la conexión de la tienda cae dos horas antes de abrir","description":"How to locate the fault in order (link, switch port, VLAN, DHCP and the floor's comms room), set up a 4G or 5G router as plan B, what works through it (POS, payment terminals, VPN) and what doesn't, how to secure the temporary link, and the follow-up with the building's technicians and the carrier.","datePublished":"2026-10-30","dateModified":"2026-10-30","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/router-4g-la-conexion-de-la-tienda-cae-dos-horas-antes-de-abrir.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/router-4g-la-conexion-de-la-tienda-cae-dos-horas-antes-de-abrir.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"4G router - The store offline before opening"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 2","item":"https://inigogonzalezgarcia.github.io/guias/sector-2.html"},{"@type":"ListItem","position":4,"name":"4G router: the store's connection drops two hours before opening","item":"https://inigogonzalezgarcia.github.io/guias/router-4g-la-conexion-de-la-tienda-cae-dos-horas-antes-de-abrir.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="sector-2.html"><span class="es">Sector 2</span><span class="en">Sector 2</span></a></p>
+    <h1><span class="es">Router 4G: la conexión de la tienda cae dos horas antes de abrir</span><span class="en">4G router: the store&#x27;s connection drops two hours before opening</span></h1>
+    <p class="lede"><span class="es">Cómo localizar el corte en orden (enlace, puerto del switch, VLAN, DHCP y la sala de comunicaciones de la planta), montar un router 4G o 5G como plan B, qué funciona a través de él (TPV, datáfonos, VPN) y qué no, cómo asegurar el enlace temporal y el seguimiento con los técnicos del edificio y el operador.</span><span class="en">How to locate the fault in order (link, switch port, VLAN, DHCP and the floor&#x27;s comms room), set up a 4G or 5G router as plan B, what works through it (POS, payment terminals, VPN) and what doesn&#x27;t, how to secure the temporary link, and the follow-up with the building&#x27;s technicians and the carrier.</span></p><p class="label post-meta"><span class="es">Sector 2</span><span class="en">Sector 2</span> · <span class="es">Router 4G - La tienda sin conexión antes de abrir</span><span class="en">4G router - The store offline before opening</span> · <span class="es">6 min</span><span class="en">6 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">30 oct 2026</span><span class="en">30 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Que una tienda o un corner sin conexión a dos horas de abrir abra igualmente y cobrando. Son dos trabajos en paralelo: encontrar dónde está el corte y, mientras tanto, dar servicio por otro camino. Si esperas a resolver la avería para tener el plan B, llegas tarde a la apertura.</p>
+<h2>Antes de empezar</h2>
+<ul><li>La <strong>ficha de la tienda</strong>: puntos de red y su etiqueta, IP del router o cortafuegos, VLAN, y el contacto de los técnicos del edificio o del gran almacén.</li><li>Un <strong>router 4G o 5G</strong> (o un módem USB que el router de la tienda acepte como salida de respaldo) con SIM de datos activa, configurado y probado antes. En una apertura viaja en el kit.</li><li>Un portátil con cable de red y un cable largo de repuesto.</li><li>Saber qué necesita salir de la tienda: el TPV hacia su servidor de ventas, el datáfono hacia la entidad de cobro, la VPN hacia la red central.</li></ul>
+<h2>1. Los primeros diez minutos: dónde está el corte</h2>
+<p>Ve de lo físico a lo lógico, y apunta la hora de cada comprobación:</p>
+<ol><li><strong>Enlace</strong>: ¿hay luz en el puerto del router o del switch del mostrador? Sin luz, el problema está en el cable, la toma o el otro extremo.</li><li><strong>Cable y toma</strong>: prueba con tu cable y tu portátil directamente en la toma de la pared. Descarta el switch pequeño de debajo del mostrador.</li><li><strong>IP</strong>: si hay enlace, mira qué recibe el portátil.</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · portátil conectado a la toma del corner</span><button class="t-copy" type="button" data-copy="ipconfig | Select-String &quot;IPv4|Autoconfig|Puerta&quot;&#10;Get-NetAdapter -Name Ethernet | Select-Object Status, LinkSpeed" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>ipconfig | Select-String &quot;IPv4|Autoconfig|Puerta&quot;</span><span class="t-out">   Dirección IPv4 de configuración automática: 169.254.88.14</span><span class="t-out">   Puerta de enlace predeterminada . . . . . :</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-NetAdapter -Name Ethernet | Select-Object Status, LinkSpeed</span><span class="t-out">Status LinkSpeed</span><span class="t-out">------ ---------</span><span class="t-out">Up     1 Gbps</span></code></pre></figure>
+<p>Hay enlace a 1 Gbps pero la dirección es <code>169.254.x.x</code>: el equipo no recibe DHCP. Eso apunta a la <strong>VLAN</strong> del puerto del switch del edificio o al servidor DHCP, no al cable.</p>
+<ol><li><strong>Con IP fija conocida</strong>: si la tienda usa direccionamiento fijo, pon la IP del TPV en el portátil (con el TPV desconectado) y haz <code>ping</code> a la puerta de enlace. Si no responde, el tráfico no llega a la red de la tienda.</li><li><strong>El router de la tienda</strong>: si llega a la puerta de enlace pero no a Internet, el problema está en la salida (circuito, operador, cortafuegos).</li></ol>
+<p class="g-warn">No reinicies equipos del edificio ni desenchufes nada en su sala. Tu trabajo ahí es enseñarles qué toma es y qué ves.</p>
+<h2>2. La sala de comunicaciones de la planta, con sus técnicos</h2>
+<p>Con el diagnóstico de arriba, la conversación con los técnicos del gran almacén es corta:</p>
+<ul><li><strong>La etiqueta de la toma</strong> del corner y la posición del <strong>panel de parcheo</strong>. Siguen el latiguillo hasta su switch.</li><li><strong>El puerto del switch</strong>: estado, VLAN asignada y si tiene seguridad de puerto o 802.1X que bloquee un equipo nuevo. Un cambio de mobiliario o una obra en la planta a veces deja un latiguillo suelto o un puerto movido a otra VLAN.</li><li><strong>El DHCP</strong> de esa VLAN, si lo dan ellos: si tiene direcciones libres y si la reserva del TPV sigue ahí.</li><li><strong>Un cambio reciente</strong>: pregunta si ha habido trabajos en la sala esa semana. Es la causa más habitual.</li></ul>
+<p>Mientras ellos miran, tú ya estás montando el plan B.</p>
+<h2>3. El plan B: un router 4G o 5G</h2>
+<ul><li><strong>Dónde ponerlo</strong>: cerca de una ventana o de un pasillo amplio, lejos de estructuras metálicas. Dentro de un gran almacén la cobertura cambia mucho de un punto a otro: mira las barras antes de fijarlo.</li><li><strong>Cómo conectarlo</strong>: lo más limpio es como <strong>salida de respaldo</strong> del router o cortafuegos de la tienda (WAN secundaria o módem USB, si lo admite). Así la red interna no cambia y los equipos no se tocan. Si no, conecta el switch del mostrador al router 4G y deja que dé DHCP en el mismo rango, después de desconectar el cable de subida al edificio para que no haya dos salidas.</li><li><strong>Comprueba</strong> desde el portátil: IP, puerta de enlace, <code>ping</code> a una dirección externa y resolución de nombres.</li></ul>
+<h2>4. Qué funciona por él y qué no</h2>
+<ul><li><strong>TPV en la nube o contra un servidor central</strong>: funciona, porque las conexiones salen de la tienda. Puede ir algo más lento.</li><li><strong>Datáfono</strong>: la mayoría se conecta a la entidad de cobro con conexión cifrada de salida, así que funciona por el 4G. Haz una venta de prueba con importe pequeño y anúlala.</li><li><strong>VPN de sitio a sitio</strong>: funciona si la tienda <strong>inicia</strong> el túnel. Una red móvil suele poner la SIM detrás de un NAT del operador (CGNAT), así que IPsec necesita NAT-T (UDP 4500). La central no podrá iniciar la conexión hacia la tienda.</li><li><strong>Lo que no funciona</strong>: cualquier cosa que entre desde fuera hacia la tienda (acceso remoto al TPV desde la central, una cámara consultada desde fuera) y lo que dependa de la IP pública fija de la tienda, como una lista blanca en un proveedor.</li><li><strong>Consumo</strong>: aplaza actualizaciones y sincronizaciones grandes. La tarifa de datos tiene límite.</li></ul>
+<h2>5. Seguridad del enlace temporal</h2>
+<ul><li><strong>Contraseña de administración</strong> del router cambiada antes de que salga de la oficina. Nunca la que trae de fábrica.</li><li><strong>Wi-Fi</strong>: si no se usa, desactivada. Si se usa, WPA2 o WPA3 con una clave larga y WPS apagado. Que el personal no la comparta con nadie para el móvil.</li><li><strong>Solo los equipos de la tienda</strong> detrás del router: ni clientes ni el personal del edificio.</li><li>El tráfico de cobro va cifrado de extremo a extremo, pero la red de pago sigue sin mezclarse con otras redes: lo que pida tu política de PCI DSS sigue vigente con el enlace temporal.</li><li>Apunta en el ticket <strong>cuándo se conectó y cuándo se retiró</strong>. Un router de respaldo olvidado sigue siendo una salida a Internet que nadie vigila.</li></ul>
+<h2>6. El ticket: &quot;el corner no tiene red y abrimos a las 10:00&quot;</h2>
+<p>Sábado, 8:00. El TPV no conecta y el datáfono marca error de comunicación.</p>
+<ol><li><strong>8:05</strong> El portátil en la toma da enlace y <code>169.254.x.x</code>: no hay DHCP. Aviso a los técnicos del gran almacén con la etiqueta de la toma.</li><li><strong>8:15</strong> Router 4G conectado como salida de respaldo del router del corner. Venta de prueba con datáfono: aprobada. El TPV sincroniza con el servidor de ventas.</li><li><strong>8:30</strong> En la sala de la planta, el técnico encuentra el puerto movido a otra VLAN tras un trabajo de la semana anterior. Lo devuelve a la VLAN de concesiones.</li><li><strong>8:45</strong> Cable de subida reconectado, el portátil recibe IP del rango correcto, el router del corner vuelve a su salida principal.</li><li><strong>9:00</strong> Venta de prueba por la red del edificio. El router 4G se queda conectado pero en reserva hasta pasada la primera hora de venta.</li><li><strong>10:00</strong> La tienda abre. Después: retirar el router, cerrar el ticket con la causa y pedir al gran almacén que el puerto quede documentado con su VLAN.</li></ol>
+<p class="g-tip">Si la causa está en el circuito del operador y no en el edificio, abre la avería con el ID de circuito y la hora de inicio, como se explica en la guía <strong>Proveedores de conectividad</strong>.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía <strong>Corner de marca en un gran almacén</strong> explica la pre-apertura en la que este plan B ya viene preparado.</li><li>La guía <strong>Cisco AnyConnect en tiendas</strong> cubre la VPN de quien visita tiendas cuando la conexión es la del móvil.</li><li>La guía <strong>Proveedores de conectividad</strong> detalla cómo abrir y escalar una avería con el operador.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>A store or corner with no connection two hours before opening still opens, and takes payments. It&#x27;s two jobs in parallel: finding where the fault is and, meanwhile, providing service another way. If you wait to fix the fault before setting up plan B, you&#x27;re late for the opening.</p>
+<h2>Before you start</h2>
+<ul><li>The <strong>store sheet</strong>: network points and their labels, IP of the router or firewall, VLAN, and the contact for the building&#x27;s or department store&#x27;s technicians.</li><li>A <strong>4G or 5G router</strong> (or a USB modem the store router accepts as a backup uplink) with an active data SIM, configured and tested beforehand. For an opening, it travels in the kit.</li><li>A laptop with a network cable and a long spare cable.</li><li>Knowing what needs to get out of the store: the POS to its sales server, the payment terminal to the acquirer, the VPN to the central network.</li></ul>
+<h2>1. The first ten minutes: where the fault is</h2>
+<p>Go from physical to logical, and note the time of each check:</p>
+<ol><li><strong>Link</strong>: is there a light on the port of the router or the counter switch? No light means the problem is in the cable, the socket or the far end.</li><li><strong>Cable and socket</strong>: test with your cable and laptop straight into the wall socket. Rule out the small switch under the counter.</li><li><strong>IP</strong>: if there&#x27;s link, see what the laptop gets.</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · laptop plugged into the corner socket</span><button class="t-copy" type="button" data-copy="ipconfig | Select-String &quot;IPv4|Autoconfiguration|Gateway&quot;&#10;Get-NetAdapter -Name Ethernet | Select-Object Status, LinkSpeed" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>ipconfig | Select-String &quot;IPv4|Autoconfiguration|Gateway&quot;</span><span class="t-out">   Autoconfiguration IPv4 Address. . : 169.254.88.14</span><span class="t-out">   Default Gateway . . . . . . . . . :</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-NetAdapter -Name Ethernet | Select-Object Status, LinkSpeed</span><span class="t-out">Status LinkSpeed</span><span class="t-out">------ ---------</span><span class="t-out">Up     1 Gbps</span></code></pre></figure>
+<p>There&#x27;s link at 1 Gbps but the address is <code>169.254.x.x</code>: the device isn&#x27;t getting DHCP. That points to the <strong>VLAN</strong> on the building&#x27;s switch port or to the DHCP server, not to the cable.</p>
+<ol><li><strong>With a known static IP</strong>: if the store uses static addressing, put the POS IP on the laptop (with the POS disconnected) and <code>ping</code> the gateway. If it doesn&#x27;t answer, traffic isn&#x27;t reaching the store network.</li><li><strong>The store router</strong>: if you reach the gateway but not the Internet, the problem is on the way out (circuit, carrier, firewall).</li></ol>
+<p class="g-warn">Don&#x27;t reboot the building&#x27;s equipment or unplug anything in its room. Your job there is to show them which socket it is and what you see.</p>
+<h2>2. The floor comms room, with its technicians</h2>
+<p>With the diagnosis above, the conversation with the department store&#x27;s technicians is short:</p>
+<ul><li><strong>The label on the corner socket</strong> and the <strong>patch panel</strong> position. They follow the patch lead to their switch.</li><li><strong>The switch port</strong>: status, assigned VLAN and whether it has port security or 802.1X blocking a new device. A furniture change or works on the floor sometimes leave a patch lead loose or a port moved to another VLAN.</li><li><strong>The DHCP</strong> for that VLAN, if they provide it: whether it has free addresses and whether the POS reservation is still there.</li><li><strong>A recent change</strong>: ask whether there was work in the room that week. It&#x27;s the most common cause.</li></ul>
+<p>While they look, you&#x27;re already setting up plan B.</p>
+<h2>3. Plan B: a 4G or 5G router</h2>
+<ul><li><strong>Where to put it</strong>: near a window or a wide aisle, away from metal structures. Inside a department store, coverage changes a lot from one spot to another: check the bars before fixing it in place.</li><li><strong>How to connect it</strong>: the cleanest way is as a <strong>backup uplink</strong> on the store&#x27;s router or firewall (secondary WAN or USB modem, if supported). The internal network doesn&#x27;t change and devices aren&#x27;t touched. If not, connect the counter switch to the 4G router and let it serve DHCP in the same range, after unplugging the uplink to the building so there aren&#x27;t two exits.</li><li><strong>Check</strong> from the laptop: IP, gateway, <code>ping</code> to an external address and name resolution.</li></ul>
+<h2>4. What works through it and what doesn&#x27;t</h2>
+<ul><li><strong>Cloud POS or POS against a central server</strong>: works, because connections go out from the store. It may be somewhat slower.</li><li><strong>Payment terminal</strong>: most connect to the acquirer over an encrypted outbound connection, so it works over 4G. Make a small test sale and void it.</li><li><strong>Site-to-site VPN</strong>: works if the store <strong>initiates</strong> the tunnel. A mobile network usually puts the SIM behind the carrier&#x27;s NAT (CGNAT), so IPsec needs NAT-T (UDP 4500). Head office won&#x27;t be able to start a connection towards the store.</li><li><strong>What doesn&#x27;t work</strong>: anything coming into the store from outside (remote access to the POS from head office, a camera viewed from outside) and anything relying on the store&#x27;s fixed public IP, such as an allow list at a provider.</li><li><strong>Data usage</strong>: defer updates and large syncs. The data plan has a cap.</li></ul>
+<h2>5. Securing the temporary link</h2>
+<ul><li>The router&#x27;s <strong>admin password</strong> changed before it leaves the office. Never the factory one.</li><li><strong>Wi-Fi</strong>: off if not used. If used, WPA2 or WPA3 with a long key and WPS off. Staff mustn&#x27;t share it with anyone for their phones.</li><li><strong>Only the store&#x27;s devices</strong> behind the router: no customers and no building staff.</li><li>Payment traffic is encrypted end to end, but the payment network still isn&#x27;t mixed with other networks: whatever your PCI DSS policy requires still applies with the temporary link.</li><li>Note in the ticket <strong>when it was connected and when it was removed</strong>. A forgotten backup router is still an Internet exit nobody watches.</li></ul>
+<h2>6. The ticket: &quot;the corner has no network and we open at 10:00&quot;</h2>
+<p>Saturday, 8:00. The POS won&#x27;t connect and the payment terminal shows a communication error.</p>
+<ol><li><strong>8:05</strong> The laptop in the socket gets link and <code>169.254.x.x</code>: no DHCP. The department store&#x27;s technicians are told, with the socket label.</li><li><strong>8:15</strong> 4G router connected as the backup uplink on the corner router. Test sale on the payment terminal: approved. The POS syncs with the sales server.</li><li><strong>8:30</strong> In the floor room, the technician finds the port moved to another VLAN after work the week before. He puts it back on the concessions VLAN.</li><li><strong>8:45</strong> Uplink cable plugged back in, the laptop gets an IP in the right range, the corner router returns to its primary uplink.</li><li><strong>9:00</strong> Test sale over the building&#x27;s network. The 4G router stays connected but on standby until after the first hour of trading.</li><li><strong>10:00</strong> The store opens. Afterwards: remove the router, close the ticket with the cause and ask the department store to document the port with its VLAN.</li></ol>
+<p class="g-tip">If the cause is in the carrier&#x27;s circuit and not in the building, raise the fault with the circuit ID and start time, as explained in the <strong>Connectivity providers</strong> guide.</p>
+<h2>Next steps</h2>
+<ul><li>The <strong>Brand corner inside a department store</strong> guide explains the pre-opening where this plan B is already prepared.</li><li>The <strong>Cisco AnyConnect in stores</strong> guide covers VPN for people visiting stores when the connection is the phone&#x27;s.</li><li>The <strong>Connectivity providers</strong> guide details how to raise and escalate a fault with the carrier.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Sector 2</span><span class="en">Sector 2</span> · <span class="es">Router 4G - La tienda sin conexión antes de abrir</span><span class="en">4G router - The store offline before opening</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="sector-2.html"><span class="es">Todas las guías del Sector 2</span><span class="en">All Sector 2 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="corner-de-marca-en-gran-almacen-checklist-de-it-de-la-pre-apertura.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Corner de marca en un gran almacén: el checklist de IT desde la obra hasta el día de apertura</span><span class="en">A brand corner inside a department store: the IT checklist from fit-out to opening day</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
