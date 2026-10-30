@@ -442,6 +442,15 @@ def related_for_post(repo):
         out.append((f'../guias/{g["slug"]}.html', f'Guía · {L["n_es"]}', f'Guide · {L["n_en"]}', g["title_es"], g["title_en"]))
     return related_html(out)
 
+def sim_more(p, lang):
+    if not p.get("app"): return ""
+    u = p["app"]
+    if lang == "es":
+        return (f'\n<p>Más sobre el simulador: <a href="{u}about?lang=es">qué es SysAdmin Desks</a>, <a href="{u}help?lang=es">cómo se resuelve un ticket paso a paso</a>, '
+                f'<a href="{u}faq?lang=es">preguntas frecuentes</a> y <a href="{u}tickets/?lang=es">los 18 tickets para practicar</a>.</p>')
+    return (f'\n<p>More about the simulator: <a href="{u}about?lang=en">what SysAdmin Desks is</a>, <a href="{u}help?lang=en">how a ticket is solved step by step</a>, '
+            f'<a href="{u}faq?lang=en">frequently asked questions</a> and <a href="{u}tickets/?lang=en">the 18 tickets to practise</a>.</p>')
+
 def aside_cta(p):
     if p.get("app"):
         return f"""<p class="label muted">{bi("Pruébalo", "Try it")}</p>
@@ -469,11 +478,11 @@ for i, p in enumerate(order):
   <div class="wrap post-grid">
     <article class="prose">
       <div class="es" lang="es">
-{md(p["es"])}
+{md(p["es"])}{sim_more(p, "es")}
 <p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
       </div>
       <div class="en" lang="en">
-{md(p["en"])}
+{md(p["en"])}{sim_more(p, "en")}
 <p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
       </div>
       <div class="news-box">
@@ -1200,6 +1209,13 @@ PRACTICE = {
 }
 def _desk_url(d, lang):
     return f"{SIM_URL}?lang={lang}#/desk/{d}"
+def _pm(lang, a, b, c, lead):
+    t = 'target="_blank" rel="noopener noreferrer"'
+    return (f'{lead} <a href="{SIM_URL}help?lang={lang}" {t}>{a}</a> · <a href="{SIM_URL}faq?lang={lang}" {t}>{b}</a> · '
+            f'<a href="{SIM_URL}tickets/?lang={lang}" {t}>{c}</a>')
+_PRACTICE_MORE = ('<p class="practice-t practice-more">'
+    + bi(_pm("es", "cómo funciona", "preguntas frecuentes", "todos los tickets", "Más sobre el simulador:"),
+         _pm("en", "how it works", "FAQ", "all the tickets", "More about the simulator:")) + '</p>')
 def practice_box(slug):
     desks = PRACTICE.get(slug, [])
     if not desks: return ""
@@ -1213,7 +1229,9 @@ def practice_box(slug):
             f'<p class="practice-h">{bi("Resuelve " + ("este ticket" if n == 1 else "estos tickets") + " en una consola simulada", "Solve " + ("this ticket" if n == 1 else "these tickets") + " in a simulated console")}</p>'
             f'<p class="practice-cmd" aria-hidden="true">PS C:\\&gt; </p>'
             f'<p class="practice-t">{bi("Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.", "Investigate, fix the cause and write the work note: it is scored when you close the ticket. Free, with your own account.")}</p>'
-            f'{links}</div></div>')
+            f'{links}'
+            f'{_PRACTICE_MORE}'
+            f'</div></div>')
 def practice_strip(slug, lang):
     desks = PRACTICE.get(slug, [])
     if not desks: return ""

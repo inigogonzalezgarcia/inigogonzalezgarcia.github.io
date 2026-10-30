@@ -507,3 +507,4 @@ a.practice-desk:hover{background:var(--accent)}
 .is-scrolly>.stage{grid-column:2;display:block;min-height:72vh;padding:10vh 0}
 .is-scrolly>.stage.reveal.in{opacity:.35;transition:opacity .35s ease}
 .is-scrolly>.stage.reveal.in.on{opacity:1}
+.practice-more{margin-top:14px}
