@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="Comms room UPS: sizing, tests and shutdown · Iñigo González" data-title-es="SAI de la sala técnica: pruebas y apagado · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Comms room UPS: sizing, tests and shutdown · Iñigo González</title>
+<meta name="description" content="The UPS in the comms room of a site with a trading floor: how to size load and runtime, dual power with A and B PDUs, battery life and replacement, monthly and annual tests, monitoring through the network card and SNMP, the shutdown order, the building&#x27;s generator and a power cut at 7:15.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/sai-de-la-sala-de-comunicaciones-dimensionado-pruebas-apagado-ordenado-y-un-corte-antes-de-la-apertura.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Comms room UPS: sizing, tests and shutdown · Iñigo González">
+<meta property="og:description" content="The UPS in the comms room of a site with a trading floor: how to size load and runtime, dual power with A and B PDUs, battery life and replacement, monthly and annual tests, monitoring through the network card and SNMP, the shutdown order, the building&#x27;s generator and a power cut at 7:15.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/sai-de-la-sala-de-comunicaciones-dimensionado-pruebas-apagado-ordenado-y-un-corte-antes-de-la-apertura.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Comms room UPS: sizing, tests and shutdown · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"The comms room UPS: sizing, A/B power, batteries, tests, orderly shutdown and a power cut before the market opens","alternativeHeadline":"SAI de la sala de comunicaciones: dimensionado, alimentación A/B, baterías, pruebas, apagado ordenado y un corte de luz antes de la apertura","description":"The UPS in the comms room of a site with a trading floor: how to size load and runtime, dual power with A and B PDUs, battery life and replacement, monthly and annual tests, monitoring through the network card and SNMP, the shutdown order, the building's generator and a power cut at 7:15.","datePublished":"2026-10-30","dateModified":"2026-10-30","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/sai-de-la-sala-de-comunicaciones-dimensionado-pruebas-apagado-ordenado-y-un-corte-antes-de-la-apertura.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/sai-de-la-sala-de-comunicaciones-dimensionado-pruebas-apagado-ordenado-y-un-corte-antes-de-la-apertura.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"UPS - Powering the comms room"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 5","item":"https://inigogonzalezgarcia.github.io/guias/sector-5.html"},{"@type":"ListItem","position":4,"name":"The comms room UPS: sizing, A/B power, batteries, tests, orderly shutdown and a power cut before the market opens","item":"https://inigogonzalezgarcia.github.io/guias/sai-de-la-sala-de-comunicaciones-dimensionado-pruebas-apagado-ordenado-y-un-corte-antes-de-la-apertura.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="sector-5.html"><span class="es">Sector 5</span><span class="en">Sector 5</span></a></p>
+    <h1><span class="es">SAI de la sala de comunicaciones: dimensionado, alimentación A/B, baterías, pruebas, apagado ordenado y un corte de luz antes de la apertura</span><span class="en">The comms room UPS: sizing, A/B power, batteries, tests, orderly shutdown and a power cut before the market opens</span></h1>
+    <p class="lede"><span class="es">El SAI de la sala de comunicaciones de una sede con sala de trading: cómo dimensionar carga y autonomía, la doble alimentación con PDU A y B, la vida de las baterías y su sustitución, las pruebas mensuales y anuales, la monitorización por tarjeta de red y SNMP, el orden de apagado, el grupo electrógeno del edificio y un corte de luz a las 7:15.</span><span class="en">The UPS in the comms room of a site with a trading floor: how to size load and runtime, dual power with A and B PDUs, battery life and replacement, monthly and annual tests, monitoring through the network card and SNMP, the shutdown order, the building&#x27;s generator and a power cut at 7:15.</span></p><p class="label post-meta"><span class="es">Sector 5</span><span class="en">Sector 5</span> · <span class="es">SAI - Alimentación de la sala de comunicaciones</span><span class="en">UPS - Powering the comms room</span> · <span class="es">9 min</span><span class="en">8 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">30 oct 2026</span><span class="en">30 Oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Que un corte de luz en la sede sea una alerta y no un incidente mayor. El SAI (sistema de alimentación ininterrumpida) de la sala de comunicaciones tiene un trabajo concreto: aguantar la carga hasta que arranque el grupo electrógeno o, si no arranca, dar tiempo para apagar en orden lo que no puede caerse de golpe. En una sede con sala de trading eso se decide antes de las 9:00, con el mercado a punto de abrir.</p>
+<h2>Antes de empezar</h2>
+<ul><li>El <strong>esquema eléctrico</strong> de la sala: de qué cuadro sale cada línea, qué SAI alimenta cada PDU y qué circuitos cubre el grupo electrógeno del edificio.</li><li>El <strong>contrato de mantenimiento</strong> del SAI (visitas, sustitución de baterías, tiempo de respuesta) y el contacto de mantenimiento del edificio para el grupo.</li><li>Acceso a la <strong>tarjeta de red</strong> de cada SAI y a la monitorización de la sede.</li></ul>
+<h2>1. Dimensionar: carga y autonomía</h2>
+<p><strong>Carga</strong>: se mide, no se suma de las placas de características. Las PDU con medición dan el consumo real de cada rack; el panel del SAI, el total.</p>
+<ul><li>Trabaja en <strong>kW</strong>, no en kVA. Un SAI de 10 kVA con factor de potencia 0,9 da 9 kW; los modernos suelen dar 1,0.</li><li>Con <strong>dos SAI, uno para la línea A y otro para la B</strong>, cada uno tiene que poder con <strong>toda</strong> la carga si el otro falla. Con 6,4 kW de carga total, dos SAI de 10 kW van al 32 % cada uno y al 64 % si queda uno solo. Por encima del 80 % con uno solo, no queda margen para crecer.</li></ul>
+<p><strong>Autonomía</strong>: depende de para qué la quieras.</p>
+<ul><li>Con <strong>grupo electrógeno</strong> que cubre la sala, el SAI tiene que aguantar el arranque y la conmutación (segundos) más un margen por si el primer intento falla. 10-15 minutos es un objetivo habitual.</li><li>Sin grupo, o si el grupo falla, la autonomía tiene que cubrir el <strong>apagado ordenado completo</strong> con margen. Mide cuánto tarda (en la prueba anual) y suma la mitad.</li><li>La autonomía real baja con la edad de las baterías y con la temperatura. La del día de la instalación no es la de dentro de cuatro años.</li></ul>
+<h2>2. Doble alimentación con PDU A y B</h2>
+<ul><li>Cada equipo crítico con <strong>dos fuentes</strong>: una a la PDU A y otra a la PDU B, cada PDU de un SAI distinto (o una de SAI y otra de red con su propia protección, según el diseño de la sala).</li><li>Los equipos con <strong>una sola fuente</strong> (algunos aparatos de operadores, consolas, equipos antiguos) van con un <strong>conmutador de transferencia</strong> (ATS) de rack, o se aceptan y se documentan como punto único de fallo.</li><li>Comprueba que <strong>cada fuente lleva carga</strong>. Una fuente desenchufada o averiada no se nota hasta que se corta la otra línea: las alertas de fuente redundante perdida de iDRAC, iLO y los switches tienen que llegar a alguien.</li><li>Cada PDU por debajo del 40-50 % de su capacidad en uso normal: si cae la otra línea, tiene que absorber toda la carga del rack.</li></ul>
+<h2>3. Baterías: vida y sustitución</h2>
+<ul><li>Las baterías de plomo selladas (VRLA) de los SAI de sala suelen tener una <strong>vida de diseño</strong> de 5 años o de 10 en las de larga duración, pero la vida real suele ser menor y depende sobre todo de la <strong>temperatura</strong>: por encima de unos 25 °C, se acorta mucho.</li><li>Mantén la sala entre 20 y 25 °C y vigila la temperatura del propio SAI, no solo la del aire acondicionado.</li><li>Planifica la <strong>sustitución</strong> por fecha y por resultado de las pruebas, no esperando a la alarma de &quot;replace battery&quot;. Anota la fecha de la última sustitución en el inventario.</li></ul>
+<h2>4. Pruebas: cada mes y cada año</h2>
+<p><strong>Cada mes</strong>:</p>
+<ul><li><strong>Autotest</strong> de baterías desde la tarjeta de red o el panel, fuera del horario de mercado. Resultado y fecha en el registro.</li><li>Revisión de alarmas activas, carga de cada SAI y de cada PDU, temperatura y autonomía estimada.</li></ul>
+<p><strong>Cada año</strong>, con el mantenedor y en ventana de cambio aprobada:</p>
+<ul><li><strong>Prueba de descarga</strong> o calibración de autonomía con carga real: cuántos minutos aguanta de verdad.</li><li>Prueba del <strong>bypass</strong> y de cada línea por separado: se corta la A y se comprueba que todo sigue en la B, y al revés. Es la prueba que encuentra la fuente desenchufada.</li><li><strong>Prueba con el grupo electrógeno</strong> del edificio coordinada con la propiedad: corte de red, arranque, conmutación y vuelta.</li></ul>
+<h2>5. Monitorización: tarjeta de red y SNMP</h2>
+<p>Cada SAI con su <strong>tarjeta de gestión de red</strong> en la VLAN de gestión, con la contraseña de fábrica cambiada y <strong>SNMPv3</strong> hacia la monitorización. Muchos SAI publican el MIB estándar de SAI (RFC 1628) además del suyo:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Linux · consulta SNMPv3 al SAI de la línea A</span><button class="t-copy" type="button" data-copy="snmpget -v3 -l authPriv -u mon-sai -a SHA -A &quot;$AUTH&quot; -x AES -X &quot;$PRIV&quot; sai-cr1-a.mgmt.local 1.3.6.1.2.1.33.1.4.1.0 1.3.6.1.2.1.33.1.2.1.0 1.3.6.1.2.1.33.1.2.3.0 1.3.6.1.2.1.33.1.2.4.0" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>snmpget -v3 -l authPriv -u mon-sai -a SHA -A &quot;$AUTH&quot; -x AES -X &quot;$PRIV&quot; sai-cr1-a.mgmt.local 1.3.6.1.2.1.33.1.4.1.0 1.3.6.1.2.1.33.1.2.1.0 1.3.6.1.2.1.33.1.2.3.0 1.3.6.1.2.1.33.1.2.4.0</span><span class="t-out">SNMPv2-SMI::mib-2.33.1.4.1.0 = INTEGER: 5</span><span class="t-out">SNMPv2-SMI::mib-2.33.1.2.1.0 = INTEGER: 2</span><span class="t-out">SNMPv2-SMI::mib-2.33.1.2.3.0 = INTEGER: 18</span><span class="t-out">SNMPv2-SMI::mib-2.33.1.2.4.0 = INTEGER: 71</span><span class="t-cmt"># 4.1 origen de la salida: 3 normal, 4 bypass, 5 batería</span><span class="t-cmt"># 2.1 estado de batería: 2 normal, 3 baja, 4 agotada</span><span class="t-cmt"># 2.3 minutos estimados de autonomía · 2.4 carga de batería en %</span></code></pre></figure>
+<p>Alertas que tienen que llegar al teléfono de guardia, no solo al correo: <strong>en batería</strong>, <strong>batería baja</strong>, <strong>sustituir batería</strong>, <strong>sobrecarga</strong>, <strong>en bypass</strong>, <strong>temperatura alta</strong> y <strong>tarjeta sin respuesta</strong> (si la monitorización no la ve, tampoco verá un corte).</p>
+<h2>6. El orden de apagado</h2>
+<p>Si el corte va a durar más que la batería, se apaga por capas, de fuera hacia dentro, y se enciende al revés:</p>
+<ol><li><strong>Lo que no hace falta para operar</strong>: entornos de prueba, servidores de impresión, equipos de sala de reuniones.</li><li><strong>Aplicaciones</strong>: máquinas virtuales de aplicación, antes que sus bases de datos.</li><li><strong>Bases de datos</strong>: con su parada limpia, para no arrancar después con una recuperación.</li><li><strong>Almacenamiento compartido</strong> y después los <strong>hosts de virtualización</strong>.</li><li><strong>La red, al final</strong>: núcleo, cortafuegos y la gestión fuera de banda siguen vivos hasta el último momento, porque son el camino por el que llegan las órdenes de apagado y por el que verás lo que pasa.</li></ol>
+<ul><li>El software de apagado del fabricante (o un agente en cada hipervisor) puede lanzar cada capa al cruzar un umbral de autonomía o de tiempo en batería. <strong>Los umbrales se fijan con la autonomía medida</strong>, no con la del catálogo.</li><li>Los equipos de la sala de trading que gestiona su propio equipo (servidores de datos de mercado, aparatos de operadores) tienen su orden y su responsable: acuérdalo por escrito antes, no durante el corte.</li><li>Los <strong>puestos de trading</strong> suelen ir en tomas de la planta respaldadas por SAI, a menudo de otro color. Si no lo están, un corte apaga los puestos aunque la sala aguante.</li></ul>
+<h2>7. El grupo electrógeno y la propiedad del edificio</h2>
+<p>En una oficina alquilada, el grupo suele ser <strong>de la propiedad</strong>:</p>
+<ul><li>Pide por escrito <strong>qué circuitos cubre</strong>: sala de comunicaciones, climatización de la sala (sin ella, el SAI aguanta pero la sala se calienta), plantas, ascensores.</li><li><strong>Tiempo de arranque y conmutación</strong> del grupo y quién lo prueba, con qué frecuencia y si es con carga.</li><li><strong>Combustible</strong>: horas de autonomía y contrato de reposición.</li><li>Contacto 24x7 del mantenimiento del edificio y aviso previo de los cortes programados, para moverlos fuera de mercado.</li></ul>
+<h2>8. El caso: corte de luz a las 7:15</h2>
+<p>Martes, 7:15. Salta la alerta &quot;en batería&quot; de los dos SAI. La sala de trading empieza a llenarse a las 8:00; el mercado abre a las 9:00.</p>
+<ol><li><strong>7:16 · ¿Ha arrancado el grupo?</strong> Los SAI siguen en batería pasado un minuto: el grupo no ha entrado. Llamada al mantenimiento del edificio.</li><li><strong>7:18 · Cuánto queda</strong>: la tarjeta de red dice 18 minutos de autonomía y 71 % de carga en la línea A. El apagado ordenado completo tarda 12 minutos: el margen es corto.</li><li><strong>7:19 · Primera capa</strong>: se apagan los entornos de prueba y los equipos no críticos para ganar autonomía. Aviso al responsable de la sala de trading y a continuidad de negocio: &quot;corte en el edificio, la sala aguanta con SAI, el grupo no ha arrancado; decisión a las 7:22&quot;.</li><li><strong>7:21 · El grupo arranca</strong>: el mantenimiento lo pone en marcha a mano. Los SAI vuelven a la entrada de red del grupo y empiezan a recargar.</li><li><strong>7:30 · Comprobaciones</strong>: los SAI en línea, cada PDU con las dos fuentes con carga, la climatización de la sala funcionando. Las baterías están al 60 %: si hay un segundo corte, no hay autonomía para otro apagado ordenado. Los equipos apagados siguen apagados hasta que la batería se recupere.</li><li><strong>8:00 · Antes de la apertura</strong>: los puestos de trading encienden y tienen red y datos de mercado. Si los puestos no estaban en tomas con SAI, se reinician y se comprueban fila a fila.</li><li><strong>Después</strong>: el informe con la hora de cada paso, la causa del fallo del grupo pedida por escrito a la propiedad, una nueva prueba del grupo con carga y la revisión de los umbrales de apagado con la autonomía que se ha visto.</li></ol>
+<p class="g-warn">Si el grupo no hubiera arrancado, a las 7:22 se habría lanzado el apagado ordenado completo y se habría activado el plan de continuidad: trasladar a los operadores al sitio alternativo antes de las 9:00 es una decisión de negocio que se toma con tiempo, no con el último minuto de batería.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <strong>Device42</strong> del Sector 5 guarda qué equipo va a qué PDU, la base para comprobar que cortar una línea no deja nada sin corriente.</li><li>La guía de <strong>DR/BCP: preparar y supervisar una prueba de recuperación</strong> explica cómo llevar a los operadores al sitio alternativo si la sede no aguanta.</li><li>El repositorio <strong>36-major-incident-command-kit</strong> de mi GitHub sirve para llevar un corte así como incidente mayor: cronología, comunicaciones y revisión posterior.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>A power cut at the site that is an alert, not a major incident. The UPS (uninterruptible power supply) in the comms room has a specific job: carry the load until the generator starts or, if it doesn&#x27;t, give you time to shut down in order whatever can&#x27;t drop all at once. On a site with a trading floor that is decided before 9:00, with the market about to open.</p>
+<h2>Before you start</h2>
+<ul><li>The room&#x27;s <strong>electrical diagram</strong>: which board each line comes from, which UPS feeds each PDU and which circuits the building&#x27;s generator covers.</li><li>The UPS <strong>maintenance contract</strong> (visits, battery replacement, response time) and the building maintenance contact for the generator.</li><li>Access to each UPS&#x27;s <strong>network card</strong> and to the site&#x27;s monitoring.</li></ul>
+<h2>1. Sizing: load and runtime</h2>
+<p><strong>Load</strong> is measured, not added up from rating plates. Metered PDUs give the real consumption of each rack; the UPS panel, the total.</p>
+<ul><li>Work in <strong>kW</strong>, not kVA. A 10 kVA UPS with a 0.9 power factor delivers 9 kW; modern ones usually deliver 1.0.</li><li>With <strong>two UPS units, one for line A and one for line B</strong>, each must be able to carry the <strong>whole</strong> load if the other fails. With 6.4 kW of total load, two 10 kW units run at 32% each and at 64% if only one is left. Above 80% on a single unit, there is no headroom to grow.</li></ul>
+<p><strong>Runtime</strong> depends on what you want it for.</p>
+<ul><li>With a <strong>generator</strong> covering the room, the UPS has to carry the start-up and transfer (seconds) plus a margin in case the first attempt fails. 10-15 minutes is a common target.</li><li>Without a generator, or if it fails, runtime has to cover the <strong>complete orderly shutdown</strong> with a margin. Measure how long it takes (in the annual test) and add half.</li><li>Real runtime drops with battery age and temperature. The figure on installation day is not the figure four years later.</li></ul>
+<h2>2. Dual power with A and B PDUs</h2>
+<ul><li>Every critical device with <strong>two power supplies</strong>: one to PDU A and one to PDU B, each PDU fed by a different UPS (or one from UPS and one from mains with its own protection, depending on the room&#x27;s design).</li><li><strong>Single-supply</strong> devices (some carrier equipment, consoles, older kit) go on a rack <strong>automatic transfer switch</strong> (ATS), or are accepted and documented as a single point of failure.</li><li>Check that <strong>each supply carries load</strong>. An unplugged or failed supply goes unnoticed until the other line is cut: the lost-redundancy power supply alerts from iDRAC, iLO and the switches must reach someone.</li><li>Each PDU below 40-50% of its capacity in normal use: if the other line drops, it has to take the whole rack&#x27;s load.</li></ul>
+<h2>3. Batteries: life and replacement</h2>
+<ul><li>The sealed lead-acid (VRLA) batteries in comms room UPS units usually have a <strong>design life</strong> of 5 years, or 10 for long-life ones, but real life is usually shorter and depends above all on <strong>temperature</strong>: above about 25 °C, it shortens considerably.</li><li>Keep the room between 20 and 25 °C and watch the temperature of the UPS itself, not just the air conditioning.</li><li>Plan <strong>replacement</strong> by date and by test results, not by waiting for the &quot;replace battery&quot; alarm. Record the date of the last replacement in the inventory.</li></ul>
+<h2>4. Tests: monthly and annual</h2>
+<p><strong>Every month</strong>:</p>
+<ul><li>Battery <strong>self-test</strong> from the network card or the panel, outside market hours. Result and date in the log.</li><li>Review of active alarms, load on each UPS and each PDU, temperature and estimated runtime.</li></ul>
+<p><strong>Every year</strong>, with the maintainer and in an approved change window:</p>
+<ul><li><strong>Discharge test</strong> or runtime calibration with real load: how many minutes it really lasts.</li><li>Test of the <strong>bypass</strong> and of each line separately: cut A and check everything stays up on B, and the other way round. It is the test that finds the unplugged supply.</li><li><strong>Generator test</strong> coordinated with the landlord: mains cut, start, transfer and return.</li></ul>
+<h2>5. Monitoring: network card and SNMP</h2>
+<p>Each UPS with its <strong>network management card</strong> on the management VLAN, with the factory password changed and <strong>SNMPv3</strong> to monitoring. Many UPS units publish the standard UPS MIB (RFC 1628) as well as their own:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Linux · SNMPv3 query to the line A UPS</span><button class="t-copy" type="button" data-copy="snmpget -v3 -l authPriv -u mon-ups -a SHA -A &quot;$AUTH&quot; -x AES -X &quot;$PRIV&quot; ups-cr1-a.mgmt.local 1.3.6.1.2.1.33.1.4.1.0 1.3.6.1.2.1.33.1.2.1.0 1.3.6.1.2.1.33.1.2.3.0 1.3.6.1.2.1.33.1.2.4.0" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>snmpget -v3 -l authPriv -u mon-ups -a SHA -A &quot;$AUTH&quot; -x AES -X &quot;$PRIV&quot; ups-cr1-a.mgmt.local 1.3.6.1.2.1.33.1.4.1.0 1.3.6.1.2.1.33.1.2.1.0 1.3.6.1.2.1.33.1.2.3.0 1.3.6.1.2.1.33.1.2.4.0</span><span class="t-out">SNMPv2-SMI::mib-2.33.1.4.1.0 = INTEGER: 5</span><span class="t-out">SNMPv2-SMI::mib-2.33.1.2.1.0 = INTEGER: 2</span><span class="t-out">SNMPv2-SMI::mib-2.33.1.2.3.0 = INTEGER: 18</span><span class="t-out">SNMPv2-SMI::mib-2.33.1.2.4.0 = INTEGER: 71</span><span class="t-cmt"># 4.1 output source: 3 normal, 4 bypass, 5 battery</span><span class="t-cmt"># 2.1 battery status: 2 normal, 3 low, 4 depleted</span><span class="t-cmt"># 2.3 estimated minutes of runtime · 2.4 battery charge in %</span></code></pre></figure>
+<p>Alerts that must reach the on-call phone, not just email: <strong>on battery</strong>, <strong>low battery</strong>, <strong>replace battery</strong>, <strong>overload</strong>, <strong>on bypass</strong>, <strong>high temperature</strong> and <strong>card not responding</strong> (if monitoring can&#x27;t see it, it won&#x27;t see a power cut either).</p>
+<h2>6. The shutdown order</h2>
+<p>If the cut will last longer than the battery, shut down in layers, from the outside in, and power up in reverse:</p>
+<ol><li><strong>What isn&#x27;t needed to operate</strong>: test environments, print servers, meeting room equipment.</li><li><strong>Applications</strong>: application virtual machines, before their databases.</li><li><strong>Databases</strong>: with a clean stop, so they don&#x27;t come back up into a recovery.</li><li><strong>Shared storage</strong> and then the <strong>virtualisation hosts</strong>.</li><li><strong>The network, last</strong>: core, firewalls and out-of-band management stay alive until the very end, because they are the path the shutdown commands travel and the way you will see what is happening.</li></ol>
+<ul><li>The vendor&#x27;s shutdown software (or an agent on each hypervisor) can trigger each layer when it crosses a runtime or time-on-battery threshold. <strong>Thresholds are set from measured runtime</strong>, not the catalogue figure.</li><li>Trading floor equipment managed by its own team (market data servers, carrier equipment) has its own order and owner: agree it in writing beforehand, not during the cut.</li><li><strong>Trading desks</strong> usually sit on UPS-backed floor sockets, often a different colour. If they don&#x27;t, a cut switches off the desks even if the room holds.</li></ul>
+<h2>7. The generator and the landlord</h2>
+<p>In a leased office, the generator usually <strong>belongs to the landlord</strong>:</p>
+<ul><li>Ask in writing <strong>which circuits it covers</strong>: comms room, the room&#x27;s cooling (without it, the UPS holds but the room heats up), floors, lifts.</li><li>The generator&#x27;s <strong>start and transfer time</strong>, and who tests it, how often and whether it is under load.</li><li><strong>Fuel</strong>: hours of runtime and the refuelling contract.</li><li>A 24x7 building maintenance contact and advance notice of planned outages, so they can be moved outside market hours.</li></ul>
+<h2>8. The case: a power cut at 7:15</h2>
+<p>Tuesday, 7:15. Both UPS units raise the &quot;on battery&quot; alert. The trading floor starts filling up at 8:00; the market opens at 9:00.</p>
+<ol><li><strong>7:16 · Has the generator started?</strong> The UPS units are still on battery after a minute: the generator hasn&#x27;t come in. Call building maintenance.</li><li><strong>7:18 · How much is left</strong>: the network card says 18 minutes of runtime and 71% charge on line A. The complete orderly shutdown takes 12 minutes: the margin is short.</li><li><strong>7:19 · First layer</strong>: test environments and non-critical equipment are shut down to gain runtime. Notice to the trading floor manager and business continuity: &quot;building power cut, the room is holding on UPS, the generator hasn&#x27;t started; decision at 7:22&quot;.</li><li><strong>7:21 · The generator starts</strong>: maintenance starts it by hand. The UPS units go back to the generator-fed input and start recharging.</li><li><strong>7:30 · Checks</strong>: UPS units online, each PDU with both supplies carrying load, the room&#x27;s cooling running. Batteries are at 60%: if there is a second cut, there is no runtime for another orderly shutdown. The equipment that was shut down stays off until the battery recovers.</li><li><strong>8:00 · Before the open</strong>: trading desks power up and have network and market data. If the desks weren&#x27;t on UPS-backed sockets, they are restarted and checked row by row.</li><li><strong>Afterwards</strong>: the report with the time of each step, the cause of the generator failure requested in writing from the landlord, a new generator test under load, and a review of the shutdown thresholds against the runtime actually seen.</li></ol>
+<p class="g-warn">If the generator hadn&#x27;t started, at 7:22 the complete orderly shutdown would have been triggered and the continuity plan activated: moving the traders to the alternate site before 9:00 is a business decision taken with time to spare, not on the last minute of battery.</p>
+<h2>Next steps</h2>
+<ul><li>The <strong>Device42</strong> guide in Sector 5 records which device goes to which PDU, the basis for checking that cutting one line leaves nothing without power.</li><li>The <strong>DR/BCP: preparing and overseeing a recovery test</strong> guide explains how to move the traders to the alternate site if the site can&#x27;t hold.</li><li>The <strong>36-major-incident-command-kit</strong> repository on my GitHub helps run a cut like this as a major incident: timeline, communications and the post-incident review.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="es">Sector 5</span><span class="en">Sector 5</span> · <span class="es">SAI - Alimentación de la sala de comunicaciones</span><span class="en">UPS - Powering the comms room</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="sector-5.html"><span class="es">Todas las guías del Sector 5</span><span class="en">All Sector 5 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/36-major-incident-command-kit.html"><span class="label muted"><span class="es">Blog · 36</span><span class="en">Blog · 36</span></span><span class="related-t"><span class="es">Los usuarios nos avisaron 40 minutos antes que la monitorización: un kit para dirigir y revisar incidentes mayores</span><span class="en">Users told us 40 minutes before monitoring did: a kit to run and review major incidents</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="oficina-que-crece-de-15-a-120-personas-con-sala-de-trading.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Una oficina que crece de 15 a 120 personas con sala de trading: qué hace falta en cada fase</span><span class="en">An office growing from 15 to 120 people with a trading floor: what each phase needs</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
