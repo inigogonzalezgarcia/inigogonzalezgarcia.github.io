@@ -230,7 +230,7 @@ home_body = "\n\n".join([
     <div>
       <p class="lede">{bi("Una consola de soporte simulada: cuentas bloqueadas en Active Directory, DNS, impresoras, Exchange Online, Intune y BitLocker. Cada ticket tiene su SLA, su veredicto y un enlace a la guía que lo explica. Gratis, con tu propia cuenta. Es práctica, no experiencia laboral: el sitio para entrenar antes de tu primer turno.", "A simulated support console: locked accounts in Active Directory, DNS, printers, Exchange Online, Intune and BitLocker. Every ticket has its SLA, a verdict and a link to the guide that explains it. Free, with your own account. It is practice, not work experience: the place to train before your first shift.")}</p>
       <a class="btn" href="https://sysadmindesksbyigg.pages.dev/" target="_blank" rel="noopener noreferrer">{bi("Abrir SysAdmin Desks", "Open SysAdmin Desks")} ↗</a>
-      <p class="u-mt22"><a class="arrow-link" href="https://sysadmindesksbyigg.pages.dev/about.html" target="_blank" rel="noopener noreferrer">{bi("Qué es y qué no es", "What it is and what it isn't")} ↗</a></p>
+      <p class="u-mt22"><a class="arrow-link" href="https://sysadmindesksbyigg.pages.dev/about" target="_blank" rel="noopener noreferrer">{bi("Qué es y qué no es", "What it is and what it isn't")} ↗</a></p>
     </div>
   </div>
 </section>''',
