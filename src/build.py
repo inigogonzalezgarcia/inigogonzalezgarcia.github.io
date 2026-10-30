@@ -838,7 +838,7 @@ resources_body = page_hero(bi("Recursos gratuitos · Tech Career Lab", "Free res
 {CAPTCHA_JS}'''
 sizes["recursos.html"] = write("recursos.html", layout(R="", path="recursos.html", active="resources",
     title_en="33 ideas to get found in IT · Iñigo González", title_es="33 ideas para que te encuentren en IT · Iñigo González",
-    desc="Free resource: 33 ideas for IT professionals to get found on LinkedIn, show their work with projects, network and get through hiring processes. Plus the Tech Career Lab newsletter.", body=resources_body,
+    desc="Free guide: 33 ideas for IT professionals to get found on LinkedIn, show their work on GitHub, network and get hired. Plus the Tech Career Lab newsletter.", body=resources_body,
     ld=[crumbs(("Home", ""), ("Resources", "recursos.html"))]))
 
 # links: grouped, each with one line saying what is behind it; counts come from the content itself
@@ -1315,8 +1315,8 @@ for lk, L in LEVELS.items():
   </div>
 </section>"""
     sizes[f"guias/{lk}.html"] = write(f"guias/{lk}.html", layout(R="../", path=f"guias/{lk}.html", active="guides",
-        title_en=(f'{L["t_en"]} · IT guides · Iñigo González' if L["key"].startswith("sector") else f'{L["n_en"]} · {L["t_en"]} · IT guides · Iñigo González'),
-        title_es=(f'{L["t_es"]} · Guías IT · Iñigo González' if L["key"].startswith("sector") else f'{L["n_es"]} · {L["t_es"]} · Guías IT · Iñigo González'),
+        title_en=L.get("seo_title_en") or (f'{L["t_en"]} · IT guides · Iñigo González' if L["key"].startswith("sector") else f'{L["n_en"]} · {L["t_en"]} · IT guides · Iñigo González'),
+        title_es=L.get("seo_title_es") or (f'{L["t_es"]} · Guías IT · Iñigo González' if L["key"].startswith("sector") else f'{L["n_es"]} · {L["t_es"]} · Guías IT · Iñigo González'),
         desc=L["seo"],
         body=lbody, ld=[{"@type": "CollectionPage", "@id": SITE_URL + f"guias/{lk}.html", "url": SITE_URL + f"guias/{lk}.html",
                          "name": f'{L["n_en"]} · {L["t_en"]}', "inLanguage": "en", "isPartOf": {"@id": SITE_URL + "#website"},
