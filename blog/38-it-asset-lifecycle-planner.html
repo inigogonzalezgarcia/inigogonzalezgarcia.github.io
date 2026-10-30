@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en" class="no-js inner" data-title-en="IT asset inventory and refresh forecast · Iñigo González" data-title-es="Inventario de hardware y plan de renovación · Iñigo González">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>IT asset inventory and refresh forecast · Iñigo González</title>
+<meta name="description" content="Monthly IT asset review from Device42, Intune, Jamf and purchases: one inventory by serial, leavers&#x27; devices, stock and a refresh forecast by quarter.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/38-it-asset-lifecycle-planner.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IT asset inventory and refresh forecast · Iñigo González">
+<meta property="og:description" content="Monthly IT asset review from Device42, Intune, Jamf and purchases: one inventory by serial, leavers&#x27; devices, stock and a refresh forecast by quarter.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/38-it-asset-lifecycle-planner.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/38-it-asset-lifecycle-planner.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="IT asset inventory and refresh forecast · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Nine laptops nobody registered and half the budget in one quarter: one inventory and a refresh plan for the office hardware","alternativeHeadline":"Nueve portátiles que nadie registró y medio presupuesto en un trimestre: un inventario único y un plan de renovación para el hardware de la oficina","description":"From the Device42 export of the comms rooms, Intune and Jamf Pro, the vendor's purchases, the office register, HR and the stock: devices nobody registered, laptops not seen for weeks, switches past end of support, leavers who kept their laptop, stock below the minimum, and the replacements by quarter with their cost, ready for the budget.","datePublished":"2026-10-30","dateModified":"2026-10-30","inLanguage":"en","image":"https://inigogonzalezgarcia.github.io/assets/og/38-it-asset-lifecycle-planner.png","url":"https://inigogonzalezgarcia.github.io/blog/38-it-asset-lifecycle-planner.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/blog/38-it-asset-lifecycle-planner.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/blog/#blog"},"articleSection":"IT Ops tools"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/blog/"},{"@type":"ListItem","position":3,"name":"Nine laptops nobody registered and half the budget in one quarter: one inventory and a refresh plan for the office hardware","item":"https://inigogonzalezgarcia.github.io/blog/38-it-asset-lifecycle-planner.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 38</p>
+    <h1><span class="es">Nueve portátiles que nadie registró y medio presupuesto en un trimestre: un inventario único y un plan de renovación para el hardware de la oficina</span><span class="en">Nine laptops nobody registered and half the budget in one quarter: one inventory and a refresh plan for the office hardware</span></h1>
+    <p class="lede"><span class="es">A partir de la exportación de Device42 de las salas de comunicaciones, Intune y Jamf Pro, las compras al fabricante, el registro de la oficina, RR. HH. y el almacén: equipos que nadie registró, portátiles que no se ven desde hace semanas, switches sin soporte del fabricante, bajas que se quedaron el portátil, almacén por debajo del mínimo y las renovaciones por trimestre con su coste, listas para el presupuesto.</span><span class="en">From the Device42 export of the comms rooms, Intune and Jamf Pro, the vendor&#x27;s purchases, the office register, HR and the stock: devices nobody registered, laptops not seen for weeks, switches past end of support, leavers who kept their laptop, stock below the minimum, and the replacements by quarter with their cost, ready for the budget.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span> · <span class="es">30 oct 2026</span><span class="en">30 Oct 2026</span> · <span class="es">4 min</span><span class="en">3 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>El problema</h2>
+<p>En muchas oficinas el inventario está repartido según quién lo cuida. Las salas de comunicaciones están en Device42, los portátiles y los móviles en Intune y Jamf, los monitores y las bases en una hoja de cálculo y las garantías en el portal del fabricante. Cada lista parece completa por separado. Juntas, aparecen los huecos: portátiles en Intune que nadie registró porque se compraron fuera del canal habitual, un portátil que no sincroniza desde hace meses, el portátil de una baja que sigue conectándose semanas después de su último día, switches de acceso sin soporte del fabricante y la garantía del switch de núcleo a seis semanas de vencer. Y cuando llega el presupuesto, la pregunta «qué tenemos que comprar el año que viene» se responde de memoria, hasta que alguien se da cuenta de que los portátiles de una renovación grande y los equipos de sobremesa de la sala de trading vencen todos en el mismo trimestre.</p>
+<h2>Qué he hecho</h2>
+<ul><li>Cobertura: un inventario único cruzado por número de serie entre Device42, las compras, el registro de la oficina y el MDM; equipos en Intune o Jamf sin registro en el inventario, equipos que no se ven desde hace 30 días, números de serie duplicados o que no cuadran y equipos sin responsable o sin sede.</li><li>Salas de comunicaciones: equipos sin soporte del fabricante o fuera de garantía, garantías que vencen en los próximos 90 días, equipos sin posición en el rack o sin responsable, y firmware sin registrar.</li><li>Ciclo de vida: un estado para cada equipo (en almacén, desplegado, en reparación, para retirar, retirado) y una fecha de renovación según la política, con lo que está vencido y lo que vence en los dos próximos trimestres.</li><li>Personas y almacén: equipos asignados a bajas y no devueltos a los 14 días, más equipos de los que permite la política, personas sin ordenador, y el almacén de cada sede frente al mínimo y frente a las renovaciones del próximo trimestre.</li><li>Previsión: las renovaciones de los cuatro próximos trimestres por categoría y sede, con unidades y coste, y lo atrasado aparte.</li><li><code>report.html</code> con un estado por área y un veredicto global, <code>asset-review.md</code> como informe para la revisión mensual con la previsión lista para el presupuesto, CSV de cada área y un exportador de solo lectura en PowerShell para Device42, Intune (Microsoft Graph) y Jamf Pro.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python solo con la librería estándar. La demo es un bróker inventado con oficinas en Madrid, París y Ámsterdam y dos salas de comunicaciones: 51 equipos en Device42, unos 300 equipos en Intune y Jamf, 740 líneas de compra y 457 del registro, 198 personas y el almacén de las tres sedes, con los problemas puestos a propósito. 14 tests, un runbook para la revisión mensual y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.</p>
+<h2>Qué aprendí</h2>
+<p>De llevar la IT de una sede, donde uso Device42 para el inventario de las salas de comunicaciones (racks, equipos de red y servidores) y una consola de operaciones con PowerShell para el inventario y el control de activos; de gestionar macOS, iOS, Android y Windows con Intune y Jamf Pro; de la relación con Dell para el hardware y las renovaciones; y de preparar y seguir el presupuesto anual de IT en una empresa con varias sedes. Las lecciones que dan forma a la herramienta son que el número de serie es la única clave que comparten todos los sistemas; que un equipo que el MDM ve y nadie compró sigue siendo tuyo, sin garantía y sin fecha de renovación; que un portátil que no se ve desde hace semanas es una respuesta esperando una pregunta; que en las salas de comunicaciones el fin de soporte manda sobre la antigüedad; y que un presupuesto hecho con las fechas de compra enseña las olas antes de que lleguen.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Ejecutarlo con las exportaciones reales de una sede y ajustar la política de renovación, los costes unitarios y la política de equipos por persona con los responsables de la sede y de finanzas.</li><li>Leer las compras y las garantías desde la API del fabricante por número de serie en lugar de un CSV.</li><li>Volcar los equipos de usuario en Device42 por número de serie, para que sea el inventario único de toda la oficina y este informe lo compruebe en lugar de construirlo.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
+      </div>
+      <div class="en" lang="en">
+<h2>The problem</h2>
+<p>In many offices the inventory is split by who looks after it. The comms rooms are in Device42, the laptops and phones in Intune and Jamf, the monitors and docks in a spreadsheet, and the warranties in the vendor&#x27;s portal. Each list looks complete on its own. Put together, the gaps show: laptops in Intune that nobody registered because they were bought outside the usual channel, a laptop that has not synced for months, a leaver&#x27;s laptop still checking in weeks after the last day, access switches past end of support and the core switch&#x27;s warranty ending in six weeks. And when the budget comes, the question &quot;what do we have to buy next year&quot; is answered from memory, until someone notices that the laptops of a big refresh and the trading floor desktops all fall due in the same quarter.</p>
+<h2>What I built</h2>
+<ul><li>Coverage: one inventory joined by serial number from Device42, the purchases, the office register and MDM; devices in Intune or Jamf with no inventory record, devices not seen for 30 days, duplicate and mismatched serials, and items without owner or site.</li><li>Comms rooms: devices past end of support or out of warranty, warranties ending in the next 90 days, devices without rack position or owner, and firmware not recorded.</li><li>Lifecycle: one state for every item (in stock, deployed, in repair, to be retired, retired) and one replacement date from the refresh policy, with what is overdue and what is due in the next two quarters.</li><li>People and stock: devices assigned to leavers and not returned after 14 days, more devices than the policy allows, people without a computer, and stock per site against the minimum and against next quarter&#x27;s replacements.</li><li>Forecast: replacements for the next four quarters by category and site, with units and cost, and the overdue backlog apart.</li><li><code>report.html</code> with a status per area and an overall verdict, <code>asset-review.md</code> as the pack for the monthly review with the forecast ready for the budget, CSVs for every area, and a read-only PowerShell exporter for Device42, Intune (Microsoft Graph) and Jamf Pro.</li></ul>
+<h2>How it is built</h2>
+<p>Python with the standard library only. The demo is a made-up broker with offices in Madrid, Paris and Amsterdam and two comms rooms: 51 devices in Device42, about 300 devices in Intune and Jamf, 740 purchase lines and 457 register lines, 198 people and the stock of the three sites, with the problems placed on purpose. 14 tests, a runbook for the monthly review, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.</p>
+<h2>What I learned</h2>
+<p>From running an office IT site, where I use Device42 for the inventory of the comms rooms (racks, network equipment and servers) and an operations console with PowerShell for inventory and asset control; from managing macOS, iOS, Android and Windows with Intune and Jamf Pro; from the relationship with Dell for hardware and renewals; and from preparing and tracking the annual IT budget in a multi-site company. The lessons that shaped the tool are that the serial number is the only key every system shares; that a device MDM sees and nobody bought is still yours, with no warranty and no replacement date; that a laptop not seen for weeks is an answer waiting for a question; that for the comms rooms end of support beats age; and that a budget built from purchase dates shows the waves before they arrive.</p>
+<h2>Next steps</h2>
+<ul><li>Run it on the real exports of one site and tune the refresh policy, the unit costs and the device policy with the site and finance leads.</li><li>Read purchases and warranties from the vendor&#x27;s API by service tag instead of a CSV.</li><li>Write the end-user devices back to Device42 by serial, so that it becomes the one inventory for the whole office and this report checks it instead of building it.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
+      <p class="repo-name">38-it-asset-lifecycle-planner</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/38-it-asset-lifecycle-planner" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="es">Compartir</span><span class="en">Share</span></p>
+        <div class="share-row es" lang="es"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F38-it-asset-lifecycle-planner.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F38-it-asset-lifecycle-planner.html&amp;text=Nueve%20port%C3%A1tiles%20que%20nadie%20registr%C3%B3%20y%20medio%20presupuesto%20en%20un%20trimestre%3A%20un%20inventario%20%C3%BAnico%20y%20un%20plan%20de%20renovaci%C3%B3n%20para%20el%20hardware%20de%20la%20oficina%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">X</a><a class="share-btn" href="https://wa.me/?text=Nueve%20port%C3%A1tiles%20que%20nadie%20registr%C3%B3%20y%20medio%20presupuesto%20en%20un%20trimestre%3A%20un%20inventario%20%C3%BAnico%20y%20un%20plan%20de%20renovaci%C3%B3n%20para%20el%20hardware%20de%20la%20oficina%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F38-it-asset-lifecycle-planner.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=Nueve%20port%C3%A1tiles%20que%20nadie%20registr%C3%B3%20y%20medio%20presupuesto%20en%20un%20trimestre%3A%20un%20inventario%20%C3%BAnico%20y%20un%20plan%20de%20renovaci%C3%B3n%20para%20el%20hardware%20de%20la%20oficina%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F38-it-asset-lifecycle-planner.html" aria-label="Compartir en Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/38-it-asset-lifecycle-planner.html" data-copied="Enlace copiado">Copiar enlace</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/38-it-asset-lifecycle-planner.html" data-title="Nueve portátiles que nadie registró y medio presupuesto en un trimestre: un inventario único y un plan de renovación para el hardware de la oficina" hidden>Más…</button></div>
+        <div class="share-row en" lang="en"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F38-it-asset-lifecycle-planner.html" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F38-it-asset-lifecycle-planner.html&amp;text=Nine%20laptops%20nobody%20registered%20and%20half%20the%20budget%20in%20one%20quarter%3A%20one%20inventory%20and%20a%20refresh%20plan%20for%20the%20office%20hardware%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Share on X">X</a><a class="share-btn" href="https://wa.me/?text=Nine%20laptops%20nobody%20registered%20and%20half%20the%20budget%20in%20one%20quarter%3A%20one%20inventory%20and%20a%20refresh%20plan%20for%20the%20office%20hardware%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F38-it-asset-lifecycle-planner.html" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=Nine%20laptops%20nobody%20registered%20and%20half%20the%20budget%20in%20one%20quarter%3A%20one%20inventory%20and%20a%20refresh%20plan%20for%20the%20office%20hardware%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F38-it-asset-lifecycle-planner.html" aria-label="Share on Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/38-it-asset-lifecycle-planner.html" data-copied="Link copied">Copy link</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/38-it-asset-lifecycle-planner.html" data-title="Nine laptops nobody registered and half the budget in one quarter: one inventory and a refresh plan for the office hardware" hidden>More…</button></div>
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="../guias/jamf-pro-enrolar-un-mac-y-desplegar-una-politica.html"><span class="label muted"><span class="es">Guía · Nivel 2</span><span class="en">Guide · Level 2</span></span><span class="related-t"><span class="es">Jamf Pro: enrolar un Mac y desplegar una política con un grupo inteligente</span><span class="en">Jamf Pro: enrolling a Mac and deploying a policy with a smart group</span></span></a><a class="related-link" href="../guias/device42-inventario-de-racks-y-equipos-de-la-sala-de-comunicaciones.html"><span class="label muted"><span class="es">Guía · Sector 5</span><span class="en">Guide · Sector 5</span></span><span class="related-t"><span class="es">Device42: el inventario de racks y equipos de la sala de comunicaciones de una sede con sala de trading</span><span class="en">Device42: the rack and equipment inventory of the comms room in a site with a trading floor</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="sysadmindesksbyigg.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">El arreglo que parece bueno y no cierra el ticket: SysAdmin Desks, un simulador gratuito para practicar soporte IT</span><span class="en">The fix that looks right and does not close the ticket: SysAdmin Desks, a free simulator to practise IT support</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about.html?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq.html?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
