@@ -1819,9 +1819,9 @@ dict(n="37b", label="SD", repo="sysadmindesksbyigg", app="https://sysadmindesksb
  title_es="El arreglo que parece bueno y no cierra el ticket: SysAdmin Desks, un simulador gratuito para practicar soporte IT",
  seo_title_en="SysAdmin Desks: free IT support simulator · Iñigo González",
  seo_title_es="SysAdmin Desks: practica soporte IT gratis · Iñigo González",
- seo_desc="Free IT support simulator in English and Spanish: 18 tickets with SLA, a console, Active Directory, a marked work note and a fix that looks right but is not.",
- dek_en="A support desk in the browser: a ticket queue with SLA, the requester and the device, a console where the commands do something, a simulated Active Directory, a desktop to fix things on the user's machine, 18 tickets from first line to second line, a tempting fix that does not solve the cause, and a work note that gets marked. Free, in English and Spanish.",
- dek_es="Una mesa de soporte en el navegador: cola de tickets con SLA, el solicitante y su equipo, una consola donde los comandos hacen algo, un Active Directory simulado, un escritorio para arreglar en la máquina del usuario, 18 tickets de primer y segundo nivel, un arreglo tentador que no resuelve la causa y una nota de trabajo que se corrige. Gratis, en español e inglés.",
+ seo_desc="Free IT support simulator in English and Spanish: 24 tickets with SLA, a console, Active Directory, a network room, RMA, labs and a work note that gets marked.",
+ dek_en="A support desk in the browser: a ticket queue with SLA, the requester and the device, a console where the commands do something, a simulated Active Directory, a desktop to fix things on the user's machine, a network room with switch and firewall CLIs, shipments and RMA, 24 tickets from first line to second line, a tempting fix that does not solve the cause, and a work note that gets marked. Free, in English and Spanish.",
+ dek_es="Una mesa de soporte en el navegador: cola de tickets con SLA, el solicitante y su equipo, una consola donde los comandos hacen algo, un Active Directory simulado, un escritorio para arreglar en la máquina del usuario, una sala de red con la CLI de switches y cortafuegos, envíos y RMA, 24 tickets de primer y segundo nivel, un arreglo tentador que no resuelve la causa y una nota de trabajo que se corrige. Gratis, en español e inglés.",
  en="""
 ## The problem
 Most people learn support on the job, with real users waiting. Labs teach the commands, but not the ticket: reading what the user really says, finding the cause instead of the symptom, checking that it works before closing, and leaving a note the next engineer can use. The classic mistake is the fix that looks right. You unlock the account that locks every morning, the user is happy for an hour, and the ticket comes back because the old password is still saved on the phone. I wanted a place to practise that loop without a real company behind it.
@@ -1829,11 +1829,14 @@ Most people learn support on the job, with real users waiting. Labs teach the co
 ## What I built
 - A ticket queue with priority, SLA (20, 30 or 45 minutes) and status. Assigning a ticket starts the clock and opens the console.
 - A ticket page with the requester and the device, cards that change as the scenario changes, and actions from the page that do the same as the command, traps included.
-- 18 tickets across Active Directory, DNS, Windows, printers, Exchange Online, Intune and BitLocker, VPN, Microsoft 365 licences, Azure AD Connect, Veeam, MECM, Red Hat, Citrix, Conditional Access, SAML single sign-on, Linux joined to AD and SQL Server. Each one has a root cause, a tempting fix that does not close it and a check to prove it works.
+- 24 tickets across Active Directory, DNS, Windows, printers, Exchange Online, Intune and BitLocker, VPN, Microsoft 365 licences, Azure AD Connect, Veeam, MECM, Red Hat, Citrix, Conditional Access, SAML single sign-on, Linux joined to AD, SQL Server, Cisco, HP and FortiGate networking, warranty RMAs and leavers' equipment. Each one has a root cause, a tempting fix that does not close it and a check to prove it works.
 - Closing a ticket asks for a resolution code and a work note. The note is marked on cause, change, verification and follow-up, and the result is Resolved, Resolved with remarks or Not resolved, with what is missing.
 - A simulated Active Directory with OUs, users, groups and computers, where every button runs a visible PowerShell command; a desktop for the tickets that are fixed on the user's machine, with an event viewer; and an inventory of servers and printers linked to the open tickets.
 - A knowledge base built from your own approved notes, downloadable as Markdown, progress with a streak, a weekly goal and badges, and an internal mailbox with real requests and phishing to tell apart from them.
-- A "Practise it" box in 17 of the guides on this website, which opens the matching ticket in the right language.
+- Ticket states (pending user, pending vendor) with the SLA paused, scripted questions to the requester where some clues only come out by asking, and a note to the user that is marked apart from the work note.
+- A network room with Cisco, Aruba and FortiGate devices, their health and a CLI on each one, and shipments and RMA linked to tickets.
+- A library per area, five labs to practise without the clock, and a profile with progress by area and a career path from first-line support to infrastructure.
+- A "Practise it" box in the guides on this website, which opens the matching ticket in the right language.
 
 ## How it is built
 A static site with plain JavaScript and a small database for accounts and results. Every ticket has automated tests, so the tempting fix can never close it. Everything is fictional: a made-up company, no real systems. It is practice, not work experience.
@@ -1842,9 +1845,9 @@ A static site with plain JavaScript and a small database for accounts and result
 From working tickets and teaching others to work them: the work note is part of the fix, a ticket is not closed until the user confirms it works, and the fix that looks right is the most common way to reopen one.
 
 ## Next steps
-- Contact the requester from the ticket with scripted questions, where some clues only come out by asking, and mark the note to the user apart from the work note.
-- Workflow states (pending user, pending vendor) with the SLA paused, and password reset by email for accounts.
-- A network room with switches, routers and firewalls, a switch CLI and network tickets, then shipments and RMA linked to tickets.
+- A fuller internal mailbox: folders, replying to the requester and writing new messages.
+- Levels by points, weekly goals with a reward and badges by area in the profile, and a full shift of four tickets at the end of each lab.
+- Keep the network room, a ticket's shipments and the labs as they were after reloading the page.
 """,
  es="""
 ## El problema
@@ -1853,11 +1856,14 @@ Casi todo el mundo aprende soporte trabajando, con usuarios reales esperando. Lo
 ## Qué he hecho
 - Una cola de tickets con prioridad, SLA (20, 30 o 45 minutos) y estado. Al asignarte un ticket empieza a correr el reloj y se abre la consola.
 - Una ficha del ticket con el solicitante y su equipo, tarjetas que cambian según avanza el caso y acciones desde la ficha que hacen lo mismo que el comando, trampas incluidas.
-- 18 tickets de Active Directory, DNS, Windows, impresoras, Exchange Online, Intune y BitLocker, VPN, licencias de Microsoft 365, Azure AD Connect, Veeam, MECM, Red Hat, Citrix, acceso condicional, inicio de sesión único con SAML, Linux unido a AD y SQL Server. Cada uno tiene una causa raíz, un arreglo tentador que no lo cierra y una comprobación para demostrar que funciona.
+- 24 tickets de Active Directory, DNS, Windows, impresoras, Exchange Online, Intune y BitLocker, VPN, licencias de Microsoft 365, Azure AD Connect, Veeam, MECM, Red Hat, Citrix, acceso condicional, inicio de sesión único con SAML, Linux unido a AD, SQL Server, redes Cisco, HP y FortiGate, RMA en garantía y equipos de bajas. Cada uno tiene una causa raíz, un arreglo tentador que no lo cierra y una comprobación para demostrar que funciona.
 - Para cerrar un ticket hay que elegir un código de resolución y escribir una nota de trabajo. La nota se corrige por causa, cambio, verificación y seguimiento, y el resultado es Resuelto, Resuelto con observaciones o No resuelto, con lo que falta.
 - Un Active Directory simulado con OU, usuarios, grupos y equipos, donde cada botón ejecuta un comando de PowerShell visible; un escritorio para los tickets que se arreglan en la máquina del usuario, con visor de eventos; y un inventario de servidores e impresoras ligado a los tickets abiertos.
 - Una base de conocimiento que se crea con tus propias notas aprobadas y se descarga en Markdown, progreso con racha, objetivo semanal e insignias, y un buzón interno con peticiones reales y phishing que hay que saber distinguir.
-- Un bloque «Practícalo» en 17 de las guías de esta web, que abre el ticket correspondiente en el idioma de la guía.
+- Estados del ticket (pendiente del usuario, pendiente del proveedor) con el SLA en pausa, preguntas guionizadas al solicitante donde algunas pistas solo salen preguntando, y una nota al usuario que se corrige aparte de la nota de trabajo.
+- Una sala de red con equipos Cisco, Aruba y FortiGate, su estado de salud y una CLI en cada uno, y envíos y RMA ligados a los tickets.
+- Una biblioteca por área, cinco laboratorios para practicar sin reloj y un perfil con el progreso por área y un itinerario desde el soporte de primera línea hasta infraestructura.
+- Un bloque «Practícalo» en las guías de esta web, que abre el ticket correspondiente en el idioma de la guía.
 
 ## Cómo está hecho
 Un sitio estático con JavaScript sin frameworks y una pequeña base de datos para las cuentas y los resultados. Cada ticket tiene tests automáticos, para que el arreglo tentador nunca pueda cerrarlo. Todo es ficticio: una empresa inventada y ningún sistema real. Es práctica, no experiencia laboral.
@@ -1866,9 +1872,9 @@ Un sitio estático con JavaScript sin frameworks y una pequeña base de datos pa
 De trabajar tickets y enseñar a otros a trabajarlos: la nota de trabajo es parte del arreglo, un ticket no está cerrado hasta que el usuario confirma que funciona, y el arreglo que parece bueno es la forma más habitual de reabrirlo.
 
 ## Siguientes pasos
-- Contactar con el solicitante desde el ticket con preguntas guionizadas, donde algunas pistas solo salen preguntando, y corregir la nota al usuario aparte de la nota de trabajo.
-- Estados de flujo (pendiente del usuario, pendiente del proveedor) con el SLA en pausa, y restablecer la contraseña de la cuenta por email.
-- Una sala de red con switches, routers y cortafuegos, una CLI de switch y tickets de red; después, envíos y RMA ligados a los tickets.
+- Un buzón interno más completo: carpetas, responder al solicitante y redactar mensajes.
+- Niveles por puntos, objetivos semanales con recompensa e insignias por área en el perfil, y un turno completo de cuatro tickets al final de cada laboratorio.
+- Que la sala de red, los envíos de un ticket y los laboratorios se conserven al recargar la página.
 """),
 dict(n="38", repo="38-it-asset-lifecycle-planner", date="2026-10-30", cat="tools",
  title_en="Nine laptops nobody registered and half the budget in one quarter: one inventory and a refresh plan for the office hardware",

@@ -447,9 +447,9 @@ def sim_more(p, lang):
     u = p["app"]
     if lang == "es":
         return (f'\n<p>Más sobre el simulador: <a href="{u}about?lang=es">qué es SysAdmin Desks</a>, <a href="{u}help?lang=es">cómo se resuelve un ticket paso a paso</a>, '
-                f'<a href="{u}faq?lang=es">preguntas frecuentes</a> y <a href="{u}tickets/?lang=es">los 18 tickets para practicar</a>.</p>')
+                f'<a href="{u}faq?lang=es">preguntas frecuentes</a> y <a href="{u}tickets/?lang=es">los 24 tickets para practicar</a>.</p>')
     return (f'\n<p>More about the simulator: <a href="{u}about?lang=en">what SysAdmin Desks is</a>, <a href="{u}help?lang=en">how a ticket is solved step by step</a>, '
-            f'<a href="{u}faq?lang=en">frequently asked questions</a> and <a href="{u}tickets/?lang=en">the 18 tickets to practise</a>.</p>')
+            f'<a href="{u}faq?lang=en">frequently asked questions</a> and <a href="{u}tickets/?lang=en">the 24 tickets to practise</a>.</p>')
 
 def aside_cta(p):
     if p.get("app"):
@@ -902,8 +902,8 @@ sizes["links.html"] = write("links.html", layout(R="", path="links.html", active
 # guides
 GUIDE_LINKS = [
     ("https://sysadmindesksbyigg.pages.dev/", "Práctica", "Practice", "SysAdmin Desks", "SysAdmin Desks",
-     "Practica 18 tickets de soporte en una consola simulada: de Active Directory y Microsoft 365 a VPN, Veeam, Citrix, Linux y SQL Server. Cada puesto enlaza con su guía. Gratis, con tu propia cuenta.",
-     "Practise 18 support tickets in a simulated console: from Active Directory and Microsoft 365 to VPN, Veeam, Citrix, Linux and SQL Server. Each desk links to its guide. Free, with your own account."),
+     "Practica 24 tickets de soporte en una consola simulada: de Active Directory y Microsoft 365 a VPN, Veeam, Citrix, Linux, SQL Server, redes Cisco y FortiGate y RMA. Cada puesto enlaza con su guía. Gratis, con tu propia cuenta.",
+     "Practise 24 support tickets in a simulated console: from Active Directory and Microsoft 365 to VPN, Veeam, Citrix, Linux, SQL Server, Cisco and FortiGate networking and RMA. Each desk links to its guide. Free, with your own account."),
     ("recursos.html", "Gratis", "Free", "33 ideas + newsletter", "33 ideas + newsletter",
      "Apúntate a <em>Tech Career Lab</em> y recibe las 33 ideas para que te encuentren si trabajas en IT. Te aviso cuando salgan las primeras guías.",
      "Join <em>Tech Career Lab</em> and get the 33 ideas to get found if you work in IT. I'll let you know when the first guides are out."),
@@ -1169,6 +1169,12 @@ def gmd(text, lang):
 # SysAdmin Desks (simulated tickets on Cloudflare Pages): the desk that practises each guide
 SIM_URL = "https://sysadmindesksbyigg.pages.dev/"
 _DESK = {
+    "net-err-disabled": ("El puerto del puesto que se apagó solo", "The desk port that switched itself off"),
+    "net-wrong-vlan": ("La impresora de Ventas cambió de sitio y nadie puede imprimir", "The Sales printer moved and nobody can print"),
+    "net-fortigate-branch": ("Valencia no llega al ERP desde el cambio de anoche", "Valencia cannot reach the ERP since last night's change"),
+    "laptop-rma": ("El portátil que se congela y avisa de que el disco va a fallar", "The laptop that freezes and warns the drive will fail"),
+    "net-psu-rma": ("Ha fallado la fuente de un switch, pero nadie lo ha notado", "A switch power supply failed, but nobody noticed"),
+    "leaver-return": ("El portátil y el móvil de una baja: devolución, borrado y registro", "A leaver's laptop and phone: return, wipe and register"),
     "ad-lockout": ("La cuenta que se bloquea cada mañana", "The account that locks every morning"),
     "dns-intranet": ("Internet funciona, la intranet no", "Internet works, the intranet does not"),
     "disk-full": ("Disco lleno: Excel no puede guardar", "Disk full: Excel cannot save"),
@@ -1189,12 +1195,18 @@ _DESK = {
     "sql-log-full": ("El ERP no puede guardar: registro de transacciones lleno", "The ERP cannot save: transaction log full"),
 }
 PRACTICE = {
+    "cisco-primeros-comandos-copia-de-configuracion-y-un-puerto-err-disabled": ["net-err-disabled"],
+    "cisco-vlans-troncales-router-de-la-sede-y-un-puerto-que-no-da-red": ["net-err-disabled", "net-wrong-vlan"],
+    "switches-hp-aruba-vlans-copia-de-configuracion-firmware-y-puerto-a-100-mb": ["net-wrong-vlan"],
+    "fortigate-politicas-con-minimo-privilegio-vpn-con-entra-id-tuneles-entre-sedes-y-un-usuario-que-no-llega": ["net-fortigate-branch"],
+    "monitorizacion-desplegar-alarmas-y-responder-en-plataformas-24x7": ["net-psu-rma"],
+    "powershell-altas-masivas-en-active-directory-desde-csv-y-bajas-con-revision": ["leaver-return"],
     "active-directory-alta-usuario-grupos": ["ad-lockout"],
     "windows-diagnostico-basico-equipo-lento-o-con-errores": ["dns-intranet", "disk-full"],
     "impresoras-instalar-impresora-de-red-y-cola-atascada": ["print-queue"],
     "outlook-exchange-online-buzon-compartido-permisos-autorespuesta": ["mailbox-full", "shared-mailbox"],
     "intune-perfiles-y-cumplimiento-en-windows-macos-ios-android-y-dispositivo-que-no-cumple": ["intune-bitlocker"],
-    "bitlocker-estado-y-clave-de-recuperacion": ["intune-bitlocker"],
+    "bitlocker-estado-y-clave-de-recuperacion": ["intune-bitlocker", "laptop-rma"],
     "anyconnect-instalar-y-diagnosticar-vpn": ["vpn-anyconnect"],
     "microsoft-365-asignar-y-retirar-licencias": ["m365-licence"],
     "azure-ad-connect-forzar-sincronizacion-y-objetos-que-no-pasan": ["aadc-sync"],
