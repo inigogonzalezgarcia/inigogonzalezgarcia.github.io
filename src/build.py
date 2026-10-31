@@ -463,10 +463,13 @@ def aside_cta(p):
       <p class="muted small">{bi("Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.", "Synthetic data. No employer code, data or systems.")}</p>"""
 
 order = sorted(POSTS, key=lambda p: p["n"])
-for i, p in enumerate(order):
+# previous / next follow the numbered project stories only; the SysAdmin Desks page (it has "app") sits outside the sequence
+nav_order = [q for q in order if not q.get("app")]
+for p in order:
     c = CATS[p["cat"]]
-    prev = order[i - 1] if i > 0 else None
-    nxt = order[i + 1] if i + 1 < len(order) else None
+    i = nav_order.index(p) if p in nav_order else None
+    prev = nav_order[i - 1] if i is not None and i > 0 else None
+    nxt = nav_order[i + 1] if i is not None and i + 1 < len(nav_order) else None
     def nav_link(q, label_es, label_en, cls):
         if not q: return "<span></span>"
         return f'<a class="post-nav-link {cls}" href="{q["repo"]}.html"><span class="label muted">{bi(label_es, label_en)}</span><span>{bi(html.escape(q["title_es"]), html.escape(q["title_en"]))}</span></a>'
