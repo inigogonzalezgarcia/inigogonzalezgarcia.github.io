@@ -1930,4 +1930,58 @@ De llevar la IT de una sede, donde uso Device42 para el inventario de las salas 
 - Ejecutarlo con las exportaciones reales de una sede y ajustar la política de renovación, los costes unitarios y la política de equipos por persona con los responsables de la sede y de finanzas.
 - Leer las compras y las garantías desde la API del fabricante por número de serie en lugar de un CSV.
 - Volcar los equipos de usuario en Device42 por número de serie, para que sea el inventario único de toda la oficina y este informe lo compruebe en lugar de construirlo."""),
+dict(n="39", repo="39-vulnerability-remediation-sla", date="2026-10-31", cat="tools",
+ title_en="A VPN with a known exploit, thirty servers waiting for a reboot and one browser update worth 40%: vulnerability remediation against the SLA",
+ title_es="Una VPN con un exploit conocido, treinta servidores esperando un reinicio y una actualización del navegador que vale un 40 %: la corrección de vulnerabilidades frente al SLA",
+ seo_title_en="Vulnerability remediation SLA review · Iñigo González",
+ seo_title_es="Revisión del SLA de vulnerabilidades · Iñigo González",
+ seo_desc="Weekly and monthly vulnerability SLA review from Qualys, CISA KEV, EPSS, the asset register and Tanium or Intune: what is late, why it is stuck, what to fix.",
+ dek_en="From the Qualys detections, the CISA KEV catalog, EPSS, the asset register, the patch status and the exceptions register: every open vulnerability against its deadline, known exploited ones past the CISA date, internet-facing hosts, patches waiting for a reboot, detections back after an old image, servers that cannot be patched, expired exceptions, the teams behind, and the fixes that close most risk.",
+ dek_es="A partir de las detecciones de Qualys, el catálogo KEV de CISA, EPSS, el inventario de activos, el estado de parcheo y el registro de excepciones: cada vulnerabilidad abierta frente a su plazo, las explotadas conocidas pasada la fecha de CISA, los equipos expuestos a internet, parches que esperan un reinicio, detecciones que vuelven tras una imagen antigua, servidores que ya no se pueden parchear, excepciones caducadas, los equipos que van con retraso y los arreglos que cierran más riesgo.",
+ en="""
+
+## The problem
+The scanner says how many vulnerabilities there are; it does not say whether we are keeping the promise we made, the remediation deadlines by severity. Those deadlines are usually tracked in a spreadsheet updated by hand, and the numbers hide the reasons: a VPN appliance back from an RMA swap on old firmware with a vulnerability that has been exploited for two years; servers with the patch installed a week ago that are still vulnerable because nobody agreed the reboot; trading desktops vulnerable again after being rebuilt from an old golden image; servers on an operating system that can no longer be patched, covered by an exception that expired a month ago; one team closing half of its fixes on time while the rest are above 90%; and a browser update, held back by a pinned version, that is 40% of all the critical and high findings on the laptops.
+
+## What I built
+- SLA: every open Qualys detection with its deadline (15, 30, 90 or 180 days by severity, 7 days for CISA KEV, a high EPSS score or a critical on an internet-facing host) and its status: on time, due in 7 days, overdue, or overdue more than twice the SLA.
+- KEV and exposure: known exploited vulnerabilities still open past the CISA due date, internet-facing hosts with critical or high findings, and overdue detections with a high EPSS.
+- Why fixes do not close: patch installed and reboot pending, detections re-opened after a fix, and operating systems past end of support.
+- Coverage and exceptions: hosts that Qualys does not scan or has not scanned for two weeks, hosts nobody owns, patch agents failing, and exceptions expired, without a compensating control or too broad.
+- Top fixes and trend: the ten updates or packages that remove most risk, the share closed inside the SLA in each of the last three months, the mean time to remediate by severity, and the owner teams behind.
+- `report.html` with a status per area and an overall verdict, `sla-review.md` with the weekly critical list and the monthly pack, CSVs for every area, and a read-only PowerShell exporter for the Qualys API, the CISA KEV feed, the EPSS API and Intune.
+
+## How it is built
+Python with the standard library only. The demo is a made-up broker with about 400 servers and 1,200 Windows 11 endpoints owned by six teams: almost 7,000 Qualys detections (open and recently fixed), the asset register, the patch status from Tanium and Intune, seven exceptions, EPSS scores and a small KEV snapshot, with the problems placed on purpose. 15 tests, a runbook for the weekly and monthly reviews and for raising or renewing an exception, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+
+## What I learned
+From running an office IT site, where I use Qualys and Tanium for vulnerability and patch management, Microsoft Defender (which I have used since a previous role), and Intune and MECM in co-management, including the Windows 11 migration of an office with a trading floor; from cybersecurity risk management, treatment plans and remediation tracking with security metrics and KPIs; from applying ISO 27001, NIS2 and NIST CSF, and from audits; and from the CAB as process owner for changes. The lessons that shaped the tool are that the clock starts when the scanner finds the vulnerability, so coverage is part of the SLA; that a known exploit beats a severity score; that installed is not fixed until the host reboots; that many hosts re-opened in the same week point to an image, not to bad luck; that an exception is a time-boxed decision with a control, not a way to make the report green; and that one well deployed update can close half of the list.
+
+## Next steps
+- Read Qualys and Tanium through their APIs on a schedule, so the weekly critical list is ready on Monday morning without exports.
+- Open one ticket per owner team with its overdue detections and the fixes that close them, closed when the rescan confirms it.
+- Compare each month with the previous one: new, closed and still overdue, and the share inside the SLA by team.""",
+ es="""
+
+## El problema
+El escáner dice cuántas vulnerabilidades hay; no dice si estamos cumpliendo lo que prometimos, los plazos de corrección por severidad. Esos plazos se suelen seguir en una hoja de cálculo actualizada a mano, y las cifras esconden los motivos: un equipo de VPN que vuelve de un cambio por garantía con un firmware antiguo y una vulnerabilidad explotada desde hace dos años; servidores con el parche instalado hace una semana que siguen siendo vulnerables porque nadie acordó el reinicio; equipos de la sala de trading vulnerables otra vez tras reinstalarse desde una imagen maestra antigua; servidores con un sistema operativo que ya no se puede parchear, cubiertos por una excepción que caducó hace un mes; un equipo que cierra la mitad de sus correcciones a tiempo mientras el resto supera el 90 %; y una actualización del navegador, retenida por una versión fijada, que supone el 40 % de todas las vulnerabilidades críticas y altas de los portátiles.
+
+## Qué he hecho
+- SLA: cada detección abierta de Qualys con su plazo (15, 30, 90 o 180 días según la severidad; 7 días si está en el catálogo KEV de CISA, tiene un EPSS alto o es crítica en un equipo expuesto a internet) y su estado: en plazo, vence en 7 días, vencida o vencida más del doble del plazo.
+- KEV y exposición: vulnerabilidades explotadas conocidas abiertas después de la fecha límite de CISA, equipos expuestos a internet con vulnerabilidades críticas o altas, y detecciones vencidas con un EPSS alto.
+- Por qué no se cierran: parche instalado con el reinicio pendiente, detecciones que vuelven a abrirse tras corregirse y sistemas operativos sin soporte del fabricante.
+- Cobertura y excepciones: equipos que Qualys no analiza o no analiza desde hace dos semanas, equipos sin responsable, agentes de parcheo que fallan, y excepciones caducadas, sin control compensatorio o demasiado amplias.
+- Arreglos y tendencia: las diez actualizaciones o paquetes que más riesgo eliminan, el porcentaje cerrado dentro del plazo en cada uno de los tres últimos meses, el tiempo medio de corrección por severidad y los equipos responsables que van con retraso.
+- `report.html` con un estado por área y un veredicto global, `sla-review.md` con la lista semanal de críticas y el informe mensual, CSV de cada área y un exportador de solo lectura en PowerShell para la API de Qualys, el catálogo KEV de CISA, la API de EPSS e Intune.
+
+## Cómo está hecho
+Python solo con la librería estándar. La demo es un bróker inventado con unos 400 servidores y 1.200 equipos con Windows 11 repartidos entre seis equipos responsables: casi 7.000 detecciones de Qualys (abiertas y corregidas recientemente), el inventario de activos, el estado de parcheo de Tanium e Intune, siete excepciones, puntuaciones EPSS y una pequeña muestra del catálogo KEV, con los problemas puestos a propósito. 15 tests, un runbook para las revisiones semanal y mensual y para pedir o renovar una excepción, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+
+## Qué aprendí
+De llevar la IT de una sede, donde uso Qualys y Tanium para la gestión de vulnerabilidades y parches, Microsoft Defender (que uso desde un puesto anterior) e Intune y MECM en cogestión, incluida la migración a Windows 11 de una oficina con sala de trading; de la gestión de riesgos de ciberseguridad, los planes de tratamiento y el seguimiento de la corrección con métricas e indicadores de seguridad; de aplicar ISO 27001, NIS2 y NIST CSF, y de las auditorías; y del CAB como responsable del proceso de cambios. Las lecciones que dan forma a la herramienta son que el reloj empieza cuando el escáner encuentra la vulnerabilidad, así que la cobertura forma parte del SLA; que un exploit conocido manda sobre la puntuación de severidad; que instalado no es corregido hasta que el equipo se reinicia; que muchos equipos que vuelven a abrirse la misma semana apuntan a una imagen, no a la mala suerte; que una excepción es una decisión con fecha de caducidad y un control, no una forma de poner el informe en verde; y que una sola actualización bien desplegada puede cerrar la mitad de la lista.
+
+## Siguientes pasos
+- Leer Qualys y Tanium desde sus API de forma programada, para que la lista semanal de críticas esté lista el lunes por la mañana sin exportaciones.
+- Abrir un ticket por equipo responsable con sus detecciones vencidas y los arreglos que las cierran, y cerrarlo cuando el nuevo análisis lo confirme.
+- Comparar cada mes con el anterior: nuevas, cerradas y aún vencidas, y el porcentaje dentro del plazo por equipo."""),
 ]
