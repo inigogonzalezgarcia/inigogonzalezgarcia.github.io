@@ -508,3 +508,4 @@ a.practice-desk:hover{background:var(--accent)}
 .is-scrolly>.stage.reveal.in{opacity:.35;transition:opacity .35s ease}
 .is-scrolly>.stage.reveal.in.on{opacity:1}
 .practice-more{margin-top:14px}
+.hero h1 .h1-name{display:block;font-size:.3em;line-height:1.1;letter-spacing:-.01em;margin-bottom:.35em;color:inherit;opacity:.9}
