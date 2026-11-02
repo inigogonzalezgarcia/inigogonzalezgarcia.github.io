@@ -14619,6 +14619,7 @@ g(slug="hotel-en-pre-apertura-checklist-de-it-hasta-el-dia-de-apertura", topic="
   title_en="Hotel pre-opening: the IT checklist from the building site to opening day",
   seo_title_en="Hotel pre-opening IT checklist · Iñigo González",
   seo_title_es="Checklist de IT para la pre-apertura de un hotel · Iñigo González",
+  seo_desc="Hotel pre-opening IT checklist: calendar back from opening, network by use, circuits to order first, PMS interfaces, check-in tests and day-one support.",
   dek_es="El calendario hacia atrás desde la fecha de apertura, la red separada por usos, los circuitos que hay que pedir antes que nada, el mapa de interfaces con el PMS, la semana de pruebas con huéspedes simulados y el soporte del primer día.",
   dek_en="The calendar counted back from the opening date, the network split by use, the circuits to order before anything else, the map of interfaces with the PMS, the test week with simulated guests and support on day one.",
   es="""
@@ -14671,7 +14672,7 @@ El PMS es el centro: casi todos los sistemas del hotel le preguntan o le envían
 
 | Sistema | Qué intercambia con el PMS |
 |---|---|
-| TPV (restaurante, bar, spa) | Consulta del huésped y **cargo a habitación** (guía de PMS hotelero) |
+| TPV (restaurante, bar, spa) | Consulta del huésped y **cargo a habitación** ([guía de PMS hotelero](pms-hotelero-soporte-interfaces-y-cargo-a-habitacion-desde-el-tpv.html)) |
 | Cerraduras | Codificar la tarjeta al hacer el check-in, anularla al hacer el check-out |
 | Centralita | Llamadas facturables al folio, despertador, estado de habitación desde el teléfono |
 | IPTV | Mensaje de bienvenida con el nombre, idioma, factura en pantalla |
@@ -14767,7 +14768,7 @@ The PMS is the centre: almost every system in the hotel asks it something or sen
 
 | System | What it exchanges with the PMS |
 |---|---|
-| POS (restaurant, bar, spa) | Guest lookup and **room charge** (hotel PMS guide) |
+| POS (restaurant, bar, spa) | Guest lookup and **room charge** ([hotel PMS guide](pms-hotelero-soporte-interfaces-y-cargo-a-habitacion-desde-el-tpv.html)) |
 | Door locks | Encode the card at check-in, cancel it at check-out |
 | PBX | Billable calls to the folio, wake-up calls, room status from the phone |
 | IPTV | Welcome message with the name, language, bill on screen |
