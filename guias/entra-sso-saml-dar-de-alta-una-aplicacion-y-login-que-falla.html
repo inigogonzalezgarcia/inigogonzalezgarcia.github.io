@@ -102,6 +102,7 @@
 <ul><li>Certificados SAML que caducan en menos de 90 días: <code>Aplicaciones empresariales → filtro &quot;Expiración del certificado&quot;</code>, o el repo 20 de mi GitHub, que lo lista con calendario.</li><li>Aplicaciones con <strong>Asignación necesaria: No</strong> que deberían tenerla.</li><li>Aplicaciones sin propietario: cuando falle, nadie sabrá a quién llamar.</li><li>Consentimientos de usuario a aplicaciones nuevas (<code>Aplicaciones empresariales → Consentimiento y permisos</code>).</li></ul>
 <h2>Siguientes pasos</h2>
 <ul><li><strong>OIDC</strong> en lugar de SAML para aplicaciones modernas: se hace en <strong>Registros de aplicaciones</strong>, con URI de redirección y ámbitos en lugar de ACS y reclamaciones. La guía de Microsoft Graph usa uno.</li><li><strong>Aprovisionamiento SCIM</strong>: que la alta y la baja en el grupo creen y desactiven la cuenta en la aplicación. Es lo que cierra el ciclo con la guía de Active Directory del Nivel 1.</li><li>Añade la aplicación a una política de Conditional Access concreta (guía anterior) si exige MFA siempre, aunque el usuario esté en un equipo conforme.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/sso-saml">«Nadie puede entrar en Gastos con SSO»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       <div class="en" lang="en">
@@ -128,6 +129,7 @@
 <ul><li>SAML certificates expiring in under 90 days: <code>Enterprise applications → &quot;Certificate expiration&quot; filter</code>, or repo 20 on my GitHub, which lists them with a calendar.</li><li>Applications with <strong>Assignment required: No</strong> that should have it.</li><li>Applications without an owner: when it breaks, nobody will know whom to call.</li><li>User consents to new applications (<code>Enterprise applications → Consent and permissions</code>).</li></ul>
 <h2>Next steps</h2>
 <ul><li><strong>OIDC</strong> instead of SAML for modern applications: done in <strong>App registrations</strong>, with redirect URIs and scopes instead of ACS and claims. The Microsoft Graph guide uses one.</li><li><strong>SCIM provisioning</strong>: so that joining and leaving the group creates and disables the account in the application. It closes the loop with the Level 1 Active Directory guide.</li><li>Add the application to a specific Conditional Access policy (previous guide) if it must always require MFA, even on a compliant device.</li></ul>
+<p class="practica">Want to practise it? Solve the ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/sso-saml?lang=en">“Nobody can sign in to Expenses with SSO”</a> in SysAdmin Desks, free and in your browser.</p>
 <p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
       </div>
       <div class="news-box">
