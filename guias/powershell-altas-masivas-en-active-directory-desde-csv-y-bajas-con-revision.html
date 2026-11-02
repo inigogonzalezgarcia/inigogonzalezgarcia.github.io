@@ -108,6 +108,7 @@
 <p class="g-warn">Si la OU <strong>Bajas</strong> está fuera del ámbito de sincronización de Azure AD Connect, mover el usuario allí hace que se borre en Entra ID en el siguiente ciclo (queda 30 días en usuarios eliminados) y con él su buzón y su OneDrive pasan a sus plazos de retención. Decídelo antes, no después.</p>
 <h2>Siguientes pasos</h2>
 <ul><li>La guía de <strong>PowerShell</strong> de este mismo nivel explica el patrón de objetos, <code>try/catch</code> y CSV que usa este script.</li><li>La guía de <strong>Azure AD Connect</strong> explica el ámbito de sincronización y qué pasa en Entra ID con cada movimiento de OU.</li><li>Las cuentas que nadie dio de baja se encuentran con una revisión periódica. Es la idea de los repositorios <strong>37-iam-access-review</strong> y <strong>03-entra-id-hygiene-audit</strong> de mi GitHub.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/leaver-return">«El portátil y el móvil de una baja: devolución, borrado y registro»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       <div class="en" lang="en">
@@ -140,6 +141,7 @@
 <p class="g-warn">If the <strong>Leavers</strong> OU is outside Azure AD Connect&#x27;s sync scope, moving the user there deletes it in Entra ID on the next cycle (it stays 30 days in deleted users), and their mailbox and OneDrive move into their retention periods. Decide beforehand, not afterwards.</p>
 <h2>Next steps</h2>
 <ul><li>The <strong>PowerShell</strong> guide at this same level explains the objects, <code>try/catch</code> and CSV pattern this script uses.</li><li>The <strong>Azure AD Connect</strong> guide explains sync scope and what happens in Entra ID with each OU move.</li><li>The accounts nobody offboarded are found with a periodic review. That is the idea behind the <strong>37-iam-access-review</strong> and <strong>03-entra-id-hygiene-audit</strong> repositories on my GitHub.</li></ul>
+<p class="practica">Want to practise it? Solve the ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/leaver-return?lang=en">“A leaver&#x27;s laptop and phone: return, wipe and register”</a> in SysAdmin Desks, free and in your browser.</p>
 <p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
       </div>
       <div class="news-box">

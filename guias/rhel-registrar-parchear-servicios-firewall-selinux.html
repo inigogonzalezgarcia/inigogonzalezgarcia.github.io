@@ -103,6 +103,7 @@
 <ul><li><code>subscription-manager status</code> y <code>dnf check-update</code>: que sigue registrado y cuánto hay pendiente.</li><li><code>needs-restarting -r</code> tras parchear, y el reinicio en la ventana.</li><li><code>journalctl -p err -S &quot;1 month ago&quot; --no-pager | tail</code>: errores repetidos que nadie ha mirado.</li><li><code>df -h</code> y el script de la guía de Bash en cron.</li><li>Con <strong>Red Hat Insights</strong> (incluido en la suscripción), los sistemas registrados aparecen en <code>console.redhat.com</code> con CVE pendientes y recomendaciones; es el informe que llevas a la reunión de parcheo.</li></ul>
 <h2>Siguientes pasos</h2>
 <ul><li>Con más de cinco servidores, el parcheo mensual se hace con <strong>Ansible</strong> (Nivel 3): un playbook con <code>dnf update</code> y reinicio controlado, servidor a servidor.</li><li>Mira <strong>Cockpit</strong> (<code>https://srv-web-01:9090</code>): la consola web que viene con RHEL para ver servicios, logs y actualizaciones sin SSH.</li><li>La guía de Ubuntu cubre lo mismo con <code>apt</code>, <code>ufw</code> y AppArmor: las diferencias son menos de lo que parece.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/rhel-var-full">«502 Bad Gateway: la aplicación de fichajes no funciona»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       <div class="en" lang="en">
@@ -130,6 +131,7 @@
 <ul><li><code>subscription-manager status</code> and <code>dnf check-update</code>: still registered, and how much is pending.</li><li><code>needs-restarting -r</code> after patching, and the reboot in the window.</li><li><code>journalctl -p err -S &quot;1 month ago&quot; --no-pager | tail</code>: repeated errors nobody has looked at.</li><li><code>df -h</code> and the script from the Bash guide in cron.</li><li>With <strong>Red Hat Insights</strong> (included in the subscription), registered systems show up at <code>console.redhat.com</code> with pending CVEs and recommendations; that is the report you take to the patching meeting.</li></ul>
 <h2>Next steps</h2>
 <ul><li>With more than five servers, monthly patching is done with <strong>Ansible</strong> (Level 3): a playbook with <code>dnf update</code> and a controlled reboot, server by server.</li><li>Look at <strong>Cockpit</strong> (<code>https://srv-web-01:9090</code>): the web console that ships with RHEL to see services, logs and updates without SSH.</li><li>The Ubuntu guide covers the same with <code>apt</code>, <code>ufw</code> and AppArmor: the differences are smaller than they look.</li></ul>
+<p class="practica">Want to practise it? Solve the ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/rhel-var-full?lang=en">“502 Bad Gateway: the timesheets app is down”</a> in SysAdmin Desks, free and in your browser.</p>
 <p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
       </div>
       <div class="news-box">
