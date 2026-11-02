@@ -164,7 +164,7 @@ CAPTCHA = (f'<div class="cf-turnstile" data-sitekey="{TS}" data-theme="light" da
 CAPTCHA_JS = '<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>' if TS else ""
 STAGES_HTML = "\n".join(stage_html(s) for s in STAGES)
 POSTS_SORTED = sorted(POSTS, key=lambda p: (p["date"], p["n"]), reverse=True)
-DESC = "Iñigo González: IT Site Leader in Madrid. 11+ years in IT operations, Modern Workplace and infrastructure across financial services, healthcare, manufacturing and luxury retail."
+DESC = "Iñigo González García, IT Site Leader in Madrid: 11+ years in IT operations, Modern Workplace and infrastructure in finance, healthcare, industry and retail."
 
 import re as _re
 _BLANK = _re.compile(r'<a\b[^>]*\btarget="_blank"[^>]*>')
@@ -518,6 +518,10 @@ for p in order:
 
 # about
 from guides import GUIDES as _GALL
+FEATURED = ["22-dex-experience-score", "19-ad-infra-health-check", "20-entra-sso-app-audit", "39-vulnerability-remediation-sla"]
+def _featured():
+    by = {p["repo"]: p for p in POSTS}
+    return " · ".join(f'<a href="blog/{r}.html">{bi(html.escape(by[r]["title_es"]), html.escape(by[r]["title_en"]))}</a>' for r in FEATURED)
 now = f'''<section class="section">
   <div class="wrap now-grid">
     <div class="reveal">
@@ -528,6 +532,7 @@ now = f'''<section class="section">
       <div class="spec-row"><dt class="label">{bi("Trabajo", "Work")}</dt><dd>{bi("Quién soy y en qué estoy ahora.", "Who I am and what I'm working on now.")}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Simulador", "Simulator")}</dt><dd><a href="https://sysadmindesksbyigg.pages.dev/" target="_blank" rel="noopener noreferrer">SysAdmin Desks ↗</a>{bi(": práctica gratuita de soporte IT con tickets, SLA y nota de trabajo.", ": free IT support practice with tickets, SLA and work notes.")}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Proyectos", "Projects")}</dt><dd><a href="blog/">{bi(f"{len(POSTS)} repos en GitHub", f"{len(POSTS)} repos on GitHub")}</a>{bi(", cada uno con su artículo.", ", each with its own story.")}</dd></div>
+      <div class="spec-row"><dt class="label">{bi("Destacados", "Featured")}</dt><dd>{_featured()}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Guías", "Guides")}</dt><dd><a href="guias.html">{bi(f"{len(_GALL)} guías paso a paso", f"{len(_GALL)} step-by-step guides")}</a>{bi(", por nivel y por sector.", ", by level and by sector.")}</dd></div>
       <div class="spec-row"><dt class="label">Newsletter</dt><dd><a href="recursos.html">Tech Career Lab</a>{bi(": una idea práctica cada dos semanas.", ": one practical idea every two weeks.")}</dd></div>
     </dl>
@@ -538,7 +543,7 @@ about_body = SEC["about"].replace('class="section dark" id="sobre-mi"', 'class="
     + "\n\n" + now + "\n\n" + SEC["map"].replace("{{MAP}}", MAP) + "\n\n" + SEC["contact"].replace("{{FORM_ACTION}}", FORM).replace("{{CAPTCHA}}", CAPTCHA).replace("{{CAPTCHA_JS}}", CAPTCHA_JS)
 sizes["about.html"] = write("about.html", layout(R="", path="about.html", active="about",
     title_en="About · Iñigo González García, IT Site Leader in Madrid", title_es="Sobre mí · Iñigo González García, IT Site Leader en Madrid",
-    desc="Iñigo González García, IT Site Leader in Madrid: 11+ years in IT operations, Modern Workplace and infrastructure across financial services, healthcare, manufacturing and luxury retail. Background, current work and contact.", body=about_body,
+    desc="Iñigo González García, IT Site Leader in Madrid: 11+ years in IT operations, Modern Workplace and infrastructure. Background, current work and contact.", body=about_body,
     ld=[{"@type": "ProfilePage", "url": SITE_URL + "about.html", "mainEntity": PERSON}, crumbs(("Home", ""), ("About", "about.html"))]))
 
 # store (IGG-ICS · IT · Tech Career, Lab & Strategy): service catalogue, no prices or checkout yet
@@ -1081,6 +1086,8 @@ def _ginline(t):
     t = html.escape(t)
     t = _re.sub(r"`([^`]+)`", r"<code>\1</code>", t)
     t = _re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", t)
+    # [text](other-guide.html): a link to another guide (local slugs only)
+    t = _re.sub(r"\[([^\[\]]+)\]\(([a-z0-9-]+\.html)\)", r'<a href="\2">\1</a>', t)
     # *text* → italics (menu names, statuses), never inside <code>
     parts = _re.split(r"(<code>.*?</code>)", t)
     return "".join(x if x.startswith("<code>") else _re.sub(r"(?<![*\w])\*(\S(?:[^*\n]*?\S)?)\*(?![*\w])", r"<em>\1</em>", x) for x in parts)
@@ -1324,7 +1331,7 @@ for i, q in enumerate(G_ORDER):
     sizes[f"guias/{q['slug']}.html"] = write(f"guias/{q['slug']}.html", layout(R="../", path=f"guias/{q['slug']}.html", active="guides",
         title_en=q.get("seo_title_en") or f'{q["title_en"]} · Iñigo González',
         title_es=q.get("seo_title_es") or f'{q["title_es"]} · Iñigo González',
-        desc=q["dek_en"], body=body, og_type="article",
+        desc=q.get("seo_desc") or q["dek_en"], body=body, og_type="article",
         ld=[{"@type": "TechArticle", "headline": q["title_en"], "alternativeHeadline": q["title_es"], "description": q["dek_en"],
              "datePublished": q["date"], "dateModified": q["date"], "inLanguage": "en", "proficiencyLevel": "Beginner" if t[0] == "nivel-1" else "Expert",
              "url": f'{SITE_URL}guias/{q["slug"]}.html', "mainEntityOfPage": f'{SITE_URL}guias/{q["slug"]}.html',

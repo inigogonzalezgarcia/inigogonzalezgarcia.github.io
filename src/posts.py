@@ -1022,6 +1022,7 @@ dict(n="22", repo="22-dex-experience-score", date="2026-10-17", cat="tools",
  seo_title_es="Puntuación DEX de 0 a 10 por portátil · Iñigo González",
  dek_en="A lab that turns endpoint telemetry into a score per device, site and department, and ranks the five fixes that would raise it most.",
  dek_es="Un laboratorio que convierte la telemetría de los equipos en una nota por dispositivo, sede y departamento, y ordena los cinco arreglos que más la subirían.",
+ seo_desc="DEX score lab: turns endpoint telemetry into a 0-10 digital experience score per device, site and department, and ranks the fixes that raise it most.",
  en="""
 
 ## Why this lab
