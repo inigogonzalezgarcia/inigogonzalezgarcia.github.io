@@ -1247,6 +1247,18 @@ def practice_box(slug):
             f'{links}'
             f'{_PRACTICE_MORE}'
             f'</div></div>')
+def practice_end(slug, lang):
+    # closing line of a guide: links to the public ticket pages of SysAdmin Desks (indexable), not to the app
+    desks = PRACTICE.get(slug, [])
+    if not desks: return ""
+    i = 0 if lang == "es" else 1
+    q = "" if lang == "es" else "?lang=en"
+    a = [f'<a href="{SIM_URL}tickets/{d}{q}">{"«" if lang == "es" else "“"}{html.escape(_DESK[d][i])}{"»" if lang == "es" else "”"}</a>' for d in desks]
+    y = " y " if lang == "es" else " and "
+    lst = a[0] if len(a) == 1 else ", ".join(a[:-1]) + y + a[-1]
+    if lang == "es":
+        return f'<p class="practica">¿Quieres practicarlo? Resuelve {"el ticket" if len(a) == 1 else "los tickets"} {lst} en SysAdmin Desks, gratis y en el navegador.</p>\n'
+    return f'<p class="practica">Want to practise it? Solve {"the ticket" if len(a) == 1 else "the tickets"} {lst} in SysAdmin Desks, free and in your browser.</p>\n'
 def practice_strip(slug, lang):
     desks = PRACTICE.get(slug, [])
     if not desks: return ""
@@ -1282,11 +1294,11 @@ for i, q in enumerate(G_ORDER):
     <article class="prose guide">
       <div class="es" lang="es">
 {practice_strip(q["slug"], "es")}{gmd(q["es"], "es")}
-<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+{practice_end(q["slug"], "es")}<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       <div class="en" lang="en">
 {practice_strip(q["slug"], "en")}{gmd(q["en"], "en")}
-<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+{practice_end(q["slug"], "en")}<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
