@@ -23,9 +23,9 @@ LEVELS = {
                     h_es="Gestión moderna, identidad<br>y automatización.", h_en="Modern management, identity<br>and automation.",
                     d_es="Gestión moderna del puesto, identidad, virtualización y automatización.",
                     d_en="Modern device management, identity, virtualisation and automation.",
-                    l_es="Veintiséis temas para quien ya administra: Intune y sus anillos de actualización, Entra ID y certificados, GPO de seguridad y Defender, Tanium, Copilot, hipervisores, bases de datos, servidores web, CMDB, monitorización y logs, y la automatización con Ansible, Docker, Jenkins y Microsoft Graph.",
-                    l_en="Twenty-six topics for people who already administer: Intune and its update rings, Entra ID and certificates, security GPOs and Defender, Tanium, Copilot, hypervisors, databases, web servers, the CMDB, monitoring and logs, and automation with Ansible, Docker, Jenkins and Microsoft Graph.",
-                    seo="Advanced IT guides: Ansible, Docker, Elasticsearch and Kibana, Entra ID Conditional Access and SSO, Grafana, Hyper-V, Intune, Intune EPM, Jenkins, Linux joined to Active Directory, Microsoft Graph, NDES and Cloud PKI, PostgreSQL, MySQL and SQL Server, SolarWinds, Ubuntu Landscape, VMware vSphere and Zabbix."),
+                    l_es="Veintinueve temas para quien ya administra: Intune y sus anillos de actualización, Entra ID y certificados, GPO de seguridad y Defender, Tanium, Copilot, hipervisores, bases de datos, servidores web, CMDB, monitorización y logs, y la automatización con Ansible, Docker, Jenkins y Microsoft Graph.",
+                    l_en="Twenty-nine topics for people who already administer: Intune and its update rings, Entra ID and certificates, security GPOs and Defender, Tanium, Copilot, hypervisors, databases, web servers, the CMDB, monitoring and logs, and automation with Ansible, Docker, Jenkins and Microsoft Graph.",
+                    seo="Advanced IT guides: Ansible, Docker, Elasticsearch and Kibana, Entra ID Conditional Access and SSO, Grafana, Hyper-V, Intune, Intune EPM, Jenkins, Linux joined to Active Directory, Microsoft Graph, NDES and Cloud PKI, PostgreSQL, MySQL and SQL Server, MySQL and MariaDB, PostgreSQL, Puppet, SolarWinds, Ubuntu Landscape, VMware vSphere and Zabbix."),
     "nivel-4": dict(key="nivel-4", n_es="Nivel 4", n_en="Level 4", t_es="Experto", t_en="Expert",
                     h_es="Infraestructura híbrida,<br>seguridad y continuidad.", h_en="Hybrid infrastructure,<br>security and continuity.",
                     d_es="Infraestructura híbrida, redes, seguridad y continuidad de negocio.",
@@ -266,6 +266,15 @@ TOPICS = [
     ("nivel-3", "zabbix", "Zabbix: servidor, agentes y plantillas", "Zabbix: server, agents and templates",
      "Instalar el servidor, desplegar el agente 2 en Windows y Linux, plantillas y macros, disparadores con dependencias, avisos y mantenimientos.",
      "Install the server, roll out agent 2 on Windows and Linux, templates and macros, triggers with dependencies, alerts and maintenance windows."),
+    ("nivel-3", "puppet", "Puppet: configuración como código", "Puppet: configuration as code",
+     "Servidor y agentes, certificados, manifiestos y módulos, entornos con Hiera, ejecución en modo noop y un agente que no aplica el catálogo.",
+     "Server and agents, certificates, manifests and modules, environments with Hiera, noop runs and an agent that does not apply its catalogue."),
+    ("nivel-3", "mysql-mariadb", "MySQL y MariaDB", "MySQL and MariaDB",
+     "Configuración y memoria de InnoDB, registro de consultas lentas, índices, réplica y el error Too many connections.",
+     "InnoDB settings and memory, the slow query log, indexes, replication and the Too many connections error."),
+    ("nivel-3", "postgresql", "PostgreSQL", "PostgreSQL",
+     "Roles y pg_hba.conf, autovacuum y tablas hinchadas, conexiones y pooling, pg_stat_statements y una base que no acepta conexiones.",
+     "Roles and pg_hba.conf, autovacuum and bloated tables, connections and pooling, pg_stat_statements and a database that refuses connections."),
     # ---- Level 4
     ("nivel-4", "aws", "Amazon AWS", "Amazon AWS",
      'Cuentas e IAM bien hechos, una VPC con VPN a la oficina, servidores sin RDP abierto, copias y alertas de coste.',
@@ -34550,7 +34559,7 @@ $ sudo mysql -e "SHOW REPLICA STATUS\\G" | grep -E "Replica_IO_Running|Replica_S
                  Last_SQL_Error:
 :::
 
-En MariaDB anteriores a 10.5 el comando es `SHOW SLAVE STATUS\\G` y el campo, `Seconds_Behind_Master`. Los dos hilos tienen que estar en `Yes`; uno en `No` con `Last_SQL_Error` relleno es una réplica parada, aunque el retraso diga `NULL` y no un número alto.
+En MariaDB los campos siguen llamándose `Slave_IO_Running`, `Slave_SQL_Running` y `Seconds_Behind_Master` (también con `SHOW REPLICA STATUS\\G`, que existe desde la 10.5; antes, `SHOW SLAVE STATUS\\G`), así que ajusta el `grep`. Los dos hilos tienen que estar en `Yes`; uno en `No` con `Last_SQL_Error` relleno es una réplica parada, aunque el retraso diga `NULL` y no un número alto.
 
 :::term psql · srv-db-02 (primario) y srv-db-02b (réplica)
 $ sudo -u postgres psql -c "SELECT application_name, client_addr, state, replay_lag FROM pg_stat_replication;"
@@ -34796,7 +34805,7 @@ $ sudo mysql -e "SHOW REPLICA STATUS\\G" | grep -E "Replica_IO_Running|Replica_S
                  Last_SQL_Error:
 :::
 
-On MariaDB before 10.5 the command is `SHOW SLAVE STATUS\\G` and the field `Seconds_Behind_Master`. Both threads must be `Yes`; one on `No` with `Last_SQL_Error` filled in is a stopped replica, even though the lag shows `NULL` rather than a high number.
+On MariaDB the fields are still called `Slave_IO_Running`, `Slave_SQL_Running` and `Seconds_Behind_Master` (also with `SHOW REPLICA STATUS\\G`, available since 10.5; before that, `SHOW SLAVE STATUS\\G`), so adjust the `grep`. Both threads must be `Yes`; one on `No` with `Last_SQL_Error` filled in is a stopped replica, even though the lag shows `NULL` rather than a high number.
 
 :::term psql · srv-db-02 (primary) and srv-db-02b (replica)
 $ sudo -u postgres psql -c "SELECT application_name, client_addr, state, replay_lag FROM pg_stat_replication;"
@@ -34848,4 +34857,1766 @@ In the ticket: since when there has been no valid backup (a week without a logic
 - The [PostgreSQL, MySQL and SQL Server](postgresql-mysql-sql-server-tareas-de-operaciones-copia-restauracion-espacio-y-consulta-lenta.html) guide covers the blocking query, disk space and growth.
 - The [Veeam](veeam-crear-un-job-comprobar-copias-y-restaurar.html) guide explains how the backup system picks up `/backup` and keeps it off the server.
 - With large databases or an RPO of minutes, logical backups fall short: physical backups with WAL archiving (pgBackRest) or binlogs (MariaDB Backup, Percona XtraBackup).
+""")
+
+
+# ---------------------------------------------------------------- L3 · Puppet
+g(slug="puppet-servidor-y-agentes-linux-y-windows-certificados-primer-modulo-hiera-y-un-agente-que-deja-de-aplicar", topic="puppet", date="2026-11-03",
+  title_es="Puppet: servidor y agentes en Linux y Windows, certificados, un primer módulo, Hiera por entorno y un agente que deja de aplicar cambios",
+  title_en="Puppet: server and agents on Linux and Windows, certificates, a first module, Hiera per environment and an agent that stops applying changes",
+  seo_title_en="Puppet: server, agents, modules and Hiera · Iñigo González",
+  seo_title_es="Puppet: servidor, agentes, módulos y Hiera · Iñigo González",
+  seo_desc="Puppet 8 or OpenVox 8: install the server, Linux and Windows agents, sign certificates, a first module, Hiera, Git environments, noop and a stuck agent.",
+  dek_es="Puppet 8 u OpenVox 8 tras el cambio de licencia: el servidor en Linux, los agentes en Linux y Windows, la firma de certificados, site.pp, un primer módulo con paquete, plantilla y servicio, roles y perfiles, Hiera por entorno, el código en Git, la ejecución en noop, los informes y un agente que deja de aplicar cambios.",
+  dek_en="Puppet 8 or OpenVox 8 after the licensing change: the server on Linux, agents on Linux and Windows, certificate signing, site.pp, a first module with a package, a template and a service, roles and profiles, Hiera per environment, code in Git, noop runs, reports and an agent that stops applying changes.",
+  es="""
+## Qué vas a conseguir
+
+Montar desde cero una instalación de Puppet que gestiona servidores Linux y Windows: un servidor primario con su autoridad de certificación, dos agentes con el certificado firmado, un primer módulo que instala un paquete, escribe su fichero de configuración desde una plantilla y reinicia el servicio solo cuando el fichero cambia, los datos en Hiera separados por entorno y el código en Git. Y saber qué mirar cuando un agente deja de aplicar los cambios que se suben al repositorio.
+
+## Antes de empezar
+
+- Un servidor Linux para el **servidor primario** (RHEL 9 o compatible en esta guía; Ubuntu 24.04 también sirve) con **4 GB de RAM** como mínimo: Puppet Server es una aplicación Java y arranca con 2 GB de memoria reservada.
+- Un nombre DNS estable para él, por ejemplo `puppet.contoso.local`, que resuelvan todos los agentes. Los agentes se conectan por **TCP 8140**.
+- Dos servidores de prueba: `srv-app-01.contoso.local` (Linux) y `srv-win-01.contoso.local` (Windows Server 2022 o 2025), con la hora sincronizada. Los certificados fallan con relojes desfasados.
+- Acceso `sudo` en los Linux y administrador local en el Windows.
+- Un repositorio Git para el código: desde el primer módulo, nada se edita a mano en el servidor.
+
+## 1. Puppet u OpenVox: qué instalar
+
+Desde 2025 hay dos caminos para la versión 8:
+
+- **Perforce**, propietario de Puppet, anunció a finales de 2024 que los paquetes oficiales pasarían a un repositorio privado. Su distribución, **Puppet Core**, exige aceptar una licencia comercial, con un uso gratuito limitado (25 nodos en el anuncio original) y suscripción por encima. El código abierto publicado sigue bajo licencia Apache 2.0, pero el desarrollo nuevo ya no se hace en público.
+- **OpenVox** es la bifurcación de la comunidad (Vox Pupuli), con primera versión en enero de 2025. Es compatible con el código de Puppet, publica paquetes en `yum.voxpupuli.org` y `apt.voxpupuli.org` y mantiene la rama 8 mientras prepara la 9.
+
+Los paquetes cambian de nombre (`openvox-server` y `openvox-agent` frente a `puppetserver` y `puppet-agent`), pero los comandos (`puppet`, `puppetserver`), las rutas (`/etc/puppetlabs`) y el lenguaje son los mismos. Esta guía usa los paquetes de OpenVox 8; con Puppet Core solo cambia el repositorio. Revisa las condiciones vigentes de cada uno antes de elegir.
+
+## 2. El servidor primario
+
+:::term bash · puppet.contoso.local
+$ sudo rpm -Uvh https://yum.voxpupuli.org/openvox8-release-el-9.noarch.rpm
+$ sudo dnf install -y openvox-server
+$ source /etc/profile.d/puppet-agent.sh
+$ sudo /opt/puppetlabs/bin/puppet config set dns_alt_names puppet,puppet.contoso.local --section server
+$ sudo /opt/puppetlabs/bin/puppet config set server puppet.contoso.local --section main
+$ sudo firewall-cmd --permanent --add-port=8140/tcp && sudo firewall-cmd --reload
+$ sudo systemctl enable --now puppetserver
+$ puppetserver --version
+puppetserver version: 8.11.0
+:::
+
+- Los ejecutables quedan en `/opt/puppetlabs/bin`; el script de `/etc/profile.d` lo añade al `PATH`. Con `sudo` hace falta la ruta completa o `sudo -i`.
+- `dns_alt_names` va **antes del primer arranque**: en ese arranque el servidor crea la autoridad de certificación y su propio certificado, y los nombres alternativos quedan grabados en él. Cambiarlo después obliga a regenerar el certificado del servidor.
+- La memoria de Java está en `/etc/sysconfig/puppetserver` (en Ubuntu, `/etc/default/puppetserver`): `JAVA_ARGS="-Xms2g -Xmx2g"`. Con cientos de agentes se sube aquí.
+- El código vive en `/etc/puppetlabs/code/environments/`, un directorio por entorno. El paquete crea `production`.
+
+## 3. El agente en Linux y en Windows
+
+En el Linux:
+
+:::term bash · srv-app-01.contoso.local
+$ sudo rpm -Uvh https://yum.voxpupuli.org/openvox8-release-el-9.noarch.rpm
+$ sudo dnf install -y openvox-agent
+$ sudo /opt/puppetlabs/bin/puppet config set server puppet.contoso.local --section main
+$ sudo /opt/puppetlabs/bin/puppet agent -t
+Info: Creating a new RSA SSL key for srv-app-01.contoso.local
+Info: Creating a new SSL certificate request for srv-app-01.contoso.local
+Info: Certificate Request fingerprint (SHA256): 4F:1A:7C:...:9C
+Info: Certificate for srv-app-01.contoso.local has not been signed yet
+Couldn't fetch certificate from CA server; you might still need to sign this agent's certificate (srv-app-01.contoso.local).
+:::
+
+En Ubuntu, el paquete del repositorio es `openvox8-release-ubuntu24.04.deb` de `apt.voxpupuli.org`, se instala con `dpkg -i` y después `apt update` y `apt install openvox-agent`.
+
+En el Windows, el MSI de la rama 8 está en `downloads.voxpupuli.org/windows/openvox8/`. Se instala en silencio desde PowerShell como administrador:
+
+:::term PowerShell · srv-win-01.contoso.local
+$ msiexec /qn /norestart /i openvox-agent-8.28.0-x64.msi PUPPET_MASTER_SERVER=puppet.contoso.local PUPPET_AGENT_STARTUP_MODE=Automatic
+$ Get-Service puppet
+Status   Name     DisplayName
+------   ----     -----------
+Running  puppet   Puppet Agent
+:::
+
+- El MSI añade `C:\\Program Files\\Puppet Labs\\Puppet\\bin` al `PATH`; la configuración queda en `C:\\ProgramData\\PuppetLabs\\puppet\\etc\\puppet.conf`. Para ejecutar `puppet agent -t` a mano, consola **como administrador**.
+- El nombre del certificado (*certname*) es el FQDN en minúsculas. Si el Windows no tiene sufijo DNS, se queda solo con el nombre corto; `PUPPET_AGENT_CERTNAME=srv-win-01.contoso.local` lo fija en la instalación.
+- El agente se ejecuta como servicio cada **30 minutos** (`runinterval`). En el Linux, `sudo /opt/puppetlabs/bin/puppet resource service puppet ensure=running enable=true` lo deja activo al arrancar.
+
+## 4. Firmar los certificados
+
+Cada agente genera su clave y envía una petición de certificado. Hasta que el servidor la firma, no recibe nada:
+
+:::term bash · puppet.contoso.local
+$ sudo /opt/puppetlabs/bin/puppetserver ca list
+Requested Certificates:
+    srv-app-01.contoso.local   (SHA256)  4F:1A:7C:...:9C
+    srv-win-01.contoso.local   (SHA256)  B2:77:0E:...:E0
+$ sudo /opt/puppetlabs/bin/puppetserver ca sign --certname srv-app-01.contoso.local,srv-win-01.contoso.local
+Successfully signed certificate request for srv-app-01.contoso.local
+Successfully signed certificate request for srv-win-01.contoso.local
+$ sudo /opt/puppetlabs/bin/puppetserver ca list --all
+:::
+
+- Compara la huella de `ca list` con la que mostró el agente antes de firmar: así sabes que firmas el equipo que crees.
+- La firma automática (`autosign.conf` o un script de política) existe y ahorra trabajo en despliegues masivos, pero firmar lo que llega sin comprobarlo da la configuración, y los secretos que lleve, a cualquier equipo que alcance el puerto 8140.
+
+## 5. site.pp: qué recibe cada nodo
+
+El fichero `manifests/site.pp` del entorno asigna clases a cada nodo por su certname:
+
+:::term site.pp · environments/production/manifests/
+node 'srv-app-01.contoso.local' {
+  include role::app_linux
+}
+
+node 'srv-win-01.contoso.local' {
+  include role::base_windows
+}
+
+node /^srv-web-\\d+\\.contoso\\.local$/ {
+  include role::web
+}
+
+node default {
+}
+:::
+
+- Se aplica el bloque más concreto que coincida; si ninguno coincide, `default`. Sin bloque `default` el agente falla con *Could not find node statement*.
+- En instalaciones grandes, la clasificación sale de un clasificador externo (Foreman, la consola de la edición comercial) en lugar de `site.pp`. La idea es la misma: un nodo, un rol.
+
+## 6. El primer módulo: paquete, plantilla y servicio
+
+El módulo `timesync` instala chrony, escribe su configuración desde una plantilla con los servidores de hora de la empresa y reinicia el servicio solo si el fichero cambia:
+
+:::term modules/timesync/manifests/init.pp
+class timesync (
+  Array[String] $servers,
+) {
+  case $facts['os']['family'] {
+    'RedHat': {
+      $conf    = '/etc/chrony.conf'
+      $service = 'chronyd'
+    }
+    'Debian': {
+      $conf    = '/etc/chrony/chrony.conf'
+      $service = 'chrony'
+    }
+    default: {
+      fail("timesync: ${facts['os']['family']} no está soportado")
+    }
+  }
+
+  package { 'chrony':
+    ensure => installed,
+  }
+
+  file { $conf:
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => epp('timesync/chrony.conf.epp', { 'servers' => $servers }),
+    require => Package['chrony'],
+    notify  => Service[$service],
+  }
+
+  service { $service:
+    ensure => running,
+    enable => true,
+  }
+}
+:::
+
+:::term modules/timesync/templates/chrony.conf.epp
+<%- | Array[String] $servers | -%>
+# Gestionado por Puppet (módulo timesync). Los cambios a mano se pierden.
+<% $servers.each |$s| { -%>
+server <%= $s %> iburst
+<% } -%>
+driftfile /var/lib/chrony/drift
+makestep 1.0 3
+rtcsync
+:::
+
+- `require` ordena (primero el paquete, luego el fichero); `notify` ordena **y** reinicia el servicio cuando el fichero cambia. Si el fichero ya está como debe, no hay reinicio.
+- `$servers` no tiene valor por defecto: sale de Hiera (apartado 8). Un valor fijo en el código obligaría a cambiar el módulo para cada sede.
+- Las plantillas **EPP** usan el propio lenguaje de Puppet; las **ERB** (`template()`, sintaxis Ruby) siguen funcionando y son las que se verán en módulos antiguos.
+- Antes de subir: `puppet parser validate modules/timesync/manifests/init.pp` y `puppet-lint` sobre el módulo.
+
+En Windows los mismos tipos de recurso funcionan con otras rutas. Un perfil base mínimo:
+
+:::term site/profile/manifests/base_windows.pp
+class profile::base_windows {
+  service { 'W32Time':
+    ensure => running,
+    enable => true,
+  }
+
+  file { 'C:/ProgramData/Contoso':
+    ensure => directory,
+  }
+}
+:::
+
+En las rutas de Windows, la barra normal evita problemas de escape en el código.
+
+## 7. Roles y perfiles
+
+El patrón habitual separa tres capas:
+
+| Capa | Qué contiene | Ejemplo |
+|---|---|---|
+| Módulo de componente | Cómo se configura una pieza, sin datos de la empresa | `timesync`, módulos de Puppet Forge |
+| Perfil | Una pieza de la empresa: qué módulos y con qué ajustes | `profile::base_linux` incluye `timesync` y el agente de monitorización |
+| Rol | Qué es el servidor, solo con `include` de perfiles | `role::app_linux` = `profile::base_linux` + `profile::app` |
+
+Cada nodo recibe **un solo rol**. Si dos servidores necesitan algo distinto, son dos roles. Los roles y perfiles suelen vivir en `site/role` y `site/profile`, junto a los módulos.
+
+## 8. Hiera: los datos fuera del código
+
+Hiera da valores a los parámetros de las clases según el nodo. En la raíz de cada entorno:
+
+:::term hiera.yaml · environments/production/
+---
+version: 5
+defaults:
+  datadir: data
+  data_hash: yaml_data
+hierarchy:
+  - name: "Por nodo"
+    path: "nodes/%{trusted.certname}.yaml"
+  - name: "Por sistema operativo"
+    path: "os/%{facts.os.family}.yaml"
+  - name: "Común"
+    path: "common.yaml"
+:::
+
+:::term data/common.yaml
+---
+timesync::servers:
+  - dc01.contoso.local
+  - dc02.contoso.local
+:::
+
+- Puppet busca de arriba abajo y se queda con el primer valor: un fichero en `nodes/` gana a `common.yaml`. La clave `timesync::servers` rellena el parámetro `$servers` sin que el código lo pida.
+- Usa `trusted.certname` (del certificado) para la capa de nodo, no un *fact* que el propio agente puede falsear.
+- Como cada entorno tiene su `hiera.yaml` y su `data/`, `staging` puede apuntar a otros servidores de hora sin tocar `production`.
+- Para ver qué valor sale y de dónde: `puppet lookup timesync::servers --environment production --explain` en el servidor.
+- Las contraseñas no van en claro: **hiera-eyaml** las cifra dentro del YAML.
+
+## 9. El código en Git y los entornos
+
+- Un **repositorio de control** con `manifests/`, `site/`, `data/`, `hiera.yaml` y un `Puppetfile` con los módulos de Puppet Forge y sus versiones.
+- **Cada rama es un entorno**: la rama `production` se despliega en `/etc/puppetlabs/code/environments/production`, la rama `staging` en `.../staging`. La herramienta que hace ese despliegue es **r10k** (o **Code Manager** en la edición comercial), lanzada desde el pipeline al fusionar.
+- El flujo de un cambio: rama, revisión, fusión a `staging`, prueba en unos pocos nodos, fusión a `production`.
+
+Antes de aplicar nada, el ensayo en el agente:
+
+:::term bash · srv-app-01.contoso.local
+$ sudo /opt/puppetlabs/bin/puppet agent -t --noop --environment staging
+Info: Using environment 'staging'
+Info: Retrieving pluginfacts
+Info: Retrieving plugin
+Info: Loading facts
+Info: Caching catalog for srv-app-01.contoso.local
+Info: Applying configuration version '1762160512'
+Notice: /Stage[main]/Timesync/File[/etc/chrony.conf]/content: current_value '{sha256}3b1f...', should be '{sha256}9ac2...' (noop)
+Notice: /Stage[main]/Timesync/Service[chronyd]: Would have triggered 'refresh' from 1 event
+Notice: Applied catalog in 0.94 seconds
+:::
+
+`--noop` compila el catálogo y dice qué cambiaría sin tocar nada. Si el resultado es el esperado, la misma orden sin `--noop` aplica el cambio en ese nodo; el resto lo recibe en su siguiente ejecución al fusionar en `production`.
+
+## 10. Informes: qué pasó en cada ejecución
+
+- Con `-t`, el código de salida dice el resultado: **0** sin cambios, **2** con cambios, **4** con fallos, **6** cambios y fallos. Sirve para un pipeline o un script.
+- En el agente, `puppet config print lastrunfile` da la ruta del resumen de la última ejecución (hora, recursos cambiados, fallidos). Una comprobación de monitorización que avise si ese fichero tiene más de dos horas detecta agentes parados.
+- El agente envía un informe al servidor en cada ejecución; por defecto se guarda en `/opt/puppetlabs/server/data/puppetserver/reports/<certname>/`.
+- Con más de unos pocos nodos, **PuppetDB** (u **OpenVoxDB**) guarda hechos, catálogos e informes de todos, y un panel como **Puppetboard** muestra qué nodos fallan o llevan tiempo sin informar.
+
+## 11. El ticket: "un agente dejó de aplicar los cambios"
+
+El cambio de servidores de hora llegó a todos los Linux menos a `srv-app-02.contoso.local`, reinstalado la semana pasada. Puppetboard dice que su último informe es de hace nueve días. Lo primero, una ejecución a mano en el agente y leer el **primer** error:
+
+:::term bash · srv-app-02.contoso.local
+$ sudo /opt/puppetlabs/bin/puppet agent -t
+Error: The certificate for 'CN=srv-app-02.contoso.local' does not match its private key
+:::
+
+Los cuatro motivos habituales, por orden de frecuencia:
+
+**1. Certificado que no corresponde tras una reinstalación.** El equipo nuevo generó otra clave, pero la CA conserva el certificado firmado del equipo anterior con el mismo nombre. Se borra en los dos lados y se vuelve a firmar:
+
+:::term bash · servidor y agente
+# en puppet.contoso.local
+$ sudo /opt/puppetlabs/bin/puppetserver ca clean --certname srv-app-02.contoso.local
+# en srv-app-02.contoso.local
+$ sudo /opt/puppetlabs/bin/puppet ssl clean
+$ sudo /opt/puppetlabs/bin/puppet agent -t
+# de nuevo en el servidor: comprobar la huella y firmar
+$ sudo /opt/puppetlabs/bin/puppetserver ca sign --certname srv-app-02.contoso.local
+:::
+
+`puppet ssl clean` borra la clave y el certificado del agente; en Windows es el mismo comando en una consola de administrador. Para que no se repita, el procedimiento de baja o reinstalación de un servidor incluye `puppetserver ca clean` y, con PuppetDB, `puppet node deactivate`.
+
+**2. Reloj desfasado.** Errores como *certificate verify failed (certificate is not yet valid)* o un certificado recién firmado que el agente da por caducado. `timedatectl` en Linux o `w32tm /query /status` en Windows. Es justo lo que el módulo `timesync` evita, pero un equipo recién instalado aún no lo tiene: la hora se corrige a mano antes del primer `puppet agent -t`.
+
+**3. El puerto 8140.** *Failed to open TCP connection to puppet.contoso.local:8140* indica red o cortafuegos, no Puppet. `nc -zv puppet.contoso.local 8140` en Linux o `Test-NetConnection puppet.contoso.local -Port 8140` en Windows. Si no conecta, revisa el cortafuegos del servidor, el del propio equipo y si el nombre resuelve a la IP correcta.
+
+**4. Agente deshabilitado.** Alguien lo paró para un cambio manual y no lo reactivó:
+
+:::term bash · srv-app-02.contoso.local
+$ sudo /opt/puppetlabs/bin/puppet agent -t
+Notice: Skipping run of Puppet configuration client; administratively disabled (Reason: 'INC-4471 prueba manual de chrony');
+Use 'puppet agent --enable' to re-enable.
+$ sudo /opt/puppetlabs/bin/puppet agent --enable
+$ sudo /opt/puppetlabs/bin/puppet agent -t --noop
+:::
+
+`puppet agent --disable "motivo"` es la forma correcta de parar un agente: deja el motivo a la vista. Antes de reactivarlo, el `--noop` enseña qué deshará Puppet de lo que se cambió a mano; si ese cambio debe quedarse, va al código primero.
+
+En el ticket: nodo, primer error, causa, comandos ejecutados en servidor y agente, y la ejecución final con código de salida 0 o 2 y sin fallos.
+
+## Siguientes pasos
+
+- La guía de [Ansible: el primer playbook para parchear servidores](ansible-primer-playbook-parchear-servidores-linux.html) cubre el otro enfoque: sin agente, por SSH y a demanda. Muchos equipos usan Puppet para el estado permanente y Ansible para tareas puntuales como el parcheo.
+- La de [Git para los scripts del equipo](git-scripts-del-equipo-bajo-control-de-versiones.html) explica ramas, revisiones y fusiones, la base del repositorio de control.
+- En el lado Windows, la guía de [Windows Server: roles, parches y eventos](windows-server-instalar-rol-parchear-y-leer-eventos.html) ayuda a decidir qué conviene describir como código en un servidor base.
+""",
+  en="""
+## What you'll get
+
+Building from scratch a Puppet setup that manages Linux and Windows servers: a primary server with its certificate authority, two agents with signed certificates, a first module that installs a package, writes its configuration file from a template and restarts the service only when the file changes, data in Hiera separated by environment, and the code in Git. And knowing what to look at when an agent stops applying the changes pushed to the repository.
+
+## Before you start
+
+- A Linux server for the **primary server** (RHEL 9 or compatible in this guide; Ubuntu 24.04 works too) with at least **4 GB of RAM**: Puppet Server is a Java application and starts with 2 GB of reserved memory.
+- A stable DNS name for it, for example `puppet.contoso.local`, that every agent resolves. Agents connect over **TCP 8140**.
+- Two test servers: `srv-app-01.contoso.local` (Linux) and `srv-win-01.contoso.local` (Windows Server 2022 or 2025), with their clocks in sync. Certificates fail with skewed clocks.
+- `sudo` access on the Linux machines and local administrator on the Windows one.
+- A Git repository for the code: from the first module on, nothing is edited by hand on the server.
+
+## 1. Puppet or OpenVox: what to install
+
+Since 2025 there are two paths for version 8:
+
+- **Perforce**, which owns Puppet, announced at the end of 2024 that the official packages would move to a private repository. Its distribution, **Puppet Core**, requires accepting a commercial licence, with limited free use (25 nodes in the original announcement) and a subscription above that. The published open source code remains under the Apache 2.0 licence, but new development no longer happens in public.
+- **OpenVox** is the community fork (Vox Pupuli), first released in January 2025. It is compatible with Puppet code, publishes packages at `yum.voxpupuli.org` and `apt.voxpupuli.org`, and maintains the 8 branch while it prepares 9.
+
+The packages are renamed (`openvox-server` and `openvox-agent` instead of `puppetserver` and `puppet-agent`), but the commands (`puppet`, `puppetserver`), the paths (`/etc/puppetlabs`) and the language are the same. This guide uses the OpenVox 8 packages; with Puppet Core only the repository changes. Check the current terms of each before choosing.
+
+## 2. The primary server
+
+:::term bash · puppet.contoso.local
+$ sudo rpm -Uvh https://yum.voxpupuli.org/openvox8-release-el-9.noarch.rpm
+$ sudo dnf install -y openvox-server
+$ source /etc/profile.d/puppet-agent.sh
+$ sudo /opt/puppetlabs/bin/puppet config set dns_alt_names puppet,puppet.contoso.local --section server
+$ sudo /opt/puppetlabs/bin/puppet config set server puppet.contoso.local --section main
+$ sudo firewall-cmd --permanent --add-port=8140/tcp && sudo firewall-cmd --reload
+$ sudo systemctl enable --now puppetserver
+$ puppetserver --version
+puppetserver version: 8.11.0
+:::
+
+- The executables live in `/opt/puppetlabs/bin`; the `/etc/profile.d` script adds it to `PATH`. With `sudo` you need the full path or `sudo -i`.
+- `dns_alt_names` goes in **before the first start**: on that start the server creates the certificate authority and its own certificate, and the alternative names are baked into it. Changing it later means regenerating the server certificate.
+- Java memory is set in `/etc/sysconfig/puppetserver` (on Ubuntu, `/etc/default/puppetserver`): `JAVA_ARGS="-Xms2g -Xmx2g"`. With hundreds of agents, you raise it here.
+- The code lives in `/etc/puppetlabs/code/environments/`, one directory per environment. The package creates `production`.
+
+## 3. The agent on Linux and on Windows
+
+On the Linux server:
+
+:::term bash · srv-app-01.contoso.local
+$ sudo rpm -Uvh https://yum.voxpupuli.org/openvox8-release-el-9.noarch.rpm
+$ sudo dnf install -y openvox-agent
+$ sudo /opt/puppetlabs/bin/puppet config set server puppet.contoso.local --section main
+$ sudo /opt/puppetlabs/bin/puppet agent -t
+Info: Creating a new RSA SSL key for srv-app-01.contoso.local
+Info: Creating a new SSL certificate request for srv-app-01.contoso.local
+Info: Certificate Request fingerprint (SHA256): 4F:1A:7C:...:9C
+Info: Certificate for srv-app-01.contoso.local has not been signed yet
+Couldn't fetch certificate from CA server; you might still need to sign this agent's certificate (srv-app-01.contoso.local).
+:::
+
+On Ubuntu, the repository package is `openvox8-release-ubuntu24.04.deb` from `apt.voxpupuli.org`, installed with `dpkg -i` followed by `apt update` and `apt install openvox-agent`.
+
+On Windows, the 8-branch MSI is at `downloads.voxpupuli.org/windows/openvox8/`. Install it silently from PowerShell as administrator:
+
+:::term PowerShell · srv-win-01.contoso.local
+$ msiexec /qn /norestart /i openvox-agent-8.28.0-x64.msi PUPPET_MASTER_SERVER=puppet.contoso.local PUPPET_AGENT_STARTUP_MODE=Automatic
+$ Get-Service puppet
+Status   Name     DisplayName
+------   ----     -----------
+Running  puppet   Puppet Agent
+:::
+
+- The MSI adds `C:\\Program Files\\Puppet Labs\\Puppet\\bin` to `PATH`; the configuration ends up in `C:\\ProgramData\\PuppetLabs\\puppet\\etc\\puppet.conf`. To run `puppet agent -t` by hand, use a console **as administrator**.
+- The certificate name (*certname*) is the lowercase FQDN. If the Windows server has no DNS suffix, it gets only the short name; `PUPPET_AGENT_CERTNAME=srv-win-01.contoso.local` sets it at install time.
+- The agent runs as a service every **30 minutes** (`runinterval`). On Linux, `sudo /opt/puppetlabs/bin/puppet resource service puppet ensure=running enable=true` keeps it enabled at boot.
+
+## 4. Sign the certificates
+
+Each agent generates its key and sends a certificate request. Until the server signs it, the agent gets nothing:
+
+:::term bash · puppet.contoso.local
+$ sudo /opt/puppetlabs/bin/puppetserver ca list
+Requested Certificates:
+    srv-app-01.contoso.local   (SHA256)  4F:1A:7C:...:9C
+    srv-win-01.contoso.local   (SHA256)  B2:77:0E:...:E0
+$ sudo /opt/puppetlabs/bin/puppetserver ca sign --certname srv-app-01.contoso.local,srv-win-01.contoso.local
+Successfully signed certificate request for srv-app-01.contoso.local
+Successfully signed certificate request for srv-win-01.contoso.local
+$ sudo /opt/puppetlabs/bin/puppetserver ca list --all
+:::
+
+- Compare the fingerprint in `ca list` with the one the agent showed before signing: that way you know you are signing the machine you think you are.
+- Autosigning (`autosign.conf` or a policy script) exists and saves work in mass rollouts, but signing whatever arrives without checking hands the configuration, and any secrets in it, to any machine that can reach port 8140.
+
+## 5. site.pp: what each node gets
+
+The environment's `manifests/site.pp` file assigns classes to each node by its certname:
+
+:::term site.pp · environments/production/manifests/
+node 'srv-app-01.contoso.local' {
+  include role::app_linux
+}
+
+node 'srv-win-01.contoso.local' {
+  include role::base_windows
+}
+
+node /^srv-web-\\d+\\.contoso\\.local$/ {
+  include role::web
+}
+
+node default {
+}
+:::
+
+- The most specific matching block applies; if none matches, `default`. Without a `default` block the agent fails with *Could not find node statement*.
+- In large setups, classification comes from an external node classifier (Foreman, the commercial edition's console) instead of `site.pp`. The idea is the same: one node, one role.
+
+## 6. The first module: package, template and service
+
+The `timesync` module installs chrony, writes its configuration from a template with the company's time servers, and restarts the service only if the file changes:
+
+:::term modules/timesync/manifests/init.pp
+class timesync (
+  Array[String] $servers,
+) {
+  case $facts['os']['family'] {
+    'RedHat': {
+      $conf    = '/etc/chrony.conf'
+      $service = 'chronyd'
+    }
+    'Debian': {
+      $conf    = '/etc/chrony/chrony.conf'
+      $service = 'chrony'
+    }
+    default: {
+      fail("timesync: ${facts['os']['family']} is not supported")
+    }
+  }
+
+  package { 'chrony':
+    ensure => installed,
+  }
+
+  file { $conf:
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => epp('timesync/chrony.conf.epp', { 'servers' => $servers }),
+    require => Package['chrony'],
+    notify  => Service[$service],
+  }
+
+  service { $service:
+    ensure => running,
+    enable => true,
+  }
+}
+:::
+
+:::term modules/timesync/templates/chrony.conf.epp
+<%- | Array[String] $servers | -%>
+# Managed by Puppet (timesync module). Manual changes will be lost.
+<% $servers.each |$s| { -%>
+server <%= $s %> iburst
+<% } -%>
+driftfile /var/lib/chrony/drift
+makestep 1.0 3
+rtcsync
+:::
+
+- `require` sets the order (package first, then the file); `notify` sets the order **and** restarts the service when the file changes. If the file is already as it should be, there is no restart.
+- `$servers` has no default value: it comes from Hiera (section 8). A value hard-coded in the module would mean changing the module for every site.
+- **EPP** templates use Puppet's own language; **ERB** templates (`template()`, Ruby syntax) still work and are what you will see in older modules.
+- Before pushing: `puppet parser validate modules/timesync/manifests/init.pp` and `puppet-lint` on the module.
+
+On Windows the same resource types work with different paths. A minimal base profile:
+
+:::term site/profile/manifests/base_windows.pp
+class profile::base_windows {
+  service { 'W32Time':
+    ensure => running,
+    enable => true,
+  }
+
+  file { 'C:/ProgramData/Contoso':
+    ensure => directory,
+  }
+}
+:::
+
+In Windows paths, forward slashes avoid escaping problems in the code.
+
+## 7. Roles and profiles
+
+The usual pattern separates three layers:
+
+| Layer | What it contains | Example |
+|---|---|---|
+| Component module | How one piece is configured, with no company data | `timesync`, Puppet Forge modules |
+| Profile | One company building block: which modules and with which settings | `profile::base_linux` includes `timesync` and the monitoring agent |
+| Role | What the server is, only `include` of profiles | `role::app_linux` = `profile::base_linux` + `profile::app` |
+
+Each node gets **exactly one role**. If two servers need something different, they are two roles. Roles and profiles usually live in `site/role` and `site/profile`, next to the modules.
+
+## 8. Hiera: data out of the code
+
+Hiera gives values to class parameters depending on the node. At the root of each environment:
+
+:::term hiera.yaml · environments/production/
+---
+version: 5
+defaults:
+  datadir: data
+  data_hash: yaml_data
+hierarchy:
+  - name: "Per node"
+    path: "nodes/%{trusted.certname}.yaml"
+  - name: "Per operating system"
+    path: "os/%{facts.os.family}.yaml"
+  - name: "Common"
+    path: "common.yaml"
+:::
+
+:::term data/common.yaml
+---
+timesync::servers:
+  - dc01.contoso.local
+  - dc02.contoso.local
+:::
+
+- Puppet searches from top to bottom and keeps the first value: a file in `nodes/` beats `common.yaml`. The `timesync::servers` key fills the `$servers` parameter without the code asking for it.
+- Use `trusted.certname` (from the certificate) for the node layer, not a *fact* the agent itself could fake.
+- Because each environment has its own `hiera.yaml` and `data/`, `staging` can point at other time servers without touching `production`.
+- To see which value comes out and where from: `puppet lookup timesync::servers --environment production --explain` on the server.
+- Passwords are never in clear text: **hiera-eyaml** encrypts them inside the YAML.
+
+## 9. Code in Git and environments
+
+- A **control repository** with `manifests/`, `site/`, `data/`, `hiera.yaml` and a `Puppetfile` listing the Puppet Forge modules and their versions.
+- **Each branch is an environment**: the `production` branch is deployed to `/etc/puppetlabs/code/environments/production`, the `staging` branch to `.../staging`. The tool that does that deployment is **r10k** (or **Code Manager** in the commercial edition), triggered from the pipeline on merge.
+- A change's flow: branch, review, merge to `staging`, test on a few nodes, merge to `production`.
+
+Before applying anything, the dry run on the agent:
+
+:::term bash · srv-app-01.contoso.local
+$ sudo /opt/puppetlabs/bin/puppet agent -t --noop --environment staging
+Info: Using environment 'staging'
+Info: Retrieving pluginfacts
+Info: Retrieving plugin
+Info: Loading facts
+Info: Caching catalog for srv-app-01.contoso.local
+Info: Applying configuration version '1762160512'
+Notice: /Stage[main]/Timesync/File[/etc/chrony.conf]/content: current_value '{sha256}3b1f...', should be '{sha256}9ac2...' (noop)
+Notice: /Stage[main]/Timesync/Service[chronyd]: Would have triggered 'refresh' from 1 event
+Notice: Applied catalog in 0.94 seconds
+:::
+
+`--noop` compiles the catalogue and says what would change without touching anything. If the result is what you expect, the same command without `--noop` applies the change on that node; the rest get it on their next run once it is merged into `production`.
+
+## 10. Reports: what happened on each run
+
+- With `-t`, the exit code tells you the result: **0** no changes, **2** changes, **4** failures, **6** changes and failures. Useful for a pipeline or a script.
+- On the agent, `puppet config print lastrunfile` gives the path of the last run's summary (time, changed and failed resources). A monitoring check that alerts if that file is more than two hours old catches stalled agents.
+- The agent sends a report to the server on every run; by default it is stored in `/opt/puppetlabs/server/data/puppetserver/reports/<certname>/`.
+- With more than a handful of nodes, **PuppetDB** (or **OpenVoxDB**) stores facts, catalogues and reports for all of them, and a dashboard such as **Puppetboard** shows which nodes fail or have not reported for a while.
+
+## 11. The ticket: "an agent stopped applying changes"
+
+The time server change reached every Linux server except `srv-app-02.contoso.local`, rebuilt last week. Puppetboard says its last report is nine days old. First, a manual run on the agent, reading the **first** error:
+
+:::term bash · srv-app-02.contoso.local
+$ sudo /opt/puppetlabs/bin/puppet agent -t
+Error: The certificate for 'CN=srv-app-02.contoso.local' does not match its private key
+:::
+
+The four usual causes, in order of frequency:
+
+**1. A certificate that does not match after a rebuild.** The new machine generated a new key, but the CA still holds the signed certificate of the previous machine with the same name. Remove it on both sides and sign again:
+
+:::term bash · server and agent
+# on puppet.contoso.local
+$ sudo /opt/puppetlabs/bin/puppetserver ca clean --certname srv-app-02.contoso.local
+# on srv-app-02.contoso.local
+$ sudo /opt/puppetlabs/bin/puppet ssl clean
+$ sudo /opt/puppetlabs/bin/puppet agent -t
+# back on the server: check the fingerprint and sign
+$ sudo /opt/puppetlabs/bin/puppetserver ca sign --certname srv-app-02.contoso.local
+:::
+
+`puppet ssl clean` deletes the agent's key and certificate; on Windows it is the same command in an administrator console. So it does not happen again, the procedure for decommissioning or rebuilding a server includes `puppetserver ca clean` and, with PuppetDB, `puppet node deactivate`.
+
+**2. Clock skew.** Errors such as *certificate verify failed (certificate is not yet valid)*, or a freshly signed certificate the agent treats as expired. `timedatectl` on Linux or `w32tm /query /status` on Windows. It is exactly what the `timesync` module prevents, but a freshly installed machine does not have it yet: fix the time by hand before the first `puppet agent -t`.
+
+**3. Port 8140.** *Failed to open TCP connection to puppet.contoso.local:8140* points at the network or a firewall, not Puppet. `nc -zv puppet.contoso.local 8140` on Linux or `Test-NetConnection puppet.contoso.local -Port 8140` on Windows. If it does not connect, check the server's firewall, the machine's own firewall and whether the name resolves to the right IP.
+
+**4. Agent disabled.** Someone stopped it for a manual change and never re-enabled it:
+
+:::term bash · srv-app-02.contoso.local
+$ sudo /opt/puppetlabs/bin/puppet agent -t
+Notice: Skipping run of Puppet configuration client; administratively disabled (Reason: 'INC-4471 manual chrony test');
+Use 'puppet agent --enable' to re-enable.
+$ sudo /opt/puppetlabs/bin/puppet agent --enable
+$ sudo /opt/puppetlabs/bin/puppet agent -t --noop
+:::
+
+`puppet agent --disable "reason"` is the right way to stop an agent: it leaves the reason in plain sight. Before re-enabling it, `--noop` shows what Puppet will undo of what was changed by hand; if that change should stay, it goes into the code first.
+
+In the ticket: node, first error, cause, commands run on server and agent, and the final run with exit code 0 or 2 and no failures.
+
+## Next steps
+
+- The guide [Ansible: your first playbook to patch servers](ansible-primer-playbook-parchear-servidores-linux.html) covers the other approach: agentless, over SSH and on demand. Many teams use Puppet for the permanent state and Ansible for one-off tasks such as patching.
+- The one on [Git for the team's scripts](git-scripts-del-equipo-bajo-control-de-versiones.html) explains branches, reviews and merges, the basis of the control repository.
+- On the Windows side, the [Windows Server: roles, patching and events](windows-server-instalar-rol-parchear-y-leer-eventos.html) guide helps decide what is worth describing as code on a base server.
+""")
+
+
+# ---------------------------------------------------------------- L3 · MySQL / MariaDB
+g(slug="mysql-y-mariadb-configuracion-buffer-pool-consultas-lentas-indices-replica-y-too-many-connections", topic="mysql-mariadb", date="2026-11-03",
+  title_es="MySQL y MariaDB: dónde está la configuración, el buffer pool de InnoDB, el registro de consultas lentas, un índice, la réplica y el error Too many connections",
+  title_en="MySQL and MariaDB: where the configuration lives, the InnoDB buffer pool, the slow query log, an index, the replica and the Too many connections error",
+  seo_title_en="MySQL and MariaDB: slow queries, connections · Iñigo González",
+  seo_title_es="MySQL y MariaDB: consulta lenta y conexiones · Iñigo González",
+  dek_es="Qué fichero manda en my.cnf y conf.d, cuánta memoria dar al buffer pool y cómo comprobarla, max_connections, el registro de consultas lentas leído con mysqldumpslow o pt-query-digest, EXPLAIN y un índice, el estado de la réplica en MySQL 8.4 y en MariaDB, y la aplicación que recibe Too many connections.",
+  dek_en="Which file wins in my.cnf and conf.d, how much memory to give the buffer pool and how to check it, max_connections, the slow query log read with mysqldumpslow or pt-query-digest, EXPLAIN and an index, replica status in MySQL 8.4 and MariaDB, and the application that gets Too many connections.",
+  seo_desc="MySQL 8.4 and MariaDB on Linux: config files, InnoDB buffer pool, slow query log, EXPLAIN and indexes, replica status and the Too many connections ticket.",
+  es="""
+## Qué vas a conseguir
+
+Llevar el día a día de un servidor MySQL o MariaDB en Linux más allá de las copias: saber qué fichero de configuración se está aplicando de verdad, dar al buffer pool de InnoDB la memoria que necesita sin que el kernel mate el proceso, encontrar las consultas que hacen ir lenta la aplicación y arreglar la peor con un índice, leer el estado de la réplica y resolver el ticket clásico: **la aplicación da "Too many connections"**.
+
+## Antes de empezar
+
+- MySQL 8.4 LTS, o MariaDB 10.11 u 11.4 LTS, en Ubuntu, Debian o RHEL, con `sudo` en el servidor.
+- Acceso como `root` del motor por el socket local (`sudo mysql` o `sudo mariadb`): en las instalaciones de los paquetes de la distribución, `root@localhost` entra por `auth_socket` / `unix_socket` sin contraseña.
+- Las cuentas, la copia programada y la restauración probada están en la guía de [MySQL, MariaDB y PostgreSQL: permisos mínimos y copias](mysql-mariadb-y-postgresql-permisos-minimos-copia-programada-restauracion-probada-y-copias-de-0-bytes.html); el bloqueo por una transacción abierta y el espacio en disco, en la de [PostgreSQL, MySQL y SQL Server](postgresql-mysql-sql-server-tareas-de-operaciones-copia-restauracion-espacio-y-consulta-lenta.html). Esta guía no los repite.
+- Una ventana de cambios para lo que exige reiniciar el servicio y para crear índices en tablas grandes.
+
+## 1. Dónde está la configuración (y cuál manda)
+
+El servidor lee varios ficheros en orden y **el último valor leído gana**. Dónde están depende del motor y de la distribución:
+
+| Instalación | Fichero principal | Carpetas incluidas | Servicio |
+|---|---|---|---|
+| MySQL en Ubuntu / Debian | `/etc/mysql/my.cnf` | `/etc/mysql/conf.d/`, `/etc/mysql/mysql.conf.d/` (`mysqld.cnf`) | `mysql` |
+| MariaDB en Ubuntu / Debian | `/etc/mysql/my.cnf` | `/etc/mysql/conf.d/`, `/etc/mysql/mariadb.conf.d/` (`50-server.cnf`) | `mariadb` |
+| MySQL en RHEL | `/etc/my.cnf` | `/etc/my.cnf.d/` | `mysqld` |
+| MariaDB en RHEL | `/etc/my.cnf` | `/etc/my.cnf.d/` (`mariadb-server.cnf`) | `mariadb` |
+
+:::term bash · srv-db-01
+$ mysqld --verbose --help 2>/dev/null | grep -A1 "Default options"
+Default options are read from the following files in the given order:
+/etc/my.cnf /etc/mysql/my.cnf ~/.my.cnf
+$ my_print_defaults mysqld
+--user=mysql
+--bind-address=10.20.40.11
+--innodb_buffer_pool_size=8G
+--max_connections=300
+--innodb_buffer_pool_size=12G
+:::
+
+- `my_print_defaults mysqld` junta todas las líneas de la sección `[mysqld]` de todos los ficheros. Si un parámetro sale **dos veces**, se aplica el último: aquí 12G, no 8G. Es el origen del "lo cambié y no hace nada".
+- Pon tus cambios en **un fichero propio**, `/etc/mysql/mysql.conf.d/zz-contoso.cnf` o `/etc/my.cnf.d/zz-contoso.cnf`: se lee al final y una actualización del paquete no lo pisa. En MariaDB, el binario es `mariadbd` y las secciones `[mariadbd]` y `[mariadb]` también valen.
+- En **MySQL 8**, `performance_schema.variables_info` dice de dónde sale cada valor: `SELECT VARIABLE_NAME, VARIABLE_SOURCE, VARIABLE_PATH FROM performance_schema.variables_info WHERE VARIABLE_NAME='max_connections';` devuelve `GLOBAL` + ruta del fichero, `PERSISTED` (un `SET PERSIST`, guardado en `mysqld-auto.cnf` dentro del directorio de datos) o `DYNAMIC` (un `SET GLOBAL` que se perderá al reiniciar). MariaDB no tiene esta tabla ni `SET PERSIST`.
+
+Para lo que es dinámico, `SET GLOBAL` aplica el cambio en caliente y el fichero lo mantiene tras el reinicio: haz siempre las dos cosas.
+
+## 2. El buffer pool de InnoDB y la memoria
+
+El **buffer pool** es la caché de datos e índices de InnoDB, y el parámetro que más influye en el rendimiento. El valor por defecto (128 MB) es para un portátil, no para un servidor.
+
+- En un servidor **dedicado** a la base de datos, entre el **50 % y el 75 % de la RAM**. Con 16 GB, unos 10-12 GB. El resto es para el sistema, las conexiones y la caché de ficheros.
+- Si comparte servidor con la aplicación, bastante menos, y se mide.
+
+:::term mysql · srv-db-01
+$ SELECT ROUND(@@innodb_buffer_pool_size/1024/1024/1024,1) AS pool_gb, @@max_connections AS max_conn;
++---------+----------+
+| pool_gb | max_conn |
++---------+----------+
+|    12.0 |      300 |
++---------+----------+
+$ SHOW GLOBAL STATUS LIKE 'Innodb_buffer_pool_read%s';
++----------------------------------+-------------+
+| Variable_name                    | Value       |
++----------------------------------+-------------+
+| Innodb_buffer_pool_read_requests | 98411250117 |
+| Innodb_buffer_pool_reads         | 1822304     |
++----------------------------------+-------------+
+$ SET GLOBAL innodb_buffer_pool_size = 12*1024*1024*1024;
+:::
+
+- `Innodb_buffer_pool_reads` son las lecturas que **no** estaban en memoria y fueron a disco. Frente a `read_requests`, aquí menos del 0,01 %: el pool es suficiente. Si ese porcentaje sube y el disco va al 100 % de uso en `iostat -x`, falta memoria.
+- El tamaño se cambia **en caliente** (MySQL 5.7+ y MariaDB 10.2+) y se ajusta a un múltiplo de `innodb_buffer_pool_chunk_size`. `SHOW STATUS LIKE 'Innodb_buffer_pool_resize_status'` dice cuándo ha terminado. Pon el mismo valor en el fichero.
+
+Lo que ve el sistema:
+
+:::term bash · srv-db-01
+$ ps -o pid,rss,cmd -C mysqld
+    PID   RSS CMD
+   1184 13921408 /usr/sbin/mysqld
+$ free -g
+               total        used        free      shared  buff/cache   available
+Mem:              15          13           0           0           1           1
+$ journalctl -k --since "-7d" | grep -i "out of memory"
+nov 01 03:14:22 srv-db-01 kernel: Out of memory: Killed process 1184 (mysqld) total-vm:16123400kB, anon-rss:14810112kB
+:::
+
+Un `mysqld` muerto por el **OOM killer** del kernel aparece como un reinicio sin motivo en el log de errores (`/var/log/mysql/error.log` en Debian y Ubuntu, `/var/log/mysqld.log` en RHEL; MariaDB suele escribir en el journal: `journalctl -u mariadb`). La causa casi nunca es solo el buffer pool: es el pool más **cada conexión** con sus búferes (`sort_buffer_size`, `join_buffer_size`, `read_buffer_size`, tablas temporales hasta `tmp_table_size`). Con 300 conexiones activas a la vez, unos pocos MB por conexión son varios GB. Por eso `max_connections` y la memoria se miran juntos.
+
+## 3. max_connections
+
+- Por defecto, **151** en los dos motores. Es **dinámico**: `SET GLOBAL max_connections = 300;` y el valor en el fichero.
+- MySQL y MariaDB guardan **una conexión más** para una cuenta con `CONNECTION_ADMIN` o `SUPER` (en MariaDB 10.5+, `CONNECTION ADMIN`): es la que te deja entrar como `root` cuando la aplicación ya ha llenado todas. Si la aplicación usa una cuenta con esos privilegios, también se come esa.
+- En MySQL 8.4 puedes definir además una **interfaz de administración** (`admin_address` y `admin_port`, por defecto 33062) que no cuenta para el límite; requiere reinicio para activarla.
+- El límite real lo pone también el sistema: cada conexión usa descriptores de fichero. Si el log de arranque dice `Changed limits: max_open_files` o `max_connections`, el servicio de systemd necesita `LimitNOFILE` más alto (un *override* con `sudo systemctl edit mysql`).
+
+:::term mysql · srv-db-01
+$ SHOW GLOBAL STATUS WHERE Variable_name IN ('Threads_connected','Threads_running','Max_used_connections','Connection_errors_max_connections');
++-----------------------------------+-------+
+| Variable_name                     | Value |
++-----------------------------------+-------+
+| Connection_errors_max_connections | 0     |
+| Max_used_connections              | 142   |
+| Threads_connected                 | 61    |
+| Threads_running                   | 3     |
++-----------------------------------+-------+
+:::
+
+`Max_used_connections` es el máximo desde el último arranque y `Connection_errors_max_connections`, cuántas conexiones se rechazaron por el límite. Llévalos a la monitorización: si el máximo se acerca al límite, el ticket del paso 7 está de camino.
+
+## 4. El registro de consultas lentas
+
+Se activa en caliente, sin reinicio:
+
+:::term mysql · srv-db-01
+$ SET GLOBAL slow_query_log_file = '/var/log/mysql/mysql-slow.log';
+$ SET GLOBAL long_query_time = 1;
+$ SET GLOBAL slow_query_log = ON;
+:::
+
+:::term /etc/mysql/mysql.conf.d/zz-contoso.cnf
+[mysqld]
+innodb_buffer_pool_size = 12G
+max_connections         = 300
+slow_query_log          = ON
+slow_query_log_file     = /var/log/mysql/mysql-slow.log
+long_query_time         = 1
+:::
+
+- `long_query_time` está en **segundos** (admite decimales, `0.5`) y por defecto es 10: casi nada llega a 10 segundos, por eso el registro suele estar vacío aunque esté activo. Ojo: el `SET GLOBAL` vale para las conexiones **nuevas**; las del pool de la aplicación siguen con el valor anterior hasta que se reconectan.
+- En MariaDB 10.11 y posteriores los nombres nuevos son `log_slow_query`, `log_slow_query_file` y `log_slow_query_time`; los antiguos siguen funcionando como alias.
+- El fichero crece rápido con un umbral bajo: entra en **logrotate** (Debian y Ubuntu ya traen `/etc/logrotate.d/mysql-server` o `mariadb`). No actives `log_queries_not_using_indexes` en producción sin un límite: registra todo lo que hace un recorrido completo, aunque tarde 1 ms.
+
+Leerlo a mano no sirve: hay miles de entradas casi iguales. Dos herramientas las agrupan por consulta, con los valores sustituidos por `N` o `?`:
+
+:::term bash · srv-db-01
+$ sudo mysqldumpslow -s t -t 3 /var/log/mysql/mysql-slow.log
+Reading mysql slow query log from /var/log/mysql/mysql-slow.log
+Count: 1840  Time=2.41s (4434s)  Lock=0.00s (0s)  Rows=12.0 (22080), crm_app[crm_app]@[10.20.30.21]
+  SELECT * FROM pedidos WHERE cliente_id = N ORDER BY fecha DESC LIMIT N
+Count: 96  Time=8.12s (779s)  Lock=0.00s (0s)  Rows=1.0 (96), informes[informes]@[10.20.30.40]
+  SELECT COUNT(*) FROM pedidos WHERE estado = 'S' AND fecha >= 'S'
+$ sudo pt-query-digest /var/log/mysql/mysql-slow.log --limit 3 | sed -n '/Profile/,/^$/p'
+# Profile
+# Rank Query ID                     Response time   Calls R/Call V/M
+# ==== ============================ =============== ===== ====== =====
+#    1 0x6A1E3F0C2D9B47A1E0F43B2C... 4434.4 71.2%   1840 2.4100  0.31 SELECT pedidos
+#    2 0x91C47D2B0E3A6F1C55D2A0B8... 779.5 12.5%     96 8.1200  1.02 SELECT pedidos
+:::
+
+- `-s t` ordena por **tiempo total**: la consulta de 2,4 segundos que se ejecuta 1.840 veces pesa más que la de 8 segundos que corre 96. Arreglar la primera es lo que nota el usuario.
+- En MariaDB, la herramienta es `mariadb-dumpslow` (con `mysqldumpslow` como enlace en muchas distribuciones). `pt-query-digest` viene en el paquete **percona-toolkit** y sirve para los dos motores.
+
+## 5. EXPLAIN y un índice
+
+:::term mysql · srv-db-01 · base de datos crm
+$ EXPLAIN SELECT * FROM pedidos WHERE cliente_id = 4187 ORDER BY fecha DESC LIMIT 20\\G
+           id: 1
+  select_type: SIMPLE
+        table: pedidos
+         type: ALL
+possible_keys: NULL
+          key: NULL
+         rows: 1843221
+     filtered: 10.00
+        Extra: Using where; Using filesort
+:::
+
+Se lee de arriba abajo:
+
+- `type: ALL` y `key: NULL`: **recorre la tabla entera** (1,8 millones de filas) para devolver 20. Es lo que hay que quitar.
+- `Using filesort`: ordena en memoria o en disco después de leer. Un índice que empiece por la columna del `WHERE` y siga por la del `ORDER BY` resuelve las dos cosas.
+
+:::term mysql · srv-db-01 · base de datos crm
+$ SHOW INDEX FROM pedidos;
+$ ALTER TABLE pedidos ADD INDEX idx_pedidos_cliente_fecha (cliente_id, fecha), ALGORITHM=INPLACE, LOCK=NONE;
+Query OK, 0 rows affected (41.88 sec)
+$ EXPLAIN SELECT * FROM pedidos WHERE cliente_id = 4187 ORDER BY fecha DESC LIMIT 20\\G
+         type: ref
+possible_keys: idx_pedidos_cliente_fecha
+          key: idx_pedidos_cliente_fecha
+         rows: 37
+        Extra: Backward index scan
+:::
+
+- `ALGORITHM=INPLACE, LOCK=NONE` crea el índice **sin bloquear las escrituras** (DDL en línea de InnoDB). Si el motor no puede hacerlo así, da un error en lugar de bloquear la tabla en silencio: mejor que lo diga.
+- Aun así consume disco y E/S y, si hay réplica, la réplica lo aplica después y **acumula retraso** mientras tanto. En tablas grandes, en la ventana de cambios.
+- `EXPLAIN ANALYZE` (MySQL 8) ejecuta la consulta y da tiempos reales; en MariaDB el equivalente es `ANALYZE SELECT ...`. Los dos **ejecutan** la consulta: nunca con un `UPDATE` o `DELETE` en producción.
+- Comprueba el efecto el día siguiente con `mysqldumpslow`: la consulta tiene que haber desaparecido del primer puesto. Y no crees índices "por si acaso": cada uno ralentiza las escrituras.
+
+## 6. El estado de la réplica
+
+El retraso y los dos hilos en `Yes` están en la guía de [permisos mínimos y copias](mysql-mariadb-y-postgresql-permisos-minimos-copia-programada-restauracion-probada-y-copias-de-0-bytes.html). Lo que conviene tener claro aquí es **qué comando y qué nombres** usa cada motor:
+
+| | MySQL 8.4 | MariaDB 10.11 / 11.x |
+|---|---|---|
+| Estado de la réplica | `SHOW REPLICA STATUS` (`SHOW SLAVE STATUS` ya **no existe** en 8.4) | `SHOW REPLICA STATUS` o `SHOW SLAVE STATUS` (son sinónimos) |
+| Campos de los hilos | `Replica_IO_Running`, `Replica_SQL_Running` | `Slave_IO_Running`, `Slave_SQL_Running` |
+| Retraso | `Seconds_Behind_Source` | `Seconds_Behind_Master` |
+| Posición en el origen | `SHOW BINARY LOG STATUS` | `SHOW MASTER STATUS` |
+| Arrancar y parar | `START REPLICA` / `STOP REPLICA` | `START REPLICA` o `START SLAVE` |
+
+En MariaDB los campos siguen con los nombres antiguos aunque el comando sea `SHOW REPLICA STATUS`: un script de monitorización que busque `Seconds_Behind_Source` en MariaDB no encuentra nada y parece que todo va bien.
+
+:::term mysql · réplica srv-db-01b (MySQL 8.4)
+$ SHOW REPLICA STATUS\\G
+             Source_Host: 10.20.40.11
+      Replica_IO_Running: Yes
+     Replica_SQL_Running: No
+   Seconds_Behind_Source: NULL
+          Last_SQL_Errno: 1062
+          Last_SQL_Error: Coordinator stopped because there were error(s) in the worker(s). ... Duplicate entry '88123' for key 'pedidos.PRIMARY'
+       Executed_Gtid_Set: 3e11fa47-71ca-11e1-9e33-c80aa9429562:1-4421907
+:::
+
+- Un hilo SQL parado por un **duplicado** casi siempre significa que alguien **escribió en la réplica**. La réplica debe estar con `read_only = ON` y `super_read_only = ON` (MySQL); en MariaDB, `read_only = ON`, teniendo en cuenta que quien tenga el privilegio `READ_ONLY ADMIN` (incluido en `SUPER` hasta MariaDB 11.0) sigue pudiendo escribir.
+- No saltes el error a ciegas (`sql_replica_skip_counter` o una transacción vacía con GTID): puedes dejar la réplica con datos distintos sin que nada avise. Anota la fila, compara origen y réplica y, si hay dudas, se **reconstruye** la réplica desde una copia nueva. Esa decisión, con el responsable de la aplicación.
+- Antes de conmutar o de sacar copias de la réplica, los dos hilos en `Yes` y el retraso en 0.
+
+## 7. El ticket: "la aplicación da 'Too many connections'"
+
+Lunes, 9:10. El CRM no carga para nadie. En el log de la aplicación (Java) se repite: `Data source rejected establishment of connection, message from server: "Too many connections"`. Desde un cliente:
+
+:::term bash · srv-app-01
+$ mysql -h srv-db-01.contoso.local -u crm_app -p crm
+ERROR 1040 (08004): Too many connections
+:::
+
+1. **Entra igualmente**, como `root` por el socket local: usa la conexión reservada del paso 3.
+
+:::term mysql · srv-db-01
+$ sudo mysql
+$ SHOW GLOBAL STATUS LIKE 'Threads_connected';
++-------------------+-------+
+| Threads_connected | 301   |
++-------------------+-------+
+$ SELECT user, SUBSTRING_INDEX(host,':',1) AS cliente, command, COUNT(*) AS n, MAX(time) AS max_s FROM performance_schema.processlist GROUP BY 1,2,3 ORDER BY n DESC LIMIT 5;
++-----------+-------------+---------+-----+-------+
+| user      | cliente     | command | n   | max_s |
++-----------+-------------+---------+-----+-------+
+| crm_app   | 10.20.30.22 | Sleep   | 212 | 26840 |
+| crm_app   | 10.20.30.21 | Sleep   |  61 |   410 |
+| crm_app   | 10.20.30.21 | Query   |   6 |     2 |
+| informes  | 10.20.30.40 | Sleep   |  18 |  3311 |
+| root      | localhost   | Query   |   1 |     0 |
++-----------+-------------+---------+-----+-------+
+:::
+
+En MariaDB, la misma consulta con `information_schema.processlist` (en MySQL 8.4 también existe, pero está obsoleta). `SHOW FULL PROCESSLIST` da lo mismo sin agrupar, útil cuando son pocas.
+
+2. **Qué dice la tabla**: no hay consultas pesadas (6 en `Query`, de 2 segundos); hay **212 conexiones dormidas** desde un solo servidor de aplicación, `10.20.30.22`, la más antigua de hace 7 horas y media. Ese servidor no devuelve las conexiones o tiene un pool mal dimensionado. Las causas habituales:
+
+- Un **nodo nuevo** de la aplicación (o un segundo contenedor) con el mismo pool: 2 nodos × pool de 150 = 300, justo el límite.
+- Un fallo en el código que abre conexiones fuera del pool y no las cierra; se nota porque el número crece cada hora sin bajar nunca.
+- `wait_timeout` en su valor por defecto, **28.800 segundos** (8 horas): el servidor tarda 8 horas en cerrar una conexión abandonada.
+
+3. **Devuelve el servicio**, cerrando solo las dormidas de ese origen y con más de 10 minutos:
+
+:::term bash · srv-db-01
+$ sudo mysql -N -e "SELECT CONCAT('KILL ', id, ';') FROM performance_schema.processlist WHERE user='crm_app' AND host LIKE '10.20.30.22:%' AND command='Sleep' AND time > 600" > /tmp/kill-crm.sql
+$ wc -l /tmp/kill-crm.sql
+208 /tmp/kill-crm.sql
+$ sudo mysql < /tmp/kill-crm.sql
+$ sudo mysql -e "SHOW GLOBAL STATUS LIKE 'Threads_connected'"
++-------------------+-------+
+| Threads_connected | 93    |
++-------------------+-------+
+:::
+
+Reiniciar la aplicación de `srv-app-01`/`srv-app-02` también las libera, pero corta a los usuarios conectados; reiniciar **MySQL** las corta a todos y no arregla nada: en unas horas vuelven.
+
+4. **Que el servidor cierre lo abandonado**: `wait_timeout` a un valor razonable, por ejemplo 600 segundos, en caliente y en el fichero:
+
+:::term mysql · srv-db-01
+$ SET GLOBAL wait_timeout = 600;
+# y en zz-contoso.cnf: wait_timeout = 600
+:::
+
+Afecta a las conexiones **nuevas**. Y tiene una condición: el pool de la aplicación tiene que renovar sus conexiones **antes** de ese tiempo (en HikariCP, `maxLifetime` e `idleTimeout` por debajo de 600 segundos). Si no, la aplicación intenta usar una conexión que el servidor ya cerró y el error cambia a `Communications link failure` o `MySQL server has gone away`. Pásalo al equipo de la aplicación antes de bajar el valor, no después.
+
+5. **El pool, dimensionado**: la suma de los pools de todos los nodos y herramientas tiene que caber en `max_connections` con margen. Con 2 nodos de CRM, la herramienta de informes y las copias: 2 × 40 + 20 + 5 = 105, holgado con 300. Un pool de 150 por nodo casi nunca hace falta: con `Threads_running` en 3, la aplicación usa a la vez muy pocas conexiones.
+
+6. **Subir el límite, solo si hace falta y con números**: si después de ajustar los pools la suma real sigue rozando el límite, se sube, pero comprobando la memoria del paso 2 (buffer pool + conexiones × búferes) y el `LimitNOFILE` del servicio. `SET GLOBAL max_connections = 400;` y el fichero; en MySQL, `SET PERSIST` hace las dos cosas a la vez. Subirlo a 2.000 "para que no vuelva a pasar" solo cambia el error por un OOM a las 3 de la mañana.
+
+En el ticket: hora, `Threads_connected` y de dónde venían las conexiones, cuántas se cerraron, el cambio en `wait_timeout` y en el pool, y la alerta nueva: **`Threads_connected` > 80 % de `max_connections` durante 5 minutos**.
+
+## Siguientes pasos
+
+- Monitoriza `Threads_connected`, `Max_used_connections`, `Connection_errors_max_connections`, el retraso de la réplica y el tamaño del registro lento con `mysqld_exporter` y la guía de [Grafana](grafana-origen-de-datos-primer-panel-y-alerta-al-canal.html).
+- Si la aplicación tiene muchos nodos o funciones que abren y cierran conexiones sin parar, un **ProxySQL** o **MaxScale** delante de la base de datos hace de pool común.
+- La guía de [PostgreSQL](postgresql-roles-pg-hba-autovacuum-pgbouncer-pg-stat-statements-y-una-aplicacion-que-no-conecta.html) cubre las mismas tareas en el otro motor: autenticación, conexiones y consultas pesadas.
+""",
+  en="""
+## What you'll get
+
+Running a MySQL or MariaDB server on Linux day to day beyond backups: knowing which configuration file is really applied, giving the InnoDB buffer pool the memory it needs without the kernel killing the process, finding the queries that slow the application down and fixing the worst one with an index, reading replica status, and resolving the classic ticket: **the application says "Too many connections"**.
+
+## Before you start
+
+- MySQL 8.4 LTS, or MariaDB 10.11 or 11.4 LTS, on Ubuntu, Debian or RHEL, with `sudo` on the server.
+- Access as the engine's `root` through the local socket (`sudo mysql` or `sudo mariadb`): in distribution package installs, `root@localhost` logs in through `auth_socket` / `unix_socket` with no password.
+- Accounts, the scheduled backup and the tested restore are in the [MySQL, MariaDB and PostgreSQL: least privilege and backups](mysql-mariadb-y-postgresql-permisos-minimos-copia-programada-restauracion-probada-y-copias-de-0-bytes.html) guide; blocking by an open transaction and disk space, in the [PostgreSQL, MySQL and SQL Server](postgresql-mysql-sql-server-tareas-de-operaciones-copia-restauracion-espacio-y-consulta-lenta.html) one. This guide does not repeat them.
+- A change window for whatever needs a service restart and for creating indexes on large tables.
+
+## 1. Where the configuration lives (and which one wins)
+
+The server reads several files in order and **the last value read wins**. Where they are depends on the engine and the distribution:
+
+| Install | Main file | Included folders | Service |
+|---|---|---|---|
+| MySQL on Ubuntu / Debian | `/etc/mysql/my.cnf` | `/etc/mysql/conf.d/`, `/etc/mysql/mysql.conf.d/` (`mysqld.cnf`) | `mysql` |
+| MariaDB on Ubuntu / Debian | `/etc/mysql/my.cnf` | `/etc/mysql/conf.d/`, `/etc/mysql/mariadb.conf.d/` (`50-server.cnf`) | `mariadb` |
+| MySQL on RHEL | `/etc/my.cnf` | `/etc/my.cnf.d/` | `mysqld` |
+| MariaDB on RHEL | `/etc/my.cnf` | `/etc/my.cnf.d/` (`mariadb-server.cnf`) | `mariadb` |
+
+:::term bash · srv-db-01
+$ mysqld --verbose --help 2>/dev/null | grep -A1 "Default options"
+Default options are read from the following files in the given order:
+/etc/my.cnf /etc/mysql/my.cnf ~/.my.cnf
+$ my_print_defaults mysqld
+--user=mysql
+--bind-address=10.20.40.11
+--innodb_buffer_pool_size=8G
+--max_connections=300
+--innodb_buffer_pool_size=12G
+:::
+
+- `my_print_defaults mysqld` gathers every line of the `[mysqld]` section from every file. If a parameter shows up **twice**, the last one applies: here 12G, not 8G. That is the source of "I changed it and nothing happens".
+- Put your changes in **a file of your own**, `/etc/mysql/mysql.conf.d/zz-contoso.cnf` or `/etc/my.cnf.d/zz-contoso.cnf`: it is read last and a package upgrade does not overwrite it. In MariaDB the binary is `mariadbd` and the `[mariadbd]` and `[mariadb]` sections also work.
+- In **MySQL 8**, `performance_schema.variables_info` says where each value comes from: `SELECT VARIABLE_NAME, VARIABLE_SOURCE, VARIABLE_PATH FROM performance_schema.variables_info WHERE VARIABLE_NAME='max_connections';` returns `GLOBAL` + the file path, `PERSISTED` (a `SET PERSIST`, stored in `mysqld-auto.cnf` in the data directory) or `DYNAMIC` (a `SET GLOBAL` that will be lost on restart). MariaDB has neither this table nor `SET PERSIST`.
+
+For dynamic settings, `SET GLOBAL` applies the change live and the file keeps it after a restart: always do both.
+
+## 2. The InnoDB buffer pool and memory
+
+The **buffer pool** is InnoDB's cache of data and indexes, and the parameter with the biggest effect on performance. The default (128 MB) is for a laptop, not a server.
+
+- On a server **dedicated** to the database, between **50% and 75% of RAM**. With 16 GB, around 10-12 GB. The rest is for the OS, connections and the file cache.
+- If it shares the server with the application, quite a bit less, and measured.
+
+:::term mysql · srv-db-01
+$ SELECT ROUND(@@innodb_buffer_pool_size/1024/1024/1024,1) AS pool_gb, @@max_connections AS max_conn;
++---------+----------+
+| pool_gb | max_conn |
++---------+----------+
+|    12.0 |      300 |
++---------+----------+
+$ SHOW GLOBAL STATUS LIKE 'Innodb_buffer_pool_read%s';
++----------------------------------+-------------+
+| Variable_name                    | Value       |
++----------------------------------+-------------+
+| Innodb_buffer_pool_read_requests | 98411250117 |
+| Innodb_buffer_pool_reads         | 1822304     |
++----------------------------------+-------------+
+$ SET GLOBAL innodb_buffer_pool_size = 12*1024*1024*1024;
+:::
+
+- `Innodb_buffer_pool_reads` are the reads that were **not** in memory and went to disk. Against `read_requests`, here under 0.01%: the pool is big enough. If that percentage climbs and the disk sits at 100% utilisation in `iostat -x`, memory is short.
+- The size changes **live** (MySQL 5.7+ and MariaDB 10.2+) and is rounded to a multiple of `innodb_buffer_pool_chunk_size`. `SHOW STATUS LIKE 'Innodb_buffer_pool_resize_status'` says when it has finished. Put the same value in the file.
+
+What the OS sees:
+
+:::term bash · srv-db-01
+$ ps -o pid,rss,cmd -C mysqld
+    PID   RSS CMD
+   1184 13921408 /usr/sbin/mysqld
+$ free -g
+               total        used        free      shared  buff/cache   available
+Mem:              15          13           0           0           1           1
+$ journalctl -k --since "-7d" | grep -i "out of memory"
+Nov 01 03:14:22 srv-db-01 kernel: Out of memory: Killed process 1184 (mysqld) total-vm:16123400kB, anon-rss:14810112kB
+:::
+
+A `mysqld` killed by the kernel's **OOM killer** shows up as an unexplained restart in the error log (`/var/log/mysql/error.log` on Debian and Ubuntu, `/var/log/mysqld.log` on RHEL; MariaDB usually writes to the journal: `journalctl -u mariadb`). The cause is almost never the buffer pool alone: it is the pool plus **every connection** with its buffers (`sort_buffer_size`, `join_buffer_size`, `read_buffer_size`, temporary tables up to `tmp_table_size`). With 300 connections active at once, a few MB per connection is several GB. That is why `max_connections` and memory are looked at together.
+
+## 3. max_connections
+
+- Default **151** on both engines. It is **dynamic**: `SET GLOBAL max_connections = 300;` and the value in the file.
+- MySQL and MariaDB keep **one extra connection** for an account with `CONNECTION_ADMIN` or `SUPER` (in MariaDB 10.5+, `CONNECTION ADMIN`): it is what lets you in as `root` when the application has filled all the others. If the application uses an account with those privileges, it eats that one too.
+- In MySQL 8.4 you can also define an **administrative interface** (`admin_address` and `admin_port`, default 33062) that does not count towards the limit; enabling it needs a restart.
+- The OS also sets a real limit: each connection uses file descriptors. If the startup log says `Changed limits: max_open_files` or `max_connections`, the systemd service needs a higher `LimitNOFILE` (an override with `sudo systemctl edit mysql`).
+
+:::term mysql · srv-db-01
+$ SHOW GLOBAL STATUS WHERE Variable_name IN ('Threads_connected','Threads_running','Max_used_connections','Connection_errors_max_connections');
++-----------------------------------+-------+
+| Variable_name                     | Value |
++-----------------------------------+-------+
+| Connection_errors_max_connections | 0     |
+| Max_used_connections              | 142   |
+| Threads_connected                 | 61    |
+| Threads_running                   | 3     |
++-----------------------------------+-------+
+:::
+
+`Max_used_connections` is the peak since the last start and `Connection_errors_max_connections` how many connections were refused because of the limit. Put them in monitoring: if the peak gets close to the limit, the ticket in step 7 is on its way.
+
+## 4. The slow query log
+
+It is enabled live, without a restart:
+
+:::term mysql · srv-db-01
+$ SET GLOBAL slow_query_log_file = '/var/log/mysql/mysql-slow.log';
+$ SET GLOBAL long_query_time = 1;
+$ SET GLOBAL slow_query_log = ON;
+:::
+
+:::term /etc/mysql/mysql.conf.d/zz-contoso.cnf
+[mysqld]
+innodb_buffer_pool_size = 12G
+max_connections         = 300
+slow_query_log          = ON
+slow_query_log_file     = /var/log/mysql/mysql-slow.log
+long_query_time         = 1
+:::
+
+- `long_query_time` is in **seconds** (decimals allowed, `0.5`) and defaults to 10: almost nothing reaches 10 seconds, which is why the log is usually empty even when enabled. Note: the `SET GLOBAL` applies to **new** connections; those in the application's pool keep the old value until they reconnect.
+- In MariaDB 10.11 and later the new names are `log_slow_query`, `log_slow_query_file` and `log_slow_query_time`; the old ones still work as aliases.
+- The file grows fast with a low threshold: add it to **logrotate** (Debian and Ubuntu already ship `/etc/logrotate.d/mysql-server` or `mariadb`). Do not enable `log_queries_not_using_indexes` in production without a limit: it logs everything that does a full scan, even if it takes 1 ms.
+
+Reading it by hand is useless: there are thousands of near-identical entries. Two tools group them by query, with values replaced by `N` or `?`:
+
+:::term bash · srv-db-01
+$ sudo mysqldumpslow -s t -t 3 /var/log/mysql/mysql-slow.log
+Reading mysql slow query log from /var/log/mysql/mysql-slow.log
+Count: 1840  Time=2.41s (4434s)  Lock=0.00s (0s)  Rows=12.0 (22080), crm_app[crm_app]@[10.20.30.21]
+  SELECT * FROM pedidos WHERE cliente_id = N ORDER BY fecha DESC LIMIT N
+Count: 96  Time=8.12s (779s)  Lock=0.00s (0s)  Rows=1.0 (96), informes[informes]@[10.20.30.40]
+  SELECT COUNT(*) FROM pedidos WHERE estado = 'S' AND fecha >= 'S'
+$ sudo pt-query-digest /var/log/mysql/mysql-slow.log --limit 3 | sed -n '/Profile/,/^$/p'
+# Profile
+# Rank Query ID                     Response time   Calls R/Call V/M
+# ==== ============================ =============== ===== ====== =====
+#    1 0x6A1E3F0C2D9B47A1E0F43B2C... 4434.4 71.2%   1840 2.4100  0.31 SELECT pedidos
+#    2 0x91C47D2B0E3A6F1C55D2A0B8... 779.5 12.5%     96 8.1200  1.02 SELECT pedidos
+:::
+
+- `-s t` sorts by **total time**: the 2.4-second query that runs 1,840 times weighs more than the 8-second one that runs 96 times. Fixing the first is what the user notices.
+- In MariaDB the tool is `mariadb-dumpslow` (with `mysqldumpslow` as a link on many distributions). `pt-query-digest` ships in the **percona-toolkit** package and works for both engines.
+
+## 5. EXPLAIN and an index
+
+:::term mysql · srv-db-01 · crm database
+$ EXPLAIN SELECT * FROM pedidos WHERE cliente_id = 4187 ORDER BY fecha DESC LIMIT 20\\G
+           id: 1
+  select_type: SIMPLE
+        table: pedidos
+         type: ALL
+possible_keys: NULL
+          key: NULL
+         rows: 1843221
+     filtered: 10.00
+        Extra: Using where; Using filesort
+:::
+
+Read it top to bottom:
+
+- `type: ALL` and `key: NULL`: it **scans the whole table** (1.8 million rows) to return 20. That is what has to go.
+- `Using filesort`: it sorts in memory or on disk after reading. An index that starts with the `WHERE` column and continues with the `ORDER BY` column solves both.
+
+:::term mysql · srv-db-01 · crm database
+$ SHOW INDEX FROM pedidos;
+$ ALTER TABLE pedidos ADD INDEX idx_pedidos_cliente_fecha (cliente_id, fecha), ALGORITHM=INPLACE, LOCK=NONE;
+Query OK, 0 rows affected (41.88 sec)
+$ EXPLAIN SELECT * FROM pedidos WHERE cliente_id = 4187 ORDER BY fecha DESC LIMIT 20\\G
+         type: ref
+possible_keys: idx_pedidos_cliente_fecha
+          key: idx_pedidos_cliente_fecha
+         rows: 37
+        Extra: Backward index scan
+:::
+
+- `ALGORITHM=INPLACE, LOCK=NONE` builds the index **without blocking writes** (InnoDB online DDL). If the engine cannot do it that way, it returns an error instead of silently locking the table: better that it says so.
+- It still uses disk and I/O and, if there is a replica, the replica applies it afterwards and **builds up lag** meanwhile. On large tables, in the change window.
+- `EXPLAIN ANALYZE` (MySQL 8) runs the query and gives real timings; in MariaDB the equivalent is `ANALYZE SELECT ...`. Both **execute** the query: never with an `UPDATE` or `DELETE` in production.
+- Check the effect the next day with `mysqldumpslow`: the query should have dropped from the top spot. And do not create indexes "just in case": each one slows down writes.
+
+## 6. Replica status
+
+Lag and the two threads at `Yes` are in the [least privilege and backups](mysql-mariadb-y-postgresql-permisos-minimos-copia-programada-restauracion-probada-y-copias-de-0-bytes.html) guide. What matters here is **which command and which names** each engine uses:
+
+| | MySQL 8.4 | MariaDB 10.11 / 11.x |
+|---|---|---|
+| Replica status | `SHOW REPLICA STATUS` (`SHOW SLAVE STATUS` **no longer exists** in 8.4) | `SHOW REPLICA STATUS` or `SHOW SLAVE STATUS` (synonyms) |
+| Thread fields | `Replica_IO_Running`, `Replica_SQL_Running` | `Slave_IO_Running`, `Slave_SQL_Running` |
+| Lag | `Seconds_Behind_Source` | `Seconds_Behind_Master` |
+| Position on the source | `SHOW BINARY LOG STATUS` | `SHOW MASTER STATUS` |
+| Start and stop | `START REPLICA` / `STOP REPLICA` | `START REPLICA` or `START SLAVE` |
+
+In MariaDB the fields keep the old names even when the command is `SHOW REPLICA STATUS`: a monitoring script looking for `Seconds_Behind_Source` on MariaDB finds nothing and everything looks fine.
+
+:::term mysql · replica srv-db-01b (MySQL 8.4)
+$ SHOW REPLICA STATUS\\G
+             Source_Host: 10.20.40.11
+      Replica_IO_Running: Yes
+     Replica_SQL_Running: No
+   Seconds_Behind_Source: NULL
+          Last_SQL_Errno: 1062
+          Last_SQL_Error: Coordinator stopped because there were error(s) in the worker(s). ... Duplicate entry '88123' for key 'pedidos.PRIMARY'
+       Executed_Gtid_Set: 3e11fa47-71ca-11e1-9e33-c80aa9429562:1-4421907
+:::
+
+- An SQL thread stopped by a **duplicate** almost always means someone **wrote to the replica**. The replica should run with `read_only = ON` and `super_read_only = ON` (MySQL); in MariaDB, `read_only = ON`, bearing in mind that anyone with the `READ_ONLY ADMIN` privilege (part of `SUPER` up to MariaDB 11.0) can still write.
+- Do not skip the error blindly (`sql_replica_skip_counter` or an empty GTID transaction): you can leave the replica with different data and nothing will warn you. Note the row, compare source and replica and, if in doubt, **rebuild** the replica from a fresh backup. That decision goes with the application owner.
+- Before failing over or taking backups from the replica, both threads at `Yes` and lag at 0.
+
+## 7. The ticket: "the application says 'Too many connections'"
+
+Monday, 9:10. The CRM does not load for anyone. The (Java) application log keeps repeating: `Data source rejected establishment of connection, message from server: "Too many connections"`. From a client:
+
+:::term bash · srv-app-01
+$ mysql -h srv-db-01.contoso.local -u crm_app -p crm
+ERROR 1040 (08004): Too many connections
+:::
+
+1. **Get in anyway**, as `root` through the local socket: it uses the reserved connection from step 3.
+
+:::term mysql · srv-db-01
+$ sudo mysql
+$ SHOW GLOBAL STATUS LIKE 'Threads_connected';
++-------------------+-------+
+| Threads_connected | 301   |
++-------------------+-------+
+$ SELECT user, SUBSTRING_INDEX(host,':',1) AS client, command, COUNT(*) AS n, MAX(time) AS max_s FROM performance_schema.processlist GROUP BY 1,2,3 ORDER BY n DESC LIMIT 5;
++-----------+-------------+---------+-----+-------+
+| user      | client      | command | n   | max_s |
++-----------+-------------+---------+-----+-------+
+| crm_app   | 10.20.30.22 | Sleep   | 212 | 26840 |
+| crm_app   | 10.20.30.21 | Sleep   |  61 |   410 |
+| crm_app   | 10.20.30.21 | Query   |   6 |     2 |
+| informes  | 10.20.30.40 | Sleep   |  18 |  3311 |
+| root      | localhost   | Query   |   1 |     0 |
++-----------+-------------+---------+-----+-------+
+:::
+
+In MariaDB, the same query with `information_schema.processlist` (it also exists in MySQL 8.4, but is deprecated). `SHOW FULL PROCESSLIST` gives the same without grouping, handy when there are few.
+
+2. **What the table says**: there are no heavy queries (6 in `Query`, at 2 seconds); there are **212 sleeping connections** from a single application server, `10.20.30.22`, the oldest from seven and a half hours ago. That server is not returning connections or has a badly sized pool. The usual causes:
+
+- A **new application node** (or a second container) with the same pool: 2 nodes × a pool of 150 = 300, exactly the limit.
+- A code bug that opens connections outside the pool and never closes them; you can tell because the number grows every hour and never drops.
+- `wait_timeout` at its default, **28,800 seconds** (8 hours): the server takes 8 hours to close an abandoned connection.
+
+3. **Restore service**, closing only the sleeping ones from that source older than 10 minutes:
+
+:::term bash · srv-db-01
+$ sudo mysql -N -e "SELECT CONCAT('KILL ', id, ';') FROM performance_schema.processlist WHERE user='crm_app' AND host LIKE '10.20.30.22:%' AND command='Sleep' AND time > 600" > /tmp/kill-crm.sql
+$ wc -l /tmp/kill-crm.sql
+208 /tmp/kill-crm.sql
+$ sudo mysql < /tmp/kill-crm.sql
+$ sudo mysql -e "SHOW GLOBAL STATUS LIKE 'Threads_connected'"
++-------------------+-------+
+| Threads_connected | 93    |
++-------------------+-------+
+:::
+
+Restarting the application on `srv-app-01`/`srv-app-02` also frees them, but cuts off connected users; restarting **MySQL** cuts off everyone and fixes nothing: in a few hours they are back.
+
+4. **Make the server close what is abandoned**: `wait_timeout` to a sensible value, for example 600 seconds, live and in the file:
+
+:::term mysql · srv-db-01
+$ SET GLOBAL wait_timeout = 600;
+# and in zz-contoso.cnf: wait_timeout = 600
+:::
+
+It affects **new** connections. And it comes with a condition: the application's pool must renew its connections **before** that time (in HikariCP, `maxLifetime` and `idleTimeout` below 600 seconds). Otherwise the application tries to use a connection the server has already closed and the error changes to `Communications link failure` or `MySQL server has gone away`. Tell the application team before lowering the value, not after.
+
+5. **A properly sized pool**: the sum of the pools of every node and tool has to fit in `max_connections` with room to spare. With 2 CRM nodes, the reporting tool and backups: 2 × 40 + 20 + 5 = 105, comfortable with 300. A pool of 150 per node is almost never needed: with `Threads_running` at 3, the application uses very few connections at the same time.
+
+6. **Raise the limit only if needed, and with numbers**: if after fixing the pools the real total still brushes the limit, raise it, but check the memory from step 2 (buffer pool + connections × buffers) and the service's `LimitNOFILE`. `SET GLOBAL max_connections = 400;` and the file; in MySQL, `SET PERSIST` does both at once. Raising it to 2,000 "so it never happens again" only swaps the error for an OOM at 3 a.m.
+
+In the ticket: time, `Threads_connected` and where the connections came from, how many were closed, the change to `wait_timeout` and the pool, and the new alert: **`Threads_connected` > 80% of `max_connections` for 5 minutes**.
+
+## Next steps
+
+- Monitor `Threads_connected`, `Max_used_connections`, `Connection_errors_max_connections`, replica lag and the size of the slow log with `mysqld_exporter` and the [Grafana](grafana-origen-de-datos-primer-panel-y-alerta-al-canal.html) guide.
+- If the application has many nodes or functions that open and close connections non-stop, a **ProxySQL** or **MaxScale** in front of the database acts as a shared pool.
+- The [PostgreSQL](postgresql-roles-pg-hba-autovacuum-pgbouncer-pg-stat-statements-y-una-aplicacion-que-no-conecta.html) guide covers the same tasks on the other engine: authentication, connections and heavy queries.
+""")
+
+# ---------------------------------------------------------------- L3 · PostgreSQL
+g(slug="postgresql-roles-pg-hba-autovacuum-pgbouncer-pg-stat-statements-y-una-aplicacion-que-no-conecta", topic="postgresql", date="2026-11-03",
+  title_es="PostgreSQL: roles y privilegios por esquema, pg_hba.conf con scram-sha-256, autovacuum y tablas hinchadas, conexiones con PgBouncer, pg_stat_statements y una aplicación que no conecta",
+  title_en="PostgreSQL: roles and schema privileges, pg_hba.conf with scram-sha-256, autovacuum and bloated tables, connections with PgBouncer, pg_stat_statements and an application that cannot connect",
+  seo_title_en="PostgreSQL: pg_hba, vacuum and connections · Iñigo González",
+  seo_title_es="PostgreSQL: pg_hba, vacuum y conexiones · Iñigo González",
+  dek_es="Qué parámetros se recargan y cuáles piden reinicio, permisos sobre el esquema y privilegios por defecto, reglas de pg_hba.conf con scram-sha-256, tuplas muertas y autovacuum, cuántas conexiones aguanta el servidor y cuándo poner PgBouncer, las consultas más pesadas con pg_stat_statements y los tres FATAL de una aplicación que no conecta.",
+  dek_en="Which parameters reload and which need a restart, schema permissions and default privileges, pg_hba.conf rules with scram-sha-256, dead tuples and autovacuum, how many connections the server can take and when to add PgBouncer, the heaviest queries with pg_stat_statements, and the three FATALs of an application that cannot connect.",
+  seo_desc="PostgreSQL 16/17 on Linux: schema privileges, pg_hba.conf and scram-sha-256, autovacuum and bloat, PgBouncer, pg_stat_statements and connection FATALs.",
+  es="""
+## Qué vas a conseguir
+
+Operar un servidor PostgreSQL en Linux con criterio: saber qué cambio se aplica con una recarga y cuál necesita reiniciar, dar permisos que no se rompen en el siguiente despliegue, abrir el acceso en `pg_hba.conf` solo a quien toca, ver si autovacuum llega a tiempo, entender cuándo faltan conexiones y cuándo sobran, encontrar las consultas que más pesan y resolver el ticket **"la aplicación no conecta"** leyendo cuál de los tres errores típicos es.
+
+## Antes de empezar
+
+- PostgreSQL 16 o 17 en Ubuntu, Debian o RHEL (paquetes del proyecto, PGDG), con `sudo` en el servidor. Se entra como superusuario con `sudo -u postgres psql`.
+- La cuenta de la aplicación, la de copias, la copia programada y el retraso de la réplica están en la guía de [MySQL, MariaDB y PostgreSQL: permisos mínimos y copias](mysql-mariadb-y-postgresql-permisos-minimos-copia-programada-restauracion-probada-y-copias-de-0-bytes.html); la sesión que bloquea y el disco lleno, en la de [PostgreSQL, MySQL y SQL Server](postgresql-mysql-sql-server-tareas-de-operaciones-copia-restauracion-espacio-y-consulta-lenta.html).
+- Una ventana de cambios para lo que exige reinicio (paso 1).
+
+## 1. Dónde está todo y qué pide reinicio
+
+| Instalación | Configuración | Datos | Servicio | Log |
+|---|---|---|---|---|
+| Ubuntu / Debian | `/etc/postgresql/17/main/` | `/var/lib/postgresql/17/main/` | `postgresql@17-main` | `/var/log/postgresql/postgresql-17-main.log` |
+| RHEL (PGDG) | `/var/lib/pgsql/17/data/` | `/var/lib/pgsql/17/data/` | `postgresql-17` | `/var/lib/pgsql/17/data/log/` |
+
+En la duda, el propio servidor lo dice:
+
+:::term psql · srv-db-02
+$ sudo -u postgres psql -c "SHOW config_file;" -c "SHOW hba_file;"
+               config_file
+-----------------------------------------
+ /etc/postgresql/17/main/postgresql.conf
+               hba_file
+-------------------------------------
+ /etc/postgresql/17/main/pg_hba.conf
+$ sudo -u postgres psql -c "SELECT name, setting, context, pending_restart FROM pg_settings WHERE name IN ('max_connections','listen_addresses','shared_preload_libraries','idle_in_transaction_session_timeout','log_min_duration_statement');"
+                name                 |        setting        |  context   | pending_restart
+-------------------------------------+-----------------------+------------+-----------------
+ idle_in_transaction_session_timeout | 0                     | user       | f
+ listen_addresses                    | localhost,10.20.40.11 | postmaster | f
+ log_min_duration_statement          | -1                    | superuser  | f
+ max_connections                     | 100                   | postmaster | f
+ shared_preload_libraries            |                       | postmaster | f
+:::
+
+La columna **`context`** responde a la pregunta de cada cambio:
+
+- `postmaster`: **reinicio** del servicio (`max_connections`, `listen_addresses`, `shared_preload_libraries`, `shared_buffers`). Corta todas las conexiones: ventana de cambios.
+- `sighup`, `superuser`, `user`: basta con **recargar** (`SELECT pg_reload_conf();` o `sudo systemctl reload postgresql@17-main`). Las sesiones abiertas siguen.
+- `pending_restart = t` tras una recarga: el valor está en el fichero, pero no se aplicará hasta reiniciar. Es la forma de saber que un cambio "no ha entrado".
+
+`pg_hba.conf` no es un parámetro, pero va igual: **se recarga, no se reinicia**. Para cambios en `postgresql.conf`, mejor un fichero propio incluido (`include_dir = 'conf.d'`, que Debian ya trae) o `ALTER SYSTEM SET ...`, que escribe en `postgresql.auto.conf` dentro del directorio de datos y se lee al final.
+
+## 2. Roles y privilegios: el esquema y lo que se cree mañana
+
+En PostgreSQL los permisos van en tres niveles, y faltar cualquiera da `permission denied`:
+
+1. **Base de datos**: `GRANT CONNECT ON DATABASE erp TO ...`.
+2. **Esquema**: `GRANT USAGE ON SCHEMA erp TO ...` (ver lo que hay dentro) y, solo para quien crea tablas, `CREATE`.
+3. **Objetos**: `GRANT SELECT ... ON ALL TABLES IN SCHEMA erp` para las tablas que **ya existen**, y `ALTER DEFAULT PRIVILEGES` para las que se creen **después**.
+
+Desde PostgreSQL 15, el esquema `public` ya no deja crear objetos a cualquiera (`CREATE` retirado a `PUBLIC`) y su dueño es `pg_database_owner`. Una aplicación migrada desde una versión antigua que creaba tablas en `public` sin permisos explícitos falla con `permission denied for schema public` tras la actualización. La solución buena es un esquema propio de la aplicación con su dueño, no devolver `CREATE` a todo el mundo.
+
+:::term psql · srv-db-02 · base de datos erp
+$ CREATE ROLE erp_lectura NOLOGIN;
+$ GRANT CONNECT ON DATABASE erp TO erp_lectura;
+$ GRANT USAGE ON SCHEMA erp TO erp_lectura;
+$ GRANT SELECT ON ALL TABLES IN SCHEMA erp TO erp_lectura;
+$ ALTER DEFAULT PRIVILEGES FOR ROLE erp_owner IN SCHEMA erp GRANT SELECT ON TABLES TO erp_lectura;
+$ GRANT erp_lectura TO laura_prado;
+$ \\dn+ erp
+                           List of schemas
+ Name |   Owner   |    Access privileges     | Description
+------+-----------+--------------------------+-------------
+ erp  | erp_owner | erp_owner=UC/erp_owner  +|
+      |           | erp_rw=U/erp_owner      +|
+      |           | erp_lectura=U/erp_owner  |
+$ \\ddp
+               Default access privileges
+   Owner   | Schema | Type  |   Access privileges
+-----------+--------+-------+-----------------------
+ erp_owner | erp    | table | erp_rw=arwd/erp_owner+
+           |        |       | erp_lectura=r/erp_owner
+:::
+
+- `\\dn+` muestra los permisos del esquema (`U` = USAGE, `C` = CREATE); `\\dp erp.facturas`, los de una tabla (`r` = SELECT, `a` = INSERT, `w` = UPDATE, `d` = DELETE); `\\ddp`, los privilegios por defecto.
+- **La trampa de `ALTER DEFAULT PRIVILEGES`**: solo se aplica a los objetos que cree **el rol de `FOR ROLE`**. Si un despliegue se hace con otra cuenta (o con `postgres`), sus tablas nuevas no los heredan y la aplicación da *permission denied* esa misma noche. Los despliegues, siempre con el dueño (`erp_owner`), y `\\ddp` en la revisión.
+- Para lecturas de todo y para monitorización hay **roles predefinidos**: `pg_read_all_data` (leer todas las tablas, PostgreSQL 14+), `pg_monitor` y `pg_read_all_stats` (ver la actividad y el texto de las consultas de otros usuarios). Mejor eso que hacer superusuario a la herramienta de monitorización.
+
+## 3. pg_hba.conf: quién entra, desde dónde y cómo
+
+Cada línea es `tipo  base_de_datos  usuario  dirección  método`, y **gana la primera que coincide**, de arriba abajo. Si ninguna coincide, se rechaza la conexión.
+
+:::term /etc/postgresql/17/main/pg_hba.conf
+# TYPE   DATABASE  USER        ADDRESS            METHOD
+local    all       postgres                       peer
+local    all       all                            peer
+host     all       backup      127.0.0.1/32       scram-sha-256
+hostssl  erp       erp_app     10.20.30.0/24      scram-sha-256
+hostssl  erp       +erp_lectura 10.20.50.0/24     scram-sha-256
+host     all       all         0.0.0.0/0          reject
+:::
+
+- `local` es el socket Unix; `peer` deja entrar al usuario del sistema con el mismo nombre (por eso funciona `sudo -u postgres psql`). `host` es TCP con o sin TLS; `hostssl`, solo con TLS.
+- `+erp_lectura` significa "cualquier miembro de ese rol": las altas y bajas se hacen con `GRANT`/`REVOKE`, sin tocar el fichero.
+- **`scram-sha-256`** es el método recomendado y el cifrado por defecto de las contraseñas desde PostgreSQL 14 (`password_encryption = scram-sha-256`). Una cuenta cuya contraseña se guardó en **MD5** (una base de datos migrada desde una versión antigua) no puede entrar por una línea `scram-sha-256`: hay que volver a poner su contraseña. `SELECT rolname FROM pg_authid WHERE rolpassword LIKE 'md5%';` dice cuáles son. MD5 está marcado como obsoleto desde PostgreSQL 18: no lo uses en líneas nuevas.
+- Nada de `trust` fuera de un laboratorio, ni de `0.0.0.0/0` con un método que no sea `reject`.
+
+Antes de recargar, comprueba que el fichero se entiende:
+
+:::term psql · srv-db-02
+$ sudo -u postgres psql -c "SELECT line_number, type, database, user_name, address, auth_method, error FROM pg_hba_file_rules WHERE error IS NOT NULL;"
+ line_number | type | database | user_name | address | auth_method |              error
+-------------+------+----------+-----------+---------+-------------+---------------------------------
+          96 | host | {erp}    | {erp_app} |         |             | invalid IP mask "/33": ...
+$ sudo -u postgres psql -c "SELECT pg_reload_conf();"
+:::
+
+`pg_hba_file_rules` lee el fichero **tal como está en disco**, no lo que está cargado: si muestra errores, una recarga dejaría el fichero anterior en uso y el log diría `pg_hba.conf was not reloaded`. Corrige y vuelve a mirar hasta que no salga nada. Y recuerda que el servidor tiene que estar escuchando en esa red: `listen_addresses` (por defecto, solo `localhost`) pide reinicio.
+
+## 4. Autovacuum y tablas hinchadas
+
+Un `UPDATE` o un `DELETE` no borra la fila: deja una **tupla muerta** que `VACUUM` marca después como espacio reutilizable. **Autovacuum** lo hace solo, por tabla, cuando las tuplas muertas superan `autovacuum_vacuum_threshold` (50) más `autovacuum_vacuum_scale_factor` (0,2, el 20 %) de la tabla. En una tabla de 50 millones de filas, eso son 10 millones de filas muertas antes de que empiece.
+
+:::term psql · srv-db-02 · base de datos erp
+$ SELECT relname, n_live_tup, n_dead_tup, round(100.0*n_dead_tup/greatest(n_live_tup,1),1) AS pct_muertas, last_autovacuum, last_autoanalyze FROM pg_stat_user_tables ORDER BY n_dead_tup DESC LIMIT 4;
+    relname     | n_live_tup | n_dead_tup | pct_muertas |        last_autovacuum        |       last_autoanalyze
+----------------+------------+------------+-------------+-------------------------------+-------------------------------
+ movimientos    |   48211904 |    9120533 |        18.9 | 2026-10-19 04:12:51.20871+01  | 2026-11-03 06:40:02.11734+01
+ sesiones_web   |     211560 |    1904377 |       900.2 | 2026-11-03 09:58:11.40325+01  | 2026-11-03 09:58:12.00412+01
+ facturas       |     918244 |       3104 |         0.3 | 2026-11-02 23:10:44.88102+01  | 2026-11-02 23:10:45.10288+01
+:::
+
+Dos casos distintos en la misma pantalla:
+
+- **`movimientos`**: el último autovacuum fue hace dos semanas. Con el 20 % por defecto, en una tabla grande llega tarde. Se le baja el umbral **solo a esa tabla**: `ALTER TABLE erp.movimientos SET (autovacuum_vacuum_scale_factor = 0.01);` (1 %).
+- **`sesiones_web`**: autovacuum pasó hace minutos y aun así hay 9 muertas por cada viva. Eso es que **no puede limpiar**: alguna transacción abierta desde hace horas retiene esas versiones. Se busca así:
+
+:::term psql · srv-db-02
+$ SELECT pid, usename, application_name, state, now()-xact_start AS abierta, age(backend_xmin) AS xmin_age FROM pg_stat_activity WHERE backend_xmin IS NOT NULL ORDER BY age(backend_xmin) DESC LIMIT 3;
+  pid  |  usename   | application_name |        state        |     abierta     | xmin_age
+-------+------------+------------------+---------------------+-----------------+----------
+ 31877 | informes   | DBeaver 24.2     | idle in transaction | 05:41:12.30211  |  8812440
+ 32014 | erp_app    | erp-api          | active              | 00:00:00.41022  |       12
+:::
+
+Una sesión `idle in transaction` de casi seis horas desde un cliente de escritorio. Mientras siga abierta, ningún `VACUUM` puede limpiar lo que ha cambiado desde entonces. Se termina con `SELECT pg_terminate_backend(31877);` (avisando al usuario) y se pone un tope para la cuenta: `ALTER ROLE informes SET idle_in_transaction_session_timeout = '15min';`. Las réplicas con `hot_standby_feedback` y los slots de replicación abandonados retienen igual: mira también `pg_replication_slots`.
+
+- **Hinchazón** (*bloat*): `VACUUM` deja el espacio libre **dentro** de la tabla para reutilizarlo, no lo devuelve al disco. Para medirlo de verdad, la extensión `pgstattuple` (`SELECT * FROM pgstattuple('erp.sesiones_web');`, campo `free_percent`).
+- Para recuperar el disco, `VACUUM FULL` reescribe la tabla pero la **bloquea por completo** mientras dura: solo en ventana y en tablas pequeñas. En tablas grandes y sin parada, la extensión **pg_repack**.
+- Pon `log_autovacuum_min_duration = '1min'` (desde PostgreSQL 15 viene en 10 minutos) para ver en el log qué tablas tardan en limpiarse.
+
+## 5. Conexiones y PgBouncer
+
+Cada conexión de PostgreSQL es **un proceso** del sistema con su memoria. `max_connections` viene en **100** y se cambia con reinicio. Subirlo a 1.000 no es gratis: cada consulta puede usar hasta `work_mem` por operación de ordenación o hash, y con cientos de conexiones activas la memoria se va.
+
+:::term psql · srv-db-02
+$ SELECT usename, client_addr, state, count(*) FROM pg_stat_activity WHERE backend_type = 'client backend' GROUP BY 1,2,3 ORDER BY 4 DESC;
+ usename  | client_addr |        state        | count
+----------+-------------+---------------------+-------
+ erp_app  | 10.20.30.31 | idle                |    58
+ erp_app  | 10.20.30.32 | idle                |    21
+ erp_app  | 10.20.30.31 | active              |     4
+ informes | 10.20.50.18 | idle in transaction |     1
+:::
+
+79 conexiones `idle` para 4 activas: la aplicación abre muchas y usa pocas. Es el caso de **PgBouncer**: un pool delante de PostgreSQL que recibe cientos de conexiones de clientes y las sirve con unas pocas conexiones reales.
+
+:::term /etc/pgbouncer/pgbouncer.ini
+[databases]
+erp = host=127.0.0.1 port=5432 dbname=erp
+
+[pgbouncer]
+listen_addr = 10.20.40.11
+listen_port = 6432
+auth_type = scram-sha-256
+auth_file = /etc/pgbouncer/userlist.txt
+pool_mode = transaction
+max_client_conn = 1000
+default_pool_size = 20
+admin_users = pgbouncer_admin
+:::
+
+- La aplicación apunta al puerto **6432** en lugar de al 5432; el resto de la cadena de conexión no cambia.
+- `pool_mode = transaction` es el que más ahorra: la conexión real se devuelve al acabar cada transacción. Lo que dependa de la **sesión** (`SET` sin `LOCAL`, bloqueos *advisory*, tablas temporales, `LISTEN`) no funciona igual; las sentencias preparadas sí, desde PgBouncer 1.21 con `max_prepared_statements`. Confírmalo con el equipo de la aplicación o empieza en `pool_mode = session`.
+- `psql -h 10.20.40.11 -p 6432 -U pgbouncer_admin pgbouncer -c "SHOW POOLS;"` muestra por pool los clientes activos y en espera (`cl_active`, `cl_waiting`) y las conexiones reales (`sv_active`, `sv_idle`). `cl_waiting` mayor que 0 de forma sostenida es que el pool se queda corto.
+
+## 6. pg_stat_statements: las consultas que más pesan
+
+`pg_stat_activity` dice qué pasa **ahora**; `pg_stat_statements` acumula todas las consultas agrupadas por forma, con tiempos y llamadas. Necesita cargarse al arrancar (un reinicio, una vez):
+
+:::term bash · srv-db-02
+$ sudo -u postgres psql -c "ALTER SYSTEM SET shared_preload_libraries = 'pg_stat_statements';"
+$ sudo systemctl restart postgresql@17-main
+$ sudo -u postgres psql -d erp -c "CREATE EXTENSION IF NOT EXISTS pg_stat_statements;"
+:::
+
+:::term psql · srv-db-02 · base de datos erp
+$ SELECT calls, round(total_exec_time/1000) AS total_s, round(mean_exec_time::numeric,1) AS media_ms, rows, left(query,70) AS consulta FROM pg_stat_statements ORDER BY total_exec_time DESC LIMIT 3;
+ calls  | total_s | media_ms |  rows   |                                consulta
+--------+---------+----------+---------+------------------------------------------------------------------------
+ 412880 |    6120 |     14.8 |  412880 | SELECT * FROM erp.movimientos WHERE cuenta_id = $1 AND fecha >= $2 ORDER BY
+    288 |    2210 |   7673.6 |     288 | SELECT cliente_id, sum(importe) FROM erp.facturas f JOIN erp.lineas l ON
+  91220 |     480 |      5.3 |   91220 | UPDATE erp.sesiones_web SET ultimo_acceso = $1 WHERE id = $2
+:::
+
+- Ordena por **`total_exec_time`**: la primera consulta tarda 15 ms, pero se ejecuta 400.000 veces y suma más que el informe de 7,7 segundos. Los valores aparecen como `$1`, `$2`.
+- El siguiente paso es `EXPLAIN (ANALYZE, BUFFERS)` con valores reales, en un entorno de pruebas o con una consulta de solo lectura: un `Seq Scan` sobre `movimientos` con millones de filas pide un índice, que se crea sin bloquear las escrituras con `CREATE INDEX CONCURRENTLY idx_mov_cuenta_fecha ON erp.movimientos (cuenta_id, fecha);`.
+- `SELECT pg_stat_statements_reset();` pone los contadores a cero: hazlo después de un cambio para medir el antes y el después. Para ver el texto de las consultas de otros usuarios hace falta superusuario o `pg_read_all_stats`.
+- Para ver en el log cada consulta lenta: `log_min_duration_statement = '2s'` y recarga.
+
+## 7. El ticket: "la aplicación no conecta a la base de datos"
+
+Martes, 8:45. El ERP no abre en dos sedes; en otra funciona. La aplicación muestra un error genérico. Lo primero es **leer el FATAL exacto** en el log del servidor, porque hay tres muy distintos:
+
+:::term bash · srv-db-02
+$ sudo grep -o "FATAL: .*" /var/log/postgresql/postgresql-17-main.log | sort | uniq -c | sort -rn | head
+    412 FATAL:  no pg_hba.conf entry for host "10.20.31.14", user "erp_app", database "erp", SSL encryption
+     97 FATAL:  sorry, too many clients already
+     12 FATAL:  remaining connection slots are reserved for ...
+:::
+
+| Mensaje | Qué significa | Arreglo | ¿Recarga o reinicio? |
+|---|---|---|---|
+| `no pg_hba.conf entry for host ...` | Llegó al servidor, pero **ninguna línea** de `pg_hba.conf` acepta esa IP, usuario y base de datos | Añadir la línea correcta | **Recarga** |
+| `sorry, too many clients already` | **Todas** las conexiones de `max_connections` en uso, incluidas las reservadas | Liberar conexiones; pool | Ninguno para liberar; **reinicio** si se sube `max_connections` |
+| `remaining connection slots are reserved for ...` | Quedan libres solo las reservadas para superusuarios (`superuser_reserved_connections`, 3 por defecto) o para `pg_use_reserved_connections` (`reserved_connections`, desde PostgreSQL 16) | Igual que el anterior: está a punto de llenarse | Igual |
+
+**Caso 1: `no pg_hba.conf entry`.** La IP `10.20.31.14` es de la red nueva de una de las sedes, migrada el fin de semana. `pg_hba.conf` solo tiene `10.20.30.0/24`:
+
+:::term bash · srv-db-02
+$ sudoedit /etc/postgresql/17/main/pg_hba.conf
+# añadir debajo de la línea de 10.20.30.0/24:
+# hostssl  erp  erp_app  10.20.31.0/24  scram-sha-256
+$ sudo -u postgres psql -tAc "SELECT count(*) FROM pg_hba_file_rules WHERE error IS NOT NULL;"
+0
+$ sudo -u postgres psql -c "SELECT pg_reload_conf();"
+$ psql "host=srv-db-02.contoso.local dbname=erp user=erp_app sslmode=require" -c "SELECT 1;"
+:::
+
+- La línea va **antes** de cualquier `reject` general: gana la primera que coincide.
+- El mensaje dice `SSL encryption` o `no encryption`: si el cliente conecta sin TLS y la línea es `hostssl`, tampoco coincide.
+- Si el error cambia a `password authentication failed for user "erp_app"`, la línea ya coincide: el problema es la contraseña o un hash MD5 con método `scram-sha-256` (paso 3).
+- Y si el cliente recibe `Connection refused` o un tiempo de espera, ni siquiera llegó: `listen_addresses`, el cortafuegos (`5432/tcp`) o la red. Eso no deja FATAL en el log.
+
+**Casos 2 y 3: conexiones agotadas.** Entra como superusuario por el socket (`sudo -u postgres psql` usa uno de los huecos reservados; si sale `too many clients already`, ni eso queda) y mira quién las tiene:
+
+:::term psql · srv-db-02
+$ SHOW max_connections;
+ 100
+$ SELECT usename, client_addr, state, count(*), max(now()-state_change) AS mas_antigua FROM pg_stat_activity WHERE backend_type='client backend' GROUP BY 1,2,3 ORDER BY 4 DESC LIMIT 3;
+ usename | client_addr |        state        | count |   mas_antigua
+---------+-------------+---------------------+-------+-----------------
+ erp_app | 10.20.30.32 | idle                |    74 | 13:02:44.11
+ erp_app | 10.20.30.31 | active              |     6 | 00:00:01.20
+ erp_app | 10.20.30.32 | idle in transaction |    11 | 02:15:09.84
+$ SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE usename='erp_app' AND client_addr='10.20.30.32' AND state IN ('idle','idle in transaction') AND now()-state_change > interval '10 minutes';
+:::
+
+1. **Devolver el servicio**: cerrar las conexiones inactivas de ese origen, con más de 10 minutos, como arriba. No hace falta reiniciar PostgreSQL, y reiniciarlo cortaría también a los usuarios que sí funcionan.
+2. **La causa**: un nodo (`10.20.30.32`) con 85 conexiones, 11 de ellas `idle in transaction` desde hace dos horas. Al equipo de la aplicación: el tamaño del pool por nodo y la transacción que no se cierra.
+3. **Que el servidor se defienda**: `ALTER ROLE erp_app SET idle_in_transaction_session_timeout = '10min';` (se aplica a las sesiones nuevas de ese rol, sin reinicio) y, si la aplicación lo tolera, `idle_session_timeout` para las inactivas sin transacción.
+4. **La solución de fondo**: PgBouncer (paso 5) delante, con la aplicación en el 6432. Subir `max_connections` es la última opción: necesita **reinicio** en ventana y memoria para ello.
+
+En el ticket: qué FATAL era (con el recuento del log), la línea añadida a `pg_hba.conf` o las conexiones cerradas y de qué origen, si fue recarga o reinicio, y la alerta nueva: **conexiones > 80 % de `max_connections`** con `postgres_exporter`.
+
+## Siguientes pasos
+
+- Monitoriza conexiones por estado, tuplas muertas por tabla, la edad de la transacción más antigua y `cl_waiting` de PgBouncer con `postgres_exporter` y la guía de [Grafana](grafana-origen-de-datos-primer-panel-y-alerta-al-canal.html).
+- Para alta disponibilidad con conmutación automática, Patroni sobre la réplica en streaming; para copias físicas con recuperación a un momento concreto, pgBackRest.
+- La guía de [MySQL y MariaDB](mysql-y-mariadb-configuracion-buffer-pool-consultas-lentas-indices-replica-y-too-many-connections.html) resuelve el mismo problema de conexiones agotadas en el otro motor.
+""",
+  en="""
+## What you'll get
+
+Running a PostgreSQL server on Linux with judgement: knowing which change applies with a reload and which needs a restart, granting permissions that do not break on the next deployment, opening access in `pg_hba.conf` only to whoever needs it, seeing whether autovacuum keeps up, understanding when connections are short and when there are too many, finding the heaviest queries and resolving the ticket **"the application cannot connect"** by reading which of the three typical errors it is.
+
+## Before you start
+
+- PostgreSQL 16 or 17 on Ubuntu, Debian or RHEL (project packages, PGDG), with `sudo` on the server. You log in as superuser with `sudo -u postgres psql`.
+- The application account, the backup account, the scheduled backup and replica lag are in the [MySQL, MariaDB and PostgreSQL: least privilege and backups](mysql-mariadb-y-postgresql-permisos-minimos-copia-programada-restauracion-probada-y-copias-de-0-bytes.html) guide; the blocking session and the full disk, in the [PostgreSQL, MySQL and SQL Server](postgresql-mysql-sql-server-tareas-de-operaciones-copia-restauracion-espacio-y-consulta-lenta.html) one.
+- A change window for whatever needs a restart (step 1).
+
+## 1. Where everything lives and what needs a restart
+
+| Install | Configuration | Data | Service | Log |
+|---|---|---|---|---|
+| Ubuntu / Debian | `/etc/postgresql/17/main/` | `/var/lib/postgresql/17/main/` | `postgresql@17-main` | `/var/log/postgresql/postgresql-17-main.log` |
+| RHEL (PGDG) | `/var/lib/pgsql/17/data/` | `/var/lib/pgsql/17/data/` | `postgresql-17` | `/var/lib/pgsql/17/data/log/` |
+
+When in doubt, the server itself tells you:
+
+:::term psql · srv-db-02
+$ sudo -u postgres psql -c "SHOW config_file;" -c "SHOW hba_file;"
+               config_file
+-----------------------------------------
+ /etc/postgresql/17/main/postgresql.conf
+               hba_file
+-------------------------------------
+ /etc/postgresql/17/main/pg_hba.conf
+$ sudo -u postgres psql -c "SELECT name, setting, context, pending_restart FROM pg_settings WHERE name IN ('max_connections','listen_addresses','shared_preload_libraries','idle_in_transaction_session_timeout','log_min_duration_statement');"
+                name                 |        setting        |  context   | pending_restart
+-------------------------------------+-----------------------+------------+-----------------
+ idle_in_transaction_session_timeout | 0                     | user       | f
+ listen_addresses                    | localhost,10.20.40.11 | postmaster | f
+ log_min_duration_statement          | -1                    | superuser  | f
+ max_connections                     | 100                   | postmaster | f
+ shared_preload_libraries            |                       | postmaster | f
+:::
+
+The **`context`** column answers the question for every change:
+
+- `postmaster`: service **restart** (`max_connections`, `listen_addresses`, `shared_preload_libraries`, `shared_buffers`). It drops every connection: change window.
+- `sighup`, `superuser`, `user`: a **reload** is enough (`SELECT pg_reload_conf();` or `sudo systemctl reload postgresql@17-main`). Open sessions carry on.
+- `pending_restart = t` after a reload: the value is in the file but will not apply until a restart. It is how you know a change "did not take".
+
+`pg_hba.conf` is not a parameter, but it works the same way: **reload, not restart**. For `postgresql.conf` changes, better an included file of your own (`include_dir = 'conf.d'`, which Debian already ships) or `ALTER SYSTEM SET ...`, which writes to `postgresql.auto.conf` in the data directory and is read last.
+
+## 2. Roles and privileges: the schema and what gets created tomorrow
+
+In PostgreSQL permissions sit at three levels, and missing any of them gives `permission denied`:
+
+1. **Database**: `GRANT CONNECT ON DATABASE erp TO ...`.
+2. **Schema**: `GRANT USAGE ON SCHEMA erp TO ...` (see what is inside) and, only for whoever creates tables, `CREATE`.
+3. **Objects**: `GRANT SELECT ... ON ALL TABLES IN SCHEMA erp` for tables that **already exist**, and `ALTER DEFAULT PRIVILEGES` for those created **later**.
+
+Since PostgreSQL 15, the `public` schema no longer lets anyone create objects (`CREATE` revoked from `PUBLIC`) and its owner is `pg_database_owner`. An application migrated from an old version that created tables in `public` without explicit grants fails with `permission denied for schema public` after the upgrade. The right fix is a schema of the application's own with its owner, not giving `CREATE` back to everyone.
+
+:::term psql · srv-db-02 · erp database
+$ CREATE ROLE erp_lectura NOLOGIN;
+$ GRANT CONNECT ON DATABASE erp TO erp_lectura;
+$ GRANT USAGE ON SCHEMA erp TO erp_lectura;
+$ GRANT SELECT ON ALL TABLES IN SCHEMA erp TO erp_lectura;
+$ ALTER DEFAULT PRIVILEGES FOR ROLE erp_owner IN SCHEMA erp GRANT SELECT ON TABLES TO erp_lectura;
+$ GRANT erp_lectura TO laura_prado;
+$ \\dn+ erp
+                           List of schemas
+ Name |   Owner   |    Access privileges     | Description
+------+-----------+--------------------------+-------------
+ erp  | erp_owner | erp_owner=UC/erp_owner  +|
+      |           | erp_rw=U/erp_owner      +|
+      |           | erp_lectura=U/erp_owner  |
+$ \\ddp
+               Default access privileges
+   Owner   | Schema | Type  |   Access privileges
+-----------+--------+-------+-----------------------
+ erp_owner | erp    | table | erp_rw=arwd/erp_owner+
+           |        |       | erp_lectura=r/erp_owner
+:::
+
+- `\\dn+` shows the schema's permissions (`U` = USAGE, `C` = CREATE); `\\dp erp.facturas`, a table's (`r` = SELECT, `a` = INSERT, `w` = UPDATE, `d` = DELETE); `\\ddp`, the default privileges.
+- **The `ALTER DEFAULT PRIVILEGES` trap**: it only applies to objects created **by the `FOR ROLE` role**. If a deployment runs under another account (or `postgres`), its new tables do not inherit them and the application gets *permission denied* that same night. Deployments always as the owner (`erp_owner`), and `\\ddp` in the review.
+- For read-everything and monitoring there are **predefined roles**: `pg_read_all_data` (read every table, PostgreSQL 14+), `pg_monitor` and `pg_read_all_stats` (see other users' activity and query text). Better that than making the monitoring tool a superuser.
+
+## 3. pg_hba.conf: who gets in, from where and how
+
+Each line is `type  database  user  address  method`, and **the first match wins**, top to bottom. If none matches, the connection is rejected.
+
+:::term /etc/postgresql/17/main/pg_hba.conf
+# TYPE   DATABASE  USER        ADDRESS            METHOD
+local    all       postgres                       peer
+local    all       all                            peer
+host     all       backup      127.0.0.1/32       scram-sha-256
+hostssl  erp       erp_app     10.20.30.0/24      scram-sha-256
+hostssl  erp       +erp_lectura 10.20.50.0/24     scram-sha-256
+host     all       all         0.0.0.0/0          reject
+:::
+
+- `local` is the Unix socket; `peer` lets in the OS user with the same name (that is why `sudo -u postgres psql` works). `host` is TCP with or without TLS; `hostssl`, TLS only.
+- `+erp_lectura` means "any member of that role": joiners and leavers are handled with `GRANT`/`REVOKE`, without touching the file.
+- **`scram-sha-256`** is the recommended method and the default password encryption since PostgreSQL 14 (`password_encryption = scram-sha-256`). An account whose password was stored as **MD5** (a database migrated from an old version) cannot log in through a `scram-sha-256` line: its password has to be set again. `SELECT rolname FROM pg_authid WHERE rolpassword LIKE 'md5%';` tells you which. MD5 is deprecated as of PostgreSQL 18: do not use it in new lines.
+- No `trust` outside a lab, and no `0.0.0.0/0` with any method other than `reject`.
+
+Before reloading, check the file parses:
+
+:::term psql · srv-db-02
+$ sudo -u postgres psql -c "SELECT line_number, type, database, user_name, address, auth_method, error FROM pg_hba_file_rules WHERE error IS NOT NULL;"
+ line_number | type | database | user_name | address | auth_method |              error
+-------------+------+----------+-----------+---------+-------------+---------------------------------
+          96 | host | {erp}    | {erp_app} |         |             | invalid IP mask "/33": ...
+$ sudo -u postgres psql -c "SELECT pg_reload_conf();"
+:::
+
+`pg_hba_file_rules` reads the file **as it is on disk**, not what is loaded: if it shows errors, a reload would keep the previous file in use and the log would say `pg_hba.conf was not reloaded`. Fix it and look again until nothing comes back. And remember the server has to be listening on that network: `listen_addresses` (by default only `localhost`) needs a restart.
+
+## 4. Autovacuum and bloated tables
+
+An `UPDATE` or `DELETE` does not remove the row: it leaves a **dead tuple** that `VACUUM` later marks as reusable space. **Autovacuum** does it on its own, per table, when dead tuples exceed `autovacuum_vacuum_threshold` (50) plus `autovacuum_vacuum_scale_factor` (0.2, i.e. 20%) of the table. On a 50-million-row table, that is 10 million dead rows before it starts.
+
+:::term psql · srv-db-02 · erp database
+$ SELECT relname, n_live_tup, n_dead_tup, round(100.0*n_dead_tup/greatest(n_live_tup,1),1) AS pct_dead, last_autovacuum, last_autoanalyze FROM pg_stat_user_tables ORDER BY n_dead_tup DESC LIMIT 4;
+    relname     | n_live_tup | n_dead_tup | pct_dead |        last_autovacuum        |       last_autoanalyze
+----------------+------------+------------+----------+-------------------------------+-------------------------------
+ movimientos    |   48211904 |    9120533 |     18.9 | 2026-10-19 04:12:51.20871+01  | 2026-11-03 06:40:02.11734+01
+ sesiones_web   |     211560 |    1904377 |    900.2 | 2026-11-03 09:58:11.40325+01  | 2026-11-03 09:58:12.00412+01
+ facturas       |     918244 |       3104 |      0.3 | 2026-11-02 23:10:44.88102+01  | 2026-11-02 23:10:45.10288+01
+:::
+
+Two different cases on the same screen:
+
+- **`movimientos`**: the last autovacuum was two weeks ago. With the default 20%, it arrives late on a large table. Lower the threshold **for that table only**: `ALTER TABLE erp.movimientos SET (autovacuum_vacuum_scale_factor = 0.01);` (1%).
+- **`sesiones_web`**: autovacuum ran minutes ago and there are still 9 dead rows per live one. That means it **cannot clean up**: some transaction open for hours is holding those row versions. Find it like this:
+
+:::term psql · srv-db-02
+$ SELECT pid, usename, application_name, state, now()-xact_start AS open_for, age(backend_xmin) AS xmin_age FROM pg_stat_activity WHERE backend_xmin IS NOT NULL ORDER BY age(backend_xmin) DESC LIMIT 3;
+  pid  |  usename   | application_name |        state        |    open_for     | xmin_age
+-------+------------+------------------+---------------------+-----------------+----------
+ 31877 | informes   | DBeaver 24.2     | idle in transaction | 05:41:12.30211  |  8812440
+ 32014 | erp_app    | erp-api          | active              | 00:00:00.41022  |       12
+:::
+
+An `idle in transaction` session of almost six hours from a desktop client. While it stays open, no `VACUUM` can clean up what has changed since. End it with `SELECT pg_terminate_backend(31877);` (telling the user) and set a cap for the account: `ALTER ROLE informes SET idle_in_transaction_session_timeout = '15min';`. Replicas with `hot_standby_feedback` and abandoned replication slots hold things back the same way: check `pg_replication_slots` too.
+
+- **Bloat**: `VACUUM` leaves the free space **inside** the table for reuse; it does not give it back to the disk. To measure it properly, the `pgstattuple` extension (`SELECT * FROM pgstattuple('erp.sesiones_web');`, field `free_percent`).
+- To reclaim disk, `VACUUM FULL` rewrites the table but **locks it completely** while it runs: only in a window and on small tables. On large tables with no downtime, the **pg_repack** extension.
+- Set `log_autovacuum_min_duration = '1min'` (since PostgreSQL 15 it defaults to 10 minutes) to see in the log which tables take long to clean.
+
+## 5. Connections and PgBouncer
+
+Each PostgreSQL connection is **an OS process** with its own memory. `max_connections` defaults to **100** and changes with a restart. Raising it to 1,000 is not free: each query can use up to `work_mem` per sort or hash operation, and with hundreds of active connections memory runs out.
+
+:::term psql · srv-db-02
+$ SELECT usename, client_addr, state, count(*) FROM pg_stat_activity WHERE backend_type = 'client backend' GROUP BY 1,2,3 ORDER BY 4 DESC;
+ usename  | client_addr |        state        | count
+----------+-------------+---------------------+-------
+ erp_app  | 10.20.30.31 | idle                |    58
+ erp_app  | 10.20.30.32 | idle                |    21
+ erp_app  | 10.20.30.31 | active              |     4
+ informes | 10.20.50.18 | idle in transaction |     1
+:::
+
+79 `idle` connections for 4 active ones: the application opens many and uses few. That is the case for **PgBouncer**: a pool in front of PostgreSQL that takes hundreds of client connections and serves them with a few real ones.
+
+:::term /etc/pgbouncer/pgbouncer.ini
+[databases]
+erp = host=127.0.0.1 port=5432 dbname=erp
+
+[pgbouncer]
+listen_addr = 10.20.40.11
+listen_port = 6432
+auth_type = scram-sha-256
+auth_file = /etc/pgbouncer/userlist.txt
+pool_mode = transaction
+max_client_conn = 1000
+default_pool_size = 20
+admin_users = pgbouncer_admin
+:::
+
+- The application points to port **6432** instead of 5432; the rest of the connection string stays the same.
+- `pool_mode = transaction` saves the most: the real connection goes back to the pool at the end of each transaction. Anything that depends on the **session** (`SET` without `LOCAL`, advisory locks, temporary tables, `LISTEN`) does not behave the same; prepared statements do work, since PgBouncer 1.21 with `max_prepared_statements`. Confirm it with the application team or start with `pool_mode = session`.
+- `psql -h 10.20.40.11 -p 6432 -U pgbouncer_admin pgbouncer -c "SHOW POOLS;"` shows per pool the active and waiting clients (`cl_active`, `cl_waiting`) and the real connections (`sv_active`, `sv_idle`). A sustained `cl_waiting` above 0 means the pool is too small.
+
+## 6. pg_stat_statements: the heaviest queries
+
+`pg_stat_activity` says what is happening **now**; `pg_stat_statements` accumulates every query grouped by shape, with timings and calls. It has to be loaded at startup (one restart, once):
+
+:::term bash · srv-db-02
+$ sudo -u postgres psql -c "ALTER SYSTEM SET shared_preload_libraries = 'pg_stat_statements';"
+$ sudo systemctl restart postgresql@17-main
+$ sudo -u postgres psql -d erp -c "CREATE EXTENSION IF NOT EXISTS pg_stat_statements;"
+:::
+
+:::term psql · srv-db-02 · erp database
+$ SELECT calls, round(total_exec_time/1000) AS total_s, round(mean_exec_time::numeric,1) AS mean_ms, rows, left(query,70) AS query FROM pg_stat_statements ORDER BY total_exec_time DESC LIMIT 3;
+ calls  | total_s | mean_ms |  rows   |                                 query
+--------+---------+---------+---------+------------------------------------------------------------------------
+ 412880 |    6120 |    14.8 |  412880 | SELECT * FROM erp.movimientos WHERE cuenta_id = $1 AND fecha >= $2 ORDER BY
+    288 |    2210 |  7673.6 |     288 | SELECT cliente_id, sum(importe) FROM erp.facturas f JOIN erp.lineas l ON
+  91220 |     480 |     5.3 |   91220 | UPDATE erp.sesiones_web SET ultimo_acceso = $1 WHERE id = $2
+:::
+
+- Sort by **`total_exec_time`**: the first query takes 15 ms, but runs 400,000 times and adds up to more than the 7.7-second report. Values show up as `$1`, `$2`.
+- The next step is `EXPLAIN (ANALYZE, BUFFERS)` with real values, in a test environment or on a read-only query: a `Seq Scan` over `movimientos` with millions of rows calls for an index, created without blocking writes with `CREATE INDEX CONCURRENTLY idx_mov_cuenta_fecha ON erp.movimientos (cuenta_id, fecha);`.
+- `SELECT pg_stat_statements_reset();` zeroes the counters: do it after a change to measure before and after. Seeing other users' query text needs superuser or `pg_read_all_stats`.
+- To see each slow query in the log: `log_min_duration_statement = '2s'` and reload.
+
+## 7. The ticket: "the application cannot connect to the database"
+
+Tuesday, 8:45. The ERP will not open at two sites; at another it works. The application shows a generic error. The first thing is to **read the exact FATAL** in the server log, because there are three very different ones:
+
+:::term bash · srv-db-02
+$ sudo grep -o "FATAL: .*" /var/log/postgresql/postgresql-17-main.log | sort | uniq -c | sort -rn | head
+    412 FATAL:  no pg_hba.conf entry for host "10.20.31.14", user "erp_app", database "erp", SSL encryption
+     97 FATAL:  sorry, too many clients already
+     12 FATAL:  remaining connection slots are reserved for ...
+:::
+
+| Message | What it means | Fix | Reload or restart? |
+|---|---|---|---|
+| `no pg_hba.conf entry for host ...` | It reached the server, but **no line** in `pg_hba.conf` accepts that IP, user and database | Add the right line | **Reload** |
+| `sorry, too many clients already` | **All** `max_connections` slots in use, reserved ones included | Free connections; pooling | Neither to free them; **restart** if `max_connections` is raised |
+| `remaining connection slots are reserved for ...` | Only the slots reserved for superusers (`superuser_reserved_connections`, 3 by default) or for `pg_use_reserved_connections` (`reserved_connections`, since PostgreSQL 16) are left | Same as above: it is about to fill up | Same |
+
+**Case 1: `no pg_hba.conf entry`.** IP `10.20.31.14` belongs to one site's new network, migrated over the weekend. `pg_hba.conf` only has `10.20.30.0/24`:
+
+:::term bash · srv-db-02
+$ sudoedit /etc/postgresql/17/main/pg_hba.conf
+# add below the 10.20.30.0/24 line:
+# hostssl  erp  erp_app  10.20.31.0/24  scram-sha-256
+$ sudo -u postgres psql -tAc "SELECT count(*) FROM pg_hba_file_rules WHERE error IS NOT NULL;"
+0
+$ sudo -u postgres psql -c "SELECT pg_reload_conf();"
+$ psql "host=srv-db-02.contoso.local dbname=erp user=erp_app sslmode=require" -c "SELECT 1;"
+:::
+
+- The line goes **before** any catch-all `reject`: the first match wins.
+- The message says `SSL encryption` or `no encryption`: if the client connects without TLS and the line is `hostssl`, it does not match either.
+- If the error changes to `password authentication failed for user "erp_app"`, the line now matches: the problem is the password or an MD5 hash against a `scram-sha-256` method (step 3).
+- And if the client gets `Connection refused` or a timeout, it never even arrived: `listen_addresses`, the firewall (`5432/tcp`) or the network. That leaves no FATAL in the log.
+
+**Cases 2 and 3: connections exhausted.** Log in as superuser through the socket (`sudo -u postgres psql` uses one of the reserved slots; if you get `too many clients already`, not even that is left) and see who holds them:
+
+:::term psql · srv-db-02
+$ SHOW max_connections;
+ 100
+$ SELECT usename, client_addr, state, count(*), max(now()-state_change) AS oldest FROM pg_stat_activity WHERE backend_type='client backend' GROUP BY 1,2,3 ORDER BY 4 DESC LIMIT 3;
+ usename | client_addr |        state        | count |     oldest
+---------+-------------+---------------------+-------+-----------------
+ erp_app | 10.20.30.32 | idle                |    74 | 13:02:44.11
+ erp_app | 10.20.30.31 | active              |     6 | 00:00:01.20
+ erp_app | 10.20.30.32 | idle in transaction |    11 | 02:15:09.84
+$ SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE usename='erp_app' AND client_addr='10.20.30.32' AND state IN ('idle','idle in transaction') AND now()-state_change > interval '10 minutes';
+:::
+
+1. **Restore service**: close the idle connections from that source older than 10 minutes, as above. No PostgreSQL restart needed, and restarting would also cut off the users who are working.
+2. **The cause**: one node (`10.20.30.32`) with 85 connections, 11 of them `idle in transaction` for two hours. To the application team: the per-node pool size and the transaction that never closes.
+3. **Let the server defend itself**: `ALTER ROLE erp_app SET idle_in_transaction_session_timeout = '10min';` (applies to new sessions of that role, no restart) and, if the application tolerates it, `idle_session_timeout` for idle sessions with no transaction.
+4. **The real fix**: PgBouncer (step 5) in front, with the application on 6432. Raising `max_connections` is the last option: it needs a **restart** in a window and the memory to back it.
+
+In the ticket: which FATAL it was (with the count from the log), the line added to `pg_hba.conf` or the connections closed and from which source, whether it was a reload or a restart, and the new alert: **connections > 80% of `max_connections`** with `postgres_exporter`.
+
+## Next steps
+
+- Monitor connections by state, dead tuples per table, the age of the oldest transaction and PgBouncer's `cl_waiting` with `postgres_exporter` and the [Grafana](grafana-origen-de-datos-primer-panel-y-alerta-al-canal.html) guide.
+- For high availability with automatic failover, Patroni on top of streaming replication; for physical backups with point-in-time recovery, pgBackRest.
+- The [MySQL and MariaDB](mysql-y-mariadb-configuracion-buffer-pool-consultas-lentas-indices-replica-y-too-many-connections.html) guide solves the same exhausted-connections problem on the other engine.
 """)
