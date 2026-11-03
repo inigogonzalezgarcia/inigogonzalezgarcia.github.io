@@ -16,16 +16,16 @@ LEVELS = {
                     h_es="Servidores, despliegues<br>y los primeros scripts.", h_en="Servers, deployments<br>and your first scripts.",
                     d_es="Servidores, despliegue de aplicaciones y los primeros scripts.",
                     d_en="Servers, app deployment and your first scripts.",
-                    l_es="Veinticinco temas para pasar del puesto de usuario a lo que hay detrás: servidores Windows y Linux, DNS y DHCP, IIS, switches Cisco y HP, gestión fuera de banda, despliegue de aplicaciones, copias, escritorios virtuales, salas, GLPI y los primeros scripts en PowerShell, Python y Bash.",
-                    l_en="Twenty-five topics to move from the user's device to what sits behind it: Windows and Linux servers, DNS and DHCP, IIS, Cisco and HP switches, out-of-band management, app deployment, backups, virtual desktops, meeting rooms, GLPI and your first PowerShell, Python and Bash scripts.",
-                    seo="Intermediate IT guides: Azure AD Connect, Bash, Citrix, Confluence, Git, Jamf Pro, MECM/SCCM, Microsoft Teams Rooms, PDQ and MDT, PowerShell, Red Hat, SharePoint, Ubuntu, Veeam, VMware Horizon and Windows Server."),
+                    l_es="Veintiséis temas para pasar del puesto de usuario a lo que hay detrás: servidores Windows y Linux, DNS y DHCP, IIS, switches Cisco y HP, gestión fuera de banda, despliegue de aplicaciones, copias, escritorios virtuales, salas, GLPI y los primeros scripts en PowerShell, Python y Bash.",
+                    l_en="Twenty-six topics to move from the user's device to what sits behind it: Windows and Linux servers, DNS and DHCP, IIS, Cisco and HP switches, out-of-band management, app deployment, backups, virtual desktops, meeting rooms, GLPI and your first PowerShell, Python and Bash scripts.",
+                    seo="Intermediate IT guides: Azure AD Connect, Bash, Citrix, Confluence, Git, Group Policy (GPO), Jamf Pro, MECM/SCCM, Microsoft Teams Rooms, PDQ and MDT, PowerShell, Red Hat, SharePoint, Ubuntu, Veeam, VMware Horizon and Windows Server."),
     "nivel-3": dict(key="nivel-3", n_es="Nivel 3", n_en="Level 3", t_es="Avanzado", t_en="Advanced",
                     h_es="Gestión moderna, identidad<br>y automatización.", h_en="Modern management, identity<br>and automation.",
                     d_es="Gestión moderna del puesto, identidad, virtualización y automatización.",
                     d_en="Modern device management, identity, virtualisation and automation.",
-                    l_es="Veinticinco temas para quien ya administra: Intune y sus anillos de actualización, Entra ID y certificados, GPO de seguridad y Defender, Tanium, Copilot, hipervisores, bases de datos, servidores web, CMDB, monitorización y logs, y la automatización con Ansible, Docker, Jenkins y Microsoft Graph.",
-                    l_en="Twenty-five topics for people who already administer: Intune and its update rings, Entra ID and certificates, security GPOs and Defender, Tanium, Copilot, hypervisors, databases, web servers, the CMDB, monitoring and logs, and automation with Ansible, Docker, Jenkins and Microsoft Graph.",
-                    seo="Advanced IT guides: Ansible, Docker, Elasticsearch and Kibana, Entra ID Conditional Access and SSO, Grafana, Hyper-V, Intune, Intune EPM, Jenkins, Linux joined to Active Directory, Microsoft Graph, NDES and Cloud PKI, PostgreSQL, MySQL and SQL Server, SolarWinds, Ubuntu Landscape, VMware vSphere."),
+                    l_es="Veintiséis temas para quien ya administra: Intune y sus anillos de actualización, Entra ID y certificados, GPO de seguridad y Defender, Tanium, Copilot, hipervisores, bases de datos, servidores web, CMDB, monitorización y logs, y la automatización con Ansible, Docker, Jenkins y Microsoft Graph.",
+                    l_en="Twenty-six topics for people who already administer: Intune and its update rings, Entra ID and certificates, security GPOs and Defender, Tanium, Copilot, hypervisors, databases, web servers, the CMDB, monitoring and logs, and automation with Ansible, Docker, Jenkins and Microsoft Graph.",
+                    seo="Advanced IT guides: Ansible, Docker, Elasticsearch and Kibana, Entra ID Conditional Access and SSO, Grafana, Hyper-V, Intune, Intune EPM, Jenkins, Linux joined to Active Directory, Microsoft Graph, NDES and Cloud PKI, PostgreSQL, MySQL and SQL Server, SolarWinds, Ubuntu Landscape, VMware vSphere and Zabbix."),
     "nivel-4": dict(key="nivel-4", n_es="Nivel 4", n_en="Level 4", t_es="Experto", t_en="Expert",
                     h_es="Infraestructura híbrida,<br>seguridad y continuidad.", h_en="Hybrid infrastructure,<br>security and continuity.",
                     d_es="Infraestructura híbrida, redes, seguridad y continuidad de negocio.",
@@ -184,6 +184,9 @@ TOPICS = [
     ("nivel-2", "glpi", "GLPI: inventario y helpdesk", "GLPI: inventory and helpdesk",
      "Instalación, inventario nativo con GLPI Agent, entidades y perfiles, tickets con SLA, notificaciones, plugins, copias y un equipo que no reporta.",
      "Installation, native inventory with GLPI Agent, entities and profiles, tickets with SLAs, notifications, plugins, backups and a silent device."),
+    ("nivel-2", "gpo", "GPO: unidades, impresoras y preferencias", "GPO: drives, printers and preferences",
+     "Directivas de grupo del día a día: unidades de red e impresoras con preferencias, filtrado por grupo, gpresult y una directiva que no se aplica.",
+     "Everyday Group Policy: network drives and printers with preferences, group filtering, gpresult and a policy that does not apply."),
     # ---- Level 3
     ("nivel-3", "ansible", "Ansible", "Ansible",
      "El primer playbook: inventario, parcheo de servidores Linux servidor a servidor y comprobación.",
@@ -260,6 +263,9 @@ TOPICS = [
     ("nivel-3", "wordpress-docker", "WordPress en Docker: web corporativa en contenedores", "WordPress on Docker: a corporate site in containers",
      "Compose con MariaDB y volúmenes, secretos fuera de git, proxy con TLS, actualizaciones, copias con prueba de restauración y bastionado.",
      "Compose with MariaDB and volumes, secrets out of git, a TLS proxy, updates, backups with a restore test and hardening."),
+    ("nivel-3", "zabbix", "Zabbix: servidor, agentes y plantillas", "Zabbix: server, agents and templates",
+     "Instalar el servidor, desplegar el agente 2 en Windows y Linux, plantillas y macros, disparadores con dependencias, avisos y mantenimientos.",
+     "Install the server, roll out agent 2 on Windows and Linux, templates and macros, triggers with dependencies, alerts and maintenance windows."),
     # ---- Level 4
     ("nivel-4", "aws", "Amazon AWS", "Amazon AWS",
      'Cuentas e IAM bien hechos, una VPC con VPN a la oficina, servidores sin RDP abierto, copias y alertas de coste.',
@@ -29011,4 +29017,5835 @@ $ & "C:\\Program Files\\GLPI-Agent\\glpi-agent.bat" --force --debug
 - The **Jira Service Management** guide covers what a well-made ticket needs, whatever the tool.
 - The **Device42** guide follows the same inventory idea for the comms room: racks, U positions and contracts.
 - With inventory and tickets in GLPI, the next step is measuring: times against SLA, reopenings and volume by category. That is what the **04-itsm-kpi-dashboard** repository on my GitHub does, and **38-it-asset-lifecycle-planner** uses the inventory to plan which devices are due for replacement.
+""")
+
+# ---------------------------------------------------------------- 1.x · Windows: user profiles
+g(slug="windows-11-perfil-temporal-o-danado-diagnostico-reparacion-y-datos-del-usuario", topic="windows", date="2026-11-03",
+  title_es="Windows 11: perfil temporal o dañado, diagnóstico, reparación segura y los datos del usuario",
+  title_en="Windows 11: temporary or corrupted user profile, diagnosis, a safe fix and the user's data",
+  seo_title_en="Windows 11: fix a temporary user profile · Iñigo González",
+  seo_title_es="Windows 11: perfil temporal o dañado · Iñigo González",
+  dek_es="El usuario entra y no tiene escritorio ni archivos: reconocer un perfil temporal, leer los eventos del servicio de perfiles, las claves .bak de ProfileList, la reparación sin perder nada, un perfil nuevo con los datos copiados, OneDrive y cómo evitar que se repita.",
+  dek_en="The user signs in and their desktop and files are gone: spotting a temporary profile, reading User Profile Service events, the ProfileList .bak keys, a fix that loses nothing, a new profile with the data copied across, OneDrive, and how to stop it happening again.",
+  seo_desc="Windows 11 temporary or corrupted user profile: User Profile Service events, ProfileList .bak keys, a safe fix, recovering data and OneDrive folder backup.",
+  es="""
+## Qué vas a conseguir
+
+Resolver el ticket "he encendido el portátil y no está nada: ni mi escritorio ni mis archivos". Sabrás distinguir un perfil temporal de un perfil dañado, arreglar el registro sin perder datos, crear un perfil nuevo con los archivos del usuario cuando el viejo no tiene arreglo y comprobar que OneDrive protege sus carpetas para que la próxima vez sea un susto de cinco minutos.
+
+## Antes de empezar
+
+- Una cuenta con **administrador local** en el equipo (la de soporte o la contraseña de LAPS) distinta de la del usuario: mientras su sesión esté abierta, su perfil no se puede tocar.
+- El nombre del equipo y del usuario. En esta guía, `PC-0412` y `CONTOSO\\lmartin` (Laura Martín).
+- Espacio para una copia de seguridad de la carpeta del perfil antes de cambiar nada.
+- Veinte minutos con el usuario fuera del equipo.
+
+## 1. Reconocer un perfil temporal
+
+Los síntomas: fondo de pantalla por defecto, escritorio vacío, Outlook pide configurarse desde cero y, en la esquina, el aviso **"No podemos iniciar sesión en tu cuenta. A menudo este problema se puede solucionar cerrando la sesión y volviendo a iniciarla"**. Ese aviso dice algo más: lo que el usuario guarde en esa sesión se pierde al cerrarla.
+
+Con el usuario todavía conectado, una comprobación de diez segundos:
+
+:::term PowerShell · sesión del usuario
+$ $env:USERPROFILE
+C:\\Users\\TEMP
+$ whoami /user
+User Name       SID
+=============== ==============================================
+contoso\\lmartin S-1-5-21-1004336348-1177238915-682003330-1604
+:::
+
+`C:\\Users\\TEMP` confirma el perfil temporal. Apunta el **SID**: es el nombre de su clave en el registro. Pide al usuario que no guarde nada en el escritorio y que, si necesita trabajar, use la web de Outlook y OneDrive mientras lo arreglas.
+
+Un **perfil dañado** es otro caso: el usuario entra en su carpeta de siempre, pero el menú Inicio no abre, la configuración no se guarda o aparece *"El servicio Servicio de perfiles de usuario no pudo iniciar sesión. No se puede cargar el perfil de usuario"* y ni siquiera llega al escritorio. El diagnóstico empieza igual.
+
+## 2. Diagnóstico: los eventos del servicio de perfiles
+
+En el **Visor de eventos › Registros de Windows › Aplicación**, filtra por el origen **User Profile Service**:
+
+:::term PowerShell (administrador) · PC-0412
+$ Get-WinEvent -FilterHashtable @{LogName='Application'; ProviderName='Microsoft-Windows-User Profiles Service'; StartTime=(Get-Date).AddDays(-2)} | Select-Object TimeCreated, Id, LevelDisplayName -First 6
+TimeCreated          Id LevelDisplayName
+-----------          -- ----------------
+03/11/2026 8:52:14 1515 Advertencia
+03/11/2026 8:52:14 1511 Advertencia
+03/11/2026 8:51:58 1500 Error
+:::
+
+- **1511**: Windows no encuentra el perfil local del usuario y le da uno temporal.
+- **1515**: Windows ha hecho una copia del perfil (la clave `.bak`) e intentará usarla en el siguiente inicio de sesión.
+- **1500**: el perfil no se pudo cargar. El texto del evento suele decir qué fichero falló, casi siempre `NTUSER.DAT`.
+- **1530** (*el archivo del registro todavía lo usan otras aplicaciones*) aparece en muchos equipos sanos: no es la causa.
+
+Para más detalle, **Registros de aplicaciones y servicios › Microsoft › Windows › User Profile Service › Operational** muestra cada paso de la carga del perfil. Mientras estás aquí, mira también el disco: con `C:` lleno, Windows no puede cargar `NTUSER.DAT` y el problema volverá.
+
+Las causas habituales: un apagado forzado mientras se cerraba la sesión o se instalaba una actualización, el disco lleno, un programa que bloquea `NTUSER.DAT` durante el inicio de sesión, o alguien que borró a mano la carpeta `C:\\Users\\lmartin` y dejó su clave en el registro.
+
+## 3. ProfileList y las claves .bak
+
+Cada perfil del equipo tiene una clave con su SID en `HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\ProfileList`. Dentro, **ProfileImagePath** dice qué carpeta es la suya. Cuando la carga falla, Windows renombra la clave buena a `<SID>.bak` y crea otra nueva que apunta a `C:\\Users\\TEMP`.
+
+:::term PowerShell (administrador) · PC-0412
+$ Get-ChildItem 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\ProfileList' | Where-Object PSChildName -like 'S-1-5-21-*' | ForEach-Object { [pscustomobject]@{ Clave = $_.PSChildName; Ruta = $_.GetValue('ProfileImagePath'); State = $_.GetValue('State'); RefCount = $_.GetValue('RefCount') } }
+Clave                                              Ruta              State RefCount
+-----                                              ----              ----- --------
+S-1-5-21-1004336348-1177238915-682003330-1604      C:\\Users\\TEMP       516        1
+S-1-5-21-1004336348-1177238915-682003330-1604.bak  C:\\Users\\lmartin      0
+S-1-5-21-1004336348-1177238915-682003330-1105      C:\\Users\\soporte      0        0
+:::
+
+Lo que te puedes encontrar:
+
+- **Dos claves**, una con `.bak` que apunta a la carpeta real y otra sin `.bak` que apunta a `TEMP`. Es el caso más común y el de esta guía.
+- **Solo la clave `.bak`**: se arregla igual, quitándole la extensión.
+- **Una sola clave que apunta a una carpeta que ya no existe**: alguien borró o renombró la carpeta. Si los datos no están en otro sitio, salta al punto 5.
+
+## 4. La reparación segura
+
+1. El usuario **cierra sesión**. Reinicia el equipo para que nada tenga cargado su perfil y entra con la cuenta de soporte.
+2. Haz una copia de lo que vas a tocar: el registro y la carpeta.
+
+:::term PowerShell (administrador) · PC-0412
+$ reg export "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\ProfileList" C:\\Temp\\ProfileList-antes.reg
+La operación se completó correctamente.
+$ robocopy C:\\Users\\lmartin D:\\Copias\\lmartin-20261103 /E /XJ /R:1 /W:1 /NP /LOG:C:\\Temp\\copia-lmartin.log
+:::
+
+3. En el **Editor del registro** (`regedit`), con la clave `ProfileList` abierta:
+
+:::ui Editor del registro · ProfileList
+> HKEY_LOCAL_MACHINE › SOFTWARE › Microsoft › Windows NT › CurrentVersion › ProfileList
+= S-1-5-21-...-1604 (ProfileImagePath: C:\\Users\\TEMP): clic derecho › Eliminar
+= S-1-5-21-...-1604.bak: clic derecho › Cambiar nombre › quitar ".bak"
+= En la clave renombrada · State: 0
+= En la clave renombrada · RefCount: 0 (si existe)
+= ProfileImagePath: C:\\Users\\lmartin
+:::
+
+4. Comprueba que `C:\\Users\\lmartin` existe y tiene dentro `NTUSER.DAT` (es un archivo oculto: `Get-ChildItem C:\\Users\\lmartin -Force`).
+5. Reinicia y pide al usuario que inicie sesión. `$env:USERPROFILE` debe devolver `C:\\Users\\lmartin`, con su escritorio y su fondo.
+
+! Nunca borres la carpeta de un perfil desde el Explorador: deja la clave del registro huérfana y es exactamente lo que provoca un perfil temporal. Para eliminar un perfil, **Configuración avanzada del sistema › Perfiles de usuario › Configuración › Eliminar**, o `Get-CimInstance Win32_UserProfile | Where-Object LocalPath -eq 'C:\\Users\\lmartin' | Remove-CimInstance`, que borra la carpeta y la clave a la vez.
+
+Si después de esto vuelve el perfil temporal, o el evento 1500 sigue señalando `NTUSER.DAT`, el perfil está dañado de verdad: toca uno nuevo.
+
+## 5. Un perfil nuevo y los datos del usuario
+
+1. Con el usuario fuera y la copia del punto 4 hecha, renombra la carpeta vieja a `C:\\Users\\lmartin.old` y elimina su clave de `ProfileList` (la exportaste antes).
+2. El usuario inicia sesión: Windows crea un perfil limpio en `C:\\Users\\lmartin`. Que cierre sesión otra vez para copiar sin archivos abiertos.
+3. Copia solo los datos, no la configuración rota:
+
+:::term PowerShell (administrador) · PC-0412
+$ $viejo = 'C:\\Users\\lmartin.old'; $nuevo = 'C:\\Users\\lmartin'
+$ foreach ($c in 'Desktop','Documents','Downloads','Pictures','Favorites') { robocopy "$viejo\\$c" "$nuevo\\$c" /E /XJ /R:1 /W:1 /NP /LOG+:C:\\Temp\\migracion-lmartin.log }
+$ robocopy "$viejo\\AppData\\Roaming\\Microsoft\\Signatures" "$nuevo\\AppData\\Roaming\\Microsoft\\Signatures" /E /R:1 /W:1
+:::
+
+- `/XJ` evita los puntos de unión del perfil, que hacen que robocopy entre en bucle.
+- Robocopy copia por defecto datos, atributos y fechas, no permisos: los archivos heredan los de la carpeta nueva y el usuario puede abrirlos.
+- No copies `NTUSER.DAT` ni `AppData` entero: ahí estaba lo que se rompió. Las firmas de Outlook sí (están en `Signatures`). Los favoritos de Edge y la configuración de Office vuelven al iniciar sesión con la cuenta de trabajo.
+
+4. Guarda `lmartin.old` dos semanas y bórrala cuando el usuario confirme que tiene todo.
+
+## 6. OneDrive: la copia de seguridad de carpetas
+
+Si la **copia de seguridad de carpetas** de OneDrive (*Known Folder Move*) estaba activa, el Escritorio, Documentos e Imágenes viven en OneDrive y el perfil nuevo solo necesita volver a iniciar sesión en OneDrive. Compruébalo antes de copiar nada:
+
+:::term PowerShell · sesión del usuario
+$ [Environment]::GetFolderPath('Desktop')
+C:\\Users\\lmartin\\OneDrive - Contoso\\Desktop
+$ [Environment]::GetFolderPath('MyDocuments')
+C:\\Users\\lmartin\\OneDrive - Contoso\\Documents
+:::
+
+Si la ruta está dentro de `OneDrive - Contoso`, esas carpetas están protegidas. Si devuelve `C:\\Users\\lmartin\\Desktop`, no lo están. El usuario lo ve en el icono de la nube › **Configuración › Sincronizar y hacer copia de seguridad › Administrar copia de seguridad**.
+
+! Con *Archivos a petición*, muchos archivos de `lmartin.old\\OneDrive - Contoso` son solo marcadores sin contenido descargado. No los copies con robocopy: se recuperan iniciando sesión en OneDrive o desde la web.
+
+## 7. Que no se repita
+
+- **OneDrive para todos**: la directiva *Mover de forma silenciosa las carpetas conocidas de Windows a OneDrive*, por GPO o Intune, convierte este ticket en "inicia sesión en OneDrive y espera".
+- **Disco**: una alerta cuando `C:` baja del 10 % libre. La guía de [diagnóstico básico de Windows](windows-diagnostico-basico-equipo-lento-o-con-errores.html) tiene la comprobación.
+- **Apagados**: explica al usuario que no mantenga pulsado el botón mientras pone "Cerrando sesión" o "Instalando actualizaciones".
+- **En soporte**: los perfiles se eliminan con el método del punto 4, nunca borrando la carpeta.
+
+## 8. El ticket: "he entrado y no tengo nada"
+
+Lunes, 9:05. Laura Martín llama: escritorio vacío, Outlook pidiendo configurarse, sus documentos han desaparecido.
+
+1. `$env:USERPROFILE` = `C:\\Users\\TEMP`: perfil temporal. Le pides que no guarde nada y que trabaje en la web un rato.
+2. Eventos 1511 y 1515 de esta mañana y un apagado forzado el viernes (Kernel-Power 41 en el registro Sistema). Disco con 40 GB libres.
+3. En `ProfileList`, su clave `.bak` apunta a `C:\\Users\\lmartin` y la otra a `TEMP`.
+4. Cierra sesión, reinicias, copia del registro y de la carpeta, borras la clave de `TEMP`, quitas `.bak`, `State` y `RefCount` a 0. Reinicio.
+5. Laura entra con su escritorio. Su Escritorio apuntaba a `C:\\Users\\lmartin\\Desktop`: abres otro ticket para activar la copia de seguridad de OneDrive en su equipo.
+
+En el ticket: SID, eventos, caso de `ProfileList`, cambios hechos, dónde está la copia y la comprobación final.
+
+## Siguientes pasos
+
+- La guía de [diagnóstico básico de un equipo lento o con errores](windows-diagnostico-basico-equipo-lento-o-con-errores.html) es la primera de este tema: disco, eventos, integridad del sistema e Intune.
+- En el Nivel 2, [las unidades de red con preferencias de GPO](gpo-unidades-de-red-e-impresoras-con-preferencias-filtrado-y-una-unidad-que-no-aparece.html) explica qué se aplica en cada inicio de sesión y por qué un perfil nuevo tarda en tener sus unidades.
+""",
+  en="""
+## What you'll get
+
+Solving the ticket "I turned my laptop on and everything is gone: my desktop and my files". You will tell a temporary profile from a corrupted one, fix the registry without losing data, build a new profile with the user's files when the old one cannot be saved, and check that OneDrive protects their folders so next time it is a five-minute scare.
+
+## Before you start
+
+- An account with **local administrator** rights on the device (the support account or the LAPS password), not the user's: while their session is open, their profile cannot be touched.
+- The device and user names. In this guide, `PC-0412` and `CONTOSO\\lmartin` (Laura Martín).
+- Space for a backup of the profile folder before you change anything.
+- Twenty minutes with the user away from the device.
+
+## 1. Spotting a temporary profile
+
+The symptoms: default wallpaper, empty desktop, Outlook asks to be set up from scratch and, in the corner, the notice **"We can't sign in to your account. This problem can often be fixed by signing out of your account, then signing back in"**. The notice says something else too: whatever the user saves in that session is lost when they sign out.
+
+With the user still signed in, a ten-second check:
+
+:::term PowerShell · user's session
+$ $env:USERPROFILE
+C:\\Users\\TEMP
+$ whoami /user
+User Name       SID
+=============== ==============================================
+contoso\\lmartin S-1-5-21-1004336348-1177238915-682003330-1604
+:::
+
+`C:\\Users\\TEMP` confirms the temporary profile. Note the **SID**: it is the name of their key in the registry. Ask the user not to save anything on the desktop and, if they need to work, to use Outlook on the web and OneDrive while you fix it.
+
+A **corrupted profile** is a different case: the user lands in their usual folder, but the Start menu won't open, settings are not saved, or they see *"The User Profile Service failed the sign-in. User profile cannot be loaded"* and never reach the desktop. The diagnosis starts the same way.
+
+## 2. Diagnosis: the User Profile Service events
+
+In **Event Viewer › Windows Logs › Application**, filter on the **User Profile Service** source:
+
+:::term PowerShell (administrator) · PC-0412
+$ Get-WinEvent -FilterHashtable @{LogName='Application'; ProviderName='Microsoft-Windows-User Profiles Service'; StartTime=(Get-Date).AddDays(-2)} | Select-Object TimeCreated, Id, LevelDisplayName -First 6
+TimeCreated          Id LevelDisplayName
+-----------          -- ----------------
+03/11/2026 8:52:14 1515 Warning
+03/11/2026 8:52:14 1511 Warning
+03/11/2026 8:51:58 1500 Error
+:::
+
+- **1511**: Windows cannot find the user's local profile and gives them a temporary one.
+- **1515**: Windows has backed up the profile (the `.bak` key) and will try to use it at the next sign-in.
+- **1500**: the profile could not be loaded. The event text usually names the file that failed, nearly always `NTUSER.DAT`.
+- **1530** (*registry file is still in use by other applications*) shows up on plenty of healthy devices: it is not the cause.
+
+For more detail, **Applications and Services Logs › Microsoft › Windows › User Profile Service › Operational** shows every step of the profile load. While you are there, check the disk too: with `C:` full, Windows cannot load `NTUSER.DAT` and the problem will come back.
+
+The usual causes: a forced shutdown while the session was signing out or an update was installing, a full disk, a program locking `NTUSER.DAT` during sign-in, or someone who deleted the `C:\\Users\\lmartin` folder by hand and left its key in the registry.
+
+## 3. ProfileList and the .bak keys
+
+Every profile on the device has a key named after its SID in `HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\ProfileList`. Inside, **ProfileImagePath** says which folder is theirs. When loading fails, Windows renames the good key to `<SID>.bak` and creates a new one pointing to `C:\\Users\\TEMP`.
+
+:::term PowerShell (administrator) · PC-0412
+$ Get-ChildItem 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\ProfileList' | Where-Object PSChildName -like 'S-1-5-21-*' | ForEach-Object { [pscustomobject]@{ Key = $_.PSChildName; Path = $_.GetValue('ProfileImagePath'); State = $_.GetValue('State'); RefCount = $_.GetValue('RefCount') } }
+Key                                                Path              State RefCount
+---                                                ----              ----- --------
+S-1-5-21-1004336348-1177238915-682003330-1604      C:\\Users\\TEMP       516        1
+S-1-5-21-1004336348-1177238915-682003330-1604.bak  C:\\Users\\lmartin      0
+S-1-5-21-1004336348-1177238915-682003330-1105      C:\\Users\\support      0        0
+:::
+
+What you may find:
+
+- **Two keys**, one with `.bak` pointing to the real folder and one without `.bak` pointing to `TEMP`. It is the most common case and the one in this guide.
+- **Only the `.bak` key**: fixed the same way, by removing the extension.
+- **A single key pointing to a folder that no longer exists**: someone deleted or renamed the folder. If the data is not somewhere else, jump to step 5.
+
+## 4. The safe fix
+
+1. The user **signs out**. Restart the device so nothing has their profile loaded, and sign in with the support account.
+2. Back up what you are going to touch: the registry and the folder.
+
+:::term PowerShell (administrator) · PC-0412
+$ reg export "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\ProfileList" C:\\Temp\\ProfileList-before.reg
+The operation completed successfully.
+$ robocopy C:\\Users\\lmartin D:\\Backups\\lmartin-20261103 /E /XJ /R:1 /W:1 /NP /LOG:C:\\Temp\\backup-lmartin.log
+:::
+
+3. In **Registry Editor** (`regedit`), with the `ProfileList` key open:
+
+:::ui Registry Editor · ProfileList
+> HKEY_LOCAL_MACHINE › SOFTWARE › Microsoft › Windows NT › CurrentVersion › ProfileList
+= S-1-5-21-...-1604 (ProfileImagePath: C:\\Users\\TEMP): right-click › Delete
+= S-1-5-21-...-1604.bak: right-click › Rename › remove ".bak"
+= On the renamed key · State: 0
+= On the renamed key · RefCount: 0 (if present)
+= ProfileImagePath: C:\\Users\\lmartin
+:::
+
+4. Check that `C:\\Users\\lmartin` exists and contains `NTUSER.DAT` (it is a hidden file: `Get-ChildItem C:\\Users\\lmartin -Force`).
+5. Restart and ask the user to sign in. `$env:USERPROFILE` should return `C:\\Users\\lmartin`, with their desktop and wallpaper.
+
+! Never delete a profile folder from File Explorer: it leaves the registry key orphaned, which is exactly what causes a temporary profile. To remove a profile, **Advanced system settings › User Profiles › Settings › Delete**, or `Get-CimInstance Win32_UserProfile | Where-Object LocalPath -eq 'C:\\Users\\lmartin' | Remove-CimInstance`, which removes the folder and the key together.
+
+If the temporary profile comes back after this, or event 1500 still points at `NTUSER.DAT`, the profile is genuinely corrupted: time for a new one.
+
+## 5. A new profile and the user's data
+
+1. With the user signed out and the backup from step 4 done, rename the old folder to `C:\\Users\\lmartin.old` and delete its `ProfileList` key (you exported it earlier).
+2. The user signs in: Windows creates a clean profile in `C:\\Users\\lmartin`. Have them sign out again so you copy with no files open.
+3. Copy only the data, not the broken settings:
+
+:::term PowerShell (administrator) · PC-0412
+$ $old = 'C:\\Users\\lmartin.old'; $new = 'C:\\Users\\lmartin'
+$ foreach ($f in 'Desktop','Documents','Downloads','Pictures','Favorites') { robocopy "$old\\$f" "$new\\$f" /E /XJ /R:1 /W:1 /NP /LOG+:C:\\Temp\\migration-lmartin.log }
+$ robocopy "$old\\AppData\\Roaming\\Microsoft\\Signatures" "$new\\AppData\\Roaming\\Microsoft\\Signatures" /E /R:1 /W:1
+:::
+
+- `/XJ` skips the profile's junction points, which send robocopy into a loop.
+- By default robocopy copies data, attributes and timestamps, not permissions: the files inherit those of the new folder and the user can open them.
+- Do not copy `NTUSER.DAT` or the whole of `AppData`: that is where the breakage was. Outlook signatures, yes (they live in `Signatures`). Edge favourites and Office settings come back when the user signs in with their work account.
+
+4. Keep `lmartin.old` for two weeks and delete it once the user confirms they have everything.
+
+## 6. OneDrive: folder backup
+
+If OneDrive **folder backup** (*Known Folder Move*) was on, Desktop, Documents and Pictures live in OneDrive and the new profile only needs to sign back in to OneDrive. Check before copying anything:
+
+:::term PowerShell · user's session
+$ [Environment]::GetFolderPath('Desktop')
+C:\\Users\\lmartin\\OneDrive - Contoso\\Desktop
+$ [Environment]::GetFolderPath('MyDocuments')
+C:\\Users\\lmartin\\OneDrive - Contoso\\Documents
+:::
+
+If the path is inside `OneDrive - Contoso`, those folders are protected. If it returns `C:\\Users\\lmartin\\Desktop`, they are not. The user can see it from the cloud icon › **Settings › Sync and back up › Manage back up**.
+
+! With *Files On-Demand*, many files in `lmartin.old\\OneDrive - Contoso` are only placeholders with no downloaded content. Do not copy them with robocopy: they come back by signing in to OneDrive or from the web.
+
+## 7. Stopping it happening again
+
+- **OneDrive for everyone**: the policy *Silently move Windows known folders to OneDrive*, through GPO or Intune, turns this ticket into "sign in to OneDrive and wait".
+- **Disk**: an alert when `C:` drops below 10% free. The [basic Windows diagnosis](windows-diagnostico-basico-equipo-lento-o-con-errores.html) guide has the check.
+- **Shutdowns**: explain to the user not to hold the power button while the screen says "Signing out" or "Installing updates".
+- **In support**: profiles are removed with the method in step 4, never by deleting the folder.
+
+## 8. The ticket: "I've signed in and I have nothing"
+
+Monday, 9:05. Laura Martín calls: empty desktop, Outlook asking to be set up, her documents gone.
+
+1. `$env:USERPROFILE` = `C:\\Users\\TEMP`: temporary profile. You ask her not to save anything and to work on the web for a while.
+2. Events 1511 and 1515 from this morning and a forced shutdown on Friday (Kernel-Power 41 in the System log). Disk with 40 GB free.
+3. In `ProfileList`, her `.bak` key points to `C:\\Users\\lmartin` and the other to `TEMP`.
+4. She signs out, you restart, back up the registry and the folder, delete the `TEMP` key, remove `.bak`, set `State` and `RefCount` to 0. Restart.
+5. Laura signs in to her own desktop. Her Desktop pointed to `C:\\Users\\lmartin\\Desktop`: you open another ticket to turn on OneDrive folder backup on her device.
+
+In the ticket: SID, events, which `ProfileList` case, changes made, where the backup is and the final check.
+
+## Next steps
+
+- The guide on [basic diagnosis of a slow device or one with errors](windows-diagnostico-basico-equipo-lento-o-con-errores.html) is the first in this topic: disk, events, system integrity and Intune.
+- At Level 2, [network drives with GPO preferences](gpo-unidades-de-red-e-impresoras-con-preferencias-filtrado-y-una-unidad-que-no-aparece.html) explains what is applied at each sign-in and why a new profile takes a while to get its drives.
+""")
+
+# ---------------------------------------------------------------- 2.x · GPO: drives, printers and preferences
+g(slug="gpo-unidades-de-red-e-impresoras-con-preferencias-filtrado-y-una-unidad-que-no-aparece", topic="gpo", date="2026-11-03",
+  title_es="GPO: unidades de red e impresoras con preferencias, filtrado por grupo, gpresult y una unidad que no aparece",
+  title_en="GPO: network drives and printers with preferences, group filtering, gpresult and a drive that does not appear",
+  seo_title_en="GPO: mapped drives and printers with GPP · Iñigo González",
+  seo_title_es="GPO: unidades e impresoras con preferencias · Iñigo González",
+  dek_es="Unidades de red e impresoras con preferencias de directiva de grupo, destino de nivel de elemento y filtrado de seguridad por grupo, filtros WMI, procesamiento de bucle invertido en dos líneas, gpupdate, gpresult /h y RSoP, y el ticket de la unidad que no aparece a un departamento.",
+  dek_en="Network drives and printers with Group Policy Preferences, item-level targeting and security filtering by group, WMI filters, loopback processing in two lines, gpupdate, gpresult /h and RSoP, and the ticket about the drive one department cannot see.",
+  seo_desc="Group Policy Preferences for mapped drives and printers: item-level targeting, security filtering, WMI filters, loopback, gpresult and a missing drive.",
+  es="""
+## Qué vas a conseguir
+
+Que cada departamento vea sus unidades de red y sus impresoras al iniciar sesión sin scripts de inicio de sesión: una GPO de preferencias, el destino por grupo, la comprobación en el equipo con gpresult y un método para el ticket que más se repite, "a los de Finanzas no les aparece la unidad F:".
+
+## Antes de empezar
+
+- La consola **Administración de directivas de grupo** (GPMC), con RSAT en tu equipo de administración, y permisos delegados para crear y vincular GPO en las OU de usuarios.
+- La estructura de ejemplo: usuarios en `OU=Usuarios,OU=Madrid,DC=contoso,DC=local`, grupos globales `GG-Finanzas` y `GG-Comercial`, el servidor de ficheros `srv-ficheros` y el de impresión `srv-impresion`.
+- Los permisos de las carpetas compartidas ya dados al grupo: la GPO conecta la unidad, no da acceso.
+- Una OU o un grupo de prueba con un par de usuarios de verdad.
+
+## 1. Directivas y preferencias
+
+En una GPO hay dos mundos:
+
+- **Directivas** (*Policies*): Windows las impone, el usuario no puede cambiarlas y casi todas se retiran al quitar la GPO.
+- **Preferencias** (*Preferences*): Windows las configura y el usuario podría cambiarlas después. Unidades de red, impresoras, accesos directos, claves de registro y carpetas viven aquí.
+
+Una GPO por función y con nombre claro, vinculada a la OU de los usuarios:
+
+:::term PowerShell · RSAT, módulo GroupPolicy
+$ New-GPO -Name "USR-Unidades-Red" -Comment "Unidades por departamento con destino por grupo" | New-GPLink -Target "OU=Usuarios,OU=Madrid,DC=contoso,DC=local"
+$ New-GPO -Name "USR-Impresoras" | New-GPLink -Target "OU=Usuarios,OU=Madrid,DC=contoso,DC=local"
+:::
+
+## 2. Unidades de red con preferencias
+
+En la GPO `USR-Unidades-Red`, **Configuración de usuario › Preferencias › Configuración de Windows › Asignaciones de unidad › Nuevo › Unidad asignada**:
+
+:::ui Nuevas propiedades de unidad · General
+= Acción: Actualizar
+= Ubicación: \\\\srv-ficheros\\Finanzas$
+[x] Volver a conectar
+= Etiquetar como: Finanzas
+= Letra de unidad: Usar: F
+:::
+
+- **Actualizar** crea la unidad si no existe y corrige lo que haya cambiado. Es la acción buena por defecto.
+- **Reemplazar** la borra y la vuelve a crear en cada aplicación, **Crear** solo la crea si no existe y **Eliminar** la quita (útil para retirar una letra vieja).
+- Dos preferencias de dos GPO con la misma letra: gana la GPO de mayor prioridad.
+
+## 3. Destino de nivel de elemento
+
+Una sola GPO con todas las unidades y, en cada una, a quién se aplica. Pestaña **Común** de la unidad:
+
+:::ui Propiedades de F: · Común
+[x] Ejecutar en el contexto de seguridad del usuario que inició la sesión
+[x] Quitar este elemento cuando ya no se aplique
+[x] Destino de nivel de elemento
+[Destino...]
+> Nuevo elemento › Grupo de seguridad
+= Grupo: CONTOSO\\GG-Finanzas
+= Usuario en el grupo
+:::
+
+- **Quitar este elemento cuando ya no se aplique**: si el usuario sale de `GG-Finanzas`, la unidad desaparece en el siguiente inicio de sesión. Sin esta casilla, se queda.
+- El destino admite más condiciones (sitio de AD, intervalo de IP, nombre del equipo, unidad organizativa) combinadas con Y/O. Un grupo es lo más fácil de mantener.
+- La consulta se hace en el equipo del usuario: muchas condiciones complejas en muchos elementos alargan el inicio de sesión.
+
+## 4. Filtrado de seguridad y filtros WMI
+
+La otra forma es una GPO por departamento con **filtrado de seguridad**: en la pestaña **Ámbito** de la GPO, quitar *Usuarios autentificados* y añadir `GG-Finanzas`.
+
+! Desde la actualización de seguridad MS16-072, el equipo lee las GPO de usuario con su propia cuenta. Si quitas *Usuarios autentificados* del filtrado, en la pestaña **Delegación** tienen que quedar *Usuarios autentificados* o *Equipos del dominio* con permiso de **Lectura** (sin *Aplicar directiva de grupo*). Si no, la GPO no se aplica a nadie y gpresult no lo deja claro.
+
+Un **filtro WMI** limita la GPO según una consulta que se evalúa en el equipo, por ejemplo solo puestos de trabajo y no servidores:
+
+:::ui GPMC · Filtros WMI › Nuevo
+= Nombre: Solo puestos de trabajo
+= Espacio de nombres: root\\CIMv2
+= Consulta: SELECT * FROM Win32_OperatingSystem WHERE ProductType = "1"
+[Guardar]
+:::
+
+Un filtro WMI se aplica a toda la GPO, se evalúa en cada actualización y una consulta mal escrita deja la GPO sin aplicar. Úsalos poco y con nombres que digan lo que filtran.
+
+## 5. Impresoras
+
+En la GPO `USR-Impresoras`, **Configuración de usuario › Preferencias › Configuración del Panel de control › Impresoras › Nuevo › Impresora compartida**:
+
+:::ui Nuevas propiedades de impresora compartida · General
+= Acción: Actualizar
+= Ruta de acceso compartida: \\\\srv-impresion\\MAD-P2-COLOR
+[x] Establecer esta impresora como predeterminada
+[x] Solo si no hay una impresora local
+:::
+
+Con destino de nivel de elemento por grupo o por intervalo de IP de la planta, igual que las unidades.
+
+- Desde las actualizaciones de 2021 (*PrintNightmare*), instalar el controlador de una impresora compartida pide permisos de administrador por defecto. La preferencia falla en silencio si el controlador no está en el equipo. Lo práctico: controladores preinstalados en la imagen o por la herramienta de despliegue, o controladores de paquete con la directiva *Point and Print de paquete: servidores aprobados* apuntando a `srv-impresion`.
+- La instalación y la cola del servidor están en la guía de [impresoras de red](impresoras-instalar-impresora-de-red-y-cola-atascada.html).
+
+## 6. Bucle invertido, en dos líneas
+
+En servidores de escritorio remoto, Citrix o equipos de kiosco, quieres que la configuración de usuario dependa del **equipo** y no de la OU del usuario. **Configuración del equipo › Directivas › Plantillas administrativas › Sistema › Directiva de grupo › Configurar el modo de procesamiento de bucle invertido de la directiva de grupo de usuario**: *Combinar* añade las GPO de usuario de la OU del equipo a las del usuario; *Reemplazar* usa solo las de la OU del equipo. Va en una GPO vinculada a la OU de esos servidores, nunca a la de los portátiles.
+
+## 7. Comprobar en el equipo: gpupdate, gpresult y RSoP
+
+:::term PowerShell · sesión del usuario en PC-0533
+$ gpupdate /force
+Actualizando directiva...
+La actualización de la directiva de equipo se completó correctamente.
+La actualización de la directiva de usuario se completó correctamente.
+$ gpresult /r /scope user
+$ gpresult /h C:\\Temp\\gp-PC-0533.html /f
+:::
+
+- `gpresult /r` lista las GPO **aplicadas** y las **filtradas**, con el motivo. El informe HTML de `/h` muestra cada preferencia y qué GPO la ganó.
+- Las unidades de red se procesan **solo en primer plano**, al iniciar sesión. Con la optimización de inicio rápido, un cambio puede necesitar dos inicios de sesión. La directiva *Esperar siempre a la red durante el inicio del equipo y el inicio de sesión* (Configuración del equipo › Plantillas administrativas › Sistema › Inicio de sesión) lo evita.
+- **RSoP**: `rsop.msc` todavía existe, pero no muestra las preferencias. Usa gpresult o el **Asistente de resultados de directivas de grupo** de GPMC, que lo saca desde tu equipo sin entrar en el del usuario. Desde PowerShell, `Get-GPResultantSetOfPolicy -User CONTOSO\\amorales -Computer PC-0533 -ReportType Html -Path C:\\Temp\\rsop.html`.
+- Los errores de las preferencias quedan en el registro **Aplicación** con origen *Group Policy Drive Maps* o *Group Policy Printers* (evento 4098), y el procesamiento completo en **Microsoft › Windows › GroupPolicy › Operational**.
+
+## 8. El ticket: "a los de Finanzas no les aparece la unidad F:"
+
+Martes, 9:10. Tres personas de Finanzas sin unidad F:. Comercial ve su unidad sin problemas. En orden:
+
+1. **¿Se aplica la GPO?** En el equipo de una de ellas:
+
+:::term PowerShell · sesión de amorales en PC-0533
+$ gpresult /r /scope user
+CONFIGURACIÓN DE USUARIO
+    Objetos de directiva de grupo aplicados
+        USR-Impresoras
+        Default Domain Policy
+    Los siguientes GPO no se aplicaron porque fueron filtrados
+        USR-Unidades-Red
+            Filtrado:  Denegado (Filtro WMI)
+:::
+
+El motivo dice dónde mirar: **Denegado (Seguridad)** es el filtrado de seguridad o la delegación; **Denegado (Filtro WMI)**, el filtro; **Deshabilitado (Vínculo)**, el vínculo; **No aplicado (vacío)**, la parte de usuario de la GPO no tiene nada.
+
+2. **Filtro WMI**: alguien vinculó a la GPO un filtro *Solo portátiles* y Finanzas ha recibido sobremesas. Pruébalo en el equipo: `Get-CimInstance -Query 'SELECT * FROM Win32_SystemEnclosure WHERE ChassisTypes = 9 OR ChassisTypes = 10'` sin resultado es "el filtro dice que no". Se quita el filtro o se corrige.
+3. **Filtrado y grupo**: si fuera *Denegado (Seguridad)*, comprueba que el usuario está en el grupo **en su sesión**: `whoami /groups | findstr GG-Finanzas`. Si lo añadieron esta mañana, necesita cerrar sesión y volver a entrar. Si está, revisa la **Delegación** (punto 4).
+4. **Orden de vínculos y prioridad**: si la GPO se aplica pero F: apunta a otro sitio, otra GPO de más prioridad usa la misma letra. `Get-GPInheritance -Target "OU=Usuarios,OU=Madrid,DC=contoso,DC=local"` lista las GPO en orden de prioridad, incluidas las **exigidas** que vienen de arriba. El informe de `gpresult /h` dice qué GPO ganó la letra F:.
+5. **Replicación de SYSVOL**: si el cambio se hizo esta mañana y solo falla en una sede, el controlador de dominio de esa sede puede no tener la versión nueva. `echo %LOGONSERVER%` dice qué controlador usa el usuario. En GPMC, el dominio › pestaña **Estado** › **Detectar ahora** compara AD y SYSVOL en todos los controladores; `(Get-GPO -Name "USR-Unidades-Red" -Server DC02).User` muestra `DSVersion` y `SysvolVersion`, que deben coincidir. Si no, `repadmin /replsummary` y el registro **Replicación DFS** de ese controlador.
+
+En este caso, el filtro WMI. Se quita, `gpupdate /force`, cierre e inicio de sesión, y F: aparece. En el ticket: equipo, salida de gpresult, causa, cambio en la GPO y quién lo aprobó.
+
+## Siguientes pasos
+
+- [GPO de seguridad](gpo-de-seguridad-base-ntlm-llmnr-smb-laps-y-despliegue-en-piloto.html) en el Nivel 3 usa las mismas herramientas (piloto, gpresult, marcha atrás) para las directivas que protegen el dominio.
+- La guía de [Active Directory: delegación y auditoría](active-directory-delegar-permisos-papelera-y-quien-ha-cambiado-este-usuario.html) explica cómo dar a soporte permiso para editar estas GPO sin hacerle administrador del dominio.
+- Antes de cambiar una GPO en uso, `Backup-GPO -Name "USR-Unidades-Red" -Path \\\\srv-gestion\\GPO-Backups`.
+""",
+  en="""
+## What you'll get
+
+Every department sees its network drives and printers at sign-in with no logon scripts: one preferences GPO, targeting by group, checking on the device with gpresult, and a method for the ticket that comes back again and again, "Finance can't see the F: drive".
+
+## Before you start
+
+- The **Group Policy Management** console (GPMC), with RSAT on your admin machine, and delegated permissions to create and link GPOs on the user OUs.
+- The example layout: users in `OU=Users,OU=Madrid,DC=contoso,DC=local`, global groups `GG-Finance` and `GG-Sales`, the file server `srv-files` and the print server `srv-print`.
+- Share permissions already granted to the group: the GPO maps the drive, it does not grant access.
+- A test OU or group with a couple of real users.
+
+## 1. Policies and preferences
+
+A GPO has two worlds:
+
+- **Policies**: Windows enforces them, the user cannot change them, and almost all are removed when the GPO goes.
+- **Preferences**: Windows configures them and the user could change them afterwards. Network drives, printers, shortcuts, registry keys and folders live here.
+
+One GPO per function with a clear name, linked to the users' OU:
+
+:::term PowerShell · RSAT, GroupPolicy module
+$ New-GPO -Name "USR-Network-Drives" -Comment "Drives per department targeted by group" | New-GPLink -Target "OU=Users,OU=Madrid,DC=contoso,DC=local"
+$ New-GPO -Name "USR-Printers" | New-GPLink -Target "OU=Users,OU=Madrid,DC=contoso,DC=local"
+:::
+
+## 2. Network drives with preferences
+
+In the `USR-Network-Drives` GPO, **User Configuration › Preferences › Windows Settings › Drive Maps › New › Mapped Drive**:
+
+:::ui New Drive Properties · General
+= Action: Update
+= Location: \\\\srv-files\\Finance$
+[x] Reconnect
+= Label as: Finance
+= Drive Letter: Use: F
+:::
+
+- **Update** creates the drive if it is missing and fixes whatever has changed. It is the right default action.
+- **Replace** deletes and recreates it on every refresh, **Create** only creates it if it does not exist, and **Delete** removes it (useful to retire an old letter).
+- Two preferences from two GPOs with the same letter: the GPO with higher precedence wins.
+
+## 3. Item-level targeting
+
+A single GPO with all the drives and, on each one, who it applies to. The drive's **Common** tab:
+
+:::ui F: Properties · Common
+[x] Run in logged-on user's security context
+[x] Remove this item when it is no longer applied
+[x] Item-level targeting
+[Targeting...]
+> New Item › Security Group
+= Group: CONTOSO\\GG-Finance
+= User in group
+:::
+
+- **Remove this item when it is no longer applied**: if the user leaves `GG-Finance`, the drive disappears at the next sign-in. Without this box, it stays.
+- Targeting supports more conditions (AD site, IP address range, computer name, organizational unit) combined with AND/OR. A group is the easiest to maintain.
+- The check runs on the user's device: lots of complex conditions on lots of items make sign-in slower.
+
+## 4. Security filtering and WMI filters
+
+The other way is one GPO per department with **security filtering**: on the GPO's **Scope** tab, remove *Authenticated Users* and add `GG-Finance`.
+
+! Since security update MS16-072, the computer reads user GPOs with its own account. If you remove *Authenticated Users* from filtering, the **Delegation** tab must still have *Authenticated Users* or *Domain Computers* with **Read** permission (without *Apply group policy*). Otherwise the GPO applies to nobody and gpresult does not make it obvious.
+
+A **WMI filter** limits the GPO according to a query evaluated on the device, for example workstations only and no servers:
+
+:::ui GPMC · WMI Filters › New
+= Name: Workstations only
+= Namespace: root\\CIMv2
+= Query: SELECT * FROM Win32_OperatingSystem WHERE ProductType = "1"
+[Save]
+:::
+
+A WMI filter applies to the whole GPO, is evaluated on every refresh, and a badly written query leaves the GPO unapplied. Use them sparingly and with names that say what they filter.
+
+## 5. Printers
+
+In the `USR-Printers` GPO, **User Configuration › Preferences › Control Panel Settings › Printers › New › Shared Printer**:
+
+:::ui New Shared Printer Properties · General
+= Action: Update
+= Share path: \\\\srv-print\\MAD-F2-COLOUR
+[x] Set this printer as the default printer
+[x] Only if a local printer is not present
+:::
+
+With item-level targeting by group or by the floor's IP range, the same as drives.
+
+- Since the 2021 updates (*PrintNightmare*), installing a shared printer's driver needs administrator rights by default. The preference fails silently if the driver is not on the device. In practice: drivers preinstalled in the image or by your deployment tool, or package drivers with the *Package Point and print - Approved servers* policy pointing to `srv-print`.
+- The server side and the queue are in the [network printers](impresoras-instalar-impresora-de-red-y-cola-atascada.html) guide.
+
+## 6. Loopback, in two lines
+
+On remote desktop servers, Citrix or kiosk devices, you want the user settings to depend on the **computer** and not on the user's OU. **Computer Configuration › Policies › Administrative Templates › System › Group Policy › Configure user Group Policy loopback processing mode**: *Merge* adds the user GPOs from the computer's OU to the user's own; *Replace* uses only those from the computer's OU. It goes in a GPO linked to those servers' OU, never to the laptops'.
+
+## 7. Checking on the device: gpupdate, gpresult and RSoP
+
+:::term PowerShell · user's session on PC-0533
+$ gpupdate /force
+Updating policy...
+Computer Policy update has completed successfully.
+User Policy update has completed successfully.
+$ gpresult /r /scope user
+$ gpresult /h C:\\Temp\\gp-PC-0533.html /f
+:::
+
+- `gpresult /r` lists the **applied** GPOs and the **filtered** ones, with the reason. The `/h` HTML report shows every preference and which GPO won it.
+- Network drives are processed **in the foreground only**, at sign-in. With fast logon optimisation, a change can take two sign-ins. The policy *Always wait for the network at computer startup and logon* (Computer Configuration › Administrative Templates › System › Logon) avoids it.
+- **RSoP**: `rsop.msc` still exists, but it does not show preferences. Use gpresult or the GPMC **Group Policy Results Wizard**, which gets it from your machine without touching the user's. From PowerShell, `Get-GPResultantSetOfPolicy -User CONTOSO\\amorales -Computer PC-0533 -ReportType Html -Path C:\\Temp\\rsop.html`.
+- Preference errors land in the **Application** log with source *Group Policy Drive Maps* or *Group Policy Printers* (event 4098), and the full processing in **Microsoft › Windows › GroupPolicy › Operational**.
+
+## 8. The ticket: "Finance can't see the F: drive"
+
+Tuesday, 9:10. Three people in Finance with no F: drive. Sales sees its drive fine. In order:
+
+1. **Is the GPO applied?** On one of their devices:
+
+:::term PowerShell · amorales's session on PC-0533
+$ gpresult /r /scope user
+USER SETTINGS
+    Applied Group Policy Objects
+        USR-Printers
+        Default Domain Policy
+    The following GPOs were not applied because they were filtered out
+        USR-Network-Drives
+            Filtering:  Denied (WMI Filter)
+:::
+
+The reason tells you where to look: **Denied (Security)** is security filtering or delegation; **Denied (WMI Filter)**, the filter; **Disabled (Link)**, the link; **Not Applied (Empty)**, the GPO's user side has nothing in it.
+
+2. **WMI filter**: someone attached a *Laptops only* filter to the GPO and Finance has received desktops. Test it on the device: `Get-CimInstance -Query 'SELECT * FROM Win32_SystemEnclosure WHERE ChassisTypes = 9 OR ChassisTypes = 10'` returning nothing is "the filter says no". Remove the filter or fix it.
+3. **Filtering and group**: if it were *Denied (Security)*, check that the user is in the group **in their session**: `whoami /groups | findstr GG-Finance`. If they were added this morning, they need to sign out and back in. If they are, check the **Delegation** (step 4).
+4. **Link order and precedence**: if the GPO applies but F: points somewhere else, another GPO with higher precedence uses the same letter. `Get-GPInheritance -Target "OU=Users,OU=Madrid,DC=contoso,DC=local"` lists the GPOs in precedence order, including **enforced** ones coming from above. The `gpresult /h` report says which GPO won the F: letter.
+5. **SYSVOL replication**: if the change was made this morning and it only fails at one site, that site's domain controller may not have the new version. `echo %LOGONSERVER%` tells you which DC the user is using. In GPMC, the domain › **Status** tab › **Detect Now** compares AD and SYSVOL on every DC; `(Get-GPO -Name "USR-Network-Drives" -Server DC02).User` shows `DSVersion` and `SysvolVersion`, which must match. If not, `repadmin /replsummary` and that DC's **DFS Replication** log.
+
+In this case, the WMI filter. It is removed, `gpupdate /force`, sign out and in, and F: appears. In the ticket: device, gpresult output, cause, GPO change and who approved it.
+
+## Next steps
+
+- [Security GPOs](gpo-de-seguridad-base-ntlm-llmnr-smb-laps-y-despliegue-en-piloto.html) at Level 3 uses the same tools (pilot, gpresult, rollback) for the policies that protect the domain.
+- The [Active Directory: delegation and auditing](active-directory-delegar-permisos-papelera-y-quien-ha-cambiado-este-usuario.html) guide explains how to let support edit these GPOs without making them domain admins.
+- Before changing a live GPO, `Backup-GPO -Name "USR-Network-Drives" -Path \\\\srv-mgmt\\GPO-Backups`.
+""")
+
+# ---------------------------------------------------------------- 2.x · PowerShell: weekly AD report
+g(slug="powershell-informe-semanal-de-active-directory-inactivos-contrasenas-y-cuentas-deshabilitadas", topic="powershell", date="2026-11-03",
+  title_es="PowerShell: un informe semanal de Active Directory con cuentas inactivas, contraseñas a punto de caducar y cuentas deshabilitadas con grupos",
+  title_en="PowerShell: a weekly Active Directory report with inactive accounts, passwords about to expire and disabled accounts still in groups",
+  seo_title_en="PowerShell: weekly Active Directory report · Iñigo González",
+  seo_title_es="PowerShell: informe semanal de AD · Iñigo González",
+  dek_es="Usuarios y equipos inactivos con LastLogonTimestamp y sus límites, contraseñas que caducan en 14 días con msDS-UserPasswordExpiryTimeComputed, cuentas deshabilitadas que siguen en grupos, CSV y HTML, una tarea programada con una gMSA de mínimo privilegio y el informe que sale vacío.",
+  dek_en="Inactive users and computers with LastLogonTimestamp and its limits, passwords expiring within 14 days with msDS-UserPasswordExpiryTimeComputed, disabled accounts still in groups, CSV and HTML, a scheduled task with a least-privilege gMSA, and the report that comes out empty.",
+  seo_desc="A weekly Active Directory report in PowerShell: inactive accounts, expiring passwords, disabled users in groups, CSV and HTML, run by a gMSA scheduled task.",
+  es="""
+## Qué vas a conseguir
+
+Cada lunes a las 6:30, sin que nadie lo lance, una carpeta con tres listas en CSV y un HTML para leer en dos minutos: usuarios y equipos sin actividad en 90 días, contraseñas que caducan en los próximos 14 días y cuentas deshabilitadas que siguen en grupos. Lo ejecuta una cuenta de servicio administrada que solo puede leer el directorio y escribir en esa carpeta.
+
+## Antes de empezar
+
+- Un servidor de gestión, aquí `srv-gestion01`, con el módulo de Active Directory: `Install-WindowsFeature RSAT-AD-PowerShell`. El script vale en PowerShell 5.1 y 7.
+- La gMSA `CONTOSO\\gmsa-informes$` creada e instalada en ese servidor. Cómo se hace está en la guía de [cuentas de servicio y gMSA en Windows Server](windows-server-cuentas-de-servicio-gmsa-tareas-programadas-y-un-servicio-que-no-arranca.html).
+- La carpeta de salida `\\\\srv-ficheros\\Informes$\\AD` con permiso de **Modificar** para la gMSA y de **Lectura** para quien recibe el informe.
+- Lo básico del [script de inventario remoto](powershell-script-de-inventario-remoto-con-csv.html): objetos, `Select-Object` y `Export-Csv`.
+
+## 1. LastLogonTimestamp: lo que dice y lo que no
+
+Active Directory guarda dos fechas de inicio de sesión:
+
+- **lastLogon**: exacta, pero cada controlador de dominio tiene la suya y **no se replica**. Para usarla habría que preguntar a todos.
+- **lastLogonTimestamp**: se replica, pero solo se actualiza cuando el valor guardado tiene más de 14 días (el intervalo por defecto, menos un margen aleatorio de hasta 5 días). Sirve para "más de 90 días sin entrar"; no sirve para "quién entró ayer".
+
+Dos trampas más:
+
+- Una cuenta que **nunca** ha iniciado sesión no tiene valor. El script usa entonces la fecha de creación (`whenCreated`) para no marcar como inactiva una alta de la semana pasada.
+- Un usuario que solo usa Microsoft 365 desde el móvil, con autenticación en la nube, puede no tocar el AD local en meses. Antes de deshabilitar, compara con los inicios de sesión de Entra ID.
+
+## 2. Cuándo caduca una contraseña
+
+El atributo **msDS-UserPasswordExpiryTimeComputed** lo calcula el controlador de dominio al pedirlo, teniendo en cuenta la directiva del dominio y las directivas de contraseña específicas (PSO). No viene en `Get-ADUser` si no lo pides por su nombre:
+
+:::term PowerShell · srv-gestion01
+$ Get-ADUser lmartin -Properties msDS-UserPasswordExpiryTimeComputed, PasswordLastSet | Select-Object SamAccountName, PasswordLastSet, @{n='Caduca';e={[datetime]::FromFileTime($_.'msDS-UserPasswordExpiryTimeComputed')}}
+SamAccountName PasswordLastSet      Caduca
+-------------- ---------------      ------
+lmartin        19/08/2026 9:14:02   17/11/2026 9:14:02
+:::
+
+El valor es un **FILETIME**. Dos valores especiales: `9223372036854775807` (la contraseña no caduca) y `0` (debe cambiarla en el próximo inicio de sesión). El script los descarta antes de convertir.
+
+## 3. El script
+
+:::term VS Code · D:\\Scripts\\Informe-AD.ps1
+#Requires -Version 5.1
+#Requires -Modules ActiveDirectory
+$ErrorActionPreference = 'Stop'
+
+$Base    = 'OU=Contoso,DC=contoso,DC=local'
+$Salida  = '\\\\srv-ficheros\\Informes$\\AD'
+$Fecha   = Get-Date -Format 'yyyy-MM-dd'
+$Limite  = (Get-Date).AddDays(-90)
+$Aviso   = (Get-Date).AddDays(14)
+$NoCaduca = 9223372036854775807
+
+Start-Transcript -Path "D:\\Scripts\\Logs\\Informe-AD-$Fecha.log"
+try {
+    # Usuarios activos con lo que necesitan las dos primeras listas
+    $Usuarios = Get-ADUser -Filter 'Enabled -eq $true' -SearchBase $Base -Properties LastLogonTimestamp, whenCreated, PasswordNeverExpires, 'msDS-UserPasswordExpiryTimeComputed', Mail
+    if ($Usuarios.Count -lt 10) { throw "Solo $($Usuarios.Count) usuarios en $Base, revisa la OU o los permisos" }
+
+    $Inactivos = $Usuarios | Where-Object {
+        if ($_.LastLogonTimestamp) { [datetime]::FromFileTime($_.LastLogonTimestamp) -lt $Limite } else { $_.whenCreated -lt $Limite }
+    } | Select-Object Name, SamAccountName, whenCreated, @{n='UltimoInicio';e={ if ($_.LastLogonTimestamp) { [datetime]::FromFileTime($_.LastLogonTimestamp) } else { 'Nunca' } }}
+
+    $EquiposInactivos = Get-ADComputer -Filter 'Enabled -eq $true' -SearchBase $Base -Properties LastLogonTimestamp, OperatingSystem |
+        Where-Object { $_.LastLogonTimestamp -and [datetime]::FromFileTime($_.LastLogonTimestamp) -lt $Limite } |
+        Select-Object Name, OperatingSystem, @{n='UltimoInicio';e={[datetime]::FromFileTime($_.LastLogonTimestamp)}}
+
+    $Caducan = $Usuarios | Where-Object { -not $_.PasswordNeverExpires -and $_.'msDS-UserPasswordExpiryTimeComputed' -notin 0, $NoCaduca } |
+        Select-Object Name, SamAccountName, Mail, @{n='Caduca';e={[datetime]::FromFileTime($_.'msDS-UserPasswordExpiryTimeComputed')}} |
+        Where-Object { $_.Caduca -gt (Get-Date) -and $_.Caduca -lt $Aviso } | Sort-Object Caduca
+
+    # Deshabilitadas con grupos (MemberOf no incluye el grupo principal, Domain Users)
+    $DeshabConGrupos = Get-ADUser -Filter 'Enabled -eq $false' -SearchBase $Base -Properties MemberOf |
+        Where-Object { $_.MemberOf.Count -gt 0 } |
+        Select-Object Name, SamAccountName, @{n='Grupos';e={ ($_.MemberOf | ForEach-Object { ($_ -split ',')[0] -replace '^CN=' }) -join '; ' }}
+
+    $Listas = [ordered]@{ 'Usuarios-inactivos' = $Inactivos; 'Equipos-inactivos' = $EquiposInactivos; 'Contrasenas-caducan' = $Caducan; 'Deshabilitados-con-grupos' = $DeshabConGrupos }
+    $Html = foreach ($k in $Listas.Keys) {
+        $Listas[$k] | Export-Csv -Path (Join-Path $Salida "$Fecha-$k.csv") -NoTypeInformation -Encoding UTF8
+        $Listas[$k] | ConvertTo-Html -Fragment -PreContent "<h2>$k ($(@($Listas[$k]).Count))</h2>"
+    }
+    ConvertTo-Html -Title "Informe AD $Fecha" -Body $Html | Out-File -FilePath (Join-Path $Salida "$Fecha-Informe-AD.html") -Encoding UTF8
+}
+catch {
+    Write-Error $_
+    Stop-Transcript
+    exit 1
+}
+Stop-Transcript
+:::
+
+- `$ErrorActionPreference = 'Stop'` y el `try/catch` con `exit 1`: un error para el script y la tarea lo muestra como fallo, en lugar de dejar un fichero vacío y un "correcto".
+- La comprobación de `$Usuarios.Count` es una alarma barata: si la consulta devuelve casi nada, algo va mal con la OU o con los permisos.
+- Rutas siempre **absolutas** y en **UNC**: la tarea no tiene unidades asignadas ni el directorio de trabajo que tienes tú.
+- `-Encoding UTF8` en Windows PowerShell 5.1 escribe la marca BOM y Excel abre bien las tildes.
+
+## 4. Probarlo a mano
+
+Primero con tu cuenta, que también puede leer el directorio:
+
+:::term PowerShell · srv-gestion01
+$ & D:\\Scripts\\Informe-AD.ps1
+Transcripción iniciada, el archivo de salida es D:\\Scripts\\Logs\\Informe-AD-2026-11-03.log
+Transcripción detenida, el archivo de salida es D:\\Scripts\\Logs\\Informe-AD-2026-11-03.log
+$ Get-ChildItem '\\\\srv-ficheros\\Informes$\\AD' | Select-Object Name, Length
+Name                                       Length
+----                                       ------
+2026-11-03-Usuarios-inactivos.csv            4812
+2026-11-03-Equipos-inactivos.csv             2240
+2026-11-03-Contrasenas-caducan.csv           1576
+2026-11-03-Deshabilitados-con-grupos.csv     3305
+2026-11-03-Informe-AD.html                  18920
+:::
+
+Abre el HTML y comprueba dos o tres nombres de cada lista contra la consola de usuarios y equipos.
+
+## 5. La tarea programada con la gMSA
+
+:::term PowerShell (administrador) · srv-gestion01
+$ $accion = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument '-NoProfile -NonInteractive -ExecutionPolicy RemoteSigned -File "D:\\Scripts\\Informe-AD.ps1"' -WorkingDirectory 'D:\\Scripts'
+$ $cuando = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday -At 6:30
+$ $quien  = New-ScheduledTaskPrincipal -UserId 'CONTOSO\\gmsa-informes$' -LogonType Password
+$ Register-ScheduledTask -TaskName 'Informe AD semanal' -TaskPath '\\Contoso\\' -Action $accion -Trigger $cuando -Principal $quien
+$ Start-ScheduledTask -TaskName 'Informe AD semanal' -TaskPath '\\Contoso\\'
+:::
+
+- `-LogonType Password` con una gMSA: el Programador de tareas pide la contraseña a AD, tú no la escribes nunca.
+- **Mínimo privilegio**: la gMSA no está en ningún grupo de administración. Leer usuarios y equipos lo puede hacer cualquier cuenta del dominio. Necesita el derecho **Iniciar sesión como proceso por lotes** en el servidor (por GPO, en *Asignación de derechos de usuario*), **Modificar** en la carpeta de salida y en `D:\\Scripts\\Logs`, y nada más. Sin *Ejecutar con los privilegios más altos*.
+- Si en tu entorno no se pueden usar gMSA, una cuenta de servicio normal con los mismos permisos y la contraseña guardada en el gestor de contraseñas del equipo; la gMSA evita el ticket del día que caduca.
+
+## 6. El ticket: "la tarea se ejecuta, pero el informe sale vacío"
+
+Lunes, 8:15. El responsable de seguridad abre el HTML: solo los títulos, `(0)` en cada lista. Los CSV pesan 0 bytes. La tarea dice que terminó bien.
+
+:::term PowerShell (administrador) · srv-gestion02
+$ Get-ScheduledTaskInfo -TaskName 'Informe AD semanal' -TaskPath '\\Contoso\\' | Select-Object LastRunTime, LastTaskResult
+LastRunTime          LastTaskResult
+-----------          --------------
+03/11/2026 6:30:01                0
+$ Get-Content D:\\Scripts\\Logs\\Informe-AD-2026-11-03.log | Select-String 'Error|no se reconoce|not recognized'
+Get-ADUser : El término 'Get-ADUser' no se reconoce como nombre de un cmdlet, función, archivo de script o programa ejecutable.
+:::
+
+`LastTaskResult` 0 significa que `powershell.exe` terminó, no que el script hiciera lo que debía. La transcripción dice el resto: la tarea se movió el viernes a `srv-gestion02`, que no tiene el módulo de AD, y la copia del script que se usó allí no tenía `#Requires` ni `$ErrorActionPreference = 'Stop'`. Sin módulo, `Get-ADUser` falla, las listas quedan vacías y `Export-Csv` crea ficheros vacíos.
+
+Las causas típicas, de más a menos frecuente:
+
+- **Falta el módulo** en el servidor donde corre la tarea: `Get-Module -ListAvailable ActiveDirectory`.
+- **Rutas relativas o unidades asignadas**: la tarea arranca en `C:\\Windows\\System32` y sin `Z:`; el informe bueno está en otra carpeta o no se escribe.
+- **La OU ha cambiado** de nombre y `-SearchBase` apunta a una que ya no existe.
+- **Permisos de lectura**: una OU con la herencia cortada o una denegación explícita devuelve menos objetos **sin dar error**. Compara el recuento con tu cuenta y con la gMSA.
+
+El arreglo: `Install-WindowsFeature RSAT-AD-PowerShell` en `srv-gestion02`, la versión del script con `#Requires`, `Stop` y la comprobación de recuento, y `Start-ScheduledTask` para comprobar. A partir de ahora, si algo falla, `LastTaskResult` será 1 y la herramienta de monitorización lo verá.
+
+## Siguientes pasos
+
+- [Altas y bajas en Active Directory desde CSV](powershell-altas-masivas-en-active-directory-desde-csv-y-bajas-con-revision.html) cierra el círculo: el informe dice quién sobra y ese script lo da de baja con revisión.
+- Guarda el script en el repositorio del equipo y que cada cambio pase por revisión.
+- Para avisar a cada usuario de la lista de contraseñas, envía el correo con Microsoft Graph y no con `Send-MailMessage`, que Microsoft marca como obsoleto.
+""",
+  en="""
+## What you'll get
+
+Every Monday at 6:30, with nobody launching it, a folder with three CSV lists and an HTML page you can read in two minutes: users and computers with no activity in 90 days, passwords expiring in the next 14 days, and disabled accounts still in groups. It is run by a managed service account that can only read the directory and write to that folder.
+
+## Before you start
+
+- A management server, here `srv-mgmt01`, with the Active Directory module: `Install-WindowsFeature RSAT-AD-PowerShell`. The script works on PowerShell 5.1 and 7.
+- The gMSA `CONTOSO\\gmsa-reports$` created and installed on that server. How to do it is in the [service accounts and gMSA on Windows Server](windows-server-cuentas-de-servicio-gmsa-tareas-programadas-y-un-servicio-que-no-arranca.html) guide.
+- The output folder `\\\\srv-files\\Reports$\\AD` with **Modify** for the gMSA and **Read** for whoever receives the report.
+- The basics from the [remote inventory script](powershell-script-de-inventario-remoto-con-csv.html): objects, `Select-Object` and `Export-Csv`.
+
+## 1. LastLogonTimestamp: what it tells you and what it doesn't
+
+Active Directory keeps two sign-in dates:
+
+- **lastLogon**: exact, but each domain controller has its own and it is **not replicated**. Using it means asking all of them.
+- **lastLogonTimestamp**: replicated, but only updated when the stored value is more than 14 days old (the default interval, minus a random margin of up to 5 days). It works for "more than 90 days without signing in"; it does not work for "who signed in yesterday".
+
+Two more traps:
+
+- An account that has **never** signed in has no value. The script then uses the creation date (`whenCreated`) so a starter from last week is not flagged as inactive.
+- A user who only uses Microsoft 365 from their phone, with cloud authentication, may not touch on-premises AD for months. Before disabling, compare with Entra ID sign-ins.
+
+## 2. When a password expires
+
+The **msDS-UserPasswordExpiryTimeComputed** attribute is calculated by the domain controller when asked, taking into account the domain policy and fine-grained password policies (PSOs). `Get-ADUser` does not return it unless you ask for it by name:
+
+:::term PowerShell · srv-mgmt01
+$ Get-ADUser lmartin -Properties msDS-UserPasswordExpiryTimeComputed, PasswordLastSet | Select-Object SamAccountName, PasswordLastSet, @{n='Expires';e={[datetime]::FromFileTime($_.'msDS-UserPasswordExpiryTimeComputed')}}
+SamAccountName PasswordLastSet      Expires
+-------------- ---------------      -------
+lmartin        19/08/2026 9:14:02   17/11/2026 9:14:02
+:::
+
+The value is a **FILETIME**. Two special values: `9223372036854775807` (the password never expires) and `0` (must change it at next sign-in). The script drops them before converting.
+
+## 3. The script
+
+:::term VS Code · D:\\Scripts\\AD-Report.ps1
+#Requires -Version 5.1
+#Requires -Modules ActiveDirectory
+$ErrorActionPreference = 'Stop'
+
+$Base      = 'OU=Contoso,DC=contoso,DC=local'
+$Output    = '\\\\srv-files\\Reports$\\AD'
+$Date      = Get-Date -Format 'yyyy-MM-dd'
+$Threshold = (Get-Date).AddDays(-90)
+$Warn      = (Get-Date).AddDays(14)
+$NoExpiry  = 9223372036854775807
+
+Start-Transcript -Path "D:\\Scripts\\Logs\\AD-Report-$Date.log"
+try {
+    # Enabled users with what the first two lists need
+    $Users = Get-ADUser -Filter 'Enabled -eq $true' -SearchBase $Base -Properties LastLogonTimestamp, whenCreated, PasswordNeverExpires, 'msDS-UserPasswordExpiryTimeComputed', Mail
+    if ($Users.Count -lt 10) { throw "Only $($Users.Count) users in $Base, check the OU or the permissions" }
+
+    $Inactive = $Users | Where-Object {
+        if ($_.LastLogonTimestamp) { [datetime]::FromFileTime($_.LastLogonTimestamp) -lt $Threshold } else { $_.whenCreated -lt $Threshold }
+    } | Select-Object Name, SamAccountName, whenCreated, @{n='LastSignIn';e={ if ($_.LastLogonTimestamp) { [datetime]::FromFileTime($_.LastLogonTimestamp) } else { 'Never' } }}
+
+    $InactiveComputers = Get-ADComputer -Filter 'Enabled -eq $true' -SearchBase $Base -Properties LastLogonTimestamp, OperatingSystem |
+        Where-Object { $_.LastLogonTimestamp -and [datetime]::FromFileTime($_.LastLogonTimestamp) -lt $Threshold } |
+        Select-Object Name, OperatingSystem, @{n='LastSignIn';e={[datetime]::FromFileTime($_.LastLogonTimestamp)}}
+
+    $Expiring = $Users | Where-Object { -not $_.PasswordNeverExpires -and $_.'msDS-UserPasswordExpiryTimeComputed' -notin 0, $NoExpiry } |
+        Select-Object Name, SamAccountName, Mail, @{n='Expires';e={[datetime]::FromFileTime($_.'msDS-UserPasswordExpiryTimeComputed')}} |
+        Where-Object { $_.Expires -gt (Get-Date) -and $_.Expires -lt $Warn } | Sort-Object Expires
+
+    # Disabled with groups (MemberOf leaves out the primary group, Domain Users)
+    $DisabledInGroups = Get-ADUser -Filter 'Enabled -eq $false' -SearchBase $Base -Properties MemberOf |
+        Where-Object { $_.MemberOf.Count -gt 0 } |
+        Select-Object Name, SamAccountName, @{n='Groups';e={ ($_.MemberOf | ForEach-Object { ($_ -split ',')[0] -replace '^CN=' }) -join '; ' }}
+
+    $Lists = [ordered]@{ 'Inactive-users' = $Inactive; 'Inactive-computers' = $InactiveComputers; 'Passwords-expiring' = $Expiring; 'Disabled-in-groups' = $DisabledInGroups }
+    $Html = foreach ($k in $Lists.Keys) {
+        $Lists[$k] | Export-Csv -Path (Join-Path $Output "$Date-$k.csv") -NoTypeInformation -Encoding UTF8
+        $Lists[$k] | ConvertTo-Html -Fragment -PreContent "<h2>$k ($(@($Lists[$k]).Count))</h2>"
+    }
+    ConvertTo-Html -Title "AD report $Date" -Body $Html | Out-File -FilePath (Join-Path $Output "$Date-AD-Report.html") -Encoding UTF8
+}
+catch {
+    Write-Error $_
+    Stop-Transcript
+    exit 1
+}
+Stop-Transcript
+:::
+
+- `$ErrorActionPreference = 'Stop'` and the `try/catch` with `exit 1`: an error stops the script and the task shows it as a failure, instead of leaving an empty file and a "success".
+- The `$Users.Count` check is a cheap alarm: if the query returns almost nothing, something is wrong with the OU or the permissions.
+- Paths always **absolute** and **UNC**: the task has no mapped drives and not the working directory you have.
+- `-Encoding UTF8` in Windows PowerShell 5.1 writes the BOM, so Excel opens accented names correctly.
+
+## 4. Test it by hand
+
+First with your own account, which can read the directory too:
+
+:::term PowerShell · srv-mgmt01
+$ & D:\\Scripts\\AD-Report.ps1
+Transcript started, output file is D:\\Scripts\\Logs\\AD-Report-2026-11-03.log
+Transcript stopped, output file is D:\\Scripts\\Logs\\AD-Report-2026-11-03.log
+$ Get-ChildItem '\\\\srv-files\\Reports$\\AD' | Select-Object Name, Length
+Name                                     Length
+----                                     ------
+2026-11-03-Inactive-users.csv              4812
+2026-11-03-Inactive-computers.csv          2240
+2026-11-03-Passwords-expiring.csv          1576
+2026-11-03-Disabled-in-groups.csv          3305
+2026-11-03-AD-Report.html                 18920
+:::
+
+Open the HTML and check two or three names from each list against Users and Computers.
+
+## 5. The scheduled task with the gMSA
+
+:::term PowerShell (administrator) · srv-mgmt01
+$ $action  = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument '-NoProfile -NonInteractive -ExecutionPolicy RemoteSigned -File "D:\\Scripts\\AD-Report.ps1"' -WorkingDirectory 'D:\\Scripts'
+$ $when    = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday -At 6:30
+$ $runas   = New-ScheduledTaskPrincipal -UserId 'CONTOSO\\gmsa-reports$' -LogonType Password
+$ Register-ScheduledTask -TaskName 'Weekly AD report' -TaskPath '\\Contoso\\' -Action $action -Trigger $when -Principal $runas
+$ Start-ScheduledTask -TaskName 'Weekly AD report' -TaskPath '\\Contoso\\'
+:::
+
+- `-LogonType Password` with a gMSA: Task Scheduler fetches the password from AD, you never type it.
+- **Least privilege**: the gMSA is in no admin group. Any domain account can read users and computers. It needs the **Log on as a batch job** right on the server (through GPO, under *User Rights Assignment*), **Modify** on the output folder and on `D:\\Scripts\\Logs`, and nothing else. No *Run with highest privileges*.
+- If gMSAs cannot be used in your environment, a regular service account with the same permissions and its password in the team's password manager; the gMSA saves you the ticket on the day it expires.
+
+## 6. The ticket: "the task runs, but the report comes out empty"
+
+Monday, 8:15. The security lead opens the HTML: only the headings, `(0)` on every list. The CSVs are 0 bytes. The task says it finished fine.
+
+:::term PowerShell (administrator) · srv-mgmt02
+$ Get-ScheduledTaskInfo -TaskName 'Weekly AD report' -TaskPath '\\Contoso\\' | Select-Object LastRunTime, LastTaskResult
+LastRunTime          LastTaskResult
+-----------          --------------
+03/11/2026 6:30:01                0
+$ Get-Content D:\\Scripts\\Logs\\AD-Report-2026-11-03.log | Select-String 'Error|not recognized'
+Get-ADUser : The term 'Get-ADUser' is not recognized as the name of a cmdlet, function, script file, or operable program.
+:::
+
+`LastTaskResult` 0 means `powershell.exe` finished, not that the script did its job. The transcript says the rest: the task was moved on Friday to `srv-mgmt02`, which does not have the AD module, and the copy of the script used there had no `#Requires` and no `$ErrorActionPreference = 'Stop'`. With no module, `Get-ADUser` fails, the lists stay empty and `Export-Csv` creates empty files.
+
+The usual causes, most frequent first:
+
+- **The module is missing** on the server running the task: `Get-Module -ListAvailable ActiveDirectory`.
+- **Relative paths or mapped drives**: the task starts in `C:\\Windows\\System32` and has no `Z:`; the real report is in another folder or never gets written.
+- **The OU was renamed** and `-SearchBase` points at one that no longer exists.
+- **Read permissions**: an OU with inheritance blocked or an explicit deny returns fewer objects **without an error**. Compare the count from your account and from the gMSA.
+
+The fix: `Install-WindowsFeature RSAT-AD-PowerShell` on `srv-mgmt02`, the version of the script with `#Requires`, `Stop` and the count check, and `Start-ScheduledTask` to confirm. From now on, if something fails, `LastTaskResult` will be 1 and the monitoring tool will see it.
+
+## Next steps
+
+- [AD starters and leavers from a CSV](powershell-altas-masivas-en-active-directory-desde-csv-y-bajas-con-revision.html) closes the loop: the report says who should go and that script handles the leaver with a review step.
+- Keep the script in the team's repository and put every change through review.
+- To warn each user on the password list, send the email through Microsoft Graph rather than `Send-MailMessage`, which Microsoft marks as obsolete.
+""")
+
+# ---------------------------------------------------------------- 2.x · Windows Server: service accounts and gMSA
+g(slug="windows-server-cuentas-de-servicio-gmsa-tareas-programadas-y-un-servicio-que-no-arranca", topic="windows-server", date="2026-11-03",
+  title_es="Windows Server: servicios y tareas programadas con cuentas de servicio administradas (gMSA) y un servicio que no arranca tras un cambio de contraseña",
+  title_en="Windows Server: services and scheduled tasks with group Managed Service Accounts (gMSA), and a service that won't start after a password change",
+  seo_title_en="Windows Server: gMSA, services and tasks · Iñigo González",
+  seo_title_es="Windows Server: gMSA, servicios y tareas · Iñigo González",
+  dek_es="Qué cuenta usar para un servicio, la clave raíz KDS, New-ADServiceAccount con el grupo de servidores autorizados, Install-ADServiceAccount y Test-ADServiceAccount, la gMSA en un servicio y en una tarea programada, y el ticket del servicio que no arranca por un error de inicio de sesión (eventos 7000 y 7038).",
+  dek_en="Which account to use for a service, the KDS root key, New-ADServiceAccount with the group of allowed servers, Install-ADServiceAccount and Test-ADServiceAccount, the gMSA on a service and on a scheduled task, and the ticket about a service that won't start because of a logon failure (events 7000 and 7038).",
+  seo_desc="Group Managed Service Accounts on Windows Server: KDS root key, create, install and test a gMSA, use it for services and tasks, and fix logon failure 7000/7038.",
+  es="""
+## Qué vas a conseguir
+
+Sacar los servicios y las tareas programadas de las cuentas `svc-` con una contraseña que alguien apuntó en una hoja hace años, y pasarlos a **cuentas de servicio administradas de grupo** (gMSA): Active Directory genera y cambia la contraseña solo, y solo los servidores autorizados pueden usarla. Y, mientras quede alguna cuenta antigua, resolver en diez minutos el ticket del servicio que no arranca porque alguien le cambió la contraseña.
+
+## Antes de empezar
+
+- Un dominio con controladores de dominio Windows Server 2012 o posterior (cualquier versión con soporte lo cumple).
+- Permisos para crear objetos en `OU=Cuentas de servicio,DC=contoso,DC=local` y, una vez por bosque, alguien de **Administradores de empresa** o **Administradores del dominio** para la clave KDS.
+- En cada servidor que use la gMSA, el módulo de AD: `Install-WindowsFeature RSAT-AD-PowerShell`.
+- El inventario de lo que corre con cuentas de dominio. Empieza por aquí:
+
+:::term PowerShell (administrador) · srv-app02
+$ Get-CimInstance Win32_Service | Where-Object StartName -like 'CONTOSO\\*' | Select-Object Name, StartName, State, StartMode
+Name             StartName              State   StartMode
+----             ---------              -----   ---------
+ContosoFacturas  CONTOSO\\svc-facturas   Running Auto
+$ Get-ScheduledTask | Where-Object { $_.Principal.UserId -like '*svc-*' } | Select-Object TaskPath, TaskName, @{n='Cuenta';e={$_.Principal.UserId}}
+TaskPath   TaskName             Cuenta
+--------   --------             ------
+\\Contoso\\  Exportar facturas    CONTOSO\\svc-facturas
+:::
+
+## 1. Qué cuenta usar
+
+| Cuenta | Dónde vale | Contraseña | Cuándo |
+|---|---|---|---|
+| Cuenta virtual (`NT SERVICE\\Servicio`) | Solo en ese servidor; en la red, como la cuenta del equipo | Ninguna | El servicio no necesita entrar en otros servidores |
+| Cuenta de usuario del dominio (`svc-`) | Cualquier servidor | La pones y la cambias tú | Solo si la aplicación no admite otra cosa |
+| gMSA (`gmsa-informes$`) | Los servidores del grupo autorizado | AD la genera (240 caracteres) y la cambia cada 30 días | Un servicio, una tarea o un grupo de IIS que entra en SQL Server, un recurso compartido o AD |
+
+Una gMSA por aplicación, no una para todo: si alguien la usa mal, el alcance es una aplicación.
+
+## 2. La clave raíz KDS (una vez por bosque)
+
+Los controladores de dominio calculan las contraseñas de las gMSA a partir de una **clave raíz KDS**. Comprueba si ya existe:
+
+:::term PowerShell · controlador de dominio (Administradores de empresa)
+$ Get-KdsRootKey
+$ Add-KdsRootKey -EffectiveImmediately
+Guid
+----
+4e1b5c3a-8d2f-4b6e-9a71-0c3d5e7f9b12
+:::
+
+- Con `-EffectiveImmediately`, la clave **no** se puede usar hasta 10 horas después: es el margen para que replique a todos los controladores. Créala la víspera.
+- En un laboratorio con un solo controlador se salta la espera con `Add-KdsRootKey -EffectiveTime ((Get-Date).AddHours(-10))`. En producción, no.
+
+## 3. Crear la gMSA
+
+Primero un grupo con los servidores que podrán usarla; después la cuenta:
+
+:::term PowerShell · RSAT, módulo ActiveDirectory
+$ New-ADGroup -Name 'GG-gMSA-Informes' -GroupScope Global -Path 'OU=Cuentas de servicio,DC=contoso,DC=local'
+$ Add-ADGroupMember -Identity 'GG-gMSA-Informes' -Members 'SRV-GESTION01$'
+$ New-ADServiceAccount -Name 'gmsa-informes' -DNSHostName 'gmsa-informes.contoso.local' -PrincipalsAllowedToRetrieveManagedPassword 'GG-gMSA-Informes' -Path 'OU=Cuentas de servicio,DC=contoso,DC=local'
+$ Get-ADServiceAccount gmsa-informes -Properties PrincipalsAllowedToRetrieveManagedPassword, ManagedPasswordIntervalInDays | Select-Object Name, ManagedPasswordIntervalInDays, PrincipalsAllowedToRetrieveManagedPassword
+Name          ManagedPasswordIntervalInDays PrincipalsAllowedToRetrieveManagedPassword
+----          ----------------------------- ------------------------------------------
+gmsa-informes                            30 {CN=GG-gMSA-Informes,OU=Cuentas de servicio,DC=contoso,DC=local}
+:::
+
+- El nombre tiene un máximo de **15 caracteres**: es el `sAMAccountName`, al que AD añade el `$`.
+- Un servidor que acabas de añadir al grupo no lo sabe hasta que renueva su ticket de Kerberos: reinícialo o, sin reiniciar, `klist -li 0x3e7 purge` en ese servidor.
+
+## 4. Instalar y probar en el servidor
+
+:::term PowerShell (administrador) · srv-gestion01
+$ Install-ADServiceAccount gmsa-informes
+$ Test-ADServiceAccount gmsa-informes
+True
+:::
+
+`True` significa que este servidor puede pedir la contraseña a AD. `False` casi siempre es uno de tres: el servidor no está en el grupo, no ha renovado su ticket desde que lo añadiste o la clave KDS todavía no es efectiva.
+
+## 5. Asignarla a un servicio
+
+En **services.msc**, el servicio › **Propiedades › Iniciar sesión**:
+
+:::ui Propiedades de ContosoInformes · Iniciar sesión
+[x] Esta cuenta: CONTOSO\\gmsa-informes$
+= Contraseña: (vacía)
+= Confirmar contraseña: (vacía)
+[Aplicar]
+= Se ha concedido a la cuenta CONTOSO\\gmsa-informes$ el derecho Iniciar sesión como servicio.
+:::
+
+Desde la línea de comandos, en una consola **cmd** (en Windows PowerShell 5.1 las comillas vacías no llegan a `sc.exe`):
+
+:::term Símbolo del sistema (administrador) · srv-gestion01
+$ sc.exe config ContosoInformes obj= "CONTOSO\\gmsa-informes$" password= ""
+[SC] ChangeServiceConfig CORRECTO
+$ sc.exe stop ContosoInformes && sc.exe start ContosoInformes
+:::
+
+- `sc.exe` no concede el derecho **Iniciar sesión como servicio**: si lo usas, dalo por GPO en *Asignación de derechos de usuario* o el servicio no arrancará (evento 7041).
+- Después, los permisos que la aplicación necesita, a la gMSA y nada más: su base de datos en SQL Server (`CREATE LOGIN [CONTOSO\\gmsa-informes$] FROM WINDOWS`), su carpeta compartida, su OU.
+
+## 6. Asignarla a una tarea programada
+
+La interfaz del Programador de tareas pide una contraseña y no sirve para una gMSA. Con PowerShell:
+
+:::term PowerShell (administrador) · srv-gestion01
+$ $quien = New-ScheduledTaskPrincipal -UserId 'CONTOSO\\gmsa-informes$' -LogonType Password
+$ Set-ScheduledTask -TaskName 'Exportar informes' -TaskPath '\\Contoso\\' -Principal $quien
+$ (Get-ScheduledTask -TaskName 'Exportar informes' -TaskPath '\\Contoso\\').Principal | Select-Object UserId, LogonType
+UserId          LogonType
+------          ---------
+gmsa-informes$  Password
+:::
+
+La gMSA necesita el derecho **Iniciar sesión como proceso por lotes** en el servidor. Un ejemplo completo de tarea con gMSA, con el script y sus comprobaciones, está en el [informe semanal de Active Directory con PowerShell](powershell-informe-semanal-de-active-directory-inactivos-contrasenas-y-cuentas-deshabilitadas.html).
+
+## 7. El ticket: "el servicio no arranca después del cambio de contraseña"
+
+Lunes, 7:50. La aplicación de facturación no responde. En `srv-app02`, el servicio **ContosoFacturas** está detenido y al arrancarlo: *Error 1069: El servicio no se inició debido a un error de inicio de sesión*.
+
+:::term PowerShell (administrador) · srv-app02
+$ Get-WinEvent -FilterHashtable @{LogName='System'; ProviderName='Service Control Manager'; Id=7000,7038,7041; StartTime=(Get-Date).AddDays(-3)} | Select-Object TimeCreated, Id, Message -First 2 | Format-List
+TimeCreated : 03/11/2026 7:52:10
+Id          : 7038
+Message     : El servicio ContosoFacturas no pudo iniciar sesión como CONTOSO\\svc-facturas con la contraseña configurada actualmente debido al siguiente error: El nombre de usuario o la contraseña no son correctos.
+TimeCreated : 03/11/2026 7:52:10
+Id          : 7000
+Message     : El servicio ContosoFacturas no pudo iniciarse debido al siguiente error: El servicio no se ha iniciado debido a un error de inicio de sesión.
+:::
+
+- **7038 + 7000**: la contraseña guardada en el servicio ya no es la de AD.
+- **7041**: la contraseña es buena, pero a la cuenta le falta el derecho *Iniciar sesión como servicio* (una GPO de seguridad lo ha sobrescrito).
+
+Después, la cuenta en AD:
+
+:::term PowerShell · RSAT
+$ Get-ADUser svc-facturas -Properties PasswordLastSet, LockedOut, Enabled, AccountExpirationDate | Select-Object Enabled, LockedOut, PasswordLastSet, AccountExpirationDate
+Enabled LockedOut PasswordLastSet      AccountExpirationDate
+------- --------- ---------------      ---------------------
+   True      True 31/10/2026 18:04:33
+:::
+
+La contraseña se cambió el viernes (`PasswordLastSet`) y la cuenta está **bloqueada**: el servicio, y probablemente otros servidores con la misma cuenta, siguen probando la contraseña vieja. Por eso el inventario del principio importa: hay que cambiarla en **todos** los sitios donde se usa, o la cuenta se vuelve a bloquear en minutos.
+
+1. La contraseña nueva, del gestor de contraseñas del equipo (o la pide el responsable de la aplicación).
+2. En cada servidor y en cada tarea que usa `svc-facturas`: **Propiedades › Iniciar sesión** con la contraseña nueva (o `sc.exe config ContosoFacturas obj= "CONTOSO\\svc-facturas" password= "..."` desde cmd).
+3. `Unlock-ADAccount svc-facturas` y `Start-Service ContosoFacturas`. Comprueba que la aplicación responde y que no hay nuevos 7038.
+4. El arreglo de verdad, en un cambio planificado: una gMSA `gmsa-facturas` con los puntos 3 a 6, permisos en SQL Server y la cuenta `svc-facturas` deshabilitada tras dos semanas sin uso.
+
+Si el servicio ya corría con una gMSA y da 7000, la causa es otra: `Test-ADServiceAccount` en ese servidor. Casi siempre es un servidor nuevo o reinstalado que nadie añadió al grupo `GG-gMSA-...`.
+
+En el ticket: servicio, eventos, estado de la cuenta, dónde se cambió la contraseña y la propuesta de pasar a gMSA.
+
+## Siguientes pasos
+
+- La guía de [IIS](iis-sitios-enlaces-grupos-de-aplicaciones-certificados-y-un-503.html) tiene el mismo problema en un grupo de aplicaciones (el evento 5021 de WAS) y la misma solución.
+- La primera guía de [Windows Server](windows-server-instalar-rol-parchear-y-leer-eventos.html) explica cómo leer el visor de eventos con filtros como los de aquí.
+- Las cuentas de servicio que no pueden ser gMSA son candidatas a un gestor de acceso privilegiado con rotación automática, como el de la guía de [CyberArk](cyberark-safes-rotacion-automatica-sesiones-grabadas-y-una-cuenta-que-el-cpm-no-cambia.html) del Nivel 4.
+""",
+  en="""
+## What you'll get
+
+Moving services and scheduled tasks off `svc-` accounts whose password somebody wrote in a spreadsheet years ago, and onto **group Managed Service Accounts** (gMSA): Active Directory generates and changes the password by itself, and only authorised servers can use it. And, while any old account is left, solving in ten minutes the ticket about a service that won't start because someone changed its password.
+
+## Before you start
+
+- A domain with Windows Server 2012 or later domain controllers (any supported version meets this).
+- Permissions to create objects in `OU=Service Accounts,DC=contoso,DC=local` and, once per forest, someone in **Enterprise Admins** or **Domain Admins** for the KDS key.
+- On every server that uses the gMSA, the AD module: `Install-WindowsFeature RSAT-AD-PowerShell`.
+- An inventory of what runs under domain accounts. Start here:
+
+:::term PowerShell (administrator) · srv-app02
+$ Get-CimInstance Win32_Service | Where-Object StartName -like 'CONTOSO\\*' | Select-Object Name, StartName, State, StartMode
+Name             StartName              State   StartMode
+----             ---------              -----   ---------
+ContosoInvoices  CONTOSO\\svc-invoices   Running Auto
+$ Get-ScheduledTask | Where-Object { $_.Principal.UserId -like '*svc-*' } | Select-Object TaskPath, TaskName, @{n='Account';e={$_.Principal.UserId}}
+TaskPath   TaskName             Account
+--------   --------             -------
+\\Contoso\\  Export invoices      CONTOSO\\svc-invoices
+:::
+
+## 1. Which account to use
+
+| Account | Where it works | Password | When |
+|---|---|---|---|
+| Virtual account (`NT SERVICE\\Service`) | Only on that server; on the network, as the computer account | None | The service does not need to reach other servers |
+| Domain user account (`svc-`) | Any server | You set it and change it | Only if the application supports nothing else |
+| gMSA (`gmsa-reports$`) | The servers in the allowed group | AD generates it (240 characters) and changes it every 30 days | A service, task or IIS pool that reaches SQL Server, a share or AD |
+
+One gMSA per application, not one for everything: if it is misused, the blast radius is one application.
+
+## 2. The KDS root key (once per forest)
+
+Domain controllers derive gMSA passwords from a **KDS root key**. Check whether one already exists:
+
+:::term PowerShell · domain controller (Enterprise Admins)
+$ Get-KdsRootKey
+$ Add-KdsRootKey -EffectiveImmediately
+Guid
+----
+4e1b5c3a-8d2f-4b6e-9a71-0c3d5e7f9b12
+:::
+
+- With `-EffectiveImmediately`, the key can **not** be used until 10 hours later: that is the margin for it to replicate to every DC. Create it the day before.
+- In a lab with a single DC you can skip the wait with `Add-KdsRootKey -EffectiveTime ((Get-Date).AddHours(-10))`. Not in production.
+
+## 3. Create the gMSA
+
+First a group with the servers that will be able to use it; then the account:
+
+:::term PowerShell · RSAT, ActiveDirectory module
+$ New-ADGroup -Name 'GG-gMSA-Reports' -GroupScope Global -Path 'OU=Service Accounts,DC=contoso,DC=local'
+$ Add-ADGroupMember -Identity 'GG-gMSA-Reports' -Members 'SRV-MGMT01$'
+$ New-ADServiceAccount -Name 'gmsa-reports' -DNSHostName 'gmsa-reports.contoso.local' -PrincipalsAllowedToRetrieveManagedPassword 'GG-gMSA-Reports' -Path 'OU=Service Accounts,DC=contoso,DC=local'
+$ Get-ADServiceAccount gmsa-reports -Properties PrincipalsAllowedToRetrieveManagedPassword, ManagedPasswordIntervalInDays | Select-Object Name, ManagedPasswordIntervalInDays, PrincipalsAllowedToRetrieveManagedPassword
+Name         ManagedPasswordIntervalInDays PrincipalsAllowedToRetrieveManagedPassword
+----         ----------------------------- ------------------------------------------
+gmsa-reports                            30 {CN=GG-gMSA-Reports,OU=Service Accounts,DC=contoso,DC=local}
+:::
+
+- The name has a maximum of **15 characters**: it is the `sAMAccountName`, to which AD adds the `$`.
+- A server you have just added to the group does not know until it renews its Kerberos ticket: restart it or, without restarting, run `klist -li 0x3e7 purge` on that server.
+
+## 4. Install and test on the server
+
+:::term PowerShell (administrator) · srv-mgmt01
+$ Install-ADServiceAccount gmsa-reports
+$ Test-ADServiceAccount gmsa-reports
+True
+:::
+
+`True` means this server can ask AD for the password. `False` is almost always one of three: the server is not in the group, it has not renewed its ticket since you added it, or the KDS key is not effective yet.
+
+## 5. Assign it to a service
+
+In **services.msc**, the service › **Properties › Log On**:
+
+:::ui ContosoReports Properties · Log On
+[x] This account: CONTOSO\\gmsa-reports$
+= Password: (blank)
+= Confirm password: (blank)
+[Apply]
+= The account CONTOSO\\gmsa-reports$ has been granted the Log On As A Service right.
+:::
+
+From the command line, in a **cmd** console (in Windows PowerShell 5.1 empty quotes do not reach `sc.exe`):
+
+:::term Command Prompt (administrator) · srv-mgmt01
+$ sc.exe config ContosoReports obj= "CONTOSO\\gmsa-reports$" password= ""
+[SC] ChangeServiceConfig SUCCESS
+$ sc.exe stop ContosoReports && sc.exe start ContosoReports
+:::
+
+- `sc.exe` does not grant the **Log on as a service** right: if you use it, grant it through GPO under *User Rights Assignment* or the service will not start (event 7041).
+- Then the permissions the application needs, to the gMSA and nothing more: its SQL Server database (`CREATE LOGIN [CONTOSO\\gmsa-reports$] FROM WINDOWS`), its share, its OU.
+
+## 6. Assign it to a scheduled task
+
+The Task Scheduler interface asks for a password and does not work for a gMSA. With PowerShell:
+
+:::term PowerShell (administrator) · srv-mgmt01
+$ $runas = New-ScheduledTaskPrincipal -UserId 'CONTOSO\\gmsa-reports$' -LogonType Password
+$ Set-ScheduledTask -TaskName 'Export reports' -TaskPath '\\Contoso\\' -Principal $runas
+$ (Get-ScheduledTask -TaskName 'Export reports' -TaskPath '\\Contoso\\').Principal | Select-Object UserId, LogonType
+UserId         LogonType
+------         ---------
+gmsa-reports$  Password
+:::
+
+The gMSA needs the **Log on as a batch job** right on the server. A complete example of a task with a gMSA, with the script and its checks, is in the [weekly Active Directory report with PowerShell](powershell-informe-semanal-de-active-directory-inactivos-contrasenas-y-cuentas-deshabilitadas.html).
+
+## 7. The ticket: "the service won't start after the password change"
+
+Monday, 7:50. The invoicing app is not responding. On `srv-app02`, the **ContosoInvoices** service is stopped and starting it gives: *Error 1069: The service did not start due to a logon failure*.
+
+:::term PowerShell (administrator) · srv-app02
+$ Get-WinEvent -FilterHashtable @{LogName='System'; ProviderName='Service Control Manager'; Id=7000,7038,7041; StartTime=(Get-Date).AddDays(-3)} | Select-Object TimeCreated, Id, Message -First 2 | Format-List
+TimeCreated : 03/11/2026 7:52:10
+Id          : 7038
+Message     : The ContosoInvoices service was unable to log on as CONTOSO\\svc-invoices with the currently configured password due to the following error: The user name or password is incorrect.
+TimeCreated : 03/11/2026 7:52:10
+Id          : 7000
+Message     : The ContosoInvoices service failed to start due to the following error: The service did not start due to a logon failure.
+:::
+
+- **7038 + 7000**: the password stored in the service is no longer the one in AD.
+- **7041**: the password is fine, but the account is missing the *Log on as a service* right (a security GPO has overwritten it).
+
+Then the account in AD:
+
+:::term PowerShell · RSAT
+$ Get-ADUser svc-invoices -Properties PasswordLastSet, LockedOut, Enabled, AccountExpirationDate | Select-Object Enabled, LockedOut, PasswordLastSet, AccountExpirationDate
+Enabled LockedOut PasswordLastSet      AccountExpirationDate
+------- --------- ---------------      ---------------------
+   True      True 31/10/2026 18:04:33
+:::
+
+The password was changed on Friday (`PasswordLastSet`) and the account is **locked out**: the service, and probably other servers using the same account, keep trying the old password. That is why the inventory at the start matters: it has to be changed in **every** place it is used, or the account locks again within minutes.
+
+1. The new password, from the team's password manager (or from the application owner).
+2. On every server and every task that uses `svc-invoices`: **Properties › Log On** with the new password (or `sc.exe config ContosoInvoices obj= "CONTOSO\\svc-invoices" password= "..."` from cmd).
+3. `Unlock-ADAccount svc-invoices` and `Start-Service ContosoInvoices`. Check that the app responds and that there are no new 7038 events.
+4. The real fix, in a planned change: a `gmsa-invoices` gMSA following steps 3 to 6, permissions in SQL Server, and the `svc-invoices` account disabled after two weeks unused.
+
+If the service already ran under a gMSA and gives 7000, the cause is different: `Test-ADServiceAccount` on that server. It is nearly always a new or rebuilt server that nobody added to the `GG-gMSA-...` group.
+
+In the ticket: service, events, account state, where the password was changed and the proposal to move to a gMSA.
+
+## Next steps
+
+- The [IIS](iis-sitios-enlaces-grupos-de-aplicaciones-certificados-y-un-503.html) guide has the same problem on an application pool (WAS event 5021) and the same solution.
+- The first [Windows Server](windows-server-instalar-rol-parchear-y-leer-eventos.html) guide explains how to read Event Viewer with filters like the ones here.
+- Service accounts that cannot become gMSAs are candidates for a privileged access manager with automatic rotation, like the one in the Level 4 [CyberArk](cyberark-safes-rotacion-automatica-sesiones-grabadas-y-una-cuenta-que-el-cpm-no-cambia.html) guide.
+""")
+
+
+# ---------------------------------------------------------------- 2.x · Cisco (second guide)
+g(slug="cisco-localizar-un-equipo-descripciones-port-security-sticky-y-una-violacion-de-seguridad", topic="cisco-basico", date="2026-11-03",
+  title_es="Cisco: encontrar en qué puerto está un equipo, descripciones de puerto, port-security con MAC sticky y una violación de seguridad al cambiar un PC",
+  title_en="Cisco: finding which port a device is on, port descriptions, port-security with sticky MAC and a security violation after a PC swap",
+  seo_title_en="Cisco: find a device's port, port-security · Iñigo González",
+  seo_title_es="Cisco: localizar un puerto y port-security · Iñigo González",
+  dek_es="De la IP a la MAC y de la MAC al puerto, saltando de switch en switch con CDP y LLDP; descripciones que ahorran bajadas al armario; port-security con MAC sticky, máximo de direcciones y modos de violación; y un puerto que cae al cambiar el PC de un puesto con teléfono IP.",
+  dek_en="From IP to MAC and from MAC to port, hopping from switch to switch with CDP and LLDP; descriptions that save trips to the cabinet; port-security with sticky MAC, address limits and violation modes; and a port that drops when the PC on a desk with an IP phone is replaced.",
+  seo_desc="Find a device's switch port with CDP and LLDP, label ports, set up Cisco port-security with sticky MAC and fix a violation after a PC swap.",
+  es="""
+## Qué vas a conseguir
+
+Saber en qué boca de qué switch está conectado un equipo partiendo solo de su IP, dejar los puertos con una descripción que diga qué hay al otro lado, limitar qué equipos pueden conectarse a cada puesto con **port-security** y resolver la violación de seguridad que aparece cuando alguien cambia el PC de su mesa. La guía de [primeros comandos en un switch Cisco](cisco-primeros-comandos-copia-de-configuracion-y-un-puerto-err-disabled.html) cubre la entrada al switch, los `show` básicos y qué es un puerto en err-disabled; esta parte de ahí.
+
+## Antes de empezar
+
+- Acceso por SSH a los switches de acceso y al núcleo (o al router que hace de puerta de enlace), con un usuario que pueda pasar a `enable`.
+- La IP o el nombre del equipo que buscas y, si puedes, su MAC (`ipconfig /all` en Windows).
+- El plano de la sede: qué switch está en qué armario y qué VLAN es de datos y cuál de voz.
+
+! Los pasos 1 y 2 son de solo lectura. Las descripciones y port-security cambian la configuración: van con un cambio aprobado, y port-security mal puesto deja puestos sin red.
+
+## 1. De la IP al puerto, switch a switch
+
+El switch que conoce la IP es el que hace de puerta de enlace de la VLAN (el núcleo o el router). Ahí se traduce la IP a MAC y se ve por qué puerto sale:
+
+:::term SW-CORE-01 · de la IP a la MAC
+$ show ip arp 10.20.0.57
+Protocol  Address          Age (min)  Hardware Addr   Type   Interface
+Internet  10.20.0.57              3   3c52.82a1.0f44  ARPA   Vlan20
+$ show mac address-table address 3c52.82a1.0f44
+          Mac Address Table
+-------------------------------------------
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+  20    3c52.82a1.0f44    DYNAMIC     Gi1/0/2
+Total Mac Addresses for this criterion: 1
+$ show cdp neighbors Gi1/0/2 detail
+Device ID: SW-P2-01
+Entry address(es):
+  IP address: 10.10.0.22
+Platform: cisco C9200L-48P-4G,  Capabilities: Switch IGMP
+Interface: GigabitEthernet1/0/2,  Port ID (outgoing port): GigabitEthernet1/1/1
+:::
+
+`Gi1/0/2` no es el puesto: es un **enlace de subida** a otro switch, porque por él se aprenden muchas MAC. CDP dice cuál es y su IP. Se repite allí:
+
+:::term SW-P2-01 · el puerto final
+$ show mac address-table address 3c52.82a1.0f44
+  20    3c52.82a1.0f44    DYNAMIC     Gi1/0/14
+$ show mac address-table interface Gi1/0/14
+  20    3c52.82a1.0f44    DYNAMIC     Gi1/0/14
+  30    0004.f2aa.1c09    DYNAMIC     Gi1/0/14
+$ show interfaces Gi1/0/14 switchport | include Mode
+Administrative Mode: static access
+Operational Mode: static access
+:::
+
+- El puerto final es un **puerto de acceso** con una o dos MAC: el PC en la VLAN de datos y, si lo hay, el teléfono IP en la de voz. Si el puerto que sale es troncal (`show interfaces trunk` lo lista), hay que seguir saltando.
+- Si la MAC no aparece, el equipo lleva unos minutos sin hablar: la tabla caduca a los **300 segundos** por defecto. Un `ping` a su IP desde el núcleo la vuelve a llenar.
+- **LLDP** hace lo mismo que CDP con equipos de otros fabricantes (switches HP, puntos de acceso, teléfonos que no son Cisco). En IOS viene apagado: `lldp run` en configuración global y después `show lldp neighbors detail`.
+
+## 2. Descripciones de puerto
+
+Una descripción buena evita repetir el paso 1 la próxima vez. Un formato fijo para toda la sede, por ejemplo `PUESTO <número> · <roseta>` para usuarios y `UPLINK <switch> <puerto>` para enlaces:
+
+:::term SW-P2-01 · descripciones
+$ configure terminal
+$ interface Gi1/0/14
+$  description PUESTO 2.11 · R2-B-11
+$ interface Gi1/1/1
+$  description UPLINK SW-CORE-01 Gi1/0/2
+$ end
+$ show interfaces description | include 2.11|UPLINK
+Gi1/0/14   up     up     PUESTO 2.11 · R2-B-11
+Gi1/1/1    up     up     UPLINK SW-CORE-01 Gi1/0/2
+$ copy running-config startup-config
+:::
+
+- La descripción aparece en `show interfaces status`, en los registros y en la monitorización por SNMP: un aviso de "Gi1/0/14 down" se entiende mejor como "PUESTO 2.11 down".
+- Cuando un puesto cambia de roseta o de uso, la descripción se cambia en el mismo ticket. Una descripción equivocada es peor que ninguna.
+
+## 3. Port-security con MAC sticky
+
+Port-security limita cuántas MAC puede aprender un puerto y cuáles. Con **sticky**, el switch apunta como autorizadas las primeras que ve y las guarda en la configuración:
+
+:::term SW-P2-01 · puerto de usuario con teléfono IP
+$ configure terminal
+$ interface Gi1/0/14
+$  switchport mode access
+$  switchport access vlan 20
+$  switchport voice vlan 30
+$  switchport port-security maximum 2
+$  switchport port-security mac-address sticky
+$  switchport port-security violation restrict
+$  switchport port-security
+$ end
+$ show port-security interface Gi1/0/14 address
+Vlan    Mac Address       Type                          Ports   Remaining Age
+----    -----------       ----                          -----   -------------
+  20    3c52.82a1.0f44    SecureSticky                  Gi1/0/14        -
+  30    0004.f2aa.1c09    SecureSticky                  Gi1/0/14        -
+$ copy running-config startup-config
+:::
+
+- El puerto tiene que ser **de acceso fijo** (`switchport mode access`). En un puerto en modo dinámico el switch rechaza el comando.
+- Con teléfono IP, **máximo 2**: el teléfono en la VLAN de voz y el PC en la de datos. Con máximo 1, el puerto cae en cuanto el teléfono arranca.
+- Las MAC sticky se guardan en la running-config: sin `copy running-config startup-config`, tras un reinicio el puerto vuelve a aprender las que vea.
+- No se activa en enlaces entre switches, en puertos de puntos de acceso ni en servidores de virtualización: por ellos pasan muchas MAC.
+
+Los **modos de violación**, qué hace el puerto cuando llega una MAC de más:
+
+| Modo | Tráfico de la MAC nueva | Registro y contador | El puerto |
+|---|---|---|---|
+| **protect** | Se descarta | Nada: ni log ni contador | Sigue arriba |
+| **restrict** | Se descarta | Mensaje de log, trap SNMP y el contador sube | Sigue arriba |
+| **shutdown** (por defecto) | Se descarta | Mensaje de log y trap | Pasa a **err-disabled** |
+
+`restrict` es un buen punto de partida en puestos de oficina: el equipo autorizado sigue trabajando y el intruso no pasa, pero queda rastro. `shutdown` es para zonas donde un equipo desconocido tiene que cortar el puerto (salas de reuniones abiertas, recepción). `protect` no deja rastro y casi nunca compensa.
+
+## 4. El ticket: "el puesto 2.11 se quedó sin red al conectar el PC nuevo"
+
+Lunes, 9:10. Han cambiado el PC del puesto 2.11 (con teléfono IP en la mesa). El teléfono funciona; el PC nuevo no coge IP. Este switch tiene los puestos en **shutdown** y el puerto aparece como err-disabled, pero la clave no es reactivarlo sin más: es leer qué MAC lo provocó y cuáles tiene apuntadas.
+
+:::term SW-P2-01 · qué ha visto port-security
+$ show port-security interface Gi1/0/14
+Port Security              : Enabled
+Port Status                : Secure-shutdown
+Violation Mode             : Shutdown
+Aging Time                 : 0 mins
+Maximum MAC Addresses      : 2
+Total MAC Addresses        : 2
+Configured MAC Addresses   : 0
+Sticky MAC Addresses       : 2
+Last Source Address:Vlan   : 8c16.45d0.73b2:20
+Security Violation Count   : 1
+$ show port-security interface Gi1/0/14 address
+  20    3c52.82a1.0f44    SecureSticky                  Gi1/0/14        -
+  30    0004.f2aa.1c09    SecureSticky                  Gi1/0/14        -
+:::
+
+Cómo se lee:
+
+- **Last Source Address:Vlan** es la MAC que provocó la violación y su VLAN: `8c16.45d0.73b2` en la 20, la de datos. Compárala con la del PC nuevo (la etiqueta o el inventario). Si no es la suya, alguien ha conectado otra cosa y el ticket cambia de naturaleza.
+- La tabla de sticky tiene el **PC antiguo** (`3c52.82a1.0f44`, VLAN 20) y el **teléfono** (VLAN 30). El máximo es 2 y ya están las dos plazas ocupadas: el PC nuevo es la tercera.
+- `clear port-security sticky interface Gi1/0/14` borraría las dos, también la del teléfono. Aquí sobra solo una.
+
+Con la confirmación de que el equipo nuevo es corporativo:
+
+:::term SW-P2-01 · quitar solo la MAC del PC antiguo y reactivar
+$ clear port-security sticky address 3c52.82a1.0f44
+$ configure terminal
+$ interface Gi1/0/14
+$  shutdown
+$  no shutdown
+$ end
+$ show port-security interface Gi1/0/14 address
+  20    8c16.45d0.73b2    SecureSticky                  Gi1/0/14        -
+  30    0004.f2aa.1c09    SecureSticky                  Gi1/0/14        -
+$ copy running-config startup-config
+:::
+
+Si el contador vuelve a subir con el PC nuevo ya aprendido, hay una tercera MAC legítima que nadie había tenido en cuenta:
+
+| Lo que aparece en Last Source Address | Origen habitual | Qué haces |
+|---|---|---|
+| Una MAC distinta cada pocos días en la VLAN de datos | El portátil alterna entre la tarjeta del portátil y la de la base de conexión | Se decide cuál se usa en ese puesto o se sube el máximo a 3 en ese puerto y se documenta |
+| Una MAC de fabricante de virtualización | Una máquina virtual con adaptador en puente en el PC | Adaptador NAT en la máquina virtual; el puente al puesto no se permite |
+| La MAC del teléfono en la VLAN de datos | Teléfono que arranca primero sin VLAN de voz | Se revisa la VLAN de voz que anuncia el switch al teléfono por CDP o LLDP |
+| Una MAC que nadie reconoce | Un equipo personal o un switch pequeño bajo la mesa | No se sube el máximo: se retira el equipo y se informa a seguridad |
+
+> `errdisable recovery cause psecure-violation` reactiva solo los puertos caídos por port-security pasado el intervalo (`errdisable recovery interval`, 300 segundos por defecto). Con el PC antiguo todavía en la tabla, el puerto vuelve, el PC nuevo vuelve a provocar la violación y cae otra vez: la recuperación automática no sustituye a limpiar la MAC.
+
+En el ticket: puerto, la MAC de **Last Source Address** y a qué equipo corresponde, qué MAC sticky se quitó, el estado final y que la configuración está guardada. Si el inventario tiene la MAC del equipo, actualízalo.
+
+## Siguientes pasos
+
+- La guía de [Cisco: VLANs, troncales y router de la sede](cisco-vlans-troncales-router-de-la-sede-y-un-puerto-que-no-da-red.html) del Nivel 4 sigue con los enlaces que has recorrido en el paso 1.
+- La de [switches HP y Aruba: LLDP, bucles y port-security](switches-hp-aruba-localizar-equipos-por-lldp-bucles-con-loop-protect-y-port-security.html) hace lo mismo con ArubaOS-Switch.
+- Para que la monitorización avise de los puertos en err-disabled antes que el usuario, la guía de **SolarWinds**.
+""",
+  en="""
+## What you'll get
+
+Knowing which port on which switch a device is plugged into starting from nothing but its IP, labelling ports with a description of what sits at the other end, limiting which devices can connect at each desk with **port-security**, and fixing the security violation that appears when someone's desk PC is replaced. The [first commands on a Cisco switch](cisco-primeros-comandos-copia-de-configuracion-y-un-puerto-err-disabled.html) guide covers getting into the switch, the basic `show` commands and what a port in err-disabled is; this one picks up from there.
+
+## Before you start
+
+- SSH access to the access switches and the core (or the router acting as the gateway), with a user that can go into `enable`.
+- The IP or name of the device you are looking for and, if possible, its MAC (`ipconfig /all` on Windows).
+- The site map: which switch is in which cabinet and which VLAN is data and which is voice.
+
+! Steps 1 and 2 are read-only. Descriptions and port-security change the configuration: they go with an approved change, and badly applied port-security leaves desks without network.
+
+## 1. From IP to port, switch by switch
+
+The switch that knows the IP is the one acting as the VLAN's gateway (the core or the router). That is where the IP translates into a MAC and you see which port it leaves through:
+
+:::term SW-CORE-01 · from IP to MAC
+$ show ip arp 10.20.0.57
+Protocol  Address          Age (min)  Hardware Addr   Type   Interface
+Internet  10.20.0.57              3   3c52.82a1.0f44  ARPA   Vlan20
+$ show mac address-table address 3c52.82a1.0f44
+          Mac Address Table
+-------------------------------------------
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+  20    3c52.82a1.0f44    DYNAMIC     Gi1/0/2
+Total Mac Addresses for this criterion: 1
+$ show cdp neighbors Gi1/0/2 detail
+Device ID: SW-P2-01
+Entry address(es):
+  IP address: 10.10.0.22
+Platform: cisco C9200L-48P-4G,  Capabilities: Switch IGMP
+Interface: GigabitEthernet1/0/2,  Port ID (outgoing port): GigabitEthernet1/1/1
+:::
+
+`Gi1/0/2` is not the desk: it is an **uplink** to another switch, because many MACs are learned through it. CDP tells you which one and its IP. Repeat there:
+
+:::term SW-P2-01 · the final port
+$ show mac address-table address 3c52.82a1.0f44
+  20    3c52.82a1.0f44    DYNAMIC     Gi1/0/14
+$ show mac address-table interface Gi1/0/14
+  20    3c52.82a1.0f44    DYNAMIC     Gi1/0/14
+  30    0004.f2aa.1c09    DYNAMIC     Gi1/0/14
+$ show interfaces Gi1/0/14 switchport | include Mode
+Administrative Mode: static access
+Operational Mode: static access
+:::
+
+- The final port is an **access port** with one or two MACs: the PC on the data VLAN and, if there is one, the IP phone on the voice VLAN. If the port you land on is a trunk (`show interfaces trunk` lists them), keep hopping.
+- If the MAC does not show up, the device has been quiet for a few minutes: the table ages out after **300 seconds** by default. A `ping` to its IP from the core fills it again.
+- **LLDP** does the same as CDP with other vendors' devices (HP switches, access points, non-Cisco phones). On IOS it is off: `lldp run` in global configuration and then `show lldp neighbors detail`.
+
+## 2. Port descriptions
+
+A good description saves you repeating step 1 next time. One fixed format for the whole site, for example `DESK <number> · <outlet>` for users and `UPLINK <switch> <port>` for links:
+
+:::term SW-P2-01 · descriptions
+$ configure terminal
+$ interface Gi1/0/14
+$  description DESK 2.11 · R2-B-11
+$ interface Gi1/1/1
+$  description UPLINK SW-CORE-01 Gi1/0/2
+$ end
+$ show interfaces description | include 2.11|UPLINK
+Gi1/0/14   up     up     DESK 2.11 · R2-B-11
+Gi1/1/1    up     up     UPLINK SW-CORE-01 Gi1/0/2
+$ copy running-config startup-config
+:::
+
+- The description shows up in `show interfaces status`, in the logs and in SNMP monitoring: a "Gi1/0/14 down" alert makes more sense as "DESK 2.11 down".
+- When a desk moves to another outlet or changes use, the description changes in the same ticket. A wrong description is worse than none.
+
+## 3. Port-security with sticky MAC
+
+Port-security limits how many MACs a port can learn and which ones. With **sticky**, the switch records the first ones it sees as authorised and keeps them in the configuration:
+
+:::term SW-P2-01 · user port with an IP phone
+$ configure terminal
+$ interface Gi1/0/14
+$  switchport mode access
+$  switchport access vlan 20
+$  switchport voice vlan 30
+$  switchport port-security maximum 2
+$  switchport port-security mac-address sticky
+$  switchport port-security violation restrict
+$  switchport port-security
+$ end
+$ show port-security interface Gi1/0/14 address
+Vlan    Mac Address       Type                          Ports   Remaining Age
+----    -----------       ----                          -----   -------------
+  20    3c52.82a1.0f44    SecureSticky                  Gi1/0/14        -
+  30    0004.f2aa.1c09    SecureSticky                  Gi1/0/14        -
+$ copy running-config startup-config
+:::
+
+- The port has to be a **static access** port (`switchport mode access`). On a port in dynamic mode the switch rejects the command.
+- With an IP phone, **maximum 2**: the phone on the voice VLAN and the PC on the data VLAN. With a maximum of 1, the port drops as soon as the phone boots.
+- Sticky MACs are stored in the running-config: without `copy running-config startup-config`, after a reboot the port learns whatever it sees again.
+- Do not enable it on links between switches, access point ports or virtualisation hosts: many MACs pass through them.
+
+The **violation modes**, what the port does when one MAC too many arrives:
+
+| Mode | Traffic from the new MAC | Log and counter | The port |
+|---|---|---|---|
+| **protect** | Dropped | Nothing: no log, no counter | Stays up |
+| **restrict** | Dropped | Log message, SNMP trap and the counter goes up | Stays up |
+| **shutdown** (default) | Dropped | Log message and trap | Goes **err-disabled** |
+
+`restrict` is a good starting point for office desks: the authorised device keeps working and the intruder gets nowhere, but it leaves a trace. `shutdown` is for areas where an unknown device should cut the port (open meeting rooms, reception). `protect` leaves no trace and is rarely worth it.
+
+## 4. The ticket: "desk 2.11 lost its network when the new PC was plugged in"
+
+Monday, 9:10. The PC at desk 2.11 (with an IP phone on the desk) has been replaced. The phone works; the new PC gets no IP. This switch has its desks in **shutdown** mode and the port shows as err-disabled, but the key is not simply re-enabling it: it is reading which MAC caused it and which ones it has recorded.
+
+:::term SW-P2-01 · what port-security has seen
+$ show port-security interface Gi1/0/14
+Port Security              : Enabled
+Port Status                : Secure-shutdown
+Violation Mode             : Shutdown
+Aging Time                 : 0 mins
+Maximum MAC Addresses      : 2
+Total MAC Addresses        : 2
+Configured MAC Addresses   : 0
+Sticky MAC Addresses       : 2
+Last Source Address:Vlan   : 8c16.45d0.73b2:20
+Security Violation Count   : 1
+$ show port-security interface Gi1/0/14 address
+  20    3c52.82a1.0f44    SecureSticky                  Gi1/0/14        -
+  30    0004.f2aa.1c09    SecureSticky                  Gi1/0/14        -
+:::
+
+How to read it:
+
+- **Last Source Address:Vlan** is the MAC that caused the violation and its VLAN: `8c16.45d0.73b2` on 20, the data VLAN. Compare it with the new PC's (the label or the inventory). If it is not the PC's, someone has plugged in something else and the ticket changes nature.
+- The sticky table holds the **old PC** (`3c52.82a1.0f44`, VLAN 20) and the **phone** (VLAN 30). The maximum is 2 and both slots are taken: the new PC is the third.
+- `clear port-security sticky interface Gi1/0/14` would clear both, the phone's as well. Only one has to go here.
+
+Once it is confirmed the new device is corporate:
+
+:::term SW-P2-01 · remove only the old PC's MAC and re-enable
+$ clear port-security sticky address 3c52.82a1.0f44
+$ configure terminal
+$ interface Gi1/0/14
+$  shutdown
+$  no shutdown
+$ end
+$ show port-security interface Gi1/0/14 address
+  20    8c16.45d0.73b2    SecureSticky                  Gi1/0/14        -
+  30    0004.f2aa.1c09    SecureSticky                  Gi1/0/14        -
+$ copy running-config startup-config
+:::
+
+If the counter goes up again with the new PC already learned, there is a third legitimate MAC nobody had accounted for:
+
+| What shows in Last Source Address | Usual source | What you do |
+|---|---|---|
+| A different MAC every few days on the data VLAN | The laptop switches between its own network card and the dock's | Decide which one is used at that desk, or raise the maximum to 3 on that port and document it |
+| A MAC from a virtualisation vendor | A virtual machine with a bridged adapter on the PC | NAT adapter on the virtual machine; bridging onto the desk port is not allowed |
+| The phone's MAC on the data VLAN | A phone that boots first without the voice VLAN | Check the voice VLAN the switch advertises to the phone over CDP or LLDP |
+| A MAC nobody recognises | A personal device or a small switch under the desk | The maximum is not raised: the device is removed and security is informed |
+
+> `errdisable recovery cause psecure-violation` re-enables only ports dropped by port-security once the interval has passed (`errdisable recovery interval`, 300 seconds by default). With the old PC still in the table, the port comes back, the new PC triggers the violation again and it drops again: automatic recovery does not replace clearing the MAC.
+
+In the ticket: port, the **Last Source Address** MAC and which device it belongs to, which sticky MAC was removed, the final state and that the configuration is saved. If the inventory holds the device's MAC, update it.
+
+## Next steps
+
+- The Level 4 guide [Cisco: VLANs, trunks and the site router](cisco-vlans-troncales-router-de-la-sede-y-un-puerto-que-no-da-red.html) carries on with the links you walked in step 1.
+- The [HP and Aruba switches: LLDP, loops and port-security](switches-hp-aruba-localizar-equipos-por-lldp-bucles-con-loop-protect-y-port-security.html) guide does the same on ArubaOS-Switch.
+- For monitoring that flags err-disabled ports before the user does, the **SolarWinds** guide.
+""")
+
+# ---------------------------------------------------------------- 2.x · HP / Aruba switches (second guide)
+g(slug="switches-hp-aruba-localizar-equipos-por-lldp-bucles-con-loop-protect-y-port-security", topic="switch-hp", date="2026-11-03",
+  title_es="Switches HP y Aruba: localizar equipos con LLDP, cortar un bucle con loop-protect y spanning tree, port-security y bloqueo de MAC",
+  title_en="HP and Aruba switches: locating devices with LLDP, stopping a loop with loop-protect and spanning tree, port-security and MAC lockout",
+  seo_title_en="HP switches: LLDP, loop-protect and loops · Iñigo González",
+  seo_title_es="Switches HP: LLDP, loop-protect y bucles · Iñigo González",
+  dek_es="Seguir una MAC por LLDP hasta la boca del puesto en ArubaOS-Switch, nombres de puerto, spanning tree con puertos de borde y protección de BPDU, loop-protect para los bucles que spanning tree no ve, port-security y lockout-mac, y una planta entera sin red por un cable entre dos rosetas.",
+  dek_en="Following a MAC over LLDP to the desk port on ArubaOS-Switch, port names, spanning tree with edge ports and BPDU protection, loop-protect for the loops spanning tree misses, port-security and lockout-mac, and a whole floor without network because of a cable between two wall outlets.",
+  seo_desc="ArubaOS-Switch: find a device with LLDP, enable spanning tree and loop-protect, set port-security and recover a floor from a network loop.",
+  es="""
+## Qué vas a conseguir
+
+Encontrar en qué puerto está un equipo en una red de switches HP ProCurve / ArubaOS-Switch, proteger los puertos de usuario para que un cable mal puesto no tumbe una planta, limitar qué equipos se conectan a cada boca y, cuando el bucle ya ha pasado, encontrarlo y cortarlo en minutos. La guía de [VLANs, copia y firmware en switches HP](switches-hp-aruba-vlans-copia-de-configuracion-firmware-y-puerto-a-100-mb.html) cubre los comandos de cada día, las VLANs y el guardado; esta parte de ahí.
+
+## Antes de empezar
+
+- SSH a la IP de gestión de cada switch, nivel *manager* (`enable`) y un **cable de consola** a mano: durante un bucle, la gestión por red suele dejar de responder.
+- Comprueba con `show version` que es **ArubaOS-Switch** (series 2530, 2930F, 3810 y similares). AOS-CX tiene sus propios comandos de loop-protect y spanning tree.
+- Qué puertos son de usuario y cuáles son enlaces entre switches o hacia el núcleo, en cada equipo.
+
+## 1. Localizar un equipo por LLDP
+
+En ArubaOS-Switch, **LLDP viene activo** de fábrica. Con la MAC del equipo (o su IP, que el switch de núcleo traduce con `show arp`):
+
+:::term sw-core-01 · ¿por dónde sale la MAC?
+$ show arp | include 10.20.0.57
+  10.20.0.57       a0b3cc-4f12d8     dynamic 23
+$ show mac-address a0b3cc-4f12d8
+  Status and Counters - Address Table - a0b3cc-4f12d8
+  Port   VLAN
+  ------ ----
+  23     20
+$ show lldp info remote-device 23
+  LLDP Remote Device Information Detail
+  Local Port   : 23
+  ChassisType  : mac-address
+  ChassisId    : 9c8cd8-11aa00
+  PortId       : 49
+  SysName      : sw-p3-acc01
+  System Descr : Aruba JL256A 2930F-48G-PoE+-4SFP+ Switch, revision WC.16.11.0021
+  Remote Management Address
+     Type    : ipv4
+     Address : 10.10.99.13
+:::
+
+El puerto 23 del núcleo lleva a otro switch: el `SysName` y la dirección de gestión dicen a cuál entrar. En `sw-p3-acc01`, el mismo `show mac-address a0b3cc-4f12d8` da el puerto del puesto. Si el puerto que sale tiene un switch o un punto de acceso según `show lldp info remote-device`, hay que seguir.
+
+Para no repetirlo, cada puerto con su **nombre**:
+
+:::term sw-p3-acc01 · nombres de puerto
+$ configure terminal
+$ interface 12 name "PUESTO 3.12 R3-A-12"
+$ interface 49 name "UPLINK sw-core-01 p23"
+$ exit
+$ show name 12
+$ write memory
+:::
+
+## 2. Spanning tree: puertos de borde y protección de BPDU
+
+Spanning tree bloquea los caminos redundantes entre switches para que las tramas no den vueltas. En ArubaOS-Switch funciona en modo **MSTP** y, según modelo y versión, puede venir desactivado de fábrica: `show spanning-tree` lo dice en la primera línea.
+
+:::term sw-p3-acc01 · spanning tree en un switch de acceso
+$ configure terminal
+$ spanning-tree
+$ spanning-tree 1-44 admin-edge-port
+$ spanning-tree 1-44 bpdu-protection
+$ spanning-tree bpdu-protection-timeout 300
+$ exit
+$ show spanning-tree bpdu-protection
+$ write memory
+:::
+
+- El **núcleo** tiene que ser el puente raíz: en él, `spanning-tree priority 0` (el valor es un multiplicador de 4096). Si no se fija, gana el switch con la MAC más baja, a menudo el más viejo del armario.
+- **admin-edge-port** en los puertos de usuario: pasan a reenviar al instante, sin esperar a spanning tree. El PC coge IP antes.
+- **bpdu-protection** en esos mismos puertos: si por un puerto de usuario llega una BPDU (alguien ha conectado un switch, o un cable que vuelve al propio switch), el puerto se desactiva. Con el *timeout*, se reactiva solo a los 300 segundos; sin él, se queda abajo hasta que alguien lo habilite.
+- En los enlaces de subida (49-50) no va ni lo uno ni lo otro.
+
+## 3. Loop-protect: los bucles que spanning tree no ve
+
+Spanning tree solo ve un bucle si las BPDU dan la vuelta. Un switch de escritorio que no las deja pasar, o un switch con spanning tree apagado, forman un bucle que nadie bloquea. **Loop-protect** envía sus propios paquetes de prueba por cada puerto y, si vuelven por el mismo switch, apaga el puerto:
+
+:::term sw-p3-acc01 · loop-protect en los puertos de usuario
+$ configure terminal
+$ loop-protect 1-44
+$ loop-protect 1-44 receiver-action send-disable
+$ loop-protect disable-timer 300
+$ loop-protect trap loop-detected
+$ exit
+$ show loop-protect 1-44
+$ write memory
+:::
+
+- `send-disable` (la acción por defecto) apaga el puerto que recibe el paquete; `disable-timer` lo reactiva a los 300 segundos. Con 0, se queda apagado hasta que alguien lo habilite: más seguro, pero más tickets.
+- `trap loop-detected` manda un trap SNMP a la monitorización: es el aviso que quieres recibir antes que la llamada de la planta.
+- Loop-protect y spanning tree se complementan: spanning tree para los enlaces entre switches; loop-protect y bpdu-protection en los puertos de usuario.
+
+## 4. Port-security y lockout-mac
+
+Port-security limita qué MAC puede usar un puerto. El modo **static** aprende las primeras MAC hasta el límite y las deja como autorizadas, y se guardan en la configuración con `write memory`:
+
+:::term sw-p3-acc01 · puesto con PC y teléfono
+$ configure terminal
+$ port-security 12 learn-mode static address-limit 2 action send-alarm
+$ exit
+$ show port-security 12
+$ show port-security intrusion-log
+$ write memory
+:::
+
+- **action**: `none`, `send-alarm` (trap y registro, el puerto sigue) o `send-disable` (trap, registro y el puerto se apaga). En oficina, `send-alarm` para empezar y `send-disable` donde un equipo desconocido no puede quedarse.
+- Una intrusión levanta un indicador en el puerto. Una vez revisada, `port-security 12 clear-intrusion-flag`, y si el puerto se apagó, `interface 12 enable`.
+- Si la red usa **802.1X o autenticación por MAC** contra RADIUS, el control de acceso ya lo hace eso: no se mezcla con port-security en el mismo puerto.
+
+**lockout-mac** bloquea una MAC concreta en todo el switch, en cualquier puerto y VLAN: `lockout-mac 3c52a1-0f4401` en configuración global. Es la medida rápida ante un equipo que no debe estar en la red mientras seguridad decide qué hacer. Se quita con `no lockout-mac 3c52a1-0f4401`.
+
+## 5. El ticket: "toda la planta se ha quedado sin red cuando alguien ha enchufado un cable a dos rosetas"
+
+Miércoles, 10:40. Nadie en la planta 3 tiene red: ni correo, ni impresoras, ni teléfonos. Alguien ha visto un latiguillo que sobraba en una mesa y lo ha conectado de una roseta a otra. Las luces del switch parpadean todas a la vez.
+
+1. **Entrar**: SSH no responde o va a saltos, porque la VLAN de gestión también está inundada. Consola, directamente.
+2. **Confirmar el bucle**: CPU alta, cambios de topología disparados y dos puertos de usuario con el mismo tráfico disparado.
+
+:::term sw-p3-acc01 · consola
+$ show cpu
+ 98 percent busy, from 300 sec ago
+$ show spanning-tree
+ Multiple Spanning Tree (MST) Information
+  STP Enabled   : No
+$ show interfaces port-utilization
+ Port   Mode     | Rx Kbits/sec  Rx Util | Tx Kbits/sec  Tx Util
+ ------ -------- + ------------- ------- + ------------- -------
+ 17     1000FDx  | 991250        99.1    | 990830        99.0
+ 31     1000FDx  | 990840        99.0    | 991140        99.1
+ 49     10GigFD  | 4870210       48.7    | 4861300       48.6
+:::
+
+Aquí spanning tree estaba apagado y los puertos de usuario no tenían loop-protect: nadie podía cortar el bucle. Dos puertos de usuario al 99 % en recepción y transmisión, a la vez, son los dos extremos del mismo cable.
+
+3. **Cortar**: apagar uno de los dos puertos. La red vuelve en segundos.
+
+:::term sw-p3-acc01 · apagar un extremo
+$ configure terminal
+$ interface 31 disable
+$ exit
+$ show name 17,31
+:::
+
+4. **Retirar el cable**: con los nombres de puerto (paso 1) sabes en qué rosetas está. Sin nombres, el panel de parcheo y la documentación del cableado. Se retira el latiguillo y se habilita el puerto (`interface 31 enable`).
+5. **Que no vuelva a pasar**, con un cambio aprobado: spanning tree activo con el núcleo como raíz, y en todos los puertos de usuario `admin-edge-port`, `bpdu-protection` y `loop-protect`. Con eso, el mismo cable apaga uno de los dos puertos en un par de segundos y el resto de la planta no se entera:
+
+:::term sw-p3-acc01 · la próxima vez
+$ show loop-protect 17,31
+ Port Enabled Loop Detected Loop Count Rx Action    Port Status
+ ---- ------- ------------- ---------- ------------ -----------
+ 17   Yes     No            0          send-disable Up
+ 31   Yes     Yes           1          send-disable Down
+$ show logging -r
+:::
+
+! Si el bucle pasa por un **switch de escritorio** que alguien ha traído, retíralo, no solo el cable. Si te piden más tomas en un puesto, es una petición de cableado o un switch gestionado, no un aparato bajo la mesa.
+
+En el ticket: hora del corte y de la vuelta, los dos puertos y las rosetas, qué se retiró y el cambio de protección que queda pendiente o aplicado.
+
+## Siguientes pasos
+
+- La guía de [Cisco: encontrar un puerto y port-security](cisco-localizar-un-equipo-descripciones-port-security-sticky-y-una-violacion-de-seguridad.html) es lo mismo con IOS: CDP, MAC sticky y modos de violación.
+- La de [LAN, WAN y WiFi entre plantas y sedes](lan-wan-y-wifi-conectar-plantas-y-sedes-de-varios-paises.html) del Sector 4 explica el diseño de núcleo y acceso donde viven estos switches.
+- La guía de **SolarWinds** recoge el trap de loop-protect y la utilización de los puertos para avisar antes de que llamen.
+""",
+  en="""
+## What you'll get
+
+Finding which port a device is on in a network of HP ProCurve / ArubaOS-Switch switches, protecting user ports so a misplaced cable cannot take down a floor, limiting which devices connect to each port and, once a loop has already happened, finding it and cutting it in minutes. The [VLANs, backup and firmware on HP switches](switches-hp-aruba-vlans-copia-de-configuracion-firmware-y-puerto-a-100-mb.html) guide covers the everyday commands, VLANs and saving; this one picks up from there.
+
+## Before you start
+
+- SSH to each switch's management IP, *manager* level (`enable`) and a **console cable** at hand: during a loop, network management usually stops responding.
+- Check with `show version` that it is **ArubaOS-Switch** (2530, 2930F, 3810 series and similar). AOS-CX has its own loop-protect and spanning tree commands.
+- Which ports are user ports and which are links between switches or to the core, on each device.
+
+## 1. Locating a device with LLDP
+
+On ArubaOS-Switch, **LLDP is on** out of the box. With the device's MAC (or its IP, which the core switch translates with `show arp`):
+
+:::term sw-core-01 · which port does the MAC leave through?
+$ show arp | include 10.20.0.57
+  10.20.0.57       a0b3cc-4f12d8     dynamic 23
+$ show mac-address a0b3cc-4f12d8
+  Status and Counters - Address Table - a0b3cc-4f12d8
+  Port   VLAN
+  ------ ----
+  23     20
+$ show lldp info remote-device 23
+  LLDP Remote Device Information Detail
+  Local Port   : 23
+  ChassisType  : mac-address
+  ChassisId    : 9c8cd8-11aa00
+  PortId       : 49
+  SysName      : sw-p3-acc01
+  System Descr : Aruba JL256A 2930F-48G-PoE+-4SFP+ Switch, revision WC.16.11.0021
+  Remote Management Address
+     Type    : ipv4
+     Address : 10.10.99.13
+:::
+
+Port 23 on the core leads to another switch: the `SysName` and the management address tell you which one to log into. On `sw-p3-acc01`, the same `show mac-address a0b3cc-4f12d8` gives the desk port. If `show lldp info remote-device` shows a switch or an access point on the port you land on, keep going.
+
+So you don't have to repeat it, each port gets its **name**:
+
+:::term sw-p3-acc01 · port names
+$ configure terminal
+$ interface 12 name "DESK 3.12 R3-A-12"
+$ interface 49 name "UPLINK sw-core-01 p23"
+$ exit
+$ show name 12
+$ write memory
+:::
+
+## 2. Spanning tree: edge ports and BPDU protection
+
+Spanning tree blocks redundant paths between switches so frames don't go round in circles. On ArubaOS-Switch it runs in **MSTP** mode and, depending on model and version, may be disabled out of the box: `show spanning-tree` tells you on the first line.
+
+:::term sw-p3-acc01 · spanning tree on an access switch
+$ configure terminal
+$ spanning-tree
+$ spanning-tree 1-44 admin-edge-port
+$ spanning-tree 1-44 bpdu-protection
+$ spanning-tree bpdu-protection-timeout 300
+$ exit
+$ show spanning-tree bpdu-protection
+$ write memory
+:::
+
+- The **core** has to be the root bridge: on it, `spanning-tree priority 0` (the value is a multiplier of 4096). If it isn't set, the switch with the lowest MAC wins, often the oldest one in the cabinet.
+- **admin-edge-port** on user ports: they start forwarding straight away, without waiting for spanning tree. The PC gets its IP sooner.
+- **bpdu-protection** on those same ports: if a BPDU arrives on a user port (someone has plugged in a switch, or a cable loops back to the same switch), the port is disabled. With the *timeout*, it re-enables itself after 300 seconds; without it, it stays down until someone enables it.
+- Neither goes on the uplinks (49-50).
+
+## 3. Loop-protect: the loops spanning tree misses
+
+Spanning tree only sees a loop if the BPDUs come back round. A desktop switch that doesn't pass them, or a switch with spanning tree off, forms a loop nobody blocks. **Loop-protect** sends its own test packets out of each port and, if they come back to the same switch, shuts the port down:
+
+:::term sw-p3-acc01 · loop-protect on user ports
+$ configure terminal
+$ loop-protect 1-44
+$ loop-protect 1-44 receiver-action send-disable
+$ loop-protect disable-timer 300
+$ loop-protect trap loop-detected
+$ exit
+$ show loop-protect 1-44
+$ write memory
+:::
+
+- `send-disable` (the default action) shuts down the port that receives the packet; `disable-timer` re-enables it after 300 seconds. With 0, it stays off until someone enables it: safer, but more tickets.
+- `trap loop-detected` sends an SNMP trap to monitoring: it is the alert you want to get before the floor calls.
+- Loop-protect and spanning tree complement each other: spanning tree for the links between switches; loop-protect and bpdu-protection on user ports.
+
+## 4. Port-security and lockout-mac
+
+Port-security limits which MACs can use a port. **Static** mode learns the first MACs up to the limit and keeps them as authorised, and they are saved in the configuration with `write memory`:
+
+:::term sw-p3-acc01 · desk with a PC and a phone
+$ configure terminal
+$ port-security 12 learn-mode static address-limit 2 action send-alarm
+$ exit
+$ show port-security 12
+$ show port-security intrusion-log
+$ write memory
+:::
+
+- **action**: `none`, `send-alarm` (trap and log, the port stays up) or `send-disable` (trap, log and the port shuts down). In an office, `send-alarm` to start with and `send-disable` where an unknown device cannot stay.
+- An intrusion raises a flag on the port. Once reviewed, `port-security 12 clear-intrusion-flag`, and if the port was shut down, `interface 12 enable`.
+- If the network uses **802.1X or MAC authentication** against RADIUS, that already does the access control: don't mix it with port-security on the same port.
+
+**lockout-mac** blocks a specific MAC across the whole switch, on any port and VLAN: `lockout-mac 3c52a1-0f4401` in global configuration. It is the quick measure for a device that shouldn't be on the network while security decides what to do. It is removed with `no lockout-mac 3c52a1-0f4401`.
+
+## 5. The ticket: "the whole floor lost network when someone plugged a cable into two wall ports"
+
+Wednesday, 10:40. Nobody on floor 3 has network: no email, no printers, no phones. Someone saw a spare patch cable on a desk and plugged it from one wall outlet into another. All the switch's lights are flashing at once.
+
+1. **Get in**: SSH doesn't answer or lurches, because the management VLAN is flooded too. Console, straight away.
+2. **Confirm the loop**: high CPU, topology changes going wild and two user ports with the same runaway traffic.
+
+:::term sw-p3-acc01 · console
+$ show cpu
+ 98 percent busy, from 300 sec ago
+$ show spanning-tree
+ Multiple Spanning Tree (MST) Information
+  STP Enabled   : No
+$ show interfaces port-utilization
+ Port   Mode     | Rx Kbits/sec  Rx Util | Tx Kbits/sec  Tx Util
+ ------ -------- + ------------- ------- + ------------- -------
+ 17     1000FDx  | 991250        99.1    | 990830        99.0
+ 31     1000FDx  | 990840        99.0    | 991140        99.1
+ 49     10GigFD  | 4870210       48.7    | 4861300       48.6
+:::
+
+Here spanning tree was off and the user ports had no loop-protect: nothing could break the loop. Two user ports at 99% receive and transmit, at the same time, are the two ends of the same cable.
+
+3. **Cut it**: disable one of the two ports. The network comes back within seconds.
+
+:::term sw-p3-acc01 · disable one end
+$ configure terminal
+$ interface 31 disable
+$ exit
+$ show name 17,31
+:::
+
+4. **Remove the cable**: with the port names (step 1) you know which outlets it is on. Without names, the patch panel and the cabling records. The patch cable is removed and the port enabled (`interface 31 enable`).
+5. **So it doesn't happen again**, with an approved change: spanning tree on with the core as root, and on every user port `admin-edge-port`, `bpdu-protection` and `loop-protect`. With that, the same cable shuts down one of the two ports in a couple of seconds and the rest of the floor never notices:
+
+:::term sw-p3-acc01 · next time
+$ show loop-protect 17,31
+ Port Enabled Loop Detected Loop Count Rx Action    Port Status
+ ---- ------- ------------- ---------- ------------ -----------
+ 17   Yes     No            0          send-disable Up
+ 31   Yes     Yes           1          send-disable Down
+$ show logging -r
+:::
+
+! If the loop goes through a **desktop switch** someone brought in, remove it, not just the cable. If a desk needs more ports, that is a cabling request or a managed switch, not a box under the desk.
+
+In the ticket: time of the outage and of recovery, the two ports and outlets, what was removed and the protection change, pending or applied.
+
+## Next steps
+
+- The [Cisco: finding a port and port-security](cisco-localizar-un-equipo-descripciones-port-security-sticky-y-una-violacion-de-seguridad.html) guide is the same on IOS: CDP, sticky MAC and violation modes.
+- The Sector 4 guide [LAN, WAN and WiFi across floors and sites](lan-wan-y-wifi-conectar-plantas-y-sedes-de-varios-paises.html) explains the core and access design these switches live in.
+- The **SolarWinds** guide picks up the loop-protect trap and port utilisation to warn you before anyone calls.
+""")
+
+# ---------------------------------------------------------------- 2.x · iDRAC / iLO (second guide)
+g(slug="idrac-e-ilo-disco-o-fuente-averiados-registros-recogida-para-el-fabricante-y-reconstruccion", topic="idrac-ilo", date="2026-11-03",
+  title_es="Dell iDRAC y HPE iLO: un disco o una fuente averiados, los registros de hardware, la recogida para el fabricante, el cambio en caliente y la reconstrucción del RAID",
+  title_en="Dell iDRAC and HPE iLO: a failed disk or power supply, the hardware logs, the vendor collection, the hot swap and the RAID rebuild",
+  seo_title_en="iDRAC and iLO: failed disk or power supply · Iñigo González",
+  seo_title_es="iDRAC e iLO: disco o fuente averiados · Iñigo González",
+  dek_es="Del aviso al cierre: Lifecycle Log y SEL en Dell, IML en HPE, estado de discos y fuentes con racadm y Redfish, el SupportAssist Collection y el Active Health System Log, el caso con el fabricante, el cambio en caliente sin sacar el disco equivocado y un RAID que no se reconstruye con el disco nuevo.",
+  dek_en="From the alert to closure: Lifecycle Log and SEL on Dell, IML on HPE, disk and power supply status with racadm and Redfish, the SupportAssist Collection and the Active Health System Log, the vendor case, a hot swap without pulling the wrong disk, and a RAID that won't rebuild onto the new disk.",
+  seo_desc="Failed disk or PSU on Dell PowerEdge or HPE ProLiant: read the logs, collect the TSR or AHS log, open the case, hot-swap and verify the RAID rebuild.",
+  es="""
+## Qué vas a conseguir
+
+Cuando un servidor avisa de un disco o una fuente de alimentación averiados, saber qué ha fallado exactamente, sacar lo que el fabricante va a pedir, abrir el caso con todo, cambiar la pieza sin parar el servidor y comprobar que el RAID vuelve a estar sano. La guía de [gestión fuera de banda con iDRAC e iLO](idrac-e-ilo-gestion-fuera-de-banda-red-usuarios-consola-firmware-y-alertas.html) cubre la red de gestión, los usuarios y las alertas; esta empieza cuando la alerta llega.
+
+## Antes de empezar
+
+- Acceso a la iDRAC (Dell PowerEdge) o la iLO (HPE ProLiant) del servidor, con racadm instalado en el puesto de salto o por SSH a la propia controladora.
+- `curl` y `jq` en el puesto de salto para las consultas Redfish (puerto 443).
+- El **número de servicio** (Dell) o el **número de serie** (HPE) y el contrato de soporte vigente, con su nivel de servicio (siguiente día laborable, cuatro horas).
+- Saber qué hace el servidor y si está en un clúster: un disco de un RAID 5 degradado no espera al mes que viene.
+
+## 1. Qué ha fallado: los registros de hardware
+
+**Dell.** El **Lifecycle Log** recoge todo (almacenamiento, fuentes, cambios de configuración y actualizaciones); el **SEL** solo los sensores. Para un disco, el Lifecycle Log filtrado por almacenamiento:
+
+:::term racadm · srv-fs-01-idrac · Lifecycle Log y SEL
+$ racadm -r srv-fs-01-idrac.mgmt.contoso.local -u adm-soporte -p ******** lclog view -c storage -s critical -n 5
+SeqNumber       = 4710
+Category        = Storage
+Severity        = Critical
+Timestamp       = 2026-11-02 23:47:52
+Message         = Disk 2 in Backplane 1 of Integrated RAID Controller 1 failed.
+$ racadm -r srv-fs-01-idrac.mgmt.contoso.local -u adm-soporte -p ******** getsel
+:::
+
+En la web: **Maintenance › Lifecycle Log**, con filtro por categoría y gravedad.
+
+**HPE.** El **IML** (*Integrated Management Log*) es el registro de hardware del servidor; el **IEL** (*iLO Event Log*), el de la propia iLO. En la web, **Information › Integrated Management Log**. Por Redfish:
+
+:::term Redfish · srv-app-02-ilo · últimas entradas del IML
+$ curl -sk -u adm-soporte 'https://srv-app-02-ilo.mgmt.contoso.local/redfish/v1/Systems/1/LogServices/IML/Entries/?$expand=.' | jq '.Members[-3:][] | {Created, Severity, Message}'
+{
+  "Created": "2026-11-03T05:12:40Z",
+  "Severity": "Critical",
+  "Message": "System Power Supply: General Failure (Power Supply 2)"
+}
+:::
+
+Fíjate en la **hora** de la primera entrada: a veces el fallo es de hace días y la alerta no llegó. Eso también va al ticket.
+
+## 2. El estado actual: discos y fuentes
+
+:::term racadm · srv-fs-01-idrac · discos y discos virtuales
+$ racadm storage get pdisks -o -p State,Status,MediaType,Size
+Disk.Bay.0:Enclosure.Internal.0-1:RAID.Integrated.1-1
+   State     = Online
+   Status    = Ok
+Disk.Bay.2:Enclosure.Internal.0-1:RAID.Integrated.1-1
+   State     = Failed
+   Status    = Critical
+   MediaType = HDD
+   Size      = 1675.50 GB
+$ racadm storage get vdisks -o -p Layout,State,Status
+Disk.Virtual.0:RAID.Integrated.1-1
+   Layout    = Raid-5
+   State     = Degraded
+   Status    = Warning
+:::
+
+Un RAID 5 **degradado** sigue sirviendo datos, pero sin protección: un segundo disco que falle se lleva el volumen. Antes de tocar nada, revisa que ningún otro disco esté en estado de fallo previsto (*predictive failure*) y que la última copia de seguridad del servidor es buena.
+
+Las **fuentes**, en los dos fabricantes por Redfish:
+
+:::term Redfish · estado de las fuentes
+$ curl -sk -u adm-soporte https://srv-fs-01-idrac.mgmt.contoso.local/redfish/v1/Chassis/System.Embedded.1/Power | jq '.PowerSupplies[] | {Name, Status}'
+$ curl -sk -u adm-soporte https://srv-app-02-ilo.mgmt.contoso.local/redfish/v1/Chassis/1/Power | jq '.PowerSupplies[] | {Name, Status}'
+{ "Name": "HpeServerPowerSupply", "Status": { "Health": "OK", "State": "Enabled" } }
+{ "Name": "HpeServerPowerSupply", "Status": { "Health": "Critical", "State": "Enabled" } }
+:::
+
+Una fuente en *Critical* puede ser la fuente o lo que la alimenta. Antes de pedir la pieza, comprueba en la sala o con el inventario que su cable llega a la PDU y que esa PDU tiene corriente: muchas "fuentes averiadas" son un cable suelto o una PDU sin alimentación.
+
+En HPE, los discos están en **System Information › Storage** de la web; por Redfish, en `/redfish/v1/Systems/1/SmartStorage/ArrayControllers/` con controladoras Smart Array (iLO 5) o en `/redfish/v1/Systems/1/Storage/` en los modelos que usan el estándar de Redfish (iLO 6).
+
+## 3. La recogida para el fabricante
+
+Es lo primero que pide soporte, y con ella el caso se resuelve sin diagnósticos por teléfono.
+
+**Dell: SupportAssist Collection** (antes, *Tech Support Report*). En la web, **Maintenance › SupportAssist › Start a Collection**, con *System Information*, *Storage Logs* y *Debug Logs*. Por racadm:
+
+:::term racadm · srv-fs-01-idrac · generar y exportar
+$ racadm techsupreport collect -t SysInfo
+# la orden devuelve el identificador de la tarea (JID_...)
+$ racadm jobqueue view -i JID_123456789012
+Status=Completed
+$ racadm techsupreport export -l //10.10.90.50/soporte -u CONTOSO\\svc-recogidas -p ********
+:::
+
+**HPE: Active Health System Log.** En la web de la iLO, **Information › Active Health System Log**: se elige el intervalo (los últimos 7 días suelen bastar; el fabricante dirá si quiere más), los datos del caso y **Download**. Sale un fichero `.ahs`. Por Redfish, el mismo fichero cuelga de `/redfish/v1/Managers/1/ActiveHealthSystem/`.
+
+> Pon en el nombre del fichero el servidor y la fecha (`srv-fs-01-TSR-2026-11-03.zip`). Las recogidas contienen nombres, direcciones IP y configuración: se suben al portal del fabricante, no a un correo.
+
+## 4. Abrir el caso con el fabricante
+
+En el portal de soporte o por teléfono, con:
+
+- Número de servicio o de serie, y el modelo.
+- Qué falla: **disco de la bahía 2, RAID 5 degradado**, o **fuente 2 en fallo, redundancia perdida**, con la hora del primer evento.
+- La recogida del paso 3 adjunta.
+- Dónde está el servidor, horario de acceso a la sala y quién recibe al técnico o la pieza.
+- Si el contrato incluye **retención del disco** averiado: sin esa opción, el disco viejo vuelve al fabricante con los datos dentro. Revisa la política antes de entregarlo.
+
+Apunta el número de caso en el ticket. Si el contrato es de cuatro horas, controla el reloj: el plazo corre desde que el caso queda abierto.
+
+## 5. El cambio en caliente
+
+Discos y fuentes de estos servidores son **en caliente** (*hot-plug*): se cambian con el servidor encendido. Lo que sale mal es sacar la pieza equivocada.
+
+- **Localizar el disco**: en Dell, `racadm storage blink:Disk.Bay.2:Enclosure.Internal.0-1:RAID.Integrated.1-1` hace parpadear su luz (y `unblink` la apaga), o **Storage › Physical Disks › Blink** en la web. En HPE, la función de identificar dispositivo de la herramienta de almacenamiento de la controladora.
+- **Comprobar la bahía** con el número que da el registro, no con la posición que "parece". El disco averiado suele tener la luz ámbar fija.
+- En HPE, si el botón de **No retirar** (*Do not remove*) del disco está iluminado, sacarlo rompe el volumen: no se toca.
+- **Sacar, esperar y meter**: liberar el disco, sacarlo unos centímetros, esperar a que deje de girar (unos 30 segundos) y extraerlo. El nuevo, en la misma bahía.
+- **Fuente**: desenchufar el cable de la fuente averiada, cambiarla y enchufarla a **la misma PDU** que tenía. Si va a la otra, las dos fuentes acaban en la misma línea y la redundancia es aparente.
+
+## 6. Comprobar la reconstrucción
+
+Con un disco de repuesto válido en la misma bahía, la controladora empieza a reconstruir sola:
+
+:::ui iDRAC9 · Storage › Physical Disks
+= Disk.Bay.2 · State: Rebuilding · Progress: 37 %
+= Disk.Virtual.0 · RAID-5 · State: Degraded
+:::
+
+- Una reconstrucción de discos grandes tarda horas y se nota en el rendimiento. Avisa a los usuarios del servicio si es en horario.
+- Al acabar: el disco en **Online**, el disco virtual en **Online** y estado *Ok*, y en el Lifecycle Log el evento de reconstrucción completada. En HPE, la unidad lógica pasa de **Interim Recovery Mode** a **Recovering** y de ahí a **OK**.
+- La fuente nueva, en *OK* y la alerta de redundancia de fuente, resuelta.
+
+Cierra el caso con el fabricante y el ticket con el número de caso, la pieza, la hora del cambio y la de fin de la reconstrucción.
+
+## 7. El ticket: "srv-fs-01: disco cambiado, pero el RAID sigue degradado"
+
+El técnico ha dejado el disco nuevo en la bahía 2 hace una hora y el disco virtual sigue en *Degraded*. No hay reconstrucción en marcha.
+
+:::term racadm · srv-fs-01-idrac
+$ racadm storage get pdisks:Disk.Bay.2:Enclosure.Internal.0-1:RAID.Integrated.1-1 -o -p State,Status,MediaType,Size,BusProtocol
+   State       = Foreign
+   Status      = Ok
+   MediaType   = HDD
+   Size        = 1675.50 GB
+   BusProtocol = SAS
+:::
+
+| Lo que dice el disco nuevo | Qué pasa | Qué haces |
+|---|---|---|
+| **Foreign** | El repuesto viene de otro servidor y trae su propia configuración RAID | Borrar la configuración ajena con la acción **Clear Foreign Configuration** de la controladora en la web de la iDRAC, y comprobar después que el disco pasa a *Ready* |
+| **Ready**, pero no reconstruye | La controladora no reconstruye sola sobre ese disco | Asignarlo como repuesto global (**Global Hot Spare**) desde las acciones del disco en la iDRAC y aplicar la tarea; la reconstrucción arranca sobre él |
+| Tamaño menor o tipo distinto (SATA en un RAID de SAS, HDD en uno de SSD) | La pieza no es la que corresponde | No se fuerza: se pide el repuesto correcto con el número de pieza del disco original |
+| **Failed** otra vez | Repuesto defectuoso o problema de la bahía | Nueva recogida y se actualiza el caso con el fabricante |
+
+! Antes de borrar una configuración ajena, comprueba en la vista previa que solo afecta **al disco nuevo**. Si aparecen más discos, hay un problema mayor (un volumen que la controladora no reconoce) y borrar ahí destruye datos: para y escala.
+
+Aquí era un repuesto con configuración de otro servidor. Tras borrar la configuración ajena de ese disco pasó a *Ready*, la reconstrucción empezó sola y a las tres horas el disco virtual estaba en *Online*.
+
+## Siguientes pasos
+
+- La guía de [gestión fuera de banda con iDRAC e iLO](idrac-e-ilo-gestion-fuera-de-banda-red-usuarios-consola-firmware-y-alertas.html) explica cómo hacer que estas alertas lleguen por SNMP, correo o Redfish.
+- La de [VMware vSphere y vCenter](vsphere-vcenter-crear-vm-snapshots-con-caducidad-y-host-en-mantenimiento.html) cubre el modo de mantenimiento si una pieza obliga a parar un host.
+- La guía de **Device42** guarda en qué PDU va cada fuente, lo que necesitas para el paso 5.
+""",
+  en="""
+## What you'll get
+
+When a server reports a failed disk or power supply, knowing exactly what has failed, gathering what the vendor will ask for, opening the case with everything in it, replacing the part without stopping the server, and checking the RAID is healthy again. The [out-of-band management with iDRAC and iLO](idrac-e-ilo-gestion-fuera-de-banda-red-usuarios-consola-firmware-y-alertas.html) guide covers the management network, users and alerts; this one starts when the alert arrives.
+
+## Before you start
+
+- Access to the server's iDRAC (Dell PowerEdge) or iLO (HPE ProLiant), with racadm installed on the jump host or over SSH to the controller itself.
+- `curl` and `jq` on the jump host for the Redfish queries (port 443).
+- The **service tag** (Dell) or **serial number** (HPE) and the current support contract, with its service level (next business day, four hours).
+- Knowing what the server does and whether it is in a cluster: a disk in a degraded RAID 5 doesn't wait until next month.
+
+## 1. What has failed: the hardware logs
+
+**Dell.** The **Lifecycle Log** records everything (storage, power supplies, configuration changes and updates); the **SEL** only the sensors. For a disk, the Lifecycle Log filtered by storage:
+
+:::term racadm · srv-fs-01-idrac · Lifecycle Log and SEL
+$ racadm -r srv-fs-01-idrac.mgmt.contoso.local -u adm-support -p ******** lclog view -c storage -s critical -n 5
+SeqNumber       = 4710
+Category        = Storage
+Severity        = Critical
+Timestamp       = 2026-11-02 23:47:52
+Message         = Disk 2 in Backplane 1 of Integrated RAID Controller 1 failed.
+$ racadm -r srv-fs-01-idrac.mgmt.contoso.local -u adm-support -p ******** getsel
+:::
+
+On the web: **Maintenance › Lifecycle Log**, filtered by category and severity.
+
+**HPE.** The **IML** (*Integrated Management Log*) is the server's hardware log; the **IEL** (*iLO Event Log*), the iLO's own. On the web, **Information › Integrated Management Log**. Over Redfish:
+
+:::term Redfish · srv-app-02-ilo · latest IML entries
+$ curl -sk -u adm-support 'https://srv-app-02-ilo.mgmt.contoso.local/redfish/v1/Systems/1/LogServices/IML/Entries/?$expand=.' | jq '.Members[-3:][] | {Created, Severity, Message}'
+{
+  "Created": "2026-11-03T05:12:40Z",
+  "Severity": "Critical",
+  "Message": "System Power Supply: General Failure (Power Supply 2)"
+}
+:::
+
+Look at the **time** of the first entry: sometimes the failure is days old and the alert never arrived. That goes in the ticket too.
+
+## 2. The current state: disks and power supplies
+
+:::term racadm · srv-fs-01-idrac · disks and virtual disks
+$ racadm storage get pdisks -o -p State,Status,MediaType,Size
+Disk.Bay.0:Enclosure.Internal.0-1:RAID.Integrated.1-1
+   State     = Online
+   Status    = Ok
+Disk.Bay.2:Enclosure.Internal.0-1:RAID.Integrated.1-1
+   State     = Failed
+   Status    = Critical
+   MediaType = HDD
+   Size      = 1675.50 GB
+$ racadm storage get vdisks -o -p Layout,State,Status
+Disk.Virtual.0:RAID.Integrated.1-1
+   Layout    = Raid-5
+   State     = Degraded
+   Status    = Warning
+:::
+
+A **degraded** RAID 5 keeps serving data, but unprotected: a second disk failing takes the volume with it. Before touching anything, check that no other disk is in *predictive failure* and that the server's last backup is good.
+
+The **power supplies**, for both vendors over Redfish:
+
+:::term Redfish · power supply status
+$ curl -sk -u adm-support https://srv-fs-01-idrac.mgmt.contoso.local/redfish/v1/Chassis/System.Embedded.1/Power | jq '.PowerSupplies[] | {Name, Status}'
+$ curl -sk -u adm-support https://srv-app-02-ilo.mgmt.contoso.local/redfish/v1/Chassis/1/Power | jq '.PowerSupplies[] | {Name, Status}'
+{ "Name": "HpeServerPowerSupply", "Status": { "Health": "OK", "State": "Enabled" } }
+{ "Name": "HpeServerPowerSupply", "Status": { "Health": "Critical", "State": "Enabled" } }
+:::
+
+A power supply in *Critical* can be the supply or whatever feeds it. Before ordering the part, check in the room or against the inventory that its cable reaches the PDU and that the PDU has power: many "failed power supplies" are a loose cable or an unpowered PDU.
+
+On HPE, disks are under **System Information › Storage** on the web; over Redfish, under `/redfish/v1/Systems/1/SmartStorage/ArrayControllers/` with Smart Array controllers (iLO 5) or `/redfish/v1/Systems/1/Storage/` on models that use the standard Redfish model (iLO 6).
+
+## 3. The vendor collection
+
+It is the first thing support asks for, and with it the case gets solved without diagnostics over the phone.
+
+**Dell: SupportAssist Collection** (formerly *Tech Support Report*). On the web, **Maintenance › SupportAssist › Start a Collection**, with *System Information*, *Storage Logs* and *Debug Logs*. With racadm:
+
+:::term racadm · srv-fs-01-idrac · generate and export
+$ racadm techsupreport collect -t SysInfo
+# the command returns the job identifier (JID_...)
+$ racadm jobqueue view -i JID_123456789012
+Status=Completed
+$ racadm techsupreport export -l //10.10.90.50/support -u CONTOSO\\svc-collections -p ********
+:::
+
+**HPE: Active Health System Log.** On the iLO web interface, **Information › Active Health System Log**: choose the range (the last 7 days is usually enough; the vendor will say if they want more), the case details and **Download**. You get an `.ahs` file. Over Redfish, the same file hangs off `/redfish/v1/Managers/1/ActiveHealthSystem/`.
+
+> Put the server and date in the file name (`srv-fs-01-TSR-2026-11-03.zip`). Collections contain names, IP addresses and configuration: they are uploaded to the vendor portal, not sent by email.
+
+## 4. Opening the case with the vendor
+
+On the support portal or by phone, with:
+
+- Service tag or serial number, and the model.
+- What is failing: **disk in bay 2, RAID 5 degraded**, or **power supply 2 failed, redundancy lost**, with the time of the first event.
+- The collection from step 3 attached.
+- Where the server is, room access hours and who receives the engineer or the part.
+- Whether the contract includes **disk retention** for the failed drive: without it, the old disk goes back to the vendor with the data on it. Check the policy before handing it over.
+
+Record the case number in the ticket. If the contract is four hours, watch the clock: it runs from the moment the case is open.
+
+## 5. The hot swap
+
+Disks and power supplies on these servers are **hot-plug**: they are replaced with the server running. What goes wrong is pulling the wrong part.
+
+- **Locate the disk**: on Dell, `racadm storage blink:Disk.Bay.2:Enclosure.Internal.0-1:RAID.Integrated.1-1` makes its light flash (and `unblink` stops it), or **Storage › Physical Disks › Blink** on the web. On HPE, the identify device function in the controller's storage tool.
+- **Check the bay** against the number in the log, not the position that "looks right". The failed disk usually has a solid amber light.
+- On HPE, if the disk's **Do not remove** button is lit, pulling it breaks the volume: leave it alone.
+- **Release, wait and pull**: release the disk, slide it out a few centimetres, wait for it to spin down (about 30 seconds) and remove it. The new one goes into the same bay.
+- **Power supply**: unplug the failed supply's cable, replace it and plug it into **the same PDU** it had. If it goes to the other one, both supplies end up on the same line and the redundancy is only apparent.
+
+## 6. Checking the rebuild
+
+With a valid replacement disk in the same bay, the controller starts rebuilding on its own:
+
+:::ui iDRAC9 · Storage › Physical Disks
+= Disk.Bay.2 · State: Rebuilding · Progress: 37 %
+= Disk.Virtual.0 · RAID-5 · State: Degraded
+:::
+
+- Rebuilding large disks takes hours and affects performance. Warn the service's users if it is during working hours.
+- When it finishes: the disk **Online**, the virtual disk **Online** with status *Ok*, and the rebuild-completed event in the Lifecycle Log. On HPE, the logical drive goes from **Interim Recovery Mode** to **Recovering** and from there to **OK**.
+- The new power supply in *OK* and the power supply redundancy alert cleared.
+
+Close the vendor case, and the ticket with the case number, the part, the time of the swap and the time the rebuild finished.
+
+## 7. The ticket: "srv-fs-01: disk replaced, but the RAID is still degraded"
+
+The engineer left the new disk in bay 2 an hour ago and the virtual disk is still *Degraded*. No rebuild is running.
+
+:::term racadm · srv-fs-01-idrac
+$ racadm storage get pdisks:Disk.Bay.2:Enclosure.Internal.0-1:RAID.Integrated.1-1 -o -p State,Status,MediaType,Size,BusProtocol
+   State       = Foreign
+   Status      = Ok
+   MediaType   = HDD
+   Size        = 1675.50 GB
+   BusProtocol = SAS
+:::
+
+| What the new disk says | What is happening | What you do |
+|---|---|---|
+| **Foreign** | The spare comes from another server and carries its own RAID configuration | Clear the foreign configuration with the controller's **Clear Foreign Configuration** action on the iDRAC web interface, then check the disk moves to *Ready* |
+| **Ready**, but no rebuild | The controller doesn't rebuild onto that disk by itself | Assign it as a **Global Hot Spare** from the disk's actions in the iDRAC and apply the job; the rebuild starts on it |
+| Smaller size or a different type (SATA in a SAS RAID, HDD in an SSD one) | It is not the right part | Don't force it: request the correct spare with the original disk's part number |
+| **Failed** again | Faulty spare or a bay problem | A new collection and the vendor case is updated |
+
+! Before clearing a foreign configuration, check in the preview that it affects **only the new disk**. If more disks appear, there is a bigger problem (a volume the controller doesn't recognise) and clearing there destroys data: stop and escalate.
+
+Here it was a spare carrying another server's configuration. After clearing the foreign configuration on that disk it moved to *Ready*, the rebuild started on its own and three hours later the virtual disk was *Online*.
+
+## Next steps
+
+- The [out-of-band management with iDRAC and iLO](idrac-e-ilo-gestion-fuera-de-banda-red-usuarios-consola-firmware-y-alertas.html) guide explains how to get these alerts delivered over SNMP, email or Redfish.
+- The [VMware vSphere and vCenter](vsphere-vcenter-crear-vm-snapshots-con-caducidad-y-host-en-mantenimiento.html) guide covers maintenance mode if a part forces a host to stop.
+- The **Device42** guide records which PDU each power supply goes to, which is what you need for step 5.
+""")
+
+# ---------------------------------------------------------------- 5.x · UPS (second guide)
+g(slug="sai-apc-tarjeta-de-red-avisos-autotest-baterias-apagado-con-powerchute-y-un-corte-sin-aviso", topic="sai-sala", date="2026-11-03",
+  title_es="SAI APC con tarjeta de red: configuración inicial, usuarios, avisos por correo y SNMP, autotest, fecha de baterías, apagado con PowerChute y un corte nocturno del que no avisó nadie",
+  title_en="APC UPS with a network card: initial setup, users, email and SNMP alerts, self-test, battery date, shutdown with PowerChute and a night-time outage nobody was told about",
+  seo_title_en="APC UPS: network card, alerts and PowerChute · Iñigo González",
+  seo_title_es="SAI APC: tarjeta de red, avisos y PowerChute · Iñigo González",
+  dek_es="Un Smart-UPS con Network Management Card 3 en la sala de comunicaciones: IP y hora, cuentas con nombre, correo por un relé que funcione, SNMPv3 y traps, autotest programado, la fecha de la última sustitución de baterías, PowerChute Network Shutdown en servidores y hosts de vSphere, y un SAI que estuvo en batería de madrugada sin que llegara un correo.",
+  dek_en="A Smart-UPS with a Network Management Card 3 in the comms room: IP and time, named accounts, email through a relay that works, SNMPv3 and traps, a scheduled self-test, the last battery replacement date, PowerChute Network Shutdown on servers and vSphere hosts, and a UPS that ran on battery overnight without a single email arriving.",
+  seo_desc="Set up an APC Smart-UPS network card: email and SNMP alerts, self-test, battery date, PowerChute shutdown for servers and vSphere, and a missed outage.",
+  es="""
+## Qué vas a conseguir
+
+Que el SAI de la sala avise, se pruebe solo y apague los servidores en orden sin que nadie tenga que estar delante. La guía de [SAI de la sala de comunicaciones](sai-de-la-sala-de-comunicaciones-dimensionado-pruebas-apagado-ordenado-y-un-corte-antes-de-la-apertura.html) explica el dimensionado, la doble alimentación, las pruebas anuales y el orden de apagado; esta es la parte práctica en un **APC Smart-UPS con Network Management Card 3** (NMC 3): la tarjeta, los avisos y PowerChute.
+
+## Antes de empezar
+
+- El modelo del SAI y de la tarjeta (en la etiqueta de la tarjeta; las NMC 3 son las AP9640, AP9641 y AP9643) y su MAC, para reservar la IP.
+- Una IP fija en la **VLAN de gestión**, con su nombre en DNS (`sai-cr1-a.mgmt.contoso.local`).
+- Un **relé SMTP** interno que acepte correo desde la red de gestión y una lista de distribución de guardia (`sai-alertas@contoso.local`).
+- Para el apagado: las IP de los servidores y del vCenter, y el orden de apagado acordado.
+
+## 1. La tarjeta en la red
+
+La NMC 3 arranca por **DHCP** de fábrica. Dos formas de dejarle una IP fija:
+
+- **Reserva en DHCP** con la MAC de la tarjeta, o
+- Por el puerto de consola **micro-USB** de la tarjeta, con PuTTY o similar, y la CLI:
+
+:::term NMC 3 · consola · IP fija
+$ boot -b manual
+$ tcpip -i 10.10.90.41 -s 255.255.255.0 -g 10.10.90.1 -h sai-cr1-a
+$ reboot
+:::
+
+La herramienta *Device IP Configuration Wizard* del fabricante hace lo mismo por red con varias tarjetas a la vez.
+
+El primer acceso es por **HTTPS** (HTTP viene desactivado) con el usuario `apc` y contraseña `apc`, y la tarjeta obliga a cambiarla en ese momento. Después, la **hora**: en *Configuration › General › Date/Time*, modo NTP contra los servidores de la sede. En *Configuration › Network › DNS*, los servidores DNS de la sede: sin ellos, la tarjeta no resuelve el nombre del relé de correo. Sin hora correcta, el registro de eventos no sirve para reconstruir un corte.
+
+## 2. Usuarios
+
+- `apc` es el **Super User**: no se puede borrar ni renombrar. Su contraseña nueva va al gestor de contraseñas como cuenta de emergencia.
+- Para el día a día, cuentas **con nombre** en *Configuration › Security › Local Users › Management*: administradores con rol *Administrator* y la monitorización con *Read-Only*. Las cuentas de esos roles vienen desactivadas hasta que se cambia la contraseña de `apc`.
+- Si hay RADIUS, en *Configuration › Security › Remote Users* la autenticación remota con la local como respaldo: una baja en el directorio quita el acceso a todos los SAI.
+
+## 3. Avisos por correo
+
+En *Configuration › Notification › E-mail*:
+
+:::ui NMC 3 · Configuration › Notification › E-mail › Server
+= From Address: sai-cr1-a@contoso.local
+= SMTP Server: relay.contoso.local
+= Port: 25
+[ ] Authentication
+[Apply]
+:::
+
+- **Recipients**: la lista de guardia, no buzones de personas. Una persona se va de vacaciones o de la empresa; la lista sigue.
+- En **Event Actions** (por evento o por grupo de gravedad), comprueba que los eventos que importan tienen marcada la casilla de correo: en batería, batería baja, fallo del autotest, sustituir batería, sobrecarga y bypass.
+- **Test**: el envío de prueba desde la propia tarjeta. Si no llega, el resto de esta sección no sirve de nada.
+
+> El correo no basta como único canal. Los avisos de "en batería" y "batería baja" también tienen que llegar a la monitorización y, de ahí, al teléfono de guardia.
+
+## 4. SNMP y traps
+
+En la NMC 3, **SNMPv1 y SNMPv3 vienen desactivados**. Para la monitorización, solo SNMPv3:
+
+- *Configuration › Network › SNMPv3 › User Profiles*: un usuario con autenticación SHA y cifrado AES.
+- *Configuration › Network › SNMPv3 › Access Control*: ese usuario, solo desde la IP del servidor de monitorización.
+- *Configuration › Notification › SNMP Traps › Trap Receivers*: el servidor de monitorización como receptor, con el mismo usuario SNMPv3. Envía un trap de prueba y comprueba que llega.
+
+Los OID del MIB estándar de SAI y cómo consultarlos están en la guía de [SAI de la sala de comunicaciones](sai-de-la-sala-de-comunicaciones-dimensionado-pruebas-apagado-ordenado-y-un-corte-antes-de-la-apertura.html). Añade en la monitorización una alerta de **tarjeta sin respuesta**: si no se la ve, tampoco se verá un corte.
+
+## 5. Autotest y fecha de las baterías
+
+- **Autotest programado** en *UPS › Configuration › Self-Test Schedule*. Las opciones dependen del modelo; una vez cada dos semanas, o al menos una al mes, es lo habitual. El SAI pasa unos segundos a batería: si una batería está mal, el SAI lo detecta con carga real y lo registra.
+- El resultado queda en el registro de eventos (*UPS: Passed a self-test* o un fallo con su motivo) y, si el evento tiene acción de correo, llega a la lista.
+- **Fecha de la última sustitución de baterías**: en la configuración general del SAI, el campo *Last Battery Replacement* (mes y año). Al cambiar las baterías, se actualiza el mismo día. El estado de baterías (*Battery System*) muestra la fecha estimada de la siguiente sustitución.
+
+! Una fecha de baterías sin actualizar hace que el SAI calcule mal cuándo hay que cambiarlas, y que el inventario diga que unas baterías de cinco años son nuevas.
+
+## 6. Apagado ordenado con PowerChute Network Shutdown
+
+**PowerChute Network Shutdown** (PCNS) es el agente que escucha a la tarjeta y apaga el equipo donde está instalado. Va en cada servidor físico (Windows o Linux) o, en vSphere, como **dispositivo virtual** que apaga las máquinas virtuales, el vCenter y los hosts en el orden configurado.
+
+En la tarjeta, *UPS › Configuration › PowerChute*:
+
+- La **frase de autenticación** (*authentication phrase*), vacía de fábrica y obligatoria para que PowerChute pueda registrarse.
+- La lista de **clientes**: la IP de cada servidor o dispositivo virtual de PowerChute (hasta 50 por tarjeta). PowerChute también se añade solo al registrarse.
+- El protocolo, HTTPS si tu versión de PowerChute lo admite.
+
+En PowerChute, la consola web en `https://<servidor>:6547`. El asistente pide la IP de la tarjeta, el usuario y la frase de autenticación. Entre servidor y tarjeta tienen que estar abiertos **TCP 80 o 443, 3052 y 6547** y **UDP 3052**.
+
+- En **Configure Events**, el evento **UPS On Battery** con *Shutdown* activado y cuántos segundos en batería esperar antes de empezar. El tiempo se fija con la autonomía **medida** y lo que tarda el apagado completo, no con la del catálogo.
+- En los ajustes de virtualización: qué máquinas virtuales se apagan primero, cuánto se les deja para apagarse, si el vCenter es una máquina virtual (va casi al final) y después el host.
+- El evento **Available runtime has been exceeded** avisa de que el apagado configurado dura más que la batería que queda: hay que reducir tiempos o carga.
+- En la tarjeta, *UPS › Configuration › Shutdown* tiene el **Low Battery Duration**: los minutos que quedan cuando el SAI declara batería baja. Tiene que ser mayor que lo que tarda PowerChute en terminar.
+
+## 7. El ticket: "el SAI estuvo en batería anoche y no le llegó un correo a nadie"
+
+Jueves, 8:00. El vigilante comenta que anoche se fue la luz en el edificio "un rato". En la sala todo está encendido, pero nadie recibió nada.
+
+1. **Qué pasó**: en *Logs › Events › Log* de la tarjeta.
+
+:::ui NMC 3 · Logs › Events › Log
+= 11/03/2026 02:31:47 · UPS: No longer on battery power.
+= 11/03/2026 02:14:05 · UPS: On battery power in response to an input power problem.
+:::
+
+Diecisiete minutos en batería. PowerChute tenía el apagado a los 20 minutos: la vuelta de la luz llegó tres minutos antes de que se apagaran los servidores, y nadie lo sabía.
+
+2. **Por qué no llegó el correo**. Desde la propia tarjeta, *E-mail › Test*. Si falla, por orden:
+
+| Comprobación | Lo que se suele encontrar |
+|---|---|
+| Servidor SMTP de la tarjeta | Apunta a un relé antiguo que se dio de baja al migrar el correo |
+| DNS de la tarjeta | Sin servidor DNS: el nombre del relé no se resuelve |
+| Cortafuegos | La VLAN de gestión no tiene permitido el puerto 25 o 587 hacia el relé |
+| Relé | Solo acepta correo de IP autorizadas, y la de la tarjeta no está |
+| Destinatarios y Event Actions | El destinatario está desactivado o el evento no tiene marcada la acción de correo |
+
+Aquí era el primero: la tarjeta seguía apuntando al relé de antes de la migración. Se cambia al relé actual, se da de alta la IP de la tarjeta en él y se repite el test hasta que llega.
+
+3. **Por qué no avisó la monitorización**: los traps estaban configurados con SNMPv1, que la tarjeta tenía desactivado. Se pasa a SNMPv3 como en el paso 4 y se envía un trap de prueba.
+4. **Las baterías**: tras 17 minutos de descarga, comprueba la carga en el estado de baterías antes de dar el ticket por cerrado. Hasta que se recupere, un segundo corte tiene menos autonomía.
+5. **El edificio**: pregunta a mantenimiento por qué se cortó y si el grupo electrógeno arrancó. Si la sala estuvo 17 minutos en batería, el grupo no entró o no cubre esa línea.
+
+En el ticket: hora de inicio y fin del corte, la causa de que no llegaran los avisos, los cambios en la tarjeta y la monitorización, la prueba de correo y de trap recibidas y la pregunta abierta con mantenimiento. Para que no se repita en silencio, una prueba de correo y de trap de cada SAI entra en la revisión mensual.
+
+## Siguientes pasos
+
+- La guía de [SAI de la sala de comunicaciones](sai-de-la-sala-de-comunicaciones-dimensionado-pruebas-apagado-ordenado-y-un-corte-antes-de-la-apertura.html) cubre la prueba anual con el mantenedor y el orden de apagado por capas.
+- La de [monitorización 24x7](monitorizacion-desplegar-alarmas-y-responder-en-plataformas-24x7.html) explica cómo hacer que un aviso llegue a una persona y no solo a un buzón.
+- La de [VMware vSphere y vCenter](vsphere-vcenter-crear-vm-snapshots-con-caducidad-y-host-en-mantenimiento.html), para el arranque de hosts y máquinas virtuales cuando vuelve la luz.
+""",
+  en="""
+## What you'll get
+
+A comms room UPS that raises alerts, tests itself and shuts the servers down in order without anyone having to be there. The [comms room UPS](sai-de-la-sala-de-comunicaciones-dimensionado-pruebas-apagado-ordenado-y-un-corte-antes-de-la-apertura.html) guide explains sizing, dual power, annual tests and the shutdown order; this is the hands-on part on an **APC Smart-UPS with a Network Management Card 3** (NMC 3): the card, the alerts and PowerChute.
+
+## Before you start
+
+- The UPS and card model (on the card's label; the NMC 3 cards are the AP9640, AP9641 and AP9643) and its MAC, to reserve the IP.
+- A fixed IP on the **management VLAN**, with its name in DNS (`ups-cr1-a.mgmt.contoso.local`).
+- An internal **SMTP relay** that accepts mail from the management network and an on-call distribution list (`ups-alerts@contoso.local`).
+- For the shutdown: the IPs of the servers and the vCenter, and the agreed shutdown order.
+
+## 1. The card on the network
+
+The NMC 3 boots with **DHCP** out of the box. Two ways to give it a fixed IP:
+
+- A **DHCP reservation** with the card's MAC, or
+- Through the card's **micro-USB** console port, with PuTTY or similar, and the CLI:
+
+:::term NMC 3 · console · fixed IP
+$ boot -b manual
+$ tcpip -i 10.10.90.41 -s 255.255.255.0 -g 10.10.90.1 -h ups-cr1-a
+$ reboot
+:::
+
+The vendor's *Device IP Configuration Wizard* tool does the same over the network for several cards at once.
+
+First access is over **HTTPS** (HTTP comes disabled) with user `apc` and password `apc`, and the card forces you to change it there and then. Next, the **time**: under *Configuration › General › Date/Time*, NTP mode against the site's servers. Under *Configuration › Network › DNS*, the site's DNS servers: without them, the card can't resolve the mail relay's name. Without the right time, the event log is useless for reconstructing an outage.
+
+## 2. Users
+
+- `apc` is the **Super User**: it cannot be deleted or renamed. Its new password goes into the password manager as the emergency account.
+- For day-to-day work, **named** accounts under *Configuration › Security › Local Users › Management*: administrators with the *Administrator* role and monitoring with *Read-Only*. Accounts with those roles stay disabled until the `apc` password is changed.
+- If there is RADIUS, under *Configuration › Security › Remote Users* remote authentication with local as fallback: a leaver in the directory loses access to every UPS.
+
+## 3. Email alerts
+
+Under *Configuration › Notification › E-mail*:
+
+:::ui NMC 3 · Configuration › Notification › E-mail › Server
+= From Address: ups-cr1-a@contoso.local
+= SMTP Server: relay.contoso.local
+= Port: 25
+[ ] Authentication
+[Apply]
+:::
+
+- **Recipients**: the on-call list, not personal mailboxes. A person goes on holiday or leaves; the list stays.
+- Under **Event Actions** (by event or by severity group), check that the events that matter have the email box ticked: on battery, low battery, self-test failed, replace battery, overload and bypass.
+- **Test**: the test send from the card itself. If it doesn't arrive, the rest of this section is worth nothing.
+
+> Email is not enough as the only channel. "On battery" and "low battery" alerts also have to reach monitoring and, from there, the on-call phone.
+
+## 4. SNMP and traps
+
+On the NMC 3, **SNMPv1 and SNMPv3 come disabled**. For monitoring, SNMPv3 only:
+
+- *Configuration › Network › SNMPv3 › User Profiles*: a user with SHA authentication and AES encryption.
+- *Configuration › Network › SNMPv3 › Access Control*: that user, only from the monitoring server's IP.
+- *Configuration › Notification › SNMP Traps › Trap Receivers*: the monitoring server as receiver, with the same SNMPv3 user. Send a test trap and check it arrives.
+
+The standard UPS MIB OIDs and how to query them are in the [comms room UPS](sai-de-la-sala-de-comunicaciones-dimensionado-pruebas-apagado-ordenado-y-un-corte-antes-de-la-apertura.html) guide. Add a **card not responding** alert in monitoring: if the card can't be seen, an outage won't be seen either.
+
+## 5. Self-test and battery date
+
+- **Scheduled self-test** under *UPS › Configuration › Self-Test Schedule*. The options depend on the model; once every two weeks, or at least once a month, is usual. The UPS goes to battery for a few seconds: if a battery is bad, the UPS detects it under real load and logs it.
+- The result goes into the event log (*UPS: Passed a self-test* or a failure with its reason) and, if the event has an email action, reaches the list.
+- **Last battery replacement date**: in the UPS's general configuration, the *Last Battery Replacement* field (month and year). When the batteries are replaced, it is updated the same day. The battery status (*Battery System*) shows the estimated date of the next replacement.
+
+! A battery date that isn't updated makes the UPS miscalculate when they need replacing, and makes the inventory say five-year-old batteries are new.
+
+## 6. Orderly shutdown with PowerChute Network Shutdown
+
+**PowerChute Network Shutdown** (PCNS) is the agent that listens to the card and shuts down the machine it is installed on. It goes on each physical server (Windows or Linux) or, on vSphere, as a **virtual appliance** that shuts down the virtual machines, the vCenter and the hosts in the configured order.
+
+On the card, *UPS › Configuration › PowerChute*:
+
+- The **authentication phrase**, empty out of the box and required before PowerChute can register.
+- The **client** list: the IP of each PowerChute server or virtual appliance (up to 50 per card). PowerChute also adds itself when it registers.
+- The protocol, HTTPS if your PowerChute version supports it.
+
+In PowerChute, the web console at `https://<server>:6547`. The wizard asks for the card's IP, the user and the authentication phrase. Between server and card, **TCP 80 or 443, 3052 and 6547** and **UDP 3052** have to be open.
+
+- Under **Configure Events**, the **UPS On Battery** event with *Shutdown* enabled and how many seconds on battery to wait before starting. The time is set from **measured** runtime and how long the complete shutdown takes, not the catalogue figure.
+- In the virtualisation settings: which virtual machines shut down first, how long they get to shut down, whether the vCenter is a virtual machine (it goes near the end) and then the host.
+- The **Available runtime has been exceeded** event warns that the configured shutdown takes longer than the battery that is left: cut times or load.
+- On the card, *UPS › Configuration › Shutdown* holds the **Low Battery Duration**: the minutes left when the UPS declares low battery. It has to be longer than PowerChute needs to finish.
+
+## 7. The ticket: "the UPS ran on battery last night and nobody got an email"
+
+Thursday, 8:00. The security guard mentions the building lost power "for a while" last night. Everything in the room is on, but nobody received anything.
+
+1. **What happened**: under *Logs › Events › Log* on the card.
+
+:::ui NMC 3 · Logs › Events › Log
+= 11/03/2026 02:31:47 · UPS: No longer on battery power.
+= 11/03/2026 02:14:05 · UPS: On battery power in response to an input power problem.
+:::
+
+Seventeen minutes on battery. PowerChute had shutdown set at 20 minutes: power came back three minutes before the servers would have gone down, and nobody knew.
+
+2. **Why the email didn't arrive**. From the card itself, *E-mail › Test*. If it fails, in order:
+
+| Check | What you usually find |
+|---|---|
+| The card's SMTP server | It points at an old relay that was retired when mail was migrated |
+| The card's DNS | No DNS server: the relay's name doesn't resolve |
+| Firewall | The management VLAN isn't allowed port 25 or 587 to the relay |
+| Relay | It only accepts mail from authorised IPs, and the card's isn't one of them |
+| Recipients and Event Actions | The recipient is disabled or the event doesn't have the email action ticked |
+
+Here it was the first one: the card still pointed at the pre-migration relay. It is changed to the current relay, the card's IP is authorised on it, and the test is repeated until it arrives.
+
+3. **Why monitoring didn't alert**: the traps were configured with SNMPv1, which the card had disabled. It moves to SNMPv3 as in step 4 and a test trap is sent.
+4. **The batteries**: after 17 minutes of discharge, check the charge in the battery status before closing the ticket. Until it recovers, a second outage has less runtime.
+5. **The building**: ask maintenance why the power was cut and whether the generator started. If the room spent 17 minutes on battery, the generator didn't come in or doesn't cover that line.
+
+In the ticket: outage start and end times, the reason the alerts didn't arrive, the changes on the card and in monitoring, the test email and test trap received, and the open question with maintenance. So it can't happen silently again, a test email and test trap from every UPS goes into the monthly review.
+
+## Next steps
+
+- The [comms room UPS](sai-de-la-sala-de-comunicaciones-dimensionado-pruebas-apagado-ordenado-y-un-corte-antes-de-la-apertura.html) guide covers the annual test with the maintainer and the layered shutdown order.
+- The [24x7 monitoring](monitorizacion-desplegar-alarmas-y-responder-en-plataformas-24x7.html) guide explains how to make an alert reach a person and not just a mailbox.
+- The [VMware vSphere and vCenter](vsphere-vcenter-crear-vm-snapshots-con-caducidad-y-host-en-mantenimiento.html) guide, for bringing hosts and virtual machines back when power returns.
+""")
+
+
+# ---------------------------------------------------------------- 2.x · Ubuntu (2)
+g(slug="ubuntu-server-disco-lleno-journald-logrotate-y-un-servicio-que-no-arranca", topic="ubuntu", date="2026-11-03",
+  title_es="Ubuntu Server: un disco lleno, journald, logrotate, kernels antiguos y un servicio que no arranca",
+  title_en="Ubuntu Server: a full disk, journald, logrotate, old kernels and a service that won't start",
+  seo_title_en="Ubuntu: full disk and a failed service · Iñigo González",
+  seo_title_es="Ubuntu: disco lleno y un servicio caído · Iñigo González",
+  dek_es="Encontrar qué llena el disco con df, du y ncdu, poner límite al journal, rotar los logs de una aplicación con logrotate, limpiar la caché de apt y los kernels antiguos, leer systemctl status y journalctl -u, ajustar un servicio con systemctl edit y su política de reinicio, y el ticket de la aplicación que dejó de escribir logs.",
+  dek_en="Find what fills the disk with df, du and ncdu, cap the journal, rotate an application's logs with logrotate, clean the apt cache and old kernels, read systemctl status and journalctl -u, adjust a service with systemctl edit and its restart policy, and the ticket of the app that stopped writing logs.",
+  seo_desc="Ubuntu Server: find what fills the disk, cap journald, logrotate, old kernels, systemctl edit and restart policy, and a service that will not start.",
+  es="""
+## Qué vas a conseguir
+
+Saber en cinco minutos qué está llenando un Ubuntu Server y liberar espacio sin borrar lo que no toca; dejar el journal y los logs de las aplicaciones con un tamaño máximo para que no vuelva a pasar; y, cuando un servicio no arranca, leer lo que systemd dice de él, corregir su unidad sin tocar el fichero del paquete y darle una política de reinicio sensata.
+
+## Antes de empezar
+
+- Ubuntu Server 22.04 o 24.04 LTS y un usuario con `sudo`.
+- El nombre del servicio de la aplicación (aquí, `contoso-api.service`) y dónde escribe sus logs (`/var/log/contoso-api/`).
+- `ncdu` instalado (`sudo apt install ncdu`). Si el disco está al 100 %, puede que ni `apt` funcione: los pasos 1 y 2 se hacen con lo que ya trae el sistema.
+
+## 1. Qué está lleno: df, du y ncdu
+
+:::term bash · srv-app-02
+$ df -h -x tmpfs -x squashfs
+Filesystem                         Size  Used Avail Use% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv   48G   48G     0 100% /
+/dev/sda2                          2.0G  1.6G  248M  87% /boot
+$ df -i /
+Filesystem                        Inodes  IUsed   IFree IUse% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv 3.1M    212K    2.9M    7% /
+$ sudo du -xh --max-depth=1 /var 2>/dev/null | sort -h | tail -n 4
+1.2G    /var/cache
+3.9G    /var/lib
+41G     /var/log
+46G     /var
+:::
+
+- `df -h` dice qué sistema de ficheros está lleno; `df -i`, si lo que se ha acabado son los **inodos** (millones de ficheros pequeños, como sesiones o colas de correo). Con los inodos al 100 % hay espacio libre y aun así no se puede crear ningún fichero.
+- `du -x` no cruza a otros sistemas de ficheros: así no cuentas un recurso NFS montado debajo. Baja nivel a nivel (`/var`, luego `/var/log`) hasta dar con el culpable.
+- `sudo ncdu -x /` hace lo mismo de forma interactiva: flechas para entrar, `d` para borrar. Úsalo para mirar, y borra con cabeza.
+- En ext4, el 5 % del disco está reservado para root. Por eso los servicios que corren con su propio usuario fallan primero, mientras root aún puede escribir.
+
+! Un fichero borrado que un proceso tiene abierto **no libera espacio** hasta que el proceso lo cierra. Si `df` no baja después de un `rm`, `sudo lsof +L1` lista esos ficheros. Para vaciar un log en uso, se trunca (`sudo truncate -s 0 fichero.log`), no se borra.
+
+## 2. El journal de systemd
+
+:::term bash · srv-app-02
+$ journalctl --disk-usage
+Archived and active journals take up 3.9G in the file system.
+$ sudo journalctl --vacuum-size=500M
+Vacuuming done, freed 3.4G of archived journals from /var/log/journal/4c1f0e8a7d2b4e0f9a3c5d6e7f8a9b0c.
+$ sudo journalctl --vacuum-time=2weeks
+:::
+
+`--vacuum-size` y `--vacuum-time` solo borran ficheros archivados; para que el límite sea permanente, un fichero propio en `journald.conf.d`:
+
+:::term /etc/systemd/journald.conf.d/10-tamano.conf
+[Journal]
+SystemMaxUse=500M
+SystemKeepFree=2G
+:::
+
+`sudo systemctl restart systemd-journald` lo aplica. Por defecto el journal puede ocupar el 10 % del sistema de ficheros, con un máximo de 4 GB: en un disco de 40 GB son 4 GB de logs del sistema.
+
+## 3. Los logs de la aplicación con logrotate
+
+journald no rota los ficheros que una aplicación escribe por su cuenta. Para eso, un fichero en `/etc/logrotate.d/`:
+
+:::term /etc/logrotate.d/contoso-api
+/var/log/contoso-api/*.log {
+    daily
+    rotate 14
+    maxsize 500M
+    compress
+    delaycompress
+    missingok
+    notifempty
+    su contoso contoso
+    create 0640 contoso contoso
+    postrotate
+        systemctl kill -s HUP contoso-api.service
+    endscript
+}
+:::
+
+- `rotate 14` guarda 14 ficheros; `compress` los comprime y `delaycompress` deja sin comprimir el más reciente, por si la aplicación aún escribe en él.
+- `su` hace falta cuando la carpeta pertenece al usuario de la aplicación; sin él, logrotate se niega con *parent directory has insecure permissions*.
+- `postrotate` avisa a la aplicación para que reabra el fichero. Si no sabe hacerlo, cambia `create` y el bloque `postrotate` por `copytruncate`: copia y vacía el fichero en su sitio, y puede perder las líneas escritas en ese instante.
+- En Ubuntu, logrotate lo lanza `logrotate.timer` una vez al día. `maxsize` solo se comprueba en cada ejecución: si la aplicación puede escribir gigas en unas horas, toca ejecutarlo más a menudo.
+
+:::term bash · probar la configuración
+$ sudo logrotate -d /etc/logrotate.d/contoso-api
+$ sudo logrotate -f /etc/logrotate.d/contoso-api
+$ systemctl list-timers logrotate.timer
+:::
+
+`-d` simula y explica lo que haría sin tocar nada; `-f` fuerza una rotación ahora.
+
+## 4. La caché de apt y los kernels antiguos
+
+:::term bash · srv-app-02
+$ uname -r
+6.8.0-87-generic
+$ dpkg --list 'linux-image-[0-9]*' | awk '/^ii/{print $2}'
+linux-image-6.8.0-79-generic
+linux-image-6.8.0-84-generic
+linux-image-6.8.0-87-generic
+$ sudo apt clean
+$ sudo apt autoremove --purge
+:::
+
+- `apt clean` vacía `/var/cache/apt/archives/`, los paquetes ya instalados.
+- `apt autoremove --purge` quita los kernels que ya no hacen falta: conserva el que está en uso y el anterior, como vuelta atrás. Es lo que libera `/boot` cuando una actualización falla por falta de espacio. Nunca borres a mano el kernel que muestra `uname -r`.
+- Si el servidor usa snaps, `sudo snap set system refresh.retain=2` limita a dos las versiones guardadas de cada uno.
+
+## 5. Un servicio: systemctl status y journalctl -u
+
+:::term bash · srv-app-02
+$ systemctl status contoso-api --no-pager
+× contoso-api.service - Contoso API de facturas
+     Loaded: loaded (/etc/systemd/system/contoso-api.service; enabled; preset: enabled)
+     Active: failed (Result: start-limit-hit) since Mon 2026-11-02 08:14:03 CET; 3min ago
+    Process: 2311 ExecStart=/opt/contoso-api/bin/contoso-api (code=exited, status=1/FAILURE)
+   Main PID: 2311 (code=exited, status=1/FAILURE)
+$ journalctl -u contoso-api -b -n 20 --no-pager
+$ journalctl -u contoso-api --since "08:00" -p err
+:::
+
+- **Loaded** dice dónde está el fichero de la unidad y si arranca con el sistema (`enabled`). **Active** dice cómo terminó: `exit-code`, `oom-kill`, `timeout` o `start-limit-hit`.
+- `journalctl -u` filtra por unidad; `-b`, desde el último arranque; `-p err`, solo errores; `-f`, en directo mientras lo arrancas en otra ventana.
+- `systemctl cat contoso-api` muestra la unidad completa, con los ficheros que la modifican.
+
+## 6. Ajustar la unidad con systemctl edit y la política de reinicio
+
+El fichero de la unidad lo instala el paquete o el equipo de la aplicación. Los cambios propios van en un fichero aparte, que sobrevive a las actualizaciones:
+
+:::term bash · sudo systemctl edit contoso-api
+[Unit]
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Service]
+Restart=on-failure
+RestartSec=10
+:::
+
+- `systemctl edit` crea `/etc/systemd/system/contoso-api.service.d/override.conf` y recarga systemd al guardar. `systemctl revert contoso-api` lo deshace.
+- `Restart=on-failure` vuelve a arrancar el servicio si muere con error, pero no si alguien lo para con `systemctl stop`. `RestartSec` es la espera entre intentos.
+- `StartLimitBurst` y `StartLimitIntervalSec` (en `[Unit]`) ponen el tope: más de 5 arranques en 300 segundos y systemd deja de intentarlo con `start-limit-hit`. Sin tope, un servicio roto se reinicia en bucle y llena el journal.
+
+## 7. El ticket: "la aplicación ha dejado de escribir logs y el servicio no arranca"
+
+Lunes, 8:20. Administración no puede emitir facturas. El equipo de la aplicación dice que el último log es del domingo a las 23:47 y que el servicio no levanta.
+
+1. **El estado**: `systemctl status contoso-api` dice `failed (Result: start-limit-hit)`. Ese resultado no es la causa: es systemd diciendo que dejó de intentarlo.
+2. **La causa, en el journal**:
+
+:::term bash · journalctl -u contoso-api
+$ journalctl -u contoso-api -b --no-pager | tail -n 4
+nov 02 08:13:52 srv-app-02 contoso-api[2311]: FATAL cannot open /var/log/contoso-api/app.log: No space left on device
+nov 02 08:13:52 srv-app-02 systemd[1]: contoso-api.service: Main process exited, code=exited, status=1/FAILURE
+nov 02 08:14:03 srv-app-02 systemd[1]: contoso-api.service: Start request repeated too quickly.
+nov 02 08:14:03 srv-app-02 systemd[1]: contoso-api.service: Failed with result 'start-limit-hit'.
+:::
+
+3. **El disco**: `df -h /` al 100 % y `du` lleva a `/var/log/contoso-api/app.log`, de 38 GB. La aplicación cambió el nivel de log a *debug* en el despliegue del viernes y no había ninguna regla de logrotate para esa carpeta.
+4. **Liberar espacio sin perder la evidencia**: guardar las últimas líneas (`sudo tail -n 5000 app.log > /root/app-tail.log`), truncar el fichero (`sudo truncate -s 0 /var/log/contoso-api/app.log`) y vaciar lo archivado del journal (`journalctl --vacuum-size=500M`). Comprobar que `df` baja; si no baja, `lsof +L1`.
+5. **Arrancar**: después de un `start-limit-hit`, systemd no deja arrancar hasta reiniciar el contador:
+
+:::term bash · srv-app-02
+$ sudo systemctl reset-failed contoso-api
+$ sudo systemctl start contoso-api
+$ systemctl is-active contoso-api
+active
+$ curl -s -o /dev/null -w "%{http_code}\\n" http://127.0.0.1:8080/health
+200
+:::
+
+6. **Que no se repita**: la regla de logrotate del apartado 3, el límite del journal del apartado 2, el nivel de log devuelto a *info* por el equipo de la aplicación y una alerta de disco al 80 % en la monitorización.
+
+En el ticket: sistema de ficheros y uso antes y después, qué fichero lo llenó y por qué, qué se truncó y qué se guardó, y las dos reglas nuevas.
+
+## Siguientes pasos
+
+- La primera guía de Ubuntu, [los primeros 30 minutos tras la instalación](ubuntu-server-usuarios-ssh-firewall-y-actualizaciones.html), cubre usuarios, SSH, firewall y actualizaciones automáticas.
+- Con varios servidores, la alerta de disco y de servicio caído va en la monitorización: la guía de [Zabbix: servidor, agentes y plantillas](zabbix-servidor-agente-2-plantillas-macros-dependencias-avisos-y-un-agente-no-disponible.html) usa la plantilla de Linux con umbrales por sistema de ficheros.
+- Para no buscar logs servidor a servidor, la guía de [ELK](elk-centralizar-logs-de-servidores-y-buscar-un-error-en-kibana.html) los centraliza.
+""",
+  en="""
+## What you'll get
+
+Knowing within five minutes what is filling an Ubuntu Server and freeing space without deleting the wrong thing; capping the journal and the applications' logs so it does not happen again; and, when a service won't start, reading what systemd says about it, fixing its unit without touching the package's file and giving it a sensible restart policy.
+
+## Before you start
+
+- Ubuntu Server 22.04 or 24.04 LTS and a user with `sudo`.
+- The application's service name (here, `contoso-api.service`) and where it writes its logs (`/var/log/contoso-api/`).
+- `ncdu` installed (`sudo apt install ncdu`). If the disk is at 100 %, even `apt` may not work: steps 1 and 2 use what the system already has.
+
+## 1. What is full: df, du and ncdu
+
+:::term bash · srv-app-02
+$ df -h -x tmpfs -x squashfs
+Filesystem                         Size  Used Avail Use% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv   48G   48G     0 100% /
+/dev/sda2                          2.0G  1.6G  248M  87% /boot
+$ df -i /
+Filesystem                        Inodes  IUsed   IFree IUse% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv 3.1M    212K    2.9M    7% /
+$ sudo du -xh --max-depth=1 /var 2>/dev/null | sort -h | tail -n 4
+1.2G    /var/cache
+3.9G    /var/lib
+41G     /var/log
+46G     /var
+:::
+
+- `df -h` tells you which file system is full; `df -i`, whether what has run out is **inodes** (millions of small files, such as sessions or mail queues). With inodes at 100 % there is free space and still no file can be created.
+- `du -x` does not cross into other file systems: that way you do not count an NFS share mounted underneath. Go down level by level (`/var`, then `/var/log`) until you find the culprit.
+- `sudo ncdu -x /` does the same interactively: arrows to go in, `d` to delete. Use it to look, and delete carefully.
+- On ext4, 5 % of the disk is reserved for root. That is why services running under their own user fail first, while root can still write.
+
+! A deleted file that a process still holds open **frees no space** until the process closes it. If `df` does not go down after an `rm`, `sudo lsof +L1` lists those files. To empty a log in use, truncate it (`sudo truncate -s 0 file.log`), do not delete it.
+
+## 2. The systemd journal
+
+:::term bash · srv-app-02
+$ journalctl --disk-usage
+Archived and active journals take up 3.9G in the file system.
+$ sudo journalctl --vacuum-size=500M
+Vacuuming done, freed 3.4G of archived journals from /var/log/journal/4c1f0e8a7d2b4e0f9a3c5d6e7f8a9b0c.
+$ sudo journalctl --vacuum-time=2weeks
+:::
+
+`--vacuum-size` and `--vacuum-time` only delete archived files; to make the limit permanent, a file of your own in `journald.conf.d`:
+
+:::term /etc/systemd/journald.conf.d/10-size.conf
+[Journal]
+SystemMaxUse=500M
+SystemKeepFree=2G
+:::
+
+`sudo systemctl restart systemd-journald` applies it. By default the journal may take 10 % of the file system, up to 4 GB: on a 40 GB disk that is 4 GB of system logs.
+
+## 3. The application's logs with logrotate
+
+journald does not rotate files an application writes on its own. For that, a file in `/etc/logrotate.d/`:
+
+:::term /etc/logrotate.d/contoso-api
+/var/log/contoso-api/*.log {
+    daily
+    rotate 14
+    maxsize 500M
+    compress
+    delaycompress
+    missingok
+    notifempty
+    su contoso contoso
+    create 0640 contoso contoso
+    postrotate
+        systemctl kill -s HUP contoso-api.service
+    endscript
+}
+:::
+
+- `rotate 14` keeps 14 files; `compress` compresses them and `delaycompress` leaves the newest uncompressed, in case the app is still writing to it.
+- `su` is needed when the folder belongs to the application's user; without it, logrotate refuses with *parent directory has insecure permissions*.
+- `postrotate` tells the application to reopen the file. If it cannot, replace `create` and the `postrotate` block with `copytruncate`: it copies and empties the file in place, and may lose the lines written at that instant.
+- On Ubuntu, logrotate is run by `logrotate.timer` once a day. `maxsize` is only checked on each run: if the app can write gigabytes in a few hours, it has to run more often.
+
+:::term bash · test the configuration
+$ sudo logrotate -d /etc/logrotate.d/contoso-api
+$ sudo logrotate -f /etc/logrotate.d/contoso-api
+$ systemctl list-timers logrotate.timer
+:::
+
+`-d` simulates and explains what it would do without touching anything; `-f` forces a rotation now.
+
+## 4. The apt cache and old kernels
+
+:::term bash · srv-app-02
+$ uname -r
+6.8.0-87-generic
+$ dpkg --list 'linux-image-[0-9]*' | awk '/^ii/{print $2}'
+linux-image-6.8.0-79-generic
+linux-image-6.8.0-84-generic
+linux-image-6.8.0-87-generic
+$ sudo apt clean
+$ sudo apt autoremove --purge
+:::
+
+- `apt clean` empties `/var/cache/apt/archives/`, packages that are already installed.
+- `apt autoremove --purge` removes kernels no longer needed: it keeps the running one and the previous one as a way back. It is what frees `/boot` when an update fails for lack of space. Never remove by hand the kernel `uname -r` shows.
+- If the server uses snaps, `sudo snap set system refresh.retain=2` limits each one to two saved revisions.
+
+## 5. A service: systemctl status and journalctl -u
+
+:::term bash · srv-app-02
+$ systemctl status contoso-api --no-pager
+× contoso-api.service - Contoso invoicing API
+     Loaded: loaded (/etc/systemd/system/contoso-api.service; enabled; preset: enabled)
+     Active: failed (Result: start-limit-hit) since Mon 2026-11-02 08:14:03 CET; 3min ago
+    Process: 2311 ExecStart=/opt/contoso-api/bin/contoso-api (code=exited, status=1/FAILURE)
+   Main PID: 2311 (code=exited, status=1/FAILURE)
+$ journalctl -u contoso-api -b -n 20 --no-pager
+$ journalctl -u contoso-api --since "08:00" -p err
+:::
+
+- **Loaded** says where the unit file is and whether it starts at boot (`enabled`). **Active** says how it ended: `exit-code`, `oom-kill`, `timeout` or `start-limit-hit`.
+- `journalctl -u` filters by unit; `-b`, since the last boot; `-p err`, errors only; `-f`, live while you start it in another window.
+- `systemctl cat contoso-api` shows the whole unit, with the files that modify it.
+
+## 6. Adjusting the unit with systemctl edit and the restart policy
+
+The unit file is installed by the package or by the application team. Your own changes go in a separate file that survives updates:
+
+:::term bash · sudo systemctl edit contoso-api
+[Unit]
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Service]
+Restart=on-failure
+RestartSec=10
+:::
+
+- `systemctl edit` creates `/etc/systemd/system/contoso-api.service.d/override.conf` and reloads systemd on save. `systemctl revert contoso-api` undoes it.
+- `Restart=on-failure` starts the service again if it dies with an error, but not if someone stops it with `systemctl stop`. `RestartSec` is the wait between attempts.
+- `StartLimitBurst` and `StartLimitIntervalSec` (in `[Unit]`) set the ceiling: more than 5 starts in 300 seconds and systemd stops trying with `start-limit-hit`. Without a ceiling, a broken service restarts in a loop and fills the journal.
+
+## 7. The ticket: "the application stopped writing logs and the service fails to start"
+
+Monday, 8:20. Accounts cannot issue invoices. The application team says the last log line is from Sunday at 23:47 and the service will not come up.
+
+1. **The state**: `systemctl status contoso-api` says `failed (Result: start-limit-hit)`. That result is not the cause: it is systemd saying it gave up.
+2. **The cause, in the journal**:
+
+:::term bash · journalctl -u contoso-api
+$ journalctl -u contoso-api -b --no-pager | tail -n 4
+Nov 02 08:13:52 srv-app-02 contoso-api[2311]: FATAL cannot open /var/log/contoso-api/app.log: No space left on device
+Nov 02 08:13:52 srv-app-02 systemd[1]: contoso-api.service: Main process exited, code=exited, status=1/FAILURE
+Nov 02 08:14:03 srv-app-02 systemd[1]: contoso-api.service: Start request repeated too quickly.
+Nov 02 08:14:03 srv-app-02 systemd[1]: contoso-api.service: Failed with result 'start-limit-hit'.
+:::
+
+3. **The disk**: `df -h /` at 100 % and `du` leads to `/var/log/contoso-api/app.log`, 38 GB. The application switched its log level to *debug* in Friday's deployment and there was no logrotate rule for that folder.
+4. **Free space without losing the evidence**: keep the last lines (`sudo tail -n 5000 app.log > /root/app-tail.log`), truncate the file (`sudo truncate -s 0 /var/log/contoso-api/app.log`) and clear the archived journal (`journalctl --vacuum-size=500M`). Check that `df` goes down; if it does not, `lsof +L1`.
+5. **Start it**: after a `start-limit-hit`, systemd will not start the unit until the counter is reset:
+
+:::term bash · srv-app-02
+$ sudo systemctl reset-failed contoso-api
+$ sudo systemctl start contoso-api
+$ systemctl is-active contoso-api
+active
+$ curl -s -o /dev/null -w "%{http_code}\\n" http://127.0.0.1:8080/health
+200
+:::
+
+6. **So it does not happen again**: the logrotate rule from section 3, the journal limit from section 2, the log level set back to *info* by the application team, and a disk alert at 80 % in monitoring.
+
+In the ticket: file system and usage before and after, which file filled it and why, what was truncated and what was kept, and the two new rules.
+
+## Next steps
+
+- The first Ubuntu guide, [the first 30 minutes after installation](ubuntu-server-usuarios-ssh-firewall-y-actualizaciones.html), covers users, SSH, the firewall and automatic updates.
+- With several servers, the disk and service-down alerts belong in monitoring: the [Zabbix: server, agents and templates](zabbix-servidor-agente-2-plantillas-macros-dependencias-avisos-y-un-agente-no-disponible.html) guide uses the Linux template with per-file-system thresholds.
+- To stop hunting logs server by server, the [ELK](elk-centralizar-logs-de-servidores-y-buscar-un-error-en-kibana.html) guide centralises them.
+""")
+
+# ---------------------------------------------------------------- 3.x · Apache (2)
+g(slug="apache-en-ubuntu-virtual-hosts-https-con-certbot-cabeceras-y-la-pagina-por-defecto", topic="nginx-apache", date="2026-11-03",
+  title_es="Apache en Ubuntu: virtual hosts, HTTPS con certbot, cabeceras de seguridad, logs y la página por defecto que aparece en lugar de tu sitio",
+  title_en="Apache on Ubuntu: virtual hosts, HTTPS with certbot, security headers, logs and the default page that shows instead of your site",
+  seo_title_en="Apache on Ubuntu: vhosts, certbot, headers · Iñigo González",
+  seo_title_es="Apache en Ubuntu: vhosts, certbot y cabeceras · Iñigo González",
+  dek_es="Servir varios sitios con Apache en Ubuntu: sites-available, a2ensite y a2enmod, ServerName y ServerAlias, la redirección de HTTP a HTTPS, certificados de Let's Encrypt con certbot y su renovación automática, cabeceras de seguridad, formatos de log, y el sitio que muestra la página por defecto de Apache o la web de otro.",
+  dek_en="Serving several sites with Apache on Ubuntu: sites-available, a2ensite and a2enmod, ServerName and ServerAlias, the HTTP to HTTPS redirect, Let's Encrypt certificates with certbot and automatic renewal, security headers, log formats, and the site that shows Apache's default page or someone else's.",
+  seo_desc="Apache on Ubuntu: virtual hosts, a2ensite, HTTPS with certbot and renewal, security headers, log formats, and fixing the wrong site with apache2ctl -S.",
+  es="""
+## Qué vas a conseguir
+
+Un servidor Apache en Ubuntu que sirve varios sitios propios (no como proxy, sino con sus ficheros), cada uno con su nombre, su certificado de Let's Encrypt renovado solo, la redirección a HTTPS, las cabeceras de seguridad y un log que dice cuánto tarda cada petición. Y, cuando alguien abre su web y ve **Apache2 Default Page: It works!** o la web de otro departamento, saber leer `apache2ctl -S` y encontrar el motivo.
+
+## Antes de empezar
+
+- Ubuntu Server 24.04 LTS con `apache2` instalado (`sudo apt install apache2`) y un usuario con `sudo`.
+- Los nombres públicos en DNS apuntando al servidor: aquí `reservas.example.com` y `portal.example.com`, con sus `www`.
+- Los puertos **80 y 443** abiertos desde internet: Let's Encrypt valida por el 80 (`sudo ufw allow "Apache Full"`).
+- Para nombres internos (`*.contoso.local`), Let's Encrypt no sirve: el certificado lo emite la CA corporativa y se configura a mano como en la guía de proxy inverso.
+
+## 1. Cómo organiza Apache los sitios en Ubuntu
+
+| Ruta | Qué contiene |
+|---|---|
+| `/etc/apache2/apache2.conf` | La configuración global y los `LogFormat` |
+| `/etc/apache2/sites-available/` | Un fichero `.conf` por sitio, activo o no |
+| `/etc/apache2/sites-enabled/` | Enlaces a los sitios activos, creados por `a2ensite` |
+| `/etc/apache2/mods-enabled/` | Módulos activos, con `a2enmod` / `a2dismod` |
+| `/etc/apache2/conf-enabled/` | Fragmentos globales, con `a2enconf` (por ejemplo `security.conf`) |
+| `/var/www/` | El contenido de cada sitio |
+| `/var/log/apache2/` | `access.log`, `error.log` y los logs propios de cada sitio |
+
+Los ficheros de `sites-enabled` se cargan **por orden alfabético**, y ese orden importa: el primero que escucha en un puerto es el sitio por defecto de ese puerto. El que trae Ubuntu se llama `000-default.conf` precisamente para ir el primero.
+
+## 2. Un virtual host por sitio
+
+:::term /etc/apache2/sites-available/reservas.conf
+<VirtualHost *:80>
+    ServerName reservas.example.com
+    ServerAlias www.reservas.example.com
+    DocumentRoot /var/www/reservas
+    <Directory /var/www/reservas>
+        Options -Indexes
+        AllowOverride None
+        Require all granted
+    </Directory>
+    ErrorLog ${APACHE_LOG_DIR}/reservas_error.log
+    CustomLog ${APACHE_LOG_DIR}/reservas_access.log tiempos
+</VirtualHost>
+:::
+
+:::term bash · activar el sitio
+$ sudo mkdir -p /var/www/reservas && sudo chown -R www-data:www-data /var/www/reservas
+$ sudo a2ensite reservas
+$ sudo a2dissite 000-default
+$ sudo apache2ctl configtest
+Syntax OK
+$ sudo systemctl reload apache2
+:::
+
+- **ServerName** es el nombre principal; **ServerAlias**, los demás (con `www` y sin él). Un nombre que no está en ninguno de los dos no es de este sitio.
+- `Options -Indexes` evita que una carpeta sin `index.html` muestre la lista de ficheros.
+- `a2ensite` y `a2dissite` solo crean y quitan el enlace: hace falta `reload` después. El formato `tiempos` se define en el apartado 5; hasta entonces, `configtest` dará error.
+
+## 3. HTTPS con certbot y su renovación
+
+:::term bash · certbot con el plugin de Apache
+$ sudo apt install certbot python3-certbot-apache
+$ sudo a2enmod ssl headers rewrite
+$ sudo certbot --apache -d reservas.example.com -d www.reservas.example.com --redirect -m it@example.com --agree-tos
+Successfully received certificate.
+Certificate is saved at: /etc/letsencrypt/live/reservas.example.com/fullchain.pem
+Key is saved at:         /etc/letsencrypt/live/reservas.example.com/privkey.pem
+Successfully deployed certificate for reservas.example.com to /etc/apache2/sites-available/reservas-le-ssl.conf
+Congratulations! You have successfully enabled HTTPS on https://reservas.example.com and https://www.reservas.example.com
+:::
+
+- certbot crea un segundo fichero, `reservas-le-ssl.conf`, con el `<VirtualHost *:443>` y las rutas del certificado. Lo que cambies después (cabeceras, logs) va en los dos ficheros: el del 80 y el del 443.
+- `--redirect` añade al sitio del puerto 80 una regla que manda todo a HTTPS con un 301. Sin certbot, lo mismo en una línea: `Redirect permanent / https://reservas.example.com/`.
+- **La renovación**: el paquete de Ubuntu instala `certbot.timer`, que comprueba dos veces al día y renueva lo que caduca en menos de 30 días. Con el snap de certbot, el temporizador es `snap.certbot.renew.timer`. Let's Encrypt dejó de enviar correos de aviso de caducidad en 2025: si la renovación falla, nadie te avisa salvo tu monitorización.
+
+:::term bash · comprobar la renovación
+$ systemctl list-timers certbot.timer
+$ sudo certbot certificates
+$ sudo certbot renew --dry-run
+Congratulations, all simulated renewals succeeded:
+  /etc/letsencrypt/live/reservas.example.com/fullchain.pem (success)
+:::
+
+## 4. Cabeceras de seguridad y lo que Apache cuenta de sí mismo
+
+En el `<VirtualHost *:443>` del sitio (necesita `mod_headers`):
+
+:::term reservas-le-ssl.conf · cabeceras
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+:::
+
+Y en `/etc/apache2/conf-available/security.conf`, que Ubuntu trae activo, para que los errores no digan la versión exacta de Apache y del sistema:
+
+:::term security.conf
+ServerTokens Prod
+ServerSignature Off
+TraceEnable Off
+:::
+
+- **HSTS** obliga al navegador a usar HTTPS durante un año. Actívalo cuando HTTPS funcione bien en todos los nombres: con `includeSubDomains`, también en los subdominios. Empieza con un `max-age` corto si tienes dudas.
+- Una **Content-Security-Policy** protege más que todas las anteriores, pero depende de cada aplicación: se acuerda con quien la desarrolla y se prueba antes con `Content-Security-Policy-Report-Only`.
+
+:::term bash · comprobar las cabeceras
+$ curl -sI https://reservas.example.com | grep -iE "^(server|strict|x-content|x-frame|referrer)"
+Server: Apache
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+Referrer-Policy: strict-origin-when-cross-origin
+:::
+
+## 5. Formatos de log
+
+`apache2.conf` ya define `combined`, `common` y `vhost_combined`. Al formato combinado le falta lo más útil para diagnosticar: el nombre del sitio que respondió y el tiempo. Un formato propio en `/etc/apache2/conf-available/log-tiempos.conf`, activado con `a2enconf log-tiempos`:
+
+:::term log-tiempos.conf
+LogFormat "%v %h %l %u %t \\"%r\\" %>s %O \\"%{Referer}i\\" \\"%{User-Agent}i\\" %D" tiempos
+:::
+
+- `%v` es el `ServerName` del virtual host que atendió la petición: con él, el ticket del apartado 6 se ve en el log.
+- `%D` es el tiempo en **microsegundos**; `%>s`, el código final; `%O`, los bytes enviados.
+- Si delante hay un balanceador, `%h` será siempre su IP: la del usuario va en `%{X-Forwarded-For}i`, o con `mod_remoteip` configurado.
+- Los logs de `/var/log/apache2/` ya los rota `/etc/logrotate.d/apache2` (14 días, comprimidos).
+
+## 6. El ticket: "la web muestra la página por defecto de Apache, o la de otro sitio"
+
+Martes, 10:15. Marketing ha publicado `portal.example.com` en el mismo servidor. Desde fuera, `http://www.portal.example.com` muestra **Apache2 Ubuntu Default Page** y `https://portal.example.com` enseña la web de reservas, con un aviso de certificado.
+
+Apache elige el virtual host en dos pasos: primero por **IP y puerto**, y entre los que coinciden, por el **nombre** pedido. Si ningún `ServerName` ni `ServerAlias` coincide, responde el primero de ese puerto. `apache2ctl -S` enseña exactamente esa tabla:
+
+:::term bash · apache2ctl -S
+$ sudo apache2ctl -S
+VirtualHost configuration:
+*:443                  is a NameVirtualHost
+         default server reservas.example.com (/etc/apache2/sites-enabled/reservas-le-ssl.conf:2)
+         port 443 namevhost reservas.example.com (/etc/apache2/sites-enabled/reservas-le-ssl.conf:2)
+                 alias www.reservas.example.com
+*:80                   is a NameVirtualHost
+         default server srv-web-01.contoso.local (/etc/apache2/sites-enabled/000-default.conf:1)
+         port 80 namevhost srv-web-01.contoso.local (/etc/apache2/sites-enabled/000-default.conf:1)
+         port 80 namevhost portal.example.com (/etc/apache2/sites-enabled/portal.conf:1)
+         port 80 namevhost reservas.example.com (/etc/apache2/sites-enabled/reservas.conf:1)
+                 alias www.reservas.example.com
+:::
+
+Cómo se lee, de más a menos frecuente:
+
+1. **`000-default` sigue activo** y es el `default server` del 80. A él va todo lo que no coincide: aquí, `www.portal.example.com`, porque `portal.conf` no tiene `ServerAlias`. Solución: añadir el alias y `a2dissite 000-default` (o dejarlo, pero con una página neutra, nunca la de Apache).
+2. **Falta el sitio del 443**: `portal.example.com` solo aparece en el 80. En el 443 no hay nadie con ese nombre, así que responde el primero (reservas) con su certificado, y el navegador avisa de que el nombre no coincide. Solución: `certbot --apache -d portal.example.com -d www.portal.example.com`.
+3. **Un `VirtualHost` con IP** (`<VirtualHost 10.20.5.10:443>`) junto a otros con `*:443`: el de la IP gana siempre para esa dirección, aunque el nombre no coincida. Todos con `*` o todos con IP, no mezclados.
+4. **El sitio no está activo**: el fichero está en `sites-available` pero no aparece en `-S`. Falta `a2ensite` y `reload`.
+5. **El DNS apunta a otro servidor**, o el navegador recuerda un 301 antiguo: `curl -sI -H "Host: portal.example.com" http://127.0.0.1/` desde el propio servidor dice qué responde Apache, sin DNS ni caché de por medio.
+
+:::term bash · después de corregir
+$ sudo apache2ctl configtest && sudo systemctl reload apache2
+$ curl -sI https://www.portal.example.com | head -n 1
+HTTP/1.1 200 OK
+$ sudo tail -n 1 /var/log/apache2/portal_access.log
+portal.example.com 203.0.113.24 - - [03/Nov/2026:10:31:07 +0100] "GET / HTTP/1.1" 200 5120 "-" "Mozilla/5.0" 1840
+:::
+
+> Una costumbre que evita este ticket: un primer sitio propio (`000-catchall.conf`) que devuelve un 404 o una página neutra para cualquier nombre desconocido, en el 80 y en el 443. Así un error de configuración nunca enseña la web de otro.
+
+En el ticket: la salida de `apache2ctl -S` antes y después, qué faltaba (alias, sitio del 443, `a2ensite`) y la comprobación con `curl`.
+
+## Siguientes pasos
+
+- La primera guía de este tema, [Nginx y Apache como proxy inverso](nginx-y-apache-proxy-inverso-tls-cabeceras-timeouts-y-un-502-bad-gateway.html), publica una aplicación interna con TLS corporativo y resuelve el 502.
+- La guía de [Ubuntu Server: los primeros 30 minutos](ubuntu-server-usuarios-ssh-firewall-y-actualizaciones.html) deja el servidor con SSH, ufw y parches antes de instalar Apache.
+- Si el sitio es un WordPress, la guía de [WordPress en Docker](wordpress-en-docker-compose-copias-bastionado-y-un-plugin-que-tumba-la-web.html) cubre copias y bastionado.
+""",
+  en="""
+## What you'll get
+
+An Apache server on Ubuntu serving several sites of its own (not as a proxy, but from their files), each with its name, its Let's Encrypt certificate renewed automatically, the redirect to HTTPS, the security headers and a log that says how long each request took. And, when someone opens their site and sees **Apache2 Default Page: It works!** or another department's site, knowing how to read `apache2ctl -S` and find the reason.
+
+## Before you start
+
+- Ubuntu Server 24.04 LTS with `apache2` installed (`sudo apt install apache2`) and a user with `sudo`.
+- The public names in DNS pointing at the server: here `reservas.example.com` and `portal.example.com`, with their `www`.
+- Ports **80 and 443** open from the internet: Let's Encrypt validates on 80 (`sudo ufw allow "Apache Full"`).
+- For internal names (`*.contoso.local`), Let's Encrypt does not work: the certificate is issued by the corporate CA and configured by hand as in the reverse proxy guide.
+
+## 1. How Apache organises sites on Ubuntu
+
+| Path | What it holds |
+|---|---|
+| `/etc/apache2/apache2.conf` | The global configuration and the `LogFormat`s |
+| `/etc/apache2/sites-available/` | One `.conf` file per site, enabled or not |
+| `/etc/apache2/sites-enabled/` | Links to enabled sites, created by `a2ensite` |
+| `/etc/apache2/mods-enabled/` | Enabled modules, with `a2enmod` / `a2dismod` |
+| `/etc/apache2/conf-enabled/` | Global snippets, with `a2enconf` (for example `security.conf`) |
+| `/var/www/` | Each site's content |
+| `/var/log/apache2/` | `access.log`, `error.log` and each site's own logs |
+
+Files in `sites-enabled` load **in alphabetical order**, and the order matters: the first one listening on a port is that port's default site. The one Ubuntu ships is called `000-default.conf` precisely so that it comes first.
+
+## 2. One virtual host per site
+
+:::term /etc/apache2/sites-available/reservas.conf
+<VirtualHost *:80>
+    ServerName reservas.example.com
+    ServerAlias www.reservas.example.com
+    DocumentRoot /var/www/reservas
+    <Directory /var/www/reservas>
+        Options -Indexes
+        AllowOverride None
+        Require all granted
+    </Directory>
+    ErrorLog ${APACHE_LOG_DIR}/reservas_error.log
+    CustomLog ${APACHE_LOG_DIR}/reservas_access.log timing
+</VirtualHost>
+:::
+
+:::term bash · enable the site
+$ sudo mkdir -p /var/www/reservas && sudo chown -R www-data:www-data /var/www/reservas
+$ sudo a2ensite reservas
+$ sudo a2dissite 000-default
+$ sudo apache2ctl configtest
+Syntax OK
+$ sudo systemctl reload apache2
+:::
+
+- **ServerName** is the main name; **ServerAlias**, the others (with and without `www`). A name in neither is not this site's.
+- `Options -Indexes` stops a folder without `index.html` from listing its files.
+- `a2ensite` and `a2dissite` only create and remove the link: a `reload` is needed afterwards. The `timing` format is defined in section 5; until then, `configtest` will fail.
+
+## 3. HTTPS with certbot and its renewal
+
+:::term bash · certbot with the Apache plugin
+$ sudo apt install certbot python3-certbot-apache
+$ sudo a2enmod ssl headers rewrite
+$ sudo certbot --apache -d reservas.example.com -d www.reservas.example.com --redirect -m it@example.com --agree-tos
+Successfully received certificate.
+Certificate is saved at: /etc/letsencrypt/live/reservas.example.com/fullchain.pem
+Key is saved at:         /etc/letsencrypt/live/reservas.example.com/privkey.pem
+Successfully deployed certificate for reservas.example.com to /etc/apache2/sites-available/reservas-le-ssl.conf
+Congratulations! You have successfully enabled HTTPS on https://reservas.example.com and https://www.reservas.example.com
+:::
+
+- certbot creates a second file, `reservas-le-ssl.conf`, with the `<VirtualHost *:443>` and the certificate paths. Whatever you change later (headers, logs) goes in both files: port 80's and port 443's.
+- `--redirect` adds a rule to the port 80 site that sends everything to HTTPS with a 301. Without certbot, the same in one line: `Redirect permanent / https://reservas.example.com/`.
+- **Renewal**: Ubuntu's package installs `certbot.timer`, which checks twice a day and renews whatever expires in under 30 days. With the certbot snap, the timer is `snap.certbot.renew.timer`. Let's Encrypt stopped sending expiry warning emails in 2025: if renewal fails, nobody tells you except your monitoring.
+
+:::term bash · check renewal
+$ systemctl list-timers certbot.timer
+$ sudo certbot certificates
+$ sudo certbot renew --dry-run
+Congratulations, all simulated renewals succeeded:
+  /etc/letsencrypt/live/reservas.example.com/fullchain.pem (success)
+:::
+
+## 4. Security headers and what Apache says about itself
+
+In the site's `<VirtualHost *:443>` (needs `mod_headers`):
+
+:::term reservas-le-ssl.conf · headers
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+:::
+
+And in `/etc/apache2/conf-available/security.conf`, which Ubuntu ships enabled, so that errors do not reveal the exact Apache and OS version:
+
+:::term security.conf
+ServerTokens Prod
+ServerSignature Off
+TraceEnable Off
+:::
+
+- **HSTS** forces the browser to use HTTPS for a year. Turn it on once HTTPS works on every name: with `includeSubDomains`, on subdomains too. Start with a short `max-age` if in doubt.
+- A **Content-Security-Policy** protects more than all of the above, but depends on each application: agree it with whoever builds it and test first with `Content-Security-Policy-Report-Only`.
+
+:::term bash · check the headers
+$ curl -sI https://reservas.example.com | grep -iE "^(server|strict|x-content|x-frame|referrer)"
+Server: Apache
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+Referrer-Policy: strict-origin-when-cross-origin
+:::
+
+## 5. Log formats
+
+`apache2.conf` already defines `combined`, `common` and `vhost_combined`. The combined format lacks what matters most for diagnosis: the site that answered and the time taken. A format of your own in `/etc/apache2/conf-available/log-timing.conf`, enabled with `a2enconf log-timing`:
+
+:::term log-timing.conf
+LogFormat "%v %h %l %u %t \\"%r\\" %>s %O \\"%{Referer}i\\" \\"%{User-Agent}i\\" %D" timing
+:::
+
+- `%v` is the `ServerName` of the virtual host that served the request: with it, the ticket in section 6 shows up in the log.
+- `%D` is the time in **microseconds**; `%>s`, the final status; `%O`, the bytes sent.
+- If there is a load balancer in front, `%h` will always be its IP: the user's goes in `%{X-Forwarded-For}i`, or with `mod_remoteip` configured.
+- Logs in `/var/log/apache2/` are already rotated by `/etc/logrotate.d/apache2` (14 days, compressed).
+
+## 6. The ticket: "the site shows the default Apache page, or another site"
+
+Tuesday, 10:15. Marketing has published `portal.example.com` on the same server. From outside, `http://www.portal.example.com` shows **Apache2 Ubuntu Default Page** and `https://portal.example.com` shows the bookings site, with a certificate warning.
+
+Apache picks the virtual host in two steps: first by **IP and port**, and among those that match, by the **name** requested. If no `ServerName` or `ServerAlias` matches, the first one on that port answers. `apache2ctl -S` shows exactly that table:
+
+:::term bash · apache2ctl -S
+$ sudo apache2ctl -S
+VirtualHost configuration:
+*:443                  is a NameVirtualHost
+         default server reservas.example.com (/etc/apache2/sites-enabled/reservas-le-ssl.conf:2)
+         port 443 namevhost reservas.example.com (/etc/apache2/sites-enabled/reservas-le-ssl.conf:2)
+                 alias www.reservas.example.com
+*:80                   is a NameVirtualHost
+         default server srv-web-01.contoso.local (/etc/apache2/sites-enabled/000-default.conf:1)
+         port 80 namevhost srv-web-01.contoso.local (/etc/apache2/sites-enabled/000-default.conf:1)
+         port 80 namevhost portal.example.com (/etc/apache2/sites-enabled/portal.conf:1)
+         port 80 namevhost reservas.example.com (/etc/apache2/sites-enabled/reservas.conf:1)
+                 alias www.reservas.example.com
+:::
+
+How to read it, most to least common:
+
+1. **`000-default` is still enabled** and is port 80's `default server`. Everything that does not match goes to it: here, `www.portal.example.com`, because `portal.conf` has no `ServerAlias`. Fix: add the alias and `a2dissite 000-default` (or keep it, but with a neutral page, never Apache's).
+2. **The 443 site is missing**: `portal.example.com` only appears on 80. On 443 nobody has that name, so the first one answers (bookings) with its certificate, and the browser warns that the name does not match. Fix: `certbot --apache -d portal.example.com -d www.portal.example.com`.
+3. **A `VirtualHost` with an IP** (`<VirtualHost 10.20.5.10:443>`) next to others with `*:443`: the IP one always wins for that address, even if the name does not match. All with `*` or all with an IP, never mixed.
+4. **The site is not enabled**: the file is in `sites-available` but does not appear in `-S`. It is missing `a2ensite` and a `reload`.
+5. **DNS points at another server**, or the browser remembers an old 301: `curl -sI -H "Host: portal.example.com" http://127.0.0.1/` from the server itself tells you what Apache answers, with no DNS or cache in the way.
+
+:::term bash · after the fix
+$ sudo apache2ctl configtest && sudo systemctl reload apache2
+$ curl -sI https://www.portal.example.com | head -n 1
+HTTP/1.1 200 OK
+$ sudo tail -n 1 /var/log/apache2/portal_access.log
+portal.example.com 203.0.113.24 - - [03/Nov/2026:10:31:07 +0100] "GET / HTTP/1.1" 200 5120 "-" "Mozilla/5.0" 1840
+:::
+
+> A habit that prevents this ticket: a first site of your own (`000-catchall.conf`) that returns a 404 or a neutral page for any unknown name, on 80 and on 443. That way a configuration mistake never shows someone else's site.
+
+In the ticket: the `apache2ctl -S` output before and after, what was missing (alias, 443 site, `a2ensite`) and the `curl` check.
+
+## Next steps
+
+- The first guide in this topic, [Nginx and Apache as a reverse proxy](nginx-y-apache-proxy-inverso-tls-cabeceras-timeouts-y-un-502-bad-gateway.html), publishes an internal app with corporate TLS and fixes the 502.
+- The [Ubuntu Server: the first 30 minutes](ubuntu-server-usuarios-ssh-firewall-y-actualizaciones.html) guide sets up SSH, ufw and patching before you install Apache.
+- If the site is WordPress, the [WordPress on Docker](wordpress-en-docker-compose-copias-bastionado-y-un-plugin-que-tumba-la-web.html) guide covers backups and hardening.
+""")
+
+# ---------------------------------------------------------------- 2.x · IIS (2)
+g(slug="iis-logs-w3c-reciclado-tiempo-de-inactividad-y-la-primera-peticion-lenta", topic="iis", date="2026-11-03",
+  title_es="IIS: leer los logs W3C, reciclado e inactividad de los grupos de aplicaciones, redirección a HTTPS y una aplicación lenta cada mañana",
+  title_en="IIS: reading W3C logs, app pool recycling and idle time-out, the HTTPS redirect and an app that is slow every morning",
+  seo_title_en="IIS: logs, recycling and the slow first hit · Iñigo González",
+  seo_title_es="IIS: logs, reciclado y arranque en frío · Iñigo González",
+  dek_es="Dónde están los logs de IIS y cómo leerlos (campos W3C, sc-status, time-taken) con PowerShell, Failed Request Tracing por tiempo, el reciclado y el tiempo de inactividad de los grupos de aplicaciones, la precarga con AlwaysRunning y Application Initialization, la redirección de HTTP a HTTPS con URL Rewrite, y la aplicación que tarda 20 segundos en la primera petición del día.",
+  dek_en="Where IIS logs live and how to read them (W3C fields, sc-status, time-taken) with PowerShell, Failed Request Tracing by time, app pool recycling and idle time-out, preloading with AlwaysRunning and Application Initialization, the HTTP to HTTPS redirect with URL Rewrite, and the app that takes 20 seconds on the first request of the day.",
+  seo_desc="IIS: read W3C logs and time-taken, tune app pool recycling and idle time-out, preload with Application Initialization, and fix a slow first request.",
+  es="""
+## Qué vas a conseguir
+
+Leer un log de IIS para responder a "¿va lento?" con números, saber cuándo y por qué se recicla o se apaga el proceso de una aplicación, dejar la aplicación caliente antes de que llegue el primer usuario y redirigir todo el tráfico HTTP a HTTPS. Con eso se cierra uno de los tickets más repetidos en IIS: **la aplicación tarda muchísimo la primera vez cada mañana y luego va bien**.
+
+## Antes de empezar
+
+- Windows Server 2022 o 2025 con IIS 10 y permisos de administrador local.
+- Las características que usa esta guía: `Install-WindowsFeature Web-Http-Tracing, Web-AppInit, Web-Scripting-Tools`.
+- El módulo **URL Rewrite 2.1**, que no es una característica de Windows: se descarga de la web de IIS y se instala aparte.
+- El ID del sitio (`Get-IISSite`): la carpeta de logs es `W3SVC<ID>`. Aquí, el sitio `Reservas` con ID 2. La configuración básica de sitios, enlaces y certificados está en la primera guía de IIS.
+
+## 1. Dónde están los logs y qué dice cada campo
+
+Los logs de cada sitio están en `%SystemDrive%\\inetpub\\logs\\LogFiles\\W3SVC2\\`, un fichero `u_exAAMMDD.log` por día. Las cuatro primeras líneas empiezan por `#` y la cuarta dice qué columnas hay:
+
+:::term u_ex261102.log
+#Software: Microsoft Internet Information Services 10.0
+#Version: 1.0
+#Date: 2026-11-02 00:00:01
+#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) sc-status sc-substatus sc-win32-status time-taken
+2026-11-02 07:58:12 10.10.40.15 GET / - 443 CONTOSO\\lmartin 10.20.4.37 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64) - 200 0 0 21874
+2026-11-02 07:58:34 10.10.40.15 GET /css/site.css - 443 CONTOSO\\lmartin 10.20.4.37 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64) https://reservas.corp.example/ 200 0 0 15
+2026-11-02 07:58:41 10.10.40.15 POST /api/reservas - 443 CONTOSO\\lmartin 10.20.4.37 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64) - 500 0 0 312
+:::
+
+| Campo | Qué es |
+|---|---|
+| `date`, `time` | Fecha y hora en **UTC**: 07:58 es 08:58 en Madrid en invierno |
+| `cs-uri-stem` | La página o recurso pedido |
+| `cs-username` | El usuario, si el sitio usa autenticación de Windows; `-` si es anónimo |
+| `c-ip` | La IP del cliente, o la del balanceador si hay uno delante |
+| `sc-status`, `sc-substatus` | El código HTTP y el subcódigo de IIS (un `401 2`, un `404 0`) |
+| `sc-win32-status` | El error de Windows; `64` o `1236` suelen ser el cliente que cerró la conexión |
+| `time-taken` | Milisegundos desde que llega la petición hasta que se envía el último byte |
+
+- IIS escribe el log con un búfer de unos segundos: si no ves la última petición, `netsh http flush logbuffer` lo vuelca.
+- Con un balanceador delante, añade en **Logging › Select Fields › Add Field** un campo personalizado de tipo *Request Header* con `X-Forwarded-For`.
+
+## 2. Buscar las peticiones lentas con PowerShell
+
+:::term PowerShell · peticiones de más de 5 segundos
+$ $log = "C:\\inetpub\\logs\\LogFiles\\W3SVC2\\u_ex261102.log"
+$ $campos = ((Get-Content $log -TotalCount 4)[3] -replace '^#Fields: ').Split(' ')
+$ Get-Content $log | Where-Object { $_ -notlike '#*' } | ConvertFrom-Csv -Delimiter ' ' -Header $campos | Where-Object { [int]$_.'time-taken' -gt 5000 } | Select-Object time, cs-uri-stem, sc-status, time-taken
+time     cs-uri-stem sc-status time-taken
+----     ----------- --------- ----------
+07:58:12 /           200       21874
+06:40:03 /           200       19240
+:::
+
+- Si en el mismo día IIS reinicia el sitio o cambia la configuración del log, aparece otra línea `#Fields` a mitad de fichero. El filtro `#*` la salta.
+- Para agrupar (peticiones por código, tiempo medio por página), `Group-Object sc-status` o `Measure-Object time-taken -Average` sobre el mismo resultado.
+- Un `time-taken` alto en ficheros estáticos (`.css`, `.js`) suele ser red o cliente lento; en la página principal o en la API, la aplicación.
+
+## 3. Failed Request Tracing por tiempo
+
+La primera guía de IIS usa FREB para los 500. Aquí sirve para lo contrario: peticiones que funcionan, pero tardan.
+
+:::ui Administrador de IIS · Reservas › Failed Request Tracing Rules › Add
+= Content to trace: All content (*)
+= Status code(s): (vacío)
+[x] Time taken (in seconds): 10
+= Providers: ASPNET, ISAPI Extension, WWW Server · Verbosity: Verbose
+[Finish]
+:::
+
+- Actívalo en el sitio (**Actions › Failed Request Tracing... › Enable**) y espera a la próxima petición lenta.
+- El fichero de `%SystemDrive%\\inetpub\\logs\\FailedReqLogFiles\\W3SVC2\\`, abierto en el navegador, tiene la pestaña **Performance View**: qué módulo se ha llevado el tiempo. Si casi todo es `ManagedPipelineHandler` o `AspNetCoreModuleV2`, el tiempo es de la aplicación, no de IIS.
+- Desactívalo al acabar: escribe un fichero por cada petición que cumple la regla.
+
+## 4. Reciclado y tiempo de inactividad de los grupos de aplicaciones
+
+Dos ajustes de cada grupo de aplicaciones, en **Advanced Settings**, deciden cuándo muere el proceso `w3wp.exe`:
+
+| Ajuste | Por defecto | Qué hace |
+|---|---|---|
+| **Process Model › Idle Time-out (minutes)** | 20 | Sin peticiones durante ese tiempo, el proceso se apaga |
+| **Process Model › Idle Time-out Action** | Terminate | *Terminate* lo cierra; *Suspend* lo deja en memoria congelado |
+| **Recycling › Regular Time Interval (minutes)** | 1740 | Recicla cada 29 horas, a una hora distinta cada día |
+| **Recycling › Specific Times** | (vacío) | Recicla a horas fijas |
+| **General › Start Mode** | OnDemand | El proceso solo arranca con la primera petición |
+
+- **Reciclar** es arrancar un proceso nuevo y retirar el viejo. Con el reciclado solapado (por defecto) el nuevo atiende mientras el viejo termina, pero llega **en frío**: la aplicación vuelve a cargar, compilar y llenar cachés.
+- Activa el registro: **Recycling › Generate Recycle Event Log Entry**, con al menos *Regular time interval*, *Specific time*, *Memory* y *Configuration changes*. WAS lo deja en el registro **Sistema**: el evento **5074** es un reciclado por tiempo y el **5186**, un proceso apagado por inactividad.
+
+Un grupo de una aplicación de uso diario se deja así:
+
+:::term cmd · appcmd como administrador
+$ cd %windir%\\system32\\inetsrv
+$ appcmd set apppool "Reservas" /recycling.periodicRestart.time:00:00:00
+$ appcmd set apppool "Reservas" /+recycling.periodicRestart.schedule.[value='04:00:00']
+$ appcmd set apppool "Reservas" /processModel.idleTimeout:00:00:00
+$ appcmd set apppool "Reservas" /startMode:AlwaysRunning
+$ appcmd list apppool "Reservas" /text:*
+:::
+
+- Sin reciclado por intervalo y con uno fijo a las 4:00, el corte pasa cuando nadie trabaja.
+- `idleTimeout` a cero: el proceso no se apaga por la noche. En un servidor con decenas de grupos que casi no se usan, mejor **Suspend** que cero: menos memoria y un arranque mucho más rápido que en frío.
+- `AlwaysRunning` arranca el proceso con el servicio WAS, sin esperar a la primera petición. Solo arranca el proceso: cargar la aplicación es el apartado siguiente.
+
+## 5. Precarga con Application Initialization
+
+Con la característica `Web-AppInit` instalada, IIS puede llamar a una página de la aplicación en cuanto arranca o se recicla el proceso, antes de enviarle tráfico de usuarios:
+
+:::term cmd · precarga en el sitio
+$ appcmd set site "Reservas" /applicationDefaults.preloadEnabled:true
+:::
+
+Y en el `web.config` de la aplicación, la página que la despierta:
+
+:::term web.config · system.webServer
+<applicationInitialization doAppInitAfterRestart="true">
+  <add initializationPage="/health" />
+</applicationInitialization>
+:::
+
+- La página tiene que hacer el trabajo caro de verdad (abrir la conexión a SQL Server, cargar la configuración) y no pedir autenticación: si devuelve un 401, la precarga no calienta nada.
+- `doAppInitAfterRestart` repite la precarga tras cada reciclado, no solo tras arrancar el servidor.
+- Funciona igual con ASP.NET 4.x y con ASP.NET Core en IIS. El cambio en `web.config` es del equipo de la aplicación: acuérdalo con ellos y que vaya en su despliegue, o lo perderán en el siguiente.
+
+## 6. Redirigir HTTP a HTTPS con URL Rewrite
+
+El sitio necesita los dos enlaces: el 443 con su certificado y el 80, que solo existe para redirigir. Con URL Rewrite, la regla va en el `web.config` del sitio:
+
+:::term web.config · system.webServer
+<rewrite>
+  <rules>
+    <rule name="HTTP a HTTPS" stopProcessing="true">
+      <match url="(.*)" />
+      <conditions>
+        <add input="{HTTPS}" pattern="^OFF$" />
+      </conditions>
+      <action type="Redirect" url="https://{HTTP_HOST}/{R:1}" redirectType="Permanent" />
+    </rule>
+  </rules>
+</rewrite>
+:::
+
+- También se crea desde el Administrador de IIS: **URL Rewrite › Add Rule(s)... › Blank rule**, con los mismos campos.
+- `redirectType="Permanent"` es un 301: el navegador lo recuerda. Pruébalo primero con `Found` (302) y cámbialo cuando funcione.
+- Si hay un balanceador que termina el TLS y habla con IIS por HTTP, `{HTTPS}` siempre vale `OFF` y la regla crea un bucle. En ese caso la condición mira la cabecera que pone el balanceador, `{HTTP_X_FORWARDED_PROTO}` con el patrón `^http$`.
+- En IIS 10 (desde la versión 1709) el sitio tiene además ajustes propios de **HSTS**, con la opción de redirigir a HTTPS sin URL Rewrite (`hsts.enabled` y `hsts.redirectHttpToHttps` en la configuración del sitio).
+
+## 7. El ticket: "la aplicación va lentísima cada mañana con la primera petición"
+
+Lunes, 9:05. Recepción dice que la aplicación de reservas tarda "como 20 segundos" en abrir a primera hora; después va bien todo el día. Algunos días pasa también después de comer.
+
+1. **Medirlo**: el script del apartado 2 sobre el log de hoy da `GET /` con `time-taken` 21874 a las 07:58 UTC (08:58 en Madrid) y, el viernes, otro de 19240 a las 14:12 UTC. Las peticiones siguientes, por debajo de 300 ms.
+2. **Qué pasó antes**: en el **Visor de eventos › Registros de Windows › Sistema**, origen **WAS**:
+
+:::term PowerShell · eventos de WAS del grupo
+$ Get-WinEvent -FilterHashtable @{LogName='System'; ProviderName='Microsoft-Windows-WAS'; Id=5074,5186; StartTime=(Get-Date).AddDays(-3)} | Where-Object Message -like "*Reservas*" | Select-Object TimeCreated, Id, Message | Format-List
+TimeCreated : 02/11/2026 7:12:44
+Id          : 5186
+Message     : A worker process with process id of '6412' serving application pool 'Reservas' was shutdown due to inactivity. Application Pool timeout configuration was set to 20 minutes. A new worker process will be started when needed.
+TimeCreated : 01/11/2026 13:51:20
+Id          : 5074
+Message     : A worker process with process id of '5120' serving application pool 'Reservas' has requested a recycle because the worker process reached its allowed processing time limit.
+:::
+
+3. **La causa**: dos motivos con el mismo síntoma. Por la noche, tras 20 minutos sin uso, el proceso se apaga (**5186**) y el primer usuario de la mañana paga el arranque en frío. Y cada 29 horas el reciclado por intervalo (**5074**) cae a una hora distinta, a veces en plena jornada: de ahí "algunos días después de comer".
+4. **El cambio**, en una ventana acordada: reciclado fijo a las 4:00, `idleTimeout` a cero, `AlwaysRunning`, precarga del sitio y la página `/health` en `applicationInitialization` (apartados 4 y 5). `appcmd` aplica el cambio y recicla el grupo: hazlo fuera de horas.
+5. **Comprobarlo** a la mañana siguiente: en el log, la primera petición del día por debajo de un segundo, y en el registro de la aplicación las llamadas a `/health` justo después de las 4:00 con el usuario vacío, que son la precarga.
+
+:::term PowerShell · la primera petición del día siguiente
+$ Get-Content $log | Where-Object { $_ -notlike '#*' } | ConvertFrom-Csv -Delimiter ' ' -Header $campos | Where-Object 'cs-uri-stem' -eq '/' | Select-Object -First 1 time, cs-username, time-taken
+time     cs-username    time-taken
+----     -----------    ----------
+07:41:09 CONTOSO\\mgarcia 412
+:::
+
+! Quitar el reciclado no arregla una aplicación que pierde memoria: solo cambia cuándo se nota. Si el grupo crece día a día, pon un límite en **Recycling › Private Memory Limit (KB)** y abre un ticket al equipo de la aplicación con la gráfica de memoria.
+
+En el ticket: tiempos antes y después, los eventos 5186 y 5074, los ajustes cambiados en el grupo y el sitio, y quién tiene el cambio de `web.config` en su despliegue.
+
+## Siguientes pasos
+
+- La primera guía de IIS, [sitios, enlaces, grupos de aplicaciones, certificados y un 503](iis-sitios-enlaces-grupos-de-aplicaciones-certificados-y-un-503.html), cubre la base y el grupo detenido.
+- La guía de [Windows Server](windows-server-instalar-rol-parchear-y-leer-eventos.html) explica los roles, los parches y cómo leer el Visor de eventos.
+- Para avisar antes que el usuario de que un sitio tarda, la guía de [Zabbix: servidor, agentes y plantillas](zabbix-servidor-agente-2-plantillas-macros-dependencias-avisos-y-un-agente-no-disponible.html) monta la monitorización con el agente de Windows.
+""",
+  en="""
+## What you'll get
+
+Reading an IIS log to answer "is it slow?" with numbers, knowing when and why an application's process is recycled or shut down, keeping the application warm before the first user arrives, and redirecting all HTTP traffic to HTTPS. That closes one of the most repeated IIS tickets: **the application takes ages the first time every morning and then runs fine**.
+
+## Before you start
+
+- Windows Server 2022 or 2025 with IIS 10 and local administrator rights.
+- The features this guide uses: `Install-WindowsFeature Web-Http-Tracing, Web-AppInit, Web-Scripting-Tools`.
+- The **URL Rewrite 2.1** module, which is not a Windows feature: it is downloaded from the IIS website and installed separately.
+- The site ID (`Get-IISSite`): the log folder is `W3SVC<ID>`. Here, the `Reservas` site with ID 2. The basic setup of sites, bindings and certificates is in the first IIS guide.
+
+## 1. Where the logs are and what each field says
+
+Each site's logs are in `%SystemDrive%\\inetpub\\logs\\LogFiles\\W3SVC2\\`, one `u_exYYMMDD.log` file per day. The first four lines start with `#` and the fourth says which columns there are:
+
+:::term u_ex261102.log
+#Software: Microsoft Internet Information Services 10.0
+#Version: 1.0
+#Date: 2026-11-02 00:00:01
+#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) sc-status sc-substatus sc-win32-status time-taken
+2026-11-02 07:58:12 10.10.40.15 GET / - 443 CONTOSO\\lmartin 10.20.4.37 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64) - 200 0 0 21874
+2026-11-02 07:58:34 10.10.40.15 GET /css/site.css - 443 CONTOSO\\lmartin 10.20.4.37 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64) https://reservas.corp.example/ 200 0 0 15
+2026-11-02 07:58:41 10.10.40.15 POST /api/reservas - 443 CONTOSO\\lmartin 10.20.4.37 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64) - 500 0 0 312
+:::
+
+| Field | What it is |
+|---|---|
+| `date`, `time` | Date and time in **UTC**: 07:58 is 08:58 in Madrid in winter |
+| `cs-uri-stem` | The page or resource requested |
+| `cs-username` | The user, if the site uses Windows authentication; `-` if anonymous |
+| `c-ip` | The client IP, or the load balancer's if there is one in front |
+| `sc-status`, `sc-substatus` | The HTTP status and the IIS substatus (a `401 2`, a `404 0`) |
+| `sc-win32-status` | The Windows error; `64` or `1236` are usually the client closing the connection |
+| `time-taken` | Milliseconds from the request arriving until the last byte is sent |
+
+- IIS writes the log through a buffer of a few seconds: if you cannot see the latest request, `netsh http flush logbuffer` flushes it.
+- With a load balancer in front, add in **Logging › Select Fields › Add Field** a custom field of type *Request Header* with `X-Forwarded-For`.
+
+## 2. Finding slow requests with PowerShell
+
+:::term PowerShell · requests over 5 seconds
+$ $log = "C:\\inetpub\\logs\\LogFiles\\W3SVC2\\u_ex261102.log"
+$ $fields = ((Get-Content $log -TotalCount 4)[3] -replace '^#Fields: ').Split(' ')
+$ Get-Content $log | Where-Object { $_ -notlike '#*' } | ConvertFrom-Csv -Delimiter ' ' -Header $fields | Where-Object { [int]$_.'time-taken' -gt 5000 } | Select-Object time, cs-uri-stem, sc-status, time-taken
+time     cs-uri-stem sc-status time-taken
+----     ----------- --------- ----------
+07:58:12 /           200       21874
+06:40:03 /           200       19240
+:::
+
+- If IIS restarts the site or the log configuration changes during the day, another `#Fields` line appears mid-file. The `#*` filter skips it.
+- To group (requests per status, average time per page), `Group-Object sc-status` or `Measure-Object time-taken -Average` on the same output.
+- A high `time-taken` on static files (`.css`, `.js`) is usually a slow network or client; on the main page or the API, the application.
+
+## 3. Failed Request Tracing by time
+
+The first IIS guide uses FREB for 500s. Here it serves the opposite case: requests that work, but slowly.
+
+:::ui IIS Manager · Reservas › Failed Request Tracing Rules › Add
+= Content to trace: All content (*)
+= Status code(s): (empty)
+[x] Time taken (in seconds): 10
+= Providers: ASPNET, ISAPI Extension, WWW Server · Verbosity: Verbose
+[Finish]
+:::
+
+- Enable it on the site (**Actions › Failed Request Tracing... › Enable**) and wait for the next slow request.
+- The file in `%SystemDrive%\\inetpub\\logs\\FailedReqLogFiles\\W3SVC2\\`, opened in the browser, has a **Performance View** tab: which module took the time. If nearly all of it is `ManagedPipelineHandler` or `AspNetCoreModuleV2`, the time belongs to the application, not IIS.
+- Turn it off when you are done: it writes a file for every request that matches the rule.
+
+## 4. Application pool recycling and idle time-out
+
+Two settings of each application pool, in **Advanced Settings**, decide when the `w3wp.exe` process dies:
+
+| Setting | Default | What it does |
+|---|---|---|
+| **Process Model › Idle Time-out (minutes)** | 20 | With no requests for that long, the process shuts down |
+| **Process Model › Idle Time-out Action** | Terminate | *Terminate* closes it; *Suspend* keeps it frozen in memory |
+| **Recycling › Regular Time Interval (minutes)** | 1740 | Recycles every 29 hours, at a different time each day |
+| **Recycling › Specific Times** | (empty) | Recycles at fixed times |
+| **General › Start Mode** | OnDemand | The process only starts with the first request |
+
+- **Recycling** means starting a new process and retiring the old one. With overlapped recycling (the default) the new one serves while the old one finishes, but it arrives **cold**: the application loads, compiles and fills its caches again.
+- Turn on logging: **Recycling › Generate Recycle Event Log Entry**, with at least *Regular time interval*, *Specific time*, *Memory* and *Configuration changes*. WAS writes to the **System** log: event **5074** is a time-based recycle and **5186**, a process shut down for inactivity.
+
+A pool for an application used every day is set like this:
+
+:::term cmd · appcmd as administrator
+$ cd %windir%\\system32\\inetsrv
+$ appcmd set apppool "Reservas" /recycling.periodicRestart.time:00:00:00
+$ appcmd set apppool "Reservas" /+recycling.periodicRestart.schedule.[value='04:00:00']
+$ appcmd set apppool "Reservas" /processModel.idleTimeout:00:00:00
+$ appcmd set apppool "Reservas" /startMode:AlwaysRunning
+$ appcmd list apppool "Reservas" /text:*
+:::
+
+- With no interval recycling and a fixed one at 4:00, the cut happens when nobody is working.
+- `idleTimeout` at zero: the process does not shut down at night. On a server with dozens of rarely used pools, **Suspend** is better than zero: less memory and a much faster start than a cold one.
+- `AlwaysRunning` starts the process with the WAS service, without waiting for the first request. It only starts the process: loading the application is the next section.
+
+## 5. Preloading with Application Initialization
+
+With the `Web-AppInit` feature installed, IIS can call a page of the application as soon as the process starts or recycles, before sending it user traffic:
+
+:::term cmd · preload on the site
+$ appcmd set site "Reservas" /applicationDefaults.preloadEnabled:true
+:::
+
+And in the application's `web.config`, the page that wakes it up:
+
+:::term web.config · system.webServer
+<applicationInitialization doAppInitAfterRestart="true">
+  <add initializationPage="/health" />
+</applicationInitialization>
+:::
+
+- The page has to do the genuinely expensive work (open the SQL Server connection, load configuration) and must not require authentication: if it returns a 401, the preload warms nothing.
+- `doAppInitAfterRestart` repeats the preload after every recycle, not only after the server starts.
+- It works the same with ASP.NET 4.x and with ASP.NET Core on IIS. The `web.config` change belongs to the application team: agree it with them and have it in their deployment, or they will lose it on the next one.
+
+## 6. Redirecting HTTP to HTTPS with URL Rewrite
+
+The site needs both bindings: 443 with its certificate and 80, which only exists to redirect. With URL Rewrite, the rule goes in the site's `web.config`:
+
+:::term web.config · system.webServer
+<rewrite>
+  <rules>
+    <rule name="HTTP to HTTPS" stopProcessing="true">
+      <match url="(.*)" />
+      <conditions>
+        <add input="{HTTPS}" pattern="^OFF$" />
+      </conditions>
+      <action type="Redirect" url="https://{HTTP_HOST}/{R:1}" redirectType="Permanent" />
+    </rule>
+  </rules>
+</rewrite>
+:::
+
+- It can also be created from IIS Manager: **URL Rewrite › Add Rule(s)... › Blank rule**, with the same fields.
+- `redirectType="Permanent"` is a 301: the browser remembers it. Test first with `Found` (302) and switch once it works.
+- If a load balancer terminates TLS and talks to IIS over HTTP, `{HTTPS}` is always `OFF` and the rule creates a loop. In that case the condition checks the header the balancer sets, `{HTTP_X_FORWARDED_PROTO}` with the pattern `^http$`.
+- In IIS 10 (from version 1709) the site also has its own **HSTS** settings, with the option to redirect to HTTPS without URL Rewrite (`hsts.enabled` and `hsts.redirectHttpToHttps` in the site configuration).
+
+## 7. The ticket: "the application is very slow every morning at the first request"
+
+Monday, 9:05. Reception says the bookings app takes "about 20 seconds" to open first thing; after that it is fine all day. Some days it also happens after lunch.
+
+1. **Measure it**: the script from section 2 on today's log gives `GET /` with `time-taken` 21874 at 07:58 UTC (08:58 in Madrid) and, on Friday, another of 19240 at 14:12 UTC. The following requests, under 300 ms.
+2. **What happened before**: in **Event Viewer › Windows Logs › System**, source **WAS**:
+
+:::term PowerShell · the pool's WAS events
+$ Get-WinEvent -FilterHashtable @{LogName='System'; ProviderName='Microsoft-Windows-WAS'; Id=5074,5186; StartTime=(Get-Date).AddDays(-3)} | Where-Object Message -like "*Reservas*" | Select-Object TimeCreated, Id, Message | Format-List
+TimeCreated : 02/11/2026 7:12:44
+Id          : 5186
+Message     : A worker process with process id of '6412' serving application pool 'Reservas' was shutdown due to inactivity. Application Pool timeout configuration was set to 20 minutes. A new worker process will be started when needed.
+TimeCreated : 01/11/2026 13:51:20
+Id          : 5074
+Message     : A worker process with process id of '5120' serving application pool 'Reservas' has requested a recycle because the worker process reached its allowed processing time limit.
+:::
+
+3. **The cause**: two reasons with the same symptom. At night, after 20 minutes without use, the process shuts down (**5186**) and the first user of the morning pays for the cold start. And every 29 hours the interval recycle (**5074**) lands at a different time, sometimes mid-day: hence "some days after lunch".
+4. **The change**, in an agreed window: a fixed recycle at 4:00, `idleTimeout` at zero, `AlwaysRunning`, site preload and the `/health` page in `applicationInitialization` (sections 4 and 5). `appcmd` applies the change and recycles the pool: do it out of hours.
+5. **Check it** the next morning: in the log, the first request of the day under one second, and the `/health` calls just after 4:00 with an empty user, which are the preload.
+
+:::term PowerShell · the first request of the next day
+$ Get-Content $log | Where-Object { $_ -notlike '#*' } | ConvertFrom-Csv -Delimiter ' ' -Header $fields | Where-Object 'cs-uri-stem' -eq '/' | Select-Object -First 1 time, cs-username, time-taken
+time     cs-username    time-taken
+----     -----------    ----------
+07:41:09 CONTOSO\\mgarcia 412
+:::
+
+! Removing recycling does not fix an application that leaks memory: it only changes when you notice. If the pool grows day after day, set a limit in **Recycling › Private Memory Limit (KB)** and open a ticket with the application team with the memory graph.
+
+In the ticket: times before and after, events 5186 and 5074, the settings changed on the pool and the site, and who has the `web.config` change in their deployment.
+
+## Next steps
+
+- The first IIS guide, [sites, bindings, application pools, certificates and a 503](iis-sitios-enlaces-grupos-de-aplicaciones-certificados-y-un-503.html), covers the basics and the stopped pool.
+- The [Windows Server](windows-server-instalar-rol-parchear-y-leer-eventos.html) guide explains roles, patching and how to read Event Viewer.
+- To find out before the user that a site is slow, the [Zabbix: server, agents and templates](zabbix-servidor-agente-2-plantillas-macros-dependencias-avisos-y-un-agente-no-disponible.html) guide sets up monitoring with the Windows agent.
+""")
+
+# ---------------------------------------------------------------- 3.x · Zabbix
+g(slug="zabbix-servidor-agente-2-plantillas-macros-dependencias-avisos-y-un-agente-no-disponible", topic="zabbix", date="2026-11-03",
+  title_es="Zabbix: instalar el servidor, desplegar el agente 2, plantillas y macros, dependencias, avisos, mantenimientos y un agente no disponible",
+  title_en="Zabbix: installing the server, rolling out agent 2, templates and macros, dependencies, alerts, maintenance and an unavailable agent",
+  seo_title_en="Zabbix: server, agent 2 and templates · Iñigo González",
+  seo_title_es="Zabbix: servidor, agente 2 y plantillas · Iñigo González",
+  dek_es="Zabbix 7.0 LTS en Ubuntu con MySQL y Apache, el agente 2 en Windows con el MSI y parámetros y en Linux, grupos de hosts, plantillas y macros con contexto, disparadores con dependencias para que la caída de un switch no mande cincuenta avisos, correo y acciones con escalado, periodos de mantenimiento y un host con el icono ZBX en rojo.",
+  dek_en="Zabbix 7.0 LTS on Ubuntu with MySQL and Apache, agent 2 on Windows with the MSI and parameters and on Linux, host groups, templates and context macros, trigger dependencies so a switch failure does not send fifty alerts, email and actions with escalation, maintenance periods and a host with a red ZBX icon.",
+  seo_desc="Zabbix 7.0 LTS: install the server, deploy agent 2 on Windows and Linux, templates, macros, trigger dependencies, email alerts and a red ZBX agent.",
+  es="""
+## Qué vas a conseguir
+
+Un servidor Zabbix para vigilar los servidores Windows y Linux de la oficina y de la sala de servidores: instalado desde el repositorio oficial, con el agente 2 desplegado de forma repetible, los hosts ordenados por grupos, plantillas con umbrales ajustados por macros, dependencias que convierten una caída de red en un solo aviso, correo a la guardia con escalado y mantenimientos para las ventanas de parches. Y, cuando un host aparece con **ZBX** en rojo, saber si es el firewall, la configuración del agente o el nombre.
+
+## Antes de empezar
+
+- **La versión**: Zabbix **7.0 LTS**, con soporte completo hasta junio de 2027 y limitado hasta junio de 2029. Servidor, proxy y agentes de la misma versión mayor; un agente más antiguo funciona, uno más nuevo que el servidor, no siempre.
+- Un **Ubuntu Server 24.04** para el servidor: para unos 200 hosts, 4 vCPU, 8 GB de RAM y disco SSD; la base de datos es lo que crece.
+- **Puertos**: el servidor consulta al agente en el **10050/TCP** (comprobaciones pasivas) y los agentes envían al servidor en el **10051/TCP** (comprobaciones activas).
+- Un nombre en DNS (`zabbix.contoso.local`), una cuenta de correo para los avisos y una lista de quién está de guardia.
+
+## 1. El servidor: Zabbix 7.0 con MySQL y Apache
+
+La guía de Zabbix para hostelería instala con PostgreSQL y Nginx; aquí, la otra combinación habitual. Los paquetes salen del repositorio oficial, no del de Ubuntu, que trae una versión antigua:
+
+:::term bash · zabbix.contoso.local (Ubuntu 24.04)
+$ wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.0+ubuntu24.04_all.deb
+$ sudo dpkg -i zabbix-release_latest_7.0+ubuntu24.04_all.deb && sudo apt update
+$ sudo apt install mysql-server zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent2
+:::
+
+La base de datos, con el juego de caracteres que exige Zabbix:
+
+:::term mysql · sudo mysql
+$ create database zabbix character set utf8mb4 collate utf8mb4_bin;
+$ create user zabbix@localhost identified by 'ContraseñaLarga';
+$ grant all privileges on zabbix.* to zabbix@localhost;
+$ set global log_bin_trust_function_creators = 1;
+$ quit;
+:::
+
+:::term bash · esquema, configuración y arranque
+$ zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix -p zabbix
+$ sudo mysql -e "set global log_bin_trust_function_creators = 0;"
+$ sudo nano /etc/zabbix/zabbix_server.conf
+DBPassword=ContraseñaLarga
+$ sudo systemctl restart zabbix-server zabbix-agent2 apache2
+$ sudo systemctl enable zabbix-server zabbix-agent2 apache2
+$ sudo ufw allow 10051/tcp && sudo ufw allow 443/tcp
+:::
+
+- `log_bin_trust_function_creators` solo hace falta mientras se importa el esquema: se vuelve a dejar en 0.
+- La importación tarda unos minutos y no muestra nada mientras trabaja.
+- La interfaz web queda en `http://zabbix.contoso.local/zabbix`. El asistente pide la base de datos (MySQL, `localhost`, usuario `zabbix`), un nombre para el servidor y la zona horaria, y guarda todo en `/etc/zabbix/web/zabbix.conf.php`.
+- El usuario inicial es **Admin** con contraseña **zabbix**. Cámbiala en el primer acceso, crea tu usuario con rol *Super admin* y deja Admin como cuenta de emergencia. Para HTTPS, el certificado se pone en Apache como en cualquier sitio.
+
+> `tail -f /var/log/zabbix/zabbix_server.log` es lo primero que se mira cuando algo no recoge datos. El servidor dice ahí, con el nombre del host, qué ha fallado.
+
+## 2. El agente 2 en Windows y en Linux
+
+**Windows**: el MSI de Zabbix Agent 2 admite los parámetros de configuración en la línea de comandos, así que el mismo comando sirve para PDQ, MECM, Intune o una GPO de inicio:
+
+:::term cmd · instalación silenciosa en SRV-FS-02
+$ msiexec /l*v C:\\Temp\\zabbix-agent2-install.log /i zabbix_agent2-7.0-windows-amd64-openssl.msi /qn SERVER=10.10.20.15 SERVERACTIVE=10.10.20.15 HOSTNAME=SRV-FS-02 ENABLEPATH=1
+$ sc query "Zabbix Agent 2"
+        STATE              : 4  RUNNING
+:::
+
+- El nombre real del MSI lleva la versión menor (7.0.x): usa la misma que el servidor.
+- `SERVER` es quién puede consultar al agente (pasivas); `SERVERACTIVE`, a quién envía el agente (activas). `HOSTNAME` tiene que coincidir **exactamente**, mayúsculas incluidas, con el *Host name* que se dará de alta en Zabbix.
+- El instalador crea la regla del firewall de Windows para el 10050 salvo que se le pase `SKIP=fw`. Si la red tiene otro firewall entre el servidor y la VLAN de servidores, ahí también.
+- La configuración queda en `C:\\Program Files\\Zabbix Agent 2\\zabbix_agent2.conf` y el log, en la misma carpeta.
+
+**Linux**, con el mismo repositorio que el servidor:
+
+:::term bash · srv-app-02 (Ubuntu)
+$ sudo apt install zabbix-agent2
+$ sudo nano /etc/zabbix/zabbix_agent2.conf
+Server=10.10.20.15
+ServerActive=10.10.20.15
+Hostname=srv-app-02
+$ sudo systemctl restart zabbix-agent2 && sudo systemctl enable zabbix-agent2
+$ sudo ufw allow from 10.10.20.15 to any port 10050 proto tcp
+:::
+
+Desde el servidor, la prueba que separa "el agente no responde" de "Zabbix está mal configurado" (paquete `zabbix-get`):
+
+:::term bash · zabbix.contoso.local
+$ zabbix_get -s 10.10.30.21 -k agent.ping
+1
+$ zabbix_get -s 10.10.30.21 -k agent.hostname
+srv-app-02
+:::
+
+## 3. Grupos de hosts, plantillas y macros
+
+Cada servidor se da de alta en **Data collection › Hosts › Create host**:
+
+:::ui Zabbix · Data collection › Hosts › Create host
+= Host name: SRV-FS-02
+= Visible name: Servidor de ficheros 2 (Madrid)
+= Templates: Windows by Zabbix agent
+= Host groups: Servidores/Madrid, Servidores/Windows
+= Interfaces: Agent · IP 10.10.30.22 · Connect to IP · Port 10050
+= Tags: servicio:ficheros · entorno:produccion
+[Add]
+:::
+
+- **Grupos de hosts** por dónde está y por qué es (`Servidores/Madrid`, `Servidores/Windows`, `Red/Switches`): se usan para permisos, acciones y mantenimientos, así que se piensan una vez y se respetan.
+- **Plantillas**: *Windows by Zabbix agent* y *Linux by Zabbix agent* traen CPU, memoria, discos, servicios y red, con descubrimiento automático de discos e interfaces. Funcionan con el agente 2. No edites las plantillas oficiales: si necesitas añadir algo, una plantilla propia enlazada además de la oficial.
+- **Macros**: los umbrales de las plantillas son macros como `{$VFS.FS.PUSED.MAX.CRIT}` (90 % de disco) o `{$CPU.UTIL.CRIT}`. Se cambian en el host o en un grupo sin tocar la plantilla, y admiten **contexto**: `{$VFS.FS.PUSED.MAX.CRIT:"/var/log"}` = 95 cambia solo ese sistema de ficheros, y en Windows `{$VFS.FS.PUSED.MAX.CRIT:"D:"}` solo la unidad D.
+- Las macros globales están en **Administration › Macros**. Las contraseñas (de SNMPv3, de una comprobación web) en una macro de tipo **Secret text**: no se vuelven a mostrar en la interfaz.
+
+## 4. Disparadores con dependencias: el switch antes que los servidores
+
+Si el switch de la sala de servidores se cae, cada servidor detrás de él aparece como no disponible: cincuenta problemas y cincuenta correos para una sola avería. Las **dependencias** lo arreglan: un disparador que depende de otro no genera problema mientras el otro está activo.
+
+1. El switch, `SW-CPD-01`, dado de alta con la plantilla **ICMP Ping** (o la de SNMP del fabricante). Su disparador es *Unavailable by ICMP ping*.
+2. En cada servidor, el disparador de disponibilidad del agente (*Zabbix agent is not available*) pasa a depender del del switch. Como viene de plantilla, la dependencia se añade en el host: **Data collection › Hosts › SRV-FS-02 › Triggers**, el disparador, pestaña **Dependencies**, **Add** y el disparador del switch.
+3. Si el switch depende a su vez del router o del cortafuegos, se encadena igual: router, switch, servidor.
+
+:::ui Zabbix · Trigger › Dependencies
+= Name: Zabbix agent is not available (for 3m)
+= Dependencies: SW-CPD-01: Unavailable by ICMP ping
+[Update]
+:::
+
+- Para muchos hosts, la forma limpia es una plantilla propia por ubicación (por ejemplo, *Dependencias CPD Madrid*) con la dependencia ya hecha, o la API de Zabbix con un script.
+- Las dependencias solo funcionan si el switch se vigila **con más frecuencia** o con un umbral más corto que los servidores: si el servidor salta antes que el switch, el aviso ya ha salido.
+
+## 5. Avisos: tipo de medio de correo y acciones
+
+Primero el canal, en **Alerts › Media types › Email**:
+
+:::ui Zabbix · Alerts › Media types › Email
+= SMTP server: smtp.contoso.local · SMTP server port: 587
+= SMTP helo: contoso.local · SMTP email: zabbix@contoso.local
+= Connection security: STARTTLS
+= Authentication: Username and password · Username: zabbix@contoso.local
+= Message format: HTML
+[Update]
+:::
+
+Con **Test** se manda un correo de prueba. Después, en cada usuario, **Users › Users › Media**: el tipo Email, la dirección, las horas (**When active**, por ejemplo `1-7,00:00-24:00`) y las severidades que quiere recibir. Mejor un **grupo de usuarios** (`Guardia Sistemas`) que usuarios sueltos.
+
+La acción decide qué problemas avisan, a quién y cuándo, en **Alerts › Actions › Trigger actions**:
+
+:::ui Zabbix · Alerts › Actions › Trigger actions › Servidores de producción
+= Conditions: Host group equals Servidores/Madrid · Trigger severity is greater than or equals Average · Tag entorno equals produccion
+> Operations
+= Paso 1 (inmediato): enviar a Guardia Sistemas por Email
+= Paso 2 (a los 30 min): enviar a Responsables de Sistemas por Email · solo si no está reconocido
+[x] Pause operations for suppressed problems
+= Recovery operations: enviar a Guardia Sistemas
+[Update]
+:::
+
+- El paso 2 se corta cuando alguien **reconoce** el problema: así el responsable solo se entera de lo que nadie ha cogido.
+- Un problema que no está en ninguna acción no avisa a nadie: comprueba que cada grupo de hosts de producción está en alguna.
+- **Reports › Action log** dice qué se envió, a quién y si falló el envío.
+
+## 6. Periodos de mantenimiento
+
+Los parches del segundo martes reinician servidores a propósito. En **Data collection › Maintenance**:
+
+:::ui Zabbix · Data collection › Maintenance › Parches noviembre
+= Maintenance type: With data collection
+= Active since: 2026-11-10 21:00 · Active till: 2026-11-11 01:00
+= Periods: One time only · 2026-11-10 21:30 · duración 3 h
+= Host groups: Servidores/Windows
+= Tags: entorno equals produccion
+[Add]
+:::
+
+- **With data collection** sigue guardando datos y marca los problemas como suprimidos; con *Pause operations for suppressed problems*, no avisan. **No data collection** deja de recoger: solo para un host que se apaga de verdad durante días.
+- El servidor Zabbix revisa los mantenimientos cada minuto: créalos con unos minutos de margen antes del reinicio.
+
+! Un mantenimiento sin fin o sobre todos los grupos esconde también la caída que no es de los parches. Siempre con fecha de fin y limitado a lo que se toca.
+
+## 7. El ticket: "un agente aparece como ZBX no disponible"
+
+Miércoles, 11:00. `SRV-FS-02` se dio de alta ayer y en **Monitoring › Hosts** su icono **ZBX** está en rojo. Al pasar el ratón, el error de la interfaz dice por dónde empezar:
+
+:::term Zabbix · error de disponibilidad del agente
+Get value from agent failed: cannot connect to [[10.10.30.22]:10050]: [4] Interrupted system call
+:::
+
+1. **¿Llega el servidor al 10050?** Desde el servidor Zabbix, `nc -zv 10.10.30.22 10050`. Si no conecta, es red: el firewall de Windows (la regla del MSI no se creó porque se instaló con `SKIP=fw`, o una GPO de firewall la anula) o un cortafuegos entre la VLAN de Zabbix y la de servidores. En el servidor Windows, `Get-NetFirewallRule -DisplayName "*Zabbix*"` y `Test-NetConnection` desde otro equipo de la misma red. *Connection refused* en lugar de *Interrupted* significa que llega pero el servicio no escucha: `sc query "Zabbix Agent 2"`.
+2. **¿Acepta al servidor?** Si conecta pero falla, el log del agente lo dice:
+
+:::term C:\\Program Files\\Zabbix Agent 2\\zabbix_agent2.log
+2026/11/04 10:52:17.402312 failed to accept an incoming connection: connection from "10.10.20.15" rejected, allowed hosts: "10.10.20.51"
+:::
+
+`Server=` apunta a otra IP: el antiguo servidor de Zabbix, o un proxy. Se corrige en `zabbix_agent2.conf` y se reinicia el servicio.
+
+3. **¿Coincide el nombre?** Las comprobaciones activas (y los elementos *active* de la plantilla) fallan aunque el ZBX pasivo esté en verde. El servidor lo deja en su log:
+
+:::term bash · /var/log/zabbix/zabbix_server.log
+$ grep "SRV-FS-02" /var/log/zabbix/zabbix_server.log | tail -n 1
+ 2231:20261104:105530.118 cannot send list of active checks to "10.10.30.22": host [srv-fs-02] not found
+:::
+
+El agente se presenta como `srv-fs-02` y en Zabbix el host es `SRV-FS-02`: el nombre distingue mayúsculas. Se iguala el `Hostname=` del agente al *Host name* de Zabbix (o se usa `HostnameItem=system.hostname` y se dan de alta los hosts con el nombre que devuelve).
+
+4. **Comprobar**: `zabbix_get -s 10.10.30.22 -k agent.ping` devuelve `1`, el icono pasa a verde en uno o dos minutos y **Latest data** del host muestra valores recientes.
+
+> Para que no vuelva a pasar, el comando de despliegue del MSI vive en un único sitio (el paquete de PDQ o MECM), con `SERVER` y `SERVERACTIVE` correctos y `HOSTNAME` tomado del nombre del equipo, y el alta en Zabbix se hace con ese mismo nombre.
+
+En el ticket: el mensaje de error de la interfaz, cuál de las tres causas era, el cambio hecho y la prueba con `zabbix_get`.
+
+## Siguientes pasos
+
+- El caso de un local de hostelería, con proxy en cada sitio, ICMP para TPV e impresoras y una tormenta de alertas, está en la guía de [Zabbix para un restaurante u hotel](zabbix-monitorizar-un-restaurante-u-hotel-tpv-impresoras-de-cocina-e-internet.html).
+- Para ver los datos de Zabbix junto a otras fuentes en un mismo panel, la guía de [Grafana](grafana-origen-de-datos-primer-panel-y-alerta-al-canal.html).
+- El agente en Windows se despliega en lote con lo que explica la guía de [PDQ y MDT](pdq-y-mdt-desplegar-software-en-lote-e-instalar-windows.html).
+""",
+  en="""
+## What you'll get
+
+A Zabbix server watching the Windows and Linux servers of the office and the server room: installed from the official repository, with agent 2 rolled out repeatably, hosts organised in groups, templates with thresholds tuned through macros, dependencies that turn a network failure into a single alert, email to the on-call team with escalation, and maintenance periods for patch windows. And, when a host shows a red **ZBX**, knowing whether it is the firewall, the agent configuration or the name.
+
+## Before you start
+
+- **The version**: Zabbix **7.0 LTS**, with full support until June 2027 and limited support until June 2029. Server, proxy and agents on the same major version; an older agent works, one newer than the server not always.
+- An **Ubuntu Server 24.04** for the server: for about 200 hosts, 4 vCPU, 8 GB of RAM and SSD storage; the database is what grows.
+- **Ports**: the server queries the agent on **10050/TCP** (passive checks) and agents send to the server on **10051/TCP** (active checks).
+- A DNS name (`zabbix.contoso.local`), a mailbox for alerts and a list of who is on call.
+
+## 1. The server: Zabbix 7.0 with MySQL and Apache
+
+The hospitality Zabbix guide installs with PostgreSQL and Nginx; here, the other common combination. Packages come from the official repository, not Ubuntu's, which carries an old version:
+
+:::term bash · zabbix.contoso.local (Ubuntu 24.04)
+$ wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.0+ubuntu24.04_all.deb
+$ sudo dpkg -i zabbix-release_latest_7.0+ubuntu24.04_all.deb && sudo apt update
+$ sudo apt install mysql-server zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent2
+:::
+
+The database, with the character set Zabbix requires:
+
+:::term mysql · sudo mysql
+$ create database zabbix character set utf8mb4 collate utf8mb4_bin;
+$ create user zabbix@localhost identified by 'ALongPassword';
+$ grant all privileges on zabbix.* to zabbix@localhost;
+$ set global log_bin_trust_function_creators = 1;
+$ quit;
+:::
+
+:::term bash · schema, configuration and start
+$ zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix -p zabbix
+$ sudo mysql -e "set global log_bin_trust_function_creators = 0;"
+$ sudo nano /etc/zabbix/zabbix_server.conf
+DBPassword=ALongPassword
+$ sudo systemctl restart zabbix-server zabbix-agent2 apache2
+$ sudo systemctl enable zabbix-server zabbix-agent2 apache2
+$ sudo ufw allow 10051/tcp && sudo ufw allow 443/tcp
+:::
+
+- `log_bin_trust_function_creators` is only needed while the schema is imported: set it back to 0.
+- The import takes a few minutes and shows nothing while it works.
+- The web interface is at `http://zabbix.contoso.local/zabbix`. The wizard asks for the database (MySQL, `localhost`, user `zabbix`), a name for the server and the time zone, and saves it all in `/etc/zabbix/web/zabbix.conf.php`.
+- The initial user is **Admin** with password **zabbix**. Change it on first login, create your own user with the *Super admin* role and keep Admin as the emergency account. For HTTPS, the certificate goes on Apache like any other site.
+
+> `tail -f /var/log/zabbix/zabbix_server.log` is the first thing to look at when something is not collecting. The server says there, with the host's name, what failed.
+
+## 2. Agent 2 on Windows and Linux
+
+**Windows**: the Zabbix Agent 2 MSI accepts configuration parameters on the command line, so the same command works for PDQ, MECM, Intune or a startup GPO:
+
+:::term cmd · silent install on SRV-FS-02
+$ msiexec /l*v C:\\Temp\\zabbix-agent2-install.log /i zabbix_agent2-7.0-windows-amd64-openssl.msi /qn SERVER=10.10.20.15 SERVERACTIVE=10.10.20.15 HOSTNAME=SRV-FS-02 ENABLEPATH=1
+$ sc query "Zabbix Agent 2"
+        STATE              : 4  RUNNING
+:::
+
+- The real MSI name carries the minor version (7.0.x): use the same one as the server.
+- `SERVER` is who may query the agent (passive); `SERVERACTIVE`, who the agent sends to (active). `HOSTNAME` must match **exactly**, case included, the *Host name* that will be created in Zabbix.
+- The installer creates the Windows firewall rule for 10050 unless it is given `SKIP=fw`. If the network has another firewall between the server and the server VLAN, open it there too.
+- The configuration ends up in `C:\\Program Files\\Zabbix Agent 2\\zabbix_agent2.conf` and the log in the same folder.
+
+**Linux**, with the same repository as the server:
+
+:::term bash · srv-app-02 (Ubuntu)
+$ sudo apt install zabbix-agent2
+$ sudo nano /etc/zabbix/zabbix_agent2.conf
+Server=10.10.20.15
+ServerActive=10.10.20.15
+Hostname=srv-app-02
+$ sudo systemctl restart zabbix-agent2 && sudo systemctl enable zabbix-agent2
+$ sudo ufw allow from 10.10.20.15 to any port 10050 proto tcp
+:::
+
+From the server, the test that separates "the agent does not answer" from "Zabbix is misconfigured" (package `zabbix-get`):
+
+:::term bash · zabbix.contoso.local
+$ zabbix_get -s 10.10.30.21 -k agent.ping
+1
+$ zabbix_get -s 10.10.30.21 -k agent.hostname
+srv-app-02
+:::
+
+## 3. Host groups, templates and macros
+
+Each server is created in **Data collection › Hosts › Create host**:
+
+:::ui Zabbix · Data collection › Hosts › Create host
+= Host name: SRV-FS-02
+= Visible name: File server 2 (Madrid)
+= Templates: Windows by Zabbix agent
+= Host groups: Servers/Madrid, Servers/Windows
+= Interfaces: Agent · IP 10.10.30.22 · Connect to IP · Port 10050
+= Tags: service:files · environment:production
+[Add]
+:::
+
+- **Host groups** by where it is and what it is (`Servers/Madrid`, `Servers/Windows`, `Network/Switches`): they drive permissions, actions and maintenance, so think them through once and stick to them.
+- **Templates**: *Windows by Zabbix agent* and *Linux by Zabbix agent* bring CPU, memory, disks, services and network, with automatic discovery of disks and interfaces. They work with agent 2. Do not edit the official templates: if you need to add something, link a template of your own alongside the official one.
+- **Macros**: template thresholds are macros such as `{$VFS.FS.PUSED.MAX.CRIT}` (90 % disk) or `{$CPU.UTIL.CRIT}`. They are changed on the host or a group without touching the template, and they accept **context**: `{$VFS.FS.PUSED.MAX.CRIT:"/var/log"}` = 95 changes only that file system, and on Windows `{$VFS.FS.PUSED.MAX.CRIT:"D:"}` only drive D.
+- Global macros live in **Administration › Macros**. Passwords (SNMPv3, a web check) go in a **Secret text** macro: the interface never shows them again.
+
+## 4. Trigger dependencies: the switch before the servers
+
+If the server room switch goes down, every server behind it shows as unavailable: fifty problems and fifty emails for a single fault. **Dependencies** fix that: a trigger that depends on another raises no problem while the other is active.
+
+1. The switch, `SW-CPD-01`, created with the **ICMP Ping** template (or the vendor's SNMP one). Its trigger is *Unavailable by ICMP ping*.
+2. On each server, the agent availability trigger (*Zabbix agent is not available*) is made to depend on the switch's. Since it comes from a template, the dependency is added on the host: **Data collection › Hosts › SRV-FS-02 › Triggers**, the trigger, **Dependencies** tab, **Add** and the switch's trigger.
+3. If the switch in turn depends on the router or the firewall, chain it the same way: router, switch, server.
+
+:::ui Zabbix · Trigger › Dependencies
+= Name: Zabbix agent is not available (for 3m)
+= Dependencies: SW-CPD-01: Unavailable by ICMP ping
+[Update]
+:::
+
+- For many hosts, the clean way is a template of your own per location (for example, *Madrid server room dependencies*) with the dependency already in place, or the Zabbix API with a script.
+- Dependencies only work if the switch is checked **more often** or with a shorter threshold than the servers: if the server fires before the switch, the alert has already gone.
+
+## 5. Alerts: the email media type and actions
+
+First the channel, in **Alerts › Media types › Email**:
+
+:::ui Zabbix · Alerts › Media types › Email
+= SMTP server: smtp.contoso.local · SMTP server port: 587
+= SMTP helo: contoso.local · SMTP email: zabbix@contoso.local
+= Connection security: STARTTLS
+= Authentication: Username and password · Username: zabbix@contoso.local
+= Message format: HTML
+[Update]
+:::
+
+**Test** sends a test email. Then, on each user, **Users › Users › Media**: the Email type, the address, the hours (**When active**, for example `1-7,00:00-24:00`) and the severities they want. A **user group** (`Systems on-call`) is better than individual users.
+
+The action decides which problems alert, whom and when, in **Alerts › Actions › Trigger actions**:
+
+:::ui Zabbix · Alerts › Actions › Trigger actions › Production servers
+= Conditions: Host group equals Servers/Madrid · Trigger severity is greater than or equals Average · Tag environment equals production
+> Operations
+= Step 1 (immediate): send to Systems on-call by Email
+= Step 2 (after 30 min): send to Systems managers by Email · only if not acknowledged
+[x] Pause operations for suppressed problems
+= Recovery operations: send to Systems on-call
+[Update]
+:::
+
+- Step 2 stops when someone **acknowledges** the problem: that way the manager only hears about what nobody has picked up.
+- A problem that matches no action alerts nobody: check that every production host group is in one.
+- **Reports › Action log** says what was sent, to whom and whether sending failed.
+
+## 6. Maintenance periods
+
+Patch Tuesday reboots servers on purpose. In **Data collection › Maintenance**:
+
+:::ui Zabbix · Data collection › Maintenance › November patching
+= Maintenance type: With data collection
+= Active since: 2026-11-10 21:00 · Active till: 2026-11-11 01:00
+= Periods: One time only · 2026-11-10 21:30 · duration 3 h
+= Host groups: Servers/Windows
+= Tags: environment equals production
+[Add]
+:::
+
+- **With data collection** keeps storing data and marks problems as suppressed; with *Pause operations for suppressed problems*, they do not alert. **No data collection** stops collecting: only for a host that is really switched off for days.
+- The Zabbix server checks maintenance every minute: create them a few minutes ahead of the reboot.
+
+! A maintenance with no end, or over every group, also hides the outage that has nothing to do with patching. Always with an end date and limited to what is being touched.
+
+## 7. The ticket: "an agent shows as ZBX unavailable"
+
+Wednesday, 11:00. `SRV-FS-02` was added yesterday and in **Monitoring › Hosts** its **ZBX** icon is red. Hovering over it, the interface error says where to start:
+
+:::term Zabbix · agent availability error
+Get value from agent failed: cannot connect to [[10.10.30.22]:10050]: [4] Interrupted system call
+:::
+
+1. **Does the server reach 10050?** From the Zabbix server, `nc -zv 10.10.30.22 10050`. If it does not connect, it is the network: the Windows firewall (the MSI rule was not created because it was installed with `SKIP=fw`, or a firewall GPO overrides it) or a firewall between the Zabbix VLAN and the server VLAN. On the Windows server, `Get-NetFirewallRule -DisplayName "*Zabbix*"`, and `Test-NetConnection` from another machine on the same network. *Connection refused* instead of *Interrupted* means it gets there but the service is not listening: `sc query "Zabbix Agent 2"`.
+2. **Does it accept the server?** If it connects but fails, the agent log says so:
+
+:::term C:\\Program Files\\Zabbix Agent 2\\zabbix_agent2.log
+2026/11/04 10:52:17.402312 failed to accept an incoming connection: connection from "10.10.20.15" rejected, allowed hosts: "10.10.20.51"
+:::
+
+`Server=` points at another IP: the old Zabbix server, or a proxy. Fix it in `zabbix_agent2.conf` and restart the service.
+
+3. **Does the name match?** Active checks (and the template's *active* items) fail even when the passive ZBX is green. The server writes it in its log:
+
+:::term bash · /var/log/zabbix/zabbix_server.log
+$ grep "SRV-FS-02" /var/log/zabbix/zabbix_server.log | tail -n 1
+ 2231:20261104:105530.118 cannot send list of active checks to "10.10.30.22": host [srv-fs-02] not found
+:::
+
+The agent introduces itself as `srv-fs-02` and in Zabbix the host is `SRV-FS-02`: the name is case-sensitive. Make the agent's `Hostname=` match the Zabbix *Host name* (or use `HostnameItem=system.hostname` and create hosts with the name it returns).
+
+4. **Check**: `zabbix_get -s 10.10.30.22 -k agent.ping` returns `1`, the icon goes green within a minute or two and the host's **Latest data** shows recent values.
+
+> So it does not happen again, the MSI deployment command lives in one place (the PDQ or MECM package), with the right `SERVER` and `SERVERACTIVE` and `HOSTNAME` taken from the computer name, and hosts are created in Zabbix with that same name.
+
+In the ticket: the interface error message, which of the three causes it was, the change made and the `zabbix_get` test.
+
+## Next steps
+
+- The hospitality case, with a proxy at each site, ICMP for tills and printers and an alert storm, is in the [Zabbix for a restaurant or hotel](zabbix-monitorizar-un-restaurante-u-hotel-tpv-impresoras-de-cocina-e-internet.html) guide.
+- To see Zabbix data alongside other sources on one dashboard, the [Grafana](grafana-origen-de-datos-primer-panel-y-alerta-al-canal.html) guide.
+- The Windows agent is rolled out in bulk with what the [PDQ and MDT](pdq-y-mdt-desplegar-software-en-lote-e-instalar-windows.html) guide explains.
+""")
+
+
+# ---------------------------------------------------------------- 3.x · ESXi from scratch to vCenter
+g(slug="esxi-8-instalar-un-host-red-de-gestion-ntp-alta-en-vcenter-y-un-host-not-responding", topic="vsphere", date="2026-11-03",
+  title_es="VMware ESXi 8 desde cero: instalación, red de gestión en la DCUI, NTP, alta en vCenter, vSwitch, datastore y un host en Not Responding",
+  title_en="VMware ESXi 8 from scratch: installation, management network in the DCUI, NTP, adding it to vCenter, vSwitch, datastore and a host showing Not Responding",
+  seo_title_en="ESXi 8: install, vCenter and Not Responding · Iñigo González",
+  seo_title_es="ESXi 8: instalación, vCenter y Not Responding · Iñigo González",
+  dek_es="Instalar ESXi 8 en un servidor nuevo, configurar la red de gestión en la DCUI (VLAN, IP fija y DNS), las primeras comprobaciones en el Host Client, NTP, el alta en vCenter, el vSwitch estándar con sus grupos de puertos, el datastore y el host que aparece como Not Responding.",
+  dek_en="Installing ESXi 8 on a new server, setting up the management network in the DCUI (VLAN, static IP and DNS), first checks in the Host Client, NTP, adding it to vCenter, the standard vSwitch and its port groups, the datastore, and the host that shows Not Responding.",
+  seo_desc="Install ESXi 8, set the management network in the DCUI, NTP, add the host to vCenter, vSwitch and datastore, and fix a host showing Not Responding.",
+  es="""
+## Qué vas a conseguir
+
+Un servidor recién llegado convertido en un host más del clúster: ESXi 8 instalado, la red de gestión con su VLAN, IP fija y DNS, la hora sincronizada, el host dado de alta en vCenter con los mismos grupos de puertos que sus compañeros y viendo el almacenamiento compartido. Y la rutina para el ticket que tarde o temprano llega: **el host aparece como Not Responding en vCenter**.
+
+## Antes de empezar
+
+- El servidor en la **Broadcom Compatibility Guide** para ESXi 8 y la ISO personalizada del fabricante (Dell, HPE, Lenovo), que trae los controladores de sus tarjetas.
+- Un disco de arranque de al menos **32 GB** (se recomiendan 128 GB), mejor un M.2 en espejo o un BOSS. Las tarjetas SD y las memorias USB como único dispositivo de arranque ya no están soportadas en ESXi 8.
+- La consola remota del servidor por iDRAC o iLO, con la ISO montada como medio virtual (guía de [iDRAC e iLO](idrac-e-ilo-gestion-fuera-de-banda-red-usuarios-consola-firmware-y-alertas.html)).
+- Los datos de red pedidos antes: nombre `esx03.contoso.local`, IP `10.10.10.23/24`, puerta de enlace `10.10.10.1`, VLAN de gestión `10`, DNS `10.10.0.10` y `10.10.0.11`. Los registros **A y PTR** creados en DNS antes de empezar.
+- Los puertos del switch para las tarjetas del servidor configurados como troncal con las VLANs de gestión, servidores y vMotion.
+
+## 1. Instalar ESXi 8
+
+Arranca el servidor desde la ISO en la consola remota:
+
+1. **Enter** en la pantalla de bienvenida y **F11** para aceptar la licencia.
+2. Elige el **disco de arranque**. Comprueba el modelo y el tamaño: si el servidor ve ya LUNs de la cabina, no las elijas por error. El instalador borra el disco que marques.
+3. Distribución de teclado: *Spanish*.
+4. Contraseña de **root**: larga, guardada en el gestor de contraseñas del equipo desde este momento.
+5. **F11** para instalar. Al terminar, desmonta la ISO y **Enter** para reiniciar.
+
+Si el disco de arranque tiene espacio de sobra, el instalador crea un datastore local llamado `datastore1`. Más adelante lo renombras con el nombre del host para no confundirlo con el de otro.
+
+## 2. La red de gestión en la DCUI
+
+La pantalla amarilla y gris es la **DCUI** (*Direct Console User Interface*). **F2** y el usuario root:
+
+:::ui DCUI · System Customization › Configure Management Network
+> Configure Management Network › Network Adapters
+[x] vmnic0 (Connected)
+[x] vmnic1 (Connected)
+> Configure Management Network › VLAN (optional)
+= VLAN ID: 10
+> Configure Management Network › IPv4 Configuration
+[x] Set static IPv4 address and network configuration
+= IPv4 Address: 10.10.10.23
+= Subnet Mask: 255.255.255.0
+= Default Gateway: 10.10.10.1
+> Configure Management Network › DNS Configuration
+= Primary DNS Server: 10.10.0.10
+= Alternate DNS Server: 10.10.0.11
+= Hostname: esx03
+> Configure Management Network › Custom DNS Suffixes
+= Suffixes: contoso.local
+:::
+
+- **Network Adapters**: dos tarjetas para la gestión, conectadas a switches distintos. Si una cae, el host sigue accesible.
+- **VLAN**: solo si el puerto del switch es troncal y la gestión va marcada. Si el puerto es de acceso en la VLAN 10, déjalo vacío. Poner VLAN en un lado y no en el otro es el error más frecuente de esta pantalla: la IP es correcta y no responde nada.
+- Con **Esc** la DCUI pregunta *Apply changes and restart management network?*: **Y**.
+- **Test Management Network** hace ping a la puerta de enlace y a los DNS y resuelve el propio nombre. Las cuatro líneas en *OK* antes de seguir.
+
+En **Troubleshooting Options** se activan el **ESXi Shell** y el **SSH**. Actívalos para la configuración y desactívalos al acabar: SSH abierto de forma permanente es un hallazgo en cualquier auditoría.
+
+## 3. Primeras comprobaciones en el Host Client
+
+El **Host Client** es la consola web del propio host: `https://esx03.contoso.local/ui`. Entra como root y repasa:
+
+- **Monitor › Hardware**: fuentes, ventiladores, memoria y controladora en verde.
+- **Manage › Licensing**: está en modo evaluación (60 días). La licencia la asigna vCenter en el paso 5.
+- **Networking**: `vmk0` con la IP de gestión y `vSwitch0` con los dos *uplinks*.
+- **Storage › Adapters**: las HBA de fibra o los adaptadores iSCSI que vas a usar.
+
+Lo mismo por SSH, más rápido de pegar en el ticket de alta:
+
+:::term SSH · esx03.contoso.local
+$ esxcli system version get
+   Product: VMware ESXi
+   Version: 8.0.3
+   Build: Releasebuild-24022510
+   Update: 3
+$ esxcli hardware platform get | grep -E "Vendor Name|Product Name|Serial Number"
+   Vendor Name: Dell Inc.
+   Product Name: PowerEdge R760
+   Serial Number: 7XKQ2W3
+$ esxcli network ip interface ipv4 get
+Name  IPv4 Address  IPv4 Netmask   IPv4 Broadcast  Address Type  Gateway     DHCP DNS
+----  ------------  -------------  --------------  ------------  ----------  --------
+vmk0  10.10.10.23   255.255.255.0  10.10.10.255    STATIC        10.10.10.1     false
+$ esxcli network ip dns server list
+   DNSServers: 10.10.0.10, 10.10.0.11
+:::
+
+La versión y el build tienen que coincidir con los del resto del clúster. Si la ISO era más antigua, el host se actualiza con Lifecycle Manager antes de meterle máquinas.
+
+## 4. NTP
+
+Un host con la hora desviada da problemas con los certificados, con la autenticación de Active Directory y con los logs, que dejan de cuadrar con los de vCenter. Dos servidores NTP internos, normalmente los controladores de dominio o los servidores de hora de la red:
+
+:::term SSH · esx03.contoso.local
+$ esxcli system ntp set --server=10.10.0.10 --server=10.10.0.11 --enabled=true
+$ esxcli system ntp get
+   Enabled: true
+   Loglevel: warning
+   Servers: 10.10.0.10, 10.10.0.11
+$ esxcli system time get
+2026-11-03T08:42:17Z
+:::
+
+En el Host Client es **Manage › System › Time & date › Edit NTP settings**: *Use Network Time Protocol*, los dos servidores y la política de arranque **Start and stop with host**. La hora del host está siempre en UTC: que no te despiste la diferencia con el reloj de Madrid.
+
+## 5. Dar de alta el host en vCenter
+
+En el vSphere Client, botón derecho sobre el clúster:
+
+:::ui vSphere Client · CL-PROD › Add Host
+= Host name or IP address: esx03.contoso.local
+= User name: root
+= Password: ••••••••••••
+[Next]
+= Security Alert: certificate SHA1 thumbprint 4E:A1:...:9C
+[Yes]
+= Assign license: vSphere 8 Enterprise Plus (CL-PROD)
+= Lockdown mode: Disabled
+= VM location: Datacenter-Madrid
+[Finish]
+:::
+
+- Usa siempre el **FQDN**, nunca la IP: vCenter guarda el nombre con el que diste de alta el host y con él se conecta después.
+- vCenter instala en el host su agente, **vpxa**, y desde entonces habla con él por ese agente.
+- Antes de que DRS le mande máquinas, ponlo en **modo de mantenimiento** mientras acabas los pasos 6 y 7. Si el clúster se gestiona con una imagen de **Lifecycle Manager**, comprueba el cumplimiento del host con esa imagen.
+- **Lockdown mode** en *Normal* impide entrar como root en el Host Client y obliga a gestionar desde vCenter. Es buena práctica en producción, pero deja una cuenta de excepción (*Exception Users*) por si vCenter se cae.
+
+## 6. vSwitch estándar y grupos de puertos
+
+Con un **vSwitch estándar** cada host tiene su propia configuración de red, así que los grupos de puertos se crean en cada uno **con el mismo nombre exacto** que en los demás. Si en `esx01` es `VLAN20-Servers` y en `esx03` es `VLAN20-servers`, vMotion falla al mover una VM entre ellos.
+
+:::term SSH · esx03.contoso.local
+$ esxcli network vswitch standard portgroup add --portgroup-name=VLAN20-Servers --vswitch-name=vSwitch0
+$ esxcli network vswitch standard portgroup set --portgroup-name=VLAN20-Servers --vlan-id=20
+$ esxcli network vswitch standard portgroup add --portgroup-name=vMotion --vswitch-name=vSwitch0
+$ esxcli network vswitch standard portgroup set --portgroup-name=vMotion --vlan-id=40
+$ esxcli network ip interface add --interface-name=vmk1 --portgroup-name=vMotion
+$ esxcli network ip interface ipv4 set --interface-name=vmk1 --ipv4=10.10.40.23 --netmask=255.255.255.0 --type=static
+$ esxcli network ip interface tag add --interface-name=vmk1 --tagname=VMotion
+$ esxcli network vswitch standard portgroup list
+Name              Virtual Switch  Active Clients  VLAN ID
+----------------  --------------  --------------  -------
+Management Network vSwitch0                    1       10
+VLAN20-Servers    vSwitch0                     0       20
+VM Network        vSwitch0                     0        0
+vMotion           vSwitch0                     1       40
+:::
+
+- `VM Network` lo crea el instalador sin VLAN. Si nadie lo usa, bórralo: una VM conectada ahí acaba en la VLAN nativa del troncal.
+- Desde vCenter, **Configure › Networking › Virtual switches** hace lo mismo con asistente. Con muchos hosts, un **Distributed Switch** evita repetir esto en cada uno.
+- Prueba vMotion de punta a punta: `vmkping -I vmk1 10.10.40.21` hacia la IP de vMotion de otro host.
+
+## 7. El datastore
+
+El equipo de almacenamiento presenta al nuevo host las mismas LUNs que a los demás (zoning en fibra o el IQN del host añadido en la cabina para iSCSI). Después, un reescaneo:
+
+:::term SSH · esx03.contoso.local
+$ esxcli storage core adapter rescan --all
+$ esxcli storage filesystem list
+Mount Point                                        Volume Name   UUID                                 Mounted  Type    Size           Free
+-------------------------------------------------  ------------  -----------------------------------  -------  ------  -------------  -------------
+/vmfs/volumes/6718a2c4-1b2e30f8-77d1-b8cef6a1c210  DS-SAN-01     6718a2c4-1b2e30f8-77d1-b8cef6a1c210  true     VMFS-6  4397778075648  1975684857856
+/vmfs/volumes/6718a2d9-0f43aa10-4c2e-b8cef6a1c210  DS-SAN-02     6718a2d9-0f43aa10-4c2e-b8cef6a1c210  true     VMFS-6  4397778075648   227633266688
+/vmfs/volumes/672f19b0-3a5c1e66-90ab-b8cef6a1c312  esx03-local   672f19b0-3a5c1e66-90ab-b8cef6a1c312  true     VMFS-6   106837311488   105264447488
+:::
+
+Los datastores compartidos aparecen solos tras el reescaneo, con su nombre. Para una LUN **nueva**, en vCenter: botón derecho sobre el host › **Storage › New Datastore** › *VMFS* › nombre `DS-SAN-03` › el dispositivo `naa.` que te indicó el equipo de almacenamiento › **VMFS 6** › usar toda la partición.
+
+! *New Datastore* formatea el dispositivo. Si una LUN que ya tiene datos no aparece montada, no es un datastore nuevo: es un problema de presentación o una copia de LUN que hay que montar, nunca formatear.
+
+Al terminar: el host sale del modo de mantenimiento, SSH desactivado y el alta anotada en el inventario.
+
+## 8. El ticket: "esx03 aparece como Not Responding en vCenter"
+
+Lunes, 8:15. En el inventario de vCenter, `esx03.contoso.local` aparece en cursiva con **(Not Responding)** y sus máquinas como *disconnected*.
+
+Lo primero, calmar el ticket: **Not Responding** significa que vCenter ha perdido el contacto con el agente de gestión del host. Las VMs suelen seguir funcionando. Haz ping a una de ellas y entra en su aplicación antes de tocar nada.
+
+1. **¿Responde el host?** Abre el Host Client (`https://esx03.contoso.local/ui`). Si no carga, entra por la consola de iDRAC o iLO y mira la DCUI: la red de gestión, la VLAN, un cable o un puerto del switch.
+2. **DNS**. vCenter se conecta por el nombre con el que se dio de alta el host. Comprueba la resolución directa e inversa desde tu equipo y desde el host (`nslookup vcenter.contoso.local`). Un registro borrado o cambiado basta para dejarlo fuera.
+3. **Puertos**. vCenter entra en el host por **TCP 443** y el host le envía latidos por **UDP 902**. Si vCenter deja de recibirlos durante unos 60 segundos, marca el host como Not Responding. Un cambio de cortafuegos entre la VLAN de gestión y vCenter produce justo esto: el host se conecta y a los pocos segundos vuelve a Not Responding. Desde el host, `nc -z -w 3 10.10.10.5 443` comprueba el camino de vuelta; el UDP 902 se lo pides al equipo de red con el log del cortafuegos.
+4. **Espacio y logs del host**. `vdf -h` muestra los ramdisks del sistema; uno lleno puede tumbar `hostd`. Los logs que cuentan: `/var/log/vpxa.log` (el agente de vCenter) y `/var/log/hostd.log` (el servicio de gestión del host).
+5. **Reiniciar los agentes, de uno en uno**. Por SSH o desde **Host Client › Manage › Services**:
+
+:::term SSH · esx03.contoso.local
+$ /etc/init.d/vpxa restart
+$ /etc/init.d/hostd restart
+$ esxcli vsan cluster get
+vSAN Clustering is not enabled on this host
+:::
+
+Las VMs no se reinician con esto. Espera uno o dos minutos y, en vCenter, botón derecho sobre el host › **Connection › Connect**.
+
+! La opción **Restart Management Agents** de la DCUI (*Troubleshooting Options*) y el comando `services.sh restart` reinician todos los servicios a la vez. No los uses si el host tiene **vSAN** (`esxcli vsan cluster get`), **LACP** en un Distributed Switch (`esxcli network vswitch dvs vmware lacp status get`) o **NSX**: puede cortar la red o el almacenamiento de las VMs. En esos casos, solo `vpxa` y `hostd`.
+
+Si nada de esto lo devuelve, el siguiente paso es evacuar las VMs (vMotion desde vCenter cuando vuelva a conectar, o apagado ordenado en una ventana) y reiniciar el host.
+
+En el ticket: hora de la caída, qué falló (DNS, cortafuegos, servicio), qué se reinició y la comprobación final: host *Connected* y una VM movida con vMotion a él y de vuelta.
+
+## Siguientes pasos
+
+- La guía de [vSphere y vCenter](vsphere-vcenter-crear-vm-snapshots-con-caducidad-y-host-en-mantenimiento.html) sigue desde aquí: VMs desde plantilla, snapshots con caducidad y un host en mantenimiento con las VMs en marcha.
+- La de [iDRAC e iLO](idrac-e-ilo-gestion-fuera-de-banda-red-usuarios-consola-firmware-y-alertas.html) cubre la consola fuera de banda que necesitas cuando la red de gestión del host no responde.
+- Con más de tres o cuatro hosts, un **Distributed Switch** y un **Host Profile** evitan repetir los pasos 4 y 6 en cada uno.
+""",
+  en="""
+## What you'll get
+
+A freshly delivered server turned into one more host in the cluster: ESXi 8 installed, the management network with its VLAN, static IP and DNS, time synchronised, the host added to vCenter with the same port groups as its peers and seeing the shared storage. And the routine for the ticket that arrives sooner or later: **the host shows Not Responding in vCenter**.
+
+## Before you start
+
+- The server listed in the **Broadcom Compatibility Guide** for ESXi 8, and the vendor's custom ISO (Dell, HPE, Lenovo), which carries the drivers for its cards.
+- A boot disk of at least **32 GB** (128 GB recommended), ideally a mirrored M.2 or a BOSS card. SD cards and USB sticks as the only boot device are no longer supported in ESXi 8.
+- The server's remote console via iDRAC or iLO, with the ISO mounted as virtual media (see the [iDRAC and iLO](idrac-e-ilo-gestion-fuera-de-banda-red-usuarios-consola-firmware-y-alertas.html) guide).
+- The network details requested beforehand: name `esx03.contoso.local`, IP `10.10.10.23/24`, gateway `10.10.10.1`, management VLAN `10`, DNS `10.10.0.10` and `10.10.0.11`. The **A and PTR** records created in DNS before you start.
+- The switch ports for the server's NICs configured as trunks with the management, server and vMotion VLANs.
+
+## 1. Installing ESXi 8
+
+Boot the server from the ISO in the remote console:
+
+1. **Enter** on the welcome screen and **F11** to accept the licence.
+2. Choose the **boot disk**. Check the model and size: if the server already sees LUNs from the array, do not pick one by mistake. The installer wipes the disk you select.
+3. Keyboard layout: whatever your team uses.
+4. **root** password: long, and stored in the team's password manager from this moment.
+5. **F11** to install. When it finishes, unmount the ISO and press **Enter** to reboot.
+
+If the boot disk has plenty of room, the installer creates a local datastore called `datastore1`. Later you rename it after the host so it is not confused with another one.
+
+## 2. The management network in the DCUI
+
+The yellow and grey screen is the **DCUI** (*Direct Console User Interface*). **F2** and the root user:
+
+:::ui DCUI · System Customization › Configure Management Network
+> Configure Management Network › Network Adapters
+[x] vmnic0 (Connected)
+[x] vmnic1 (Connected)
+> Configure Management Network › VLAN (optional)
+= VLAN ID: 10
+> Configure Management Network › IPv4 Configuration
+[x] Set static IPv4 address and network configuration
+= IPv4 Address: 10.10.10.23
+= Subnet Mask: 255.255.255.0
+= Default Gateway: 10.10.10.1
+> Configure Management Network › DNS Configuration
+= Primary DNS Server: 10.10.0.10
+= Alternate DNS Server: 10.10.0.11
+= Hostname: esx03
+> Configure Management Network › Custom DNS Suffixes
+= Suffixes: contoso.local
+:::
+
+- **Network Adapters**: two NICs for management, connected to different switches. If one fails, the host stays reachable.
+- **VLAN**: only if the switch port is a trunk and management traffic is tagged. If the port is an access port in VLAN 10, leave it empty. Setting the VLAN on one side and not the other is the most common mistake on this screen: the IP is right and nothing answers.
+- On **Esc** the DCUI asks *Apply changes and restart management network?*: **Y**.
+- **Test Management Network** pings the gateway and the DNS servers and resolves the host's own name. All four lines *OK* before moving on.
+
+**Troubleshooting Options** is where the **ESXi Shell** and **SSH** are enabled. Turn them on for the setup and off when you finish: SSH left permanently open is a finding in any audit.
+
+## 3. First checks in the Host Client
+
+The **Host Client** is the host's own web console: `https://esx03.contoso.local/ui`. Log in as root and go through:
+
+- **Monitor › Hardware**: power supplies, fans, memory and controller in green.
+- **Manage › Licensing**: it is in evaluation mode (60 days). vCenter assigns the licence in step 5.
+- **Networking**: `vmk0` with the management IP and `vSwitch0` with both *uplinks*.
+- **Storage › Adapters**: the Fibre Channel HBAs or iSCSI adapters you are going to use.
+
+The same over SSH, quicker to paste into the onboarding ticket:
+
+:::term SSH · esx03.contoso.local
+$ esxcli system version get
+   Product: VMware ESXi
+   Version: 8.0.3
+   Build: Releasebuild-24022510
+   Update: 3
+$ esxcli hardware platform get | grep -E "Vendor Name|Product Name|Serial Number"
+   Vendor Name: Dell Inc.
+   Product Name: PowerEdge R760
+   Serial Number: 7XKQ2W3
+$ esxcli network ip interface ipv4 get
+Name  IPv4 Address  IPv4 Netmask   IPv4 Broadcast  Address Type  Gateway     DHCP DNS
+----  ------------  -------------  --------------  ------------  ----------  --------
+vmk0  10.10.10.23   255.255.255.0  10.10.10.255    STATIC        10.10.10.1     false
+$ esxcli network ip dns server list
+   DNSServers: 10.10.0.10, 10.10.0.11
+:::
+
+Version and build must match the rest of the cluster. If the ISO was older, the host is updated with Lifecycle Manager before it gets any VMs.
+
+## 4. NTP
+
+A host with drifting time causes trouble with certificates, with Active Directory authentication and with logs, which stop lining up with vCenter's. Two internal NTP servers, usually the domain controllers or the network's time servers:
+
+:::term SSH · esx03.contoso.local
+$ esxcli system ntp set --server=10.10.0.10 --server=10.10.0.11 --enabled=true
+$ esxcli system ntp get
+   Enabled: true
+   Loglevel: warning
+   Servers: 10.10.0.10, 10.10.0.11
+$ esxcli system time get
+2026-11-03T08:42:17Z
+:::
+
+In the Host Client it is **Manage › System › Time & date › Edit NTP settings**: *Use Network Time Protocol*, both servers, and the startup policy **Start and stop with host**. The host's clock is always in UTC: do not let the difference with local time throw you.
+
+## 5. Adding the host to vCenter
+
+In the vSphere Client, right-click the cluster:
+
+:::ui vSphere Client · CL-PROD › Add Host
+= Host name or IP address: esx03.contoso.local
+= User name: root
+= Password: ••••••••••••
+[Next]
+= Security Alert: certificate SHA1 thumbprint 4E:A1:...:9C
+[Yes]
+= Assign license: vSphere 8 Enterprise Plus (CL-PROD)
+= Lockdown mode: Disabled
+= VM location: Datacenter-Madrid
+[Finish]
+:::
+
+- Always use the **FQDN**, never the IP: vCenter stores the name you added the host with and uses it to connect from then on.
+- vCenter installs its agent on the host, **vpxa**, and talks to the host through it from then on.
+- Before DRS sends it any VMs, put it in **maintenance mode** while you finish steps 6 and 7. If the cluster is managed with a **Lifecycle Manager** image, check the host's compliance with that image.
+- **Lockdown mode** set to *Normal* blocks root logins to the Host Client and forces management through vCenter. It is good practice in production, but keep an exception account (*Exception Users*) in case vCenter goes down.
+
+## 6. Standard vSwitch and port groups
+
+With a **standard vSwitch** each host has its own network configuration, so port groups are created on each one **with exactly the same name** as on the others. If it is `VLAN20-Servers` on `esx01` and `VLAN20-servers` on `esx03`, vMotion fails when moving a VM between them.
+
+:::term SSH · esx03.contoso.local
+$ esxcli network vswitch standard portgroup add --portgroup-name=VLAN20-Servers --vswitch-name=vSwitch0
+$ esxcli network vswitch standard portgroup set --portgroup-name=VLAN20-Servers --vlan-id=20
+$ esxcli network vswitch standard portgroup add --portgroup-name=vMotion --vswitch-name=vSwitch0
+$ esxcli network vswitch standard portgroup set --portgroup-name=vMotion --vlan-id=40
+$ esxcli network ip interface add --interface-name=vmk1 --portgroup-name=vMotion
+$ esxcli network ip interface ipv4 set --interface-name=vmk1 --ipv4=10.10.40.23 --netmask=255.255.255.0 --type=static
+$ esxcli network ip interface tag add --interface-name=vmk1 --tagname=VMotion
+$ esxcli network vswitch standard portgroup list
+Name              Virtual Switch  Active Clients  VLAN ID
+----------------  --------------  --------------  -------
+Management Network vSwitch0                    1       10
+VLAN20-Servers    vSwitch0                     0       20
+VM Network        vSwitch0                     0        0
+vMotion           vSwitch0                     1       40
+:::
+
+- `VM Network` is created by the installer with no VLAN. If nothing uses it, delete it: a VM connected there ends up on the trunk's native VLAN.
+- In vCenter, **Configure › Networking › Virtual switches** does the same with a wizard. With many hosts, a **Distributed Switch** saves repeating this on each one.
+- Test vMotion end to end: `vmkping -I vmk1 10.10.40.21` to another host's vMotion IP.
+
+## 7. The datastore
+
+The storage team presents the same LUNs to the new host as to the others (zoning on Fibre Channel, or the host's IQN added on the array for iSCSI). Then a rescan:
+
+:::term SSH · esx03.contoso.local
+$ esxcli storage core adapter rescan --all
+$ esxcli storage filesystem list
+Mount Point                                        Volume Name   UUID                                 Mounted  Type    Size           Free
+-------------------------------------------------  ------------  -----------------------------------  -------  ------  -------------  -------------
+/vmfs/volumes/6718a2c4-1b2e30f8-77d1-b8cef6a1c210  DS-SAN-01     6718a2c4-1b2e30f8-77d1-b8cef6a1c210  true     VMFS-6  4397778075648  1975684857856
+/vmfs/volumes/6718a2d9-0f43aa10-4c2e-b8cef6a1c210  DS-SAN-02     6718a2d9-0f43aa10-4c2e-b8cef6a1c210  true     VMFS-6  4397778075648   227633266688
+/vmfs/volumes/672f19b0-3a5c1e66-90ab-b8cef6a1c312  esx03-local   672f19b0-3a5c1e66-90ab-b8cef6a1c312  true     VMFS-6   106837311488   105264447488
+:::
+
+Shared datastores show up on their own after the rescan, with their names. For a **new** LUN, in vCenter: right-click the host › **Storage › New Datastore** › *VMFS* › name `DS-SAN-03` › the `naa.` device the storage team gave you › **VMFS 6** › use the whole partition.
+
+! *New Datastore* formats the device. If a LUN that already holds data does not show up mounted, it is not a new datastore: it is a presentation problem or a LUN copy that needs mounting, never formatting.
+
+When you finish: the host leaves maintenance mode, SSH is off and the addition is recorded in the inventory.
+
+## 8. The ticket: "esx03 shows Not Responding in vCenter"
+
+Monday, 8:15. In the vCenter inventory, `esx03.contoso.local` is in italics with **(Not Responding)** and its VMs show as *disconnected*.
+
+First, take the heat out of the ticket: **Not Responding** means vCenter has lost contact with the host's management agent. The VMs usually keep running. Ping one of them and open its application before you touch anything.
+
+1. **Does the host answer?** Open the Host Client (`https://esx03.contoso.local/ui`). If it does not load, go in through the iDRAC or iLO console and look at the DCUI: the management network, the VLAN, a cable or a switch port.
+2. **DNS**. vCenter connects using the name the host was added with. Check forward and reverse lookups from your machine and from the host (`nslookup vcenter.contoso.local`). One deleted or changed record is enough to cut it off.
+3. **Ports**. vCenter reaches the host on **TCP 443** and the host sends heartbeats over **UDP 902**. If vCenter stops receiving them for about 60 seconds, it marks the host Not Responding. A firewall change between the management VLAN and vCenter produces exactly this: the host connects and a few seconds later goes back to Not Responding. From the host, `nc -z -w 3 10.10.10.5 443` checks the return path; ask the network team about UDP 902 with the firewall log.
+4. **Host space and logs**. `vdf -h` shows the system ramdisks; a full one can bring `hostd` down. The logs that matter: `/var/log/vpxa.log` (the vCenter agent) and `/var/log/hostd.log` (the host management service).
+5. **Restart the agents, one at a time**. Over SSH or from **Host Client › Manage › Services**:
+
+:::term SSH · esx03.contoso.local
+$ /etc/init.d/vpxa restart
+$ /etc/init.d/hostd restart
+$ esxcli vsan cluster get
+vSAN Clustering is not enabled on this host
+:::
+
+This does not restart the VMs. Wait a minute or two and, in vCenter, right-click the host › **Connection › Connect**.
+
+! The DCUI's **Restart Management Agents** option (*Troubleshooting Options*) and the `services.sh restart` command restart every service at once. Do not use them if the host has **vSAN** (`esxcli vsan cluster get`), **LACP** on a Distributed Switch (`esxcli network vswitch dvs vmware lacp status get`) or **NSX**: it can cut the VMs' network or storage. In those cases, only `vpxa` and `hostd`.
+
+If none of this brings it back, the next step is to evacuate the VMs (vMotion from vCenter once it reconnects, or an orderly shutdown in a window) and reboot the host.
+
+In the ticket: time of the outage, what failed (DNS, firewall, service), what was restarted, and the final check: host *Connected* and a VM moved to it with vMotion and back.
+
+## Next steps
+
+- The [vSphere and vCenter](vsphere-vcenter-crear-vm-snapshots-con-caducidad-y-host-en-mantenimiento.html) guide carries on from here: VMs from a template, snapshots with an expiry and a host in maintenance with the VMs running.
+- The [iDRAC and iLO](idrac-e-ilo-gestion-fuera-de-banda-red-usuarios-consola-firmware-y-alertas.html) guide covers the out-of-band console you need when the host's management network does not answer.
+- With more than three or four hosts, a **Distributed Switch** and a **Host Profile** save repeating steps 4 and 6 on each one.
+""")
+
+# ---------------------------------------------------------------- 3.x · Kibana alerting and ILM
+g(slug="kibana-paneles-alertas-ilm-data-streams-y-elasticsearch-en-solo-lectura-por-disco-lleno", topic="elk", date="2026-11-03",
+  title_es="Kibana y Elasticsearch: paneles de logs, reglas de alerta, ciclo de vida de índices con data streams y un clúster en solo lectura por disco lleno",
+  title_en="Kibana and Elasticsearch: log dashboards, alerting rules, index lifecycle with data streams and a cluster gone read-only because the disk is full",
+  seo_title_en="Kibana alerts, ILM and a read-only index · Iñigo González",
+  seo_title_es="Kibana: alertas, ILM e índice en solo lectura · Iñigo González",
+  dek_es="Un panel de Kibana para los logs de Windows y Linux, una regla de tipo Elasticsearch query con su conector, una política ILM con rollover y borrado sobre un data stream propio, y el lunes en que Elasticsearch deja de aceptar logs porque el disco ha pasado la marca de flood-stage.",
+  dek_en="A Kibana dashboard for Windows and Linux logs, an Elasticsearch query rule with its connector, an ILM policy with rollover and delete on your own data stream, and the Monday when Elasticsearch stops accepting logs because the disk passed the flood-stage watermark.",
+  seo_desc="Kibana dashboards for Windows and Linux logs, alerting rules with connectors, ILM with rollover on data streams, and Elasticsearch read-only after a full disk.",
+  es="""
+## Qué vas a conseguir
+
+Pasar de "los logs están en Elasticsearch" a que te avisen: un panel que el equipo abre cada mañana, una regla que manda un mensaje cuando hay demasiados inicios de sesión fallidos, los índices con fecha de caducidad automática gracias a **ILM** y los **data streams**, y la rutina para el día en que el disco se llena y Elasticsearch se pone en solo lectura.
+
+## Antes de empezar
+
+- Elasticsearch y Kibana **8.x** funcionando, como en la guía de [ELK para centralizar logs](elk-centralizar-logs-de-servidores-y-buscar-un-error-en-kibana.html), con un usuario con permisos de administración.
+- **Winlogbeat** en los servidores Windows y **Filebeat** con el módulo `system` en los Linux. En 8.x escriben en los data streams `winlogbeat-8.x.x` y `filebeat-8.x.x`.
+- En `kibana.yml`, la clave `xpack.encryptedSavedObjects.encryptionKey` con al menos 32 caracteres. Sin ella, Kibana no deja crear reglas ni conectores.
+- Licencia: con **Basic** solo están los conectores *Index* y *Server log*. **Email**, **Microsoft Teams** o **Webhook** necesitan una suscripción de pago (Gold o superior) o la prueba de 30 días.
+
+## 1. Un panel para los logs de Windows y Linux
+
+Primero las **vistas de datos** (*data views*), que dicen a Kibana qué índices leer:
+
+:::ui Kibana · Stack Management › Data Views › Create data view
+= Name: Windows
+= Index pattern: winlogbeat-*
+= Timestamp field: @timestamp
+[Save data view to Kibana]
+:::
+
+Otra igual con `filebeat-*` para Linux. Después **Analytics › Dashboards › Create dashboard › Create visualization** y, con **Lens**, cuatro paneles:
+
+| Panel | Vista | Filtro (KQL) | Gráfico |
+|---|---|---|---|
+| Inicios de sesión fallidos | Windows | `event.code: 4625` | Barras por hora, top 10 de `winlog.event_data.TargetUserName` |
+| Cuentas bloqueadas | Windows | `event.code: 4740` | Tabla con hora, cuenta y `host.name` |
+| SSH fallido en Linux | Linux | `event.dataset: "system.auth" and system.auth.ssh.event: "Failed"` | Top 10 de `source.ip` |
+| Equipos que más registran | Ambas | (ninguno) | Barras por `host.name` |
+
+Guarda el panel con una etiqueta (*Tags*: `operaciones`) y el intervalo **Last 24 hours**. El cuarto panel es el que avisa antes que nadie de un servidor con el log en modo depuración: lo vas a necesitar en el paso 6.
+
+## 2. El conector
+
+El **conector** es el canal por el que sale el aviso. Se crea una vez y lo usan todas las reglas:
+
+:::ui Kibana · Stack Management › Alerts and Insights › Connectors › Create connector
+> Microsoft Teams
+= Connector name: Teams · Operaciones
+= Webhook URL: https://contoso.webhook.office.com/webhookb2/...
+[Save & test]
+:::
+
+- La URL del webhook la crea el propietario del canal en Teams. Trátala como una contraseña: quien la tenga puede escribir en el canal.
+- **Save & test** envía un mensaje de prueba. Si no llega, el servidor de Kibana no tiene salida a Internet o necesita proxy (`xpack.actions.proxyUrl` en `kibana.yml`).
+- Con licencia Basic, el conector *Index* escribe la alerta en un índice; útil para un panel de alertas, pero no avisa a nadie.
+
+## 3. Una regla de tipo Elasticsearch query
+
+:::ui Kibana · Stack Management › Alerts and Insights › Rules › Create rule › Elasticsearch query
+= Name: Windows · más de 20 logons fallidos en 5 min
+= Query type: KQL or Lucene
+= Data view: Windows
+= Query: event.code: 4625
+= When: count() over top 5 host.name
+= Threshold: IS ABOVE 20
+= Time window: For the last 5 minutes
+= Check every: 1 minute
+[Test query]
+> Actions › Teams · Operaciones
+= Action frequency: On status changes
+= Run when: Query matched
+= Message: {{rule.name}} · {{context.title}} · {{context.link}}
+[Create rule]
+:::
+
+- **Test query** dice cuántos documentos encuentra ahora mismo. Si devuelve miles, el umbral está mal o falta un filtro.
+- **On status changes** manda un mensaje cuando salta y otro cuando se recupera (añade una segunda acción con *Run when: Recovered*), no uno cada minuto.
+- `{{context.link}}` lleva directo a los documentos en Discover: quien recibe el aviso no tiene que construir la búsqueda.
+- Pon nombre que diga qué pasa y dónde. "Alerta 3" a las tres de la mañana no ayuda.
+
+## 4. Una política ILM con rollover y borrado
+
+La guía anterior usaba un índice por día y una política que solo borraba. Con **rollover**, Elasticsearch crea un índice nuevo cuando el actual llega a un tamaño o una edad, y la fase de borrado cuenta desde ese momento. En **Dev Tools**:
+
+:::term Kibana · Dev Tools · política ILM
+PUT _ilm/policy/logs-contoso-30d
+{
+  "policy": {
+    "phases": {
+      "hot": {
+        "actions": {
+          "rollover": { "max_primary_shard_size": "10gb", "max_age": "1d" }
+        }
+      },
+      "delete": {
+        "min_age": "30d",
+        "actions": { "delete": {} }
+      }
+    }
+  }
+}
+:::
+
+- `max_age: 1d` y `max_primary_shard_size: 10gb`: lo primero que se cumpla. Con poco volumen, un índice por día; si un día se dispara, se parte antes.
+- `min_age: 30d` en *delete* se mide desde el rollover: un índice vive unos 31 días.
+- Los Beats y los data streams `logs-*-*` usan por defecto las políticas integradas (`logs`, `filebeat`, `winlogbeat`), que hacen rollover pero **no borran nunca**. Revísalas en **Stack Management › Index Lifecycle Policies** y añádeles una fase de borrado, o asigna la tuya en su plantilla.
+
+## 5. Un data stream propio
+
+Un **data stream** es un nombre lógico (`logs-contoso.servers-default`) detrás del que hay índices ocultos (`.ds-logs-contoso.servers-default-2026.11.03-000001`). Se escribe siempre en el nombre y Elasticsearch hace el resto. Lo crea una **plantilla de índice** con `data_stream`:
+
+:::term Kibana · Dev Tools · plantilla del data stream
+PUT _index_template/logs-contoso.servers
+{
+  "index_patterns": ["logs-contoso.servers-*"],
+  "data_stream": {},
+  "priority": 200,
+  "template": {
+    "settings": {
+      "index.lifecycle.name": "logs-contoso-30d",
+      "number_of_replicas": 0
+    }
+  }
+}
+:::
+
+- `priority: 200`, porque la plantilla integrada `logs` (patrón `logs-*-*`, prioridad 100) también encaja con ese nombre y gana la de prioridad más alta.
+- Los documentos necesitan `@timestamp`: el data stream lo exige.
+
+En Logstash, la salida pasa de un índice con fecha al data stream:
+
+:::term /etc/logstash/conf.d/30-output.conf
+output {
+  elasticsearch {
+    hosts => ["https://10.20.5.10:9200"]
+    data_stream => "true"
+    data_stream_type => "logs"
+    data_stream_dataset => "contoso.servers"
+    data_stream_namespace => "default"
+    user => "logstash_writer"
+    password => "${ES_PWD}"
+  }
+}
+:::
+
+Para comprobar que la política se aplica: `GET _data_stream/logs-contoso.servers-default` muestra los índices y la política, y `GET logs-contoso.servers-default/_ilm/explain` la fase de cada uno. Un índice en `ERROR` en el *explain* es una política que no avanza y un disco que se llena.
+
+! En un data stream no se puede borrar el índice de escritura (el más reciente). Si necesitas cerrarlo, primero `POST logs-contoso.servers-default/_rollover`.
+
+## 6. El ticket: "Kibana no muestra logs desde el sábado"
+
+Lunes, 9:00. El panel del paso 1 está vacío desde el sábado a las 3:12. Logstash escribe esto en su log sin parar:
+
+:::term srv-elk-01 · journalctl -u logstash
+retrying failed action with response code: 429 ({"type"=>"cluster_block_exception", "reason"=>"index [.ds-logs-contoso.servers-default-2026.11.01-000032] blocked by: [TOO_MANY_REQUESTS/12/disk usage exceeded flood-stage watermark, index has read-only-allow-delete block];"})
+:::
+
+Elasticsearch tiene tres marcas de disco por nodo: **low** (85 %, deja de asignar shards nuevos), **high** (90 %, intenta mover shards a otro nodo) y **flood-stage** (95 %). Al pasar la última pone en todos los índices de ese nodo el bloqueo `index.blocks.read_only_allow_delete`: se puede leer y borrar, pero no escribir.
+
+:::term Kibana · Dev Tools
+$ GET _cat/allocation?v&h=node,disk.percent,disk.used,disk.avail
+node         disk.percent disk.used disk.avail
+srv-elk-01             96   479.6gb     20.3gb
+$ GET _cluster/health?filter_path=status,number_of_nodes,unassigned_shards
+{"status":"yellow","number_of_nodes":1,"unassigned_shards":4}
+$ GET _cat/indices?v&s=store.size:desc&h=index,store.size&expand_wildcards=all
+index                                                  store.size
+.ds-logs-contoso.servers-default-2026.11.01-000032          61.2gb
+.ds-logs-contoso.servers-default-2026.10.31-000031          58.7gb
+.ds-logs-contoso.servers-default-2026.10.04-000004           4.1gb
+:::
+
+- La **salud** del clúster sigue en amarillo, como siempre en un nodo único con réplicas pendientes. El bloqueo por disco no la pone en rojo: por eso nadie lo vio en el panel de estado.
+- Los dos últimos índices pesan quince veces lo normal. El panel de "equipos que más registran" señala a `srv-app-07`, que desde el viernes tiene la aplicación en nivel de log `DEBUG`.
+
+Pasos:
+
+1. **Cortar la causa**: devolver el log de `srv-app-07` a `INFO` (o parar su Filebeat mientras tanto).
+2. **Liberar espacio** borrando lo más antiguo que ya no se necesita. Con el bloqueo, borrar está permitido: `DELETE .ds-logs-contoso.servers-default-2026.10.04-000004`. Nunca borres ficheros a mano en el directorio de datos.
+3. **Esperar a que se levante el bloqueo**. Desde la versión 7.4, Elasticsearch quita `read_only_allow_delete` por sí solo cuando el disco del nodo baja de la marca **high** (90 %). Comprueba con `GET _cat/allocation?v` que estás por debajo.
+4. Si el disco ya está por debajo y los índices siguen bloqueados, quítalo a mano:
+
+:::term Kibana · Dev Tools · quitar el bloqueo
+PUT */_settings?expand_wildcards=all
+{
+  "index.blocks.read_only_allow_delete": null
+}
+:::
+
+5. **Comprobar que entra todo**: Logstash reintenta los 429 por su cuenta. Mira en Discover que llegan eventos nuevos y si hay hueco. Lo que Filebeat no pudo enviar lo reintenta desde su registro; lo que se perdió, se anota en el ticket.
+
+! Subir la marca de flood-stage al 98 % para "salir del paso" solo aplaza el problema unas horas y deja el nodo sin margen. Si lo haces, vuelve a ponerla en `null` en cuanto liberes espacio.
+
+Para que no se repita: la regla de Stack Monitoring **Disk Usage threshold** (o una regla propia sobre el disco) avisando al 80 %, la política del paso 4 con fase de borrado en todos los data streams y un tope de volumen por servidor revisado en el panel.
+
+En el ticket: hora de inicio del bloqueo, servidor y causa del volumen, índices borrados, hora de vuelta a la normalidad y hueco de logs si lo hubo.
+
+## Siguientes pasos
+
+- La guía de [ELK para centralizar logs](elk-centralizar-logs-de-servidores-y-buscar-un-error-en-kibana.html) cubre la instalación, el pipeline de Logstash y la búsqueda en Kibana.
+- La de [Grafana](grafana-origen-de-datos-primer-panel-y-alerta-al-canal.html) sirve si el equipo prefiere tener los paneles y las alertas de Elasticsearch junto a los de otras fuentes.
+- Con más de un nodo, la fase **warm** de ILM mueve los índices viejos a discos más baratos, y las réplicas dejan el clúster en verde.
+""",
+  en="""
+## What you'll get
+
+Going from "the logs are in Elasticsearch" to being told when something happens: a dashboard the team opens every morning, a rule that sends a message when there are too many failed logons, indices that expire on their own thanks to **ILM** and **data streams**, and the routine for the day the disk fills up and Elasticsearch goes read-only.
+
+## Before you start
+
+- Elasticsearch and Kibana **8.x** running, as in the [ELK log centralisation](elk-centralizar-logs-de-servidores-y-buscar-un-error-en-kibana.html) guide, with a user that has admin rights.
+- **Winlogbeat** on the Windows servers and **Filebeat** with the `system` module on the Linux ones. In 8.x they write to the `winlogbeat-8.x.x` and `filebeat-8.x.x` data streams.
+- In `kibana.yml`, the `xpack.encryptedSavedObjects.encryptionKey` key with at least 32 characters. Without it, Kibana will not let you create rules or connectors.
+- Licence: with **Basic** only the *Index* and *Server log* connectors are available. **Email**, **Microsoft Teams** or **Webhook** need a paid subscription (Gold or higher) or the 30-day trial.
+
+## 1. A dashboard for Windows and Linux logs
+
+First the **data views**, which tell Kibana which indices to read:
+
+:::ui Kibana · Stack Management › Data Views › Create data view
+= Name: Windows
+= Index pattern: winlogbeat-*
+= Timestamp field: @timestamp
+[Save data view to Kibana]
+:::
+
+Another one the same way with `filebeat-*` for Linux. Then **Analytics › Dashboards › Create dashboard › Create visualization** and, with **Lens**, four panels:
+
+| Panel | Data view | Filter (KQL) | Chart |
+|---|---|---|---|
+| Failed logons | Windows | `event.code: 4625` | Bars per hour, top 10 `winlog.event_data.TargetUserName` |
+| Locked-out accounts | Windows | `event.code: 4740` | Table with time, account and `host.name` |
+| Failed SSH on Linux | Linux | `event.dataset: "system.auth" and system.auth.ssh.event: "Failed"` | Top 10 `source.ip` |
+| Noisiest hosts | Both | (none) | Bars by `host.name` |
+
+Save the dashboard with a tag (*Tags*: `operations`) and the **Last 24 hours** time range. The fourth panel is the one that spots a server left in debug logging before anyone else does: you will need it in step 6.
+
+## 2. The connector
+
+The **connector** is the channel the alert goes out through. You create it once and every rule uses it:
+
+:::ui Kibana · Stack Management › Alerts and Insights › Connectors › Create connector
+> Microsoft Teams
+= Connector name: Teams · Operations
+= Webhook URL: https://contoso.webhook.office.com/webhookb2/...
+[Save & test]
+:::
+
+- The webhook URL is created by the channel owner in Teams. Treat it like a password: whoever has it can post to the channel.
+- **Save & test** sends a test message. If it does not arrive, the Kibana server has no Internet access or needs a proxy (`xpack.actions.proxyUrl` in `kibana.yml`).
+- With a Basic licence, the *Index* connector writes the alert into an index; useful for an alerts dashboard, but it notifies nobody.
+
+## 3. An Elasticsearch query rule
+
+:::ui Kibana · Stack Management › Alerts and Insights › Rules › Create rule › Elasticsearch query
+= Name: Windows · over 20 failed logons in 5 min
+= Query type: KQL or Lucene
+= Data view: Windows
+= Query: event.code: 4625
+= When: count() over top 5 host.name
+= Threshold: IS ABOVE 20
+= Time window: For the last 5 minutes
+= Check every: 1 minute
+[Test query]
+> Actions › Teams · Operations
+= Action frequency: On status changes
+= Run when: Query matched
+= Message: {{rule.name}} · {{context.title}} · {{context.link}}
+[Create rule]
+:::
+
+- **Test query** tells you how many documents it finds right now. If it returns thousands, the threshold is wrong or a filter is missing.
+- **On status changes** sends one message when it fires and another when it recovers (add a second action with *Run when: Recovered*), not one every minute.
+- `{{context.link}}` goes straight to the documents in Discover: whoever gets the alert does not have to build the search.
+- Give it a name that says what is happening and where. "Alert 3" at three in the morning helps nobody.
+
+## 4. An ILM policy with rollover and delete
+
+The earlier guide used one index per day and a policy that only deleted. With **rollover**, Elasticsearch creates a new index when the current one reaches a size or an age, and the delete phase counts from that moment. In **Dev Tools**:
+
+:::term Kibana · Dev Tools · ILM policy
+PUT _ilm/policy/logs-contoso-30d
+{
+  "policy": {
+    "phases": {
+      "hot": {
+        "actions": {
+          "rollover": { "max_primary_shard_size": "10gb", "max_age": "1d" }
+        }
+      },
+      "delete": {
+        "min_age": "30d",
+        "actions": { "delete": {} }
+      }
+    }
+  }
+}
+:::
+
+- `max_age: 1d` and `max_primary_shard_size: 10gb`: whichever comes first. With low volume, one index per day; if a day spikes, it splits earlier.
+- `min_age: 30d` in *delete* is measured from rollover: an index lives about 31 days.
+- The Beats and the `logs-*-*` data streams use the built-in policies by default (`logs`, `filebeat`, `winlogbeat`), which roll over but **never delete**. Review them in **Stack Management › Index Lifecycle Policies** and add a delete phase, or assign yours in their template.
+
+## 5. Your own data stream
+
+A **data stream** is a logical name (`logs-contoso.servers-default`) backed by hidden indices (`.ds-logs-contoso.servers-default-2026.11.03-000001`). You always write to the name and Elasticsearch does the rest. It is created by an **index template** with `data_stream`:
+
+:::term Kibana · Dev Tools · data stream template
+PUT _index_template/logs-contoso.servers
+{
+  "index_patterns": ["logs-contoso.servers-*"],
+  "data_stream": {},
+  "priority": 200,
+  "template": {
+    "settings": {
+      "index.lifecycle.name": "logs-contoso-30d",
+      "number_of_replicas": 0
+    }
+  }
+}
+:::
+
+- `priority: 200`, because the built-in `logs` template (pattern `logs-*-*`, priority 100) also matches that name and the higher priority wins.
+- Documents need `@timestamp`: the data stream requires it.
+
+In Logstash, the output moves from a dated index to the data stream:
+
+:::term /etc/logstash/conf.d/30-output.conf
+output {
+  elasticsearch {
+    hosts => ["https://10.20.5.10:9200"]
+    data_stream => "true"
+    data_stream_type => "logs"
+    data_stream_dataset => "contoso.servers"
+    data_stream_namespace => "default"
+    user => "logstash_writer"
+    password => "${ES_PWD}"
+  }
+}
+:::
+
+To check the policy is applied: `GET _data_stream/logs-contoso.servers-default` shows the backing indices and the policy, and `GET logs-contoso.servers-default/_ilm/explain` the phase of each one. An index in `ERROR` in the *explain* output is a policy that is stuck and a disk that is filling up.
+
+! In a data stream you cannot delete the write index (the newest one). If you need to close it off, first `POST logs-contoso.servers-default/_rollover`.
+
+## 6. The ticket: "Kibana shows no logs since Saturday"
+
+Monday, 9:00. The dashboard from step 1 has been empty since Saturday at 3:12. Logstash keeps writing this to its log:
+
+:::term srv-elk-01 · journalctl -u logstash
+retrying failed action with response code: 429 ({"type"=>"cluster_block_exception", "reason"=>"index [.ds-logs-contoso.servers-default-2026.11.01-000032] blocked by: [TOO_MANY_REQUESTS/12/disk usage exceeded flood-stage watermark, index has read-only-allow-delete block];"})
+:::
+
+Elasticsearch has three disk watermarks per node: **low** (85 %, stops allocating new shards), **high** (90 %, tries to move shards to another node) and **flood-stage** (95 %). Past the last one it puts the `index.blocks.read_only_allow_delete` block on every index on that node: you can read and delete, but not write.
+
+:::term Kibana · Dev Tools
+$ GET _cat/allocation?v&h=node,disk.percent,disk.used,disk.avail
+node         disk.percent disk.used disk.avail
+srv-elk-01             96   479.6gb     20.3gb
+$ GET _cluster/health?filter_path=status,number_of_nodes,unassigned_shards
+{"status":"yellow","number_of_nodes":1,"unassigned_shards":4}
+$ GET _cat/indices?v&s=store.size:desc&h=index,store.size&expand_wildcards=all
+index                                                  store.size
+.ds-logs-contoso.servers-default-2026.11.01-000032          61.2gb
+.ds-logs-contoso.servers-default-2026.10.31-000031          58.7gb
+.ds-logs-contoso.servers-default-2026.10.04-000004           4.1gb
+:::
+
+- Cluster **health** is still yellow, as it always is on a single node with pending replicas. The disk block does not turn it red: that is why nobody saw it on the status panel.
+- The last two indices are fifteen times the usual size. The "noisiest hosts" panel points at `srv-app-07`, whose application has been on `DEBUG` log level since Friday.
+
+Steps:
+
+1. **Stop the cause**: put `srv-app-07`'s logging back to `INFO` (or stop its Filebeat in the meantime).
+2. **Free space** by deleting the oldest data nobody needs. Deleting is allowed under the block: `DELETE .ds-logs-contoso.servers-default-2026.10.04-000004`. Never delete files by hand in the data directory.
+3. **Wait for the block to lift**. Since version 7.4, Elasticsearch removes `read_only_allow_delete` on its own once the node's disk drops below the **high** watermark (90 %). Check with `GET _cat/allocation?v` that you are below it.
+4. If the disk is already below it and the indices are still blocked, remove it by hand:
+
+:::term Kibana · Dev Tools · remove the block
+PUT */_settings?expand_wildcards=all
+{
+  "index.blocks.read_only_allow_delete": null
+}
+:::
+
+5. **Check everything flows in**: Logstash retries the 429s on its own. Look in Discover for new events and for any gap. What Filebeat could not send it retries from its registry; anything that was lost goes in the ticket.
+
+! Raising the flood-stage watermark to 98 % to "get through it" only postpones the problem by a few hours and leaves the node with no headroom. If you do it, set it back to `null` as soon as you free space.
+
+So it does not happen again: the Stack Monitoring **Disk Usage threshold** rule (or your own rule on disk) alerting at 80 %, the step 4 policy with a delete phase on every data stream, and a per-server volume cap reviewed on the dashboard.
+
+In the ticket: when the block started, the server and cause of the volume, the indices deleted, when things were back to normal and any gap in the logs.
+
+## Next steps
+
+- The [ELK log centralisation](elk-centralizar-logs-de-servidores-y-buscar-un-error-en-kibana.html) guide covers the installation, the Logstash pipeline and searching in Kibana.
+- The [Grafana](grafana-origen-de-datos-primer-panel-y-alerta-al-canal.html) guide helps if the team prefers Elasticsearch dashboards and alerts next to those from other sources.
+- With more than one node, the ILM **warm** phase moves old indices to cheaper disks, and replicas turn the cluster green.
+""")
+
+# ---------------------------------------------------------------- 2.x · Python and Microsoft Graph
+g(slug="python-y-microsoft-graph-informe-de-usuarios-y-dispositivos-paginacion-429-y-un-403", topic="python-it", date="2026-11-03",
+  title_es="Python y Microsoft Graph: un informe de usuarios y dispositivos con MSAL, paginación, límites 429 y un 403 Authorization_RequestDenied",
+  title_en="Python and Microsoft Graph: a users and devices report with MSAL, paging, 429 throttling and a 403 Authorization_RequestDenied",
+  seo_title_en="Python and Microsoft Graph: IT reports · Iñigo González",
+  seo_title_es="Python y Microsoft Graph: informes de IT · Iñigo González",
+  dek_es="El registro de aplicación con permisos de aplicación de solo lectura, el token con MSAL por credenciales de cliente, la paginación con @odata.nextLink, los 429 con Retry-After, el CSV de usuarios y dispositivos, el secreto fuera del código y los dos tickets clásicos: solo salen 100 usuarios y el 403.",
+  dek_en="The app registration with read-only application permissions, the MSAL client credentials token, paging with @odata.nextLink, 429s with Retry-After, the users and devices CSV, the secret kept out of the code, and the two classic tickets: only 100 users and the 403.",
+  seo_desc="Python and Microsoft Graph for IT reports: MSAL client credentials, paging with @odata.nextLink, 429 throttling, a CSV of users and devices, and the 403.",
+  es="""
+## Qué vas a conseguir
+
+Un script de Python que se conecta a Microsoft Graph sin usuario delante, saca todos los usuarios y todos los dispositivos de Entra ID, y escribe dos CSV listos para Excel. Con permisos de solo lectura, sin la contraseña en el código, y sabiendo qué hacer cuando devuelve 100 filas de 3.000 o un **403**.
+
+## Antes de empezar
+
+- Python 3.11 o posterior y un entorno virtual con `msal` y `requests` (`python -m pip install msal requests`), como en la guía de [Python para IT](python-para-it-entorno-virtual-csv-api-informe-programado-y-un-script-que-falla.html).
+- Para crear la aplicación, el rol **Application Administrator** o **Cloud Application Administrator**. Para dar el consentimiento de administrador a permisos de aplicación de Graph, **Privileged Role Administrator** o **Global Administrator**: normalmente lo pides a quien tenga ese rol.
+- Si ya has usado Graph desde PowerShell ([Microsoft Graph con PowerShell](microsoft-graph-primeras-consultas-con-powershell-y-un-informe-que-no-existe-en-el-portal.html)), las consultas son las mismas; cambia cómo se obtiene el token.
+
+## 1. El registro de aplicación
+
+Un script programado no puede iniciar sesión como una persona: se autentica como **aplicación**, con su propia identidad y sus permisos.
+
+:::ui Microsoft Entra admin center › Identity › Applications › App registrations › New registration
+= Name: it-informes-graph
+[x] Accounts in this organizational directory only (Contoso only - Single tenant)
+= Redirect URI: (vacío)
+[Register]
+:::
+
+En la página de la aplicación apunta el **Application (client) ID** y el **Directory (tenant) ID**. Después, los permisos:
+
+:::ui it-informes-graph › API permissions › Add a permission › Microsoft Graph
+> Application permissions
+[x] User.Read.All
+[x] Device.Read.All
+[Add permissions]
+[Grant admin consent for Contoso]
+:::
+
+- **Application permissions**, no *Delegated*. Los delegados son para cuando hay un usuario conectado; con credenciales de cliente no sirven de nada.
+- Solo lectura: `User.Read.All` y `Device.Read.All`. Nada de `ReadWrite` en un script de informes.
+- La columna **Status** tiene que decir *Granted for Contoso*. Sin consentimiento, el permiso está pedido pero no concedido.
+- Puedes quitar el permiso delegado `User.Read` que la aplicación trae por defecto.
+
+## 2. La credencial, fuera del código
+
+La aplicación necesita demostrar quién es. Dos opciones en **Certificates & secrets**:
+
+- **Certificado (preferible)**: subes la parte pública y el script firma con la clave privada, que nunca viaja. No hay un texto que se pueda copiar a un correo o a un repositorio.
+- **Secreto de cliente**: una cadena con caducidad (el portal recomienda 180 días; el máximo es 24 meses). Más sencillo, pero es una contraseña.
+
+Un certificado autofirmado vale para esto:
+
+:::term bash · srv-scripts-01
+$ sudo install -d -m 700 -o informes -g informes /etc/it-informes
+$ sudo -u informes openssl req -x509 -newkey rsa:2048 -nodes -days 365 -subj "/CN=it-informes-graph" -keyout /etc/it-informes/graph.key -out /etc/it-informes/graph.crt
+$ sudo -u informes chmod 600 /etc/it-informes/graph.key
+$ openssl x509 -in /etc/it-informes/graph.crt -noout -fingerprint -sha1
+sha1 Fingerprint=8A:3F:12:C4:9B:0E:71:5D:22:AF:63:90:1C:E8:47:B2:D5:6A:0F:39
+:::
+
+Sube `graph.crt` en **Certificates & secrets › Certificates › Upload certificate**. El portal muestra la huella (*thumbprint*): la misma que acabas de ver, sin los dos puntos.
+
+Los datos que no son secretos van en variables de entorno, en un fichero que solo lee la cuenta del script:
+
+:::term /etc/it-informes/graph.env
+GRAPH_TENANT_ID=0b1c2d3e-4f50-6172-8394-a5b6c7d8e9f0
+GRAPH_CLIENT_ID=5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b
+GRAPH_CERT_KEY=/etc/it-informes/graph.key
+GRAPH_CERT_THUMBPRINT=8A3F12C49B0E715D22AF63901CE847B2D56A0F39
+:::
+
+! Si usas un secreto, va en ese mismo fichero (`GRAPH_CLIENT_SECRET=...`) con permisos 600, nunca en el `.py` ni en git. Y apunta en el calendario su fecha de caducidad: el día que caduca el informe deja de llegar.
+
+## 3. El script
+
+:::term informe_graph.py
+import csv
+import os
+import sys
+import time
+
+import msal
+import requests
+
+GRAPH = "https://graph.microsoft.com/v1.0"
+
+
+def obtener_token():
+    with open(os.environ["GRAPH_CERT_KEY"], encoding="utf-8") as f:
+        clave = f.read()
+    app = msal.ConfidentialClientApplication(
+        os.environ["GRAPH_CLIENT_ID"],
+        authority="https://login.microsoftonline.com/" + os.environ["GRAPH_TENANT_ID"],
+        client_credential={"private_key": clave, "thumbprint": os.environ["GRAPH_CERT_THUMBPRINT"]},
+    )
+    resultado = app.acquire_token_for_client(scopes=["https://graph.microsoft.com/.default"])
+    if "access_token" not in resultado:
+        sys.exit(f"Sin token: {resultado.get('error')} · {resultado.get('error_description')}")
+    return resultado["access_token"]
+
+
+def leer_todo(sesion, url):
+    # Recorre todas las páginas y respeta los 429 de Graph
+    intentos = 0
+    while url:
+        r = sesion.get(url, timeout=60)
+        if r.status_code in (429, 503, 504) and intentos < 5:
+            espera = int(r.headers.get("Retry-After", "10"))
+            print(f"Graph pide esperar {espera} s ({r.status_code})", file=sys.stderr)
+            time.sleep(espera)
+            intentos += 1
+            continue
+        r.raise_for_status()
+        intentos = 0
+        datos = r.json()
+        yield from datos.get("value", [])
+        url = datos.get("@odata.nextLink")
+
+
+def escribir_csv(fichero, filas, campos):
+    with open(fichero, "w", newline="", encoding="utf-8-sig") as f:
+        w = csv.DictWriter(f, fieldnames=campos, extrasaction="ignore")
+        w.writeheader()
+        n = 0
+        for fila in filas:
+            w.writerow(fila)
+            n += 1
+    print(f"{fichero}: {n} filas")
+
+
+def main():
+    sesion = requests.Session()
+    sesion.headers["Authorization"] = "Bearer " + obtener_token()
+
+    campos_u = ["displayName", "userPrincipalName", "accountEnabled", "department", "createdDateTime"]
+    url_u = f"{GRAPH}/users?$select={','.join(campos_u)}&$top=999"
+    escribir_csv("usuarios.csv", leer_todo(sesion, url_u), campos_u)
+
+    campos_d = ["displayName", "operatingSystem", "operatingSystemVersion", "trustType",
+                "accountEnabled", "approximateLastSignInDateTime"]
+    url_d = f"{GRAPH}/devices?$select={','.join(campos_d)}&$top=999"
+    escribir_csv("dispositivos.csv", leer_todo(sesion, url_d), campos_d)
+
+
+if __name__ == "__main__":
+    main()
+:::
+
+Lo que hace cada parte:
+
+- **`acquire_token_for_client`** pide un token para la aplicación con el ámbito `https://graph.microsoft.com/.default`, que significa "los permisos de aplicación ya concedidos". Si falla, MSAL no lanza excepción: devuelve un diccionario con `error` y `error_description`, y por eso se comprueba.
+- **`$select`** pide solo las columnas que vas a usar. Menos datos, más rápido y menos probabilidad de que Graph te frene.
+- **`$top=999`** es el tamaño de página máximo para usuarios. Aun así, con más de 999 hay varias páginas.
+- **`@odata.nextLink`** es la URL de la página siguiente, completa. Mientras exista, hay más. No la construyas tú: úsala tal cual.
+- **429 Too Many Requests**: Graph te frena y dice en la cabecera **Retry-After** cuántos segundos esperar. Se espera eso y se repite la misma URL. Cinco intentos y, si sigue, el script falla con el error a la vista.
+- **`utf-8-sig`** escribe la marca BOM para que Excel abra bien los acentos de "Pérez" y "Muñoz".
+
+## 4. Ejecutarlo y programarlo
+
+:::term bash · srv-scripts-01
+$ cd /opt/it-informes && . .venv/bin/activate
+$ set -a && . /etc/it-informes/graph.env && set +a
+$ python informe_graph.py
+usuarios.csv: 2847 filas
+dispositivos.csv: 3112 filas
+:::
+
+Para programarlo, un temporizador de systemd o cron con la cuenta `informes` y el `EnvironmentFile=/etc/it-informes/graph.env` del servicio. Compara el número de filas con lo que dice el portal de Entra (**Users › All users** muestra el total): es la comprobación más rápida de que el informe está completo.
+
+## 5. El ticket: "el informe solo trae 100 usuarios" y "da 403"
+
+### Solo salen 100 usuarios
+
+Una versión anterior del script hacía una sola petición:
+
+:::term informe_viejo.py · el fallo
+$ r = requests.get(f"{GRAPH}/users", headers=cabeceras)
+$ usuarios = r.json()["value"]
+$ print(len(usuarios))
+100
+:::
+
+**100** es el tamaño de página por defecto de `/users`. Graph devuelve la primera página y, en el mismo JSON, `@odata.nextLink` con la siguiente. El script la ignoraba. La solución es la función `leer_todo` del paso 3: seguir `@odata.nextLink` hasta que no venga. Con `$top=999` hay menos páginas, pero el bucle sigue siendo obligatorio.
+
+> Si el número es otro redondo (999, 200), es el mismo problema con otro tamaño de página.
+
+### 403 Authorization_RequestDenied
+
+:::term salida del script
+requests.exceptions.HTTPError: 403 Client Error: Forbidden for url: https://graph.microsoft.com/v1.0/users?$select=...
+{"error":{"code":"Authorization_RequestDenied","message":"Insufficient privileges to complete the operation."}}
+:::
+
+El token es válido (si no, sería un **401**), pero la aplicación no tiene el permiso. Para saber qué permisos lleva de verdad el token, mira su claim `roles`:
+
+:::term python · qué permisos trae el token
+$ import base64, json
+$ carga = token.split(".")[1]
+$ carga += "=" * (-len(carga) % 4)
+$ print(json.loads(base64.urlsafe_b64decode(carga)).get("roles"))
+None
+:::
+
+`None` significa que el token no lleva ningún permiso de aplicación. Las causas, por orden de frecuencia:
+
+1. El permiso se añadió como **Delegated** en vez de **Application**. En *API permissions*, la columna **Type** lo dice.
+2. Falta el **consentimiento de administrador**: la columna *Status* dice *Not granted for Contoso*. Pídeselo a quien tenga el rol.
+3. Has añadido el permiso a otra aplicación con nombre parecido: compara el **client ID** de `graph.env` con el del portal.
+4. Pides un dato que necesita otro permiso. Por ejemplo, `signInActivity` en `/users` necesita además `AuditLog.Read.All`.
+
+Tras corregirlo, una nueva ejecución pide un token nuevo y `roles` muestra `['User.Read.All', 'Device.Read.All']`. Un token emitido antes del cambio no se actualiza: si probabas en una sesión interactiva de Python, vuelve a pedirlo.
+
+En el ticket: qué devolvía, la causa, el cambio en la aplicación y el número de filas final comparado con el portal.
+
+## Siguientes pasos
+
+- La guía de [Python para IT](python-para-it-entorno-virtual-csv-api-informe-programado-y-un-script-que-falla.html) cubre el entorno virtual, el logging y el script que falla al programarlo.
+- La de [Microsoft Graph con PowerShell](microsoft-graph-primeras-consultas-con-powershell-y-un-informe-que-no-existe-en-el-portal.html) hace los mismos informes desde PowerShell.
+- Para Intune, el mismo script con `DeviceManagementManagedDevices.Read.All` y `/deviceManagement/managedDevices` da cumplimiento, último contacto y usuario principal de cada equipo.
+""",
+  en="""
+## What you'll get
+
+A Python script that connects to Microsoft Graph with nobody signed in, pulls every user and every device from Entra ID, and writes two CSV files ready for Excel. With read-only permissions, no password in the code, and knowing what to do when it returns 100 rows out of 3,000 or a **403**.
+
+## Before you start
+
+- Python 3.11 or later and a virtual environment with `msal` and `requests` (`python -m pip install msal requests`), as in the [Python for IT](python-para-it-entorno-virtual-csv-api-informe-programado-y-un-script-que-falla.html) guide.
+- To create the app, the **Application Administrator** or **Cloud Application Administrator** role. To grant admin consent for Graph application permissions, **Privileged Role Administrator** or **Global Administrator**: usually you ask whoever holds that role.
+- If you have already used Graph from PowerShell ([Microsoft Graph with PowerShell](microsoft-graph-primeras-consultas-con-powershell-y-un-informe-que-no-existe-en-el-portal.html)), the queries are the same; what changes is how you get the token.
+
+## 1. The app registration
+
+A scheduled script cannot sign in as a person: it authenticates as an **application**, with its own identity and permissions.
+
+:::ui Microsoft Entra admin center › Identity › Applications › App registrations › New registration
+= Name: it-reports-graph
+[x] Accounts in this organizational directory only (Contoso only - Single tenant)
+= Redirect URI: (empty)
+[Register]
+:::
+
+On the app's page note the **Application (client) ID** and the **Directory (tenant) ID**. Then the permissions:
+
+:::ui it-reports-graph › API permissions › Add a permission › Microsoft Graph
+> Application permissions
+[x] User.Read.All
+[x] Device.Read.All
+[Add permissions]
+[Grant admin consent for Contoso]
+:::
+
+- **Application permissions**, not *Delegated*. Delegated ones are for when a user is signed in; with client credentials they do nothing.
+- Read-only: `User.Read.All` and `Device.Read.All`. No `ReadWrite` in a reporting script.
+- The **Status** column must say *Granted for Contoso*. Without consent, the permission is requested but not granted.
+- You can remove the delegated `User.Read` permission the app comes with by default.
+
+## 2. The credential, outside the code
+
+The app has to prove who it is. Two options in **Certificates & secrets**:
+
+- **Certificate (preferred)**: you upload the public part and the script signs with the private key, which never travels. There is no string anyone can paste into an email or a repository.
+- **Client secret**: a string with an expiry (the portal recommends 180 days; the maximum is 24 months). Simpler, but it is a password.
+
+A self-signed certificate is fine for this:
+
+:::term bash · srv-scripts-01
+$ sudo install -d -m 700 -o reports -g reports /etc/it-reports
+$ sudo -u reports openssl req -x509 -newkey rsa:2048 -nodes -days 365 -subj "/CN=it-reports-graph" -keyout /etc/it-reports/graph.key -out /etc/it-reports/graph.crt
+$ sudo -u reports chmod 600 /etc/it-reports/graph.key
+$ openssl x509 -in /etc/it-reports/graph.crt -noout -fingerprint -sha1
+sha1 Fingerprint=8A:3F:12:C4:9B:0E:71:5D:22:AF:63:90:1C:E8:47:B2:D5:6A:0F:39
+:::
+
+Upload `graph.crt` under **Certificates & secrets › Certificates › Upload certificate**. The portal shows the *thumbprint*: the same one you just saw, without the colons.
+
+The values that are not secret go into environment variables, in a file only the script's account can read:
+
+:::term /etc/it-reports/graph.env
+GRAPH_TENANT_ID=0b1c2d3e-4f50-6172-8394-a5b6c7d8e9f0
+GRAPH_CLIENT_ID=5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b
+GRAPH_CERT_KEY=/etc/it-reports/graph.key
+GRAPH_CERT_THUMBPRINT=8A3F12C49B0E715D22AF63901CE847B2D56A0F39
+:::
+
+! If you use a secret, it goes in that same file (`GRAPH_CLIENT_SECRET=...`) with 600 permissions, never in the `.py` or in git. And put its expiry date in the calendar: the day it expires, the report stops arriving.
+
+## 3. The script
+
+:::term graph_report.py
+import csv
+import os
+import sys
+import time
+
+import msal
+import requests
+
+GRAPH = "https://graph.microsoft.com/v1.0"
+
+
+def get_token():
+    with open(os.environ["GRAPH_CERT_KEY"], encoding="utf-8") as f:
+        key = f.read()
+    app = msal.ConfidentialClientApplication(
+        os.environ["GRAPH_CLIENT_ID"],
+        authority="https://login.microsoftonline.com/" + os.environ["GRAPH_TENANT_ID"],
+        client_credential={"private_key": key, "thumbprint": os.environ["GRAPH_CERT_THUMBPRINT"]},
+    )
+    result = app.acquire_token_for_client(scopes=["https://graph.microsoft.com/.default"])
+    if "access_token" not in result:
+        sys.exit(f"No token: {result.get('error')} · {result.get('error_description')}")
+    return result["access_token"]
+
+
+def read_all(session, url):
+    # Walks every page and honours Graph's 429s
+    attempts = 0
+    while url:
+        r = session.get(url, timeout=60)
+        if r.status_code in (429, 503, 504) and attempts < 5:
+            wait = int(r.headers.get("Retry-After", "10"))
+            print(f"Graph asks to wait {wait} s ({r.status_code})", file=sys.stderr)
+            time.sleep(wait)
+            attempts += 1
+            continue
+        r.raise_for_status()
+        attempts = 0
+        data = r.json()
+        yield from data.get("value", [])
+        url = data.get("@odata.nextLink")
+
+
+def write_csv(filename, rows, fields):
+    with open(filename, "w", newline="", encoding="utf-8-sig") as f:
+        w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
+        w.writeheader()
+        n = 0
+        for row in rows:
+            w.writerow(row)
+            n += 1
+    print(f"{filename}: {n} rows")
+
+
+def main():
+    session = requests.Session()
+    session.headers["Authorization"] = "Bearer " + get_token()
+
+    user_fields = ["displayName", "userPrincipalName", "accountEnabled", "department", "createdDateTime"]
+    users_url = f"{GRAPH}/users?$select={','.join(user_fields)}&$top=999"
+    write_csv("users.csv", read_all(session, users_url), user_fields)
+
+    device_fields = ["displayName", "operatingSystem", "operatingSystemVersion", "trustType",
+                     "accountEnabled", "approximateLastSignInDateTime"]
+    devices_url = f"{GRAPH}/devices?$select={','.join(device_fields)}&$top=999"
+    write_csv("devices.csv", read_all(session, devices_url), device_fields)
+
+
+if __name__ == "__main__":
+    main()
+:::
+
+What each part does:
+
+- **`acquire_token_for_client`** requests a token for the application with the `https://graph.microsoft.com/.default` scope, which means "the application permissions already granted". If it fails, MSAL does not raise an exception: it returns a dictionary with `error` and `error_description`, which is why it is checked.
+- **`$select`** asks only for the columns you will use. Less data, faster, and less chance of Graph throttling you.
+- **`$top=999`** is the maximum page size for users. Even so, with more than 999 there are several pages.
+- **`@odata.nextLink`** is the full URL of the next page. As long as it exists, there is more. Do not build it yourself: use it as it comes.
+- **429 Too Many Requests**: Graph throttles you and says in the **Retry-After** header how many seconds to wait. Wait that long and repeat the same URL. Five attempts and, if it persists, the script fails with the error in plain sight.
+- **`utf-8-sig`** writes the BOM so Excel opens accented names such as "Pérez" and "Muñoz" correctly.
+
+## 4. Running and scheduling it
+
+:::term bash · srv-scripts-01
+$ cd /opt/it-reports && . .venv/bin/activate
+$ set -a && . /etc/it-reports/graph.env && set +a
+$ python graph_report.py
+users.csv: 2847 rows
+devices.csv: 3112 rows
+:::
+
+To schedule it, a systemd timer or cron with the `reports` account and the service's `EnvironmentFile=/etc/it-reports/graph.env`. Compare the row count with what the Entra portal says (**Users › All users** shows the total): it is the quickest check that the report is complete.
+
+## 5. The ticket: "the report only brings 100 users" and "it gives 403"
+
+### Only 100 users come out
+
+An earlier version of the script made a single request:
+
+:::term old_report.py · the bug
+$ r = requests.get(f"{GRAPH}/users", headers=headers)
+$ users = r.json()["value"]
+$ print(len(users))
+100
+:::
+
+**100** is the default page size for `/users`. Graph returns the first page and, in the same JSON, `@odata.nextLink` with the next one. The script ignored it. The fix is the `read_all` function from step 3: follow `@odata.nextLink` until it stops coming. With `$top=999` there are fewer pages, but the loop is still mandatory.
+
+> If the number is another round one (999, 200), it is the same problem with a different page size.
+
+### 403 Authorization_RequestDenied
+
+:::term script output
+requests.exceptions.HTTPError: 403 Client Error: Forbidden for url: https://graph.microsoft.com/v1.0/users?$select=...
+{"error":{"code":"Authorization_RequestDenied","message":"Insufficient privileges to complete the operation."}}
+:::
+
+The token is valid (otherwise it would be a **401**), but the app lacks the permission. To see which permissions the token really carries, look at its `roles` claim:
+
+:::term python · which permissions the token carries
+$ import base64, json
+$ payload = token.split(".")[1]
+$ payload += "=" * (-len(payload) % 4)
+$ print(json.loads(base64.urlsafe_b64decode(payload)).get("roles"))
+None
+:::
+
+`None` means the token carries no application permissions at all. The causes, most frequent first:
+
+1. The permission was added as **Delegated** instead of **Application**. In *API permissions*, the **Type** column tells you.
+2. **Admin consent** is missing: the *Status* column says *Not granted for Contoso*. Ask whoever holds the role.
+3. You added the permission to another app with a similar name: compare the **client ID** in `graph.env` with the one in the portal.
+4. You are asking for data that needs another permission. For example, `signInActivity` on `/users` also needs `AuditLog.Read.All`.
+
+Once fixed, a new run requests a new token and `roles` shows `['User.Read.All', 'Device.Read.All']`. A token issued before the change is not updated: if you were testing in an interactive Python session, request it again.
+
+In the ticket: what it returned, the cause, the change on the app, and the final row count compared with the portal.
+
+## Next steps
+
+- The [Python for IT](python-para-it-entorno-virtual-csv-api-informe-programado-y-un-script-que-falla.html) guide covers the virtual environment, logging and the script that fails once scheduled.
+- The [Microsoft Graph with PowerShell](microsoft-graph-primeras-consultas-con-powershell-y-un-informe-que-no-existe-en-el-portal.html) guide produces the same reports from PowerShell.
+- For Intune, the same script with `DeviceManagementManagedDevices.Read.All` and `/deviceManagement/managedDevices` gives compliance, last check-in and primary user for each device.
+""")
+
+# ---------------------------------------------------------------- 3.x · MySQL/MariaDB and PostgreSQL for operations
+g(slug="mysql-mariadb-y-postgresql-permisos-minimos-copia-programada-restauracion-probada-y-copias-de-0-bytes", topic="databases", date="2026-11-03",
+  title_es="MySQL, MariaDB y PostgreSQL: usuarios con permisos mínimos, copia lógica programada, restauración probada, retraso de réplica y copias de 0 bytes",
+  title_en="MySQL, MariaDB and PostgreSQL: least-privilege users, a scheduled logical backup, a tested restore, replication lag and 0-byte backups",
+  seo_title_en="MySQL and PostgreSQL: backups that restore · Iñigo González",
+  seo_title_es="MySQL y PostgreSQL: copias que se restauran · Iñigo González",
+  dek_es="Una cuenta para la aplicación, otra para las copias y ninguna con más permisos de los necesarios, mysqldump y pg_dump en un script con temporizador de systemd, las contraseñas en ~/.my.cnf y .pgpass con 0600, la restauración probada en otra base de datos, el retraso de la réplica y una semana de copias vacías.",
+  dek_en="One account for the application, another for backups and none with more rights than it needs, mysqldump and pg_dump in a script with a systemd timer, passwords in ~/.my.cnf and .pgpass with 0600, the tested restore into another database, replication lag, and a week of empty backups.",
+  seo_desc="MySQL, MariaDB and PostgreSQL: least-privilege users, scheduled mysqldump and pg_dump, a tested restore, replication lag and the 0-byte backup ticket.",
+  es="""
+## Qué vas a conseguir
+
+Las bases de datos de las aplicaciones internas (el CRM en MariaDB, el ERP en PostgreSQL) con cuentas separadas y permisos mínimos, una copia lógica cada noche que falla de forma visible si algo va mal, una restauración probada en otra base de datos con su tiempo apuntado, el retraso de la réplica a la vista y la rutina para el ticket que nadie quiere: **la copia lleva una semana generando ficheros de 0 bytes**.
+
+## Antes de empezar
+
+- MySQL 8.0 u 8.4, o MariaDB 10.11 u 11.4, y PostgreSQL 15 o posterior, en Linux, con `sudo` en el servidor.
+- Un destino para las copias que no sea el disco de datos (`/backup`, montado desde otra cabina o un NAS) y que luego recoja el sistema de copias (Veeam, cinta).
+- Un servidor de pruebas (`srv-db-test`) con las mismas versiones de los motores para restaurar.
+- La guía de [PostgreSQL, MySQL y SQL Server](postgresql-mysql-sql-server-tareas-de-operaciones-copia-restauracion-espacio-y-consulta-lenta.html) cubre las consultas básicas, el espacio y la consulta lenta; esta va de cuentas, copias automáticas y su verificación.
+
+## 1. Tres cuentas por aplicación
+
+Una aplicación no necesita ser dueña de su base de datos para funcionar. Separa:
+
+| Cuenta | Para qué | Permisos |
+|---|---|---|
+| Propietaria (`crm_owner`) | Despliegues que cambian tablas | DDL sobre su base de datos; no se usa en el día a día |
+| Aplicación (`crm_app`) | La aplicación en marcha | Leer y escribir datos, sin crear ni borrar tablas |
+| Copias (`backup`) | El trabajo de copia | Solo lectura, solo desde el propio servidor |
+
+En **MySQL / MariaDB**:
+
+:::term mysql · srv-db-01
+$ sudo mysql
+$ CREATE USER 'crm_app'@'10.20.30.%' IDENTIFIED BY '...';
+$ GRANT SELECT, INSERT, UPDATE, DELETE ON crm.* TO 'crm_app'@'10.20.30.%';
+$ CREATE USER 'backup'@'localhost' IDENTIFIED BY '...';
+$ GRANT SELECT, SHOW VIEW, TRIGGER, EVENT, LOCK TABLES, PROCESS, RELOAD ON *.* TO 'backup'@'localhost';
+$ SHOW GRANTS FOR 'crm_app'@'10.20.30.%';
++-------------------------------------------------------------------------------+
+| Grants for crm_app@10.20.30.%                                                 |
++-------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `crm_app`@`10.20.30.%`                                  |
+| GRANT SELECT, INSERT, UPDATE, DELETE ON `crm`.* TO `crm_app`@`10.20.30.%`     |
++-------------------------------------------------------------------------------+
+:::
+
+- El **host** forma parte del usuario: `crm_app` solo entra desde la red de los servidores de aplicación, y `backup` solo desde `localhost`.
+- `PROCESS` evita el aviso de *tablespaces* de mysqldump en MySQL 8; `RELOAD` lo pide mysqldump con `--single-transaction` desde MySQL 8.0.32 cuando la base de datos usa GTID.
+- Nada de `GRANT ALL` ni de `%` como host para la aplicación.
+
+En **PostgreSQL**, permisos a un **rol de grupo** y el usuario de la aplicación dentro de él:
+
+:::term psql · srv-db-02
+$ sudo -u postgres psql -d erp
+$ CREATE ROLE erp_rw NOLOGIN;
+$ GRANT CONNECT ON DATABASE erp TO erp_rw;
+$ GRANT USAGE ON SCHEMA erp TO erp_rw;
+$ GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA erp TO erp_rw;
+$ GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA erp TO erp_rw;
+$ ALTER DEFAULT PRIVILEGES FOR ROLE erp_owner IN SCHEMA erp GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO erp_rw;
+$ ALTER DEFAULT PRIVILEGES FOR ROLE erp_owner IN SCHEMA erp GRANT USAGE, SELECT ON SEQUENCES TO erp_rw;
+$ CREATE ROLE erp_app LOGIN PASSWORD '...' IN ROLE erp_rw;
+$ CREATE ROLE backup LOGIN PASSWORD '...';
+$ GRANT pg_read_all_data TO backup;
+:::
+
+- `ALTER DEFAULT PRIVILEGES FOR ROLE erp_owner`: las tablas que cree el propietario en el próximo despliegue llegan ya con permisos para la aplicación. Sin esto, la tabla nueva da *permission denied* el día del despliegue.
+- `pg_read_all_data` (PostgreSQL 14 y posteriores) da lectura sobre todas las tablas y esquemas: justo lo que necesita `pg_dump`.
+- En `pg_hba.conf`, cada cuenta desde donde corresponde: `hostssl erp erp_app 10.20.30.0/24 scram-sha-256` y `host all backup 127.0.0.1/32 scram-sha-256`. Recarga con `SELECT pg_reload_conf();`.
+
+## 2. Las contraseñas de la copia, en ficheros 0600
+
+El trabajo de copia corre con una cuenta del sistema propia, `dbbackup`, y lee las contraseñas de ficheros en su carpeta personal. Nunca en el script ni en la línea de comandos (se verían en `ps`).
+
+:::term bash · srv-db-01 y srv-db-02
+$ sudo useradd --system --create-home --home-dir /var/lib/dbbackup --shell /usr/sbin/nologin dbbackup
+$ sudo -u dbbackup install -m 600 /dev/null /var/lib/dbbackup/.my.cnf
+$ sudo -u dbbackup install -m 600 /dev/null /var/lib/dbbackup/.pgpass
+$ sudoedit -u dbbackup /var/lib/dbbackup/.my.cnf /var/lib/dbbackup/.pgpass
+$ sudo ls -l /var/lib/dbbackup/.my.cnf /var/lib/dbbackup/.pgpass
+-rw------- 1 dbbackup dbbackup  42 nov  3 10:12 /var/lib/dbbackup/.my.cnf
+-rw------- 1 dbbackup dbbackup  38 nov  3 10:12 /var/lib/dbbackup/.pgpass
+:::
+
+:::term ~dbbackup/.my.cnf y ~dbbackup/.pgpass
+# .my.cnf
+[client]
+user=backup
+password=...
+# .pgpass (host:puerto:base de datos:usuario:contraseña)
+localhost:5432:*:backup:...
+:::
+
+- Los dos ficheros se buscan en el **HOME** del usuario que ejecuta el comando. Si el trabajo corre con otra cuenta o sin HOME, no los encuentra.
+- **`.pgpass`** con permisos para el grupo o para otros se **ignora**: libpq avisa con *has group or world access* y sigue sin contraseña.
+- MySQL ignora un `.my.cnf` que cualquiera pueda escribir. En MySQL (no en MariaDB) existe además `mysql_config_editor`, que guarda las credenciales ofuscadas en `~/.mylogin.cnf`.
+
+## 3. El script y el temporizador
+
+:::term /usr/local/sbin/db-backup.sh
+#!/usr/bin/env bash
+set -euo pipefail
+umask 077
+DEST=/backup/db
+STAMP=$(date +%F_%H%M)
+
+# MariaDB / MySQL: CRM
+mysqldump --single-transaction --routines --triggers --events crm | gzip > "$DEST/crm-$STAMP.sql.gz.part"
+zcat "$DEST/crm-$STAMP.sql.gz.part" | tail -n 1 | grep -q "Dump completed"
+mv "$DEST/crm-$STAMP.sql.gz.part" "$DEST/crm-$STAMP.sql.gz"
+
+# PostgreSQL: ERP
+pg_dump -h localhost -U backup -Fc -f "$DEST/erp-$STAMP.dump.part" erp
+pg_restore -l "$DEST/erp-$STAMP.dump.part" > /dev/null
+mv "$DEST/erp-$STAMP.dump.part" "$DEST/erp-$STAMP.dump"
+
+# Retención local: 14 días
+find "$DEST" -type f \\( -name '*.sql.gz' -o -name '*.dump' \\) -mtime +14 -delete
+:::
+
+- **`set -euo pipefail`**: si `mysqldump` falla dentro de la tubería, el script falla. Sin `pipefail`, el resultado sería el de `gzip`, que siempre termina bien aunque reciba cero bytes.
+- **`.part` y `mv`**: solo tiene nombre definitivo una copia que ha terminado y se ha comprobado. Un `.part` en la carpeta es una copia rota.
+- **Las comprobaciones**: mysqldump termina el fichero con `-- Dump completed on ...`; `pg_restore -l` lee el índice del fichero `-Fc` y falla si está truncado.
+- `--single-transaction` da una copia coherente sin bloquear las tablas InnoDB. Las tablas MyISAM no entran en esa garantía.
+- La base de datos va **sin `--databases`**: así el fichero no lleva `USE crm` y se puede restaurar con otro nombre (paso 4).
+
+Un servicio y un temporizador de systemd:
+
+:::term /etc/systemd/system/db-backup.service y db-backup.timer
+[Unit]
+Description=Copia lógica de CRM y ERP
+OnFailure=notify-email@%n.service
+
+[Service]
+Type=oneshot
+User=dbbackup
+ExecStart=/usr/local/sbin/db-backup.sh
+
+# --- db-backup.timer ---
+[Unit]
+Description=Copia lógica diaria
+
+[Timer]
+OnCalendar=*-*-* 02:30:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+:::
+
+:::term bash · srv-db-01
+$ sudo systemctl daemon-reload && sudo systemctl enable --now db-backup.timer
+$ sudo systemctl start db-backup.service && systemctl status db-backup.service --no-pager | head -3
+○ db-backup.service - Copia lógica de CRM y ERP
+     Loaded: loaded (/etc/systemd/system/db-backup.service; static)
+     Active: inactive (dead) since Tue 2026-11-03 10:31:52 CET; 4s ago
+$ ls -lh /backup/db | tail -2
+-rw------- 1 dbbackup dbbackup 412M nov  3 10:31 crm-2026-11-03_1030.sql.gz
+-rw------- 1 dbbackup dbbackup 1,9G nov  3 10:31 erp-2026-11-03_1030.dump
+$ systemctl list-timers db-backup.timer
+:::
+
+- Con `User=dbbackup`, systemd pone el HOME de esa cuenta, y con él se encuentran `.my.cnf` y `.pgpass`.
+- `OnFailure=` lanza otra unidad cuando la copia falla (aquí una plantilla `notify-email@` que envía un correo; vale cualquier aviso que use el equipo). Una copia que falla en silencio es el ticket del paso 6.
+- `Persistent=true` lanza la copia al arrancar si el servidor estaba apagado a las 2:30.
+
+## 4. La restauración, probada en otra base de datos
+
+Una vez al mes, en `srv-db-test`, con la copia de anoche y el cronómetro en marcha:
+
+:::term bash · srv-db-test
+$ sudo -u postgres createdb erp_restore
+$ time sudo -u postgres pg_restore -d erp_restore --no-owner --no-privileges -j 4 /restore/erp-2026-11-03_0230.dump
+real    6m41s
+$ sudo -u postgres psql -d erp_restore -tAc "SELECT count(*), max(fecha) FROM erp.facturas;"
+918244|2026-11-02 23:58:11
+$ sudo mysql -e "CREATE DATABASE crm_restore"
+$ time (zcat /restore/crm-2026-11-03_0230.sql.gz | sudo mysql crm_restore)
+real    3m12s
+$ sudo mysql -N -e "SELECT COUNT(*), MAX(creado) FROM crm_restore.clientes;"
+41877   2026-11-02 21:14:03
+:::
+
+- Se restaura en una base de datos con **otro nombre** (`erp_restore`), nunca encima de la original. Con `--no-owner` y `--no-privileges` los objetos quedan a nombre de quien restaura, sin necesitar que existan los roles de producción; `-j 4` restaura en paralelo.
+- Compara el recuento y la **última fecha** con producción a la hora de la copia: si la última factura es de hace una semana, la copia es vieja aunque restaure bien.
+- Apunta el **tiempo** (6 minutos y 41 segundos): es tu RTO real para esa base de datos, el que se compara con lo que el negocio espera.
+- Borra `erp_restore` y `crm_restore` al terminar y registra la prueba: fecha, fichero, tiempo, recuentos y quién la hizo.
+
+## 5. El retraso de la réplica, en un vistazo
+
+Si hay una réplica (para lectura o para conmutar en caso de fallo), su retraso es lo primero que se mira antes de hacer copias desde ella o de conmutar.
+
+:::term mysql · réplica srv-db-01b
+$ sudo mysql -e "SHOW REPLICA STATUS\\G" | grep -E "Replica_IO_Running|Replica_SQL_Running:|Seconds_Behind_Source|Last_SQL_Error:"
+             Replica_IO_Running: Yes
+            Replica_SQL_Running: Yes
+          Seconds_Behind_Source: 0
+                 Last_SQL_Error:
+:::
+
+En MariaDB anteriores a 10.5 el comando es `SHOW SLAVE STATUS\\G` y el campo, `Seconds_Behind_Master`. Los dos hilos tienen que estar en `Yes`; uno en `No` con `Last_SQL_Error` relleno es una réplica parada, aunque el retraso diga `NULL` y no un número alto.
+
+:::term psql · srv-db-02 (primario) y srv-db-02b (réplica)
+$ sudo -u postgres psql -c "SELECT application_name, client_addr, state, replay_lag FROM pg_stat_replication;"
+ application_name | client_addr  |   state   |   replay_lag
+------------------+--------------+-----------+-----------------
+ srv-db-02b       | 10.20.40.12  | streaming | 00:00:00.004112
+# en la réplica:
+$ sudo -u postgres psql -tAc "SELECT now() - pg_last_xact_replay_timestamp();"
+00:00:01.83
+:::
+
+Una fila vacía en `pg_stat_replication` es que la réplica no está conectada. En la réplica, el segundo valor crece aunque todo vaya bien si el primario no tiene escrituras: compáralo con la actividad real antes de alarmarte.
+
+## 6. El ticket: "la copia de la base de datos lleva una semana dejando ficheros de 0 bytes"
+
+Martes, 9:30. Al preparar la restauración mensual, el fichero de anoche pesa 0 bytes. Y el de la noche anterior. El servidor `srv-db-03` aún usa una línea de cron antigua, no el script del paso 3:
+
+:::term /etc/cron.d/backup-erp
+30 2 * * * dbbackup pg_dump -h localhost -U backup -Fc erp > /backup/db/erp-$(date +\\%F).dump 2>/dev/null
+:::
+
+Así se explica el tamaño: la **redirección `>` la hace el shell** y crea el fichero antes de que `pg_dump` arranque. Si `pg_dump` falla, queda un fichero vacío, y `2>/dev/null` tira el mensaje de error. (El `\\%` es obligatorio: en un crontab, `%` sin escapar es un salto de línea.)
+
+1. **Desde cuándo**: `ls -l --time-style=long-iso /backup/db | tail` muestra 0 bytes desde el 27 de octubre. ¿Qué cambió ese día? El registro de cambios dice que se aplicó un rol de Ansible que reescribió las carpetas personales de las cuentas de servicio.
+2. **Ejecutar lo mismo, como el mismo usuario y con el error a la vista**:
+
+:::term bash · srv-db-03
+$ sudo -u dbbackup -H pg_dump -h localhost -U backup -Fc erp -f /tmp/prueba.dump
+WARNING: password file "/var/lib/dbbackup/.pgpass" has group or world access; permissions should be u=rw (0600) or less
+pg_dump: error: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+$ sudo ls -l /var/lib/dbbackup/.pgpass
+-rw-r--r-- 1 dbbackup dbbackup 38 oct 27 11:02 /var/lib/dbbackup/.pgpass
+:::
+
+3. **La causa**: el rol de Ansible dejó `.pgpass` en `0644`. libpq lo ignora por seguridad, `pg_dump` se queda sin contraseña y, sin terminal, no puede pedirla. Solución: `sudo chmod 600 /var/lib/dbbackup/.pgpass` y corregir el rol de Ansible para que use `mode: "0600"`.
+4. **Descarta lo demás** antes de cerrar, porque los mismos 0 bytes salen de otras causas:
+
+- **Disco lleno**: `df -h /backup` y `df -i /backup`. Con el destino lleno, el fichero se crea y no se escribe.
+- **Permisos del destino**: `sudo -u dbbackup touch /backup/db/prueba`. Si falla, el cron ni siquiera crearía el fichero.
+- En **MySQL**, el equivalente es `mysqldump: Got error: 1045: Access denied for user 'backup'@'localhost' (using password: NO)`: no ha leído `.my.cnf` (otro HOME u otro usuario), o lo ha descartado con *World-writable config file ... is ignored*.
+
+5. **Copia ya**, sin esperar a esta noche: el comando del punto 2 con el fichero en `/backup/db/`, comprobado con `pg_restore -l`, y una restauración rápida en `srv-db-test` como en el paso 4.
+6. **Que no vuelva a pasar en silencio**: sustituir la línea de cron por el script y el temporizador del paso 3 (falla de verdad, deja `.part` y avisa con `OnFailure`) y añadir a la monitorización una comprobación del tamaño y la fecha del último fichero de `/backup/db`.
+
+En el ticket: desde qué fecha no hay copia válida (una semana sin copia lógica del ERP: avisa a su responsable), la causa, el cambio, la copia nueva con su prueba de restauración y la mejora para detectarlo.
+
+## Siguientes pasos
+
+- La guía de [PostgreSQL, MySQL y SQL Server](postgresql-mysql-sql-server-tareas-de-operaciones-copia-restauracion-espacio-y-consulta-lenta.html) cubre la consulta que bloquea, el espacio y el crecimiento.
+- La de [Veeam](veeam-crear-un-job-comprobar-copias-y-restaurar.html) explica cómo el sistema de copias recoge `/backup` y lo guarda fuera del servidor.
+- Con bases de datos grandes o un RPO de minutos, la copia lógica se queda corta: copias físicas con archivado de WAL (pgBackRest) o binlogs (MariaDB Backup, Percona XtraBackup).
+""",
+  en="""
+## What you'll get
+
+The internal applications' databases (the CRM on MariaDB, the ERP on PostgreSQL) with separate accounts and least privilege, a nightly logical backup that fails visibly when something goes wrong, a tested restore into another database with its time recorded, replication lag in view, and the routine for the ticket nobody wants: **the backup has been producing 0-byte files for a week**.
+
+## Before you start
+
+- MySQL 8.0 or 8.4, or MariaDB 10.11 or 11.4, and PostgreSQL 15 or later, on Linux, with `sudo` on the server.
+- A backup target that is not the data disk (`/backup`, mounted from another array or a NAS) and that the backup system (Veeam, tape) then picks up.
+- A test server (`srv-db-test`) with the same engine versions to restore to.
+- The [PostgreSQL, MySQL and SQL Server](postgresql-mysql-sql-server-tareas-de-operaciones-copia-restauracion-espacio-y-consulta-lenta.html) guide covers basic queries, disk space and the slow query; this one is about accounts, automated backups and verifying them.
+
+## 1. Three accounts per application
+
+An application does not need to own its database to work. Split them:
+
+| Account | What for | Rights |
+|---|---|---|
+| Owner (`crm_owner`) | Deployments that change tables | DDL on its database; not used day to day |
+| Application (`crm_app`) | The running application | Read and write data, no creating or dropping tables |
+| Backup (`backup`) | The backup job | Read-only, only from the server itself |
+
+On **MySQL / MariaDB**:
+
+:::term mysql · srv-db-01
+$ sudo mysql
+$ CREATE USER 'crm_app'@'10.20.30.%' IDENTIFIED BY '...';
+$ GRANT SELECT, INSERT, UPDATE, DELETE ON crm.* TO 'crm_app'@'10.20.30.%';
+$ CREATE USER 'backup'@'localhost' IDENTIFIED BY '...';
+$ GRANT SELECT, SHOW VIEW, TRIGGER, EVENT, LOCK TABLES, PROCESS, RELOAD ON *.* TO 'backup'@'localhost';
+$ SHOW GRANTS FOR 'crm_app'@'10.20.30.%';
++-------------------------------------------------------------------------------+
+| Grants for crm_app@10.20.30.%                                                 |
++-------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `crm_app`@`10.20.30.%`                                  |
+| GRANT SELECT, INSERT, UPDATE, DELETE ON `crm`.* TO `crm_app`@`10.20.30.%`     |
++-------------------------------------------------------------------------------+
+:::
+
+- The **host** is part of the user: `crm_app` only gets in from the application servers' network, and `backup` only from `localhost`.
+- `PROCESS` avoids mysqldump's *tablespaces* warning on MySQL 8; `RELOAD` is requested by mysqldump with `--single-transaction` since MySQL 8.0.32 when the database uses GTIDs.
+- No `GRANT ALL` and no `%` as the host for the application.
+
+On **PostgreSQL**, rights go to a **group role** and the application user sits inside it:
+
+:::term psql · srv-db-02
+$ sudo -u postgres psql -d erp
+$ CREATE ROLE erp_rw NOLOGIN;
+$ GRANT CONNECT ON DATABASE erp TO erp_rw;
+$ GRANT USAGE ON SCHEMA erp TO erp_rw;
+$ GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA erp TO erp_rw;
+$ GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA erp TO erp_rw;
+$ ALTER DEFAULT PRIVILEGES FOR ROLE erp_owner IN SCHEMA erp GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO erp_rw;
+$ ALTER DEFAULT PRIVILEGES FOR ROLE erp_owner IN SCHEMA erp GRANT USAGE, SELECT ON SEQUENCES TO erp_rw;
+$ CREATE ROLE erp_app LOGIN PASSWORD '...' IN ROLE erp_rw;
+$ CREATE ROLE backup LOGIN PASSWORD '...';
+$ GRANT pg_read_all_data TO backup;
+:::
+
+- `ALTER DEFAULT PRIVILEGES FOR ROLE erp_owner`: tables the owner creates in the next deployment arrive already granted to the application. Without it, the new table gives *permission denied* on deployment day.
+- `pg_read_all_data` (PostgreSQL 14 and later) grants read access on every table and schema: exactly what `pg_dump` needs.
+- In `pg_hba.conf`, each account from where it belongs: `hostssl erp erp_app 10.20.30.0/24 scram-sha-256` and `host all backup 127.0.0.1/32 scram-sha-256`. Reload with `SELECT pg_reload_conf();`.
+
+## 2. The backup passwords, in 0600 files
+
+The backup job runs under its own system account, `dbbackup`, and reads the passwords from files in its home folder. Never in the script or on the command line (they would show up in `ps`).
+
+:::term bash · srv-db-01 and srv-db-02
+$ sudo useradd --system --create-home --home-dir /var/lib/dbbackup --shell /usr/sbin/nologin dbbackup
+$ sudo -u dbbackup install -m 600 /dev/null /var/lib/dbbackup/.my.cnf
+$ sudo -u dbbackup install -m 600 /dev/null /var/lib/dbbackup/.pgpass
+$ sudoedit -u dbbackup /var/lib/dbbackup/.my.cnf /var/lib/dbbackup/.pgpass
+$ sudo ls -l /var/lib/dbbackup/.my.cnf /var/lib/dbbackup/.pgpass
+-rw------- 1 dbbackup dbbackup  42 Nov  3 10:12 /var/lib/dbbackup/.my.cnf
+-rw------- 1 dbbackup dbbackup  38 Nov  3 10:12 /var/lib/dbbackup/.pgpass
+:::
+
+:::term ~dbbackup/.my.cnf and ~dbbackup/.pgpass
+# .my.cnf
+[client]
+user=backup
+password=...
+# .pgpass (host:port:database:user:password)
+localhost:5432:*:backup:...
+:::
+
+- Both files are looked up in the **HOME** of the user running the command. If the job runs under another account or with no HOME, it does not find them.
+- A **`.pgpass`** with group or world permissions is **ignored**: libpq warns *has group or world access* and carries on without a password.
+- MySQL ignores a `.my.cnf` that anyone can write to. MySQL (not MariaDB) also has `mysql_config_editor`, which stores obfuscated credentials in `~/.mylogin.cnf`.
+
+## 3. The script and the timer
+
+:::term /usr/local/sbin/db-backup.sh
+#!/usr/bin/env bash
+set -euo pipefail
+umask 077
+DEST=/backup/db
+STAMP=$(date +%F_%H%M)
+
+# MariaDB / MySQL: CRM
+mysqldump --single-transaction --routines --triggers --events crm | gzip > "$DEST/crm-$STAMP.sql.gz.part"
+zcat "$DEST/crm-$STAMP.sql.gz.part" | tail -n 1 | grep -q "Dump completed"
+mv "$DEST/crm-$STAMP.sql.gz.part" "$DEST/crm-$STAMP.sql.gz"
+
+# PostgreSQL: ERP
+pg_dump -h localhost -U backup -Fc -f "$DEST/erp-$STAMP.dump.part" erp
+pg_restore -l "$DEST/erp-$STAMP.dump.part" > /dev/null
+mv "$DEST/erp-$STAMP.dump.part" "$DEST/erp-$STAMP.dump"
+
+# Local retention: 14 days
+find "$DEST" -type f \\( -name '*.sql.gz' -o -name '*.dump' \\) -mtime +14 -delete
+:::
+
+- **`set -euo pipefail`**: if `mysqldump` fails inside the pipe, the script fails. Without `pipefail`, the result would be `gzip`'s, which always succeeds even when it receives zero bytes.
+- **`.part` and `mv`**: only a backup that has finished and been checked gets its final name. A `.part` left in the folder is a broken backup.
+- **The checks**: mysqldump ends the file with `-- Dump completed on ...`; `pg_restore -l` reads the table of contents of the `-Fc` file and fails if it is truncated.
+- `--single-transaction` gives a consistent copy without locking InnoDB tables. MyISAM tables are outside that guarantee.
+- The database is dumped **without `--databases`**: that way the file carries no `USE crm` and can be restored under another name (step 4).
+
+A systemd service and timer:
+
+:::term /etc/systemd/system/db-backup.service and db-backup.timer
+[Unit]
+Description=Logical backup of CRM and ERP
+OnFailure=notify-email@%n.service
+
+[Service]
+Type=oneshot
+User=dbbackup
+ExecStart=/usr/local/sbin/db-backup.sh
+
+# --- db-backup.timer ---
+[Unit]
+Description=Daily logical backup
+
+[Timer]
+OnCalendar=*-*-* 02:30:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+:::
+
+:::term bash · srv-db-01
+$ sudo systemctl daemon-reload && sudo systemctl enable --now db-backup.timer
+$ sudo systemctl start db-backup.service && systemctl status db-backup.service --no-pager | head -3
+○ db-backup.service - Logical backup of CRM and ERP
+     Loaded: loaded (/etc/systemd/system/db-backup.service; static)
+     Active: inactive (dead) since Tue 2026-11-03 10:31:52 CET; 4s ago
+$ ls -lh /backup/db | tail -2
+-rw------- 1 dbbackup dbbackup 412M Nov  3 10:31 crm-2026-11-03_1030.sql.gz
+-rw------- 1 dbbackup dbbackup 1.9G Nov  3 10:31 erp-2026-11-03_1030.dump
+$ systemctl list-timers db-backup.timer
+:::
+
+- With `User=dbbackup`, systemd sets that account's HOME, and with it `.my.cnf` and `.pgpass` are found.
+- `OnFailure=` starts another unit when the backup fails (here a `notify-email@` template that sends an email; any alert the team uses will do). A backup that fails silently is the step 6 ticket.
+- `Persistent=true` runs the backup at boot if the server was off at 2:30.
+
+## 4. The restore, tested into another database
+
+Once a month, on `srv-db-test`, with last night's backup and a stopwatch running:
+
+:::term bash · srv-db-test
+$ sudo -u postgres createdb erp_restore
+$ time sudo -u postgres pg_restore -d erp_restore --no-owner --no-privileges -j 4 /restore/erp-2026-11-03_0230.dump
+real    6m41s
+$ sudo -u postgres psql -d erp_restore -tAc "SELECT count(*), max(fecha) FROM erp.facturas;"
+918244|2026-11-02 23:58:11
+$ sudo mysql -e "CREATE DATABASE crm_restore"
+$ time (zcat /restore/crm-2026-11-03_0230.sql.gz | sudo mysql crm_restore)
+real    3m12s
+$ sudo mysql -N -e "SELECT COUNT(*), MAX(creado) FROM crm_restore.clientes;"
+41877   2026-11-02 21:14:03
+:::
+
+- Restore into a database with **another name** (`erp_restore`), never over the original. With `--no-owner` and `--no-privileges` the objects belong to whoever restores them, without needing the production roles to exist; `-j 4` restores in parallel.
+- Compare the count and the **latest date** with production at backup time: if the last invoice is a week old, the backup is stale even though it restores fine.
+- Record the **time** (6 minutes 41 seconds): it is your real RTO for that database, the one you compare with what the business expects.
+- Drop `erp_restore` and `crm_restore` when done and log the test: date, file, time, counts and who did it.
+
+## 5. Replication lag at a glance
+
+If there is a replica (for reads or for failover), its lag is the first thing to check before taking backups from it or failing over.
+
+:::term mysql · replica srv-db-01b
+$ sudo mysql -e "SHOW REPLICA STATUS\\G" | grep -E "Replica_IO_Running|Replica_SQL_Running:|Seconds_Behind_Source|Last_SQL_Error:"
+             Replica_IO_Running: Yes
+            Replica_SQL_Running: Yes
+          Seconds_Behind_Source: 0
+                 Last_SQL_Error:
+:::
+
+On MariaDB before 10.5 the command is `SHOW SLAVE STATUS\\G` and the field `Seconds_Behind_Master`. Both threads must be `Yes`; one on `No` with `Last_SQL_Error` filled in is a stopped replica, even though the lag shows `NULL` rather than a high number.
+
+:::term psql · srv-db-02 (primary) and srv-db-02b (replica)
+$ sudo -u postgres psql -c "SELECT application_name, client_addr, state, replay_lag FROM pg_stat_replication;"
+ application_name | client_addr  |   state   |   replay_lag
+------------------+--------------+-----------+-----------------
+ srv-db-02b       | 10.20.40.12  | streaming | 00:00:00.004112
+# on the replica:
+$ sudo -u postgres psql -tAc "SELECT now() - pg_last_xact_replay_timestamp();"
+00:00:01.83
+:::
+
+An empty result from `pg_stat_replication` means the replica is not connected. On the replica, the second value grows even when everything is fine if the primary has no writes: compare it with real activity before raising the alarm.
+
+## 6. The ticket: "the database backup has been producing 0-byte files for a week"
+
+Tuesday, 9:30. While preparing the monthly restore, last night's file is 0 bytes. So is the one from the night before. Server `srv-db-03` still uses an old cron line, not the step 3 script:
+
+:::term /etc/cron.d/backup-erp
+30 2 * * * dbbackup pg_dump -h localhost -U backup -Fc erp > /backup/db/erp-$(date +\\%F).dump 2>/dev/null
+:::
+
+That explains the size: the **`>` redirection is done by the shell**, which creates the file before `pg_dump` starts. If `pg_dump` fails, an empty file is left behind, and `2>/dev/null` throws the error message away. (The `\\%` is required: in a crontab, an unescaped `%` is a newline.)
+
+1. **Since when**: `ls -l --time-style=long-iso /backup/db | tail` shows 0 bytes since 27 October. What changed that day? The change log says an Ansible role was applied that rewrote the service accounts' home folders.
+2. **Run the same thing, as the same user, with the error in view**:
+
+:::term bash · srv-db-03
+$ sudo -u dbbackup -H pg_dump -h localhost -U backup -Fc erp -f /tmp/test.dump
+WARNING: password file "/var/lib/dbbackup/.pgpass" has group or world access; permissions should be u=rw (0600) or less
+pg_dump: error: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+$ sudo ls -l /var/lib/dbbackup/.pgpass
+-rw-r--r-- 1 dbbackup dbbackup 38 Oct 27 11:02 /var/lib/dbbackup/.pgpass
+:::
+
+3. **The cause**: the Ansible role left `.pgpass` at `0644`. libpq ignores it for safety, `pg_dump` has no password and, with no terminal, cannot ask for one. Fix: `sudo chmod 600 /var/lib/dbbackup/.pgpass` and correct the Ansible role to use `mode: "0600"`.
+4. **Rule out the rest** before closing, because the same 0 bytes come from other causes:
+
+- **Disk full**: `df -h /backup` and `df -i /backup`. With the target full, the file is created and never written.
+- **Target permissions**: `sudo -u dbbackup touch /backup/db/test`. If it fails, cron would not even create the file.
+- On **MySQL**, the equivalent is `mysqldump: Got error: 1045: Access denied for user 'backup'@'localhost' (using password: NO)`: it has not read `.my.cnf` (another HOME or another user), or it discarded it with *World-writable config file ... is ignored*.
+
+5. **Back up now**, without waiting for tonight: the command from point 2 writing into `/backup/db/`, checked with `pg_restore -l`, and a quick restore on `srv-db-test` as in step 4.
+6. **Make sure it never fails silently again**: replace the cron line with the step 3 script and timer (it fails for real, leaves a `.part` and alerts through `OnFailure`) and add a monitoring check on the size and date of the latest file in `/backup/db`.
+
+In the ticket: since when there has been no valid backup (a week without a logical backup of the ERP: tell its owner), the cause, the change, the new backup with its restore test, and the improvement to detect it.
+
+## Next steps
+
+- The [PostgreSQL, MySQL and SQL Server](postgresql-mysql-sql-server-tareas-de-operaciones-copia-restauracion-espacio-y-consulta-lenta.html) guide covers the blocking query, disk space and growth.
+- The [Veeam](veeam-crear-un-job-comprobar-copias-y-restaurar.html) guide explains how the backup system picks up `/backup` and keeps it off the server.
+- With large databases or an RPO of minutes, logical backups fall short: physical backups with WAL archiving (pgBackRest) or binlogs (MariaDB Backup, Percona XtraBackup).
 """)
