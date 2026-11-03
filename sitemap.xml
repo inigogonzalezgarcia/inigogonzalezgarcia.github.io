@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://inigogonzalezgarcia.github.io/</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/about.html</loc><lastmod>2026-11-03</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/guias.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/journey.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/links.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/recursos.html</loc><lastmod>2026-11-03</lastmod></url>
@@ -58,6 +58,7 @@
   <url><loc>https://inigogonzalezgarcia.github.io/guias/android-perfil-de-trabajo-intune.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/ansible-primer-playbook-parchear-servidores-linux.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/anyconnect-instalar-y-diagnosticar-vpn.html</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/apache-en-ubuntu-virtual-hosts-https-con-certbot-cabeceras-y-la-pagina-por-defecto.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/as400-alta-y-gestion-de-usuarios-en-ibm-i.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/azure-ad-connect-forzar-sincronizacion-y-objetos-que-no-pasan.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/azure-cost-management-ambitos-presupuestos-etiquetas-reservas-focus-y-la-factura-que-se-dispara.html</loc><lastmod>2026-10-30</lastmod></url>
@@ -69,6 +70,7 @@
   <url><loc>https://inigogonzalezgarcia.github.io/guias/business-case-de-it-opciones-costes-beneficios-medibles-y-la-decision-del-comite.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/cashdro-integracion-con-el-tpv-red-cobro-en-efectivo-y-arqueo.html</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/cisco-anyconnect-resolver-problemas-de-conexion-vpn-en-tiendas-y-viajes.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/cisco-localizar-un-equipo-descripciones-port-security-sticky-y-una-violacion-de-seguridad.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/cisco-primeros-comandos-copia-de-configuracion-y-un-puerto-err-disabled.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/cisco-salas-de-comunicaciones-de-una-sede-con-sala-de-trading.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/cisco-vlans-troncales-router-de-la-sede-y-un-puerto-que-no-da-red.html</loc><lastmod>2026-10-27</lastmod></url>
@@ -89,15 +91,19 @@
   <url><loc>https://inigogonzalezgarcia.github.io/guias/entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/entra-conditional-access-politicas-base-y-usuario-bloqueado.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/entra-sso-saml-dar-de-alta-una-aplicacion-y-login-que-falla.html</loc><lastmod>2026-10-22</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/esxi-8-instalar-un-host-red-de-gestion-ntp-alta-en-vcenter-y-un-host-not-responding.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/fortigate-politicas-con-minimo-privilegio-vpn-con-entra-id-tuneles-entre-sedes-y-un-usuario-que-no-llega.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/git-scripts-del-equipo-bajo-control-de-versiones.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/glpi-inventario-con-glpi-agent-tickets-sla-y-un-equipo-que-deja-de-reportar.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/gpo-de-seguridad-base-ntlm-llmnr-smb-laps-y-despliegue-en-piloto.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/gpo-unidades-de-red-e-impresoras-con-preferencias-filtrado-y-una-unidad-que-no-aparece.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/grafana-origen-de-datos-primer-panel-y-alerta-al-canal.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/hotel-en-pre-apertura-checklist-de-it-hasta-el-dia-de-apertura.html</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/hyper-v-crear-vm-conmutador-virtual-puntos-de-control-y-exportar.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/icg-y-hiopos-puesta-en-marcha-de-un-tpv-red-impresoras-de-cocina-y-cierre.html</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/idrac-e-ilo-disco-o-fuente-averiados-registros-recogida-para-el-fabricante-y-reconstruccion.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/idrac-e-ilo-gestion-fuera-de-banda-red-usuarios-consola-firmware-y-alertas.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/iis-logs-w3c-reciclado-tiempo-de-inactividad-y-la-primera-peticion-lenta.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/iis-sitios-enlaces-grupos-de-aplicaciones-certificados-y-un-503.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/impresoras-de-tienda-etiquetas-tickets-y-multifuncion-sin-it-en-sitio.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/impresoras-instalar-impresora-de-red-y-cola-atascada.html</loc><lastmod>2026-10-21</lastmod></url>
@@ -110,6 +116,7 @@
   <url><loc>https://inigogonzalezgarcia.github.io/guias/jamf-pro-enrolar-un-mac-y-desplegar-una-politica.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/jenkins-pipeline-que-prueba-los-scripts-del-equipo-en-cada-cambio.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/jira-service-management-un-ticket-bien-hecho.html</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/kibana-paneles-alertas-ilm-data-streams-y-elasticsearch-en-solo-lectura-por-disco-lleno.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/kubernetes-de-docker-compose-a-un-cluster-gestionado-despliegue-y-un-pod-en-crashloopbackoff.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/lan-wan-y-wifi-conectar-plantas-y-sedes-de-varios-paises.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/licencias-office-365-por-perfil-con-el-service-desk-tiendas-y-oficina-central.html</loc><lastmod>2026-10-28</lastmod></url>
@@ -127,11 +134,12 @@
   <url><loc>https://inigogonzalezgarcia.github.io/guias/migracion-de-tenant-microsoft-365-inventario-identidades-buzones-onedrive-y-dia-del-corte.html</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/mikrotik-y-tp-link-omada-red-y-wifi-de-un-restaurante-u-hotel.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/monitorizacion-desplegar-alarmas-y-responder-en-plataformas-24x7.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/mysql-mariadb-y-postgresql-permisos-minimos-copia-programada-restauracion-probada-y-copias-de-0-bytes.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/ndes-y-cloud-pki-certificados-a-los-dispositivos-desde-intune.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/nginx-y-apache-proxy-inverso-tls-cabeceras-timeouts-y-un-502-bad-gateway.html</loc><lastmod>2026-10-30</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/guias/nivel-1.html</loc><lastmod>2026-10-21</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/guias/nivel-2.html</loc><lastmod>2026-10-30</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/guias/nivel-3.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/nivel-1.html</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/nivel-2.html</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/nivel-3.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/nivel-4.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/nutanix-ahv-para-quien-viene-de-vsphere-prism-proteccion-lcm-y-un-disco-caido.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/oficina-que-crece-de-15-a-120-personas-con-sala-de-trading.html</loc><lastmod>2026-10-30</lastmod></url>
@@ -143,16 +151,19 @@
   <url><loc>https://inigogonzalezgarcia.github.io/guias/pms-hotelero-soporte-interfaces-y-cargo-a-habitacion-desde-el-tpv.html</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/postgresql-mysql-sql-server-tareas-de-operaciones-copia-restauracion-espacio-y-consulta-lenta.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/powershell-altas-masivas-en-active-directory-desde-csv-y-bajas-con-revision.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/powershell-informe-semanal-de-active-directory-inactivos-contrasenas-y-cuentas-deshabilitadas.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/powershell-script-de-inventario-remoto-con-csv.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/presupuesto-de-it-preparar-y-seguir-el-presupuesto-anual-en-una-empresa-multisede.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/proveedores-de-conectividad-inventario-de-circuitos-averias-y-sla.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/python-para-it-entorno-virtual-csv-api-informe-programado-y-un-script-que-falla.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/python-y-microsoft-graph-informe-de-usuarios-y-dispositivos-paginacion-429-y-un-403.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/qualys-agentes-etiquetas-priorizacion-y-la-vulnerabilidad-que-sigue-tras-parchear.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/rabbitmq-colas-de-integracion-clinica-y-un-consumidor-parado.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/red-hat-ajuste-de-rendimiento-de-un-servidor-critico.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/reglamento-europeo-de-ia-ai-act-riesgos-roles-calendario-y-registro-de-casos-de-uso.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/rhel-registrar-parchear-servicios-firewall-selinux.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/router-4g-la-conexion-de-la-tienda-cae-dos-horas-antes-de-abrir.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/sai-apc-tarjeta-de-red-avisos-autotest-baterias-apagado-con-powerchute-y-un-corte-sin-aviso.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/sai-de-la-sala-de-comunicaciones-dimensionado-pruebas-apagado-ordenado-y-un-corte-antes-de-la-apertura.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/salas-de-videoconferencia-poly-en-la-oficina-central-aprovisionamiento-y-soporte.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/sap-soporte-a-usuarios-desde-it-sin-ser-consultor-sap.html</loc><lastmod>2026-10-28</lastmod></url>
@@ -160,16 +171,18 @@
   <url><loc>https://inigogonzalezgarcia.github.io/guias/sector-2.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/sector-3.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/sector-4.html</loc><lastmod>2026-10-28</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/guias/sector-5.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/sector-5.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/sharepoint-sitio-de-equipo-permisos-y-uso-compartido.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/solarwinds-anadir-un-nodo-afinar-una-alerta-y-leer-que-paso-antes-de-la-caida.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/sql-server-copias-y-restauracion-de-la-base-de-datos-del-erp.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/switches-hp-aruba-localizar-equipos-por-lldp-bucles-con-loop-protect-y-port-security.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/switches-hp-aruba-vlans-copia-de-configuracion-firmware-y-puerto-a-100-mb.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/tanium-cliente-preguntas-parches-software-y-un-equipo-con-datos-antiguos.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/teams-los-problemas-mas-comunes.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/teams-rooms-poner-en-marcha-una-sala.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/terraform-modulo-estado-remoto-plan-en-el-pipeline-deriva-e-importacion.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/ubuntu-landscape-registrar-la-flota-y-parchear-por-grupos-con-ventana.html</loc><lastmod>2026-10-22</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/ubuntu-server-disco-lleno-journald-logrotate-y-un-servicio-que-no-arranca.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/ubuntu-server-usuarios-ssh-firewall-y-actualizaciones.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/veeam-crear-un-job-comprobar-copias-y-restaurar.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/veeam-planificar-y-probar-restauraciones-en-plantas-y-sedes.html</loc><lastmod>2026-10-28</lastmod></url>
@@ -177,9 +190,12 @@
   <url><loc>https://inigogonzalezgarcia.github.io/guias/vmware-mantenimiento-de-hosts-y-maquinas-virtuales-en-varias-plantas.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/vsphere-vcenter-crear-vm-snapshots-con-caducidad-y-host-en-mantenimiento.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/windows-11-migrar-los-equipos-de-una-sede-con-sala-de-trading.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/windows-11-perfil-temporal-o-danado-diagnostico-reparacion-y-datos-del-usuario.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/windows-diagnostico-basico-equipo-lento-o-con-errores.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/windows-server-actualizaciones-planificadas-sin-cortar-el-servicio.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/windows-server-cuentas-de-servicio-gmsa-tareas-programadas-y-un-servicio-que-no-arranca.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/windows-server-instalar-rol-parchear-y-leer-eventos.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/wordpress-en-docker-compose-copias-bastionado-y-un-plugin-que-tumba-la-web.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/zabbix-monitorizar-un-restaurante-u-hotel-tpv-impresoras-de-cocina-e-internet.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/zabbix-servidor-agente-2-plantillas-macros-dependencias-avisos-y-un-agente-no-disponible.html</loc><lastmod>2026-11-03</lastmod></url>
 </urlset>
