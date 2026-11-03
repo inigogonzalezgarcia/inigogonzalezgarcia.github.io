@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://inigogonzalezgarcia.github.io/</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/about.html</loc><lastmod>2026-11-03</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/guias.html</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias.html</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/journey.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/links.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/recursos.html</loc><lastmod>2026-11-03</lastmod></url>
@@ -97,6 +97,7 @@
   <url><loc>https://inigogonzalezgarcia.github.io/guias/git-scripts-del-equipo-bajo-control-de-versiones.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/glpi-inventario-con-glpi-agent-tickets-sla-y-un-equipo-que-deja-de-reportar.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/gpo-de-seguridad-base-ntlm-llmnr-smb-laps-y-despliegue-en-piloto.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/gpo-plantillas-admx-almacen-central-edge-office-instalacion-de-msi-y-directivas-que-tardan-en-aplicarse.html</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/gpo-unidades-de-red-e-impresoras-con-preferencias-filtrado-y-una-unidad-que-no-aparece.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/grafana-origen-de-datos-primer-panel-y-alerta-al-canal.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/hotel-en-pre-apertura-checklist-de-it-hasta-el-dia-de-apertura.html</loc><lastmod>2026-10-27</lastmod></url>
@@ -141,8 +142,8 @@
   <url><loc>https://inigogonzalezgarcia.github.io/guias/mysql-y-mariadb-configuracion-buffer-pool-consultas-lentas-indices-replica-y-too-many-connections.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/ndes-y-cloud-pki-certificados-a-los-dispositivos-desde-intune.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/nginx-y-apache-proxy-inverso-tls-cabeceras-timeouts-y-un-502-bad-gateway.html</loc><lastmod>2026-10-30</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/guias/nivel-1.html</loc><lastmod>2026-11-03</lastmod></url>
-  <url><loc>https://inigogonzalezgarcia.github.io/guias/nivel-2.html</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/nivel-1.html</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/nivel-2.html</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/nivel-3.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/nivel-4.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/nutanix-ahv-para-quien-viene-de-vsphere-prism-proteccion-lcm-y-un-disco-caido.html</loc><lastmod>2026-10-28</lastmod></url>
@@ -158,6 +159,7 @@
   <url><loc>https://inigogonzalezgarcia.github.io/guias/postgresql-roles-pg-hba-autovacuum-pgbouncer-pg-stat-statements-y-una-aplicacion-que-no-conecta.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/powershell-altas-masivas-en-active-directory-desde-csv-y-bajas-con-revision.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/powershell-informe-semanal-de-active-directory-inactivos-contrasenas-y-cuentas-deshabilitadas.html</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/powershell-remoto-winrm-invoke-command-en-lote-segundo-salto-jea-y-acceso-denegado.html</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/powershell-script-de-inventario-remoto-con-csv.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/presupuesto-de-it-preparar-y-seguir-el-presupuesto-anual-en-una-empresa-multisede.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/proveedores-de-conectividad-inventario-de-circuitos-averias-y-sla.html</loc><lastmod>2026-10-28</lastmod></url>
@@ -198,6 +200,7 @@
   <url><loc>https://inigogonzalezgarcia.github.io/guias/vmware-mantenimiento-de-hosts-y-maquinas-virtuales-en-varias-plantas.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/vsphere-vcenter-crear-vm-snapshots-con-caducidad-y-host-en-mantenimiento.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/wifi-de-huespedes-en-mikrotik-hotspot-portal-cautivo-vales-y-limites.html</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/windows-11-actualizaciones-que-fallan-o-se-deshacen-historial-registros-dism-sfc-y-reinicio-de-componentes.html</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/windows-11-migrar-los-equipos-de-una-sede-con-sala-de-trading.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/windows-11-perfil-temporal-o-danado-diagnostico-reparacion-y-datos-del-usuario.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/windows-diagnostico-basico-equipo-lento-o-con-errores.html</loc><lastmod>2026-10-21</lastmod></url>
