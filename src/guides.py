@@ -23,15 +23,15 @@ LEVELS = {
                     h_es="Gestión moderna, identidad<br>y automatización.", h_en="Modern management, identity<br>and automation.",
                     d_es="Gestión moderna del puesto, identidad, virtualización y automatización.",
                     d_en="Modern device management, identity, virtualisation and automation.",
-                    l_es="Veintinueve temas para quien ya administra: Intune y sus anillos de actualización, Entra ID y certificados, GPO de seguridad y Defender, Tanium, Copilot, hipervisores, bases de datos, servidores web, CMDB, monitorización y logs, y la automatización con Ansible, Docker, Jenkins y Microsoft Graph.",
-                    l_en="Twenty-nine topics for people who already administer: Intune and its update rings, Entra ID and certificates, security GPOs and Defender, Tanium, Copilot, hypervisors, databases, web servers, the CMDB, monitoring and logs, and automation with Ansible, Docker, Jenkins and Microsoft Graph.",
+                    l_es="Treinta temas para quien ya administra: Intune y sus anillos de actualización, Entra ID y certificados, GPO de seguridad y Defender, Tanium, Copilot, hipervisores, bases de datos, servidores web, CMDB, monitorización y logs, y la automatización con Ansible, Docker, Jenkins y Microsoft Graph.",
+                    l_en="Thirty topics for people who already administer: Intune and its update rings, Entra ID and certificates, security GPOs and Defender, Tanium, Copilot, hypervisors, databases, web servers, the CMDB, monitoring and logs, and automation with Ansible, Docker, Jenkins and Microsoft Graph.",
                     seo="Advanced IT guides: Ansible, Docker, Elasticsearch and Kibana, Entra ID Conditional Access and SSO, Grafana, Hyper-V, Intune, Intune EPM, Jenkins, Linux joined to Active Directory, Microsoft Graph, NDES and Cloud PKI, PostgreSQL, MySQL and SQL Server, MySQL and MariaDB, PostgreSQL, Puppet, SolarWinds, Ubuntu Landscape, VMware vSphere and Zabbix."),
     "nivel-4": dict(key="nivel-4", n_es="Nivel 4", n_en="Level 4", t_es="Experto", t_en="Expert",
                     h_es="Infraestructura híbrida,<br>seguridad y continuidad.", h_en="Hybrid infrastructure,<br>security and continuity.",
                     d_es="Infraestructura híbrida, redes, seguridad y continuidad de negocio.",
                     d_en="Hybrid infrastructure, networking, security and business continuity.",
-                    l_es="Veinte temas para quien diseña, decide y responde cuando algo grande falla: nube e infraestructura como código, contenedores, redes y cortafuegos, acceso privilegiado, detección y vulnerabilidades, protección de datos, cumplimiento normativo y el AI Act, costes de Azure, el business case y la recuperación ante desastres.",
-                    l_en="Twenty topics for people who design, decide and respond when something big fails: cloud and infrastructure as code, containers, networks and firewalls, privileged access, detection and vulnerabilities, data protection, compliance and the AI Act, Azure costs, the business case and disaster recovery.",
+                    l_es="Veintiún temas para quien diseña, decide y responde cuando algo grande falla: nube e infraestructura como código, contenedores, redes y cortafuegos, acceso privilegiado, detección y vulnerabilidades, protección de datos, cumplimiento normativo y el AI Act, costes de Azure, el business case y la recuperación ante desastres.",
+                    l_en="Twenty-one topics for people who design, decide and respond when something big fails: cloud and infrastructure as code, containers, networks and firewalls, privileged access, detection and vulnerabilities, data protection, compliance and the AI Act, Azure costs, the business case and disaster recovery.",
                     seo="Step-by-step expert IT guides: AWS, Azure Virtual Desktop, Sentinel, Purview, CyberArk, FortiGate, Kubernetes, Terraform, DR/BCP and ISO 27001/NIS2.",
                     seo_title_en="Expert IT guides: AWS, Sentinel, CyberArk, Terraform · Iñigo González",
                     seo_title_es="Guías IT nivel experto: AWS, Sentinel, CyberArk y Terraform · Iñigo González"),
@@ -39,8 +39,8 @@ LEVELS = {
                     h_es="Hostelería<br>y punto de venta.", h_en="Hospitality<br>and point of sale.",
                     d_es="TPV, sistemas de hotel y la puesta en marcha de un establecimiento.",
                     d_en="POS, hotel systems and getting a new venue up and running.",
-                    l_es="Siete guías desde el día a día de IT en hoteles y restaurantes: la pre-apertura de un hotel, el punto de venta con ICG y HIOPOS, el cobro en efectivo con CashDro, el cargo a habitación en el PMS, la televisión por IPTV, la red y la WiFi con MikroTik y TP-Link, y la monitorización con Zabbix.",
-                    l_en="Seven guides from everyday IT in hotels and restaurants: a hotel's pre-opening, the point of sale with ICG and HIOPOS, cash payments with CashDro, room charges in the PMS, IPTV television, the network and WiFi with MikroTik and TP-Link, and monitoring with Zabbix.",
+                    l_es="Ocho guías desde el día a día de IT en hoteles y restaurantes: la pre-apertura de un hotel, el punto de venta con ICG y HIOPOS, el cobro en efectivo con CashDro, el cargo a habitación en el PMS, la televisión por IPTV, la red y la WiFi con MikroTik y TP-Link, y la monitorización con Zabbix.",
+                    l_en="Eight guides from everyday IT in hotels and restaurants: a hotel's pre-opening, the point of sale with ICG and HIOPOS, cash payments with CashDro, room charges in the PMS, IPTV television, the network and WiFi with MikroTik and TP-Link, and monitoring with Zabbix.",
                     seo="IT guides for hospitality: hotel pre-opening IT checklist, ICG and HIOPOS POS setup, CashDro integration, hotel PMS interfaces and room charges, hotel IPTV troubleshooting, MikroTik and TP-Link Omada networks and Zabbix monitoring."),
     "sector-2": dict(key="sector-2", n_es="Sector 2", n_en="Sector 2", t_es="Retail y oficinas corporativas", t_en="Retail and corporate offices",
                     h_es="Retail y<br>oficinas corporativas.", h_en="Retail and<br>corporate offices.",
@@ -53,22 +53,22 @@ LEVELS = {
                     h_es="Sanidad y<br>plataformas críticas.", h_en="Healthcare and<br>critical platforms.",
                     d_es="Servidores que no pueden parar: rendimiento, actualizaciones y monitorización.",
                     d_en="Servers that can't stop: performance, upgrades and monitoring.",
-                    l_es="Siete guías para plataformas que funcionan 24x7: publicar aplicaciones clínicas en Citrix, entornos de prueba que se parecen a producción, alarmas que llegan a alguien, Oracle en hardware nuevo, rendimiento en Red Hat parches de Windows Server sin corte y las colas de RabbitMQ de la capa de integración.",
-                    l_en="Seven guides for platforms that run 24x7: publishing clinical apps in Citrix, test environments that look like production, alarms that reach someone, Oracle on new hardware, Red Hat performance, Windows Server patching without downtime and RabbitMQ queues in the integration layer.",
+                    l_es="Ocho guías para plataformas que funcionan 24x7: publicar aplicaciones clínicas en Citrix, entornos de prueba que se parecen a producción, alarmas que llegan a alguien, Oracle en hardware nuevo, rendimiento en Red Hat parches de Windows Server sin corte y las colas de RabbitMQ de la capa de integración.",
+                    l_en="Eight guides for platforms that run 24x7: publishing clinical apps in Citrix, test environments that look like production, alarms that reach someone, Oracle on new hardware, Red Hat performance, Windows Server patching without downtime and RabbitMQ queues in the integration layer.",
                     seo="IT guides for healthcare and critical platforms: Citrix app publishing, test environments, monitoring and alarms, Oracle server hardware and OS upgrade, Red Hat performance tuning and Windows Server patching without downtime."),
     "sector-4": dict(key="sector-4", n_es="Sector 4", n_en="Sector 4", t_es="Industria multinacional", t_en="Multinational manufacturing",
                     h_es="Industria<br>multinacional.", h_en="Multinational<br>manufacturing.",
                     d_es="Sedes en varios países, redes entre plantas, ERP y presupuesto de IT.",
                     d_en="Sites in several countries, networks between plants, ERP and IT budget.",
-                    l_es="Siete guías para una empresa con plantas en varios países: la red entre sedes, los móviles corporativos, el presupuesto anual de IT, el soporte a usuarios de SAP, copias de SQL Server, restauraciones con Veeam y el mantenimiento de VMware.",
-                    l_en="Seven guides for a company with plants in several countries: the network between sites, corporate phones, the annual IT budget, supporting SAP users, SQL Server backups, restores with Veeam and VMware maintenance.",
+                    l_es="Ocho guías para una empresa con plantas en varios países: la red entre sedes, los móviles corporativos, el presupuesto anual de IT, el soporte a usuarios de SAP, copias de SQL Server, restauraciones con Veeam y el mantenimiento de VMware.",
+                    l_en="Eight guides for a company with plants in several countries: the network between sites, corporate phones, the annual IT budget, supporting SAP users, SQL Server backups, restores with Veeam and VMware maintenance.",
                     seo="IT guides for multinational manufacturing: multi-country LAN, WAN and Wi-Fi, corporate mobile MDM, annual IT budget, SAP user support, SQL Server backup and restore, Veeam restore testing and VMware host maintenance."),
     "sector-5": dict(key="sector-5", n_es="Sector 5", n_en="Sector 5", t_es="Servicios financieros y trading", t_en="Financial services and trading",
                     h_es="Servicios financieros<br>y trading.", h_en="Financial services<br>and trading.",
                     d_es="Una sede con sala de trading que no puede parar: red, acceso, salas y continuidad.",
                     d_en="A site with a trading floor that can't stop: network, access, rooms and continuity.",
-                    l_es="Once guías para una sede con sala de trading: salas de comunicaciones, su inventario en Device42, el SAI, una línea de voz caída, una oficina que crece de 15 a 120 personas, acceso condicional, una prueba de recuperación, salas de Teams sobre Crestron, PIM, operadores de conectividad y la migración a Windows 11.",
-                    l_en="Eleven guides for a site with a trading floor: comms rooms, their inventory in Device42, the UPS, a voice line down, an office growing from 15 to 120 people, Conditional Access, a recovery test, Teams rooms on Crestron, PIM, connectivity providers and the move to Windows 11.",
+                    l_es="Trece guías para una sede con sala de trading: salas de comunicaciones, su inventario en Device42, el SAI, una línea de voz caída, una oficina que crece de 15 a 120 personas, acceso condicional, una prueba de recuperación, salas de Teams sobre Crestron, PIM, operadores de conectividad y la migración a Windows 11.",
+                    l_en="Thirteen guides for a site with a trading floor: comms rooms, their inventory in Device42, the UPS, a voice line down, an office growing from 15 to 120 people, Conditional Access, a recovery test, Teams rooms on Crestron, PIM, connectivity providers and the move to Windows 11.",
                     seo="IT guides for financial services and trading floors: comms rooms, Device42 inventory, UPS, voice lines, office growth, Conditional Access for a site, DR test, Teams Rooms on Crestron, PIM just-in-time, connectivity providers and Windows 11 migration."),
 }
 LEVEL1 = LEVELS["nivel-1"]
@@ -269,6 +269,9 @@ TOPICS = [
     ("nivel-3", "puppet", "Puppet: configuración como código", "Puppet: configuration as code",
      "Servidor y agentes, certificados, manifiestos y módulos, entornos con Hiera, ejecución en modo noop y un agente que no aplica el catálogo.",
      "Server and agents, certificates, manifests and modules, environments with Hiera, noop runs and an agent that does not apply its catalogue."),
+    ("nivel-3", "keycloak", "Keycloak: SSO para aplicaciones internas", "Keycloak: SSO for internal apps",
+     "Realm, clientes OIDC y SAML, federación con Active Directory por LDAP, roles y grupos, MFA y una aplicación que devuelve invalid_redirect_uri.",
+     "Realm, OIDC and SAML clients, Active Directory federation over LDAP, roles and groups, MFA and an app that returns invalid_redirect_uri."),
     ("nivel-3", "mysql-mariadb", "MySQL y MariaDB", "MySQL and MariaDB",
      "Configuración y memoria de InnoDB, registro de consultas lentas, índices, réplica y el error Too many connections.",
      "InnoDB settings and memory, the slow query log, indexes, replication and the Too many connections error."),
@@ -336,6 +339,9 @@ TOPICS = [
     ("nivel-4", "ai-act", "Reglamento Europeo de IA (AI Act)", "EU AI Act",
      "Niveles de riesgo, proveedor y responsable del despliegue, alfabetización y transparencia, calendario, registro de casos de uso y RGPD.",
      "Risk levels, provider and deployer, AI literacy and transparency, timeline, a use-case register and GDPR."),
+    ("nivel-4", "zos", "z/OS para quien viene de Windows", "z/OS for people coming from Windows",
+     "LPAR, IPL, JES y la salida de los trabajos, RACF, CICS e IMS, registros SMF y REXX, explicados con equivalencias del mundo Windows y un trabajo que no termina.",
+     "LPARs, IPL, JES and job output, RACF, CICS and IMS, SMF records and REXX, explained with Windows equivalents and a job that never ends."),
     ("sector-1", "cashdro", "CashDro - Integración con el TPV", "CashDro - Integration with the POS",
      "El cobro en efectivo automático: red, credenciales, la rutina diaria y el arqueo.",
      "Automatic cash payments: network, credentials, the daily routine and the cash count."),
@@ -354,6 +360,9 @@ TOPICS = [
     ("sector-1", "zabbix-local", "Zabbix - Monitorizar un restaurante o un hotel", "Zabbix - Monitoring a restaurant or hotel",
      "Servidor y proxy, ICMP para TPV e impresoras de cocina, SNMP para red y SAI, avisos por Telegram y una tormenta de alertas en pleno servicio.",
      "Server and proxy, ICMP for tills and kitchen printers, SNMP for network and UPS, Telegram alerts and an alert storm in the middle of service."),
+    ("sector-1", "wifi-huespedes", "WiFi de huéspedes - Portal cautivo y límites en MikroTik", "Guest Wi-Fi - Captive portal and limits on MikroTik",
+     "Red de huéspedes separada, Hotspot con portal y vales, límites de ancho de banda por usuario y un huésped que se conecta pero no navega.",
+     "A separate guest network, Hotspot with a portal and vouchers, per-user bandwidth limits and a guest who connects but cannot browse."),
     ("sector-1", "mikrotik-tplink", "MikroTik y TP-Link - Red y WiFi de un restaurante u hotel", "MikroTik and TP-Link - Network and WiFi for a restaurant or hotel",
      "VLAN para TPV, pagos, personal y clientes, WiFi de clientes con portal y límites, 4G de respaldo y la WiFi lenta en mitad de un evento.",
      "VLANs for POS, payments, staff and guests, guest WiFi with a portal and limits, 4G backup and the slow WiFi in the middle of an event."),
@@ -405,6 +414,9 @@ TOPICS = [
     ("sector-3", "rabbitmq-clinica", "RabbitMQ - Colas de la capa de integración clínica", "RabbitMQ - Queues in the clinical integration layer",
      "Colas, consumidores y dead-letter, alarmas de profundidad, y los resultados que no llegan a la historia clínica porque se paró un consumidor.",
      "Queues, consumers and dead-letter, depth alarms, and the results that never reach the patient record because a consumer stopped."),
+    ("sector-3", "mantenimiento-clinico", "Ventana de mantenimiento - Un sistema clínico 24x7", "Maintenance window - A 24x7 clinical system",
+     "Planificar con los servicios clínicos, procedimiento de contingencia, plan de vuelta atrás, validación con usuarios clínicos y una ventana que se alarga.",
+     "Planning with the clinical services, downtime procedures, a rollback plan, validation with clinical users and a window that overruns."),
     ("sector-4", "lan-wan-wifi", "LAN, WAN y WiFi - Conectar sedes de varios países", "LAN, WAN and WiFi - Connecting sites in several countries",
      "La sede tipo, la WAN con MPLS o SD-WAN y su respaldo 4G, la WiFi con 802.1X y la planta lejana que va lenta al ERP.",
      "The standard site, a WAN on MPLS or SD-WAN with 4G backup, Wi-Fi with 802.1X and the distant plant that is slow to the ERP."),
@@ -426,6 +438,9 @@ TOPICS = [
     ("sector-4", "vmware-mantenimiento", "VMware - Mantenimiento de hosts y máquinas virtuales", "VMware - Maintaining hosts and virtual machines",
      "Lifecycle Manager, modo mantenimiento con DRS, VMware Tools, snapshots, certificados y un calendario según los turnos de planta.",
      "Lifecycle Manager, maintenance mode with DRS, VMware Tools, snapshots, certificates and a calendar built around plant shifts."),
+    ("sector-4", "it-ot", "IT/OT - Integrar la red de planta con la corporativa", "IT/OT - Joining the plant network to the corporate one",
+     "Inventario de activos OT, zonas y conductos, DMZ industrial, acceso remoto de proveedores, parches en ventanas de parada y una línea que se para tras un cambio.",
+     "OT asset inventory, zones and conduits, an industrial DMZ, vendor remote access, patching in shutdown windows and a line that stops after a change."),
     ("sector-5", "cisco-sede", "Cisco - Switches, routers y salas de comunicaciones de una sede", "Cisco - Switches, routers and comms rooms on a site",
      "La sala de comunicaciones de una sede con trading: doble alimentación, núcleo redundante, cambios fuera de mercado y acceso de consola.",
      "The comms room of a site with a trading floor: dual power, a redundant core, changes outside market hours and console access."),
@@ -459,6 +474,9 @@ TOPICS = [
     ("sector-5", "sai-sala", "SAI - Alimentación de la sala de comunicaciones", "UPS - Powering the comms room",
      "Carga y autonomía, PDU A y B, baterías, pruebas mensuales y anuales, SNMP, orden de apagado, grupo electrógeno y un corte antes de la apertura.",
      "Load and runtime, A and B PDUs, batteries, monthly and annual tests, SNMP, shutdown order, generator and a power cut before the open."),
+    ("sector-5", "consejo", "Consejo de administración - Soporte técnico a la reunión", "Board meeting - Technical support",
+     "Preparación con secretaría, prueba técnica de la sala, consejeros remotos, dispositivos y portal del consejo, plan B y un consejero que no oye la sala.",
+     "Preparation with the company secretary, room tech check, remote directors, devices and the board portal, a plan B and a director who cannot hear the room."),
 ]
 
 GUIDES = []
@@ -36619,4 +36637,2337 @@ In the ticket: which FATAL it was (with the count from the log), the line added 
 - Monitor connections by state, dead tuples per table, the age of the oldest transaction and PgBouncer's `cl_waiting` with `postgres_exporter` and the [Grafana](grafana-origen-de-datos-primer-panel-y-alerta-al-canal.html) guide.
 - For high availability with automatic failover, Patroni on top of streaming replication; for physical backups with point-in-time recovery, pgBackRest.
 - The [MySQL and MariaDB](mysql-y-mariadb-configuracion-buffer-pool-consultas-lentas-indices-replica-y-too-many-connections.html) guide solves the same exhausted-connections problem on the other engine.
+""")
+
+g(slug="z-os-para-quien-viene-de-windows-lpar-ipl-jes2-sdsf-racf-cics-y-un-batch-que-no-termina", topic="zos", date="2026-11-03",
+  title_es="z/OS para quien viene de Windows: LPAR, IPL, JES2 y SDSF, datasets, RACF, CICS e IMS, SMF, REXX y un batch nocturno que no termina",
+  title_en="z/OS for people coming from Windows: LPARs, IPL, JES2 and SDSF, datasets, RACF, CICS and IMS, SMF, REXX and a nightly batch that never ends",
+  seo_title_en="z/OS from Windows: JES2, SDSF, RACF and batch · Iñigo González",
+  seo_title_es="z/OS desde Windows: JES2, SDSF, RACF y batch · Iñigo González",
+  dek_es="Los conceptos del mainframe traducidos a lo que ya conoces de Windows y Linux: LPAR, IPL y capacidad, JES2 y el JCL, SDSF y los códigos de retorno, datasets, RACF, CICS e IMS, SMF, REXX y los comandos de consola, con un trabajo nocturno que no ha terminado y los informes de la mañana sin salir.",
+  dek_en="Mainframe concepts translated into what you already know from Windows and Linux: LPARs, IPL and capacity, JES2 and JCL, SDSF and return codes, datasets, RACF, CICS and IMS, SMF, REXX and console commands, with a nightly job that never finished and the morning reports missing.",
+  seo_desc="z/OS explained for Windows and Linux admins: LPARs, IPL, JES2, JCL, SDSF, RACF, CICS, SMF, console commands, and a stuck nightly batch job.",
+  es="""
+## Qué vas a conseguir
+
+Entender el entorno z/OS que te toca soportar sin ser programador de sistemas: qué es cada pieza y a qué se parece en Windows o Linux, dónde mirar la salida de un trabajo, qué significan los códigos de retorno, qué comandos de consola son de solo lectura y cuáles no, y cómo seguir un trabajo nocturno que no ha terminado hasta dar con quién lo está bloqueando.
+
+## Antes de empezar
+
+- Un usuario TSO con acceso a **ISPF** y **SDSF** (o a la interfaz web de z/OSMF) y, si te lo dan, autorización para emitir comandos de consola desde SDSF. Lo de esta guía es z/OS 3.1 o 3.2.
+- El **runbook** del centro: quién es el programador de sistemas de guardia, quién es el dueño de cada cadena batch y qué planificador se usa (IBM Z Workload Scheduler, Control-M u otro).
+- Una regla que no se negocia: en z/OS casi todo lo que no empieza por `D` (*display*) cambia algo. Ante la duda, solo comandos `D` y `$D`, y el resto con la aprobación del responsable.
+
+## 1. El mapa: z/OS en términos de Windows
+
+| z/OS | Lo más parecido en Windows/Linux | Para qué lo vas a usar |
+|---|---|---|
+| **LPAR** | Una VM sobre un hipervisor (PR/SM, en el firmware de la máquina) | Cada LPAR es un sistema z/OS (o Linux) con su CPU, memoria y E/S |
+| **HMC** | vCenter más iDRAC/iLO | Arrancar, parar y repartir capacidad entre LPAR; solo con permiso |
+| **IPL** | El arranque del sistema | Cuando hay mantenimiento o un cambio que no es dinámico |
+| **JES2** | El planificador de tareas más la cola de impresión | Recibe los trabajos batch, los ejecuta y guarda su salida en el *spool* |
+| **JCL** | Un `.bat` que declara programa y ficheros | Describe cada paso de un trabajo |
+| **SDSF** | El Visor de eventos más el Administrador de tareas | Ver trabajos, su salida y la consola |
+| **Dataset** | Un fichero (con formato fijo) | Los datos de entrada y salida del batch |
+| **RACF** | Active Directory más las ACL de NTFS | Usuarios, grupos y quién puede leer qué |
+| **CICS e IMS** | Un servidor de aplicaciones (IIS, Tomcat) | Las transacciones en línea |
+| **SMF** | El registro de eventos y los contadores de rendimiento | Rendimiento, auditoría y facturación |
+| **REXX** | PowerShell | Pequeñas automatizaciones |
+
+## 2. LPAR, IPL y capacidad
+
+- Una máquina IBM Z se divide en **LPAR**. Varias LPAR z/OS suelen formar un **Parallel Sysplex** que comparte datos y carga, igual que un clúster: si una LPAR se para, las aplicaciones siguen en las otras.
+- El **IPL** (*Initial Program Load*) es el arranque. Se lanza desde la HMC con una dirección de carga (el disco del sistema) y un parámetro de carga que apunta al miembro `LOADxx` de configuración. Se planifica: después de aplicar mantenimiento (PTF) con SMP/E, para un cambio de parámetros que no se puede activar en caliente o por una ventana trimestral. En un sysplex se hace LPAR a LPAR (*rolling IPL*). Un IPL no planificado es un incidente grave y lo lleva el programador de sistemas.
+- **Capacidad**: la CPU se mide en **MSU** y el coste del software se calcula sobre ella (los informes SCRT salen de los registros SMF). Los pesos y los topes de cada LPAR se definen en la HMC; la capacidad temporal (On/Off Capacity on Demand, CBU para contingencia) se activa por contrato. Dentro de la LPAR, **WLM** reparte la CPU según la prioridad de cada carga. Para operaciones: un cambio de capacidad es un cambio planificado, nunca un ajuste para que un trabajo vaya más rápido.
+
+`D IPLINFO` dice cuándo fue el último IPL y con qué parámetros; `D M=CPU`, los procesadores en línea.
+
+:::term Consola · último IPL
+$ D IPLINFO
+IEE254I 02.15.07 IPLINFO DISPLAY 418
+ SYSTEM IPLED AT 05.12.44 ON 10/05/2026
+ RELEASE z/OS 03.02.00    LICENSE = z/OS
+ USED LOAD00 IN SYS0.IPLPARM ON 0A82
+ IEASYS LIST = (00,PR) (OP)
+ IPL DEVICE: ORIGINAL(0A80) CURRENT(0A80) VOLUME(ZOS32A)
+:::
+
+## 3. JES2, JCL y los trabajos batch
+
+Un trabajo es un JCL con una tarjeta `JOB`, uno o varios pasos `EXEC` (el programa) y sus `DD` (los ficheros):
+
+:::term JCL · NOMDIA01
+//NOMDIA01 JOB (CONT,NOM),'NOMINA DIARIA',CLASS=N,MSGCLASS=X
+//STEP010  EXEC PGM=IEBGENER
+//SYSPRINT DD SYSOUT=*
+//SYSIN    DD DUMMY
+//SYSUT1   DD DSN=PROD.NOMINA.MAESTRO,DISP=SHR
+//SYSUT2   DD DSN=PROD.NOMINA.EXTRACTO(+1),DISP=(NEW,CATLG,DELETE),
+//            SPACE=(CYL,(5,5)),RECFM=FB,LRECL=200
+:::
+
+- `CLASS=N` decide qué **iniciadores** pueden ejecutarlo (un iniciador es un hueco de ejecución, como un trabajador de un grupo de procesos). Si ninguno sirve esa clase, el trabajo espera en cola.
+- `DISP=SHR` pide el dataset compartido; `DISP=OLD` o `NEW`, en exclusiva. Esa reserva (un **ENQ**) es la que hace esperar a otro trabajo que pide el mismo dataset.
+- El planificador lanza los trabajos en orden y con dependencias; JES2 solo los ejecuta. Los reinicios se hacen desde el planificador, no reenviando el JCL a mano.
+
+## 4. SDSF: dónde se lee la salida
+
+En SDSF, los comandos de panel:
+
+- `ST`: todos los trabajos (en cola, en ejecución y terminados). Filtra con `PREFIX NOM*` y `OWNER *`.
+- `DA`: lo que está activo ahora, con CPU y E/S. Un trabajo en DA con CPU al 0 % durante horas está esperando algo.
+- `LOG`: el **SYSLOG**, la consola del sistema con fecha y hora.
+- `H` y `O`: salida retenida y salida pendiente de imprimir; `I`, la cola de entrada.
+
+Junto al trabajo, `S` abre toda la salida y `?` la lista de ficheros: **JESMSGLG** (los mensajes de JES), **JESJCL** (el JCL tal como se interpretó) y **JESYSMSG** (lo que pasó en cada paso y con cada dataset). La columna **Max-RC** de ST resume el final:
+
+| Max-RC | Qué significa |
+|---|---|
+| `CC 0000` | Correcto |
+| `CC 0004` | Aviso; según el programa, normal |
+| `CC 0008` o más | Error del programa; mira el paso en JESYSMSG |
+| `ABEND S0C4` | Fallo de sistema (acceso a memoria no válido), como un *access violation* |
+| `ABEND S222` | Cancelado por un operador |
+| `ABEND S322` | Superó el tiempo de CPU permitido |
+| `ABEND U4038` | Fallo de usuario (de la aplicación o del runtime) |
+| `JCL ERROR` | El JCL está mal o falta un dataset; no llegó a ejecutarse |
+
+Los códigos que empiezan por `S` son del sistema; los que empiezan por `U`, de la aplicación. Ninguno se arregla relanzando sin más: se pasa al dueño de la cadena con el paso y el mensaje.
+
+## 5. Datasets, catálogo y RACF
+
+- Un **dataset** tiene un nombre de hasta 44 caracteres en partes de hasta 8 (`PROD.NOMINA.MAESTRO`). La primera parte (HLQ) suele indicar entorno y aplicación, y es la que protege RACF.
+- Tipos: secuencial (un fichero), **PDS/PDSE** (una carpeta de miembros, como `SYS1.PARMLIB`), **VSAM** (un fichero indexado, casi una tabla) y **GDG** (generaciones numeradas: `(+1)` es la nueva, `(0)` la última; como una rotación de logs).
+- El **catálogo** dice en qué volumen está cada dataset, como un DNS de ficheros. También existe z/OS UNIX con ficheros normales en zFS, donde viven Java, los certificados y muchas herramientas modernas.
+
+**RACF** controla quién es quién y qué puede hacer. Lo administra el equipo de seguridad (atributo SPECIAL); operaciones suele poder consultar:
+
+:::term TSO · consultar un usuario y un perfil
+$ LISTUSER JPEREZ
+USER=JPEREZ  NAME=JUAN PEREZ          OWNER=NOMINA    CREATED=24.112
+ DEFAULT-GROUP=NOMLECT  PASSDATE=26.290 PASS-INTERVAL= 90
+ ATTRIBUTES=REVOKED
+$ LISTDSD DATASET('PROD.NOMINA.**') GENERIC
+:::
+
+- `ATTRIBUTES=REVOKED`: la cuenta está revocada, normalmente por intentos fallidos. La reactiva seguridad con `ALTUSER JPEREZ RESUME`, previa verificación.
+- Los permisos se dan a grupos, no a personas: `PERMIT 'PROD.NOMINA.**' ID(NOMLECT) ACCESS(READ) GENERIC` y, si el perfil está en memoria, `SETROPTS GENERIC(DATASET) REFRESH`. Niveles de acceso, de menos a más: NONE, EXECUTE, READ, UPDATE, CONTROL, ALTER.
+
+## 6. CICS, IMS, SMF y REXX
+
+- **CICS** e **IMS** son gestores de transacciones: miles de operaciones cortas por segundo (consultar un saldo, registrar un pedido). Cada uno corre en una o varias **regiones**, que en SDSF ves como tareas arrancadas (en DA). Para saber si una región está viva: que aparezca en `D A,L`, su log en SDSF y, si te lo permiten, `F CICSPRD1,CEMT I TASK` para ver sus tareas. En IMS, `/DIS A REG` desde su terminal maestro o la consola con el carácter de comandos de ese IMS. Parar o reciclar una región lo decide el equipo de la aplicación.
+- **SMF** escribe registros numerados: el 30 (contabilidad de trabajos y pasos), del 70 al 79 (RMF, rendimiento), el 80 (RACF), el 110 (CICS) y el 89 (uso de producto, para la facturación). `D SMF` muestra dónde se están escribiendo.
+- **REXX** es el lenguaje de scripts de TSO. Con la interfaz REXX de SDSF se listan trabajos sin abrir paneles:
+
+:::term REXX · trabajos NOM* y su código de retorno
+/* REXX */
+rc = isfcalls('ON')
+isfprefix = 'NOM*'
+isfowner = '*'
+Address SDSF "ISFEXEC ST"
+do i = 1 to JNAME.0
+  say JNAME.i JOBID.i QUEUE.i RETCODE.i
+end
+rc = isfcalls('OFF')
+:::
+
+## 7. La consola y los comandos de operador
+
+Desde SDSF se emiten con `/` delante (`/D A,L`) y la respuesta se ve en `LOG` o en `ULOG`. Los de consulta:
+
+| Comando | Qué muestra |
+|---|---|
+| `D A,L` | Trabajos, tareas arrancadas y usuarios TSO activos |
+| `D IPLINFO` | El último IPL y sus parámetros |
+| `D R,L` | Mensajes pendientes de respuesta (montajes de cinta, peticiones de operador) |
+| `D GRS,C` | Recursos con contención: quién tiene un dataset y quién lo espera |
+| `$D JOBQ,DELAY=YES,DELAY` | Trabajos en cola retrasados y el motivo |
+| `$D I` | Iniciadores de JES2 y las clases que sirven |
+
+! `C` (cancelar), `$P`, `$C`, `V ... OFFLINE` o una respuesta `R nn,...` cambian el sistema. Con la aprobación del dueño o del programador de sistemas, y anotados en el ticket.
+
+## 8. El ticket: "el batch nocturno no ha terminado y no han salido los informes de la mañana"
+
+7:45. Contabilidad no tiene los informes de nómina. En el planificador, `NOMDIA01` aparece en ejecución desde las 02:10 y todo lo que depende de él está esperando.
+
+1. **Dónde está**: en SDSF, `PREFIX NOM*` y `ST`. Si la cola es `EXECUTION` y en `DA` no consume CPU, está esperando algo. Si la cola es `INPUT`, nunca empezó (paso 4).
+2. **Qué espera**: `S` sobre el trabajo y la salida JESYSMSG, o el `LOG` alrededor de las 02:10:
+
+:::term SDSF · LOG
+IEF861I FOLLOWING RESERVED DATA SET NAMES UNAVAILABLE TO NOMDIA01
+IEF863I DSN = PROD.NOMINA.MAESTRO NOMDIA01 RC = 04
+*IEF099I JOB NOMDIA01 WAITING FOR DATA SETS
+:::
+
+3. **Quién tiene el dataset**:
+
+:::term Consola · contención
+$ D GRS,C
+ISG343I 07.48.12 GRS STATUS 233
+S=SYSTEMS SYSDSN   PROD.NOMINA.MAESTRO
+SYSNAME  JOBNAME  ASID     TCBADDR   EXC/SHR    STATUS
+SYSA     JPEREZ   0087     008E5C10  EXCLUSIVE  OWN
+SYSA     NOMDIA01 0045     008FD0E8  SHARE      WAIT
+:::
+
+Aquí es un usuario TSO que dejó el dataset abierto en edición por la tarde. Si el dueño es otro trabajo (una copia que se quedó colgada), la pista sigue igual: `D A,L` y su salida en SDSF.
+
+4. **Otras esperas habituales**:
+- **Cinta**: `D R,L` muestra un `IEF233A M ...` pendiente; el trabajo espera a que se monte un volumen. Con cinta virtual, lo resuelve el equipo de almacenamiento.
+- **Retenido o sin iniciador**: `$D JOBQ,DELAY=YES,DELAY` devuelve `DELAY=(HOLD)` o `DELAY=(JOBCLASS)`. Retenido se libera con `$A J4711` cuando el dueño lo confirma; para la clase, `$D I` dice si algún iniciador sirve la clase `N`.
+5. **Resolver, con aprobación**: se pide al usuario que salga de la edición; si no contesta, con el visto bueno del responsable, `C U=JPEREZ` para su sesión TSO. El trabajo continúa solo en cuanto se libera el dataset (`IEF099I` desaparece del log). Si la cadena ya no llega a tiempo, el dueño decide cancelar (`C NOMDIA01`) y relanzar desde el planificador en el paso que indique el runbook: reenviar a mano puede duplicar actualizaciones o crear una generación GDG de más.
+6. **Comprobar**: `NOMDIA01` termina con `CC 0000`, los dependientes arrancan y los informes salen.
+
+En el ticket: hora de inicio, mensaje de espera, salida de `D GRS,C`, quién aprobó la acción, comando emitido y resultado final.
+
+## Siguientes pasos
+
+- La guía de [VMware ESXi y vCenter](esxi-8-instalar-un-host-red-de-gestion-ntp-alta-en-vcenter-y-un-host-not-responding.html) es el equivalente x86 de las LPAR y la HMC.
+- La de [iDRAC e iLO](idrac-e-ilo-gestion-fuera-de-banda-red-usuarios-consola-firmware-y-alertas.html) cubre la gestión fuera de banda, la misma idea que la HMC en un servidor normal.
+- Para practicar con los paneles sin tocar producción, IBM ofrece el entorno gratuito **IBM Z Xplore**.
+""",
+  en="""
+## What you'll get
+
+Understanding the z/OS environment you have to support without being a systems programmer: what each piece is and what it resembles in Windows or Linux, where to read a job's output, what return codes mean, which console commands are read-only and which are not, and how to follow a nightly job that never finished until you find who is blocking it.
+
+## Before you start
+
+- A TSO user with access to **ISPF** and **SDSF** (or the z/OSMF web interface) and, if granted, authority to issue console commands from SDSF. This guide covers z/OS 3.1 or 3.2.
+- The site's **runbook**: who the on-call systems programmer is, who owns each batch chain and which scheduler is used (IBM Z Workload Scheduler, Control-M or another).
+- One non-negotiable rule: on z/OS almost everything that does not start with `D` (*display*) changes something. When in doubt, only `D` and `$D` commands, and the rest with the owner's approval.
+
+## 1. The map: z/OS in Windows terms
+
+| z/OS | Closest thing in Windows/Linux | What you will use it for |
+|---|---|---|
+| **LPAR** | A VM on a hypervisor (PR/SM, in the machine's firmware) | Each LPAR is a z/OS (or Linux) system with its own CPU, memory and I/O |
+| **HMC** | vCenter plus iDRAC/iLO | Start, stop and share capacity between LPARs; only with permission |
+| **IPL** | Booting the system | When there is maintenance or a change that is not dynamic |
+| **JES2** | Task Scheduler plus the print queue | Receives batch jobs, runs them and keeps their output on the *spool* |
+| **JCL** | A `.bat` that declares program and files | Describes each step of a job |
+| **SDSF** | Event Viewer plus Task Manager | View jobs, their output and the console |
+| **Dataset** | A file (with a fixed format) | The batch input and output data |
+| **RACF** | Active Directory plus NTFS ACLs | Users, groups and who can read what |
+| **CICS and IMS** | An application server (IIS, Tomcat) | Online transactions |
+| **SMF** | The event log and performance counters | Performance, audit and billing |
+| **REXX** | PowerShell | Small automations |
+
+## 2. LPARs, IPL and capacity
+
+- An IBM Z machine is split into **LPARs**. Several z/OS LPARs usually form a **Parallel Sysplex** that shares data and workload, just like a cluster: if one LPAR stops, applications carry on in the others.
+- The **IPL** (*Initial Program Load*) is the boot. It is started from the HMC with a load address (the system disk) and a load parameter pointing at the `LOADxx` configuration member. It is planned: after applying maintenance (PTFs) with SMP/E, for a parameter change that cannot be activated live, or in a quarterly window. In a sysplex it is done one LPAR at a time (*rolling IPL*). An unplanned IPL is a major incident and the systems programmer leads it.
+- **Capacity**: CPU is measured in **MSUs** and software cost is calculated on it (the SCRT reports come from SMF records). Each LPAR's weights and caps are defined in the HMC; temporary capacity (On/Off Capacity on Demand, CBU for disaster recovery) is activated under contract. Inside the LPAR, **WLM** shares CPU according to each workload's priority. For operations: a capacity change is a planned change, never a tweak to make a job run faster.
+
+`D IPLINFO` shows when the last IPL was and with which parameters; `D M=CPU`, the processors online.
+
+:::term Console · last IPL
+$ D IPLINFO
+IEE254I 02.15.07 IPLINFO DISPLAY 418
+ SYSTEM IPLED AT 05.12.44 ON 10/05/2026
+ RELEASE z/OS 03.02.00    LICENSE = z/OS
+ USED LOAD00 IN SYS0.IPLPARM ON 0A82
+ IEASYS LIST = (00,PR) (OP)
+ IPL DEVICE: ORIGINAL(0A80) CURRENT(0A80) VOLUME(ZOS32A)
+:::
+
+## 3. JES2, JCL and batch jobs
+
+A job is JCL with a `JOB` card, one or more `EXEC` steps (the program) and their `DD` statements (the files):
+
+:::term JCL · NOMDIA01
+//NOMDIA01 JOB (CONT,NOM),'NOMINA DIARIA',CLASS=N,MSGCLASS=X
+//STEP010  EXEC PGM=IEBGENER
+//SYSPRINT DD SYSOUT=*
+//SYSIN    DD DUMMY
+//SYSUT1   DD DSN=PROD.NOMINA.MAESTRO,DISP=SHR
+//SYSUT2   DD DSN=PROD.NOMINA.EXTRACTO(+1),DISP=(NEW,CATLG,DELETE),
+//            SPACE=(CYL,(5,5)),RECFM=FB,LRECL=200
+:::
+
+- `CLASS=N` decides which **initiators** can run it (an initiator is an execution slot, like a worker in a process pool). If none serves that class, the job waits in the queue.
+- `DISP=SHR` asks for the dataset shared; `DISP=OLD` or `NEW`, exclusively. That reservation (an **ENQ**) is what makes another job wait when it asks for the same dataset.
+- The scheduler launches jobs in order and with dependencies; JES2 only runs them. Restarts are done from the scheduler, not by resubmitting the JCL by hand.
+
+## 4. SDSF: where to read the output
+
+In SDSF, the panel commands:
+
+- `ST`: all jobs (queued, running and finished). Filter with `PREFIX NOM*` and `OWNER *`.
+- `DA`: what is active now, with CPU and I/O. A job in DA at 0% CPU for hours is waiting for something.
+- `LOG`: the **SYSLOG**, the system console with date and time.
+- `H` and `O`: held output and output waiting to print; `I`, the input queue.
+
+Next to the job, `S` opens all its output and `?` the list of files: **JESMSGLG** (JES messages), **JESJCL** (the JCL as interpreted) and **JESYSMSG** (what happened in each step and with each dataset). The **Max-RC** column in ST sums up the end:
+
+| Max-RC | What it means |
+|---|---|
+| `CC 0000` | Success |
+| `CC 0004` | Warning; depending on the program, normal |
+| `CC 0008` or higher | Program error; check the step in JESYSMSG |
+| `ABEND S0C4` | System abend (invalid memory access), like an *access violation* |
+| `ABEND S222` | Cancelled by an operator |
+| `ABEND S322` | Exceeded its allowed CPU time |
+| `ABEND U4038` | User abend (from the application or its runtime) |
+| `JCL ERROR` | The JCL is wrong or a dataset is missing; it never ran |
+
+Codes starting with `S` come from the system; those starting with `U`, from the application. None is fixed by simply rerunning: it goes to the chain's owner with the step and the message.
+
+## 5. Datasets, the catalog and RACF
+
+- A **dataset** has a name of up to 44 characters in qualifiers of up to 8 (`PROD.NOMINA.MAESTRO`). The first qualifier (HLQ) usually indicates environment and application, and it is what RACF protects.
+- Types: sequential (one file), **PDS/PDSE** (a folder of members, such as `SYS1.PARMLIB`), **VSAM** (an indexed file, almost a table) and **GDG** (numbered generations: `(+1)` is the new one, `(0)` the latest; like log rotation).
+- The **catalog** says which volume each dataset is on, like a DNS for files. There is also z/OS UNIX with normal files in zFS, where Java, certificates and many modern tools live.
+
+**RACF** controls who is who and what they can do. The security team administers it (SPECIAL attribute); operations can usually query:
+
+:::term TSO · query a user and a profile
+$ LISTUSER JPEREZ
+USER=JPEREZ  NAME=JUAN PEREZ          OWNER=NOMINA    CREATED=24.112
+ DEFAULT-GROUP=NOMLECT  PASSDATE=26.290 PASS-INTERVAL= 90
+ ATTRIBUTES=REVOKED
+$ LISTDSD DATASET('PROD.NOMINA.**') GENERIC
+:::
+
+- `ATTRIBUTES=REVOKED`: the account is revoked, usually after failed attempts. Security reinstates it with `ALTUSER JPEREZ RESUME`, after verification.
+- Permissions go to groups, not people: `PERMIT 'PROD.NOMINA.**' ID(NOMLECT) ACCESS(READ) GENERIC` and, if the profile is held in memory, `SETROPTS GENERIC(DATASET) REFRESH`. Access levels, from least to most: NONE, EXECUTE, READ, UPDATE, CONTROL, ALTER.
+
+## 6. CICS, IMS, SMF and REXX
+
+- **CICS** and **IMS** are transaction managers: thousands of short operations per second (checking a balance, recording an order). Each runs in one or more **regions**, which you see in SDSF as started tasks (in DA). To check a region is alive: it appears in `D A,L`, its log in SDSF and, if allowed, `F CICSPRD1,CEMT I TASK` to see its tasks. In IMS, `/DIS A REG` from its master terminal or the console with that IMS's command recognition character. Stopping or recycling a region is the application team's decision.
+- **SMF** writes numbered records: type 30 (job and step accounting), 70 to 79 (RMF, performance), 80 (RACF), 110 (CICS) and 89 (product usage, for billing). `D SMF` shows where they are being written.
+- **REXX** is TSO's scripting language. With SDSF's REXX interface you list jobs without opening panels:
+
+:::term REXX · NOM* jobs and their return code
+/* REXX */
+rc = isfcalls('ON')
+isfprefix = 'NOM*'
+isfowner = '*'
+Address SDSF "ISFEXEC ST"
+do i = 1 to JNAME.0
+  say JNAME.i JOBID.i QUEUE.i RETCODE.i
+end
+rc = isfcalls('OFF')
+:::
+
+## 7. The console and operator commands
+
+From SDSF they are issued with a leading `/` (`/D A,L`) and the response shows in `LOG` or `ULOG`. The query ones:
+
+| Command | What it shows |
+|---|---|
+| `D A,L` | Active jobs, started tasks and TSO users |
+| `D IPLINFO` | The last IPL and its parameters |
+| `D R,L` | Messages awaiting a reply (tape mounts, operator requests) |
+| `D GRS,C` | Resources in contention: who holds a dataset and who waits for it |
+| `$D JOBQ,DELAY=YES,DELAY` | Delayed queued jobs and the reason |
+| `$D I` | JES2 initiators and the classes they serve |
+
+! `C` (cancel), `$P`, `$C`, `V ... OFFLINE` or an `R nn,...` reply change the system. With the approval of the owner or the systems programmer, and recorded in the ticket.
+
+## 8. The ticket: "the nightly batch never finished and the morning reports are missing"
+
+7:45. Accounting has no payroll reports. In the scheduler, `NOMDIA01` shows as running since 02:10 and everything that depends on it is waiting.
+
+1. **Where it is**: in SDSF, `PREFIX NOM*` and `ST`. If the queue is `EXECUTION` and in `DA` it uses no CPU, it is waiting for something. If the queue is `INPUT`, it never started (step 4).
+2. **What it waits for**: `S` on the job and the JESYSMSG output, or the `LOG` around 02:10:
+
+:::term SDSF · LOG
+IEF861I FOLLOWING RESERVED DATA SET NAMES UNAVAILABLE TO NOMDIA01
+IEF863I DSN = PROD.NOMINA.MAESTRO NOMDIA01 RC = 04
+*IEF099I JOB NOMDIA01 WAITING FOR DATA SETS
+:::
+
+3. **Who holds the dataset**:
+
+:::term Console · contention
+$ D GRS,C
+ISG343I 07.48.12 GRS STATUS 233
+S=SYSTEMS SYSDSN   PROD.NOMINA.MAESTRO
+SYSNAME  JOBNAME  ASID     TCBADDR   EXC/SHR    STATUS
+SYSA     JPEREZ   0087     008E5C10  EXCLUSIVE  OWN
+SYSA     NOMDIA01 0045     008FD0E8  SHARE      WAIT
+:::
+
+Here it is a TSO user who left the dataset open in edit in the afternoon. If the owner is another job (a backup that hung), the trail is the same: `D A,L` and its output in SDSF.
+
+4. **Other common waits**:
+- **Tape**: `D R,L` shows a pending `IEF233A M ...`; the job is waiting for a volume to be mounted. With virtual tape, the storage team resolves it.
+- **Held or no initiator**: `$D JOBQ,DELAY=YES,DELAY` returns `DELAY=(HOLD)` or `DELAY=(JOBCLASS)`. A held job is released with `$A J4711` once the owner confirms; for the class, `$D I` tells you whether any initiator serves class `N`.
+5. **Resolve, with approval**: ask the user to leave the edit session; if there is no answer, with the manager's go-ahead, `C U=JPEREZ` for their TSO session. The job carries on by itself as soon as the dataset is released (`IEF099I` disappears from the log). If the chain can no longer make it in time, the owner decides to cancel (`C NOMDIA01`) and restart from the scheduler at the step the runbook names: resubmitting by hand can duplicate updates or create one GDG generation too many.
+6. **Check**: `NOMDIA01` ends with `CC 0000`, the dependants start and the reports come out.
+
+In the ticket: start time, wait message, `D GRS,C` output, who approved the action, command issued and final result.
+
+## Next steps
+
+- The [VMware ESXi and vCenter](esxi-8-instalar-un-host-red-de-gestion-ntp-alta-en-vcenter-y-un-host-not-responding.html) guide is the x86 equivalent of LPARs and the HMC.
+- The [iDRAC and iLO](idrac-e-ilo-gestion-fuera-de-banda-red-usuarios-consola-firmware-y-alertas.html) one covers out-of-band management, the same idea as the HMC on an ordinary server.
+- To practise with the panels without touching production, IBM offers the free **IBM Z Xplore** environment.
+""")
+g(slug="keycloak-sso-realm-clientes-oidc-y-saml-active-directory-por-ldap-mfa-e-invalid-redirect-uri", topic="keycloak", date="2026-11-03",
+  title_es="Keycloak: SSO para aplicaciones internas con un realm, clientes OIDC y SAML, Active Directory por LDAP, roles, OTP y un invalid_redirect_uri",
+  title_en="Keycloak: SSO for internal applications with a realm, OIDC and SAML clients, Active Directory over LDAP, roles, OTP and an invalid_redirect_uri",
+  seo_title_en="Keycloak SSO: OIDC, SAML, AD and MFA · Iñigo González",
+  seo_title_es="Keycloak SSO: OIDC, SAML, AD y MFA · Iñigo González",
+  dek_es="Keycloak 26 en contenedor y en modo producción detrás de un proxy inverso, un realm propio, un cliente OIDC y uno SAML, Active Directory en solo lectura por LDAP, grupos y roles en el token, OTP obligatorio y una aplicación que devuelve Invalid parameter: redirect_uri, con una nota sobre la hora de los servidores.",
+  dek_en="Keycloak 26 in a container and in production mode behind a reverse proxy, its own realm, an OIDC and a SAML client, read-only Active Directory over LDAP, groups and roles in the token, mandatory OTP, and an app that returns Invalid parameter: redirect_uri, with a note on server clocks.",
+  seo_desc="Keycloak 26 SSO for internal apps: production setup behind a proxy, realm, OIDC and SAML clients, AD over LDAP, roles, OTP and invalid_redirect_uri.",
+  es="""
+## Qué vas a conseguir
+
+Un Keycloak que da inicio de sesión único a las aplicaciones internas con las cuentas de Active Directory: instalado en modo producción detrás del proxy inverso, con un realm para la empresa, una aplicación por OIDC y otra por SAML, los grupos del directorio convertidos en roles, un segundo factor obligatorio y el método para el error más repetido al conectar una aplicación nueva: **Invalid parameter: redirect_uri**.
+
+## Antes de empezar
+
+- Un servidor Linux con Docker (o Podman) y una base de datos **PostgreSQL** para Keycloak. La guía usa la versión 26.8; los menús son los de la consola de administración de la 26.
+- Un nombre DNS (`sso.contoso.local`) que apunte al proxy inverso (Nginx o Apache) con un certificado de la CA interna. El proxy termina TLS y habla con Keycloak por HTTP en la red interna.
+- Una cuenta de servicio de AD solo para lectura (`CONTOSO\\svc-keycloak`), con contraseña que no caduque o gestionada por el equipo de identidad, y LDAPS (636) abierto desde el servidor hacia los controladores de dominio.
+- **NTP** funcionando en el servidor de Keycloak y en los de las aplicaciones. Ver la nota del final.
+
+## 1. Instalar en modo producción detrás del proxy
+
+`start` arranca en modo producción: exige un `hostname` y no admite la base de datos de desarrollo. La configuración va en variables `KC_*` (cada opción `--algo-asi` se escribe `KC_ALGO_ASI`):
+
+:::term /opt/keycloak/compose.yaml
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.8.1
+    container_name: keycloak
+    command: start
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://db01.contoso.local:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: ${KC_DB_PASSWORD}
+      KC_HOSTNAME: https://sso.contoso.local
+      KC_HTTP_ENABLED: "true"
+      KC_PROXY_HEADERS: xforwarded
+      KC_PROXY_TRUSTED_ADDRESSES: 10.20.0.10
+      KC_HEALTH_ENABLED: "true"
+      KC_TRUSTSTORE_PATHS: /opt/keycloak/conf/truststores/contoso-root.pem
+      KC_BOOTSTRAP_ADMIN_USERNAME: tmpadmin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_BOOTSTRAP_ADMIN_PASSWORD}
+    volumes:
+      - ./contoso-root.pem:/opt/keycloak/conf/truststores/contoso-root.pem:ro
+    ports:
+      - "10.20.0.21:8080:8080"
+      - "127.0.0.1:9000:9000"
+    restart: unless-stopped
+:::
+
+- `KC_PROXY_HEADERS: xforwarded`: Keycloak se fía de las cabeceras `X-Forwarded-*` del proxy, pero solo si vienen de `KC_PROXY_TRUSTED_ADDRESSES` (la IP del proxy). El proxy debe enviar `X-Forwarded-Proto: https`.
+- El puerto **9000** es el de gestión (`/health`, `/metrics`): no se publica por el proxy.
+- En el proxy, hacia fuera solo `/realms/`, `/resources/` y `/.well-known/`. `/admin/` y `/realms/master/`, solo desde la red de IT.
+- `KC_TRUSTSTORE_PATHS` añade la CA interna, la que firma los certificados de LDAPS de los controladores.
+
+:::term Servidor · arrancar y comprobar
+$ docker compose up -d
+$ docker logs keycloak 2>&1 | grep -o "Keycloak 26.8.1 on JVM"
+Keycloak 26.8.1 on JVM
+$ curl -s http://127.0.0.1:9000/health/ready | grep -o '"status": "UP"' | head -1
+"status": "UP"
+:::
+
+El usuario `tmpadmin` es temporal y la consola lo avisa: entra en `https://sso.contoso.local/admin/`, crea en el realm **master** un administrador con nombre propio y OTP, y borra `tmpadmin`.
+
+## 2. El realm de la empresa
+
+**master** es solo para administrar Keycloak. Las aplicaciones van en un realm propio:
+
+:::ui Consola de administración · Manage realms
+> Manage realms › Create realm
+= Realm name: contoso
+[x] Enabled
+[Create]
+:::
+
+En **Realm settings**: pestaña **Login**, *User registration* desactivado y *Forgot password* desactivado (la contraseña es la de AD y se cambia por el procedimiento de siempre); pestaña **Email**, el servidor SMTP interno. El emisor de los tokens queda como `https://sso.contoso.local/realms/contoso` y todo lo que una aplicación necesita está en `https://sso.contoso.local/realms/contoso/.well-known/openid-configuration`.
+
+## 3. Un cliente OIDC y uno SAML
+
+La aplicación de compras (`compras.contoso.local`) habla OIDC:
+
+:::ui Realm contoso · Clients › Create client
+= Client type: OpenID Connect
+= Client ID: compras
+[Next]
+[x] Client authentication
+[x] Standard flow
+[ ] Direct access grants
+[Next]
+= Root URL: https://compras.contoso.local
+= Valid redirect URIs: https://compras.contoso.local/oidc/callback
+= Valid post logout redirect URIs: https://compras.contoso.local/
+= Web origins: +
+[Save]
+:::
+
+- **Client authentication** activado: es una aplicación de servidor con secreto. El secreto está en la pestaña **Credentials** y se entrega al equipo de la aplicación por el gestor de contraseñas, junto con el Client ID y la URL de descubrimiento.
+- Una aplicación de navegador pura (SPA) no puede guardar secretos: *Client authentication* desactivado y PKCE en la aplicación.
+- **Valid redirect URIs** con la URI exacta. Un `*` al final se admite, pero `*` solo abre la puerta a cualquier destino.
+
+Para una aplicación que solo habla **SAML** (la wiki, por ejemplo): **Clients › Import client** con los metadatos del proveedor de servicio, o **Create client** con *Client type: SAML* y como *Client ID* su Entity ID (`https://wiki.contoso.local/saml/metadata`); la URL de ACS va en la pestaña **Advanced** (*Assertion Consumer Service POST Binding URL*) y el formato del NameID, en **Settings**. La aplicación recibe los metadatos de Keycloak en `https://sso.contoso.local/realms/contoso/protocol/saml/descriptor`.
+
+## 4. Active Directory por LDAP, en solo lectura
+
+:::ui Realm contoso · User federation › Add Ldap providers
+= Vendor: Active Directory
+= Connection URL: ldaps://dc01.contoso.local:636
+= Bind type: simple
+= Bind DN: CN=svc-keycloak,OU=Servicios,DC=contoso,DC=local
+= Bind credentials: ••••••••
+[Test connection]
+[Test authentication]
+= Edit mode: READ_ONLY
+= Users DN: OU=Usuarios,DC=contoso,DC=local
+= Username LDAP attribute: sAMAccountName
+= RDN LDAP attribute: cn
+= UUID LDAP attribute: objectGUID
+= User object classes: person, organizationalPerson, user
+= User LDAP filter: (!(userAccountControl:1.2.840.113556.1.4.803:=2))
+= Search scope: Subtree
+[x] Import users
+[x] Periodic changed users sync: 3600
+[Save]
+:::
+
+- **READ_ONLY**: Keycloak no escribe nada en AD. Las altas, bajas y cambios de contraseña siguen en el directorio.
+- El filtro deja fuera las cuentas deshabilitadas en AD. Una baja deja de entrar en cuanto se deshabilita, porque la contraseña se valida contra AD en cada inicio de sesión.
+- La primera vez, **Action › Sync all users**. Después, la sincronización periódica de cambios.
+
+## 5. Grupos, roles y lo que llega en el token
+
+1. **Grupos de AD**: en el proveedor LDAP, pestaña **Mappers › Add mapper**, tipo `group-ldap-mapper`: *LDAP Groups DN* `OU=Grupos,DC=contoso,DC=local`, *Group Object Classes* `group`, *Membership LDAP Attribute* `member`, *Mode* `READ_ONLY`. Si hay grupos anidados, *User Groups Retrieve Strategy* `LOAD_GROUPS_BY_MEMBER_ATTRIBUTE_RECURSIVELY`. Después, **Action › Sync LDAP groups to Keycloak**.
+2. **Roles de la aplicación**: en **Clients › compras › Roles**, `comprador` y `aprobador`. La aplicación decide por roles, no por nombres de grupos de AD que alguien puede renombrar.
+3. **Grupo a rol**: **Groups › GG-Compras-Aprobadores › Role mapping › Assign role**, filtro por clientes, `compras aprobador`.
+4. **Comprobar**: **Clients › compras › Client scopes › Evaluate**, elegir un usuario de prueba y ver *Generated access token*. Los roles salen en `resource_access.compras.roles`. Si la aplicación quiere también los grupos, un mapper **Group Membership** en el ámbito dedicado del cliente (`compras-dedicated`) con *Token Claim Name* `groups`.
+
+## 6. OTP obligatorio
+
+1. **Authentication › Policies › OTP Policy**: TOTP, 6 dígitos, 30 segundos, *Look around window* 1. Valen Microsoft Authenticator, Google Authenticator o FreeOTP.
+2. **Authentication › Flows**: duplicar `browser` como `browser-otp`. En la copia, el subflujo condicional del segundo factor (su nombre empieza por *Browser - Conditional*) y su **OTP Form** pasan a **Required**.
+3. **Piloto**: en **Clients › compras › Advanced › Authentication flow overrides**, *Browser Flow* `browser-otp`. Solo esa aplicación pide OTP.
+4. **Todos**: en el flujo, **Action › Bind flow › Browser flow**. Quien no tenga OTP verá al entrar la pantalla para registrar la aplicación del móvil.
+
+Móvil perdido: **Users › usuario › Credentials**, borrar la credencial OTP tras verificar la identidad por el procedimiento del service desk; en el siguiente inicio de sesión la vuelve a registrar.
+
+## 7. El ticket: "compras devuelve Invalid parameter: redirect_uri"
+
+Después de la actualización de la aplicación de compras, nadie entra: Keycloak muestra **We are sorry... Invalid parameter: redirect_uri**.
+
+1. **La URL que pide la aplicación**: en la barra del navegador, el parámetro `redirect_uri` de `.../realms/contoso/protocol/openid-connect/auth?client_id=compras&redirect_uri=...`. Descodificado: `http://compras.contoso.local/oidc/callback`.
+2. **El log de Keycloak** lo confirma:
+
+:::term Servidor · eventos de error
+$ docker logs keycloak 2>&1 | grep invalid_redirect_uri | tail -1
+WARN  [org.keycloak.events] (executor-thread-12) type="LOGIN_ERROR", realmId="6f1c2e0a-...", clientId="compras", userId="null", ipAddress="10.20.5.31", error="invalid_redirect_uri", redirect_uri="http://compras.contoso.local/oidc/callback"
+:::
+
+3. **Comparar** con *Valid redirect URIs* del cliente, carácter a carácter. La comparación es exacta:
+
+| Lo que manda la aplicación | Lo registrado | Causa |
+|---|---|---|
+| `http://...` | `https://...` | La aplicación, detrás de su propio proxy, no se fía de `X-Forwarded-Proto` y cree que está en HTTP |
+| `https://compras01.contoso.local/...` | `https://compras.contoso.local/...` | Se entra por el nombre del servidor o por la IP |
+| `.../oidc/callback/` | `.../oidc/callback` | Barra final o ruta nueva tras la actualización |
+| `client_id=compras-test` | `compras` | Configuración de otro entorno |
+
+4. **Arreglar en el sitio correcto**: aquí, la causa es la primera; la actualización ha perdido el ajuste que hacía confiar en el proxy, y el equipo de la aplicación lo restaura. Añadir la URI `http://` en Keycloak lo taparía y dejaría el código de autorización viajando sin cifrar. Añadir una URI nueva solo tiene sentido si la aplicación de verdad cambió de dirección, y entonces con la URI exacta, nunca `*`.
+5. Si el error sale **al cerrar sesión**, es el `post_logout_redirect_uri` y se compara con *Valid post logout redirect URIs*.
+
+En el ticket: la URI recibida, la registrada, la causa y quién cambió qué.
+
+> **La hora de los servidores**: TOTP depende del reloj. Si el servidor de Keycloak se desvía más de lo que cubre *Look around window*, los códigos correctos se rechazan. Y si el reloj del servidor de la aplicación va adelantado o atrasado, rechaza tokens recién emitidos (`iat` en el futuro, `exp` ya pasado) o aserciones SAML fuera de `NotBefore`/`NotOnOrAfter`. Antes de tocar márgenes de tolerancia en la aplicación, `chronyc tracking` o `w32tm /query /status` en los dos lados.
+
+## Siguientes pasos
+
+- La guía de [Entra ID SSO con SAML](entra-sso-saml-dar-de-alta-una-aplicacion-y-login-que-falla.html) hace lo mismo para aplicaciones SaaS con identidades en la nube; las dos conviven.
+- El proxy inverso, las cabeceras `X-Forwarded-*` y los certificados están en la de [Nginx y Apache](nginx-y-apache-proxy-inverso-tls-cabeceras-timeouts-y-un-502-bad-gateway.html).
+- Copia de la base de datos PostgreSQL de Keycloak y exportación del realm (`kc.sh export`) antes de cada actualización de versión.
+""",
+  en="""
+## What you'll get
+
+A Keycloak that provides single sign-on to internal applications with Active Directory accounts: installed in production mode behind the reverse proxy, with a realm for the company, one application over OIDC and another over SAML, directory groups turned into roles, a mandatory second factor, and the method for the most repeated error when connecting a new application: **Invalid parameter: redirect_uri**.
+
+## Before you start
+
+- A Linux server with Docker (or Podman) and a **PostgreSQL** database for Keycloak. The guide uses version 26.8; the menus are those of the 26 admin console.
+- A DNS name (`sso.contoso.local`) pointing at the reverse proxy (Nginx or Apache) with a certificate from the internal CA. The proxy terminates TLS and talks to Keycloak over HTTP on the internal network.
+- A read-only AD service account (`CONTOSO\\svc-keycloak`), with a password that does not expire or one managed by the identity team, and LDAPS (636) open from the server to the domain controllers.
+- **NTP** working on the Keycloak server and on the application servers. See the note at the end.
+
+## 1. Install in production mode behind the proxy
+
+`start` runs in production mode: it requires a `hostname` and does not allow the development database. Configuration goes in `KC_*` variables (each `--some-option` is written `KC_SOME_OPTION`):
+
+:::term /opt/keycloak/compose.yaml
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.8.1
+    container_name: keycloak
+    command: start
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://db01.contoso.local:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: ${KC_DB_PASSWORD}
+      KC_HOSTNAME: https://sso.contoso.local
+      KC_HTTP_ENABLED: "true"
+      KC_PROXY_HEADERS: xforwarded
+      KC_PROXY_TRUSTED_ADDRESSES: 10.20.0.10
+      KC_HEALTH_ENABLED: "true"
+      KC_TRUSTSTORE_PATHS: /opt/keycloak/conf/truststores/contoso-root.pem
+      KC_BOOTSTRAP_ADMIN_USERNAME: tmpadmin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_BOOTSTRAP_ADMIN_PASSWORD}
+    volumes:
+      - ./contoso-root.pem:/opt/keycloak/conf/truststores/contoso-root.pem:ro
+    ports:
+      - "10.20.0.21:8080:8080"
+      - "127.0.0.1:9000:9000"
+    restart: unless-stopped
+:::
+
+- `KC_PROXY_HEADERS: xforwarded`: Keycloak trusts the proxy's `X-Forwarded-*` headers, but only when they come from `KC_PROXY_TRUSTED_ADDRESSES` (the proxy's IP). The proxy must send `X-Forwarded-Proto: https`.
+- Port **9000** is the management port (`/health`, `/metrics`): it is not published through the proxy.
+- On the proxy, only `/realms/`, `/resources/` and `/.well-known/` face outwards. `/admin/` and `/realms/master/`, only from the IT network.
+- `KC_TRUSTSTORE_PATHS` adds the internal CA, the one that signs the domain controllers' LDAPS certificates.
+
+:::term Server · start and check
+$ docker compose up -d
+$ docker logs keycloak 2>&1 | grep -o "Keycloak 26.8.1 on JVM"
+Keycloak 26.8.1 on JVM
+$ curl -s http://127.0.0.1:9000/health/ready | grep -o '"status": "UP"' | head -1
+"status": "UP"
+:::
+
+The `tmpadmin` user is temporary and the console warns about it: sign in at `https://sso.contoso.local/admin/`, create a named administrator with OTP in the **master** realm, and delete `tmpadmin`.
+
+## 2. The company realm
+
+**master** is only for administering Keycloak. Applications go in their own realm:
+
+:::ui Admin console · Manage realms
+> Manage realms › Create realm
+= Realm name: contoso
+[x] Enabled
+[Create]
+:::
+
+In **Realm settings**: **Login** tab, *User registration* off and *Forgot password* off (the password is the AD one and is changed through the usual procedure); **Email** tab, the internal SMTP server. The token issuer becomes `https://sso.contoso.local/realms/contoso` and everything an application needs is at `https://sso.contoso.local/realms/contoso/.well-known/openid-configuration`.
+
+## 3. An OIDC client and a SAML one
+
+The purchasing app (`compras.contoso.local`) speaks OIDC:
+
+:::ui Realm contoso · Clients › Create client
+= Client type: OpenID Connect
+= Client ID: compras
+[Next]
+[x] Client authentication
+[x] Standard flow
+[ ] Direct access grants
+[Next]
+= Root URL: https://compras.contoso.local
+= Valid redirect URIs: https://compras.contoso.local/oidc/callback
+= Valid post logout redirect URIs: https://compras.contoso.local/
+= Web origins: +
+[Save]
+:::
+
+- **Client authentication** on: it is a server-side app with a secret. The secret is in the **Credentials** tab and is handed to the app team through the password manager, together with the Client ID and the discovery URL.
+- A pure browser app (SPA) cannot keep secrets: *Client authentication* off and PKCE in the app.
+- **Valid redirect URIs** with the exact URI. A trailing `*` is allowed, but `*` on its own opens the door to any destination.
+
+For an app that only speaks **SAML** (the wiki, for example): **Clients › Import client** with the service provider's metadata, or **Create client** with *Client type: SAML* and its Entity ID as *Client ID* (`https://wiki.contoso.local/saml/metadata`); the ACS URL goes in the **Advanced** tab (*Assertion Consumer Service POST Binding URL*) and the NameID format in **Settings**. The app gets Keycloak's metadata from `https://sso.contoso.local/realms/contoso/protocol/saml/descriptor`.
+
+## 4. Active Directory over LDAP, read-only
+
+:::ui Realm contoso · User federation › Add Ldap providers
+= Vendor: Active Directory
+= Connection URL: ldaps://dc01.contoso.local:636
+= Bind type: simple
+= Bind DN: CN=svc-keycloak,OU=Servicios,DC=contoso,DC=local
+= Bind credentials: ••••••••
+[Test connection]
+[Test authentication]
+= Edit mode: READ_ONLY
+= Users DN: OU=Usuarios,DC=contoso,DC=local
+= Username LDAP attribute: sAMAccountName
+= RDN LDAP attribute: cn
+= UUID LDAP attribute: objectGUID
+= User object classes: person, organizationalPerson, user
+= User LDAP filter: (!(userAccountControl:1.2.840.113556.1.4.803:=2))
+= Search scope: Subtree
+[x] Import users
+[x] Periodic changed users sync: 3600
+[Save]
+:::
+
+- **READ_ONLY**: Keycloak writes nothing to AD. New starters, leavers and password changes stay in the directory.
+- The filter leaves out accounts disabled in AD. A leaver stops getting in as soon as the account is disabled, because the password is validated against AD at every sign-in.
+- The first time, **Action › Sync all users**. After that, the periodic sync of changes.
+
+## 5. Groups, roles and what reaches the token
+
+1. **AD groups**: on the LDAP provider, **Mappers › Add mapper** tab, type `group-ldap-mapper`: *LDAP Groups DN* `OU=Grupos,DC=contoso,DC=local`, *Group Object Classes* `group`, *Membership LDAP Attribute* `member`, *Mode* `READ_ONLY`. With nested groups, *User Groups Retrieve Strategy* `LOAD_GROUPS_BY_MEMBER_ATTRIBUTE_RECURSIVELY`. Then **Action › Sync LDAP groups to Keycloak**.
+2. **App roles**: in **Clients › compras › Roles**, `comprador` and `aprobador`. The app decides by roles, not by AD group names that someone may rename.
+3. **Group to role**: **Groups › GG-Compras-Aprobadores › Role mapping › Assign role**, filter by clients, `compras aprobador`.
+4. **Check**: **Clients › compras › Client scopes › Evaluate**, pick a test user and look at *Generated access token*. The roles appear in `resource_access.compras.roles`. If the app also wants the groups, a **Group Membership** mapper in the client's dedicated scope (`compras-dedicated`) with *Token Claim Name* `groups`.
+
+## 6. Mandatory OTP
+
+1. **Authentication › Policies › OTP Policy**: TOTP, 6 digits, 30 seconds, *Look around window* 1. Microsoft Authenticator, Google Authenticator or FreeOTP all work.
+2. **Authentication › Flows**: duplicate `browser` as `browser-otp`. In the copy, the conditional second-factor subflow (its name starts with *Browser - Conditional*) and its **OTP Form** become **Required**.
+3. **Pilot**: in **Clients › compras › Advanced › Authentication flow overrides**, *Browser Flow* `browser-otp`. Only that app asks for OTP.
+4. **Everyone**: on the flow, **Action › Bind flow › Browser flow**. Anyone without OTP will see the screen to register the phone app when they sign in.
+
+Lost phone: **Users › user › Credentials**, delete the OTP credential after verifying identity through the service desk procedure; at the next sign-in they register it again.
+
+## 7. The ticket: "purchasing returns Invalid parameter: redirect_uri"
+
+After the purchasing app's upgrade, nobody can get in: Keycloak shows **We are sorry... Invalid parameter: redirect_uri**.
+
+1. **The URL the app asks for**: in the browser's address bar, the `redirect_uri` parameter of `.../realms/contoso/protocol/openid-connect/auth?client_id=compras&redirect_uri=...`. Decoded: `http://compras.contoso.local/oidc/callback`.
+2. **The Keycloak log** confirms it:
+
+:::term Server · error events
+$ docker logs keycloak 2>&1 | grep invalid_redirect_uri | tail -1
+WARN  [org.keycloak.events] (executor-thread-12) type="LOGIN_ERROR", realmId="6f1c2e0a-...", clientId="compras", userId="null", ipAddress="10.20.5.31", error="invalid_redirect_uri", redirect_uri="http://compras.contoso.local/oidc/callback"
+:::
+
+3. **Compare** with the client's *Valid redirect URIs*, character by character. The comparison is exact:
+
+| What the app sends | What is registered | Cause |
+|---|---|---|
+| `http://...` | `https://...` | The app, behind its own proxy, does not trust `X-Forwarded-Proto` and thinks it is on HTTP |
+| `https://compras01.contoso.local/...` | `https://compras.contoso.local/...` | People reach it by the server name or by IP |
+| `.../oidc/callback/` | `.../oidc/callback` | Trailing slash or a new path after the upgrade |
+| `client_id=compras-test` | `compras` | Configuration from another environment |
+
+4. **Fix it in the right place**: here the cause is the first one; the upgrade lost the setting that made the app trust the proxy, and the app team restores it. Adding the `http://` URI in Keycloak would hide it and leave the authorisation code travelling unencrypted. Adding a new URI only makes sense if the app really moved address, and then with the exact URI, never `*`.
+5. If the error appears **on sign-out**, it is the `post_logout_redirect_uri`, compared against *Valid post logout redirect URIs*.
+
+In the ticket: the URI received, the one registered, the cause and who changed what.
+
+> **Server clocks**: TOTP depends on the clock. If the Keycloak server drifts beyond what *Look around window* covers, correct codes are rejected. And if the app server's clock runs fast or slow, it rejects freshly issued tokens (`iat` in the future, `exp` already passed) or SAML assertions outside `NotBefore`/`NotOnOrAfter`. Before touching tolerance settings in the app, `chronyc tracking` or `w32tm /query /status` on both sides.
+
+## Next steps
+
+- The [Entra ID SSO with SAML](entra-sso-saml-dar-de-alta-una-aplicacion-y-login-que-falla.html) guide does the same for SaaS apps with cloud identities; the two live side by side.
+- The reverse proxy, the `X-Forwarded-*` headers and certificates are in the [Nginx and Apache](nginx-y-apache-proxy-inverso-tls-cabeceras-timeouts-y-un-502-bad-gateway.html) guide.
+- Back up Keycloak's PostgreSQL database and export the realm (`kc.sh export`) before every version upgrade.
+""")
+
+
+# ---------------------------------------------------------------- Sector 4 · IT/OT
+g(slug="it-ot-integrar-la-red-de-planta-con-la-corporativa-inventario-zonas-dmz-industrial-y-una-linea-parada", topic="it-ot", date="2026-11-03",
+  title_es="IT/OT: integrar la red de una planta con la corporativa sin poner en riesgo la producción",
+  title_en="IT/OT: joining a plant's network to the corporate one without putting production at risk",
+  seo_title_en="IT/OT: joining a plant network safely · Iñigo González",
+  seo_title_es="IT/OT: integrar la red de planta con IT · Iñigo González",
+  dek_es="Inventario de PLC, HMI, servidores SCADA y estaciones de ingeniería sin escaneos activos, los niveles Purdue y las zonas y conductos de IEC 62443 explicados sin jerga, una DMZ industrial con réplica del historian, jump host y relé de parches y antivirus, reglas de firewall por conducto, acceso remoto de proveedores con MFA y aprobación, parches en paradas planificadas, copias de los programas de PLC y una línea que se para tras un cambio de IT.",
+  dek_en="Inventorying PLCs, HMIs, SCADA servers and engineering workstations without active scans, Purdue levels and IEC 62443 zones and conduits in plain words, an industrial DMZ with a historian replica, jump host and patch and AV relay, firewall rules per conduit, vendor remote access with MFA and approval, patching in planned shutdowns, PLC program backups and a line that stops after an IT change.",
+  seo_desc="IT/OT for a plant: passive OT inventory, Purdue levels, IEC 62443 zones and conduits, an industrial DMZ, vendor access and a line stopped by an IT change.",
+  es="""
+## Qué vas a conseguir
+
+Conectar la red de una planta con la corporativa de forma que el negocio vea los datos de producción y los proveedores puedan dar soporte, sin que un cambio pensado para las oficinas llegue a una línea. En la parte de oficinas, un error se arregla con un reinicio; en la planta, un PLC que deja de recibir órdenes para la línea, y una hora de línea parada se mide en piezas que no salen. La regla de toda la guía: **en OT manda la disponibilidad**, y cualquier cosa que IT haga en la planta se acuerda antes con el jefe de planta y con el responsable de automatización.
+
+## Antes de empezar
+
+- El **responsable de OT o de automatización** de cada planta y el **jefe de planta**: son quienes deciden cuándo se toca algo. Sin ellos no se empieza.
+- Los **planos de red** de la planta, aunque estén desactualizados, y las listas de equipos que entregaron los integradores y fabricantes de cada línea.
+- El **calendario de paradas planificadas** de producción del año: es tu calendario de ventanas.
+- Los contratos de soporte de los fabricantes (SCADA, PLC, robots) y qué acceso remoto exige cada uno.
+- Acceso de lectura al firewall entre IT y la planta y a los switches de la red de planta.
+
+## 1. Inventario de activos OT sin escanear
+
+En OT no se lanza un escaneo de red para "ver qué hay". Un barrido de puertos o un escáner de vulnerabilidades puede colgar un PLC antiguo o un panel de operador, y eso es una línea parada. El inventario se construye con fuentes que no tocan los equipos:
+
+- **Listas de los fabricantes e integradores**: cada línea se entregó con su documentación (*as-built*): modelos, firmware, direcciones IP.
+- **Recorrido físico** por los armarios con el responsable de automatización: etiquetas, modelos, qué está conectado a qué.
+- **Tablas de los switches de planta**: leer la tabla de direcciones MAC y la tabla ARP del switch es pasivo para los equipos conectados.
+- **Una sonda pasiva** de OT conectada a un puerto SPAN (espejo) del switch: escucha el tráfico, reconoce protocolos industriales (Modbus TCP, EtherNet/IP, S7, OPC UA) y deduce qué es cada equipo sin enviarle nada.
+
+:::term Switch de planta · solo lectura
+$ show mac address-table vlan 120
+          Mac Address Table
+-------------------------------------------
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+ 120    0008.dc2a.11f0    DYNAMIC     Gi1/0/3
+ 120    001d.9c4b.07a2    DYNAMIC     Gi1/0/5
+ 120    5cf8.21e4.9b10    DYNAMIC     Gi1/0/12
+$ show ip arp vlan 120
+:::
+
+! Si alguien propone "un escaneo suave" en producción, la respuesta es no. Los escaneos activos, si hacen falta, se hacen en una parada planificada, con el responsable de automatización delante y equipo a equipo.
+
+Cada activo va a una ficha con lo mismo en todas las plantas:
+
+| Campo | Ejemplo |
+|---|---|
+| Nombre y tipo | `L2-PLC-01` · PLC de la línea 2 de envasado |
+| Fabricante, modelo y firmware | Los de la placa y del proyecto del integrador |
+| IP, MAC y VLAN | `10.40.20.15` · VLAN 120 |
+| Nivel Purdue y zona | Nivel 1 · Zona Línea 2 |
+| Sistema operativo (si es un PC) | Windows 10 IoT Enterprise LTSC en un HMI |
+| Responsable y soporte | Responsable de automatización · contrato con el integrador |
+| Dónde está su copia | Repositorio de proyectos de PLC, versión y fecha |
+
+La [CMDB](cmdb-clases-de-ci-relaciones-reconciliacion-calidad-del-dato-y-auditorias.html) es el sitio natural para estas fichas, con una clase propia para activos OT.
+
+## 2. Niveles Purdue, zonas y conductos
+
+El **modelo Purdue** ordena la planta por capas, de la máquina al ERP:
+
+| Nivel | Qué hay | Ejemplos |
+|---|---|---|
+| 0 | El proceso físico | Sensores, motores, válvulas |
+| 1 | Control básico | PLC, variadores, controladores de seguridad |
+| 2 | Supervisión de la línea | HMI, servidor SCADA de la línea |
+| 3 | Operaciones de la planta | Historian, MES, estaciones de ingeniería, servidores de la planta |
+| 3.5 | DMZ industrial | Réplica del historian, jump host, relé de parches y antivirus |
+| 4 y 5 | Red corporativa e Internet | ERP, correo, puestos de oficina |
+
+La norma **IEC 62443** (en concreto la parte 3-2) añade dos ideas sencillas:
+
+- Una **zona** es un grupo de equipos con las mismas necesidades de seguridad: por ejemplo, todo lo de la línea 2 (sus PLC, sus HMI y su SCADA). Lo que pasa dentro de una zona no afecta a otra.
+- Un **conducto** es el único camino permitido entre dos zonas, con lo que puede pasar por él: quién, hacia dónde, qué protocolo y en qué sentido.
+
+En la práctica: una VLAN y un segmento por zona, un firewall entre zonas y una lista de conductos aprobada por OT. Si dos equipos de zonas distintas hablan, lo hacen por un conducto que alguien ha documentado.
+
+## 3. La DMZ industrial
+
+La regla de oro: **ninguna conexión cruza directamente de la red corporativa a la planta**. Todo termina en la DMZ industrial (nivel 3.5) y desde ahí se sirve o se reenvía:
+
+- **Réplica del historian**: el historian de la planta (nivel 3) envía sus datos a una réplica en la DMZ. Los usuarios de oficina y los informes consultan la réplica, nunca el historian de la planta.
+- **Jump host**: el único punto de entrada para administrar o dar soporte a equipos de la planta. Se entra con MFA y desde ahí, solo a los equipos autorizados.
+- **Relé de parches y antivirus**: un servidor WSUS y el servidor de distribución del antivirus en la DMZ. Los equipos de la planta descargan de ahí, no de Internet ni de los servidores corporativos.
+- **Intercambio de ficheros**: si producción necesita recibir recetas u órdenes en fichero, una carpeta en la DMZ con análisis antivirus, no un recurso compartido de la oficina mapeado en un HMI.
+
+Los equipos de la planta no deberían estar en el dominio corporativo. Si lo están, en una OU propia que **bloquea la herencia** y con GPO pensadas para OT; la guía de [GPO de seguridad](gpo-de-seguridad-base-ntlm-llmnr-smb-laps-y-despliegue-en-piloto.html) se aplica a oficinas, y sus directivas solo llegan a OT tras probarlas con el fabricante.
+
+## 4. Reglas del firewall por conducto
+
+Cada regla del firewall corresponde a un conducto de la lista, con su número de cambio en el comentario. Un ejemplo de la planta de Northwind en Zaragoza:
+
+| Conducto | Origen | Destino | Servicio | Sentido |
+|---|---|---|---|---|
+| C-01 Historian | Historian planta `10.40.30.10` | Réplica DMZ `10.40.35.10` | El puerto que documente el fabricante del historian | Planta → DMZ |
+| C-02 Informes | Red corporativa | Réplica DMZ `10.40.35.10` | HTTPS 443 | Corporativa → DMZ |
+| C-03 Soporte | Red corporativa y proveedores (VPN) | Jump host `10.40.35.20` | HTTPS 443 (RD Gateway) | → DMZ |
+| C-04 Administración | Jump host `10.40.35.20` | Estaciones de ingeniería `10.40.30.21-22` | RDP 3389 | DMZ → Planta |
+| C-05 Parches | Servidores y HMI de la planta | WSUS DMZ `10.40.35.30` | HTTPS 8531 | Planta → DMZ |
+| C-06 MES | MES `10.40.30.20` | SCADA línea 2 `10.40.20.10` | OPC UA 4840 | Nivel 3 → Nivel 2 |
+| Final | Cualquiera | Cualquiera | Todo | Denegado y registrado |
+
+- Nada de reglas *any* hacia la planta ni de objetos compartidos con reglas de oficinas: los objetos de OT se nombran `OT-...` y solo se usan en reglas de OT.
+- Los protocolos industriales (Modbus TCP 502, EtherNet/IP 44818, S7 102) no deberían cruzar de la red corporativa a la planta. Si alguno cruza, es un conducto que hay que revisar.
+- Las reglas de la planta no entran en las "limpiezas de reglas sin uso": un conducto que se usa una vez al mes en un cambio de formato sigue siendo necesario.
+
+La guía de [FortiGate](fortigate-politicas-con-minimo-privilegio-vpn-con-entra-id-tuneles-entre-sedes-y-un-usuario-que-no-llega.html) explica cómo escribir estas políticas con mínimo privilegio.
+
+## 5. Acceso remoto de proveedores
+
+El fabricante del SCADA o el integrador de la línea necesitan entrar para dar soporte. El acceso se da siempre por el mismo camino:
+
+1. **Una cuenta por persona** del proveedor, nunca una cuenta compartida "proveedor-scada", y deshabilitada por defecto.
+2. Entrada por VPN o portal con **MFA**, solo hasta el jump host.
+3. **Aprobación de la sesión**: el proveedor la pide con un ticket; el responsable de automatización la aprueba para una ventana concreta (por ejemplo, de 14:00 a 16:00) y solo hacia los equipos de esa línea.
+4. Desde el jump host, solo los destinos de su conducto. Las sesiones se **graban** si la herramienta lo permite.
+5. Al acabar, la cuenta vuelve a deshabilitarse y el ticket recoge qué se hizo.
+
+! Los módems 4G o los programas de control remoto que algunos integradores dejan instalados "para soporte" saltan todo lo anterior. En el recorrido del inventario, búscalos y quítalos con el responsable de la planta.
+
+Si la empresa ya tiene una herramienta de cuentas privilegiadas, como en la guía de [CyberArk](cyberark-safes-rotacion-automatica-sesiones-grabadas-y-una-cuenta-que-el-cpm-no-cambia.html), las cuentas de proveedores de OT van en un safe propio con sesiones grabadas.
+
+## 6. Parches y antivirus en ventanas de parada
+
+- **Solo en paradas planificadas**, acordadas con el jefe de planta: nunca durante la producción, aunque el parche sea "solo de seguridad".
+- **Lista de compatibilidad del fabricante**: los fabricantes de SCADA publican qué actualizaciones de Windows y qué versiones de antivirus han validado con su software. Lo que no está en la lista, no se instala.
+- **Primero en un equipo de pruebas**: un HMI o una estación de repuesto con la misma imagen.
+- **Copia antes de tocar**: imagen de los servidores SCADA y de las estaciones de ingeniería con la [restauración probada](veeam-planificar-y-probar-restauraciones-en-plantas-y-sedes.html).
+- **Antivirus**: firmas desde el relé de la DMZ con un retraso (por ejemplo, 24 horas detrás de las oficinas), exclusiones que indica el fabricante y análisis completos programados solo en paradas. En equipos que no admiten antivirus, control de aplicaciones (lista blanca).
+
+En el calendario de paradas, cada ventana tiene su lista: qué equipos, qué parches, quién de OT valida que la línea arranca y cuál es la vuelta atrás.
+
+## 7. Copias de los programas de PLC
+
+Si un PLC se avería o alguien borra parte de su programa, la línea no arranca hasta que se recarga. Sin copia, hay que pedirla al integrador, que quizá ya no la tenga.
+
+- El responsable de automatización saca la copia con el software de ingeniería del fabricante (subida del programa desde el PLC) después de cada cambio y, como mínimo, cada trimestre.
+- IT pone el **repositorio**: una carpeta en un servidor de la planta, con versiones, acceso solo para automatización y copia a otra ubicación.
+- Cada copia con su ficha: PLC, versión, fecha, quién y por qué (cambio de receta, mejora, corrección).
+- Comprobar de vez en cuando que el programa del PLC coincide con la última copia: la herramienta de ingeniería permite comparar el programa del equipo con el del repositorio. Una diferencia es un cambio sin registrar.
+
+## 8. El ticket: "la línea 2 se ha parado tras un cambio de IT anoche"
+
+Martes, 6:20. El turno de mañana avisa: la línea 2 de envasado está parada. El SCADA de la línea no recibe las órdenes del MES y los paneles de operador muestran que no hay orden de fabricación activa. Anoche hubo cambios de IT.
+
+1. **Primero, la línea**: con el jefe de turno y el responsable de automatización. Ellos deciden si la línea puede trabajar en modo local mientras se investiga. Nadie de IT toca un PLC ni un HMI sin ellos.
+2. **Qué cambió anoche**: el calendario de cambios muestra dos candidatos: una limpieza de objetos del firewall a las 23:00 y la actualización mensual de la GPO de seguridad con nuevas firmas de antivirus a medianoche.
+3. **El firewall**: una traza del tráfico del MES hacia el SCADA de la línea 2:
+
+:::term FortiGate · traza del flujo
+$ diagnose debug flow filter addr 10.40.20.10
+$ diagnose debug flow show function-name enable
+$ diagnose debug enable
+$ diagnose debug flow trace start 10
+id=65308 trace_id=1 func=print_pkt_detail line=5911 msg="vd-root:0 received a packet(proto=6, 10.40.30.20:52814->10.40.20.10:4840) tun_id=0.0.0.0 from port7. flag [S], seq 3021457710, ack 0, win 64240"
+id=65308 trace_id=1 func=fw_forward_handler line=1015 msg="Denied by forward policy check (policy 0)"
+$ diagnose debug disable
+:::
+
+El tráfico del conducto C-06 cae en la política 0, la denegación implícita. En **Log & Report › System Events**, el registro de anoche dice que se editó el grupo de direcciones `GRP-SERVIDORES-MES`, compartido por una regla de oficinas y por la del conducto C-06, y se quitó el MES de la planta al "limpiar servidores antiguos".
+
+**Vuelta atrás**: devolver el miembro al grupo, con un cambio de emergencia aprobado por el responsable de OT. La lista de revisiones de la configuración (**Configuration › Revisions**, en el menú del administrador) sirve para comparar el antes y el después; restaurar una revisión completa reinicia el equipo y deshace todo lo de la noche, así que se corrige el objeto, no la configuración entera.
+
+**Si el firewall está bien, la GPO o el antivirus**: en un HMI, con el responsable de automatización:
+
+:::term HMI · PowerShell como administrador
+$ gpresult /scope computer /r
+$ Get-WinEvent -LogName "Microsoft-Windows-Windows Defender/Operational" -MaxEvents 20 | Where-Object Id -in 1116,1117 | Select-Object TimeCreated, Id, Message
+$ & "C:\\Program Files\\Windows Defender\\MpCmdRun.exe" -Restore -ListAll
+:::
+
+Si `gpresult` muestra una GPO de oficinas aplicada al HMI, la OU de la planta no bloqueaba la herencia; si los eventos 1116 y 1117 muestran que el antivirus puso en cuarentena un componente del software del SCADA, se restaura con `MpCmdRun.exe -Restore -Name <nombre>`, se añade la exclusión del fabricante y se para la distribución de esas firmas a la planta.
+
+**Comprobación**: la línea vuelve a recibir órdenes y el responsable de automatización da por buena la producción. Hasta entonces el ticket no se cierra.
+
+**Para que no se repita**, el control de cambios incluye a OT:
+
+- Todo cambio que toque una zona OT, un objeto usado en un conducto, una GPO que llegue a equipos de la planta o el antivirus de la planta necesita la aprobación del responsable de OT en el comité de cambios.
+- Los activos y conductos de OT están en la CMDB, así que el análisis de impacto de un cambio los ve.
+- Objetos del firewall propios de OT, sin compartir con oficinas.
+- Firmas y parches a la planta por el relé de la DMZ, con retraso y tras un equipo de pruebas.
+
+En el ticket: hora de la parada, cambio causante, vuelta atrás, hora de recuperación de la línea y las acciones preventivas, con su responsable.
+
+## Siguientes pasos
+
+- La guía de [LAN, WAN y WiFi entre plantas](lan-wan-y-wifi-conectar-plantas-y-sedes-de-varios-paises.html) cubre la red de cada sede en la que se integra la red de planta.
+- La de [Defender Antivirus y reglas ASR](defender-antivirus-y-reglas-asr-de-auditoria-a-bloqueo-y-una-aplicacion-bloqueada.html) explica las exclusiones y el modo auditoría antes de aplicar nada a un equipo de OT.
+- La de [DR/BCP](dr-bcp-rpo-y-rto-por-servicio-plan-de-recuperacion-y-prueba-completa.html) sirve para dar a cada línea su RTO y probar la recuperación del SCADA y del historian.
+- La de [mantenimiento de VMware](vmware-mantenimiento-de-hosts-y-maquinas-virtuales-en-varias-plantas.html) cubre los servidores virtuales de la planta y su calendario según los turnos.
+""",
+  en="""
+## What you'll get
+
+Connecting a plant's network to the corporate one so the business can see production data and vendors can give support, without a change meant for the offices reaching a line. On the office side, a mistake is fixed with a reboot; in the plant, a PLC that stops receiving orders stops the line, and an hour of a stopped line is measured in parts that don't ship. The rule for the whole guide: **in OT, availability comes first**, and anything IT does in the plant is agreed beforehand with the plant manager and the automation lead.
+
+## Before you start
+
+- Each plant's **OT or automation lead** and the **plant manager**: they decide when something is touched. Without them, nothing starts.
+- The plant's **network drawings**, even if they're out of date, and the equipment lists delivered by each line's integrators and vendors.
+- Production's **planned shutdown calendar** for the year: it's your calendar of windows.
+- The vendors' support contracts (SCADA, PLCs, robots) and the remote access each one requires.
+- Read access to the firewall between IT and the plant and to the plant network switches.
+
+## 1. Inventorying OT assets without scanning
+
+In OT you don't run a network scan "to see what's there". A port sweep or a vulnerability scanner can hang an old PLC or an operator panel, and that's a stopped line. The inventory is built from sources that don't touch the devices:
+
+- **Vendor and integrator lists**: each line was handed over with its documentation (*as-built*): models, firmware, IP addresses.
+- **A physical walkdown** of the cabinets with the automation lead: labels, models, what is connected to what.
+- **The plant switches' tables**: reading the switch's MAC address table and ARP table is passive for the connected devices.
+- **A passive OT sensor** connected to a SPAN (mirror) port on the switch: it listens to traffic, recognises industrial protocols (Modbus TCP, EtherNet/IP, S7, OPC UA) and works out what each device is without sending it anything.
+
+:::term Plant switch · read only
+$ show mac address-table vlan 120
+          Mac Address Table
+-------------------------------------------
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+ 120    0008.dc2a.11f0    DYNAMIC     Gi1/0/3
+ 120    001d.9c4b.07a2    DYNAMIC     Gi1/0/5
+ 120    5cf8.21e4.9b10    DYNAMIC     Gi1/0/12
+$ show ip arp vlan 120
+:::
+
+! If someone suggests "a gentle scan" in production, the answer is no. Active scans, if needed, are done in a planned shutdown, with the automation lead present and one device at a time.
+
+Each asset gets a record with the same fields in every plant:
+
+| Field | Example |
+|---|---|
+| Name and type | `L2-PLC-01` · PLC for packaging line 2 |
+| Vendor, model and firmware | From the nameplate and the integrator's project |
+| IP, MAC and VLAN | `10.40.20.15` · VLAN 120 |
+| Purdue level and zone | Level 1 · Line 2 zone |
+| Operating system (if it's a PC) | Windows 10 IoT Enterprise LTSC on an HMI |
+| Owner and support | Automation lead · contract with the integrator |
+| Where its backup is | PLC project repository, version and date |
+
+The [CMDB](cmdb-clases-de-ci-relaciones-reconciliacion-calidad-del-dato-y-auditorias.html) is the natural home for these records, with its own class for OT assets.
+
+## 2. Purdue levels, zones and conduits
+
+The **Purdue model** arranges the plant in layers, from the machine to the ERP:
+
+| Level | What's there | Examples |
+|---|---|---|
+| 0 | The physical process | Sensors, motors, valves |
+| 1 | Basic control | PLCs, drives, safety controllers |
+| 2 | Line supervision | HMIs, the line's SCADA server |
+| 3 | Plant operations | Historian, MES, engineering workstations, plant servers |
+| 3.5 | Industrial DMZ | Historian replica, jump host, patch and AV relay |
+| 4 and 5 | Corporate network and Internet | ERP, email, office desktops |
+
+The **IEC 62443** standard (specifically part 3-2) adds two simple ideas:
+
+- A **zone** is a group of devices with the same security needs: for example, everything on line 2 (its PLCs, HMIs and SCADA). What happens inside one zone doesn't affect another.
+- A **conduit** is the only allowed path between two zones, with what may travel through it: who, to where, which protocol and in which direction.
+
+In practice: one VLAN and segment per zone, a firewall between zones and a list of conduits approved by OT. If two devices in different zones talk, they do it through a conduit someone has documented.
+
+## 3. The industrial DMZ
+
+The golden rule: **no connection crosses directly from the corporate network to the plant**. Everything ends in the industrial DMZ (level 3.5) and is served or forwarded from there:
+
+- **Historian replica**: the plant historian (level 3) sends its data to a replica in the DMZ. Office users and reports query the replica, never the plant historian.
+- **Jump host**: the only entry point for administering or supporting plant devices. You sign in with MFA and from there reach only the authorised devices.
+- **Patch and antivirus relay**: a WSUS server and the antivirus distribution server in the DMZ. Plant devices download from there, not from the Internet or from the corporate servers.
+- **File exchange**: if production needs to receive recipes or orders as files, a folder in the DMZ with antivirus scanning, not an office share mapped on an HMI.
+
+Plant devices shouldn't be in the corporate domain. If they are, they go in their own OU that **blocks inheritance**, with GPOs designed for OT; the [security GPOs](gpo-de-seguridad-base-ntlm-llmnr-smb-laps-y-despliegue-en-piloto.html) guide applies to offices, and its policies only reach OT after testing them with the vendor.
+
+## 4. Firewall rules per conduit
+
+Each firewall rule matches a conduit on the list, with its change number in the comment. An example from Northwind's plant in Zaragoza:
+
+| Conduit | Source | Destination | Service | Direction |
+|---|---|---|---|---|
+| C-01 Historian | Plant historian `10.40.30.10` | DMZ replica `10.40.35.10` | The port the historian vendor documents | Plant → DMZ |
+| C-02 Reports | Corporate network | DMZ replica `10.40.35.10` | HTTPS 443 | Corporate → DMZ |
+| C-03 Support | Corporate network and vendors (VPN) | Jump host `10.40.35.20` | HTTPS 443 (RD Gateway) | → DMZ |
+| C-04 Administration | Jump host `10.40.35.20` | Engineering workstations `10.40.30.21-22` | RDP 3389 | DMZ → Plant |
+| C-05 Patching | Plant servers and HMIs | DMZ WSUS `10.40.35.30` | HTTPS 8531 | Plant → DMZ |
+| C-06 MES | MES `10.40.30.20` | Line 2 SCADA `10.40.20.10` | OPC UA 4840 | Level 3 → Level 2 |
+| Final | Any | Any | All | Denied and logged |
+
+- No *any* rules towards the plant and no objects shared with office rules: OT objects are named `OT-...` and only used in OT rules.
+- Industrial protocols (Modbus TCP 502, EtherNet/IP 44818, S7 102) shouldn't cross from the corporate network to the plant. If one does, it's a conduit to review.
+- Plant rules are left out of "unused rule clean-ups": a conduit used once a month for a product changeover is still needed.
+
+The [FortiGate](fortigate-politicas-con-minimo-privilegio-vpn-con-entra-id-tuneles-entre-sedes-y-un-usuario-que-no-llega.html) guide explains how to write these policies with least privilege.
+
+## 5. Vendor remote access
+
+The SCADA vendor or the line integrator need to connect to give support. Access is always given the same way:
+
+1. **One account per person** at the vendor, never a shared "vendor-scada" account, and disabled by default.
+2. Entry through VPN or a portal with **MFA**, only as far as the jump host.
+3. **Session approval**: the vendor requests it with a ticket; the automation lead approves it for a specific window (for example, 14:00 to 16:00) and only towards that line's devices.
+4. From the jump host, only the destinations in its conduit. Sessions are **recorded** if the tool allows it.
+5. When finished, the account is disabled again and the ticket records what was done.
+
+! The 4G modems or remote control programs some integrators leave installed "for support" bypass all of the above. During the inventory walkdown, look for them and remove them with the plant manager.
+
+If the company already has a privileged account tool, as in the [CyberArk](cyberark-safes-rotacion-automatica-sesiones-grabadas-y-una-cuenta-que-el-cpm-no-cambia.html) guide, OT vendor accounts go in their own safe with recorded sessions.
+
+## 6. Patching and antivirus in shutdown windows
+
+- **Only in planned shutdowns**, agreed with the plant manager: never during production, even if the patch is "security only".
+- **The vendor's compatibility list**: SCADA vendors publish which Windows updates and antivirus versions they have validated with their software. What isn't on the list doesn't get installed.
+- **First on a test device**: a spare HMI or workstation with the same image.
+- **Backup before touching**: an image of the SCADA servers and engineering workstations with the [restore tested](veeam-planificar-y-probar-restauraciones-en-plantas-y-sedes.html).
+- **Antivirus**: signatures from the DMZ relay with a delay (for example, 24 hours behind the offices), the exclusions the vendor specifies and full scans scheduled only in shutdowns. On devices that can't run antivirus, application control (allowlisting).
+
+In the shutdown calendar, each window has its list: which devices, which patches, who from OT confirms the line starts and what the rollback is.
+
+## 7. PLC program backups
+
+If a PLC fails or someone deletes part of its program, the line doesn't start until it's reloaded. Without a backup, you have to ask the integrator, who may no longer have it.
+
+- The automation lead takes the backup with the vendor's engineering software (uploading the program from the PLC) after every change and at least every quarter.
+- IT provides the **repository**: a folder on a plant server, with versioning, access only for automation and a copy to another location.
+- Each backup with its record: PLC, version, date, who and why (recipe change, improvement, fix).
+- Check from time to time that the PLC's program matches the latest backup: the engineering tool can compare the program on the device with the one in the repository. A difference is an unrecorded change.
+
+## 8. The ticket: "line 2 stopped after an IT change last night"
+
+Tuesday, 6:20. The morning shift reports that packaging line 2 is stopped. The line's SCADA isn't receiving orders from the MES and the operator panels show no active production order. There were IT changes last night.
+
+1. **The line first**: with the shift lead and the automation lead. They decide whether the line can run in local mode while you investigate. Nobody from IT touches a PLC or an HMI without them.
+2. **What changed last night**: the change calendar shows two candidates: a firewall object clean-up at 23:00 and the monthly security GPO update with new antivirus signatures at midnight.
+3. **The firewall**: a trace of the traffic from the MES to the line 2 SCADA:
+
+:::term FortiGate · flow trace
+$ diagnose debug flow filter addr 10.40.20.10
+$ diagnose debug flow show function-name enable
+$ diagnose debug enable
+$ diagnose debug flow trace start 10
+id=65308 trace_id=1 func=print_pkt_detail line=5911 msg="vd-root:0 received a packet(proto=6, 10.40.30.20:52814->10.40.20.10:4840) tun_id=0.0.0.0 from port7. flag [S], seq 3021457710, ack 0, win 64240"
+id=65308 trace_id=1 func=fw_forward_handler line=1015 msg="Denied by forward policy check (policy 0)"
+$ diagnose debug disable
+:::
+
+Conduit C-06 traffic hits policy 0, the implicit deny. In **Log & Report › System Events**, last night's log shows the address group `GRP-SERVIDORES-MES` was edited. It's shared by an office rule and by the C-06 conduit rule, and the plant MES was removed while "cleaning up old servers".
+
+**Rollback**: put the member back in the group, with an emergency change approved by the OT lead. The configuration revision list (**Configuration › Revisions**, in the administrator menu) is useful to compare before and after; restoring a full revision reboots the unit and undoes everything from last night, so you fix the object, not the whole configuration.
+
+**If the firewall is fine, the GPO or the antivirus**: on an HMI, with the automation lead:
+
+:::term HMI · PowerShell as administrator
+$ gpresult /scope computer /r
+$ Get-WinEvent -LogName "Microsoft-Windows-Windows Defender/Operational" -MaxEvents 20 | Where-Object Id -in 1116,1117 | Select-Object TimeCreated, Id, Message
+$ & "C:\\Program Files\\Windows Defender\\MpCmdRun.exe" -Restore -ListAll
+:::
+
+If `gpresult` shows an office GPO applied to the HMI, the plant OU wasn't blocking inheritance; if events 1116 and 1117 show the antivirus quarantined a component of the SCADA software, restore it with `MpCmdRun.exe -Restore -Name <name>`, add the vendor's exclusion and stop distributing those signatures to the plant.
+
+**Check**: the line receives orders again and the automation lead signs off production. Until then the ticket isn't closed.
+
+**So it doesn't happen again**, change control includes OT:
+
+- Any change that touches an OT zone, an object used in a conduit, a GPO that reaches plant devices or the plant antivirus needs the OT lead's approval in the change board.
+- OT assets and conduits are in the CMDB, so a change's impact analysis sees them.
+- Firewall objects owned by OT, not shared with the offices.
+- Signatures and patches reach the plant through the DMZ relay, with a delay and after a test device.
+
+In the ticket: time of the stop, the change that caused it, the rollback, the time the line recovered and the preventive actions, each with an owner.
+
+## Next steps
+
+- The [LAN, WAN and Wi-Fi between plants](lan-wan-y-wifi-conectar-plantas-y-sedes-de-varios-paises.html) guide covers each site's network that the plant network joins.
+- The [Defender Antivirus and ASR rules](defender-antivirus-y-reglas-asr-de-auditoria-a-bloqueo-y-una-aplicacion-bloqueada.html) guide explains exclusions and audit mode before applying anything to an OT device.
+- The [DR/BCP](dr-bcp-rpo-y-rto-por-servicio-plan-de-recuperacion-y-prueba-completa.html) guide helps give each line its RTO and test recovery of the SCADA and historian.
+- The [VMware maintenance](vmware-mantenimiento-de-hosts-y-maquinas-virtuales-en-varias-plantas.html) guide covers the plant's virtual servers and their calendar around shifts.
+""")
+
+# ---------------------------------------------------------------- Sector 5 · Consejo de administración
+g(slug="consejo-de-administracion-soporte-tecnico-a-la-reunion-sala-consejeros-remotos-y-plan-b", topic="consejo", date="2026-11-03",
+  title_es="Consejo de administración: soporte técnico a la reunión, de la preparación con secretaría a un consejero que no oye la sala",
+  title_en="Board meeting: technical support, from preparation with the company secretary to a director who cannot hear the room",
+  seo_title_en="Board meeting: technical support · Iñigo González",
+  seo_title_es="Consejo de administración: soporte técnico · Iñigo González",
+  dek_es="Preparación con secretaría del consejo (orden del día, asistentes en sala y en remoto, confidencialidad), el portal del consejo y las tabletas, la revisión de la sala el día antes, la prueba con los consejeros remotos, el plan B con dispositivos de respaldo y marcación telefónica, el día de la reunión, lo que se recoge después y qué hacer cuando un consejero remoto no oye la sala.",
+  dek_en="Preparation with the company secretary (agenda, attendees in the room and remote, confidentiality), the board portal and tablets, the room check the day before, the test call with remote directors, a plan B with backup devices and phone dial-in, the day itself, what gets collected afterwards and what to do when a remote director cannot hear the room.",
+  seo_desc="Board meeting tech support: prep with the company secretary, board portal and tablets, room check, remote directors, plan B and a director who can't hear.",
+  es="""
+## Qué vas a conseguir
+
+Un consejo de administración en el que la tecnología no se nota: los consejeros entran, la documentación está en sus tabletas, los que asisten en remoto se oyen y se les oye, y nadie de IT está en la sala cuando no debe. En una sede financiera el consejo se reúne pocas veces al año, con personas que no son empleados y temas que no pueden salir de la sala. Un fallo de audio en el consejo pesa más que cualquier otro ticket del mes, y la confidencialidad pesa tanto como que todo funcione.
+
+## Antes de empezar
+
+- El contacto de la **secretaría del consejo** (el secretario o la secretaria del consejo y su equipo): es tu cliente para esta reunión y quien decide todo lo que no es técnico.
+- La **sala**: su modelo de kit, sus micrófonos y su estado en el portal de gestión, como en la guía de [Teams Rooms sobre Crestron](microsoft-teams-rooms-salas-sobre-crestron-en-una-sede-financiera.html).
+- Acceso de administración al **portal del consejo** (la aplicación donde se publican los documentos) y a la gestión de las tabletas en el MDM.
+- Licencias de **Audio Conferencing** para quien organiza la reunión de Teams, para que la invitación lleve número de teléfono e ID de conferencia.
+- Una persona de soporte asignada al consejo y otra de respaldo, las dos con el procedimiento leído.
+
+## 1. Preparación con secretaría
+
+Dos semanas antes, una reunión corta con secretaría para cerrar:
+
+| Tema | Qué necesitas saber |
+|---|---|
+| Fecha, hora y duración | Incluida la comida o la pausa, si la hay |
+| Orden del día | Qué puntos son confidenciales y si IT debe salir de la sala en ellos |
+| Asistentes en sala | Consejeros, invitados por puntos (auditores, directivos) y si traen su propio equipo |
+| Asistentes en remoto | Quién, desde dónde, con qué dispositivo y con qué cuenta (empleado, invitado o sin cuenta) |
+| Presentaciones | Quién presenta, desde qué equipo y si hay vídeo con sonido |
+| Grabación y transcripción | Lo decide secretaría; por defecto, ni grabación, ni transcripción, ni Copilot |
+| Plan B | Si secretaría acepta que un consejero entre por teléfono si falla Teams |
+
+Con eso se crea la reunión de Teams, que **organiza secretaría** (no IT), con opciones pensadas para un consejo:
+
+:::ui Teams · Opciones de la reunión
+> Reunión del consejo · Opciones
+= ¿Quién puede omitir la sala de espera?: Solo organizadores y coorganizadores
+[ ] Las personas que llaman pueden omitir la sala de espera
+= ¿Quién puede presentar?: Personas específicas
+[ ] Grabar automáticamente
+= Permitir Copilot: Desactivado
+= Chat de la reunión: Desactivado
+[Guardar]
+:::
+
+- Con todos esperando en la sala de espera, secretaría admite a cada uno por su nombre. Si el consejo lo pide, alguien de secretaría puede ser coorganizador para admitir y quien presenta, presentador.
+- Si la empresa tiene Teams Premium y etiquetas de confidencialidad para reuniones, la etiqueta de "Consejo" fija estas opciones y añade marca de agua. Sin Premium, se configuran a mano y se comprueban el día antes.
+- La invitación, con el **número de teléfono y el ID de conferencia** visibles: es el plan B de los remotos.
+
+## 2. El portal del consejo y las tabletas
+
+La documentación del consejo no viaja por correo: se publica en el **portal del consejo**, con acceso individual para cada consejero.
+
+- **Cuentas**: una por consejero, con MFA. Los consejeros externos suelen ser los que más ayuda necesitan con el MFA; resuélvelo semanas antes, no la mañana del consejo.
+- **Tabletas corporativas** gestionadas por el MDM: código de bloqueo, cifrado, la aplicación del portal y poco más. Con borrado remoto disponible si se pierde una.
+- **Una semana antes**: actualizar la aplicación del portal y el sistema de las tabletas. Nunca el día antes: una actualización con un cambio de interfaz el día del consejo genera llamadas.
+- **El día antes**, cuando secretaría publica la documentación: comprobar en una tableta de prueba que el paquete se descarga completo y se abre **sin conexión**. La WiFi de la sala puede fallar; la documentación no debe depender de ella.
+- Tabletas cargadas, con su cargador, y **dos de repuesto** preparadas con el mismo perfil.
+
+## 3. La revisión técnica de la sala el día antes
+
+Con la sala vacía y sin prisas, por la tarde:
+
+1. **Teams Rooms**: en el portal Pro la sala está **Correcta**, sin incidentes y sin actualizaciones programadas para esa noche ni para la mañana del consejo. Si hay una pendiente, se pospone.
+2. **Reunión de prueba** desde la sala con un portátil fuera de ella (otra sala o un móvil en casa de alguien del equipo).
+3. **Cobertura de los micrófonos**: alguien se sienta en cada puesto de la mesa, incluidos los extremos y el atril, y habla en voz normal; el del portátil remoto confirma que se oye cada puesto. Los micrófonos de techo cubren zonas que configura el integrador audiovisual en el procesador de audio; si un extremo de la mesa queda flojo, se avisa al integrador ese mismo día.
+4. **Contenido**: conectar por HDMI el portátil de quien presenta (o uno igual) y compartir también por Teams; con vídeo, comprobar que el sonido llega a los remotos.
+5. **La consola**: en la pantalla de inicio, con la reunión del consejo en la agenda y el botón **Unirse** visible.
+6. **Grabación**: confirmar que no hay nada grabando ni transcribiendo por defecto, según lo que haya decidido secretaría.
+
+Lo que quede pendiente se anota y se comunica a secretaría esa misma tarde, con la alternativa.
+
+## 4. La prueba con los consejeros remotos
+
+Uno o dos días antes, una llamada de 10 minutos con cada consejero que asistirá en remoto, desde el mismo dispositivo y el mismo sitio desde el que se conectará:
+
+- Entra con el **enlace de la invitación** (no con otro), en la aplicación de Teams o en el navegador, y queda en la sala de espera como pasará el día del consejo.
+- Que se oiga y se le oiga: **Configuración › Dispositivos › Hacer una llamada de prueba** en Teams graba y reproduce su voz y muestra qué micrófono y altavoz está usando.
+- Dispositivo de audio elegido a propósito: unos auriculares con micrófono, mejor que el altavoz del portátil.
+- Que conoce el plan B: el número de teléfono de la invitación con su ID de conferencia, y un teléfono de soporte para el día.
+
+## 5. El plan B
+
+| Si falla | Alternativa |
+|---|---|
+| La sala Teams Rooms | Portátil de respaldo en la sala con un altavoz con micrófono de conferencia certificado, unido a la misma reunión |
+| La reunión de Teams | Una **segunda reunión de Teams** creada por secretaría, con el enlace ya enviado a los remotos "por si acaso" |
+| La conexión del consejero | Entrar por teléfono con el número y el ID de la invitación |
+| Una tableta | Tableta de repuesto con su sesión del portal |
+| La red de la sala | Las tabletas tienen la documentación descargada; el portátil de respaldo, un router 4G |
+
+- El portátil de respaldo **no se une a la reunión con el micrófono abierto** mientras la sala funciona: dos dispositivos con audio abierto en la misma sala generan eco.
+- Todo el plan B se prueba en la revisión del día antes, no solo se prepara.
+
+## 6. El día de la reunión
+
+- **Una hora antes**: sala encendida, reunión abierta desde la consola, tabletas en su sitio, portátil de respaldo cargado y apagado, y el portal Pro abierto en tu equipo.
+- **Presencia discreta**: soporte está a la vista al principio, cuando se conectan los remotos, y después fuera de la sala, localizable por teléfono o por mensaje con secretaría.
+- **Puntos confidenciales**: si secretaría lo ha pedido, nadie de IT entra en la sala durante esos puntos. Desde fuera, el portal Pro dice si la sala sigue unida y sin incidencias; si hace falta entrar, secretaría decide cuándo.
+- No se comenta nada de lo que se oye o se ve en la sala, ni en el ticket. El ticket recoge lo técnico: qué falló, cuándo y cómo se resolvió.
+
+## 7. Después de la reunión
+
+- **Tabletas**: recogerlas todas y contarlas contra la lista. Si el portal lo permite, la documentación se retira o caduca según la política de secretaría; si falta una tableta, bloqueo y borrado remoto desde el MDM y aviso a secretaría.
+- **Ficheros temporales**: en el portátil de quien presentó, si es de la empresa, borrar las copias locales de las presentaciones (Descargas, carpetas temporales, el escritorio) con el visto bueno de su dueño; en el portátil de respaldo, cerrar la sesión y borrar lo que se haya descargado.
+- **Pizarras y contenido de la sala**: comprobar que no queda nada en pantallas, pizarras digitales ni en la consola.
+- **Dispositivos prestados** (auriculares, cargadores, tabletas de repuesto) devueltos y anotados.
+- **Cinco minutos con secretaría** al día siguiente: qué funcionó, qué no y qué se cambia para el próximo consejo.
+
+## 8. El ticket: "un consejero remoto no oye la sala"
+
+Jueves, 10:05. El consejo ha empezado hace cinco minutos. Secretaría escribe: un consejero que asiste desde Londres dice que ve la sala pero no oye nada.
+
+**Primero, de qué lado está.** Si los demás remotos oyen la sala, el problema está en su lado. Si nadie en remoto oye la sala, el problema está en la sala. Secretaría lo pregunta por el chat o por teléfono, sin interrumpir la reunión.
+
+**Si nadie en remoto oye la sala**, el fallo está en la sala:
+
+- El **silencio de la consola**: alguien ha pulsado el micrófono en la consola o en un botón de silencio de la mesa. En la reunión, el icono del micrófono de la sala aparece tachado.
+- El **micrófono seleccionado**: si el ordenador de la sala ha cogido otro dispositivo como micrófono (un cambio de cable, un reinicio), el audio de la sala no sale. En el portal Pro, **Settings › Peripherals › Conference Microphone**, o en la consola, **Más › Configuración** con la contraseña de administrador, se comprueba que es el micrófono de techo o el procesador de audio de la sala.
+- La **cobertura**: si solo no se oye a quien habla en un extremo de la mesa, es la zona del micrófono de techo, no un fallo; se pide a esa persona que hable hacia el centro y se avisa al integrador para después.
+
+**Si solo él no oye**, el fallo está en su lado. Por teléfono con el consejero:
+
+- El **altavoz elegido en Teams**: en la reunión, la flecha junto al botón del micrófono muestra qué micrófono y qué altavoz está usando. Lo habitual es que Teams haya cogido unos auriculares Bluetooth apagados o la salida de un monitor sin altavoces.
+- El **volumen** del sistema y de Teams en el mezclador de volumen de su equipo.
+- Si nada funciona en dos minutos, **el plan B**: que se una por teléfono con el número y el ID de la invitación (o que secretaría le llame desde el panel **Personas** de la reunión marcando su número) y mantenga el vídeo del ordenador sin audio para no generar eco. Secretaría lo admite desde la sala de espera.
+
+**Comprobación**: el consejero confirma a secretaría que oye y se le oye.
+
+En el ticket: hora, de qué lado estaba el fallo, causa (silencio, dispositivo seleccionado, cobertura o equipo del consejero), cómo se resolvió y cuánto duró. Si fue de la sala, una acción para la revisión del próximo consejo.
+
+## Siguientes pasos
+
+- La guía de [Microsoft Teams Rooms sobre Crestron](microsoft-teams-rooms-salas-sobre-crestron-en-una-sede-financiera.html) cubre la cuenta de la sala, el portal Pro y las actualizaciones fuera de horario.
+- La de [Teams Rooms](teams-rooms-poner-en-marcha-una-sala.html) del Nivel 2 explica la puesta en marcha de una sala desde cero.
+- La de [problemas comunes de Teams](teams-los-problemas-mas-comunes.html) sirve para los fallos de audio y vídeo del lado del consejero.
+- La de [Microsoft Purview](microsoft-purview-etiquetas-de-confidencialidad-retencion-dlp-y-un-documento-cifrado-que-no-abre.html) cubre las etiquetas de confidencialidad para la documentación del consejo.
+""",
+  en="""
+## What you'll get
+
+A board meeting where the technology goes unnoticed: directors walk in, the papers are on their tablets, those attending remotely can hear and be heard, and nobody from IT is in the room when they shouldn't be. At a financial firm the board meets a few times a year, with people who aren't employees and items that can't leave the room. An audio failure at the board weighs more than any other ticket that month, and confidentiality matters as much as everything working.
+
+## Before you start
+
+- The contact at the **company secretary's office** (the company secretary and their team): they're your client for this meeting and decide everything that isn't technical.
+- The **room**: its kit model, its microphones and its status in the management portal, as in the [Teams Rooms on Crestron](microsoft-teams-rooms-salas-sobre-crestron-en-una-sede-financiera.html) guide.
+- Admin access to the **board portal** (the app where the papers are published) and to tablet management in the MDM.
+- **Audio Conferencing** licences for whoever organises the Teams meeting, so the invitation carries a phone number and conference ID.
+- One support person assigned to the board and a backup, both having read the procedure.
+
+## 1. Preparation with the company secretary
+
+Two weeks before, a short meeting with the company secretary to settle:
+
+| Topic | What you need to know |
+|---|---|
+| Date, time and length | Including lunch or the break, if there is one |
+| Agenda | Which items are confidential and whether IT must leave the room for them |
+| Attendees in the room | Directors, guests for specific items (auditors, executives) and whether they bring their own devices |
+| Remote attendees | Who, from where, on which device and with which account (employee, guest or no account) |
+| Presentations | Who presents, from which device and whether there's video with sound |
+| Recording and transcription | The company secretary decides; by default, no recording, no transcription and no Copilot |
+| Plan B | Whether the company secretary accepts a director joining by phone if Teams fails |
+
+With that, the Teams meeting is created, **organised by the company secretary's office** (not IT), with options suited to a board:
+
+:::ui Teams · Meeting options
+> Board meeting · Options
+= Who can bypass the lobby?: Only organizers and co-organizers
+[ ] People dialing in can bypass the lobby
+= Who can present?: Specific people
+[ ] Record automatically
+= Allow Copilot: Off
+= Meeting chat: Off
+[Save]
+:::
+
+- With everyone waiting in the lobby, the company secretary admits each person by name. If the board asks for it, someone from the secretary's office can be a co-organizer to admit people, and whoever presents, a presenter.
+- If the company has Teams Premium and sensitivity labels for meetings, a "Board" label sets these options and adds a watermark. Without Premium, they're set by hand and checked the day before.
+- The invitation, with the **phone number and conference ID** visible: it's the remote attendees' plan B.
+
+## 2. The board portal and tablets
+
+Board papers don't travel by email: they're published in the **board portal**, with individual access for each director.
+
+- **Accounts**: one per director, with MFA. Non-executive directors are usually the ones who need most help with MFA; sort it out weeks before, not the morning of the board.
+- **Corporate tablets** managed by the MDM: passcode, encryption, the portal app and little else. With remote wipe available if one is lost.
+- **One week before**: update the portal app and the tablets' OS. Never the day before: an update that changes the interface on board day brings calls.
+- **The day before**, when the company secretary publishes the papers: check on a test tablet that the pack downloads in full and opens **offline**. The room's Wi-Fi may fail; the papers mustn't depend on it.
+- Tablets charged, with their chargers, and **two spares** prepared with the same profile.
+
+## 3. The room tech check the day before
+
+With the room empty and no rush, in the afternoon:
+
+1. **Teams Rooms**: in the Pro portal the room is **Healthy**, with no incidents and no updates scheduled for that night or the morning of the board. If one is pending, it's postponed.
+2. **A test meeting** from the room with a laptop outside it (another room, or a phone at a team member's home).
+3. **Microphone coverage**: someone sits in each seat at the table, including the ends and the lectern, and speaks at a normal volume; the person on the remote laptop confirms each seat can be heard. Ceiling microphones cover zones the AV integrator configures in the audio processor; if one end of the table is weak, the integrator is told that same day.
+4. **Content**: connect the presenter's laptop (or an identical one) over HDMI and also share through Teams; with video, check the sound reaches remote attendees.
+5. **The console**: on the home screen, with the board meeting in the agenda and the **Join** button visible.
+6. **Recording**: confirm nothing records or transcribes by default, in line with what the company secretary decided.
+
+Anything outstanding is noted and passed to the company secretary that afternoon, with the alternative.
+
+## 4. The test call with remote directors
+
+One or two days before, a 10-minute call with each director attending remotely, from the same device and the same place they'll join from:
+
+- They join with the **invitation link** (not a different one), in the Teams app or the browser, and land in the lobby as they will on board day.
+- That they can hear and be heard: **Settings › Devices › Make a test call** in Teams records and plays back their voice and shows which microphone and speaker they're using.
+- An audio device chosen on purpose: a headset with a microphone, better than the laptop speaker.
+- That they know the plan B: the phone number in the invitation with its conference ID, and a support phone number for the day.
+
+## 5. The plan B
+
+| If this fails | Alternative |
+|---|---|
+| The Teams Rooms room | A backup laptop in the room with a certified conference speakerphone, joined to the same meeting |
+| The Teams meeting | A **second Teams meeting** created by the company secretary, with the link already sent to remote attendees "just in case" |
+| The director's connection | Joining by phone with the number and ID in the invitation |
+| A tablet | A spare tablet with its portal session |
+| The room network | Tablets have the papers downloaded; the backup laptop, a 4G router |
+
+- The backup laptop **doesn't join the meeting with its microphone open** while the room is working: two devices with open audio in the same room cause echo.
+- The whole plan B is tested in the check the day before, not just prepared.
+
+## 6. On the day
+
+- **An hour before**: room on, meeting opened from the console, tablets in place, backup laptop charged and switched off, and the Pro portal open on your device.
+- **Discreet presence**: support is visible at the start, while remote attendees connect, and then outside the room, reachable by phone or message with the company secretary.
+- **Confidential items**: if the company secretary has asked for it, nobody from IT enters the room during those items. From outside, the Pro portal shows whether the room is still in the meeting with no issues; if someone needs to go in, the company secretary decides when.
+- Nothing heard or seen in the room is mentioned, not even in the ticket. The ticket records the technical side: what failed, when and how it was solved.
+
+## 7. After the meeting
+
+- **Tablets**: collect them all and count them against the list. If the portal allows it, papers are withdrawn or expire according to the company secretary's policy; if a tablet is missing, lock and remote wipe from the MDM and tell the company secretary.
+- **Temporary files**: on the presenter's laptop, if it's a company one, delete local copies of the presentations (Downloads, temp folders, the desktop) with its owner's agreement; on the backup laptop, sign out and delete anything downloaded.
+- **Whiteboards and room content**: check nothing is left on the displays, digital whiteboards or the console.
+- **Loaned devices** (headsets, chargers, spare tablets) returned and logged.
+- **Five minutes with the company secretary** the next day: what worked, what didn't and what changes for the next board.
+
+## 8. The ticket: "a remote director cannot hear the room"
+
+Thursday, 10:05. The board started five minutes ago. The company secretary messages: a director attending from London says they can see the room but can't hear anything.
+
+**First, which side it's on.** If the other remote attendees hear the room, the problem is on the director's side. If nobody remote hears the room, the problem is in the room. The company secretary asks by chat or phone, without interrupting the meeting.
+
+**If nobody remote hears the room**, the fault is in the room:
+
+- **Mute on the console**: someone pressed the microphone on the console or a mute button on the table. In the meeting, the room's microphone icon shows crossed out.
+- **The selected microphone**: if the room computer has picked another device as the microphone (a cable change, a reboot), the room's audio doesn't go out. In the Pro portal, **Settings › Peripherals › Conference Microphone**, or on the console, **More › Settings** with the admin password, check it's the ceiling microphone or the room's audio processor.
+- **Coverage**: if only the person speaking at one end of the table can't be heard, it's the ceiling microphone's zone, not a fault; ask that person to speak towards the centre and tell the integrator for afterwards.
+
+**If only the director can't hear**, the fault is on their side. By phone with the director:
+
+- **The speaker selected in Teams**: in the meeting, the arrow next to the microphone button shows which microphone and speaker are in use. The usual cause is Teams picking a Bluetooth headset that's switched off or a monitor's output with no speakers.
+- The **volume** of the system and of Teams in their device's volume mixer.
+- If nothing works within two minutes, **the plan B**: they join by phone with the number and ID in the invitation (or the company secretary dials them from the meeting's **People** panel) and keep the computer's video without audio to avoid echo. The company secretary admits them from the lobby.
+
+**Check**: the director confirms to the company secretary that they can hear and be heard.
+
+In the ticket: time, which side the fault was on, the cause (mute, selected device, coverage or the director's device), how it was solved and how long it lasted. If it was the room, an action for the next board's check.
+
+## Next steps
+
+- The [Microsoft Teams Rooms on Crestron](microsoft-teams-rooms-salas-sobre-crestron-en-una-sede-financiera.html) guide covers the room account, the Pro portal and updates outside hours.
+- The Level 2 [Teams Rooms](teams-rooms-poner-en-marcha-una-sala.html) guide explains setting up a room from scratch.
+- The [common Teams problems](teams-los-problemas-mas-comunes.html) guide helps with audio and video faults on the director's side.
+- The [Microsoft Purview](microsoft-purview-etiquetas-de-confidencialidad-retencion-dlp-y-un-documento-cifrado-que-no-abre.html) guide covers sensitivity labels for board papers.
+""")
+
+
+# ---------------------------------------------------------------- 1.x · Outlook · buzón lleno
+g(slug="outlook-exchange-online-buzon-lleno-cuotas-archivo-en-linea-y-ndr-5-2-2", topic="outlook", date="2026-11-03",
+  title_es="Exchange Online: buzón lleno, cuotas, archivo en línea, directiva de retención y el NDR 5.2.2",
+  title_en="Exchange Online: mailbox full, quotas, online archive, retention policy and the NDR 5.2.2",
+  seo_title_en="Exchange Online: mailbox full and NDR 5.2.2 · Iñigo González",
+  seo_title_es="Exchange Online: buzón lleno y NDR 5.2.2 · Iñigo González",
+  dek_es="Cuánto ocupa un buzón y cuánto le permite su licencia, qué carpetas lo llenan, la carpeta Elementos recuperables y su cuota, el archivo en línea con la directiva MRM que mueve lo antiguo, el archivo de expansión automática y un usuario al que los clientes le rebotan los correos con 554 5.2.2 mailbox full.",
+  dek_en="How big a mailbox is and how much its licence allows, which folders fill it, the Recoverable Items folder and its quota, the online archive with the MRM policy that moves old mail, auto-expanding archiving, and a user whose customers get 554 5.2.2 mailbox full bounces.",
+  seo_desc="Exchange Online mailbox full: check size and quota, find what fills it, enable the online archive and an MRM policy, and fix the 554 5.2.2 NDR.",
+  es="""
+## Qué vas a conseguir
+
+Resolver de verdad un buzón lleno en Exchange Online: medir cuánto ocupa y cuál es su límite, encontrar qué carpetas lo llenan, activar el archivo en línea con una directiva que mueva el correo antiguo sin que el usuario haga nada, y entender por qué a veces el buzón "está lleno" aunque el usuario no vea tanto correo. Sin borrar nada del usuario sin su acuerdo.
+
+## Antes de empezar
+
+- Rol de **Administrador de Exchange** o **Administración de destinatarios**, el módulo `ExchangeOnlineManagement` y `Connect-ExchangeOnline`.
+- La licencia del usuario: de ella depende el tamaño máximo del buzón y del archivo. No se puede subir la cuota por encima de lo que da la licencia; solo bajarla.
+- Saber si la organización tiene retenciones (litigio, eDiscovery, directivas de retención de Purview): cambian lo que ocurre con lo borrado.
+
+## 1. Cuánto ocupa y cuánto puede ocupar
+
+:::term PowerShell · Exchange Online
+$ Get-EXOMailboxStatistics -Identity marta.leon@contoso.com | Format-List DisplayName, ItemCount, TotalItemSize, TotalDeletedItemSize
+DisplayName          : Marta León
+ItemCount            : 412873
+TotalItemSize        : 49.62 GB (53,279,123,456 bytes)
+TotalDeletedItemSize : 12.08 GB (12,970,868,736 bytes)
+$ Get-Mailbox marta.leon@contoso.com | Format-List IssueWarningQuota, ProhibitSendQuota, ProhibitSendReceiveQuota, RecoverableItemsQuota, ArchiveStatus
+IssueWarningQuota        : 49 GB (52,613,349,376 bytes)
+ProhibitSendQuota        : 49.5 GB (53,150,220,288 bytes)
+ProhibitSendReceiveQuota : 50 GB (53,687,091,200 bytes)
+RecoverableItemsQuota    : 30 GB (32,212,254,720 bytes)
+ArchiveStatus            : None
+:::
+
+- **TotalItemSize** es lo que el usuario ve y lo que cuenta para la cuota. **TotalDeletedItemSize** es la carpeta **Elementos recuperables**, invisible para él y con su propia cuota.
+- Los tres umbrales: **aviso** (le llega un correo), **prohibir envío** (no puede enviar) y **prohibir envío y recepción** (Exchange rechaza el correo entrante y el remitente recibe un NDR).
+- Este buzón tiene la cuota en 50 GB: o su licencia la da así (Office 365 E1, Exchange Online Plan 1) o alguien la bajó a mano. Compara con la tabla de la sección 5.
+
+> El tamaño que muestra Outlook en local (el `.ost`) no es el del buzón: bajar el tiempo de correo sin conexión aligera el equipo, no el servidor.
+
+## 2. Qué lo está llenando
+
+:::term PowerShell · las carpetas más grandes
+$ Get-EXOMailboxFolderStatistics -Identity marta.leon@contoso.com | Sort-Object { [int64]($_.FolderSize -replace '^.*\\(|,| bytes\\)$','') } -Descending | Select-Object -First 5 FolderPath, ItemsInFolder, FolderSize
+FolderPath                  ItemsInFolder FolderSize
+----------                  ------------- ----------
+/Elementos enviados                 98412 17.31 GB (18,586,329,088 bytes)
+/Bandeja de entrada                 187220 15.90 GB (17,072,394,240 bytes)
+/Bandeja de entrada/Pedidos          64018 8.44 GB (9,062,334,464 bytes)
+/Elementos eliminados                41733 5.12 GB (5,497,558,138 bytes)
+/Archivo                             12090 1.97 GB (2,115,276,390 bytes)
+$ Get-EXOMailboxFolderStatistics -Identity marta.leon@contoso.com -FolderScope RecoverableItems | Select-Object FolderPath, ItemsInFolder, FolderSize
+FolderPath                  ItemsInFolder FolderSize
+----------                  ------------- ----------
+/Elementos recuperables                 0 0 B (0 bytes)
+/Deletions                          88120 11.96 GB (12,841,693,184 bytes)
+/Purges                               904 120.4 MB (126,248,550 bytes)
+/Versions                               0 0 B (0 bytes)
+:::
+
+- **Enviados** y una carpeta de **pedidos** o **facturas** con adjuntos suelen ser la mitad del buzón.
+- **Elementos eliminados** cuenta para la cuota: vaciarla libera espacio, y lo vaciado pasa a Elementos recuperables, que tiene cuota propia.
+- Para el usuario: **Archivo › Herramientas › Limpieza del buzón** en Outlook muestra el tamaño por carpeta y busca los elementos de más de 1 MB. Que decida él qué sobra.
+
+! No borres correo del usuario, ni con `Search-Mailbox` ni con una búsqueda de contenido y purga, sin su acuerdo por escrito y sin comprobar que no hay retención legal. El buzón puede ser prueba en un litigio o contener lo único que queda de un expediente.
+
+## 3. El archivo en línea
+
+El archivo es un segundo buzón del usuario en Exchange Online. Aparece en Outlook y en Outlook en la web como otro buzón en el panel de carpetas y no cuenta para la cuota del principal:
+
+:::term PowerShell · activar el archivo
+$ Enable-Mailbox -Identity marta.leon@contoso.com -Archive
+$ Get-Mailbox marta.leon@contoso.com | Format-List ArchiveStatus, ArchiveState, ArchiveQuota, RetentionPolicy
+ArchiveStatus   : Active
+ArchiveState    : Local
+ArchiveQuota    : 50 GB (53,687,091,200 bytes)
+RetentionPolicy : Default MRM Policy
+:::
+
+- También desde el **Centro de administración de Exchange**: Destinatarios › Buzones › el usuario › Otros › **Administrar archivo de buzón**.
+- Al activar el archivo, el buzón queda con la **Default MRM Policy** si no tenía otra. Su etiqueta **Default 2 year move to archive** mueve al archivo lo que tiene más de dos años, y **Recoverable Items 14 days move to archive** hace lo mismo con Elementos recuperables pasados 14 días.
+- El archivo puede tardar en estar listo. Cuéntaselo al usuario: el correo antiguo "desaparece" de la bandeja y aparece en el archivo, con la misma estructura de carpetas. Nada se borra.
+
+## 4. Una directiva que mueva antes
+
+Si dos años no bastan (el buzón se llena con correo de un año), una directiva propia con una etiqueta de un año:
+
+:::term PowerShell · directiva de retención con traslado a un año
+$ New-RetentionPolicyTag "Contoso 1 año al archivo" -Type All -AgeLimitForRetention 365 -RetentionAction MoveToArchive
+$ New-RetentionPolicy "Contoso Archivo 1 año" -RetentionPolicyTagLinks "Contoso 1 año al archivo","Recoverable Items 14 days move to archive","Personal never move to archive"
+$ Set-Mailbox marta.leon@contoso.com -RetentionPolicy "Contoso Archivo 1 año"
+$ Get-Mailbox marta.leon@contoso.com | Format-List RetentionHoldEnabled, ElcProcessingDisabled
+RetentionHoldEnabled  : False
+ElcProcessingDisabled : False
+$ Start-ManagedFolderAssistant -Identity marta.leon@contoso.com
+:::
+
+- **Start-ManagedFolderAssistant** pone el buzón en cola para que el asistente de carpetas administradas lo procese ya, sin esperar a su ciclo. Aun así, mover decenas de gigas lleva horas o días: vuelve a mirar `Get-EXOMailboxStatistics` y `Get-EXOMailboxStatistics -Archive` al día siguiente.
+- Si **RetentionHoldEnabled** o **ElcProcessingDisabled** están en `True`, el asistente no mueve nada. Alguien los puso por un motivo: pregunta antes de quitarlos.
+- La etiqueta **Personal never move to archive** deja al usuario excluir una carpeta concreta desde Outlook.
+- Las directivas MRM conviven con las de retención de Purview. Si la organización usa Purview, consulta con quien la gestiona antes de crear una MRM nueva.
+
+## 5. Licencias, cuotas y el archivo de expansión automática
+
+Valores de la descripción del servicio de Exchange Online a noviembre de 2026 (revísalos en *Exchange Online limits*, cambian):
+
+| Licencia | Buzón principal | Archivo |
+|---|---|---|
+| Microsoft 365 Business Basic y Standard | 100 GB | 50 GB |
+| Microsoft 365 Business Premium | 100 GB | 1,5 TB con expansión automática |
+| Microsoft 365 / Office 365 E3 y E5 | 100 GB | 1,5 TB con expansión automática |
+| Office 365 E1, Exchange Online Plan 1 | 50 GB | 50 GB (más con el complemento Exchange Online Archiving) |
+| F3 | 2 GB | No incluido |
+
+- La cuota real de cada buzón la dice `Get-Mailbox`, no la tabla: un administrador puede haberla bajado, y un buzón creado hace años puede conservar un valor antiguo.
+- **Expansión automática**: con la licencia adecuada, el archivo empieza con 100 GB y crece por tramos hasta 1,5 TB. Se activa por usuario con `Enable-Mailbox marta.leon@contoso.com -AutoExpandingArchive` o para toda la organización con `Set-OrganizationConfig -AutoExpandingArchive`. **No se puede desactivar** después; los tramos nuevos tardan en aprovisionarse.
+- **Elementos recuperables**: 30 GB sin retención; 100 GB si el buzón está en retención. Si se llena, el usuario no puede borrar ("No se pudo completar la operación") ni a veces aceptar reuniones. Con el archivo activado, la etiqueta de 14 días vacía esa carpeta hacia el archivo.
+- El archivo es para el correo del propio usuario. Copiar a un buzón el correo de otros para archivarlo no está permitido por las condiciones del servicio.
+
+## 6. El ticket: "me dice que el buzón está lleno y a los clientes les rebotan los correos"
+
+Martes, 10:20. Marta, de administración, tiene en Outlook la barra roja **Su buzón está lleno** y no puede enviar. Un cliente le reenvía por WhatsApp el rebote que recibe:
+
+:::ui Informe de no entrega · para el remitente externo
+= Your message to marta.leon@contoso.com couldn't be delivered.
+= marta.leon's mailbox is full.
+= Remote Server returned '554 5.2.2 mailbox full; STOREDRV.Deliver.Exception:QuotaExceededException.MapiExceptionQuotaExceeded'
+:::
+
+1. **Qué umbral ha pasado**: `Get-EXOMailboxStatistics` da 49,62 GB con la cuota en 50 GB. Ha superado *prohibir envío* (49,5 GB) y está a punto de *prohibir envío y recepción*; parte del correo entrante ya rebota. El correo rechazado **no** se encola en Exchange: el remitente tiene que volver a enviarlo.
+2. **Qué permite su licencia**: Marta tiene Business Standard, que da 100 GB, pero `Get-Mailbox` dice 50 GB. Alguien la limitó hace tiempo o el buzón conserva el valor de cuando se creó. Con el visto bueno del responsable, la cuota vuelve al máximo de su licencia: `Set-Mailbox marta.leon@contoso.com -ProhibitSendReceiveQuota 100GB -ProhibitSendQuota 99GB -IssueWarningQuota 98GB`. En minutos vuelve a enviar y recibir.
+3. **Si ya estuviera en el máximo**, no hay cuota que subir. El alivio inmediato es que Marta vacíe **Elementos eliminados** (5 GB aquí) y mueva o borre ella misma los adjuntos grandes que no necesite.
+4. **La solución que dura**: archivo en línea y directiva de un año (secciones 3 y 4), `Start-ManagedFolderAssistant` y seguimiento al día siguiente. En Business Standard el archivo se queda en 50 GB; si se llenará pronto, toca hablar de licencia (Exchange Online Archiving o un plan superior) con quien la paga.
+5. **Avisar a los remitentes**: el cliente y quien haya escrito esa mañana deben reenviar. Marta lo hace desde su propio correo una vez resuelto.
+
+En el ticket: tamaño antes y después, cuota anterior y nueva con quién la aprobó, archivo activado, directiva asignada y la fecha en que se revisa que el traslado ha terminado.
+
+## Siguientes pasos
+
+- La primera guía de este tema, [buzón compartido, permisos y respuesta automática](outlook-exchange-online-buzon-compartido-permisos-autorespuesta.html), cubre también el Outlook que no abre por un `.ost` demasiado grande.
+- Un informe mensual de buzones por encima del 90 % de su cuota (`Get-EXOMailbox -ResultSize Unlimited` con `Get-EXOMailboxStatistics`) evita que el problema llegue como incidencia.
+- Las directivas de retención de Purview, las retenciones por litigio y la búsqueda de contenido son el siguiente paso cuando hay que conservar o eliminar correo por norma, no por espacio.
+""",
+  en="""
+## What you'll get
+
+Fixing a full mailbox in Exchange Online properly: measuring how much it holds and what its limit is, finding which folders fill it, turning on the online archive with a policy that moves old mail without the user doing anything, and understanding why a mailbox is sometimes "full" even though the user doesn't see that much mail. Without deleting any of the user's mail without their agreement.
+
+## Before you start
+
+- The **Exchange Administrator** or **Recipient Management** role, the `ExchangeOnlineManagement` module and `Connect-ExchangeOnline`.
+- The user's licence: it sets the maximum size of the mailbox and the archive. You can't raise the quota above what the licence gives; only lower it.
+- Knowing whether the organisation uses holds (litigation, eDiscovery, Purview retention policies): they change what happens to deleted mail.
+
+## 1. How big it is and how big it can get
+
+:::term PowerShell · Exchange Online
+$ Get-EXOMailboxStatistics -Identity marta.leon@contoso.com | Format-List DisplayName, ItemCount, TotalItemSize, TotalDeletedItemSize
+DisplayName          : Marta León
+ItemCount            : 412873
+TotalItemSize        : 49.62 GB (53,279,123,456 bytes)
+TotalDeletedItemSize : 12.08 GB (12,970,868,736 bytes)
+$ Get-Mailbox marta.leon@contoso.com | Format-List IssueWarningQuota, ProhibitSendQuota, ProhibitSendReceiveQuota, RecoverableItemsQuota, ArchiveStatus
+IssueWarningQuota        : 49 GB (52,613,349,376 bytes)
+ProhibitSendQuota        : 49.5 GB (53,150,220,288 bytes)
+ProhibitSendReceiveQuota : 50 GB (53,687,091,200 bytes)
+RecoverableItemsQuota    : 30 GB (32,212,254,720 bytes)
+ArchiveStatus            : None
+:::
+
+- **TotalItemSize** is what the user sees and what counts towards the quota. **TotalDeletedItemSize** is the **Recoverable Items** folder, invisible to them and with its own quota.
+- The three thresholds: **warning** (they get an email), **prohibit send** (they can't send) and **prohibit send and receive** (Exchange rejects incoming mail and the sender gets an NDR).
+- This mailbox's quota is 50 GB: either its licence gives that (Office 365 E1, Exchange Online Plan 1) or someone lowered it by hand. Compare with the table in section 5.
+
+> The size Outlook shows locally (the `.ost`) is not the mailbox size: reducing the offline mail period lightens the device, not the server.
+
+## 2. What is filling it
+
+:::term PowerShell · the largest folders
+$ Get-EXOMailboxFolderStatistics -Identity marta.leon@contoso.com | Sort-Object { [int64]($_.FolderSize -replace '^.*\\(|,| bytes\\)$','') } -Descending | Select-Object -First 5 FolderPath, ItemsInFolder, FolderSize
+FolderPath               ItemsInFolder FolderSize
+----------               ------------- ----------
+/Sent Items                      98412 17.31 GB (18,586,329,088 bytes)
+/Inbox                          187220 15.90 GB (17,072,394,240 bytes)
+/Inbox/Orders                    64018 8.44 GB (9,062,334,464 bytes)
+/Deleted Items                   41733 5.12 GB (5,497,558,138 bytes)
+/Archive                         12090 1.97 GB (2,115,276,390 bytes)
+$ Get-EXOMailboxFolderStatistics -Identity marta.leon@contoso.com -FolderScope RecoverableItems | Select-Object FolderPath, ItemsInFolder, FolderSize
+FolderPath               ItemsInFolder FolderSize
+----------               ------------- ----------
+/Recoverable Items                   0 0 B (0 bytes)
+/Deletions                       88120 11.96 GB (12,841,693,184 bytes)
+/Purges                            904 120.4 MB (126,248,550 bytes)
+/Versions                            0 0 B (0 bytes)
+:::
+
+- **Sent Items** and an **orders** or **invoices** folder full of attachments are often half the mailbox.
+- **Deleted Items** counts towards the quota: emptying it frees space, and what is emptied moves to Recoverable Items, which has its own quota.
+- For the user: **File › Tools › Mailbox Cleanup** in Outlook shows the size per folder and finds items over 1 MB. Let them decide what goes.
+
+! Don't delete the user's mail, with `Search-Mailbox` or with a content search and purge, without their written agreement and without checking there is no legal hold. The mailbox may be evidence in litigation or hold the only remaining copy of a case file.
+
+## 3. The online archive
+
+The archive is a second mailbox for the user in Exchange Online. It shows in Outlook and Outlook on the web as another mailbox in the folder pane and doesn't count towards the primary's quota:
+
+:::term PowerShell · enable the archive
+$ Enable-Mailbox -Identity marta.leon@contoso.com -Archive
+$ Get-Mailbox marta.leon@contoso.com | Format-List ArchiveStatus, ArchiveState, ArchiveQuota, RetentionPolicy
+ArchiveStatus   : Active
+ArchiveState    : Local
+ArchiveQuota    : 50 GB (53,687,091,200 bytes)
+RetentionPolicy : Default MRM Policy
+:::
+
+- Also from the **Exchange admin center**: Recipients › Mailboxes › the user › Others › **Manage mailbox archive**.
+- When the archive is turned on, the mailbox gets the **Default MRM Policy** if it had no other. Its **Default 2 year move to archive** tag moves anything older than two years to the archive, and **Recoverable Items 14 days move to archive** does the same with Recoverable Items after 14 days.
+- The archive can take a while to be ready. Tell the user: old mail "disappears" from the inbox and shows up in the archive, with the same folder structure. Nothing is deleted.
+
+## 4. A policy that moves sooner
+
+If two years isn't enough (the mailbox fills up with a year's mail), your own policy with a one-year tag:
+
+:::term PowerShell · retention policy moving at one year
+$ New-RetentionPolicyTag "Contoso 1 year to archive" -Type All -AgeLimitForRetention 365 -RetentionAction MoveToArchive
+$ New-RetentionPolicy "Contoso Archive 1 year" -RetentionPolicyTagLinks "Contoso 1 year to archive","Recoverable Items 14 days move to archive","Personal never move to archive"
+$ Set-Mailbox marta.leon@contoso.com -RetentionPolicy "Contoso Archive 1 year"
+$ Get-Mailbox marta.leon@contoso.com | Format-List RetentionHoldEnabled, ElcProcessingDisabled
+RetentionHoldEnabled  : False
+ElcProcessingDisabled : False
+$ Start-ManagedFolderAssistant -Identity marta.leon@contoso.com
+:::
+
+- **Start-ManagedFolderAssistant** queues the mailbox so the Managed Folder Assistant processes it now, instead of waiting for its cycle. Even so, moving tens of gigabytes takes hours or days: check `Get-EXOMailboxStatistics` and `Get-EXOMailboxStatistics -Archive` again the next day.
+- If **RetentionHoldEnabled** or **ElcProcessingDisabled** are `True`, the assistant moves nothing. Someone set them for a reason: ask before clearing them.
+- The **Personal never move to archive** tag lets the user exclude a specific folder from Outlook.
+- MRM policies coexist with Purview retention policies. If the organisation uses Purview, check with whoever runs it before creating a new MRM policy.
+
+## 5. Licences, quotas and auto-expanding archiving
+
+Values from the Exchange Online service description as of November 2026 (check them in *Exchange Online limits*, they change):
+
+| Licence | Primary mailbox | Archive |
+|---|---|---|
+| Microsoft 365 Business Basic and Standard | 100 GB | 50 GB |
+| Microsoft 365 Business Premium | 100 GB | 1.5 TB with auto-expanding |
+| Microsoft 365 / Office 365 E3 and E5 | 100 GB | 1.5 TB with auto-expanding |
+| Office 365 E1, Exchange Online Plan 1 | 50 GB | 50 GB (more with the Exchange Online Archiving add-on) |
+| F3 | 2 GB | Not included |
+
+- Each mailbox's real quota is what `Get-Mailbox` says, not the table: an administrator may have lowered it, and a mailbox created years ago may keep an old value.
+- **Auto-expanding**: with the right licence, the archive starts at 100 GB and grows in steps up to 1.5 TB. Turn it on per user with `Enable-Mailbox marta.leon@contoso.com -AutoExpandingArchive` or for the whole organisation with `Set-OrganizationConfig -AutoExpandingArchive`. It **can't be turned off** afterwards; new storage takes time to be provisioned.
+- **Recoverable Items**: 30 GB without a hold; 100 GB if the mailbox is on hold. When it fills up, the user can't delete ("The operation could not be completed") and sometimes can't accept meetings. With the archive on, the 14-day tag empties that folder into the archive.
+- The archive is for the user's own mail. Copying other people's mail into a mailbox to archive it is not allowed under the service terms.
+
+## 6. The ticket: "it says my mailbox is full and customers' emails bounce"
+
+Tuesday, 10:20. Marta, in accounts, has the red **Your mailbox is full** bar in Outlook and can't send. A customer forwards her the bounce they got:
+
+:::ui Non-delivery report · to the external sender
+= Your message to marta.leon@contoso.com couldn't be delivered.
+= marta.leon's mailbox is full.
+= Remote Server returned '554 5.2.2 mailbox full; STOREDRV.Deliver.Exception:QuotaExceededException.MapiExceptionQuotaExceeded'
+:::
+
+1. **Which threshold it has crossed**: `Get-EXOMailboxStatistics` shows 49.62 GB against a 50 GB quota. It is past *prohibit send* (49.5 GB) and about to hit *prohibit send and receive*; some incoming mail is already bouncing. Rejected mail is **not** queued in Exchange: the sender has to send it again.
+2. **What her licence allows**: Marta has Business Standard, which gives 100 GB, but `Get-Mailbox` says 50 GB. Someone limited it long ago or the mailbox kept the value it was created with. With the manager's approval, the quota goes back to the licence maximum: `Set-Mailbox marta.leon@contoso.com -ProhibitSendReceiveQuota 100GB -ProhibitSendQuota 99GB -IssueWarningQuota 98GB`. Within minutes she can send and receive again.
+3. **If it were already at the maximum**, there is no quota to raise. The immediate relief is for Marta to empty **Deleted Items** (5 GB here) and move or delete the large attachments she doesn't need herself.
+4. **The lasting fix**: online archive and a one-year policy (sections 3 and 4), `Start-ManagedFolderAssistant` and a check the next day. On Business Standard the archive stays at 50 GB; if it will fill up soon, the licence (Exchange Online Archiving or a higher plan) is a conversation with whoever pays for it.
+5. **Tell the senders**: the customer and anyone who wrote that morning must resend. Marta does it from her own mailbox once it is fixed.
+
+In the ticket: size before and after, old and new quota with who approved it, archive enabled, policy assigned, and the date you check the move has finished.
+
+## Next steps
+
+- The first guide in this topic, [shared mailbox, permissions and automatic replies](outlook-exchange-online-buzon-compartido-permisos-autorespuesta.html), also covers the Outlook that won't open because of an oversized `.ost`.
+- A monthly report of mailboxes above 90 % of their quota (`Get-EXOMailbox -ResultSize Unlimited` with `Get-EXOMailboxStatistics`) keeps the problem from arriving as an incident.
+- Purview retention policies, litigation holds and content search are the next step when mail has to be kept or deleted by rule, not for space.
+""")
+
+# ---------------------------------------------------------------- S1 · WiFi de huéspedes
+g(slug="wifi-de-huespedes-en-mikrotik-hotspot-portal-cautivo-vales-y-limites", topic="wifi-huespedes", date="2026-11-03",
+  title_es="WiFi de huéspedes en MikroTik: red aislada, Hotspot con portal cautivo, vales, límites por usuario y un huésped que no navega",
+  title_en="Guest Wi-Fi on MikroTik: an isolated network, Hotspot with a captive portal, vouchers, per-user limits and a guest who can't browse",
+  seo_title_en="MikroTik Hotspot: guest Wi-Fi with a portal · Iñigo González",
+  seo_title_es="MikroTik Hotspot: WiFi de huéspedes y portal · Iñigo González",
+  dek_es="La red de huéspedes de un hotel o un restaurante en RouterOS 7: VLAN separada del TPV y del personal, cortafuegos hacia las redes privadas, ip hotspot setup, la página de acceso, usuarios y vales con perfiles y límites, el walled garden para la web del hotel, el DHCP y los registros, y el huésped que se conecta pero no ve el portal.",
+  dek_en="A hotel or restaurant guest network on RouterOS 7: a VLAN apart from the POS and staff, a firewall towards private ranges, ip hotspot setup, the login page, users and vouchers with profiles and limits, the walled garden for the hotel website, DHCP and logs, and the guest who connects but never sees the portal.",
+  seo_desc="Guest Wi-Fi on MikroTik RouterOS 7: isolated VLAN, Hotspot captive portal, vouchers, per-user rate limits, walled garden and troubleshooting.",
+  es="""
+## Qué vas a conseguir
+
+Una WiFi de huéspedes que se gestiona sola: aislada del TPV, de los datáfonos y de la red del personal, con una página de acceso del hotel, usuarios por habitación o vales para el restaurante, un límite de velocidad por persona y los registros para saber quién se conectó. Y un método para el ticket más repetido de recepción: "estoy conectado pero no me sale nada".
+
+## Antes de empezar
+
+- Un router **MikroTik** con **RouterOS 7** y la red del local montada como en la guía de [red y WiFi de un restaurante u hotel](mikrotik-y-tp-link-omada-red-y-wifi-de-un-restaurante-u-hotel.html): un bridge con filtrado de VLAN y la **VLAN 100** para clientes.
+- Puntos de acceso que lleven el SSID de huéspedes a esa VLAN. Si son TP-Link Omada, el SSID **sin** el portal de Omada: un solo portal, el del MikroTik.
+- Acceso por Winbox o SSH desde la VLAN de gestión, y una copia (`/export`) antes de empezar.
+- Saber qué pide la dirección: acceso libre aceptando condiciones, clave por habitación o vales de un día.
+
+## 1. La red de huéspedes, aparte
+
+La VLAN 100 tiene su interfaz y su subred. Una /22 da más de mil direcciones, suficiente para un hotel lleno con dos o tres dispositivos por persona:
+
+:::term RouterOS · la interfaz de huéspedes
+$ /interface vlan add interface=bridge1 name=vlan100-huespedes vlan-id=100
+$ /ip address add address=10.40.100.1/22 interface=vlan100-huespedes
+$ /ip firewall address-list add list=redes-privadas address=10.0.0.0/8
+$ /ip firewall address-list add list=redes-privadas address=172.16.0.0/12
+$ /ip firewall address-list add list=redes-privadas address=192.168.0.0/16
+$ /ip firewall filter add chain=forward in-interface=vlan100-huespedes dst-address-list=redes-privadas action=drop comment="huespedes: nada interno" place-before=0
+:::
+
+- La regla bloquea cualquier destino privado, no solo las VLAN del local: también la red del router 4G (`192.168.8.0/24`) o una VPN hacia la central.
+- Hacia el router, los huéspedes solo necesitan DHCP, DNS y el portal. Las reglas dinámicas del Hotspot abren lo suyo; añade DNS y cierra lo demás:
+
+:::term RouterOS · lo que un huésped puede pedir al router
+$ /ip firewall filter add chain=input in-interface=vlan100-huespedes protocol=udp dst-port=53,67 action=accept comment="huespedes: DNS y DHCP"
+$ /ip firewall filter add chain=input in-interface=vlan100-huespedes protocol=tcp dst-port=53 action=accept
+$ /ip firewall filter add chain=input in-interface=vlan100-huespedes action=drop comment="huespedes: ni Winbox ni SSH"
+:::
+
+- **Aislamiento entre clientes** en el punto de acceso: un huésped no debe ver el portátil del de al lado. En Omada, *Guest Network* en el SSID; en un punto de acceso MikroTik con el paquete `wifi`, `client-isolation=yes` en el *datapath* del SSID.
+
+## 2. El Hotspot con ip hotspot setup
+
+El asistente crea el servidor, el perfil, el pool, el DHCP y las reglas dinámicas en una sola pasada:
+
+:::term RouterOS · /ip hotspot setup
+$ /ip hotspot setup
+hotspot interface: vlan100-huespedes
+local address of network: 10.40.100.1/22
+masquerade network: no
+address pool of network: 10.40.100.10-10.40.103.250
+select certificate: none
+ip address of smtp server: 0.0.0.0
+dns servers: 1.1.1.1,9.9.9.9
+dns name: wifi.northwind.example
+name of local hotspot user: recepcion
+password for the user: ********
+:::
+
+- **masquerade network: no** porque la regla de NAT hacia la WAN ya existe. Si respondes que sí, quedará una segunda regla que hace lo mismo.
+- **dns name** es el nombre con el que el huésped ve el portal y al que vuelve para cerrar sesión. Uno corto y del dominio del hotel.
+- El router hace de DNS para los huéspedes: `/ip dns set allow-remote-requests=yes`. Con el input cerrado como en la sección 1, solo responde a las redes internas.
+- Revisa lo creado con `/ip hotspot print`, `/ip hotspot profile print` y `/ip dhcp-server print`. En **IP › Firewall** verás reglas marcadas con **D** en cadenas `hs-*`: son dinámicas, van siempre arriba y no se tocan.
+
+! El asistente pone el DHCP con su propio tiempo de concesión. Ajústalo en la sección 5; con un salón lleno, el tiempo de concesión decide si el pool alcanza.
+
+## 3. La página de acceso y el walled garden
+
+Las páginas del portal están en **Files › hotspot**: `login.html`, `status.html`, `logout.html` y sus imágenes. Se editan fuera del router y se suben de nuevo:
+
+- En `login.html`, el logotipo del hotel, el texto de condiciones de uso (lo redacta la dirección o su asesor legal) y los campos de usuario y clave. No quites el formulario ni sus campos ocultos: son los que envían el inicio de sesión.
+- Guarda una copia de la carpeta original antes de tocarla. Si la página deja de funcionar, se vuelve a ella.
+- Cómo se entra se elige en el perfil del servidor:
+
+:::term RouterOS · perfil del servidor Hotspot
+$ /ip hotspot profile set [find name=hsprof1] login-by=http-chap,cookie,trial http-cookie-lifetime=1d trial-uptime-limit=30m trial-user-profile=default
+:::
+
+- **http-chap**: usuario y clave sin que viajen en claro. **cookie**: el dispositivo no vuelve a pedir el portal en un día. **trial**: acceso libre de 30 minutos al día por dispositivo, útil en una cafetería; quítalo si todo debe pasar por usuario.
+
+El **walled garden** es lo que se puede abrir **sin** iniciar sesión: la web del hotel, la carta del restaurante o la pasarela de reservas:
+
+:::term RouterOS · walled garden
+$ /ip hotspot walled-garden add dst-host=www.northwind.example comment="web del hotel"
+$ /ip hotspot walled-garden add dst-host=*.northwind.example comment="carta y reservas"
+$ /ip hotspot walled-garden ip add dst-address=203.0.113.40 action=accept comment="servidor de reservas por IP"
+:::
+
+`walled-garden` filtra por nombre las peticiones web; `walled-garden ip`, cualquier tráfico por dirección. Cuanto más corto, mejor: cada entrada es una puerta abierta sin identificar a nadie.
+
+## 4. Usuarios, vales y perfiles con límites
+
+El **perfil de usuario** fija la velocidad y la duración; el **usuario**, quién entra:
+
+:::term RouterOS · perfiles y usuarios
+$ /ip hotspot user profile add name=huesped rate-limit=5M/20M shared-users=3 idle-timeout=30m keepalive-timeout=2m
+$ /ip hotspot user profile add name=evento rate-limit=2M/8M shared-users=1 session-timeout=6h
+$ /ip hotspot user add name=hab214 password=Mar7lago profile=huesped limit-uptime=3d comment="check-out 06/11"
+$ /ip hotspot user add name=boda1108-01 password=k4p9 profile=evento limit-uptime=8h
+$ /ip hotspot user print where profile=huesped
+Columns: NAME, PROFILE, UPTIME
+#  NAME    PROFILE  UPTIME
+0  hab214  huesped  0s
+:::
+
+- **rate-limit** es subida/bajada del huésped: `5M/20M` son 5 Mbps de subida y 20 de bajada por usuario. El Hotspot crea una cola dinámica por cada sesión.
+- **shared-users=3**: el móvil, la tableta y el portátil de la habitación con la misma clave.
+- **limit-uptime** caduca la clave por tiempo de conexión; para que no sirva después del check-out, recepción la borra o el usuario se crea con la duración de la estancia.
+- **Vales para eventos o el restaurante**: lotes de usuarios del perfil `evento` impresos en tarjetas. Para muchos lotes o vales con caducidad por fecha, el paquete **User Manager** de RouterOS 7 hace de servidor RADIUS y los genera; el Hotspot lo usa con `use-radius=yes` en el perfil del servidor.
+- Las colas del Hotspot limitan a cada huésped. El **total** de la red de clientes, para que siempre quede ancho de banda para el TPV, va en una cola simple sobre la /22, como en la guía de red del local. Y recuerda: lo que va por FastTrack se salta las colas.
+
+## 5. DHCP, concesiones y registros
+
+:::term RouterOS · concesión y ocupación del pool
+$ /ip dhcp-server set [find interface=vlan100-huespedes] name=dhcp-huespedes lease-time=1h
+$ /ip dhcp-server lease print count-only where server=dhcp-huespedes
+388
+$ /ip hotspot active print
+Columns: SERVER, USER, ADDRESS, UPTIME, SESSION-TIME-LEFT
+#  SERVER     USER         ADDRESS        UPTIME   SESSION-TIME-LEFT
+0  hotspot1   hab214       10.40.100.57   1h12m
+1  hotspot1   boda1108-01  10.40.101.203  22m      5h38m
+:::
+
+- Una hora de concesión libera rápido las direcciones de quien se va, sin que el huésped que se queda lo note.
+- `/ip hotspot host print` muestra **todos** los dispositivos que el Hotspot ve, hayan iniciado sesión o no; `/ip hotspot active print`, solo las sesiones abiertas.
+- Registros: `/system logging add topics=hotspot action=memory` y `/log print where topics~"hotspot"`. Cada inicio y cierre de sesión queda con usuario, IP y MAC.
+- En muchos países la ley obliga a conservar los registros de conexión de una red pública durante un tiempo. Envíalos a un servidor syslog (`/system logging action add name=syslog target=remote remote=10.40.10.20`) y pregunta a la dirección cuánto tiempo deben guardarse.
+
+## 6. El ticket: "el huésped se conecta a la WiFi pero no navega / no le sale la página de acceso"
+
+Viernes, 22:40. Recepción llama: el cliente de la 312 ve "Conectado" en el móvil, pero no le aparece la página para poner la clave y no carga nada. Otros huéspedes navegan bien.
+
+1. **¿Tiene dirección?** En `/ip hotspot host print` se busca su MAC (el huésped la ve en los ajustes de la WiFi). Si **no aparece**, no ha recibido IP: `/ip dhcp-server lease print count-only` da 1.012 de 1.019 posibles. El pool está agotado por un tiempo de concesión de tres días que alguien puso. Se baja a una hora y se libera lo que no está activo; a los minutos el móvil obtiene dirección. Si aparece con una `169.254.x.x` en su móvil, es lo mismo.
+2. **Tiene IP, pero no sale el portal.** El sistema del móvil detecta el portal pidiendo una página **http://** fija a su fabricante; el Hotspot la intercepta y abre la ventana de acceso. Si no la abre:
+
+- **Navegadores con HTTPS primero**: el huésped escribe una web en `https://`. El Hotspot no puede redirigir HTTPS sin un error de certificado, así que la página no carga. Que abra `http://wifi.northwind.example` (el *dns name*); recepción lo tiene impreso en la tarjeta de la habitación.
+- **DNS fijo o VPN**: un móvil con *DNS privado* fijado en un proveedor concreto, o con una VPN que arranca sola, no ve el portal. Que ponga el DNS privado en automático o pause la VPN hasta iniciar sesión.
+- **El walled garden demasiado generoso**: si alguien añadió los dominios de comprobación de los fabricantes (o un `*` amplio) al walled garden, el móvil cree que ya tiene internet y no abre la ventana. `/ip hotspot walled-garden print` y fuera lo que no sea la web del hotel.
+
+3. **Ve el portal, pone la clave y falla.** `/log print where topics~"hotspot"` muestra el intento: `login failed: invalid username or password`, o que el usuario ha agotado su tiempo. La clave caducó con el `limit-uptime`, o hay más dispositivos que `shared-users`. Recepción le da una nueva.
+4. **Inicia sesión y no navega.** Si `/ip hotspot active print` lo muestra activo, el problema está detrás: `/ping 1.1.1.1` desde el router, la DNS (`/ip dns print`) y la cola de su sesión en `/queue simple print where dynamic`. Si todos los huéspedes van mal a la vez, es la salida a internet y el ticket cambia de dueño.
+
+En el ticket: MAC e IP del dispositivo, en qué paso falló, la causa y el cambio (concesión, walled garden, usuario). Si fue el pool, que se revise también en los demás establecimientos.
+
+> Una tarjeta en la habitación con el nombre de la red, la dirección `http://` del portal y la clave evita la mitad de estas llamadas.
+
+## Siguientes pasos
+
+- La guía de [red y WiFi de un restaurante u hotel](mikrotik-y-tp-link-omada-red-y-wifi-de-un-restaurante-u-hotel.html) tiene el plan de VLAN completo, la doble WAN y la WiFi lenta en mitad de una boda.
+- La de [Zabbix en un restaurante o un hotel](zabbix-monitorizar-un-restaurante-u-hotel-tpv-impresoras-de-cocina-e-internet.html) puede vigilar el número de sesiones del Hotspot y la ocupación del pool para avisar antes de que se agote.
+- Si el hotel quiere que el usuario de la WiFi salga del sistema de reservas al hacer el check-in, el paso siguiente es un servidor RADIUS conectado al PMS.
+""",
+  en="""
+## What you'll get
+
+A guest Wi-Fi that runs itself: isolated from the POS, the card terminals and the staff network, with a hotel login page, per-room users or vouchers for the restaurant, a speed limit per person and logs to know who connected. And a method for reception's most repeated ticket: "I'm connected but nothing comes up".
+
+## Before you start
+
+- A **MikroTik** router on **RouterOS 7** with the venue network built as in the [restaurant or hotel network and WiFi](mikrotik-y-tp-link-omada-red-y-wifi-de-un-restaurante-u-hotel.html) guide: a bridge with VLAN filtering and **VLAN 100** for guests.
+- Access points that put the guest SSID on that VLAN. If they are TP-Link Omada, the SSID **without** Omada's portal: one portal only, the MikroTik's.
+- Winbox or SSH access from the management VLAN, and a backup (`/export`) before you start.
+- Knowing what management wants: free access after accepting terms, a key per room or one-day vouchers.
+
+## 1. The guest network, kept apart
+
+VLAN 100 has its own interface and subnet. A /22 gives over a thousand addresses, enough for a full hotel with two or three devices per person:
+
+:::term RouterOS · the guest interface
+$ /interface vlan add interface=bridge1 name=vlan100-huespedes vlan-id=100
+$ /ip address add address=10.40.100.1/22 interface=vlan100-huespedes
+$ /ip firewall address-list add list=redes-privadas address=10.0.0.0/8
+$ /ip firewall address-list add list=redes-privadas address=172.16.0.0/12
+$ /ip firewall address-list add list=redes-privadas address=192.168.0.0/16
+$ /ip firewall filter add chain=forward in-interface=vlan100-huespedes dst-address-list=redes-privadas action=drop comment="guests: nothing internal" place-before=0
+:::
+
+- The rule blocks every private destination, not only the venue's VLANs: also the 4G router's network (`192.168.8.0/24`) or a VPN to head office.
+- Towards the router, guests only need DHCP, DNS and the portal. The Hotspot's dynamic rules open what it needs; add DNS and close the rest:
+
+:::term RouterOS · what a guest may ask the router for
+$ /ip firewall filter add chain=input in-interface=vlan100-huespedes protocol=udp dst-port=53,67 action=accept comment="guests: DNS and DHCP"
+$ /ip firewall filter add chain=input in-interface=vlan100-huespedes protocol=tcp dst-port=53 action=accept
+$ /ip firewall filter add chain=input in-interface=vlan100-huespedes action=drop comment="guests: no Winbox, no SSH"
+:::
+
+- **Client isolation** on the access point: a guest must not see the laptop next door. In Omada, *Guest Network* on the SSID; on a MikroTik access point with the `wifi` package, `client-isolation=yes` on the SSID's *datapath*.
+
+## 2. The Hotspot with ip hotspot setup
+
+The wizard creates the server, the profile, the pool, the DHCP server and the dynamic rules in one go:
+
+:::term RouterOS · /ip hotspot setup
+$ /ip hotspot setup
+hotspot interface: vlan100-huespedes
+local address of network: 10.40.100.1/22
+masquerade network: no
+address pool of network: 10.40.100.10-10.40.103.250
+select certificate: none
+ip address of smtp server: 0.0.0.0
+dns servers: 1.1.1.1,9.9.9.9
+dns name: wifi.northwind.example
+name of local hotspot user: recepcion
+password for the user: ********
+:::
+
+- **masquerade network: no** because the NAT rule towards the WAN already exists. Answer yes and you get a second rule doing the same thing.
+- **dns name** is the name under which the guest sees the portal and goes back to log out. A short one in the hotel's domain.
+- The router is the guests' DNS: `/ip dns set allow-remote-requests=yes`. With input closed as in section 1, it only answers the internal networks.
+- Review what was created with `/ip hotspot print`, `/ip hotspot profile print` and `/ip dhcp-server print`. Under **IP › Firewall** you'll see rules flagged **D** in `hs-*` chains: they are dynamic, always at the top, and you leave them alone.
+
+! The wizard sets up DHCP with its own lease time. Adjust it in section 5; with a full function room, the lease time decides whether the pool is big enough.
+
+## 3. The login page and the walled garden
+
+The portal pages are under **Files › hotspot**: `login.html`, `status.html`, `logout.html` and their images. Edit them off the router and upload them again:
+
+- In `login.html`, the hotel logo, the terms of use (written by management or its legal adviser) and the username and password fields. Don't remove the form or its hidden fields: they are what submits the login.
+- Keep a copy of the original folder before touching it. If the page stops working, you go back to it.
+- How guests sign in is chosen in the server profile:
+
+:::term RouterOS · Hotspot server profile
+$ /ip hotspot profile set [find name=hsprof1] login-by=http-chap,cookie,trial http-cookie-lifetime=1d trial-uptime-limit=30m trial-user-profile=default
+:::
+
+- **http-chap**: username and password without sending them in clear. **cookie**: the device isn't asked for the portal again for a day. **trial**: free access for 30 minutes a day per device, useful in a café; remove it if everything must go through a user.
+
+The **walled garden** is what can be opened **without** signing in: the hotel website, the restaurant menu or the booking page:
+
+:::term RouterOS · walled garden
+$ /ip hotspot walled-garden add dst-host=www.northwind.example comment="hotel website"
+$ /ip hotspot walled-garden add dst-host=*.northwind.example comment="menu and bookings"
+$ /ip hotspot walled-garden ip add dst-address=203.0.113.40 action=accept comment="booking server by IP"
+:::
+
+`walled-garden` filters web requests by name; `walled-garden ip`, any traffic by address. The shorter, the better: every entry is an open door with nobody identified.
+
+## 4. Users, vouchers and profiles with limits
+
+The **user profile** sets the speed and duration; the **user**, who gets in:
+
+:::term RouterOS · profiles and users
+$ /ip hotspot user profile add name=huesped rate-limit=5M/20M shared-users=3 idle-timeout=30m keepalive-timeout=2m
+$ /ip hotspot user profile add name=evento rate-limit=2M/8M shared-users=1 session-timeout=6h
+$ /ip hotspot user add name=hab214 password=Mar7lago profile=huesped limit-uptime=3d comment="check-out 06/11"
+$ /ip hotspot user add name=boda1108-01 password=k4p9 profile=evento limit-uptime=8h
+$ /ip hotspot user print where profile=huesped
+Columns: NAME, PROFILE, UPTIME
+#  NAME    PROFILE  UPTIME
+0  hab214  huesped  0s
+:::
+
+- **rate-limit** is the guest's upload/download: `5M/20M` is 5 Mbps up and 20 down per user. The Hotspot creates a dynamic queue for each session.
+- **shared-users=3**: the room's phone, tablet and laptop on the same key.
+- **limit-uptime** expires the key by connected time; so it doesn't work after check-out, reception deletes it or the user is created for the length of the stay.
+- **Vouchers for events or the restaurant**: batches of `evento` profile users printed on cards. For many batches or vouchers that expire by date, RouterOS 7's **User Manager** package acts as a RADIUS server and generates them; the Hotspot uses it with `use-radius=yes` on the server profile.
+- Hotspot queues limit each guest. The **total** for the guest network, so there is always bandwidth left for the POS, is a simple queue on the /22, as in the venue network guide. And remember: anything on FastTrack skips the queues.
+
+## 5. DHCP, leases and logs
+
+:::term RouterOS · lease time and pool usage
+$ /ip dhcp-server set [find interface=vlan100-huespedes] name=dhcp-huespedes lease-time=1h
+$ /ip dhcp-server lease print count-only where server=dhcp-huespedes
+388
+$ /ip hotspot active print
+Columns: SERVER, USER, ADDRESS, UPTIME, SESSION-TIME-LEFT
+#  SERVER     USER         ADDRESS        UPTIME   SESSION-TIME-LEFT
+0  hotspot1   hab214       10.40.100.57   1h12m
+1  hotspot1   boda1108-01  10.40.101.203  22m      5h38m
+:::
+
+- A one-hour lease frees the addresses of people who leave quickly, without the guest who stays noticing.
+- `/ip hotspot host print` shows **every** device the Hotspot sees, signed in or not; `/ip hotspot active print`, only open sessions.
+- Logs: `/system logging add topics=hotspot action=memory` and `/log print where topics~"hotspot"`. Each login and logout is recorded with user, IP and MAC.
+- In many countries the law requires keeping connection logs for a public network for a period. Send them to a syslog server (`/system logging action add name=syslog target=remote remote=10.40.10.20`) and ask management how long they must be kept.
+
+## 6. The ticket: "the guest connects to the Wi-Fi but can't browse / the login page doesn't open"
+
+Friday, 22:40. Reception calls: the guest in 312 sees "Connected" on their phone, but the page to enter the key never appears and nothing loads. Other guests are browsing fine.
+
+1. **Do they have an address?** Look for their MAC (the guest sees it in the Wi-Fi settings) in `/ip hotspot host print`. If it **isn't there**, they got no IP: `/ip dhcp-server lease print count-only` shows 1,012 of 1,019 possible. The pool is exhausted because of a three-day lease time someone set. Lower it to one hour and free what isn't active; within minutes the phone gets an address. If their phone shows a `169.254.x.x`, it is the same thing.
+2. **They have an IP, but no portal.** The phone's system detects the portal by requesting a fixed **http://** page from its maker; the Hotspot intercepts it and opens the sign-in window. If it doesn't:
+
+- **HTTPS-first browsers**: the guest types a website as `https://`. The Hotspot can't redirect HTTPS without a certificate error, so the page doesn't load. Have them open `http://wifi.northwind.example` (the *dns name*); reception has it printed on the room card.
+- **Fixed DNS or a VPN**: a phone with *Private DNS* pinned to a specific provider, or with a VPN that starts on its own, doesn't see the portal. Have them set Private DNS to automatic or pause the VPN until signed in.
+- **An over-generous walled garden**: if someone added the makers' connectivity-check domains (or a broad `*`) to the walled garden, the phone thinks it already has internet and doesn't open the window. `/ip hotspot walled-garden print` and remove anything that isn't the hotel website.
+
+3. **They see the portal, enter the key and it fails.** `/log print where topics~"hotspot"` shows the attempt: `login failed: invalid username or password`, or that the user has used up its time. The key expired with `limit-uptime`, or there are more devices than `shared-users`. Reception issues a new one.
+4. **They sign in and can't browse.** If `/ip hotspot active print` shows them active, the problem is further along: `/ping 1.1.1.1` from the router, DNS (`/ip dns print`) and their session's queue in `/queue simple print where dynamic`. If every guest is affected at once, it is the internet line and the ticket changes hands.
+
+In the ticket: the device's MAC and IP, which step failed, the cause and the change (lease, walled garden, user). If it was the pool, have it checked in the other venues too.
+
+> A card in the room with the network name, the portal's `http://` address and the key prevents half of these calls.
+
+## Next steps
+
+- The [restaurant or hotel network and WiFi](mikrotik-y-tp-link-omada-red-y-wifi-de-un-restaurante-u-hotel.html) guide has the full VLAN plan, dual WAN and the slow WiFi in the middle of a wedding.
+- The [Zabbix for a restaurant or hotel](zabbix-monitorizar-un-restaurante-u-hotel-tpv-impresoras-de-cocina-e-internet.html) guide can watch the number of Hotspot sessions and pool usage to warn before it runs out.
+- If the hotel wants the Wi-Fi user to come from the booking system at check-in, the next step is a RADIUS server connected to the PMS.
+""")
+
+# ---------------------------------------------------------------- S3 · Ventana de mantenimiento clínico
+g(slug="ventana-de-mantenimiento-de-un-sistema-clinico-24x7-contingencia-vuelta-atras-y-validacion", topic="mantenimiento-clinico", date="2026-11-03",
+  title_es="Ventana de mantenimiento en un sistema clínico 24x7: acuerdo con los servicios, contingencia, plan por pasos, vuelta atrás y validación",
+  title_en="Maintenance window on a 24x7 clinical system: agreement with the services, downtime procedures, step plan, rollback and validation",
+  seo_title_en="Maintenance window on a 24x7 clinical system · Iñigo González",
+  seo_title_es="Mantenimiento de un sistema clínico 24x7 · Iñigo González",
+  dek_es="Cómo preparar y ejecutar una parada planificada de la historia clínica (aplicación sobre Oracle y Red Hat, publicada en Citrix): la ventana con los servicios y la supervisión de enfermería, la aprobación del cambio, el procedimiento de contingencia en papel y el visor de solo lectura, la comunicación, el plan con horas y puntos de decisión, la vuelta atrás, la validación con usuarios clave y la ventana que se alarga mientras urgencias pide el sistema.",
+  dek_en="How to prepare and run a planned outage of the patient record (an application on Oracle and Red Hat, published in Citrix): the window with the services and nursing supervisors, change approval, paper downtime procedures and the read-only viewer, communication, a timed plan with decision points, rollback, validation with clinical key users, and the window that overruns while the emergency department asks for the system.",
+  seo_desc="Planned downtime on a 24x7 EHR: agree the window, downtime procedures, timed plan with go/no-go points, rollback and validation with clinical users.",
+  es="""
+## Qué vas a conseguir
+
+Parar la historia clínica electrónica (HCE) de un hospital para una actualización sin que la atención se resienta: una ventana acordada con quien trabaja esa noche, un procedimiento de contingencia que la planta conoce, un plan con horas y puntos de decisión, una vuelta atrás probada y una validación hecha por profesionales clínicos antes de dar el sistema por bueno. Y saber qué hacer cuando la ventana se alarga y urgencias necesita el sistema ya.
+
+## Antes de empezar
+
+- La plataforma de ejemplo: la aplicación HCE en servidores **Red Hat Enterprise Linux**, la base de datos en **Oracle** y el acceso de los usuarios por **Citrix**. Lo mismo vale con otros componentes.
+- El cambio probado en preproducción, con su tiempo medido y la vuelta atrás ensayada, como en la guía de [entornos de prueba](entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas.html).
+- Los nombres de quienes deciden: responsable funcional de la HCE, dirección de enfermería, jefe de la guardia médica, DBA, proveedor y el responsable de IT de guardia.
+- El inventario de lo que depende de la HCE: laboratorio, imagen, farmacia, admisión, la capa de integración y las impresoras de etiquetas y pulseras.
+
+## 1. La ventana, acordada con los servicios clínicos
+
+En un hospital no hay hora sin pacientes. Hay horas con menos actividad y servicios que se pueden preparar:
+
+- **La hora**: de madrugada entre semana suele ser la menos mala (por ejemplo, de 2:00 a 5:00 un martes). Evita los cambios de turno de enfermería, la preparación de la dosis unitaria de farmacia y las extracciones de primera hora del laboratorio.
+- **Con quién**: la dirección de enfermería y las **supervisoras de guardia** de esa noche, el jefe de la guardia médica y urgencias, el laboratorio, radiología, farmacia y admisión. Cada uno dice qué le pasa sin sistema y qué necesita antes.
+- **La duración máxima**: se acuerda el corte total que el hospital acepta y una hora límite. Si a esa hora no está, se vuelve atrás.
+- **El calendario**: con tres o cuatro semanas de antelación, sin coincidir con otros cambios, festivos, una auditoría o una semana de pico asistencial (gripe, puentes).
+
+> Que las supervisoras de guardia sepan la fecha antes que nadie: son quienes organizan la planta esa noche.
+
+## 2. El cambio y su aprobación
+
+La petición de cambio llega al comité de cambios (CAB) completa:
+
+1. Qué se cambia, por qué y qué partes de la HCE toca.
+2. Resultado de las pruebas en preproducción, con el visto bueno del responsable funcional.
+3. Plan por pasos con horas (sección 5) y el criterio y el plan de vuelta atrás (sección 6).
+4. Procedimiento de contingencia y la lista de servicios avisados.
+5. Usuarios clave que validarán, y a qué hora estarán disponibles.
+
+:::ui Gestión de cambios · RFC-2026-0518 · Aprobación
+> Cambios › RFC-2026-0518 › Planificación
+= Sistema: HCE producción (hce-app01/02, hce-db01, granja Citrix HCE)
+= Ventana: martes 17/11/2026, 02:00 – 05:00 (corte previsto 02:15 – 04:00)
+= Hora límite para decidir vuelta atrás: 03:30
+= Vuelta atrás probada en preproducción: Sí, 35 minutos
+= Visto bueno funcional: responsable HCE, 05/11/2026
+= Servicios avisados: Urgencias, UCI, Hospitalización, Laboratorio, Radiología, Farmacia, Admisión
+[x] Procedimiento de contingencia revisado con supervisión de enfermería
+[Enviar a CAB]
+:::
+
+## 3. El procedimiento de contingencia
+
+Durante la parada el hospital sigue funcionando sin HCE. Eso se prepara:
+
+- **Formularios en papel** por servicio: órdenes médicas, registro de constantes, administración de medicación, peticiones al laboratorio y a radiología, ingreso y alta. Cada unidad tiene su carpeta de contingencia y sabe dónde está.
+- **Visor de solo lectura** (o de contingencia): una copia de consulta de los datos clínicos, en un servidor aparte o en un PC por unidad, que se actualiza periódicamente y sigue disponible cuando la HCE está parada. Comprueba la tarde anterior que se ha refrescado y abre en cada unidad.
+- **Listados impresos** antes de la parada, en cada unidad: pacientes ingresados con cama, alergias, medicación activa y su plan de administración para las horas de la ventana. Una hora antes, no la tarde anterior: así reflejan los ingresos de la noche.
+- **Identificación y etiquetas**: admisión y urgencias tienen pulseras y etiquetas de contingencia, o un número provisional para los pacientes que lleguen durante la parada.
+- **La vuelta**: lo registrado en papel se pasa a la HCE después. Quién lo hace, en qué orden (primero medicación y órdenes) y hasta cuándo, está escrito antes de la ventana.
+
+! Si el visor de contingencia o los listados no están listos a la hora prevista, la ventana no empieza. Es el primer punto de decisión.
+
+## 4. La comunicación: antes, durante y después
+
+| Momento | Qué | A quién |
+|---|---|---|
+| 3 semanas antes | Fecha, hora, duración y qué hacer | Todos los servicios, dirección |
+| 1 semana antes | Recordatorio y procedimiento de contingencia | Supervisiones, jefes de servicio |
+| Día anterior | Recordatorio con el teléfono de la guardia de IT | Supervisiones de guardia, urgencias |
+| 30 minutos antes | Aviso de cierre en Citrix y llamada a las supervisoras | Usuarios conectados, supervisiones |
+| Durante | Una llamada o un mensaje en cada punto de decisión | Supervisora de guardia, jefe de guardia |
+| Al terminar | Sistema disponible, qué validar y cómo pasar lo de papel | Todas las unidades |
+| Día siguiente | Resultado, incidencias y lecciones | CAB, responsable funcional, dirección |
+
+- Una sola persona de IT habla con las supervisoras durante la ventana. Los técnicos trabajan; el coordinador informa.
+- El aviso en Citrix no debe sustituir a la llamada: a las dos de la madrugada nadie lee un mensaje en pantalla.
+
+## 5. El plan por pasos, con horas y puntos de decisión
+
+| Hora | Paso | Quién | Punto de decisión |
+|---|---|---|---|
+| 01:00 | Listados impresos y visor de contingencia comprobado en cada unidad | Supervisiones, IT | **Ir / no ir 1**: contingencia lista |
+| 01:30 | Copia de seguridad verificada y punto de restauración en Oracle | DBA | Copia correcta |
+| 02:00 | Aviso final; aplicación deshabilitada en Citrix | IT | |
+| 02:15 | Parada de la aplicación y de las integraciones de entrada | IT, integración | Mensajes en cola, no perdidos |
+| 02:30 | Actualización de base de datos y aplicación | Proveedor, DBA | |
+| 03:30 | Comprobaciones técnicas | IT, proveedor | **Ir / no ir 2**: seguir o volver atrás |
+| 03:45 | Validación con usuarios clave | Usuarios clave | **Ir / no ir 3**: visto bueno clínico |
+| 04:15 | Apertura en Citrix, integraciones en marcha | IT | |
+| 04:30 | Aviso de disponibilidad a las unidades | Coordinador | |
+
+Los pasos técnicos que hacen posible la vuelta atrás, antes de tocar nada:
+
+:::term Oracle · SQL*Plus como SYSDBA en hce-db01
+$ SELECT name, log_mode, flashback_on FROM v$database;
+NAME      LOG_MODE     FLASHBACK_ON
+--------- ------------ ------------------
+HCEPRO    ARCHIVELOG   NO
+$ CREATE RESTORE POINT antes_rfc0518 GUARANTEE FLASHBACK DATABASE;
+Restore point created.
+$ SELECT name, guarantee_flashback_database, time FROM v$restore_point;
+NAME           GUA TIME
+-------------- --- ------------------------------
+ANTES_RFC0518  YES 17-NOV-26 01.34.12.000000000 AM
+:::
+
+:::term PowerShell · Citrix (en el Delivery Controller)
+$ Set-BrokerApplication -Name "HCE Produccion" -Enabled $false
+$ Get-BrokerApplication -Name "HCE Produccion" | Select-Object Name, Enabled
+Name           Enabled
+----           -------
+HCE Produccion   False
+:::
+
+- El punto de restauración garantizado necesita la base en **ARCHIVELOG** y espacio en el área de recuperación (FRA). El DBA calcula cuánto generará la actualización.
+- Deshabilitar la aplicación en Citrix impide nuevas sesiones; las abiertas se cierran con aviso tras la llamada a las supervisoras.
+- Las integraciones de entrada (laboratorio, admisión) se paran de forma que los mensajes **se encolen**, no se pierdan. Se apunta la profundidad de cada cola antes y después.
+
+## 6. La vuelta atrás
+
+- **El criterio**, escrito antes: si a la hora límite (03:30) las comprobaciones técnicas no han terminado bien, se vuelve atrás. No se negocia a las 03:29.
+- **El plan**, ensayado en preproducción con su tiempo: parar la aplicación, volver la base de datos al punto de restauración y la aplicación a su versión anterior (paquetes, ficheros o la instantánea de las máquinas virtuales de aplicación).
+
+:::term Oracle · volver al punto de restauración
+$ SHUTDOWN IMMEDIATE
+$ STARTUP MOUNT
+$ FLASHBACK DATABASE TO RESTORE POINT antes_rfc0518;
+Flashback complete.
+$ ALTER DATABASE OPEN RESETLOGS;
+Database altered.
+:::
+
+- Tras la vuelta atrás se valida igual que tras el cambio: el sistema antiguo también tiene que funcionar antes de abrirlo.
+- Con el visto bueno definitivo, el DBA borra el punto de restauración (`DROP RESTORE POINT antes_rfc0518;`): si se olvida, llena la FRA en unos días.
+
+## 7. Validación con usuarios clave y vigilancia posterior
+
+Los **usuarios clave** son profesionales clínicos (una enfermera, un médico de guardia, alguien de admisión y del laboratorio) que conocen los circuitos y están citados a la hora prevista. Con un **paciente de pruebas** en producción, siguen un guion corto:
+
+1. Buscar el paciente y abrir su historia; ver alergias y episodios anteriores.
+2. Registrar constantes y una administración de medicación.
+3. Prescribir y comprobar que la orden llega a farmacia.
+4. Pedir una analítica y comprobar que llega al laboratorio; recibir un resultado de prueba.
+5. Imprimir una etiqueta y una pulsera.
+6. Cada paso, firmado con nombre y hora en la hoja de validación.
+
+Las comprobaciones técnicas van antes, en paralelo:
+
+:::term Bash · hce-app01
+$ systemctl is-active hce-app hce-integracion
+active
+active
+$ curl -s -o /dev/null -w "%{http_code} %{time_total}s\\n" https://hce.contoso.local/health
+200 0.412s
+$ journalctl -u hce-app --since "02:30" -p err --no-pager | tail -n 5
+-- No entries --
+:::
+
+- Después de abrir: las colas de integración se vacían, los tiempos de respuesta se comparan con los medidos antes del cambio y la monitorización vuelve a avisar. El silencio de la ventana caduca a su hora, como en la guía de [monitorización y alarmas](monitorizacion-desplegar-alarmas-y-responder-en-plataformas-24x7.html).
+- IT de guardia refuerza las primeras horas del turno de mañana: es cuando todo el hospital entra a la vez.
+
+## 8. El ticket: "la ventana se alarga y urgencias necesita el sistema"
+
+Martes, 03:40. La actualización de la base de datos debía acabar a las 03:15 y va por el 80 %. La supervisora de guardia llama: urgencias tiene cinco pacientes en espera, el visor de contingencia no muestra las pruebas de un paciente que ingresó a las 02:30 y el jefe de la guardia pregunta cuándo vuelve el sistema.
+
+1. **Es el punto de decisión 2, con diez minutos de retraso.** El coordinador reúne en una llamada al proveedor, al DBA, al responsable de IT de guardia y al jefe de la guardia médica (o a quien la dirección designó como responsable clínico de la ventana).
+2. **Los hechos, no las impresiones**: cuánto queda según el proveedor y con qué fiabilidad; cuánto tarda la vuelta atrás (35 minutos ensayados); si la vuelta atrás sigue siendo posible desde donde está la actualización.
+3. **Las opciones**:
+
+- **Seguir**: si quedan 15 minutos y la estimación es sólida, el sistema nuevo podría estar en 45 minutos con validación.
+- **Volver atrás**: el sistema antiguo, en unos 50 minutos con validación, y el cambio para otra ventana.
+
+4. **Quién decide**: IT y el proveedor dicen qué es posible y cuánto tarda; el **responsable clínico** decide si el hospital aguanta ese tiempo en contingencia. Si la estimación del proveedor ya ha fallado una vez, la opción por defecto es la que estaba escrita: volver atrás.
+5. **Mientras tanto**, la contingencia se refuerza: el paciente de urgencias se atiende con el papel y una llamada directa al laboratorio para sus resultados. Nadie espera al sistema para tratar a un paciente.
+6. **Comunicar la decisión** a la supervisora con una hora concreta ("a las 04:35, sistema disponible") y llamar si cambia. Una hora que se incumple dos veces vale menos que ninguna.
+7. **Después**: el registro en papel se pasa a la HCE, empezando por urgencias. En la revisión del cambio, por qué el paso tardó más que en preproducción (volumen de datos, estadísticas, otra carga en el almacenamiento) y el ajuste del tiempo y de la hora límite para el siguiente intento.
+
+## Siguientes pasos
+
+- La guía de [entornos de prueba](entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas.html) explica cómo medir en preproducción el tiempo real del cambio y de su vuelta atrás.
+- La de [Oracle en hardware nuevo](oracle-cambiar-hardware-y-sistema-operativo-del-servidor-de-base-de-datos.html) cubre el plan con el DBA, Data Guard y RMAN para cambios de servidor.
+- La de [parches de Windows Server sin cortar el servicio](windows-server-actualizaciones-planificadas-sin-cortar-el-servicio.html) aplica las mismas ventanas a los parches de cada mes.
+- La de [publicar la aplicación clínica en Citrix](citrix-publicar-aplicacion-clinica-y-dar-soporte-en-planta.html) ayuda en la reapertura y con la sesión que no abre en planta.
+""",
+  en="""
+## What you'll get
+
+Taking a hospital's electronic patient record (EHR) down for an upgrade without care suffering: a window agreed with whoever works that night, a downtime procedure the wards know, a plan with times and decision points, a rehearsed rollback and validation by clinical staff before the system is accepted. And knowing what to do when the window overruns and the emergency department needs the system now.
+
+## Before you start
+
+- The example platform: the EHR application on **Red Hat Enterprise Linux** servers, the database on **Oracle** and user access through **Citrix**. The same applies with other components.
+- The change tested in pre-production, with its time measured and the rollback rehearsed, as in the [test environments](entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas.html) guide.
+- The names of the decision makers: the EHR business owner, nursing management, the on-call medical lead, the DBA, the vendor and the on-call IT lead.
+- The inventory of what depends on the EHR: laboratory, imaging, pharmacy, admissions, the integration layer and the label and wristband printers.
+
+## 1. The window, agreed with the clinical services
+
+In a hospital there is no hour without patients. There are hours with less activity and services that can prepare:
+
+- **The time**: the early hours on a weekday are usually the least bad (for example, 2:00 to 5:00 on a Tuesday). Avoid nursing shift changes, pharmacy's unit-dose preparation and the laboratory's first-thing blood draws.
+- **With whom**: nursing management and that night's **on-call nursing supervisors**, the on-call medical lead and the emergency department, the laboratory, radiology, pharmacy and admissions. Each says what happens to them without the system and what they need beforehand.
+- **The maximum duration**: agree the total outage the hospital accepts and a cut-off time. If it isn't done by then, you roll back.
+- **The calendar**: three or four weeks ahead, not clashing with other changes, bank holidays, an audit or a peak week (flu season, long weekends).
+
+> Make sure the on-call supervisors know the date before anyone else: they are the ones who organise the wards that night.
+
+## 2. The change and its approval
+
+The change request reaches the change advisory board (CAB) complete:
+
+1. What changes, why, and which parts of the EHR it touches.
+2. Pre-production test results, with the business owner's sign-off.
+3. The step plan with times (section 5) and the rollback criterion and plan (section 6).
+4. The downtime procedure and the list of services notified.
+5. The key users who will validate, and when they will be available.
+
+:::ui Change management · RFC-2026-0518 · Approval
+> Changes › RFC-2026-0518 › Planning
+= System: EHR production (hce-app01/02, hce-db01, EHR Citrix farm)
+= Window: Tuesday 17/11/2026, 02:00 – 05:00 (planned outage 02:15 – 04:00)
+= Cut-off for the rollback decision: 03:30
+= Rollback rehearsed in pre-production: Yes, 35 minutes
+= Business sign-off: EHR owner, 05/11/2026
+= Services notified: Emergency, ICU, Wards, Laboratory, Radiology, Pharmacy, Admissions
+[x] Downtime procedure reviewed with nursing supervisors
+[Submit to CAB]
+:::
+
+## 3. The downtime procedure
+
+During the outage the hospital keeps working without the EHR. That is prepared:
+
+- **Paper forms** per service: medical orders, vital signs charts, medication administration, laboratory and radiology requests, admission and discharge. Each unit has its downtime folder and knows where it is.
+- **Read-only (downtime) viewer**: a lookup copy of the clinical data, on a separate server or one PC per unit, refreshed periodically and still available when the EHR is down. Check the afternoon before that it has refreshed and opens in every unit.
+- **Printed lists** before the outage, in each unit: inpatients with bed, allergies, active medication and its administration schedule for the window's hours. One hour before, not the afternoon before: that way they include the night's admissions.
+- **Identification and labels**: admissions and the emergency department have downtime wristbands and labels, or a provisional number for patients arriving during the outage.
+- **Back-entry**: what was recorded on paper is entered into the EHR afterwards. Who does it, in what order (medication and orders first) and by when is written down before the window.
+
+! If the downtime viewer or the lists aren't ready on time, the window doesn't start. That is the first decision point.
+
+## 4. Communication: before, during and after
+
+| When | What | To whom |
+|---|---|---|
+| 3 weeks before | Date, time, duration and what to do | All services, management |
+| 1 week before | Reminder and downtime procedure | Supervisors, heads of service |
+| The day before | Reminder with the IT on-call number | On-call supervisors, emergency |
+| 30 minutes before | Closing notice in Citrix and a call to the supervisors | Connected users, supervisors |
+| During | A call or message at each decision point | On-call supervisor, on-call lead |
+| At the end | System available, what to check and how to back-enter paper | All units |
+| Next day | Outcome, incidents and lessons | CAB, business owner, management |
+
+- One single IT person talks to the supervisors during the window. Engineers work; the coordinator informs.
+- The Citrix notice is no substitute for the call: at two in the morning nobody reads an on-screen message.
+
+## 5. The step plan, with times and decision points
+
+| Time | Step | Who | Decision point |
+|---|---|---|---|
+| 01:00 | Lists printed and downtime viewer checked in each unit | Supervisors, IT | **Go / no-go 1**: downtime ready |
+| 01:30 | Backup verified and Oracle restore point | DBA | Backup good |
+| 02:00 | Final notice; application disabled in Citrix | IT | |
+| 02:15 | Application and inbound interfaces stopped | IT, integration | Messages queued, not lost |
+| 02:30 | Database and application upgrade | Vendor, DBA | |
+| 03:30 | Technical checks | IT, vendor | **Go / no-go 2**: continue or roll back |
+| 03:45 | Validation with key users | Key users | **Go / no-go 3**: clinical sign-off |
+| 04:15 | Opened in Citrix, interfaces running | IT | |
+| 04:30 | Availability notice to the units | Coordinator | |
+
+The technical steps that make rollback possible, before touching anything:
+
+:::term Oracle · SQL*Plus as SYSDBA on hce-db01
+$ SELECT name, log_mode, flashback_on FROM v$database;
+NAME      LOG_MODE     FLASHBACK_ON
+--------- ------------ ------------------
+HCEPRO    ARCHIVELOG   NO
+$ CREATE RESTORE POINT antes_rfc0518 GUARANTEE FLASHBACK DATABASE;
+Restore point created.
+$ SELECT name, guarantee_flashback_database, time FROM v$restore_point;
+NAME           GUA TIME
+-------------- --- ------------------------------
+ANTES_RFC0518  YES 17-NOV-26 01.34.12.000000000 AM
+:::
+
+:::term PowerShell · Citrix (on the Delivery Controller)
+$ Set-BrokerApplication -Name "HCE Produccion" -Enabled $false
+$ Get-BrokerApplication -Name "HCE Produccion" | Select-Object Name, Enabled
+Name           Enabled
+----           -------
+HCE Produccion   False
+:::
+
+- A guaranteed restore point needs the database in **ARCHIVELOG** and space in the fast recovery area (FRA). The DBA estimates how much the upgrade will generate.
+- Disabling the application in Citrix stops new sessions; open ones are closed with a warning after the call to the supervisors.
+- Inbound interfaces (laboratory, admissions) are stopped so that messages **queue**, not get lost. Note each queue's depth before and after.
+
+## 6. Rollback
+
+- **The criterion**, written beforehand: if by the cut-off (03:30) the technical checks haven't passed, you roll back. It isn't negotiated at 03:29.
+- **The plan**, rehearsed in pre-production with its time: stop the application, take the database back to the restore point and the application back to its previous version (packages, files or the snapshot of the application VMs).
+
+:::term Oracle · back to the restore point
+$ SHUTDOWN IMMEDIATE
+$ STARTUP MOUNT
+$ FLASHBACK DATABASE TO RESTORE POINT antes_rfc0518;
+Flashback complete.
+$ ALTER DATABASE OPEN RESETLOGS;
+Database altered.
+:::
+
+- After a rollback you validate exactly as after the change: the old system has to work too before it is opened.
+- With the final sign-off, the DBA drops the restore point (`DROP RESTORE POINT antes_rfc0518;`): forgotten, it fills the FRA within days.
+
+## 7. Validation with key users and monitoring afterwards
+
+The **key users** are clinical staff (a nurse, an on-call doctor, someone from admissions and the laboratory) who know the workflows and are booked for the planned time. With a **test patient** in production, they follow a short script:
+
+1. Find the patient and open their record; see allergies and previous episodes.
+2. Record vital signs and a medication administration.
+3. Prescribe and check the order reaches pharmacy.
+4. Request a blood test and check it reaches the laboratory; receive a test result.
+5. Print a label and a wristband.
+6. Each step signed with name and time on the validation sheet.
+
+The technical checks go first, in parallel:
+
+:::term Bash · hce-app01
+$ systemctl is-active hce-app hce-integracion
+active
+active
+$ curl -s -o /dev/null -w "%{http_code} %{time_total}s\\n" https://hce.contoso.local/health
+200 0.412s
+$ journalctl -u hce-app --since "02:30" -p err --no-pager | tail -n 5
+-- No entries --
+:::
+
+- After opening: the integration queues drain, response times are compared with those measured before the change and monitoring alerts again. The window's silence expires on time, as in the [monitoring and alarms](monitorizacion-desplegar-alarmas-y-responder-en-plataformas-24x7.html) guide.
+- On-call IT reinforces the first hours of the morning shift: that is when the whole hospital logs in at once.
+
+## 8. The ticket: "the window is overrunning and the emergency department needs the system"
+
+Tuesday, 03:40. The database upgrade was due to finish at 03:15 and is at 80 %. The on-call supervisor calls: the emergency department has five patients waiting, the downtime viewer doesn't show the tests of a patient admitted at 02:30, and the on-call lead asks when the system is coming back.
+
+1. **This is decision point 2, ten minutes late.** The coordinator gets the vendor, the DBA, the on-call IT lead and the on-call medical lead (or whoever management named as the window's clinical lead) on one call.
+2. **Facts, not impressions**: how much is left according to the vendor and how reliable that is; how long the rollback takes (35 minutes rehearsed); whether rollback is still possible from where the upgrade is.
+3. **The options**:
+
+- **Continue**: if 15 minutes remain and the estimate is solid, the new system could be ready in 45 minutes with validation.
+- **Roll back**: the old system in about 50 minutes with validation, and the change for another window.
+
+4. **Who decides**: IT and the vendor say what is possible and how long it takes; the **clinical lead** decides whether the hospital can stay in downtime for that long. If the vendor's estimate has already failed once, the default option is the written one: roll back.
+5. **Meanwhile**, downtime procedures are reinforced: the emergency patient is treated on paper with a direct call to the laboratory for their results. Nobody waits for the system to treat a patient.
+6. **Communicate the decision** to the supervisor with a concrete time ("system available at 04:35") and call if it changes. A time missed twice is worth less than none.
+7. **Afterwards**: the paper record is back-entered into the EHR, starting with the emergency department. In the change review, why the step took longer than in pre-production (data volume, statistics, other load on storage) and the adjusted time and cut-off for the next attempt.
+
+## Next steps
+
+- The [test environments](entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas.html) guide explains how to measure the real time of the change and its rollback in pre-production.
+- The [Oracle on new hardware](oracle-cambiar-hardware-y-sistema-operativo-del-servidor-de-base-de-datos.html) guide covers the plan with the DBA, Data Guard and RMAN for server changes.
+- The [Windows Server patching without downtime](windows-server-actualizaciones-planificadas-sin-cortar-el-servicio.html) guide applies the same windows to monthly patching.
+- The [publishing the clinical app in Citrix](citrix-publicar-aplicacion-clinica-y-dar-soporte-en-planta.html) guide helps with reopening and with the session that won't open on the ward.
 """)
