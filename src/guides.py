@@ -996,7 +996,7 @@ g(slug="anyconnect-instalar-y-diagnosticar-vpn", topic="anyconnect", date="2026-
   title_es="Cisco AnyConnect: instalar el cliente y diagnosticar una VPN que no conecta",
   title_en="Cisco AnyConnect: installing the client and diagnosing a VPN that won't connect",
   seo_title_en="Cisco AnyConnect: install and fix the VPN · Iñigo González",
-  seo_title_es="Cisco AnyConnect: instalar y diagnosticar la VPN · Iñigo González",
+  seo_title_es="Cisco AnyConnect: instalar y diagnosticar · Iñigo González",
   dek_es="Instalar Secure Client, conectar, y seguir un orden fijo cuando falla: red, DNS, certificado, credenciales o el propio cliente.",
   dek_en="Install Secure Client, connect, and follow a fixed order when it fails: network, DNS, certificate, credentials or the client itself.",
   es="""
@@ -2045,7 +2045,7 @@ Teams version (Settings → About), whether it happens in the browser (`teams.mi
 g(slug="outlook-exchange-online-buzon-compartido-permisos-autorespuesta", topic="outlook", date="2026-10-21",
   title_es="Outlook y Exchange Online: buzón compartido, permisos y respuesta automática",
   title_en="Outlook and Exchange Online: shared mailbox, permissions and automatic replies",
-  seo_title_en="Exchange Online: shared mailbox and permissions · Iñigo González",
+  seo_title_en="Exchange Online: shared mailboxes · Iñigo González",
   seo_title_es="Exchange Online: buzón compartido y permisos · Iñigo González",
   dek_es="Las tres peticiones de correo más frecuentes resueltas con PowerShell, y qué hacer con un Outlook que no abre o no sincroniza.",
   dek_en="The three most frequent email requests solved with PowerShell, and what to do with an Outlook that won't open or sync.",
@@ -3144,7 +3144,7 @@ Pages with sensitive information (network diagrams with IPs, emergency procedure
 g(slug="git-scripts-del-equipo-bajo-control-de-versiones", topic="git", date="2026-10-21",
   title_es="Git: poner los scripts del equipo bajo control de versiones",
   title_en="Git: putting the team's scripts under version control",
-  seo_title_en="Git for IT teams: scripts under version control · Iñigo González",
+  seo_title_en="Git for IT teams: scripts in version control · Iñigo González",
   seo_title_es="Git para equipos de IT: scripts versionados · Iñigo González",
   dek_es="Repositorio, ramas, commits que se entienden, pull request con revisión, y lo que nunca debe entrar en un repo.",
   dek_en="Repository, branches, commits that make sense, pull requests with review, and what must never go into a repo.",
@@ -3356,7 +3356,7 @@ g(slug="jamf-pro-enrolar-un-mac-y-desplegar-una-politica", topic="jamf-pro", dat
   title_es="Jamf Pro: enrolar un Mac y desplegar una política con un grupo inteligente",
   title_en="Jamf Pro: enrolling a Mac and deploying a policy with a smart group",
   seo_title_en="Jamf Pro: enrol a Mac and deploy a policy · Iñigo González",
-  seo_title_es="Jamf Pro: enrolar un Mac y desplegar una política · Iñigo González",
+  seo_title_es="Jamf Pro: enrolar un Mac y una política · Iñigo González",
   dek_es="Enrolamiento automatizado o por el usuario, el inventario que lo alimenta todo, un grupo inteligente y una política que instala y configura. Más los comandos del día a día.",
   dek_en="Automated or user-initiated enrolment, the inventory that feeds everything, a smart group and a policy that installs and configures. Plus the everyday commands.",
   es="""
@@ -3762,7 +3762,7 @@ g(slug="teams-rooms-poner-en-marcha-una-sala", topic="teams-rooms", date="2026-1
   title_es="Microsoft Teams Rooms: poner en marcha una sala y supervisarla",
   title_en="Microsoft Teams Rooms: bringing a room online and keeping an eye on it",
   seo_title_en="Microsoft Teams Rooms: set up a room · Iñigo González",
-  seo_title_es="Microsoft Teams Rooms: poner en marcha una sala · Iñigo González",
+  seo_title_es="Teams Rooms: poner en marcha una sala · Iñigo González",
   dek_es="Cuenta de recurso, licencia, inicio de sesión del dispositivo, periféricos y el Pro Management Portal. Y los fallos típicos de una sala el lunes por la mañana.",
   dek_en="Resource account, licence, device sign-in, peripherals and the Pro Management Portal. Plus the typical Monday-morning room failures.",
   es="""
@@ -3923,7 +3923,7 @@ g(slug="pdq-y-mdt-desplegar-software-en-lote-e-instalar-windows", topic="pdq-mdt
   title_es="PDQ y MDT: desplegar software en lote e instalar Windows desde cero",
   title_en="PDQ and MDT: deploying software in bulk and installing Windows from scratch",
   seo_title_en="PDQ and MDT: deploy software and Windows · Iñigo González",
-  seo_title_es="PDQ y MDT: desplegar software e instalar Windows · Iñigo González",
+  seo_title_es="PDQ y MDT: software e instalación de Windows · Iñigo González",
   dek_es="PDQ Deploy e Inventory para empujar un instalador a 50 equipos esta tarde, y MDT para una instalación limpia de Windows con un recurso compartido de implementación. Cuándo sigue teniendo sentido frente a Intune.",
   dek_en="PDQ Deploy and Inventory to push an installer to 50 devices this afternoon, and MDT for a clean Windows install from a deployment share. When it still makes sense next to Intune.",
   es="""
@@ -4347,7 +4347,7 @@ g(slug="rhel-registrar-parchear-servicios-firewall-selinux", topic="rhel", date=
   title_es="Red Hat Enterprise Linux: registrar, parchear y controlar servicios, firewall y SELinux",
   title_en="Red Hat Enterprise Linux: registering, patching, and managing services, the firewall and SELinux",
   seo_title_en="RHEL: register, patch, firewalld and SELinux · Iñigo González",
-  seo_title_es="RHEL: registrar, parchear, firewalld y SELinux · Iñigo González",
+  seo_title_es="RHEL: registro, parches, firewalld y SELinux · Iñigo González",
   dek_es="Lo que haces en un RHEL recién entregado y lo que repites cada mes: suscripción, dnf, systemd, journalctl, firewalld y los dos comandos de SELinux que evitan desactivarlo.",
   dek_en="What you do on a freshly delivered RHEL and what you repeat every month: subscription, dnf, systemd, journalctl, firewalld, and the two SELinux commands that save you from turning it off.",
   es="""
@@ -4982,7 +4982,7 @@ g(slug="veeam-crear-un-job-comprobar-copias-y-restaurar", topic="veeam", date="2
   title_es="Veeam Backup: crear un trabajo, comprobar que termina bien y hacer una restauración de prueba",
   title_en="Veeam Backup: creating a job, checking it completes, and running a test restore",
   seo_title_en="Veeam Backup: create a job and test a restore · Iñigo González",
-  seo_title_es="Veeam Backup: crear un job y probar restauración · Iñigo González",
+  seo_title_es="Veeam: crear un job y probar la restauración · Iñigo González",
   dek_es="Repositorio, trabajo de copia con retención, los avisos que no hay que ignorar, y la restauración de un fichero y de una máquina entera. Porque una copia sin restaurar no es una copia.",
   dek_en="Repository, backup job with retention, the warnings you must not ignore, and restoring a file and a whole machine. Because a backup you never restored is not a backup.",
   es="""
@@ -5167,7 +5167,7 @@ g(slug="vmware-horizon-pool-de-escritorios-y-conexion-que-falla", topic="vmware-
   title_es="VMware Horizon: un pool de escritorios desde una imagen maestra y la conexión que falla",
   title_en="VMware Horizon: a desktop pool from a golden image, and the connection that fails",
   seo_title_en="VMware Horizon: desktop pool and failed login · Iñigo González",
-  seo_title_es="VMware Horizon: pool de escritorios y conexión · Iñigo González",
+  seo_title_es="VMware Horizon: pool de escritorios · Iñigo González",
   dek_es="Imagen maestra con el agente, pool de clones instantáneos, asignación a un grupo, y el orden para diagnosticar 'el escritorio no conecta' con Horizon Console y los logs del cliente.",
   dek_en="Golden image with the agent, an instant-clone pool, entitlement to a group, and the order for diagnosing 'the desktop won't connect' with Horizon Console and the client logs.",
   es="""
@@ -5541,7 +5541,7 @@ g(slug="ansible-primer-playbook-parchear-servidores-linux", topic="ansible", dat
   title_es="Ansible: el primer playbook para parchear servidores Linux uno a uno",
   title_en="Ansible: your first playbook to patch Linux servers one at a time",
   seo_title_en="Ansible: a playbook to patch Linux servers · Iñigo González",
-  seo_title_es="Ansible: playbook para parchear servidores Linux · Iñigo González",
+  seo_title_es="Ansible: playbook para parchear Linux · Iñigo González",
   dek_es="Inventario, conexión por SSH, un playbook que actualiza, reinicia solo si hace falta y comprueba el servicio, ejecutado servidor a servidor con `serial`.",
   dek_en="Inventory, SSH connection, a playbook that updates, reboots only when needed and checks the service, run one server at a time with `serial`.",
   es="""
@@ -7079,7 +7079,7 @@ g(slug="hyper-v-crear-vm-conmutador-virtual-puntos-de-control-y-exportar", topic
   title_es="Hyper-V: crear una máquina virtual, el conmutador virtual, puntos de control y exportación",
   title_en="Hyper-V: creating a virtual machine, the virtual switch, checkpoints and export",
   seo_title_en="Hyper-V: VM, virtual switch and checkpoints · Iñigo González",
-  seo_title_es="Hyper-V: VM, conmutador virtual y puntos de control · Iñigo González",
+  seo_title_es="Hyper-V: VM, conmutador y puntos de control · Iñigo González",
   dek_es="El rol en Windows Server, el conmutador externo que no te deja sin red, una VM de generación 2 con PowerShell, puntos de control antes de un cambio y la exportación como copia fría.",
   dek_en="The role on Windows Server, the external switch that doesn't cut your network, a generation 2 VM with PowerShell, checkpoints before a change and export as a cold backup.",
   es="""
@@ -7301,8 +7301,8 @@ $ Import-VM -Path "E:\\Export\\2026-10-22\\srv-test-01\\Virtual Machines\\<GUID>
 g(slug="intune-perfiles-y-cumplimiento-en-windows-macos-ios-android-y-dispositivo-que-no-cumple", topic="intune", date="2026-10-22",
   title_es="Intune en Windows, macOS, iOS y Android: perfiles de configuración, cumplimiento y un dispositivo que no cumple",
   title_en="Intune on Windows, macOS, iOS and Android: configuration profiles, compliance and a device that is non-compliant",
-  seo_title_en="Intune: profiles and compliance on 4 platforms · Iñigo González",
-  seo_title_es="Intune: perfiles y cumplimiento en 4 plataformas · Iñigo González",
+  seo_title_en="Intune: profiles and compliance · Iñigo González",
+  seo_title_es="Intune: perfiles y cumplimiento · Iñigo González",
   dek_es="La estructura de grupos y filtros que vale para las cuatro plataformas, una política de cumplimiento por sistema, el perfil de configuración con el catálogo de ajustes y la rutina para el dispositivo que aparece en rojo.",
   dek_en="The group and filter structure that works for all four platforms, one compliance policy per OS, the configuration profile with the Settings Catalog, and the routine for the device that shows up red.",
   es="""
@@ -8359,8 +8359,8 @@ The three commands: `sssctl domain-status` (can it see the domain?), `journalctl
 g(slug="microsoft-graph-primeras-consultas-con-powershell-y-un-informe-que-no-existe-en-el-portal", topic="graph", date="2026-10-22",
   title_es="Microsoft Graph con PowerShell: las primeras consultas y un informe que no existe en el portal",
   title_en="Microsoft Graph with PowerShell: your first queries and a report the portal doesn't have",
-  seo_title_en="Microsoft Graph with PowerShell: first queries · Iñigo González",
-  seo_title_es="Microsoft Graph con PowerShell: primeros pasos · Iñigo González",
+  seo_title_en="Microsoft Graph with PowerShell: basics · Iñigo González",
+  seo_title_es="Microsoft Graph con PowerShell: inicio · Iñigo González",
   dek_es="El SDK, los ámbitos de permiso y por qué pedir los mínimos, Graph Explorer para encontrar la consulta, paginación, y el informe de dispositivos sin check-in con su usuario y su manager en un CSV.",
   dek_en="The SDK, permission scopes and why to ask for the minimum, Graph Explorer to find the query, paging, and the report of devices with no check-in together with their user and manager in a CSV.",
   es="""
@@ -9446,7 +9446,7 @@ g(slug="ubuntu-landscape-registrar-la-flota-y-parchear-por-grupos-con-ventana", 
   title_es="Ubuntu Landscape: registrar la flota de Ubuntu y parchear por grupos con ventana",
   title_en="Ubuntu Landscape: registering the Ubuntu fleet and patching by group within a window",
   seo_title_en="Ubuntu Landscape: patch the fleet by group · Iñigo González",
-  seo_title_es="Ubuntu Landscape: parchear la flota por grupos · Iñigo González",
+  seo_title_es="Ubuntu Landscape: parchear por grupos · Iñigo González",
   dek_es="El cliente de Landscape con Ubuntu Pro, grupos de acceso y etiquetas, el perfil de actualizaciones que parchea cada grupo en su ventana, los reinicios pendientes y el informe de CVE para la reunión de parcheo.",
   dek_en="The Landscape client with Ubuntu Pro, access groups and tags, the upgrade profile that patches each group in its window, pending reboots and the CVE report for the patching meeting.",
   es="""
@@ -10797,7 +10797,7 @@ g(slug="microsoft-365-roles-de-administracion-pim-y-cuentas-de-emergencia", topi
   title_es="Microsoft 365: los roles de administración, PIM y las cuentas de emergencia",
   title_en="Microsoft 365: admin roles, PIM and the emergency accounts",
   seo_title_en="Microsoft 365 admin roles, PIM, break-glass · Iñigo González",
-  seo_title_es="Microsoft 365: roles de admin, PIM y emergencia · Iñigo González",
+  seo_title_es="Microsoft 365: roles de admin y PIM · Iñigo González",
   dek_es="Inventariar quién es administrador hoy, pasar cada tarea al rol mínimo, dejar dos cuentas de emergencia bien guardadas, convertir el resto en asignaciones elegibles con PIM (MFA, justificación y aprobación), y las revisiones y alertas que lo mantienen así.",
   dek_en="Inventory who is an administrator today, move each task to the least-privileged role, keep two well-guarded emergency accounts, turn the rest into eligible assignments with PIM (MFA, justification and approval), and the reviews and alerts that keep it that way.",
   es="""
@@ -11829,7 +11829,7 @@ g(slug="azure-monitor-y-log-analytics-area-de-trabajo-reglas-de-recopilacion-ale
   title_es="Azure Monitor y Log Analytics: el área de trabajo, el agente, las alertas y un servidor que deja de enviar datos",
   title_en="Azure Monitor and Log Analytics: the workspace, the agent, alerts and a server that stops sending data",
   seo_title_en="Azure Monitor and Log Analytics: alerts · Iñigo González",
-  seo_title_es="Azure Monitor y Log Analytics: agente y alertas · Iñigo González",
+  seo_title_es="Azure Monitor y Log Analytics: alertas · Iñigo González",
   dek_es="Cómo diseñar un área de trabajo, recoger eventos, contadores y syslog con el agente de Azure Monitor y reglas de recopilación, traer los servidores locales con Azure Arc, consultar con KQL, alertar con un grupo de acciones, controlar retención y coste, y resolver el ticket de un servidor que ya no informa.",
   dek_en="How to design a workspace, collect events, counters and syslog with the Azure Monitor agent and data collection rules, bring on-prem servers in with Azure Arc, query with KQL, alert through an action group, keep retention and cost under control, and solve the ticket for a server that no longer reports.",
   es="""
@@ -12901,7 +12901,7 @@ g(slug="kubernetes-de-docker-compose-a-un-cluster-gestionado-despliegue-y-un-pod
   title_es="Kubernetes: de Docker Compose a un clúster gestionado, un despliegue y un pod en CrashLoopBackOff",
   title_en="Kubernetes: from Docker Compose to a managed cluster, a deployment and a pod in CrashLoopBackOff",
   seo_title_en="Kubernetes: from Compose to CrashLoopBackOff · Iñigo González",
-  seo_title_es="Kubernetes: de Compose a un pod en CrashLoopBackOff · Iñigo González",
+  seo_title_es="Kubernetes: de Compose a CrashLoopBackOff · Iñigo González",
   dek_es="Cuándo compensa el salto desde Compose en un servidor y cuándo no, un clúster AKS o EKS, una herramienta interna con Deployment, Service y Gateway API, configuración y secretos, peticiones y límites de recursos, una actualización progresiva con vuelta atrás y cómo leer un pod que no arranca.",
   dek_en="When the jump from Compose on one server pays off and when it doesn't, an AKS or EKS cluster, an internal tool with Deployment, Service and Gateway API, configuration and secrets, resource requests and limits, a rolling update with rollback, and how to read a pod that won't start.",
   es="""
@@ -13545,7 +13545,7 @@ g(slug="openshift-proyectos-routes-scc-acceso-por-grupos-y-actualizaciones-por-c
   title_es="Red Hat OpenShift: proyectos, Routes, SCC, acceso por grupos y actualizaciones por canal",
   title_en="Red Hat OpenShift: projects, Routes, SCCs, group access and channel upgrades",
   seo_title_en="Red Hat OpenShift: Routes, SCCs, upgrades · Iñigo González",
-  seo_title_es="Red Hat OpenShift: Routes, SCC y actualizaciones · Iñigo González",
+  seo_title_es="OpenShift: Routes, SCC y actualizaciones · Iñigo González",
   dek_es="Qué añade OpenShift a Kubernetes, entrar con oc y desplegar una aplicación interna con Deployment, Service y Route, dar acceso a un equipo con grupos de Entra ID y RoleBindings, actualizar el clúster por canales y resolver el pod que no arranca por la SCC o la Route que devuelve 503.",
   dek_en="What OpenShift adds to Kubernetes, signing in with oc and deploying an internal app with a Deployment, Service and Route, giving a team access with Entra ID groups and RoleBindings, upgrading the cluster through channels, and fixing the pod blocked by its SCC or the Route that returns 503.",
   es="""
@@ -14651,7 +14651,7 @@ g(slug="hotel-en-pre-apertura-checklist-de-it-hasta-el-dia-de-apertura", topic="
   title_es="Hotel en pre-apertura: el checklist de IT desde la obra hasta el día de apertura",
   title_en="Hotel pre-opening: the IT checklist from the building site to opening day",
   seo_title_en="Hotel pre-opening IT checklist · Iñigo González",
-  seo_title_es="Checklist de IT para la pre-apertura de un hotel · Iñigo González",
+  seo_title_es="Checklist IT de pre-apertura de un hotel · Iñigo González",
   seo_desc="Hotel pre-opening IT checklist: calendar back from opening, network by use, circuits to order first, PMS interfaces, check-in tests and day-one support.",
   dek_es="El calendario hacia atrás desde la fecha de apertura, la red separada por usos, los circuitos que hay que pedir antes que nada, el mapa de interfaces con el PMS, la semana de pruebas con huéspedes simulados y el soporte del primer día.",
   dek_en="The calendar counted back from the opening date, the network split by use, the circuits to order before anything else, the map of interfaces with the PMS, the test week with simulated guests and support on day one.",
@@ -15466,7 +15466,7 @@ g(slug="iptv-en-hotel-diagnostico-de-canales-multicast-y-televisores-de-habitaci
   title_es="IPTV en hotel: diagnóstico de canales, la red multicast y los televisores de habitación",
   title_en="Hotel IPTV: troubleshooting channels, the multicast network and in-room TVs",
   seo_title_en="Hotel IPTV: channels, multicast and TVs · Iñigo González",
-  seo_title_es="IPTV en hotel: canales, multicast y televisores · Iñigo González",
+  seo_title_es="IPTV en hotel: canales y multicast · Iñigo González",
   dek_es="Cómo llega un canal desde la cabecera hasta la habitación, la configuración de IGMP snooping y del querier que evita la mitad de las averías, la tabla de síntomas para saber dónde mirar, y el diagnóstico de una habitación sin canales y de canales que se cortan cada pocos minutos.",
   dek_en="How a channel gets from the headend to the room, the IGMP snooping and querier setup that prevents half the faults, the symptom table that tells you where to look, and troubleshooting a room with no channels and channels that cut out every few minutes.",
   es="""
@@ -16559,7 +16559,7 @@ g(slug="impresoras-de-tienda-etiquetas-tickets-y-multifuncion-sin-it-en-sitio", 
   title_es="Impresoras de tienda: instalación y mantenimiento de etiquetas, tickets y multifunción sin IT en sitio",
   title_en="Store printers: installing and maintaining label, receipt and multifunction printers with no IT on site",
   seo_title_en="Store printers: labels, receipts, MFPs · Iñigo González",
-  seo_title_es="Impresoras de tienda: etiquetas, tickets y MFP · Iñigo González",
+  seo_title_es="Impresoras de tienda: etiquetas y tickets · Iñigo González",
   dek_es="Los tres tipos de impresora de una tienda, cómo desplegar drivers y colas desde la central, por qué cada impresora necesita una IP reservada, quién se ocupa de los consumibles, cómo guiar por teléfono a quien no es técnico y qué hacer cuando la tienda no puede imprimir etiquetas antes de abrir.",
   dek_en="The three kinds of printer in a store, how to deploy drivers and queues from head office, why every printer needs a reserved IP, who handles consumables, how to guide a non-technical person over the phone and what to do when the store can't print labels before opening.",
   es="""
@@ -17063,7 +17063,7 @@ g(slug="salas-de-videoconferencia-poly-en-la-oficina-central-aprovisionamiento-y
   title_es="Poly: salas de videoconferencia de la oficina central, del aprovisionamiento al consejo que empieza en cinco minutos",
   title_en="Poly: head-office video conferencing rooms, from provisioning to the board meeting that starts in five minutes",
   seo_title_en="Poly video conference rooms: setup, support · Iñigo González",
-  seo_title_es="Salas Poly de videoconferencia: alta y soporte · Iñigo González",
+  seo_title_es="Salas Poly: alta y soporte · Iñigo González",
   dek_es="Qué equipo Poly poner en cada sala, cuándo Teams Rooms en Android y cuándo una barra USB para el portátil, cómo aprovisionar con Poly Lens y el centro de administración de Teams, la cuenta de sala y su calendario, el firmware sin sustos y qué hacer cuando la sala sale desconectada justo antes del consejo.",
   dek_en="Which Poly device goes in each room, when to use Teams Rooms on Android and when a USB bar for the laptop, how to provision with Poly Lens and the Teams admin center, the room account and its calendar, firmware without surprises and what to do when the room shows offline just before the board meeting.",
   es="""
@@ -17692,7 +17692,7 @@ g(slug="monitorizacion-desplegar-alarmas-y-responder-en-plataformas-24x7", topic
   title_es="Monitorización: desplegar alarmas y responder a ellas en una plataforma 24x7",
   title_en="Monitoring: deploying alarms and responding to them on a 24x7 platform",
   seo_title_en="Monitoring alarms on a 24x7 platform · Iñigo González",
-  seo_title_es="Alarmas de monitorización en una plataforma 24x7 · Iñigo González",
+  seo_title_es="Alarmas de monitorización 24x7 · Iñigo González",
   dek_es="Qué vigilar en una plataforma que no puede pararse, cómo fijar umbrales y severidades, a quién despierta cada alarma, el runbook dentro del aviso, las ventanas de mantenimiento, la revisión del ruido y una alarma de madrugada desde el aviso hasta el cierre.",
   dek_en="What to watch on a platform that can't stop, how to set thresholds and severities, who each alarm wakes up, the runbook inside the alert, maintenance windows, the noise review, and a night-time alarm from page to closure.",
   es="""
@@ -17910,7 +17910,7 @@ Each month, with the tool's alarm report:
 g(slug="oracle-cambiar-hardware-y-sistema-operativo-del-servidor-de-base-de-datos", topic="oracle-upgrade", date="2026-10-28",
   title_es="Oracle: cambiar el hardware y el sistema operativo del servidor de base de datos sin parar el hospital",
   title_en="Oracle: replacing the database server's hardware and operating system without stopping the hospital",
-  seo_title_en="Oracle database server hardware and OS upgrade · Iñigo González",
+  seo_title_en="Oracle server hardware and OS upgrade · Iñigo González",
   seo_title_es="Oracle: cambiar hardware y SO del servidor · Iñigo González",
   dek_es="La matriz de certificación, el aviso sobre licencias por núcleo, el plan con el DBA, los prerrequisitos del nuevo servidor, el paso con Data Guard o con RMAN, la vuelta atrás, la validación con el responsable de la aplicación y qué mirar cuando tras el cambio todo va lento.",
   dek_en="The certification matrix, the warning about per-core licensing, the plan with the DBA, the new server's prerequisites, the move with Data Guard or RMAN, the rollback, validation with the application owner and what to check when everything is slow after the change.",
@@ -18327,7 +18327,7 @@ g(slug="windows-server-actualizaciones-planificadas-sin-cortar-el-servicio", top
   title_es="Windows Server: actualizaciones planificadas sin cortar el servicio",
   title_en="Windows Server: planned updates without interrupting the service",
   seo_title_en="Windows Server patching without downtime · Iñigo González",
-  seo_title_es="Parches de Windows Server sin cortar el servicio · Iñigo González",
+  seo_title_es="Parches de Windows Server sin cortes · Iñigo González",
   dek_es="Cómo parchear cada mes los servidores de un hospital que funciona 24x7: anillos, ventanas acordadas con los responsables clínicos, clústeres con Cluster-Aware Updating, pares balanceados de uno en uno, comprobaciones antes y después, WSUS, MECM o Azure Update Manager, la vuelta atrás y el servidor que no volvió tras el Patch Tuesday.",
   dek_en="How to patch a 24x7 hospital's servers every month: rings, windows agreed with clinical owners, clusters with Cluster-Aware Updating, balanced pairs one at a time, checks before and after, WSUS, MECM or Azure Update Manager, rollback and the server that didn't come back after Patch Tuesday.",
   es="""
@@ -19515,7 +19515,7 @@ If you have read access:
 g(slug="sql-server-copias-y-restauracion-de-la-base-de-datos-del-erp", topic="sqlserver-backup", date="2026-10-28",
   title_es="SQL Server: copias de seguridad del ERP, restauración a un punto en el tiempo y unas filas borradas",
   title_en="SQL Server: ERP backups, point-in-time restore and some deleted rows",
-  seo_title_en="SQL Server: ERP backup and point-in-time restore · Iñigo González",
+  seo_title_en="SQL Server: ERP point-in-time restore · Iñigo González",
   seo_title_es="SQL Server: copias y restauración del ERP · Iñigo González",
   dek_es="El modelo de recuperación que necesita la base de datos del ERP, la pauta de copias completas, diferenciales y de log, la copia a un recurso compartido o a una URL con checksum, la retención, la cadena de restauración con NORECOVERY y STOPAT en un servidor de pruebas, el historial de msdb y cómo recuperar unas filas borradas a las 10:40 en una planta de otro país.",
   dek_en="The recovery model the ERP database needs, the schedule of full, differential and log backups, backing up to a share or a URL with checksum, retention, the restore chain with NORECOVERY and STOPAT on a test server, msdb history, and how to get back rows deleted at 10:40 in a plant in another country.",
@@ -20664,8 +20664,8 @@ $ $loc.AdditionalProperties.ipRanges.cidrAddress
 g(slug="dr-bcp-preparar-y-supervisar-una-prueba-de-recuperacion-en-una-sede-financiera", topic="dr-prueba", date="2026-10-28",
   title_es="DR/BCP: preparar y supervisar una prueba de recuperación en una sede financiera",
   title_en="DR/BCP: preparing and supervising a recovery test at a financial site",
-  seo_title_en="DR/BCP: run a recovery test at a financial site · Iñigo González",
-  seo_title_es="DR/BCP: prueba de recuperación en una sede financiera · Iñigo González",
+  seo_title_en="DR/BCP: recovery test at a trading site · Iñigo González",
+  seo_title_es="DR/BCP: prueba de recuperación en trading · Iñigo González",
   dek_es="Cómo se organiza una prueba de recuperación en una entidad financiera: alcance y escenario, lo que espera la regulación de resiliencia, roles y go/no-go, el calendario de un fin de semana, cómo medir RTO y RPO de verdad, la validación del negocio, el registro de incidencias y el informe con su plan de remediación.",
   dek_en="How a recovery test is organised at a financial firm: scope and scenario, what resilience regulation expects, roles and go/no-go, a weekend timeline, how to measure RTO and RPO properly, business sign-off, the issues log and the report with its remediation plan.",
   es="""
@@ -21627,7 +21627,7 @@ g(slug="windows-11-migrar-los-equipos-de-una-sede-con-sala-de-trading", topic="w
   title_es="Windows 11: migrar los equipos de una sede con sala de trading sin tocar el horario de mercado",
   title_en="Windows 11: migrating a site's PCs with a trading floor without touching market hours",
   seo_title_en="Windows 11 migration of a trading-floor site · Iñigo González",
-  seo_title_es="Migración a Windows 11 de una sede con trading · Iñigo González",
+  seo_title_es="Windows 11: migrar una sede con trading · Iñigo González",
   dek_es="Comprobar TPM 2.0 y procesador, validar las aplicaciones de trading y de negocio, hacer un piloto con usuarios reales, elegir entre actualización in situ (Intune o MECM) y reinstalación con Autopilot, planificar por mesas fuera de horario, cuidar los puestos multimonitor, la ventana de vuelta atrás y el puesto que pierde sus cuatro pantallas.",
   dek_en="Check TPM 2.0 and CPU, validate trading and business applications, run a pilot with real users, choose between in-place upgrade (Intune or MECM) and wipe-and-load with Autopilot, schedule by desk outside market hours, look after multi-monitor desks, the rollback window and the desk that loses its four screens.",
   es="""
@@ -38970,4 +38970,891 @@ Tuesday, 03:40. The database upgrade was due to finish at 03:15 and is at 80 %. 
 - The [Oracle on new hardware](oracle-cambiar-hardware-y-sistema-operativo-del-servidor-de-base-de-datos.html) guide covers the plan with the DBA, Data Guard and RMAN for server changes.
 - The [Windows Server patching without downtime](windows-server-actualizaciones-planificadas-sin-cortar-el-servicio.html) guide applies the same windows to monthly patching.
 - The [publishing the clinical app in Citrix](citrix-publicar-aplicacion-clinica-y-dar-soporte-en-planta.html) guide helps with reopening and with the session that won't open on the ward.
+""")
+
+
+# ---------------------------------------------------------------- 2.x · Windows: updates that fail or roll back
+g(slug="windows-11-actualizaciones-que-fallan-o-se-deshacen-historial-registros-dism-sfc-y-reinicio-de-componentes", topic="windows", date="2026-11-04",
+  title_es="Windows 11: actualizaciones que fallan o se deshacen, historial y códigos de error, registros, DISM, SFC y reinicio de componentes",
+  title_en="Windows 11: updates that fail or roll back, history and error codes, logs, DISM, SFC and resetting the components",
+  seo_title_en="Windows 11: updates that fail and roll back · Iñigo González",
+  seo_title_es="Windows 11: actualizaciones que se deshacen · Iñigo González",
+  dek_es="Leer el historial de Windows Update y sus códigos (0x800f081f, 0x80070002, 0x800f0922), generar WindowsUpdate.log, buscar en CBS.log, reparar el almacén de componentes con DISM (con origen sin conexión) y SFC, reiniciar los componentes sin romper nada, hacer sitio y el ticket del equipo que dice «Deshaciendo cambios» cada noche.",
+  dek_en="Reading Windows Update history and its codes (0x800f081f, 0x80070002, 0x800f0922), generating WindowsUpdate.log, searching CBS.log, repairing the component store with DISM (with an offline source) and SFC, resetting the components safely, freeing space, and the ticket for the device that says 'Undoing changes' every night.",
+  seo_desc="Windows 11 updates that fail or roll back: error codes, WindowsUpdate.log, CBS.log, DISM RestoreHealth with /Source, SFC and resetting update components.",
+  es="""
+## Qué vas a conseguir
+
+Un método para el equipo que no consigue instalar una actualización: saber qué actualización falla y con qué código, leer los dos registros que lo explican, reparar el almacén de componentes con DISM y SFC, reiniciar Windows Update sin borrar lo que no toca y resolver el caso más molesto: la actualización se instala, reinicia, llega al 100 % y dice **No se pudieron completar las actualizaciones. Deshaciendo cambios**.
+
+## Antes de empezar
+
+- Windows 11 23H2, 24H2 o 25H2 y una sesión de administrador local (en remoto, por PowerShell o con la herramienta de control remoto).
+- Saber cómo recibe las actualizaciones el equipo: Windows Update directamente, anillos de Intune, WSUS o MECM. Cambia dónde busca los archivos de reparación.
+- Una ISO de Windows 11 de la **misma versión** que el equipo, guardada en un recurso compartido (`\\\\srv-ficheros\\Software$\\ISO`), para reparar sin conexión.
+- `C:\\Temp` creado para dejar las copias de los registros.
+
+## 1. Qué actualización falla y con qué código
+
+En el equipo, **Configuración › Windows Update › Historial de actualizaciones**: cada actualización con su estado y, si falló, el código. Desde PowerShell, con el historial completo:
+
+:::term PowerShell (administrador) · PC-0418
+$ $s = (New-Object -ComObject Microsoft.Update.Session).CreateUpdateSearcher()
+$ $s.QueryHistory(0, $s.GetTotalHistoryCount()) | Select-Object -First 4 Date, ResultCode, @{n='HResult';e={'0x{0:X8}' -f $_.HResult}}, Title | Format-List
+Date       : 03/11/2026 21:14:52
+ResultCode : 4
+HResult    : 0x800F081F
+Title      : 2026-10 Actualización acumulativa para Windows 11 Version 24H2 para sistemas basados en x64 (KBxxxxxxx)
+Date       : 02/11/2026 21:12:07
+ResultCode : 4
+HResult    : 0x800F081F
+Title      : 2026-10 Actualización acumulativa para Windows 11 Version 24H2 para sistemas basados en x64 (KBxxxxxxx)
+:::
+
+- `ResultCode`: **2** correcta, **3** correcta con errores, **4** fallida, **5** cancelada. La fecha está en UTC.
+- El mismo error queda en el registro **Sistema**, origen *WindowsUpdateClient*, evento **20** (*Error de instalación*), y en **Registros de Windows › Setup** aparece el paquete del KB y su cambio de estado.
+
+Los códigos que más se ven y por dónde empezar:
+
+| Código | Qué significa | Primer paso |
+|---|---|---|
+| `0x800f081f` | CBS_E_SOURCE_MISSING: no encuentra los archivos de origen de un componente | DISM /RestoreHealth, con origen si hace falta (punto 4) |
+| `0x800f0831` | CBS_E_STORE_CORRUPTION: falta el manifiesto de un paquete anterior | DISM; si no basta, el paquete del Catálogo |
+| `0x80073712` | ERROR_SXS_COMPONENT_STORE_CORRUPT: almacén de componentes incoherente | DISM /RestoreHealth |
+| `0x80070002` | ERROR_FILE_NOT_FOUND: falta un archivo, a menudo de una descarga a medias | Reiniciar los componentes (punto 5) |
+| `0x80070070` | ERROR_DISK_FULL: no hay espacio | Hacer sitio (punto 6) |
+| `0x800f0922` | CBS_E_INSTALLERS_FAILED: falló un instalador durante la instalación | Conexión a los servidores de actualización (VPN, proxy) y espacio en la partición del sistema |
+| `0x8024402c` | WU_E_PT_WINHTTP_NAME_NOT_RESOLVED: no resuelve el servidor de actualizaciones | DNS y proxy del equipo |
+
+## 2. WindowsUpdate.log: qué hizo el agente
+
+Desde Windows 10, el agente escribe trazas ETW en `C:\\Windows\\Logs\\WindowsUpdate`. `Get-WindowsUpdateLog` las convierte en un texto legible (por defecto, en el escritorio de quien lo ejecuta):
+
+:::term PowerShell (administrador) · PC-0418
+$ Get-WindowsUpdateLog -LogPath C:\\Temp\\WindowsUpdate.log
+$ Select-String -Path C:\\Temp\\WindowsUpdate.log -Pattern 'FATAL|0x8' | Select-Object -Last 4 | ForEach-Object Line
+2026/11/03 21:13:40.5512031 5120  8344  Deployment      Installing update KBxxxxxxx (Revision 1)
+2026/11/03 21:14:51.9028114 5120  8344  Handler         FATAL: CBS called Error with 0x800f081f,
+2026/11/03 21:14:51.9031209 5120  8344  Handler         FATAL: Completing with result 0x800f081f
+2026/11/03 21:14:52.0125977 5120  8344  Agent           * END * Install ClientId = UpdateOrchestrator, Updates = 1, ScenarioId = 8, Result 0x800f081f
+:::
+
+Si el error es de **búsqueda o descarga** (proxy, WSUS que no responde, `0x8024...`), la causa está aquí. Si dice **CBS called Error**, el agente descargó bien y quien falló fue el servicio de componentes: el siguiente registro.
+
+## 3. CBS.log: qué falló al instalar
+
+**CBS** (*Component-Based Servicing*) instala los paquetes y anota cada paso en `C:\\Windows\\Logs\\CBS\\CBS.log`. Es grande y se está escribiendo: se copia y se busca en la copia.
+
+:::term PowerShell (administrador) · PC-0418
+$ Copy-Item C:\\Windows\\Logs\\CBS\\CBS.log C:\\Temp\\CBS.log
+$ Select-String -Path C:\\Temp\\CBS.log -Pattern 'HRESULT = 0x8|Payload Corrupt|Error' | Select-Object -Last 3 | ForEach-Object Line
+2026-11-03 21:14:40, Info   CSI  (p) CSI Payload Corrupt (n) amd64_microsoft-windows-shell32_31bf3856ad364e35_10.0.26100.xxxx_none_...\\shell32.dll
+2026-11-03 21:14:51, Error  CBS  Failed to pin deployment while resolving Update: Package_for_RollupFix~31bf3856ad364e35~amd64~~26100.xxxx [HRESULT = 0x800f081f - CBS_E_SOURCE_MISSING]
+2026-11-03 21:14:51, Info   CBS  Failed to execute execution chain. [HRESULT = 0x800f081f - CBS_E_SOURCE_MISSING]
+:::
+
+**Payload Corrupt** o **SOURCE_MISSING** con el nombre de un componente es almacén de componentes dañado: lo arregla DISM. Los registros antiguos se comprimen en `CbsPersist_*.cab` en la misma carpeta.
+
+## 4. DISM y SFC, en este orden
+
+**DISM** repara el almacén de componentes (`C:\\Windows\\WinSxS`), que es de donde **SFC** saca las copias buenas de los archivos del sistema. Por eso DISM va primero.
+
+:::term PowerShell (administrador) · PC-0418
+$ DISM /Online /Cleanup-Image /CheckHealth
+$ DISM /Online /Cleanup-Image /ScanHealth
+The component store is repairable.
+$ DISM /Online /Cleanup-Image /RestoreHealth
+Error: 0x800f081f
+The source files could not be found.
+Use the "Source" option to specify the location of the files that are required to restore the feature.
+:::
+
+`/CheckHealth` lee una marca y tarda segundos; `/ScanHealth` revisa todo (varios minutos); `/RestoreHealth` repara descargando de Windows Update lo que falte. En un equipo que se actualiza por WSUS o sin salida a internet, esa descarga no llega y aparece el mismo `0x800f081f`. Dos salidas:
+
+- **Origen sin conexión**: montar la ISO de la misma versión, ver qué índice es tu edición y usarlo con `/LimitAccess`, que impide ir a Windows Update.
+
+:::term PowerShell (administrador) · PC-0418
+$ Mount-DiskImage -ImagePath \\\\srv-ficheros\\Software$\\ISO\\Win11_24H2_es-ES_x64.iso
+$ DISM /Get-WimInfo /WimFile:E:\\sources\\install.wim
+Index : 3
+Name : Windows 11 Enterprise
+$ DISM /Online /Cleanup-Image /RestoreHealth /Source:WIM:E:\\sources\\install.wim:3 /LimitAccess
+The restore operation completed successfully.
+$ sfc /scannow
+Windows Resource Protection found corrupt files and successfully repaired them.
+:::
+
+Si la ISO trae `install.esd` en lugar de `install.wim`, el origen es `/Source:ESD:E:\\sources\\install.esd:3`. Cuanto más reciente sea la ISO, más componentes encuentra.
+
+- **Permitir la reparación desde Windows Update aunque haya WSUS**: la directiva *Configuración del equipo › Plantillas administrativas › Sistema › Especificar la configuración para la instalación de componentes opcionales y la reparación de componentes*, con la casilla de descargar el contenido de reparación directamente de Windows Update.
+
+Lo que reparó SFC queda en CBS.log con la etiqueta `[SR]`: `Select-String -Path C:\\Windows\\Logs\\CBS\\CBS.log -SimpleMatch '[SR]' | Select-Object -Last 10`.
+
+## 5. Reiniciar los componentes de Windows Update
+
+Cuando el error es de descarga (`0x80070002`, una actualización que se queda al 0 % o vuelve a descargarse cada día), la caché de descargas o la base de datos de catálogos está mal. Se **renombran**, no se borran:
+
+:::term Símbolo del sistema (administrador) · PC-0418
+$ net stop wuauserv
+$ net stop bits
+$ net stop cryptsvc
+$ ren C:\\Windows\\SoftwareDistribution SoftwareDistribution.old
+$ ren C:\\Windows\\System32\\catroot2 catroot2.old
+$ net start cryptsvc
+$ net start bits
+$ net start wuauserv
+:::
+
+- Si `ren` dice que el archivo está en uso, un servicio ha vuelto a arrancar solo: se para otra vez y se repite.
+- Windows crea las dos carpetas de nuevo en la siguiente búsqueda. El historial que se ve en Configuración se queda casi vacío: es normal, el de PowerShell y el registro de eventos siguen ahí.
+- Nunca se borra `catroot` (sin el 2) ni nada de `WinSxS` a mano.
+- Cuando el equipo se haya actualizado bien, se borran las carpetas `.old`.
+
+## 6. Espacio en disco
+
+Una acumulativa necesita varios GB libres para descomprimirse y una actualización de versión bastante más: por debajo de 20 GB libres en `C:` empiezan los fallos raros.
+
+:::term PowerShell (administrador) · PC-0418
+$ Get-PSDrive C | Select-Object @{n='LibreGB';e={[math]::Round($_.Free/1GB,1)}}
+LibreGB
+-------
+    6,2
+$ DISM /Online /Cleanup-Image /AnalyzeComponentStore
+Component Store Cleanup Recommended : Yes
+$ DISM /Online /Cleanup-Image /StartComponentCleanup
+:::
+
+Además: **Configuración › Sistema › Almacenamiento › Recomendaciones de limpieza**, la papelera, `C:\\Windows\\SoftwareDistribution.old` si ya no hace falta y, sobre todo, las carpetas del usuario que OneDrive puede dejar solo en la nube.
+
+! No uses `/StartComponentCleanup /ResetBase` como rutina: libera más espacio, pero las actualizaciones instaladas dejan de poder desinstalarse.
+
+## 7. El ticket: "se instala, reinicia y dice 'Deshaciendo cambios'"
+
+Martes, 8:45. Desde hace una semana, PC-0418 se reinicia cada noche, llega al 100 %, dice **No se pudieron completar las actualizaciones. Deshaciendo cambios. No apagues el equipo** y tarda veinte minutos en arrancar. Cumplimiento lo marca sin el parche del mes.
+
+1. **El código**: el historial del punto 1 da `0x800F081F` en el mismo KB cuatro noches seguidas. No es un fallo puntual.
+2. **Reinicio pendiente y espacio**: `Test-Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Component Based Servicing\\RebootPending'` da `False` y hay 6,2 GB libres. Se limpia (punto 6) hasta 31 GB.
+3. **Los registros**: WindowsUpdate.log dice *CBS called Error*; CBS.log, *CSI Payload Corrupt* en un componente y `CBS_E_SOURCE_MISSING`. Almacén de componentes dañado.
+4. **La reparación**: `RestoreHealth` falla con `0x800f081f` porque el equipo va por WSUS. Con la ISO de 24H2 como origen y `/LimitAccess` termina bien; después, `sfc /scannow` y un reinicio.
+5. **La actualización**: *Buscar actualizaciones*. Se instala, reinicia y arranca sin deshacer. Si volviera a fallar, el paquete del **Catálogo de Microsoft Update**: en 24H2 pueden ser varios `.msu` (actualizaciones de punto de control); se dejan todos en la misma carpeta y se instala el del KB con `DISM /Online /Add-Package /PackagePath:C:\\Temp\\KB\\windows11.0-kbxxxxxxx-x64.msu`, que encuentra solo los requisitos.
+6. **Si nada de lo anterior funciona**: **Configuración › Sistema › Recuperación › Solucionar problemas con Windows Update › Reinstalar ahora** reinstala la versión actual de Windows conservando aplicaciones y archivos. El último paso es reinstalar el equipo con la imagen corporativa.
+
+Otras causas del mismo síntoma: con `0x800f0922`, una VPN o un proxy que corta la conexión durante el reinicio, o la partición del sistema EFI sin espacio; con fallos de controladores en CBS.log, el controlador o el antivirus de terceros que bloquea los archivos.
+
+En el ticket: KB, código, líneas de los dos registros, qué se reparó y con qué origen, y la comprobación final (historial con `ResultCode` 2).
+
+## Siguientes pasos
+
+- El [diagnóstico básico de un equipo lento o con errores](windows-diagnostico-basico-equipo-lento-o-con-errores.html) es la primera guía de este tema: versión, disco, eventos e integridad del sistema.
+- Si el equipo lo gestiona Intune, la guía de [anillos de Windows Update en Intune](intune-anillos-de-windows-update-plazos-actualizaciones-urgentes-y-un-equipo-que-no-se-parchea.html) explica plazos, reinicios forzados y los informes de cumplimiento.
+- En servidores, el mismo método con ventanas y clústeres está en [actualizaciones planificadas de Windows Server](windows-server-actualizaciones-planificadas-sin-cortar-el-servicio.html).
+""",
+  en="""
+## What you'll get
+
+A method for the device that cannot install an update: knowing which update fails and with which code, reading the two logs that explain it, repairing the component store with DISM and SFC, resetting Windows Update without deleting what you shouldn't, and solving the most annoying case: the update installs, restarts, reaches 100% and says **We couldn't complete the updates. Undoing changes**.
+
+## Before you start
+
+- Windows 11 23H2, 24H2 or 25H2 and a local administrator session (remotely, through PowerShell or the remote control tool).
+- Knowing how the device gets its updates: Windows Update directly, Intune rings, WSUS or MECM. It changes where the repair files are fetched from.
+- A Windows 11 ISO of the **same version** as the device, kept on a share (`\\\\srv-ficheros\\Software$\\ISO`), for offline repair.
+- `C:\\Temp` created to keep the copies of the logs.
+
+## 1. Which update fails and with which code
+
+On the device, **Settings › Windows Update › Update history**: each update with its status and, if it failed, the code. From PowerShell, with the full history:
+
+:::term PowerShell (administrator) · PC-0418
+$ $s = (New-Object -ComObject Microsoft.Update.Session).CreateUpdateSearcher()
+$ $s.QueryHistory(0, $s.GetTotalHistoryCount()) | Select-Object -First 4 Date, ResultCode, @{n='HResult';e={'0x{0:X8}' -f $_.HResult}}, Title | Format-List
+Date       : 11/3/2026 9:14:52 PM
+ResultCode : 4
+HResult    : 0x800F081F
+Title      : 2026-10 Cumulative Update for Windows 11 Version 24H2 for x64-based Systems (KBxxxxxxx)
+Date       : 11/2/2026 9:12:07 PM
+ResultCode : 4
+HResult    : 0x800F081F
+Title      : 2026-10 Cumulative Update for Windows 11 Version 24H2 for x64-based Systems (KBxxxxxxx)
+:::
+
+- `ResultCode`: **2** succeeded, **3** succeeded with errors, **4** failed, **5** aborted. The date is in UTC.
+- The same error lands in the **System** log, source *WindowsUpdateClient*, event **20** (*Installation Failure*), and **Windows Logs › Setup** shows the KB package and its state change.
+
+The codes you see most and where to start:
+
+| Code | What it means | First step |
+|---|---|---|
+| `0x800f081f` | CBS_E_SOURCE_MISSING: the source files for a component cannot be found | DISM /RestoreHealth, with a source if needed (step 4) |
+| `0x800f0831` | CBS_E_STORE_CORRUPTION: the manifest of an earlier package is missing | DISM; if that is not enough, the Catalog package |
+| `0x80073712` | ERROR_SXS_COMPONENT_STORE_CORRUPT: the component store is inconsistent | DISM /RestoreHealth |
+| `0x80070002` | ERROR_FILE_NOT_FOUND: a file is missing, often from a half-finished download | Reset the components (step 5) |
+| `0x80070070` | ERROR_DISK_FULL: there is no space | Free up space (step 6) |
+| `0x800f0922` | CBS_E_INSTALLERS_FAILED: an installer failed during installation | Connection to the update servers (VPN, proxy) and space on the system partition |
+| `0x8024402c` | WU_E_PT_WINHTTP_NAME_NOT_RESOLVED: the update server name does not resolve | The device's DNS and proxy |
+
+## 2. WindowsUpdate.log: what the agent did
+
+Since Windows 10, the agent writes ETW traces to `C:\\Windows\\Logs\\WindowsUpdate`. `Get-WindowsUpdateLog` turns them into readable text (by default, on the desktop of whoever runs it):
+
+:::term PowerShell (administrator) · PC-0418
+$ Get-WindowsUpdateLog -LogPath C:\\Temp\\WindowsUpdate.log
+$ Select-String -Path C:\\Temp\\WindowsUpdate.log -Pattern 'FATAL|0x8' | Select-Object -Last 4 | ForEach-Object Line
+2026/11/03 21:13:40.5512031 5120  8344  Deployment      Installing update KBxxxxxxx (Revision 1)
+2026/11/03 21:14:51.9028114 5120  8344  Handler         FATAL: CBS called Error with 0x800f081f,
+2026/11/03 21:14:51.9031209 5120  8344  Handler         FATAL: Completing with result 0x800f081f
+2026/11/03 21:14:52.0125977 5120  8344  Agent           * END * Install ClientId = UpdateOrchestrator, Updates = 1, ScenarioId = 8, Result 0x800f081f
+:::
+
+If the error is in the **scan or download** (proxy, WSUS not answering, `0x8024...`), the cause is here. If it says **CBS called Error**, the agent downloaded fine and the one that failed was the servicing stack: the next log.
+
+## 3. CBS.log: what failed during installation
+
+**CBS** (*Component-Based Servicing*) installs the packages and writes every step to `C:\\Windows\\Logs\\CBS\\CBS.log`. It is large and being written to: copy it and search the copy.
+
+:::term PowerShell (administrator) · PC-0418
+$ Copy-Item C:\\Windows\\Logs\\CBS\\CBS.log C:\\Temp\\CBS.log
+$ Select-String -Path C:\\Temp\\CBS.log -Pattern 'HRESULT = 0x8|Payload Corrupt|Error' | Select-Object -Last 3 | ForEach-Object Line
+2026-11-03 21:14:40, Info   CSI  (p) CSI Payload Corrupt (n) amd64_microsoft-windows-shell32_31bf3856ad364e35_10.0.26100.xxxx_none_...\\shell32.dll
+2026-11-03 21:14:51, Error  CBS  Failed to pin deployment while resolving Update: Package_for_RollupFix~31bf3856ad364e35~amd64~~26100.xxxx [HRESULT = 0x800f081f - CBS_E_SOURCE_MISSING]
+2026-11-03 21:14:51, Info   CBS  Failed to execute execution chain. [HRESULT = 0x800f081f - CBS_E_SOURCE_MISSING]
+:::
+
+**Payload Corrupt** or **SOURCE_MISSING** with a component name means a damaged component store: DISM fixes it. Older logs are compressed into `CbsPersist_*.cab` in the same folder.
+
+## 4. DISM and SFC, in this order
+
+**DISM** repairs the component store (`C:\\Windows\\WinSxS`), which is where **SFC** takes the good copies of system files from. That is why DISM goes first.
+
+:::term PowerShell (administrator) · PC-0418
+$ DISM /Online /Cleanup-Image /CheckHealth
+$ DISM /Online /Cleanup-Image /ScanHealth
+The component store is repairable.
+$ DISM /Online /Cleanup-Image /RestoreHealth
+Error: 0x800f081f
+The source files could not be found.
+Use the "Source" option to specify the location of the files that are required to restore the feature.
+:::
+
+`/CheckHealth` reads a flag and takes seconds; `/ScanHealth` checks everything (several minutes); `/RestoreHealth` repairs by downloading whatever is missing from Windows Update. On a device that updates through WSUS or has no internet access, that download never arrives and you get the same `0x800f081f`. Two ways out:
+
+- **Offline source**: mount the ISO of the same version, find the index of your edition and use it with `/LimitAccess`, which stops DISM going to Windows Update.
+
+:::term PowerShell (administrator) · PC-0418
+$ Mount-DiskImage -ImagePath \\\\srv-ficheros\\Software$\\ISO\\Win11_24H2_en-US_x64.iso
+$ DISM /Get-WimInfo /WimFile:E:\\sources\\install.wim
+Index : 3
+Name : Windows 11 Enterprise
+$ DISM /Online /Cleanup-Image /RestoreHealth /Source:WIM:E:\\sources\\install.wim:3 /LimitAccess
+The restore operation completed successfully.
+$ sfc /scannow
+Windows Resource Protection found corrupt files and successfully repaired them.
+:::
+
+If the ISO has `install.esd` instead of `install.wim`, the source is `/Source:ESD:E:\\sources\\install.esd:3`. The more recent the ISO, the more components it finds.
+
+- **Allow repair from Windows Update even with WSUS**: the policy *Computer Configuration › Administrative Templates › System › Specify settings for optional component installation and component repair*, with the box to download repair content directly from Windows Update.
+
+What SFC repaired goes into CBS.log with the `[SR]` tag: `Select-String -Path C:\\Windows\\Logs\\CBS\\CBS.log -SimpleMatch '[SR]' | Select-Object -Last 10`.
+
+## 5. Resetting the Windows Update components
+
+When the error is in the download (`0x80070002`, an update stuck at 0% or downloading again every day), the download cache or the catalog database is broken. You **rename** them, you do not delete them:
+
+:::term Command Prompt (administrator) · PC-0418
+$ net stop wuauserv
+$ net stop bits
+$ net stop cryptsvc
+$ ren C:\\Windows\\SoftwareDistribution SoftwareDistribution.old
+$ ren C:\\Windows\\System32\\catroot2 catroot2.old
+$ net start cryptsvc
+$ net start bits
+$ net start wuauserv
+:::
+
+- If `ren` says the file is in use, a service has started again on its own: stop it again and repeat.
+- Windows recreates both folders on the next scan. The history shown in Settings ends up almost empty: that is normal, the PowerShell history and the event log are still there.
+- Never delete `catroot` (without the 2) or anything in `WinSxS` by hand.
+- Once the device has updated correctly, delete the `.old` folders.
+
+## 6. Disk space
+
+A cumulative update needs several GB free to unpack and a version upgrade quite a lot more: below 20 GB free on `C:` the odd failures start.
+
+:::term PowerShell (administrator) · PC-0418
+$ Get-PSDrive C | Select-Object @{n='FreeGB';e={[math]::Round($_.Free/1GB,1)}}
+FreeGB
+------
+   6.2
+$ DISM /Online /Cleanup-Image /AnalyzeComponentStore
+Component Store Cleanup Recommended : Yes
+$ DISM /Online /Cleanup-Image /StartComponentCleanup
+:::
+
+Also: **Settings › System › Storage › Cleanup recommendations**, the recycle bin, `C:\\Windows\\SoftwareDistribution.old` if no longer needed and, above all, the user's folders that OneDrive can keep in the cloud only.
+
+! Do not use `/StartComponentCleanup /ResetBase` as routine: it frees more space, but installed updates can no longer be uninstalled.
+
+## 7. The ticket: "it installs, restarts and says 'Undoing changes'"
+
+Tuesday, 8:45. For a week, PC-0418 has restarted every night, reached 100%, said **We couldn't complete the updates. Undoing changes. Don't turn off your computer** and taken twenty minutes to boot. Compliance flags it without this month's patch.
+
+1. **The code**: the history from step 1 gives `0x800F081F` on the same KB four nights in a row. It is not a one-off.
+2. **Pending reboot and space**: `Test-Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Component Based Servicing\\RebootPending'` returns `False` and there are 6.2 GB free. A cleanup (step 6) takes it to 31 GB.
+3. **The logs**: WindowsUpdate.log says *CBS called Error*; CBS.log, *CSI Payload Corrupt* on a component and `CBS_E_SOURCE_MISSING`. Damaged component store.
+4. **The repair**: `RestoreHealth` fails with `0x800f081f` because the device uses WSUS. With the 24H2 ISO as the source and `/LimitAccess` it completes; then `sfc /scannow` and a restart.
+5. **The update**: *Check for updates*. It installs, restarts and boots without rolling back. If it failed again, the package from the **Microsoft Update Catalog**: on 24H2 it can be several `.msu` files (checkpoint cumulative updates); put them all in the same folder and install the KB's one with `DISM /Online /Add-Package /PackagePath:C:\\Temp\\KB\\windows11.0-kbxxxxxxx-x64.msu`, which finds the prerequisites by itself.
+6. **If none of that works**: **Settings › System › Recovery › Fix problems using Windows Update › Reinstall now** reinstalls the current version of Windows keeping apps and files. The last step is reimaging the device with the corporate image.
+
+Other causes of the same symptom: with `0x800f0922`, a VPN or proxy that cuts the connection during the restart, or an EFI system partition with no space; with driver failures in CBS.log, the driver or a third-party antivirus locking the files.
+
+In the ticket: KB, code, the lines from both logs, what was repaired and with which source, and the final check (history with `ResultCode` 2).
+
+## Next steps
+
+- [Basic diagnosis of a slow device or one with errors](windows-diagnostico-basico-equipo-lento-o-con-errores.html) is the first guide in this topic: version, disk, events and system integrity.
+- If Intune manages the device, the guide on [Windows Update rings in Intune](intune-anillos-de-windows-update-plazos-actualizaciones-urgentes-y-un-equipo-que-no-se-parchea.html) explains deadlines, forced restarts and the compliance reports.
+- For servers, the same method with maintenance windows and clusters is in [planned Windows Server updates](windows-server-actualizaciones-planificadas-sin-cortar-el-servicio.html).
+""")
+
+# ---------------------------------------------------------------- 2.x · PowerShell: remoting for IT operations
+g(slug="powershell-remoto-winrm-invoke-command-en-lote-segundo-salto-jea-y-acceso-denegado", topic="powershell", date="2026-11-04",
+  title_es="PowerShell remoto: WinRM, Invoke-Command contra muchos equipos, Enter-PSSession, el segundo salto, JEA, registro y un acceso denegado",
+  title_en="PowerShell remoting: WinRM, Invoke-Command against many computers, Enter-PSSession, the second hop, JEA, logging and an access denied",
+  seo_title_en="PowerShell remoting: WinRM, JEA and errors · Iñigo González",
+  seo_title_es="PowerShell remoto: WinRM, JEA y errores · Iñigo González",
+  dek_es="Lo que hay debajo de WinRM (puertos 5985 y 5986, Kerberos, TrustedHosts solo fuera del dominio), Invoke-Command contra cientos de equipos con -ThrottleLimit y los errores recogidos, sesiones interactivas, el segundo salto sin CredSSP, JEA en breve, transcripciones y registro, y el ticket de los servidores que dan acceso denegado.",
+  dek_en="What sits under WinRM (ports 5985 and 5986, Kerberos, TrustedHosts only outside the domain), Invoke-Command against hundreds of computers with -ThrottleLimit and the errors collected, interactive sessions, the second hop without CredSSP, JEA in brief, transcripts and logging, and the ticket about servers that return access denied.",
+  seo_desc="PowerShell remoting for IT operations: WinRM, Invoke-Command at scale with -ThrottleLimit, the second hop, JEA, logging and fixing WinRM access denied errors.",
+  es="""
+## Qué vas a conseguir
+
+Usar PowerShell remoto como herramienta diaria de operaciones: saber qué tiene que estar en su sitio para que funcione, lanzar un comando contra cien servidores y quedarte con los resultados y con la lista de los que fallaron, trabajar en una sesión interactiva, resolver el "acceso denegado" al recurso compartido desde dentro de la sesión, dar a soporte solo los comandos que necesita y diagnosticar los servidores que responden **WinRM cannot complete the operation** o **Access is denied**.
+
+## Antes de empezar
+
+- Windows PowerShell 5.1 o PowerShell 7 en tu equipo de administración, en el dominio `contoso.local`.
+- Una cuenta de administración (`CONTOSO\\adm-lmartin`, no tu cuenta de correo) que sea administrador local en los servidores, normalmente por un grupo como `GG-Admins-Servidores`.
+- El módulo **ActiveDirectory** de RSAT para consultar equipos y SPN.
+- La guía del [script de inventario remoto](powershell-script-de-inventario-remoto-con-csv.html) explica el bucle con `try/catch`; aquí se pasa a la ejecución en paralelo.
+
+## 1. WinRM en dos minutos
+
+PowerShell remoto viaja por **WinRM**, la implementación de Microsoft de WS-Management:
+
+- **5985/TCP** para HTTP y **5986/TCP** para HTTPS. En el dominio, HTTP no viaja en claro: Kerberos cifra el contenido después de autenticar.
+- En Windows Server viene activo de serie. En Windows 11, `Enable-PSRemoting -Force` arranca el servicio, crea el agente de escucha y abre el firewall. Si la red del equipo es **Pública**, falla salvo con `-SkipNetworkProfileCheck`, que solo abre a la subred local.
+- Para muchos equipos, una GPO: *Configuración del equipo › Plantillas administrativas › Componentes de Windows › Administración remota de Windows (WinRM) › Servicio WinRM › Permitir la administración remota del servidor a través de WinRM*, el servicio **WinRM** en automático y la regla de firewall **Administración remota de Windows (HTTP de entrada)** limitada a la red de administración.
+
+:::term PowerShell · equipo de administración
+$ Test-NetConnection srv-app07 -Port 5985 | Select-Object ComputerName, TcpTestSucceeded
+ComputerName TcpTestSucceeded
+------------ ----------------
+srv-app07                True
+$ Test-WSMan srv-app07
+wsmid           : http://schemas.dmtf.org/wbem/wsman/identity/1/wsmanidentity.xsd
+ProtocolVersion : http://schemas.dmtf.org/wbem/wsman/1/wsman.xsd
+ProductVendor   : Microsoft Corporation
+ProductVersion  : OS: 0.0.0 SP: 0.0 Stack: 3.0
+:::
+
+`Test-WSMan` contesta sin autenticar: confirma red, firewall y servicio, no permisos.
+
+**Fuera del dominio** (un servidor en grupo de trabajo, una DMZ, o cuando escribes una IP), Kerberos no sirve y entra NTLM. Entonces hace falta HTTPS o añadir el destino a **TrustedHosts** en tu equipo, y pasar `-Credential` siempre:
+
+:::term PowerShell (administrador) · equipo de administración
+$ Set-Item WSMan:\\localhost\\Client\\TrustedHosts -Value 'srv-dmz01' -Concatenate -Force
+$ Get-Item WSMan:\\localhost\\Client\\TrustedHosts | Select-Object Value
+:::
+
+! TrustedHosts no hace "de confianza" a nadie: solo calla el aviso de que no se puede comprobar la identidad del servidor. Nunca `*`, y nunca para equipos del dominio, que deben ir por nombre y Kerberos. Para la DMZ, mejor un agente de escucha HTTPS en 5986 con un certificado de la CA interna.
+
+## 2. Invoke-Command contra muchos equipos
+
+Si `-ComputerName` recibe la lista entera, PowerShell abre las conexiones en paralelo, **32 a la vez** por defecto (`-ThrottleLimit`). Cada resultado llega con la propiedad `PSComputerName`, y los equipos que fallan van a la variable de errores en lugar de parar el comando:
+
+:::term PowerShell · equipo de administración
+$ $servidores = (Get-ADComputer -Filter 'OperatingSystem -like "*Server*"' -SearchBase 'OU=Servidores,DC=contoso,DC=local').DNSHostName
+$ $servicio = 'Spooler'
+$ $r = Invoke-Command -ComputerName $servidores -ThrottleLimit 64 -ErrorAction SilentlyContinue -ErrorVariable fallos -ScriptBlock {
+$     $s = Get-Service -Name $using:servicio
+$     [pscustomobject]@{ Estado = $s.Status; Inicio = $s.StartType; Arranque = (Get-CimInstance Win32_OperatingSystem).LastBootUpTime }
+$ }
+$ $r | Select-Object PSComputerName, Estado, Inicio, Arranque | Export-Csv C:\\Temp\\spooler.csv -NoTypeInformation -Delimiter ';' -Encoding UTF8
+$ $fallos | ForEach-Object { [pscustomobject]@{ Equipo = $_.TargetObject; Error = $_.FullyQualifiedErrorId } } | Format-Table -AutoSize
+Equipo                     Error
+------                     -----
+srv-app07.contoso.local    WinRMOperationTimeout,PSSessionStateBroken
+srv-app09.contoso.local    CannotConnect,PSSessionStateBroken
+srv-app11.contoso.local    AccessDenied,PSSessionStateBroken
+:::
+
+- `$using:servicio` lleva una variable local al bloque remoto. Sin `$using:` llega vacía.
+- `-ErrorVariable fallos` (sin `$`) guarda los errores de conexión con el equipo en `TargetObject`. Ese CSV de fallos es tan importante como el de resultados: dice qué equipos **no** sabes cómo están.
+- Para trabajos largos, `-AsJob` devuelve el control y `Receive-Job` recoge después.
+- Si vas a lanzar varios comandos seguidos, abre las sesiones una vez: `$ses = New-PSSession -ComputerName $servidores`, después `Invoke-Command -Session $ses ...` y al final `Remove-PSSession $ses`.
+
+## 3. Enter-PSSession: una consola en el servidor
+
+:::term PowerShell · equipo de administración
+$ Enter-PSSession -ComputerName srv-app07
+[srv-app07]: PS C:\\Users\\adm-lmartin\\Documents> Get-Service W3SVC | Restart-Service -PassThru
+Status   Name               DisplayName
+------   ----               -----------
+Running  W3SVC              World Wide Web Publishing Service
+[srv-app07]: PS C:\\Users\\adm-lmartin\\Documents> exit
+:::
+
+- Todo corre en el servidor, sin escritorio: nada que abra una ventana ni que pregunte de forma interactiva (instaladores con asistente, `notepad`).
+- Para llevar un archivo, sin carpetas compartidas: `Copy-Item C:\\Temp\\parche.msu -Destination C:\\Temp -ToSession (New-PSSession srv-app07)`.
+
+## 4. El segundo salto
+
+Dentro de la sesión en `srv-app07`, `Get-ChildItem \\\\srv-ficheros\\Software$` da **Access is denied**. No es un permiso que falte: con Kerberos, `srv-app07` sabe quién eres pero no tiene tus credenciales para presentarlas a un tercer equipo. Es el **segundo salto**. Las salidas, de mejor a peor:
+
+1. **Evitarlo**: copiar el archivo al servidor antes con `Copy-Item -ToSession`, o lanzar el trabajo desde el equipo que tiene los datos.
+2. **Pasar la credencial explícitamente** para ese acceso: `Invoke-Command srv-app07 { New-PSDrive -Name S -PSProvider FileSystem -Root \\\\srv-ficheros\\Software$ -Credential $using:cred }`, con `$cred = Get-Credential` en tu equipo.
+3. **Delegación restringida basada en recursos** (Kerberos, sin guardar contraseñas), configurada en el destino: `Set-ADComputer srv-ficheros -PrincipalsAllowedToDelegateToAccount (Get-ADComputer srv-app07)`. Sirve para SMB, no para encadenar otra sesión de WinRM. Si ya se intentó antes, `klist purge -li 0x3e7` en `srv-app07` o esperar 15 minutos.
+4. **CredSSP**: envía tu credencial al servidor y la deja allí; si ese servidor está comprometido, tu cuenta también. Solo de forma puntual, hacia un servidor concreto (`Enable-WSManCredSSP -Role Client -DelegateComputer srv-app07.contoso.local` y `-Role Server` en el destino) y deshaciéndolo al terminar con `Disable-WSManCredSSP`.
+
+! La delegación sin restricciones (*Confiar en este equipo para la delegación a cualquier servicio*) también "funciona" y es la peor opción: cualquier servicio de ese equipo puede usar tu identidad en cualquier sitio.
+
+## 5. JEA: solo los comandos que hacen falta
+
+**Just Enough Administration** crea un punto de conexión propio donde un grupo solo ve unos comandos concretos, y ejecuta con una cuenta virtual que es administradora local mientras dura la sesión. Ejemplo: que Soporte N1 pueda reiniciar la cola de impresión e IIS sin ser administrador del servidor.
+
+:::term PowerShell (administrador) · srv-app07
+$ $mod = 'C:\\Program Files\\WindowsPowerShell\\Modules\\JEASoporte'
+$ New-Item -ItemType Directory -Path "$mod\\RoleCapabilities" -Force | Out-Null
+$ New-ModuleManifest -Path "$mod\\JEASoporte.psd1"
+$ New-PSRoleCapabilityFile -Path "$mod\\RoleCapabilities\\ReinicioServicios.psrc" -VisibleCmdlets 'Get-Service', @{ Name = 'Restart-Service'; Parameters = @{ Name = 'Name'; ValidateSet = 'Spooler', 'W3SVC' } }
+$ New-PSSessionConfigurationFile -Path C:\\Temp\\Soporte.pssc -SessionType RestrictedRemoteServer -RunAsVirtualAccount -TranscriptDirectory 'C:\\JEA\\Transcripciones' -RoleDefinitions @{ 'CONTOSO\\GG-Soporte-N1' = @{ RoleCapabilities = 'ReinicioServicios' } }
+$ Test-PSSessionConfigurationFile C:\\Temp\\Soporte.pssc
+True
+$ Register-PSSessionConfiguration -Name Soporte -Path C:\\Temp\\Soporte.pssc
+:::
+
+Desde soporte: `Enter-PSSession srv-app07 -ConfigurationName Soporte`. `Get-PSSessionCapability -ConfigurationName Soporte -Username CONTOSO\\jperez` muestra qué comandos verá cada persona antes de que pruebe. JEA también resuelve el acceso de quien no es administrador, que en el punto de conexión por defecto recibe acceso denegado.
+
+## 6. Registro: quién hizo qué
+
+- **Transcripciones**: `Start-Transcript -Path \\\\srv-gestion\\Transcripciones$\\$env:USERNAME-$(Get-Date -Format yyyyMMdd-HHmm).txt` al empezar un cambio, o la directiva *Activar la transcripción de PowerShell* con una carpeta central donde los usuarios pueden escribir pero no leer. JEA las guarda en `TranscriptDirectory`.
+- **Registro de bloques de script**: evento **4104** en *Microsoft-Windows-PowerShell/Operational* del servidor, con el código que se ejecutó en remoto. Se activa por GPO, como en la guía de [GPO de seguridad](gpo-de-seguridad-base-ntlm-llmnr-smb-laps-y-despliegue-en-piloto.html).
+- **Conexiones**: *Microsoft-Windows-WinRM/Operational* en el destino, y en **Seguridad** el evento **4624** de tipo de inicio de sesión 3 con tu cuenta de administración.
+
+## 7. El ticket: "WinRM cannot complete the operation / Access is denied en algunos servidores"
+
+Jueves, 10:20. El script de comprobación del punto 2 funciona en 58 de 63 servidores. Los cinco restantes:
+
+1. **srv-app07, WinRMOperationTimeout**: el mensaje completo dice *WinRM cannot complete the operation... a firewall exception for the WinRM service is enabled...*. El puerto no responde. Por consola remota o la consola del hipervisor, `Get-NetConnectionProfile` da `NetworkCategory : Public`: al arrancar no encontró un controlador de dominio y la regla de firewall del perfil Dominio no aplica. `Restart-Service NlaSvc -Force` lo devuelve a `DomainAuthenticated`; para que no se repita, se revisa por qué arranca sin ver el dominio (DNS de la tarjeta, orden de arranque frente a los controladores).
+2. **srv-app09, CannotConnect**: `sc.exe \\\\srv-app09 query winrm` da `STATE : 1 STOPPED`. Alguien lo paró y quedó en manual. `sc.exe \\\\srv-app09 config winrm start= delayed-auto` y `sc.exe \\\\srv-app09 start winrm`; la GPO del punto 1 evita que vuelva a pasar.
+3. **srv-app11, AccessDenied**: red y servicio bien, la cuenta no es administradora local. El servidor se movió a una OU donde no llega la GPO que añade `GG-Admins-Servidores` a **Administradores**. Se corrige la OU o el vínculo; no se añade tu cuenta a mano.
+4. **10.0.30.25, por IP**: *The WinRM client cannot process the request... the destination machine must be added to the TrustedHosts configuration setting*. Con IP no hay Kerberos. Se cambia la lista para usar el nombre DNS (`Resolve-DnsName 10.0.30.25` da `srv-app14.contoso.local`), no se toca TrustedHosts.
+5. **srv-app12, error 0x80090322 con Kerberos**: `setspn -Q HTTP/srv-app12*` muestra el SPN `HTTP/srv-app12.contoso.local` registrado en la cuenta `svc-intranet` (una aplicación de IIS con autenticación Kerberos), así que el vale se cifra para la cuenta equivocada. Con el responsable de la aplicación, el SPN pasa a un nombre propio de la web (`HTTP/intranet.contoso.local`) y WinRM vuelve a usar el del equipo.
+
+Un sexto caso que aparece en servidores fuera del dominio: con una cuenta **local** que es administradora, el acceso se deniega igualmente porque UAC filtra el token de las cuentas locales en conexiones de red. No se resuelve poniendo `LocalAccountTokenFilterPolicy` a 1 en todos los equipos (la base de seguridad de Microsoft lo mantiene filtrado a propósito para frenar el movimiento lateral): cuenta de dominio, o JEA, o como mucho una excepción documentada en ese servidor.
+
+En el ticket: cada servidor con su error, la causa, el cambio y la repetición del comando con 63 de 63.
+
+## Siguientes pasos
+
+- El [informe semanal de Active Directory](powershell-informe-semanal-de-active-directory-inactivos-contrasenas-y-cuentas-deshabilitadas.html) es la otra guía de este tema: se programa con una gMSA y se puede combinar con la consulta remota de este artículo.
+- Para que WinRM, el firewall y el grupo de administradores lleguen igual a todos los servidores, la guía de [GPO de seguridad](gpo-de-seguridad-base-ntlm-llmnr-smb-laps-y-despliegue-en-piloto.html) explica el despliegue con piloto.
+- Las cuentas de servicio sin contraseña que caduca están en la guía de [gMSA y tareas programadas](windows-server-cuentas-de-servicio-gmsa-tareas-programadas-y-un-servicio-que-no-arranca.html).
+""",
+  en="""
+## What you'll get
+
+Using PowerShell remoting as a daily operations tool: knowing what has to be in place for it to work, running a command against a hundred servers and keeping both the results and the list of those that failed, working in an interactive session, solving the "access denied" to a share from inside the session, giving support only the commands it needs, and diagnosing servers that answer **WinRM cannot complete the operation** or **Access is denied**.
+
+## Before you start
+
+- Windows PowerShell 5.1 or PowerShell 7 on your admin workstation, in the `contoso.local` domain.
+- An admin account (`CONTOSO\\adm-lmartin`, not your mailbox account) that is local administrator on the servers, usually through a group such as `GG-Admins-Servidores`.
+- The RSAT **ActiveDirectory** module to query computers and SPNs.
+- The [remote inventory script](powershell-script-de-inventario-remoto-con-csv.html) guide explains the loop with `try/catch`; here you move on to parallel execution.
+
+## 1. WinRM in two minutes
+
+PowerShell remoting travels over **WinRM**, Microsoft's implementation of WS-Management:
+
+- **5985/TCP** for HTTP and **5986/TCP** for HTTPS. In the domain, HTTP is not sent in clear text: Kerberos encrypts the content after authentication.
+- On Windows Server it is on out of the box. On Windows 11, `Enable-PSRemoting -Force` starts the service, creates the listener and opens the firewall. If the device's network is **Public**, it fails unless you use `-SkipNetworkProfileCheck`, which only opens it to the local subnet.
+- For many devices, a GPO: *Computer Configuration › Administrative Templates › Windows Components › Windows Remote Management (WinRM) › WinRM Service › Allow remote server management through WinRM*, the **WinRM** service set to automatic, and the firewall rule **Windows Remote Management (HTTP-In)** limited to the management network.
+
+:::term PowerShell · admin workstation
+$ Test-NetConnection srv-app07 -Port 5985 | Select-Object ComputerName, TcpTestSucceeded
+ComputerName TcpTestSucceeded
+------------ ----------------
+srv-app07                True
+$ Test-WSMan srv-app07
+wsmid           : http://schemas.dmtf.org/wbem/wsman/identity/1/wsmanidentity.xsd
+ProtocolVersion : http://schemas.dmtf.org/wbem/wsman/1/wsman.xsd
+ProductVendor   : Microsoft Corporation
+ProductVersion  : OS: 0.0.0 SP: 0.0 Stack: 3.0
+:::
+
+`Test-WSMan` answers without authenticating: it confirms network, firewall and service, not permissions.
+
+**Outside the domain** (a workgroup server, a DMZ, or when you type an IP), Kerberos does not work and NTLM takes over. Then you need HTTPS or the target added to **TrustedHosts** on your workstation, and `-Credential` every time:
+
+:::term PowerShell (administrator) · admin workstation
+$ Set-Item WSMan:\\localhost\\Client\\TrustedHosts -Value 'srv-dmz01' -Concatenate -Force
+$ Get-Item WSMan:\\localhost\\Client\\TrustedHosts | Select-Object Value
+:::
+
+! TrustedHosts does not make anyone "trusted": it only silences the warning that the server's identity cannot be verified. Never `*`, and never for domain computers, which must go by name and Kerberos. For the DMZ, better an HTTPS listener on 5986 with a certificate from the internal CA.
+
+## 2. Invoke-Command against many computers
+
+If `-ComputerName` receives the whole list, PowerShell opens the connections in parallel, **32 at a time** by default (`-ThrottleLimit`). Each result arrives with the `PSComputerName` property, and the computers that fail go into the error variable instead of stopping the command:
+
+:::term PowerShell · admin workstation
+$ $servers = (Get-ADComputer -Filter 'OperatingSystem -like "*Server*"' -SearchBase 'OU=Servidores,DC=contoso,DC=local').DNSHostName
+$ $service = 'Spooler'
+$ $r = Invoke-Command -ComputerName $servers -ThrottleLimit 64 -ErrorAction SilentlyContinue -ErrorVariable failed -ScriptBlock {
+$     $s = Get-Service -Name $using:service
+$     [pscustomobject]@{ Status = $s.Status; StartType = $s.StartType; LastBoot = (Get-CimInstance Win32_OperatingSystem).LastBootUpTime }
+$ }
+$ $r | Select-Object PSComputerName, Status, StartType, LastBoot | Export-Csv C:\\Temp\\spooler.csv -NoTypeInformation -Encoding UTF8
+$ $failed | ForEach-Object { [pscustomobject]@{ Computer = $_.TargetObject; Error = $_.FullyQualifiedErrorId } } | Format-Table -AutoSize
+Computer                   Error
+--------                   -----
+srv-app07.contoso.local    WinRMOperationTimeout,PSSessionStateBroken
+srv-app09.contoso.local    CannotConnect,PSSessionStateBroken
+srv-app11.contoso.local    AccessDenied,PSSessionStateBroken
+:::
+
+- `$using:service` carries a local variable into the remote block. Without `$using:` it arrives empty.
+- `-ErrorVariable failed` (without `$`) keeps the connection errors, with the computer in `TargetObject`. That failure CSV matters as much as the results one: it tells you which computers you **don't** know the state of.
+- For long jobs, `-AsJob` hands control back and `Receive-Job` collects later.
+- If you are going to run several commands in a row, open the sessions once: `$ses = New-PSSession -ComputerName $servers`, then `Invoke-Command -Session $ses ...` and at the end `Remove-PSSession $ses`.
+
+## 3. Enter-PSSession: a console on the server
+
+:::term PowerShell · admin workstation
+$ Enter-PSSession -ComputerName srv-app07
+[srv-app07]: PS C:\\Users\\adm-lmartin\\Documents> Get-Service W3SVC | Restart-Service -PassThru
+Status   Name               DisplayName
+------   ----               -----------
+Running  W3SVC              World Wide Web Publishing Service
+[srv-app07]: PS C:\\Users\\adm-lmartin\\Documents> exit
+:::
+
+- Everything runs on the server, with no desktop: nothing that opens a window or asks interactively (installers with a wizard, `notepad`).
+- To take a file across without shares: `Copy-Item C:\\Temp\\patch.msu -Destination C:\\Temp -ToSession (New-PSSession srv-app07)`.
+
+## 4. The second hop
+
+Inside the session on `srv-app07`, `Get-ChildItem \\\\srv-ficheros\\Software$` gives **Access is denied**. It is not a missing permission: with Kerberos, `srv-app07` knows who you are but does not have your credentials to present to a third computer. That is the **second hop**. The ways out, from best to worst:
+
+1. **Avoid it**: copy the file to the server first with `Copy-Item -ToSession`, or run the job from the computer that holds the data.
+2. **Pass the credential explicitly** for that access: `Invoke-Command srv-app07 { New-PSDrive -Name S -PSProvider FileSystem -Root \\\\srv-ficheros\\Software$ -Credential $using:cred }`, with `$cred = Get-Credential` on your workstation.
+3. **Resource-based constrained delegation** (Kerberos, no stored passwords), configured on the target: `Set-ADComputer srv-ficheros -PrincipalsAllowedToDelegateToAccount (Get-ADComputer srv-app07)`. It works for SMB, not for chaining another WinRM session. If it was attempted before, `klist purge -li 0x3e7` on `srv-app07` or wait 15 minutes.
+4. **CredSSP**: sends your credential to the server and leaves it there; if that server is compromised, so is your account. Only as a one-off, towards one specific server (`Enable-WSManCredSSP -Role Client -DelegateComputer srv-app07.contoso.local` and `-Role Server` on the target), undone afterwards with `Disable-WSManCredSSP`.
+
+! Unconstrained delegation (*Trust this computer for delegation to any service*) also "works" and is the worst option: any service on that computer can use your identity anywhere.
+
+## 5. JEA: only the commands that are needed
+
+**Just Enough Administration** creates its own endpoint where a group sees only specific commands, running as a virtual account that is local administrator for the duration of the session. Example: letting Service Desk L1 restart the print spooler and IIS without being server administrators.
+
+:::term PowerShell (administrator) · srv-app07
+$ $mod = 'C:\\Program Files\\WindowsPowerShell\\Modules\\JEASupport'
+$ New-Item -ItemType Directory -Path "$mod\\RoleCapabilities" -Force | Out-Null
+$ New-ModuleManifest -Path "$mod\\JEASupport.psd1"
+$ New-PSRoleCapabilityFile -Path "$mod\\RoleCapabilities\\ServiceRestart.psrc" -VisibleCmdlets 'Get-Service', @{ Name = 'Restart-Service'; Parameters = @{ Name = 'Name'; ValidateSet = 'Spooler', 'W3SVC' } }
+$ New-PSSessionConfigurationFile -Path C:\\Temp\\Support.pssc -SessionType RestrictedRemoteServer -RunAsVirtualAccount -TranscriptDirectory 'C:\\JEA\\Transcripts' -RoleDefinitions @{ 'CONTOSO\\GG-Soporte-N1' = @{ RoleCapabilities = 'ServiceRestart' } }
+$ Test-PSSessionConfigurationFile C:\\Temp\\Support.pssc
+True
+$ Register-PSSessionConfiguration -Name Support -Path C:\\Temp\\Support.pssc
+:::
+
+From support: `Enter-PSSession srv-app07 -ConfigurationName Support`. `Get-PSSessionCapability -ConfigurationName Support -Username CONTOSO\\jperez` shows which commands each person will see before they try. JEA also solves access for people who are not administrators, who get access denied on the default endpoint.
+
+## 6. Logging: who did what
+
+- **Transcripts**: `Start-Transcript -Path \\\\srv-gestion\\Transcripts$\\$env:USERNAME-$(Get-Date -Format yyyyMMdd-HHmm).txt` at the start of a change, or the policy *Turn on PowerShell Transcription* with a central folder where users can write but not read. JEA keeps them in `TranscriptDirectory`.
+- **Script block logging**: event **4104** in *Microsoft-Windows-PowerShell/Operational* on the server, with the code that was run remotely. It is turned on by GPO, as in the [security GPOs](gpo-de-seguridad-base-ntlm-llmnr-smb-laps-y-despliegue-en-piloto.html) guide.
+- **Connections**: *Microsoft-Windows-WinRM/Operational* on the target, and in **Security** event **4624** with logon type 3 and your admin account.
+
+## 7. The ticket: "WinRM cannot complete the operation / Access is denied on some servers"
+
+Thursday, 10:20. The check script from step 2 works on 58 of 63 servers. The other five:
+
+1. **srv-app07, WinRMOperationTimeout**: the full message says *WinRM cannot complete the operation... a firewall exception for the WinRM service is enabled...*. The port does not answer. Through remote console or the hypervisor console, `Get-NetConnectionProfile` gives `NetworkCategory : Public`: at boot it did not find a domain controller and the Domain profile firewall rule does not apply. `Restart-Service NlaSvc -Force` brings it back to `DomainAuthenticated`; so it does not happen again, you check why it boots without seeing the domain (the NIC's DNS, boot order against the domain controllers).
+2. **srv-app09, CannotConnect**: `sc.exe \\\\srv-app09 query winrm` gives `STATE : 1 STOPPED`. Someone stopped it and left it on manual. `sc.exe \\\\srv-app09 config winrm start= delayed-auto` and `sc.exe \\\\srv-app09 start winrm`; the GPO from step 1 stops it happening again.
+3. **srv-app11, AccessDenied**: network and service fine, the account is not a local administrator. The server was moved to an OU that the GPO adding `GG-Admins-Servidores` to **Administrators** does not reach. You fix the OU or the link; you do not add your account by hand.
+4. **10.0.30.25, by IP**: *The WinRM client cannot process the request... the destination machine must be added to the TrustedHosts configuration setting*. With an IP there is no Kerberos. You change the list to use the DNS name (`Resolve-DnsName 10.0.30.25` gives `srv-app14.contoso.local`), you do not touch TrustedHosts.
+5. **srv-app12, error 0x80090322 with Kerberos**: `setspn -Q HTTP/srv-app12*` shows the SPN `HTTP/srv-app12.contoso.local` registered on the `svc-intranet` account (an IIS application with Kerberos authentication), so the ticket is encrypted for the wrong account. With the application owner, the SPN moves to a name of the website's own (`HTTP/intranet.contoso.local`) and WinRM goes back to using the computer's.
+
+A sixth case shows up on servers outside the domain: with a **local** account that is an administrator, access is still denied because UAC filters the token of local accounts on network logons. It is not solved by setting `LocalAccountTokenFilterPolicy` to 1 on every computer (Microsoft's security baseline keeps it filtered on purpose to slow lateral movement): a domain account, or JEA, or at most a documented exception on that server.
+
+In the ticket: each server with its error, the cause, the change and the command rerun with 63 of 63.
+
+## Next steps
+
+- The [weekly Active Directory report](powershell-informe-semanal-de-active-directory-inactivos-contrasenas-y-cuentas-deshabilitadas.html) is the other guide in this topic: it is scheduled with a gMSA and can be combined with the remote query in this article.
+- To make WinRM, the firewall and the administrators group reach every server the same way, the [security GPOs](gpo-de-seguridad-base-ntlm-llmnr-smb-laps-y-despliegue-en-piloto.html) guide explains the rollout with a pilot.
+- Service accounts with no expiring password are in the guide on [gMSA and scheduled tasks](windows-server-cuentas-de-servicio-gmsa-tareas-programadas-y-un-servicio-que-no-arranca.html).
+""")
+
+# ---------------------------------------------------------------- 2.x · GPO: ADMX, Edge, Office and software installation
+g(slug="gpo-plantillas-admx-almacen-central-edge-office-instalacion-de-msi-y-directivas-que-tardan-en-aplicarse", topic="gpo", date="2026-11-04",
+  title_es="GPO: almacén central de ADMX, Microsoft Edge y Microsoft 365 Apps, instalar un MSI con Instalación de software y la directiva que solo se aplica tras dos reinicios",
+  title_en="GPO: the ADMX central store, Microsoft Edge and Microsoft 365 Apps, assigning an MSI with Software Installation, and the policy that only applies after two restarts",
+  seo_title_en="GPO: Edge, Office ADMX and MSI deployment · Iñigo González",
+  seo_title_es="GPO: Edge, Office, ADMX e instalar un MSI · Iñigo González",
+  dek_es="Crear y mantener el almacén central de plantillas en SYSVOL, añadir las ADMX de Edge y de Microsoft 365 Apps, fijar página de inicio y lista de extensiones permitidas, configurar Office, asignar un MSI con sus límites frente a MECM e Intune, y por qué una directiva tarda dos reinicios: procesamiento asíncrono, esperar a la red, vínculos lentos y el registro operativo.",
+  dek_en="Creating and maintaining the template central store in SYSVOL, adding the Edge and Microsoft 365 Apps ADMX files, setting the home page and the extension allow list, configuring Office, assigning an MSI and its limits against MECM and Intune, and why a policy takes two restarts: asynchronous processing, waiting for the network, slow links and the operational log.",
+  seo_desc="Group Policy for software and browsers: ADMX central store, Edge and Microsoft 365 Apps settings, MSI Software Installation, and policies needing two restarts.",
+  es="""
+## Qué vas a conseguir
+
+Configurar el navegador y Office de todos los equipos desde Active Directory con las plantillas oficiales en un único sitio, instalar una aplicación MSI sencilla sin herramienta de despliegue sabiendo hasta dónde llega, y entender el ticket que confunde a medio equipo de soporte: "la directiva no se aplica hasta el segundo reinicio" o "tarda una eternidad".
+
+## Antes de empezar
+
+- GPMC con RSAT y permisos para crear y vincular GPO en las OU de equipos y usuarios (la guía de [unidades de red e impresoras](gpo-unidades-de-red-e-impresoras-con-preferencias-filtrado-y-una-unidad-que-no-aparece.html) explica directivas frente a preferencias, filtrado y gpresult).
+- Permiso de escritura en `\\\\contoso.local\\SYSVOL\\contoso.local\\Policies` (Domain Admins o un grupo delegado para las plantillas).
+- Descargadas: las **plantillas de directiva de Microsoft Edge** (página de Edge para empresas) y las **plantillas administrativas de Microsoft 365 Apps** (Centro de descargas de Microsoft, el paquete de ADMX/ADML y la herramienta de personalización de Office).
+- Una OU piloto con equipos reales, `OU=Piloto,OU=Equipos,DC=contoso,DC=local`.
+
+## 1. El almacén central de plantillas
+
+Sin almacén central, el editor de GPO usa las plantillas de `C:\\Windows\\PolicyDefinitions` del equipo desde el que editas: dos administradores con Windows distintos ven ajustes distintos. El **almacén central** es una carpeta `PolicyDefinitions` en SYSVOL que se replica a todos los controladores; cuando existe, el editor usa solo esa.
+
+:::term PowerShell (administrador) · equipo de administración con Windows 11 24H2
+$ $central = '\\\\contoso.local\\SYSVOL\\contoso.local\\Policies\\PolicyDefinitions'
+$ if (Test-Path $central) { robocopy $central "D:\\Copias\\PolicyDefinitions-$(Get-Date -Format yyyyMMdd)" /E /NP }
+$ robocopy C:\\Windows\\PolicyDefinitions $central *.admx /NP
+$ robocopy C:\\Windows\\PolicyDefinitions\\es-ES "$central\\es-ES" *.adml /NP
+$ robocopy C:\\Windows\\PolicyDefinitions\\en-US "$central\\en-US" *.adml /NP
+:::
+
+- La fuente buena es un equipo con la versión de Windows más reciente que tengas, o el paquete descargable de plantillas de Windows 11 de esa versión.
+- Cada `.admx` necesita su `.adml` en cada idioma que usen los administradores. Si falta, el editor da errores del tipo *No se encontró el recurso '$(string.xxx)'* al abrir la GPO.
+- Al abrir cualquier GPO, el editor muestra en **Plantillas administrativas** el texto *Definiciones de directiva (archivos ADMX) recuperadas del almacén central*. Si no lo dice, no está usando la carpeta que crees.
+
+! Copia de seguridad antes de cada actualización del almacén, y nunca se copian plantillas antiguas encima de nuevas: un ADMX de Windows 10 sobre uno de Windows 11 hace desaparecer ajustes del editor (las GPO los conservan, pero dejan de verse).
+
+## 2. Añadir las plantillas de Edge y de Office
+
+Del paquete de Edge, la carpeta `windows\\admx`: `msedge.admx` y `msedgeupdate.admx`, con sus `.adml` de `es-ES` y `en-US`. Del de Microsoft 365 Apps, la carpeta `admx`: `office16.admx` y los de cada aplicación que vayas a gestionar (`word16.admx`, `excel16.admx`, `outlk16.admx`, `ppt16.admx`), con sus idiomas.
+
+Todo al almacén central, en las mismas carpetas. Tras la replicación de SYSVOL, aparecen **Microsoft Edge** en *Plantillas administrativas* del equipo y del usuario, y **Microsoft Office 2016** con cada aplicación (el nombre se quedó en 2016, también vale para Microsoft 365 Apps).
+
+## 3. Configurar Microsoft Edge
+
+Una GPO de equipo, `CMP-Edge`, vinculada primero a la OU piloto. En **Configuración del equipo › Directivas › Plantillas administrativas › Microsoft Edge**:
+
+:::ui Editor de GPO · CMP-Edge · Microsoft Edge
+> Inicio, página principal y página Nueva pestaña
+= Acción que se realizará al iniciar (RestoreOnStartup): Habilitada · Abrir una lista de direcciones URL
+= Sitios que se abrirán al iniciar el explorador (RestoreOnStartupURLs): https://intranet.contoso.local
+= Configurar la URL de la página principal (HomepageLocation): https://intranet.contoso.local
+= Mostrar el botón Inicio en la barra de herramientas (ShowHomeButton): Habilitada
+> Extensiones
+= Controlar qué extensiones no se pueden instalar (ExtensionInstallBlocklist): *
+= Permitir la instalación de extensiones específicas (ExtensionInstallAllowlist): <id del gestor de contraseñas corporativo>
+= Controlar qué extensiones se instalan de forma silenciosa (ExtensionInstallForcelist): <id>;https://edge.microsoft.com/extensionwebstorebase/v1/crx
+:::
+
+- La lista de bloqueo con `*` y la de permitidas con los ID de 32 letras es la combinación habitual: nada entra si no está aprobado. El ID está al final de la URL de la extensión en la tienda de complementos de Edge.
+- Una extensión que ya estaba instalada y pasa a bloqueada se **deshabilita**, no se desinstala. Las forzadas no se pueden quitar ni desactivar.
+- Las directivas de **Microsoft Edge** son obligatorias; las de **Microsoft Edge: configuración predeterminada (los usuarios pueden invalidarla)** son recomendadas, un valor inicial que el usuario puede cambiar.
+
+En el equipo, tras `gpupdate /force` y cerrar Edge del todo, `edge://policy` lista cada directiva con su valor, su origen y si hay error. En el registro están en `HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge`.
+
+## 4. Configurar Microsoft 365 Apps
+
+La mayoría de los ajustes de Office son **de usuario**. Una GPO `USR-Office` vinculada a la OU de usuarios y una parte de equipo para el canal de actualización:
+
+- *Configuración del equipo › Plantillas administrativas › Microsoft Office 2016 (equipo) › Actualizaciones › Canal de actualización* = **Canal empresarial mensual**.
+- *Configuración de usuario › Plantillas administrativas › Microsoft Outlook 2016 › Configuración de la cuenta › Exchange › Modo de intercambio en caché › Configuración de sincronización del Modo de intercambio en caché* = **12 meses**, para que los buzones grandes no llenen el disco del portátil.
+- *Configuración de usuario › Plantillas administrativas › Microsoft Word 2016 › Opciones de Word › Seguridad › Centro de confianza › Configuración de notificaciones de macros de VBA* = **Deshabilitar todas excepto las macros firmadas digitalmente**. Lo mismo en Excel y PowerPoint.
+
+En el equipo se comprueba en `HKCU\\Software\\Policies\\Microsoft\\Office\\16.0` y, en la aplicación, porque la opción aparece en gris con el aviso de que la administra la organización.
+
+> Para usuarios que no están en el dominio o casi nunca ven la red interna, el **servicio de directivas en la nube** de Microsoft 365 (config.office.com) aplica los mismos ajustes por grupo de Entra ID sin GPO. Lo que no se debe hacer es configurar lo mismo por los dos sitios.
+
+## 5. Instalar un MSI con Instalación de software
+
+Para una aplicación pequeña en MSI y pocos equipos, la GPO lo instala al arrancar sin más herramientas:
+
+1. El MSI en un recurso compartido con **Lectura** para *Equipos del dominio* en recurso y NTFS: `\\\\srv-ficheros\\Software$\\7zip\\7z-x64.msi`. Siempre la ruta UNC, nunca `D:\\...` ni una unidad asignada: la instala la cuenta del equipo antes de que haya nadie conectado.
+2. GPO de equipo `CMP-SW-7zip`, **Configuración del equipo › Directivas › Configuración de software › Instalación de software › Nuevo › Paquete**, el MSI por su ruta UNC.
+3. Método **Asignado**: se instala en el siguiente arranque. **Avanzado** si necesitas una transformación `.mst`, que solo se puede añadir al crear el paquete, no después.
+4. En las propiedades, pestaña **Implementación**: *Desinstalar esta aplicación cuando esté fuera del ámbito de administración*, para que salga cuando el equipo cambie de OU. La pestaña **Actualizaciones** enlaza la versión nueva con la antigua.
+
+Comprobación en el equipo: `gpresult /scope computer /r` la lista en *Instalación de software*, el registro **Aplicación** tiene eventos del origen *Application Management Group Policy* con el resultado, y `Get-Package -Name '7-Zip*'` la muestra instalada.
+
+Hasta dónde llega, frente a una herramienta de despliegue:
+
+| | Instalación de software (GPO) | MECM / Intune |
+|---|---|---|
+| Formatos | Solo MSI (y MST) | MSI, EXE, scripts, MSIX, Win32 empaquetado |
+| Cuándo instala | Solo en el arranque, en primer plano | Cuando toca, con ventanas de mantenimiento y plazos |
+| Informes | Ninguno central: evento a evento | Estado por equipo y por despliegue |
+| Reintentos y dependencias | No | Sí |
+| Fuera de la oficina o por VPN | No en vínculo lento | Sí (Intune por internet, MECM con CMG) |
+
+Sirve para un MSI aislado en una sede; en cuanto hay informes, versiones o portátiles fuera, va a [MECM](mecm-sccm-empaquetar-una-aplicacion-y-desplegarla.html) o a Intune.
+
+## 6. El ticket: "la directiva solo se aplica después de dos reinicios" o "tarda muchísimo"
+
+Lunes, 9:30. El piloto de `CMP-SW-7zip` y de `CMP-Edge`: Edge ya tiene la página de inicio, pero 7-Zip no se instala tras el primer reinicio; aparece tras el segundo. En otra planta, otros dicen que los cambios de GPO tardan horas.
+
+1. **Lo que pasa es el diseño**: Windows 11 arranca y deja iniciar sesión **sin esperar a la red** (*optimización de inicio de sesión rápido*) y aplica las directivas en segundo plano. La mayoría de las directivas, como Edge, funcionan así. Instalación de software, redirección de carpetas y las unidades de red de preferencias necesitan el **primer plano síncrono**: en el arranque asíncrono las detectan, marcan que el siguiente arranque tiene que ser síncrono y esperan. De ahí los dos reinicios.
+2. **Confirmarlo en el equipo**: en **Sistema**, el evento **1112** de *GroupPolicy*: la extensión *Software Installation* no pudo aplicar los cambios porque deben procesarse antes del inicio del sistema o de sesión, y el sistema esperará en el siguiente. En el registro operativo, el tiempo y el tipo de vínculo:
+
+:::term PowerShell (administrador) · PC-0533
+$ Get-WinEvent -LogName 'Microsoft-Windows-GroupPolicy/Operational' -MaxEvents 300 | Where-Object Id -in 4000, 5314, 8000 | Select-Object -First 3 TimeCreated, Id, Message | Format-List
+TimeCreated : 03/11/2026 8:02:41
+Id          : 8000
+Message     : Completed computer boot policy processing for CONTOSO\\PC-0533$ in 47 seconds.
+TimeCreated : 03/11/2026 8:01:56
+Id          : 5314
+Message     : A fast link was detected. The Estimated bandwidth is 94000 kbps. The slow link threshold is 500 kbps.
+$ gpresult /scope computer /r | Select-String 'vínculo lento|aplicó desde'
+    La directiva de grupo se aplicó desde:      DC01.contoso.local
+    Umbral de vínculo lento de directiva de grupo:   500 kbps
+:::
+
+3. **La solución para los equipos de sobremesa**: en una GPO de equipo de la OU de puestos, *Configuración del equipo › Plantillas administrativas › Sistema › Inicio de sesión › Esperar siempre a la red durante el inicio del equipo y el inicio de sesión* = **Habilitada**. El precio son unos segundos más en el arranque; a cambio, todo se aplica en un reinicio. Si la red tarda en estar lista (802.1X, tarjetas lentas), *Sistema › Directiva de grupo › Especificar el tiempo de espera de procesamiento de directivas de inicio* a 60 segundos.
+4. **Los portátiles con wifi o VPN**: aunque esperen, la red llega después de iniciar sesión o se mide como **vínculo lento** (por debajo de 500 kbps; *Configurar la detección de vínculos lentos de la directiva de grupo*). En vínculo lento, Instalación de software no se procesa por defecto. No se baja el umbral para forzarlo: el software de los portátiles va por Intune o MECM.
+5. **"Tarda horas" en la otra planta**: no es un fallo. El refresco en segundo plano es cada **90 minutos con hasta 30 de margen aleatorio**, y solo después de que el cambio se haya replicado al controlador de esa sede. Para probar, `gpupdate /force`; para varios equipos a la vez, en GPMC, clic derecho en la OU › **Actualización de directiva de grupo**. Si el evento 8000 da tiempos de minutos, el registro operativo dice qué extensión tarda (evento 5016 con milisegundos por extensión): a menudo un filtro WMI pesado o una impresora que no responde.
+
+En el ticket: equipos, evento 1112, tiempos de 8000, la directiva añadida y la comprobación: 7-Zip instalado en el primer reinicio en los cinco equipos del piloto.
+
+## Siguientes pasos
+
+- La guía de [unidades de red e impresoras con preferencias](gpo-unidades-de-red-e-impresoras-con-preferencias-filtrado-y-una-unidad-que-no-aparece.html) es la primera de este tema y usa el mismo gpresult y el mismo registro operativo.
+- Las [GPO de seguridad](gpo-de-seguridad-base-ntlm-llmnr-smb-laps-y-despliegue-en-piloto.html) traen sus propias plantillas (las de las Security Baselines) al mismo almacén central.
+- Para software con informes, versiones y portátiles fuera de la oficina, [empaquetar y desplegar una aplicación con MECM](mecm-sccm-empaquetar-una-aplicacion-y-desplegarla.html).
+""",
+  en="""
+## What you'll get
+
+Configuring the browser and Office on every device from Active Directory with the official templates in a single place, installing a simple MSI application without a deployment tool while knowing how far that goes, and understanding the ticket that confuses half the support team: "the policy doesn't apply until the second restart" or "it takes forever".
+
+## Before you start
+
+- GPMC with RSAT and permissions to create and link GPOs on the computer and user OUs (the [network drives and printers](gpo-unidades-de-red-e-impresoras-con-preferencias-filtrado-y-una-unidad-que-no-aparece.html) guide explains policies versus preferences, filtering and gpresult).
+- Write permission on `\\\\contoso.local\\SYSVOL\\contoso.local\\Policies` (Domain Admins or a group delegated for templates).
+- Downloaded: the **Microsoft Edge policy templates** (Edge for Business page) and the **Microsoft 365 Apps administrative templates** (Microsoft Download Center, the ADMX/ADML and Office Customization Tool package).
+- A pilot OU with real devices, `OU=Piloto,OU=Equipos,DC=contoso,DC=local`.
+
+## 1. The template central store
+
+Without a central store, the GPO editor uses the templates in `C:\\Windows\\PolicyDefinitions` on the computer you edit from: two administrators on different Windows versions see different settings. The **central store** is a `PolicyDefinitions` folder in SYSVOL that replicates to every domain controller; when it exists, the editor uses only that one.
+
+:::term PowerShell (administrator) · admin workstation with Windows 11 24H2
+$ $central = '\\\\contoso.local\\SYSVOL\\contoso.local\\Policies\\PolicyDefinitions'
+$ if (Test-Path $central) { robocopy $central "D:\\Backups\\PolicyDefinitions-$(Get-Date -Format yyyyMMdd)" /E /NP }
+$ robocopy C:\\Windows\\PolicyDefinitions $central *.admx /NP
+$ robocopy C:\\Windows\\PolicyDefinitions\\en-US "$central\\en-US" *.adml /NP
+$ robocopy C:\\Windows\\PolicyDefinitions\\es-ES "$central\\es-ES" *.adml /NP
+:::
+
+- The good source is a device on the newest Windows version you have, or the downloadable Windows 11 template package for that version.
+- Every `.admx` needs its `.adml` in each language the administrators use. If one is missing, the editor shows errors like *Resource '$(string.xxx)' referenced in attribute displayName could not be found* when you open the GPO.
+- When you open any GPO, the editor shows under **Administrative Templates** the text *Policy definitions (ADMX files) retrieved from the central store*. If it does not say that, it is not using the folder you think.
+
+! Back up before every central store update, and never copy older templates over newer ones: a Windows 10 ADMX over a Windows 11 one makes settings disappear from the editor (the GPOs keep them, but you can no longer see them).
+
+## 2. Adding the Edge and Office templates
+
+From the Edge package, the `windows\\admx` folder: `msedge.admx` and `msedgeupdate.admx`, with their `.adml` from `en-US` and `es-ES`. From the Microsoft 365 Apps package, the `admx` folder: `office16.admx` and those for each app you will manage (`word16.admx`, `excel16.admx`, `outlk16.admx`, `ppt16.admx`), with their languages.
+
+All into the central store, in the same folders. After SYSVOL replication, **Microsoft Edge** appears under *Administrative Templates* for computer and user, and **Microsoft Office 2016** with each app (the name stayed at 2016; it also covers Microsoft 365 Apps).
+
+## 3. Configuring Microsoft Edge
+
+A computer GPO, `CMP-Edge`, linked to the pilot OU first. Under **Computer Configuration › Policies › Administrative Templates › Microsoft Edge**:
+
+:::ui GPO editor · CMP-Edge · Microsoft Edge
+> Startup, home page and new tab page
+= Action to take on startup (RestoreOnStartup): Enabled · Open a list of URLs
+= Sites to open when the browser starts (RestoreOnStartupURLs): https://intranet.contoso.local
+= Configure the home page URL (HomepageLocation): https://intranet.contoso.local
+= Show Home button on toolbar (ShowHomeButton): Enabled
+> Extensions
+= Control which extensions cannot be installed (ExtensionInstallBlocklist): *
+= Allow specific extensions to be installed (ExtensionInstallAllowlist): <ID of the corporate password manager>
+= Control which extensions are installed silently (ExtensionInstallForcelist): <ID>;https://edge.microsoft.com/extensionwebstorebase/v1/crx
+:::
+
+- The block list with `*` and the allow list with the 32-letter IDs is the usual combination: nothing gets in unless it is approved. The ID is at the end of the extension's URL in the Edge Add-ons store.
+- An extension that was already installed and becomes blocked is **disabled**, not uninstalled. Force-installed ones cannot be removed or turned off.
+- **Microsoft Edge** policies are mandatory; those under **Microsoft Edge – Default Settings (users can override)** are recommended, a starting value the user can change.
+
+On the device, after `gpupdate /force` and closing Edge completely, `edge://policy` lists each policy with its value, its source and any error. In the registry they live in `HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge`.
+
+## 4. Configuring Microsoft 365 Apps
+
+Most Office settings are **user** settings. A `USR-Office` GPO linked to the user OU, plus a computer part for the update channel:
+
+- *Computer Configuration › Administrative Templates › Microsoft Office 2016 (Machine) › Updates › Update Channel* = **Monthly Enterprise Channel**.
+- *User Configuration › Administrative Templates › Microsoft Outlook 2016 › Account Settings › Exchange › Cached Exchange Mode › Cached Exchange Mode Sync Settings* = **12 months**, so large mailboxes do not fill the laptop's disk.
+- *User Configuration › Administrative Templates › Microsoft Word 2016 › Word Options › Security › Trust Center › VBA Macro Notification Settings* = **Disable all except digitally signed macros**. The same in Excel and PowerPoint.
+
+On the device, check `HKCU\\Software\\Policies\\Microsoft\\Office\\16.0` and the app itself, where the option is greyed out with a note that your organisation manages it.
+
+> For users who are not in the domain or rarely see the internal network, the Microsoft 365 **Cloud Policy service** (config.office.com) applies the same settings by Entra ID group without GPOs. What you should not do is configure the same thing in both places.
+
+## 5. Installing an MSI with Software Installation
+
+For a small MSI app and a few devices, the GPO installs it at startup with no other tools:
+
+1. The MSI on a share with **Read** for *Domain Computers* on both share and NTFS: `\\\\srv-ficheros\\Software$\\7zip\\7z-x64.msi`. Always the UNC path, never `D:\\...` or a mapped drive: the computer account installs it before anyone signs in.
+2. Computer GPO `CMP-SW-7zip`, **Computer Configuration › Policies › Software Settings › Software installation › New › Package**, the MSI by its UNC path.
+3. **Assigned** method: it installs at the next startup. **Advanced** if you need an `.mst` transform, which can only be added when the package is created, not afterwards.
+4. In the properties, **Deployment** tab: *Uninstall this application when it falls out of the scope of management*, so it is removed when the device changes OU. The **Upgrades** tab links the new version to the old one.
+
+Check on the device: `gpresult /scope computer /r` lists it under *Software Installation*, the **Application** log has events from the *Application Management Group Policy* source with the result, and `Get-Package -Name '7-Zip*'` shows it installed.
+
+How far it goes, compared with a deployment tool:
+
+| | Software Installation (GPO) | MECM / Intune |
+|---|---|---|
+| Formats | MSI only (and MST) | MSI, EXE, scripts, MSIX, packaged Win32 |
+| When it installs | At startup only, in the foreground | When due, with maintenance windows and deadlines |
+| Reporting | No central reporting: event by event | Status per device and per deployment |
+| Retries and dependencies | No | Yes |
+| Out of the office or over VPN | Not on a slow link | Yes (Intune over the internet, MECM with CMG) |
+
+It is fine for a one-off MSI at one site; as soon as you need reports, versions or laptops away from the office, it goes to [MECM](mecm-sccm-empaquetar-una-aplicacion-y-desplegarla.html) or Intune.
+
+## 6. The ticket: "the policy only applies after two restarts" or "it takes ages"
+
+Monday, 9:30. The pilot of `CMP-SW-7zip` and `CMP-Edge`: Edge already has the home page, but 7-Zip does not install after the first restart; it appears after the second. On another floor, people say GPO changes take hours.
+
+1. **What happens is by design**: Windows 11 starts and lets users sign in **without waiting for the network** (*fast logon optimisation*) and applies policies in the background. Most policies, like Edge, work that way. Software Installation, Folder Redirection and drive-map preferences need **synchronous foreground** processing: in the asynchronous startup they are detected, the next startup is flagged as synchronous, and they wait. Hence the two restarts.
+2. **Confirm it on the device**: in **System**, event **1112** from *GroupPolicy*: the *Software Installation* extension could not apply its changes because they must be processed before system startup or user logon, and the system will wait at the next one. In the operational log, the time taken and the link type:
+
+:::term PowerShell (administrator) · PC-0533
+$ Get-WinEvent -LogName 'Microsoft-Windows-GroupPolicy/Operational' -MaxEvents 300 | Where-Object Id -in 4000, 5314, 8000 | Select-Object -First 3 TimeCreated, Id, Message | Format-List
+TimeCreated : 11/3/2026 8:02:41 AM
+Id          : 8000
+Message     : Completed computer boot policy processing for CONTOSO\\PC-0533$ in 47 seconds.
+TimeCreated : 11/3/2026 8:01:56 AM
+Id          : 5314
+Message     : A fast link was detected. The Estimated bandwidth is 94000 kbps. The slow link threshold is 500 kbps.
+$ gpresult /scope computer /r | Select-String 'slow link|applied from'
+    Group Policy was applied from:      DC01.contoso.local
+    Group Policy slow link threshold:   500 kbps
+:::
+
+3. **The fix for desktops**: in a computer GPO on the workstation OU, *Computer Configuration › Administrative Templates › System › Logon › Always wait for the network at computer startup and logon* = **Enabled**. The price is a few extra seconds at startup; in exchange, everything applies in one restart. If the network takes a while to be ready (802.1X, slow NICs), *System › Group Policy › Specify startup policy processing wait time* to 60 seconds.
+4. **Laptops on Wi-Fi or VPN**: even if they wait, the network arrives after sign-in or is measured as a **slow link** (below 500 kbps; *Configure Group Policy slow link detection*). On a slow link, Software Installation is not processed by default. You do not lower the threshold to force it: laptop software goes through Intune or MECM.
+5. **"It takes hours" on the other floor**: not a fault. Background refresh runs every **90 minutes with up to a 30-minute random offset**, and only once the change has replicated to that site's domain controller. To test, `gpupdate /force`; for several devices at once, in GPMC, right-click the OU › **Group Policy Update**. If event 8000 shows minutes, the operational log says which extension is slow (event 5016 with milliseconds per extension): often a heavy WMI filter or a printer that does not respond.
+
+In the ticket: devices, event 1112, the 8000 timings, the policy added and the check: 7-Zip installed on the first restart on all five pilot devices.
+
+## Next steps
+
+- The guide on [network drives and printers with preferences](gpo-unidades-de-red-e-impresoras-con-preferencias-filtrado-y-una-unidad-que-no-aparece.html) is the first in this topic and uses the same gpresult and the same operational log.
+- The [security GPOs](gpo-de-seguridad-base-ntlm-llmnr-smb-laps-y-despliegue-en-piloto.html) bring their own templates (the Security Baselines ones) into the same central store.
+- For software with reports, versions and laptops away from the office, [packaging and deploying an application with MECM](mecm-sccm-empaquetar-una-aplicacion-y-desplegarla.html).
 """)
