@@ -7,7 +7,7 @@ English by default with a Spanish switch. Plain HTML, CSS and JavaScript, genera
 - **Home**: photos, latest blog stories, an interactive map of where I have worked, contact.
 - **Journey**: eleven years in five stages, in numbers, and the toolkit (each tool links to its guide and its blog story).
 - **Blog**: one story per GitHub project (38 projects) plus SysAdmin Desks, on what each one solves and how it was built.
-- **IT guides**: 148 step-by-step guides in English and Spanish, from first steps to expert (four levels) and real cases by sector (hospitality, retail, healthcare, industry and financial services). Each guide links to its related blog stories, and some open a practice ticket in [SysAdmin Desks](https://sysadmindesksbyigg.pages.dev).
+- **IT guides**: 151 step-by-step guides in English and Spanish, from first steps to expert (four levels) and real cases by sector (hospitality, retail, healthcare, industry and financial services). Each guide links to its related blog stories, and some open a practice ticket in [SysAdmin Desks](https://sysadmindesksbyigg.pages.dev).
 - **Services** (IGG-ICS career advice), **Resources** (33 ideas for IT professionals and the Tech Career Lab newsletter), **About**, **Links**, and the legal pages.
 
 ## How it is built
