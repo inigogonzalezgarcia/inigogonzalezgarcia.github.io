@@ -135,6 +135,7 @@
   <url><loc>https://inigogonzalezgarcia.github.io/guias/mikrotik-y-tp-link-omada-red-y-wifi-de-un-restaurante-u-hotel.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/monitorizacion-desplegar-alarmas-y-responder-en-plataformas-24x7.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/mysql-mariadb-y-postgresql-permisos-minimos-copia-programada-restauracion-probada-y-copias-de-0-bytes.html</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/mysql-y-mariadb-configuracion-buffer-pool-consultas-lentas-indices-replica-y-too-many-connections.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/ndes-y-cloud-pki-certificados-a-los-dispositivos-desde-intune.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/nginx-y-apache-proxy-inverso-tls-cabeceras-timeouts-y-un-502-bad-gateway.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/nivel-1.html</loc><lastmod>2026-11-03</lastmod></url>
@@ -150,11 +151,13 @@
   <url><loc>https://inigogonzalezgarcia.github.io/guias/pim-acceso-just-in-time-para-administradores-de-una-sede-financiera.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/pms-hotelero-soporte-interfaces-y-cargo-a-habitacion-desde-el-tpv.html</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/postgresql-mysql-sql-server-tareas-de-operaciones-copia-restauracion-espacio-y-consulta-lenta.html</loc><lastmod>2026-10-22</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/postgresql-roles-pg-hba-autovacuum-pgbouncer-pg-stat-statements-y-una-aplicacion-que-no-conecta.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/powershell-altas-masivas-en-active-directory-desde-csv-y-bajas-con-revision.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/powershell-informe-semanal-de-active-directory-inactivos-contrasenas-y-cuentas-deshabilitadas.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/powershell-script-de-inventario-remoto-con-csv.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/presupuesto-de-it-preparar-y-seguir-el-presupuesto-anual-en-una-empresa-multisede.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/proveedores-de-conectividad-inventario-de-circuitos-averias-y-sla.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://inigogonzalezgarcia.github.io/guias/puppet-servidor-y-agentes-linux-y-windows-certificados-primer-modulo-hiera-y-un-agente-que-deja-de-aplicar.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/python-para-it-entorno-virtual-csv-api-informe-programado-y-un-script-que-falla.html</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/python-y-microsoft-graph-informe-de-usuarios-y-dispositivos-paginacion-429-y-un-403.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://inigogonzalezgarcia.github.io/guias/qualys-agentes-etiquetas-priorizacion-y-la-vulnerabilidad-que-sigue-tras-parchear.html</loc><lastmod>2026-10-28</lastmod></url>
