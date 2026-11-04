@@ -1,10 +1,10 @@
 # Social preview cards (assets/og/*.png, 1200x630) and the Apple touch icon, drawn by src/make_og.py.
-# Runs when a post, the card script or the font changes, and commits the images if any changed.
+# Runs when a post, the guide levels, the card script or the font changes, and commits the images if any changed.
 name: OG images
 on:
   push:
     branches: [main]
-    paths: ["src/posts.py", "src/make_og.py", "assets/InterTight.woff", ".github/workflows/og-images.yml"]
+    paths: ["src/posts.py", "src/guides.py", "src/make_og.py", "assets/InterTight.woff", ".github/workflows/og-images.yml"]
   workflow_dispatch:
 permissions:
   contents: write
