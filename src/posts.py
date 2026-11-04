@@ -879,6 +879,7 @@ dict(n="19", repo="19-ad-infra-health-check", date="2026-10-16", cat="tools",
  seo_title_es="Chequeo de salud de Active Directory con PowerShell · Iñigo González",
  dek_en="Domain controllers, replication, DHCP, Group Policy and admin accounts from one read-only export, ordered by what to fix today.",
  dek_es="Controladores de dominio, replicación, DHCP, directivas de grupo y cuentas de administrador desde una exportación de solo lectura, ordenados por lo que hay que arreglar hoy.",
+ seo_desc="Active Directory health check with PowerShell: one read-only export for domain controllers, replication, DHCP, Group Policy and admin accounts, by priority.",
  en="""
 
 ## The problem
