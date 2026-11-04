@@ -155,6 +155,8 @@ from pages import PERSON, PERSON_ID, PERSON_REF, WEBSITE, SITE_URL, crumbs, layo
 from posts import POSTS, CATS
 import make_og
 OG = make_og.build(SITE, POSTS, CATS, only_missing=True)  # social preview cards, one per post (CI makes the real ones)
+from guides import LEVELS as _LOG
+OG_G = make_og.build_guides(SITE, _LOG, only_missing=True)  # one card per guide level and sector
 
 SEC = {p.stem: p.read_text() for p in (ROOT / "sections").glob("*.html")}
 FORM = f'https://formspree.io/f/{CONF["formspree_id"]}' if CONF.get("formspree_id") else f"mailto:{MAIL}"
@@ -1353,7 +1355,7 @@ for i, q in enumerate(G_ORDER):
     sizes[f"guias/{q['slug']}.html"] = write(f"guias/{q['slug']}.html", layout(R="../", path=f"guias/{q['slug']}.html", active="guides",
         title_en=q.get("seo_title_en") or f'{q["title_en"]} · Iñigo González',
         title_es=q.get("seo_title_es") or f'{q["title_es"]} · Iñigo González',
-        desc=q.get("seo_desc") or q["dek_en"], body=body, og_type="article",
+        desc=q.get("seo_desc") or q["dek_en"], body=body, og_type="article", og_image=OG_G[L["key"]],
         ld=[{"@type": "TechArticle", "headline": q["title_en"], "alternativeHeadline": q["title_es"], "description": q["dek_en"],
              "datePublished": q["date"], "dateModified": q["date"], "inLanguage": "en", "proficiencyLevel": "Beginner" if t[0] == "nivel-1" else "Expert",
              "url": f'{SITE_URL}guias/{q["slug"]}.html', "mainEntityOfPage": f'{SITE_URL}guias/{q["slug"]}.html',
@@ -1398,7 +1400,7 @@ for lk, L in LEVELS.items():
     sizes[f"guias/{lk}.html"] = write(f"guias/{lk}.html", layout(R="../", path=f"guias/{lk}.html", active="guides",
         title_en=L.get("seo_title_en") or (f'{L["t_en"]} · IT guides · Iñigo González' if L["key"].startswith("sector") else f'{L["n_en"]} · {L["t_en"]} · IT guides · Iñigo González'),
         title_es=L.get("seo_title_es") or (f'{L["t_es"]} · Guías IT · Iñigo González' if L["key"].startswith("sector") else f'{L["n_es"]} · {L["t_es"]} · Guías IT · Iñigo González'),
-        desc=L["seo"],
+        desc=L["seo"], og_image=OG_G[L["key"]],
         body=lbody, ld=[{"@type": "CollectionPage", "@id": SITE_URL + f"guias/{lk}.html", "url": SITE_URL + f"guias/{lk}.html",
                          "name": f'{L["n_en"]} · {L["t_en"]}', "inLanguage": "en", "isPartOf": {"@id": SITE_URL + "#website"},
                          "hasPart": [{"@type": "TechArticle", "headline": q["title_en"], "url": f'{SITE_URL}guias/{q["slug"]}.html'} for q in lg]},

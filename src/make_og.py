@@ -78,6 +78,18 @@ def touch_icon(root, out):
     im.save(out, "PNG", optimize=True)
 
 
+def build_guides(site, levels, only_missing=False):
+    """One card per guide level and sector (assets/og/guias-<key>.png). Returns {level key: image path relative to the site}."""
+    out = {}
+    for k, L in levels.items():
+        rel = f"assets/og/guias-{k}.png"
+        if not (only_missing and (site / rel).exists()):
+            kicker = ("IT guides · " + L["t_en"]) if k.startswith("sector") else ("IT guides · " + L["n_en"] + " · " + L["t_en"])
+            card(site, site / rel, kicker, L["d_en"], "inigogonzalezgarcia.github.io/guias · step by step, EN/ES")
+        out[k] = rel
+    return out
+
+
 def build(site, posts, cats, only_missing=False):
     """site = repo root (fonts come from site/assets). Returns {post repo: image path relative to the site}."""
     todo = lambda f: not (only_missing and f.exists())
@@ -101,4 +113,6 @@ if __name__ == "__main__":
     src = Path(__file__).resolve().parent
     sys.path.insert(0, str(src))
     from posts import POSTS, CATS
+    from guides import LEVELS
     print(len(build(src.parent, POSTS, CATS)), "post cards + site card + touch icon")
+    print(len(build_guides(src.parent, LEVELS)), "guide level and sector cards")
