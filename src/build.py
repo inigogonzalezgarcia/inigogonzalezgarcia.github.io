@@ -441,8 +441,20 @@ def related_html(items):
 def related_for_guide(topic):
     return related_html([(f'../blog/{r}.html', f'Blog · {_POST_BY_REPO[r].get("label", _POST_BY_REPO[r]["n"])}', f'Blog · {_POST_BY_REPO[r].get("label", _POST_BY_REPO[r]["n"])}',
                           _POST_BY_REPO[r]["title_es"], _POST_BY_REPO[r]["title_en"]) for r in RELATED.get(topic, [])])
+# posts that link to each other in "Related" (shown before the guides)
+POST_RELATED = {
+    "19-ad-infra-health-check": ["20-entra-sso-app-audit", "03-entra-id-hygiene-audit"],
+    "41-windows-update-ring-tracker": ["18-mecm-intune-comanagement-tracker", "02-intune-compliance-report"],
+    "42-retail-store-it-health": ["31-dealer-systems-health", "34-venue-service-readiness"],
+    "40-change-calendar-risk-review": ["36-major-incident-command-kit", "04-itsm-kpi-dashboard"],
+    "39-vulnerability-remediation-sla": ["25-security-controls-evidence", "37-iam-access-review"],
+    "22-dex-experience-score": ["21-apple-fleet-audit", "28-euc-provider-service-review"],
+}
 def related_for_post(repo):
     out = []
+    for r in POST_RELATED.get(repo, []):
+        q = _POST_BY_REPO[r]
+        out.append((f'{r}.html', f'Blog · {q["n"]}', f'Blog · {q["n"]}', q["title_es"], q["title_en"]))
     for g in GUIDES_FOR_POST.get(repo, [])[:4]:
         L = _LR[_TOPIC_R[g["topic"]][0]]
         out.append((f'../guias/{g["slug"]}.html', f'Guía · {L["n_es"]}', f'Guide · {L["n_en"]}', g["title_es"], g["title_en"]))
