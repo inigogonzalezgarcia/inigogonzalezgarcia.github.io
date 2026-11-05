@@ -1,6 +1,6 @@
 """Legal pages (legal notice, terms). Same shell as the hand-written privacidad.html. Imported by build.py."""
 import base64
-from pages import MAIL, SEC_HEAD
+from pages import MAIL, SEC_HEAD, bilingual_static
 
 UPDATED_ES = "18 de octubre de 2026"
 UPDATED_EN = "18 October 2026"
@@ -15,15 +15,16 @@ def mail_tag(addr=MAIL, link=True):
 M = mail_tag()
 MT = mail_tag(link=False)  # same address shown as plain text, where the page had no link
 
-def shell(*, path, title_es, title_en, desc, es, en):
-    return f'''<!doctype html>
+def shell(*, path, title_es, title_en, desc_es, desc_en, es, en):
+    """Both languages; bilingual_static() turns it into the English page and its /es/ copy."""
+    return bilingual_static(f'''<!doctype html>
 <html lang="en" data-title-es="{title_es} · Iñigo González" data-title-en="{title_en} · Iñigo González">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 {SEC_HEAD}
 <title>{title_es} · Iñigo González</title>
-<meta name="description" content="{desc}">
+<meta name="description" content="">
 <meta name="theme-color" content="#0e1a24">
 <meta name="robots" content="noindex">
 <link rel="canonical" href="{SITE}/{path}">
@@ -75,7 +76,7 @@ def shell(*, path, title_es, title_en, desc, es, en):
 <script src="assets/consent.js"></script>
 </body>
 </html>
-'''
+''', path, desc_es, desc_en)
 
 # ------------------------------------------------------------------ legal notice
 AVISO_ES = f'''  <p class="label kicker">Aviso legal · Última actualización: {UPDATED_ES}</p>
@@ -309,7 +310,9 @@ COND_EN = f'''  <p class="label kicker">Terms · {UPDATED_EN}</p>
 
 PAGES = {
     "aviso-legal.html": dict(title_es="Aviso legal", title_en="Legal notice",
-                             desc="Aviso legal de inigogonzalezgarcia.github.io / Legal notice.", es=AVISO_ES, en=AVISO_EN),
+                             desc_es="Aviso legal de inigogonzalezgarcia.github.io: quién está detrás de la web, condiciones de uso y propiedad intelectual.",
+                             desc_en="Legal notice for inigogonzalezgarcia.github.io: who runs the site, terms of use and intellectual property.", es=AVISO_ES, en=AVISO_EN),
     "condiciones.html": dict(title_es="Condiciones de contratación", title_en="Terms of service",
-                             desc="Condiciones de contratación de los servicios IGG-ICS / Terms of service.", es=COND_ES, en=COND_EN),
+                             desc_es="Condiciones de contratación de los servicios IGG-ICS para perfiles IT: reserva, pago, cancelación y desistimiento.",
+                             desc_en="Terms of service for IGG-ICS career services for IT professionals: booking, payment, cancellation and withdrawal.", es=COND_ES, en=COND_EN),
 }

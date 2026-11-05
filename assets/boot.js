@@ -1,2 +1,5 @@
-/* Runs in <head> before the page paints: marks JS as available and picks the language (closed list: es, en). */
-document.documentElement.classList.remove('no-js');(function(){var l;try{l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')}catch(e){}if(l!=='es'&&l!=='en'){l='en'}document.documentElement.lang=l})();
+/* Runs in <head> before the page paints: marks JS as available. Each URL has one fixed language (<html lang>, closed list
+   es/en): English at the usual URL, Spanish under /es/. Old links with ?lang=es / ?lang=en are sent to the page in that
+   language (location.replace, hash kept, lang dropped). Nothing is picked from localStorage or the browser language, so
+   crawlers always see the same page. The 404 (data-i18n="auto") takes its language from the URL it is shown at. */
+(function(){var d=document.documentElement,l=d.lang==='es'?'es':'en',q=null,w=null,p=location.pathname,es=/^\/es(\/|$)/.test(p);d.classList.remove('no-js');try{q=new URLSearchParams(location.search);w=q.get('lang')}catch(e){}if(w!=='es'&&w!=='en'){w=null}if(d.getAttribute('data-i18n')==='auto'){l=w||(es?'es':'en');d.lang=l;var t=d.getAttribute('data-title-'+l);if(t){document.title=t}}else if(w&&w!==l){q.delete('lang');var s=q.toString(),u=w==='es'?'/es'+p:(p.slice(3)||'/');location.replace(u+(s?'?'+s:'')+location.hash);return}document.addEventListener('click',function(e){var b=e.target&&e.target.closest&&e.target.closest('#langBtn');if(b){try{localStorage.setItem('lang',b.getAttribute('hreflang'))}catch(x){}}})})();

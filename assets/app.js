@@ -5,21 +5,28 @@
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var lang = function () { return root.lang === "en" ? "en" : "es"; };
+  /* site root, from this script's own URL (assets/app.js): data.js paths are relative to it, on /es/ pages too */
+  var BASE = (function () { try { return new URL("../", document.currentScript.src).href; } catch (e) { return "/"; } })();
+  var abs = function (u) { try { return new URL(u, BASE).href; } catch (e) { return u; } };
 
   /* ---------- language ---------- */
   var T = {
     es: { title: "Iñigo González · Operaciones IT e Infraestructura", sending: "Enviando…", ok: "Gracias. Te responderé lo antes posible.", err: "No se ha podido enviar. Vuelve a intentarlo en unos minutos o escríbeme por LinkedIn.", missing: "Rellena nombre, un email válido y el mensaje.", captcha: "Completa la verificación antes de enviar.", nmissing: "Rellena tu nombre, un email válido y marca la casilla.", nok: "¡Hecho! Te enviaré las 33 ideas por email en las próximas 24 horas. Si no las ves, revisa Promociones y Spam.", nbrevo: "¡Casi está! Te he enviado un email para confirmar tu suscripción. En cuanto confirmes, te llegan las 33 ideas. Si no lo ves, revisa Promociones y Spam.", nconf: "¡Suscripción confirmada! Las 33 ideas van de camino a tu email.", bmissing: "Para reservar, elige una hora y marca las dos casillas.", bok: "¡Recibido! Te escribiré en menos de 24 horas laborables con el precio y el enlace de pago. La cita queda confirmada al recibir el pago.", week: "Semana del", none: "No quedan horas esta semana." },
     en: { title: "Iñigo González · IT Operations & Infrastructure", sending: "Sending…", ok: "Thank you. I'll get back to you soon.", err: "It couldn't be sent. Please try again in a few minutes or message me on LinkedIn.", missing: "Please fill in your name, a valid email and a message.", captcha: "Please complete the check before sending.", nmissing: "Please fill in your name and a valid email, and tick the box.", nok: "Done! I’ll email you the 33 ideas within 24 hours. If you can’t see them, check your Promotions and Spam folders.", nbrevo: "Almost there! I’ve sent you an email to confirm your subscription. Once you confirm, the 33 ideas will arrive. If you can’t see it, check Promotions and Spam.", nconf: "Subscription confirmed! The 33 ideas are on their way to your inbox.", bmissing: "To book, pick a time and tick both boxes.", bok: "Got it! I'll email you within 24 working hours with the price and the payment link. The appointment is confirmed once payment arrives.", week: "Week of", none: "No times left this week." }
   };
-  function applyLang(l) {
-    root.lang = l;
-    document.title = root.getAttribute("data-title-" + l) || T[l].title;
-    $$(".lang-btn [data-l]").forEach(function (s) { s.classList.toggle("on", s.getAttribute("data-l") === l); });
-    try { localStorage.setItem("lang", l); } catch (e) {}
+  /* The language is fixed per page (<html lang>, set by the build; /es/ pages are Spanish). The ES · EN button is a link
+     to the same page in the other language; boot.js remembers the choice in localStorage when it is clicked. Only the
+     404 (one page for both languages, data-i18n="auto") points its button at the home page in the other language. */
+  function initLang() {
+    var l = lang(), b = $("#langBtn");
+    if (b && root.getAttribute("data-i18n") === "auto") {
+      b.setAttribute("href", l === "es" ? "/" : "/es/");
+      b.setAttribute("hreflang", l === "es" ? "en" : "es");
+      $$("[data-l]", b).forEach(function (s) { s.classList.toggle("on", s.getAttribute("data-l") === l); });
+    }
     renderCity(currentCity);
     setCaption();
   }
-  $("#langBtn").addEventListener("click", function () { applyLang(lang() === "es" ? "en" : "es"); });
 
   /* ---------- share (blog posts) ---------- */
   var shareMsg = $(".share-msg");
@@ -62,7 +69,7 @@
   var media = $("#heroMedia"), hero = $(".hero");
   if (media) slides.forEach(function (s, i) {
     var img = new Image();
-    img.src = s.src; img.alt = s.alt || ""; if (i === 0) img.className = "on";
+    img.src = abs(s.src); img.alt = s.alt || ""; if (i === 0) img.className = "on";
     if (s.pos) img.style.objectPosition = s.pos;
     media.appendChild(img);
   });
@@ -93,7 +100,7 @@
   /* ---------- about photo ---------- */
   if (S.about && $("#aboutPhoto")) {
     var ap = $("#aboutPhoto"), im = new Image();
-    im.src = S.about.src; im.alt = S.about.alt || "Iñigo González"; im.loading = "lazy";
+    im.src = abs(S.about.src); im.alt = S.about.alt || "Iñigo González"; im.loading = "lazy";
     if (S.about.pos) im.style.objectPosition = S.about.pos;
     ap.insertBefore(im, ap.firstChild);
     var ini = $(".initials", ap); if (ini) ini.remove();
@@ -172,7 +179,6 @@
     }
     function toggle() { box.hidden = !chk.checked; if (chk.checked) render(); }
     chk.addEventListener("change", toggle);
-    var lb = $("#langBtn"); if (lb) lb.addEventListener("click", function () { if (!box.hidden) setTimeout(render, 0); });
     slotsReset = function () { hid.value = ""; box.hidden = true; };
     if (/[?&]reserva=1/.test(location.search) || location.hash === "#reservar") { chk.checked = true; toggle(); }
   })();
@@ -241,7 +247,7 @@
   });
 
   var y = $("#year"); if (y) y.textContent = new Date().getFullYear();
-  applyLang(lang());
+  initLang();
   }
 
   /* ---------- map ---------- */

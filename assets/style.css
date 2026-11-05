@@ -45,6 +45,7 @@ html[lang=es] .en, html[lang=en] .es{display:none!important}
 .menu-btn,.lang-btn{background:none;border:0;color:inherit;font:inherit;font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;padding:8px 2px}
 .menu-btn{color:var(--accent)}
 .site-header:not(.solid) .menu-btn{color:#e7a571}
+a.lang-btn{text-decoration:none;display:inline-block}
 .lang-btn span{opacity:.5}
 .lang-btn span.on{opacity:1;text-decoration:underline;text-underline-offset:4px}
 .sep{width:1px;height:16px;background:currentColor;opacity:.3}
