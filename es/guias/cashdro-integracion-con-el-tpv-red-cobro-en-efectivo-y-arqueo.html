@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>CashDro: integración con el TPV y arqueo · Iñigo González</title>
+<meta name="description" content="Cómo funciona un cajón de cobro automático conectado al TPV, la red y las credenciales que necesita, el flujo de un cobro, la rutina diaria de fondo, retirada…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/cashdro-integracion-con-el-tpv-red-cobro-en-efectivo-y-arqueo.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/cashdro-integracion-con-el-tpv-red-cobro-en-efectivo-y-arqueo.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/cashdro-integracion-con-el-tpv-red-cobro-en-efectivo-y-arqueo.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/cashdro-integracion-con-el-tpv-red-cobro-en-efectivo-y-arqueo.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CashDro: integración con el TPV y arqueo · Iñigo González">
+<meta property="og:description" content="Cómo funciona un cajón de cobro automático conectado al TPV, la red y las credenciales que necesita, el flujo de un cobro, la rutina diaria de fondo, retirada…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/cashdro-integracion-con-el-tpv-red-cobro-en-efectivo-y-arqueo.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-sector-1.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CashDro: integración con el TPV y arqueo · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"CashDro: integración con el TPV, el cobro en efectivo y el arqueo que cuadra","alternativeHeadline":"CashDro: integration with the POS, cash payments and a cash count that balances","description":"Cómo funciona un cajón de cobro automático conectado al TPV, la red y las credenciales que necesita, el flujo de un cobro, la rutina diaria de fondo, retirada y arqueo, y qué mirar cuando el TPV no conecta o el arqueo no cuadra.","datePublished":"2026-10-27","dateModified":"2026-10-27","inLanguage":"es","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/es/guias/cashdro-integracion-con-el-tpv-red-cobro-en-efectivo-y-arqueo.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/guias/cashdro-integracion-con-el-tpv-red-cobro-en-efectivo-y-arqueo.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"CashDro - Integración con el TPV"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 1","item":"https://inigogonzalezgarcia.github.io/es/guias/sector-1.html"},{"@type":"ListItem","position":4,"name":"CashDro: integración con el TPV, el cobro en efectivo y el arqueo que cuadra","item":"https://inigogonzalezgarcia.github.io/es/guias/cashdro-integracion-con-el-tpv-red-cobro-en-efectivo-y-arqueo.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/cashdro-integracion-con-el-tpv-red-cobro-en-efectivo-y-arqueo.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <a href="sector-1.html"><span class="es">Sector 1</span></a></p>
+    <h1><span class="es">CashDro: integración con el TPV, el cobro en efectivo y el arqueo que cuadra</span></h1>
+    <p class="lede"><span class="es">Cómo funciona un cajón de cobro automático conectado al TPV, la red y las credenciales que necesita, el flujo de un cobro, la rutina diaria de fondo, retirada y arqueo, y qué mirar cuando el TPV no conecta o el arqueo no cuadra.</span></p><p class="label post-meta"><span class="es">Sector 1</span> · <span class="es">CashDro - Integración con el TPV</span> · <span class="es">5 min</span> · <span class="es">Actualizado</span> <span class="es">27 oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Que el cobro en efectivo pase por una máquina y no por las manos del camarero: el TPV manda el importe, el cliente mete billetes y monedas, la máquina devuelve el cambio y el TPV da la venta por cobrada. Menos descuadres, menos tiempo de cierre y menos dinero en contacto con la comida. Para IT, el trabajo es la red, la integración y saber diagnosticar cuando algo falla con cola en la barra.</p>
+<h2>Antes de empezar</h2>
+<ul><li>El modelo de CashDro instalado y el <strong>distribuidor</strong> que lo mantiene (los atascos y las piezas son cosa suya).</li><li>El TPV con la <strong>integración de CashDro</strong> disponible y activada por su integrador (guía de ICG y HIOPOS).</li><li>La red del local: el CashDro va en la misma VLAN que los TPV o en una a la que los TPV llegan por una regla concreta.</li><li>Las <strong>credenciales</strong> de integración que entrega el instalador. Van al gestor de contraseñas del equipo, no a un pósit en la caja.</li></ul>
+<h2>1. Cómo funciona un cobro</h2>
+<ol><li>El camarero cierra la cuenta en el TPV y elige el medio de pago <strong>CashDro</strong>.</li><li>El TPV envía el importe a la máquina por la red, con un identificador del TPV que lo pide (por ejemplo <code>TPV-BARRA-01</code>).</li><li>El TPV muestra una ventana de espera; la máquina muestra el importe al cliente.</li><li>El cliente introduce el efectivo. La máquina cuenta, valida y devuelve el cambio.</li><li>La máquina confirma el cobro al TPV, la ventana se cierra y se imprime el ticket.</li></ol>
+<p>Si el cliente se arrepiente, el TPV permite cancelar mientras la operación no ha terminado, y la máquina devuelve lo introducido.</p>
+<h2>2. La configuración en el TPV</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">TPV · Configuración · Medios de pago · CashDro</span></figcaption><div class="ui-body"><div class="ui-path"><span>Configuración</span><span class="ui-sep" aria-hidden="true">›</span><span>Dispositivos</span><span class="ui-sep" aria-hidden="true">›</span><span>Cajón de cobro automático</span></div><div class="ui-field"><span class="ui-k">Tipo</span><span class="ui-v">CashDro</span></div><div class="ui-field"><span class="ui-k">Dirección IP del equipo</span><span class="ui-v">10.40.30.71</span></div><div class="ui-field"><span class="ui-k">Usuario</span><span class="ui-v">tpv-integracion (entregado por el instalador)</span></div><div class="ui-field"><span class="ui-k">Contraseña</span><span class="ui-v">•••••••• (en el gestor de contraseñas)</span></div><div class="ui-field"><span class="ui-k">Identificador del puesto</span><span class="ui-v">TPV-BARRA-01</span></div><div class="ui-field"><span class="ui-k">Medio de pago asociado</span><span class="ui-v">Efectivo (CashDro)</span></div><div class="ui-btn">Probar conexión</div></div></figure>
+<ul><li><strong>IP fija</strong> para el CashDro. Si la dirección es privada, solo los TPV de esa red pueden usarlo: un TPV en otra VLAN sin regla no lo verá nunca.</li><li>Un <strong>identificador por TPV</strong>: así el informe de la máquina dice desde qué puesto se pidió cada cobro, que es lo primero que preguntará quien revise un descuadre.</li><li>Las credenciales por defecto, cambiadas en la instalación. Quien tiene ese usuario puede pedir cobros y, según el modelo, operaciones de la máquina.</li></ul>
+<h2>3. La rutina diaria</h2>
+<div class="g-table"><table><thead><tr><th>Momento</th><th>Qué se hace</th><th>Quién</th></tr></thead><tbody><tr><td>Apertura</td><td>Comprobar el <strong>fondo de cambio</strong> (lo que la máquina tiene para devolver) y recargar monedas si hace falta</td><td>Encargado</td></tr><tr><td>Durante el día</td><td>Nada: el cambio se recicla con lo que pagan los clientes</td><td></td></tr><tr><td>Si se llena</td><td><strong>Retirada</strong> parcial de billetes al cajón de recaudación, registrada en la máquina</td><td>Encargado</td></tr><tr><td>Cierre</td><td><strong>Arqueo</strong>: lo que dice la máquina, lo que dice el TPV y lo retirado deben cuadrar</td><td>Encargado</td></tr></tbody></table></div>
+<p>Cada retirada o recarga se hace desde el menú de la máquina con un usuario nominal, nunca abriendo el equipo sin registrar la operación. Si no queda registrada, el arqueo no cuadra.</p>
+<h2>4. El ticket: &quot;el TPV no conecta con el CashDro&quot;</h2>
+<p>Sábado, 14:00, cola en la barra. El TPV da error al elegir CashDro.</p>
+<ol><li><strong>¿Le pasa a un TPV o a todos?</strong> Si los demás cobran, el problema está en ese TPV (configuración, red del puesto).</li><li><strong>La máquina</strong>: encendida, sin mensaje de error en su pantalla, con el cable de red conectado.</li><li><strong>La red</strong>:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · desde el TPV o un equipo de la misma VLAN</span><button class="t-copy" type="button" data-copy="Test-Connection 10.40.30.71 -Count 2&#10;Get-NetIPConfiguration | Select-Object InterfaceAlias, IPv4Address, IPv4DefaultGateway" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Test-Connection 10.40.30.71 -Count 2</span><span class="t-out">Destination     Status</span><span class="t-out">-----------     ------</span><span class="t-out">10.40.30.71     TimedOut</span><span class="t-out">10.40.30.71     TimedOut</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-NetIPConfiguration | Select-Object InterfaceAlias, IPv4Address, IPv4DefaultGateway</span><span class="t-out">InterfaceAlias  IPv4Address    IPv4DefaultGateway</span><span class="t-out">--------------  -----------    ------------------</span><span class="t-out">Ethernet        10.40.20.34    10.40.20.1</span></code></pre></figure>
+<p>El TPV tiene una IP de la <strong>VLAN 20</strong> (oficinas), no de la 30: alguien lo ha cambiado de toma o el puerto del switch ha perdido su VLAN. Se vuelve a poner en su puerto (o se corrige la VLAN del puerto, guía de Cisco del Nivel 4) y se prueba de nuevo.</p>
+<ol><li><strong>Mientras tanto</strong>: se cobra con el medio de pago <strong>Efectivo</strong> manual y se apunta en una hoja qué ventas se cobraron así, para el arqueo del cierre.</li></ol>
+<h2>5. El ticket: &quot;el arqueo no cuadra&quot;</h2>
+<ol><li><strong>Las operaciones manuales</strong>: retiradas, recargas o aperturas no registradas en la máquina son la causa más frecuente.</li><li><strong>Los cobros cancelados a medias</strong>: una venta que el TPV dio por cancelada pero la máquina cobró (o al revés). El informe de la máquina, filtrado por el identificador del TPV y la hora, lo muestra.</li><li><strong>Las ventas cobradas en efectivo manual</strong> durante una incidencia, que no pasan por la máquina.</li><li>Si con eso no cuadra, el distribuidor tiene el registro interno de la máquina (billetes rechazados, atascos y devoluciones).</li></ol>
+<h2>6. Lo que revisas cada mes</h2>
+<ul><li>Que el CashDro y los TPV tienen su IP reservada y están en su VLAN.</li><li>Los usuarios de la máquina: los de personal que ya no trabaja, desactivados.</li><li>Las actualizaciones de la integración en el TPV, con el integrador, antes de una temporada fuerte y no en mitad de ella.</li><li>Los descuadres del mes por local y su causa: si se repite una, hay un proceso que corregir, no una máquina.</li></ul>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <strong>ICG y HIOPOS</strong> cubre el resto del punto de venta.</li><li>La guía de Cisco del Nivel 4 explica cómo leer en qué VLAN está un puerto.</li><li>La guía de <strong>hotel en pre-apertura</strong> sitúa los datáfonos y el punto de venta en la red de un hotel.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span></p>
+      <p class="repo-name"><span class="es">Sector 1</span> · <span class="es">CashDro - Integración con el TPV</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
+      <a class="arrow-link" href="sector-1.html"><span class="es">Todas las guías del Sector 1</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/34-venue-service-readiness.html"><span class="label muted"><span class="es">Blog · 34</span></span><span class="related-t"><span class="es">La única impresora de cocina llevaba caída desde ayer: la revisión de cada mañana en hostelería</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <span></span>
+    <a class="post-nav-link next" href="hotel-en-pre-apertura-checklist-de-it-hasta-el-dia-de-apertura.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">Hotel en pre-apertura: el checklist de IT desde la obra hasta el día de apertura</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

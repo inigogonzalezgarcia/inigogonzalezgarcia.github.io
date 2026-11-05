@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="no-js inner" data-title-en="Confluence: an IT space and useful runbooks · Iñigo González" data-title-es="Confluence: espacio de IT y runbooks útiles · Iñigo González">
+<html lang="en" class="no-js inner">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -16,6 +16,9 @@
 <meta name="author" content="Iñigo González">
 <meta name="theme-color" content="#0e1a24">
 <link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/confluence-espacio-de-it-y-runbooks-que-se-usan.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/confluence-espacio-de-it-y-runbooks-que-se-usan.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/confluence-espacio-de-it-y-runbooks-que-se-usan.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/confluence-espacio-de-it-y-runbooks-que-se-usan.html">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <meta property="og:site_name" content="Iñigo González">
@@ -36,7 +39,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Confluence: setting up the IT space and writing runbooks the team actually uses","alternativeHeadline":"Confluence: montar el espacio de IT y escribir runbooks que el equipo use","description":"Space structure, permissions, a runbook template with the fields that matter, and how to link it to Jira tickets.","datePublished":"2026-10-21","dateModified":"2026-10-21","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/confluence-espacio-de-it-y-runbooks-que-se-usan.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/confluence-espacio-de-it-y-runbooks-que-se-usan.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Confluence"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 2","item":"https://inigogonzalezgarcia.github.io/guias/nivel-2.html"},{"@type":"ListItem","position":4,"name":"Confluence: setting up the IT space and writing runbooks the team actually uses","item":"https://inigogonzalezgarcia.github.io/guias/confluence-espacio-de-it-y-runbooks-que-se-usan.html"}]}]}</script>
 </head>
 <body id="top">
-<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
 
 <header class="site-header">
   <div class="wrap">
@@ -44,11 +47,11 @@
       <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
       <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
     </a>
-    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/"><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
     <div class="head-actions">
-      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
       <span class="sep" aria-hidden="true"></span>
-      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+      <a class="lang-btn" id="langBtn" href="../es/guias/confluence-espacio-de-it-y-runbooks-que-se-usan.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
     </div>
   </div>
 </header>
@@ -56,53 +59,29 @@
 <div class="menu" id="menu" aria-hidden="true">
   <div class="menu-top">
     <span class="label">Iñigo González</span>
-    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
   </div>
-  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
     <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
     <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
-    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
   </div>
 </div>
 
 <main id="main">
 <section class="page-hero post-hero">
   <div class="wrap">
-    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="nivel-2.html"><span class="es">Nivel 2</span><span class="en">Level 2</span></a></p>
-    <h1><span class="es">Confluence: montar el espacio de IT y escribir runbooks que el equipo use</span><span class="en">Confluence: setting up the IT space and writing runbooks the team actually uses</span></h1>
-    <p class="lede"><span class="es">Estructura del espacio, permisos, una plantilla de runbook con los campos que importan, y cómo enlazarlo con los tickets de Jira.</span><span class="en">Space structure, permissions, a runbook template with the fields that matter, and how to link it to Jira tickets.</span></p><p class="label post-meta"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">Confluence</span><span class="en">Confluence</span> · <span class="es">4 min</span><span class="en">3 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">21 oct 2026</span><span class="en">21 Oct 2026</span></p>
+    <p class="label kicker"><a href="../guias.html"><span class="en">Guides</span></a> · <a href="nivel-2.html"><span class="en">Level 2</span></a></p>
+    <h1><span class="en">Confluence: setting up the IT space and writing runbooks the team actually uses</span></h1>
+    <p class="lede"><span class="en">Space structure, permissions, a runbook template with the fields that matter, and how to link it to Jira tickets.</span></p><p class="label post-meta"><span class="en">Level 2</span> · <span class="en">Confluence</span> · <span class="en">3 min read</span> · <span class="en">Updated</span> <span class="en">21 Oct 2026</span></p>
   </div>
 </section>
 
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose guide">
-      <div class="es" lang="es">
-<h2>Qué vas a conseguir</h2>
-<p>Un espacio de Confluence donde el equipo de IT encuentra en 30 segundos cómo se hace cada cosa, con runbooks que se mantienen porque están ligados a los tickets. Lo contrario de una wiki con 400 páginas que nadie abre.</p>
-<h2>Antes de empezar</h2>
-<ul><li>Permiso para <strong>crear espacios</strong> en Confluence (lo da el administrador del sitio) o un espacio de IT ya creado donde seas administrador.</li><li>Decidir con el equipo quién puede <strong>leer</strong> (toda la empresa o solo IT) y quién puede <strong>editar</strong> (IT). Los runbooks con contraseñas o IPs internas no se escriben; se enlaza al gestor de secretos.</li><li>Jira Service Management en el mismo sitio de Atlassian, para enlazar artículos y tickets.</li></ul>
-<h2>1. Estructura: poca y estable</h2>
-<p>Un espacio por equipo (<code>IT</code>), no uno por proyecto. Dentro, cuatro ramas de primer nivel que no cambian:</p>
-<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Confluence · Espacio IT › Árbol de páginas</span></figcaption><div class="ui-body"><div class="ui-path"><span>IT</span><span class="ui-sep" aria-hidden="true">›</span><span>Runbooks (cómo se hace cada tarea, uno por tarea)</span></div><div class="ui-path"><span>IT</span><span class="ui-sep" aria-hidden="true">›</span><span>Servicios (qué es cada sistema, quién lo lleva, proveedor, contrato)</span></div><div class="ui-path"><span>IT</span><span class="ui-sep" aria-hidden="true">›</span><span>Procedimientos (altas, bajas, cambios, incidentes graves)</span></div><div class="ui-path"><span>IT</span><span class="ui-sep" aria-hidden="true">›</span><span>Decisiones (una página por decisión técnica, con fecha y motivo)</span></div><div class="ui-field"><span class="ui-k">Página de inicio</span><span class="ui-v">buscador + los 10 runbooks más usados + &quot;quién lleva qué&quot;</span></div></div></figure>
-<p>Un runbook es <strong>una tarea</strong>: &quot;Dar de alta un usuario&quot;, &quot;Renovar el certificado del portal&quot;, &quot;Reiniciar el servicio de impresión&quot;. Si una página explica tres cosas, son tres runbooks.</p>
-<h2>2. La plantilla de runbook</h2>
-<p>Crea una <strong>plantilla de espacio</strong> (Configuración del espacio → Plantillas) con estos bloques y usa la macro de <strong>estado</strong> para que se vea de un vistazo si está vigente:</p>
-<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Confluence · Plantilla &quot;Runbook&quot;</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Estado</span><span class="ui-v">VIGENTE · Propietario: @persona · Revisado: 21/10/2026 · Servicio: enlace a Servicios</span></div><div class="ui-field"><span class="ui-k">Cuándo se usa</span><span class="ui-v">una frase. Si no sabes si aplica, aquí lo sabes.</span></div><div class="ui-field"><span class="ui-k">Requisitos</span><span class="ui-v">accesos, herramientas, a quién avisar antes</span></div><div class="ui-field"><span class="ui-k">Pasos</span><span class="ui-v">numerados, un comando o una acción por paso, con el resultado esperado</span></div><div class="ui-field"><span class="ui-k">Comprobación</span><span class="ui-v">cómo sabes que ha funcionado</span></div><div class="ui-field"><span class="ui-k">Si falla</span><span class="ui-v">los dos o tres errores conocidos y qué hacer</span></div><div class="ui-field"><span class="ui-k">Tickets relacionados</span><span class="ui-v">macro de Jira con el filtro &quot;labels = runbook-alta-usuario&quot;</span></div></div></figure>
-<p>Dos reglas que hacen que se mantenga: cada runbook tiene <strong>un propietario</strong> (no &quot;el equipo&quot;) y una fecha de <strong>revisión</strong> que se actualiza al usarlo. Una página sin revisar en 6 meses se marca como DUDOSA, no se borra.</p>
-<h2>3. Enlazar con Jira</h2>
-<p>Cuando resuelves un ticket siguiendo un runbook, enlaza la página desde el ticket (<strong>Enlazar → Página de Confluence</strong>). Y en la página, la macro de Jira muestra los tickets que la han usado: así ves cuáles valen y cuáles no se usan nunca.</p>
-<p>Si el service desk tiene <strong>base de conocimiento</strong> activada, el espacio de IT (o uno aparte para usuarios) se vincula desde Jira Service Management → Proyecto → Base de conocimiento. Jira sugiere los artículos al usuario mientras escribe el ticket, y ahí es donde un buen título (&quot;Outlook pide la contraseña una y otra vez&quot;) desvía tickets antes de que existan.</p>
-<h2>4. Permisos</h2>
-<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Confluence · Configuración del espacio › Permisos</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Grupo confluence-users (toda la empresa)</span><span class="ui-v">Ver páginas</span></div><div class="ui-field"><span class="ui-k">Grupo it-team</span><span class="ui-v">Ver, Añadir, Eliminar páginas · Añadir comentarios</span></div><div class="ui-field"><span class="ui-k">Grupo it-admins</span><span class="ui-v">Administrar espacio</span></div><div class="ui-field"><span class="ui-k">Anónimo</span><span class="ui-v">sin acceso</span></div></div></figure>
-<p>Las páginas con información sensible (diagramas de red con IPs, procedimientos de emergencia) van en una rama con <strong>restricciones de página</strong> a <code>it-team</code>. Las contraseñas no van en ningún sitio de Confluence: se enlaza al gestor de contraseñas del equipo.</p>
-<h2>5. Buscar que funcione</h2>
-<ul><li><strong>Etiquetas</strong> por sistema (<code>intune</code>, <code>exchange</code>, <code>vpn</code>) y por tipo (<code>runbook</code>, <code>decision</code>). Una página de &quot;Runbooks por sistema&quot; con la macro de <strong>Content by Label</strong> se mantiene sola.</li><li>Títulos con el verbo y el objeto: &quot;Renovar el certificado de vpn.contoso.com&quot;, no &quot;Certificados&quot;.</li><li>Al final de cada página, <strong>Páginas relacionadas</strong> (macro) con dos o tres enlaces.</li></ul>
-<h2>Siguientes pasos</h2>
-<ul><li>Migra los procedimientos que hoy viven en Word o en el correo, uno por semana, empezando por los que más tickets generan.</li><li>Una vez al trimestre, revisa la lista de páginas sin visitas en 90 días: se archivan o se fusionan.</li><li>En el Nivel 4 verás la administración de Jira y Confluence a nivel de sitio: esquemas, automatizaciones y la relación con Atlassian.</li></ul>
-<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
-      </div>
+      
       <div class="en" lang="en">
 <h2>What you&#x27;ll get</h2>
 <p>A Confluence space where the IT team finds how to do anything in 30 seconds, with runbooks that stay maintained because they are tied to tickets. The opposite of a wiki with 400 pages nobody opens.</p>
@@ -130,27 +109,27 @@
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
-        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
-        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
       </div>
     </article>
     <aside class="post-aside">
-      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
-      <p class="repo-name"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">Confluence</span><span class="en">Confluence</span></p>
-      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
-      <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span><span class="en">All Level 2 guides</span> →</a>
+      <p class="label muted"><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="en">Level 2</span> · <span class="en">Confluence</span></p>
+      <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-2.html"><span class="en">All Level 2 guides</span> →</a>
       
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>
   
   <div class="wrap related">
-    <h2 class="label kicker related-h"><span class="es">Relacionado</span><span class="en">Related</span></h2>
-    <div class="related-grid"><a class="related-link" href="../blog/30-jira-confluence-admin-kit.html"><span class="label muted"><span class="es">Blog · 30</span><span class="en">Blog · 30</span></span><span class="related-t"><span class="es">128 licencias sin uso y un sprint abierto nueve días tarde: revisión mensual de Jira y Confluence</span><span class="en">128 unused licences and a sprint nine days late: a monthly Jira and Confluence review</span></span></a></div>
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/30-jira-confluence-admin-kit.html"><span class="label muted"><span class="en">Blog · 30</span></span><span class="related-t"><span class="en">128 unused licences and a sprint nine days late: a monthly Jira and Confluence review</span></span></a></div>
   </div>
   <div class="wrap post-nav">
-    <a class="post-nav-link prev" href="citrix-vdi-publicar-aplicacion-y-sesion-que-no-abre.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Citrix VDI: publicar una aplicación y diagnosticar una sesión que no abre</span><span class="en">Citrix VDI: publishing an application and diagnosing a session that won&#x27;t launch</span></span></a>
-    <a class="post-nav-link next" href="git-scripts-del-equipo-bajo-control-de-versiones.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Git: poner los scripts del equipo bajo control de versiones</span><span class="en">Git: putting the team&#x27;s scripts under version control</span></span></a>
+    <a class="post-nav-link prev" href="citrix-vdi-publicar-aplicacion-y-sesion-que-no-abre.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">Citrix VDI: publishing an application and diagnosing a session that won&#x27;t launch</span></span></a>
+    <a class="post-nav-link next" href="git-scripts-del-equipo-bajo-control-de-versiones.html"><span class="label muted"><span class="en">Next</span></span><span><span class="en">Git: putting the team&#x27;s scripts under version control</span></span></a>
   </div>
 </section>
 </main>
@@ -158,8 +137,8 @@
 <footer>
   <div class="wrap">
     <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
-    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
-    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
   </div>
 </footer>
 

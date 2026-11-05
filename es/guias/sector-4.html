@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Industria multinacional · Guías IT · Iñigo González</title>
+<meta name="description" content="Guías IT para industria multinacional: LAN, WAN y WiFi entre países, MDM de móviles, presupuesto de IT, soporte SAP, copias de SQL Server, Veeam y VMware.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/sector-4.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/sector-4.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/sector-4.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/sector-4.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Industria multinacional · Guías IT · Iñigo González">
+<meta property="og:description" content="Guías IT para industria multinacional: LAN, WAN y WiFi entre países, MDM de móviles, presupuesto de IT, soporte SAP, copias de SQL Server, Veeam y VMware.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/sector-4.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-sector-4.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Industria multinacional · Guías IT · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","@id":"https://inigogonzalezgarcia.github.io/es/guias/sector-4.html","url":"https://inigogonzalezgarcia.github.io/es/guias/sector-4.html","name":"Sector 4 · Industria multinacional","inLanguage":"es","isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/#website"},"hasPart":[{"@type":"TechArticle","headline":"LAN, WAN y WiFi: conectar plantas y sedes de varios países","url":"https://inigogonzalezgarcia.github.io/es/guias/lan-wan-y-wifi-conectar-plantas-y-sedes-de-varios-paises.html"},{"@type":"TechArticle","headline":"MDM: gestión de móviles corporativos en plantas y sedes de varios países","url":"https://inigogonzalezgarcia.github.io/es/guias/mdm-gestion-de-moviles-corporativos-en-plantas-y-sedes-de-varios-paises.html"},{"@type":"TechArticle","headline":"Presupuesto de IT: preparar y seguir el presupuesto anual de una empresa con sedes en varios países","url":"https://inigogonzalezgarcia.github.io/es/guias/presupuesto-de-it-preparar-y-seguir-el-presupuesto-anual-en-una-empresa-multisede.html"},{"@type":"TechArticle","headline":"SAP: soporte a usuarios desde IT sin ser consultor de SAP","url":"https://inigogonzalezgarcia.github.io/es/guias/sap-soporte-a-usuarios-desde-it-sin-ser-consultor-sap.html"},{"@type":"TechArticle","headline":"SQL Server: copias de seguridad del ERP, restauración a un punto en el tiempo y unas filas borradas","url":"https://inigogonzalezgarcia.github.io/es/guias/sql-server-copias-y-restauracion-de-la-base-de-datos-del-erp.html"},{"@type":"TechArticle","headline":"Veeam: planificar y probar restauraciones en plantas y sedes, y un servidor de ficheros cifrado","url":"https://inigogonzalezgarcia.github.io/es/guias/veeam-planificar-y-probar-restauraciones-en-plantas-y-sedes.html"},{"@type":"TechArticle","headline":"VMware: mantenimiento de hosts y máquinas virtuales en los clústeres de varias plantas","url":"https://inigogonzalezgarcia.github.io/es/guias/vmware-mantenimiento-de-hosts-y-maquinas-virtuales-en-varias-plantas.html"},{"@type":"TechArticle","headline":"IT/OT: integrar la red de una planta con la corporativa sin poner en riesgo la producción","url":"https://inigogonzalezgarcia.github.io/es/guias/it-ot-integrar-la-red-de-planta-con-la-corporativa-inventario-zonas-dmz-industrial-y-una-linea-parada.html"}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 4","item":"https://inigogonzalezgarcia.github.io/es/guias/sector-4.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/sector-4.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <span class="es">Sector 4</span></p>
+    <h1><span class="es">Industria<br>multinacional.</span></h1>
+    <p class="lede"><span class="es">Ocho guías para una empresa con plantas en varios países: la red entre sedes, los móviles corporativos, el presupuesto anual de IT, el soporte a usuarios de SAP, copias de SQL Server, restauraciones con Veeam y el mantenimiento de VMware.</span></p><p class="label post-meta"><span class="es">8 guías · ES/EN · ejemplos ficticios</span></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="sr-only"><span class="es">Temas y guías</span></h2>
+    <div class="guide-levels three">
+      <div class="guide-level reveal" id="lan-wan-wifi"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">LAN, WAN y WiFi - Conectar sedes de varios países</span></h3><p class="muted small"><span class="es">La sede tipo, la WAN con MPLS o SD-WAN y su respaldo 4G, la WiFi con 802.1X y la planta lejana que va lenta al ERP.</span></p><ul class="guide-topics guide-list"><li><a href="lan-wan-y-wifi-conectar-plantas-y-sedes-de-varios-paises.html"><span class="es">LAN, WAN y WiFi: conectar plantas y sedes de varios países</span></a><span class="muted small"><span class="es">Un diseño de sede que se repite en cada país, la red de planta (OT) separada de la de oficina, MPLS frente a SD-WAN con circuito de respaldo, la WiFi con 802.1X y la de invitados, los operadores locales y sus plazos, y el ticket de la planta que va lenta al ERP.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="mdm-moviles"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">MDM - Gestión de móviles corporativos</span></h3><p class="muted small"><span class="es">Móviles de jefes de planta y comerciales en varios países: alta automática, protección de apps, SIM, pérdidas y bajas.</span></p><ul class="guide-topics guide-list"><li><a href="mdm-gestion-de-moviles-corporativos-en-plantas-y-sedes-de-varios-paises.html"><span class="es">MDM: gestión de móviles corporativos en plantas y sedes de varios países</span></a><span class="muted small"><span class="es">Cómo llegan los móviles de jefes de planta y comerciales ya gestionados por Intune, con Android Enterprise totalmente gestionado y Apple Business Manager con ADE, la protección de apps, el cumplimiento, las SIM de cada país, el móvil perdido, las bajas y el ticket del móvil que se queda en la configuración inicial.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="presupuesto-it"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">Presupuesto de IT - Preparar y seguir el presupuesto anual</span></h3><p class="muted small"><span class="es">Run frente a change, CAPEX y OPEX, el calendario de renovaciones, el reparto por país y explicar una desviación al CFO.</span></p><ul class="guide-topics guide-list"><li><a href="presupuesto-de-it-preparar-y-seguir-el-presupuesto-anual-en-una-empresa-multisede.html"><span class="es">Presupuesto de IT: preparar y seguir el presupuesto anual de una empresa con sedes en varios países</span></a><span class="muted small"><span class="es">Cómo separar run y change, qué es CAPEX y qué es OPEX, el calendario de contratos y renovaciones, las licencias por plantilla, el ciclo de renovación de equipos, el reparto por país y moneda, el seguimiento mensual frente al real y cómo responder cuando el CFO pregunta por qué vais un 12 % por encima en el tercer trimestre.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="sap-soporte"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">SAP - Soporte a usuarios desde IT</span></h3><p class="muted small"><span class="es">SAP GUI y sus conexiones, usuarios bloqueados, SU53, impresión con SPAD y SP01, y cuándo pasar el ticket al equipo SAP.</span></p><ul class="guide-topics guide-list"><li><a href="sap-soporte-a-usuarios-desde-it-sin-ser-consultor-sap.html"><span class="es">SAP: soporte a usuarios desde IT sin ser consultor de SAP</span></a><span class="muted small"><span class="es">Lo que hace el primer y segundo nivel de IT con los usuarios de SAP: instalar SAP GUI y sus conexiones, desbloquear usuarios cuando IT está autorizado, leer un SU53, entender la impresión con SPAD y SP01, mirar SM04 y SM21 si hay acceso, saber cuándo escalar y el ticket del almacén que no imprime albaranes.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="sqlserver-backup"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">SQL Server - Copias de seguridad y restauración</span></h3><p class="muted small"><span class="es">Modelos de recuperación, copias completas, diferenciales y de log del ERP, restaurar a un minuto y unas filas borradas.</span></p><ul class="guide-topics guide-list"><li><a href="sql-server-copias-y-restauracion-de-la-base-de-datos-del-erp.html"><span class="es">SQL Server: copias de seguridad del ERP, restauración a un punto en el tiempo y unas filas borradas</span></a><span class="muted small"><span class="es">El modelo de recuperación que necesita la base de datos del ERP, la pauta de copias completas, diferenciales y de log, la copia a un recurso compartido o a una URL con checksum, la retención, la cadena de restauración con NORECOVERY y STOPAT en un servidor de pruebas, el historial de msdb y cómo recuperar unas filas borradas a las 10:40 en una planta de otro país.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="veeam-restauraciones"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">Veeam - Planificar y probar restauraciones</span></h3><p class="muted small"><span class="es">Qué restauración usar en cada caso, SureBackup, el calendario de pruebas por planta y un servidor de ficheros cifrado.</span></p><ul class="guide-topics guide-list"><li><a href="veeam-planificar-y-probar-restauraciones-en-plantas-y-sedes.html"><span class="es">Veeam: planificar y probar restauraciones en plantas y sedes, y un servidor de ficheros cifrado</span></a><span class="muted small"><span class="es">Qué tipo de restauración elegir para cada necesidad, pruebas automáticas con SureBackup y laboratorio virtual, un calendario trimestral de pruebas por planta, cómo documentar el tiempo real frente al RTO, la copia a otra sede y a un repositorio inmutable, y qué hacer cuando el servidor de ficheros de una planta aparece cifrado.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="vmware-mantenimiento"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">VMware - Mantenimiento de hosts y máquinas virtuales</span></h3><p class="muted small"><span class="es">Lifecycle Manager, modo mantenimiento con DRS, VMware Tools, snapshots, certificados y un calendario según los turnos de planta.</span></p><ul class="guide-topics guide-list"><li><a href="vmware-mantenimiento-de-hosts-y-maquinas-virtuales-en-varias-plantas.html"><span class="es">VMware: mantenimiento de hosts y máquinas virtuales en los clústeres de varias plantas</span></a><span class="muted small"><span class="es">La rutina de mantenimiento de los clústeres vSphere de cada sede: imágenes de vSphere Lifecycle Manager, modo mantenimiento con DRS, VMware Tools y versiones de hardware virtual, higiene de snapshots, capacidad de datastores, certificados, salud del hardware, un calendario coordinado con los turnos de planta y qué mirar cuando un host no entra en modo mantenimiento.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="it-ot"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">IT/OT - Integrar la red de planta con la corporativa</span></h3><p class="muted small"><span class="es">Inventario de activos OT, zonas y conductos, DMZ industrial, acceso remoto de proveedores, parches en ventanas de parada y una línea que se para tras un cambio.</span></p><ul class="guide-topics guide-list"><li><a href="it-ot-integrar-la-red-de-planta-con-la-corporativa-inventario-zonas-dmz-industrial-y-una-linea-parada.html"><span class="es">IT/OT: integrar la red de una planta con la corporativa sin poner en riesgo la producción</span></a><span class="muted small"><span class="es">Inventario de PLC, HMI, servidores SCADA y estaciones de ingeniería sin escaneos activos, los niveles Purdue y las zonas y conductos de IEC 62443 explicados sin jerga, una DMZ industrial con réplica del historian, jump host y relé de parches y antivirus, reglas de firewall por conducto, acceso remoto de proveedores con MFA y aprobación, parches en paradas planificadas, copias de los programas de PLC y una línea que se para tras un cambio de IT.</span></span></li></ul></div>
+    </div>
+    <div class="numbers-head reveal u-mt34">
+      <div>
+        <p class="label kicker"><span class="es">Cómo están hechas</span></p>
+        <h2 class="h2 sm"><span class="es">Terminales y ventanas<br>simuladas.</span></h2>
+      </div>
+    </div>
+    <p class="lede reveal"><span class="es">Las guías no llevan capturas de sistemas reales: los terminales y las ventanas que ves son simulaciones con nombres, dominios y usuarios ficticios. Los comandos sí son los de verdad, y cada terminal tiene un botón para copiarlos.</span></p>
+    <p class="reveal u-mt22"><a class="arrow-link" href="nivel-1.html"><span class="es">Nivel 1: Primeros pasos</span> →</a> · <a class="arrow-link" href="nivel-2.html"><span class="es">Nivel 2: Base sólida</span> →</a> · <a class="arrow-link" href="nivel-3.html"><span class="es">Nivel 3: Avanzado</span> →</a> · <a class="arrow-link" href="nivel-4.html"><span class="es">Nivel 4: Experto</span> →</a> · <a class="arrow-link" href="sector-1.html"><span class="es">Sector 1: Hostelería y punto de venta</span> →</a> · <a class="arrow-link" href="sector-2.html"><span class="es">Sector 2: Retail y oficinas corporativas</span> →</a> · <a class="arrow-link" href="sector-3.html"><span class="es">Sector 3: Sanidad y plataformas críticas</span> →</a> · <a class="arrow-link" href="sector-5.html"><span class="es">Sector 5: Servicios financieros y trading</span> →</a> · <a class="arrow-link" href="../guias.html"><span class="es">Todos los niveles</span> →</a></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

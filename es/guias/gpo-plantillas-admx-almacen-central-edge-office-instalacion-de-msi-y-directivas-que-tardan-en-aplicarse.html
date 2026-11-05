@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>GPO: Edge, Office, ADMX e instalar un MSI · Iñigo González</title>
+<meta name="description" content="Crear y mantener el almacén central de plantillas en SYSVOL, añadir las ADMX de Edge y de Microsoft 365 Apps, fijar página de inicio y lista de extensiones…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/gpo-plantillas-admx-almacen-central-edge-office-instalacion-de-msi-y-directivas-que-tardan-en-aplicarse.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/gpo-plantillas-admx-almacen-central-edge-office-instalacion-de-msi-y-directivas-que-tardan-en-aplicarse.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/gpo-plantillas-admx-almacen-central-edge-office-instalacion-de-msi-y-directivas-que-tardan-en-aplicarse.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/gpo-plantillas-admx-almacen-central-edge-office-instalacion-de-msi-y-directivas-que-tardan-en-aplicarse.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GPO: Edge, Office, ADMX e instalar un MSI · Iñigo González">
+<meta property="og:description" content="Crear y mantener el almacén central de plantillas en SYSVOL, añadir las ADMX de Edge y de Microsoft 365 Apps, fijar página de inicio y lista de extensiones…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/gpo-plantillas-admx-almacen-central-edge-office-instalacion-de-msi-y-directivas-que-tardan-en-aplicarse.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-nivel-2.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="GPO: Edge, Office, ADMX e instalar un MSI · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"GPO: almacén central de ADMX, Microsoft Edge y Microsoft 365 Apps, instalar un MSI con Instalación de software y la directiva que solo se aplica tras dos reinicios","alternativeHeadline":"GPO: the ADMX central store, Microsoft Edge and Microsoft 365 Apps, assigning an MSI with Software Installation, and the policy that only applies after two restarts","description":"Crear y mantener el almacén central de plantillas en SYSVOL, añadir las ADMX de Edge y de Microsoft 365 Apps, fijar página de inicio y lista de extensiones permitidas, configurar Office, asignar un MSI con sus límites frente a MECM e Intune, y por qué una directiva tarda dos reinicios: procesamiento asíncrono, esperar a la red, vínculos lentos y el registro operativo.","datePublished":"2026-11-04","dateModified":"2026-11-04","inLanguage":"es","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/es/guias/gpo-plantillas-admx-almacen-central-edge-office-instalacion-de-msi-y-directivas-que-tardan-en-aplicarse.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/guias/gpo-plantillas-admx-almacen-central-edge-office-instalacion-de-msi-y-directivas-que-tardan-en-aplicarse.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"GPO: unidades, impresoras y preferencias"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Nivel 2","item":"https://inigogonzalezgarcia.github.io/es/guias/nivel-2.html"},{"@type":"ListItem","position":4,"name":"GPO: almacén central de ADMX, Microsoft Edge y Microsoft 365 Apps, instalar un MSI con Instalación de software y la directiva que solo se aplica tras dos reinicios","item":"https://inigogonzalezgarcia.github.io/es/guias/gpo-plantillas-admx-almacen-central-edge-office-instalacion-de-msi-y-directivas-que-tardan-en-aplicarse.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/gpo-plantillas-admx-almacen-central-edge-office-instalacion-de-msi-y-directivas-que-tardan-en-aplicarse.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <a href="nivel-2.html"><span class="es">Nivel 2</span></a></p>
+    <h1><span class="es">GPO: almacén central de ADMX, Microsoft Edge y Microsoft 365 Apps, instalar un MSI con Instalación de software y la directiva que solo se aplica tras dos reinicios</span></h1>
+    <p class="lede"><span class="es">Crear y mantener el almacén central de plantillas en SYSVOL, añadir las ADMX de Edge y de Microsoft 365 Apps, fijar página de inicio y lista de extensiones permitidas, configurar Office, asignar un MSI con sus límites frente a MECM e Intune, y por qué una directiva tarda dos reinicios: procesamiento asíncrono, esperar a la red, vínculos lentos y el registro operativo.</span></p><p class="label post-meta"><span class="es">Nivel 2</span> · <span class="es">GPO: unidades, impresoras y preferencias</span> · <span class="es">10 min</span> · <span class="es">Actualizado</span> <span class="es">4 nov 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Configurar el navegador y Office de todos los equipos desde Active Directory con las plantillas oficiales en un único sitio, instalar una aplicación MSI sencilla sin herramienta de despliegue sabiendo hasta dónde llega, y entender el ticket que confunde a medio equipo de soporte: &quot;la directiva no se aplica hasta el segundo reinicio&quot; o &quot;tarda una eternidad&quot;.</p>
+<h2>Antes de empezar</h2>
+<ul><li>GPMC con RSAT y permisos para crear y vincular GPO en las OU de equipos y usuarios (la guía de <a href="gpo-unidades-de-red-e-impresoras-con-preferencias-filtrado-y-una-unidad-que-no-aparece.html">unidades de red e impresoras</a> explica directivas frente a preferencias, filtrado y gpresult).</li><li>Permiso de escritura en <code>\\contoso.local\SYSVOL\contoso.local\Policies</code> (Domain Admins o un grupo delegado para las plantillas).</li><li>Descargadas: las <strong>plantillas de directiva de Microsoft Edge</strong> (página de Edge para empresas) y las <strong>plantillas administrativas de Microsoft 365 Apps</strong> (Centro de descargas de Microsoft, el paquete de ADMX/ADML y la herramienta de personalización de Office).</li><li>Una OU piloto con equipos reales, <code>OU=Piloto,OU=Equipos,DC=contoso,DC=local</code>.</li></ul>
+<h2>1. El almacén central de plantillas</h2>
+<p>Sin almacén central, el editor de GPO usa las plantillas de <code>C:\Windows\PolicyDefinitions</code> del equipo desde el que editas: dos administradores con Windows distintos ven ajustes distintos. El <strong>almacén central</strong> es una carpeta <code>PolicyDefinitions</code> en SYSVOL que se replica a todos los controladores; cuando existe, el editor usa solo esa.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell (administrador) · equipo de administración con Windows 11 24H2</span><button class="t-copy" type="button" data-copy="$central = &#x27;\\contoso.local\SYSVOL\contoso.local\Policies\PolicyDefinitions&#x27;&#10;if (Test-Path $central) { robocopy $central &quot;D:\Copias\PolicyDefinitions-$(Get-Date -Format yyyyMMdd)&quot; /E /NP }&#10;robocopy C:\Windows\PolicyDefinitions $central *.admx /NP&#10;robocopy C:\Windows\PolicyDefinitions\es-ES &quot;$central\es-ES&quot; *.adml /NP&#10;robocopy C:\Windows\PolicyDefinitions\en-US &quot;$central\en-US&quot; *.adml /NP" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>$central = &#x27;\\contoso.local\SYSVOL\contoso.local\Policies\PolicyDefinitions&#x27;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>if (Test-Path $central) { robocopy $central &quot;D:\Copias\PolicyDefinitions-$(Get-Date -Format yyyyMMdd)&quot; /E /NP }</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>robocopy C:\Windows\PolicyDefinitions $central *.admx /NP</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>robocopy C:\Windows\PolicyDefinitions\es-ES &quot;$central\es-ES&quot; *.adml /NP</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>robocopy C:\Windows\PolicyDefinitions\en-US &quot;$central\en-US&quot; *.adml /NP</span></code></pre></figure>
+<ul><li>La fuente buena es un equipo con la versión de Windows más reciente que tengas, o el paquete descargable de plantillas de Windows 11 de esa versión.</li><li>Cada <code>.admx</code> necesita su <code>.adml</code> en cada idioma que usen los administradores. Si falta, el editor da errores del tipo <em>No se encontró el recurso &#x27;$(string.xxx)&#x27;</em> al abrir la GPO.</li><li>Al abrir cualquier GPO, el editor muestra en <strong>Plantillas administrativas</strong> el texto <em>Definiciones de directiva (archivos ADMX) recuperadas del almacén central</em>. Si no lo dice, no está usando la carpeta que crees.</li></ul>
+<p class="g-warn">Copia de seguridad antes de cada actualización del almacén, y nunca se copian plantillas antiguas encima de nuevas: un ADMX de Windows 10 sobre uno de Windows 11 hace desaparecer ajustes del editor (las GPO los conservan, pero dejan de verse).</p>
+<h2>2. Añadir las plantillas de Edge y de Office</h2>
+<p>Del paquete de Edge, la carpeta <code>windows\admx</code>: <code>msedge.admx</code> y <code>msedgeupdate.admx</code>, con sus <code>.adml</code> de <code>es-ES</code> y <code>en-US</code>. Del de Microsoft 365 Apps, la carpeta <code>admx</code>: <code>office16.admx</code> y los de cada aplicación que vayas a gestionar (<code>word16.admx</code>, <code>excel16.admx</code>, <code>outlk16.admx</code>, <code>ppt16.admx</code>), con sus idiomas.</p>
+<p>Todo al almacén central, en las mismas carpetas. Tras la replicación de SYSVOL, aparecen <strong>Microsoft Edge</strong> en <em>Plantillas administrativas</em> del equipo y del usuario, y <strong>Microsoft Office 2016</strong> con cada aplicación (el nombre se quedó en 2016, también vale para Microsoft 365 Apps).</p>
+<h2>3. Configurar Microsoft Edge</h2>
+<p>Una GPO de equipo, <code>CMP-Edge</code>, vinculada primero a la OU piloto. En <strong>Configuración del equipo › Directivas › Plantillas administrativas › Microsoft Edge</strong>:</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Editor de GPO · CMP-Edge · Microsoft Edge</span></figcaption><div class="ui-body"><div class="ui-path"><span>Inicio, página principal y página Nueva pestaña</span></div><div class="ui-field"><span class="ui-k">Acción que se realizará al iniciar (RestoreOnStartup)</span><span class="ui-v">Habilitada · Abrir una lista de direcciones URL</span></div><div class="ui-field"><span class="ui-k">Sitios que se abrirán al iniciar el explorador (RestoreOnStartupURLs)</span><span class="ui-v">https://intranet.contoso.local</span></div><div class="ui-field"><span class="ui-k">Configurar la URL de la página principal (HomepageLocation)</span><span class="ui-v">https://intranet.contoso.local</span></div><div class="ui-field"><span class="ui-k">Mostrar el botón Inicio en la barra de herramientas (ShowHomeButton)</span><span class="ui-v">Habilitada</span></div><div class="ui-path"><span>Extensiones</span></div><div class="ui-field"><span class="ui-k">Controlar qué extensiones no se pueden instalar (ExtensionInstallBlocklist)</span><span class="ui-v">*</span></div><div class="ui-field"><span class="ui-k">Permitir la instalación de extensiones específicas (ExtensionInstallAllowlist)</span><span class="ui-v">&lt;id del gestor de contraseñas corporativo&gt;</span></div><div class="ui-field"><span class="ui-k">Controlar qué extensiones se instalan de forma silenciosa (ExtensionInstallForcelist)</span><span class="ui-v">&lt;id&gt;;https://edge.microsoft.com/extensionwebstorebase/v1/crx</span></div></div></figure>
+<ul><li>La lista de bloqueo con <code>*</code> y la de permitidas con los ID de 32 letras es la combinación habitual: nada entra si no está aprobado. El ID está al final de la URL de la extensión en la tienda de complementos de Edge.</li><li>Una extensión que ya estaba instalada y pasa a bloqueada se <strong>deshabilita</strong>, no se desinstala. Las forzadas no se pueden quitar ni desactivar.</li><li>Las directivas de <strong>Microsoft Edge</strong> son obligatorias; las de <strong>Microsoft Edge: configuración predeterminada (los usuarios pueden invalidarla)</strong> son recomendadas, un valor inicial que el usuario puede cambiar.</li></ul>
+<p>En el equipo, tras <code>gpupdate /force</code> y cerrar Edge del todo, <code>edge://policy</code> lista cada directiva con su valor, su origen y si hay error. En el registro están en <code>HKLM\SOFTWARE\Policies\Microsoft\Edge</code>.</p>
+<h2>4. Configurar Microsoft 365 Apps</h2>
+<p>La mayoría de los ajustes de Office son <strong>de usuario</strong>. Una GPO <code>USR-Office</code> vinculada a la OU de usuarios y una parte de equipo para el canal de actualización:</p>
+<ul><li><em>Configuración del equipo › Plantillas administrativas › Microsoft Office 2016 (equipo) › Actualizaciones › Canal de actualización</em> = <strong>Canal empresarial mensual</strong>.</li><li><em>Configuración de usuario › Plantillas administrativas › Microsoft Outlook 2016 › Configuración de la cuenta › Exchange › Modo de intercambio en caché › Configuración de sincronización del Modo de intercambio en caché</em> = <strong>12 meses</strong>, para que los buzones grandes no llenen el disco del portátil.</li><li><em>Configuración de usuario › Plantillas administrativas › Microsoft Word 2016 › Opciones de Word › Seguridad › Centro de confianza › Configuración de notificaciones de macros de VBA</em> = <strong>Deshabilitar todas excepto las macros firmadas digitalmente</strong>. Lo mismo en Excel y PowerPoint.</li></ul>
+<p>En el equipo se comprueba en <code>HKCU\Software\Policies\Microsoft\Office\16.0</code> y, en la aplicación, porque la opción aparece en gris con el aviso de que la administra la organización.</p>
+<p class="g-tip">Para usuarios que no están en el dominio o casi nunca ven la red interna, el <strong>servicio de directivas en la nube</strong> de Microsoft 365 (config.office.com) aplica los mismos ajustes por grupo de Entra ID sin GPO. Lo que no se debe hacer es configurar lo mismo por los dos sitios.</p>
+<h2>5. Instalar un MSI con Instalación de software</h2>
+<p>Para una aplicación pequeña en MSI y pocos equipos, la GPO lo instala al arrancar sin más herramientas:</p>
+<ol><li>El MSI en un recurso compartido con <strong>Lectura</strong> para <em>Equipos del dominio</em> en recurso y NTFS: <code>\\srv-ficheros\Software$\7zip\7z-x64.msi</code>. Siempre la ruta UNC, nunca <code>D:\...</code> ni una unidad asignada: la instala la cuenta del equipo antes de que haya nadie conectado.</li><li>GPO de equipo <code>CMP-SW-7zip</code>, <strong>Configuración del equipo › Directivas › Configuración de software › Instalación de software › Nuevo › Paquete</strong>, el MSI por su ruta UNC.</li><li>Método <strong>Asignado</strong>: se instala en el siguiente arranque. <strong>Avanzado</strong> si necesitas una transformación <code>.mst</code>, que solo se puede añadir al crear el paquete, no después.</li><li>En las propiedades, pestaña <strong>Implementación</strong>: <em>Desinstalar esta aplicación cuando esté fuera del ámbito de administración</em>, para que salga cuando el equipo cambie de OU. La pestaña <strong>Actualizaciones</strong> enlaza la versión nueva con la antigua.</li></ol>
+<p>Comprobación en el equipo: <code>gpresult /scope computer /r</code> la lista en <em>Instalación de software</em>, el registro <strong>Aplicación</strong> tiene eventos del origen <em>Application Management Group Policy</em> con el resultado, y <code>Get-Package -Name &#x27;7-Zip*&#x27;</code> la muestra instalada.</p>
+<p>Hasta dónde llega, frente a una herramienta de despliegue:</p>
+<div class="g-table"><table><thead><tr><th></th><th>Instalación de software (GPO)</th><th>MECM / Intune</th></tr></thead><tbody><tr><td>Formatos</td><td>Solo MSI (y MST)</td><td>MSI, EXE, scripts, MSIX, Win32 empaquetado</td></tr><tr><td>Cuándo instala</td><td>Solo en el arranque, en primer plano</td><td>Cuando toca, con ventanas de mantenimiento y plazos</td></tr><tr><td>Informes</td><td>Ninguno central: evento a evento</td><td>Estado por equipo y por despliegue</td></tr><tr><td>Reintentos y dependencias</td><td>No</td><td>Sí</td></tr><tr><td>Fuera de la oficina o por VPN</td><td>No en vínculo lento</td><td>Sí (Intune por internet, MECM con CMG)</td></tr></tbody></table></div>
+<p>Sirve para un MSI aislado en una sede; en cuanto hay informes, versiones o portátiles fuera, va a <a href="mecm-sccm-empaquetar-una-aplicacion-y-desplegarla.html">MECM</a> o a Intune.</p>
+<h2>6. El ticket: &quot;la directiva solo se aplica después de dos reinicios&quot; o &quot;tarda muchísimo&quot;</h2>
+<p>Lunes, 9:30. El piloto de <code>CMP-SW-7zip</code> y de <code>CMP-Edge</code>: Edge ya tiene la página de inicio, pero 7-Zip no se instala tras el primer reinicio; aparece tras el segundo. En otra planta, otros dicen que los cambios de GPO tardan horas.</p>
+<ol><li><strong>Lo que pasa es el diseño</strong>: Windows 11 arranca y deja iniciar sesión <strong>sin esperar a la red</strong> (<em>optimización de inicio de sesión rápido</em>) y aplica las directivas en segundo plano. La mayoría de las directivas, como Edge, funcionan así. Instalación de software, redirección de carpetas y las unidades de red de preferencias necesitan el <strong>primer plano síncrono</strong>: en el arranque asíncrono las detectan, marcan que el siguiente arranque tiene que ser síncrono y esperan. De ahí los dos reinicios.</li><li><strong>Confirmarlo en el equipo</strong>: en <strong>Sistema</strong>, el evento <strong>1112</strong> de <em>GroupPolicy</em>: la extensión <em>Software Installation</em> no pudo aplicar los cambios porque deben procesarse antes del inicio del sistema o de sesión, y el sistema esperará en el siguiente. En el registro operativo, el tiempo y el tipo de vínculo:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell (administrador) · PC-0533</span><button class="t-copy" type="button" data-copy="Get-WinEvent -LogName &#x27;Microsoft-Windows-GroupPolicy/Operational&#x27; -MaxEvents 300 | Where-Object Id -in 4000, 5314, 8000 | Select-Object -First 3 TimeCreated, Id, Message | Format-List&#10;gpresult /scope computer /r | Select-String &#x27;vínculo lento|aplicó desde&#x27;" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-WinEvent -LogName &#x27;Microsoft-Windows-GroupPolicy/Operational&#x27; -MaxEvents 300 | Where-Object Id -in 4000, 5314, 8000 | Select-Object -First 3 TimeCreated, Id, Message | Format-List</span><span class="t-out">TimeCreated : 03/11/2026 8:02:41</span><span class="t-out">Id          : 8000</span><span class="t-out">Message     : Completed computer boot policy processing for CONTOSO\PC-0533$ in 47 seconds.</span><span class="t-out">TimeCreated : 03/11/2026 8:01:56</span><span class="t-out">Id          : 5314</span><span class="t-out">Message     : A fast link was detected. The Estimated bandwidth is 94000 kbps. The slow link threshold is 500 kbps.</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>gpresult /scope computer /r | Select-String &#x27;vínculo lento|aplicó desde&#x27;</span><span class="t-out">    La directiva de grupo se aplicó desde:      DC01.contoso.local</span><span class="t-out">    Umbral de vínculo lento de directiva de grupo:   500 kbps</span></code></pre></figure>
+<ol><li><strong>La solución para los equipos de sobremesa</strong>: en una GPO de equipo de la OU de puestos, <em>Configuración del equipo › Plantillas administrativas › Sistema › Inicio de sesión › Esperar siempre a la red durante el inicio del equipo y el inicio de sesión</em> = <strong>Habilitada</strong>. El precio son unos segundos más en el arranque; a cambio, todo se aplica en un reinicio. Si la red tarda en estar lista (802.1X, tarjetas lentas), <em>Sistema › Directiva de grupo › Especificar el tiempo de espera de procesamiento de directivas de inicio</em> a 60 segundos.</li><li><strong>Los portátiles con wifi o VPN</strong>: aunque esperen, la red llega después de iniciar sesión o se mide como <strong>vínculo lento</strong> (por debajo de 500 kbps; <em>Configurar la detección de vínculos lentos de la directiva de grupo</em>). En vínculo lento, Instalación de software no se procesa por defecto. No se baja el umbral para forzarlo: el software de los portátiles va por Intune o MECM.</li><li><strong>&quot;Tarda horas&quot; en la otra planta</strong>: no es un fallo. El refresco en segundo plano es cada <strong>90 minutos con hasta 30 de margen aleatorio</strong>, y solo después de que el cambio se haya replicado al controlador de esa sede. Para probar, <code>gpupdate /force</code>; para varios equipos a la vez, en GPMC, clic derecho en la OU › <strong>Actualización de directiva de grupo</strong>. Si el evento 8000 da tiempos de minutos, el registro operativo dice qué extensión tarda (evento 5016 con milisegundos por extensión): a menudo un filtro WMI pesado o una impresora que no responde.</li></ol>
+<p>En el ticket: equipos, evento 1112, tiempos de 8000, la directiva añadida y la comprobación: 7-Zip instalado en el primer reinicio en los cinco equipos del piloto.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <a href="gpo-unidades-de-red-e-impresoras-con-preferencias-filtrado-y-una-unidad-que-no-aparece.html">unidades de red e impresoras con preferencias</a> es la primera de este tema y usa el mismo gpresult y el mismo registro operativo.</li><li>Las <a href="gpo-de-seguridad-base-ntlm-llmnr-smb-laps-y-despliegue-en-piloto.html">GPO de seguridad</a> traen sus propias plantillas (las de las Security Baselines) al mismo almacén central.</li><li>Para software con informes, versiones y portátiles fuera de la oficina, <a href="mecm-sccm-empaquetar-una-aplicacion-y-desplegarla.html">empaquetar y desplegar una aplicación con MECM</a>.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span></p>
+      <p class="repo-name"><span class="es">Nivel 2</span> · <span class="es">GPO: unidades, impresoras y preferencias</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
+      <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/19-ad-infra-health-check.html"><span class="label muted"><span class="es">Blog · 19</span></span><span class="related-t"><span class="es">Un chequeo de los lunes para Active Directory</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="glpi-inventario-con-glpi-agent-tickets-sla-y-un-equipo-que-deja-de-reportar.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">GLPI: inventario con GLPI Agent, tickets con SLA y un equipo que deja de reportar</span></span></a>
+    <a class="post-nav-link next" href="gpo-unidades-de-red-e-impresoras-con-preferencias-filtrado-y-una-unidad-que-no-aparece.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">GPO: unidades de red e impresoras con preferencias, filtrado por grupo, gpresult y una unidad que no aparece</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

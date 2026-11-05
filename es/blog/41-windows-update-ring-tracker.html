@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Anillos de Windows Update y go/no-go · Iñigo González</title>
+<meta name="description" content="A partir de los dispositivos y los anillos de actualización de Intune, los despliegues de Configuration Manager de los equipos en cogestión, los informes…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/blog/41-windows-update-ring-tracker.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/41-windows-update-ring-tracker.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/41-windows-update-ring-tracker.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/41-windows-update-ring-tracker.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Anillos de Windows Update y go/no-go · Iñigo González">
+<meta property="og:description" content="A partir de los dispositivos y los anillos de actualización de Intune, los despliegues de Configuration Manager de los equipos en cogestión, los informes…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/blog/41-windows-update-ring-tracker.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/41-windows-update-ring-tracker.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Anillos de Windows Update y go/no-go · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Un anillo pausado y olvidado y un piloto solo de informáticos: Windows Update, anillo a anillo","alternativeHeadline":"A paused ring nobody remembered and a pilot of IT staff: the Windows update rollout, ring by ring","description":"A partir de los dispositivos y los anillos de actualización de Intune, los despliegues de Configuration Manager de los equipos en cogestión, los informes de Windows Update for Business y el estado de versiones de Windows: cada anillo frente a su aplazamiento y su fecha límite, la puerta antes de la siguiente promoción, los equipos que van con retraso y por qué, los códigos de error por modelo, si el piloto se parece al resto del parque y el porcentaje con la compilación al día 7, 14 y 21 de los tres últimos meses.","datePublished":"2026-11-02","dateModified":"2026-11-02","inLanguage":"es","image":"https://inigogonzalezgarcia.github.io/assets/og/41-windows-update-ring-tracker.png","url":"https://inigogonzalezgarcia.github.io/es/blog/41-windows-update-ring-tracker.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/blog/41-windows-update-ring-tracker.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/es/blog/#blog"},"articleSection":"Herramientas de IT Ops"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/es/blog/"},{"@type":"ListItem","position":3,"name":"Un anillo pausado y olvidado y un piloto solo de informáticos: Windows Update, anillo a anillo","item":"https://inigogonzalezgarcia.github.io/es/blog/41-windows-update-ring-tracker.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span></a><a href="../guias.html"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../blog/41-windows-update-ring-tracker.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 41</p>
+    <h1><span class="es">Un anillo pausado y olvidado y un piloto solo de informáticos: Windows Update, anillo a anillo</span></h1>
+    <p class="lede"><span class="es">A partir de los dispositivos y los anillos de actualización de Intune, los despliegues de Configuration Manager de los equipos en cogestión, los informes de Windows Update for Business y el estado de versiones de Windows: cada anillo frente a su aplazamiento y su fecha límite, la puerta antes de la siguiente promoción, los equipos que van con retraso y por qué, los códigos de error por modelo, si el piloto se parece al resto del parque y el porcentaje con la compilación al día 7, 14 y 21 de los tres últimos meses.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span> · <span class="es">2 nov 2026</span> · <span class="es">5 min</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>El problema</h2>
+<p>Los anillos de actualización son temporizadores. El anillo general recibe la actualización diez días después del Patch Tuesday haya ido bien el piloto o no, y el informe que cuenta instalaciones no dice si el despliegue está bajo control. En un mes normal el anillo general arranca con el piloto todavía al 77%; el anillo tardío de la sala de trading se pausó tras una actualización problemática y nadie se acordó de él, así que cinco semanas después lleva dos meses de retraso y la pausa caduca sin que nadie haya decidido qué pasa después; sesenta puestos de trading están en el anillo general y se quedan sin audio en los cascos a la apertura del mercado; un modelo de portátil falla la actualización con el mismo código de error en un tercio de sus equipos; noventa equipos llevan esperando un reinicio desde antes de la fecha límite; una oficina entera deja de sincronizar el mismo día por la VPN; el piloto son nueve informáticos de cada diez; y el porcentaje de equipos con la compilación al día dos semanas después del Patch Tuesday baja tres meses seguidos. No es el seguimiento de cogestión que publiqué hace tiempo, que sigue el estado de cada carga de trabajo, ni la revisión del SLA de vulnerabilidades de hace unos días: sigue una actualización mensual a través de los anillos, y encaja con el calendario de cambios que he publicado hoy, porque promocionar un anillo es un cambio y merece una decisión como cualquier otro.</p>
+<h2>Qué he hecho</h2>
+<ul><li>Anillos y puertas: cada anillo frente a su fecha de oferta, su fecha límite y su periodo de gracia; la puerta entre anillos (el porcentaje del anillo anterior con la compilación, su tasa de fallos, los días desde que se le ofreció, incidentes P1 o P2 abiertos por la actualización y problemas conocidos que bloquean el siguiente anillo); anillos promocionados sin cumplir la puerta; el go/no-go de la siguiente promoción; anillos en pausa; y directivas que se apartan del estándar del anillo.</li><li>Equipos con retraso: sin la actualización pasada la fecha límite y la gracia, con un reinicio pendiente, sin sincronizar (por sede), sin anillo o en dos, en una versión de Windows 11 cerca del fin de servicio, o retenidos por una safeguard hold de la actualización de características.</li><li>Fallos y composición: códigos de error por modelo, equipos que fallan mes tras mes, incidentes asociados a la actualización, puestos de trading fuera del anillo tardío, un piloto al que le faltan los departamentos, modelos y sedes del anillo general, y anillos que no tienen el tamaño previsto.</li><li>Tendencia: el porcentaje con la actualización de cada mes al día 7, 14 y 21 del Patch Tuesday, la mediana de días hasta instalar por anillo y los equipos que van con retraso todos los meses.</li><li><code>report.html</code> con una línea temporal del mes que muestra la oferta, la fecha límite, la gracia, la pausa y las puertas de cada anillo; <code>rollout-pack.md</code> para la reunión mensual de parches o el CAB, con el go/no-go y una línea para la decisión; CSV de cada área; y un exportador de solo lectura en PowerShell para Microsoft Graph, los informes de Windows Update for Business en Log Analytics y Configuration Manager.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python solo con la librería estándar. Un equipo tiene la compilación al día cuando la revisión de su versión del sistema es la del Patch Tuesday del mes o posterior; su anillo sale de los grupos o colecciones a los que están asignadas sus directivas, y los equipos en cogestión siguen el despliegue de Configuration Manager cuando la carga de trabajo de Windows Update no ha pasado a Intune; y cada equipo se mide con su propia fecha límite y su gracia, así que uno que aún está dentro de su plazo no cuenta como retrasado. La demo es una empresa inventada con sala de trading y 1.500 equipos con Windows 11 en cuatro ciudades europeas, revisada veinte días después del Patch Tuesday de octubre, con las compilaciones, los KB, las fechas de fin de servicio y los problemas conocidos reales del estado de versiones de Windows, y los problemas puestos a propósito. 13 tests, un runbook para el ciclo mensual y la reunión de parches, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.</p>
+<h2>Qué aprendí</h2>
+<p>De dirigir la migración a Windows 11 de una oficina con sala de trading; de gestionar Intune y MECM en cogestión, con empaquetado de aplicaciones en SCCM, PDQ y MDT, Endpoint Privilege Management, BitLocker y Microsoft Defender; de años automatizando con PowerShell y Microsoft Graph; y de la gestión de versiones, con su planificación, pruebas, marcha atrás y validación después de cada versión, y del CAB como responsable del proceso de cambios, dando soporte a unos 2.500 usuarios en oficinas europeas. Las lecciones que hay detrás de la herramienta son que el aplazamiento dice cuándo puede recibir un anillo la actualización y solo una puerta dice si debe; que una pausa es un reloj que se acaba solo; que el anillo tardío solo protege a los equipos que de verdad están en él; que un piloto de informáticos prueba las aplicaciones de informática; que una sede entera sin sincronizar es la red, no los usuarios; que un código de error en un modelo es una configuración base que se arregla una vez, no equipos que se reparan uno a uno; que una actualización instalada que espera un reinicio no protege nada; y que la medida de verdad es el porcentaje con la compilación al día 14 y 21, mes tras mes.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Ejecutar la exportación y la revisión de forma programada después del Patch Tuesday y antes de cada promoción, y publicar la puerta en el canal de parches.</li><li>Leer las compilaciones y los problemas conocidos desde la API de Windows Updates de Microsoft Graph en lugar de copiarlos.</li><li>Añadir las actualizaciones de controladores y firmware por modelo como una categoría propia.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span></p>
+      <p class="repo-name">41-windows-update-ring-tracker</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/41-windows-update-ring-tracker" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="es">Compartir</span></p>
+        <div class="share-row es" lang="es"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F41-windows-update-ring-tracker.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F41-windows-update-ring-tracker.html&amp;text=Un%20anillo%20pausado%20y%20olvidado%20y%20un%20piloto%20solo%20de%20inform%C3%A1ticos%3A%20Windows%20Update%2C%20anillo%20a%20anillo%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">X</a><a class="share-btn" href="https://wa.me/?text=Un%20anillo%20pausado%20y%20olvidado%20y%20un%20piloto%20solo%20de%20inform%C3%A1ticos%3A%20Windows%20Update%2C%20anillo%20a%20anillo%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F41-windows-update-ring-tracker.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=Un%20anillo%20pausado%20y%20olvidado%20y%20un%20piloto%20solo%20de%20inform%C3%A1ticos%3A%20Windows%20Update%2C%20anillo%20a%20anillo%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F41-windows-update-ring-tracker.html" aria-label="Compartir en Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/es/blog/41-windows-update-ring-tracker.html" data-copied="Enlace copiado">Copiar enlace</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/es/blog/41-windows-update-ring-tracker.html" data-title="Un anillo pausado y olvidado y un piloto solo de informáticos: Windows Update, anillo a anillo" hidden>Más…</button></div>
+        
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="18-mecm-intune-comanagement-tracker.html"><span class="label muted"><span class="es">Blog · 18</span></span><span class="related-t"><span class="es">Un go/no-go para el siguiente paso del slider de co-management</span></span></a><a class="related-link" href="02-intune-compliance-report.html"><span class="label muted"><span class="es">Blog · 02</span></span><span class="related-t"><span class="es">Un informe de cumplimiento de Intune que se puede enseñar a dirección</span></span></a><a class="related-link" href="../guias/windows-11-actualizaciones-que-fallan-o-se-deshacen-historial-registros-dism-sfc-y-reinicio-de-componentes.html"><span class="label muted"><span class="es">Guía · Nivel 1</span></span><span class="related-t"><span class="es">Windows 11: actualizaciones que fallan o se deshacen, historial y códigos de error, registros, DISM, SFC y reinicio de componentes</span></span></a><a class="related-link" href="../guias/windows-11-perfil-temporal-o-danado-diagnostico-reparacion-y-datos-del-usuario.html"><span class="label muted"><span class="es">Guía · Nivel 1</span></span><span class="related-t"><span class="es">Windows 11: perfil temporal o dañado, diagnóstico, reparación segura y los datos del usuario</span></span></a><a class="related-link" href="../guias/windows-diagnostico-basico-equipo-lento-o-con-errores.html"><span class="label muted"><span class="es">Guía · Nivel 1</span></span><span class="related-t"><span class="es">Windows 10 y 11: diagnóstico básico de un equipo lento, con errores o que no sincroniza con Intune</span></span></a><a class="related-link" href="../guias/mecm-sccm-empaquetar-una-aplicacion-y-desplegarla.html"><span class="label muted"><span class="es">Guía · Nivel 2</span></span><span class="related-t"><span class="es">MECM / SCCM: empaquetar una aplicación y desplegarla a una colección</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="40-change-calendar-risk-review.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Dos cambios la misma noche y un parche en pleno cierre de mes: el calendario de cambios antes del CAB</span></span></a>
+    <a class="post-nav-link next" href="42-retail-store-it-health.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">Una tienda que salta al 4G nueve veces en una semana y un córner sin línea: el IT de una cadena de tiendas</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

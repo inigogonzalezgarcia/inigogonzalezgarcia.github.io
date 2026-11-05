@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Nivel 1 · Primeros pasos · Guías IT · Iñigo González</title>
+<meta name="description" content="Guías de soporte IT para empezar: Active Directory, Android, BitLocker, AnyConnect, impresoras, iPhone, Jira, Microsoft 365, Teams, Outlook y Windows.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/nivel-1.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/nivel-1.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/nivel-1.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/nivel-1.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nivel 1 · Primeros pasos · Guías IT · Iñigo González">
+<meta property="og:description" content="Guías de soporte IT para empezar: Active Directory, Android, BitLocker, AnyConnect, impresoras, iPhone, Jira, Microsoft 365, Teams, Outlook y Windows.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/nivel-1.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-nivel-1.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Nivel 1 · Primeros pasos · Guías IT · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","@id":"https://inigogonzalezgarcia.github.io/es/guias/nivel-1.html","url":"https://inigogonzalezgarcia.github.io/es/guias/nivel-1.html","name":"Nivel 1 · Primeros pasos","inLanguage":"es","isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/#website"},"hasPart":[{"@type":"TechArticle","headline":"Alta de un usuario en Active Directory y sus grupos","url":"https://inigogonzalezgarcia.github.io/es/guias/active-directory-alta-usuario-grupos.html"},{"@type":"TechArticle","headline":"Enrolar un Android con perfil de trabajo en Intune","url":"https://inigogonzalezgarcia.github.io/es/guias/android-perfil-de-trabajo-intune.html"},{"@type":"TechArticle","headline":"BitLocker: comprobar el cifrado y recuperar un equipo que pide la clave","url":"https://inigogonzalezgarcia.github.io/es/guias/bitlocker-estado-y-clave-de-recuperacion.html"},{"@type":"TechArticle","headline":"Cisco AnyConnect: instalar el cliente y diagnosticar una VPN que no conecta","url":"https://inigogonzalezgarcia.github.io/es/guias/anyconnect-instalar-y-diagnosticar-vpn.html"},{"@type":"TechArticle","headline":"Impresoras: instalar una impresora de red y desatascar la cola","url":"https://inigogonzalezgarcia.github.io/es/guias/impresoras-instalar-impresora-de-red-y-cola-atascada.html"},{"@type":"TechArticle","headline":"iPhone y iPad: enrolar en Intune y comprobar que llegan las políticas","url":"https://inigogonzalezgarcia.github.io/es/guias/iphone-ipad-enrolar-en-intune.html"},{"@type":"TechArticle","headline":"Jira Service Management: un ticket bien hecho, de principio a fin","url":"https://inigogonzalezgarcia.github.io/es/guias/jira-service-management-un-ticket-bien-hecho.html"},{"@type":"TechArticle","headline":"Microsoft 365: asignar y retirar licencias, y saber qué incluye cada una","url":"https://inigogonzalezgarcia.github.io/es/guias/microsoft-365-asignar-y-retirar-licencias.html"},{"@type":"TechArticle","headline":"Microsoft Teams: los cinco problemas que más llegan y cómo resolverlos","url":"https://inigogonzalezgarcia.github.io/es/guias/teams-los-problemas-mas-comunes.html"},{"@type":"TechArticle","headline":"Outlook y Exchange Online: buzón compartido, permisos y respuesta automática","url":"https://inigogonzalezgarcia.github.io/es/guias/outlook-exchange-online-buzon-compartido-permisos-autorespuesta.html"},{"@type":"TechArticle","headline":"Exchange Online: buzón lleno, cuotas, archivo en línea, directiva de retención y el NDR 5.2.2","url":"https://inigogonzalezgarcia.github.io/es/guias/outlook-exchange-online-buzon-lleno-cuotas-archivo-en-linea-y-ndr-5-2-2.html"},{"@type":"TechArticle","headline":"Windows 11: actualizaciones que fallan o se deshacen, historial y códigos de error, registros, DISM, SFC y reinicio de componentes","url":"https://inigogonzalezgarcia.github.io/es/guias/windows-11-actualizaciones-que-fallan-o-se-deshacen-historial-registros-dism-sfc-y-reinicio-de-componentes.html"},{"@type":"TechArticle","headline":"Windows 11: perfil temporal o dañado, diagnóstico, reparación segura y los datos del usuario","url":"https://inigogonzalezgarcia.github.io/es/guias/windows-11-perfil-temporal-o-danado-diagnostico-reparacion-y-datos-del-usuario.html"},{"@type":"TechArticle","headline":"Windows 10 y 11: diagnóstico básico de un equipo lento, con errores o que no sincroniza con Intune","url":"https://inigogonzalezgarcia.github.io/es/guias/windows-diagnostico-basico-equipo-lento-o-con-errores.html"}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Nivel 1","item":"https://inigogonzalezgarcia.github.io/es/guias/nivel-1.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/nivel-1.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <span class="es">Nivel 1</span></p>
+    <h1><span class="es">Primeros pasos<br>en soporte IT.</span></h1>
+    <p class="lede"><span class="es">Once temas para empezar: el puesto, el usuario y sus herramientas. Paso a paso, con los comandos y las comprobaciones que harías en un ticket real.</span></p><p class="label post-meta"><span class="es">14 guías · ES/EN · ejemplos ficticios</span></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="sr-only"><span class="es">Temas y guías</span></h2>
+    <div class="guide-levels three">
+      <div class="guide-level reveal" id="active-directory"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">Active Directory: usuarios y grupos</span></h3><p class="muted small"><span class="es">Altas, bajas, grupos y las incidencias de cada día: cuentas bloqueadas y contraseñas.</span></p><ul class="guide-topics guide-list"><li><a href="active-directory-alta-usuario-grupos.html"><span class="es">Alta de un usuario en Active Directory y sus grupos</span></a><span class="muted small"><span class="es">Crear la cuenta, ponerla en la OU correcta, añadir los grupos y comprobar que todo está bien antes de avisar al usuario.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="android"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">Android</span></h3><p class="muted small"><span class="es">Móviles corporativos y perfil de trabajo con Intune.</span></p><ul class="guide-topics guide-list"><li><a href="android-perfil-de-trabajo-intune.html"><span class="es">Enrolar un Android con perfil de trabajo en Intune</span></a><span class="muted small"><span class="es">Qué le pides al usuario, qué hace el Portal de empresa y cómo compruebas que el perfil de trabajo recibe las políticas y las aplicaciones.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="bitlocker"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">BitLocker</span></h3><p class="muted small"><span class="es">Cifrado del disco, claves de recuperación y qué hacer cuando un equipo pide la clave.</span></p><ul class="guide-topics guide-list"><li><a href="bitlocker-estado-y-clave-de-recuperacion.html"><span class="es">BitLocker: comprobar el cifrado y recuperar un equipo que pide la clave</span></a><span class="muted small"><span class="es">Ver si el disco está cifrado, dónde está guardada la clave de recuperación y qué hacer cuando un portátil arranca en la pantalla azul de BitLocker.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="anyconnect"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">Cisco AnyConnect (VPN)</span></h3><p class="muted small"><span class="es">Instalar el cliente, conectar y diagnosticar los fallos más habituales.</span></p><ul class="guide-topics guide-list"><li><a href="anyconnect-instalar-y-diagnosticar-vpn.html"><span class="es">Cisco AnyConnect: instalar el cliente y diagnosticar una VPN que no conecta</span></a><span class="muted small"><span class="es">Instalar Secure Client, conectar, y seguir un orden fijo cuando falla: red, DNS, certificado, credenciales o el propio cliente.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="impresoras"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">Impresoras y periféricos</span></h3><p class="muted small"><span class="es">Instalar una impresora de red, colas atascadas y periféricos que no responden.</span></p><ul class="guide-topics guide-list"><li><a href="impresoras-instalar-impresora-de-red-y-cola-atascada.html"><span class="es">Impresoras: instalar una impresora de red y desatascar la cola</span></a><span class="muted small"><span class="es">Añadir una impresora por IP o desde el servidor de impresión, y los tres arreglos que resuelven casi todas las incidencias de impresión.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="ios"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">iPhone y iPad</span></h3><p class="muted small"><span class="es">Enrolar un dispositivo Apple en Intune y comprobar que recibe las políticas.</span></p><ul class="guide-topics guide-list"><li><a href="iphone-ipad-enrolar-en-intune.html"><span class="es">iPhone y iPad: enrolar en Intune y comprobar que llegan las políticas</span></a><span class="muted small"><span class="es">El camino del usuario con el Portal de empresa, qué cambia si el dispositivo viene por Apple Business Manager, y cómo verificar correo, Wi-Fi y apps.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="jira"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">Jira Service Management: tickets</span></h3><p class="muted small"><span class="es">Abrir, clasificar, trabajar y cerrar un ticket de forma que ayude al siguiente.</span></p><ul class="guide-topics guide-list"><li><a href="jira-service-management-un-ticket-bien-hecho.html"><span class="es">Jira Service Management: un ticket bien hecho, de principio a fin</span></a><span class="muted small"><span class="es">Clasificar, priorizar, escribir para el siguiente, escalar y cerrar. Y las búsquedas JQL que usarás cada día.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="m365"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">Microsoft 365 y licencias</span></h3><p class="muted small"><span class="es">Asignar y retirar licencias, y saber qué incluye cada una.</span></p><ul class="guide-topics guide-list"><li><a href="microsoft-365-asignar-y-retirar-licencias.html"><span class="es">Microsoft 365: asignar y retirar licencias, y saber qué incluye cada una</span></a><span class="muted small"><span class="es">Desde el centro de administración y desde PowerShell con Microsoft Graph, con los errores típicos y la baja de un usuario sin perder su buzón.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="teams"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">Microsoft Teams</span></h3><p class="muted small"><span class="es">Los problemas que más llegan al service desk y cómo resolverlos en minutos.</span></p><ul class="guide-topics guide-list"><li><a href="teams-los-problemas-mas-comunes.html"><span class="es">Microsoft Teams: los cinco problemas que más llegan y cómo resolverlos</span></a><span class="muted small"><span class="es">No abre o va lento, no se oye, el estado no cambia, no aparece un equipo o un canal, y la cámara no funciona en la reunión.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="outlook"><p class="label kicker"><span class="es">2 guías</span></p><h3><span class="es">Outlook y Exchange Online</span></h3><p class="muted small"><span class="es">Buzones compartidos, permisos, respuestas automáticas y perfiles que no abren.</span></p><ul class="guide-topics guide-list"><li><a href="outlook-exchange-online-buzon-compartido-permisos-autorespuesta.html"><span class="es">Outlook y Exchange Online: buzón compartido, permisos y respuesta automática</span></a><span class="muted small"><span class="es">Las tres peticiones de correo más frecuentes resueltas con PowerShell, y qué hacer con un Outlook que no abre o no sincroniza.</span></span></li><li><a href="outlook-exchange-online-buzon-lleno-cuotas-archivo-en-linea-y-ndr-5-2-2.html"><span class="es">Exchange Online: buzón lleno, cuotas, archivo en línea, directiva de retención y el NDR 5.2.2</span></a><span class="muted small"><span class="es">Cuánto ocupa un buzón y cuánto le permite su licencia, qué carpetas lo llenan, la carpeta Elementos recuperables y su cuota, el archivo en línea con la directiva MRM que mueve lo antiguo, el archivo de expansión automática y un usuario al que los clientes le rebotan los correos con 554 5.2.2 mailbox full.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="windows"><p class="label kicker"><span class="es">3 guías</span></p><h3><span class="es">Windows 10 y 11</span></h3><p class="muted small"><span class="es">Diagnóstico básico de un equipo: lento, con errores o que no sincroniza con Intune.</span></p><ul class="guide-topics guide-list"><li><a href="windows-11-actualizaciones-que-fallan-o-se-deshacen-historial-registros-dism-sfc-y-reinicio-de-componentes.html"><span class="es">Windows 11: actualizaciones que fallan o se deshacen, historial y códigos de error, registros, DISM, SFC y reinicio de componentes</span></a><span class="muted small"><span class="es">Leer el historial de Windows Update y sus códigos (0x800f081f, 0x80070002, 0x800f0922), generar WindowsUpdate.log, buscar en CBS.log, reparar el almacén de componentes con DISM (con origen sin conexión) y SFC, reiniciar los componentes sin romper nada, hacer sitio y el ticket del equipo que dice «Deshaciendo cambios» cada noche.</span></span></li><li><a href="windows-11-perfil-temporal-o-danado-diagnostico-reparacion-y-datos-del-usuario.html"><span class="es">Windows 11: perfil temporal o dañado, diagnóstico, reparación segura y los datos del usuario</span></a><span class="muted small"><span class="es">El usuario entra y no tiene escritorio ni archivos: reconocer un perfil temporal, leer los eventos del servicio de perfiles, las claves .bak de ProfileList, la reparación sin perder nada, un perfil nuevo con los datos copiados, OneDrive y cómo evitar que se repita.</span></span></li><li><a href="windows-diagnostico-basico-equipo-lento-o-con-errores.html"><span class="es">Windows 10 y 11: diagnóstico básico de un equipo lento, con errores o que no sincroniza con Intune</span></a><span class="muted small"><span class="es">Diez minutos de comprobaciones con un orden fijo: versión y actualizaciones, disco y memoria, integridad del sistema, eventos, y el estado de Entra ID e Intune.</span></span></li></ul></div>
+    </div>
+    <div class="numbers-head reveal u-mt34">
+      <div>
+        <p class="label kicker"><span class="es">Cómo están hechas</span></p>
+        <h2 class="h2 sm"><span class="es">Terminales y ventanas<br>simuladas.</span></h2>
+      </div>
+    </div>
+    <p class="lede reveal"><span class="es">Las guías no llevan capturas de sistemas reales: los terminales y las ventanas que ves son simulaciones con nombres, dominios y usuarios ficticios. Los comandos sí son los de verdad, y cada terminal tiene un botón para copiarlos.</span></p>
+    <p class="reveal u-mt22"><a class="arrow-link" href="nivel-2.html"><span class="es">Nivel 2: Base sólida</span> →</a> · <a class="arrow-link" href="nivel-3.html"><span class="es">Nivel 3: Avanzado</span> →</a> · <a class="arrow-link" href="nivel-4.html"><span class="es">Nivel 4: Experto</span> →</a> · <a class="arrow-link" href="sector-1.html"><span class="es">Sector 1: Hostelería y punto de venta</span> →</a> · <a class="arrow-link" href="sector-2.html"><span class="es">Sector 2: Retail y oficinas corporativas</span> →</a> · <a class="arrow-link" href="sector-3.html"><span class="es">Sector 3: Sanidad y plataformas críticas</span> →</a> · <a class="arrow-link" href="sector-4.html"><span class="es">Sector 4: Industria multinacional</span> →</a> · <a class="arrow-link" href="sector-5.html"><span class="es">Sector 5: Servicios financieros y trading</span> →</a> · <a class="arrow-link" href="../guias.html"><span class="es">Todos los niveles</span> →</a></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

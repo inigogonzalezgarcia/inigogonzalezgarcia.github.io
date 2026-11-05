@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="no-js inner" data-title-en="Ansible: a playbook to patch Linux servers · Iñigo González" data-title-es="Ansible: playbook para parchear Linux · Iñigo González">
+<html lang="en" class="no-js inner">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -16,6 +16,9 @@
 <meta name="author" content="Iñigo González">
 <meta name="theme-color" content="#0e1a24">
 <link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/ansible-primer-playbook-parchear-servidores-linux.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/ansible-primer-playbook-parchear-servidores-linux.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/ansible-primer-playbook-parchear-servidores-linux.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/ansible-primer-playbook-parchear-servidores-linux.html">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <meta property="og:site_name" content="Iñigo González">
@@ -36,7 +39,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Ansible: your first playbook to patch Linux servers one at a time","alternativeHeadline":"Ansible: el primer playbook para parchear servidores Linux uno a uno","description":"Inventory, SSH connection, a playbook that updates, reboots only when needed and checks the service, run one server at a time with `serial`.","datePublished":"2026-10-22","dateModified":"2026-10-22","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/ansible-primer-playbook-parchear-servidores-linux.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/ansible-primer-playbook-parchear-servidores-linux.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Ansible"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 3","item":"https://inigogonzalezgarcia.github.io/guias/nivel-3.html"},{"@type":"ListItem","position":4,"name":"Ansible: your first playbook to patch Linux servers one at a time","item":"https://inigogonzalezgarcia.github.io/guias/ansible-primer-playbook-parchear-servidores-linux.html"}]}]}</script>
 </head>
 <body id="top">
-<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
 
 <header class="site-header">
   <div class="wrap">
@@ -44,11 +47,11 @@
       <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
       <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
     </a>
-    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/"><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
     <div class="head-actions">
-      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
       <span class="sep" aria-hidden="true"></span>
-      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+      <a class="lang-btn" id="langBtn" href="../es/guias/ansible-primer-playbook-parchear-servidores-linux.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
     </div>
   </div>
 </header>
@@ -56,52 +59,29 @@
 <div class="menu" id="menu" aria-hidden="true">
   <div class="menu-top">
     <span class="label">Iñigo González</span>
-    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
   </div>
-  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
     <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
     <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
-    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
   </div>
 </div>
 
 <main id="main">
 <section class="page-hero post-hero">
   <div class="wrap">
-    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="nivel-3.html"><span class="es">Nivel 3</span><span class="en">Level 3</span></a></p>
-    <h1><span class="es">Ansible: el primer playbook para parchear servidores Linux uno a uno</span><span class="en">Ansible: your first playbook to patch Linux servers one at a time</span></h1>
-    <p class="lede"><span class="es">Inventario, conexión por SSH, un playbook que actualiza, reinicia solo si hace falta y comprueba el servicio, ejecutado servidor a servidor con `serial`.</span><span class="en">Inventory, SSH connection, a playbook that updates, reboots only when needed and checks the service, run one server at a time with `serial`.</span></p><p class="label post-meta"><span class="es">Nivel 3</span><span class="en">Level 3</span> · <span class="es">Ansible</span><span class="en">Ansible</span> · <span class="es">4 min</span><span class="en">4 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">22 oct 2026</span><span class="en">22 Oct 2026</span></p>
+    <p class="label kicker"><a href="../guias.html"><span class="en">Guides</span></a> · <a href="nivel-3.html"><span class="en">Level 3</span></a></p>
+    <h1><span class="en">Ansible: your first playbook to patch Linux servers one at a time</span></h1>
+    <p class="lede"><span class="en">Inventory, SSH connection, a playbook that updates, reboots only when needed and checks the service, run one server at a time with `serial`.</span></p><p class="label post-meta"><span class="en">Level 3</span> · <span class="en">Ansible</span> · <span class="en">4 min read</span> · <span class="en">Updated</span> <span class="en">22 Oct 2026</span></p>
   </div>
 </section>
 
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose guide">
-      <div class="es" lang="es">
-<h2>Qué vas a conseguir</h2>
-<p>Sustituir el parcheo manual de la guía de RHEL y Ubuntu por un playbook que hace lo mismo en todos los servidores, en orden, parando si uno falla. Al terminar tendrás un repositorio con el inventario, el playbook y la salida de la primera ejecución para el ticket de cambio.</p>
-<h2>Antes de empezar</h2>
-<ul><li>Una máquina de control con Python 3 y acceso SSH a los servidores (tu portátil Linux/macOS, WSL o una VM pequeña).</li><li>Una clave SSH desplegada en los servidores para un usuario con <code>sudo</code> sin contraseña (o con contraseña: Ansible la pide con <code>-K</code>).</li><li>Los servidores en la guía de Git del Nivel 2: el playbook es código y va bajo control de versiones desde el primer día.</li></ul>
-<h2>1. Instalar y comprobar la conexión</h2>
-<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">bash · máquina de control</span><button class="t-copy" type="button" data-copy="python3 -m pip install --user ansible&#10;ansible --version | head -1&#10;mkdir -p ~/ops/ansible &amp;&amp; cd ~/ops/ansible&#10;cat &gt; inventory.ini &lt;&lt;&#x27;EOF&#x27;&#10;ansible linux -i inventory.ini -m ping" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>python3 -m pip install --user ansible</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>ansible --version | head -1</span><span class="t-out">ansible [core 2.17.4]</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>mkdir -p ~/ops/ansible &amp;&amp; cd ~/ops/ansible</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>cat &gt; inventory.ini &lt;&lt;&#x27;EOF&#x27;</span><span class="t-out">[web]</span><span class="t-out">srv-web-01.contoso.local</span><span class="t-out">srv-web-02.contoso.local</span><span class="t-out"> </span><span class="t-out">[db]</span><span class="t-out">srv-db-01.contoso.local</span><span class="t-out"> </span><span class="t-out">[linux:children]</span><span class="t-out">web</span><span class="t-out">db</span><span class="t-out"> </span><span class="t-out">[linux:vars]</span><span class="t-out">ansible_user=ansible</span><span class="t-out">ansible_become=true</span><span class="t-out">EOF</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>ansible linux -i inventory.ini -m ping</span><span class="t-out">srv-web-01.contoso.local | SUCCESS =&gt; {&quot;changed&quot;: false, &quot;ping&quot;: &quot;pong&quot;}</span><span class="t-out">srv-web-02.contoso.local | SUCCESS =&gt; {&quot;changed&quot;: false, &quot;ping&quot;: &quot;pong&quot;}</span><span class="t-out">srv-db-01.contoso.local | SUCCESS =&gt; {&quot;changed&quot;: false, &quot;ping&quot;: &quot;pong&quot;}</span></code></pre></figure>
-<p><code>ping</code> aquí no es ICMP: es &quot;me conecto por SSH y encuentro Python&quot;. Si uno falla, prueba <code>ssh ansible@srv-db-01.contoso.local</code> a mano antes de buscar en Ansible.</p>
-<h2>2. Comandos sueltos antes del playbook</h2>
-<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">bash · máquina de control</span><button class="t-copy" type="button" data-copy="ansible linux -i inventory.ini -m shell -a &quot;uptime; df -h / | tail -1&quot;&#10;ansible web -i inventory.ini -m service -a &quot;name=httpd state=started&quot; --check" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>ansible linux -i inventory.ini -m shell -a &quot;uptime; df -h / | tail -1&quot;</span><span class="t-out">srv-web-01.contoso.local | CHANGED | rc=0 &gt;&gt;</span><span class="t-out"> 08:12:03 up 41 days,  2:17,  0 users,  load average: 0.08, 0.05, 0.01</span><span class="t-out">/dev/mapper/rhel-root   50G   31G   20G  62% /</span><span class="t-out">...</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>ansible web -i inventory.ini -m service -a &quot;name=httpd state=started&quot; --check</span><span class="t-out">srv-web-01.contoso.local | SUCCESS =&gt; {&quot;changed&quot;: false, &quot;name&quot;: &quot;httpd&quot;, &quot;state&quot;: &quot;started&quot;}</span></code></pre></figure>
-<p><code>--check</code> es el modo ensayo: dice qué cambiaría sin tocar nada. Úsalo siempre la primera vez.</p>
-<h2>3. El playbook de parcheo</h2>
-<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">patch.yml</span><button class="t-copy" type="button" data-copy="---&#10;- name: Parcheo mensual de servidores Linux&#10;  hosts: linux&#10;  serial: 1&#10;  max_fail_percentage: 0&#10;  tasks:&#10;    - name: Actualizar paquetes (RHEL)&#10;      ansible.builtin.dnf:&#10;        name: &quot;*&quot;&#10;        state: latest&#10;      when: ansible_os_family == &quot;RedHat&quot;&#10;      register: dnf_result&#10;&#10;    - name: Actualizar paquetes (Ubuntu)&#10;      ansible.builtin.apt:&#10;        upgrade: dist&#10;        update_cache: true&#10;      when: ansible_os_family == &quot;Debian&quot;&#10;      register: apt_result&#10;&#10;    - name: ¿Hace falta reiniciar? (RHEL)&#10;      ansible.builtin.command: needs-restarting -r&#10;      register: nr&#10;      failed_when: nr.rc not in [0, 1]&#10;      changed_when: false&#10;      when: ansible_os_family == &quot;RedHat&quot;&#10;&#10;    - name: ¿Hace falta reiniciar? (Ubuntu)&#10;      ansible.builtin.stat:&#10;        path: /var/run/reboot-required&#10;      register: rr&#10;      when: ansible_os_family == &quot;Debian&quot;&#10;&#10;    - name: Reiniciar solo si hace falta&#10;      ansible.builtin.reboot:&#10;        reboot_timeout: 600&#10;      when: (nr.rc is defined and nr.rc == 1) or (rr.stat is defined and rr.stat.exists)&#10;&#10;    - name: Comprobar que el servicio principal está activo&#10;      ansible.builtin.service_facts:&#10;&#10;    - name: Fallar si httpd no está corriendo en los web&#10;      ansible.builtin.assert:&#10;        that: ansible_facts.services[&#x27;httpd.service&#x27;].state == &#x27;running&#x27;&#10;        fail_msg: &quot;httpd no arrancó tras el parcheo&quot;&#10;      when: &quot;&#x27;web&#x27; in group_names&quot;" data-copied="Copiado">Copiar</button></figcaption><pre class="t-body"><code><span class="t-out">---</span><span class="t-out">- name: Parcheo mensual de servidores Linux</span><span class="t-out">  hosts: linux</span><span class="t-out">  serial: 1</span><span class="t-out">  max_fail_percentage: 0</span><span class="t-out">  tasks:</span><span class="t-out">    - name: Actualizar paquetes (RHEL)</span><span class="t-out">      ansible.builtin.dnf:</span><span class="t-out">        name: &quot;*&quot;</span><span class="t-out">        state: latest</span><span class="t-out">      when: ansible_os_family == &quot;RedHat&quot;</span><span class="t-out">      register: dnf_result</span><span class="t-out"> </span><span class="t-out">    - name: Actualizar paquetes (Ubuntu)</span><span class="t-out">      ansible.builtin.apt:</span><span class="t-out">        upgrade: dist</span><span class="t-out">        update_cache: true</span><span class="t-out">      when: ansible_os_family == &quot;Debian&quot;</span><span class="t-out">      register: apt_result</span><span class="t-out"> </span><span class="t-out">    - name: ¿Hace falta reiniciar? (RHEL)</span><span class="t-out">      ansible.builtin.command: needs-restarting -r</span><span class="t-out">      register: nr</span><span class="t-out">      failed_when: nr.rc not in [0, 1]</span><span class="t-out">      changed_when: false</span><span class="t-out">      when: ansible_os_family == &quot;RedHat&quot;</span><span class="t-out"> </span><span class="t-out">    - name: ¿Hace falta reiniciar? (Ubuntu)</span><span class="t-out">      ansible.builtin.stat:</span><span class="t-out">        path: /var/run/reboot-required</span><span class="t-out">      register: rr</span><span class="t-out">      when: ansible_os_family == &quot;Debian&quot;</span><span class="t-out"> </span><span class="t-out">    - name: Reiniciar solo si hace falta</span><span class="t-out">      ansible.builtin.reboot:</span><span class="t-out">        reboot_timeout: 600</span><span class="t-out">      when: (nr.rc is defined and nr.rc == 1) or (rr.stat is defined and rr.stat.exists)</span><span class="t-out"> </span><span class="t-out">    - name: Comprobar que el servicio principal está activo</span><span class="t-out">      ansible.builtin.service_facts:</span><span class="t-out"> </span><span class="t-out">    - name: Fallar si httpd no está corriendo en los web</span><span class="t-out">      ansible.builtin.assert:</span><span class="t-out">        that: ansible_facts.services[&#x27;httpd.service&#x27;].state == &#x27;running&#x27;</span><span class="t-out">        fail_msg: &quot;httpd no arrancó tras el parcheo&quot;</span><span class="t-out">      when: &quot;&#x27;web&#x27; in group_names&quot;</span></code></pre></figure>
-<p>Lo importante está en tres líneas: <code>serial: 1</code> (un servidor a la vez), <code>max_fail_percentage: 0</code> (si uno falla, se para todo) y el <code>reboot</code> condicionado. <code>needs-restarting -r</code> devuelve 1 cuando hace falta reiniciar, por eso se acepta como código válido.</p>
-<h2>4. Ejecutar: ensayo, real y evidencia</h2>
-<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">bash · máquina de control</span><button class="t-copy" type="button" data-copy="ansible-playbook -i inventory.ini patch.yml --check --diff&#10;ansible-playbook -i inventory.ini patch.yml | tee logs/patch-2026-10.log" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>ansible-playbook -i inventory.ini patch.yml --check --diff</span><span class="t-out">PLAY [Parcheo mensual de servidores Linux] ************************************</span><span class="t-out">TASK [Actualizar paquetes (RHEL)] *********************************************</span><span class="t-out">changed: [srv-web-01.contoso.local]</span><span class="t-out">...</span><span class="t-out">PLAY RECAP ********************************************************************</span><span class="t-out">srv-web-01.contoso.local : ok=5 changed=1 unreachable=0 failed=0 skipped=3</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>ansible-playbook -i inventory.ini patch.yml | tee logs/patch-2026-10.log</span><span class="t-out">...</span><span class="t-out">TASK [Reiniciar solo si hace falta] *******************************************</span><span class="t-out">changed: [srv-web-01.contoso.local]</span><span class="t-out">TASK [Fallar si httpd no está corriendo en los web] ***************************</span><span class="t-out">ok: [srv-web-01.contoso.local]</span><span class="t-out">PLAY RECAP ********************************************************************</span><span class="t-out">srv-web-01.contoso.local : ok=7 changed=2 unreachable=0 failed=0 skipped=2</span><span class="t-out">srv-web-02.contoso.local : ok=7 changed=2 unreachable=0 failed=0 skipped=2</span><span class="t-out">srv-db-01.contoso.local  : ok=6 changed=1 unreachable=0 failed=0 skipped=3</span></code></pre></figure>
-<p>El <code>PLAY RECAP</code> con <code>failed=0</code> y el log con <code>tee</code> son la evidencia que adjuntas al ticket de cambio. Si un servidor falla, Ansible se detiene ahí y los siguientes quedan sin tocar: eso es lo que quieres en una ventana de parcheo.</p>
-<p class="g-tip">Consejo: <code>ansible-playbook ... --limit srv-web-01.contoso.local</code> ejecuta el mismo playbook en uno solo. Es la forma de probar en el servidor menos crítico antes de la ventana.</p>
-<h2>5. Lo que apuntas en el ticket</h2>
-<ul><li>Versión del playbook (el commit de Git), inventario usado y la fecha.</li><li>El <code>PLAY RECAP</code> completo y qué servidores se reiniciaron.</li><li>Si alguno falló: el error de la tarea y qué se hizo a mano.</li></ul>
-<h2>Siguientes pasos</h2>
-<ul><li>Separa variables por entorno (<code>group_vars/web.yml</code>) y guarda secretos con <code>ansible-vault</code>, nunca en claro en el repo.</li><li>Con Windows, Ansible funciona por WinRM o SSH con los módulos <code>ansible.windows.*</code>: el mismo playbook, otro inventario.</li><li>El siguiente paso natural es un rol: <code>ansible-galaxy init roles/baseline</code> para la configuración base de un servidor nuevo (usuarios, NTP, firewall, agente de monitorización).</li></ul>
-<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
-      </div>
+      
       <div class="en" lang="en">
 <h2>What you&#x27;ll get</h2>
 <p>Replace the manual patching from the RHEL and Ubuntu guides with a playbook that does the same on every server, in order, stopping if one fails. By the end you will have a repository with the inventory, the playbook and the output of the first run for the change ticket.</p>
@@ -128,15 +108,15 @@
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
-        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
-        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
       </div>
     </article>
     <aside class="post-aside">
-      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
-      <p class="repo-name"><span class="es">Nivel 3</span><span class="en">Level 3</span> · <span class="es">Ansible</span><span class="en">Ansible</span></p>
-      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
-      <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span><span class="en">All Level 3 guides</span> →</a>
+      <p class="label muted"><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="en">Level 3</span> · <span class="en">Ansible</span></p>
+      <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-3.html"><span class="en">All Level 3 guides</span> →</a>
       
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
@@ -144,7 +124,7 @@
   
   <div class="wrap post-nav">
     <span></span>
-    <a class="post-nav-link next" href="docker-contenedores-en-un-servidor-de-operaciones.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Docker: montar y mantener contenedores en un servidor de operaciones</span><span class="en">Docker: running and maintaining containers on an operations server</span></span></a>
+    <a class="post-nav-link next" href="docker-contenedores-en-un-servidor-de-operaciones.html"><span class="label muted"><span class="en">Next</span></span><span><span class="en">Docker: running and maintaining containers on an operations server</span></span></a>
   </div>
 </section>
 </main>
@@ -152,8 +132,8 @@
 <footer>
   <div class="wrap">
     <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
-    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
-    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
   </div>
 </footer>
 

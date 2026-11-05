@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>RabbitMQ: colas clínicas y consumidor parado · Iñigo González</title>
+<meta name="description" content="Cómo viaja un mensaje entre sistemas clínicos por RabbitMQ, qué mirar en la interfaz de gestión y con rabbitmqctl, qué alarmas poner sobre profundidad de cola…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/rabbitmq-colas-de-integracion-clinica-y-un-consumidor-parado.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/rabbitmq-colas-de-integracion-clinica-y-un-consumidor-parado.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/rabbitmq-colas-de-integracion-clinica-y-un-consumidor-parado.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/rabbitmq-colas-de-integracion-clinica-y-un-consumidor-parado.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RabbitMQ: colas clínicas y consumidor parado · Iñigo González">
+<meta property="og:description" content="Cómo viaja un mensaje entre sistemas clínicos por RabbitMQ, qué mirar en la interfaz de gestión y con rabbitmqctl, qué alarmas poner sobre profundidad de cola…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/rabbitmq-colas-de-integracion-clinica-y-un-consumidor-parado.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-sector-3.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="RabbitMQ: colas clínicas y consumidor parado · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"RabbitMQ en la capa de integración de una plataforma clínica: colas, consumidores, dead-letter y los resultados que no llegan a la historia clínica","alternativeHeadline":"RabbitMQ in a clinical platform's integration layer: queues, consumers, dead-letter and the results that never reach the patient record","description":"Cómo viaja un mensaje entre sistemas clínicos por RabbitMQ, qué mirar en la interfaz de gestión y con rabbitmqctl, qué alarmas poner sobre profundidad de cola y consumidores, para qué sirve una cola dead-letter, la cola que crece porque se paró un consumidor y los resultados de laboratorio no llegan a la historia clínica, cómo recuperarlo sin perder ni duplicar mensajes y cómo contárselo a los equipos clínicos.","datePublished":"2026-10-30","dateModified":"2026-10-30","inLanguage":"es","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/es/guias/rabbitmq-colas-de-integracion-clinica-y-un-consumidor-parado.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/guias/rabbitmq-colas-de-integracion-clinica-y-un-consumidor-parado.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"RabbitMQ - Colas de la capa de integración clínica"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 3","item":"https://inigogonzalezgarcia.github.io/es/guias/sector-3.html"},{"@type":"ListItem","position":4,"name":"RabbitMQ en la capa de integración de una plataforma clínica: colas, consumidores, dead-letter y los resultados que no llegan a la historia clínica","item":"https://inigogonzalezgarcia.github.io/es/guias/rabbitmq-colas-de-integracion-clinica-y-un-consumidor-parado.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/rabbitmq-colas-de-integracion-clinica-y-un-consumidor-parado.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <a href="sector-3.html"><span class="es">Sector 3</span></a></p>
+    <h1><span class="es">RabbitMQ en la capa de integración de una plataforma clínica: colas, consumidores, dead-letter y los resultados que no llegan a la historia clínica</span></h1>
+    <p class="lede"><span class="es">Cómo viaja un mensaje entre sistemas clínicos por RabbitMQ, qué mirar en la interfaz de gestión y con rabbitmqctl, qué alarmas poner sobre profundidad de cola y consumidores, para qué sirve una cola dead-letter, la cola que crece porque se paró un consumidor y los resultados de laboratorio no llegan a la historia clínica, cómo recuperarlo sin perder ni duplicar mensajes y cómo contárselo a los equipos clínicos.</span></p><p class="label post-meta"><span class="es">Sector 3</span> · <span class="es">RabbitMQ - Colas de la capa de integración clínica</span> · <span class="es">8 min</span> · <span class="es">Actualizado</span> <span class="es">30 oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Entender lo bastante la capa de mensajería de una plataforma clínica para vigilarla y para actuar cuando algo se atasca. Entre el sistema de laboratorio, el de admisiones y la historia clínica electrónica viajan mensajes (normalmente HL7) que pasan por un motor de integración y por RabbitMQ. Si una cola deja de vaciarse, en planta no se ven resultados. La guía cubre cómo se monta, qué se mira, qué alarmas poner y cómo recuperar un consumidor parado sin perder ni duplicar un solo mensaje.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Un usuario de la <strong>interfaz de gestión</strong> (puerto 15672) con la etiqueta <em>monitoring</em> para el equipo de operaciones; <em>administrator</em> solo para quien cambia la configuración.</li><li>Acceso al servidor de RabbitMQ para <code>rabbitmqctl</code> y <code>rabbitmq-diagnostics</code> (necesitan los permisos del usuario del servicio).</li><li>El <strong>mapa de interfaces</strong>: qué sistema publica en qué exchange, qué cola lee cada consumidor y quién es el responsable de cada uno (equipo de integración, proveedor, operaciones).</li><li>El <strong>procedimiento de contingencia</strong> clínico: qué hace el laboratorio o la planta cuando los resultados no llegan por la vía normal. No lo decide IT, pero IT tiene que saber cuándo activarlo.</li></ul>
+<h2>1. Cómo viaja un resultado</h2>
+<p>Un resultado validado en el laboratorio sale como mensaje, pasa por el motor de integración y llega a la historia clínica:</p>
+<ol><li>El <strong>motor de integración</strong> recibe el mensaje del sistema de laboratorio y lo <strong>publica</strong> en un <em>exchange</em> (<code>clinico.resultados</code>) con una clave de enrutado (<code>lab.resultado</code>).</li><li>El exchange, según sus <strong>bindings</strong>, lo deja en una o varias <strong>colas</strong>: <code>lab.resultados.hce</code> para la historia clínica, y quizá otra para un sistema de archivo.</li><li>Un <strong>consumidor</strong> (el servicio de integración de la historia clínica) lee de la cola, entrega el mensaje y, cuando la historia clínica lo ha aceptado, envía el <strong>ack</strong>. Solo entonces RabbitMQ lo borra.</li></ol>
+<div class="g-table"><table><thead><tr><th>Pieza</th><th>Ejemplo</th><th>Lo que conviene saber</th></tr></thead><tbody><tr><td>Virtual host</td><td><code>clinico</code></td><td>Separa entornos y permisos: producción y pruebas no comparten vhost</td></tr><tr><td>Exchange</td><td><code>clinico.resultados</code> (topic)</td><td>No guarda nada: si no hay cola enlazada, el mensaje se pierde</td></tr><tr><td>Cola</td><td><code>lab.resultados.hce</code> (quorum)</td><td>Duradera y replicada en el clúster; los mensajes, persistentes</td></tr><tr><td>Consumidor</td><td>servicio de integración HCE</td><td>Ack manual y <em>prefetch</em> bajo (por ejemplo, 10)</td></tr><tr><td>Dead-letter</td><td><code>lab.resultados.dlq</code></td><td>Donde van los mensajes que no se pueden entregar</td></tr></tbody></table></div>
+<h2>2. Mirar el estado: interfaz de gestión y rabbitmqctl</h2>
+<p>En la interfaz de gestión, la pestaña de colas muestra por cada una: <strong>Ready</strong> (esperando consumidor), <strong>Unacked</strong> (entregados y sin confirmar), <strong>Total</strong>, las tasas de entrada, entrega y ack, y el número de <strong>consumidores</strong>. Desde la línea de comandos:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">rabbit01 · estado de las colas</span><button class="t-copy" type="button" data-copy="rabbitmqctl list_queues -p clinico name type messages_ready messages_unacknowledged consumers&#10;rabbitmqctl list_consumers -p clinico&#10;rabbitmq-diagnostics alarms" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>rabbitmqctl list_queues -p clinico name type messages_ready messages_unacknowledged consumers</span><span class="t-out">Timeout: 60.0 seconds ...</span><span class="t-out">Listing queues for vhost clinico ...</span><span class="t-out">name                 type     messages_ready  messages_unacknowledged  consumers</span><span class="t-out">lab.resultados.hce   quorum   0               3                        1</span><span class="t-out">adt.eventos.hce      quorum   0               0                        1</span><span class="t-out">lab.resultados.dlq   quorum   0               0                        0</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>rabbitmqctl list_consumers -p clinico</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>rabbitmq-diagnostics alarms</span><span class="t-out">Node rabbit@rabbit01 reported no alarms, local or clustered</span></code></pre></figure>
+<ul><li><strong>Ready bajo, Unacked bajo y un consumidor</strong>: la cola se vacía al ritmo al que llega. Es lo normal.</li><li><strong>Ready creciendo y 0 consumidores</strong>: nadie está leyendo. Es el caso del apartado 5.</li><li><strong>Ready creciendo, Unacked igual al prefetch y la tasa de ack a cero</strong>: el consumidor está conectado pero <strong>atascado</strong>, esperando a la historia clínica o colgado.</li><li><code>rabbitmq-diagnostics alarms</code> muestra las alarmas de <strong>memoria y disco</strong>. Con una activa, RabbitMQ <strong>bloquea a los publicadores</strong>: el problema ya no es una cola, es todo el nodo.</li></ul>
+<h2>3. Qué monitorizar</h2>
+<ul><li><strong>Profundidad de cola</strong> (<code>messages_ready</code>) por encima de un umbral durante unos minutos. El umbral depende de la cola: una de resultados que suele estar a cero no es igual que una de carga nocturna.</li><li><strong>Consumidores = 0</strong> en las colas que siempre deben tener uno: alarma inmediata, sin esperar a que crezca.</li><li><strong>Unacked atascado</strong> al nivel del prefetch sin acks durante varios minutos.</li><li><strong>Mensajes en la dead-letter</strong> mayor que cero: cada uno es un resultado o un evento que no ha llegado.</li></ul>
+<p>El plugin de Prometheus (puerto 15692) expone métricas como <code>rabbitmq_queue_messages_ready</code> y <code>rabbitmq_queue_consumers</code>; para tenerlas por cola, el endpoint <code>/metrics/per-object</code> o <code>/metrics/detailed</code>. Desde ahí, Grafana o la herramienta de monitorización de la plataforma, con la alarma enviada a la guardia.</p>
+<h2>4. Dead-letter: los mensajes que no se pueden entregar</h2>
+<p>Un mensaje va a la dead-letter cuando el consumidor lo <strong>rechaza sin reencolar</strong>, cuando <strong>caduca</strong> por TTL, cuando la cola supera su <strong>longitud máxima</strong> o, en colas quorum, cuando supera su <strong>límite de entregas</strong> (un mensaje que hace fallar al consumidor una y otra vez). Se configura con una política:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">rabbit01 · política de dead-letter para las colas de laboratorio</span><button class="t-copy" type="button" data-copy="rabbitmqctl set_policy -p clinico DLX-lab &quot;^lab\.resultados\.hce$&quot; &#x27;{&quot;dead-letter-exchange&quot;:&quot;clinico.dlx&quot;}&#x27; --apply-to queues&#10;rabbitmqctl list_policies -p clinico" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>rabbitmqctl set_policy -p clinico DLX-lab &quot;^lab\.resultados\.hce$&quot; &#x27;{&quot;dead-letter-exchange&quot;:&quot;clinico.dlx&quot;}&#x27; --apply-to queues</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>rabbitmqctl list_policies -p clinico</span></code></pre></figure>
+<p>Con el exchange <code>clinico.dlx</code> enlazado a <code>lab.resultados.dlq</code>. Cada mensaje en la dead-letter lleva la cabecera <code>x-death</code> con el motivo y la cola de origen.</p>
+<ul><li>La dead-letter <strong>se revisa, no se purga</strong>. Cada mensaje es un dato clínico que no ha llegado a su destino.</li><li>Corregida la causa (un código de prueba que la historia clínica no conocía, un paciente sin dar de alta), el equipo de integración decide reprocesarlo. La interfaz de gestión puede <strong>mover</strong> los mensajes de vuelta a la cola original si están activos los plugins de <em>shovel</em>.</li></ul>
+<p class="g-warn">A una cola solo se le aplica <strong>una política</strong> (la de mayor prioridad). Una política nueva que coincida con una cola puede sustituir a la que ya tenía, con su TTL o su límite de longitud. Revisa <code>list_policies</code> antes de crear otra, y nunca pongas un TTL o una longitud máxima en una cola clínica sin dead-letter: los mensajes se descartarían en silencio.</p>
+<h2>5. El ticket: &quot;los resultados de laboratorio no llegan a la historia clínica&quot;</h2>
+<p>Martes, 10:35. Una supervisora de urgencias llama: hay analíticas validadas en el laboratorio que no aparecen en la historia clínica.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">rabbit01 · la cola de resultados</span><button class="t-copy" type="button" data-copy="rabbitmqctl list_queues -p clinico name messages_ready messages_unacknowledged consumers" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>rabbitmqctl list_queues -p clinico name messages_ready messages_unacknowledged consumers</span><span class="t-out">name                 messages_ready  messages_unacknowledged  consumers</span><span class="t-out">lab.resultados.hce   1842            0                        0</span><span class="t-out">adt.eventos.hce      0               0                        1</span><span class="t-out">lab.resultados.dlq   0               0                        0</span></code></pre></figure>
+<p>1.842 resultados esperando y <strong>ningún consumidor</strong>. Los mensajes están a salvo en la cola: nada se ha perdido todavía.</p>
+<ol><li><strong>Avisa a los equipos clínicos primero</strong> (apartado 6). Ahora mismo hay pacientes cuyos resultados no se ven.</li><li><strong>Por qué se paró el consumidor</strong>: el servidor del servicio de integración se reinició a las 10:02 en la ventana de parches y el servicio no arrancó. La interfaz de gestión lo confirma: la cola empezó a crecer a las 10:02.</li><li><strong>Antes de arrancarlo</strong>: comprueba que la historia clínica acepta mensajes (su servicio de entrada responde) y avisa a su equipo de que va a llegar un volumen alto. El prefetch bajo hace que el consumidor procese a un ritmo que la historia clínica aguanta.</li><li><strong>Arranca el consumidor</strong> y mira cómo baja la cola: <code>Ready</code> disminuye, <code>Unacked</code> se mantiene en torno al prefetch y la tasa de ack es constante.</li><li><strong>Comprueba duplicados</strong>. Si el consumidor se cortó con mensajes sin confirmar, RabbitMQ los devuelve a la cola marcados como <em>redelivered</em> y se entregan otra vez. El consumidor debe ser <strong>idempotente</strong>: descartar un mensaje cuyo identificador de control HL7 (MSH-10) ya procesó.</li><li><strong>Concilia</strong>: número de resultados que el laboratorio envió entre las 10:02 y el final de la recuperación frente a los recibidos en la historia clínica, y dead-letter vacía o revisada.</li><li><strong>Cierra con los equipos clínicos</strong> y deja anotado: hora de inicio, de detección y de fin, número de mensajes retrasados, causa y acción. La acción obvia: el servicio en arranque automático y la alarma de <strong>consumidores = 0</strong>, que tenía que haber saltado a las 10:03 y no a las 10:35 por una llamada.</li></ol>
+<p>Lo que <strong>no</strong> se hace para &quot;desatascar&quot;:</p>
+<ul><li><strong>Purgar</strong> la cola: borra resultados clínicos sin vuelta atrás.</li><li>Borrar y recrear la cola, o reiniciar el nodo de RabbitMQ: no arregla un consumidor parado y arriesga lo que hay dentro.</li></ul>
+<h2>6. Comunicar con los equipos clínicos</h2>
+<p>Lo que necesitan saber, en su idioma y no en el de la cola:</p>
+<ul><li><strong>Qué está afectado</strong>: &quot;los resultados de laboratorio validados desde las 10:02 no se están volcando en la historia clínica&quot;. Qué <strong>no</strong> lo está: imagen, prescripción, admisiones.</li><li><strong>Que no se han perdido</strong>: están guardados y llegarán con su hora original de validación.</li><li><strong>Qué hacer mientras tanto</strong>: consultar el visor del laboratorio y seguir el procedimiento de contingencia para los valores críticos, que el laboratorio comunica por teléfono.</li><li><strong>Cuándo es la próxima actualización</strong>, aunque no haya novedades. No prometas una hora de solución que no controlas.</li><li><strong>Al cerrar</strong>: &quot;todos los resultados están ya en la historia clínica; los validados entre las 10:02 y las 11:10 llegaron con retraso&quot;. Si algún servicio debe revisar resultados de esa franja, que lo sepa ahora.</li></ul>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <strong>Monitorización</strong> de este sector cubre cómo desplegar alarmas que lleguen a alguien y cómo responder a ellas.</li><li>La guía de <strong>Windows Server: actualizaciones planificadas sin cortar el servicio</strong> encaja con la causa del ticket: qué comprobar después de reiniciar un servidor que da servicio a otros.</li><li>Para coordinar un incidente con impacto clínico (roles, cronología, comunicaciones y revisión posterior), el repositorio <strong>36-major-incident-command-kit</strong> de mi GitHub sigue esa idea.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span></p>
+      <p class="repo-name"><span class="es">Sector 3</span> · <span class="es">RabbitMQ - Colas de la capa de integración clínica</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
+      <a class="arrow-link" href="sector-3.html"><span class="es">Todas las guías del Sector 3</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/36-major-incident-command-kit.html"><span class="label muted"><span class="es">Blog · 36</span></span><span class="related-t"><span class="es">Los usuarios nos avisaron 40 minutos antes que la monitorización: un kit para dirigir y revisar incidentes mayores</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="windows-server-actualizaciones-planificadas-sin-cortar-el-servicio.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Windows Server: actualizaciones planificadas sin cortar el servicio</span></span></a>
+    <a class="post-nav-link next" href="ventana-de-mantenimiento-de-un-sistema-clinico-24x7-contingencia-vuelta-atras-y-validacion.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">Ventana de mantenimiento en un sistema clínico 24x7: acuerdo con los servicios, contingencia, plan por pasos, vuelta atrás y validación</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

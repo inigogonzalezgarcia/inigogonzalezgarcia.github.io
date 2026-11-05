@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>iDRAC e iLO: disco o fuente averiados · Iñigo González</title>
+<meta name="description" content="Del aviso al cierre: Lifecycle Log y SEL en Dell, IML en HPE, estado de discos y fuentes con racadm y Redfish, el SupportAssist Collection y el Active Health…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/idrac-e-ilo-disco-o-fuente-averiados-registros-recogida-para-el-fabricante-y-reconstruccion.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/idrac-e-ilo-disco-o-fuente-averiados-registros-recogida-para-el-fabricante-y-reconstruccion.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/idrac-e-ilo-disco-o-fuente-averiados-registros-recogida-para-el-fabricante-y-reconstruccion.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/idrac-e-ilo-disco-o-fuente-averiados-registros-recogida-para-el-fabricante-y-reconstruccion.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iDRAC e iLO: disco o fuente averiados · Iñigo González">
+<meta property="og:description" content="Del aviso al cierre: Lifecycle Log y SEL en Dell, IML en HPE, estado de discos y fuentes con racadm y Redfish, el SupportAssist Collection y el Active Health…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/idrac-e-ilo-disco-o-fuente-averiados-registros-recogida-para-el-fabricante-y-reconstruccion.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-nivel-2.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="iDRAC e iLO: disco o fuente averiados · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Dell iDRAC y HPE iLO: un disco o una fuente averiados, los registros de hardware, la recogida para el fabricante, el cambio en caliente y la reconstrucción del RAID","alternativeHeadline":"Dell iDRAC and HPE iLO: a failed disk or power supply, the hardware logs, the vendor collection, the hot swap and the RAID rebuild","description":"Del aviso al cierre: Lifecycle Log y SEL en Dell, IML en HPE, estado de discos y fuentes con racadm y Redfish, el SupportAssist Collection y el Active Health System Log, el caso con el fabricante, el cambio en caliente sin sacar el disco equivocado y un RAID que no se reconstruye con el disco nuevo.","datePublished":"2026-11-03","dateModified":"2026-11-03","inLanguage":"es","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/es/guias/idrac-e-ilo-disco-o-fuente-averiados-registros-recogida-para-el-fabricante-y-reconstruccion.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/guias/idrac-e-ilo-disco-o-fuente-averiados-registros-recogida-para-el-fabricante-y-reconstruccion.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Dell iDRAC y HPE iLO"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Nivel 2","item":"https://inigogonzalezgarcia.github.io/es/guias/nivel-2.html"},{"@type":"ListItem","position":4,"name":"Dell iDRAC y HPE iLO: un disco o una fuente averiados, los registros de hardware, la recogida para el fabricante, el cambio en caliente y la reconstrucción del RAID","item":"https://inigogonzalezgarcia.github.io/es/guias/idrac-e-ilo-disco-o-fuente-averiados-registros-recogida-para-el-fabricante-y-reconstruccion.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/idrac-e-ilo-disco-o-fuente-averiados-registros-recogida-para-el-fabricante-y-reconstruccion.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <a href="nivel-2.html"><span class="es">Nivel 2</span></a></p>
+    <h1><span class="es">Dell iDRAC y HPE iLO: un disco o una fuente averiados, los registros de hardware, la recogida para el fabricante, el cambio en caliente y la reconstrucción del RAID</span></h1>
+    <p class="lede"><span class="es">Del aviso al cierre: Lifecycle Log y SEL en Dell, IML en HPE, estado de discos y fuentes con racadm y Redfish, el SupportAssist Collection y el Active Health System Log, el caso con el fabricante, el cambio en caliente sin sacar el disco equivocado y un RAID que no se reconstruye con el disco nuevo.</span></p><p class="label post-meta"><span class="es">Nivel 2</span> · <span class="es">Dell iDRAC y HPE iLO</span> · <span class="es">8 min</span> · <span class="es">Actualizado</span> <span class="es">3 nov 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Cuando un servidor avisa de un disco o una fuente de alimentación averiados, saber qué ha fallado exactamente, sacar lo que el fabricante va a pedir, abrir el caso con todo, cambiar la pieza sin parar el servidor y comprobar que el RAID vuelve a estar sano. La guía de <a href="idrac-e-ilo-gestion-fuera-de-banda-red-usuarios-consola-firmware-y-alertas.html">gestión fuera de banda con iDRAC e iLO</a> cubre la red de gestión, los usuarios y las alertas; esta empieza cuando la alerta llega.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Acceso a la iDRAC (Dell PowerEdge) o la iLO (HPE ProLiant) del servidor, con racadm instalado en el puesto de salto o por SSH a la propia controladora.</li><li><code>curl</code> y <code>jq</code> en el puesto de salto para las consultas Redfish (puerto 443).</li><li>El <strong>número de servicio</strong> (Dell) o el <strong>número de serie</strong> (HPE) y el contrato de soporte vigente, con su nivel de servicio (siguiente día laborable, cuatro horas).</li><li>Saber qué hace el servidor y si está en un clúster: un disco de un RAID 5 degradado no espera al mes que viene.</li></ul>
+<h2>1. Qué ha fallado: los registros de hardware</h2>
+<p><strong>Dell.</strong> El <strong>Lifecycle Log</strong> recoge todo (almacenamiento, fuentes, cambios de configuración y actualizaciones); el <strong>SEL</strong> solo los sensores. Para un disco, el Lifecycle Log filtrado por almacenamiento:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">racadm · srv-fs-01-idrac · Lifecycle Log y SEL</span><button class="t-copy" type="button" data-copy="racadm -r srv-fs-01-idrac.mgmt.contoso.local -u adm-soporte -p ******** lclog view -c storage -s critical -n 5&#10;racadm -r srv-fs-01-idrac.mgmt.contoso.local -u adm-soporte -p ******** getsel" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm -r srv-fs-01-idrac.mgmt.contoso.local -u adm-soporte -p ******** lclog view -c storage -s critical -n 5</span><span class="t-out">SeqNumber       = 4710</span><span class="t-out">Category        = Storage</span><span class="t-out">Severity        = Critical</span><span class="t-out">Timestamp       = 2026-11-02 23:47:52</span><span class="t-out">Message         = Disk 2 in Backplane 1 of Integrated RAID Controller 1 failed.</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm -r srv-fs-01-idrac.mgmt.contoso.local -u adm-soporte -p ******** getsel</span></code></pre></figure>
+<p>En la web: <strong>Maintenance › Lifecycle Log</strong>, con filtro por categoría y gravedad.</p>
+<p><strong>HPE.</strong> El <strong>IML</strong> (<em>Integrated Management Log</em>) es el registro de hardware del servidor; el <strong>IEL</strong> (<em>iLO Event Log</em>), el de la propia iLO. En la web, <strong>Information › Integrated Management Log</strong>. Por Redfish:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Redfish · srv-app-02-ilo · últimas entradas del IML</span><button class="t-copy" type="button" data-copy="curl -sk -u adm-soporte &#x27;https://srv-app-02-ilo.mgmt.contoso.local/redfish/v1/Systems/1/LogServices/IML/Entries/?$expand=.&#x27; | jq &#x27;.Members[-3:][] | {Created, Severity, Message}&#x27;" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>curl -sk -u adm-soporte &#x27;https://srv-app-02-ilo.mgmt.contoso.local/redfish/v1/Systems/1/LogServices/IML/Entries/?$expand=.&#x27; | jq &#x27;.Members[-3:][] | {Created, Severity, Message}&#x27;</span><span class="t-out">{</span><span class="t-out">  &quot;Created&quot;: &quot;2026-11-03T05:12:40Z&quot;,</span><span class="t-out">  &quot;Severity&quot;: &quot;Critical&quot;,</span><span class="t-out">  &quot;Message&quot;: &quot;System Power Supply: General Failure (Power Supply 2)&quot;</span><span class="t-out">}</span></code></pre></figure>
+<p>Fíjate en la <strong>hora</strong> de la primera entrada: a veces el fallo es de hace días y la alerta no llegó. Eso también va al ticket.</p>
+<h2>2. El estado actual: discos y fuentes</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">racadm · srv-fs-01-idrac · discos y discos virtuales</span><button class="t-copy" type="button" data-copy="racadm storage get pdisks -o -p State,Status,MediaType,Size&#10;racadm storage get vdisks -o -p Layout,State,Status" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm storage get pdisks -o -p State,Status,MediaType,Size</span><span class="t-out">Disk.Bay.0:Enclosure.Internal.0-1:RAID.Integrated.1-1</span><span class="t-out">   State     = Online</span><span class="t-out">   Status    = Ok</span><span class="t-out">Disk.Bay.2:Enclosure.Internal.0-1:RAID.Integrated.1-1</span><span class="t-out">   State     = Failed</span><span class="t-out">   Status    = Critical</span><span class="t-out">   MediaType = HDD</span><span class="t-out">   Size      = 1675.50 GB</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm storage get vdisks -o -p Layout,State,Status</span><span class="t-out">Disk.Virtual.0:RAID.Integrated.1-1</span><span class="t-out">   Layout    = Raid-5</span><span class="t-out">   State     = Degraded</span><span class="t-out">   Status    = Warning</span></code></pre></figure>
+<p>Un RAID 5 <strong>degradado</strong> sigue sirviendo datos, pero sin protección: un segundo disco que falle se lleva el volumen. Antes de tocar nada, revisa que ningún otro disco esté en estado de fallo previsto (<em>predictive failure</em>) y que la última copia de seguridad del servidor es buena.</p>
+<p>Las <strong>fuentes</strong>, en los dos fabricantes por Redfish:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Redfish · estado de las fuentes</span><button class="t-copy" type="button" data-copy="curl -sk -u adm-soporte https://srv-fs-01-idrac.mgmt.contoso.local/redfish/v1/Chassis/System.Embedded.1/Power | jq &#x27;.PowerSupplies[] | {Name, Status}&#x27;&#10;curl -sk -u adm-soporte https://srv-app-02-ilo.mgmt.contoso.local/redfish/v1/Chassis/1/Power | jq &#x27;.PowerSupplies[] | {Name, Status}&#x27;" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>curl -sk -u adm-soporte https://srv-fs-01-idrac.mgmt.contoso.local/redfish/v1/Chassis/System.Embedded.1/Power | jq &#x27;.PowerSupplies[] | {Name, Status}&#x27;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>curl -sk -u adm-soporte https://srv-app-02-ilo.mgmt.contoso.local/redfish/v1/Chassis/1/Power | jq &#x27;.PowerSupplies[] | {Name, Status}&#x27;</span><span class="t-out">{ &quot;Name&quot;: &quot;HpeServerPowerSupply&quot;, &quot;Status&quot;: { &quot;Health&quot;: &quot;OK&quot;, &quot;State&quot;: &quot;Enabled&quot; } }</span><span class="t-out">{ &quot;Name&quot;: &quot;HpeServerPowerSupply&quot;, &quot;Status&quot;: { &quot;Health&quot;: &quot;Critical&quot;, &quot;State&quot;: &quot;Enabled&quot; } }</span></code></pre></figure>
+<p>Una fuente en <em>Critical</em> puede ser la fuente o lo que la alimenta. Antes de pedir la pieza, comprueba en la sala o con el inventario que su cable llega a la PDU y que esa PDU tiene corriente: muchas &quot;fuentes averiadas&quot; son un cable suelto o una PDU sin alimentación.</p>
+<p>En HPE, los discos están en <strong>System Information › Storage</strong> de la web; por Redfish, en <code>/redfish/v1/Systems/1/SmartStorage/ArrayControllers/</code> con controladoras Smart Array (iLO 5) o en <code>/redfish/v1/Systems/1/Storage/</code> en los modelos que usan el estándar de Redfish (iLO 6).</p>
+<h2>3. La recogida para el fabricante</h2>
+<p>Es lo primero que pide soporte, y con ella el caso se resuelve sin diagnósticos por teléfono.</p>
+<p><strong>Dell: SupportAssist Collection</strong> (antes, <em>Tech Support Report</em>). En la web, <strong>Maintenance › SupportAssist › Start a Collection</strong>, con <em>System Information</em>, <em>Storage Logs</em> y <em>Debug Logs</em>. Por racadm:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">racadm · srv-fs-01-idrac · generar y exportar</span><button class="t-copy" type="button" data-copy="racadm techsupreport collect -t SysInfo&#10;racadm jobqueue view -i JID_123456789012&#10;racadm techsupreport export -l //10.10.90.50/soporte -u CONTOSO\svc-recogidas -p ********" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm techsupreport collect -t SysInfo</span><span class="t-cmt"># la orden devuelve el identificador de la tarea (JID_...)</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm jobqueue view -i JID_123456789012</span><span class="t-out">Status=Completed</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm techsupreport export -l //10.10.90.50/soporte -u CONTOSO\svc-recogidas -p ********</span></code></pre></figure>
+<p><strong>HPE: Active Health System Log.</strong> En la web de la iLO, <strong>Information › Active Health System Log</strong>: se elige el intervalo (los últimos 7 días suelen bastar; el fabricante dirá si quiere más), los datos del caso y <strong>Download</strong>. Sale un fichero <code>.ahs</code>. Por Redfish, el mismo fichero cuelga de <code>/redfish/v1/Managers/1/ActiveHealthSystem/</code>.</p>
+<p class="g-tip">Pon en el nombre del fichero el servidor y la fecha (<code>srv-fs-01-TSR-2026-11-03.zip</code>). Las recogidas contienen nombres, direcciones IP y configuración: se suben al portal del fabricante, no a un correo.</p>
+<h2>4. Abrir el caso con el fabricante</h2>
+<p>En el portal de soporte o por teléfono, con:</p>
+<ul><li>Número de servicio o de serie, y el modelo.</li><li>Qué falla: <strong>disco de la bahía 2, RAID 5 degradado</strong>, o <strong>fuente 2 en fallo, redundancia perdida</strong>, con la hora del primer evento.</li><li>La recogida del paso 3 adjunta.</li><li>Dónde está el servidor, horario de acceso a la sala y quién recibe al técnico o la pieza.</li><li>Si el contrato incluye <strong>retención del disco</strong> averiado: sin esa opción, el disco viejo vuelve al fabricante con los datos dentro. Revisa la política antes de entregarlo.</li></ul>
+<p>Apunta el número de caso en el ticket. Si el contrato es de cuatro horas, controla el reloj: el plazo corre desde que el caso queda abierto.</p>
+<h2>5. El cambio en caliente</h2>
+<p>Discos y fuentes de estos servidores son <strong>en caliente</strong> (<em>hot-plug</em>): se cambian con el servidor encendido. Lo que sale mal es sacar la pieza equivocada.</p>
+<ul><li><strong>Localizar el disco</strong>: en Dell, <code>racadm storage blink:Disk.Bay.2:Enclosure.Internal.0-1:RAID.Integrated.1-1</code> hace parpadear su luz (y <code>unblink</code> la apaga), o <strong>Storage › Physical Disks › Blink</strong> en la web. En HPE, la función de identificar dispositivo de la herramienta de almacenamiento de la controladora.</li><li><strong>Comprobar la bahía</strong> con el número que da el registro, no con la posición que &quot;parece&quot;. El disco averiado suele tener la luz ámbar fija.</li><li>En HPE, si el botón de <strong>No retirar</strong> (<em>Do not remove</em>) del disco está iluminado, sacarlo rompe el volumen: no se toca.</li><li><strong>Sacar, esperar y meter</strong>: liberar el disco, sacarlo unos centímetros, esperar a que deje de girar (unos 30 segundos) y extraerlo. El nuevo, en la misma bahía.</li><li><strong>Fuente</strong>: desenchufar el cable de la fuente averiada, cambiarla y enchufarla a <strong>la misma PDU</strong> que tenía. Si va a la otra, las dos fuentes acaban en la misma línea y la redundancia es aparente.</li></ul>
+<h2>6. Comprobar la reconstrucción</h2>
+<p>Con un disco de repuesto válido en la misma bahía, la controladora empieza a reconstruir sola:</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">iDRAC9 · Storage › Physical Disks</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Disk.Bay.2 · State</span><span class="ui-v">Rebuilding · Progress: 37 %</span></div><div class="ui-field"><span class="ui-k">Disk.Virtual.0 · RAID-5 · State</span><span class="ui-v">Degraded</span></div></div></figure>
+<ul><li>Una reconstrucción de discos grandes tarda horas y se nota en el rendimiento. Avisa a los usuarios del servicio si es en horario.</li><li>Al acabar: el disco en <strong>Online</strong>, el disco virtual en <strong>Online</strong> y estado <em>Ok</em>, y en el Lifecycle Log el evento de reconstrucción completada. En HPE, la unidad lógica pasa de <strong>Interim Recovery Mode</strong> a <strong>Recovering</strong> y de ahí a <strong>OK</strong>.</li><li>La fuente nueva, en <em>OK</em> y la alerta de redundancia de fuente, resuelta.</li></ul>
+<p>Cierra el caso con el fabricante y el ticket con el número de caso, la pieza, la hora del cambio y la de fin de la reconstrucción.</p>
+<h2>7. El ticket: &quot;srv-fs-01: disco cambiado, pero el RAID sigue degradado&quot;</h2>
+<p>El técnico ha dejado el disco nuevo en la bahía 2 hace una hora y el disco virtual sigue en <em>Degraded</em>. No hay reconstrucción en marcha.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">racadm · srv-fs-01-idrac</span><button class="t-copy" type="button" data-copy="racadm storage get pdisks:Disk.Bay.2:Enclosure.Internal.0-1:RAID.Integrated.1-1 -o -p State,Status,MediaType,Size,BusProtocol" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>racadm storage get pdisks:Disk.Bay.2:Enclosure.Internal.0-1:RAID.Integrated.1-1 -o -p State,Status,MediaType,Size,BusProtocol</span><span class="t-out">   State       = Foreign</span><span class="t-out">   Status      = Ok</span><span class="t-out">   MediaType   = HDD</span><span class="t-out">   Size        = 1675.50 GB</span><span class="t-out">   BusProtocol = SAS</span></code></pre></figure>
+<div class="g-table"><table><thead><tr><th>Lo que dice el disco nuevo</th><th>Qué pasa</th><th>Qué haces</th></tr></thead><tbody><tr><td><strong>Foreign</strong></td><td>El repuesto viene de otro servidor y trae su propia configuración RAID</td><td>Borrar la configuración ajena con la acción <strong>Clear Foreign Configuration</strong> de la controladora en la web de la iDRAC, y comprobar después que el disco pasa a <em>Ready</em></td></tr><tr><td><strong>Ready</strong>, pero no reconstruye</td><td>La controladora no reconstruye sola sobre ese disco</td><td>Asignarlo como repuesto global (<strong>Global Hot Spare</strong>) desde las acciones del disco en la iDRAC y aplicar la tarea; la reconstrucción arranca sobre él</td></tr><tr><td>Tamaño menor o tipo distinto (SATA en un RAID de SAS, HDD en uno de SSD)</td><td>La pieza no es la que corresponde</td><td>No se fuerza: se pide el repuesto correcto con el número de pieza del disco original</td></tr><tr><td><strong>Failed</strong> otra vez</td><td>Repuesto defectuoso o problema de la bahía</td><td>Nueva recogida y se actualiza el caso con el fabricante</td></tr></tbody></table></div>
+<p class="g-warn">Antes de borrar una configuración ajena, comprueba en la vista previa que solo afecta <strong>al disco nuevo</strong>. Si aparecen más discos, hay un problema mayor (un volumen que la controladora no reconoce) y borrar ahí destruye datos: para y escala.</p>
+<p>Aquí era un repuesto con configuración de otro servidor. Tras borrar la configuración ajena de ese disco pasó a <em>Ready</em>, la reconstrucción empezó sola y a las tres horas el disco virtual estaba en <em>Online</em>.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <a href="idrac-e-ilo-gestion-fuera-de-banda-red-usuarios-consola-firmware-y-alertas.html">gestión fuera de banda con iDRAC e iLO</a> explica cómo hacer que estas alertas lleguen por SNMP, correo o Redfish.</li><li>La de <a href="vsphere-vcenter-crear-vm-snapshots-con-caducidad-y-host-en-mantenimiento.html">VMware vSphere y vCenter</a> cubre el modo de mantenimiento si una pieza obliga a parar un host.</li><li>La guía de <strong>Device42</strong> guarda en qué PDU va cada fuente, lo que necesitas para el paso 5.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span></p>
+      <p class="repo-name"><span class="es">Nivel 2</span> · <span class="es">Dell iDRAC y HPE iLO</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
+      <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/35-private-cloud-capacity-review.html"><span class="label muted"><span class="es">Blog · 35</span></span><span class="related-t"><span class="es">El clúster parecía ir bien al 74%: una revisión mensual de capacidad y disponibilidad de una nube privada</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="dns-y-dhcp-en-windows-server-zonas-ambitos-conmutacion-y-un-equipo-sin-ip.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">DNS y DHCP en Windows Server: zonas, registros, ámbitos, conmutación por error y un equipo sin IP</span></span></a>
+    <a class="post-nav-link next" href="idrac-e-ilo-gestion-fuera-de-banda-red-usuarios-consola-firmware-y-alertas.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">Dell iDRAC y HPE iLO: red de gestión, usuarios, consola remota, firmware, alertas y un servidor que no arranca</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="no-js inner" data-title-en="ICG and HIOPOS: setting up a POS · Iñigo González" data-title-es="ICG y HIOPOS: puesta en marcha de un TPV · Iñigo González">
+<html lang="en" class="no-js inner">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -16,6 +16,9 @@
 <meta name="author" content="Iñigo González">
 <meta name="theme-color" content="#0e1a24">
 <link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/icg-y-hiopos-puesta-en-marcha-de-un-tpv-red-impresoras-de-cocina-y-cierre.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/icg-y-hiopos-puesta-en-marcha-de-un-tpv-red-impresoras-de-cocina-y-cierre.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/icg-y-hiopos-puesta-en-marcha-de-un-tpv-red-impresoras-de-cocina-y-cierre.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/icg-y-hiopos-puesta-en-marcha-de-un-tpv-red-impresoras-de-cocina-y-cierre.html">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <meta property="og:site_name" content="Iñigo González">
@@ -36,7 +39,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"ICG and HIOPOS: setting up a POS, with the network, kitchen printers and end-of-day close","alternativeHeadline":"ICG y HIOPOS: puesta en marcha de un TPV, con la red, las impresoras de cocina y el cierre de caja","description":"Which part of the work belongs to IT and which to the integrator, a venue's inventory, the fixed IPs that prevent half the tickets, how each dish reaches its kitchen printer or screen, the test before opening and the \"kitchen isn't printing\" ticket.","datePublished":"2026-10-27","dateModified":"2026-10-27","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/icg-y-hiopos-puesta-en-marcha-de-un-tpv-red-impresoras-de-cocina-y-cierre.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/icg-y-hiopos-puesta-en-marcha-de-un-tpv-red-impresoras-de-cocina-y-cierre.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"ICG and HIOPOS - Setting up a POS"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 1","item":"https://inigogonzalezgarcia.github.io/guias/sector-1.html"},{"@type":"ListItem","position":4,"name":"ICG and HIOPOS: setting up a POS, with the network, kitchen printers and end-of-day close","item":"https://inigogonzalezgarcia.github.io/guias/icg-y-hiopos-puesta-en-marcha-de-un-tpv-red-impresoras-de-cocina-y-cierre.html"}]}]}</script>
 </head>
 <body id="top">
-<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
 
 <header class="site-header">
   <div class="wrap">
@@ -44,11 +47,11 @@
       <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
       <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
     </a>
-    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/"><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
     <div class="head-actions">
-      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
       <span class="sep" aria-hidden="true"></span>
-      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+      <a class="lang-btn" id="langBtn" href="../es/guias/icg-y-hiopos-puesta-en-marcha-de-un-tpv-red-impresoras-de-cocina-y-cierre.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
     </div>
   </div>
 </header>
@@ -56,59 +59,29 @@
 <div class="menu" id="menu" aria-hidden="true">
   <div class="menu-top">
     <span class="label">Iñigo González</span>
-    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
   </div>
-  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
     <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
     <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
-    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
   </div>
 </div>
 
 <main id="main">
 <section class="page-hero post-hero">
   <div class="wrap">
-    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="sector-1.html"><span class="es">Sector 1</span><span class="en">Sector 1</span></a></p>
-    <h1><span class="es">ICG y HIOPOS: puesta en marcha de un TPV, con la red, las impresoras de cocina y el cierre de caja</span><span class="en">ICG and HIOPOS: setting up a POS, with the network, kitchen printers and end-of-day close</span></h1>
-    <p class="lede"><span class="es">Qué parte del trabajo es de IT y qué parte del integrador, el inventario de un local, las IP fijas que evitan la mitad de los tickets, cómo llega cada plato a su impresora o pantalla de cocina, la prueba antes de abrir y el ticket de &quot;no imprime en cocina&quot;.</span><span class="en">Which part of the work belongs to IT and which to the integrator, a venue&#x27;s inventory, the fixed IPs that prevent half the tickets, how each dish reaches its kitchen printer or screen, the test before opening and the &quot;kitchen isn&#x27;t printing&quot; ticket.</span></p><p class="label post-meta"><span class="es">Sector 1</span><span class="en">Sector 1</span> · <span class="es">ICG y HIOPOS - Puesta en marcha de un TPV</span><span class="en">ICG and HIOPOS - Setting up a POS</span> · <span class="es">6 min</span><span class="en">6 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">27 oct 2026</span><span class="en">27 Oct 2026</span></p>
+    <p class="label kicker"><a href="../guias.html"><span class="en">Guides</span></a> · <a href="sector-1.html"><span class="en">Sector 1</span></a></p>
+    <h1><span class="en">ICG and HIOPOS: setting up a POS, with the network, kitchen printers and end-of-day close</span></h1>
+    <p class="lede"><span class="en">Which part of the work belongs to IT and which to the integrator, a venue&#x27;s inventory, the fixed IPs that prevent half the tickets, how each dish reaches its kitchen printer or screen, the test before opening and the &quot;kitchen isn&#x27;t printing&quot; ticket.</span></p><p class="label post-meta"><span class="en">Sector 1</span> · <span class="en">ICG and HIOPOS - Setting up a POS</span> · <span class="en">6 min read</span> · <span class="en">Updated</span> <span class="en">27 Oct 2026</span></p>
   </div>
 </section>
 
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose guide">
-      <div class="es" lang="es">
-<h2>Qué vas a conseguir</h2>
-<p>Dejar listo el punto de venta de un restaurante o un bar: terminales, impresoras de tickets y de cocina, cajón, datáfono y la conexión con el resto del grupo, de forma que el día de apertura el camarero solo tenga que marcar y cobrar. Y saber resolver en pocos minutos el ticket que más se repite en hostelería.</p>
-<h2>Antes de empezar</h2>
-<ul><li>El <strong>integrador</strong> o distribuidor del software (ICG y HIOPOS se venden e instalan casi siempre a través de distribuidores): quién da de alta las licencias, quién carga la carta y a quién llamas de noche.</li><li>La versión del sistema: <strong>ICG FrontRest</strong> en terminales Windows con la gestión central en <strong>ICG Manager</strong>, o <strong>HIOPOS</strong> en sus propios terminales, con la gestión en la nube.</li><li>La distribución del local: barras, salas, terraza, cocina caliente, cocina fría, postres. De ahí salen las impresoras y las rutas.</li><li>La red del local preparada, con una VLAN para el punto de venta y otra para los datáfonos (guía de hotel en pre-apertura).</li></ul>
-<h2>1. Quién hace qué</h2>
-<div class="g-table"><table><thead><tr><th>Tarea</th><th>IT</th><th>Integrador</th><th>Negocio</th></tr></thead><tbody><tr><td>Red, VLAN, IP fijas, WiFi para comanderos</td><td>✓</td><td></td><td></td></tr><tr><td>Licencias e instalación del software</td><td></td><td>✓</td><td></td></tr><tr><td>Carta: artículos, familias, precios, modificadores</td><td></td><td>Carga inicial</td><td>Mantenimiento</td></tr><tr><td>Usuarios y permisos de camareros y encargados</td><td></td><td>✓</td><td>Altas y bajas</td></tr><tr><td>Impresoras y pantallas de cocina: instalación física y red</td><td>✓</td><td></td><td></td></tr><tr><td>Rutas de impresión por familia</td><td></td><td>✓</td><td>Valida</td></tr><tr><td>Datáfono y medios de pago</td><td>Red</td><td>Integración</td><td>Contrato con el banco</td></tr><tr><td>Copias de seguridad de la base de datos local, si la hay</td><td>✓</td><td>Indica qué copiar</td><td></td></tr></tbody></table></div>
-<p>Escribir esta tabla con el integrador el primer día evita que, la noche de apertura, cada uno piense que algo lo hacía el otro.</p>
-<h2>2. El inventario del local</h2>
-<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Inventario · Restaurante Brisa · Punto de venta</span></figcaption><div class="ui-body"><div class="ui-path"><span>Activos</span><span class="ui-sep" aria-hidden="true">›</span><span>Sede 04</span><span class="ui-sep" aria-hidden="true">›</span><span>Punto de venta</span></div><div class="ui-field"><span class="ui-k">TPV-BARRA-01 · terminal táctil · 10.40.30.11 · VLAN 30</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">TPV-SALA-01 · terminal táctil · 10.40.30.12 · VLAN 30</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">CMD-01 a CMD-04 · comanderos (tabletas) · WiFi SSID pos-sala · 10.40.30.21-24</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">IMP-TICKET-BARRA · impresora térmica 80 mm · 10.40.30.51 · puerto 9100</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">IMP-COC-CALIENTE · impresora de cocina · 10.40.30.52 · puerto 9100</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">IMP-COC-FRIA · impresora de cocina · 10.40.30.53 · puerto 9100</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">KDS-POSTRES · pantalla de cocina · 10.40.30.61</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">DAT-BARRA-01 · datáfono · 10.40.40.11 · VLAN 40</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">Cajón portamonedas</span><span class="ui-v">conectado a IMP-TICKET-BARRA (se abre al imprimir un cobro en efectivo)</span></div></div></figure>
-<ul><li><strong>IP fijas</strong> (o reservas en el DHCP) para todo lo que el software busca por dirección: impresoras, pantallas de cocina, el servidor local. Una impresora que cambia de IP tras un corte de luz es el origen de la mitad de los tickets de &quot;no imprime&quot;.</li><li>El nombre de cada impresora dice dónde está. Cuando llamen de cocina a las 21:30, no hay tiempo para averiguar qué es &quot;Printer 3&quot;.</li></ul>
-<h2>3. Cómo llega cada plato a su sitio</h2>
-<p>Cada artículo pertenece a una <strong>familia</strong> (entrantes, carnes, pescados, postres, bebidas), y cada familia tiene una o varias <strong>rutas de impresión</strong>: el destino donde se imprime o se muestra la comanda.</p>
-<div class="g-table"><table><thead><tr><th>Familia</th><th>Destino</th><th>Notas</th></tr></thead><tbody><tr><td>Entrantes fríos, ensaladas</td><td>IMP-COC-FRIA</td><td></td></tr><tr><td>Carnes, pescados, arroces</td><td>IMP-COC-CALIENTE</td><td></td></tr><tr><td>Postres</td><td>KDS-POSTRES</td><td>Pantalla de cocina con tiempos</td></tr><tr><td>Bebidas</td><td>Ninguno (las sirve la barra)</td><td>O la impresora de barra si la sala está lejos</td></tr><tr><td>Menú del día</td><td>Se reparte: cada plato del menú va a la ruta de su familia</td><td>Se comprueba siempre en la prueba</td></tr></tbody></table></div>
-<ul><li>Las <strong>pantallas de cocina</strong> (en ICG, HioScreen) muestran los platos pendientes con el tiempo que llevan esperando. Sustituyen a la impresora o la acompañan.</li><li>Define también la <strong>impresora de respaldo</strong> de cada ruta: si la de cocina caliente no responde, que salga en la de fría y no se pierda la comanda.</li></ul>
-<h2>4. La prueba antes de abrir</h2>
-<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Hoja de pruebas · Restaurante Brisa · TPV</span></figcaption><div class="ui-body"><div class="ui-path"><span>Pruebas</span><span class="ui-sep" aria-hidden="true">›</span><span>Apertura</span><span class="ui-sep" aria-hidden="true">›</span><span>Flujo completo</span></div><div class="ui-field"><span class="ui-k">Abrir mesa 12 desde un comandero y pedir un plato de cada familia · [x] Cada plato sale en su cocina</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">Pedir un menú del día · [x] Los platos se reparten entre cocinas</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">Desconectar el cable de IMP-COC-CALIENTE y pedir una carne · [x] Sale en la impresora de respaldo</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">Cobrar la mesa 12 con tarjeta · [x] El datáfono recibe el importe y el ticket sale con la firma del pago</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">Cobrar una consumición en barra en efectivo · [x] Se abre el cajón</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">Anular una línea como camarero · [x] Pide la autorización del encargado</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">Cierre de caja de prueba · [x] El informe cuadra con las ventas de prueba</span><span class="ui-v"></span></div></div></figure>
-<p>Después se borran o se anulan las ventas de prueba siguiendo lo que indique el integrador: un cierre con ventas falsas ensucia los informes de la primera semana.</p>
-<h2>5. El ticket: &quot;no imprime en cocina&quot;</h2>
-<p>Viernes, 21:30, cocina caliente no recibe comandas. En orden, de lo más rápido a lo más lento:</p>
-<ol><li><strong>¿Es una impresora o todas?</strong> Si sale en la fría y no en la caliente, el problema está en esa impresora, no en el TPV.</li><li><strong>Lo físico</strong>: papel, tapa bien cerrada, piloto de error, cable de red conectado y con luz en el puerto.</li><li><strong>La red</strong>, desde un equipo del local en la misma VLAN:</li></ol>
-<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · desde el equipo de la oficina del local</span><button class="t-copy" type="button" data-copy="Test-NetConnection 10.40.30.52 -Port 9100&#10;arp -a | Select-String &quot;10.40.30.52&quot;" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Test-NetConnection 10.40.30.52 -Port 9100</span><span class="t-out">ComputerName     : 10.40.30.52</span><span class="t-out">RemoteAddress    : 10.40.30.52</span><span class="t-out">RemotePort       : 9100</span><span class="t-out">TcpTestSucceeded : False</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>arp -a | Select-String &quot;10.40.30.52&quot;</span></code></pre></figure>
-<p><code>TcpTestSucceeded : False</code> y sin entrada en la tabla ARP: la impresora no está en esa dirección. Lo más habitual es que, tras un corte de luz, la impresora haya arrancado con una IP por DHCP distinta. Se imprime su hoja de configuración (normalmente manteniendo pulsado el botón de avance de papel al encenderla), se ve la IP real y se corrige la reserva o la IP fija.</p>
-<ol><li><strong>Las comandas atascadas</strong>: con la impresora de nuevo en línea, se reenvían desde el TPV las comandas que no salieron. Se confirma con cocina qué mesas faltaban.</li><li><strong>El cierre del ticket</strong>: la causa (IP cambiada), la solución (reserva DHCP creada) y la acción para que no se repita en las demás impresoras del local.</li></ol>
-<p class="g-tip">Consejo: un datáfono que &quot;no conecta&quot; sigue el mismo camino: primero lo físico, luego la red de su VLAN, y después el proveedor de pagos. Nunca se mueve un datáfono a otra red para probar.</p>
-<h2>6. Lo que revisas cada mes</h2>
-<ul><li>Que cada impresora y pantalla tiene su IP reservada y su etiqueta en el inventario.</li><li>Las altas y bajas de camareros: las bajas, desactivadas el último día, no a final de mes.</li><li>Las versiones del software y de los terminales, con el integrador.</li><li>Si hay base de datos local, que la copia de seguridad se hace y que se ha restaurado alguna vez.</li></ul>
-<h2>Siguientes pasos</h2>
-<ul><li>La guía de <strong>CashDro</strong> añade el cobro en efectivo automático al TPV.</li><li>La de <strong>PMS hotelero</strong> cubre el cargo a habitación cuando el restaurante está en un hotel.</li><li>La guía de impresoras del Nivel 1 explica las colas de impresión de oficina, que funcionan distinto que las de cocina.</li></ul>
-<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
-      </div>
+      
       <div class="en" lang="en">
 <h2>What you&#x27;ll get</h2>
 <p>Getting a restaurant or bar&#x27;s point of sale ready: terminals, receipt and kitchen printers, cash drawer, card terminal and the link to the rest of the group, so that on opening day the waiter only has to ring things up and take payment. And knowing how to solve hospitality&#x27;s most repeated ticket in a few minutes.</p>
@@ -142,27 +115,27 @@
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
-        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
-        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
       </div>
     </article>
     <aside class="post-aside">
-      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
-      <p class="repo-name"><span class="es">Sector 1</span><span class="en">Sector 1</span> · <span class="es">ICG y HIOPOS - Puesta en marcha de un TPV</span><span class="en">ICG and HIOPOS - Setting up a POS</span></p>
-      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
-      <a class="arrow-link" href="sector-1.html"><span class="es">Todas las guías del Sector 1</span><span class="en">All Sector 1 guides</span> →</a>
+      <p class="label muted"><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="en">Sector 1</span> · <span class="en">ICG and HIOPOS - Setting up a POS</span></p>
+      <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="sector-1.html"><span class="en">All Sector 1 guides</span> →</a>
       
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>
   
   <div class="wrap related">
-    <h2 class="label kicker related-h"><span class="es">Relacionado</span><span class="en">Related</span></h2>
-    <div class="related-grid"><a class="related-link" href="../blog/34-venue-service-readiness.html"><span class="label muted"><span class="es">Blog · 34</span><span class="en">Blog · 34</span></span><span class="related-t"><span class="es">La única impresora de cocina llevaba caída desde ayer: la revisión de cada mañana en hostelería</span><span class="en">The only kitchen printer had been down since yesterday: a morning check for a hospitality venue</span></span></a></div>
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/34-venue-service-readiness.html"><span class="label muted"><span class="en">Blog · 34</span></span><span class="related-t"><span class="en">The only kitchen printer had been down since yesterday: a morning check for a hospitality venue</span></span></a></div>
   </div>
   <div class="wrap post-nav">
-    <a class="post-nav-link prev" href="hotel-en-pre-apertura-checklist-de-it-hasta-el-dia-de-apertura.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Hotel en pre-apertura: el checklist de IT desde la obra hasta el día de apertura</span><span class="en">Hotel pre-opening: the IT checklist from the building site to opening day</span></span></a>
-    <a class="post-nav-link next" href="iptv-en-hotel-diagnostico-de-canales-multicast-y-televisores-de-habitacion.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">IPTV en hotel: diagnóstico de canales, la red multicast y los televisores de habitación</span><span class="en">Hotel IPTV: troubleshooting channels, the multicast network and in-room TVs</span></span></a>
+    <a class="post-nav-link prev" href="hotel-en-pre-apertura-checklist-de-it-hasta-el-dia-de-apertura.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">Hotel pre-opening: the IT checklist from the building site to opening day</span></span></a>
+    <a class="post-nav-link next" href="iptv-en-hotel-diagnostico-de-canales-multicast-y-televisores-de-habitacion.html"><span class="label muted"><span class="en">Next</span></span><span><span class="en">Hotel IPTV: troubleshooting channels, the multicast network and in-room TVs</span></span></a>
   </div>
 </section>
 </main>
@@ -170,8 +143,8 @@
 <footer>
   <div class="wrap">
     <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
-    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
-    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
   </div>
 </footer>
 

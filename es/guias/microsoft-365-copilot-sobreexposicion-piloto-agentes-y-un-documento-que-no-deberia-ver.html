@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Microsoft 365 Copilot: despliegue y permisos · Iñigo González</title>
+<meta name="description" content="Licencias y requisitos, revisar la sobreexposición en SharePoint y OneDrive antes de activar…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/microsoft-365-copilot-sobreexposicion-piloto-agentes-y-un-documento-que-no-deberia-ver.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/microsoft-365-copilot-sobreexposicion-piloto-agentes-y-un-documento-que-no-deberia-ver.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/microsoft-365-copilot-sobreexposicion-piloto-agentes-y-un-documento-que-no-deberia-ver.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/microsoft-365-copilot-sobreexposicion-piloto-agentes-y-un-documento-que-no-deberia-ver.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Microsoft 365 Copilot: despliegue y permisos · Iñigo González">
+<meta property="og:description" content="Licencias y requisitos, revisar la sobreexposición en SharePoint y OneDrive antes de activar…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/microsoft-365-copilot-sobreexposicion-piloto-agentes-y-un-documento-que-no-deberia-ver.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-nivel-3.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Microsoft 365 Copilot: despliegue y permisos · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Microsoft 365 Copilot: requisitos, sobreexposición en SharePoint, piloto, agentes y un usuario que ve un documento que no debería","alternativeHeadline":"Microsoft 365 Copilot: prerequisites, oversharing in SharePoint, pilot, agents and a user who sees a document they shouldn't","description":"Licencias y requisitos, revisar la sobreexposición en SharePoint y OneDrive antes de activar (informes de SharePoint Advanced Management, Restricted Content Discovery, etiquetas de confidencialidad en Purview), grupos piloto, informes de uso, formación, gobierno de agentes de Copilot Studio y el ticket del usuario al que Copilot le enseña un documento que no debería ver.","datePublished":"2026-10-30","dateModified":"2026-10-30","inLanguage":"es","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/es/guias/microsoft-365-copilot-sobreexposicion-piloto-agentes-y-un-documento-que-no-deberia-ver.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/guias/microsoft-365-copilot-sobreexposicion-piloto-agentes-y-un-documento-que-no-deberia-ver.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Microsoft 365 Copilot: despliegue y permisos"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Nivel 3","item":"https://inigogonzalezgarcia.github.io/es/guias/nivel-3.html"},{"@type":"ListItem","position":4,"name":"Microsoft 365 Copilot: requisitos, sobreexposición en SharePoint, piloto, agentes y un usuario que ve un documento que no debería","item":"https://inigogonzalezgarcia.github.io/es/guias/microsoft-365-copilot-sobreexposicion-piloto-agentes-y-un-documento-que-no-deberia-ver.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/microsoft-365-copilot-sobreexposicion-piloto-agentes-y-un-documento-que-no-deberia-ver.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <a href="nivel-3.html"><span class="es">Nivel 3</span></a></p>
+    <h1><span class="es">Microsoft 365 Copilot: requisitos, sobreexposición en SharePoint, piloto, agentes y un usuario que ve un documento que no debería</span></h1>
+    <p class="lede"><span class="es">Licencias y requisitos, revisar la sobreexposición en SharePoint y OneDrive antes de activar (informes de SharePoint Advanced Management, Restricted Content Discovery, etiquetas de confidencialidad en Purview), grupos piloto, informes de uso, formación, gobierno de agentes de Copilot Studio y el ticket del usuario al que Copilot le enseña un documento que no debería ver.</span></p><p class="label post-meta"><span class="es">Nivel 3</span> · <span class="es">Microsoft 365 Copilot: despliegue y permisos</span> · <span class="es">7 min</span> · <span class="es">Actualizado</span> <span class="es">30 oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Un despliegue de Microsoft 365 Copilot (Microsoft lo está renombrando como Microsoft Copilot en su documentación) que empieza por los permisos y no por las licencias, pasa por un piloto con objetivos medibles, forma a la gente para usarlo bien y mantiene los agentes bajo control. Y la respuesta al primer ticket serio que llega casi siempre: &quot;Copilot me ha resumido un documento de RR. HH. que yo no debería poder ver&quot;.</p>
+<p>La idea que lo ordena todo: <strong>Copilot solo enseña lo que el usuario ya puede abrir</strong>. No salta permisos; los hace visibles. Un fichero compartido con toda la empresa hace tres años, que nadie encontraba, aparece ahora en una respuesta. Por eso el trabajo serio está antes de activar.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Licencias base que admitan el complemento de Copilot (Microsoft 365 E3/E5, Office 365 E1/E3/E5, Business Standard o Premium, entre otras) y las licencias de Copilot compradas.</li><li>Usuarios en <strong>Entra ID</strong> con buzón de <strong>Exchange Online</strong> y <strong>OneDrive</strong>; Microsoft 365 Apps en un canal admitido (Current o Monthly Enterprise reciben antes las novedades); el nuevo Outlook y Teams actualizados.</li><li>La red permite los dominios de Microsoft 365 y de Copilot (incluido <code>*.cloud.microsoft</code>) y las conexiones WebSocket, también a través del proxy.</li><li>Roles: <strong>SharePoint Administrator</strong> para los informes y la configuración de sitios, administrador de <strong>Purview</strong> para etiquetas y DLP, y <strong>AI Administrator</strong> o equivalente para la configuración de Copilot y los agentes.</li></ul>
+<h2>1. La sobreexposición: lo primero</h2>
+<p>Los informes de <strong>SharePoint Advanced Management</strong> (incluido con las licencias de Copilot) en el centro de administración de SharePoint, en <strong>Informes › Gobierno del acceso a los datos</strong>:</p>
+<ul><li><strong>Vínculos de uso compartido</strong>: sitios con vínculos <em>Cualquier persona</em> y <em>Personas de su organización</em>. Un vínculo de organización sobre una carpeta de nóminas es exactamente lo que Copilot va a encontrar.</li><li><strong>Contenido compartido con &quot;Todos excepto los usuarios externos&quot;</strong>: el grupo que mete a toda la empresa en un sitio con un clic.</li><li><strong>Permisos del sitio</strong>: sitios con muchos usuarios con acceso, herencia rota o sin propietario.</li></ul>
+<p>Con la lista de sitios de riesgo, tres herramientas, de menos a más drásticas:</p>
+<ul><li><strong>Revisión de acceso del sitio</strong>: SharePoint pide al propietario que revise y quite permisos. Es la solución de verdad y la más lenta.</li><li><strong>Restricted Content Discovery</strong> (en el sitio: <em>Restringir contenido de Microsoft Copilot</em>): el sitio sigue accesible para quien tiene permiso, pero no aparece en las respuestas de Copilot ni en la búsqueda de toda la organización. Es temporal, mientras se revisan los permisos.</li><li><strong>Control de acceso restringido</strong>: solo los miembros de un grupo concreto pueden entrar en el sitio, tengan el vínculo que tengan.</li></ul>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · SharePoint Online · apartar un sitio de Copilot mientras se revisa</span><button class="t-copy" type="button" data-copy="Connect-SPOService -Url https://contoso-admin.sharepoint.com&#10;Set-SPOSite -Identity https://contoso.sharepoint.com/sites/RRHH-Nominas -RestrictContentOrgWideSearch $true&#10;Get-SPOSite -Identity https://contoso.sharepoint.com/sites/RRHH-Nominas | Select-Object Url, RestrictContentOrgWideSearch" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Connect-SPOService -Url https://contoso-admin.sharepoint.com</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Set-SPOSite -Identity https://contoso.sharepoint.com/sites/RRHH-Nominas -RestrictContentOrgWideSearch $true</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-SPOSite -Identity https://contoso.sharepoint.com/sites/RRHH-Nominas | Select-Object Url, RestrictContentOrgWideSearch</span><span class="t-out">Url                                              RestrictContentOrgWideSearch</span><span class="t-out">---                                              ----------------------------</span><span class="t-out">https://contoso.sharepoint.com/sites/RRHH-Nominas                        True</span></code></pre></figure>
+<p class="g-tip"><strong>Restricted SharePoint Search</strong> (una lista de hasta 100 sitios permitidos para toda la empresa) fue la solución de urgencia de los primeros despliegues. Microsoft la está retirando: desde el 31 de julio de 2026 ya no se puede activar si no estaba activada. Para un despliegue de hoy, Restricted Content Discovery por sitio.</p>
+<h2>2. Purview: etiquetas y DLP</h2>
+<ul><li><strong>Etiquetas de confidencialidad</strong> con cifrado en lo sensible (<em>Confidencial - RR. HH.</em>, <em>Restringido - Comité</em>). Copilot respeta el cifrado: si el usuario no tiene los derechos de uso para ver y extraer el contenido, Copilot no lo usa. La etiqueta viaja con el fichero aunque alguien lo comparta mal.</li><li><strong>Etiqueta predeterminada</strong> en las bibliotecas de los sitios sensibles, para no depender de que cada persona etiquete.</li><li>Una <strong>directiva de DLP</strong> con la ubicación de Microsoft 365 Copilot que excluye del procesamiento los ficheros con ciertas etiquetas.</li><li><strong>Auditoría</strong> activada: cada interacción con Copilot queda registrada como <code>CopilotInteraction</code>, con los recursos a los que accedió para responder.</li></ul>
+<h2>3. El piloto</h2>
+<ul><li>Un grupo de Entra ID <code>GG-Copilot-Piloto</code> con <strong>licencias asignadas por grupo</strong>: 30-50 personas de varios departamentos, con algún responsable y alguien escéptico, no solo entusiastas.</li><li>Objetivos medibles antes de empezar: tiempo para preparar un informe semanal, actas de reunión, primeros borradores. Una encuesta corta al principio y a las seis semanas.</li><li>Un <strong>canal de Teams</strong> del piloto para dudas y ejemplos, y un par de <strong>champions</strong> que responden ahí.</li><li>Los sitios de riesgo ya revisados o apartados con Restricted Content Discovery <strong>antes</strong> del primer día.</li></ul>
+<h2>4. Informes de uso</h2>
+<ul><li><strong>Centro de administración de Microsoft 365 › Informes › Uso › Microsoft 365 Copilot</strong>: usuarios activos, uso por aplicación (Teams, Outlook, Word, Excel, PowerPoint) y licencias asignadas sin uso.</li><li>El informe de <strong>preparación</strong> de Copilot dice qué usuarios cumplen los requisitos técnicos.</li><li>Una licencia sin uso en 30 días vuelve al grupo de espera; una lista de espera vale más que licencias olvidadas.</li></ul>
+<h2>5. Formación</h2>
+<p>Lo que funciona es corto y del trabajo de cada uno: cómo pedir (contexto, objetivo, formato, fuentes), cómo pedir que cite de dónde saca cada dato, y <strong>revisar siempre</strong> lo que devuelve antes de mandarlo. Sesiones de 45 minutos por departamento con sus casos (resumir un hilo de correo largo, preparar una reunión a partir de los documentos compartidos, un primer borrador en Word) funcionan mejor que una formación general.</p>
+<p>También hay que decir qué no hacer: no pegar datos de clientes en herramientas de IA no autorizadas, y avisar si Copilot enseña algo que no debería (sección 7).</p>
+<h2>6. Agentes y Copilot Studio</h2>
+<p>Los agentes extienden Copilot con instrucciones, conocimiento (sitios, ficheros) y acciones. Sin gobierno, en tres meses hay doscientos agentes y nadie sabe qué datos usa cada uno.</p>
+<ul><li><strong>Quién crea</strong>: los agentes sencillos del generador de agentes pueden estar abiertos a todos; <strong>Copilot Studio</strong> para quien tenga un caso aprobado.</li><li><strong>Dónde</strong>: en el centro de administración de Power Platform, los <strong>entornos</strong>: uno de desarrollo personal o de equipo para crear y uno de producción para lo publicado, con <strong>directivas de datos</strong> que bloquean los conectores no aprobados.</li><li><strong>Qué se publica</strong>: en el centro de administración de Microsoft 365, el inventario de <strong>agentes</strong>, donde se aprueban, se bloquean y se asignan a usuarios o grupos.</li><li><strong>Revisión</strong>: cada agente publicado con un propietario, un propósito escrito y las fuentes que usa. Los que llevan 90 días sin uso se retiran.</li></ul>
+<p class="g-warn">Un agente con conocimiento de un sitio responde con lo que puede ver <strong>quien lo usa</strong>, pero un agente con acciones que usan las credenciales de su autor puede hacer cosas en nombre de otros. Revisa con qué identidad se ejecuta cada conector antes de publicarlo.</p>
+<h2>7. El ticket: &quot;Copilot me ha enseñado un documento que no debería ver&quot;</h2>
+<p>Una persona del piloto pregunta a Copilot por &quot;las subidas salariales previstas&quot; y la respuesta cita un Excel de RR. HH. Lo primero, decirle que ha hecho bien en avisar. Después:</p>
+<ol><li><strong>¿Qué fichero es?</strong> La respuesta de Copilot cita sus fuentes: con el enlace, se abre el fichero como administrador y se mira <strong>Administrar acceso</strong>.</li><li><strong>¿Por qué puede verlo?</strong> Casi siempre es una de tres: un <strong>vínculo de &quot;Personas de su organización&quot;</strong> creado hace tiempo, el grupo <strong>&quot;Todos excepto los usuarios externos&quot;</strong> con permiso en el sitio o la carpeta, o una <strong>herencia rota</strong> en una carpeta concreta. Copilot no ha saltado nada: esa persona podía abrir el fichero desde el navegador.</li><li><strong>Cerrar el acceso</strong>: quitar el vínculo o el permiso, poner la etiqueta de confidencialidad con cifrado y, si el sitio entero está mal, <strong>Restricted Content Discovery</strong> mientras su propietario lo revisa.</li><li><strong>¿Quién más lo ha visto?</strong> En <strong>Purview › Auditoría</strong>, buscar los accesos al fichero y las interacciones <code>CopilotInteraction</code> que lo usaron como recurso, en el periodo en que estuvo abierto. Si es un dato personal, se avisa al delegado de protección de datos y él decide si hay brecha que notificar.</li><li><strong>Buscar los parecidos</strong>: el mismo vínculo o grupo suele estar en más sitios. Se vuelve al informe de vínculos de uso compartido filtrando por ese sitio y los de RR. HH. y Finanzas.</li></ol>
+<h2>Siguientes pasos</h2>
+<ul><li><strong>Microsoft Purview</strong> cubre en profundidad etiquetas, DLP y auditoría, que son la mitad de un despliegue de Copilot bien hecho.</li><li><strong>SharePoint</strong>: permisos de sitios, grupos y uso compartido; la revisión de sobreexposición es, en el fondo, una limpieza de SharePoint pendiente.</li><li>Revisar el inquilino antes y después del despliegue (uso compartido externo, propietarios, licencias sin uso) es la idea del repositorio <strong>27-m365-tenant-governance-review</strong> de mi GitHub.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span></p>
+      <p class="repo-name"><span class="es">Nivel 3</span> · <span class="es">Microsoft 365 Copilot: despliegue y permisos</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
+      <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/27-m365-tenant-governance-review.html"><span class="label muted"><span class="es">Blog · 27</span></span><span class="related-t"><span class="es">¿Sigue el tenant gobernado como acordamos? Una revisión mensual de Microsoft 365</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="intune-anillos-de-windows-update-plazos-actualizaciones-urgentes-y-un-equipo-que-no-se-parchea.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Intune: anillos de Windows Update, plazos, actualizaciones urgentes y un equipo que nunca se parchea</span></span></a>
+    <a class="post-nav-link next" href="gpo-de-seguridad-base-ntlm-llmnr-smb-laps-y-despliegue-en-piloto.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">GPO de seguridad: NTLM, LLMNR, firma SMB, LAPS, registro de PowerShell y un despliegue con piloto y marcha atrás</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

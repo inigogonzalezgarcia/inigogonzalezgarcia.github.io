@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Cisco en una sede con sala de trading · Iñigo González</title>
+<meta name="description" content="Cómo se monta y se mantiene la sala de comunicaciones de una sede financiera: energía doble y SAI, núcleo redundante, pilas de acceso, etiquetado, consola…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/cisco-salas-de-comunicaciones-de-una-sede-con-sala-de-trading.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/cisco-salas-de-comunicaciones-de-una-sede-con-sala-de-trading.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/cisco-salas-de-comunicaciones-de-una-sede-con-sala-de-trading.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/cisco-salas-de-comunicaciones-de-una-sede-con-sala-de-trading.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cisco en una sede con sala de trading · Iñigo González">
+<meta property="og:description" content="Cómo se monta y se mantiene la sala de comunicaciones de una sede financiera: energía doble y SAI, núcleo redundante, pilas de acceso, etiquetado, consola…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/cisco-salas-de-comunicaciones-de-una-sede-con-sala-de-trading.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-sector-5.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cisco en una sede con sala de trading · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Cisco: switches, routers y salas de comunicaciones de una sede con sala de trading","alternativeHeadline":"Cisco: switches, routers and comms rooms of a site with a trading floor","description":"Cómo se monta y se mantiene la sala de comunicaciones de una sede financiera: energía doble y SAI, núcleo redundante, pilas de acceso, etiquetado, consola fuera de banda, copias de configuración, cambios fuera del horario de mercado, visitas de operadoras y una mesa sin red a las 8:55.","datePublished":"2026-10-28","dateModified":"2026-10-28","inLanguage":"es","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/es/guias/cisco-salas-de-comunicaciones-de-una-sede-con-sala-de-trading.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/guias/cisco-salas-de-comunicaciones-de-una-sede-con-sala-de-trading.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Cisco - Switches, routers y salas de comunicaciones de una sede"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 5","item":"https://inigogonzalezgarcia.github.io/es/guias/sector-5.html"},{"@type":"ListItem","position":4,"name":"Cisco: switches, routers y salas de comunicaciones de una sede con sala de trading","item":"https://inigogonzalezgarcia.github.io/es/guias/cisco-salas-de-comunicaciones-de-una-sede-con-sala-de-trading.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/cisco-salas-de-comunicaciones-de-una-sede-con-sala-de-trading.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <a href="sector-5.html"><span class="es">Sector 5</span></a></p>
+    <h1><span class="es">Cisco: switches, routers y salas de comunicaciones de una sede con sala de trading</span></h1>
+    <p class="lede"><span class="es">Cómo se monta y se mantiene la sala de comunicaciones de una sede financiera: energía doble y SAI, núcleo redundante, pilas de acceso, etiquetado, consola fuera de banda, copias de configuración, cambios fuera del horario de mercado, visitas de operadoras y una mesa sin red a las 8:55.</span></p><p class="label post-meta"><span class="es">Sector 5</span> · <span class="es">Cisco - Switches, routers y salas de comunicaciones de una sede</span> · <span class="es">8 min</span> · <span class="es">Actualizado</span> <span class="es">28 oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Una sala de comunicaciones en la que un fallo de una fuente, de un switch o de un circuito no deja a nadie sin red, y en la que cualquier técnico del equipo sabe qué hay, dónde está cada cable y cómo entrar a un equipo aunque la red esté caída. En una sede con sala de trading la red no puede pararse en horario de mercado: cada minuto sin red en una mesa es una posición que nadie puede gestionar. Esta guía no repite VLANs ni troncales (están en la guía de Cisco del Nivel 4); se centra en cómo se diseña y se opera la sala para que esa exigencia se cumpla.</p>
+<h2>Antes de empezar</h2>
+<ul><li>El <strong>inventario</strong> de la sala: núcleo, pilas de acceso, routers, firewalls, servidor de consolas, SAI y PDU, con su número de serie y su contrato de soporte.</li><li>El <strong>calendario de mercado</strong> que aplica a la sede (apertura, cierre, festivos de cada mercado en el que se opera) y la ventana de cambios acordada con el negocio.</li><li>Los <strong>identificadores de circuito</strong> de cada operadora y su teléfono de incidencias 24x7.</li><li>Acceso al gestor de contraseñas del equipo, con las credenciales locales de los equipos y del servidor de consolas.</li></ul>
+<h2>1. Energía y redundancia</h2>
+<p>La regla es que nada crítico dependa de un solo elemento:</p>
+<ul><li><strong>Dos fuentes</strong> en cada switch y router, cada una a una <strong>PDU distinta</strong>, y cada PDU a un <strong>SAI distinto</strong> (o a dos ramas del mismo sistema de alimentación de la sede). Una fuente a la PDU A y otra a la PDU A no es redundancia.</li><li><strong>Núcleo en pareja</strong>: dos switches de núcleo (StackWise Virtual o una pareja con HSRP/VRRP, según el diseño), con los uplinks de cada pila de acceso repartidos entre los dos.</li><li><strong>Pilas de acceso</strong> con el cable de pila cerrado en anillo y, si el modelo lo permite, StackPower. Si un miembro cae, la pila sigue con los demás.</li><li><strong>Los puestos de una mesa repartidos entre miembros de la pila</strong>: si el puesto principal de un trader va al switch 2, su segundo equipo o su teléfono de mesa va al switch 3. Así, perder un miembro deja a la mesa a medio gas, no a oscuras.</li><li>Dos <strong>routers o circuitos de operadoras distintas</strong>, con entradas al edificio por caminos distintos cuando el edificio lo permite.</li></ul>
+<p class="g-tip">Pide al responsable de instalaciones la autonomía real del SAI con la carga actual y la prueba del grupo electrógeno. El dato de la placa no sirve si se añadieron racks desde la instalación.</p>
+<h2>2. Etiquetado y cableado</h2>
+<div class="g-table"><table><thead><tr><th>Elemento</th><th>Norma</th><th>Ejemplo</th></tr></thead><tbody><tr><td>Rack</td><td>Fila y posición</td><td><code>R02</code></td></tr><tr><td>Equipo</td><td>Nombre de host en el frontal y en la trasera</td><td><code>sw-acc-p3-01</code></td></tr><tr><td>Panel de parcheo</td><td>Rack, panel y puerto</td><td><code>R02-PP04-17</code></td></tr><tr><td>Toma de puesto</td><td>Planta, zona y número, igual en el panel</td><td><code>P3-TR-042</code></td></tr><tr><td>Latiguillo</td><td>Etiqueta en ambos extremos con origen y destino</td><td><code>PP04-17 / Gi2/0/17</code></td></tr><tr><td>Circuito de operadora</td><td>Identificador del circuito y operadora</td><td><code>CIRC-A-77310</code></td></tr></tbody></table></div>
+<ul><li>Colores fijos: por ejemplo, azul para puestos, amarillo para enlaces entre equipos, rojo para gestión y consola.</li><li>La <strong>hoja de puertos</strong> (toma, panel, switch, puerto, VLAN) vive en un sitio único y se actualiza en el mismo cambio que mueve el cable. Una hoja desactualizada es peor que ninguna, porque alguien la creerá.</li><li>Nada de latiguillos colgando entre racks ni cableado que tape las fuentes: cambiar una fuente en caliente no debe exigir mover cables de producción.</li></ul>
+<h2>3. Consola fuera de banda y copias de configuración</h2>
+<p>Si el núcleo se cae, no vas a llegar a él por la red que él mismo da. El <strong>servidor de consolas</strong> tiene un cable de consola a cada equipo de la sala, su propia salida (una línea de datos móviles o un circuito independiente) y acceso solo para el equipo de redes, con MFA. Los puertos de gestión de los equipos van a una red de gestión separada.</p>
+<p>Cada equipo guarda copias locales de su configuración al guardarla, y además una herramienta central (la de monitorización o un script programado) las recoge cada noche.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">sw-core-01 · copias locales de configuración</span><button class="t-copy" type="button" data-copy="show running-config | section archive&#10;show archive" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show running-config | section archive</span><span class="t-out">archive</span><span class="t-out"> path flash:/archive/cfg</span><span class="t-out"> maximum 10</span><span class="t-out"> write-memory</span><span class="t-out"> time-period 1440</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show archive</span><span class="t-out">The maximum archive configurations allowed is 10.</span><span class="t-out">There are currently 3 archive configurations saved.</span><span class="t-out">The next archive file will be named flash:/archive/cfg-4</span><span class="t-out"> Archive #  Name</span><span class="t-out">   1        flash:/archive/cfg-1</span><span class="t-out">   2        flash:/archive/cfg-2</span><span class="t-out">   3        flash:/archive/cfg-3 &lt;- Most Recent</span></code></pre></figure>
+<p>Con <code>write-memory</code> se guarda una copia cada vez que alguien hace <code>write memory</code>, y con <code>time-period</code> también una al día. Compara la copia central de anoche con la configuración actual antes de cualquier cambio: así sabes si alguien tocó algo fuera de procedimiento.</p>
+<h2>4. Ventanas de cambio y visitas de operadoras</h2>
+<ul><li><strong>Fuera del horario de mercado</strong>: los cambios en núcleo, routers y pilas que dan servicio a la sala de trading se hacen por la noche o en fin de semana, con el calendario de festivos a la vista. Un día festivo en un mercado puede ser laborable en otro en el que la sede opera.</li><li><strong>Congelación</strong> en fechas sensibles: cierres de trimestre, vencimientos y días de publicación de datos macroeconómicos relevantes para la mesa. El negocio te dirá cuáles.</li><li>Cada cambio con plan de vuelta atrás probado, persona de redes en la sala o con consola, y una prueba de humo al terminar: un puesto de cada mesa con red, plataformas de mercado conectadas, telefonía de mesa con tono.</li><li><strong>Visitas de operadoras</strong>: siempre con ticket previo, nombre del técnico, identificador del circuito y alguien de IT acompañando. El técnico de una operadora toca su equipo, no el tuyo; si para su trabajo hay que reiniciar tu router, eso es un cambio y va en ventana.</li></ul>
+<p class="g-warn">Una intervención &quot;sin impacto&quot; de una operadora a las 10:00 en un día de mercado no existe. Pide que se haga en ventana aunque digan que no corta.</p>
+<h2>5. El ticket: &quot;una mesa de trading se ha quedado sin red a las 8:55&quot;</h2>
+<p>Cinco minutos antes de la apertura, seis puestos de la mesa de renta fija no tienen red. Los teléfonos de la misma mesa sí funcionan.</p>
+<ol><li><strong>Acota</strong>: seis puestos de una misma fila y los teléfonos funcionando apunta a un elemento común, no a seis cables.</li><li><strong>La hoja de puertos</strong> dice que esos seis puestos van todos al switch 3 de la pila de la planta 3, y los teléfonos al switch 2.</li><li><strong>La pila</strong>:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">sw-acc-p3-01 · estado de la pila y alimentación</span><button class="t-copy" type="button" data-copy="show switch&#10;show logging | include STACKMGR" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show switch</span><span class="t-out">Switch/Stack Mac Address : 0c11.6700.1a00 - Local Mac Address</span><span class="t-out">Mac persistency wait time: Indefinite</span><span class="t-out">                                             H/W   Current</span><span class="t-out">Switch#   Role    Mac Address     Priority Version  State</span><span class="t-out">-------------------------------------------------------------</span><span class="t-out">*1       Active   0c11.6700.1a00     15     V02     Ready</span><span class="t-out"> 2       Standby  0c11.6700.2b00     14     V02     Ready</span><span class="t-out"> 3       Member   0000.0000.0000      0             Removed</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show logging | include STACKMGR</span><span class="t-out">Oct 28 08:53:12: %STACKMGR-6-SWITCH_REMOVED: Switch 1 R0/0: stack_mgr: Switch 3 has been removed from the stack.</span></code></pre></figure>
+<ol><li><strong>En la sala</strong>: el switch 3 está apagado. Tiene una sola fuente instalada (la segunda nunca se llegó a pedir) y está conectada a la PDU B, que ha saltado.</li><li><strong>Recuperar ya</strong>: rearma la PDU si instalaciones confirma que es seguro; si no, mueve los seis latiguillos a puertos libres del switch 1 o 2 en la misma VLAN (consulta la hoja) y anota el cambio. Prioridad: la mesa operando a las 9:00.</li><li><strong>Después</strong>: pide la segunda fuente, revisa qué más tiene una sola fuente o una sola PDU, y reparte los puestos de esa mesa entre miembros, como en la sección 1. El informe de la incidencia dice causa, tiempo sin servicio y qué se cambia para que no se repita.</li></ol>
+<h2>6. Lo que revisas cada mes</h2>
+<ul><li>Fuentes y PDU: que cada equipo tiene dos fuentes en estado correcto (<code>show environment power</code>) y cada una en una PDU distinta.</li><li>El estado del SAI y su autonomía, con instalaciones.</li><li>Que la copia central de configuración de anoche existe para todos los equipos y que no hay diferencias sin cambio aprobado.</li><li>El servidor de consolas: que llegas a cada equipo y que su línea de salida funciona.</li><li>La hoja de puertos contra la realidad en una muestra de tomas.</li><li>El soporte y el fin de vida de los equipos de la sala.</li></ul>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <strong>Cisco: switches y routers</strong> del Nivel 4 cubre VLANs, troncales, el router con circuito de respaldo y los cambios en remoto con red de seguridad.</li><li>La guía de <strong>Fortinet FortiGate</strong> cubre el firewall que suele estar en la misma sala.</li><li>La guía de <strong>SolarWinds</strong> sirve para vigilar fuentes, pilas y circuitos y guardar las configuraciones.</li><li>La guía de <strong>Backup y DR/BCP</strong> sitúa la sala en el plan de continuidad de la sede.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span></p>
+      <p class="repo-name"><span class="es">Sector 5</span> · <span class="es">Cisco - Switches, routers y salas de comunicaciones de una sede</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
+      <a class="arrow-link" href="sector-5.html"><span class="es">Todas las guías del Sector 5</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap post-nav">
+    <span></span>
+    <a class="post-nav-link next" href="conditional-access-politicas-para-una-sede-con-sala-de-trading.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">Conditional Access: políticas pensadas para una sede con sala de trading</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Retail y oficinas corporativas · Guías IT · Iñigo González</title>
+<meta name="description" content="Guías IT para retail y oficinas: pre-apertura de un corner, router 4G, altas de usuario, AS400, copias en cinta, VPN, impresoras de tienda y salas Poly.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/sector-2.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/sector-2.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/sector-2.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/sector-2.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Retail y oficinas corporativas · Guías IT · Iñigo González">
+<meta property="og:description" content="Guías IT para retail y oficinas: pre-apertura de un corner, router 4G, altas de usuario, AS400, copias en cinta, VPN, impresoras de tienda y salas Poly.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/sector-2.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-sector-2.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Retail y oficinas corporativas · Guías IT · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","@id":"https://inigogonzalezgarcia.github.io/es/guias/sector-2.html","url":"https://inigogonzalezgarcia.github.io/es/guias/sector-2.html","name":"Sector 2 · Retail y oficinas corporativas","inLanguage":"es","isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/#website"},"hasPart":[{"@type":"TechArticle","headline":"Alta de usuario: red, correo y aplicaciones de negocio en tiendas y oficina central","url":"https://inigogonzalezgarcia.github.io/es/guias/alta-de-usuario-en-retail-red-correo-y-aplicaciones-de-negocio.html"},{"@type":"TechArticle","headline":"AS400: alta y gestión de usuarios en IBM i","url":"https://inigogonzalezgarcia.github.io/es/guias/as400-alta-y-gestion-de-usuarios-en-ibm-i.html"},{"@type":"TechArticle","headline":"Backup en cinta: rotación, custodia y comprobación de las copias","url":"https://inigogonzalezgarcia.github.io/es/guias/backup-en-cinta-rotacion-gfs-custodia-y-comprobacion-de-copias.html"},{"@type":"TechArticle","headline":"Cisco AnyConnect: resolver problemas de conexión VPN en tiendas, hoteles y viajes","url":"https://inigogonzalezgarcia.github.io/es/guias/cisco-anyconnect-resolver-problemas-de-conexion-vpn-en-tiendas-y-viajes.html"},{"@type":"TechArticle","headline":"Impresoras de tienda: instalación y mantenimiento de etiquetas, tickets y multifunción sin IT en sitio","url":"https://inigogonzalezgarcia.github.io/es/guias/impresoras-de-tienda-etiquetas-tickets-y-multifuncion-sin-it-en-sitio.html"},{"@type":"TechArticle","headline":"Office 365: asignación de licencias por perfil con el service desk, de la tienda a la oficina central","url":"https://inigogonzalezgarcia.github.io/es/guias/licencias-office-365-por-perfil-con-el-service-desk-tiendas-y-oficina-central.html"},{"@type":"TechArticle","headline":"Poly: salas de videoconferencia de la oficina central, del aprovisionamiento al consejo que empieza en cinco minutos","url":"https://inigogonzalezgarcia.github.io/es/guias/salas-de-videoconferencia-poly-en-la-oficina-central-aprovisionamiento-y-soporte.html"},{"@type":"TechArticle","headline":"Corner de marca en un gran almacén: el checklist de IT desde la obra hasta el día de apertura","url":"https://inigogonzalezgarcia.github.io/es/guias/corner-de-marca-en-gran-almacen-checklist-de-it-de-la-pre-apertura.html"},{"@type":"TechArticle","headline":"Router 4G: la conexión de la tienda cae dos horas antes de abrir","url":"https://inigogonzalezgarcia.github.io/es/guias/router-4g-la-conexion-de-la-tienda-cae-dos-horas-antes-de-abrir.html"}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 2","item":"https://inigogonzalezgarcia.github.io/es/guias/sector-2.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/sector-2.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <span class="es">Sector 2</span></p>
+    <h1><span class="es">Retail y<br>oficinas corporativas.</span></h1>
+    <p class="lede"><span class="es">Nueve guías para dar soporte a tiendas sin IT en sitio y a una oficina central: la pre-apertura de un corner en un gran almacén, la conexión que cae antes de abrir, el alta de un usuario de punta a punta, AS400, copias en cinta, la VPN de quien visita tiendas, impresoras de tienda, licencias de Office 365 por perfil y salas Poly.</span></p><p class="label post-meta"><span class="es">9 guías · ES/EN · ejemplos ficticios</span></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="sr-only"><span class="es">Temas y guías</span></h2>
+    <div class="guide-levels three">
+      <div class="guide-level reveal" id="alta-usuario"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">Alta de usuario - Red, correo y aplicaciones de negocio</span></h3><p class="muted small"><span class="es">La incorporación de punta a punta: plazo con RR. HH., cuenta y licencia por rol, red, TPV y ERP, y el primer día en tienda.</span></p><ul class="guide-topics guide-list"><li><a href="alta-de-usuario-en-retail-red-correo-y-aplicaciones-de-negocio.html"><span class="es">Alta de usuario: red, correo y aplicaciones de negocio en tiendas y oficina central</span></a><span class="muted small"><span class="es">La incorporación completa en una cadena de tiendas: la petición de RR. HH. con plazo, la cuenta y la licencia según el rol, buzones y buzones compartidos, la red de tienda y la VPN de oficina, el usuario del TPV y del ERP, la entrega del equipo y el encargado que no puede entrar en el TPV el primer día.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="as400"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">AS400 - Alta y gestión de usuarios</span></h3><p class="muted small"><span class="es">Perfiles de usuario en IBM i: plantillas por rol, autorizaciones especiales, perfiles inhabilitados, el 5250 y las bajas.</span></p><ul class="guide-topics guide-list"><li><a href="as400-alta-y-gestion-de-usuarios-en-ibm-i.html"><span class="es">AS400: alta y gestión de usuarios en IBM i</span></a><span class="muted small"><span class="es">Cómo se crea un perfil de usuario en IBM i para el ERP de una cadena de tiendas: clases de usuario y autorizaciones especiales, perfiles de grupo, programa inicial, restablecer contraseñas, perfiles inhabilitados por QMAXSIGN, el emulador 5250 de Access Client Solutions y las bajas.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="backup-cinta"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">Backup en cinta - Rotación y comprobación de copias</span></h3><p class="muted small"><span class="es">Cintas LTO en la oficina central: rotación GFS, etiquetas, custodia externa, cifrado, prueba de restauración mensual y trabajos fallidos.</span></p><ul class="guide-topics guide-list"><li><a href="backup-en-cinta-rotacion-gfs-custodia-y-comprobacion-de-copias.html"><span class="es">Backup en cinta: rotación, custodia y comprobación de las copias</span></a><span class="muted small"><span class="es">Cómo se lleva la copia en cinta LTO de una oficina central: rotación diaria, semanal y mensual, etiquetas, custodia fuera de la oficina, cifrado, la revisión de los trabajos, la prueba de restauración mensual, la limpieza de la unidad y el trabajo que falla porque la cinta está protegida, sin caducar o fuera de la librería.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="anyconnect-retail"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">Cisco AnyConnect - Resolver problemas de conexión VPN</span></h3><p class="muted small"><span class="es">VPN para oficina central y jefes de área de visita en tienda: Wi-Fi de hotel, portales cautivos, certificados, MFA, split tunnel y DART.</span></p><ul class="guide-topics guide-list"><li><a href="cisco-anyconnect-resolver-problemas-de-conexion-vpn-en-tiendas-y-viajes.html"><span class="es">Cisco AnyConnect: resolver problemas de conexión VPN en tiendas, hoteles y viajes</span></a><span class="muted small"><span class="es">Los fallos de VPN que llegan de quien no trabaja en la oficina: jefes de área que van de tienda en tienda, Wi-Fi de hotel con portal cautivo, certificados caducados, avisos de MFA, el túnel dividido que no lleva al ERP y el paquete DART para diagnosticar sin estar allí.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="impresoras-tienda"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">Impresoras de tienda - Instalación y mantenimiento</span></h3><p class="muted small"><span class="es">Etiquetas, tickets y multifunción en tiendas sin IT: drivers centralizados, IPs reservadas y la impresora que falla antes de abrir.</span></p><ul class="guide-topics guide-list"><li><a href="impresoras-de-tienda-etiquetas-tickets-y-multifuncion-sin-it-en-sitio.html"><span class="es">Impresoras de tienda: instalación y mantenimiento de etiquetas, tickets y multifunción sin IT en sitio</span></a><span class="muted small"><span class="es">Los tres tipos de impresora de una tienda, cómo desplegar drivers y colas desde la central, por qué cada impresora necesita una IP reservada, quién se ocupa de los consumibles, cómo guiar por teléfono a quien no es técnico y qué hacer cuando la tienda no puede imprimir etiquetas antes de abrir.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="o365-licencias"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">Office 365 - Asignación de licencias con el service desk</span></h3><p class="muted small"><span class="es">F3 para tienda y E3 para oficina, licencias por grupo en Entra ID, altas y bajas con el service desk y conciliación mensual.</span></p><ul class="guide-topics guide-list"><li><a href="licencias-office-365-por-perfil-con-el-service-desk-tiendas-y-oficina-central.html"><span class="es">Office 365: asignación de licencias por perfil con el service desk, de la tienda a la oficina central</span></a><span class="muted small"><span class="es">Qué licencia lleva cada perfil en una cadena con tiendas y oficina central, cómo asignarlas por grupo en Entra ID, el flujo de petición, aprobación, asignación y recuperación en las bajas, la conciliación mensual y qué mirar cuando el usuario no tiene Outlook o Teams tras asignarle la licencia.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="poly-salas"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">Poly - Salas de videoconferencia</span></h3><p class="muted small"><span class="es">Salas de la oficina central con HP Poly: Teams Rooms en Android o barra USB, Poly Lens, cuenta de sala y la sala caída antes del consejo.</span></p><ul class="guide-topics guide-list"><li><a href="salas-de-videoconferencia-poly-en-la-oficina-central-aprovisionamiento-y-soporte.html"><span class="es">Poly: salas de videoconferencia de la oficina central, del aprovisionamiento al consejo que empieza en cinco minutos</span></a><span class="muted small"><span class="es">Qué equipo Poly poner en cada sala, cuándo Teams Rooms en Android y cuándo una barra USB para el portátil, cómo aprovisionar con Poly Lens y el centro de administración de Teams, la cuenta de sala y su calendario, el firmware sin sustos y qué hacer cuando la sala sale desconectada justo antes del consejo.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="corner-preapertura"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">Corner en gran almacén - Checklist de IT de la pre-apertura</span></h3><p class="muted small"><span class="es">Qué pone el gran almacén y qué pone la marca, punto de red, TPV, datáfonos e impresoras, respaldo 4G, día de pruebas y entrega.</span></p><ul class="guide-topics guide-list"><li><a href="corner-de-marca-en-gran-almacen-checklist-de-it-de-la-pre-apertura.html"><span class="es">Corner de marca en un gran almacén: el checklist de IT desde la obra hasta el día de apertura</span></a><span class="muted small"><span class="es">Qué pone el equipo de IT y telecomunicaciones del gran almacén y qué pone la marca, el punto de red y la sala de comunicaciones de la planta, TPV, datáfonos e impresoras, el respaldo por Wi-Fi o 4G, usuarios y cuentas, el día de pruebas, el soporte del día de apertura y la entrega a quien da soporte después.</span></span></li></ul></div>
+      <div class="guide-level reveal" id="router-4g"><p class="label kicker"><span class="es">1 guía</span></p><h3><span class="es">Router 4G - La tienda sin conexión antes de abrir</span></h3><p class="muted small"><span class="es">Enlace, puerto, VLAN y DHCP, la sala de comunicaciones de la planta, un router 4G como plan B, qué funciona por él y su seguridad.</span></p><ul class="guide-topics guide-list"><li><a href="router-4g-la-conexion-de-la-tienda-cae-dos-horas-antes-de-abrir.html"><span class="es">Router 4G: la conexión de la tienda cae dos horas antes de abrir</span></a><span class="muted small"><span class="es">Cómo localizar el corte en orden (enlace, puerto del switch, VLAN, DHCP y la sala de comunicaciones de la planta), montar un router 4G o 5G como plan B, qué funciona a través de él (TPV, datáfonos, VPN) y qué no, cómo asegurar el enlace temporal y el seguimiento con los técnicos del edificio y el operador.</span></span></li></ul></div>
+    </div>
+    <div class="numbers-head reveal u-mt34">
+      <div>
+        <p class="label kicker"><span class="es">Cómo están hechas</span></p>
+        <h2 class="h2 sm"><span class="es">Terminales y ventanas<br>simuladas.</span></h2>
+      </div>
+    </div>
+    <p class="lede reveal"><span class="es">Las guías no llevan capturas de sistemas reales: los terminales y las ventanas que ves son simulaciones con nombres, dominios y usuarios ficticios. Los comandos sí son los de verdad, y cada terminal tiene un botón para copiarlos.</span></p>
+    <p class="reveal u-mt22"><a class="arrow-link" href="nivel-1.html"><span class="es">Nivel 1: Primeros pasos</span> →</a> · <a class="arrow-link" href="nivel-2.html"><span class="es">Nivel 2: Base sólida</span> →</a> · <a class="arrow-link" href="nivel-3.html"><span class="es">Nivel 3: Avanzado</span> →</a> · <a class="arrow-link" href="nivel-4.html"><span class="es">Nivel 4: Experto</span> →</a> · <a class="arrow-link" href="sector-1.html"><span class="es">Sector 1: Hostelería y punto de venta</span> →</a> · <a class="arrow-link" href="sector-3.html"><span class="es">Sector 3: Sanidad y plataformas críticas</span> →</a> · <a class="arrow-link" href="sector-4.html"><span class="es">Sector 4: Industria multinacional</span> →</a> · <a class="arrow-link" href="sector-5.html"><span class="es">Sector 5: Servicios financieros y trading</span> →</a> · <a class="arrow-link" href="../guias.html"><span class="es">Todos los niveles</span> →</a></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

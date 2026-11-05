@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Guías IT · Iñigo González</title>
+<meta name="description" content="Guías IT prácticas paso a paso, de los primeros pasos en soporte al nivel experto: Active Directory, Microsoft 365, Intune, Windows, Teams y más.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Guías IT · Iñigo González">
+<meta property="og:description" content="Guías IT prácticas paso a paso, de los primeros pasos en soporte al nivel experto: Active Directory, Microsoft 365, Intune, Windows, Teams y más.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Guías IT · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="journey.html"><span class="es">Viaje</span></a><a href="about.html"><span class="es">Sobre mí</span></a><a href="blog/"><span class="es">Blog</span></a><a href="guias.html" aria-current="page"><span class="es">Guías</span></a><a href="store.html"><span class="es">Servicios</span></a><a href="recursos.html"><span class="es">Recursos</span></a><a href="links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../guias.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero">
+  <div class="wrap">
+    <p class="label kicker"><span class="es">Guías IT</span></p>
+    <h1><span class="es">Guías prácticas<br>para el día a día en IT.</span></h1>
+    <p class="lede"><span class="es">Paso a paso, con comandos y comprobaciones, sobre lo que uso en mi trabajo: Intune, Jamf Pro, Active Directory, GPO, Entra ID, MECM y operaciones en sede.</span></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="numbers-head reveal">
+      <div>
+        <p class="label kicker"><span class="es">Lo que vas a encontrar</span></p>
+        <h2 class="h2 sm"><span class="es">De lo básico<br>a lo experto.</span></h2>
+      </div>
+    </div>
+    <div class="guide-levels">
+      <div class="guide-level reveal open"><p class="label kicker"><span class="es">Nivel 1</span></p><h3><span class="es">Primeros pasos</span></h3><p class="muted small"><span class="es">Lo que necesitas para empezar en soporte: el puesto, el usuario y sus herramientas.</span></p><ul class="guide-topics"><li><a href="guias/nivel-1.html#active-directory"><span class="es">Active Directory: usuarios y grupos</span></a></li><li><a href="guias/nivel-1.html#android"><span class="es">Android</span></a></li><li><a href="guias/nivel-1.html#bitlocker"><span class="es">BitLocker</span></a></li><li><a href="guias/nivel-1.html#anyconnect"><span class="es">Cisco AnyConnect (VPN)</span></a></li><li><a href="guias/nivel-1.html#impresoras"><span class="es">Impresoras y periféricos</span></a></li><li><a href="guias/nivel-1.html#ios"><span class="es">iPhone y iPad</span></a></li><li><a href="guias/nivel-1.html#jira"><span class="es">Jira Service Management: tickets</span></a></li><li><a href="guias/nivel-1.html#m365"><span class="es">Microsoft 365 y licencias</span></a></li><li><a href="guias/nivel-1.html#teams"><span class="es">Microsoft Teams</span></a></li><li><a href="guias/nivel-1.html#outlook"><span class="es">Outlook y Exchange Online</span></a></li><li><a href="guias/nivel-1.html#windows"><span class="es">Windows 10 y 11</span></a></li></ul><a class="btn" href="guias/nivel-1.html"><span class="es">Ver las guías</span> →</a></div>
+      <div class="guide-level reveal open"><p class="label kicker"><span class="es">Nivel 2</span></p><h3><span class="es">Base sólida</span></h3><p class="muted small"><span class="es">Servidores, despliegue de aplicaciones y los primeros scripts.</span></p><ul class="guide-topics"><li><a href="guias/nivel-2.html#azure-ad-connect"><span class="es">Azure AD Connect</span></a></li><li><a href="guias/nivel-2.html#bash"><span class="es">Bash</span></a></li><li><a href="guias/nivel-2.html#citrix-vdi"><span class="es">Citrix VDI</span></a></li><li><a href="guias/nivel-2.html#confluence"><span class="es">Confluence</span></a></li><li><a href="guias/nivel-2.html#git"><span class="es">Git</span></a></li><li><a href="guias/nivel-2.html#jamf-pro"><span class="es">Jamf Pro</span></a></li><li><a href="guias/nivel-2.html#mecm-sccm"><span class="es">MECM / SCCM: empaquetado de aplicaciones</span></a></li><li><a href="guias/nivel-2.html#teams-rooms"><span class="es">Microsoft Teams Rooms</span></a></li><li><a href="guias/nivel-2.html#pdq-mdt"><span class="es">PDQ y MDT</span></a></li><li><a href="guias/nivel-2.html#powershell"><span class="es">PowerShell</span></a></li><li><a href="guias/nivel-2.html#rhel"><span class="es">Red Hat Enterprise Linux</span></a></li><li><a href="guias/nivel-2.html#sharepoint"><span class="es">SharePoint</span></a></li><li><a href="guias/nivel-2.html#ubuntu"><span class="es">Ubuntu</span></a></li><li><a href="guias/nivel-2.html#veeam"><span class="es">Veeam Backup</span></a></li><li><a href="guias/nivel-2.html#vmware-horizon"><span class="es">VMware Horizon</span></a></li><li><a href="guias/nivel-2.html#windows-server"><span class="es">Windows Server</span></a></li></ul><a class="btn" href="guias/nivel-2.html"><span class="es">Ver las guías</span> →</a></div>
+      <div class="guide-level reveal open"><p class="label kicker"><span class="es">Nivel 3</span></p><h3><span class="es">Avanzado</span></h3><p class="muted small"><span class="es">Gestión moderna del puesto, identidad, virtualización y automatización.</span></p><ul class="guide-topics"><li><a href="guias/nivel-3.html#ansible"><span class="es">Ansible</span></a></li><li><a href="guias/nivel-3.html#docker"><span class="es">Docker</span></a></li><li><a href="guias/nivel-3.html#elk"><span class="es">Elasticsearch, Logstash y Kibana</span></a></li><li><a href="guias/nivel-3.html#conditional-access"><span class="es">Entra ID: Conditional Access</span></a></li><li><a href="guias/nivel-3.html#entra-sso"><span class="es">Entra ID: SSO, SAML y App Registrations</span></a></li><li><a href="guias/nivel-3.html#grafana"><span class="es">Grafana</span></a></li><li><a href="guias/nivel-3.html#hyper-v"><span class="es">Hyper-V</span></a></li><li><a href="guias/nivel-3.html#intune-epm"><span class="es">Intune EPM</span></a></li><li><a href="guias/nivel-3.html#intune"><span class="es">Intune: Windows, macOS, iOS y Android</span></a></li><li><a href="guias/nivel-3.html#jenkins"><span class="es">Jenkins (CI/CD)</span></a></li><li><a href="guias/nivel-3.html#linux-ad"><span class="es">Linux integrado con Active Directory</span></a></li><li><a href="guias/nivel-3.html#graph"><span class="es">Microsoft Graph</span></a></li><li><a href="guias/nivel-3.html#ndes-pki"><span class="es">NDES y Cloud PKI</span></a></li><li><a href="guias/nivel-3.html#databases"><span class="es">PostgreSQL, MySQL y SQL Server</span></a></li><li><a href="guias/nivel-3.html#solarwinds"><span class="es">SolarWinds</span></a></li><li><a href="guias/nivel-3.html#landscape"><span class="es">Ubuntu Landscape</span></a></li><li><a href="guias/nivel-3.html#vsphere"><span class="es">VMware vSphere y vCenter</span></a></li></ul><a class="btn" href="guias/nivel-3.html"><span class="es">Ver las guías</span> →</a></div>
+      <div class="guide-level reveal open"><p class="label kicker"><span class="es">Nivel 4</span></p><h3><span class="es">Experto</span></h3><p class="muted small"><span class="es">Infraestructura híbrida, redes, seguridad y continuidad de negocio.</span></p><ul class="guide-topics"><li><a href="guias/nivel-4.html#aws"><span class="es">Amazon AWS</span></a></li><li><a href="guias/nivel-4.html#azure-monitor"><span class="es">Azure Monitor y Log Analytics</span></a></li><li><a href="guias/nivel-4.html#avd-w365"><span class="es">Azure Virtual Desktop y Windows 365</span></a></li><li><a href="guias/nivel-4.html#dr-bcp"><span class="es">Backup y recuperación ante desastres (DR/BCP)</span></a></li><li><a href="guias/nivel-4.html#cisco"><span class="es">Cisco: switches y routers</span></a></li><li><a href="guias/nivel-4.html#cyberark"><span class="es">CyberArk</span></a></li><li><a href="guias/nivel-4.html#fortigate"><span class="es">Fortinet FortiGate</span></a></li><li><a href="guias/nivel-4.html#compliance"><span class="es">ISO 27001, NIS2 y RGPD en IT</span></a></li><li><a href="guias/nivel-4.html#kubernetes"><span class="es">Kubernetes</span></a></li><li><a href="guias/nivel-4.html#m365-pim"><span class="es">Microsoft 365: Global Admin y PIM</span></a></li><li><a href="guias/nivel-4.html#purview"><span class="es">Microsoft Purview</span></a></li><li><a href="guias/nivel-4.html#sentinel"><span class="es">Microsoft Sentinel</span></a></li><li><a href="guias/nivel-4.html#tenant-migration"><span class="es">Migraciones de tenant Microsoft 365</span></a></li><li><a href="guias/nivel-4.html#nutanix"><span class="es">Nutanix</span></a></li><li><a href="guias/nivel-4.html#qualys"><span class="es">Qualys</span></a></li><li><a href="guias/nivel-4.html#openshift"><span class="es">Red Hat OpenShift</span></a></li><li><a href="guias/nivel-4.html#terraform"><span class="es">Terraform</span></a></li></ul><a class="btn" href="guias/nivel-4.html"><span class="es">Ver las guías</span> →</a></div>
+    </div>
+    <div class="numbers-head reveal u-mt34">
+      <div>
+        <p class="label kicker"><span class="es">Desde la experiencia</span></p>
+        <h2 class="h2 sm"><span class="es">Casos reales<br>por sector.</span></h2>
+      </div>
+    </div>
+    <div class="guide-levels five">
+      <div class="guide-level reveal open"><p class="label kicker"><span class="es">Sector 1</span></p><h3><span class="es">Hostelería y punto de venta</span></h3><p class="muted small"><span class="es">TPV, sistemas de hotel y la puesta en marcha de un establecimiento.</span></p><ul class="guide-topics"><li><a href="guias/sector-1.html#cashdro"><span class="es">CashDro - Integración con el TPV</span></a></li><li><a href="guias/sector-1.html#hotel-preopening"><span class="es">Hotel en pre-apertura - Checklist de IT hasta el día de apertura</span></a></li><li><a href="guias/sector-1.html#icg-hiopos"><span class="es">ICG y HIOPOS - Puesta en marcha de un TPV</span></a></li><li><a href="guias/sector-1.html#iptv-hotel"><span class="es">IPTV en hotel - Diagnóstico de canales y equipos de habitación</span></a></li><li><a href="guias/sector-1.html#pms-hotel"><span class="es">PMS hotelero - Soporte e interfaces con el TPV</span></a></li></ul><a class="btn" href="guias/sector-1.html"><span class="es">Ver las guías</span> →</a></div>
+      <div class="guide-level reveal open"><p class="label kicker"><span class="es">Sector 2</span></p><h3><span class="es">Retail y oficinas corporativas</span></h3><p class="muted small"><span class="es">El día a día de IT en oficinas y tiendas: usuarios, licencias, impresión y copias.</span></p><ul class="guide-topics"><li><a href="guias/sector-2.html#alta-usuario"><span class="es">Alta de usuario - Red, correo y aplicaciones de negocio</span></a></li><li><a href="guias/sector-2.html#as400"><span class="es">AS400 - Alta y gestión de usuarios</span></a></li><li><a href="guias/sector-2.html#backup-cinta"><span class="es">Backup en cinta - Rotación y comprobación de copias</span></a></li><li><a href="guias/sector-2.html#anyconnect-retail"><span class="es">Cisco AnyConnect - Resolver problemas de conexión VPN</span></a></li><li><a href="guias/sector-2.html#impresoras-tienda"><span class="es">Impresoras de tienda - Instalación y mantenimiento</span></a></li><li><a href="guias/sector-2.html#o365-licencias"><span class="es">Office 365 - Asignación de licencias con el service desk</span></a></li><li><a href="guias/sector-2.html#poly-salas"><span class="es">Poly - Salas de videoconferencia</span></a></li></ul><a class="btn" href="guias/sector-2.html"><span class="es">Ver las guías</span> →</a></div>
+      <div class="guide-level reveal open"><p class="label kicker"><span class="es">Sector 3</span></p><h3><span class="es">Sanidad y plataformas críticas</span></h3><p class="muted small"><span class="es">Servidores que no pueden parar: rendimiento, actualizaciones y monitorización.</span></p><ul class="guide-topics"><li><a href="guias/sector-3.html#citrix-apps"><span class="es">Citrix VDI - Publicar y dar soporte a aplicaciones</span></a></li><li><a href="guias/sector-3.html#entornos-prueba"><span class="es">Entornos de prueba - Preparar un entorno para validar cambios</span></a></li><li><a href="guias/sector-3.html#monitorizacion-alarmas"><span class="es">Monitorización - Desplegar alarmas y responder a ellas</span></a></li><li><a href="guias/sector-3.html#oracle-upgrade"><span class="es">Oracle - Actualizar hardware y SO de servidores de base de datos</span></a></li><li><a href="guias/sector-3.html#rhel-rendimiento"><span class="es">Red Hat - Ajuste de rendimiento de un servidor</span></a></li><li><a href="guias/sector-3.html#winserver-parches"><span class="es">Windows Server - Actualizaciones planificadas sin cortar el servicio</span></a></li></ul><a class="btn" href="guias/sector-3.html"><span class="es">Ver las guías</span> →</a></div>
+      <div class="guide-level reveal open"><p class="label kicker"><span class="es">Sector 4</span></p><h3><span class="es">Industria multinacional</span></h3><p class="muted small"><span class="es">Sedes en varios países, redes entre plantas, ERP y presupuesto de IT.</span></p><ul class="guide-topics"><li><a href="guias/sector-4.html#lan-wan-wifi"><span class="es">LAN, WAN y WiFi - Conectar sedes de varios países</span></a></li><li><a href="guias/sector-4.html#mdm-moviles"><span class="es">MDM - Gestión de móviles corporativos</span></a></li><li><a href="guias/sector-4.html#presupuesto-it"><span class="es">Presupuesto de IT - Preparar y seguir el presupuesto anual</span></a></li><li><a href="guias/sector-4.html#sap-soporte"><span class="es">SAP - Soporte a usuarios desde IT</span></a></li><li><a href="guias/sector-4.html#sqlserver-backup"><span class="es">SQL Server - Copias de seguridad y restauración</span></a></li><li><a href="guias/sector-4.html#veeam-restauraciones"><span class="es">Veeam - Planificar y probar restauraciones</span></a></li><li><a href="guias/sector-4.html#vmware-mantenimiento"><span class="es">VMware - Mantenimiento de hosts y máquinas virtuales</span></a></li></ul><a class="btn" href="guias/sector-4.html"><span class="es">Ver las guías</span> →</a></div>
+      <div class="guide-level reveal open"><p class="label kicker"><span class="es">Sector 5</span></p><h3><span class="es">Servicios financieros y trading</span></h3><p class="muted small"><span class="es">Una sede con sala de trading que no puede parar: red, acceso, salas y continuidad.</span></p><ul class="guide-topics"><li><a href="guias/sector-5.html#cisco-sede"><span class="es">Cisco - Switches, routers y salas de comunicaciones de una sede</span></a></li><li><a href="guias/sector-5.html#ca-sede"><span class="es">Conditional Access - Políticas para una sede</span></a></li><li><a href="guias/sector-5.html#dr-prueba"><span class="es">DR/BCP - Preparar y supervisar una prueba de recuperación</span></a></li><li><a href="guias/sector-5.html#teams-rooms-crestron"><span class="es">Microsoft Teams Rooms - Salas sobre Crestron</span></a></li><li><a href="guias/sector-5.html#pim-jit"><span class="es">PIM - Acceso Just-In-Time para administradores</span></a></li><li><a href="guias/sector-5.html#proveedores-conectividad"><span class="es">Proveedores de conectividad - Gestión de circuitos y averías</span></a></li><li><a href="guias/sector-5.html#windows11-migracion"><span class="es">Windows 11 - Migrar los equipos de una sede</span></a></li></ul><a class="btn" href="guias/sector-5.html"><span class="es">Ver las guías</span> →</a></div>
+    </div>
+    <div class="numbers-head reveal u-mt34">
+      <div>
+        <p class="label kicker"><span class="es">Mientras tanto</span></p>
+        <h2 class="h2 sm"><span class="es">Por dónde seguir.</span></h2>
+      </div>
+    </div>
+    <div class="etm-grid guide-grid">
+      <a class="etm-item reveal guide-card" href="https://sysadmindesksbyigg.pages.dev/" target="_blank" rel="noopener noreferrer"><p class="label muted"><span class="es">Práctica</span></p><h3><span class="es">SysAdmin Desks</span> ↗</h3><p><span class="es">Practica 24 tickets de soporte en una consola simulada: de Active Directory y Microsoft 365 a VPN, Veeam, Citrix, Linux, SQL Server, redes Cisco y FortiGate y RMA. Cada puesto enlaza con su guía. Gratis, con tu propia cuenta.</span></p></a>
+      <a class="etm-item reveal guide-card" href="recursos.html"><p class="label muted"><span class="es">Gratis</span></p><h3><span class="es">33 ideas + newsletter</span> →</h3><p><span class="es">Apúntate a <em>Tech Career Lab</em> y recibe las 33 ideas para que te encuentren si trabajas en IT. Te aviso cuando salgan las primeras guías.</span></p></a>
+      <a class="etm-item reveal guide-card" href="about.html?reserva=1#reservar"><p class="label muted"><span class="es">30 min</span></p><h3><span class="es">Sesión inicial</span> →</h3><p><span class="es">¿Tienes una duda concreta sobre tu carrera en IT? Reserva una videollamada de 30 minutos y sales con siguientes pasos claros.</span></p></a>
+      <a class="etm-item reveal guide-card" href="blog/"><p class="label muted"><span class="es">Blog</span></p><h3><span class="es">Labs y herramientas</span> →</h3><p><span class="es">Mientras tanto, en el blog cuento cómo construí cada herramienta: Intune, Jamf Pro, Active Directory, Entra ID, MECM y más.</span></p></a>
+      <a class="etm-item reveal guide-card" href="https://github.com/inigogonzalezgarcia" target="_blank" rel="noopener noreferrer"><p class="label muted"><span class="es">GitHub</span></p><h3><span class="es">El código de los proyectos</span> ↗</h3><p><span class="es">Scripts y herramientas con datos ficticios que puedes probar y adaptar a tu entorno.</span></p></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="condiciones.html"><span class="es">Condiciones</span></a> · <a href="recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

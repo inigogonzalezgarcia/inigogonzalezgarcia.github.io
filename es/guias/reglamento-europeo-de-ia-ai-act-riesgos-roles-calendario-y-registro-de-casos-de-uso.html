@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>AI Act en IT: riesgos, roles y calendario · Iñigo González</title>
+<meta name="description" content="Qué significa el AI Act para una empresa que usa Copilot, chatbots y otras herramientas de IA: las cuatro categorías de riesgo, proveedor y responsable…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/reglamento-europeo-de-ia-ai-act-riesgos-roles-calendario-y-registro-de-casos-de-uso.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/reglamento-europeo-de-ia-ai-act-riesgos-roles-calendario-y-registro-de-casos-de-uso.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/reglamento-europeo-de-ia-ai-act-riesgos-roles-calendario-y-registro-de-casos-de-uso.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/reglamento-europeo-de-ia-ai-act-riesgos-roles-calendario-y-registro-de-casos-de-uso.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI Act en IT: riesgos, roles y calendario · Iñigo González">
+<meta property="og:description" content="Qué significa el AI Act para una empresa que usa Copilot, chatbots y otras herramientas de IA: las cuatro categorías de riesgo, proveedor y responsable…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/reglamento-europeo-de-ia-ai-act-riesgos-roles-calendario-y-registro-de-casos-de-uso.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-nivel-4.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AI Act en IT: riesgos, roles y calendario · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"El Reglamento Europeo de IA (AI Act) en un departamento de IT: niveles de riesgo, roles, calendario, registro de casos de uso y una herramienta no aprobada","alternativeHeadline":"The EU AI Act for an IT department: risk levels, roles, timeline, a use-case register and an unapproved tool","description":"Qué significa el AI Act para una empresa que usa Copilot, chatbots y otras herramientas de IA: las cuatro categorías de riesgo, proveedor y responsable del despliegue, la obligación de alfabetización y la de transparencia, el calendario con los cambios del Ómnibus Digital, un registro de casos de uso, la aprobación y su relación con la EIPD del RGPD, y un empleado que mete datos de clientes en una herramienta no aprobada.","datePublished":"2026-10-30","dateModified":"2026-10-30","inLanguage":"es","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/es/guias/reglamento-europeo-de-ia-ai-act-riesgos-roles-calendario-y-registro-de-casos-de-uso.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/guias/reglamento-europeo-de-ia-ai-act-riesgos-roles-calendario-y-registro-de-casos-de-uso.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Reglamento Europeo de IA (AI Act)"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Nivel 4","item":"https://inigogonzalezgarcia.github.io/es/guias/nivel-4.html"},{"@type":"ListItem","position":4,"name":"El Reglamento Europeo de IA (AI Act) en un departamento de IT: niveles de riesgo, roles, calendario, registro de casos de uso y una herramienta no aprobada","item":"https://inigogonzalezgarcia.github.io/es/guias/reglamento-europeo-de-ia-ai-act-riesgos-roles-calendario-y-registro-de-casos-de-uso.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/reglamento-europeo-de-ia-ai-act-riesgos-roles-calendario-y-registro-de-casos-de-uso.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <a href="nivel-4.html"><span class="es">Nivel 4</span></a></p>
+    <h1><span class="es">El Reglamento Europeo de IA (AI Act) en un departamento de IT: niveles de riesgo, roles, calendario, registro de casos de uso y una herramienta no aprobada</span></h1>
+    <p class="lede"><span class="es">Qué significa el AI Act para una empresa que usa Copilot, chatbots y otras herramientas de IA: las cuatro categorías de riesgo, proveedor y responsable del despliegue, la obligación de alfabetización y la de transparencia, el calendario con los cambios del Ómnibus Digital, un registro de casos de uso, la aprobación y su relación con la EIPD del RGPD, y un empleado que mete datos de clientes en una herramienta no aprobada.</span></p><p class="label post-meta"><span class="es">Nivel 4</span> · <span class="es">Reglamento Europeo de IA (AI Act)</span> · <span class="es">9 min</span> · <span class="es">Actualizado</span> <span class="es">30 oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Saber qué parte del Reglamento (UE) 2024/1689, el <strong>AI Act</strong>, afecta a tu organización cuando no fabrica modelos de IA pero los usa todos los días: Copilot en Microsoft 365, un chatbot en la web, una herramienta de selección de RR. HH., un asistente de código. Y montar lo mínimo que IT tiene que tener: un registro de casos de uso, un circuito de aprobación y una respuesta para cuando alguien usa una herramienta que nadie ha aprobado.</p>
+<p>Esta guía es un mapa práctico para IT, no asesoramiento jurídico: las decisiones de clasificación se toman con el área legal y el delegado de protección de datos (DPO).</p>
+<h2>Antes de empezar</h2>
+<ul><li>Un <strong>patrocinador</strong> en dirección y un grupo pequeño con legal, DPO, seguridad, RR. HH. y IT. La IA entra por todas las áreas, no solo por IT.</li><li>El <strong>inventario</strong> de lo que ya se usa: licencias de Copilot, funciones de IA activadas en el SaaS que ya tienes (CRM, ITSM, RR. HH.), desarrollos propios con APIs de modelos y lo que la gente usa sin pedir permiso (los registros del proxy o de Defender for Cloud Apps lo enseñan).</li><li>La política de uso aceptable de IT, para añadirle la parte de IA en vez de crear otra.</li></ul>
+<h2>1. Las cuatro categorías de riesgo</h2>
+<p>El reglamento no regula &quot;la IA&quot; en bloque: regula usos, según el riesgo.</p>
+<div class="g-table"><table><thead><tr><th>Categoría</th><th>Qué es</th><th>Ejemplos</th><th>Qué implica</th></tr></thead><tbody><tr><td>Prohibido</td><td>Prácticas no permitidas en la UE (artículo 5)</td><td>Puntuación social, manipulación que causa daño, reconocimiento de emociones en el trabajo o en la educación salvo por motivos médicos o de seguridad, recopilación indiscriminada de imágenes faciales</td><td>No se usa. Si aparece, se para</td></tr><tr><td>Alto riesgo</td><td>Sistemas del anexo III o componentes de seguridad de productos regulados (anexo I)</td><td>Cribado de CV y decisiones sobre empleados, evaluación de solvencia de personas físicas, precios de seguros de vida y salud</td><td>Obligaciones fuertes para el proveedor y para quien lo despliega</td></tr><tr><td>Riesgo limitado (transparencia)</td><td>Sistemas que interactúan con personas o generan contenido</td><td>Chatbots, contenido generado o manipulado (<em>deepfakes</em>)</td><td>Avisar a las personas</td></tr><tr><td>Riesgo mínimo</td><td>El resto</td><td>Filtros de spam, resúmenes de reuniones, asistentes de código</td><td>Sin obligaciones específicas más allá de la alfabetización</td></tr></tbody></table></div>
+<p class="g-tip">En una empresa típica, casi todo cae en mínimo o limitado. Lo que hay que vigilar son los usos de <strong>RR. HH.</strong> y de <strong>evaluación de clientes</strong>: ahí está el alto riesgo, aunque la herramienta la venda un tercero.</p>
+<h2>2. Proveedor o responsable del despliegue</h2>
+<ul><li><strong>Proveedor</strong> (<em>provider</em>): quien desarrolla un sistema de IA y lo comercializa o lo pone en servicio con su nombre. Microsoft, para Copilot.</li><li><strong>Responsable del despliegue</strong> (<em>deployer</em>): quien usa un sistema de IA bajo su autoridad en una actividad profesional. Tu empresa, cuando activa Copilot.</li><li>Ojo con los desarrollos propios: si tu equipo monta un chatbot para clientes sobre la API de un modelo y lo publica con vuestra marca, sois el <strong>proveedor de ese sistema</strong>, con las obligaciones de transparencia del proveedor.</li><li>Si modificas de forma sustancial un sistema de alto riesgo o le cambias la finalidad para convertirlo en uno, pasas a tener las obligaciones del proveedor.</li></ul>
+<h2>3. Lo que aplica a una empresa que usa Copilot o un chatbot</h2>
+<p><strong>Alfabetización en IA (artículo 4)</strong>, aplicable desde el 2 de febrero de 2025. Tras el Ómnibus Digital, la obligación es <strong>adoptar medidas para apoyar</strong> la alfabetización del personal y de quien use los sistemas en nombre de la empresa, sin exigir un nivel concreto a cada persona. En la práctica:</p>
+<ul><li>Una formación corta por perfil: qué puede y qué no puede hacer la herramienta, alucinaciones, qué datos no se meten y cómo revisar lo que produce.</li><li>Formación más profunda para quien configura o aprueba casos de uso.</li><li>Registro de quién la ha hecho: es lo que podrás enseñar.</li></ul>
+<p><strong>Transparencia (artículo 50)</strong>, aplicable desde el 2 de agosto de 2026:</p>
+<ul><li>Un <strong>chatbot</strong> que habla con clientes tiene que dejar claro que es una IA, salvo que sea evidente.</li><li>Si publicas <strong>imágenes, audio o vídeo generados o manipulados</strong> que parecen reales, hay que indicarlo.</li><li>Si usas reconocimiento de emociones o categorización biométrica (en los casos permitidos), hay que informar a las personas expuestas.</li></ul>
+<p><strong>Si un caso de uso es de alto riesgo</strong>, quien lo despliega tiene que, entre otras cosas, usarlo según las instrucciones del proveedor, asignar <strong>supervisión humana</strong> a personas con formación y autoridad, vigilar su funcionamiento, conservar los <strong>registros</strong> que genera durante al menos seis meses e <strong>informar a los representantes de los trabajadores</strong> antes de usarlo en el trabajo.</p>
+<h2>4. El calendario</h2>
+<div class="g-table"><table><thead><tr><th>Fecha</th><th>Qué empieza a aplicar</th></tr></thead><tbody><tr><td>1 de agosto de 2024</td><td>Entrada en vigor del reglamento</td></tr><tr><td>2 de febrero de 2025</td><td>Prácticas prohibidas y alfabetización en IA</td></tr><tr><td>2 de agosto de 2025</td><td>Obligaciones de los modelos de propósito general (GPAI) y régimen de gobernanza y sanciones</td></tr><tr><td>2 de agosto de 2026</td><td>Aplicación general, incluida la transparencia del artículo 50</td></tr><tr><td>2 de diciembre de 2027</td><td>Alto riesgo del anexo III (empleo, solvencia, servicios esenciales…)</td></tr><tr><td>2 de agosto de 2028</td><td>Alto riesgo del anexo I (IA en productos regulados)</td></tr></tbody></table></div>
+<p>Las dos últimas fechas son las del <strong>Ómnibus Digital sobre IA</strong>, el Reglamento (UE) 2026/1744, publicado en julio de 2026, que retrasó el alto riesgo (antes 2 de agosto de 2026 y 2027), suavizó la redacción de la alfabetización y añadió nuevas prohibiciones sobre imágenes íntimas no consentidas y material de abuso infantil desde el 2 de diciembre de 2026. Las obligaciones de alto riesgo son las mismas: solo se ha movido la fecha.</p>
+<p>En España, la autoridad de supervisión es la <strong>AESIA</strong> (Agencia Española de Supervisión de la Inteligencia Artificial). Los modelos de propósito general obligan a sus proveedores, no a quien usa Copilot.</p>
+<h2>5. El registro de casos de uso</h2>
+<p>Una tabla en la herramienta de GRC, en SharePoint o en la CMDB, con una fila por <strong>caso de uso</strong> (no por herramienta: Copilot para resumir reuniones y Copilot para evaluar candidatos son dos casos distintos):</p>
+<div class="g-table"><table><thead><tr><th>Campo</th><th>Ejemplo</th></tr></thead><tbody><tr><td>Caso de uso</td><td>Resumen de reuniones de Teams con Copilot</td></tr><tr><td>Herramienta y proveedor</td><td>Microsoft 365 Copilot · Microsoft</td></tr><tr><td>Dueño de negocio</td><td>Dirección de operaciones</td></tr><tr><td>Rol de la empresa</td><td>Responsable del despliegue</td></tr><tr><td>Datos que trata</td><td>Transcripciones internas; puede incluir datos personales</td></tr><tr><td>Categoría de riesgo</td><td>Mínimo</td></tr><tr><td>EIPD necesaria</td><td>Revisada por el DPO: cubierta por la de Microsoft 365</td></tr><tr><td>Controles</td><td>Etiquetas de confidencialidad de Purview, licencias por grupo, formación hecha</td></tr><tr><td>Aprobado por / fecha</td><td>Comité de IA · 2026-09-15 · revisión anual</td></tr></tbody></table></div>
+<p>Lo que se revisa cada trimestre: casos nuevos, cambios de finalidad, herramientas que han añadido IA por su cuenta en una actualización y casos que han dejado de usarse.</p>
+<h2>6. Aprobación y su relación con el RGPD</h2>
+<p>Un circuito sencillo para cada caso de uso nuevo:</p>
+<ol><li><strong>Solicitud</strong> con la finalidad, los datos y quién lo va a usar.</li><li><strong>Clasificación</strong> de riesgo con legal. Si cae en prohibido, se para aquí.</li><li><strong>Protección de datos</strong>: si trata datos personales, el DPO decide si hace falta una <strong>evaluación de impacto (EIPD)</strong> según el artículo 35 del RGPD. Para un sistema de alto riesgo, la información que da el proveedor sirve para hacerla. Revisa también el contrato: dónde se procesan los datos, si se usan para entrenar y cuánto tiempo se guardan.</li><li><strong>Seguridad</strong>: acceso con la identidad corporativa, registro de actividad, etiquetas de confidencialidad y qué ve la herramienta (Copilot ve lo que el usuario puede abrir: un SharePoint con permisos de más es un problema antes de Copilot y más visible después).</li><li><strong>Aprobación</strong>, alta en el registro y formación de los usuarios antes de dar licencias.</li></ol>
+<h2>7. El caso: un empleado ha pegado datos de clientes en una herramienta de IA no aprobada</h2>
+<p>Un analista ha pegado una exportación con nombres, correos y saldos de 300 clientes en un chatbot público con su cuenta personal para &quot;ordenar la tabla&quot;. Lo detecta la alerta de DLP del navegador o lo cuenta él mismo.</p>
+<ol><li><strong>Contener</strong>: que deje de usarla, borre la conversación y, si la herramienta lo permite, desactive el uso de sus conversaciones para entrenar. Guarda capturas como evidencia antes de borrar.</li><li><strong>Evaluar qué datos han salido</strong>: hay datos personales de clientes, así que se avisa al <strong>DPO</strong> de inmediato. El DPO decide si es una violación de seguridad que hay que notificar a la AEPD en un máximo de <strong>72 horas</strong> desde que se tiene conocimiento (artículo 33 del RGPD). Se notifique o no, queda en el registro de violaciones de seguridad.</li><li><strong>Revisar las condiciones</strong> de la herramienta: dónde guarda los datos, durante cuánto tiempo y si los usa para entrenar. Eso cambia la valoración del riesgo.</li><li><strong>Bloquear</strong>: en Defender for Cloud Apps, marcar la aplicación como <strong>no autorizada</strong> (<em>Unsanctioned</em>); con la integración con Defender for Endpoint, el acceso queda bloqueado en los equipos gestionados. Lo mismo en el proxy si lo usas.</li><li><strong>Dar la alternativa</strong>: si la necesidad es real, una herramienta aprobada con la cuenta corporativa (Copilot con protección de datos empresariales, por ejemplo). Prohibir sin ofrecer nada aumenta el uso escondido.</li><li><strong>Cerrar</strong>: formación para la persona y su equipo, una línea en el registro de casos de uso si la necesidad se aprueba, y revisar qué otras herramientas de IA salen en los registros.</li></ol>
+<p class="g-warn">Lo que falla en este caso es la protección de datos y la confidencialidad, no el AI Act. Por eso la respuesta va por el proceso de incidentes de seguridad y el DPO, no por un comité de IA aparte.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <strong>ISO 27001, NIS2 y RGPD en IT</strong> cubre la gestión de incidentes de seguridad y las notificaciones en las que se apoya el último apartado.</li><li>La guía de <strong>Microsoft Purview</strong> explica las etiquetas de confidencialidad y la DLP que limitan lo que Copilot puede ver y lo que sale de la empresa.</li><li>El repositorio <strong>25-security-controls-evidence</strong> de mi GitHub reúne en un registro la evidencia de controles que pide una auditoría; el registro de casos de uso de IA y la formación encajan como una línea más.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span></p>
+      <p class="repo-name"><span class="es">Nivel 4</span> · <span class="es">Reglamento Europeo de IA (AI Act)</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
+      <a class="arrow-link" href="nivel-4.html"><span class="es">Todas las guías del Nivel 4</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/25-security-controls-evidence.html"><span class="label muted"><span class="es">Blog · 25</span></span><span class="related-t"><span class="es">¿Qué te pedirá el auditor que aún no puedes enseñar? Un registro para ISO 27001, NIS2 y RGPD</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="business-case-de-it-opciones-costes-beneficios-medibles-y-la-decision-del-comite.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Business case de IT: opciones, costes, beneficios medibles, TCO a cinco años y la decisión que pides al comité</span></span></a>
+    <a class="post-nav-link next" href="z-os-para-quien-viene-de-windows-lpar-ipl-jes2-sdsf-racf-cics-y-un-batch-que-no-termina.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">z/OS para quien viene de Windows: LPAR, IPL, JES2 y SDSF, datasets, RACF, CICS e IMS, SMF, REXX y un batch nocturno que no termina</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

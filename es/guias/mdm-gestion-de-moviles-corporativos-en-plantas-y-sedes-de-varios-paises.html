@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>MDM de móviles corporativos en varios países · Iñigo González</title>
+<meta name="description" content="Cómo llegan los móviles de jefes de planta y comerciales ya gestionados por Intune, con Android Enterprise totalmente gestionado y Apple Business Manager…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/mdm-gestion-de-moviles-corporativos-en-plantas-y-sedes-de-varios-paises.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/mdm-gestion-de-moviles-corporativos-en-plantas-y-sedes-de-varios-paises.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/mdm-gestion-de-moviles-corporativos-en-plantas-y-sedes-de-varios-paises.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/mdm-gestion-de-moviles-corporativos-en-plantas-y-sedes-de-varios-paises.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MDM de móviles corporativos en varios países · Iñigo González">
+<meta property="og:description" content="Cómo llegan los móviles de jefes de planta y comerciales ya gestionados por Intune, con Android Enterprise totalmente gestionado y Apple Business Manager…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/mdm-gestion-de-moviles-corporativos-en-plantas-y-sedes-de-varios-paises.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-sector-4.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="MDM de móviles corporativos en varios países · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"MDM: gestión de móviles corporativos en plantas y sedes de varios países","alternativeHeadline":"MDM: managing corporate phones across plants and offices in several countries","description":"Cómo llegan los móviles de jefes de planta y comerciales ya gestionados por Intune, con Android Enterprise totalmente gestionado y Apple Business Manager con ADE, la protección de apps, el cumplimiento, las SIM de cada país, el móvil perdido, las bajas y el ticket del móvil que se queda en la configuración inicial.","datePublished":"2026-10-28","dateModified":"2026-10-28","inLanguage":"es","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/es/guias/mdm-gestion-de-moviles-corporativos-en-plantas-y-sedes-de-varios-paises.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/guias/mdm-gestion-de-moviles-corporativos-en-plantas-y-sedes-de-varios-paises.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"MDM - Gestión de móviles corporativos"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 4","item":"https://inigogonzalezgarcia.github.io/es/guias/sector-4.html"},{"@type":"ListItem","position":4,"name":"MDM: gestión de móviles corporativos en plantas y sedes de varios países","item":"https://inigogonzalezgarcia.github.io/es/guias/mdm-gestion-de-moviles-corporativos-en-plantas-y-sedes-de-varios-paises.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/mdm-gestion-de-moviles-corporativos-en-plantas-y-sedes-de-varios-paises.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <a href="sector-4.html"><span class="es">Sector 4</span></a></p>
+    <h1><span class="es">MDM: gestión de móviles corporativos en plantas y sedes de varios países</span></h1>
+    <p class="lede"><span class="es">Cómo llegan los móviles de jefes de planta y comerciales ya gestionados por Intune, con Android Enterprise totalmente gestionado y Apple Business Manager con ADE, la protección de apps, el cumplimiento, las SIM de cada país, el móvil perdido, las bajas y el ticket del móvil que se queda en la configuración inicial.</span></p><p class="label post-meta"><span class="es">Sector 4</span> · <span class="es">MDM - Gestión de móviles corporativos</span> · <span class="es">7 min</span> · <span class="es">Actualizado</span> <span class="es">28 oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Que un jefe de planta en otro país saque el móvil de la caja, lo encienda, inicie sesión con su cuenta y tenga el correo, Teams, la app de partes de mantenimiento y la VPN sin que nadie de IT lo toque. En una industria con sedes repartidas, los móviles se compran en cada país, llegan por el operador local y el usuario está en la nave o en la carretera: el alta tiene que ser automática y el soporte, remoto.</p>
+<h2>Antes de empezar</h2>
+<ul><li><strong>Intune</strong> con la autoridad MDM configurada y el tenant enlazado a <strong>Managed Google Play</strong>.</li><li><strong>Apple Business Manager</strong> (ahora Apple Business) con el token de inscripción automatizada (ADE) cargado en Intune, y el Apple ID de la organización que lo renueva cada año documentado.</li><li>Los <strong>proveedores</strong> de cada país: que el distribuidor o el operador asigne los equipos a vuestra cuenta (ID de cliente de Apple, revendedor de zero-touch o Knox Mobile Enrollment). Si no, el móvil llega como uno de tienda.</li><li>Una política de <strong>qué apps</strong> lleva cada perfil: dirección, comerciales, jefes de turno y móviles compartidos de almacén no necesitan lo mismo.</li></ul>
+<h2>1. Los perfiles de dispositivo</h2>
+<div class="g-table"><table><thead><tr><th>Quién</th><th>Propiedad</th><th>Inscripción</th><th>Por qué</th></tr></thead><tbody><tr><td>Jefes de planta, dirección</td><td>Empresa</td><td>Android Enterprise <strong>totalmente gestionado</strong> o iPhone con <strong>ADE</strong> supervisado</td><td>Todo el equipo es de empresa; borrado y bloqueo completos</td></tr><tr><td>Comerciales que viajan</td><td>Empresa</td><td>Igual, con más apps de cliente</td><td>Mucho tiempo fuera de la red y en otros países</td></tr><tr><td>Móvil personal con correo</td><td>Usuario</td><td>Sin inscripción, solo <strong>protección de apps</strong></td><td>No se gestiona el teléfono, solo los datos de empresa</td></tr><tr><td>Terminal compartido de almacén</td><td>Empresa</td><td>Android Enterprise <strong>dedicado</strong></td><td>Una app en modo quiosco, sin usuario</td></tr></tbody></table></div>
+<p>Cada perfil, un grupo de dispositivos (por el nombre del perfil de inscripción o por un filtro) para asignar apps, configuración y cumplimiento sin listas manuales.</p>
+<h2>2. Alta automática: Android y iPhone</h2>
+<p><strong>Android Enterprise totalmente gestionado</strong>: en Intune, <strong>Dispositivos › Inscripción › Android › Perfiles de inscripción › Dispositivos de usuario corporativos totalmente administrados</strong>. El perfil genera un token y un código QR. El móvil, recién sacado de la caja o restablecido, se inscribe:</p>
+<ol><li>Con <strong>zero-touch</strong> o <strong>Knox Mobile Enrollment</strong> si el proveedor lo ha registrado: al conectarse a internet, el móvil se inscribe solo.</li><li>Si no, con el <strong>QR</strong>: en la pantalla de bienvenida se toca seis veces seguidas, se escanea el código y se sigue el asistente.</li><li>El usuario inicia sesión con su cuenta corporativa; Intune instala el Authenticator, el Portal de empresa y las apps asignadas.</li></ol>
+<p><strong>iPhone con ADE</strong>: el equipo aparece en Apple Business Manager asignado al servidor MDM de Intune, y en Intune recibe el perfil de inscripción (supervisado, con afinidad de usuario y autenticación moderna en el Asistente de configuración). Al encenderlo, el iPhone muestra la pantalla de <strong>Gestión remota</strong> y se inscribe antes de llegar al escritorio.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Intune · Inscripción · Apple · Tokens del programa de inscripción</span></figcaption><div class="ui-body"><div class="ui-path"><span>Dispositivos</span><span class="ui-sep" aria-hidden="true">›</span><span>Inscripción</span><span class="ui-sep" aria-hidden="true">›</span><span>Apple</span><span class="ui-sep" aria-hidden="true">›</span><span>Tokens del programa de inscripción</span><span class="ui-sep" aria-hidden="true">›</span><span>ABM-contoso</span><span class="ui-sep" aria-hidden="true">›</span><span>Dispositivos</span></div><div class="ui-field"><span class="ui-k">Número de serie</span><span class="ui-v">F2LXK9Q1N7</span></div><div class="ui-field"><span class="ui-k">Estado del perfil</span><span class="ui-v">Asignado</span></div><div class="ui-field"><span class="ui-k">Perfil</span><span class="ui-v">iOS-Supervisado-Usuario</span></div><div class="ui-field"><span class="ui-k">Fecha de asignación</span><span class="ui-v">26/10/2026</span></div><div class="ui-field"><span class="ui-k">Último contacto</span><span class="ui-v">Nunca</span></div><div class="ui-btn">Sincronizar</div><div class="ui-btn">Asignar perfil</div></div></figure>
+<p class="g-tip">Un iPhone comprado en una tienda o por un operador que no está asociado a vuestra cuenta se puede añadir a Apple Business Manager con <strong>Apple Configurator</strong> en otro iPhone; luego hay que borrarlo y volver a empezar el asistente.</p>
+<h2>3. Protección de apps y cumplimiento</h2>
+<ul><li><strong>Protección de apps</strong> (Aplicaciones › Protección): PIN de la app, impedir copiar datos de Outlook y Teams a apps personales, cifrado de los datos de empresa y borrado selectivo. Es lo único que se aplica a móviles personales y una segunda capa en los corporativos.</li><li><strong>Cumplimiento</strong>: versión mínima de sistema, bloqueo de pantalla, sin root ni jailbreak y, en Android, la verificación de integridad de Google Play. Un móvil no conforme se marca y, tras un periodo de gracia, deja de acceder.</li><li><strong>Acceso condicional</strong> exige dispositivo conforme o app protegida para el correo y el ERP móvil. Sin eso, la política de cumplimiento solo informa.</li><li>Las <strong>actualizaciones</strong> de sistema con un plazo, no al instante: en la planta hay apps de proveedores (mantenimiento, calidad) que se prueban primero.</li></ul>
+<h2>4. SIM, operadores y países</h2>
+<ul><li>Un <strong>contrato por país</strong> con el operador local, o uno global con roaming. Lo habitual es local para quien no sale del país y tarifa con roaming incluido para comerciales y dirección.</li><li><strong>eSIM</strong>: cada vez más operadores la ofrecen; el QR de activación se entrega al usuario por un canal seguro y una sola vez. Si se borra el móvil, en muchos casos hay que pedir una nueva.</li><li>El <strong>PIN y el PUK</strong> de las SIM físicas, en el gestor de inventario, no en un sobre en el cajón de la planta.</li><li>El inventario cruza <strong>IMEI, número de serie, número de teléfono, usuario y país</strong>. Cuando el operador facture una línea, tienes que saber de quién es.</li></ul>
+<h2>5. El ticket: &quot;el móvil nuevo no se inscribe, se queda en la configuración inicial&quot;</h2>
+<p>Martes, planta 9. El nuevo jefe de mantenimiento ha recibido un iPhone del operador local y se queda en el asistente: no aparece la pantalla de gestión remota, o aparece y da error.</p>
+<ol><li><strong>¿Está el equipo en Apple Business Manager?</strong> Busca el número de serie. Si no está, el operador no lo ha asociado a vuestra cuenta: o se lo pides con el número de pedido, o lo añades con Apple Configurator.</li><li><strong>¿Tiene perfil en Intune?</strong> Si está en el token pero sin perfil asignado, asígnalo y pulsa <strong>Sincronizar</strong>. Si el iPhone ya se activó antes de tener perfil, no lo recogerá: hay que borrarlo (Ajustes › General › Transferir o restablecer el iPhone › Borrar contenidos y ajustes) y empezar de nuevo.</li><li><strong>¿Llega a internet?</strong> Este es el caso típico en planta: el usuario se conecta a la <strong>WiFi de invitados</strong>, que tiene portal cautivo, y el asistente no puede hablar con Apple ni con Intune. Que use datos móviles o una WiFi sin portal.</li><li><strong>¿Puede el usuario inscribirse?</strong> Que tenga licencia de Intune, que no supere el límite de dispositivos por usuario y que las restricciones de inscripción permitan la plataforma y la propiedad corporativa.</li><li><strong>En Android</strong>, lo mismo con otros nombres: el equipo registrado en zero-touch o Knox, el token del perfil no revocado ni caducado y, si se usa QR, un móvil restablecido de fábrica (no se puede inscribir como totalmente gestionado un móvil ya configurado).</li></ol>
+<p>Para ver qué está pasando en Intune:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · Microsoft Graph</span><button class="t-copy" type="button" data-copy="Connect-MgGraph -Scopes DeviceManagementManagedDevices.Read.All&#10;Get-MgDeviceManagementManagedDevice -Filter &quot;serialNumber eq &#x27;F2LXK9Q1N7&#x27;&quot; | Select-Object DeviceName, ComplianceState, EnrolledDateTime, LastSyncDateTime" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Connect-MgGraph -Scopes DeviceManagementManagedDevices.Read.All</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-MgDeviceManagementManagedDevice -Filter &quot;serialNumber eq &#x27;F2LXK9Q1N7&#x27;&quot; | Select-Object DeviceName, ComplianceState, EnrolledDateTime, LastSyncDateTime</span><span class="t-out">DeviceName       ComplianceState EnrolledDateTime     LastSyncDateTime</span><span class="t-out">----------       --------------- ----------------     ----------------</span><span class="t-out">iPhone-P09-0117  compliant       28/10/2026 08:36:50  28/10/2026 08:41:12</span></code></pre></figure>
+<p>Si aparece y es conforme, la inscripción terminó y el problema es de apps o configuración. Si no aparece, la inscripción no llegó a completarse y sigues en los pasos anteriores.</p>
+<h2>6. Pérdida, robo y bajas</h2>
+<div class="g-table"><table><thead><tr><th>Situación</th><th>Acción en Intune</th><th>Además</th></tr></thead><tbody><tr><td>Perdido, quizá aparece</td><td><strong>Bloqueo remoto</strong>; en iPhone supervisado, <strong>modo perdido</strong> con un mensaje y localización</td><td>Avisar al operador si no aparece en 24 horas</td></tr><tr><td>Robado</td><td><strong>Borrar</strong></td><td>Bloqueo de la SIM e IMEI con el operador, denuncia según el país</td></tr><tr><td>Baja de la persona</td><td>Retirar la licencia, <strong>borrar</strong> y reasignar el equipo</td><td>Recuperar el móvil y la SIM en la planta</td></tr><tr><td>Cambio de puesto</td><td>Cambiar el usuario principal o reinscribir</td><td>Revisar el perfil de apps</td></tr></tbody></table></div>
+<p class="g-warn">Antes de reutilizar un iPhone, comprueba el <strong>bloqueo de activación</strong>: en un equipo supervisado Intune puede guardar el código para saltarlo. En Android, la protección de restablecimiento de fábrica corporativa debe estar configurada con una cuenta de la empresa, no con la del usuario que se fue.</p>
+<h2>7. Lo que revisas cada mes</h2>
+<ul><li>Móviles sin sincronizar en más de 30 días: perdidos, en un cajón o de alguien que ya no está.</li><li>Móviles no conformes por país y su causa.</li><li>Fecha de caducidad del token ADE, del certificado push de Apple y del enlace con Managed Google Play.</li><li>Líneas facturadas por cada operador frente al inventario: una SIM sin móvil asignado es un gasto o un riesgo.</li></ul>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <strong>Intune</strong> del Nivel 3 detalla perfiles, cumplimiento y asignación de apps.</li><li>Las guías de <strong>iPhone y iPad</strong> y de <strong>Android</strong> del Nivel 1 cubren el soporte al usuario en el día a día.</li><li>La guía de <strong>Entra ID: Conditional Access</strong> explica cómo exigir dispositivo conforme para el correo y el ERP.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span></p>
+      <p class="repo-name"><span class="es">Sector 4</span> · <span class="es">MDM - Gestión de móviles corporativos</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
+      <a class="arrow-link" href="sector-4.html"><span class="es">Todas las guías del Sector 4</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/02-intune-compliance-report.html"><span class="label muted"><span class="es">Blog · 02</span></span><span class="related-t"><span class="es">Un informe de cumplimiento de Intune que se puede enseñar a dirección</span></span></a><a class="related-link" href="../blog/21-apple-fleet-audit.html"><span class="label muted"><span class="es">Blog · 21</span></span><span class="related-t"><span class="es">Una revisión semanal para una flota Apple en Jamf Pro</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="lan-wan-y-wifi-conectar-plantas-y-sedes-de-varios-paises.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">LAN, WAN y WiFi: conectar plantas y sedes de varios países</span></span></a>
+    <a class="post-nav-link next" href="presupuesto-de-it-preparar-y-seguir-el-presupuesto-anual-en-una-empresa-multisede.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">Presupuesto de IT: preparar y seguir el presupuesto anual de una empresa con sedes en varios países</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>
