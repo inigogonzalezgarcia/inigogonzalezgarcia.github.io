@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="no-js inner" data-title-en="Jamf Pro weekly audit for an Apple fleet · Iñigo González" data-title-es="Auditoría semanal de Jamf Pro (flota Apple) · Iñigo González">
+<html lang="en" class="no-js inner">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -16,6 +16,9 @@
 <meta name="author" content="Iñigo González">
 <meta name="theme-color" content="#0e1a24">
 <link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/21-apple-fleet-audit.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/21-apple-fleet-audit.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/21-apple-fleet-audit.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/21-apple-fleet-audit.html">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <meta property="og:site_name" content="Iñigo González">
@@ -36,7 +39,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"A weekly review for a Jamf Pro Apple fleet","alternativeHeadline":"Una revisión semanal para una flota Apple en Jamf Pro","description":"Push certificate and tokens, OS currency, FileVault, SIP, bootstrap token, passcodes, stale devices and full disks, with the executives' devices first.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://inigogonzalezgarcia.github.io/assets/og/21-apple-fleet-audit.png","url":"https://inigogonzalezgarcia.github.io/blog/21-apple-fleet-audit.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/blog/21-apple-fleet-audit.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/blog/#blog"},"articleSection":"IT Ops tools"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/blog/"},{"@type":"ListItem","position":3,"name":"A weekly review for a Jamf Pro Apple fleet","item":"https://inigogonzalezgarcia.github.io/blog/21-apple-fleet-audit.html"}]}]}</script>
 </head>
 <body id="top">
-<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
 
 <header class="site-header">
   <div class="wrap">
@@ -44,11 +47,11 @@
       <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
       <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
     </a>
-    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/" aria-current="page"><span class="en">Blog</span></a><a href="../guias.html"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
     <div class="head-actions">
-      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
       <span class="sep" aria-hidden="true"></span>
-      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+      <a class="lang-btn" id="langBtn" href="../es/blog/21-apple-fleet-audit.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
     </div>
   </div>
 </header>
@@ -56,13 +59,13 @@
 <div class="menu" id="menu" aria-hidden="true">
   <div class="menu-top">
     <span class="label">Iñigo González</span>
-    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
   </div>
-  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
     <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
     <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
-    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
   </div>
 </div>
 
@@ -70,27 +73,15 @@
 <section class="page-hero post-hero">
   <div class="wrap">
     <p class="label kicker"><a href="./">Blog</a> · 21</p>
-    <h1><span class="es">Una revisión semanal para una flota Apple en Jamf Pro</span><span class="en">A weekly review for a Jamf Pro Apple fleet</span></h1>
-    <p class="lede"><span class="es">Certificado push y tokens, versiones de sistema, FileVault, SIP, bootstrap token, códigos de acceso, equipos que no se conectan y discos llenos, con los dispositivos de dirección primero.</span><span class="en">Push certificate and tokens, OS currency, FileVault, SIP, bootstrap token, passcodes, stale devices and full disks, with the executives&#x27; devices first.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span><span class="en">IT Ops tools</span> · <span class="es">17 oct 2026</span><span class="en">17 Oct 2026</span> · <span class="es">2 min</span><span class="en">2 min read</span></p>
+    <h1><span class="en">A weekly review for a Jamf Pro Apple fleet</span></h1>
+    <p class="lede"><span class="en">Push certificate and tokens, OS currency, FileVault, SIP, bootstrap token, passcodes, stale devices and full disks, with the executives&#x27; devices first.</span></p><p class="label post-meta"><span class="en">IT Ops tools</span> · <span class="en">17 Oct 2026</span> · <span class="en">2 min read</span></p>
   </div>
 </section>
 
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose">
-      <div class="es" lang="es">
-<h2>El problema</h2>
-<p>Jamf Pro muestra cada detalle de cada Mac, iPhone y iPad, pero las preguntas de cada semana están repartidas entre grupos inteligentes, páginas de ajustes y los portales de Apple. Los problemas se repiten: caduca el certificado push de APNs y ningún dispositivo recibe órdenes (o alguien crea uno nuevo en lugar de renovarlo y toca volver a inscribirlos todos), caduca el token de ADE y los portátiles nuevos salen de la caja sin gestionar, un Mac tiene FileVault activado pero sin clave de recuperación en Jamf Pro, un Mac con Apple silicon no tiene bootstrap token y las actualizaciones nunca se instalan, un iPhone no tiene código, un portátil lleva dos meses sin conectarse y el iPad del CEO tiene el disco lleno la tarde antes del consejo.</p>
-<h2>Qué he hecho</h2>
-<ul><li>Un exportador de solo lectura con la API de Jamf Pro (un cliente de API con permisos solo de lectura; el secreto se lee de una variable de entorno).</li><li>Comprobaciones en siete áreas: tokens de la plataforma (APNs, ADE, Apps and Books), versiones de sistema, seguridad del Mac, seguridad del móvil, inscripción, hardware (almacenamiento y garantía) y dispositivos VIP, cuyos hallazgos suben un nivel y tienen su propia sección.</li><li><code>review.md</code> para la reunión semanal con un calendario de tokens, <code>device_actions.csv</code> como lista de trabajo por dispositivo, <code>findings.csv</code> y <code>report.html</code>.</li></ul>
-<h2>Cómo está hecho</h2>
-<p>Python solo con la librería estándar. La demo es una flota inventada de 40 dispositivos (18 Mac, 14 iPhone, 8 iPad) con tres usuarios VIP y fallos puestos a propósito. 17 tests. Un runbook para la revisión semanal y para renovar el certificado de APNs y los tokens de ADE y VPP sin sustos.</p>
-<h2>Qué aprendí</h2>
-<p>De gestionar MacBooks, iPhones e iPads con Jamf Pro y dar soporte a usuarios VIP y reuniones de consejo: los errores caros no están en un dispositivo, sino en el certificado o el token que para toda la flota. Y un dato que Jamf Pro no ha recogido debe saltarse la comprobación, no dar una falsa alarma.</p>
-<h2>Siguientes pasos</h2>
-<ul><li>Crear en Jamf Pro un rol de API solo con permisos de lectura y un cliente de API.</li><li>Ejecutar la exportación y añadir la caducidad de APNs desde Settings &gt; Global &gt; Push certificates.</li><li>Añadir tu lista de VIP y llevar <code>review.md</code> a la reunión semanal.</li></ul>
-<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
-      </div>
+      
       <div class="en" lang="en">
 <h2>The problem</h2>
 <p>Jamf Pro shows every detail of every Mac, iPhone and iPad, but the weekly questions are spread over smart groups, settings pages and Apple&#x27;s portals. The same problems come back: the APNs push certificate expires and no device gets a command (or someone creates a new one instead of renewing it and every device has to re-enroll), the ADE token expires and new laptops come out of the box unmanaged, a Mac has FileVault on but no recovery key in Jamf Pro, an Apple silicon Mac has no bootstrap token and updates never install, an iPhone has no passcode, a laptop has not checked in for two months, and the CEO&#x27;s iPad has a full disk the evening before the board meeting.</p>
@@ -106,18 +97,18 @@
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
-        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
-        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
       </div>
     </article>
     <aside class="post-aside">
-      <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
+      <p class="label muted"><span class="en">The repository</span></p>
       <p class="repo-name">21-apple-fleet-audit</p>
-      <a class="btn" href="https://github.com/inigogonzalezgarcia/21-apple-fleet-audit" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
-      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/21-apple-fleet-audit" target="_blank" rel="noopener noreferrer"><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="en">Synthetic data. No employer code, data or systems.</span></p>
       <div class="share">
-        <p class="label muted"><span class="es">Compartir</span><span class="en">Share</span></p>
-        <div class="share-row es" lang="es"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F21-apple-fleet-audit.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F21-apple-fleet-audit.html&amp;text=Una%20revisi%C3%B3n%20semanal%20para%20una%20flota%20Apple%20en%20Jamf%20Pro%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">X</a><a class="share-btn" href="https://wa.me/?text=Una%20revisi%C3%B3n%20semanal%20para%20una%20flota%20Apple%20en%20Jamf%20Pro%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F21-apple-fleet-audit.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=Una%20revisi%C3%B3n%20semanal%20para%20una%20flota%20Apple%20en%20Jamf%20Pro%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F21-apple-fleet-audit.html" aria-label="Compartir en Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/21-apple-fleet-audit.html" data-copied="Enlace copiado">Copiar enlace</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/21-apple-fleet-audit.html" data-title="Una revisión semanal para una flota Apple en Jamf Pro" hidden>Más…</button></div>
+        <p class="label muted"><span class="en">Share</span></p>
+        
         <div class="share-row en" lang="en"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F21-apple-fleet-audit.html" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F21-apple-fleet-audit.html&amp;text=A%20weekly%20review%20for%20a%20Jamf%20Pro%20Apple%20fleet%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Share on X">X</a><a class="share-btn" href="https://wa.me/?text=A%20weekly%20review%20for%20a%20Jamf%20Pro%20Apple%20fleet%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F21-apple-fleet-audit.html" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=A%20weekly%20review%20for%20a%20Jamf%20Pro%20Apple%20fleet%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F21-apple-fleet-audit.html" aria-label="Share on Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/21-apple-fleet-audit.html" data-copied="Link copied">Copy link</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/21-apple-fleet-audit.html" data-title="A weekly review for a Jamf Pro Apple fleet" hidden>More…</button></div>
         <p class="share-msg small muted" role="status" aria-live="polite"></p>
       </div>
@@ -125,12 +116,12 @@
   </div>
   
   <div class="wrap related">
-    <h2 class="label kicker related-h"><span class="es">Relacionado</span><span class="en">Related</span></h2>
-    <div class="related-grid"><a class="related-link" href="02-intune-compliance-report.html"><span class="label muted"><span class="es">Blog · 02</span><span class="en">Blog · 02</span></span><span class="related-t"><span class="es">Un informe de cumplimiento de Intune que se puede enseñar a dirección</span><span class="en">An Intune compliance report you can hand to a manager</span></span></a><a class="related-link" href="38-it-asset-lifecycle-planner.html"><span class="label muted"><span class="es">Blog · 38</span><span class="en">Blog · 38</span></span><span class="related-t"><span class="es">Nueve portátiles sin registrar y medio presupuesto en un trimestre: inventario y plan de renovación de la oficina</span><span class="en">Nine unregistered laptops and half the budget in one quarter: one inventory and a refresh plan for the office</span></span></a><a class="related-link" href="../guias/iphone-ipad-enrolar-en-intune.html"><span class="label muted"><span class="es">Guía · Nivel 1</span><span class="en">Guide · Level 1</span></span><span class="related-t"><span class="es">iPhone y iPad: enrolar en Intune y comprobar que llegan las políticas</span><span class="en">iPhone and iPad: enrolling in Intune and checking that policies arrive</span></span></a><a class="related-link" href="../guias/jamf-pro-enrolar-un-mac-y-desplegar-una-politica.html"><span class="label muted"><span class="es">Guía · Nivel 2</span><span class="en">Guide · Level 2</span></span><span class="related-t"><span class="es">Jamf Pro: enrolar un Mac y desplegar una política con un grupo inteligente</span><span class="en">Jamf Pro: enrolling a Mac and deploying a policy with a smart group</span></span></a><a class="related-link" href="../guias/mdm-gestion-de-moviles-corporativos-en-plantas-y-sedes-de-varios-paises.html"><span class="label muted"><span class="es">Guía · Sector 4</span><span class="en">Guide · Sector 4</span></span><span class="related-t"><span class="es">MDM: gestión de móviles corporativos en plantas y sedes de varios países</span><span class="en">MDM: managing corporate phones across plants and offices in several countries</span></span></a></div>
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="02-intune-compliance-report.html"><span class="label muted"><span class="en">Blog · 02</span></span><span class="related-t"><span class="en">An Intune compliance report you can hand to a manager</span></span></a><a class="related-link" href="38-it-asset-lifecycle-planner.html"><span class="label muted"><span class="en">Blog · 38</span></span><span class="related-t"><span class="en">Nine unregistered laptops and half the budget in one quarter: one inventory and a refresh plan for the office</span></span></a><a class="related-link" href="../guias/iphone-ipad-enrolar-en-intune.html"><span class="label muted"><span class="en">Guide · Level 1</span></span><span class="related-t"><span class="en">iPhone and iPad: enrolling in Intune and checking that policies arrive</span></span></a><a class="related-link" href="../guias/jamf-pro-enrolar-un-mac-y-desplegar-una-politica.html"><span class="label muted"><span class="en">Guide · Level 2</span></span><span class="related-t"><span class="en">Jamf Pro: enrolling a Mac and deploying a policy with a smart group</span></span></a><a class="related-link" href="../guias/mdm-gestion-de-moviles-corporativos-en-plantas-y-sedes-de-varios-paises.html"><span class="label muted"><span class="en">Guide · Sector 4</span></span><span class="related-t"><span class="en">MDM: managing corporate phones across plants and offices in several countries</span></span></a></div>
   </div>
   <div class="wrap post-nav">
-    <a class="post-nav-link prev" href="20-entra-sso-app-audit.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Qué app con SSO va a fallar la próxima y cuál no vigila nadie</span><span class="en">Which SSO app will break next, and which one nobody is watching</span></span></a>
-    <a class="post-nav-link next" href="22-dex-experience-score.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Una nota de 0 a 10 para la experiencia de cada portátil</span><span class="en">A 0-10 experience score for every laptop</span></span></a>
+    <a class="post-nav-link prev" href="20-entra-sso-app-audit.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">Which SSO app will break next, and which one nobody is watching</span></span></a>
+    <a class="post-nav-link next" href="22-dex-experience-score.html"><span class="label muted"><span class="en">Next</span></span><span><span class="en">A 0-10 experience score for every laptop</span></span></a>
   </div>
 </section>
 </main>
@@ -138,8 +129,8 @@
 <footer>
   <div class="wrap">
     <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
-    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
-    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
   </div>
 </footer>
 

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Windows 11: migrar una sede con trading · Iñigo González</title>
+<meta name="description" content="Comprobar TPM 2.0 y procesador, validar las aplicaciones de trading y de negocio, hacer un piloto con usuarios reales, elegir entre actualización in situ…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/windows-11-migrar-los-equipos-de-una-sede-con-sala-de-trading.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/windows-11-migrar-los-equipos-de-una-sede-con-sala-de-trading.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/windows-11-migrar-los-equipos-de-una-sede-con-sala-de-trading.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/windows-11-migrar-los-equipos-de-una-sede-con-sala-de-trading.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows 11: migrar una sede con trading · Iñigo González">
+<meta property="og:description" content="Comprobar TPM 2.0 y procesador, validar las aplicaciones de trading y de negocio, hacer un piloto con usuarios reales, elegir entre actualización in situ…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/windows-11-migrar-los-equipos-de-una-sede-con-sala-de-trading.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-sector-5.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Windows 11: migrar una sede con trading · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Windows 11: migrar los equipos de una sede con sala de trading sin tocar el horario de mercado","alternativeHeadline":"Windows 11: migrating a site's PCs with a trading floor without touching market hours","description":"Comprobar TPM 2.0 y procesador, validar las aplicaciones de trading y de negocio, hacer un piloto con usuarios reales, elegir entre actualización in situ (Intune o MECM) y reinstalación con Autopilot, planificar por mesas fuera de horario, cuidar los puestos multimonitor, la ventana de vuelta atrás y el puesto que pierde sus cuatro pantallas.","datePublished":"2026-10-28","dateModified":"2026-10-28","inLanguage":"es","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/es/guias/windows-11-migrar-los-equipos-de-una-sede-con-sala-de-trading.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/guias/windows-11-migrar-los-equipos-de-una-sede-con-sala-de-trading.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Windows 11 - Migrar los equipos de una sede"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 5","item":"https://inigogonzalezgarcia.github.io/es/guias/sector-5.html"},{"@type":"ListItem","position":4,"name":"Windows 11: migrar los equipos de una sede con sala de trading sin tocar el horario de mercado","item":"https://inigogonzalezgarcia.github.io/es/guias/windows-11-migrar-los-equipos-de-una-sede-con-sala-de-trading.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/windows-11-migrar-los-equipos-de-una-sede-con-sala-de-trading.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <a href="sector-5.html"><span class="es">Sector 5</span></a></p>
+    <h1><span class="es">Windows 11: migrar los equipos de una sede con sala de trading sin tocar el horario de mercado</span></h1>
+    <p class="lede"><span class="es">Comprobar TPM 2.0 y procesador, validar las aplicaciones de trading y de negocio, hacer un piloto con usuarios reales, elegir entre actualización in situ (Intune o MECM) y reinstalación con Autopilot, planificar por mesas fuera de horario, cuidar los puestos multimonitor, la ventana de vuelta atrás y el puesto que pierde sus cuatro pantallas.</span></p><p class="label post-meta"><span class="es">Sector 5</span> · <span class="es">Windows 11 - Migrar los equipos de una sede</span> · <span class="es">7 min</span> · <span class="es">Actualizado</span> <span class="es">28 oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Pasar todos los equipos de la sede a Windows 11 sin que un operador llegue a las 8:00 y se encuentre su puesto sin pantallas o su plataforma sin arrancar. En una sala de trading cada puesto es caro de parar: varios monitores, aplicaciones de mercado con versiones certificadas, teclados especiales, turrets de voz. La migración se planifica por mesas, fuera de horario de mercado y con una vuelta atrás que funcione.</p>
+<h2>Antes de empezar</h2>
+<ul><li>El <strong>inventario</strong> de equipos de la sede con modelo, procesador, TPM y usuario, sacado de Intune o MECM.</li><li>La lista de <strong>aplicaciones</strong> de cada mesa y su responsable de negocio: quién dice &quot;funciona&quot; en cada una.</li><li>La versión de Windows 11 aprobada por la organización (por ejemplo <strong>25H2</strong>) y su imagen o paquete de actualización.</li><li>El calendario de mercado: festivos, cierres de mes y trimestre, publicaciones relevantes. Esas semanas no se migra.</li><li>Si aún quedan equipos en Windows 10, recuerda que solo reciben parches de seguridad con <strong>ESU</strong>: la fecha límite es real.</li></ul>
+<h2>1. Hardware: qué equipos pueden actualizarse</h2>
+<p>Windows 11 exige <strong>TPM 2.0</strong>, <strong>UEFI con arranque seguro</strong>, un procesador de la lista soportada (Intel de 8.ª generación o posterior, AMD Zen 2 o posterior, en líneas generales), 4 GB de RAM y 64 GB de disco. El informe de preparación de Intune (<strong>Reports › Windows updates › Reports › Windows feature update device readiness report</strong>) lo da para toda la flota; para un equipo concreto:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell (administrador) · PC-MAD-TRD-014</span><button class="t-copy" type="button" data-copy="Get-Tpm | Select-Object TpmPresent, TpmReady&#10;(Get-CimInstance -Namespace root\cimv2\security\microsofttpm -ClassName Win32_Tpm).SpecVersion&#10;Confirm-SecureBootUEFI&#10;(Get-CimInstance Win32_Processor).Name" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-Tpm | Select-Object TpmPresent, TpmReady</span><span class="t-out">TpmPresent TpmReady</span><span class="t-out">---------- --------</span><span class="t-out">      True     True</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>(Get-CimInstance -Namespace root\cimv2\security\microsofttpm -ClassName Win32_Tpm).SpecVersion</span><span class="t-out">2.0, 0, 1.59</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Confirm-SecureBootUEFI</span><span class="t-out">True</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>(Get-CimInstance Win32_Processor).Name</span><span class="t-out">Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz</span></code></pre></figure>
+<ul><li>Los equipos que no cumplen se <strong>sustituyen</strong>, no se fuerzan: un equipo no soportado no recibe garantía de actualizaciones.</li><li>Las estaciones de trading suelen llevar <strong>tarjetas gráficas de varias salidas</strong>: anota modelo y driver, porque es lo primero que falla.</li></ul>
+<h2>2. Aplicaciones: la lista que firma negocio</h2>
+<div class="g-table"><table><thead><tr><th>Tipo</th><th>Ejemplos</th><th>Qué validar</th></tr></thead><tbody><tr><td>Plataformas de mercado</td><td>Terminal de datos, plataforma de ejecución</td><td>Versión certificada por el proveedor para Windows 11</td></tr><tr><td>Complementos de Excel</td><td>Precios en tiempo real, modelos</td><td>Que carguen y refresquen</td></tr><tr><td>Voz</td><td>Cliente del turret, grabación</td><td>Audio, auriculares, integración</td></tr><tr><td>Internas</td><td>Herramientas de riesgo, back office</td><td>Arranque, impresión, conexión a BD</td></tr></tbody></table></div>
+<ul><li>Pide al proveedor de cada plataforma la <strong>declaración de soporte</strong> para la versión exacta de Windows 11. Sin ella, si falla, la respuesta será &quot;no soportado&quot;.</li><li>Las aplicaciones antiguas pueden necesitar <strong>.NET Framework 3.5</strong>, que hay que habilitar de nuevo tras una reinstalación limpia.</li></ul>
+<h2>3. El piloto</h2>
+<ol><li>Elige <strong>dos o tres puestos por mesa</strong>, con usuarios dispuestos y que usen todas las aplicaciones de la mesa.</li><li>Migra el piloto con el mismo método que usarás después, no a mano.</li><li>Déjalo <strong>una o dos semanas</strong> de mercado real.</li><li>Recoge los fallos en un único tablero (Jira o la herramienta que uses) y no avances hasta cerrarlos o aceptarlos por escrito.</li></ol>
+<h2>4. El método: actualización in situ o reinstalación</h2>
+<div class="g-table"><table><thead><tr><th></th><th>Actualización in situ</th><th>Reinstalación con Autopilot</th></tr></thead><tbody><tr><td>Cómo</td><td>Intune (directiva de actualización de características) o MECM (secuencia de tareas de actualización)</td><td>Borrado del equipo y aprovisionamiento con Autopilot</td></tr><tr><td>Conserva</td><td>Aplicaciones, datos, configuración</td><td>Nada: todo se instala de cero</td></tr><tr><td>Duración</td><td>1 a 2 horas</td><td>2 a 3 horas con todas las aplicaciones</td></tr><tr><td>Vuelta atrás</td><td>Sí, dentro de la ventana de desinstalación</td><td>No: se vuelve a reinstalar</td></tr><tr><td>Cuándo</td><td>Equipos recientes y sanos</td><td>Equipos con años de cambios o que se sustituyen</td></tr></tbody></table></div>
+<p>Con Intune, en <strong>Devices › Windows › Windows updates › Feature updates › Create profile</strong>:</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Intune admin center · Feature updates · Create profile</span></figcaption><div class="ui-body"><div class="ui-path"><span>Devices</span><span class="ui-sep" aria-hidden="true">›</span><span>Windows</span><span class="ui-sep" aria-hidden="true">›</span><span>Windows updates</span><span class="ui-sep" aria-hidden="true">›</span><span>Feature updates</span><span class="ui-sep" aria-hidden="true">›</span><span>Create profile</span></div><div class="ui-field"><span class="ui-k">Name</span><span class="ui-v">W11-25H2 · Sede MAD · Mesa Renta Fija</span></div><div class="ui-field"><span class="ui-k">Feature update to deploy</span><span class="ui-v">Windows 11, version 25H2</span></div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Make available to users as a required update</div><div class="ui-field"><span class="ui-k">Rollout options</span><span class="ui-v">Make update available on a specific date</span></div><div class="ui-field"><span class="ui-k">Assignments</span><span class="ui-v">grp-MAD-W11-RentaFija-Ola2</span></div><div class="ui-btn">Create</div></div></figure>
+<ul><li>Un <strong>grupo por mesa y ola</strong>: así controlas exactamente qué puestos se actualizan cada noche.</li><li>Si la sede está en <strong>cogestión</strong> con MECM, comprueba qué consola tiene la carga de trabajo de actualizaciones antes de crear nada.</li><li>Con MECM, una secuencia de tareas de actualización con un paquete de actualización del sistema operativo, desplegada con <strong>ventana de mantenimiento</strong> fuera de horario.</li></ul>
+<h2>5. Planificar por mesas, fuera de horario</h2>
+<ul><li><strong>Noches de lunes a jueves</strong>, a partir del cierre, o fin de semana para mesas grandes. Nunca la noche antes de un día de publicaciones relevantes.</li><li>Una <strong>mesa por noche</strong>, como mucho dos. Si algo falla, el impacto es de una mesa.</li><li>Un técnico en sala a primera hora del día siguiente, recorriendo cada puesto migrado antes de que llegue el usuario.</li><li><strong>Puestos multimonitor</strong>: haz una foto de cada puesto (posición de pantallas, cables, docks) antes de migrar. Tras la actualización, la disposición de pantallas puede cambiar.</li></ul>
+<h2>6. El ticket: &quot;tras la actualización, un puesto ha perdido sus cuatro monitores&quot; o &quot;una aplicación no arranca&quot;</h2>
+<p>Miércoles, 7:40. Un operador de la mesa de divisas solo ve una pantalla, en baja resolución.</p>
+<ol><li><strong>Mira el driver de la gráfica</strong>:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell (administrador) · PC-MAD-TRD-022</span><button class="t-copy" type="button" data-copy="Get-PnpDevice -Class Display | Select-Object Status, FriendlyName&#10;DISM /Online /Get-OSUninstallWindow" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-PnpDevice -Class Display | Select-Object Status, FriendlyName</span><span class="t-out">Status FriendlyName</span><span class="t-out">------ ------------</span><span class="t-out">OK     Microsoft Basic Display Adapter</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>DISM /Online /Get-OSUninstallWindow</span><span class="t-out">Deployment Image Servicing and Management tool</span><span class="t-out">Version: 10.0.26100.1</span><span class="t-out"> </span><span class="t-out">Image Version: 10.0.26100.6584</span><span class="t-out"> </span><span class="t-out">Uninstall Window : 10</span><span class="t-out"> </span><span class="t-out">The operation completed successfully.</span></code></pre></figure>
+<p>El equipo usa el adaptador genérico: la actualización ha dejado fuera el driver del fabricante de la tarjeta. Instala el driver aprobado para Windows 11 (desde Intune o el catálogo del fabricante), reinicia y <strong>recoloca las pantallas</strong> según la foto del puesto. Añade ese driver al paquete de la siguiente ola.</p>
+<ol><li><strong>Si el puesto no queda bien antes de la apertura</strong>, el operador se mueve a un puesto de contingencia. No se depura con el usuario sentado delante.</li><li><strong>Una aplicación no arranca</strong>: revisa el visor de eventos (Application) y si le falta un componente. Si es .NET Framework 3.5:</li></ol>
+<p><code>DISM /Online /Enable-Feature /FeatureName:NetFx3 /All</code></p>
+<p>Si es un complemento de Excel, mira <strong>Archivo › Opciones › Complementos</strong>: Excel puede haberlo deshabilitado al arrancar.</p>
+<ol><li><strong>Vuelta atrás</strong>: si la aplicación de mercado no funciona en Windows 11 y el proveedor no tiene solución, el equipo vuelve a la versión anterior dentro de la ventana (<strong>Configuración › Sistema › Recuperación › Volver</strong>, o <code>DISM /Online /Initiate-OSUninstall</code>). La ventana por defecto es de <strong>10 días</strong>; para la sala, amplíala justo tras la actualización con <code>DISM /Online /Set-OSUninstallWindow /Value:30</code>. Pasado ese plazo, <code>Windows.old</code> desaparece y ya no hay vuelta atrás.</li></ol>
+<p class="g-warn">Excluye ese equipo del grupo de la directiva antes de volver atrás, o Intune lo actualizará de nuevo esa misma noche.</p>
+<h2>7. Seguimiento de la migración</h2>
+<ul><li>El informe de la directiva de actualización (<strong>Reports › Windows updates › Reports › Feature Updates report</strong>) por mesa: actualizados, pendientes, con error.</li><li>Los equipos con error, con su código, revisados cada mañana.</li><li>Las incidencias abiertas por mesa tras cada ola: si una ola genera más de las previstas, se para la siguiente.</li></ul>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <strong>Windows 10 y 11</strong> del Nivel 1 cubre el soporte diario del puesto.</li><li>La guía de <strong>Intune</strong> del Nivel 3 explica directivas, grupos y anillos de actualización.</li><li>La guía de <strong>MECM / SCCM</strong> cubre las secuencias de tareas si la sede sigue en cogestión.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span></p>
+      <p class="repo-name"><span class="es">Sector 5</span> · <span class="es">Windows 11 - Migrar los equipos de una sede</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
+      <a class="arrow-link" href="sector-5.html"><span class="es">Todas las guías del Sector 5</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/18-mecm-intune-comanagement-tracker.html"><span class="label muted"><span class="es">Blog · 18</span></span><span class="related-t"><span class="es">Un go/no-go para el siguiente paso del slider de co-management</span></span></a><a class="related-link" href="../blog/29-tenant-separation-cutover-planner.html"><span class="label muted"><span class="es">Blog · 29</span></span><span class="related-t"><span class="es">La ola 3 es el día 30 y el inventario dice que no: la separación de un tenant de Microsoft 365</span></span></a><a class="related-link" href="../blog/41-windows-update-ring-tracker.html"><span class="label muted"><span class="es">Blog · 41</span></span><span class="related-t"><span class="es">Un anillo pausado y olvidado y un piloto solo de informáticos: Windows Update, anillo a anillo</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="device42-inventario-de-racks-y-equipos-de-la-sala-de-comunicaciones.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Device42: el inventario de racks y equipos de la sala de comunicaciones de una sede con sala de trading</span></span></a>
+    <a class="post-nav-link next" href="linea-de-voz-con-un-banco-caida-private-wire-turrets-y-grabacion.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">Línea de voz con un banco caída: private wires, turrets y la grabación que no puede faltar</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

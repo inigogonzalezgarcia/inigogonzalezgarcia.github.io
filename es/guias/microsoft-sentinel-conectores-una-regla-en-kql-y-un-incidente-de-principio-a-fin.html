@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Microsoft Sentinel: conectores y reglas KQL · Iñigo González</title>
+<meta name="description" content="El área de trabajo y los conectores que importan (Entra ID, Microsoft 365, Defender, servidores), la primera regla de análisis que avisa cuando entra…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/microsoft-sentinel-conectores-una-regla-en-kql-y-un-incidente-de-principio-a-fin.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/microsoft-sentinel-conectores-una-regla-en-kql-y-un-incidente-de-principio-a-fin.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/microsoft-sentinel-conectores-una-regla-en-kql-y-un-incidente-de-principio-a-fin.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/microsoft-sentinel-conectores-una-regla-en-kql-y-un-incidente-de-principio-a-fin.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Microsoft Sentinel: conectores y reglas KQL · Iñigo González">
+<meta property="og:description" content="El área de trabajo y los conectores que importan (Entra ID, Microsoft 365, Defender, servidores), la primera regla de análisis que avisa cuando entra…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/microsoft-sentinel-conectores-una-regla-en-kql-y-un-incidente-de-principio-a-fin.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-nivel-4.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Microsoft Sentinel: conectores y reglas KQL · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Microsoft Sentinel: conectores, una regla en KQL y un incidente de principio a fin","alternativeHeadline":"Microsoft Sentinel: connectors, a KQL rule and an incident from start to finish","description":"El área de trabajo y los conectores que importan (Entra ID, Microsoft 365, Defender, servidores), la primera regla de análisis que avisa cuando entra una cuenta de emergencia, la automatización que asigna y avisa, la investigación de un incidente con KQL y cómo no arruinarse con la ingesta.","datePublished":"2026-10-27","dateModified":"2026-10-27","inLanguage":"es","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/es/guias/microsoft-sentinel-conectores-una-regla-en-kql-y-un-incidente-de-principio-a-fin.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/guias/microsoft-sentinel-conectores-una-regla-en-kql-y-un-incidente-de-principio-a-fin.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Microsoft Sentinel"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Nivel 4","item":"https://inigogonzalezgarcia.github.io/es/guias/nivel-4.html"},{"@type":"ListItem","position":4,"name":"Microsoft Sentinel: conectores, una regla en KQL y un incidente de principio a fin","item":"https://inigogonzalezgarcia.github.io/es/guias/microsoft-sentinel-conectores-una-regla-en-kql-y-un-incidente-de-principio-a-fin.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/microsoft-sentinel-conectores-una-regla-en-kql-y-un-incidente-de-principio-a-fin.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <a href="nivel-4.html"><span class="es">Nivel 4</span></a></p>
+    <h1><span class="es">Microsoft Sentinel: conectores, una regla en KQL y un incidente de principio a fin</span></h1>
+    <p class="lede"><span class="es">El área de trabajo y los conectores que importan (Entra ID, Microsoft 365, Defender, servidores), la primera regla de análisis que avisa cuando entra una cuenta de emergencia, la automatización que asigna y avisa, la investigación de un incidente con KQL y cómo no arruinarse con la ingesta.</span></p><p class="label post-meta"><span class="es">Nivel 4</span> · <span class="es">Microsoft Sentinel</span> · <span class="es">7 min</span> · <span class="es">Actualizado</span> <span class="es">27 oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Un Sentinel que recibe los registros que importan, genera incidentes que alguien atiende y no se come el presupuesto. Una regla de análisis escrita por ti, una automatización que la asigna y avisa al canal del equipo, y la rutina para investigar y cerrar un incidente con una clasificación que sirva para mejorar las reglas.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Un <strong>área de trabajo de Log Analytics</strong> en la región que corresponda a tus datos, y el rol <strong>Microsoft Sentinel Contributor</strong> sobre ella (y Log Analytics Contributor para los conectores).</li><li>Sentinel se usa desde el <strong>portal de Microsoft Defender</strong> (operaciones de seguridad unificadas), junto con los incidentes de Defender XDR. Las rutas de esta guía son las de ese portal.</li><li>Una idea del presupuesto: se paga por GB ingerido. Hay orígenes gratuitos (actividad de Azure, auditoría de Office 365, alertas de Defender) y otros que no lo son (inicios de sesión de Entra ID, eventos de seguridad de Windows).</li><li>La guía de <strong>Azure Monitor y Log Analytics</strong> explica el área de trabajo por dentro; aquí basta con saber escribir una consulta KQL sencilla.</li></ul>
+<h2>1. Los conectores que importan</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Microsoft Defender · Sentinel · Centro de contenido</span></figcaption><div class="ui-body"><div class="ui-path"><span>Microsoft Sentinel</span><span class="ui-sep" aria-hidden="true">›</span><span>Administración de contenido</span><span class="ui-sep" aria-hidden="true">›</span><span>Centro de contenido</span></div><div class="ui-field"><span class="ui-k">Microsoft Entra ID</span><span class="ui-v">instalado · Tablas: SigninLogs, AuditLogs, AADNonInteractiveUserSignInLogs</span></div><div class="ui-field"><span class="ui-k">Microsoft 365</span><span class="ui-v">instalado · Tabla: OfficeActivity (Exchange, SharePoint, Teams) · sin coste de ingesta</span></div><div class="ui-field"><span class="ui-k">Microsoft Defender XDR</span><span class="ui-v">instalado · Incidentes y alertas sincronizados</span></div><div class="ui-field"><span class="ui-k">Windows Security Events via AMA</span><span class="ui-v">instalado · Regla de recopilación: dcr-servidores-seguridad (conjunto Común)</span></div><div class="ui-field"><span class="ui-k">Syslog via AMA</span><span class="ui-v">instalado · Regla de recopilación: dcr-linux-auth (auth, authpriv)</span></div><div class="ui-btn">Administrar</div></div></figure>
+<ul><li>Empieza por <strong>identidad</strong> (Entra ID) y <strong>correo y documentos</strong> (Microsoft 365): es por donde entra la mayoría de los ataques en un tenant de oficina.</li><li>Los eventos de Windows se recogen con el <strong>agente de Azure Monitor</strong> y una regla de recopilación de datos. El conjunto <strong>Común</strong> basta para empezar; <em>Todos los eventos</em> multiplica el coste sin multiplicar las detecciones.</li><li>Comprueba que llegan datos antes de escribir ninguna regla:</li></ul>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Sentinel · Búsqueda avanzada (KQL)</span><button class="t-copy" type="button" data-copy="SigninLogs&#10;| where TimeGenerated &gt; ago(1h)&#10;| summarize Inicios = count() by ResultType" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>SigninLogs</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>| where TimeGenerated &gt; ago(1h)</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>| summarize Inicios = count() by ResultType</span><span class="t-out">ResultType   Inicios</span><span class="t-out">0            1 284</span><span class="t-out">50126        37</span><span class="t-out">50074        12</span><span class="t-out">53003        4</span></code></pre></figure>
+<p><code>ResultType</code> 0 es un inicio correcto; el resto son códigos de error de Entra ID (50126: credenciales incorrectas; 50074: falta completar MFA; 53003: bloqueado por Conditional Access).</p>
+<h2>2. La primera regla: entra una cuenta de emergencia</h2>
+<p>Las cuentas de emergencia no se usan nunca (guía de Global Admin y PIM). Si alguien entra con una, tiene que saberse en minutos. Primero, una <strong>watchlist</strong> con sus nombres para no escribirlos dentro de la regla:</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Microsoft Defender · Sentinel · Watchlists</span></figcaption><div class="ui-body"><div class="ui-path"><span>Microsoft Sentinel</span><span class="ui-sep" aria-hidden="true">›</span><span>Configuración</span><span class="ui-sep" aria-hidden="true">›</span><span>Watchlists</span><span class="ui-sep" aria-hidden="true">›</span><span>Nueva</span></div><div class="ui-field"><span class="ui-k">Nombre y alias</span><span class="ui-v">breakglass</span></div><div class="ui-field"><span class="ui-k">Origen</span><span class="ui-v">archivo CSV con la columna UserPrincipalName</span></div><div class="ui-field"><span class="ui-k">Clave de búsqueda</span><span class="ui-v">UserPrincipalName</span></div><div class="ui-field"><span class="ui-k">Filas</span><span class="ui-v">brk-admin-01@contoso.onmicrosoft.com · brk-admin-02@contoso.onmicrosoft.com</span></div><div class="ui-btn">Crear</div></div></figure>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Regla de análisis · consulta</span><button class="t-copy" type="button" data-copy="let breakglass = _GetWatchlist(&quot;breakglass&quot;) | project UserPrincipalName;&#10;SigninLogs&#10;| where UserPrincipalName in~ (breakglass)&#10;| project TimeGenerated, UserPrincipalName, IPAddress, Location, AppDisplayName, ResultType, UserAgent" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>let breakglass = _GetWatchlist(&quot;breakglass&quot;) | project UserPrincipalName;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>SigninLogs</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>| where UserPrincipalName in~ (breakglass)</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>| project TimeGenerated, UserPrincipalName, IPAddress, Location, AppDisplayName, ResultType, UserAgent</span></code></pre></figure>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Microsoft Defender · Sentinel · Regla de análisis</span></figcaption><div class="ui-body"><div class="ui-path"><span>Microsoft Sentinel</span><span class="ui-sep" aria-hidden="true">›</span><span>Configuración</span><span class="ui-sep" aria-hidden="true">›</span><span>Análisis</span><span class="ui-sep" aria-hidden="true">›</span><span>Crear</span><span class="ui-sep" aria-hidden="true">›</span><span>Regla de consulta casi en tiempo real (NRT)</span></div><div class="ui-field"><span class="ui-k">Nombre</span><span class="ui-v">Inicio de sesión de una cuenta de emergencia</span></div><div class="ui-field"><span class="ui-k">Gravedad</span><span class="ui-v">Alta · Táctica MITRE ATT&amp;CK: Acceso inicial, Cuentas válidas (T1078)</span></div><div class="ui-field"><span class="ui-k">Asignación de entidades</span><span class="ui-v">Cuenta → UserPrincipalName · IP → IPAddress</span></div><div class="ui-field"><span class="ui-k">Detalles de la alerta</span><span class="ui-v">título dinámico &quot;Cuenta de emergencia {{UserPrincipalName}} desde {{IPAddress}}&quot;</span></div><div class="ui-field"><span class="ui-k">Creación de incidentes</span><span class="ui-v">Habilitada · Agrupación de alertas: por cuenta, 24 horas</span></div><div class="ui-btn">Revisar y crear</div></div></figure>
+<ul><li>Una regla <strong>NRT</strong> se ejecuta cada minuto. Para la mayoría de reglas basta una <strong>programada</strong> cada 5 o 15 minutos; las NRT se reservan para lo que no puede esperar.</li><li>La <strong>asignación de entidades</strong> es lo que permite después ver la cuenta y la IP como objetos en la investigación, y que Sentinel relacione este incidente con otros de la misma IP.</li></ul>
+<h2>3. La automatización: asignar y avisar</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Microsoft Defender · Sentinel · Automatización</span></figcaption><div class="ui-body"><div class="ui-path"><span>Microsoft Sentinel</span><span class="ui-sep" aria-hidden="true">›</span><span>Configuración</span><span class="ui-sep" aria-hidden="true">›</span><span>Automatización</span><span class="ui-sep" aria-hidden="true">›</span><span>Crear</span><span class="ui-sep" aria-hidden="true">›</span><span>Regla de automatización</span></div><div class="ui-field"><span class="ui-k">Nombre</span><span class="ui-v">Cuentas de emergencia → seguridad</span></div><div class="ui-field"><span class="ui-k">Desencadenador</span><span class="ui-v">Cuando se crea el incidente</span></div><div class="ui-field"><span class="ui-k">Condiciones</span><span class="ui-v">Nombre de la regla de análisis contiene &quot;cuenta de emergencia&quot;</span></div><div class="ui-field"><span class="ui-k">Acciones</span><span class="ui-v">Asignar propietario: equipo de seguridad de guardia · Cambiar gravedad: Alta · Agregar etiqueta: breakglass</span></div><div class="ui-field"><span class="ui-k">Acción</span><span class="ui-v">Ejecutar playbook: pb-aviso-teams (publica el incidente en el canal de seguridad)</span></div><div class="ui-btn">Aplicar</div></div></figure>
+<p>El <strong>playbook</strong> es una aplicación lógica de Azure: recibe el incidente y publica en Teams con el enlace. Las reglas de automatización ordenan el trabajo; los playbooks hacen cosas fuera de Sentinel (avisar, deshabilitar una cuenta, abrir un ticket en Jira Service Management).</p>
+<h2>4. Un incidente de principio a fin</h2>
+<p>Lunes, 07:12. El canal de seguridad recibe: <em>Cuenta de emergencia brk-admin-02 desde 198.51.100.23</em>.</p>
+<ol><li><strong>Abrir el incidente</strong> (<em>Investigación y respuesta › Incidentes y alertas › Incidentes</em>): ver la alerta, las entidades (cuenta e IP) y la línea temporal.</li><li><strong>¿Fue un cambio planificado?</strong> El registro de cambios dice que no hay prueba de las cuentas de emergencia programada esta semana.</li><li><strong>¿Qué hizo esa IP?</strong></li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Búsqueda avanzada · la IP del incidente</span><button class="t-copy" type="button" data-copy="SigninLogs&#10;| where TimeGenerated &gt; ago(24h) and IPAddress == &quot;198.51.100.23&quot;&#10;| summarize Usuarios = dcount(UserPrincipalName), Fallos = countif(ResultType != &quot;0&quot;), Correctos = countif(ResultType == &quot;0&quot;) by bin(TimeGenerated, 1h)" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>SigninLogs</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>| where TimeGenerated &gt; ago(24h) and IPAddress == &quot;198.51.100.23&quot;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>| summarize Usuarios = dcount(UserPrincipalName), Fallos = countif(ResultType != &quot;0&quot;), Correctos = countif(ResultType == &quot;0&quot;) by bin(TimeGenerated, 1h)</span><span class="t-out">TimeGenerated         Usuarios   Fallos   Correctos</span><span class="t-out">27/10/2026 05:00      143        141      0</span><span class="t-out">27/10/2026 06:00      211        208      1</span><span class="t-out">27/10/2026 07:00      1          0        1</span></code></pre></figure>
+<p>Muchos usuarios distintos, casi todo fallos y un acierto: un <strong>ataque de difusión de contraseñas</strong> (password spray) que acertó con la contraseña de una cuenta de emergencia.</p>
+<ol><li><strong>Contener</strong>: deshabilitar la cuenta, revocar sus sesiones (<code>Revoke-MgUserSignInSession</code>), cambiar la contraseña, bloquear la IP en una ubicación con nombre de Conditional Access y revisar en <em>AuditLogs</em> qué hizo la cuenta en esos minutos.</li><li><strong>Clasificar y cerrar</strong>: <em>Verdadero positivo — actividad sospechosa</em>, con un comentario de lo que se hizo y las acciones pendientes (por qué la cuenta de emergencia podía entrar solo con contraseña).</li></ol>
+<p>La clasificación no es burocracia: los incidentes cerrados como <em>Falso positivo</em> te dicen qué reglas hay que afinar, y los <em>Benignos</em> (actividad sospechosa pero esperada, como una prueba planificada) qué excepciones faltan.</p>
+<h2>5. El coste</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Búsqueda avanzada · qué ingiere más</span><button class="t-copy" type="button" data-copy="Usage&#10;| where TimeGenerated &gt; ago(30d) and IsBillable == true&#10;| summarize GB = round(sum(Quantity) / 1000, 1) by DataType&#10;| sort by GB desc" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Usage</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>| where TimeGenerated &gt; ago(30d) and IsBillable == true</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>| summarize GB = round(sum(Quantity) / 1000, 1) by DataType</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>| sort by GB desc</span><span class="t-out">DataType                          GB</span><span class="t-out">SecurityEvent                     412.6</span><span class="t-out">AADNonInteractiveUserSignInLogs   188.3</span><span class="t-out">SigninLogs                        41.2</span><span class="t-out">Syslog                            19.8</span></code></pre></figure>
+<ul><li><code>SecurityEvent</code> arriba del todo suele ser un conjunto de eventos demasiado amplio o un servidor ruidoso: se ajusta la regla de recopilación.</li><li>Las tablas que solo se consultan en una investigación pueden ir al plan <strong>Basic</strong> o <strong>Auxiliary</strong>, mucho más barato, a cambio de consultas más limitadas.</li><li>Con un volumen estable, un <strong>nivel de compromiso</strong> diario abarata el GB.</li></ul>
+<h2>6. Lo que revisas cada mes</h2>
+<ul><li>Reglas que no han generado ningún incidente en 90 días (¿siguen llegando los datos que miran?) y reglas que generan tantos que nadie los lee.</li><li>El estado de los conectores y de las reglas: la tabla <code>SentinelHealth</code> y la página de cada conector dicen cuándo dejaron de llegar datos.</li><li>Tiempo medio hasta asignar y hasta cerrar los incidentes de gravedad alta.</li><li>La factura de ingesta frente al mes anterior, por tabla.</li></ul>
+<h2>Siguientes pasos</h2>
+<ul><li>Las <strong>plantillas de reglas</strong> de cada solución del Centro de contenido: se activan, se prueban y se afinan en lugar de escribirlas desde cero.</li><li><strong>UEBA</strong> (análisis de comportamiento de usuarios y entidades): detecta lo raro para cada usuario, no lo raro en general.</li><li><strong>Inteligencia de amenazas</strong>: indicadores de IP y dominios cruzados con tus registros.</li><li>La alerta de copias borradas o inmutabilidad cambiada de la guía de DR/BCP, como segunda regla propia.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span></p>
+      <p class="repo-name"><span class="es">Nivel 4</span> · <span class="es">Microsoft Sentinel</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
+      <a class="arrow-link" href="nivel-4.html"><span class="es">Todas las guías del Nivel 4</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="microsoft-purview-etiquetas-de-confidencialidad-retencion-dlp-y-un-documento-cifrado-que-no-abre.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Microsoft Purview: etiquetas de confidencialidad, retención, DLP y un documento cifrado que no abre</span></span></a>
+    <a class="post-nav-link next" href="migracion-de-tenant-microsoft-365-inventario-identidades-buzones-onedrive-y-dia-del-corte.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">Migraciones de tenant de Microsoft 365: inventario, identidades, buzones, OneDrive y el día del corte</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

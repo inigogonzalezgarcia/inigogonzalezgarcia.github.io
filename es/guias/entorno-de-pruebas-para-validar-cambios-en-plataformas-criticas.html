@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Entorno de pruebas para plataformas críticas · Iñigo González</title>
+<meta name="description" content="Qué tiene que ser igual que producción, cómo refrescar los datos sin llevar información de pacientes, la red aislada, el plan de pruebas con el responsable…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Entorno de pruebas para plataformas críticas · Iñigo González">
+<meta property="og:description" content="Qué tiene que ser igual que producción, cómo refrescar los datos sin llevar información de pacientes, la red aislada, el plan de pruebas con el responsable…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-sector-3.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Entorno de pruebas para plataformas críticas · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Entornos de prueba: preparar una preproducción para validar cambios en plataformas críticas","alternativeHeadline":"Test environments: preparing a pre-production to validate changes on critical platforms","description":"Qué tiene que ser igual que producción, cómo refrescar los datos sin llevar información de pacientes, la red aislada, el plan de pruebas con el responsable de la aplicación, el visto bueno antes del CAB y qué hacer cuando funcionó en pruebas y falló en producción.","datePublished":"2026-10-28","dateModified":"2026-10-28","inLanguage":"es","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/es/guias/entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/guias/entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Entornos de prueba - Preparar un entorno para validar cambios"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 3","item":"https://inigogonzalezgarcia.github.io/es/guias/sector-3.html"},{"@type":"ListItem","position":4,"name":"Entornos de prueba: preparar una preproducción para validar cambios en plataformas críticas","item":"https://inigogonzalezgarcia.github.io/es/guias/entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <a href="sector-3.html"><span class="es">Sector 3</span></a></p>
+    <h1><span class="es">Entornos de prueba: preparar una preproducción para validar cambios en plataformas críticas</span></h1>
+    <p class="lede"><span class="es">Qué tiene que ser igual que producción, cómo refrescar los datos sin llevar información de pacientes, la red aislada, el plan de pruebas con el responsable de la aplicación, el visto bueno antes del CAB y qué hacer cuando funcionó en pruebas y falló en producción.</span></p><p class="label post-meta"><span class="es">Sector 3</span> · <span class="es">Entornos de prueba - Preparar un entorno para validar cambios</span> · <span class="es">5 min</span> · <span class="es">Actualizado</span> <span class="es">28 oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Un entorno donde probar una actualización de la historia clínica, un parche del servidor o un cambio de integración antes de que llegue a la planta. En una plataforma que no puede pararse, el entorno de pruebas es lo único que separa un cambio de una incidencia a las tres de la mañana. Solo sirve si se parece a producción en lo que importa y si no contiene datos reales de pacientes.</p>
+<h2>Antes de empezar</h2>
+<ul><li>El inventario de la plataforma en producción: servidores, versiones, base de datos, integraciones (laboratorio, imagen, farmacia) y certificados.</li><li>El <strong>responsable funcional</strong> de la aplicación y el proveedor: son quienes saben qué hay que probar y quienes firman.</li><li>La política de protección de datos del centro y al delegado de protección de datos (DPD): los datos de salud son categoría especial en el RGPD.</li><li>Capacidad en la plataforma virtual para un entorno más pequeño, pero con la misma arquitectura.</li></ul>
+<h2>1. Lo que tiene que ser igual que producción</h2>
+<div class="g-table"><table><thead><tr><th>Igual siempre</th><th>Puede ser distinto</th></tr></thead><tbody><tr><td>Versión de la aplicación y de sus módulos</td><td>Número de servidores de aplicación</td></tr><tr><td>Versión del sistema operativo y nivel de parches</td><td>CPU y memoria (más pequeño)</td></tr><tr><td>Motor y versión de la base de datos, intercalación</td><td>Volumen de datos (un subconjunto)</td></tr><tr><td>Configuración de la aplicación y del servidor web</td><td>Nombres de host (con sufijo <code>-pre</code>)</td></tr><tr><td>Integraciones, aunque apunten a sus propios entornos de pruebas</td><td>Certificados (de la CA interna de pruebas)</td></tr><tr><td>Antivirus, agentes y GPO aplicadas</td><td>Alta disponibilidad (puede ser un solo nodo)</td></tr></tbody></table></div>
+<p>Si el clúster o el balanceador forman parte del cambio, el entorno de pruebas los necesita también. Probar una conmutación en un solo nodo no prueba nada.</p>
+<h2>2. Los datos: nunca pacientes reales</h2>
+<ul><li><strong>Datos ficticios</strong> generados por el proveedor o por un script para pruebas funcionales normales.</li><li><strong>Copia de producción enmascarada</strong> cuando hace falta volumen o casos reales (rendimiento, migraciones): se restaura en una red aislada, se enmascara y solo entonces se abre a los probadores.</li><li>El enmascaramiento es <strong>estático</strong>: se cambian los datos en la base. El enmascaramiento dinámico de SQL Server solo oculta al consultar; el dato sigue ahí y no vale para un entorno de pruebas.</li><li>Se enmascara todo lo identificativo: nombre, apellidos, DNI, número de historia, tarjeta sanitaria, teléfono, dirección y textos libres de notas clínicas (o se vacían).</li></ul>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · comprobación tras el refresco</span><button class="t-copy" type="button" data-copy="Invoke-Sqlcmd -ServerInstance srv-sql-pre01 -Database HCE_PRE -Query &quot;SELECT TOP 3 NHC, Apellido1, DNI, Telefono FROM Pacientes&quot;" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Invoke-Sqlcmd -ServerInstance srv-sql-pre01 -Database HCE_PRE -Query &quot;SELECT TOP 3 NHC, Apellido1, DNI, Telefono FROM Pacientes&quot;</span><span class="t-out">NHC       Apellido1   DNI        Telefono</span><span class="t-out">---       ---------   ---        --------</span><span class="t-out">PRE000101 APELLIDO101 00000101T  600000101</span><span class="t-out">PRE000102 APELLIDO102 00000102R  600000102</span><span class="t-out">PRE000103 APELLIDO103 00000103W  600000103</span></code></pre></figure>
+<p class="g-warn">Si la comprobación muestra un solo nombre real, el entorno se cierra y se avisa al DPD. No se &quot;arregla después&quot;.</p>
+<h2>3. Red aislada y accesos</h2>
+<ul><li>VLAN propia para el entorno de pruebas, sin rutas hacia los servidores de producción. Una prueba que escribe en el laboratorio real es una incidencia de seguridad del paciente.</li><li>Las integraciones apuntan a los entornos de pruebas de los otros sistemas, o a simuladores.</li><li>Acceso nominal y temporal para probadores y proveedor; cuentas de servicio distintas de las de producción.</li><li>Copias de seguridad propias: un refresco fallido no debe obligar a pedir otra copia de producción.</li></ul>
+<h2>4. El plan de pruebas y el visto bueno</h2>
+<p>El plan se escribe con el responsable de la aplicación, no lo escribe IT solo:</p>
+<ol><li><strong>Qué cambia</strong> y qué partes de la aplicación toca.</li><li><strong>Casos de prueba</strong> de los circuitos críticos: ingreso, prescripción, petición al laboratorio, alta.</li><li><strong>Pruebas técnicas</strong>: instalación, tiempo del cambio, reversión y rendimiento básico.</li><li><strong>Resultado</strong> de cada caso con quién lo probó y cuándo.</li><li><strong>Visto bueno</strong> firmado por el responsable funcional, que se adjunta a la petición de cambio antes de ir al CAB.</li></ol>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Gestión de cambios · RFC-2026-0412 · Pruebas</span></figcaption><div class="ui-body"><div class="ui-path"><span>Cambios</span><span class="ui-sep" aria-hidden="true">›</span><span>RFC-2026-0412</span><span class="ui-sep" aria-hidden="true">›</span><span>Pruebas en preproducción</span></div><div class="ui-field"><span class="ui-k">Entorno</span><span class="ui-v">HCE-PRE (srv-hce-pre01, srv-sql-pre01)</span></div><div class="ui-field"><span class="ui-k">Versión probada</span><span class="ui-v">8.4.2</span></div><div class="ui-field"><span class="ui-k">Casos ejecutados</span><span class="ui-v">24 de 24, 23 correctos, 1 con observación aceptada</span></div><div class="ui-field"><span class="ui-k">Reversión probada</span><span class="ui-v">Sí, 18 minutos</span></div><div class="ui-field"><span class="ui-k">Visto bueno funcional</span><span class="ui-v">javier.ruiz (responsable HCE), 21/10/2026</span></div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Plan de pruebas adjunto</div><div class="ui-opt"><span class="ui-box" aria-hidden="true"></span>Pendiente de CAB</div><div class="ui-btn">Enviar a CAB</div></div></figure>
+<h2>5. El ticket: &quot;funcionó en pruebas y falló en producción&quot;</h2>
+<p>Jueves, 06:10, tras la ventana de cambio. La actualización se aplicó y el módulo de farmacia da error en producción; en preproducción funcionó.</p>
+<ol><li><strong>Se aplica el plan de reversión</strong> si el error afecta a la atención y no hay solución en el tiempo acordado. Primero la plataforma, después la investigación.</li><li><strong>Se busca la deriva</strong>: qué es distinto entre los dos entornos. Lo habitual: un parche del sistema, un certificado, un cambio manual que nunca se documentó.</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · comparar parches entre producción y preproducción</span><button class="t-copy" type="button" data-copy="Compare-Object (Get-HotFix -ComputerName srv-hce-app01) (Get-HotFix -ComputerName srv-hce-pre01) -Property HotFixID" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Compare-Object (Get-HotFix -ComputerName srv-hce-app01) (Get-HotFix -ComputerName srv-hce-pre01) -Property HotFixID</span><span class="t-out">HotFixID   SideIndicator</span><span class="t-out">--------   -------------</span><span class="t-out">KB5066835  &lt;=</span></code></pre></figure>
+<p>Producción tiene un parche que preproducción no tiene. Se aplica en preproducción, se repite la prueba y se reproduce el error: ya hay causa para el proveedor.</p>
+<ol><li><strong>Se corrige el proceso</strong>: el entorno de pruebas entra en el mismo ciclo de parches que producción, una semana antes.</li></ol>
+<h2>6. Lo que revisas cada mes</h2>
+<ul><li>Versiones y parches de producción y preproducción comparados, con las diferencias justificadas.</li><li>Fecha del último refresco y resultado de la comprobación de enmascaramiento.</li><li>Accesos al entorno: los temporales caducados, retirados.</li><li>Cambios aprobados en el mes que se aplicaron sin pasar por pruebas, y por qué.</li></ul>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <strong>ISO 27001/NIS2/RGPD en IT</strong> explica el tratamiento de datos de salud y la gestión de cambios que pide la auditoría.</li><li>La guía de <strong>PostgreSQL/MySQL/SQL Server</strong> cubre la restauración de bases de datos para el refresco.</li><li>La guía de <strong>Backup y DR/BCP</strong> sitúa el entorno de pruebas en el plan de recuperación.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span></p>
+      <p class="repo-name"><span class="es">Sector 3</span> · <span class="es">Entornos de prueba - Preparar un entorno para validar cambios</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
+      <a class="arrow-link" href="sector-3.html"><span class="es">Todas las guías del Sector 3</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/40-change-calendar-risk-review.html"><span class="label muted"><span class="es">Blog · 40</span></span><span class="related-t"><span class="es">Dos cambios la misma noche y un parche en pleno cierre de mes: el calendario de cambios antes del CAB</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="citrix-publicar-aplicacion-clinica-y-dar-soporte-en-planta.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Citrix VDI: publicar una aplicación clínica y darle soporte en las plantas</span></span></a>
+    <a class="post-nav-link next" href="monitorizacion-desplegar-alarmas-y-responder-en-plataformas-24x7.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">Monitorización: desplegar alarmas y responder a ellas en una plataforma 24x7</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

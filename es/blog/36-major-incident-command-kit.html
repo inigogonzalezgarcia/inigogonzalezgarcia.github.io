@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Kit de incidentes graves: MTTA, MTTR y revisión · Iñigo González</title>
+<meta name="description" content="Para cada P1 y P2 del trimestre: la primera alerta frente al primer aviso de los usuarios, el tiempo de respuesta, mitigación y resolución frente al objetivo…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/blog/36-major-incident-command-kit.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/36-major-incident-command-kit.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/36-major-incident-command-kit.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/36-major-incident-command-kit.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kit de incidentes graves: MTTA, MTTR y revisión · Iñigo González">
+<meta property="og:description" content="Para cada P1 y P2 del trimestre: la primera alerta frente al primer aviso de los usuarios, el tiempo de respuesta, mitigación y resolución frente al objetivo…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/blog/36-major-incident-command-kit.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/36-major-incident-command-kit.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kit de incidentes graves: MTTA, MTTR y revisión · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Los usuarios nos avisaron 40 minutos antes que la monitorización: un kit para dirigir y revisar incidentes mayores","alternativeHeadline":"Users told us 40 minutes before monitoring did: a kit to run and review major incidents","description":"Para cada P1 y P2 del trimestre: la primera alerta frente al primer aviso de los usuarios, el tiempo de respuesta, mitigación y resolución frente al objetivo, quién lo dirigió, los huecos en las comunicaciones, el cambio de la noche anterior, la revisión, la causa raíz y las acciones vencidas, con una línea de tiempo y un borrador de revisión post-incidente por incidente.","datePublished":"2026-10-28","dateModified":"2026-10-28","inLanguage":"es","image":"https://inigogonzalezgarcia.github.io/assets/og/36-major-incident-command-kit.png","url":"https://inigogonzalezgarcia.github.io/es/blog/36-major-incident-command-kit.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/blog/36-major-incident-command-kit.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/es/blog/#blog"},"articleSection":"Herramientas de IT Ops"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/es/blog/"},{"@type":"ListItem","position":3,"name":"Los usuarios nos avisaron 40 minutos antes que la monitorización: un kit para dirigir y revisar incidentes mayores","item":"https://inigogonzalezgarcia.github.io/es/blog/36-major-incident-command-kit.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span></a><a href="../guias.html"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../blog/36-major-incident-command-kit.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 36</p>
+    <h1><span class="es">Los usuarios nos avisaron 40 minutos antes que la monitorización: un kit para dirigir y revisar incidentes mayores</span></h1>
+    <p class="lede"><span class="es">Para cada P1 y P2 del trimestre: la primera alerta frente al primer aviso de los usuarios, el tiempo de respuesta, mitigación y resolución frente al objetivo, quién lo dirigió, los huecos en las comunicaciones, el cambio de la noche anterior, la revisión, la causa raíz y las acciones vencidas, con una línea de tiempo y un borrador de revisión post-incidente por incidente.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span> · <span class="es">28 oct 2026</span> · <span class="es">4 min</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>El problema</h2>
+<p>La revisión post-incidente se suele escribir una semana después, de memoria, por la persona que más trabajo tuvo en el puente. Para entonces la línea de tiempo es una suposición, y las preguntas que cambiarían algo la próxima vez no se hacen. El service desk había recibido decenas de llamadas por el login antes de que nadie en IT lo supiera, y ninguna alerta saltó hasta mucho después de la detección. Una alerta de la cola de pagos saltó a las dos y diez y nadie actuó hasta las tres. La mesa de trading pasó hora y media sin una actualización y nunca recibió el aviso de resolución. El cambio de la noche anterior fue la causa, y el ticket no lo dice. La acción que habría detectado la caída del login lleva un mes vencida. Los datos están en la herramienta ITSM, las consolas de monitorización, el chat del puente y la bandeja de enviados; la revisión que importa los junta por incidente y los mide contra la política que el equipo se comprometió a cumplir.</p>
+<h2>Qué he hecho</h2>
+<ul><li>Detección: la primera alerta sobre el servicio o el CI frente al primer aviso de los usuarios y el ticket, con los puntos ciegos (avisan los usuarios, sin alerta) y las alertas que nadie atendió.</li><li>Respuesta: el tiempo hasta la asignación, la mitigación y la resolución frente a los objetivos de cada prioridad, y si constan un incident commander, un responsable de comunicaciones y un responsable técnico.</li><li>Comunicaciones: una actualización a los interesados cada N minutos según la política, la primera tarde, los huecos y el aviso de resolución que falta.</li><li>Antes y después: cambios en el servicio en las 72 horas previas al impacto, la revisión post-incidente en N días laborables, la causa raíz en el registro de problema, las acciones vencidas y los incidentes que vuelven en el mismo CI en 30 días.</li><li><code>report.html</code> con una línea de tiempo por incidente en SVG, un borrador de revisión post-incidente por cada incidente mayor con las partes que solo pueden escribir las personas bien marcadas, y CSV de incidentes, MTTD/MTTA/MTTM/MTTR por mes y prioridad, huecos de comunicación, acciones vencidas y repeticiones.</li><li>Un comando <code>start</code> que imprime la tarjeta de roles, el checklist de los primeros quince minutos y la primera comunicación para un incidente nuevo, y un exportador de solo lectura en PowerShell para ServiceNow y Jira Service Management.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python solo con la librería estándar. La demo es el equipo de operaciones IT de un banco inventado durante un trimestre: 54 incidentes, seis de ellos mayores, en pagos con tarjeta, banca online, voz de trading, la API móvil, el hub de pagos y datos de mercado, con alertas de cinco herramientas de monitorización, cambios, líneas de tiempo del puente, comunicaciones, problemas y acciones, y los problemas puestos a propósito. 15 tests, un runbook para los primeros quince minutos y la revisión semanal, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.</p>
+<h2>Qué aprendí</h2>
+<p>De liderar la respuesta técnica en incidentes mayores y los post-mortems que vinieron después, y de ser responsable de los procesos de incidencias, cambios y problemas. Uno de ellos fue la caída de una línea de voz que usaba una mesa de trading en una empresa de servicios financieros: la solución fue técnica, pero lo que la mesa recordaba era cada cuánto tenía noticias nuestras. Las lecciones que dan forma a la herramienta son que la detección empieza con la primera señal, no con el ticket; que una actualización sin novedades sigue siendo una actualización; que un cambio en los días previos es sospechoso hasta que la revisión lo descarta; y que una revisión sin responsable y fecha para cada acción es una reunión, no una revisión.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Ejecutarlo con las exportaciones reales del último trimestre y ajustar los objetivos, el intervalo de comunicaciones y los días para la revisión con los responsables de incidentes mayores.</li><li>Leer las alertas de las APIs de monitorización y las comunicaciones del plan de comunicación en lugar de dos CSV.</li><li>Escribir el borrador de revisión en el registro de problema, y llevar los puntos ciegos y las acciones vencidas a la revisión mensual de servicio.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span></p>
+      <p class="repo-name">36-major-incident-command-kit</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/36-major-incident-command-kit" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="es">Compartir</span></p>
+        <div class="share-row es" lang="es"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F36-major-incident-command-kit.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F36-major-incident-command-kit.html&amp;text=Los%20usuarios%20nos%20avisaron%2040%20minutos%20antes%20que%20la%20monitorizaci%C3%B3n%3A%20un%20kit%20para%20dirigir%20y%20revisar%20incidentes%20mayores%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">X</a><a class="share-btn" href="https://wa.me/?text=Los%20usuarios%20nos%20avisaron%2040%20minutos%20antes%20que%20la%20monitorizaci%C3%B3n%3A%20un%20kit%20para%20dirigir%20y%20revisar%20incidentes%20mayores%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F36-major-incident-command-kit.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=Los%20usuarios%20nos%20avisaron%2040%20minutos%20antes%20que%20la%20monitorizaci%C3%B3n%3A%20un%20kit%20para%20dirigir%20y%20revisar%20incidentes%20mayores%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F36-major-incident-command-kit.html" aria-label="Compartir en Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/es/blog/36-major-incident-command-kit.html" data-copied="Enlace copiado">Copiar enlace</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/es/blog/36-major-incident-command-kit.html" data-title="Los usuarios nos avisaron 40 minutos antes que la monitorización: un kit para dirigir y revisar incidentes mayores" hidden>Más…</button></div>
+        
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="40-change-calendar-risk-review.html"><span class="label muted"><span class="es">Blog · 40</span></span><span class="related-t"><span class="es">Dos cambios la misma noche y un parche en pleno cierre de mes: el calendario de cambios antes del CAB</span></span></a><a class="related-link" href="08-edge-health-slo-monitor.html"><span class="label muted"><span class="es">Blog · 08</span></span><span class="related-t"><span class="es">SLO y alertas por burn rate para el edge, en Python sin dependencias</span></span></a><a class="related-link" href="../guias/grafana-origen-de-datos-primer-panel-y-alerta-al-canal.html"><span class="label muted"><span class="es">Guía · Nivel 3</span></span><span class="related-t"><span class="es">Grafana: un origen de datos, el primer panel y una alerta que avisa al canal del equipo</span></span></a><a class="related-link" href="../guias/solarwinds-anadir-un-nodo-afinar-una-alerta-y-leer-que-paso-antes-de-la-caida.html"><span class="label muted"><span class="es">Guía · Nivel 3</span></span><span class="related-t"><span class="es">SolarWinds: añadir un nodo, afinar una alerta que salta demasiado y leer qué pasó antes de la caída</span></span></a><a class="related-link" href="../guias/azure-monitor-y-log-analytics-area-de-trabajo-reglas-de-recopilacion-alertas-y-un-servidor-que-deja-de-enviar-datos.html"><span class="label muted"><span class="es">Guía · Nivel 4</span></span><span class="related-t"><span class="es">Azure Monitor y Log Analytics: el área de trabajo, el agente, las alertas y un servidor que deja de enviar datos</span></span></a><a class="related-link" href="../guias/monitorizacion-desplegar-alarmas-y-responder-en-plataformas-24x7.html"><span class="label muted"><span class="es">Guía · Sector 3</span></span><span class="related-t"><span class="es">Monitorización: desplegar alarmas y responder a ellas en una plataforma 24x7</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="35-private-cloud-capacity-review.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">El clúster parecía ir bien al 74%: una revisión mensual de capacidad y disponibilidad de una nube privada</span></span></a>
+    <a class="post-nav-link next" href="37-iam-access-review.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">Se fue hace tres semanas y sigue en Domain Admins: la revisión mensual de accesos</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

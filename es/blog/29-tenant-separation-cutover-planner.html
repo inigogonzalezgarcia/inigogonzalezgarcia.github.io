@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Separación de tenant Microsoft 365: plan de olas · Iñigo González</title>
+<meta name="description" content="Equipos que no se pueden resetear al tenant destino, usuarios que van a fallar el primer día, aplicaciones sin decisión y un go o no-go por ola con su motivo…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/blog/29-tenant-separation-cutover-planner.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/29-tenant-separation-cutover-planner.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/29-tenant-separation-cutover-planner.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/29-tenant-separation-cutover-planner.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Separación de tenant Microsoft 365: plan de olas · Iñigo González">
+<meta property="og:description" content="Equipos que no se pueden resetear al tenant destino, usuarios que van a fallar el primer día, aplicaciones sin decisión y un go o no-go por ola con su motivo…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/blog/29-tenant-separation-cutover-planner.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/29-tenant-separation-cutover-planner.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Separación de tenant Microsoft 365: plan de olas · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"La ola 3 es el día 30 y el inventario dice que no: la separación de un tenant de Microsoft 365","alternativeHeadline":"Wave 3 is on the 30th and the inventory says no: readiness for a Microsoft 365 tenant split","description":"Equipos que no se pueden resetear al tenant destino, usuarios que van a fallar el primer día, aplicaciones sin decisión y un go o no-go por ola con su motivo, a partir de las exportaciones del propio tenant origen.","datePublished":"2026-10-23","dateModified":"2026-10-23","inLanguage":"es","image":"https://inigogonzalezgarcia.github.io/assets/og/29-tenant-separation-cutover-planner.png","url":"https://inigogonzalezgarcia.github.io/es/blog/29-tenant-separation-cutover-planner.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/blog/29-tenant-separation-cutover-planner.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/es/blog/#blog"},"articleSection":"Herramientas de IT Ops"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/es/blog/"},{"@type":"ListItem","position":3,"name":"La ola 3 es el día 30 y el inventario dice que no: la separación de un tenant de Microsoft 365","item":"https://inigogonzalezgarcia.github.io/es/blog/29-tenant-separation-cutover-planner.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span></a><a href="../guias.html"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../blog/29-tenant-separation-cutover-planner.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 29</p>
+    <h1><span class="es">La ola 3 es el día 30 y el inventario dice que no: la separación de un tenant de Microsoft 365</span></h1>
+    <p class="lede"><span class="es">Equipos que no se pueden resetear al tenant destino, usuarios que van a fallar el primer día, aplicaciones sin decisión y un go o no-go por ola con su motivo, a partir de las exportaciones del propio tenant origen.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span> · <span class="es">23 oct 2026</span> · <span class="es">3 min</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>El problema</h2>
+<p>Una separación de tenant son mil reseteos pequeños que tienen que salir bien el mismo fin de semana. El plan del programa dice &quot;ola 3, la planta, 30 de noviembre&quot;. El inventario dice que un tercio de los equipos de la planta no tienen TPM, que catorce kioscos no tienen usuario principal, que noventa equipos llevan una aplicación HMI que nadie ha catalogado, y que la ola tiene dos equipos más de los que los técnicos pueden resetear en cuatro días. Nada de eso aparece en el seguimiento del proyecto, y todo está en las exportaciones de Intune, Entra y Exchange. La revisión de preparación debería empezar por esas exportaciones, no por el plan.</p>
+<h2>Qué he hecho</h2>
+<ul><li>Preparación de equipos con cuatro bloqueos que paran una ola: sin hardware hash de Autopilot en el destino, clave de BitLocker sin custodiar, hardware no apto para Windows 11 y equipos que no se conectan desde hace semanas. Además, las acciones para el propio día: sistema por debajo de la línea base, poco disco, equipos solo unidos al dominio, equipos no conformes, administradores locales que el reseteo va a quitar, kioscos y aplicaciones sin decisión.</li><li>Preparación de usuarios: sin método de MFA (el acceso condicional del destino los para el primer día), buzones demasiado grandes para la ventana, licencias sin SKU comprado en el destino, buzones compartidos repartidos entre olas, usuarios inactivos y bajas.</li><li>Un go, go con acciones o no-go por ola, con su motivo: capacidad (técnicos, equipos por día, días), porcentaje de bloqueados, horas de migración de buzones frente a la ventana, periodos de congelación y un piloto que espera a que el tenant destino esté terminado.</li><li><code>report.html</code>, <code>cutover-plan.md</code> para el comité de cambios con el checklist de prerrequisitos y el orden del día del corte, <code>blockers.csv</code> con columnas de responsable y resuelto, y los CSV por ola, equipo, usuario y aplicación.</li><li>Un exportador de solo lectura en PowerShell para Microsoft Graph y Exchange Online.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python solo con la librería estándar. La demo es una segregación inventada de un grupo de concesionarios de automoción respecto a su matriz: cuatro sedes, 1.208 equipos, 1.182 usuarios y seis olas, con los problemas puestos a propósito para que cada ola falle por un motivo distinto. 22 tests y un runbook con la cadencia semanal, cómo leer los veredictos y la corrección habitual de cada hallazgo.</p>
+<h2>Qué aprendí</h2>
+<p>De migraciones tenant a tenant y la administración de Microsoft 365 que hay detrás, de Windows Autopilot e Intune con co-gestión de ConfigMgr, de una migración a Windows 11 en varias sedes, y de cambios pasados por el CAB con periodos de congelación. La lección que da forma a la herramienta es que una ola rara vez falla el día del corte. Falla semanas antes, cuando nadie cuenta los equipos sin hardware hash o los usuarios sin MFA, y la fecha sigue en el plan igualmente.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Unir el informe de preparación de hardware para Windows 11 con la exportación de Graph, para que la comprobación de hardware use datos reales de TPM y Secure Boot.</li><li>Ejecutarlo cada semana del programa y guardar las salidas con fecha, para que la revisión enseñe cómo bajan los bloqueos.</li><li>Acordar las reglas de las olas y el calendario de congelación con el comité de cambios antes de la primera ejecución, no después.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span></p>
+      <p class="repo-name">29-tenant-separation-cutover-planner</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/29-tenant-separation-cutover-planner" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="es">Compartir</span></p>
+        <div class="share-row es" lang="es"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F29-tenant-separation-cutover-planner.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F29-tenant-separation-cutover-planner.html&amp;text=La%20ola%203%20es%20el%20d%C3%ADa%2030%20y%20el%20inventario%20dice%20que%20no%3A%20la%20separaci%C3%B3n%20de%20un%20tenant%20de%20Microsoft%20365%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">X</a><a class="share-btn" href="https://wa.me/?text=La%20ola%203%20es%20el%20d%C3%ADa%2030%20y%20el%20inventario%20dice%20que%20no%3A%20la%20separaci%C3%B3n%20de%20un%20tenant%20de%20Microsoft%20365%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F29-tenant-separation-cutover-planner.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=La%20ola%203%20es%20el%20d%C3%ADa%2030%20y%20el%20inventario%20dice%20que%20no%3A%20la%20separaci%C3%B3n%20de%20un%20tenant%20de%20Microsoft%20365%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F29-tenant-separation-cutover-planner.html" aria-label="Compartir en Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/es/blog/29-tenant-separation-cutover-planner.html" data-copied="Enlace copiado">Copiar enlace</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/es/blog/29-tenant-separation-cutover-planner.html" data-title="La ola 3 es el día 30 y el inventario dice que no: la separación de un tenant de Microsoft 365" hidden>Más…</button></div>
+        
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="27-m365-tenant-governance-review.html"><span class="label muted"><span class="es">Blog · 27</span></span><span class="related-t"><span class="es">¿Sigue el tenant gobernado como acordamos? Una revisión mensual de Microsoft 365</span></span></a><a class="related-link" href="18-mecm-intune-comanagement-tracker.html"><span class="label muted"><span class="es">Blog · 18</span></span><span class="related-t"><span class="es">Un go/no-go para el siguiente paso del slider de co-management</span></span></a><a class="related-link" href="../guias/mecm-sccm-empaquetar-una-aplicacion-y-desplegarla.html"><span class="label muted"><span class="es">Guía · Nivel 2</span></span><span class="related-t"><span class="es">MECM / SCCM: empaquetar una aplicación y desplegarla a una colección</span></span></a><a class="related-link" href="../guias/intune-perfiles-y-cumplimiento-en-windows-macos-ios-android-y-dispositivo-que-no-cumple.html"><span class="label muted"><span class="es">Guía · Nivel 3</span></span><span class="related-t"><span class="es">Intune en Windows, macOS, iOS y Android: perfiles de configuración, cumplimiento y un dispositivo que no cumple</span></span></a><a class="related-link" href="../guias/migracion-de-tenant-microsoft-365-inventario-identidades-buzones-onedrive-y-dia-del-corte.html"><span class="label muted"><span class="es">Guía · Nivel 4</span></span><span class="related-t"><span class="es">Migraciones de tenant de Microsoft 365: inventario, identidades, buzones, OneDrive y el día del corte</span></span></a><a class="related-link" href="../guias/windows-11-migrar-los-equipos-de-una-sede-con-sala-de-trading.html"><span class="label muted"><span class="es">Guía · Sector 5</span></span><span class="related-t"><span class="es">Windows 11: migrar los equipos de una sede con sala de trading sin tocar el horario de mercado</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="28-euc-provider-service-review.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">El proveedor dice 96% y los usuarios dicen que va lento: una revisión mensual del servicio EUC desde los tickets</span></span></a>
+    <a class="post-nav-link next" href="30-jira-confluence-admin-kit.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">128 licencias sin uso y un sprint abierto nueve días tarde: revisión mensual de Jira y Confluence</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

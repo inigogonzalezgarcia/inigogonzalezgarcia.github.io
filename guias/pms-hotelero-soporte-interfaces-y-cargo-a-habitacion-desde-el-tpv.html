@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="no-js inner" data-title-en="Hotel PMS: interfaces and room charges · Iñigo González" data-title-es="PMS hotelero: interfaces y cargo a habitación · Iñigo González">
+<html lang="en" class="no-js inner">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -16,6 +16,9 @@
 <meta name="author" content="Iñigo González">
 <meta name="theme-color" content="#0e1a24">
 <link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/pms-hotelero-soporte-interfaces-y-cargo-a-habitacion-desde-el-tpv.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/pms-hotelero-soporte-interfaces-y-cargo-a-habitacion-desde-el-tpv.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/pms-hotelero-soporte-interfaces-y-cargo-a-habitacion-desde-el-tpv.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/pms-hotelero-soporte-interfaces-y-cargo-a-habitacion-desde-el-tpv.html">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <meta property="og:site_name" content="Iñigo González">
@@ -36,7 +39,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Hotel PMS: support, interfaces and room charges from the POS","alternativeHeadline":"PMS hotelero: soporte, interfaces y el cargo a habitación desde el TPV","description":"What the PMS is and why the whole hotel depends on it, how a restaurant charge travels to the guest's folio, the mapping table between outlets and transaction codes, the reasons a charge is rejected and what to check before the night audit.","datePublished":"2026-10-27","dateModified":"2026-10-27","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/pms-hotelero-soporte-interfaces-y-cargo-a-habitacion-desde-el-tpv.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/pms-hotelero-soporte-interfaces-y-cargo-a-habitacion-desde-el-tpv.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Hotel PMS - Support and POS interfaces"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 1","item":"https://inigogonzalezgarcia.github.io/guias/sector-1.html"},{"@type":"ListItem","position":4,"name":"Hotel PMS: support, interfaces and room charges from the POS","item":"https://inigogonzalezgarcia.github.io/guias/pms-hotelero-soporte-interfaces-y-cargo-a-habitacion-desde-el-tpv.html"}]}]}</script>
 </head>
 <body id="top">
-<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
 
 <header class="site-header">
   <div class="wrap">
@@ -44,11 +47,11 @@
       <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
       <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
     </a>
-    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/"><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
     <div class="head-actions">
-      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
       <span class="sep" aria-hidden="true"></span>
-      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+      <a class="lang-btn" id="langBtn" href="../es/guias/pms-hotelero-soporte-interfaces-y-cargo-a-habitacion-desde-el-tpv.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
     </div>
   </div>
 </header>
@@ -56,54 +59,29 @@
 <div class="menu" id="menu" aria-hidden="true">
   <div class="menu-top">
     <span class="label">Iñigo González</span>
-    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
   </div>
-  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
     <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
     <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
-    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
   </div>
 </div>
 
 <main id="main">
 <section class="page-hero post-hero">
   <div class="wrap">
-    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="sector-1.html"><span class="es">Sector 1</span><span class="en">Sector 1</span></a></p>
-    <h1><span class="es">PMS hotelero: soporte, interfaces y el cargo a habitación desde el TPV</span><span class="en">Hotel PMS: support, interfaces and room charges from the POS</span></h1>
-    <p class="lede"><span class="es">Qué es el PMS y por qué todo el hotel depende de él, cómo viaja un cargo del restaurante al folio del huésped, la tabla de correspondencias entre puntos de venta y códigos de transacción, los motivos por los que un cargo se rechaza y qué revisar antes de la auditoría nocturna.</span><span class="en">What the PMS is and why the whole hotel depends on it, how a restaurant charge travels to the guest&#x27;s folio, the mapping table between outlets and transaction codes, the reasons a charge is rejected and what to check before the night audit.</span></p><p class="label post-meta"><span class="es">Sector 1</span><span class="en">Sector 1</span> · <span class="es">PMS hotelero - Soporte e interfaces con el TPV</span><span class="en">Hotel PMS - Support and POS interfaces</span> · <span class="es">5 min</span><span class="en">5 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">27 oct 2026</span><span class="en">27 Oct 2026</span></p>
+    <p class="label kicker"><a href="../guias.html"><span class="en">Guides</span></a> · <a href="sector-1.html"><span class="en">Sector 1</span></a></p>
+    <h1><span class="en">Hotel PMS: support, interfaces and room charges from the POS</span></h1>
+    <p class="lede"><span class="en">What the PMS is and why the whole hotel depends on it, how a restaurant charge travels to the guest&#x27;s folio, the mapping table between outlets and transaction codes, the reasons a charge is rejected and what to check before the night audit.</span></p><p class="label post-meta"><span class="en">Sector 1</span> · <span class="en">Hotel PMS - Support and POS interfaces</span> · <span class="en">5 min read</span> · <span class="en">Updated</span> <span class="en">27 Oct 2026</span></p>
   </div>
 </section>
 
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose guide">
-      <div class="es" lang="es">
-<h2>Qué vas a conseguir</h2>
-<p>Entender el PMS lo bastante para dar soporte a recepción sin ser recepcionista, y resolver el ticket que más se repite entre el restaurante y la recepción: &quot;no me deja cargar a la habitación&quot;. El ejemplo usa términos de <strong>Oracle OPERA</strong>, el PMS más extendido en cadenas; otros PMS tienen las mismas piezas con otros nombres.</p>
-<h2>Antes de empezar</h2>
-<ul><li>Un usuario del PMS con permisos de consulta de reservas y de la configuración de interfaces (no de tarifas ni de facturación: no los necesitas).</li><li>El nombre del <strong>servidor o servicio de interfaces</strong> y del proveedor de cada interfaz (TPV, cerraduras, centralita, IPTV).</li><li>La lista de <strong>puntos de venta</strong> del hotel (restaurante, bar, room service, spa) y su código en el TPV.</li></ul>
-<h2>1. El PMS y sus piezas</h2>
-<ul><li><strong>Reserva y perfil</strong>: quién es el huésped, en qué habitación está, cuándo llega y se va.</li><li><strong>Folio</strong>: la cuenta del huésped, donde se suman la habitación, el restaurante, el minibar o el spa.</li><li><strong>Códigos de transacción</strong>: cada tipo de cargo tiene uno (alojamiento, alimentos, bebidas, spa). Contabilidad cuenta los ingresos con ellos.</li><li><strong>Interfaces</strong>: los otros sistemas se conectan al PMS a través de un servidor de interfaces (en OPERA, <strong>IFC8</strong>) o de su API en la nube (<strong>OHIP</strong> en OPERA Cloud), con protocolos como <strong>FIAS</strong>.</li><li><strong>Auditoría nocturna</strong>: el cierre del día. Pasa los cargos de habitación, cambia la fecha del hotel y saca los informes. Si una interfaz tiene cargos pendientes, se quedan fuera del día.</li></ul>
-<h2>2. Cómo viaja un cargo a habitación</h2>
-<ol><li>El camarero cierra la mesa y elige <strong>Cargo a habitación</strong>. Escribe el número de habitación (o el apellido).</li><li>El TPV envía una <strong>consulta</strong> al PMS: ¿quién está alojado en la 214?</li><li>El PMS responde con el huésped (o los huéspedes) de esa habitación y si puede recibir cargos.</li><li>El camarero elige el huésped, que firma el ticket.</li><li>El TPV envía el <strong>cargo</strong>: importe, desglose por tipo (comida, bebida), punto de venta, número de ticket y la reserva.</li><li>El PMS lo apunta en el folio con el código de transacción que corresponde y contesta con un OK. Si contesta con un rechazo, el TPV lo muestra y la venta sigue abierta.</li></ol>
-<h2>3. La tabla de correspondencias</h2>
-<p>Cada punto de venta del TPV, y cada tipo de venta dentro de él, se corresponde con un código de transacción del PMS. Si falta una fila, el cargo se rechaza.</p>
-<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PMS · Interfaces · Correspondencias del TPV</span></figcaption><div class="ui-body"><div class="ui-path"><span>Configuración</span><span class="ui-sep" aria-hidden="true">›</span><span>Interfaces</span><span class="ui-sep" aria-hidden="true">›</span><span>TPV-RESTAURANTES</span><span class="ui-sep" aria-hidden="true">›</span><span>Correspondencias</span></div><div class="ui-field"><span class="ui-k">Punto de venta 10 · Restaurante · Comida → 2010 Alimentos restaurante</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">Punto de venta 10 · Restaurante · Bebida → 2110 Bebidas restaurante</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">Punto de venta 20 · Bar del lobby · Bebida → 2120 Bebidas bar</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">Punto de venta 30 · Room service · Comida → 2030 Alimentos room service</span><span class="ui-v"></span></div><div class="ui-field"><span class="ui-k">Punto de venta 40 · Terraza · (sin correspondencias)</span><span class="ui-v"></span></div></div></figure>
-<p>La terraza se abrió la semana pasada y nadie añadió su fila: todos sus cargos a habitación fallan. Es el motivo número uno cuando un punto de venta nuevo &quot;no carga&quot; y los demás sí.</p>
-<h2>4. El ticket: &quot;no me deja cargar a la habitación&quot;</h2>
-<div class="g-table"><table><thead><tr><th>Lo que dice el TPV</th><th>Causa probable</th><th>Qué haces</th></tr></thead><tbody><tr><td>Habitación no encontrada</td><td>El huésped ya ha hecho el check-out, o se ha cambiado de habitación</td><td>Recepción confirma la habitación actual; si ya se fue, se cobra en el momento</td></tr><tr><td>Huésped sin crédito / no admite cargos</td><td>La reserva está marcada como <strong>No Post</strong> (sin cargos) o ha superado el límite de crédito</td><td>Lo decide recepción, no IT: suele ser un huésped sin tarjeta de garantía</td></tr><tr><td>Código de transacción no válido</td><td>Falta la correspondencia del punto de venta (apartado 3)</td><td>Se añade la fila con el responsable de contabilidad y se reenvía el cargo</td></tr><tr><td>Sin respuesta del PMS / tiempo de espera</td><td>La interfaz está caída</td><td>Apartado 5</td></tr><tr><td>Cargo duplicado</td><td>El TPV reintentó tras un tiempo de espera y el primer cargo sí llegó</td><td>Recepción anula uno en el folio; se revisa el tiempo de espera de la interfaz</td></tr></tbody></table></div>
-<h2>5. Cuando la interfaz está caída</h2>
-<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PMS · Interfaces · Estado</span></figcaption><div class="ui-body"><div class="ui-path"><span>Configuración</span><span class="ui-sep" aria-hidden="true">›</span><span>Interfaces</span><span class="ui-sep" aria-hidden="true">›</span><span>Estado de las interfaces</span></div><div class="ui-txt">TPV-RESTAURANTES    Desconectada    Último mensaje: 27/10/2026 13:42:18</div><div class="ui-txt">CERRADURAS          Conectada       Último mensaje: 27/10/2026 14:05:51</div><div class="ui-txt">CENTRALITA          Conectada       Último mensaje: 27/10/2026 14:05:47</div><div class="ui-txt">IPTV                Conectada       Último mensaje: 27/10/2026 14:04:02</div></div></figure>
-<ol><li><strong>Cuál está caída y desde cuándo</strong>: solo la del TPV, desde las 13:42. No es el PMS entero: las cerraduras funcionan.</li><li><strong>El otro extremo</strong>: el servicio de interfaz del TPV en su servidor, arrancado; la red entre ese servidor y el de interfaces (las IP y el puerto están en la hoja de interfaces).</li><li><strong>Reiniciar en orden</strong>: primero el servicio de interfaz del lado del TPV, luego la interfaz en el PMS. Nunca el servidor de interfaces entero en plena hora de comidas: tira también las cerraduras y la centralita.</li><li><strong>Los cargos pendientes</strong>: al reconectar, el TPV reenvía los cargos que no pudo entregar (según cómo esté configurado). Se comprueba en el folio de dos o tres huéspedes que han llegado una sola vez.</li><li>Si sigue caída, el proveedor del TPV con la hora exacta del último mensaje.</li></ol>
-<h2>6. Antes de la auditoría nocturna</h2>
-<ul><li>Todas las interfaces conectadas y sin cargos pendientes de enviar.</li><li>Los cierres de caja de los puntos de venta hechos: un cargo que llega después de la auditoría cae en el día siguiente.</li><li>Los rechazos del día revisados con recepción: cada uno es un importe que alguien tiene que cobrar.</li></ul>
-<h2>7. Lo que revisas cada mes</h2>
-<ul><li>La tabla de correspondencias frente a los puntos de venta que existen de verdad (los nuevos, añadidos; los cerrados, retirados).</li><li>Los usuarios del PMS: altas con su rol, bajas el último día. El PMS tiene datos personales y de pago de los huéspedes.</li><li>Las versiones del servidor de interfaces y de cada interfaz, con sus proveedores.</li></ul>
-<h2>Siguientes pasos</h2>
-<ul><li>La guía de <strong>hotel en pre-apertura</strong> tiene el mapa completo de interfaces de un hotel nuevo.</li><li>La de <strong>ICG y HIOPOS</strong> cubre el lado del TPV.</li><li>La de <strong>IPTV en hotel</strong> usa la interfaz con el PMS para el mensaje de bienvenida y la factura en pantalla.</li></ul>
-<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
-      </div>
+      
       <div class="en" lang="en">
 <h2>What you&#x27;ll get</h2>
 <p>Understanding the PMS well enough to support the front office without being a receptionist, and solving the most repeated ticket between the restaurant and reception: &quot;it won&#x27;t let me charge it to the room&quot;. The example uses <strong>Oracle OPERA</strong> terms, the most widespread PMS in hotel chains; other PMSs have the same pieces under other names.</p>
@@ -132,27 +110,27 @@
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
-        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
-        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
       </div>
     </article>
     <aside class="post-aside">
-      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
-      <p class="repo-name"><span class="es">Sector 1</span><span class="en">Sector 1</span> · <span class="es">PMS hotelero - Soporte e interfaces con el TPV</span><span class="en">Hotel PMS - Support and POS interfaces</span></p>
-      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
-      <a class="arrow-link" href="sector-1.html"><span class="es">Todas las guías del Sector 1</span><span class="en">All Sector 1 guides</span> →</a>
+      <p class="label muted"><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="en">Sector 1</span> · <span class="en">Hotel PMS - Support and POS interfaces</span></p>
+      <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="sector-1.html"><span class="en">All Sector 1 guides</span> →</a>
       
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>
   
   <div class="wrap related">
-    <h2 class="label kicker related-h"><span class="es">Relacionado</span><span class="en">Related</span></h2>
-    <div class="related-grid"><a class="related-link" href="../blog/34-venue-service-readiness.html"><span class="label muted"><span class="es">Blog · 34</span><span class="en">Blog · 34</span></span><span class="related-t"><span class="es">La única impresora de cocina llevaba caída desde ayer: la revisión de cada mañana en hostelería</span><span class="en">The only kitchen printer had been down since yesterday: a morning check for a hospitality venue</span></span></a><a class="related-link" href="../blog/24-hospitality-it-preopening.html"><span class="label muted"><span class="es">Blog · 24</span><span class="en">Blog · 24</span></span><span class="related-t"><span class="es">¿Estará IT lista antes de que abra el hotel? Un tracker de pre-apertura</span><span class="en">Will IT be ready before the hotel opens? A pre-opening tracker</span></span></a></div>
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/34-venue-service-readiness.html"><span class="label muted"><span class="en">Blog · 34</span></span><span class="related-t"><span class="en">The only kitchen printer had been down since yesterday: a morning check for a hospitality venue</span></span></a><a class="related-link" href="../blog/24-hospitality-it-preopening.html"><span class="label muted"><span class="en">Blog · 24</span></span><span class="related-t"><span class="en">Will IT be ready before the hotel opens? A pre-opening tracker</span></span></a></div>
   </div>
   <div class="wrap post-nav">
-    <a class="post-nav-link prev" href="iptv-en-hotel-diagnostico-de-canales-multicast-y-televisores-de-habitacion.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">IPTV en hotel: diagnóstico de canales, la red multicast y los televisores de habitación</span><span class="en">Hotel IPTV: troubleshooting channels, the multicast network and in-room TVs</span></span></a>
-    <a class="post-nav-link next" href="zabbix-monitorizar-un-restaurante-u-hotel-tpv-impresoras-de-cocina-e-internet.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Zabbix: monitorizar un restaurante o un hotel, con los TPV, las impresoras de cocina e internet vigilados antes del servicio</span><span class="en">Zabbix: monitoring a restaurant or hotel, with the POS, kitchen printers and internet watched before service</span></span></a>
+    <a class="post-nav-link prev" href="iptv-en-hotel-diagnostico-de-canales-multicast-y-televisores-de-habitacion.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">Hotel IPTV: troubleshooting channels, the multicast network and in-room TVs</span></span></a>
+    <a class="post-nav-link next" href="zabbix-monitorizar-un-restaurante-u-hotel-tpv-impresoras-de-cocina-e-internet.html"><span class="label muted"><span class="en">Next</span></span><span><span class="en">Zabbix: monitoring a restaurant or hotel, with the POS, kitchen printers and internet watched before service</span></span></a>
   </div>
 </section>
 </main>
@@ -160,8 +138,8 @@
 <footer>
   <div class="wrap">
     <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
-    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
-    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
   </div>
 </footer>
 

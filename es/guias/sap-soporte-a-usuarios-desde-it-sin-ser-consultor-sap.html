@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Soporte a usuarios de SAP desde IT · Iñigo González</title>
+<meta name="description" content="Lo que hace el primer y segundo nivel de IT con los usuarios de SAP: instalar SAP GUI y sus conexiones, desbloquear usuarios cuando IT está autorizado, leer…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/sap-soporte-a-usuarios-desde-it-sin-ser-consultor-sap.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/sap-soporte-a-usuarios-desde-it-sin-ser-consultor-sap.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/sap-soporte-a-usuarios-desde-it-sin-ser-consultor-sap.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/sap-soporte-a-usuarios-desde-it-sin-ser-consultor-sap.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Soporte a usuarios de SAP desde IT · Iñigo González">
+<meta property="og:description" content="Lo que hace el primer y segundo nivel de IT con los usuarios de SAP: instalar SAP GUI y sus conexiones, desbloquear usuarios cuando IT está autorizado, leer…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/sap-soporte-a-usuarios-desde-it-sin-ser-consultor-sap.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-sector-4.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Soporte a usuarios de SAP desde IT · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"SAP: soporte a usuarios desde IT sin ser consultor de SAP","alternativeHeadline":"SAP: supporting users from IT without being an SAP consultant","description":"Lo que hace el primer y segundo nivel de IT con los usuarios de SAP: instalar SAP GUI y sus conexiones, desbloquear usuarios cuando IT está autorizado, leer un SU53, entender la impresión con SPAD y SP01, mirar SM04 y SM21 si hay acceso, saber cuándo escalar y el ticket del almacén que no imprime albaranes.","datePublished":"2026-10-28","dateModified":"2026-10-28","inLanguage":"es","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/es/guias/sap-soporte-a-usuarios-desde-it-sin-ser-consultor-sap.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/guias/sap-soporte-a-usuarios-desde-it-sin-ser-consultor-sap.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"SAP - Soporte a usuarios desde IT"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 4","item":"https://inigogonzalezgarcia.github.io/es/guias/sector-4.html"},{"@type":"ListItem","position":4,"name":"SAP: soporte a usuarios desde IT sin ser consultor de SAP","item":"https://inigogonzalezgarcia.github.io/es/guias/sap-soporte-a-usuarios-desde-it-sin-ser-consultor-sap.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/sap-soporte-a-usuarios-desde-it-sin-ser-consultor-sap.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <a href="sector-4.html"><span class="es">Sector 4</span></a></p>
+    <h1><span class="es">SAP: soporte a usuarios desde IT sin ser consultor de SAP</span></h1>
+    <p class="lede"><span class="es">Lo que hace el primer y segundo nivel de IT con los usuarios de SAP: instalar SAP GUI y sus conexiones, desbloquear usuarios cuando IT está autorizado, leer un SU53, entender la impresión con SPAD y SP01, mirar SM04 y SM21 si hay acceso, saber cuándo escalar y el ticket del almacén que no imprime albaranes.</span></p><p class="label post-meta"><span class="es">Sector 4</span> · <span class="es">SAP - Soporte a usuarios desde IT</span> · <span class="es">7 min</span> · <span class="es">Actualizado</span> <span class="es">28 oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Resolver en IT lo que es de IT (el puesto, la red, la impresora, la cuenta) y pasar al equipo SAP lo que es de SAP (permisos, configuración, procesos) con la información que necesita para no volver a preguntar. En una industria con plantas en varios países, SAP es el sistema que mueve pedidos, producción y expediciones: un almacén que no imprime albaranes es un camión esperando en el muelle.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Qué tiene <strong>autorizado</strong> IT por escrito: muchas empresas permiten a la mesa de ayuda desbloquear usuarios y cambiar contraseñas en SU01, y nada más. Lo que no está en ese documento se escala.</li><li>Los <strong>sistemas</strong> y su papel: producción (por ejemplo <code>PRD</code>), calidad (<code>QAS</code>) y desarrollo (<code>DEV</code>), con su mandante. Un cambio en el sistema equivocado es peor que no hacerlo.</li><li>El <strong>equipo SAP</strong> (interno o un socio de mantenimiento): cola de tickets, horario y guardia fuera de horario, sobre todo si las plantas trabajan a turnos.</li><li>La <strong>versión de SAP GUI</strong> homologada y el paquete de instalación que la empresa distribuye.</li></ul>
+<h2>1. SAP GUI y las conexiones</h2>
+<p>El equipo SAP suele preparar un <strong>servidor de instalación</strong> con un paquete propio (SAP GUI, complementos de Office si se usan, y la configuración de conexiones). IT lo distribuye como cualquier otra aplicación.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · instalación desatendida desde el servidor de instalación</span><button class="t-copy" type="button" data-copy="&amp; \\srv-files01\sapgui\Setup\NwSapSetup.exe /Silent /Package=&quot;SAPGUI-CONTOSO&quot;&#10;$LASTEXITCODE&#10;Get-ChildItem &quot;$env:APPDATA\SAP\Common&quot; -Filter *.xml | Select-Object Name, LastWriteTime" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>&amp; \\srv-files01\sapgui\Setup\NwSapSetup.exe /Silent /Package=&quot;SAPGUI-CONTOSO&quot;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>$LASTEXITCODE</span><span class="t-out">0</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-ChildItem &quot;$env:APPDATA\SAP\Common&quot; -Filter *.xml | Select-Object Name, LastWriteTime</span><span class="t-out">Name                   LastWriteTime</span><span class="t-out">----                   -------------</span><span class="t-out">SAPUILandscape.xml     28/10/2026 09:12:40</span></code></pre></figure>
+<ul><li>Las entradas de <strong>SAP Logon</strong> viven en <code>SAPUILandscape.xml</code>. Lo mejor es que apunten a un fichero central de conexiones que mantiene el equipo SAP: si cambia un servidor, no hay que tocar cada PC.</li><li>Una conexión lleva el servidor de aplicaciones y el <strong>número de instancia</strong>, o el servidor de mensajes y el <strong>grupo de inicio de sesión</strong>, y el identificador del sistema. Si el puesto está en otro país y pasa por un SAProuter, también la cadena del router.</li><li>Puertos que la red debe dejar pasar: <code>32NN</code> (dispatcher) y, si se usa grupo de inicio de sesión, <code>36NN</code> (servidor de mensajes), donde <code>NN</code> es el número de instancia. Una planta que no llega a SAP casi siempre es esto o la VPN.</li><li>Si hay inicio de sesión único (SNC con Kerberos), un usuario al que le pide contraseña tiene un problema de su cuenta de Windows o del puesto, no de SAP.</li></ul>
+<h2>2. Usuarios bloqueados y contraseñas (si IT está autorizado)</h2>
+<p>En la transacción <strong>SU01</strong>, con el usuario de SAP (no siempre coincide con el de Windows):</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">SAP GUI · SU01 · Mantener usuarios</span></figcaption><div class="ui-body"><div class="ui-path"><span>SAP Easy Access</span><span class="ui-sep" aria-hidden="true">›</span><span>/nSU01</span></div><div class="ui-field"><span class="ui-k">Usuario</span><span class="ui-v">LPRADO</span></div><div class="ui-field"><span class="ui-k">Estado</span><span class="ui-v">Bloqueado por intentos de conexión erróneos</span></div><div class="ui-field"><span class="ui-k">Pestaña Datos de inicio de sesión › Válido hasta</span><span class="ui-v">31/12/9999</span></div><div class="ui-field"><span class="ui-k">Tipo de usuario</span><span class="ui-v">A Diálogo</span></div><div class="ui-btn">Bloquear/Desbloquear</div><div class="ui-btn">Modificar contraseña</div></div></figure>
+<ol><li>Comprueba <strong>quién pide</strong> el desbloqueo: el propio usuario por un canal identificado, no un compañero por teléfono.</li><li>Mira el <strong>motivo</strong>. Bloqueado por intentos erróneos: desbloquea y, si no recuerda la contraseña, asigna una inicial que el sistema obligará a cambiar. <strong>Bloqueado por el administrador</strong>: no lo toques, suele ser una baja o una decisión de seguridad; escala.</li><li>Revisa la <strong>validez</strong>: un usuario con fecha <em>Válido hasta</em> pasada no entra aunque no esté bloqueado. Ampliarla no suele estar autorizado a IT.</li><li>Anota en el ticket el sistema, el mandante y lo que hiciste.</li></ol>
+<h2>3. Errores de autorización: SU53</h2>
+<p>Cuando un usuario dice &quot;no me deja&quot; o &quot;no tengo autorización&quot;, la respuesta no la tiene IT, pero IT puede recoger la prueba:</p>
+<ol><li>Que repita la acción hasta el error.</li><li>Justo después, en el campo de comandos: <code>/nSU53</code>. Muestra la <strong>última comprobación de autorización fallida</strong>: el objeto (por ejemplo <code>V_LIKP_VST</code>, entregas por puesto de expedición), el campo y el valor que faltan.</li><li>Captura de esa pantalla al ticket y escala al equipo de <strong>seguridad SAP</strong> o de roles.</li></ol>
+<p class="g-tip">Si tienes permiso, SU53 también puede mostrar el último error de <strong>otro usuario</strong>. Es útil cuando el usuario está en una nave sin forma fácil de enviarte una captura.</p>
+<h2>4. Impresión desde SAP: SPAD y SP01</h2>
+<p>SAP no imprime en &quot;la impresora de Windows&quot; del usuario, salvo en impresión desde el puesto. Imprime en un <strong>dispositivo de salida</strong> definido en <strong>SPAD</strong>:</p>
+<div class="g-table"><table><thead><tr><th>Dato del dispositivo</th><th>Qué significa</th></tr></thead><tbody><tr><td>Nombre corto (4 caracteres)</td><td>El que el usuario elige o el que trae por defecto la clase de mensaje</td></tr><tr><td>Tipo de dispositivo</td><td>El lenguaje que SAP envía (PCL, PostScript, ZPL para etiquetas)</td></tr><tr><td>Método de acceso</td><td><code>U</code> (protocolo Berkeley/LPD hacia la impresora o un servidor), <code>S</code> (SAPSprint en un servidor Windows), <code>F</code> o <code>G</code> (impresión desde el puesto del usuario), <code>C</code> o <code>L</code> (por el sistema operativo del servidor SAP)</td></tr><tr><td>Impresora en el host</td><td>IP o nombre de la impresora, o la cola del servidor de impresión</td></tr></tbody></table></div>
+<p>Cada impresión genera una <strong>orden de spool</strong> que se ve en <strong>SP01</strong> (todas, con permiso) o <strong>SP02</strong> (las propias). El estado dice dónde se quedó: <em>En espera</em>, <em>Problema</em>, <em>Error</em> o <em>Completada</em>.</p>
+<h2>5. El ticket: &quot;no se pueden imprimir albaranes desde SAP en el almacén&quot;</h2>
+<p>Miércoles, 06:40, planta 9. El turno de expediciones no imprime albaranes y hay dos camiones en el muelle.</p>
+<ol><li><strong>¿Una impresora o todas?</strong> Si otras impresoras del almacén imprimen desde SAP, el problema está en esa impresora o su dispositivo.</li><li><strong>En SP01</strong>, filtrando por el dispositivo <code>AL09</code> y la última hora: las órdenes están en <strong>Error</strong>, y el registro de la orden de salida dice que no se puede conectar con el host de la impresora.</li><li><strong>En SPAD</strong> (solo lectura): el dispositivo <code>AL09</code> usa método de acceso <code>U</code> hacia <code>10.9.20.45</code>.</li><li><strong>Desde la red</strong>:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · equipo de la VLAN de impresión de la planta 9</span><button class="t-copy" type="button" data-copy="Test-NetConnection 10.9.20.45 -Port 515&#10;Get-DhcpServerv4Lease -ComputerName srv-dhcp09 -ScopeId 10.9.20.0 | Where-Object HostName -like &quot;*alm-exp*&quot;" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Test-NetConnection 10.9.20.45 -Port 515</span><span class="t-out">WARNING: TCP connect to (10.9.20.45 : 515) failed</span><span class="t-out">TcpTestSucceeded : False</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-DhcpServerv4Lease -ComputerName srv-dhcp09 -ScopeId 10.9.20.0 | Where-Object HostName -like &quot;*alm-exp*&quot;</span><span class="t-out">IPAddress    ClientId           HostName         AddressState</span><span class="t-out">---------    --------           --------         ------------</span><span class="t-out">10.9.20.88   00-1b-63-4a-7c-21  prn-alm-exp01    Active</span></code></pre></figure>
+<p>La impresora se cambió ayer por avería, la nueva tiene otra MAC y el DHCP le dio otra IP. SAP sigue enviando a la antigua.</p>
+<ol><li><strong>La solución de IT</strong>: actualizar la reserva de DHCP con la MAC nueva para que vuelva a <code>10.9.20.45</code>, reiniciar la impresora y comprobar el puerto. No hace falta tocar SPAD.</li><li><strong>Reimprimir</strong>: las órdenes en error se pueden volver a enviar desde SP01, o el usuario reimprime los albaranes desde SAP (por ejemplo con <strong>VL71</strong>, salida de entregas) si su rol lo permite.</li><li>Si la impresora nueva es de <strong>otro modelo</strong> e imprime caracteres extraños, el tipo de dispositivo ya no corresponde: eso se escala al equipo SAP para cambiarlo en SPAD.</li></ol>
+<p class="g-tip">Una impresora de almacén usada por SAP lleva <strong>IP reservada y etiqueta</strong> con el nombre del dispositivo SAP. El técnico que la cambia sabe así que hay algo más que conectarla.</p>
+<h2>6. SM04, SM21 y cuándo escalar</h2>
+<p>Si tienes acceso de lectura:</p>
+<ul><li><strong>SM04</strong>: usuarios conectados en el servidor de aplicaciones actual (<strong>AL08</strong> para todos los servidores). Sirve para confirmar si un usuario tiene sesiones abiertas o colgadas.</li><li><strong>SM21</strong>: registro del sistema. Útil para ver si a la hora del problema hubo errores generales (de spool, de base de datos, de comunicaciones) y no solo en ese usuario.</li><li><strong>SM12</strong> (bloqueos de registros) y <strong>ST22</strong> (volcados de programa): se miran, no se borran. Borrar una entrada de SM12 puede dejar un documento a medias.</li></ul>
+<div class="g-table"><table><thead><tr><th>Escala al equipo SAP cuando</th><th>Información que debe llevar el ticket</th></tr></thead><tbody><tr><td>Falta una autorización</td><td>Captura de SU53, usuario, sistema y mandante</td></tr><tr><td>Un dispositivo de salida está mal configurado</td><td>Nombre del dispositivo, orden de spool y su registro</td></tr><tr><td>Un programa da un volcado</td><td>Transacción, hora y el identificador de ST22</td></tr><tr><td>Lento para todos o caído</td><td>Hora de inicio, plantas afectadas y prueba de red hecha</td></tr><tr><td>Cualquier cambio en producción que no esté autorizado a IT</td><td>Qué se pide y quién lo pide</td></tr></tbody></table></div>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <strong>Impresoras</strong> del Nivel 1 cubre el lado de la impresora y el servidor de impresión.</li><li>La guía de <strong>Jira Service Management</strong> ayuda a montar la cola compartida entre IT y el equipo SAP.</li><li>La guía de <strong>Windows 10 y 11</strong> sirve para empaquetar y distribuir SAP GUI con el resto del puesto.</li><li>La guía de <strong>Fortinet FortiGate</strong> explica las reglas que necesita una planta remota para llegar a SAP.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span></p>
+      <p class="repo-name"><span class="es">Sector 4</span> · <span class="es">SAP - Soporte a usuarios desde IT</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
+      <a class="arrow-link" href="sector-4.html"><span class="es">Todas las guías del Sector 4</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="presupuesto-de-it-preparar-y-seguir-el-presupuesto-anual-en-una-empresa-multisede.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Presupuesto de IT: preparar y seguir el presupuesto anual de una empresa con sedes en varios países</span></span></a>
+    <a class="post-nav-link next" href="sql-server-copias-y-restauracion-de-la-base-de-datos-del-erp.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">SQL Server: copias de seguridad del ERP, restauración a un punto en el tiempo y unas filas borradas</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>
