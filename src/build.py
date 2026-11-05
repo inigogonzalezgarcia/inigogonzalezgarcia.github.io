@@ -445,6 +445,7 @@ def related_for_guide(topic):
                           _POST_BY_REPO[r]["title_es"], _POST_BY_REPO[r]["title_en"]) for r in RELATED.get(topic, [])])
 # posts that link to each other in "Related" (shown before the guides)
 POST_RELATED = {
+    "01-finops-cloud-cost-dashboard": ["43-azure-cost-rightsizing", "35-private-cloud-capacity-review"],
     "43-azure-cost-rightsizing": ["01-finops-cloud-cost-dashboard", "23-it-vendor-contract-tracker"],
     "19-ad-infra-health-check": ["20-entra-sso-app-audit", "03-entra-id-hygiene-audit"],
     "41-windows-update-ring-tracker": ["18-mecm-intune-comanagement-tracker", "02-intune-compliance-report"],
@@ -882,7 +883,7 @@ resources_body = page_hero(bi("Recursos gratuitos · Tech Career Lab", "Free res
 </section>
 {CAPTCHA_JS}'''
 sizes["recursos.html"] = write("recursos.html", layout(R="", path="recursos.html", active="resources",
-    title_en="33 ideas to get found in IT · Iñigo González", title_es="33 ideas para que te encuentren en IT · Iñigo González",
+    title_en="33 ideas to get found on LinkedIn in IT · Iñigo González", title_es="33 ideas para que te encuentren en LinkedIn · Iñigo González",
     desc="Free guide: 33 ideas for IT professionals to get found on LinkedIn, show their work on GitHub, network and get hired. Plus the Tech Career Lab newsletter.", body=resources_body,
     ld=[crumbs(("Home", ""), ("Resources", "recursos.html"))]))
 
