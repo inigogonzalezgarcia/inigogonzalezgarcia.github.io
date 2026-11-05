@@ -96,6 +96,9 @@ def build(site, posts, cats, only_missing=False):
     f = site / "assets" / "og" / "site.png"
     if todo(f):
         card(site, f, "IT Site Leader · Madrid", "IT operations, Modern Workplace and infrastructure", "inigogonzalezgarcia.github.io")
+    f = site / "assets" / "og" / "recursos.png"
+    if todo(f):
+        card(site, f, "Free guide · IT careers", "33 ideas to get found on LinkedIn when you work in IT", "inigogonzalezgarcia.github.io/recursos · plus the Tech Career Lab newsletter")
     f = site / "assets" / "apple-touch-icon.png"
     if todo(f):
         touch_icon(site, f)

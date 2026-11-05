@@ -445,6 +445,42 @@ def related_for_guide(topic):
                           _POST_BY_REPO[r]["title_es"], _POST_BY_REPO[r]["title_en"]) for r in RELATED.get(topic, [])])
 # posts that link to each other in "Related" (shown before the guides)
 POST_RELATED = {
+    "02-intune-compliance-report": ["18-mecm-intune-comanagement-tracker", "41-windows-update-ring-tracker"],
+    "03-entra-id-hygiene-audit": ["37-iam-access-review", "20-entra-sso-app-audit"],
+    "04-itsm-kpi-dashboard": ["28-euc-provider-service-review", "36-major-incident-command-kit"],
+    "05-it-ops-console": ["38-it-asset-lifecycle-planner", "19-ad-infra-health-check"],
+    "06-kubernetes-ingress-lab": ["07-aws-private-connectivity", "08-edge-health-slo-monitor"],
+    "07-aws-private-connectivity": ["06-kubernetes-ingress-lab", "01-finops-cloud-cost-dashboard"],
+    "08-edge-health-slo-monitor": ["36-major-incident-command-kit", "10-gpu-fleet-observability"],
+    "09-gpu-node-remediation": ["10-gpu-fleet-observability", "11-gpu-fleet-lifecycle"],
+    "10-gpu-fleet-observability": ["09-gpu-node-remediation", "08-edge-health-slo-monitor"],
+    "11-gpu-fleet-lifecycle": ["16-gitops-gpu-fleet", "13-cluster-acceptance-burnin"],
+    "12-gpu-goodput-mtbi": ["14-slurm-gpu-ops", "15-multi-tenant-gpu-scheduling"],
+    "13-cluster-acceptance-burnin": ["11-gpu-fleet-lifecycle", "09-gpu-node-remediation"],
+    "14-slurm-gpu-ops": ["12-gpu-goodput-mtbi", "15-multi-tenant-gpu-scheduling"],
+    "15-multi-tenant-gpu-scheduling": ["14-slurm-gpu-ops", "16-gitops-gpu-fleet"],
+    "16-gitops-gpu-fleet": ["11-gpu-fleet-lifecycle", "15-multi-tenant-gpu-scheduling"],
+    "17-teams-rooms-fleet-health": ["33-executive-meeting-readiness", "22-dex-experience-score"],
+    "18-mecm-intune-comanagement-tracker": ["41-windows-update-ring-tracker", "29-tenant-separation-cutover-planner"],
+    "20-entra-sso-app-audit": ["37-iam-access-review", "27-m365-tenant-governance-review"],
+    "21-apple-fleet-audit": ["02-intune-compliance-report", "38-it-asset-lifecycle-planner"],
+    "23-it-vendor-contract-tracker": ["28-euc-provider-service-review", "43-azure-cost-rightsizing"],
+    "24-hospitality-it-preopening": ["34-venue-service-readiness", "42-retail-store-it-health"],
+    "25-security-controls-evidence": ["39-vulnerability-remediation-sla", "37-iam-access-review"],
+    "26-ot-segmentation-lab": ["25-security-controls-evidence", "39-vulnerability-remediation-sla"],
+    "27-m365-tenant-governance-review": ["20-entra-sso-app-audit", "29-tenant-separation-cutover-planner"],
+    "28-euc-provider-service-review": ["04-itsm-kpi-dashboard", "23-it-vendor-contract-tracker"],
+    "29-tenant-separation-cutover-planner": ["27-m365-tenant-governance-review", "18-mecm-intune-comanagement-tracker"],
+    "30-jira-confluence-admin-kit": ["23-it-vendor-contract-tracker", "27-m365-tenant-governance-review"],
+    "31-dealer-systems-health": ["42-retail-store-it-health", "28-euc-provider-service-review"],
+    "32-backup-restore-test-tracker": ["35-private-cloud-capacity-review", "36-major-incident-command-kit"],
+    "33-executive-meeting-readiness": ["17-teams-rooms-fleet-health", "21-apple-fleet-audit"],
+    "34-venue-service-readiness": ["24-hospitality-it-preopening", "42-retail-store-it-health"],
+    "35-private-cloud-capacity-review": ["32-backup-restore-test-tracker", "43-azure-cost-rightsizing"],
+    "36-major-incident-command-kit": ["40-change-calendar-risk-review", "08-edge-health-slo-monitor"],
+    "37-iam-access-review": ["03-entra-id-hygiene-audit", "25-security-controls-evidence"],
+    "38-it-asset-lifecycle-planner": ["21-apple-fleet-audit", "23-it-vendor-contract-tracker"],
+    "sysadmindesksbyigg": ["19-ad-infra-health-check", "02-intune-compliance-report"],
     "01-finops-cloud-cost-dashboard": ["43-azure-cost-rightsizing", "35-private-cloud-capacity-review"],
     "43-azure-cost-rightsizing": ["01-finops-cloud-cost-dashboard", "23-it-vendor-contract-tracker"],
     "19-ad-infra-health-check": ["20-entra-sso-app-audit", "03-entra-id-hygiene-audit"],
@@ -843,6 +879,13 @@ news_form = f'''<form class="reveal" id="newsForm" action="{NEWS_ACTION}" method
       <p class="form-status" id="newsStatus" role="status"></p>
       <p class="privacy">{bi("Te enviaré un email para confirmar tu suscripción (doble confirmación). La newsletter se gestiona con Brevo y solo uso tus datos para enviarte las ideas y la newsletter. Más información en la <a href='privacidad.html'>política de privacidad</a>.", "I'll email you to confirm your subscription (double opt-in). The newsletter runs on Brevo and I only use your details to send you the ideas and the newsletter. More in the <a href='privacidad.html'>privacy policy</a>.")}</p>
     </form>'''
+# links from the resources page to the work it talks about (projects, practice, guides)
+res_related = related_html([
+    ("blog/", "Blog", "Blog", f"{len(POSTS)} proyectos en GitHub, cada uno con su artículo", f"{len(POSTS)} projects on GitHub, each with its story"),
+    ("blog/sysadmindesksbyigg.html", "Blog · SD", "Blog · SD", "SysAdmin Desks: practica tickets de soporte IT gratis", "SysAdmin Desks: practise IT support tickets for free"),
+    ("guias.html", "Guías", "Guides", "Guías IT paso a paso, de primera línea a infraestructura", "Step-by-step IT guides, from first line to infrastructure"),
+    ("guias/git-scripts-del-equipo-bajo-control-de-versiones.html", "Guía", "Guide", "Git: poner los scripts del equipo bajo control de versiones", "Git: putting the team's scripts under version control"),
+])
 resources_body = page_hero(bi("Recursos gratuitos · Tech Career Lab", "Free resources · Tech Career Lab"),
     bi("33 ideas para que te encuentren<br>si trabajas en IT.", "33 ideas to get found<br>if you work in IT."),
     bi("Si buscas trabajo en IT o quieres empezar a construir tu marca profesional, estas 33 ideas te ayudan a ganar visibilidad, demostrar lo que sabes hacer y que más empresas te tengan en su radar.",
@@ -868,6 +911,7 @@ resources_body = page_hero(bi("Recursos gratuitos · Tech Career Lab", "Free res
     </div>
   </div>
 </section>
+{res_related}
 
 <section class="section dark cta-band">
   <div class="wrap welcome reveal">
@@ -882,7 +926,7 @@ resources_body = page_hero(bi("Recursos gratuitos · Tech Career Lab", "Free res
   </div>
 </section>
 {CAPTCHA_JS}'''
-sizes["recursos.html"] = write("recursos.html", layout(R="", path="recursos.html", active="resources",
+sizes["recursos.html"] = write("recursos.html", layout(R="", path="recursos.html", active="resources", og_image="assets/og/recursos.png",
     title_en="33 ideas to get found on LinkedIn in IT · Iñigo González", title_es="33 ideas para que te encuentren en LinkedIn · Iñigo González",
     desc="Free guide: 33 ideas for IT professionals to get found on LinkedIn, show their work on GitHub, network and get hired. Plus the Tech Career Lab newsletter.", body=resources_body,
     ld=[crumbs(("Home", ""), ("Resources", "recursos.html"))]))
