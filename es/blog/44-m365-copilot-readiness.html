@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Revisión de preparación para Copilot · Iñigo González</title>
+<meta name="description" content="A partir de los usuarios de Entra ID, el informe de uso de Microsoft 365 Copilot, los sitios de SharePoint, la cobertura de etiquetas y las directivas de DLP…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/blog/44-m365-copilot-readiness.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/44-m365-copilot-readiness.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/44-m365-copilot-readiness.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/44-m365-copilot-readiness.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revisión de preparación para Copilot · Iñigo González">
+<meta property="og:description" content="A partir de los usuarios de Entra ID, el informe de uso de Microsoft 365 Copilot, los sitios de SharePoint, la cobertura de etiquetas y las directivas de DLP…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/blog/44-m365-copilot-readiness.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/44-m365-copilot-readiness.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Revisión de preparación para Copilot · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Un sitio de RR. HH. abierto a todos y un agente sin dueño: ¿está listo el tenant para Copilot?","alternativeHeadline":"An HR site open to all and an agent nobody owns: is the tenant ready for the next Copilot wave?","description":"A partir de los usuarios de Entra ID, el informe de uso de Microsoft 365 Copilot, los sitios de SharePoint, la cobertura de etiquetas y las directivas de DLP, los agentes de Copilot Studio y los registros de formación: qué licencias recuperar, si cada oleada está formada, registrada en MFA y con un equipo conforme, qué podría mostrar Copilot que no debería, qué agentes no tienen dueño o usan conectores que nadie ha aprobado, y un veredicto por oleada para el comité de dirección.","datePublished":"2026-11-05","dateModified":"2026-11-05","inLanguage":"es","image":"https://inigogonzalezgarcia.github.io/assets/og/44-m365-copilot-readiness.png","url":"https://inigogonzalezgarcia.github.io/es/blog/44-m365-copilot-readiness.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/blog/44-m365-copilot-readiness.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/es/blog/#blog"},"articleSection":"Herramientas de IT Ops"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/es/blog/"},{"@type":"ListItem","position":3,"name":"Un sitio de RR. HH. abierto a todos y un agente sin dueño: ¿está listo el tenant para Copilot?","item":"https://inigogonzalezgarcia.github.io/es/blog/44-m365-copilot-readiness.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span></a><a href="../guias.html"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../blog/44-m365-copilot-readiness.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 44</p>
+    <h1><span class="es">Un sitio de RR. HH. abierto a todos y un agente sin dueño: ¿está listo el tenant para Copilot?</span></h1>
+    <p class="lede"><span class="es">A partir de los usuarios de Entra ID, el informe de uso de Microsoft 365 Copilot, los sitios de SharePoint, la cobertura de etiquetas y las directivas de DLP, los agentes de Copilot Studio y los registros de formación: qué licencias recuperar, si cada oleada está formada, registrada en MFA y con un equipo conforme, qué podría mostrar Copilot que no debería, qué agentes no tienen dueño o usan conectores que nadie ha aprobado, y un veredicto por oleada para el comité de dirección.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span> · <span class="es">5 nov 2026</span> · <span class="es">5 min</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>El problema</h2>
+<p>Copilot responde a partir de todo lo que una persona ya puede abrir, así que un despliegue que fue bien en el piloto puede torcerse en la siguiente oleada por motivos que ninguna consola enseña por sí sola. Dos semanas antes de una oleada de 400 personas, el sitio de relaciones laborales de RR. HH. está compartido con Todos excepto los usuarios externos desde una migración, y 1.650 personas podrían recibirlo en una respuesta; el sitio de selección tiene vínculos de cualquier persona y ninguna etiqueta; un sitio de un litigio cerrado no tiene propietario y sigue siendo buscable; una cuarta parte de los archivos de Finanzas lleva etiqueta de confidencialidad y la directiva de DLP para Copilot sigue en simulación; un agente publicado para toda la empresa lo creó alguien que ya se ha ido y lee de un conector de Dropbox que nadie aprobó; un agente de RR. HH. ayuda a cribar candidatos y no está en el registro de IA; 34 licencias llevan un mes sin usarse mientras a la siguiente oleada le faltan 14; y la propia oleada está formada al 70%, con 14 personas sin registrar en MFA y 31 sin un equipo conforme. No es la revisión de gobierno del tenant que publiqué hace un par de semanas, que mira roles de administración, Acceso condicional y configuración: es la revisión antes de cada oleada de Copilot y cada mes después, sobre lo que Copilot puede alcanzar y quién lo está usando.</p>
+<h2>Qué he hecho</h2>
+<ul><li>Licencias: usuarios con licencia sin actividad en Copilot en 30 días o nunca, licencias en cuentas deshabilitadas, su coste mensual, y si el remanente cubre la siguiente oleada una vez recuperadas.</li><li>Oleadas: formación, registro en MFA, un equipo conforme y una licencia para cada persona de una oleada antes de su arranque, y un champion en cada departamento.</li><li>Sobreexposición: sitios de SharePoint compartidos con Todos excepto los usuarios externos o con vínculos de cualquier persona, sitios sin propietario o con uno solo, sin etiqueta de confidencialidad, y sitios inactivos que Copilot todavía puede buscar, con Restricted Content Discovery como medida provisional mientras se arreglan.</li><li>Etiquetas y DLP: cobertura de etiquetas por departamento y si hay una directiva de DLP aplicada en la ubicación de Microsoft 365 Copilot; agentes sin propietario, publicados para todos, con conectores fuera de la lista permitida o sin uso, y agentes que apoyan decisiones sobre personas sin entrada en el registro de IA; y la adopción por departamento y aplicación con su tendencia y la encuesta.</li><li>Un veredicto por oleada (lista, atención o no lista), <code>report.html</code>, <code>readiness-pack.md</code> para el comité de dirección de Copilot con una columna de decisión por oleada, CSV de licencias a recuperar, sobreexposición, agentes, adopción, oleadas y acciones, y un exportador de solo lectura en PowerShell para Microsoft Graph y SharePoint Online.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python solo con la librería estándar. Cada problema dice a qué oleadas alcanza: a las que tienen personas de su departamento, o a todas cuando es una sobreexposición crítica o un agente abierto a toda la empresa, porque cualquier usuario de Copilot que pueda abrir el contenido puede recibirlo en una respuesta. Una oleada no está lista cuando le alcanza un problema crítico. El informe de uso es el informe de Microsoft Graph por usuario, con la fecha de última actividad global y por aplicación; las columnas de los sitios son las propiedades de Get-SPOSite más los recuentos del informe de gobierno de acceso a datos de SharePoint; los agentes salen del inventario de Power Platform. El coste de las licencias es una estimación a un precio que se fija en la configuración, y la columna del registro de IA es un registro, no una valoración jurídica. La demo es una empresa de energía inventada con 1.800 personas en tres oleadas, revisada el 5 de noviembre a dos semanas de la segunda, con los problemas puestos a propósito: 37 licencias a recuperar, 1.110 euros al mes, cuatro sitios críticos y ninguna oleada lista hasta que se arreglen. 14 tests, un runbook con el orden del día del comité, el sí o no de cada oleada y los pasos de ADKAR, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura. Los hallazgos pueden ir como evidencia al registro de controles que publiqué antes en la serie.</p>
+<h2>Qué aprendí</h2>
+<p>De desplegar Microsoft 365 Copilot y herramientas de IA e impulsar su adopción, y de administrar los agentes de Microsoft 365 y Copilot Studio; de ser administrador global de Microsoft 365, con PIM, Acceso condicional e integración de aplicaciones; de Microsoft Purview, con DLP y etiquetas de confidencialidad, de muchos años con SharePoint y de Power Platform; de la gestión del cambio con Prosci, ADKAR y Kotter; del Reglamento Europeo de IA y la IA responsable; y de los casos de negocio con beneficios medibles. Las lecciones que hay detrás de la herramienta son que Copilot no crea accesos nuevos, hace fácil encontrar la sobreexposición de siempre, así que los permisos hay que arreglarlos antes de la oleada y no después; que Restricted Content Discovery da tiempo pero no cambia ningún permiso; que con una cuarta parte de los archivos etiquetados la DLP tiene poco sobre lo que actuar; que un agente sin propietario no es problema de nadie hasta que responde lo que no debe; que un agente que ayuda a decidir sobre personas necesita su entrada en el registro antes de usarse, no después; que una licencia que nadie usa es la licencia más barata para la siguiente oleada; y que la formación y los champions deciden la adopción más que la licencia.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Ejecutar la revisión tres semanas y una semana antes de cada oleada, y cada mes después.</li><li>Leer los agentes desde la API de inventario de Power Platform y la cobertura de etiquetas desde la exportación del explorador de contenido de Purview.</li><li>Añadir el informe de uso de agentes y guardar un año de adopción para ponerlo al lado del tiempo que la gente dice ahorrar.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span></p>
+      <p class="repo-name">44-m365-copilot-readiness</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/44-m365-copilot-readiness" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="es">Compartir</span></p>
+        <div class="share-row es" lang="es"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F44-m365-copilot-readiness.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F44-m365-copilot-readiness.html&amp;text=Un%20sitio%20de%20RR.%20HH.%20abierto%20a%20todos%20y%20un%20agente%20sin%20due%C3%B1o%3A%20%C2%BFest%C3%A1%20listo%20el%20tenant%20para%20Copilot%3F%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">X</a><a class="share-btn" href="https://wa.me/?text=Un%20sitio%20de%20RR.%20HH.%20abierto%20a%20todos%20y%20un%20agente%20sin%20due%C3%B1o%3A%20%C2%BFest%C3%A1%20listo%20el%20tenant%20para%20Copilot%3F%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F44-m365-copilot-readiness.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=Un%20sitio%20de%20RR.%20HH.%20abierto%20a%20todos%20y%20un%20agente%20sin%20due%C3%B1o%3A%20%C2%BFest%C3%A1%20listo%20el%20tenant%20para%20Copilot%3F%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F44-m365-copilot-readiness.html" aria-label="Compartir en Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/es/blog/44-m365-copilot-readiness.html" data-copied="Enlace copiado">Copiar enlace</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/es/blog/44-m365-copilot-readiness.html" data-title="Un sitio de RR. HH. abierto a todos y un agente sin dueño: ¿está listo el tenant para Copilot?" hidden>Más…</button></div>
+        
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="27-m365-tenant-governance-review.html"><span class="label muted"><span class="es">Blog · 27</span></span><span class="related-t"><span class="es">¿Sigue el tenant gobernado como acordamos? Una revisión mensual de Microsoft 365</span></span></a><a class="related-link" href="25-security-controls-evidence.html"><span class="label muted"><span class="es">Blog · 25</span></span><span class="related-t"><span class="es">¿Qué te pedirá el auditor que aún no puedes enseñar? Un registro para ISO 27001, NIS2 y RGPD</span></span></a><a class="related-link" href="../guias/microsoft-365-asignar-y-retirar-licencias.html"><span class="label muted"><span class="es">Guía · Nivel 1</span></span><span class="related-t"><span class="es">Microsoft 365: asignar y retirar licencias, y saber qué incluye cada una</span></span></a><a class="related-link" href="../guias/sharepoint-sitio-de-equipo-permisos-y-uso-compartido.html"><span class="label muted"><span class="es">Guía · Nivel 2</span></span><span class="related-t"><span class="es">SharePoint Online: crear un sitio de equipo, dar permisos bien y entender el uso compartido</span></span></a><a class="related-link" href="../guias/entra-conditional-access-politicas-base-y-usuario-bloqueado.html"><span class="label muted"><span class="es">Guía · Nivel 3</span></span><span class="related-t"><span class="es">Entra ID Conditional Access: las políticas base, el modo solo informe y un usuario bloqueado</span></span></a><a class="related-link" href="../guias/microsoft-graph-primeras-consultas-con-powershell-y-un-informe-que-no-existe-en-el-portal.html"><span class="label muted"><span class="es">Guía · Nivel 3</span></span><span class="related-t"><span class="es">Microsoft Graph con PowerShell: las primeras consultas y un informe que no existe en el portal</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="43-azure-cost-rightsizing.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Una reserva al 55% que se renueva sola y VMs paradas que se pagan: la revisión de costes de Azure</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>
