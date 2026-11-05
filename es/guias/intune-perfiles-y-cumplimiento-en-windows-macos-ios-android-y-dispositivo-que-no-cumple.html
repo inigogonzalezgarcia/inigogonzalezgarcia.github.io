@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Intune: perfiles y cumplimiento · Iñigo González</title>
+<meta name="description" content="La estructura de grupos y filtros que vale para las cuatro plataformas, una política de cumplimiento por sistema, el perfil de configuración con el catálogo…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/intune-perfiles-y-cumplimiento-en-windows-macos-ios-android-y-dispositivo-que-no-cumple.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/intune-perfiles-y-cumplimiento-en-windows-macos-ios-android-y-dispositivo-que-no-cumple.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/intune-perfiles-y-cumplimiento-en-windows-macos-ios-android-y-dispositivo-que-no-cumple.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/intune-perfiles-y-cumplimiento-en-windows-macos-ios-android-y-dispositivo-que-no-cumple.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Intune: perfiles y cumplimiento · Iñigo González">
+<meta property="og:description" content="La estructura de grupos y filtros que vale para las cuatro plataformas, una política de cumplimiento por sistema, el perfil de configuración con el catálogo…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/intune-perfiles-y-cumplimiento-en-windows-macos-ios-android-y-dispositivo-que-no-cumple.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-nivel-3.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Intune: perfiles y cumplimiento · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Intune en Windows, macOS, iOS y Android: perfiles de configuración, cumplimiento y un dispositivo que no cumple","alternativeHeadline":"Intune on Windows, macOS, iOS and Android: configuration profiles, compliance and a device that is non-compliant","description":"La estructura de grupos y filtros que vale para las cuatro plataformas, una política de cumplimiento por sistema, el perfil de configuración con el catálogo de ajustes y la rutina para el dispositivo que aparece en rojo.","datePublished":"2026-10-22","dateModified":"2026-10-22","inLanguage":"es","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/es/guias/intune-perfiles-y-cumplimiento-en-windows-macos-ios-android-y-dispositivo-que-no-cumple.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/guias/intune-perfiles-y-cumplimiento-en-windows-macos-ios-android-y-dispositivo-que-no-cumple.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Intune: Windows, macOS, iOS y Android"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Nivel 3","item":"https://inigogonzalezgarcia.github.io/es/guias/nivel-3.html"},{"@type":"ListItem","position":4,"name":"Intune en Windows, macOS, iOS y Android: perfiles de configuración, cumplimiento y un dispositivo que no cumple","item":"https://inigogonzalezgarcia.github.io/es/guias/intune-perfiles-y-cumplimiento-en-windows-macos-ios-android-y-dispositivo-que-no-cumple.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/intune-perfiles-y-cumplimiento-en-windows-macos-ios-android-y-dispositivo-que-no-cumple.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <a href="nivel-3.html"><span class="es">Nivel 3</span></a></p>
+    <h1><span class="es">Intune en Windows, macOS, iOS y Android: perfiles de configuración, cumplimiento y un dispositivo que no cumple</span></h1>
+    <p class="lede"><span class="es">La estructura de grupos y filtros que vale para las cuatro plataformas, una política de cumplimiento por sistema, el perfil de configuración con el catálogo de ajustes y la rutina para el dispositivo que aparece en rojo.</span></p><p class="label post-meta"><span class="es">Nivel 3</span> · <span class="es">Intune: Windows, macOS, iOS y Android</span> · <span class="es">5 min</span> · <span class="es">Actualizado</span> <span class="es">22 oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/intune-bitlocker" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «&#x27;Tu dispositivo no cumple los requisitos&#x27;» en SysAdmin Desks ↗</span></a>
+<h2>Qué vas a conseguir</h2>
+<p>Que un dispositivo de cualquier plataforma, al enrolarse (guías de Android, iPhone y Windows del Nivel 1, Jamf aparte), reciba su cumplimiento y su configuración sin que nadie lo asigne a mano, y que Conditional Access (guía anterior) pueda confiar en el estado <strong>Conforme</strong>. Y el procedimiento de siete minutos para un dispositivo <strong>No conforme</strong>.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Rol <strong>Intune Administrator</strong> y, para el enrolamiento de Apple, el certificado APNs y el token de Apple Business Manager ya configurados (<code>Dispositivos → Inscripción</code>).</li><li>Grupos de Entra ID: uno de usuarios por tipo (<code>sg-intune-users-standard</code>, <code>sg-intune-users-vip</code>) y los <strong>grupos dinámicos de dispositivos</strong> o los <strong>filtros</strong> que separan plataformas.</li><li>Un dispositivo de prueba por plataforma, enrolado con un usuario que no sea tú.</li></ul>
+<h2>1. Grupos y filtros: la base</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Intune · Filtros</span></figcaption><div class="ui-body"><div class="ui-path"><span>Administración de inquilinos</span><span class="ui-sep" aria-hidden="true">›</span><span>Filtros</span><span class="ui-sep" aria-hidden="true">›</span><span>Crear</span><span class="ui-sep" aria-hidden="true">›</span><span>Dispositivos administrados</span></div><div class="ui-field"><span class="ui-k">Nombre</span><span class="ui-v">f-windows-corp</span></div><div class="ui-field"><span class="ui-k">Plataforma</span><span class="ui-v">Windows 10 and later</span></div><div class="ui-field"><span class="ui-k">Regla</span><span class="ui-v">(device.deviceOwnership -eq &quot;Corporate&quot;)</span></div><div class="ui-btn">Crear</div></div></figure>
+<p>Crea cuatro filtros (<code>f-windows-corp</code>, <code>f-macos-corp</code>, <code>f-ios-corp</code>, <code>f-android-corp</code>) y asigna todo a <strong>Todos los usuarios</strong> o a <code>sg-intune-users-*</code> con el filtro de plataforma. Es más rápido y más claro que un grupo dinámico de dispositivos por cada combinación, y los filtros se evalúan en el momento del check-in, no cada media hora.</p>
+<h2>2. Una política de cumplimiento por plataforma</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Intune · Cumplimiento</span></figcaption><div class="ui-body"><div class="ui-path"><span>Dispositivos</span><span class="ui-sep" aria-hidden="true">›</span><span>Cumplimiento</span><span class="ui-sep" aria-hidden="true">›</span><span>Crear directiva</span><span class="ui-sep" aria-hidden="true">›</span><span>Windows 10 and later</span></div><div class="ui-field"><span class="ui-k">Nombre</span><span class="ui-v">Compliance - Windows</span></div><div class="ui-txt">Estado del dispositivo</div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Requerir BitLocker</div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Requerir que el arranque seguro esté habilitado</div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Requerir la integridad de código</div><div class="ui-txt">Propiedades del dispositivo</div><div class="ui-field"><span class="ui-k">Versión mínima del SO</span><span class="ui-v">10.0.22631.4317</span></div><div class="ui-txt">Seguridad del sistema</div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Requerir una contraseña para desbloquear</div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Firewall · [x] Antivirus · [x] Antispyware · [x] Microsoft Defender Antimalware actualizado</div><div class="ui-txt">Acciones en caso de incumplimiento</div><div class="ui-field"><span class="ui-k">Marcar dispositivo como no conforme</span><span class="ui-v">Inmediatamente</span></div><div class="ui-field"><span class="ui-k">Enviar correo al usuario final</span><span class="ui-v">1 día · plantilla &quot;Tu equipo no cumple&quot;</span></div><div class="ui-field"><span class="ui-k">Retirar dispositivo no conforme</span><span class="ui-v">30 días</span></div><div class="ui-txt">Asignaciones</div><div class="ui-field"><span class="ui-k">Todos los usuarios · Filtro</span><span class="ui-v">incluir f-windows-corp</span></div><div class="ui-btn">Crear</div></div></figure>
+<p>Las otras tres con el mismo esqueleto: <strong>macOS</strong> (FileVault, firewall, versión mínima, integridad del sistema), <strong>iOS/iPadOS</strong> (código de acceso, sin jailbreak, versión mínima), <strong>Android Enterprise</strong> (código, sin root, nivel de parche de seguridad no anterior a X, Play Protect). La acción de &quot;marcar inmediatamente&quot; es la que alimenta Conditional Access; la <strong>gracia de un día</strong> con correo evita que un parche de madrugada bloquee a la gente a las 9:00.</p>
+<p class="g-tip">Consejo: en <code>Dispositivos → Cumplimiento → Configuración de la directiva de cumplimiento</code>, deja <strong>Marcar dispositivos sin directiva de cumplimiento como: No conforme</strong>. Si no, un dispositivo al que no le llega ninguna política cuenta como conforme y entra.</p>
+<h2>3. El perfil de configuración con el catálogo de ajustes</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Intune · Configuración</span></figcaption><div class="ui-body"><div class="ui-path"><span>Dispositivos</span><span class="ui-sep" aria-hidden="true">›</span><span>Configuración</span><span class="ui-sep" aria-hidden="true">›</span><span>Crear</span><span class="ui-sep" aria-hidden="true">›</span><span>Nueva directiva</span><span class="ui-sep" aria-hidden="true">›</span><span>Windows 10 and later</span><span class="ui-sep" aria-hidden="true">›</span><span>Catálogo de configuración</span></div><div class="ui-field"><span class="ui-k">Nombre</span><span class="ui-v">Config - Windows - Baseline corp</span></div><div class="ui-txt">Catálogo de configuración</div><div class="ui-path"><span>Agregar configuración</span><span class="ui-sep" aria-hidden="true">›</span><span>buscar &quot;bitlocker&quot;</span></div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>BitLocker › Require Device Encryption: Habilitado</div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>BitLocker › Allow Standard User Encryption: Habilitado</div><div class="ui-path"><span>Agregar configuración</span><span class="ui-sep" aria-hidden="true">›</span><span>buscar &quot;screen saver&quot;</span></div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Local Policies Security Options › Interactive Logon Machine Inactivity Limit: 600</div><div class="ui-path"><span>Agregar configuración</span><span class="ui-sep" aria-hidden="true">›</span><span>buscar &quot;Windows Hello&quot;</span></div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Windows Hello For Business › Use Windows Hello For Business: true</div><div class="ui-txt">Asignaciones</div><div class="ui-field"><span class="ui-k">Todos los usuarios · Filtro</span><span class="ui-v">incluir f-windows-corp</span></div><div class="ui-btn">Crear</div></div></figure>
+<p>El <strong>catálogo de configuración</strong> sustituye a las plantillas antiguas y, para macOS, a buena parte de los <code>.mobileconfig</code> manuales: es el mismo cuadro de búsqueda en las cuatro plataformas. Un perfil por tema (cifrado, bloqueo, Wi-Fi, certificados) es más fácil de diagnosticar que uno con cien ajustes. Para iOS y Android, el equivalente son las <strong>restricciones de dispositivo</strong> y, para Wi-Fi/VPN/certificados, sus plantillas propias (la guía de NDES usa una).</p>
+<h2>4. El dispositivo que no cumple</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Intune · Dispositivos</span></figcaption><div class="ui-body"><div class="ui-path"><span>Dispositivos</span><span class="ui-sep" aria-hidden="true">›</span><span>Todos los dispositivos</span><span class="ui-sep" aria-hidden="true">›</span><span>LAPTOP-7F2K9Q</span></div><div class="ui-field"><span class="ui-k">Usuario principal</span><span class="ui-v">laura.prado@contoso.com · Windows 11 23H2 · Corporativo · Último check-in: 22/10/2026 09:12</span></div><div class="ui-field"><span class="ui-k">Cumplimiento</span><span class="ui-v">No conforme</span></div><div class="ui-path"><span>Cumplimiento del dispositivo</span><span class="ui-sep" aria-hidden="true">›</span><span>Compliance - Windows</span></div><div class="ui-field"><span class="ui-k">Requerir BitLocker</span><span class="ui-v">Error</span></div><div class="ui-field"><span class="ui-k">Versión mínima del SO</span><span class="ui-v">Conforme</span></div><div class="ui-field"><span class="ui-k">Firewall</span><span class="ui-v">Conforme</span></div><div class="ui-btn">Sincronizar</div><div class="ui-btn">Reiniciar</div><div class="ui-btn">Recopilar diagnósticos</div></div></figure>
+<p>Siete minutos, en este orden:</p>
+<ol><li><strong>Qué regla falla</strong> (la pantalla de arriba). No es &quot;el equipo&quot;, es BitLocker.</li><li><strong>Sincronizar</strong> desde el portal y, en el equipo, <code>Configuración → Cuentas → Acceso a trabajo → Información → Sincronizar</code>. Muchos &quot;no conforme&quot; son estado antiguo: el equipo lleva tres días apagado.</li><li>Si sigue, mira la <strong>causa</strong> en el equipo: en este caso <code>manage-bde -status C:</code> dice <code>Protection Off</code> porque se suspendió para una actualización de firmware y nadie la reanudó: <code>manage-bde -protectors -enable C:</code>.</li><li>Comprueba en el <strong>Visor de eventos</strong> <code>Microsoft-Windows-DeviceManagement-Enterprise-Diagnostics-Provider/Admin</code> que el check-in llega sin errores 0x8018xxxx.</li><li>Vuelve a sincronizar y espera al siguiente ciclo (hasta 8 horas; <code>Sincronizar</code> lo adelanta). Ya en <strong>Conforme</strong>, Conditional Access deja pasar.</li></ol>
+<p>Para macOS, <code>sudo profiles list</code> y el <code>Portal de empresa → Comprobar estado</code>; para iOS/Android, el mismo botón en el Portal de empresa y, si no hay check-in desde hace días, el dispositivo está apagado, sin red o el usuario quitó la app.</p>
+<h2>5. Lo que revisas cada mes</h2>
+<ul><li><strong>Informes → Cumplimiento del dispositivo</strong>: no conformes por regla, no por dispositivo. Si el 30 % falla por versión mínima, el problema es el anillo de actualizaciones, no 60 tickets.</li><li>Dispositivos <strong>sin check-in en 30 días</strong>: retirar o investigar (<code>Todos los dispositivos → filtro Último check-in</code>).</li><li>Perfiles con <strong>Error</strong> o <strong>Conflicto</strong> en <code>Configuración → la directiva → Estado del dispositivo</code>: dos perfiles que fijan el mismo ajuste con valores distintos.</li><li>Que las versiones mínimas de las políticas de cumplimiento se han subido tras el martes de parches, con el día de gracia por delante.</li></ul>
+<h2>Siguientes pasos</h2>
+<ul><li><strong>Autopilot</strong> (Windows) y <strong>ADE</strong> (Apple): que el dispositivo salga de la caja y termine en este estado sin pasar por IT; la guía de MECM del Nivel 2 explica el camino intermedio con co-administración.</li><li><strong>Líneas base de seguridad</strong> (<code>Seguridad de los puntos de conexión → Líneas base</code>) para no inventar la configuración desde cero; compara con tu perfil antes de aplicarla.</li><li>La guía de Intune EPM quita el administrador local a los usuarios una vez que el cumplimiento y la configuración están estables.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/intune-bitlocker">«&#x27;Tu dispositivo no cumple los requisitos&#x27;»</a> en SysAdmin Desks, gratis y en el navegador.</p>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span></p>
+      <p class="repo-name"><span class="es">Nivel 3</span> · <span class="es">Intune: Windows, macOS, iOS y Android</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
+      <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span> →</a>
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/intune-bitlocker" target="_blank" rel="noopener noreferrer"><span>&#x27;Tu dispositivo no cumple los requisitos&#x27;</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help?lang=es" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/?lang=es" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/02-intune-compliance-report.html"><span class="label muted"><span class="es">Blog · 02</span></span><span class="related-t"><span class="es">Un informe de cumplimiento de Intune que se puede enseñar a dirección</span></span></a><a class="related-link" href="../blog/18-mecm-intune-comanagement-tracker.html"><span class="label muted"><span class="es">Blog · 18</span></span><span class="related-t"><span class="es">Un go/no-go para el siguiente paso del slider de co-management</span></span></a><a class="related-link" href="../blog/29-tenant-separation-cutover-planner.html"><span class="label muted"><span class="es">Blog · 29</span></span><span class="related-t"><span class="es">La ola 3 es el día 30 y el inventario dice que no: la separación de un tenant de Microsoft 365</span></span></a><a class="related-link" href="../blog/41-windows-update-ring-tracker.html"><span class="label muted"><span class="es">Blog · 41</span></span><span class="related-t"><span class="es">Un anillo pausado y olvidado y un piloto solo de informáticos: Windows Update, anillo a anillo</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="hyper-v-crear-vm-conmutador-virtual-puntos-de-control-y-exportar.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Hyper-V: crear una máquina virtual, el conmutador virtual, puntos de control y exportación</span></span></a>
+    <a class="post-nav-link next" href="intune-epm-quitar-administrador-local-y-elevar-solo-lo-necesario.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">Intune EPM: quitar el administrador local y elevar solo lo que hace falta</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

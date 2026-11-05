@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="no-js inner" data-title-en="Trading voice line down: triage and backup · Iñigo González" data-title-es="Línea de voz de trading caída: qué hacer · Iñigo González">
+<html lang="en" class="no-js inner">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -16,6 +16,9 @@
 <meta name="author" content="Iñigo González">
 <meta name="theme-color" content="#0e1a24">
 <link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/linea-de-voz-con-un-banco-caida-private-wire-turrets-y-grabacion.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/linea-de-voz-con-un-banco-caida-private-wire-turrets-y-grabacion.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/linea-de-voz-con-un-banco-caida-private-wire-turrets-y-grabacion.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/linea-de-voz-con-un-banco-caida-private-wire-turrets-y-grabacion.html">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <meta property="og:site_name" content="Iñigo González">
@@ -36,7 +39,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"A voice line to a bank is down: private wires, turrets and the recording that can't be missing","alternativeHeadline":"Línea de voz con un banco caída: private wires, turrets y la grabación que no puede faltar","description":"What private wires, ringdown lines and a turret's hoot-n-holler are, how to triage with the desk, work out which side is down, what to give the carrier and the turret vendor, the temporary workaround on recorded lines under MiFID II, how to keep the desk informed and the RCA.","datePublished":"2026-10-30","dateModified":"2026-10-30","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/linea-de-voz-con-un-banco-caida-private-wire-turrets-y-grabacion.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/linea-de-voz-con-un-banco-caida-private-wire-turrets-y-grabacion.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Voice lines - A private wire to a bank down"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 5","item":"https://inigogonzalezgarcia.github.io/guias/sector-5.html"},{"@type":"ListItem","position":4,"name":"A voice line to a bank is down: private wires, turrets and the recording that can't be missing","item":"https://inigogonzalezgarcia.github.io/guias/linea-de-voz-con-un-banco-caida-private-wire-turrets-y-grabacion.html"}]}]}</script>
 </head>
 <body id="top">
-<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
 
 <header class="site-header">
   <div class="wrap">
@@ -44,11 +47,11 @@
       <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
       <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
     </a>
-    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/"><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
     <div class="head-actions">
-      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
       <span class="sep" aria-hidden="true"></span>
-      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+      <a class="lang-btn" id="langBtn" href="../es/guias/linea-de-voz-con-un-banco-caida-private-wire-turrets-y-grabacion.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
     </div>
   </div>
 </header>
@@ -56,61 +59,29 @@
 <div class="menu" id="menu" aria-hidden="true">
   <div class="menu-top">
     <span class="label">Iñigo González</span>
-    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
   </div>
-  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
     <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
     <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
-    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
   </div>
 </div>
 
 <main id="main">
 <section class="page-hero post-hero">
   <div class="wrap">
-    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="sector-5.html"><span class="es">Sector 5</span><span class="en">Sector 5</span></a></p>
-    <h1><span class="es">Línea de voz con un banco caída: private wires, turrets y la grabación que no puede faltar</span><span class="en">A voice line to a bank is down: private wires, turrets and the recording that can&#x27;t be missing</span></h1>
-    <p class="lede"><span class="es">Qué son las private wires, las líneas de ringdown y el hoot-n-holler de un turret, cómo hacer el triaje con la mesa, saber de qué lado está la caída, qué dar al operador y al fabricante del turret, la alternativa temporal con líneas grabadas por MiFID II, cómo informar a la mesa y el RCA.</span><span class="en">What private wires, ringdown lines and a turret&#x27;s hoot-n-holler are, how to triage with the desk, work out which side is down, what to give the carrier and the turret vendor, the temporary workaround on recorded lines under MiFID II, how to keep the desk informed and the RCA.</span></p><p class="label post-meta"><span class="es">Sector 5</span><span class="en">Sector 5</span> · <span class="es">Líneas de voz - Private wire con un banco caída</span><span class="en">Voice lines - A private wire to a bank down</span> · <span class="es">6 min</span><span class="en">6 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">30 oct 2026</span><span class="en">30 Oct 2026</span></p>
+    <p class="label kicker"><a href="../guias.html"><span class="en">Guides</span></a> · <a href="sector-5.html"><span class="en">Sector 5</span></a></p>
+    <h1><span class="en">A voice line to a bank is down: private wires, turrets and the recording that can&#x27;t be missing</span></h1>
+    <p class="lede"><span class="en">What private wires, ringdown lines and a turret&#x27;s hoot-n-holler are, how to triage with the desk, work out which side is down, what to give the carrier and the turret vendor, the temporary workaround on recorded lines under MiFID II, how to keep the desk informed and the RCA.</span></p><p class="label post-meta"><span class="en">Sector 5</span> · <span class="en">Voice lines - A private wire to a bank down</span> · <span class="en">6 min read</span> · <span class="en">Updated</span> <span class="en">30 Oct 2026</span></p>
   </div>
 </section>
 
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose guide">
-      <div class="es" lang="es">
-<h2>Qué vas a conseguir</h2>
-<p>Que cuando una mesa de derivados pierde la línea directa con un banco, sepas en cinco minutos si el problema es vuestro, del banco o del operador, que la mesa siga hablando con ese banco por una línea <strong>grabada</strong> mientras se arregla y que al final quede un análisis de causa que evite la siguiente. Para un bróker, esa línea es por donde se negocian los precios: cada minuto sin ella es negocio que se va por otro lado.</p>
-<h2>Antes de empezar</h2>
-<ul><li>El <strong>inventario de líneas de voz</strong> de la sede: cada private wire con su contraparte, la mesa que la usa, el botón del turret, el ID de circuito en cada extremo, el operador y quién la pidió.</li><li>El contrato y el teléfono de soporte del <strong>fabricante del turret</strong> y del <strong>operador</strong> que da los circuitos.</li><li>El contacto del equipo de voz de cada contraparte (su &quot;voice desk&quot;), no solo el del operador del banco.</li><li>Acceso de lectura al <strong>sistema de grabación</strong> de voz para comprobar que una línea graba.</li><li>La política de cumplimiento sobre grabación de comunicaciones y qué canales están aprobados.</li></ul>
-<h2>1. El vocabulario: qué hay en una mesa</h2>
-<ul><li><strong>Turret</strong>: el terminal de voz de la mesa de trading. Muchos botones de línea, dos auriculares o altavoces, y cada botón es una línea o un grupo de líneas.</li><li><strong>Private wire</strong>: un circuito de voz punto a punto y permanente entre un botón de vuestro turret y uno de la contraparte. No se marca un número.</li><li><strong>Ringdown</strong>: al pulsar el botón, suena en el otro extremo. Automático (ARD) si suena al descolgar o pulsar; manual si hay que dar una señal.</li><li><strong>Hoot-n-holler</strong>: un canal de altavoz siempre abierto, a menudo multipunto, para difundir precios o avisos entre oficinas o entre mesas.</li><li><strong>Líneas de marcación</strong>: líneas telefónicas normales que salen por el turret o el teléfono y también se graban.</li><li>Hoy muchas private wires viajan por la red de voz gestionada de un operador, sobre IP, y no por un circuito físico dedicado de extremo a extremo. Para el diagnóstico da igual: hay un tramo vuestro, un tramo del operador y un tramo de la contraparte.</li></ul>
-<h2>2. El triaje con la mesa</h2>
-<p>Lo que preguntas al operador de la mesa en el primer minuto:</p>
-<ol><li><strong>¿Qué botón y qué contraparte?</strong> Con el inventario lo conviertes en ID de circuito.</li><li><strong>¿Qué ve en el turret?</strong> El botón no se ilumina, se ilumina pero no suena al otro lado, se oye ruido o silencio, o se cuelga sola.</li><li><strong>¿Desde cuándo?</strong> La hora exacta de la última conversación buena.</li><li><strong>¿Es solo esa línea?</strong> Prueba otra private wire del mismo turret y la misma línea desde otro puesto de la mesa.</li></ol>
-<p>El resultado te dice por dónde empezar:</p>
-<ul><li><strong>Una línea, en todos los puestos</strong>: circuito, operador o lado de la contraparte.</li><li><strong>Todas las líneas de un puesto</strong>: el turret de ese puesto o su conexión. Es del fabricante del turret.</li><li><strong>Muchas líneas a la vez</strong>: el sistema central de turrets, su pasarela o el enlace con el operador. Es un incidente mayor.</li></ul>
-<h2>3. ¿De qué lado está la caída?</h2>
-<ul><li><strong>Llama a la contraparte por una línea grabada</strong> (marcación desde el turret) y pregunta si ven la línea caída en su lado. Si a ellos también les falla, que abran incidencia con su equipo de voz y te den el número.</li><li><strong>El sistema de gestión del turret</strong> suele mostrar el estado de cada línea. Si tu lado está en servicio y la línea no tiene señal, el corte está en el operador o más allá.</li><li><strong>El operador</strong> puede hacer una prueba del circuito de extremo a extremo y decirte en qué tramo se pierde.</li><li>Si ninguno de los dos extremos ha cambiado nada y la prueba del operador falla, la avería es suya.</li></ul>
-<p class="g-tip">Un private wire tiene dos extremos y a veces dos clientes del mismo operador. Que tú y la contraparte abráis la avería con el mismo ID de circuito ahorra que el operador investigue dos veces.</p>
-<h2>4. Abrir las averías y escalar</h2>
-<p><strong>Al operador</strong>: ID de circuito, extremos A y B, contraparte, hora de inicio, síntoma, lo que ya habéis descartado en cada lado y el impacto (&quot;línea de negociación de una mesa en horario de mercado&quot;). Pide prioridad máxima y una hora estimada.</p>
-<p><strong>Al fabricante del turret</strong>, si el triaje apunta a vuestro lado: puesto, botón, configuración de la línea y desde cuándo.</p>
-<p><strong>Escalado</strong>: si a los treinta minutos no hay hora estimada, al siguiente nivel de la matriz del operador. Avisa también al responsable de la mesa y a tu responsable: si la caída se alarga, puede afectar a varias contrapartes y ya es un incidente mayor.</p>
-<h2>5. La alternativa mientras tanto: siempre grabada</h2>
-<p>MiFID II obliga a <strong>grabar</strong> las conversaciones que llevan o pueden llevar a operaciones y a conservarlas <strong>cinco años</strong> (hasta siete si el supervisor lo pide). La alternativa temporal tiene que cumplir eso:</p>
-<ul><li><strong>Línea de marcación desde el turret</strong> al número directo de la mesa de la contraparte. Es la opción normal: se graba igual que la private wire.</li><li><strong>Teléfono fijo grabado</strong> de la sede, si el turret no puede.</li><li><strong>Móvil corporativo</strong> solo si está dentro de la solución de grabación aprobada.</li><li><strong>Nunca</strong> un móvil personal, una aplicación de mensajería o un canal que cumplimiento no haya aprobado. Las sanciones por comunicaciones fuera de canales grabados son reales.</li></ul>
-<p>Antes de decir a la mesa &quot;usad esta línea&quot;, haz una <strong>llamada de prueba</strong> y comprueba en el sistema de grabación que aparece y se oye. Apunta en el ticket qué alternativa se usó y durante cuánto tiempo: cumplimiento puede pedirlo.</p>
-<p class="g-warn">Si la caída afecta también a la grabación, la mesa no debe negociar por voz hasta que vuelva o hasta que cumplimiento decida. No lo decide IT.</p>
-<h2>6. Comunicar a la mesa</h2>
-<p>Mensajes cortos y con hora, al responsable de la mesa y por el canal que usen:</p>
-<ul><li><strong>Al abrir</strong>: &quot;La línea directa con el banco B está caída desde las 9:12. Usad la marcación del botón 24, que está grabada. Avería abierta con el operador.&quot;</li><li><strong>Cada 30 minutos</strong>: estado y hora estimada, aunque no haya novedades.</li><li><strong>Al cerrar</strong>: &quot;Línea restablecida a las 10:47. Por favor, haced una llamada por la private wire para confirmarlo.&quot; Cierra solo cuando la mesa lo confirme.</li></ul>
-<h2>7. El RCA</h2>
-<ul><li><strong>Cronología</strong>: hora de inicio, de detección, de la alternativa, de la reparación y de la confirmación de la mesa.</li><li><strong>Causa</strong>: el informe del operador o del fabricante, por escrito.</li><li><strong>Impacto</strong>: qué mesa, qué contraparte, cuánto tiempo y si hubo alguna conversación fuera de línea grabada.</li><li><strong>Acciones</strong>: rutas diversas para las líneas críticas, una línea de marcación de respaldo documentada para cada contraparte, una prueba mensual de las private wires con la mesa y el inventario corregido si faltaba algo.</li></ul>
-<h2>Siguientes pasos</h2>
-<ul><li>La guía <strong>Proveedores de conectividad</strong> cubre el inventario de circuitos, la matriz de escalado y la revisión del SLA del operador.</li><li>La guía <strong>DR/BCP: preparar una prueba de recuperación</strong> sitúa la voz de la mesa dentro del plan de continuidad.</li><li>El repositorio <strong>36-major-incident-command-kit</strong> de mi GitHub sirve de plantilla para la cronología, los mensajes y el RCA cuando una caída de voz se convierte en incidente mayor.</li></ul>
-<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
-      </div>
+      
       <div class="en" lang="en">
 <h2>What you&#x27;ll get</h2>
 <p>When a derivatives desk loses its direct line to a bank, you know within five minutes whether the problem is yours, the bank&#x27;s or the carrier&#x27;s, the desk keeps talking to that bank on a <strong>recorded</strong> line while it&#x27;s fixed, and at the end there is a root cause analysis that prevents the next one. For a broker, that line is where prices are negotiated: every minute without it is business going elsewhere.</p>
@@ -146,27 +117,27 @@
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
-        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
-        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
       </div>
     </article>
     <aside class="post-aside">
-      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
-      <p class="repo-name"><span class="es">Sector 5</span><span class="en">Sector 5</span> · <span class="es">Líneas de voz - Private wire con un banco caída</span><span class="en">Voice lines - A private wire to a bank down</span></p>
-      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
-      <a class="arrow-link" href="sector-5.html"><span class="es">Todas las guías del Sector 5</span><span class="en">All Sector 5 guides</span> →</a>
+      <p class="label muted"><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="en">Sector 5</span> · <span class="en">Voice lines - A private wire to a bank down</span></p>
+      <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="sector-5.html"><span class="en">All Sector 5 guides</span> →</a>
       
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>
   
   <div class="wrap related">
-    <h2 class="label kicker related-h"><span class="es">Relacionado</span><span class="en">Related</span></h2>
-    <div class="related-grid"><a class="related-link" href="../blog/36-major-incident-command-kit.html"><span class="label muted"><span class="es">Blog · 36</span><span class="en">Blog · 36</span></span><span class="related-t"><span class="es">Los usuarios nos avisaron 40 minutos antes que la monitorización: un kit para dirigir y revisar incidentes mayores</span><span class="en">Users told us 40 minutes before monitoring did: a kit to run and review major incidents</span></span></a></div>
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/36-major-incident-command-kit.html"><span class="label muted"><span class="en">Blog · 36</span></span><span class="related-t"><span class="en">Users told us 40 minutes before monitoring did: a kit to run and review major incidents</span></span></a></div>
   </div>
   <div class="wrap post-nav">
-    <a class="post-nav-link prev" href="windows-11-migrar-los-equipos-de-una-sede-con-sala-de-trading.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Windows 11: migrar los equipos de una sede con sala de trading sin tocar el horario de mercado</span><span class="en">Windows 11: migrating a site&#x27;s PCs with a trading floor without touching market hours</span></span></a>
-    <a class="post-nav-link next" href="oficina-que-crece-de-15-a-120-personas-con-sala-de-trading.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Una oficina que crece de 15 a 120 personas con sala de trading: qué hace falta en cada fase</span><span class="en">An office growing from 15 to 120 people with a trading floor: what each phase needs</span></span></a>
+    <a class="post-nav-link prev" href="windows-11-migrar-los-equipos-de-una-sede-con-sala-de-trading.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">Windows 11: migrating a site&#x27;s PCs with a trading floor without touching market hours</span></span></a>
+    <a class="post-nav-link next" href="oficina-que-crece-de-15-a-120-personas-con-sala-de-trading.html"><span class="label muted"><span class="en">Next</span></span><span><span class="en">An office growing from 15 to 120 people with a trading floor: what each phase needs</span></span></a>
   </div>
 </section>
 </main>
@@ -174,8 +145,8 @@
 <footer>
   <div class="wrap">
     <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
-    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
-    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
   </div>
 </footer>
 

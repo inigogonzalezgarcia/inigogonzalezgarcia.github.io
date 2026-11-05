@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="no-js inner" data-title-en="SLOs and burn-rate alerts in Python · Iñigo González" data-title-es="SLO y alertas por burn rate en Python · Iñigo González">
+<html lang="en" class="no-js inner">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -16,6 +16,9 @@
 <meta name="author" content="Iñigo González">
 <meta name="theme-color" content="#0e1a24">
 <link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/08-edge-health-slo-monitor.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/08-edge-health-slo-monitor.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/08-edge-health-slo-monitor.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/08-edge-health-slo-monitor.html">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <meta property="og:site_name" content="Iñigo González">
@@ -36,7 +39,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"SLOs and burn-rate alerts for the edge, in plain Python","alternativeHeadline":"SLO y alertas por burn rate para el edge, en Python sin dependencias","description":"DNS, TLS, HTTP and TCP probes, an error budget and a fictional postmortem.","datePublished":"2026-10-01","dateModified":"2026-10-01","inLanguage":"en","image":"https://inigogonzalezgarcia.github.io/assets/og/08-edge-health-slo-monitor.png","url":"https://inigogonzalezgarcia.github.io/blog/08-edge-health-slo-monitor.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/blog/08-edge-health-slo-monitor.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/blog/#blog"},"articleSection":"Cloud & SRE lab"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/blog/"},{"@type":"ListItem","position":3,"name":"SLOs and burn-rate alerts for the edge, in plain Python","item":"https://inigogonzalezgarcia.github.io/blog/08-edge-health-slo-monitor.html"}]}]}</script>
 </head>
 <body id="top">
-<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
 
 <header class="site-header">
   <div class="wrap">
@@ -44,11 +47,11 @@
       <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
       <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
     </a>
-    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/" aria-current="page"><span class="en">Blog</span></a><a href="../guias.html"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
     <div class="head-actions">
-      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
       <span class="sep" aria-hidden="true"></span>
-      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+      <a class="lang-btn" id="langBtn" href="../es/blog/08-edge-health-slo-monitor.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
     </div>
   </div>
 </header>
@@ -56,13 +59,13 @@
 <div class="menu" id="menu" aria-hidden="true">
   <div class="menu-top">
     <span class="label">Iñigo González</span>
-    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
   </div>
-  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
     <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
     <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
-    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
   </div>
 </div>
 
@@ -70,25 +73,15 @@
 <section class="page-hero post-hero">
   <div class="wrap">
     <p class="label kicker"><a href="./">Blog</a> · 08</p>
-    <h1><span class="es">SLO y alertas por burn rate para el edge, en Python sin dependencias</span><span class="en">SLOs and burn-rate alerts for the edge, in plain Python</span></h1>
-    <p class="lede"><span class="es">Sondas DNS, TLS, HTTP y TCP, un presupuesto de error y un postmortem ficticio.</span><span class="en">DNS, TLS, HTTP and TCP probes, an error budget and a fictional postmortem.</span></p><p class="label post-meta"><span class="es">Laboratorio cloud y SRE</span><span class="en">Cloud & SRE lab</span> · <span class="es">1 oct 2026</span><span class="en">1 Oct 2026</span> · <span class="es">2 min</span><span class="en">2 min read</span></p>
+    <h1><span class="en">SLOs and burn-rate alerts for the edge, in plain Python</span></h1>
+    <p class="lede"><span class="en">DNS, TLS, HTTP and TCP probes, an error budget and a fictional postmortem.</span></p><p class="label post-meta"><span class="en">Cloud & SRE lab</span> · <span class="en">1 Oct 2026</span> · <span class="en">2 min read</span></p>
   </div>
 </section>
 
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose">
-      <div class="es" lang="es">
-<h2>Por qué este laboratorio</h2>
-<p>Viene de años de monitorización y respuesta a alertas con herramientas como Grafana, SolarWinds y el stack de Elastic. Este laboratorio aplica el enfoque SRE al edge: despertar a alguien cuando el presupuesto de error se consume demasiado rápido, no en cada comprobación fallida.</p>
-<h2>Qué he hecho</h2>
-<ul><li>Sondas DNS, TLS, HTTP y TCP.</li><li>Un SLO con presupuesto de error y alertas multiventana por burn rate, con un mínimo de sondas malas antes de avisar.</li><li>Exportación a Elasticsearch (ECS) y Prometheus, un webhook firmado y un informe HTML.</li><li>Una plantilla de postmortem y un postmortem ficticio: un registro DNS perdido en una migración de zona.</li></ul>
-<h2>Cómo está hecho</h2>
-<p>Python 3.11, solo librería estándar, 14 tests.</p>
-<h2>Siguientes pasos</h2>
-<ul><li>Enviar los resultados a tu Elasticsearch o Prometheus.</li><li>Instalar las units de systemd en una VM pequeña cerca de tus usuarios.</li><li>Conectar el webhook firmado a n8n, Teams o Slack, y acordar los SLO con los responsables del servicio.</li></ul>
-<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
-      </div>
+      
       <div class="en" lang="en">
 <h2>Why this lab</h2>
 <p>Comes from years of monitoring and alert response with tools such as Grafana, SolarWinds and the Elastic stack. This lab applies the SRE approach to the edge: wake someone up when the error budget is burning too fast, not on every failed check.</p>
@@ -102,18 +95,18 @@
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
-        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
-        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
       </div>
     </article>
     <aside class="post-aside">
-      <p class="label muted"><span class="es">El repositorio</span><span class="en">The repository</span></p>
+      <p class="label muted"><span class="en">The repository</span></p>
       <p class="repo-name">08-edge-health-slo-monitor</p>
-      <a class="btn" href="https://github.com/inigogonzalezgarcia/08-edge-health-slo-monitor" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span><span class="en">View on GitHub</span> ↗</a>
-      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/08-edge-health-slo-monitor" target="_blank" rel="noopener noreferrer"><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="en">Synthetic data. No employer code, data or systems.</span></p>
       <div class="share">
-        <p class="label muted"><span class="es">Compartir</span><span class="en">Share</span></p>
-        <div class="share-row es" lang="es"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F08-edge-health-slo-monitor.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F08-edge-health-slo-monitor.html&amp;text=SLO%20y%20alertas%20por%20burn%20rate%20para%20el%20edge%2C%20en%20Python%20sin%20dependencias%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">X</a><a class="share-btn" href="https://wa.me/?text=SLO%20y%20alertas%20por%20burn%20rate%20para%20el%20edge%2C%20en%20Python%20sin%20dependencias%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F08-edge-health-slo-monitor.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=SLO%20y%20alertas%20por%20burn%20rate%20para%20el%20edge%2C%20en%20Python%20sin%20dependencias%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F08-edge-health-slo-monitor.html" aria-label="Compartir en Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/08-edge-health-slo-monitor.html" data-copied="Enlace copiado">Copiar enlace</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/08-edge-health-slo-monitor.html" data-title="SLO y alertas por burn rate para el edge, en Python sin dependencias" hidden>Más…</button></div>
+        <p class="label muted"><span class="en">Share</span></p>
+        
         <div class="share-row en" lang="en"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F08-edge-health-slo-monitor.html" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F08-edge-health-slo-monitor.html&amp;text=SLOs%20and%20burn-rate%20alerts%20for%20the%20edge%2C%20in%20plain%20Python%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Share on X">X</a><a class="share-btn" href="https://wa.me/?text=SLOs%20and%20burn-rate%20alerts%20for%20the%20edge%2C%20in%20plain%20Python%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F08-edge-health-slo-monitor.html" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=SLOs%20and%20burn-rate%20alerts%20for%20the%20edge%2C%20in%20plain%20Python%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F08-edge-health-slo-monitor.html" aria-label="Share on Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/08-edge-health-slo-monitor.html" data-copied="Link copied">Copy link</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/08-edge-health-slo-monitor.html" data-title="SLOs and burn-rate alerts for the edge, in plain Python" hidden>More…</button></div>
         <p class="share-msg small muted" role="status" aria-live="polite"></p>
       </div>
@@ -121,12 +114,12 @@
   </div>
   
   <div class="wrap related">
-    <h2 class="label kicker related-h"><span class="es">Relacionado</span><span class="en">Related</span></h2>
-    <div class="related-grid"><a class="related-link" href="36-major-incident-command-kit.html"><span class="label muted"><span class="es">Blog · 36</span><span class="en">Blog · 36</span></span><span class="related-t"><span class="es">Los usuarios nos avisaron 40 minutos antes que la monitorización: un kit para dirigir y revisar incidentes mayores</span><span class="en">Users told us 40 minutes before monitoring did: a kit to run and review major incidents</span></span></a><a class="related-link" href="10-gpu-fleet-observability.html"><span class="label muted"><span class="es">Blog · 10</span><span class="en">Blog · 10</span></span><span class="related-t"><span class="es">Observabilidad de una flota de GPU: alertas que dicen qué hacer</span><span class="en">Observability for a GPU fleet: alerts that say what to do</span></span></a><a class="related-link" href="../guias/elk-centralizar-logs-de-servidores-y-buscar-un-error-en-kibana.html"><span class="label muted"><span class="es">Guía · Nivel 3</span><span class="en">Guide · Level 3</span></span><span class="related-t"><span class="es">Elasticsearch, Logstash y Kibana: centralizar los logs de los servidores y buscar un error</span><span class="en">Elasticsearch, Logstash and Kibana: centralising server logs and finding an error</span></span></a><a class="related-link" href="../guias/kibana-paneles-alertas-ilm-data-streams-y-elasticsearch-en-solo-lectura-por-disco-lleno.html"><span class="label muted"><span class="es">Guía · Nivel 3</span><span class="en">Guide · Level 3</span></span><span class="related-t"><span class="es">Kibana y Elasticsearch: paneles de logs, reglas de alerta, ciclo de vida de índices con data streams y un clúster en solo lectura por disco lleno</span><span class="en">Kibana and Elasticsearch: log dashboards, alerting rules, index lifecycle with data streams and a cluster gone read-only because the disk is full</span></span></a><a class="related-link" href="../guias/apache-en-ubuntu-virtual-hosts-https-con-certbot-cabeceras-y-la-pagina-por-defecto.html"><span class="label muted"><span class="es">Guía · Nivel 3</span><span class="en">Guide · Level 3</span></span><span class="related-t"><span class="es">Apache en Ubuntu: virtual hosts, HTTPS con certbot, cabeceras de seguridad, logs y la página por defecto que aparece en lugar de tu sitio</span><span class="en">Apache on Ubuntu: virtual hosts, HTTPS with certbot, security headers, logs and the default page that shows instead of your site</span></span></a><a class="related-link" href="../guias/nginx-y-apache-proxy-inverso-tls-cabeceras-timeouts-y-un-502-bad-gateway.html"><span class="label muted"><span class="es">Guía · Nivel 3</span><span class="en">Guide · Level 3</span></span><span class="related-t"><span class="es">Nginx y Apache: publicar una aplicación interna como proxy inverso, con TLS, cabeceras, timeouts y un 502 Bad Gateway</span><span class="en">Nginx and Apache: publishing an internal app as a reverse proxy, with TLS, headers, timeouts and a 502 Bad Gateway</span></span></a></div>
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="36-major-incident-command-kit.html"><span class="label muted"><span class="en">Blog · 36</span></span><span class="related-t"><span class="en">Users told us 40 minutes before monitoring did: a kit to run and review major incidents</span></span></a><a class="related-link" href="10-gpu-fleet-observability.html"><span class="label muted"><span class="en">Blog · 10</span></span><span class="related-t"><span class="en">Observability for a GPU fleet: alerts that say what to do</span></span></a><a class="related-link" href="../guias/elk-centralizar-logs-de-servidores-y-buscar-un-error-en-kibana.html"><span class="label muted"><span class="en">Guide · Level 3</span></span><span class="related-t"><span class="en">Elasticsearch, Logstash and Kibana: centralising server logs and finding an error</span></span></a><a class="related-link" href="../guias/kibana-paneles-alertas-ilm-data-streams-y-elasticsearch-en-solo-lectura-por-disco-lleno.html"><span class="label muted"><span class="en">Guide · Level 3</span></span><span class="related-t"><span class="en">Kibana and Elasticsearch: log dashboards, alerting rules, index lifecycle with data streams and a cluster gone read-only because the disk is full</span></span></a><a class="related-link" href="../guias/apache-en-ubuntu-virtual-hosts-https-con-certbot-cabeceras-y-la-pagina-por-defecto.html"><span class="label muted"><span class="en">Guide · Level 3</span></span><span class="related-t"><span class="en">Apache on Ubuntu: virtual hosts, HTTPS with certbot, security headers, logs and the default page that shows instead of your site</span></span></a><a class="related-link" href="../guias/nginx-y-apache-proxy-inverso-tls-cabeceras-timeouts-y-un-502-bad-gateway.html"><span class="label muted"><span class="en">Guide · Level 3</span></span><span class="related-t"><span class="en">Nginx and Apache: publishing an internal app as a reverse proxy, with TLS, headers, timeouts and a 502 Bad Gateway</span></span></a></div>
   </div>
   <div class="wrap post-nav">
-    <a class="post-nav-link prev" href="07-aws-private-connectivity.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">Conectividad privada en AWS con Terraform, y el fallo que pilló la CI</span><span class="en">Private connectivity on AWS with Terraform, and the bug CI caught</span></span></a>
-    <a class="post-nav-link next" href="09-gpu-node-remediation.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Un controlador de Kubernetes que drena, repara o pone en cuarentena nodos GPU</span><span class="en">Teaching a Kubernetes controller to drain, repair or quarantine GPU nodes</span></span></a>
+    <a class="post-nav-link prev" href="07-aws-private-connectivity.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">Private connectivity on AWS with Terraform, and the bug CI caught</span></span></a>
+    <a class="post-nav-link next" href="09-gpu-node-remediation.html"><span class="label muted"><span class="en">Next</span></span><span><span class="en">Teaching a Kubernetes controller to drain, repair or quarantine GPU nodes</span></span></a>
   </div>
 </section>
 </main>
@@ -134,8 +127,8 @@
 <footer>
   <div class="wrap">
     <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
-    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
-    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
   </div>
 </footer>
 

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Switch Cisco: comandos básicos y err-disabled · Iñigo González</title>
+<meta name="description" content="Entrar por consola o SSH, los seis show que responden casi cualquier ticket, guardar y sacar una copia de la configuración, un puerto apagado…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/cisco-primeros-comandos-copia-de-configuracion-y-un-puerto-err-disabled.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/cisco-primeros-comandos-copia-de-configuracion-y-un-puerto-err-disabled.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/cisco-primeros-comandos-copia-de-configuracion-y-un-puerto-err-disabled.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/cisco-primeros-comandos-copia-de-configuracion-y-un-puerto-err-disabled.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Switch Cisco: comandos básicos y err-disabled · Iñigo González">
+<meta property="og:description" content="Entrar por consola o SSH, los seis show que responden casi cualquier ticket, guardar y sacar una copia de la configuración, un puerto apagado…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/cisco-primeros-comandos-copia-de-configuracion-y-un-puerto-err-disabled.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-nivel-2.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Switch Cisco: comandos básicos y err-disabled · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Cisco: primeros comandos en un switch, copia de la configuración y un puerto en err-disabled","alternativeHeadline":"Cisco: first commands on a switch, backing up the config and a port in err-disabled","description":"Entrar por consola o SSH, los seis show que responden casi cualquier ticket, guardar y sacar una copia de la configuración, un puerto apagado por port-security o BPDU Guard y asignar la VLAN de acceso a un puesto.","datePublished":"2026-10-30","dateModified":"2026-10-30","inLanguage":"es","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/es/guias/cisco-primeros-comandos-copia-de-configuracion-y-un-puerto-err-disabled.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/guias/cisco-primeros-comandos-copia-de-configuracion-y-un-puerto-err-disabled.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Cisco: primeros comandos en un switch"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Nivel 2","item":"https://inigogonzalezgarcia.github.io/es/guias/nivel-2.html"},{"@type":"ListItem","position":4,"name":"Cisco: primeros comandos en un switch, copia de la configuración y un puerto en err-disabled","item":"https://inigogonzalezgarcia.github.io/es/guias/cisco-primeros-comandos-copia-de-configuracion-y-un-puerto-err-disabled.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/cisco-primeros-comandos-copia-de-configuracion-y-un-puerto-err-disabled.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <a href="nivel-2.html"><span class="es">Nivel 2</span></a></p>
+    <h1><span class="es">Cisco: primeros comandos en un switch, copia de la configuración y un puerto en err-disabled</span></h1>
+    <p class="lede"><span class="es">Entrar por consola o SSH, los seis show que responden casi cualquier ticket, guardar y sacar una copia de la configuración, un puerto apagado por port-security o BPDU Guard y asignar la VLAN de acceso a un puesto.</span></p><p class="label post-meta"><span class="es">Nivel 2</span> · <span class="es">Cisco: primeros comandos en un switch</span> · <span class="es">6 min</span> · <span class="es">Actualizado</span> <span class="es">30 oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/net-err-disabled" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «El puerto del puesto que se apagó solo» en SysAdmin Desks ↗</span></a>
+<h2>Qué vas a conseguir</h2>
+<p>Entrar en un switch Cisco Catalyst sin miedo a romper nada, leer qué hay conectado y dónde, guardar y copiar la configuración, y resolver los dos tickets de red que más llegan a soporte: un puerto que el switch ha apagado solo y un puesto que hay que poner en su VLAN.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Un usuario en el switch (nominal por TACACS+ o RADIUS si existe; la cuenta local es solo para emergencias) y saber si tienes nivel 15 o tienes que pasar a <code>enable</code>.</li><li>Para consola: un cable de consola RJ45 o USB y PuTTY o similar a <strong>9600 baudios, 8 bits, sin paridad, 1 bit de parada y sin control de flujo</strong>.</li><li>El plano básico de la sede: qué switch es qué armario, qué VLAN es de usuarios, de voz y de impresoras.</li></ul>
+<p class="g-warn">En modo <code>show</code> no cambias nada. Todo lo que empieza por <code>configure terminal</code> sí, y en un switch de producción va con un cambio aprobado o con permiso del responsable de red.</p>
+<h2>1. Entrar: consola o SSH</h2>
+<p>La consola es para un switch nuevo, uno sin IP o uno al que ya no llegas por red. Lo normal es <strong>SSH</strong> contra la IP de gestión:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Desde tu PC</span><button class="t-copy" type="button" data-copy="ssh adm-soporte@10.10.0.21" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>ssh adm-soporte@10.10.0.21</span><span class="t-out">SW-P1-01&gt;enable</span><span class="t-out">Password:</span><span class="t-out">SW-P1-01#terminal length 0</span></code></pre></figure>
+<p>El símbolo <code>&gt;</code> es modo usuario; <code>#</code> es modo privilegiado. <code>terminal length 0</code> quita el <em>--More--</em> para que las salidas largas salgan enteras y se puedan copiar al ticket.</p>
+<h2>2. Los seis comandos que responden casi cualquier ticket</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">SW-P1-01 · Catalyst 9200 · solo lectura</span><button class="t-copy" type="button" data-copy="show interfaces status&#10;show mac address-table interface Gi1/0/14&#10;show vlan brief&#10;show cdp neighbors&#10;show logging | include Gi1/0/14&#10;show running-config interface Gi1/0/14" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show interfaces status</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show mac address-table interface Gi1/0/14</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show vlan brief</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show cdp neighbors</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show logging | include Gi1/0/14</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show running-config interface Gi1/0/14</span><span class="t-out">Port      Name          Status       Vlan  Duplex  Speed Type</span><span class="t-out">Gi1/0/14  PUESTO 1.07   connected    20    a-full  a-1000 10/100/1000BaseTX</span><span class="t-out">          Mac Address Table</span><span class="t-out">Vlan    Mac Address       Type        Ports</span><span class="t-out">----    -----------       --------    -----</span><span class="t-out">  20    00a0.c914.2b7e    DYNAMIC     Gi1/0/14</span></code></pre></figure>
+<ul><li><code>show interfaces status</code>: una línea por puerto con estado (<em>connected</em>, <em>notconnect</em>, <em>err-disabled</em>, <em>disabled</em>), VLAN y velocidad. Es el primer vistazo.</li><li><code>show mac address-table</code>: qué MAC ha aprendido el switch en cada puerto. Con la MAC del PC (<code>ipconfig /all</code>) sabes en qué puerto está, sin bajar al armario: <code>show mac address-table address 00a0.c914.2b7e</code>.</li><li><code>show vlan brief</code>: qué VLAN existen y qué puertos de acceso hay en cada una.</li><li><code>show cdp neighbors</code>: qué equipo Cisco hay al otro lado de cada enlace (otro switch, un teléfono, un punto de acceso).</li><li><code>show logging</code>: los mensajes del switch. Un puerto que sube y baja, o que se apaga, deja rastro aquí.</li><li><code>show running-config interface</code>: la configuración de ese puerto y nada más.</li></ul>
+<h2>3. Guardar y sacar una copia de la configuración</h2>
+<p>El switch tiene dos configuraciones: la <strong>running</strong> (la que está funcionando, en memoria) y la <strong>startup</strong> (la que carga al arrancar). Un cambio que no se guarda se pierde en el siguiente reinicio.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">SW-P1-01 · guardar y exportar</span><button class="t-copy" type="button" data-copy="copy running-config startup-config&#10;copy running-config scp://adm-soporte@10.10.0.50/backups/SW-P1-01-2026-10-30.cfg&#10;copy running-config tftp://10.10.0.50/SW-P1-01-2026-10-30.cfg" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>copy running-config startup-config</span><span class="t-out">Destination filename [startup-config]?</span><span class="t-out">Building configuration...</span><span class="t-out">[OK]</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>copy running-config scp://adm-soporte@10.10.0.50/backups/SW-P1-01-2026-10-30.cfg</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>copy running-config tftp://10.10.0.50/SW-P1-01-2026-10-30.cfg</span></code></pre></figure>
+<ul><li><code>copy running-config startup-config</code> (o su forma corta <code>write memory</code>) guarda. Se hace después de cada cambio que funciona, no antes.</li><li>Para una copia fuera del equipo, <strong>SCP</strong> va cifrado y pide usuario; <strong>TFTP</strong> no pide nada y viaja en claro, así que solo dentro de la red de gestión. Antes de un cambio, una copia a mano adjunta al ticket.</li></ul>
+<h2>4. El ticket: &quot;el puesto 1.07 se ha quedado sin red&quot;</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">SW-P1-01 · diagnóstico</span><button class="t-copy" type="button" data-copy="show interfaces status err-disabled&#10;show logging | include Gi1/0/14&#10;show port-security interface Gi1/0/14" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show interfaces status err-disabled</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show logging | include Gi1/0/14</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show port-security interface Gi1/0/14</span><span class="t-out">Port      Name          Status       Reason               Err-disabled Vlans</span><span class="t-out">Gi1/0/14  PUESTO 1.07   err-disabled psecure-violation</span><span class="t-out">%PORT_SECURITY-2-PSECURE_VIOLATION: Security violation occurred, caused by MAC address 3c52.82a1.0f44 on port GigabitEthernet1/0/14.</span><span class="t-out">%PM-4-ERR_DISABLE: psecure-violation error detected on Gi1/0/14, putting Gi1/0/14 in err-disable state</span><span class="t-out">Port Security              : Enabled</span><span class="t-out">Port Status                : Secure-shutdown</span><span class="t-out">Violation Mode             : Shutdown</span><span class="t-out">Maximum MAC Addresses      : 1</span><span class="t-out">Sticky MAC Addresses       : 1</span><span class="t-out">Security Violation Count   : 1</span></code></pre></figure>
+<p><strong>err-disabled</strong> significa que el switch ha apagado el puerto a propósito, y la columna <em>Reason</em> dice por qué. Los dos motivos más habituales en un puerto de usuario:</p>
+<div class="g-table"><table><thead><tr><th>Motivo</th><th>Qué pasó</th><th>Qué haces</th></tr></thead><tbody><tr><td><strong>psecure-violation</strong></td><td>Port-security solo admite una MAC (aquí <em>sticky</em>, la primera que aprendió) y ha aparecido otra: un portátil nuevo, un PC cambiado de mesa</td><td>Confirmas que el equipo nuevo es legítimo, borras la MAC aprendida y reactivas el puerto</td></tr><tr><td><strong>bpduguard</strong></td><td>Han conectado un switch pequeño o un equipo que habla spanning-tree en un puerto de usuario</td><td>Se retira el aparato y se reactiva el puerto. No se desactiva BPDU Guard</td></tr></tbody></table></div>
+<p>Aquí han cambiado el PC del puesto. Con el visto bueno de que el equipo es corporativo:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">SW-P1-01 · reactivar el puerto</span><button class="t-copy" type="button" data-copy="clear port-security sticky interface Gi1/0/14&#10;configure terminal&#10;interface Gi1/0/14&#10; shutdown&#10; no shutdown&#10;end&#10;show interfaces Gi1/0/14 status&#10;copy running-config startup-config" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>clear port-security sticky interface Gi1/0/14</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>configure terminal</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>interface Gi1/0/14</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span> shutdown</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span> no shutdown</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>end</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show interfaces Gi1/0/14 status</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>copy running-config startup-config</span></code></pre></figure>
+<p><code>shutdown</code> y <code>no shutdown</code> sacan el puerto de err-disabled. El nuevo equipo será la nueva MAC <em>sticky</em>, y como la sticky se guarda en la configuración, hay que guardar para que no vuelva la antigua tras un reinicio.</p>
+<p class="g-tip">Algunos switches tienen <strong>errdisable recovery</strong>: el puerto se reactiva solo pasado un tiempo (300 segundos por defecto) para los motivos activados. <code>show errdisable recovery</code> dice cuáles. Pero un puerto que se recupera y vuelve a caer cada cinco minutos esconde el problema.</p>
+<h2>5. Poner un puesto en su VLAN</h2>
+<p>Un puesto nuevo, o uno que ha cambiado de departamento, necesita su puerto en la VLAN correcta:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">SW-P1-01 · puerto de acceso</span><button class="t-copy" type="button" data-copy="show vlan brief | include 20|30&#10;configure terminal&#10;interface Gi1/0/22&#10; description PUESTO 1.15&#10; switchport mode access&#10; switchport access vlan 20&#10; switchport voice vlan 30&#10;end&#10;show interfaces Gi1/0/22 status&#10;copy running-config startup-config" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show vlan brief | include 20|30</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>configure terminal</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>interface Gi1/0/22</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span> description PUESTO 1.15</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span> switchport mode access</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span> switchport access vlan 20</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span> switchport voice vlan 30</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>end</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show interfaces Gi1/0/22 status</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>copy running-config startup-config</span></code></pre></figure>
+<ul><li>La VLAN tiene que existir (<code>show vlan brief</code>). Si no aparece, no la crees tú: avisa a red, porque además tiene que llegar por la troncal.</li><li>Comprueba en el PC que coge una IP del rango de esa VLAN (<code>ipconfig /all</code>). Si sale una 169.254.x.x, el switch está bien y el problema es de DHCP.</li></ul>
+<h2>6. Qué poner en el ticket</h2>
+<p>Switch y puerto, estado antes y después, el motivo del err-disabled sacado del log, qué se cambió y la confirmación de que la configuración está guardada.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <strong>Cisco: switches y routers</strong> del Nivel 4 sigue desde aquí: troncales sin cortar una planta, el router con circuito de respaldo y cambios en remoto con red de seguridad.</li><li>La guía de <strong>Cisco: switches, routers y salas de comunicaciones de una sede</strong> lo aplica a una sede real con sala de comunicaciones.</li><li>Si el puesto coge una IP 169.254.x.x, sigue en la guía de <strong>DNS y DHCP en Windows Server</strong>.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/net-err-disabled">«El puerto del puesto que se apagó solo»</a> en SysAdmin Desks, gratis y en el navegador.</p>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span></p>
+      <p class="repo-name"><span class="es">Nivel 2</span> · <span class="es">Cisco: primeros comandos en un switch</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
+      <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span> →</a>
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/net-err-disabled" target="_blank" rel="noopener noreferrer"><span>El puerto del puesto que se apagó solo</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help?lang=es" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/?lang=es" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="cisco-localizar-un-equipo-descripciones-port-security-sticky-y-una-violacion-de-seguridad.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Cisco: encontrar en qué puerto está un equipo, descripciones de puerto, port-security con MAC sticky y una violación de seguridad al cambiar un PC</span></span></a>
+    <a class="post-nav-link next" href="powershell-altas-masivas-en-active-directory-desde-csv-y-bajas-con-revision.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">PowerShell: altas masivas en Active Directory desde un CSV y bajas con revisión previa</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

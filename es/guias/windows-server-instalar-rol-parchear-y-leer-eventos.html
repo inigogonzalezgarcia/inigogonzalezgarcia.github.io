@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Windows Server: roles, parches y eventos · Iñigo González</title>
+<meta name="description" content="Roles y características con PowerShell, la rutina de parcheo con ventana y comprobación, y las tres consultas al visor de eventos que resuelven la mayoría…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/windows-server-instalar-rol-parchear-y-leer-eventos.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/windows-server-instalar-rol-parchear-y-leer-eventos.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/windows-server-instalar-rol-parchear-y-leer-eventos.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/windows-server-instalar-rol-parchear-y-leer-eventos.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows Server: roles, parches y eventos · Iñigo González">
+<meta property="og:description" content="Roles y características con PowerShell, la rutina de parcheo con ventana y comprobación, y las tres consultas al visor de eventos que resuelven la mayoría…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/windows-server-instalar-rol-parchear-y-leer-eventos.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-nivel-2.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Windows Server: roles, parches y eventos · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Windows Server: instalar un rol, parchear sin cortar el servicio y leer los eventos que importan","alternativeHeadline":"Windows Server: installing a role, patching without cutting the service, and reading the events that matter","description":"Roles y características con PowerShell, la rutina de parcheo con ventana y comprobación, y las tres consultas al visor de eventos que resuelven la mayoría de los 'el servidor va raro'.","datePublished":"2026-10-21","dateModified":"2026-10-21","inLanguage":"es","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/es/guias/windows-server-instalar-rol-parchear-y-leer-eventos.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/guias/windows-server-instalar-rol-parchear-y-leer-eventos.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Windows Server"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Nivel 2","item":"https://inigogonzalezgarcia.github.io/es/guias/nivel-2.html"},{"@type":"ListItem","position":4,"name":"Windows Server: instalar un rol, parchear sin cortar el servicio y leer los eventos que importan","item":"https://inigogonzalezgarcia.github.io/es/guias/windows-server-instalar-rol-parchear-y-leer-eventos.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/windows-server-instalar-rol-parchear-y-leer-eventos.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <a href="nivel-2.html"><span class="es">Nivel 2</span></a></p>
+    <h1><span class="es">Windows Server: instalar un rol, parchear sin cortar el servicio y leer los eventos que importan</span></h1>
+    <p class="lede"><span class="es">Roles y características con PowerShell, la rutina de parcheo con ventana y comprobación, y las tres consultas al visor de eventos que resuelven la mayoría de los &#x27;el servidor va raro&#x27;.</span></p><p class="label post-meta"><span class="es">Nivel 2</span> · <span class="es">Windows Server</span> · <span class="es">5 min</span> · <span class="es">Actualizado</span> <span class="es">21 oct 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Manejar un Windows Server (2019, 2022 o 2025) para lo que se pide en operaciones: añadir un rol sin asistente, parchearlo un martes por la noche sin que nadie lo note, y saber leer el visor de eventos para decir con datos qué pasó.</p>
+<h2>Antes de empezar</h2>
+<ul><li>Acceso por RDP o, mejor, por <strong>PowerShell remoto</strong> (<code>Enter-PSSession srv-files-01</code>) con una cuenta de administración del servidor. Instala <strong>RSAT</strong> y <strong>Windows Admin Center</strong> si no están: la mitad del trabajo se hace sin entrar.</li><li>Saber qué servicio da el servidor y quién depende de él: es lo que decide la ventana de parcheo y a quién avisas.</li><li>Un ticket de cambio aprobado para cualquier cosa que reinicie.</li></ul>
+<h2>1. Instalar un rol o característica</h2>
+<p>Ejemplo: un servidor de ficheros nuevo necesita el rol <strong>File Server</strong> y la herramienta de administración de deduplicación.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · servidor (o remoto con -ComputerName)</span><button class="t-copy" type="button" data-copy="Get-WindowsFeature | Where-Object Installed | Select-Object -ExpandProperty Name&#10;Get-WindowsFeature FS-FileServer, FS-Data-Deduplication, RSAT-File-Services | Select-Object Name, InstallState&#10;Install-WindowsFeature FS-FileServer, FS-Data-Deduplication -IncludeManagementTools" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-WindowsFeature | Where-Object Installed | Select-Object -ExpandProperty Name</span><span class="t-out">FileAndStorage-Services</span><span class="t-out">Storage-Services</span><span class="t-out">...</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-WindowsFeature FS-FileServer, FS-Data-Deduplication, RSAT-File-Services | Select-Object Name, InstallState</span><span class="t-out">Name                   InstallState</span><span class="t-out">----                   ------------</span><span class="t-out">FS-FileServer             Available</span><span class="t-out">FS-Data-Deduplication     Available</span><span class="t-out">RSAT-File-Services        Available</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Install-WindowsFeature FS-FileServer, FS-Data-Deduplication -IncludeManagementTools</span><span class="t-out">Success Restart Needed Exit Code      Feature Result</span><span class="t-out">------- -------------- ---------      --------------</span><span class="t-out">True    No             Success        {Data Deduplication, File Server, File Server ...}</span></code></pre></figure>
+<p><code>Restart Needed: No</code> es lo que esperas en la mayoría; cuando dice <code>Yes</code> (p. ej. al instalar Hyper-V), el rol no funciona hasta reiniciar. En <strong>Server Core</strong> (sin interfaz) esto es la única forma, y es la razón de aprenderlo así.</p>
+<h2>2. Parchear sin cortar el servicio</h2>
+<p>La rutina mensual, en este orden:</p>
+<ol><li><strong>Antes</strong>: snapshot o copia reciente (Veeam de la noche anterior vale), ticket de cambio con la ventana, y aviso a los que dependen del servicio.</li><li><strong>Ver qué hay pendiente</strong> y aprobarlo (si hay WSUS o Windows Update for Business, ya llega filtrado):</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · servidor</span><button class="t-copy" type="button" data-copy="Install-Module PSWindowsUpdate -Scope AllUsers -Force   # una vez&#10;Get-WindowsUpdate&#10;Install-WindowsUpdate -AcceptAll -IgnoreReboot" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Install-Module PSWindowsUpdate -Scope AllUsers -Force   # una vez</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-WindowsUpdate</span><span class="t-out">ComputerName Status KB        Size Title</span><span class="t-out">------------ ------ --        ---- -----</span><span class="t-out">SRV-FILES-01 ------ KB5044281 712MB 2026-10 Cumulative Update for Microsoft server operating system version 21H2</span><span class="t-out">SRV-FILES-01 ------ KB5043066  45MB Security Update for .NET Framework</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Install-WindowsUpdate -AcceptAll -IgnoreReboot</span><span class="t-out">...</span><span class="t-out">Reboot is required.</span></code></pre></figure>
+<ol><li><strong>Reiniciar en la ventana</strong>, no al acabar de instalar: <code>Restart-Computer -ComputerName srv-files-01 -Wait -For PowerShell -Timeout 900</code> desde tu equipo espera a que vuelva y te devuelve el control.</li><li><strong>Después</strong>: que el servicio responde (un <code>Test-NetConnection</code> al puerto, abrir el recurso compartido, un inicio de sesión de prueba), que no hay errores nuevos en el visor de eventos, y cerrar el ticket con la hora.</li></ol>
+<p>En un <strong>clúster de conmutación por error</strong> (ficheros, SQL, Hyper-V), el truco para no cortar es parchear nodo a nodo: <code>Suspend-ClusterNode -Drain</code> mueve los roles al otro nodo, parcheas y reinicias ese, <code>Resume-ClusterNode</code>, y repites. <strong>Cluster-Aware Updating</strong> lo automatiza.</p>
+<p class="g-warn">Un servidor con <code>Pending reboot</code> desde hace semanas es un servidor a medio parchear: las actualizaciones no se aplican hasta reiniciar, y el siguiente parche fallará con <code>0x800f0922</code> o similar. <code>Test-PendingReboot</code> (módulo del mismo nombre) te lo dice en una línea para toda la lista de servidores.</p>
+<h2>3. Leer el visor de eventos con criterio</h2>
+<p>Abrirlo y mirar es perder la tarde. Pregúntale lo concreto:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · servidor</span><button class="t-copy" type="button" data-copy="Get-WinEvent -FilterHashtable @{LogName=&quot;System&quot;; Level=1,2; StartTime=(Get-Date).AddDays(-1)} | Group-Object Id, ProviderName | Sort-Object Count -Descending | Select-Object -First 5 Count, Name&#10;Get-WinEvent -FilterHashtable @{LogName=&quot;System&quot;; Id=1074,6008,41} -MaxEvents 3 | Select-Object TimeCreated, Id, @{n=&quot;Msg&quot;;e={$_.Message.Substring(0,[math]::Min(110,$_.Message.Length))}}&#10;Get-WinEvent -FilterHashtable @{LogName=&quot;System&quot;; Id=7031,7034} -MaxEvents 5 | Select-Object TimeCreated, @{n=&quot;Svc&quot;;e={$_.Properties[0].Value}}" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmt"># 1. ¿Qué errores y críticos hubo desde el último arranque?</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-WinEvent -FilterHashtable @{LogName=&quot;System&quot;; Level=1,2; StartTime=(Get-Date).AddDays(-1)} | Group-Object Id, ProviderName | Sort-Object Count -Descending | Select-Object -First 5 Count, Name</span><span class="t-out">Count Name</span><span class="t-out">----- ----</span><span class="t-out">   14 7031, Service Control Manager</span><span class="t-out">    3 5719, NETLOGON</span><span class="t-out">    1 1074, User32</span><span class="t-cmt"># 2. ¿Quién reinició el servidor y por qué? (1074 planificado, 6008 apagado sucio, 41 Kernel-Power)</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-WinEvent -FilterHashtable @{LogName=&quot;System&quot;; Id=1074,6008,41} -MaxEvents 3 | Select-Object TimeCreated, Id, @{n=&quot;Msg&quot;;e={$_.Message.Substring(0,[math]::Min(110,$_.Message.Length))}}</span><span class="t-out">TimeCreated         Id Msg</span><span class="t-out">-----------         -- ---</span><span class="t-out">21/10/2026 23:41:02 1074 The process C:\Windows\system32\winlogon.exe (SRV-FILES-01) has initiated the restart of computer SRV-FILES-01 on behalf of user CONTOSO\laura.prado for the following reason: Operating System: Service pack (Planned)</span><span class="t-cmt"># 3. ¿Qué servicio se cae y cuándo? (7031/7034 = terminó inesperadamente)</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-WinEvent -FilterHashtable @{LogName=&quot;System&quot;; Id=7031,7034} -MaxEvents 5 | Select-Object TimeCreated, @{n=&quot;Svc&quot;;e={$_.Properties[0].Value}}</span><span class="t-out">TimeCreated         Svc</span><span class="t-out">-----------         ---</span><span class="t-out">21/10/2026 08:02:11 Print Spooler</span><span class="t-out">21/10/2026 07:47:55 Print Spooler</span></code></pre></figure>
+<p>Las tres consultas cubren casi todo: <strong>qué se repite</strong> (la primera), <strong>por qué se reinició</strong> (la segunda: un 6008 sin 1074 antes es un apagón o un cuelgue) y <strong>qué servicio falla</strong> (la tercera). Un 5719 de NETLOGON repetido es el servidor sin contacto con un controlador de dominio al arrancar: red o DNS. Lo demás se busca por ID en la documentación de Microsoft, con el texto exacto.</p>
+<h2>4. Lo que miras cada semana</h2>
+<ul><li><code>Get-Service | Where-Object {$_.StartType -eq &quot;Automatic&quot; -and $_.Status -ne &quot;Running&quot;}</code>: servicios automáticos parados.</li><li><code>Get-PSDrive -PSProvider FileSystem</code>: disco libre; y en un servidor de ficheros, <code>Get-DedupStatus</code>.</li><li><code>Get-WindowsUpdate</code> y <code>Test-PendingReboot</code>.</li><li>El visor de eventos con la consulta 1 de arriba.</li><li>En <strong>Windows Admin Center</strong>, todo esto para varios servidores en una pantalla, sin RDP.</li></ul>
+<h2>Siguientes pasos</h2>
+<ul><li>Pon la rutina de parcheo en un script con <code>PSWindowsUpdate</code> sobre la lista de servidores, con el reinicio en la ventana y el informe al final: es el mismo patrón que la guía de PowerShell.</li><li>Aprende <strong>Server Core</strong>: los servidores nuevos sin interfaz tienen menos parches, menos superficie y se gestionan igual desde PowerShell y Admin Center.</li><li>En el Nivel 3 verás Hyper-V y, en el 4, los clústeres, el DR y la nube híbrida donde estos servidores acaban viviendo.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span></p>
+      <p class="repo-name"><span class="es">Nivel 2</span> · <span class="es">Windows Server</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
+      <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/19-ad-infra-health-check.html"><span class="label muted"><span class="es">Blog · 19</span></span><span class="related-t"><span class="es">Un chequeo de los lunes para Active Directory</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="windows-server-cuentas-de-servicio-gmsa-tareas-programadas-y-un-servicio-que-no-arranca.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Windows Server: servicios y tareas programadas con cuentas de servicio administradas (gMSA) y un servicio que no arranca tras un cambio de contraseña</span></span></a>
+    <a class="post-nav-link next" href="python-para-it-entorno-virtual-csv-api-informe-programado-y-un-script-que-falla.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">Python para IT: entorno virtual, un CSV, una API con token, un informe programado y el script que falla en el servidor</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

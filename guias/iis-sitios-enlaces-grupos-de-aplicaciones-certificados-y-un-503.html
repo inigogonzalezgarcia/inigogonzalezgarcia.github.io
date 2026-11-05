@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="no-js inner" data-title-en="IIS: sites, app pools and the 503 error · Iñigo González" data-title-es="IIS: sitios, grupos de aplicaciones y el 503 · Iñigo González">
+<html lang="en" class="no-js inner">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -16,6 +16,9 @@
 <meta name="author" content="Iñigo González">
 <meta name="theme-color" content="#0e1a24">
 <link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/iis-sitios-enlaces-grupos-de-aplicaciones-certificados-y-un-503.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/iis-sitios-enlaces-grupos-de-aplicaciones-certificados-y-un-503.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/iis-sitios-enlaces-grupos-de-aplicaciones-certificados-y-un-503.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/iis-sitios-enlaces-grupos-de-aplicaciones-certificados-y-un-503.html">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <meta property="og:site_name" content="Iñigo González">
@@ -36,7 +39,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"IIS: sites, bindings, application pools, HTTPS certificates and a 503 Service Unavailable","alternativeHeadline":"IIS: sitios, enlaces, grupos de aplicaciones, certificados HTTPS y un 503 Service Unavailable","description":"Sites and bindings with host headers, application pools (identity, recycling and .NET CLR version), the HTTPS certificate on the binding, W3C and HTTPERR logs, Failed Request Tracing, appcmd and PowerShell, and a 503 from a pool stopped by rapid-fail protection or by an expired password.","datePublished":"2026-10-30","dateModified":"2026-10-30","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/iis-sitios-enlaces-grupos-de-aplicaciones-certificados-y-un-503.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/iis-sitios-enlaces-grupos-de-aplicaciones-certificados-y-un-503.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"IIS"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 2","item":"https://inigogonzalezgarcia.github.io/guias/nivel-2.html"},{"@type":"ListItem","position":4,"name":"IIS: sites, bindings, application pools, HTTPS certificates and a 503 Service Unavailable","item":"https://inigogonzalezgarcia.github.io/guias/iis-sitios-enlaces-grupos-de-aplicaciones-certificados-y-un-503.html"}]}]}</script>
 </head>
 <body id="top">
-<a class="skip" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
 
 <header class="site-header">
   <div class="wrap">
@@ -44,11 +47,11 @@
       <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
       <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
     </a>
-    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="es">Links</span><span class="en">Links</span></a></nav>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/"><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
     <div class="head-actions">
-      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span><span class="en">Menu</span></button>
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
       <span class="sep" aria-hidden="true"></span>
-      <button class="lang-btn" id="langBtn" aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span> · <span data-l="en">EN</span></button>
+      <a class="lang-btn" id="langBtn" href="../es/guias/iis-sitios-enlaces-grupos-de-aplicaciones-certificados-y-un-503.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
     </div>
   </div>
 </header>
@@ -56,64 +59,29 @@
 <div class="menu" id="menu" aria-hidden="true">
   <div class="menu-top">
     <span class="label">Iñigo González</span>
-    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span><span class="en">Close ×</span></button>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
   </div>
-  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span><span class="en">Links</span></a></nav>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
   <div class="menu-foot label">
     <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
     <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
-    <a href="../about.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span> →</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
   </div>
 </div>
 
 <main id="main">
 <section class="page-hero post-hero">
   <div class="wrap">
-    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span><span class="en">Guides</span></a> · <a href="nivel-2.html"><span class="es">Nivel 2</span><span class="en">Level 2</span></a></p>
-    <h1><span class="es">IIS: sitios, enlaces, grupos de aplicaciones, certificados HTTPS y un 503 Service Unavailable</span><span class="en">IIS: sites, bindings, application pools, HTTPS certificates and a 503 Service Unavailable</span></h1>
-    <p class="lede"><span class="es">Sitios y enlaces con encabezado de host, grupos de aplicaciones (identidad, reciclado y versión de .NET CLR), el certificado HTTPS en el enlace, los logs W3C y HTTPERR, Failed Request Tracing, appcmd y PowerShell, y un 503 por un grupo detenido por la protección contra errores rápidos o por una contraseña caducada.</span><span class="en">Sites and bindings with host headers, application pools (identity, recycling and .NET CLR version), the HTTPS certificate on the binding, W3C and HTTPERR logs, Failed Request Tracing, appcmd and PowerShell, and a 503 from a pool stopped by rapid-fail protection or by an expired password.</span></p><p class="label post-meta"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">IIS</span><span class="en">IIS</span> · <span class="es">6 min</span><span class="en">5 min read</span> · <span class="es">Actualizado</span><span class="en">Updated</span> <span class="es">30 oct 2026</span><span class="en">30 Oct 2026</span></p>
+    <p class="label kicker"><a href="../guias.html"><span class="en">Guides</span></a> · <a href="nivel-2.html"><span class="en">Level 2</span></a></p>
+    <h1><span class="en">IIS: sites, bindings, application pools, HTTPS certificates and a 503 Service Unavailable</span></h1>
+    <p class="lede"><span class="en">Sites and bindings with host headers, application pools (identity, recycling and .NET CLR version), the HTTPS certificate on the binding, W3C and HTTPERR logs, Failed Request Tracing, appcmd and PowerShell, and a 503 from a pool stopped by rapid-fail protection or by an expired password.</span></p><p class="label post-meta"><span class="en">Level 2</span> · <span class="en">IIS</span> · <span class="en">5 min read</span> · <span class="en">Updated</span> <span class="en">30 Oct 2026</span></p>
   </div>
 </section>
 
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose guide">
-      <div class="es" lang="es">
-<h2>Qué vas a conseguir</h2>
-<p>Dar soporte a las aplicaciones web que corren en IIS: saber qué sitio responde a qué nombre, en qué grupo de aplicaciones corre y con qué cuenta, qué certificado entrega, dónde está el log de cada petición y qué hacer cuando la página dice <strong>HTTP Error 503. The service is unavailable</strong>.</p>
-<h2>Antes de empezar</h2>
-<ul><li>Windows Server 2022 o 2025 con IIS 10 y permisos de administrador local.</li><li>Las características que esta guía usa: <code>Install-WindowsFeature Web-Server, Web-Mgmt-Console, Web-Scripting-Tools, Web-Http-Tracing</code>.</li><li>PowerShell como administrador, con <strong>WebAdministration</strong> (la unidad <code>IIS:\</code>) o <strong>IISAdministration</strong> (<code>Get-IISSite</code>, <code>Get-IISAppPool</code>). Los dos sirven; no los mezcles en el mismo script.</li></ul>
-<h2>1. Sitios, enlaces y encabezados de host</h2>
-<p>Un <strong>sitio</strong> es una carpeta con uno o varios <strong>enlaces</strong> (<em>bindings</em>): protocolo, IP, puerto y nombre de host. Varios sitios comparten la IP y el puerto 443 si cada uno tiene su nombre:</p>
-<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Administrador de IIS · Sites › Add Website</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Site name</span><span class="ui-v">Reservas</span></div><div class="ui-field"><span class="ui-k">Application pool</span><span class="ui-v">Reservas</span></div><div class="ui-field"><span class="ui-k">Physical path</span><span class="ui-v">D:\Sites\Reservas</span></div><div class="ui-field"><span class="ui-k">Binding</span><span class="ui-v">https · IP address: All Unassigned · Port: 443</span></div><div class="ui-field"><span class="ui-k">Host name</span><span class="ui-v">reservas.corp.example</span></div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Require Server Name Indication</div><div class="ui-field"><span class="ui-k">SSL certificate</span><span class="ui-v">reservas.corp.example (Contoso Issuing CA 01)</span></div><div class="ui-btn">OK</div></div></figure>
-<ul><li>Con HTTPS y varios sitios en el mismo puerto hace falta <strong>SNI</strong> (<em>Require Server Name Indication</em>): el navegador dice el nombre antes de recibir el certificado.</li><li>Cada sitio tiene un <strong>ID</strong>: su carpeta de logs se llama <code>W3SVC&lt;ID&gt;</code>. Apúntalo en la ficha de la aplicación.</li></ul>
-<p><code>Get-IISSite</code> o <code>appcmd list sites</code> listan los sitios con su ID, su estado y sus enlaces.</p>
-<h2>2. Grupos de aplicaciones</h2>
-<p>El <strong>grupo de aplicaciones</strong> (<em>application pool</em>) es el proceso <code>w3wp.exe</code> que ejecuta el sitio. Un grupo por aplicación: si una se cuelga o se recicla, las demás siguen.</p>
-<ul><li><strong>Identidad</strong>: por defecto, <strong>ApplicationPoolIdentity</strong>, una cuenta virtual llamada <code>IIS AppPool\Reservas</code> a la que se dan permisos NTFS sobre la carpeta. Si la aplicación necesita entrar en SQL Server o en un recurso compartido con autenticación de Windows, una cuenta de dominio; mejor una <strong>gMSA</strong> (<code>CONTOSO\gmsa-reservas$</code>, sin contraseña que caduque).</li><li><strong>Versión de .NET CLR</strong>: <code>v4.0</code> para ASP.NET 4.x; <strong>No Managed Code</strong> para ASP.NET Core, que lleva su propio runtime. Modo de canalización: <em>Integrated</em>.</li><li><strong>Reciclado</strong>: por defecto, cada <strong>1.740 minutos</strong> (29 horas), así que cada día a una hora distinta. Mejor una hora fija sin uso, como las 4:00. El <strong>Idle Time-out</strong> (20 minutos) apaga el proceso si nadie entra.</li><li><strong>Rapid-Fail Protection</strong>: si el proceso falla <strong>5 veces en 5 minutos</strong>, IIS detiene el grupo. Es el origen del 503 más frecuente.</li></ul>
-<p><code>Get-IISAppPool</code> muestra el estado, la versión de CLR y la identidad de cada grupo; <code>appcmd list wp</code>, el PID de cada <code>w3wp.exe</code>, el que buscas en el Administrador de tareas cuando un proceso consume CPU.</p>
-<h2>3. El certificado HTTPS</h2>
-<ul><li>El certificado va en el almacén del equipo, <strong>Local Machine › Personal</strong>, con su clave privada: <code>Import-PfxCertificate -FilePath .\reservas.pfx -CertStoreLocation Cert:\LocalMachine\My -Password $pwd</code>.</li><li>El enlace guarda la <strong>huella</strong> (<em>thumbprint</em>) del certificado. Al renovarlo, el nuevo tiene otra huella y el enlace sigue con el viejo hasta que lo cambias.</li></ul>
-<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · cambiar el certificado del enlace</span><button class="t-copy" type="button" data-copy="$thumb = (Get-ChildItem Cert:\LocalMachine\My | Where-Object Subject -like &quot;*reservas.corp.example*&quot; | Sort-Object NotAfter -Descending | Select-Object -First 1).Thumbprint&#10;Import-Module WebAdministration&#10;(Get-WebBinding -Name &quot;Reservas&quot; -Protocol https).AddSslCertificate($thumb, &quot;My&quot;)&#10;netsh http show sslcert hostnameport=reservas.corp.example:443" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>$thumb = (Get-ChildItem Cert:\LocalMachine\My | Where-Object Subject -like &quot;*reservas.corp.example*&quot; | Sort-Object NotAfter -Descending | Select-Object -First 1).Thumbprint</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Import-Module WebAdministration</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>(Get-WebBinding -Name &quot;Reservas&quot; -Protocol https).AddSslCertificate($thumb, &quot;My&quot;)</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>netsh http show sslcert hostnameport=reservas.corp.example:443</span></code></pre></figure>
-<p><code>netsh</code> muestra lo que HTTP.sys tiene de verdad asociado a ese nombre y puerto.</p>
-<h2>4. Logs: W3C y HTTPERR</h2>
-<ul><li><strong>Logs de IIS</strong> en <code>%SystemDrive%\inetpub\logs\LogFiles\W3SVC&lt;ID&gt;\</code>, un fichero <code>u_exAAMMDD.log</code> por día en formato W3C. Las horas están en <strong>UTC</strong>: en Madrid, una o dos horas menos que el reloj.</li><li>Los campos clave: <code>sc-status</code>, <code>sc-substatus</code> y <code>time-taken</code> (milisegundos).</li><li><strong>HTTPERR</strong> en <code>%SystemRoot%\System32\LogFiles\HTTPERR\</code>: lo que HTTP.sys rechazó antes de pasarlo a IIS. Un 503 con el grupo detenido aparece aquí, no en el log del sitio. El último campo es el motivo: <code>AppOffline</code> (los errores de la aplicación la han dejado fuera de servicio), <code>Disabled</code> (un administrador la ha detenido) o <code>QueueFull</code> (la cola está llena).</li></ul>
-<h2>5. Failed Request Tracing</h2>
-<p>Cuando el log dice 500 y no se sabe qué módulo lo produce, <strong>Failed Request Tracing</strong> (FREB) guarda el recorrido completo de la petición:</p>
-<ol><li>En el sitio, <strong>Actions › Failed Request Tracing...</strong> y marcar <strong>Enable</strong> (por defecto guarda hasta 50 ficheros).</li><li>En <strong>Failed Request Tracing Rules</strong>, una regla: <em>All content</em>, códigos <code>500-599</code> o un tiempo mayor que 30 segundos.</li><li>Reproducir el error. Los ficheros quedan en <code>%SystemDrive%\inetpub\logs\FailedReqLogFiles\W3SVC&lt;ID&gt;\</code> y se abren con el navegador. Desactívalo al acabar.</li></ol>
-<p class="g-warn">Un 503 de un grupo detenido no deja traza en FREB: la petición se queda en HTTP.sys y nunca entra en IIS. Para ese caso, HTTPERR y el registro de eventos.</p>
-<h2>6. El ticket: &quot;la aplicación de reservas da 503 Service Unavailable&quot;</h2>
-<p>Lunes, 8:30. Recepción no puede abrir la aplicación de reservas: <strong>HTTP Error 503. The service is unavailable</strong>.</p>
-<ol><li><strong>El grupo</strong>: en el Administrador de IIS, <em>Application Pools</em>, <code>Reservas</code> aparece <strong>Stopped</strong>. HTTPERR lo confirma con <code>503 ... AppOffline Reservas</code>.</li><li><strong>Por qué se detuvo</strong>: en el <strong>Visor de eventos › Registros de Windows › Sistema</strong>, origen <strong>WAS</strong>. Uno de estos dos eventos:</li></ol>
-<ul><li><strong>5021</strong>: <em>The identity of application pool Reservas is invalid</em>. La contraseña de la cuenta <code>CONTOSO\svc-reservas</code> ha caducado o alguien la ha cambiado en el directorio activo. Tras varios intentos fallidos, WAS deshabilita el grupo.</li><li><strong>5002</strong>: <em>Application pool &#x27;Reservas&#x27; is being automatically disabled due to a series of failures</em>. Es la protección contra errores rápidos: el proceso arranca y se cae. En el registro <strong>Aplicación</strong>, el error de <code>w3wp.exe</code> (evento 1000) o de .NET Runtime dice por qué, a menudo un despliegue del viernes.</li></ul>
-<p><strong>Si es el 5021, la contraseña</strong>: comprobar la cuenta con <code>Get-ADUser svc-reservas -Properties PasswordExpired, LockedOut</code>, pedir el cambio de contraseña al responsable de la cuenta y ponerla en el grupo:</p>
-<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · actualizar la identidad y arrancar el grupo</span><button class="t-copy" type="button" data-copy="$cred = Get-Credential CONTOSO\svc-reservas&#10;Import-Module WebAdministration&#10;Set-ItemProperty IIS:\AppPools\Reservas -Name processModel -Value @{userName=$cred.UserName; password=$cred.GetNetworkCredential().Password; identityType=3}&#10;Start-WebAppPool -Name &quot;Reservas&quot;&#10;(Invoke-WebRequest https://reservas.corp.example -UseBasicParsing).StatusCode" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>$cred = Get-Credential CONTOSO\svc-reservas</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Import-Module WebAdministration</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Set-ItemProperty IIS:\AppPools\Reservas -Name processModel -Value @{userName=$cred.UserName; password=$cred.GetNetworkCredential().Password; identityType=3}</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Start-WebAppPool -Name &quot;Reservas&quot;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>(Invoke-WebRequest https://reservas.corp.example -UseBasicParsing).StatusCode</span><span class="t-out">200</span></code></pre></figure>
-<p><strong>Si es el 5002, los errores rápidos</strong>: arrancar el grupo no basta: se volverá a parar a los cinco fallos, y desactivar la protección solo esconde el problema. Primero la causa (deshacer el despliegue, la dependencia que falta, el <code>web.config</code> roto) y después <code>Start-WebAppPool</code>. Para que no se repita, el grupo pasa a una <strong>gMSA</strong>.</p>
-<p>En el ticket: grupo, evento de WAS, causa, cambio y la comprobación final (200 desde fuera del servidor).</p>
-<h2>Siguientes pasos</h2>
-<ul><li>La guía de <strong>Windows Server</strong> cubre los roles, los parches y los eventos del sistema que has usado aquí.</li><li>La de <strong>Nginx y Apache</strong> del Nivel 3 es lo mismo en Linux: sitios por nombre, certificados, proxy inverso y el 502.</li></ul>
-<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
-      </div>
+      
       <div class="en" lang="en">
 <h2>What you&#x27;ll get</h2>
 <p>Supporting the web applications that run on IIS: knowing which site answers to which name, which application pool it runs in and under which account, which certificate it presents, where each request&#x27;s log is and what to do when the page says <strong>HTTP Error 503. The service is unavailable</strong>.</p>
@@ -152,23 +120,23 @@
       </div>
       <div class="news-box">
         <p class="label kicker">Tech Career Lab · newsletter</p>
-        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
-        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span><span class="en">Sign up and get the 33 ideas</span> →</a>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
       </div>
     </article>
     <aside class="post-aside">
-      <p class="label muted"><span class="es">Esta guía</span><span class="en">This guide</span></p>
-      <p class="repo-name"><span class="es">Nivel 2</span><span class="en">Level 2</span> · <span class="es">IIS</span><span class="en">IIS</span></p>
-      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
-      <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span><span class="en">All Level 2 guides</span> →</a>
+      <p class="label muted"><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="en">Level 2</span> · <span class="en">IIS</span></p>
+      <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-2.html"><span class="en">All Level 2 guides</span> →</a>
       
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>
   
   <div class="wrap post-nav">
-    <a class="post-nav-link prev" href="iis-logs-w3c-reciclado-tiempo-de-inactividad-y-la-primera-peticion-lenta.html"><span class="label muted"><span class="es">Anterior</span><span class="en">Previous</span></span><span><span class="es">IIS: leer los logs W3C, reciclado e inactividad de los grupos de aplicaciones, redirección a HTTPS y una aplicación lenta cada mañana</span><span class="en">IIS: reading W3C logs, app pool recycling and idle time-out, the HTTPS redirect and an app that is slow every morning</span></span></a>
-    <a class="post-nav-link next" href="switches-hp-aruba-localizar-equipos-por-lldp-bucles-con-loop-protect-y-port-security.html"><span class="label muted"><span class="es">Siguiente</span><span class="en">Next</span></span><span><span class="es">Switches HP y Aruba: localizar equipos con LLDP, cortar un bucle con loop-protect y spanning tree, port-security y bloqueo de MAC</span><span class="en">HP and Aruba switches: locating devices with LLDP, stopping a loop with loop-protect and spanning tree, port-security and MAC lockout</span></span></a>
+    <a class="post-nav-link prev" href="iis-logs-w3c-reciclado-tiempo-de-inactividad-y-la-primera-peticion-lenta.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">IIS: reading W3C logs, app pool recycling and idle time-out, the HTTPS redirect and an app that is slow every morning</span></span></a>
+    <a class="post-nav-link next" href="switches-hp-aruba-localizar-equipos-por-lldp-bucles-con-loop-protect-y-port-security.html"><span class="label muted"><span class="en">Next</span></span><span><span class="en">HP and Aruba switches: locating devices with LLDP, stopping a loop with loop-protect and spanning tree, port-security and MAC lockout</span></span></a>
   </div>
 </section>
 </main>
@@ -176,8 +144,8 @@
 <footer>
   <div class="wrap">
     <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
-    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span><span class="en">Cookie settings</span></button></span>
-    <a href="#top"><span class="es">Volver arriba ↑</span><span class="en">Back to top ↑</span></a>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
   </div>
 </footer>
 
