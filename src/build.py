@@ -142,8 +142,8 @@ for c in CITIES:
     ly = c.get("ly", 3)
     hq = f' data-hq="{" ".join(c["hq"])}"' if c.get("hq") else ""
     major = " major" if c["id"] in ("madrid", "kansas", "istanbul") else ""
-    pins.append(f'<g class="pin {c["kind"]}{major}" data-id="{c["id"]}" data-s="{" ".join(c["stages"])}"{hq} data-x="{x:.1f}" data-y="{y:.1f}" transform="translate({x:.1f} {y:.1f})" tabindex="0" role="button" aria-label="{html.escape(c["name_es"])} / {html.escape(c["name_en"])}"><circle class="halo" r="7"/><circle class="core" r="3"/><text class="es" x="{lx}" y="{ly}" text-anchor="{anchor}">{html.escape(c["name_es"])}</text><text class="en" x="{lx}" y="{ly}" text-anchor="{anchor}">{html.escape(c["name_en"])}</text></g>')
-MAP = f'''      <svg id="map" viewBox="0 0 1000 487" role="img" aria-label="Mapa / Map">
+    pins.append(f'<g class="pin {c["kind"]}{major}" data-id="{c["id"]}" data-s="{" ".join(c["stages"])}"{hq} data-x="{x:.1f}" data-y="{y:.1f}" transform="translate({x:.1f} {y:.1f})" tabindex="0" role="button" aria-label="[es]{html.escape(c["name_es"])}[en]{html.escape(c["name_en"])}"><circle class="halo" r="7"/><circle class="core" r="3"/><text class="es" x="{lx}" y="{ly}" text-anchor="{anchor}">{html.escape(c["name_es"])}</text><text class="en" x="{lx}" y="{ly}" text-anchor="{anchor}">{html.escape(c["name_en"])}</text></g>')
+MAP = f'''      <svg id="map" viewBox="0 0 1000 487" role="img" aria-label="[es]Mapa[en]Map">
         <g id="mapLayer">{paths}<g id="routes">{"".join(routes)}</g><g id="pins">{"".join(pins)}</g></g>
       </svg>'''
 
@@ -151,7 +151,7 @@ MAP = f'''      <svg id="map" viewBox="0 0 1000 487" role="img" aria-label="Mapa
 # ---------------------------------------------------------------- pages
 import sys
 sys.path.insert(0, str(ROOT))
-from pages import PERSON, PERSON_ID, PERSON_REF, WEBSITE, SITE_URL, crumbs, layout, page_hero, card, md, minutes, fdate, soon, bi as bi2, MAIL, LINKEDIN, GITHUB, LINKTREE, SEC_HEAD
+from pages import PERSON, PERSON_ID, PERSON_REF, WEBSITE, SITE_URL, crumbs, layout, Page, localize, lpath, lurl, pick, desc_cut, bilingual_static, LANGS, page_hero, card, md, minutes, fdate, soon, bi as bi2, MAIL, LINKEDIN, GITHUB, LINKTREE, SEC_HEAD
 from posts import POSTS, CATS
 import make_og
 OG = make_og.build(SITE, POSTS, CATS, only_missing=True)  # social preview cards, one per post (CI makes the real ones)
@@ -167,6 +167,7 @@ CAPTCHA_JS = '<script src="https://challenges.cloudflare.com/turnstile/v0/api.js
 STAGES_HTML = "\n".join(stage_html(s) for s in STAGES)
 POSTS_SORTED = sorted(POSTS, key=lambda p: (p["date"], p["n"]), reverse=True)
 DESC = "Iñigo González García, IT Site Leader in Madrid: 11+ years in IT operations, Modern Workplace and infrastructure in finance, healthcare, industry and retail."
+DESC_ES = "Iñigo González García, IT Site Leader en Madrid: más de 11 años en operaciones IT, Modern Workplace e infraestructura en finanzas, sanidad, industria y retail."
 
 import re as _re
 _BLANK = _re.compile(r'<a\b[^>]*\btarget="_blank"[^>]*>')
@@ -183,7 +184,7 @@ def safe_rel(s):
         return t.replace(r.group(0), rel) if r else t.replace("<a ", f"<a {rel} ", 1)
     return _BLANK.sub(fix, s)
 
-def write(path, s):
+def _put(path, s):
     assert not re.search(r"\{\{[A-Z_]+\}\}", s), path  # unreplaced template placeholder; guide content may contain {{ }} legitimately
     s = safe_rel(s)
     f = SITE / path
@@ -191,7 +192,17 @@ def write(path, s):
     f.write_text(s)
     return len(s)
 
+def write(path, s):
+    """A bilingual Page becomes two files: English at `path` and Spanish at es/`path` (one language per URL, see pages.py).
+    Returns the size of the English file; the Spanish one is recorded in `sizes` here."""
+    if isinstance(s, Page):
+        es = lpath(path, "es")
+        sizes[es] = _put(es, localize(s.render("es"), "es"))
+        return _put(path, localize(s.render("en"), "en"))
+    return _put(path, s)
+
 sizes = {}
+HOME = ("Inicio", "Home")
 
 # home
 latest = "\n".join(card(p, CATS, "") for p in POSTS_SORTED[:3])
@@ -262,7 +273,7 @@ home_body = "\n\n".join([
 </section>'''])
 sizes["index.html"] = write("index.html", layout(R="", path="", active="", home=True, gsap=("SplitText",),
     title_en="Iñigo González García · IT Site Leader in Madrid", title_es="Iñigo González García · IT Site Leader en Madrid",
-    desc=DESC, body=home_body, ld=[PERSON, WEBSITE]))
+    desc=DESC, desc_es=DESC_ES, body=home_body, ld=[PERSON, WEBSITE]))
 
 # journey
 JP = CONF.get("journey_photo")
@@ -328,8 +339,9 @@ if JP:
     journey_body = journey_body.replace('<section class="page-hero">', '<section class="page-hero has-bg bg-journey">', 1)
 sizes["journey.html"] = write("journey.html", layout(R="", path="journey.html", active="journey", gsap=("ScrollTrigger",),
     title_en="Journey · Iñigo González", title_es="Viaje · Iñigo González",
-    desc="Eleven years in IT operations in five stages: consulting, luxury retail, healthcare software, manufacturing and financial services.", body=journey_body,
-    ld=[crumbs(("Home", ""), ("Journey", "journey.html"))]))
+    desc="Eleven years in IT operations in five stages: consulting, luxury retail, healthcare software, manufacturing and financial services.",
+    desc_es="Once años en operaciones IT en cinco etapas: consultoría, retail de lujo, software sanitario, industria y servicios financieros.", body=journey_body,
+    ld=lambda l: [crumbs((HOME, ""), (("Viaje", "Journey"), "journey.html"), lang=l)]))
 
 # blog index
 cards = "\n".join(card(p, CATS, "../") for p in POSTS_SORTED)
@@ -349,11 +361,12 @@ blog_body = page_hero("Blog · " + bi("Labs y herramientas", "Labs & tools"),
 </section>'''
 sizes["blog/index.html"] = write("blog/index.html", layout(R="../", path="blog/", active="blog",
     title_en="Blog · IT Ops tools & labs · Iñigo González García", title_es="Blog · Herramientas y labs de IT Ops · Iñigo González García",
-    desc="How I built my IT Ops tools and labs: Jamf, Entra ID, MECM + Intune, Active Directory and Teams Rooms, plus cloud, SRE and GPU labs, each with its GitHub repo.", body=blog_body,
-    ld=[{"@type": "Blog", "@id": SITE_URL + "blog/#blog", "url": SITE_URL + "blog/", "name": "Labs & tools · Iñigo González",
-         "inLanguage": "en", "author": PERSON_REF,
-         "blogPost": [{"@type": "BlogPosting", "headline": q["title_en"], "url": f'{SITE_URL}blog/{q["repo"]}.html', "datePublished": q["date"]} for q in POSTS_SORTED]},
-        crumbs(("Home", ""), ("Blog", "blog/"))]))
+    desc="How I built my IT Ops tools and labs: Jamf, Entra ID, MECM + Intune, Active Directory and Teams Rooms, plus cloud, SRE and GPU labs, each with its GitHub repo.",
+    desc_es="Cómo construí mis herramientas y labs de IT Ops: Jamf, Entra ID, MECM + Intune, Active Directory y Teams Rooms, y labs de cloud, SRE y GPU, cada uno en GitHub.", body=blog_body,
+    ld=lambda l: [{"@type": "Blog", "@id": lurl("blog/", l) + "#blog", "url": lurl("blog/", l), "name": pick(l, "Labs y herramientas · Iñigo González", "Labs & tools · Iñigo González"),
+         "inLanguage": l, "author": PERSON_REF,
+         "blogPost": [{"@type": "BlogPosting", "headline": pick(l, q["title_es"], q["title_en"]), "url": lurl(f'blog/{q["repo"]}.html', l), "datePublished": q["date"]} for q in POSTS_SORTED]},
+        crumbs((HOME, ""), ("Blog", "blog/"), lang=l)]))
 
 # posts
 from urllib.parse import quote as _q
@@ -361,9 +374,9 @@ from urllib.parse import quote as _q
 def share_html(p):
     """Share links for a post: plain URLs to each network (no third-party scripts, nothing loads until clicked),
     copy-link, and the device share sheet where the browser offers one (app.js shows that button)."""
-    url = f'{SITE_URL}blog/{p["repo"]}.html'
-    U = _q(url, safe="")
     def row(l, title, copy, copied, more):
+        url = lurl(f'blog/{p["repo"]}.html', l)  # each language shares its own URL
+        U = _q(url, safe="")
         T = _q(title + " · Iñigo González", safe="")
         aria = {"es": "Compartir en", "en": "Share on"}[l]
         links = [("LinkedIn", f"https://www.linkedin.com/sharing/share-offsite/?url={U}"),
@@ -566,13 +579,14 @@ for p in order:
     sizes[f"blog/{p['repo']}.html"] = write(f"blog/{p['repo']}.html", layout(R="../", path=f"blog/{p['repo']}.html", active="blog",
         title_en=p.get("seo_title_en") or f'{p["title_en"]} · Iñigo González',
         title_es=p.get("seo_title_es") or f'{p["title_es"]} · Iñigo González',
-        desc=p.get("seo_desc") or p["dek_en"], body=body, og_type="article", og_image=OG[p["repo"]],
-        ld=[{"@type": "BlogPosting", "headline": p["title_en"], "alternativeHeadline": p["title_es"], "description": p["dek_en"],
-             "datePublished": p["date"], "dateModified": p["date"], "inLanguage": "en", "image": SITE_URL + OG[p["repo"]],
-             "url": f'{SITE_URL}blog/{p["repo"]}.html', "mainEntityOfPage": f'{SITE_URL}blog/{p["repo"]}.html',
-             "author": PERSON_REF, "publisher": PERSON_REF, "isPartOf": {"@id": SITE_URL + "blog/#blog"},
-             "articleSection": c[1]},
-            crumbs(("Home", ""), ("Blog", "blog/"), (p["title_en"], f'blog/{p["repo"]}.html'))]))
+        desc=p.get("seo_desc") or p["dek_en"], desc_es=p.get("seo_desc_es") or desc_cut(p["dek_es"]), body=body, og_type="article", og_image=OG[p["repo"]],
+        ld=lambda l, p=p, c=c: [{"@type": "BlogPosting", "headline": pick(l, p["title_es"], p["title_en"]), "alternativeHeadline": pick(l, p["title_en"], p["title_es"]),
+             "description": pick(l, p["dek_es"], p["dek_en"]),
+             "datePublished": p["date"], "dateModified": p["date"], "inLanguage": l, "image": SITE_URL + OG[p["repo"]],
+             "url": lurl(f'blog/{p["repo"]}.html', l), "mainEntityOfPage": lurl(f'blog/{p["repo"]}.html', l),
+             "author": PERSON_REF, "publisher": PERSON_REF, "isPartOf": {"@id": lurl("blog/", l) + "#blog"},
+             "articleSection": pick(l, c[0], c[1])},
+            crumbs((HOME, ""), ("Blog", "blog/"), ((p["title_es"], p["title_en"]), f'blog/{p["repo"]}.html'), lang=l)]))
 
 # about
 from guides import GUIDES as _GALL
@@ -601,8 +615,9 @@ about_body = SEC["about"].replace('class="section dark" id="sobre-mi"', 'class="
     + "\n\n" + now + "\n\n" + SEC["map"].replace("{{MAP}}", MAP) + "\n\n" + SEC["contact"].replace("{{FORM_ACTION}}", FORM).replace("{{CAPTCHA}}", CAPTCHA).replace("{{CAPTCHA_JS}}", CAPTCHA_JS)
 sizes["about.html"] = write("about.html", layout(R="", path="about.html", active="about",
     title_en="About · Iñigo González García, IT Site Leader in Madrid", title_es="Sobre mí · Iñigo González García, IT Site Leader en Madrid",
-    desc="Iñigo González García, IT Site Leader in Madrid: 11+ years in IT operations, Modern Workplace and infrastructure. Background, current work and contact.", body=about_body,
-    ld=[{"@type": "ProfilePage", "url": SITE_URL + "about.html", "mainEntity": PERSON}, crumbs(("Home", ""), ("About", "about.html"))]))
+    desc="Iñigo González García, IT Site Leader in Madrid: 11+ years in IT operations, Modern Workplace and infrastructure. Background, current work and contact.",
+    desc_es="Iñigo González García, IT Site Leader en Madrid: más de 11 años en operaciones IT, Modern Workplace e infraestructura. Trayectoria, trabajo actual y contacto.", body=about_body,
+    ld=lambda l: [{"@type": "ProfilePage", "url": lurl("about.html", l), "inLanguage": l, "mainEntity": PERSON}, crumbs((HOME, ""), (("Sobre mí", "About"), "about.html"), lang=l)]))
 
 # store (IGG-ICS · IT · Tech Career, Lab & Strategy): service catalogue, no prices or checkout yet
 BOOK = CONF.get("booking_url", "")  # Calendly: only sent by email for follow-up sessions, not shown on the site
@@ -834,8 +849,9 @@ store_body = page_hero(bi("Servicios", "Services") + " · IGG-ICS · IT · Tech 
 </section>'''
 sizes["store.html"] = write("store.html", layout(R="", path="store.html", active="store",
     title_en="Services · IGG-ICS IT career services · Iñigo González", title_es="Servicios IGG-ICS para perfiles IT · Iñigo González",
-    desc="IGG-ICS career services for IT professionals: CV and LinkedIn review, IT 360º diagnosis and a 4-week action plan. Online, in Spanish or English.", body=store_body,
-    ld=[crumbs(("Home", ""), ("Services", "store.html"))]))
+    desc="IGG-ICS career services for IT professionals: CV and LinkedIn review, IT 360º diagnosis and a 4-week action plan. Online, in Spanish or English.",
+    desc_es="Servicios IGG-ICS para perfiles IT: revisión de CV y LinkedIn, Diagnóstico 360º IT y un plan de acción de 4 semanas. Online, en español o en inglés.", body=store_body,
+    ld=lambda l: [crumbs((HOME, ""), (("Servicios", "Services"), "store.html"), lang=l)]))
 
 # old advisory URL: keep it working (newsletters link to it) and send visitors to the store
 sizes["asesoria.html"] = write("asesoria.html", '''<!doctype html>
@@ -928,8 +944,9 @@ resources_body = page_hero(bi("Recursos gratuitos · Tech Career Lab", "Free res
 {CAPTCHA_JS}'''
 sizes["recursos.html"] = write("recursos.html", layout(R="", path="recursos.html", active="resources", og_image="assets/og/recursos.png",
     title_en="33 ideas to get found on LinkedIn in IT · Iñigo González", title_es="33 ideas para que te encuentren en LinkedIn · Iñigo González",
-    desc="Free guide: 33 ideas for IT professionals to get found on LinkedIn, show their work on GitHub, network and get hired. Plus the Tech Career Lab newsletter.", body=resources_body,
-    ld=[crumbs(("Home", ""), ("Resources", "recursos.html"))]))
+    desc="Free guide: 33 ideas for IT professionals to get found on LinkedIn, show their work on GitHub, network and get hired. Plus the Tech Career Lab newsletter.",
+    desc_es="Guía gratuita: 33 ideas para que te encuentren en LinkedIn si trabajas en IT, enseñar tu trabajo en GitHub y hacer networking. Y la newsletter Tech Career Lab.", body=resources_body,
+    ld=lambda l: [crumbs((HOME, ""), (("Recursos", "Resources"), "recursos.html"), lang=l)]))
 
 # links: grouped, each with one line saying what is behind it; counts come from the content itself
 from guides import GUIDES as _GL, LEVELS as _LVL
@@ -970,8 +987,9 @@ links_body = page_hero("Links", bi("Todo, en un sitio.", "Everything, in one pla
 </section>'''
 sizes["links.html"] = write("links.html", layout(R="", path="links.html", active="links",
     title_en="Links · Iñigo González", title_es="Links · Iñigo González",
-    desc="Everything in one place: SysAdmin Desks, IT guides, blog, free resources, services, LinkedIn, GitHub and contact for Iñigo González.", body=links_body,
-    ld=[crumbs(("Home", ""), ("Links", "links.html"))]))
+    desc="Everything in one place: SysAdmin Desks, IT guides, blog, free resources, services, LinkedIn, GitHub and contact for Iñigo González.",
+    desc_es="Todo en un sitio: SysAdmin Desks, guías IT, blog, recursos gratuitos, servicios, LinkedIn, GitHub y contacto de Iñigo González.", body=links_body,
+    ld=lambda l: [crumbs((HOME, ""), ("Links", "links.html"), lang=l)]))
 
 # guides
 GUIDE_LINKS = [
@@ -1142,8 +1160,9 @@ guides_body = page_hero(bi("Guías IT", "IT guides"),
 </section>'''
 sizes["guias.html"] = write("guias.html", layout(R="", path="guias.html", active="guides",
     title_en="IT guides · Iñigo González", title_es="Guías IT · Iñigo González",
-    desc="Practical step-by-step IT guides, from first steps in support to expert level: Active Directory, Microsoft 365, Intune, Windows, Teams and more.", body=guides_body,
-    ld=[crumbs(("Home", ""), ("Guides", "guias.html"))]))
+    desc="Practical step-by-step IT guides, from first steps in support to expert level: Active Directory, Microsoft 365, Intune, Windows, Teams and more.",
+    desc_es="Guías IT prácticas paso a paso, de los primeros pasos en soporte al nivel experto: Active Directory, Microsoft 365, Intune, Windows, Teams y más.", body=guides_body,
+    ld=lambda l: [crumbs((HOME, ""), (("Guías", "Guides"), "guias.html"), lang=l)]))
 
 # ---------------------------------------------------------------- guides: level 1 index + one page per guide
 from guides import LEVELS, TOPICS, GUIDES
@@ -1401,12 +1420,14 @@ for i, q in enumerate(G_ORDER):
     sizes[f"guias/{q['slug']}.html"] = write(f"guias/{q['slug']}.html", layout(R="../", path=f"guias/{q['slug']}.html", active="guides",
         title_en=q.get("seo_title_en") or f'{q["title_en"]} · Iñigo González',
         title_es=q.get("seo_title_es") or f'{q["title_es"]} · Iñigo González',
-        desc=q.get("seo_desc") or q["dek_en"], body=body, og_type="article", og_image=OG_G[L["key"]],
-        ld=[{"@type": "TechArticle", "headline": q["title_en"], "alternativeHeadline": q["title_es"], "description": q["dek_en"],
-             "datePublished": q["date"], "dateModified": q["date"], "inLanguage": "en", "proficiencyLevel": "Beginner" if t[0] == "nivel-1" else "Expert",
-             "url": f'{SITE_URL}guias/{q["slug"]}.html', "mainEntityOfPage": f'{SITE_URL}guias/{q["slug"]}.html',
-             "author": PERSON_REF, "publisher": PERSON_REF, "articleSection": t[3]},
-            crumbs(("Home", ""), ("Guides", "guias.html"), (L["n_en"], f'guias/{L["key"]}.html'), (q["title_en"], f'guias/{q["slug"]}.html'))]))
+        desc=q.get("seo_desc") or q["dek_en"], desc_es=q.get("seo_desc_es") or desc_cut(q["dek_es"]), body=body, og_type="article", og_image=OG_G[L["key"]],
+        ld=lambda l, q=q, t=t, L=L: [{"@type": "TechArticle", "headline": pick(l, q["title_es"], q["title_en"]), "alternativeHeadline": pick(l, q["title_en"], q["title_es"]),
+             "description": pick(l, q["dek_es"], q["dek_en"]),
+             "datePublished": q["date"], "dateModified": q["date"], "inLanguage": l, "proficiencyLevel": "Beginner" if t[0] == "nivel-1" else "Expert",
+             "url": lurl(f'guias/{q["slug"]}.html', l), "mainEntityOfPage": lurl(f'guias/{q["slug"]}.html', l),
+             "author": PERSON_REF, "publisher": PERSON_REF, "articleSection": pick(l, t[2], t[3])},
+            crumbs((HOME, ""), (("Guías", "Guides"), "guias.html"), ((L["n_es"], L["n_en"]), f'guias/{L["key"]}.html'),
+                   ((q["title_es"], q["title_en"]), f'guias/{q["slug"]}.html'), lang=l)]))
 
 # one index page per level: one block per topic with its guides
 def topic_block(t):
@@ -1446,11 +1467,11 @@ for lk, L in LEVELS.items():
     sizes[f"guias/{lk}.html"] = write(f"guias/{lk}.html", layout(R="../", path=f"guias/{lk}.html", active="guides",
         title_en=L.get("seo_title_en") or (f'{L["t_en"]} · IT guides · Iñigo González' if L["key"].startswith("sector") else f'{L["n_en"]} · {L["t_en"]} · IT guides · Iñigo González'),
         title_es=L.get("seo_title_es") or (f'{L["t_es"]} · Guías IT · Iñigo González' if L["key"].startswith("sector") else f'{L["n_es"]} · {L["t_es"]} · Guías IT · Iñigo González'),
-        desc=L["seo"], og_image=OG_G[L["key"]],
-        body=lbody, ld=[{"@type": "CollectionPage", "@id": SITE_URL + f"guias/{lk}.html", "url": SITE_URL + f"guias/{lk}.html",
-                         "name": f'{L["n_en"]} · {L["t_en"]}', "inLanguage": "en", "isPartOf": {"@id": SITE_URL + "#website"},
-                         "hasPart": [{"@type": "TechArticle", "headline": q["title_en"], "url": f'{SITE_URL}guias/{q["slug"]}.html'} for q in lg]},
-                        crumbs(("Home", ""), ("Guides", "guias.html"), (L["n_en"], f"guias/{lk}.html"))]))
+        desc=L["seo"], desc_es=L["seo_es"], og_image=OG_G[L["key"]],
+        body=lbody, ld=lambda l, L=L, lk=lk, lg=lg: [{"@type": "CollectionPage", "@id": lurl(f"guias/{lk}.html", l), "url": lurl(f"guias/{lk}.html", l),
+                         "name": pick(l, f'{L["n_es"]} · {L["t_es"]}', f'{L["n_en"]} · {L["t_en"]}'), "inLanguage": l, "isPartOf": {"@id": SITE_URL + "#website"},
+                         "hasPart": [{"@type": "TechArticle", "headline": pick(l, q["title_es"], q["title_en"]), "url": lurl(f'guias/{q["slug"]}.html', l)} for q in lg]},
+                        crumbs((HOME, ""), (("Guías", "Guides"), "guias.html"), ((L["n_es"], L["n_en"]), f"guias/{lk}.html"), lang=l)]))
 
 # legal pages (legal notice, terms); privacidad.html stays hand-written
 import legal
@@ -1458,7 +1479,7 @@ for path, kw in legal.PAGES.items():
     sizes[path] = write(path, legal.shell(path=path, **kw))
 
 # 404: GitHub Pages serves /404.html for any missing URL, at that URL, so every link is root-absolute (R="/")
-nf_latest = "\n".join(f'      <a class="link-btn" href="/blog/{q["repo"]}.html"><span>{html.escape(q["title_en"])}</span><span aria-hidden="true">→</span></a>' for q in POSTS_SORTED[:3])
+nf_latest = "\n".join(f'      <a class="link-btn" href="/blog/{q["repo"]}.html"><span>{bi(html.escape(q["title_es"]), html.escape(q["title_en"]))}</span><span aria-hidden="true">→</span></a>' for q in POSTS_SORTED[:3])
 nf_body = page_hero("404", bi("Esta página<br>no existe.", "This page<br>doesn't exist."),
     bi("Puede que el enlace sea antiguo o tenga una errata. Estos caminos sí funcionan:", "The link may be old or have a typo. These ones work:")) + f'''
 
@@ -1471,22 +1492,28 @@ nf_body = page_hero("404", bi("Esta página<br>no existe.", "This page<br>doesn'
   </div>
 </section>'''
 sizes["404.html"] = write("404.html", layout(R="/", path="404.html", active="", title_en="Page not found · Iñigo González",
-    title_es="Página no encontrada · Iñigo González", desc="This page doesn't exist.", body=nf_body, robots="noindex"))
+    title_es="Página no encontrada · Iñigo González", desc="This page doesn't exist.", desc_es="Esta página no existe.", body=nf_body, robots="noindex", single=True))
 
 # sitemap.xml + robots.txt: every indexable page (not noindex, not redirects); lastmod = post date, or the newest
 # post date for pages that list posts, so the file only changes when content does
 NOINDEX = {"404.html", "asesoria.html", "privacidad.html"} | set(legal.PAGES)
+NOINDEX |= {lpath(r, "es") for r in NOINDEX}
 newest = max(q["date"] for q in POSTS)
 post_date = {f'blog/{q["repo"]}.html': q["date"] for q in POSTS}
 post_date.update({f'guias/{q["slug"]}.html': q["date"] for q in GUIDES})
 post_date["guias.html"] = max(q["date"] for q in GUIDES)
 for _k in LEVELS: post_date[f"guias/{_k}.html"] = max((q["date"] for q in GUIDES if LVL_OF[q["slug"]] == _k), default=post_date["guias.html"])
+# every page is listed in both languages, each <url> with its hreflang alternates (en, es, x-default = en)
 urls = []
-for rel in sorted(sizes, key=lambda r: (r != "index.html", r.startswith("blog/") or r.startswith("guias/"), r)):
+_page = lambda r: "" if r == "index.html" else r.replace("index.html", "")  # file -> page path ("" is the home page)
+for rel in sorted((r for r in sizes if not r.startswith("es/")), key=lambda r: (r != "index.html", r.startswith("blog/") or r.startswith("guias/"), r)):
     if rel in NOINDEX: continue
-    loc = SITE_URL + ("" if rel == "index.html" else rel.replace("index.html", ""))
-    urls.append(f"  <url><loc>{loc}</loc><lastmod>{post_date.get(rel, newest)}</lastmod></url>")
-(SITE / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    assert lpath(rel, "es") in sizes, f"{rel}: no Spanish copy"
+    pg = _page(rel)
+    alts = "".join(f'<xhtml:link rel="alternate" hreflang="{h}" href="{lurl(pg, l)}"/>' for h, l in (("en", "en"), ("es", "es"), ("x-default", "en")))
+    for l in LANGS:
+        urls.append(f"  <url><loc>{lurl(pg, l)}</loc><lastmod>{post_date.get(rel, newest)}</lastmod>{alts}</url>")
+(SITE / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
                                   + "\n".join(urls) + "\n</urlset>\n")
 (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}sitemap.xml\n")
 
@@ -1494,15 +1521,18 @@ data = {"cities": {c["id"]: c for c in CITIES}, "hero": CONF["hero_photos"], "ab
         "formspree": bool(CONF.get("formspree_id")), "ga4": CONF.get("ga4_id", "")}
 (SITE / "assets" / "data.js").write_text("window.SITE=" + json.dumps(data, ensure_ascii=False, separators=(",", ":")) + ";\n")
 
-# privacidad.html is hand-written: keep its security <meta> block and new-tab links in sync with the rest of the site
-pv = SITE / "privacidad.html"
-pt = pv.read_text()
+# privacy: hand-written in both languages in src/privacidad.html; written here as privacidad.html and es/privacidad.html,
+# with the security <meta> block and new-tab links in sync with the rest of the site
+pt = (ROOT / "privacidad.html").read_text()
 pt = _re.sub(r"(<!-- sec:start[^>]*-->\n).*?(<!-- sec:end -->)", lambda m: m.group(1) + SEC_HEAD + "\n" + m.group(2), pt, count=1, flags=_re.S)
-pv.write_text(safe_rel(pt))
+sizes["privacidad.html"] = write("privacidad.html", bilingual_static(pt, "privacidad.html",
+    "Política de privacidad y cookies de inigogonzalezgarcia.github.io: qué datos se tratan, para qué, cuánto tiempo y tus derechos.",
+    "Privacy and cookie policy for inigogonzalezgarcia.github.io: what data is processed, why, for how long and your rights."))
 
 # guide pages whose guide was removed from guides.py are deleted, so they stop being served
-for _f in (SITE / "guias").glob("*.html"):
-    if f"guias/{_f.name}" not in sizes: _f.unlink()
+for _d in ("guias", "es/guias", "es/blog"):
+    for _f in (SITE / _d).glob("*.html"):
+        if f"{_d}/{_f.name}" not in sizes: _f.unlink()
 
 # security checks on everything that is served
 problems = []
@@ -1527,4 +1557,9 @@ for f in list(SITE.rglob("*.html")) + list((SITE / "assets").glob("*.js")) + lis
     if "xkeysib-" in f.read_text(errors="ignore"): problems.append(f"{f.relative_to(SITE)}: Brevo API key")
 if problems:
     raise SystemExit("security check failed:\n  " + "\n  ".join(problems))
-print("ok", len(sizes), "pages,", sum(sizes.values()) // 1024, "KB · security checks passed")
+import check_i18n
+_i18n = check_i18n.check(SITE)
+if _i18n["problems"]:
+    raise SystemExit("i18n check failed:\n  " + "\n  ".join(_i18n["problems"][:40]))
+_nes = sum(1 for r in sizes if r.startswith("es/"))
+print("ok", len(sizes), f"pages ({len(sizes) - _nes} en + {_nes} es),", sum(sizes.values()) // 1024, "KB · security checks passed ·", _i18n["summary"])

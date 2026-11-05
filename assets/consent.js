@@ -6,6 +6,9 @@
   var MAX_AGE = 1000 * 60 * 60 * 24 * 180; // ask again after 6 months
   var root = document.documentElement;
   var L = function () { return root.lang === "en" ? "en" : "es"; };
+  /* privacy page in the page's language, from the site root (this script lives in assets/), so it works from any folder */
+  var POLICY = (function () { try { return new URL("../", document.currentScript.src).href; } catch (e) { return "/"; } })();
+  var policyHref = function () { return POLICY + (L() === "es" ? "es/" : "") + "privacidad.html"; };
   var T = {
     es: {
       kicker: "Iñigo González · Privacidad",
@@ -97,7 +100,7 @@
       for (var i = 3; i < arguments.length; i++) n.appendChild(arguments[i]);
       return n;
     };
-    var kids = [el("p", "label cc-k"), el("h2", "cc-t"), el("p", "cc-x"), el("a", "cc-p", { href: "privacidad.html" })];
+    var kids = [el("p", "label cc-k"), el("h2", "cc-t"), el("p", "cc-x"), el("a", "cc-p", { href: policyHref() })];
     if (showSettings) {
       var cb = el("input", null, { type: "checkbox", id: "ccA" }); cb.checked = !!checked;
       kids.push(el("div", "cc-s", null,
