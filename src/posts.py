@@ -1347,7 +1347,7 @@ De gestionar servicios de puesto de trabajo con proveedores: SLAs y OLAs definid
 - Poner las OLAs en `settings.json` solo cuando los responsables de los equipos internos las hayan aceptado.
 - Guardar la salida de cada mes para que la tercera revisión pueda enseñar la tendencia."""),
 dict(n="29", repo="29-tenant-separation-cutover-planner", date="2026-10-23", cat="tools",
- title_en="The plan says wave 3 on the 30th; the inventory says no: readiness for a Microsoft 365 tenant separation", title_es="El plan dice ola 3 el día 30; el inventario dice que no: preparación de una separación de tenant de Microsoft 365",
+ title_en="Wave 3 is on the 30th and the inventory says no: readiness for a Microsoft 365 tenant split", title_es="La ola 3 es el día 30 y el inventario dice que no: la separación de un tenant de Microsoft 365",
  seo_title_en="Microsoft 365 tenant separation planner · Iñigo González",
  seo_title_es="Separación de tenant Microsoft 365: plan de olas · Iñigo González",
  dek_en="Devices that cannot be reset into the target, users who will fail on day 1, applications without a decision, and a go or no-go per wave with the reason, from the source tenant's own exports.",
@@ -1397,7 +1397,7 @@ De migraciones tenant a tenant y la administración de Microsoft 365 que hay det
 - Ejecutarlo cada semana del programa y guardar las salidas con fecha, para que la revisión enseñe cómo bajan los bloqueos.
 - Acordar las reglas de las olas y el calendario de congelación con el comité de cambios antes de la primera ejecución, no después."""),
 dict(n="30", repo="30-jira-confluence-admin-kit", date="2026-10-24", cat="tools",
- title_en="128 licences nobody uses and a sprint still open nine days late: a monthly review of a Jira and Confluence site", title_es="128 licencias que nadie usa y un sprint abierto nueve días tarde: una revisión mensual de un sitio de Jira y Confluence",
+ title_en="128 unused licences and a sprint nine days late: a monthly Jira and Confluence review", title_es="128 licencias sin uso y un sprint abierto nueve días tarde: revisión mensual de Jira y Confluence",
  seo_title_en="Jira and Confluence admin review · Iñigo González",
  seo_title_es="Revisión de admin de Jira y Confluence · Iñigo González",
  dek_en="Licences to reclaim with the saving, admins who should not be admins, external users and service accounts without an owner, projects, spaces and custom fields to clean up, and the agile health of every Scrum board, from the site's own exports.",
@@ -1449,7 +1449,7 @@ De administrar Jira y Confluence y llevar la relación con Atlassian, de trabaja
 - Acordar con seguridad el objetivo de administradores y los responsables de las cuentas de servicio antes de la primera revisión.
 - Guardar la salida de cada mes, para que la siguiente revisión empiece por lo que ha cambiado desde la anterior."""),
 dict(n="31", repo="31-dealer-systems-health", date="2026-10-25", cat="tools",
- title_en="The warranty feed stopped on Thursday and the dealer found out on Tuesday: a weekly review of a dealer network's systems", title_es="El feed de garantías se paró el jueves y el concesionario se enteró el martes: una revisión semanal de los sistemas de una red de concesionarios",
+ title_en="The warranty feed stopped on Thursday and the dealer found out on Tuesday: a dealer network review", title_es="El feed de garantías paró el jueves y el concesionario lo supo el martes: la red de concesionarios",
  seo_title_en="Dealer network systems: weekly health review · Iñigo González",
  seo_title_es="Sistemas de una red de concesionarios: revisión semanal · Iñigo González",
  seo_desc="Weekly review of a dealer network: stopped DMS feeds, warranty claims near the deadline, parts and price files per dealer, in red, amber or green.",
@@ -1502,8 +1502,8 @@ De trabajar con sistemas de gestión de concesionarios (DMS) y redes de concesio
 - Adaptar una vez las tres consultas SQL al log de integraciones y al sistema de garantías, y programar la exportación para el lunes por la mañana.
 - Enviar la línea de cada concesionario en rojo a su jefe de zona antes de la reunión, para que la reunión vaya de soluciones y no de descubrir los problemas."""),
 dict(n="32", repo="32-backup-restore-test-tracker", date="2026-10-25", cat="tools",
- title_en="The backup ran every night, but would it bring the system back? A monthly review of backups, restore tests and DR",
- title_es="El backup corrió cada noche, pero ¿devolvería el sistema? Una revisión mensual de backups, pruebas de restauración y DR",
+ title_en="The backup ran every night, but would it bring the system back? Backups, restores and DR monthly",
+ title_es="El backup corrió cada noche, pero ¿devolvería el sistema? Backups, restauraciones y DR cada mes",
  seo_title_en="Backup restore tests and DR review · Iñigo González",
  seo_title_es="Pruebas de restauración de backups y DR · Iñigo González",
  dek_en="The last good backup of each system against its RPO, offsite and immutable copies that actually ran, restore tests against the plan and the RTO, and the DR exercises and their actions, per system and tier, in red, amber or green.",
@@ -1604,8 +1604,8 @@ De dar soporte a consejos y comités de dirección: Teams Rooms sobre Crestron c
 - Acordar la ventana de congelación y las versiones mínimas de sistema operativo y app del consejo con el proveedor audiovisual y el equipo de soporte VIP.
 - Enviar el pack de preparación al equipo de secretaría del consejo el día antes de cada consejo."""),
 dict(n="34", repo="34-venue-service-readiness", date="2026-10-26", cat="tools",
- title_en="The only kitchen printer had been down since yesterday: a morning readiness check for a hospitality venue",
- title_es="La única impresora de cocina llevaba caída desde ayer: una revisión de cada mañana para un local de hostelería",
+ title_en="The only kitchen printer had been down since yesterday: a morning check for a hospitality venue",
+ title_es="La única impresora de cocina llevaba caída desde ayer: la revisión de cada mañana en hostelería",
  seo_title_en="Hospitality IT opening check: POS and Wi-Fi · Iñigo González",
  seo_title_es="Revisión IT de apertura en hostelería: TPV y Wi-Fi · Iñigo González",
  dek_en="For every service in the next week, in a restaurant, a pool club, a bar and a hotel: the opening check, enough working tills and handhelds, kitchen printers, card terminals and cash machines, the network and the failover, the PMS and IPTV, and the vendor who would fix each of them, with a verdict per service.",
@@ -1763,8 +1763,8 @@ De liderar la respuesta técnica en incidentes mayores y los post-mortems que vi
 - Leer las alertas de las APIs de monitorización y las comunicaciones del plan de comunicación en lugar de dos CSV.
 - Escribir el borrador de revisión en el registro de problema, y llevar los puntos ciegos y las acciones vencidas a la revisión mensual de servicio."""),
 dict(n="37", repo="37-iam-access-review", date="2026-10-29", cat="tools",
- title_en="He left three weeks ago and is still in Domain Admins: a monthly access review for joiners, movers, leavers and privileged access",
- title_es="Se fue hace tres semanas y sigue en Domain Admins: una revisión mensual de accesos para altas, cambios, bajas y accesos privilegiados",
+ title_en="He left three weeks ago and is still in Domain Admins: the monthly access review",
+ title_es="Se fue hace tres semanas y sigue en Domain Admins: la revisión mensual de accesos",
  seo_title_en="IAM access review: joiners, movers, leavers · Iñigo González",
  seo_title_es="Revisión de accesos IAM: altas, cambios y bajas · Iñigo González",
  seo_desc="Monthly IAM review from HR, AD and Entra ID exports: leavers still enabled, movers keeping access, orphan accounts, standing admin roles and recertification.",
@@ -2146,8 +2146,8 @@ De dar soporte a las boutiques y puntos de venta de marcas de lujo, con sus impr
 - Leer los tickets desde la Table API de ServiceNow en lugar de una exportación de lista.
 - Guardar el histórico semanal de cada tienda para ver su tendencia en un trimestre."""),
 dict(n="43", repo="43-azure-cost-rightsizing", date="2026-11-04", cat="tools",
- title_en="A reservation at 55% about to renew itself and VMs billed while stopped: the monthly Azure cost review",
- title_es="Una reserva al 55% que se renueva sola y VMs paradas que se siguen pagando: la revisión mensual de Azure",
+ title_en="A reservation at 55% about to auto-renew and VMs billed while stopped: the Azure cost review",
+ title_es="Una reserva al 55% que se renueva sola y VMs paradas que se pagan: la revisión de costes de Azure",
  seo_title_en="Monthly Azure cost review and right-sizing · Iñigo González",
  seo_title_es="Revisión de costes de Azure y redimensionado · Iñigo González",
  seo_desc="Monthly Azure cost review from the FOCUS export: right-sizing, waste, reservations and savings plans, showback by cost centre, budgets and unit cost.",
