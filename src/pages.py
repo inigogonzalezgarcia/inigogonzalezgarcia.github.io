@@ -404,3 +404,9 @@ def soon(kicker_es, kicker_en, R):
       <a class="btn" href="{R}blog/">{bi("Ir al blog", "Go to the blog")} →</a>
       <a class="arrow-link" href="{R}journey.html">{bi("Ver el viaje", "See the journey")}</a>
     </div>''').replace('class="page-hero"', 'class="page-hero soon"')
+
+# ---------------------------------------------------------------- hand-written meta descriptions
+# seo_overrides.py fills seo_desc / seo_desc_es for the pages with the most Search Console impressions. It runs here
+# because build.py imports pages before it renders any post or guide (posts.py and guides.py import nothing).
+import seo_overrides
+seo_overrides.apply()
