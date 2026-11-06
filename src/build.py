@@ -250,12 +250,12 @@ home_body = "\n\n".join([
     f'''<section class="section">
   <div class="wrap welcome reveal">
     <div>
-      <p class="label kicker">FX Research Lab · {bi("simulador educativo", "educational simulator")}</p>
+      <p class="label kicker">FX Trading Lab · {bi("simulador educativo", "educational simulator")}</p>
       <h2 class="h2 sm">{bi("Aprende a leer<br>un backtest.", "Learn to read<br>a backtest.")}</h2>
     </div>
     <div>
-      <p class="lede">{bi("Una hipótesis de trading congelada, un motor de backtesting que paga costes y no hace trampas, y un protocolo para no creerte el resultado: Monte Carlo, benchmark aleatorio, sensibilidad y walk-forward sobre siete años de datos reales (2019–2025). La regla que ganó en 2024 perdió en 2022 y, en conjunto, no gana: eso es exactamente lo que enseña. Lecciones gratis, cada operación explicada en su gráfico. Sin señales, sin ejecución real, no es asesoramiento de inversión.", "A frozen trading hypothesis, a backtesting engine that pays its costs and takes no shortcuts, and a protocol for not believing the result: Monte Carlo, random benchmark, sensitivity and walk-forward on seven years of real data (2019–2025). The rule that won in 2024 lost in 2022 and, over all, does not win: that is exactly what it teaches. Free lessons, every trade explained on its chart. No signals, no live execution, not investment advice.")}</p>
-      <a class="btn" href="https://fx-trading-lab.pages.dev/" target="_blank" rel="noopener noreferrer">{bi("Abrir FX Research Lab", "Open FX Research Lab")} ↗</a>
+      <p class="lede">{bi("Una hipótesis de trading congelada, un motor de backtesting que paga costes y no hace trampas, y un protocolo para no creerte el resultado: Monte Carlo, benchmark aleatorio, sensibilidad y walk-forward sobre ocho años de datos reales (2019–2025). La regla que ganó en 2024 perdió en 2022 y, en conjunto, no gana: eso es exactamente lo que enseña. Lecciones gratis, cada operación explicada en su gráfico. Sin señales, sin ejecución real, no es asesoramiento de inversión.", "A frozen trading hypothesis, a backtesting engine that pays its costs and takes no shortcuts, and a protocol for not believing the result: Monte Carlo, random benchmark, sensitivity and walk-forward on eight years of real data (2019–2025). The rule that won in 2024 lost in 2022 and, over all, does not win: that is exactly what it teaches. Free lessons, every trade explained on its chart. No signals, no live execution, not investment advice.")}</p>
+      <a class="btn" href="https://fx-trading-lab.pages.dev/" target="_blank" rel="noopener noreferrer">{bi("Abrir FX Trading Lab", "Open FX Trading Lab")} ↗</a>
       <p class="u-mt22"><a class="arrow-link" href="https://fx-trading-lab.pages.dev/method" target="_blank" rel="noopener noreferrer">{bi("Método y aviso", "Method and notice")} ↗</a></p>
     </div>
   </div>
@@ -617,7 +617,7 @@ now = f'''<section class="section">
     <dl class="spec reveal">
       <div class="spec-row"><dt class="label">{bi("Trabajo", "Work")}</dt><dd>{bi("Quién soy y en qué estoy ahora.", "Who I am and what I'm working on now.")}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Simulador", "Simulator")}</dt><dd><a href="https://sysadmindesksbyigg.pages.dev/" target="_blank" rel="noopener noreferrer">SysAdmin Desks ↗</a>{bi(": práctica gratuita de soporte IT con tickets, SLA y nota de trabajo.", ": free IT support practice with tickets, SLA and work notes.")}</dd></div>
-      <div class="spec-row"><dt class="label">{bi("Laboratorio", "Lab")}</dt><dd><a href="https://fx-trading-lab.pages.dev/" target="_blank" rel="noopener noreferrer">FX Research Lab ↗</a>{bi(": simulador educativo para comprobar una idea de trading con método; siete años de datos reales y lecciones gratis.", ": educational simulator for testing a trading idea with method; seven years of real data and free lessons.")}</dd></div>
+      <div class="spec-row"><dt class="label">{bi("Laboratorio", "Lab")}</dt><dd><a href="https://fx-trading-lab.pages.dev/" target="_blank" rel="noopener noreferrer">FX Trading Lab ↗</a>{bi(": simulador educativo para comprobar una idea de trading con método; ocho años de datos reales y lecciones gratis.", ": educational simulator for testing a trading idea with method; eight years of real data and free lessons.")}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Proyectos", "Projects")}</dt><dd><a href="blog/">{bi(f"{len(POSTS)} repos en GitHub", f"{len(POSTS)} repos on GitHub")}</a>{bi(", cada uno con su artículo.", ", each with its own story.")}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Destacados", "Featured")}</dt><dd>{_featured()}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Guías", "Guides")}</dt><dd><a href="guias.html">{bi(f"{len(_GALL)} guías paso a paso", f"{len(_GALL)} step-by-step guides")}</a>{bi(", por nivel y por sector.", ", by level and by sector.")}</dd></div>
@@ -969,7 +969,7 @@ _nsec = sum(1 for k in _LVL if k.startswith("sector-")); _nlvl = sum(1 for k in 
 LINK_GROUPS = [
     (bi("Aprende y practica", "Learn and practise"), [
         ("https://sysadmindesksbyigg.pages.dev/", "SysAdmin Desks", bi("Simulador gratuito de soporte IT: tickets, SLA y nota de trabajo.", "Free IT support simulator: tickets, SLA and work notes."), "ext"),
-        ("https://fx-trading-lab.pages.dev/", "FX Research Lab", bi("Simulador educativo: aprende a leer un backtest con siete años de datos reales. Sin señales.", "Educational simulator: learn to read a backtest on seven years of real data. No signals."), "ext"),
+        ("https://fx-trading-lab.pages.dev/", "FX Trading Lab", bi("Simulador educativo: aprende a leer un backtest con ocho años de datos reales. Sin señales.", "Educational simulator: learn to read a backtest on eight years of real data. No signals."), "ext"),
         ("guias.html", bi("Guías IT", "IT guides"), bi(f"{len(_GL)} guías paso a paso: {_nlvl} niveles y {_nsec} sectores.", f"{len(_GL)} step-by-step guides: {_nlvl} levels and {_nsec} sectors."), ""),
         ("blog/", "Blog", bi(f"{len(POSTS)} proyectos en GitHub, cada uno con su artículo.", f"{len(POSTS)} projects on GitHub, each with its story."), ""),
     ]),
