@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Secure RDP by GPO: NLA, jump host, CredSSP · Iñigo González</title>
+<meta name="description" content="Remote Desktop hardened by GPO: logon rights, NLA and TLS, session limits, admin subnets, jump host, Restricted Admin, and NLA or CredSSP errors.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/escritorio-remoto-seguro-por-gpo-nla-limites-de-sesion-servidor-de-salto-restricted-admin-y-error-credssp.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/escritorio-remoto-seguro-por-gpo-nla-limites-de-sesion-servidor-de-salto-restricted-admin-y-error-credssp.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/escritorio-remoto-seguro-por-gpo-nla-limites-de-sesion-servidor-de-salto-restricted-admin-y-error-credssp.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/escritorio-remoto-seguro-por-gpo-nla-limites-de-sesion-servidor-de-salto-restricted-admin-y-error-credssp.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Secure RDP by GPO: NLA, jump host, CredSSP · Iñigo González">
+<meta property="og:description" content="Remote Desktop hardened by GPO: logon rights, NLA and TLS, session limits, admin subnets, jump host, Restricted Admin, and NLA or CredSSP errors.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/escritorio-remoto-seguro-por-gpo-nla-limites-de-sesion-servidor-de-salto-restricted-admin-y-error-credssp.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-nivel-3.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Secure RDP by GPO: NLA, jump host, CredSSP · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Secure Remote Desktop by GPO: who can sign in, NLA and TLS, session limits, admin networks only, jump host, Restricted Admin and Remote Credential Guard, and the NLA or CredSSP error","alternativeHeadline":"Escritorio remoto seguro por GPO: quién puede entrar, NLA y TLS, límites de sesión, solo desde la red de administración, servidor de salto, Restricted Admin y Remote Credential Guard, y el error de NLA o CredSSP","description":"Enabling RDP only where it is needed, deciding who gets in with groups and user rights, requiring NLA and TLS, ending idle and disconnected sessions, limiting port 3389 to the admin network, reaching servers from a jump host with Restricted Admin or Remote Credential Guard, and fixing the NLA and CredSSP errors.","datePublished":"2026-11-06","dateModified":"2026-11-06","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/escritorio-remoto-seguro-por-gpo-nla-limites-de-sesion-servidor-de-salto-restricted-admin-y-error-credssp.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/escritorio-remoto-seguro-por-gpo-nla-limites-de-sesion-servidor-de-salto-restricted-admin-y-error-credssp.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Security GPOs"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 3","item":"https://inigogonzalezgarcia.github.io/guias/nivel-3.html"},{"@type":"ListItem","position":4,"name":"Secure Remote Desktop by GPO: who can sign in, NLA and TLS, session limits, admin networks only, jump host, Restricted Admin and Remote Credential Guard, and the NLA or CredSSP error","item":"https://inigogonzalezgarcia.github.io/guias/escritorio-remoto-seguro-por-gpo-nla-limites-de-sesion-servidor-de-salto-restricted-admin-y-error-credssp.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/"><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../es/guias/escritorio-remoto-seguro-por-gpo-nla-limites-de-sesion-servidor-de-salto-restricted-admin-y-error-credssp.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="en">Guides</span></a> · <a href="nivel-3.html"><span class="en">Level 3</span></a></p>
+    <h1><span class="en">Secure Remote Desktop by GPO: who can sign in, NLA and TLS, session limits, admin networks only, jump host, Restricted Admin and Remote Credential Guard, and the NLA or CredSSP error</span></h1>
+    <p class="lede"><span class="en">Enabling RDP only where it is needed, deciding who gets in with groups and user rights, requiring NLA and TLS, ending idle and disconnected sessions, limiting port 3389 to the admin network, reaching servers from a jump host with Restricted Admin or Remote Credential Guard, and fixing the NLA and CredSSP errors.</span></p><p class="label post-meta"><span class="en">Level 3</span> · <span class="en">Security GPOs</span> · <span class="en">7 min read</span> · <span class="en">Updated</span> <span class="en">6 Nov 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>Remote Desktop configured the same way on every server and computer from GPO: on only where it is used, who can sign in decided by AD groups, authentication before the session opens, forgotten sessions ending on their own, port 3389 open only to the admin network, and admins coming in from a jump host without leaving their credential on each server. And what to do with the two most common connection errors.</p>
+<h2>Before you start</h2>
+<ul><li>GPMC and permissions on the server and computer OUs.</li><li>The <a href="gpo-de-seguridad-base-ntlm-llmnr-smb-laps-y-despliegue-en-piloto.html">baseline security GPOs</a> applied or in pilot: Credential Guard and LAPS fit with what is done here.</li><li>A defined admin network, for example <code>10.10.50.0/24</code>, and a jump host (<code>srv-jump01</code>, <code>10.10.50.10</code>) that admins connect to.</li><li>One AD group per set of servers and who gets into them: <code>GG-RDP-SRV-Finance</code>, <code>GG-RDP-SRV-Applications</code>.</li></ul>
+<h2>1. Turn RDP on and decide who gets in</h2>
+<p>In <strong>Computer Configuration › Policies › Administrative Templates › Windows Components › Remote Desktop Services › Remote Desktop Session Host › Connections</strong>, <em>Allow users to connect remotely by using Remote Desktop Services</em> = <strong>Enabled</strong> in the server GPO. On workstations, only if support connects that way; otherwise <strong>Disabled</strong>.</p>
+<p>Signing in over RDP needs two things: the <strong>right</strong> <em>Allow log on through Remote Desktop Services</em> (by default <em>Administrators</em> and <em>Remote Desktop Users</em> have it) and not being in the <strong>deny right</strong>, which always wins.</p>
+<ul><li>Local group membership, with preferences: <em>Computer Configuration › Preferences › Control Panel Settings › Local Users and Groups › New › Local Group</em>, group <strong>Remote Desktop Users (built-in)</strong>, action <strong>Update</strong>, member <code>CONTOSO\GG-RDP-SRV-Finance</code>. <em>Update</em> adds without removing what is there; the <em>Restricted Groups</em> policy replaces everything.</li><li>In <em>Security Settings › Local Policies › User Rights Assignment › Deny log on through Remote Desktop Services</em>: <strong>Local account</strong> (S-1-5-113; the local admin signs in at the console or with LAPS, not over RDP from the network) and, on member servers and workstations, <strong>Domain Admins</strong>: those accounts only sign in on domain controllers.</li></ul>
+<p>If someone without the right tries to sign in, the session drops after the password with <em>The connection was denied because the user account is not authorized for remote login</em>. It is a group problem, not a network one.</p>
+<h2>2. NLA, TLS and encryption</h2>
+<p>In <em>Remote Desktop Session Host › Security</em>:</p>
+<ul><li><em>Require user authentication for remote connections by using Network Level Authentication</em> = <strong>Enabled</strong>. With <strong>NLA</strong> the user authenticates (through CredSSP) before the server creates the session and draws the sign-in screen: without a valid account there is no session using resources and no screen to attack.</li><li><em>Require use of specific security layer for remote (RDP) connections</em> = <strong>Enabled</strong>, layer <strong>SSL</strong> (it is TLS).</li><li><em>Set client connection encryption level</em> = <strong>High Level</strong>.</li><li>Optional, with an internal CA: <em>Server authentication certificate template</em> with the name of a certificate template for RDP. The server requests its certificate and the &quot;identity of the remote computer cannot be verified&quot; warning goes away.</li></ul>
+<h2>3. Idle and disconnected sessions</h2>
+<p>A disconnected session is still open: processes, locked files and, without Credential Guard, the credential in memory. In <em>Remote Desktop Session Host › Session Time Limits</em>:</p>
+<div class="g-table"><table><thead><tr><th>Policy</th><th>Usual value on servers</th></tr></thead><tbody><tr><td>Set time limit for active but idle Remote Desktop Services sessions</td><td>1 hour</td></tr><tr><td>Set time limit for disconnected sessions</td><td>1 hour</td></tr><tr><td>End session when time limits are reached</td><td>Enabled</td></tr></tbody></table></div>
+<p>And in <em>Connections</em>, <em>Restrict Remote Desktop Services users to a single Remote Desktop Services session</em> = <strong>Enabled</strong>. In <em>Device and Resource Redirection</em>, on sensitive servers, <em>Do not allow drive redirection</em> and <em>Do not allow Clipboard redirection</em>: without them, copying files from the server to the laptop is drag and drop.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell (administrator) · SRV-APP02 after gpupdate</span><button class="t-copy" type="button" data-copy="Get-ItemProperty &quot;HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services&quot; | Select-Object fDenyTSConnections, UserAuthentication, SecurityLayer, MinEncryptionLevel, MaxIdleTime, MaxDisconnectionTime&#10;qwinsta" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-ItemProperty &quot;HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services&quot; | Select-Object fDenyTSConnections, UserAuthentication, SecurityLayer, MinEncryptionLevel, MaxIdleTime, MaxDisconnectionTime</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>qwinsta</span><span class="t-out">fDenyTSConnections   : 0</span><span class="t-out">UserAuthentication   : 1</span><span class="t-out">SecurityLayer        : 2</span><span class="t-out">MinEncryptionLevel   : 3</span><span class="t-out">MaxIdleTime          : 3600000</span><span class="t-out">MaxDisconnectionTime : 3600000</span><span class="t-out"> SESSIONNAME       USERNAME                 ID  STATE   TYPE        DEVICE</span><span class="t-out"> services                                    0  Disc</span><span class="t-out">&gt;console                                     1  Conn</span><span class="t-out"> rdp-tcp#4         adm.lgarcia               2  Active</span><span class="t-out"> rdp-tcp                                 65536  Listen</span></code></pre></figure>
+<p>Times are stored in milliseconds: 3600000 is one hour.</p>
+<h2>4. Only from the admin network</h2>
+<p>RDP requiring NLA is not enough if any office PC can reach port 3389 on a server. In the server firewall GPO, the predefined rules of the <strong>Remote Desktop</strong> group (<em>Remote Desktop - User Mode (TCP-In)</em> and <em>(UDP-In)</em>, port 3389) with <strong>Scope › Remote IP address</strong> = the jump host IPs, <code>10.10.50.10</code> and <code>10.10.50.11</code>.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · RDP rule in the server firewall GPO</span><button class="t-copy" type="button" data-copy="$s = Open-NetGPO -PolicyStore &quot;contoso.local\FW-Servers&quot;&#10;Get-NetFirewallRule -GPOSession $s -Group &quot;@FirewallAPI.dll,-28752&quot; | Set-NetFirewallRule -GPOSession $s -Enabled True -Profile Domain -RemoteAddress 10.10.50.10,10.10.50.11&#10;Save-NetGPO -GPOSession $s" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>$s = Open-NetGPO -PolicyStore &quot;contoso.local\FW-Servers&quot;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-NetFirewallRule -GPOSession $s -Group &quot;@FirewallAPI.dll,-28752&quot; | Set-NetFirewallRule -GPOSession $s -Enabled True -Profile Domain -RemoteAddress 10.10.50.10,10.10.50.11</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Save-NetGPO -GPOSession $s</span></code></pre></figure>
+<p><code>@FirewallAPI.dll,-28752</code> is the internal name of the <em>Remote Desktop</em> group, the same in any language. If the GPO does not contain those rules yet, add them first as <strong>Predefined</strong> from the editor. Profiles, merging with local rules and dropped-packet logging are in the <a href="firewall-de-windows-por-gpo-perfiles-reglas-registro-y-una-aplicacion-que-deja-de-funcionar.html">Windows Firewall by GPO</a> guide.</p>
+<h2>5. Jump host, Restricted Admin and Remote Credential Guard</h2>
+<p>With normal RDP, your password travels to the server and stays in its memory: if that server is compromised, so is your admin account. Two modes avoid it:</p>
+<div class="g-table"><table><thead><tr><th></th><th>Restricted Admin</th><th>Remote Credential Guard</th></tr></thead><tbody><tr><td>What reaches the server</td><td>Nothing reusable</td><td>Nothing: Kerberos is redirected back to the source device</td></tr><tr><td>Network resources from the session</td><td>As the computer account</td><td>As you</td></tr><tr><td>Requirements</td><td>Being an admin on the server</td><td>Kerberos (connect by name, not IP), same or trusted domain</td></tr><tr><td>Typical use</td><td>Support connecting to user devices</td><td>Admins from the jump host</td></tr></tbody></table></div>
+<p><strong>On the target servers and devices</strong>: <em>Administrative Templates › System › Credentials Delegation › Remote host allows delegation of non-exportable credentials</em> = <strong>Enabled</strong>. Without it, neither mode works.</p>
+<p><strong>On the jump host and admin workstations</strong>: <em>System › Credentials Delegation › Restrict delegation of credentials to remote servers</em> = <strong>Enabled</strong>, with <strong>Require Remote Credential Guard</strong> or <strong>Restrict Credential Delegation</strong> (uses Remote Credential Guard and, if it cannot, Restricted Admin). By hand: <code>mstsc /remoteGuard</code> or <code>mstsc /restrictedAdmin</code>.</p>
+<p>For support connecting to user devices, Microsoft recommends <strong>Restricted Admin</strong> rather than Remote Credential Guard: if the user&#x27;s device is compromised, with Remote Credential Guard the attacker could use the open channel to request access in your name while the session lasts.</p>
+<p>On the server, event <strong>4624</strong> with logon type <strong>10</strong> shows <em>Restricted Admin Mode: Yes</em> when the session came in that way.</p>
+<h2>6. The ticket: &quot;it says it requires Network Level Authentication&quot; or &quot;CredSSP&quot;</h2>
+<p><strong>Case 1.</strong> An admin tries to get into <code>SRV-APP07</code> and gets: <em>The remote computer that you are trying to connect to requires Network Level Authentication (NLA), but your Windows domain controller cannot be contacted to perform NLA</em>. With NLA, the server must validate the credential against a DC before opening the session.</p>
+<ol><li>From the jump host, <code>Test-NetConnection SRV-APP07 -Port 3389</code>: it answers, so it is not the firewall.</li><li>On the hypervisor console or iDRAC/iLO, with the local admin (LAPS password): <code>Test-ComputerSecureChannel</code> returns <strong>False</strong>. The server was restored from an old backup and its computer account password no longer matches AD.</li><li><code>Test-ComputerSecureChannel -Repair -Credential CONTOSO\adm.lgarcia</code> returns <strong>True</strong>; RDP works again without touching NLA.</li></ol>
+<p>If the message is <em>The Local Security Authority cannot be contacted... This could be due to an expired password</em>, the user&#x27;s password has expired or is flagged to change at next sign-in: with NLA there is no screen to change it. Change it from another device (Ctrl+Alt+Del › Change a password) or from support, and try again.</p>
+<p><strong>Case 2.</strong> From an up-to-date laptop to <code>SRV-LEG01</code>, an old server restored from an unpatched template: <em>An authentication error has occurred. The function requested is not supported... This could be due to CredSSP encryption oracle remediation</em>. The client, with the default setting (<strong>Mitigated</strong>), refuses to fall back to the server&#x27;s vulnerable CredSSP version.</p>
+<ul><li>The fix is <strong>updating and restarting the server</strong>. Afterwards, the GPO <em>Credentials Delegation › Encryption Oracle Remediation</em> = <strong>Force Updated Clients</strong> on servers, so they do not accept unpatched clients either.</li><li>Setting <strong>Vulnerable</strong> on a client is a temporary workaround on a single device with a removal date, never by GPO for everyone. Turning NLA off on the server is not the fix either.</li></ul>
+<p>In the ticket: exact message, cause (broken secure channel, expired password or missing patch), what was changed and the successful connection from the jump host.</p>
+<h2>Next steps</h2>
+<ul><li><a href="auditoria-avanzada-por-gpo-tamano-de-registros-reenvio-de-eventos-wef-y-el-evento-que-no-esta.html">Advanced auditing and event forwarding</a> sends type 10 4624 events to the collector: every RDP sign-in is recorded off the server.</li><li>To manage without RDP, the <a href="powershell-remoto-winrm-invoke-command-en-lote-segundo-salto-jea-y-acceso-denegado.html">PowerShell remoting and WinRM</a> guide: most day-to-day work does not need a desktop.</li><li>For cloud desktops with their own front door, <a href="azure-virtual-desktop-y-windows-365-host-pool-cloud-pc-y-conexion-que-falla.html">Azure Virtual Desktop and Windows 365</a>.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="en">Level 3</span> · <span class="en">Security GPOs</span></p>
+      <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-3.html"><span class="en">All Level 3 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/25-security-controls-evidence.html"><span class="label muted"><span class="en">Blog · 25</span></span><span class="related-t"><span class="en">What will the auditor ask for that you cannot show yet? One register for ISO 27001, NIS2 and GDPR</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="auditoria-avanzada-por-gpo-tamano-de-registros-reenvio-de-eventos-wef-y-el-evento-que-no-esta.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">Advanced auditing by GPO: logons, lockouts, accounts, processes with command line, log sizes, forwarding events to a collector, and the event that isn&#x27;t there</span></span></a>
+    <a class="post-nav-link next" href="gpo-de-seguridad-base-ntlm-llmnr-smb-laps-y-despliegue-en-piloto.html"><span class="label muted"><span class="en">Next</span></span><span><span class="en">Security GPOs: NTLM, LLMNR, SMB signing, LAPS, PowerShell logging, and a rollout with pilot and rollback</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

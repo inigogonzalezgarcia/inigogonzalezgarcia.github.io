@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>pfSense: firewall de oficina, NAT y reglas · Iñigo González</title>
+<meta name="description" content="pfSense CE de cero en una oficina: instalación y asistente, WAN, LAN y VLAN, alias y reglas que solo permiten lo necesario, NAT de salida y redirección…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/pfsense-firewall-de-oficina-interfaces-vlan-alias-reglas-nat-dns-y-un-servicio-publicado-que-no-se-ve.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/pfsense-firewall-de-oficina-interfaces-vlan-alias-reglas-nat-dns-y-un-servicio-publicado-que-no-se-ve.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/pfsense-firewall-de-oficina-interfaces-vlan-alias-reglas-nat-dns-y-un-servicio-publicado-que-no-se-ve.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/pfsense-firewall-de-oficina-interfaces-vlan-alias-reglas-nat-dns-y-un-servicio-publicado-que-no-se-ve.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pfSense: firewall de oficina, NAT y reglas · Iñigo González">
+<meta property="og:description" content="pfSense CE de cero en una oficina: instalación y asistente, WAN, LAN y VLAN, alias y reglas que solo permiten lo necesario, NAT de salida y redirección…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/pfsense-firewall-de-oficina-interfaces-vlan-alias-reglas-nat-dns-y-un-servicio-publicado-que-no-se-ve.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-nivel-3.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="pfSense: firewall de oficina, NAT y reglas · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"pfSense como firewall de oficina: instalación, interfaces y VLAN, alias y reglas de mínimo privilegio, NAT, DHCP y DNS, y un servicio publicado que no se ve desde fuera","alternativeHeadline":"pfSense as the office firewall: installation, interfaces and VLANs, aliases and least-privilege rules, NAT, DHCP and DNS, and a published service that cannot be reached from outside","description":"pfSense CE de cero en una oficina: instalación y asistente, WAN, LAN y VLAN, alias y reglas que solo permiten lo necesario, NAT de salida y redirección de puertos, DHCP con reservas, DNS Resolver con el dominio de la empresa, paquetes con criterio y un portal publicado que desde fuera no responde.","datePublished":"2026-11-06","dateModified":"2026-11-06","inLanguage":"es","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/es/guias/pfsense-firewall-de-oficina-interfaces-vlan-alias-reglas-nat-dns-y-un-servicio-publicado-que-no-se-ve.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/guias/pfsense-firewall-de-oficina-interfaces-vlan-alias-reglas-nat-dns-y-un-servicio-publicado-que-no-se-ve.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"pfSense: firewall de oficina"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Nivel 3","item":"https://inigogonzalezgarcia.github.io/es/guias/nivel-3.html"},{"@type":"ListItem","position":4,"name":"pfSense como firewall de oficina: instalación, interfaces y VLAN, alias y reglas de mínimo privilegio, NAT, DHCP y DNS, y un servicio publicado que no se ve desde fuera","item":"https://inigogonzalezgarcia.github.io/es/guias/pfsense-firewall-de-oficina-interfaces-vlan-alias-reglas-nat-dns-y-un-servicio-publicado-que-no-se-ve.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/pfsense-firewall-de-oficina-interfaces-vlan-alias-reglas-nat-dns-y-un-servicio-publicado-que-no-se-ve.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <a href="nivel-3.html"><span class="es">Nivel 3</span></a></p>
+    <h1><span class="es">pfSense como firewall de oficina: instalación, interfaces y VLAN, alias y reglas de mínimo privilegio, NAT, DHCP y DNS, y un servicio publicado que no se ve desde fuera</span></h1>
+    <p class="lede"><span class="es">pfSense CE de cero en una oficina: instalación y asistente, WAN, LAN y VLAN, alias y reglas que solo permiten lo necesario, NAT de salida y redirección de puertos, DHCP con reservas, DNS Resolver con el dominio de la empresa, paquetes con criterio y un portal publicado que desde fuera no responde.</span></p><p class="label post-meta"><span class="es">Nivel 3</span> · <span class="es">pfSense: firewall de oficina</span> · <span class="es">8 min</span> · <span class="es">Actualizado</span> <span class="es">6 nov 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Un firewall pfSense que separa la oficina en redes con sentido (servidores, usuarios, impresoras, gestión), deja pasar entre ellas solo lo que hace falta, sale a internet con NAT, reparte direcciones y resuelve nombres, y publica un servicio hacia fuera. Y el método para cuando ese servicio &quot;no se ve desde casa&quot;.</p>
+<h2>Antes de empezar</h2>
+<ul><li><strong>pfSense CE 2.8</strong> en un equipo con al menos dos tarjetas de red (mejor Intel, <code>igc</code>/<code>ix</code>) o en una máquina virtual con dos adaptadores. El instalador de CE es el <strong>Netgate Installer</strong>: necesita internet durante la instalación porque descarga la versión al momento.</li><li>El plan de direcciones. En esta guía: VLAN 10 servidores <code>10.20.10.0/24</code>, VLAN 20 usuarios <code>10.20.20.0/24</code>, VLAN 30 impresoras <code>10.20.30.0/24</code>, VLAN 99 gestión <code>10.20.99.0/24</code>, dominio <code>contoso.local</code> con controladores en <code>10.20.10.10</code> y <code>10.20.10.11</code>.</li><li>Un switch gestionable con las VLAN creadas y un troncal hacia el puerto LAN del firewall.</li><li>Si vienes de FortiGate, la guía de <a href="fortigate-politicas-con-minimo-privilegio-vpn-con-entra-id-tuneles-entre-sedes-y-un-usuario-que-no-llega.html">FortiGate</a> cuenta los mismos conceptos con otros nombres.</li></ul>
+<h2>1. Instalación y primer acceso</h2>
+<ol><li>Arranca el instalador, elige <strong>ZFS</strong> (con dos discos, en espejo) y deja que descargue e instale la versión estable.</li><li>En la consola, opción <strong>1) Assign Interfaces</strong>: <code>igc0</code> como WAN, <code>igc1</code> como LAN. Sin VLAN todavía (se crean desde la web).</li><li>Opción <strong>2) Set interface(s) IP address</strong> si la LAN no debe ser la de fábrica, <code>192.168.1.1/24</code>. Aquí: <code>10.20.99.1/24</code>, la red de gestión.</li><li>Desde un portátil en la LAN, <code>https://10.20.99.1</code> con <code>admin</code> / <code>pfsense</code>. El asistente pide nombre (<code>fw-oficina</code>), dominio (<code>contoso.local</code>), zona horaria y la <strong>contraseña nueva de admin</strong>.</li></ol>
+<p>Después, en <strong>System › Advanced › Admin Access</strong>: protocolo HTTPS, y deja la regla <strong>anti-lockout</strong> activada hasta que tengas una regla propia que permita la gestión desde la VLAN 99. Mejor que <code>admin</code>, cuentas con nombre en <strong>System › User Manager</strong>.</p>
+<h2>2. Interfaces y VLAN</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">pfSense · Interfaces › Assignments › VLANs › Add</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Parent Interface</span><span class="ui-v">igc1</span></div><div class="ui-field"><span class="ui-k">VLAN Tag</span><span class="ui-v">20</span></div><div class="ui-field"><span class="ui-k">Description</span><span class="ui-v">USUARIOS</span></div><div class="ui-btn">Save</div></div></figure>
+<p>Repite para 10, 30 y 99. Después, en <strong>Interfaces › Assignments</strong>, añade cada VLAN como interfaz, ábrela, marca <strong>Enable</strong>, ponle nombre (<code>SERVIDORES</code>, <code>USUARIOS</code>, <code>IMPRESORAS</code>, <code>GESTION</code>) y una <strong>Static IPv4</strong> (<code>10.20.20.1/24</code>...). La LAN original queda como red de gestión o sin uso.</p>
+<p>En la <strong>WAN</strong>, pfSense trae marcadas <strong>Block private networks and loopback addresses</strong> y <strong>Block bogon networks</strong>: bloquean tráfico entrante desde direcciones que nunca deberían venir de internet. Déjalas así salvo que la WAN esté en una red privada del operador desde la que necesites recibir algo.</p>
+<h2>3. Alias y reglas de mínimo privilegio</h2>
+<p>Los <strong>alias</strong> ponen nombre a grupos de IP y puertos; las reglas se leen solas y un cambio se hace en un sitio.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">pfSense · Firewall › Aliases</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">DCS (Host)</span><span class="ui-v">10.20.10.10, 10.20.10.11</span></div><div class="ui-field"><span class="ui-k">SRV_ERP (Host)</span><span class="ui-v">10.20.10.15</span></div><div class="ui-field"><span class="ui-k">PRIVADAS (Network)</span><span class="ui-v">10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16</span></div><div class="ui-field"><span class="ui-k">PUERTOS_AD (Port)</span><span class="ui-v">53, 88, 135, 389, 445, 464, 636, 3268, 49152:65535</span></div><div class="ui-field"><span class="ui-k">PUERTOS_WEB (Port)</span><span class="ui-v">80, 443</span></div><div class="ui-btn">Apply Changes</div></div></figure>
+<p>Cómo evalúa pfSense:</p>
+<ul><li>Las reglas se aplican en la interfaz <strong>por la que entra</strong> el tráfico: lo que sale de los usuarios se filtra en la pestaña <code>USUARIOS</code>.</li><li>De arriba abajo, <strong>gana la primera que coincide</strong>. Las reglas <em>Floating</em> se evalúan antes.</li><li>Lo que no coincide con nada se bloquea. Una VLAN nueva sin reglas no deja pasar nada.</li></ul>
+<p>Las reglas de <code>USUARIOS</code>, en este orden:</p>
+<div class="g-table"><table><thead><tr><th>Acción</th><th>Origen</th><th>Destino</th><th>Puerto</th><th>Para qué</th></tr></thead><tbody><tr><td>Pass</td><td>USUARIOS net</td><td>DCS</td><td>PUERTOS_AD (TCP/UDP)</td><td>Inicio de sesión, DNS y GPO</td></tr><tr><td>Pass</td><td>USUARIOS net</td><td>SRV_ERP</td><td>443</td><td>La aplicación de gestión</td></tr><tr><td>Pass</td><td>USUARIOS net</td><td>IMPRESORAS net</td><td>9100, 443</td><td>Imprimir y ver la consola web</td></tr><tr><td>Block</td><td>USUARIOS net</td><td>PRIVADAS</td><td>cualquiera</td><td>Nada más hacia dentro (con registro)</td></tr><tr><td>Pass</td><td>USUARIOS net</td><td>cualquiera</td><td>cualquiera</td><td>Internet</td></tr></tbody></table></div>
+<ul><li>El bloqueo de <code>PRIVADAS</code> antes del &quot;a internet&quot; es lo que impide que un PC de usuario llegue a la VLAN de gestión.</li><li>Marca <strong>Log</strong> en los bloqueos: es lo que mirarás en <strong>Status › System Logs › Firewall</strong> cuando alguien diga &quot;no me deja&quot;.</li><li>Cada regla con descripción que diga quién la pidió y por qué.</li></ul>
+<h2>4. NAT de salida y redirección de puertos</h2>
+<ul><li><strong>Salida</strong>: en <strong>Firewall › NAT › Outbound</strong>, el modo <strong>Automatic</strong> crea las reglas para todas las redes internas. Pasa a <strong>Hybrid</strong> solo si necesitas algo especial (una IP pública concreta para un servidor, <em>static port</em> para una centralita) y añade esas reglas arriba.</li><li><strong>Entrada</strong>: publicar el portal de clientes que corre en <code>10.20.10.20</code>:</li></ul>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">pfSense · Firewall › NAT › Port Forward › Add</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Interface</span><span class="ui-v">WAN</span></div><div class="ui-field"><span class="ui-k">Address Family</span><span class="ui-v">IPv4 · Protocol: TCP</span></div><div class="ui-field"><span class="ui-k">Destination</span><span class="ui-v">WAN address · Port: HTTPS</span></div><div class="ui-field"><span class="ui-k">Redirect target IP</span><span class="ui-v">Address or Alias · 10.20.10.20</span></div><div class="ui-field"><span class="ui-k">Redirect target port</span><span class="ui-v">HTTPS</span></div><div class="ui-field"><span class="ui-k">Description</span><span class="ui-v">Portal clientes</span></div><div class="ui-field"><span class="ui-k">Filter rule association</span><span class="ui-v">Add associated filter rule</span></div><div class="ui-btn">Save</div></div></figure>
+<p>La regla asociada aparece en <strong>Firewall › Rules › WAN</strong>. Si el servicio solo lo usan unos pocos (un proveedor, otra sede), limita el <strong>origen</strong> con un alias en esa regla. Y el servidor publicado, mejor en su propia VLAN (una DMZ) que con los controladores de dominio.</p>
+<h2>5. DHCP y DNS Resolver</h2>
+<ul><li><strong>DHCP</strong>: en <strong>Services › DHCP Server</strong>, una pestaña por interfaz. Rango, puerta de enlace y, en una red con Active Directory, <strong>servidores DNS = los controladores</strong>. Las reservas en <strong>Static Mappings</strong>: MAC, IP y nombre. ISC DHCP está obsoleto en pfSense; en <strong>System › Advanced › Networking</strong>, <strong>Server Backend: Kea DHCP</strong> es el motor que sigue evolucionando.</li><li><strong>DNS Resolver</strong> (Unbound, activado por defecto) en <strong>Services › DNS Resolver</strong>: escucha en las interfaces internas. Para que pfSense y las redes sin dominio resuelvan <code>contoso.local</code>, una <strong>Domain Override</strong> de <code>contoso.local</code> hacia <code>10.20.10.10</code>. Las <strong>Host Overrides</strong> sirven para el DNS dividido del paso 7.</li><li>En <strong>System › General Setup</strong>, los DNS de salida y la casilla de no usar los del operador si quieres resolver siempre igual.</li></ul>
+<h2>6. Paquetes, con criterio</h2>
+<p><strong>System › Package Manager › Available Packages</strong>. Los más útiles en una oficina:</p>
+<ul><li><strong>pfBlockerNG</strong>: listas de IP y DNS maliciosos.</li><li><strong>acme</strong>: certificados de Let&#x27;s Encrypt para la propia interfaz web o un proxy.</li><li><strong>openvpn-client-export</strong> y <strong>WireGuard</strong>: la VPN (guía de acceso remoto de pfSense).</li><li><strong>Zabbix Agent</strong> o SNMP en <strong>Services › SNMP</strong> para la monitorización.</li></ul>
+<p>Cada paquete es algo más que actualizar y que puede fallar en una actualización de versión: instala lo que vayas a usar y apúntalo en la documentación del firewall.</p>
+<h2>7. El ticket: &quot;el portal de clientes no se ve desde fuera&quot;</h2>
+<p>Lunes, 9:00. Tras cambiar el router del operador el viernes, los clientes no entran en <code>https://portal.contoso.example</code>. Desde la oficina, por IP, funciona.</p>
+<ol><li><strong>¿Llega el tráfico al firewall?</strong> <strong>Diagnostics › Packet Capture</strong>: interfaz WAN, puerto 443, y una prueba desde un móvil con datos. Ningún paquete. Y en <strong>Status › Interfaces</strong>, la WAN tiene <code>192.168.1.2</code>: una IP privada.</li><li><strong>El router del operador hace NAT delante.</strong> El nuevo router no viene en modo puente: la IP pública está en él y las conexiones entrantes mueren ahí. Hay dos salidas: pedir al operador el <strong>modo puente</strong> (pfSense recibe la IP pública) o, en su defecto, redirigir el 443 del router hacia <code>192.168.1.2</code> o ponerlo como DMZ. Si la IP de la WAN del router del operador está en <code>100.64.0.0/10</code>, es <strong>CGNAT</strong>: sin IP pública no hay publicación posible, hay que contratarla.</li><li><strong>Si los paquetes sí llegan pero no hay respuesta</strong>, el orden de las reglas: en <strong>Status › System Logs › Firewall</strong>, un bloqueo en WAN hacia <code>10.20.10.20:443</code> por una regla de pfBlockerNG o una regla <em>Block</em> puesta encima de la asociada. Se mueve la regla de pfBlockerNG o se crea una excepción para el portal. Si el log no muestra nada, revisa que la redirección tenga su regla asociada y que la <code>Destination</code> sea <code>WAN address</code>.</li><li><strong>Si el firewall reenvía pero el servidor no contesta</strong>: en <strong>Diagnostics › States</strong>, el estado queda en <code>SYN_SENT:CLOSED</code>. Puerta de enlace del servidor que no es el firewall o el cortafuegos de Windows del servidor sin la regla del 443.</li><li><strong>&quot;Desde la oficina, por nombre, no entra&quot;</strong>: es otro problema, la <strong>NAT reflection</strong>. Dentro, <code>portal.contoso.example</code> resuelve a la IP pública y pfSense, por defecto, no la devuelve hacia dentro. La solución limpia es el <strong>DNS dividido</strong>: una Host Override en el DNS Resolver (o un registro en el DNS de Active Directory) de <code>portal.contoso.example</code> a <code>10.20.10.20</code>. La alternativa es <strong>System › Advanced › Firewall &amp; NAT › NAT Reflection mode for port forwards: Pure NAT</strong>.</li></ol>
+<p>En el ticket: dónde se cortaba (router del operador en modo router), el cambio hecho, la prueba desde fuera (móvil con datos) y desde dentro por nombre.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <a href="pfsense-openvpn-con-ldap-o-radius-wireguard-entre-sedes-alta-disponibilidad-con-carp-y-una-vpn-que-cae-tras-la-conmutacion.html">pfSense: acceso remoto y alta disponibilidad</a> añade OpenVPN para usuarios, WireGuard entre sedes, CARP con dos firewalls y la copia y actualización de versión.</li><li>La de <a href="opnsense-reglas-alias-grupos-suricata-ids-e-ips-y-una-alerta-que-bloquea-trafico-legitimo.html">OPNsense con Suricata</a> es la alternativa con detección de intrusiones integrada.</li><li>Lo que va detrás del 443 publicado: la guía de <a href="apache-en-ubuntu-virtual-hosts-https-con-certbot-cabeceras-y-la-pagina-por-defecto.html">Apache en Ubuntu</a> o la de <a href="iis-sitios-enlaces-grupos-de-aplicaciones-certificados-y-un-503.html">IIS</a>.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span></p>
+      <p class="repo-name"><span class="es">Nivel 3</span> · <span class="es">pfSense: firewall de oficina</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
+      <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/45-network-config-compliance.html"><span class="label muted"><span class="es">Blog · 45</span></span><span class="related-t"><span class="es">Telnet en un switch de sede y un cambio nocturno sin guardar: la revisión semanal de la red</span></span></a><a class="related-link" href="../blog/26-ot-segmentation-lab.html"><span class="label muted"><span class="es">Blog · 26</span></span><span class="related-t"><span class="es">¿Qué caminos hacia la red de planta no deberían existir? Un laboratorio de segmentación Purdue e IEC 62443</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="zabbix-windows-y-linux-a-fondo-servicios-eventlog-logs-procesos-userparameter-psk-y-un-elemento-no-soportado.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Zabbix: Windows y Linux a fondo con el agente 2, con servicios descubiertos, registro de eventos, ficheros de log, procesos, UserParameter, cifrado PSK y un elemento «not supported»</span></span></a>
+    <a class="post-nav-link next" href="pfsense-openvpn-con-ldap-o-radius-wireguard-entre-sedes-alta-disponibilidad-con-carp-y-una-vpn-que-cae-tras-la-conmutacion.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">pfSense: OpenVPN para usuarios con LDAP o RADIUS, WireGuard entre sedes, alta disponibilidad con CARP, copias y actualización, y una VPN que cae tras la conmutación</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

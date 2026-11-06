@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>PowerChute shutdown on VMware and Windows · Iñigo González</title>
+<meta name="description" content="PowerChute Network Shutdown for vSphere and Windows: appliance, NMC pairing, VM, vCenter and host shutdown order, delays and runtime, a test, and a fix.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/sai-powerchute-network-shutdown-en-vmware-y-windows-secuencia-de-apagado-prueba-y-hosts-que-se-apagan-antes.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/sai-powerchute-network-shutdown-en-vmware-y-windows-secuencia-de-apagado-prueba-y-hosts-que-se-apagan-antes.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/sai-powerchute-network-shutdown-en-vmware-y-windows-secuencia-de-apagado-prueba-y-hosts-que-se-apagan-antes.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/sai-powerchute-network-shutdown-en-vmware-y-windows-secuencia-de-apagado-prueba-y-hosts-que-se-apagan-antes.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PowerChute shutdown on VMware and Windows · Iñigo González">
+<meta property="og:description" content="PowerChute Network Shutdown for vSphere and Windows: appliance, NMC pairing, VM, vCenter and host shutdown order, delays and runtime, a test, and a fix.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/sai-powerchute-network-shutdown-en-vmware-y-windows-secuencia-de-apagado-prueba-y-hosts-que-se-apagan-antes.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-sector-5.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PowerChute shutdown on VMware and Windows · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"PowerChute Network Shutdown on VMware and Windows: the virtual appliance, pairing with the UPS card, the shutdown sequence, delays and thresholds, a controlled test and hosts that shut down before the VMs","alternativeHeadline":"PowerChute Network Shutdown en VMware y Windows: el dispositivo virtual, el emparejamiento con la tarjeta del SAI, la secuencia de apagado, retardos y umbrales, una prueba controlada y unos hosts que se apagan antes que las máquinas virtuales","description":"PowerChute Network Shutdown with vCenter: deploying the virtual appliance, pairing it with the Network Management Card, the shutdown order of VMs, vCenter, hosts and storage, the timing maths with runtime and Low Battery Duration, PowerChute on a physical Windows server, a test with a real power cut, and the case of hosts that went down with VMs still running.","datePublished":"2026-11-06","dateModified":"2026-11-06","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/sai-powerchute-network-shutdown-en-vmware-y-windows-secuencia-de-apagado-prueba-y-hosts-que-se-apagan-antes.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/sai-powerchute-network-shutdown-en-vmware-y-windows-secuencia-de-apagado-prueba-y-hosts-que-se-apagan-antes.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"UPS - Powering the comms room"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 5","item":"https://inigogonzalezgarcia.github.io/guias/sector-5.html"},{"@type":"ListItem","position":4,"name":"PowerChute Network Shutdown on VMware and Windows: the virtual appliance, pairing with the UPS card, the shutdown sequence, delays and thresholds, a controlled test and hosts that shut down before the VMs","item":"https://inigogonzalezgarcia.github.io/guias/sai-powerchute-network-shutdown-en-vmware-y-windows-secuencia-de-apagado-prueba-y-hosts-que-se-apagan-antes.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/"><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../es/guias/sai-powerchute-network-shutdown-en-vmware-y-windows-secuencia-de-apagado-prueba-y-hosts-que-se-apagan-antes.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="en">Guides</span></a> · <a href="sector-5.html"><span class="en">Sector 5</span></a></p>
+    <h1><span class="en">PowerChute Network Shutdown on VMware and Windows: the virtual appliance, pairing with the UPS card, the shutdown sequence, delays and thresholds, a controlled test and hosts that shut down before the VMs</span></h1>
+    <p class="lede"><span class="en">PowerChute Network Shutdown with vCenter: deploying the virtual appliance, pairing it with the Network Management Card, the shutdown order of VMs, vCenter, hosts and storage, the timing maths with runtime and Low Battery Duration, PowerChute on a physical Windows server, a test with a real power cut, and the case of hosts that went down with VMs still running.</span></p><p class="label post-meta"><span class="en">Sector 5</span> · <span class="en">UPS - Powering the comms room</span> · <span class="en">9 min read</span> · <span class="en">Updated</span> <span class="en">6 Nov 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>If the outage lasts longer than the battery, the vSphere cluster and the physical servers shut themselves down in order: first the VMs with a clean shutdown, then vCenter, then the hosts and finally everything else, all before the UPS runs out. And proving it with a real test, not with faith in a configuration screen. The <a href="sai-apc-tarjeta-de-red-avisos-autotest-baterias-apagado-con-powerchute-y-un-corte-sin-aviso.html">APC UPS network card</a> guide gets the card ready and introduces PowerChute; this one goes into the detail of the sequence.</p>
+<h2>Before you start</h2>
+<ul><li>The UPS <strong>Network Management Card 3</strong> configured: static IP, time by NTP, alerts and the PowerChute <strong>authentication phrase</strong> (<em>UPS › Configuration › PowerChute</em>).</li><li>The <strong>measured runtime</strong> with the real load (from the last annual test, as in the <a href="sai-de-la-sala-de-comunicaciones-dimensionado-pruebas-apagado-ordenado-y-un-corte-antes-de-la-apertura.html">comms room UPS</a> guide), not the catalogue figure.</li><li>In vCenter, an account for PowerChute with the administrator role (<code>svc-pcns@vsphere.local</code> or an AD one) and the list of VMs with their priority, agreed with the application owners.</li><li><strong>VMware Tools</strong> running in every VM: without it, PowerChute can&#x27;t request a clean shutdown and powers it off hard.</li><li>Open between PowerChute and the card: <strong>TCP 80 or 443, 3052 and 6547</strong> and <strong>UDP 3052</strong>.</li></ul>
+<h2>1. The PowerChute virtual appliance</h2>
+<p>On vSphere, PowerChute Network Shutdown (version 5.x) is installed as a <strong>virtual appliance</strong>: an OVA file deployed with <em>Deploy OVF Template</em>.</p>
+<ul><li>A static IP on the <strong>management network</strong>, the same one from which the card and vCenter are reachable, with its name in DNS (<code>pcns01.mgmt.contoso.local</code>).</li><li>Where to put it: on a cluster host, with no automatic vMotion moving it around uncontrolled (a DRS rule pinning it to a host, or DRS set to manual for that VM). PowerChute shuts itself down near the end, with vCenter, and needs to know which host it is on.</li><li>The web console is at <code>https://pcns01.mgmt.contoso.local:6547</code>. The first-run wizard asks, in order: the environment type (vCenter), the vCenter and its account, the hosts it protects, whether <strong>vCenter is a VM</strong> inside those hosts, and the UPS card.</li></ul>
+<p>If vCenter runs inside the protected cluster, tick it in the wizard (<em>vCenter Server Running on a VM</em>): PowerChute leaves it until the end and, once it is down, talks directly to the hosts to finish.</p>
+<h2>2. Pairing with the card</h2>
+<p>In the wizard, under <em>Network Management Card Connection</em>:</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerChute Network Shutdown · Setup › UPS Details</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Configuration</span><span class="ui-v">Single UPS</span></div><div class="ui-field"><span class="ui-k">Protocol</span><span class="ui-v">HTTPS · Port: 443</span></div><div class="ui-field"><span class="ui-k">NMC IP Address</span><span class="ui-v">10.10.90.41</span></div><div class="ui-field"><span class="ui-k">User Name</span><span class="ui-v">apc</span></div><div class="ui-field"><span class="ui-k">Authentication Phrase</span><span class="ui-v">****************</span></div><div class="ui-btn">Next</div><div class="ui-field"><span class="ui-k">Registered with NMC 10.10.90.41</span><span class="ui-v">Smart-UPS SRT 10000 (ups-cr1-a)</span></div></div></figure>
+<ul><li><strong>Single</strong>, <strong>Redundant</strong> or <strong>Parallel UPS</strong>: with two UPSs feeding the A and B power supplies of every host, <em>Redundant</em>. PowerChute only shuts down if both are on battery: losing one is no reason to stop the cluster.</li><li>The user and phrase must be the card&#x27;s. If they don&#x27;t match, PowerChute doesn&#x27;t register and won&#x27;t receive events.</li><li>On the card, the PowerChute client list shows the appliance&#x27;s IP. If it isn&#x27;t there, there is no pairing, whatever the PowerChute screen says.</li></ul>
+<h2>3. The shutdown sequence</h2>
+<p>What PowerChute does with vCenter, in order, with the <em>Virtualization Settings</em>:</p>
+<div class="g-table"><table><thead><tr><th>Step</th><th>What happens</th><th>Setting</th></tr></thead><tbody><tr><td>1</td><td>Disables vSphere HA on the cluster</td><td><em>Disable HA on Shutdown</em>: without it, HA may power on elsewhere the VMs that are being shut down</td></tr><tr><td>2</td><td>VM migration (optional)</td><td>Usually off: with every host on the same UPS, migrating saves nothing</td></tr><tr><td>3</td><td>Shuts down the VMs by priority group</td><td><em>VM Prioritization</em>: un-prioritised first, then low, medium and high, each group with its duration</td></tr><tr><td>4</td><td>Shuts down vCenter (if it is a VM)</td><td>Its own duration, 240 seconds by default</td></tr><tr><td>5</td><td>Disables vCLS and puts the hosts in maintenance mode</td><td>With their own durations</td></tr><tr><td>6</td><td>Shuts down the hosts</td><td><em>Host Protection</em>: which hosts and in what order</td></tr><tr><td>7</td><td>Shuts down the PowerChute appliance and, if configured, the UPS</td><td><em>Shutdown Settings › Turn off the UPS</em></td></tr></tbody></table></div>
+<p>The priorities follow dependencies, like the layered order in the comms room UPS guide:</p>
+<ul><li><strong>Un-prioritised</strong> (shut down first): test systems, print servers, user jump hosts.</li><li><strong>Low</strong>: web applications and application servers.</li><li><strong>Medium</strong>: databases, which take longer to stop cleanly.</li><li><strong>High</strong>: domain controllers, DNS and whatever the others need until the end.</li></ul>
+<p><strong>Each group&#x27;s duration</strong> is how long PowerChute waits before moving to the next one, whether the VMs have shut down or not. Set it from how long the slowest VM in the group really takes, plus a margin. If a VM is still running when the last step&#x27;s time runs out, the host goes down with it inside.</p>
+<p><strong>Shared storage</strong> comes after the hosts. If the array supports shutdown by command or SSH, PowerChute can launch it with a command file or an SSH action at the end; if not, it stays on until the UPS cuts its output. Confirm with the array vendor which of the two is right for it.</p>
+<h2>4. Delays and thresholds: the maths</h2>
+<p>Three numbers decide whether the sequence finishes before the battery runs out:</p>
+<ul><li>**The <em>UPS On Battery</em> event delay** (in <em>Configure Events</em>): how long to wait on battery before starting, in case power returns or the generator starts.</li><li><strong>Total shutdown time</strong>: the sum of the steps in section 3, plus two minutes PowerChute reserves for the operating system itself.</li><li><strong>Low Battery Duration</strong> (on the card, <em>UPS › Configuration › Shutdown</em>): the minutes left when the UPS declares low battery. When that point is reached, PowerChute starts even if the delay hasn&#x27;t finished.</li></ul>
+<p>With an example from the room:</p>
+<div class="g-table"><table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody><tr><td>Measured runtime with the current load</td><td>22 min</td></tr><tr><td>Durations: un-prioritised 2 min, low 3, medium 6, high 3</td><td>14 min</td></tr><tr><td>vCenter, vCLS and maintenance mode</td><td>6 min</td></tr><tr><td>System margin</td><td>2 min</td></tr><tr><td><strong>Total shutdown time</strong></td><td><strong>22 min</strong></td></tr></tbody></table></div>
+<p>It doesn&#x27;t fit: with any delay on battery, the sequence doesn&#x27;t finish. PowerChute flags it with the <strong>Available runtime has been exceeded</strong> event, and rightly so. The ways out are reducing durations (measured, not guessed), taking load off the UPS or starting earlier. Here, after measuring, the low group ended up at 2 minutes and the medium one at 4, vCenter at its real duration (3 minutes, one less than the default) and the <em>On Battery</em> delay at 1 minute: 1 + 18 = 19 minutes out of 22.</p>
+<ul><li><strong>Runtime Remaining Below Threshold</strong>: besides the delay, an event that starts the shutdown when the remaining runtime drops below a threshold, however long it has been on battery. Useful if the load changes a lot during the day.</li><li>The card&#x27;s <strong>Low Battery Duration</strong> must be longer than the total shutdown time, with a margin. If it is shorter, the UPS cuts its output with the sequence half done.</li></ul>
+<h2>5. PowerChute on a physical Windows server</h2>
+<p>For servers that aren&#x27;t hosts (the physical backup server, for example), PowerChute is installed on Windows itself with the vendor&#x27;s installer and configured the same way, at <code>https://srv-bkp-01:6547</code>.</p>
+<ul><li>The same wizard: UPS, protocol, card IP, user and phrase.</li><li>In <em>Configure Events</em>, <em>UPS On Battery</em> with <em>Shut Down System</em> and its delay, coordinated with the cluster: a backup server can shut down before anything else.</li><li>If something needs stopping carefully before shutdown (the backup service, a database), a <strong>command file</strong> in <em>Shutdown Settings</em>, with its duration. PowerChute only runs files from the <code>user_files</code> folder of its installation.</li><li>Windows Firewall: TCP 6547 and TCP/UDP 3052 from the card&#x27;s IP.</li></ul>
+<h2>6. A controlled test</h2>
+<p>An untried configuration is a hypothesis. Once a year, and after every big change to the cluster:</p>
+<ol><li><strong>Before</strong>: a window agreed with the application owners and with the UPS maintainer present, a recent backup, and the list of VMs without VMware Tools running:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerCLI · vcenter01.contoso.local</span><button class="t-copy" type="button" data-copy="Get-VM | Where-Object { $_.PowerState -eq &#x27;PoweredOn&#x27; -and $_.ExtensionData.Guest.ToolsRunningStatus -ne &#x27;guestToolsRunning&#x27; } | Select-Object Name, @{n=&#x27;Tools&#x27;;e={$_.ExtensionData.Guest.ToolsRunningStatus}}" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-VM | Where-Object { $_.PowerState -eq &#x27;PoweredOn&#x27; -and $_.ExtensionData.Guest.ToolsRunningStatus -ne &#x27;guestToolsRunning&#x27; } | Select-Object Name, @{n=&#x27;Tools&#x27;;e={$_.ExtensionData.Guest.ToolsRunningStatus}}</span><span class="t-out">Name          Tools</span><span class="t-out">----          -----</span><span class="t-out">srv-lic-01    guestToolsNotRunning</span><span class="t-out">app-legacy-02 guestToolsNotRunning</span></code></pre></figure>
+<ol><li><strong>The cut</strong>: the maintainer opens the UPS input (nobody pulls a host&#x27;s power cable). Someone notes the time of each step from the vCenter console and the PowerChute event log.</li><li><strong>During</strong>: check that each group shuts down in its turn, that vCenter goes down after all the VMs and that the hosts shut down with every VM already off.</li><li><strong>Coming back</strong>: the input is closed, the UPS recharges and hosts, storage and VMs are powered on in reverse order (PowerChute can start the VMs when power returns if configured to). The owners check their applications.</li><li><strong>After</strong>: compare the real times with the configured durations and adjust.</li></ol>
+<h2>7. The case: &quot;in the test, the hosts shut down before the VMs&quot;</h2>
+<p>Saturday, 22:00, annual test. After 9 minutes the three hosts are off; on the way back, the <code>srv-sql-02</code> database starts with recovery and the licence server has its file system marked dirty.</p>
+<ol><li><strong>The PowerChute log</strong> tells you what happened: the medium group had the default 120-second duration and PowerChute moved on with <code>srv-sql-02</code> still shutting down. In vCenter, the <em>Initiate guest OS shutdown</em> task for <code>srv-sql-02</code> started at 22:04:10 and the VM was still running at 22:08, when host shutdown began.</li><li><strong>The VMs without Tools</strong>: <code>srv-lic-01</code> and <code>app-legacy-02</code> were on the list from step 1 of the test. Without VMware Tools there is no clean shutdown: they were powered off hard at the start.</li><li><strong>HA</strong>: <em>Disable HA on Shutdown</em> was unticked. When the first host shut down, HA restarted two VMs on the other two, which went down again two minutes later with their host.</li><li><strong>The card</strong>: <em>Low Battery Duration</em> was at 2 minutes, the factory value on many models. It made no difference because the test was cut short, but in a long outage the UPS would have cut its output with the sequence half done.</li></ol>
+<p>What was changed:</p>
+<ul><li><strong>Measured</strong> durations: each group&#x27;s is the slowest shutdown among its VMs (<code>srv-sql-02</code> takes 4 minutes 20 seconds) plus one minute.</li><li>VMware Tools installed on both VMs, and the report of VMs without Tools added to the monthly review.</li><li><em>Disable HA on Shutdown</em> ticked.</li><li><em>Low Battery Duration</em> raised to cover the total shutdown time, and the maths in section 4 recalculated with no <em>Available runtime has been exceeded</em> event.</li><li>A second test in the next window: hosts off at 17 minutes with every VM shut down before them and no start-up with recovery.</li></ul>
+<p>In the report: the test timeline, what failed, the changes and the second test that confirms them.</p>
+<h2>Next steps</h2>
+<ul><li>The <a href="vmware-mantenimiento-de-hosts-y-maquinas-virtuales-en-varias-plantas.html">VMware host and VM maintenance</a> guide covers the ordered power-on of the cluster after an outage.</li><li>The <a href="sai-de-la-sala-de-comunicaciones-dimensionado-pruebas-apagado-ordenado-y-un-corte-antes-de-la-apertura.html">comms room UPS</a> guide explains how to measure runtime during the annual test with the maintainer.</li><li>The <strong>36-major-incident-command-kit</strong> repository on my GitHub helps you keep the test timeline as if it were a real incident.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="en">Sector 5</span> · <span class="en">UPS - Powering the comms room</span></p>
+      <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="sector-5.html"><span class="en">All Sector 5 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/36-major-incident-command-kit.html"><span class="label muted"><span class="en">Blog · 36</span></span><span class="related-t"><span class="en">Users told us 40 minutes before monitoring did: a kit to run and review major incidents</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="sai-de-la-sala-de-comunicaciones-dimensionado-pruebas-apagado-ordenado-y-un-corte-antes-de-la-apertura.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">The comms room UPS: sizing, A/B power, batteries, tests, orderly shutdown and a power cut before the market opens</span></span></a>
+    <a class="post-nav-link next" href="consejo-de-administracion-soporte-tecnico-a-la-reunion-sala-consejeros-remotos-y-plan-b.html"><span class="label muted"><span class="en">Next</span></span><span><span class="en">Board meeting: technical support, from preparation with the company secretary to a director who cannot hear the room</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

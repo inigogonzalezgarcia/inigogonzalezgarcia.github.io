@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Advanced audit policy and event forwarding · Iñigo González</title>
+<meta name="description" content="Advanced audit policy by GPO, event log sizes and Windows Event Forwarding to a collector, plus why the security event you need is missing.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/auditoria-avanzada-por-gpo-tamano-de-registros-reenvio-de-eventos-wef-y-el-evento-que-no-esta.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/auditoria-avanzada-por-gpo-tamano-de-registros-reenvio-de-eventos-wef-y-el-evento-que-no-esta.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/auditoria-avanzada-por-gpo-tamano-de-registros-reenvio-de-eventos-wef-y-el-evento-que-no-esta.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/auditoria-avanzada-por-gpo-tamano-de-registros-reenvio-de-eventos-wef-y-el-evento-que-no-esta.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Advanced audit policy and event forwarding · Iñigo González">
+<meta property="og:description" content="Advanced audit policy by GPO, event log sizes and Windows Event Forwarding to a collector, plus why the security event you need is missing.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/auditoria-avanzada-por-gpo-tamano-de-registros-reenvio-de-eventos-wef-y-el-evento-que-no-esta.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-nivel-3.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Advanced audit policy and event forwarding · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Advanced auditing by GPO: logons, lockouts, accounts, processes with command line, log sizes, forwarding events to a collector, and the event that isn't there","alternativeHeadline":"Auditoría avanzada por GPO: inicios de sesión, bloqueos, cuentas, procesos con línea de comandos, tamaño de los registros, reenvío de eventos a un colector y el evento que no está","description":"The advanced audit policy that generates the events you actually investigate (logon, lockout, account and group management, process creation with command line, policy changes), logs big enough to keep them, Windows Event Forwarding to a collector your SIEM reads, and why the event you need is not there.","datePublished":"2026-11-06","dateModified":"2026-11-06","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/auditoria-avanzada-por-gpo-tamano-de-registros-reenvio-de-eventos-wef-y-el-evento-que-no-esta.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/auditoria-avanzada-por-gpo-tamano-de-registros-reenvio-de-eventos-wef-y-el-evento-que-no-esta.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Security GPOs"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 3","item":"https://inigogonzalezgarcia.github.io/guias/nivel-3.html"},{"@type":"ListItem","position":4,"name":"Advanced auditing by GPO: logons, lockouts, accounts, processes with command line, log sizes, forwarding events to a collector, and the event that isn't there","item":"https://inigogonzalezgarcia.github.io/guias/auditoria-avanzada-por-gpo-tamano-de-registros-reenvio-de-eventos-wef-y-el-evento-que-no-esta.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/"><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../es/guias/auditoria-avanzada-por-gpo-tamano-de-registros-reenvio-de-eventos-wef-y-el-evento-que-no-esta.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="en">Guides</span></a> · <a href="nivel-3.html"><span class="en">Level 3</span></a></p>
+    <h1><span class="en">Advanced auditing by GPO: logons, lockouts, accounts, processes with command line, log sizes, forwarding events to a collector, and the event that isn&#x27;t there</span></h1>
+    <p class="lede"><span class="en">The advanced audit policy that generates the events you actually investigate (logon, lockout, account and group management, process creation with command line, policy changes), logs big enough to keep them, Windows Event Forwarding to a collector your SIEM reads, and why the event you need is not there.</span></p><p class="label post-meta"><span class="en">Level 3</span> · <span class="en">Security GPOs</span> · <span class="en">9 min read</span> · <span class="en">Updated</span> <span class="en">6 Nov 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>Every computer and server in the domain recording what an investigation asks (who signed in and from where, which account was locked, who added someone to a group, which process ran and with which parameters), those events not overwritten within hours, and all of it reaching a central server the SIEM collects from. And knowing what to check when the event you need is not there.</p>
+<h2>Before you start</h2>
+<ul><li>GPMC and permissions to create and link GPOs on the computer, server and domain controller OUs.</li><li>The security baseline already in place: the <a href="gpo-de-seguridad-base-ntlm-llmnr-smb-laps-y-despliegue-en-piloto.html">baseline security GPOs</a> guide covers NTLM, LLMNR, SMB signing, LAPS and PowerShell logging. This guide does not repeat them.</li><li>A Windows Server 2022 or 2025 server for the <strong>collector</strong> (<code>srv-wec01.contoso.local</code>), with disk for several days of events and your SIEM&#x27;s agent if there is one.</li><li>A pilot OU with computers and a couple of servers, as with any security GPO.</li></ul>
+<h2>1. Advanced auditing, not basic</h2>
+<p>Windows has two sets of audit policies. The <strong>basic</strong> one (<em>Local Policies › Audit Policy</em>) has 9 broad categories; the <strong>advanced</strong> one has more than 50 subcategories and is the one to use. Mixing both gives unpredictable results, so you configure only the advanced one and force it to win:</p>
+<ul><li><em>Security Settings › Local Policies › Security Options › Audit: Force audit policy subcategory settings (Windows Vista or later) to override audit policy category settings</em> = <strong>Enabled</strong>.</li></ul>
+<p>The subcategories live in <strong>Computer Configuration › Policies › Windows Settings › Security Settings › Advanced Audit Policy Configuration › Audit Policies</strong>. A sensible starting point, in a <code>SEC-Audit</code> GPO linked to computers and servers:</p>
+<div class="g-table"><table><thead><tr><th>Category › subcategory</th><th>Value</th><th>Events it gives</th></tr></thead><tbody><tr><td>Logon/Logoff › Audit Logon</td><td>Success and Failure</td><td>4624, 4625</td></tr><tr><td>Logon/Logoff › Audit Account Lockout</td><td>Failure</td><td>4625 with status 0xC0000234 on the device where it was attempted</td></tr><tr><td>Logon/Logoff › Audit Special Logon</td><td>Success</td><td>4672 (session with admin privileges)</td></tr><tr><td>Account Management › Audit User Account Management</td><td>Success and Failure</td><td>4720, 4722, 4724, 4725, 4726, 4738, 4740</td></tr><tr><td>Account Management › Audit Security Group Management</td><td>Success</td><td>4728, 4732, 4756 (added to group)</td></tr><tr><td>Detailed Tracking › Audit Process Creation</td><td>Success</td><td>4688</td></tr><tr><td>Policy Change › Audit Audit Policy Change</td><td>Success</td><td>4719</td></tr><tr><td>Policy Change › Audit Authentication Policy Change</td><td>Success</td><td>4706, 4713, 4716</td></tr></tbody></table></div>
+<p>On the <strong>domain controllers</strong>, a separate GPO (<code>SEC-Audit-DC</code>) with the above plus <em>Account Logon › Audit Credential Validation</em> (4776, NTLM) and <em>Audit Kerberos Authentication Service</em> (4768, 4771). Event <strong>4740</strong> (account locked out) is written on the domain controller holding the PDC emulator role, with the name of the computer that caused the lockout.</p>
+<p class="g-tip">Process creation without the command line is of little use. In <em>Administrative Templates › System › Audit Process Creation</em>, <strong>Include command line in process creation events</strong> = <strong>Enabled</strong>. Event 4688 then carries the <em>Process Command Line</em> field. It can contain passwords someone types into a script: the security log is already restricted, and the SIEM must be too.</p>
+<p>The GPO stores advanced auditing in an <code>audit.csv</code> file inside its SYSVOL folder (<code>Machine\Microsoft\Windows NT\Audit\</code>). To check what the device really applies, use <code>auditpol</code>, not the editor:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Command Prompt (administrator) · PC-0412 in the pilot OU</span><button class="t-copy" type="button" data-copy="gpupdate /force&#10;auditpol /get /subcategory:&quot;Process Creation&quot;,&quot;Logon&quot;,&quot;Account Lockout&quot;,&quot;User Account Management&quot;" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>gpupdate /force</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>auditpol /get /subcategory:&quot;Process Creation&quot;,&quot;Logon&quot;,&quot;Account Lockout&quot;,&quot;User Account Management&quot;</span><span class="t-out">System audit policy</span><span class="t-out">Category/Subcategory                      Setting</span><span class="t-out">Detailed Tracking</span><span class="t-out">  Process Creation                        Success</span><span class="t-out">Logon/Logoff</span><span class="t-out">  Logon                                   Success and Failure</span><span class="t-out">  Account Lockout                         Failure</span><span class="t-out">Account Management</span><span class="t-out">  User Account Management                 Success and Failure</span></code></pre></figure>
+<p>On a Windows installed in another language, <code>auditpol</code> subcategory names are localised too; <code>auditpol /get /category:*</code> lists them all with their local names.</p>
+<h2>2. Log size and retention</h2>
+<p>The <strong>Security</strong> log ships at 20 MB. On a file server or a domain controller with advanced auditing, that is hours. In <strong>Administrative Templates › Windows Components › Event Log Service</strong>:</p>
+<ul><li><em>Security › Specify the maximum log file size (KB)</em>: <strong>196608</strong> (192 MB) on workstations, which is what Microsoft&#x27;s baseline sets; <strong>1048576</strong> (1 GB) or more on domain controllers and busy servers.</li><li><em>Application</em> and <em>System</em>: <strong>32768</strong> KB.</li><li><em>Control Event Log behavior when the log file reaches its maximum size</em> = <strong>Disabled</strong> (overwrite old events). Retaining without automatic backup fills the log and stops new events being written.</li></ul>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell (administrator) · checking log size and age</span><button class="t-copy" type="button" data-copy="wevtutil gl Security&#10;(Get-WinEvent -LogName Security -Oldest -MaxEvents 1).TimeCreated" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>wevtutil gl Security</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>(Get-WinEvent -LogName Security -Oldest -MaxEvents 1).TimeCreated</span><span class="t-out">name: Security</span><span class="t-out">enabled: true</span><span class="t-out">type: Admin</span><span class="t-out">logging:</span><span class="t-out">  logFileName: %SystemRoot%\System32\Winevt\Logs\Security.evtx</span><span class="t-out">  retention: false</span><span class="t-out">  autoBackup: false</span><span class="t-out">  maxSize: 201326592</span><span class="t-out">Monday, October 27, 2026 7:02:15 AM</span></code></pre></figure>
+<p>The useful question is not &quot;how big is it&quot; but &quot;how far back does it go&quot;: if the oldest event is two hours old, the local log is useless for any investigation and everything depends on the collector.</p>
+<h2>3. The Windows Event Forwarding collector</h2>
+<p><strong>Windows Event Forwarding</strong> (WEF) forwards events to a central server without an agent: it uses WinRM, which is already in Windows. In <strong>source-initiated</strong> mode, each device asks the collector what to send; new devices join on their own.</p>
+<p>On <code>srv-wec01</code>:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell (administrator) · srv-wec01</span><button class="t-copy" type="button" data-copy="winrm quickconfig -q&#10;wecutil qc /q&#10;Get-Service Wecsvc, WinRM | Select-Object Name, Status, StartType" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>winrm quickconfig -q</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>wecutil qc /q</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-Service Wecsvc, WinRM | Select-Object Name, Status, StartType</span><span class="t-out">Name    Status StartType</span><span class="t-out">----    ------ ---------</span><span class="t-out">Wecsvc Running Automatic</span><span class="t-out">WinRM  Running Automatic</span></code></pre></figure>
+<p>The subscription is created in <strong>Event Viewer › Subscriptions › Create Subscription</strong>:</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Subscription Properties · SEC-Base</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Subscription name</span><span class="ui-v">SEC-Base</span></div><div class="ui-field"><span class="ui-k">Destination log</span><span class="ui-v">Forwarded Events</span></div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Source computer initiated</div><div class="ui-field"><span class="ui-k">Computer groups</span><span class="ui-v">CONTOSO\GG-WEF-Sources</span></div><div class="ui-field"><span class="ui-k">Events</span><span class="ui-v">by XML (query below)</span></div><div class="ui-field"><span class="ui-k">Advanced</span><span class="ui-v">delivery optimization Normal · protocol HTTP · port 5985</span></div><div class="ui-btn">OK</div></div></figure>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">XML query of the SEC-Base subscription</span><button class="t-copy" type="button" data-copy="&lt;QueryList&gt;&#10;  &lt;Query Id=&quot;0&quot; Path=&quot;Security&quot;&gt;&#10;    &lt;Select Path=&quot;Security&quot;&gt;*[System[(EventID=4625 or EventID=4740 or EventID=4672 or EventID=4688 or EventID=4719 or EventID=4720 or EventID=4726 or EventID=4728 or EventID=4732 or EventID=4756 or EventID=1102)]]&lt;/Select&gt;&#10;    &lt;Select Path=&quot;Security&quot;&gt;*[System[(EventID=4624)]] and *[EventData[Data[@Name=&#x27;LogonType&#x27;]=&#x27;10&#x27;]]&lt;/Select&gt;&#10;  &lt;/Query&gt;&#10;&lt;/QueryList&gt;" data-copied="Copied">Copy</button></figcaption><pre class="t-body"><code><span class="t-out">&lt;QueryList&gt;</span><span class="t-out">  &lt;Query Id=&quot;0&quot; Path=&quot;Security&quot;&gt;</span><span class="t-out">    &lt;Select Path=&quot;Security&quot;&gt;*[System[(EventID=4625 or EventID=4740 or EventID=4672 or EventID=4688 or EventID=4719 or EventID=4720 or EventID=4726 or EventID=4728 or EventID=4732 or EventID=4756 or EventID=1102)]]&lt;/Select&gt;</span><span class="t-out">    &lt;Select Path=&quot;Security&quot;&gt;*[System[(EventID=4624)]] and *[EventData[Data[@Name=&#x27;LogonType&#x27;]=&#x27;10&#x27;]]&lt;/Select&gt;</span><span class="t-out">  &lt;/Query&gt;</span><span class="t-out">&lt;/QueryList&gt;</span></code></pre></figure>
+<ul><li>Better <strong>one subscription with several queries</strong> than many subscriptions: each one is another connection per device.</li><li><strong>4624</strong> from every device is a lot of volume; here only type 10 (Remote Desktop) is sent. Network logons on servers can go in a separate subscription for that group.</li><li><strong>Normal</strong> delivers in batches every 15 minutes; <strong>Minimize Latency</strong>, in about 30 seconds. For SIEM alerts, minimum latency on what is critical.</li><li><strong>1102</strong> (security log cleared) is always logged, with no policy: it is in the query because it is the first thing someone covering their tracks does.</li></ul>
+<h2>4. The source devices, by GPO</h2>
+<p>In a <code>SEC-WEF-Source</code> GPO linked to the computer and server OUs:</p>
+<ol><li><em>Administrative Templates › Windows Components › Event Forwarding › Configure target Subscription Manager</em> = <strong>Enabled</strong>, with the value <code>Server=http://srv-wec01.contoso.local:5985/wsman/SubscriptionManager/WEC,Refresh=600</code>.</li><li><em>Security Settings › System Services › Windows Remote Management (WS-Management)</em> = <strong>Automatic</strong>.</li><li>The forwarding service runs as <strong>Network Service</strong> and by default cannot read the security log. In <em>Preferences › Control Panel Settings › Local Users and Groups</em>, group <strong>Event Log Readers (built-in)</strong>, action <em>Update</em>, member <code>NT AUTHORITY\NETWORK SERVICE</code>. It needs a restart of the device (or the WinRM service) for the token to pick it up.</li><li>On the collector, inbound firewall to 5985 from the device networks (the <a href="powershell-remoto-winrm-invoke-command-en-lote-segundo-salto-jea-y-acceso-denegado.html">PowerShell remoting and WinRM</a> guide explains the port and authentication).</li></ol>
+<p>With HTTP and Kerberos inside the domain, the content is encrypted by WinRM; HTTPS on 5986 is needed for devices outside the domain, with certificates.</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Command Prompt (administrator) · srv-wec01</span><button class="t-copy" type="button" data-copy="wecutil gr SEC-Base" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>wecutil gr SEC-Base</span><span class="t-out">Subscription: SEC-Base</span><span class="t-out">	RunTimeStatus: Active</span><span class="t-out">	LastError: 0</span><span class="t-out">	EventSources:</span><span class="t-out">		PC-0412.contoso.local</span><span class="t-out">			RunTimeStatus: Active</span><span class="t-out">			LastError: 0</span><span class="t-out">			LastHeartbeatTime: 2026-11-06T09:12:44.512</span><span class="t-out">		SRV-FS01.contoso.local</span><span class="t-out">			RunTimeStatus: Active</span><span class="t-out">			LastError: 0</span><span class="t-out">			LastHeartbeatTime: 2026-11-06T09:13:02.087</span></code></pre></figure>
+<p>On the source, <em>Applications and Services Logs › Microsoft › Windows › Eventlog-ForwardingPlugin › Operational</em> shows <strong>104</strong> (connected to the subscription manager) and <strong>100</strong> (subscription created). Errors reading the security log show up there too.</p>
+<p class="g-tip">Also increase <strong>Forwarded Events</strong> on the collector (<code>wevtutil sl ForwardedEvents /ms:4294967296</code> for 4 GB). The SIEM agent (Azure Monitor Agent for Sentinel, Splunk Universal Forwarder, Wazuh) reads that log and ships it; the collector is the single point you watch.</p>
+<h2>5. The ticket: &quot;the event I need is not in the log&quot;</h2>
+<p>Security wants to know what the user of <code>PC-0377</code> ran yesterday at 18:40: a Defender alert mentions a <code>powershell.exe</code> launched from Excel. Event Viewer on <code>PC-0377</code> has no <strong>4688</strong> at all, and neither does the collector.</p>
+<ol><li><strong>Is it being audited?</strong> <code>auditpol /get /subcategory:&quot;Process Creation&quot;</code> says <strong>No Auditing</strong>, even though the <code>SEC-Audit</code> GPO shows as applied in <code>gpresult /r</code>.</li><li><strong>Basic overrides advanced.</strong> In the <code>gpresult /h</code> report, <em>Local Policies › Audit Policy › Audit process tracking</em> comes from an old GPO on the Sales OU, and <em>Audit: Force audit policy subcategory settings...</em> is <strong>Disabled</strong> in that same GPO. With the option disabled, the basic category wins over all its subcategories.</li></ol>
+<p>Fix: remove the basic policy from the old GPO, leave <em>Force audit policy subcategory settings</em> <strong>Enabled</strong> (in <code>SEC-Audit</code>, with a link order that wins) and check again with <code>auditpol</code>.</p>
+<p>If <code>auditpol</code> says <strong>Success</strong> and the event is still missing, the next suspect is <strong>size</strong>:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell (administrator) · PC-0377</span><button class="t-copy" type="button" data-copy="(Get-WinEvent -LogName Security -Oldest -MaxEvents 1).TimeCreated&#10;Get-WinEvent -LogName Security -MaxEvents 1 | Select-Object TimeCreated&#10;wevtutil gl Security | findstr maxSize" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>(Get-WinEvent -LogName Security -Oldest -MaxEvents 1).TimeCreated</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-WinEvent -LogName Security -MaxEvents 1 | Select-Object TimeCreated</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>wevtutil gl Security | findstr maxSize</span><span class="t-out">Thursday, November 5, 2026 9:17:40 PM</span><span class="t-out">TimeCreated</span><span class="t-out">-----------</span><span class="t-out">11/6/2026 10:02:11 AM</span><span class="t-out">  maxSize: 20971520</span></code></pre></figure>
+<p>The log only reaches back to 21:17 last night: the size GPO is not applied on that device (it sat in an OU without the link). The 18:40 event was overwritten and only what reached the collector remains. The ticket note records both causes, the GPO change and the check (<code>auditpol</code> with <em>Success</em>, <code>maxSize: 201326592</code> and a test 4688 seen on the collector).</p>
+<p class="g-warn">When an advanced audit setting is removed from a GPO, the device keeps the configuration it had. To leave a subcategory unaudited you configure it explicitly as <em>No Auditing</em>, or clean up with <code>auditpol /clear</code> on the device and apply the GPO again.</p>
+<h2>Next steps</h2>
+<ul><li>To read account management events (who deleted or changed a user), the <a href="active-directory-delegar-permisos-papelera-y-quien-ha-cambiado-este-usuario.html">Active Directory delegation and auditing</a> guide.</li><li>What reaches the collector becomes alerts in the SIEM: <a href="microsoft-sentinel-conectores-una-regla-en-kql-y-un-incidente-de-principio-a-fin.html">Microsoft Sentinel, connectors and a KQL rule</a>.</li><li>Auditing firewall connections (events 5156 and 5157) complements the <a href="firewall-de-windows-por-gpo-perfiles-reglas-registro-y-una-aplicacion-que-deja-de-funcionar.html">Windows Firewall by GPO</a> guide.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="en">Level 3</span> · <span class="en">Security GPOs</span></p>
+      <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-3.html"><span class="en">All Level 3 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/25-security-controls-evidence.html"><span class="label muted"><span class="en">Blog · 25</span></span><span class="related-t"><span class="en">What will the auditor ask for that you cannot show yet? One register for ISO 27001, NIS2 and GDPR</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="microsoft-365-copilot-sobreexposicion-piloto-agentes-y-un-documento-que-no-deberia-ver.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">Microsoft 365 Copilot: prerequisites, oversharing in SharePoint, pilot, agents and a user who sees a document they shouldn&#x27;t</span></span></a>
+    <a class="post-nav-link next" href="escritorio-remoto-seguro-por-gpo-nla-limites-de-sesion-servidor-de-salto-restricted-admin-y-error-credssp.html"><span class="label muted"><span class="en">Next</span></span><span><span class="en">Secure Remote Desktop by GPO: who can sign in, NLA and TLS, session limits, admin networks only, jump host, Restricted Admin and Remote Credential Guard, and the NLA or CredSSP error</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
