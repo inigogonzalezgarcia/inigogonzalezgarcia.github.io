@@ -444,6 +444,7 @@ RELATED = {
     "windows11-migracion": ["18-mecm-intune-comanagement-tracker", "29-tenant-separation-cutover-planner", "41-windows-update-ring-tracker"],
     "entornos-prueba": ["40-change-calendar-risk-review"],
     "router-4g": ["42-retail-store-it-health"],
+    "cisco-wap": ["45-network-config-compliance", "34-venue-service-readiness"], "cacti": ["08-edge-health-slo-monitor"], "pfsense": ["45-network-config-compliance", "26-ot-segmentation-lab"], "opnsense": ["26-ot-segmentation-lab", "39-vulnerability-remediation-sla"], "nagios": ["08-edge-health-slo-monitor", "36-major-incident-command-kit"], "squid": ["25-security-controls-evidence"], "freeradius": ["37-iam-access-review", "45-network-config-compliance"], "asterisk": ["36-major-incident-command-kit"], "splunk": ["25-security-controls-evidence", "39-vulnerability-remediation-sla"], "cripto": ["25-security-controls-evidence"],
     "cisco-sede": ["45-network-config-compliance"], "cisco-basico": ["45-network-config-compliance"], "switch-hp": ["45-network-config-compliance"],
     "impresoras-tienda": ["42-retail-store-it-health"],
     "anyconnect-retail": ["42-retail-store-it-health"],
