@@ -14662,6 +14662,7 @@ g(slug="hotel-en-pre-apertura-checklist-de-it-hasta-el-dia-de-apertura", topic="
   seo_title_en="Hotel pre-opening IT checklist · Iñigo González",
   seo_title_es="Checklist IT de pre-apertura de un hotel · Iñigo González",
   seo_desc="Hotel pre-opening IT checklist: calendar back from opening, network by use, circuits to order first, PMS interfaces, check-in tests and day-one support.",
+  seo_desc_es="Checklist IT para la pre-apertura de un hotel: calendario desde la apertura, red por usos, circuitos, interfaces con el PMS, pruebas de check-in y soporte.",
   dek_es="El calendario hacia atrás desde la fecha de apertura, la red separada por usos, los circuitos que hay que pedir antes que nada, el mapa de interfaces con el PMS, la semana de pruebas con huéspedes simulados y el soporte del primer día.",
   dek_en="The calendar counted back from the opening date, the network split by use, the circuits to order before anything else, the map of interfaces with the PMS, the test week with simulated guests and support on day one.",
   es="""
