@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>OPNsense: Suricata IDS/IPS y ajuste · Iñigo González</title>
+<meta name="description" content="OPNsense en una oficina: instalación y asistente, alias y grupos de interfaces para no repetir reglas, Suricata primero solo detectando y después bloqueando…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/opnsense-reglas-alias-grupos-suricata-ids-e-ips-y-una-alerta-que-bloquea-trafico-legitimo.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/opnsense-reglas-alias-grupos-suricata-ids-e-ips-y-una-alerta-que-bloquea-trafico-legitimo.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/opnsense-reglas-alias-grupos-suricata-ids-e-ips-y-una-alerta-que-bloquea-trafico-legitimo.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/opnsense-reglas-alias-grupos-suricata-ids-e-ips-y-una-alerta-que-bloquea-trafico-legitimo.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OPNsense: Suricata IDS/IPS y ajuste · Iñigo González">
+<meta property="og:description" content="OPNsense en una oficina: instalación y asistente, alias y grupos de interfaces para no repetir reglas, Suricata primero solo detectando y después bloqueando…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/opnsense-reglas-alias-grupos-suricata-ids-e-ips-y-una-alerta-que-bloquea-trafico-legitimo.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-nivel-3.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OPNsense: Suricata IDS/IPS y ajuste · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"OPNsense: instalación, reglas, alias y grupos, Suricata en modo IDS y luego IPS, actualizaciones y copias, y una alerta que bloquea tráfico legítimo","alternativeHeadline":"OPNsense: installation, rules, aliases and groups, Suricata in IDS and then IPS mode, updates and backups, and an alert that blocks legitimate traffic","description":"OPNsense en una oficina: instalación y asistente, alias y grupos de interfaces para no repetir reglas, Suricata primero solo detectando y después bloqueando con conjuntos de reglas y políticas, actualizaciones y copias de configuración, y la gestoría que no puede subir facturas porque el IPS la bloquea.","datePublished":"2026-11-06","dateModified":"2026-11-06","inLanguage":"es","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/es/guias/opnsense-reglas-alias-grupos-suricata-ids-e-ips-y-una-alerta-que-bloquea-trafico-legitimo.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/guias/opnsense-reglas-alias-grupos-suricata-ids-e-ips-y-una-alerta-que-bloquea-trafico-legitimo.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"OPNsense: firewall con IDS"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Nivel 3","item":"https://inigogonzalezgarcia.github.io/es/guias/nivel-3.html"},{"@type":"ListItem","position":4,"name":"OPNsense: instalación, reglas, alias y grupos, Suricata en modo IDS y luego IPS, actualizaciones y copias, y una alerta que bloquea tráfico legítimo","item":"https://inigogonzalezgarcia.github.io/es/guias/opnsense-reglas-alias-grupos-suricata-ids-e-ips-y-una-alerta-que-bloquea-trafico-legitimo.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/opnsense-reglas-alias-grupos-suricata-ids-e-ips-y-una-alerta-que-bloquea-trafico-legitimo.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <a href="nivel-3.html"><span class="es">Nivel 3</span></a></p>
+    <h1><span class="es">OPNsense: instalación, reglas, alias y grupos, Suricata en modo IDS y luego IPS, actualizaciones y copias, y una alerta que bloquea tráfico legítimo</span></h1>
+    <p class="lede"><span class="es">OPNsense en una oficina: instalación y asistente, alias y grupos de interfaces para no repetir reglas, Suricata primero solo detectando y después bloqueando con conjuntos de reglas y políticas, actualizaciones y copias de configuración, y la gestoría que no puede subir facturas porque el IPS la bloquea.</span></p><p class="label post-meta"><span class="es">Nivel 3</span> · <span class="es">OPNsense: firewall con IDS</span> · <span class="es">7 min</span> · <span class="es">Actualizado</span> <span class="es">6 nov 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Un OPNsense que filtra como cualquier firewall y, además, <strong>mira dentro</strong> del tráfico con Suricata: primero solo avisando, hasta conocer qué es normal en la oficina, y después bloqueando lo que es claramente malicioso. Con las reglas ordenadas en grupos, la configuración guardada y el procedimiento para cuando el IPS corta algo que el negocio necesita.</p>
+<h2>Antes de empezar</h2>
+<ul><li><strong>OPNsense 25.7 o posterior</strong> en un equipo con tarjetas Intel (<code>igb</code>, <code>igc</code>, <code>ix</code>): el modo IPS usa <strong>netmap</strong> y no todas las tarjetas lo soportan bien. Para Suricata, al menos 8 GB de RAM y una CPU que no vaya justa con el tráfico de la oficina.</li><li>El plan de red: VLAN de usuarios de cada planta (<code>10.30.20.0/24</code> y <code>10.30.21.0/24</code>), servidores (<code>10.30.10.0/24</code>), dominio <code>contoso.local</code>.</li><li>Los conceptos de firewall (interfaz de entrada, primera regla que coincide, NAT) son los mismos que en la guía de <a href="pfsense-firewall-de-oficina-interfaces-vlan-alias-reglas-nat-dns-y-un-servicio-publicado-que-no-se-ve.html">pfSense como firewall de oficina</a>; aquí se cuenta lo que cambia en OPNsense.</li></ul>
+<h2>1. Instalación y primer acceso</h2>
+<ol><li>Descarga la imagen <strong>vga</strong> (USB) o <strong>dvd</strong> de la web de OPNsense y comprueba su suma SHA256.</li><li>Arranca: el sistema inicia en vivo. Entra con <code>installer</code> / <code>opnsense</code> para instalar en disco (elige <strong>ZFS</strong>). Con <code>root</code> / <code>opnsense</code> se prueba sin instalar.</li><li>Tras reiniciar, en la consola, <strong>1) Assign interfaces</strong> y <strong>2) Set interface IP address</strong> si la LAN no debe ser <code>192.168.1.1/24</code>.</li><li>En <code>https://&lt;IP LAN&gt;</code>, <code>root</code> / <code>opnsense</code>, y el asistente: nombre (<code>fw-oficina</code>), dominio, DNS, WAN, LAN y la <strong>contraseña nueva de root</strong>.</li></ol>
+<p>Después: un usuario con nombre en <strong>System › Access › Users</strong> (con el grupo <code>admins</code>) y, en <strong>System › Settings › Administration</strong>, HTTPS, la interfaz de gestión limitada a la red de IT y el acceso SSH de root desactivado.</p>
+<h2>2. Alias, grupos de interfaces y reglas</h2>
+<p><strong>Firewall › Aliases</strong> admite más tipos que un firewall básico: <em>Host(s)</em>, <em>Network(s)</em>, <em>Port(s)</em>, <em>URL Table</em> (una lista descargada periódicamente), <em>GeoIP</em> (por país, con una clave de MaxMind) y <em>Network group</em>.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">OPNsense · Firewall › Aliases › Add</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Name</span><span class="ui-v">SRV_FICHEROS · Type: Host(s) · Content: 10.30.10.20</span></div><div class="ui-field"><span class="ui-k">Name</span><span class="ui-v">PUERTOS_SMB · Type: Port(s) · Content: 445</span></div><div class="ui-field"><span class="ui-k">Name</span><span class="ui-v">PRIVADAS · Type: Network(s) · Content: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16</span></div><div class="ui-btn">Save</div><div class="ui-btn">Apply</div></div></figure>
+<p>Los <strong>grupos de interfaces</strong> evitan copiar las mismas reglas en cada VLAN de usuarios:</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">OPNsense · Firewall › Groups › Add</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Name</span><span class="ui-v">USUARIOS</span></div><div class="ui-field"><span class="ui-k">Members</span><span class="ui-v">USUARIOS_P1, USUARIOS_P2</span></div><div class="ui-field"><span class="ui-k">Description</span><span class="ui-v">Usuarios de todas las plantas</span></div><div class="ui-btn">Save</div></div></figure>
+<p>El grupo aparece como una pestaña más en <strong>Firewall › Rules</strong>. El orden de evaluación es <strong>Floating, después grupo, después interfaz</strong>: lo común a todas las plantas va en el grupo y la excepción de una planta, en su interfaz. Dentro de cada pestaña, la primera regla que coincide gana y lo que no coincide se bloquea.</p>
+<p>Para saber qué regla ha decidido sobre una conexión, <strong>Firewall › Log Files › Live View</strong>, filtrando por la IP del equipo: cada línea dice la regla y si pasó o se bloqueó.</p>
+<h2>3. Suricata en modo IDS: primero, mirar</h2>
+<p>Antes de activar nada, desactiva la descarga de trabajo en las tarjetas, que impide a Suricata ver los paquetes tal como son:</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">OPNsense · Interfaces › Settings</span></figcaption><div class="ui-body"><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Hardware CRC: Disable hardware checksum offload</div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Hardware TSO: Disable hardware TCP segmentation offload</div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Hardware LRO: Disable hardware large receive offload</div><div class="ui-field"><span class="ui-k">VLAN Hardware Filtering</span><span class="ui-v">Disable VLAN Hardware Filtering</span></div><div class="ui-btn">Save</div></div></figure>
+<p>Después, Suricata solo detectando:</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">OPNsense · Services › Intrusion Detection › Administration › Settings</span></figcaption><div class="ui-body"><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Enabled</div><div class="ui-opt"><span class="ui-box" aria-hidden="true"></span>IPS mode</div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Promiscuous mode</div><div class="ui-field"><span class="ui-k">Pattern matcher</span><span class="ui-v">Hyperscan</span></div><div class="ui-field"><span class="ui-k">Interfaces</span><span class="ui-v">USUARIOS_P1, USUARIOS_P2, SERVIDORES</span></div><div class="ui-field"><span class="ui-k">Home networks</span><span class="ui-v">10.30.0.0/16</span></div><div class="ui-btn">Apply</div></div></figure>
+<ul><li><strong>Interfaces internas, no la WAN</strong>: en la WAN Suricata ve el tráfico después del NAT y todas las alertas apuntan al propio firewall, no al equipo que las causa. Y lo que llega de internet sin regla ya lo descarta el firewall.</li><li><strong>Promiscuous mode</strong> hace falta si las VLAN cuelgan de la misma tarjeta física.</li><li>En <strong>Download</strong>, elige los conjuntos de reglas (<em>rulesets</em>): los de <strong>ET open</strong> (<code>emerging-malware</code>, <code>emerging-exploit</code>, <code>emerging-phishing</code>, <code>emerging-coinminer</code>, <code>emerging-scan</code>, <code>emerging-policy</code>, <code>emerging-info</code>...) y los de <strong>abuse.ch</strong>. Pulsa <strong>Download &amp; Update Rules</strong> y programa la actualización diaria con <strong>Schedule</strong>.</li></ul>
+<p>Déjalo <strong>una o dos semanas</strong> así. En <strong>Alerts</strong> verás qué salta y desde qué equipos: lo que es ruido (un escaneo propio, una aplicación antigua de la oficina) se identifica ahora, cuando todavía no corta nada.</p>
+<h2>4. Políticas y el paso a IPS</h2>
+<p>Las <strong>políticas</strong> (pestaña <strong>Policy</strong>) cambian la acción de muchas reglas a la vez sin tocar las reglas una a una. Cada política dice: de estos conjuntos, las reglas con esta acción, pasan a esta otra.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">OPNsense · Intrusion Detection › Policy › Add</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Priority</span><span class="ui-v">10</span></div><div class="ui-field"><span class="ui-k">Rulesets</span><span class="ui-v">ET open/emerging-malware, ET open/emerging-exploit, ET open/emerging-phishing, ET open/emerging-coinminer, abuse.ch/URLhaus</span></div><div class="ui-field"><span class="ui-k">Action</span><span class="ui-v">Alert</span></div><div class="ui-field"><span class="ui-k">New action</span><span class="ui-v">Drop</span></div><div class="ui-field"><span class="ui-k">Description</span><span class="ui-v">Bloquear lo claramente malicioso</span></div><div class="ui-btn">Save</div></div></figure>
+<ul><li><strong>Solo bloquea categorías de alta confianza.</strong> <code>emerging-policy</code> e <code>emerging-info</code> describen comportamientos (un servicio de compartir ficheros, un dominio de una extensión rara) que en una oficina son a menudo legítimos: se quedan en <em>Alert</em>.</li><li>Si dos políticas afectan a la misma regla, gana la de <strong>número de prioridad más bajo</strong>.</li></ul>
+<p>Con las políticas en su sitio, en <strong>Settings</strong> marca <strong>IPS mode</strong> (en versiones recientes, <em>Capture mode: Netmap (IPS)</em>) y aplica. Las interfaces se reinician un instante: hazlo fuera de horario. En <strong>Alerts</strong>, la columna <strong>Action</strong> pasa a mostrar <code>blocked</code> en lo que se descarta.</p>
+<p class="g-tip">Si la tarjeta no funciona bien con netmap (cortes, rendimiento muy bajo), el <em>tunable</em> <code>dev.netmap.admode=2</code> en <strong>System › Settings › Tunables</strong> fuerza el modo emulado. Es más lento, pero estable.</p>
+<h2>5. Actualizaciones y copias</h2>
+<ul><li><strong>System › Firmware › Status › Check for updates</strong>. Las actualizaciones menores salen cada pocas semanas; las versiones mayores (25.7, 26.1...), dos veces al año y se aplican desde la misma página tras leer las notas. Si incluyen núcleo nuevo, piden reinicio.</li><li>Desde la consola, la opción <strong>12) Update from console</strong> hace lo mismo si la web no responde.</li><li><strong>System › Configuration › Backups › Download configuration</strong>, cifrada con contraseña. Antes de cada actualización y después de cada cambio importante.</li><li><strong>System › Configuration › History</strong> guarda cada cambio con quién lo hizo: compara dos versiones y vuelve a una anterior.</li><li>Con ZFS, <strong>System › Snapshots</strong> crea un punto de arranque antes de actualizar: si la versión nueva falla, se arranca desde el anterior.</li></ul>
+<h2>6. El ticket: &quot;la gestoría no puede subirnos las facturas desde que hay IPS&quot;</h2>
+<p>Miércoles, 9:15. Contabilidad no puede descargar ni subir ficheros al portal de intercambio de la gestoría: el navegador se queda cargando y acaba en <em>conexión restablecida</em>. Desde el móvil con datos, funciona.</p>
+<ol><li><strong>¿Es el IPS?</strong> En <strong>Alerts</strong>, filtrando por la IP del puesto de contabilidad:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">fw-oficina · shell (opción 8 de la consola)</span><button class="t-copy" type="button" data-copy="grep &#x27;&quot;src_ip&quot;:&quot;10.30.20.45&quot;&#x27; /var/log/suricata/eve.json | grep &#x27;&quot;blocked&quot;&#x27; | tail -n 1" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>grep &#x27;&quot;src_ip&quot;:&quot;10.30.20.45&quot;&#x27; /var/log/suricata/eve.json | grep &#x27;&quot;blocked&quot;&#x27; | tail -n 1</span><span class="t-out">{&quot;timestamp&quot;:&quot;2026-11-05T09:12:44.512+0100&quot;,&quot;event_type&quot;:&quot;alert&quot;,&quot;src_ip&quot;:&quot;10.30.20.45&quot;,&quot;src_port&quot;:51874,&quot;dest_ip&quot;:&quot;203.0.113.80&quot;,&quot;dest_port&quot;:443,&quot;proto&quot;:&quot;TCP&quot;,&quot;alert&quot;:{&quot;action&quot;:&quot;blocked&quot;,&quot;signature_id&quot;:2059421,&quot;signature&quot;:&quot;ET INFO Observed File Sharing Service Domain in TLS SNI (files.fabrikam.example)&quot;,&quot;category&quot;:&quot;Potentially Bad Traffic&quot;},&quot;tls&quot;:{&quot;sni&quot;:&quot;files.fabrikam.example&quot;}}</span></code></pre></figure>
+<ol><li><strong>¿Por qué se bloquea algo de <code>emerging-info</code>?</strong> En <strong>Policy</strong> aparece una segunda política, añadida la semana pasada &quot;para ir más seguros&quot;, que pasa a <em>Drop</em> todo <code>emerging-info</code> y <code>emerging-policy</code>. Es el error de fondo.</li><li><strong>Las tres herramientas, de más general a más concreta</strong>:</li></ol>
+<ul><li><strong>Corregir la política</strong>: se quita <code>emerging-info</code> y <code>emerging-policy</code> de la política de bloqueo. Es la solución de verdad: esos conjuntos describen comportamientos, no amenazas.</li><li><strong>Excepción para una regla</strong>: una política con <strong>prioridad 1</strong>, el SID <code>2059421</code> (o filtrando por el conjunto y la regla) y <em>New action: Alert</em>. Sigue avisando, ya no bloquea. Un cambio manual en la pestaña <strong>Rules</strong> hace lo mismo para una regla suelta y queda marcado como <code>__manual__</code>.</li><li><strong>Lista de paso</strong> en <strong>User defined</strong>: una regla con <em>Destination IP</em> <code>203.0.113.80</code> y <em>Action: Pass</em>, para que Suricata deje de inspeccionar ese tráfico. Solo para destinos conocidos y estables, con descripción y fecha de revisión: un <em>pass</em> demasiado amplio es un agujero.</li></ul>
+<ol><li><strong>Comprobación</strong>: contabilidad sube una factura de prueba; en <strong>Alerts</strong> la entrada aparece como <code>allowed</code> (si se quedó en alerta) o no aparece (si va por la lista de paso).</li></ol>
+<p>En el ticket: alerta y SID, la política que la convertía en bloqueo, el cambio aplicado y quién lo aprobó. Y, en el registro de cambios del firewall, la regla de oro: <strong>ninguna política nueva en Drop sin una semana antes en Alert</strong>.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>La base de reglas, NAT y DNS con la otra gran distribución está en la guía de <a href="pfsense-firewall-de-oficina-interfaces-vlan-alias-reglas-nat-dns-y-un-servicio-publicado-que-no-se-ve.html">pfSense como firewall de oficina</a>; el acceso remoto y la alta disponibilidad, en la de <a href="pfsense-openvpn-con-ldap-o-radius-wireguard-entre-sedes-alta-disponibilidad-con-carp-y-una-vpn-que-cae-tras-la-conmutacion.html">pfSense con OpenVPN, WireGuard y CARP</a>.</li><li>Para guardar y buscar las alertas de Suricata junto al resto de registros, la guía de <a href="elk-centralizar-logs-de-servidores-y-buscar-un-error-en-kibana.html">ELK</a>: <code>eve.json</code> se envía tal cual.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span></p>
+      <p class="repo-name"><span class="es">Nivel 3</span> · <span class="es">OPNsense: firewall con IDS</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
+      <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/26-ot-segmentation-lab.html"><span class="label muted"><span class="es">Blog · 26</span></span><span class="related-t"><span class="es">¿Qué caminos hacia la red de planta no deberían existir? Un laboratorio de segmentación Purdue e IEC 62443</span></span></a><a class="related-link" href="../blog/39-vulnerability-remediation-sla.html"><span class="label muted"><span class="es">Blog · 39</span></span><span class="related-t"><span class="es">Una VPN con un exploit conocido y treinta servidores sin reiniciar: la corrección de vulnerabilidades frente al SLA</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="pfsense-openvpn-con-ldap-o-radius-wireguard-entre-sedes-alta-disponibilidad-con-carp-y-una-vpn-que-cae-tras-la-conmutacion.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">pfSense: OpenVPN para usuarios con LDAP o RADIUS, WireGuard entre sedes, alta disponibilidad con CARP, copias y actualización, y una VPN que cae tras la conmutación</span></span></a>
+    <a class="post-nav-link next" href="nagios-core-objetos-plantillas-nrpe-ncpa-avisos-escalados-dependencias-y-un-falso-critical.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">Nagios Core 4.5: hosts, servicios y plantillas, NRPE en Linux y NCPA en Windows, avisos y escalados, dependencias, comprobaciones pasivas y un CRITICAL que no lo era</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

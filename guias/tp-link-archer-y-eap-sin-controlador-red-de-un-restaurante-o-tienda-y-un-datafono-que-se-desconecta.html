@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>TP-Link Archer and EAP for a small venue · Iñigo González</title>
+<meta name="description" content="TP-Link Archer and standalone EAP for a small venue: guest WiFi, DHCP reservations, backups and a card terminal that drops at peak time.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/tp-link-archer-y-eap-sin-controlador-red-de-un-restaurante-o-tienda-y-un-datafono-que-se-desconecta.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/tp-link-archer-y-eap-sin-controlador-red-de-un-restaurante-o-tienda-y-un-datafono-que-se-desconecta.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/tp-link-archer-y-eap-sin-controlador-red-de-un-restaurante-o-tienda-y-un-datafono-que-se-desconecta.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/tp-link-archer-y-eap-sin-controlador-red-de-un-restaurante-o-tienda-y-un-datafono-que-se-desconecta.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TP-Link Archer and EAP for a small venue · Iñigo González">
+<meta property="og:description" content="TP-Link Archer and standalone EAP for a small venue: guest WiFi, DHCP reservations, backups and a card terminal that drops at peak time.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/tp-link-archer-y-eap-sin-controlador-red-de-un-restaurante-o-tienda-y-un-datafono-que-se-desconecta.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-sector-1.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TP-Link Archer and EAP for a small venue · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"TP-Link Archer and EAP without a controller: the network of a small restaurant or shop and a card terminal that drops at peak time","alternativeHeadline":"TP-Link Archer y EAP sin controlador: la red de un restaurante o una tienda pequeña y un datáfono que se desconecta en hora punta","description":"An Archer router and an EAP access point in standalone mode for a venue with a single till: first setup, password and secure management, isolated guest WiFi, DHCP reservations for the POS, card terminal and printers, port forwarding only when needed, firmware, configuration backup, scheduled reboot and the card terminal that loses its connection on Saturday lunchtime.","datePublished":"2026-11-06","dateModified":"2026-11-06","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/tp-link-archer-y-eap-sin-controlador-red-de-un-restaurante-o-tienda-y-un-datafono-que-se-desconecta.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/tp-link-archer-y-eap-sin-controlador-red-de-un-restaurante-o-tienda-y-un-datafono-que-se-desconecta.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"MikroTik and TP-Link - Network and WiFi for a restaurant or hotel"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 1","item":"https://inigogonzalezgarcia.github.io/guias/sector-1.html"},{"@type":"ListItem","position":4,"name":"TP-Link Archer and EAP without a controller: the network of a small restaurant or shop and a card terminal that drops at peak time","item":"https://inigogonzalezgarcia.github.io/guias/tp-link-archer-y-eap-sin-controlador-red-de-un-restaurante-o-tienda-y-un-datafono-que-se-desconecta.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/"><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../es/guias/tp-link-archer-y-eap-sin-controlador-red-de-un-restaurante-o-tienda-y-un-datafono-que-se-desconecta.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="en">Guides</span></a> · <a href="sector-1.html"><span class="en">Sector 1</span></a></p>
+    <h1><span class="en">TP-Link Archer and EAP without a controller: the network of a small restaurant or shop and a card terminal that drops at peak time</span></h1>
+    <p class="lede"><span class="en">An Archer router and an EAP access point in standalone mode for a venue with a single till: first setup, password and secure management, isolated guest WiFi, DHCP reservations for the POS, card terminal and printers, port forwarding only when needed, firmware, configuration backup, scheduled reboot and the card terminal that loses its connection on Saturday lunchtime.</span></p><p class="label post-meta"><span class="en">Sector 1</span> · <span class="en">MikroTik and TP-Link - Network and WiFi for a restaurant or hotel</span> · <span class="en">8 min read</span> · <span class="en">Updated</span> <span class="en">6 Nov 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>The network of a small venue (a bar, a café, a corner shop) with what is usually there: a <strong>TP-Link Archer</strong> router and, if the router does not cover the whole place, an <strong>EAP</strong> access point in standalone mode, with no Omada controller. When you finish, the POS, the card terminal and the printers always have the same IP, guests browse without seeing anything at the till, the configuration is stored off the device, and you know what to look at when the card terminal says &quot;no communication&quot; with the place full.</p>
+<h2>Before you start</h2>
+<ul><li>A current <strong>Archer</strong> router (AX series) behind the ISP&#x27;s router or ONT, or acting as the router itself if the ISP allows it. Menus change a little between models and firmware versions; this guide uses the names of the English web interface.</li><li>An <strong>EAP</strong> (EAP225, EAP245, EAP610 or similar) in standalone mode, powered over PoE.</li><li>The list of fixed devices with their <strong>MAC</strong>: POS, card terminal (WiFi or cable), receipt printer, kitchen printer. The MAC is on the label or in each device&#x27;s network menu.</li><li>If the venue will grow to several access points or needs real VLANs, the path is the <a href="mikrotik-y-tp-link-omada-red-y-wifi-de-un-restaurante-u-hotel.html">MikroTik and TP-Link Omada</a> guide. This one is for the single-till venue.</li></ul>
+<h2>1. First setup, password and management</h2>
+<p>Connect a laptop by cable to a LAN port on the Archer and open <code>http://tplinkwifi.net</code> or the IP on the label (usually <code>192.168.0.1</code>). The wizard asks for an admin password: long and stored in the business&#x27;s password manager, not on a sticky note by the till.</p>
+<p>First, change the internal network so it does not clash with the ISP router&#x27;s (which usually uses <code>192.168.1.0/24</code> or <code>192.168.0.0/24</code>): if the two networks overlap, nothing reaches the internet.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Archer · Advanced › Network › LAN</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">IP Address</span><span class="ui-v">192.168.10.1</span></div><div class="ui-field"><span class="ui-k">Subnet Mask</span><span class="ui-v">255.255.255.0</span></div><div class="ui-btn">Save</div></div></figure>
+<p>Then, management:</p>
+<ul><li><strong>Advanced › System › Administration</strong>: <strong>Remote Management</strong> off. If the firmware offers local management over <strong>HTTPS</strong>, turn it on; if it lets you restrict local management to certain devices, leave only the admin&#x27;s laptop.</li><li><strong>TP-Link ID / Tether app</strong>: if the router is bound to an account to manage it from a phone, make it a business account with its own email and MFA, not the one of the waiter who set it up.</li><li><strong>Advanced › System › Time</strong>: Madrid time zone and an NTP server. Without the right time, the scheduled reboot and the logs are useless.</li><li><strong>Advanced › NAT Forwarding › UPnP</strong>: off. UPnP lets any device on the network open ports to the internet without asking.</li></ul>
+<h2>2. Isolated guest WiFi</h2>
+<p>On the Archer, the guest network comes isolated from the local network:</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Archer · Advanced › Wireless › Guest Network</span></figcaption><div class="ui-body"><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>2.4GHz · Network Name: Northwind-Guests</div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>5GHz · Network Name: Northwind-Guests</div><div class="ui-field"><span class="ui-k">Security</span><span class="ui-v">WPA2/WPA3-Personal</span></div><div class="ui-opt"><span class="ui-box" aria-hidden="true"></span>Allow guests to see each other and access my local network</div><div class="ui-btn">Save</div></div></figure>
+<ul><li>With that box <strong>unticked</strong>, a guest browses but cannot see the POS, the printer or the other guests.</li><li>The staff and device WiFi is the router&#x27;s main one, with a different key that never goes on the chalkboard.</li></ul>
+<p>If the dining room is far away and you add an <strong>EAP</strong>, cable it to a LAN port on the Archer. With the router serving DHCP, the EAP takes an IP from it; if it gets none, it boots on <code>192.168.0.254</code>. The first login with <code>admin</code> / <code>admin</code> forces you to change the username and password. The guest SSID is created flagged as a guest network:</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">EAP (standalone) · Wireless › Wireless Settings › Add SSID</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">SSID</span><span class="ui-v">Northwind-Guests</span></div><div class="ui-field"><span class="ui-k">Security</span><span class="ui-v">WPA-PSK · WPA2-PSK/WPA3-SAE</span></div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Guest Network</div><div class="ui-field"><span class="ui-k">Rate Limit</span><span class="ui-v">Download 10 Mbps · Upload 3 Mbps (per client)</span></div><div class="ui-btn">OK</div></div></figure>
+<p><strong>Guest Network</strong> on the EAP stops those clients from reaching private addresses on the local network. Use the <strong>same name and key</strong> on the Archer and the EAP so phones move from one to the other. And pin the EAP with a DHCP reservation (step 3) so you always find it on the same IP.</p>
+<h2>3. DHCP reservations for POS, card terminal and printers</h2>
+<p>A POS looking for the kitchen printer at <code>192.168.10.31</code> stops printing the day the printer gets another address. Every fixed device gets its reservation:</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Archer · Advanced › Network › DHCP Server</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">IP Address Pool</span><span class="ui-v">192.168.10.100 - 192.168.10.249</span></div><div class="ui-field"><span class="ui-k">Address Lease Time</span><span class="ui-v">120 minutes</span></div><div class="ui-path"><span>Address Reservation</span><span class="ui-sep" aria-hidden="true">›</span><span>Add</span></div><div class="ui-field"><span class="ui-k">MAC Address</span><span class="ui-v">00-1B-21-4C-7A-10 · Reserved IP: 192.168.10.20 (POS)</span></div><div class="ui-field"><span class="ui-k">MAC Address</span><span class="ui-v">3C-2A-F4-01-88-9E · Reserved IP: 192.168.10.30 (receipt printer)</span></div><div class="ui-field"><span class="ui-k">MAC Address</span><span class="ui-v">3C-2A-F4-01-91-02 · Reserved IP: 192.168.10.31 (kitchen printer)</span></div><div class="ui-field"><span class="ui-k">MAC Address</span><span class="ui-v">9C-A5-25-77-03-5D · Reserved IP: 192.168.10.40 (card terminal)</span></div><div class="ui-field"><span class="ui-k">MAC Address</span><span class="ui-v">50-91-E3-0A-2B-C4 · Reserved IP: 192.168.10.5 (dining room EAP)</span></div><div class="ui-btn">Save</div></div></figure>
+<ul><li>Reservations go <strong>below the dynamic range</strong> (<code>.2</code> to <code>.99</code>), in a table with device, MAC and IP taped inside the network cabinet.</li><li>A 150-address range and short leases cope with a full venue; the default range of many models (100 addresses with long leases) runs out on a match day.</li><li>If the card terminal is on WiFi, write down its <strong>WiFi</strong> MAC: it differs from the wired one.</li></ul>
+<h2>4. Port forwarding, only when needed</h2>
+<p>A venue like this almost never needs inbound connections from the internet: the POS, the card terminal and the camera cloud all open their connections outwards. The typical case is the camera installer asking to &quot;open the recorder&#x27;s port&quot;. Before doing it, ask whether the vendor has an app with a cloud connection or whether a VPN will do. If it is really needed:</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Archer · Advanced › NAT Forwarding › Virtual Servers › Add</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Service Name</span><span class="ui-v">NVR-cameras</span></div><div class="ui-field"><span class="ui-k">External Port</span><span class="ui-v">8443</span></div><div class="ui-field"><span class="ui-k">Internal IP</span><span class="ui-v">192.168.10.60</span></div><div class="ui-field"><span class="ui-k">Internal Port</span><span class="ui-v">443</span></div><div class="ui-field"><span class="ui-k">Protocol</span><span class="ui-v">TCP</span></div><div class="ui-btn">Save</div></div></figure>
+<ul><li>Never the recorder&#x27;s 80 or 443 as they are, never its default user, and the recorder with its firmware up to date.</li><li>If the ISP router sits in front of the Archer, the port has to be opened <strong>there too</strong> (or the ISP router put in bridge mode). It is the number one cause of &quot;I opened it and it doesn&#x27;t work&quot;.</li><li>Record each rule with its reason and date. A rule with no owner is deleted at the next review.</li></ul>
+<h2>5. Firmware, configuration backup and scheduled reboot</h2>
+<ul><li><strong>Firmware</strong>: <strong>Advanced › System › Firmware Update</strong>. Download only from the TP-Link site for your model <strong>and hardware version</strong> (the label says <code>Ver: 1.0</code>, <code>2.0</code>...): firmware for another version can brick the device. Update outside service hours and without cutting the power.</li><li><strong>Backup</strong>: <strong>Advanced › System › Backup &amp; Restore › Backup</strong> downloads a configuration file. Take one when the installation is done and another after every change, and keep them in the venue&#x27;s folder with the reservations table. On the EAP, <strong>Management › Backup &amp; Restore</strong> does the same.</li><li><strong>Scheduled reboot</strong>: in <strong>Advanced › System › Reboot › Reboot Schedule</strong>, once a week at a time with no service (Monday at 5:00). It fixes nothing, but it frees memory on consumer routers that have been on for months. Check first that the router&#x27;s clock is right.</li></ul>
+<p class="g-tip">A scheduled reboot that coincides with the POS&#x27;s nightly close cuts the close-of-day upload. Ask what time the POS does it.</p>
+<h2>6. The ticket: &quot;the card terminal loses its connection at lunchtime&quot;</h2>
+<p>Saturday, 14:30, terrace full. The wireless card terminal shows <strong>&quot;Communication error&quot;</strong> on one payment in three. At 17:00 it works perfectly.</p>
+<ol><li><strong>Does it have an IP?</strong> In the terminal&#x27;s communications menu: IP <code>192.168.10.187</code>, not the <code>.40</code> in the table. The reservation was made with the wired MAC and the terminal is on WiFi. Every time its lease expires, it competes for an address with the guests&#x27; phones.</li><li><strong>Are there addresses left?</strong> <strong>Advanced › Network › DHCP Server › DHCP Client List</strong>: 100 clients with the old 100-address range. On this model, guests get addresses from the same range as the local network: with the terrace full, the terminal cannot renew.</li><li><strong>And the bandwidth?</strong> The Archer&#x27;s network map shows the fibre upload maxed out: one guest uploading videos. The terminal needs little bandwidth but it needs it <strong>now</strong>; if the upload is full, the connection to the bank times out.</li><li><strong>And the signal?</strong> The terminal connects on 2.4 GHz to the dining room EAP from the far end of the terrace, on the busiest channel.</li></ol>
+<p>What changes:</p>
+<ul><li>The reservation, redone with the terminal&#x27;s <strong>WiFi MAC</strong>, and the range widened to 150 addresses with 120-minute leases.</li><li>A <strong>per-client limit</strong> on the EAP&#x27;s guest WiFi and, in the Archer&#x27;s <strong>Advanced › QoS</strong>, high priority for the POS and the card terminal.</li><li>The deeper fix: the counter terminal <strong>on cable</strong>; the terrace one with the backup SIM the payment provider offers switched on. An EAP on the terrace if coverage is still poor.</li></ul>
+<p>In the ticket: the IP it had, the reservation MAC, DHCP usage, the changes and the test (ten payments in a row at Sunday&#x27;s peak time).</p>
+<h2>Next steps</h2>
+<ul><li>When there is more than one access point or the network needs splitting into VLANs, the <a href="mikrotik-y-tp-link-omada-red-y-wifi-de-un-restaurante-u-hotel.html">MikroTik and TP-Link Omada</a> guide is the next level.</li><li>If guests must accept terms or use vouchers, the <a href="wifi-de-huespedes-en-mikrotik-hotspot-portal-cautivo-vales-y-limites.html">guest WiFi with MikroTik Hotspot</a> guide.</li><li>To hear about an outage before the manager does, <a href="zabbix-monitorizar-un-restaurante-u-hotel-tpv-impresoras-de-cocina-e-internet.html">Zabbix for restaurants and hotels</a>.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="en">Sector 1</span> · <span class="en">MikroTik and TP-Link - Network and WiFi for a restaurant or hotel</span></p>
+      <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="sector-1.html"><span class="en">All Sector 1 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/34-venue-service-readiness.html"><span class="label muted"><span class="en">Blog · 34</span></span><span class="related-t"><span class="en">The only kitchen printer had been down since yesterday: a morning check for a hospitality venue</span></span></a><a class="related-link" href="../blog/24-hospitality-it-preopening.html"><span class="label muted"><span class="en">Blog · 24</span></span><span class="related-t"><span class="en">Will IT be ready before the hotel opens? A pre-opening tracker</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="mikrotik-y-tp-link-omada-red-y-wifi-de-un-restaurante-u-hotel.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">MikroTik and TP-Link Omada: the network and WiFi of a restaurant or hotel, with VLANs, guest WiFi and 4G backup</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

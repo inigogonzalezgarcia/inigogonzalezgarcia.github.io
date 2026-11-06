@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Cacti: gráficas SNMP de tráfico y umbrales · Iñigo González</title>
+<meta name="description" content="Cacti 1.2 en Ubuntu: instalación y los avisos del asistente, alta de switches y routers Cisco y HP por SNMP, gráficas de interfaz con contadores de 64 bits…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/cacti-switches-y-routers-por-snmp-graficas-de-trafico-umbrales-y-un-enlace-saturado-a-las-nueve.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/cacti-switches-y-routers-por-snmp-graficas-de-trafico-umbrales-y-un-enlace-saturado-a-las-nueve.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/cacti-switches-y-routers-por-snmp-graficas-de-trafico-umbrales-y-un-enlace-saturado-a-las-nueve.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/cacti-switches-y-routers-por-snmp-graficas-de-trafico-umbrales-y-un-enlace-saturado-a-las-nueve.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cacti: gráficas SNMP de tráfico y umbrales · Iñigo González">
+<meta property="og:description" content="Cacti 1.2 en Ubuntu: instalación y los avisos del asistente, alta de switches y routers Cisco y HP por SNMP, gráficas de interfaz con contadores de 64 bits…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/cacti-switches-y-routers-por-snmp-graficas-de-trafico-umbrales-y-un-enlace-saturado-a-las-nueve.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-nivel-2.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cacti: gráficas SNMP de tráfico y umbrales · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Cacti: switches y routers por SNMP, gráficas de tráfico con contadores de 64 bits, árboles, umbrales con thold, spine y la línea que parece saturada a las 9:00","alternativeHeadline":"Cacti: switches and routers over SNMP, traffic graphs with 64-bit counters, trees, thresholds with thold, spine, and the line that looks saturated at 9:00","description":"Cacti 1.2 en Ubuntu: instalación y los avisos del asistente, alta de switches y routers Cisco y HP por SNMP, gráficas de interfaz con contadores de 64 bits, árboles, umbrales con el plugin thold, el poller spine y cómo leer la línea WAN que parece saturada a las 9:00 (percentil 95, intervalo de sondeo y contadores que dan la vuelta).","datePublished":"2026-11-06","dateModified":"2026-11-06","inLanguage":"es","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/es/guias/cacti-switches-y-routers-por-snmp-graficas-de-trafico-umbrales-y-un-enlace-saturado-a-las-nueve.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/guias/cacti-switches-y-routers-por-snmp-graficas-de-trafico-umbrales-y-un-enlace-saturado-a-las-nueve.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Cacti: gráficas de tráfico por SNMP"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Nivel 2","item":"https://inigogonzalezgarcia.github.io/es/guias/nivel-2.html"},{"@type":"ListItem","position":4,"name":"Cacti: switches y routers por SNMP, gráficas de tráfico con contadores de 64 bits, árboles, umbrales con thold, spine y la línea que parece saturada a las 9:00","item":"https://inigogonzalezgarcia.github.io/es/guias/cacti-switches-y-routers-por-snmp-graficas-de-trafico-umbrales-y-un-enlace-saturado-a-las-nueve.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/cacti-switches-y-routers-por-snmp-graficas-de-trafico-umbrales-y-un-enlace-saturado-a-las-nueve.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <a href="nivel-2.html"><span class="es">Nivel 2</span></a></p>
+    <h1><span class="es">Cacti: switches y routers por SNMP, gráficas de tráfico con contadores de 64 bits, árboles, umbrales con thold, spine y la línea que parece saturada a las 9:00</span></h1>
+    <p class="lede"><span class="es">Cacti 1.2 en Ubuntu: instalación y los avisos del asistente, alta de switches y routers Cisco y HP por SNMP, gráficas de interfaz con contadores de 64 bits, árboles, umbrales con el plugin thold, el poller spine y cómo leer la línea WAN que parece saturada a las 9:00 (percentil 95, intervalo de sondeo y contadores que dan la vuelta).</span></p><p class="label post-meta"><span class="es">Nivel 2</span> · <span class="es">Cacti: gráficas de tráfico por SNMP</span> · <span class="es">9 min</span> · <span class="es">Actualizado</span> <span class="es">6 nov 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Gráficas del tráfico de cada interfaz de los switches y routers de la oficina, ordenadas en un árbol por sede, con un aviso por correo cuando la línea de Internet pasa de un umbral. Y, cuando alguien diga &quot;la línea va saturada a las nueve&quot;, saber leer la gráfica: si de verdad está al límite, si es un pico de cinco minutos o si la gráfica miente porque el contador dio la vuelta.</p>
+<h2>Antes de empezar</h2>
+<ul><li><strong>La versión</strong>: Cacti <strong>1.2</strong> (la rama estable; Ubuntu 24.04 trae un 1.2.2x en sus paquetes). La 1.3 está en desarrollo; no la uses en producción.</li><li>Un <strong>Ubuntu Server 24.04</strong> con 2 vCPU y 4 GB de RAM basta para un par de cientos de interfaces.</li><li><strong>SNMP</strong> habilitado en los equipos, mejor <strong>v3</strong> (usuario con autenticación y cifrado) o, si no, v2c con una comunidad de solo lectura limitada por ACL a la IP de Cacti. <strong>161/UDP</strong> abierto desde el servidor de Cacti.</li><li>La velocidad contratada de cada línea WAN (sin ella no sabrás qué es &quot;saturado&quot;).</li></ul>
+<h2>1. Instalar Cacti y spine</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">bash · cacti01</span><button class="t-copy" type="button" data-copy="sudo apt install -y cacti cacti-spine snmp&#10;sudo mysql_tzinfo_to_sql /usr/share/zoneinfo | sudo mysql -u root mysql&#10;sudo mysql -u root -e &quot;GRANT SELECT ON mysql.time_zone_name TO &#x27;cacti&#x27;@&#x27;localhost&#x27;; FLUSH PRIVILEGES;&quot;" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>sudo apt install -y cacti cacti-spine snmp</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>sudo mysql_tzinfo_to_sql /usr/share/zoneinfo | sudo mysql -u root mysql</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>sudo mysql -u root -e &quot;GRANT SELECT ON mysql.time_zone_name TO &#x27;cacti&#x27;@&#x27;localhost&#x27;; FLUSH PRIVILEGES;&quot;</span></code></pre></figure>
+<p>El paquete instala Apache, PHP, MariaDB (crea la base de datos con <em>dbconfig-common</em>) y la tarea programada <code>/etc/cron.d/cacti</code>, que lanza el poller cada 5 minutos. Se entra en <code>http://cacti01.contoso.local/cacti</code> con el usuario <code>admin</code> y el asistente revisa el sistema. Lo que suele marcar en rojo:</p>
+<ul><li><strong>MariaDB</strong>: <code>collation-server = utf8mb4_unicode_ci</code>, <code>character-set-server = utf8mb4</code>, y tamaños de <code>max_heap_table_size</code>, <code>tmp_table_size</code>, <code>join_buffer_size</code> e <code>innodb_buffer_pool_size</code> según la RAM. Van en <code>/etc/mysql/mariadb.conf.d/50-server.cnf</code>, con reinicio de MariaDB.</li><li><strong>PHP</strong>: <code>memory_limit</code> (al menos 400M), <code>max_execution_time</code> (60) y <code>date.timezone = Europe/Madrid</code>, tanto en <code>/etc/php/8.3/apache2/php.ini</code> como en <code>/etc/php/8.3/cli/php.ini</code>. El poller usa el de línea de comandos.</li><li><strong>Zonas horarias</strong> en MariaDB: los dos últimos comandos de arriba.</li></ul>
+<p>No sigas con avisos en rojo: el asistente lo permite, pero esos ajustes acaban en gráficas con huecos.</p>
+<h2>2. SNMP en los equipos y prueba desde Cacti</h2>
+<p>En un switch Cisco, SNMPv3 de solo lectura limitado a la IP de Cacti:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">sw-core-01 · configure terminal</span><button class="t-copy" type="button" data-copy="ip access-list standard SNMP-CACTI&#10; permit 10.10.99.30&#10;snmp-server view SOLO-LECTURA iso included&#10;snmp-server group CACTI v3 priv read SOLO-LECTURA access SNMP-CACTI&#10;snmp-server user cacti CACTI v3 auth sha Clave-Auth-2026 priv aes 128 Clave-Priv-2026" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>ip access-list standard SNMP-CACTI</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span> permit 10.10.99.30</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>snmp-server view SOLO-LECTURA iso included</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>snmp-server group CACTI v3 priv read SOLO-LECTURA access SNMP-CACTI</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>snmp-server user cacti CACTI v3 auth sha Clave-Auth-2026 priv aes 128 Clave-Priv-2026</span></code></pre></figure>
+<p>En HP/Aruba (ArubaOS-Switch) el equivalente es <code>snmpv3 enable</code>, <code>snmpv3 user cacti auth sha ... priv aes ...</code> y <code>snmpv3 group managerpriv user cacti sec-model ver3</code>. Antes de tocar Cacti, prueba desde el servidor:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">bash · cacti01</span><button class="t-copy" type="button" data-copy="snmpget -v3 -l authPriv -u cacti -a SHA -A &#x27;Clave-Auth-2026&#x27; -x AES -X &#x27;Clave-Priv-2026&#x27; 10.10.99.1 1.3.6.1.2.1.1.5.0&#10;snmpwalk -v3 -l authPriv -u cacti -a SHA -A &#x27;Clave-Auth-2026&#x27; -x AES -X &#x27;Clave-Priv-2026&#x27; 10.10.99.1 1.3.6.1.2.1.31.1.1.1.6 | head -3" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>snmpget -v3 -l authPriv -u cacti -a SHA -A &#x27;Clave-Auth-2026&#x27; -x AES -X &#x27;Clave-Priv-2026&#x27; 10.10.99.1 1.3.6.1.2.1.1.5.0</span><span class="t-out">iso.3.6.1.2.1.1.5.0 = STRING: &quot;sw-core-01&quot;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>snmpwalk -v3 -l authPriv -u cacti -a SHA -A &#x27;Clave-Auth-2026&#x27; -x AES -X &#x27;Clave-Priv-2026&#x27; 10.10.99.1 1.3.6.1.2.1.31.1.1.1.6 | head -3</span><span class="t-out">iso.3.6.1.2.1.31.1.1.1.6.1 = Counter64: 918273645512</span><span class="t-out">iso.3.6.1.2.1.31.1.1.1.6.2 = Counter64: 22018837410</span><span class="t-out">iso.3.6.1.2.1.31.1.1.1.6.10101 = Counter64: 5412093321877</span></code></pre></figure>
+<p>El primero es el nombre del equipo (<code>sysName</code>); el segundo, <code>ifHCInOctets</code>, los <strong>contadores de 64 bits</strong> de bytes recibidos por interfaz. Si el <code>snmpget</code> responde <em>Timeout</em>, es la ACL, el firewall o las claves; si responde pero el segundo no devuelve nada, el equipo no tiene contadores de 64 bits o solo habla v1.</p>
+<h2>3. Dar de alta un equipo y sus gráficas</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Cacti · Console › Create › New Device</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Description</span><span class="ui-v">sw-core-01 · Madrid</span></div><div class="ui-field"><span class="ui-k">Hostname</span><span class="ui-v">10.10.99.1</span></div><div class="ui-field"><span class="ui-k">Device Template</span><span class="ui-v">Cisco Router</span></div><div class="ui-field"><span class="ui-k">SNMP Version</span><span class="ui-v">Version 3</span></div><div class="ui-field"><span class="ui-k">SNMP Username</span><span class="ui-v">cacti</span></div><div class="ui-field"><span class="ui-k">Auth Protocol</span><span class="ui-v">SHA · Privacy Protocol: AES128</span></div><div class="ui-field"><span class="ui-k">Downed Device Detection</span><span class="ui-v">SNMP Uptime</span></div><div class="ui-btn">Create</div></div></figure>
+<p>Para HP o equipos genéricos, la plantilla <strong>Generic SNMP Device</strong>. Al guardar, Cacti muestra arriba la respuesta SNMP (nombre, ubicación, uptime): si sale en rojo, vuelve al paso 2.</p>
+<p>Después, <strong>Create Graphs for this Device</strong>. En la consulta <em>SNMP - Interface Statistics</em> aparece una línea por interfaz con su nombre, alias (la <code>description</code> del puerto), velocidad y estado:</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Cacti · Create Graphs for this Device · SNMP - Interface Statistics</span></figcaption><div class="ui-body"><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Gi1/0/48 · Alias: WAN-Fibra-Madrid · Speed: 1000000000 · Status: Up</div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Po1 · Alias: Enlace-a-sw-p1 · Speed: 2000000000 · Status: Up</div><div class="ui-opt"><span class="ui-box" aria-hidden="true"></span>Gi1/0/12 · Alias: (vacío) · Status: Down</div><div class="ui-field"><span class="ui-k">Select a Graph Type</span><span class="ui-v">In/Out Bits (64-bit Counters)</span></div><div class="ui-btn">Create</div></div></figure>
+<ul><li><strong>Siempre 64 bits.</strong> Un contador de 32 bits de bytes da la vuelta al llegar a unos 4.300 millones: a 1 Gb/s eso ocurre cada 34 segundos, mucho antes de que pase el poller. Con 64 bits no da la vuelta en la práctica.</li><li>Grafica los enlaces que importan (WAN, uplinks, servidores), no los 48 puertos de cada switch de planta.</li><li>Pon <code>description</code> en los puertos de los switches: el alias de la gráfica sale de ahí.</li></ul>
+<h2>4. Árboles</h2>
+<p>Las gráficas sueltas no se encuentran. <strong>Console › Management › Trees › Add</strong>: un árbol <code>Red</code> con una rama por sede (<code>Madrid</code>, <code>Valencia</code>) y, dentro, los equipos. Se arrastran desde la lista de la derecha y en la ficha de la rama se elige ordenar por nombre. En la pestaña <strong>Graphs</strong>, el árbol muestra todas las gráficas de un equipo o de una sede de golpe.</p>
+<h2>5. Umbrales con thold</h2>
+<p>El plugin <strong>thold</strong> avisa cuando un valor pasa un límite. Se instala desde su repositorio oficial de GitHub (Cacti/plugin_thold), en la versión 1.8, la de la rama 1.2 de Cacti, dentro de la carpeta de plugins:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">bash · cacti01</span><button class="t-copy" type="button" data-copy="cd /usr/share/cacti/site/plugins&#10;sudo git clone --branch v1.8 https://github.com/Cacti/plugin_thold.git thold&#10;sudo chown -R www-data:www-data thold" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>cd /usr/share/cacti/site/plugins</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>sudo git clone --branch v1.8 https://github.com/Cacti/plugin_thold.git thold</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>sudo chown -R www-data:www-data thold</span></code></pre></figure>
+<p>En <strong>Console › Configuration › Plugins</strong>, <em>Install</em> y <em>Enable</em> en thold. El correo saliente se configura en <strong>Console › Configuration › Settings › Mail/Reporting/DNS</strong> (servidor SMTP y remitente), con un correo de prueba antes de seguir.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Cacti · Management › Thresholds › Add</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Device</span><span class="ui-v">sw-core-01 · Madrid</span></div><div class="ui-field"><span class="ui-k">Graph</span><span class="ui-v">WAN-Fibra-Madrid - Traffic</span></div><div class="ui-field"><span class="ui-k">Data Source</span><span class="ui-v">traffic_in</span></div><div class="ui-field"><span class="ui-k">Threshold Type</span><span class="ui-v">High / Low</span></div><div class="ui-field"><span class="ui-k">High Threshold</span><span class="ui-v">400000000</span></div><div class="ui-field"><span class="ui-k">Breach Duration</span><span class="ui-v">15 minutes</span></div><div class="ui-field"><span class="ui-k">Data Manipulation</span><span class="ui-v">CDEF · Turn Bytes into Bits</span></div><div class="ui-field"><span class="ui-k">Notification List</span><span class="ui-v">Red - Guardia</span></div><div class="ui-btn">Save</div></div></figure>
+<ul><li>La gráfica se guarda en bytes; el CDEF <em>Turn Bytes into Bits</em> compara en bits, como la velocidad contratada. Aquí, 400 Mb/s en una línea de 500.</li><li><strong>Breach Duration</strong> evita avisos por un pico de una muestra: solo avisa si sigue por encima 15 minutos.</li><li>Un umbral en el estado del equipo (<em>Downed Device Detection</em>) ya avisa si un switch deja de responder; thold es para valores.</li></ul>
+<h2>6. El poller: spine e intervalo</h2>
+<p>El poller por defecto es <code>cmd.php</code> (PHP, uno a uno). <strong>spine</strong>, en C y multihilo, es más rápido:</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Cacti · Console › Configuration › Settings › Poller</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Poller Type</span><span class="ui-v">spine</span></div><div class="ui-field"><span class="ui-k">Poller Interval</span><span class="ui-v">Every 5 Minutes</span></div><div class="ui-field"><span class="ui-k">Cron Interval</span><span class="ui-v">Every 5 Minutes</span></div><div class="ui-field"><span class="ui-k">Maximum Threads per Process</span><span class="ui-v">4</span></div><div class="ui-btn">Save</div></div></figure>
+<p>Spine lee la base de datos de <code>/etc/cacti/spine.conf</code>. En <strong>Console › Utilities › View Cacti Log</strong> cada ciclo deja una línea <code>SYSTEM STATS: Time:12.4 Method:spine Processes:1 Threads:4 Hosts:38 HostsPerProcess:38 DataSources:412 RRDsProcessed:203</code>. Si <code>Time</code> se acerca a 300 segundos, el poller no termina a tiempo y aparecen huecos.</p>
+<p>Bajar a sondeo de <strong>1 minuto</strong> da gráficas más finas, pero exige cambiar a la vez <em>Poller Interval</em>, la línea de <code>/etc/cron.d/cacti</code> y el perfil de datos (<strong>Console › Presets › Data Profiles</strong>). Solo afecta a las fuentes de datos nuevas: los RRD existentes conservan su paso de 5 minutos.</p>
+<h2>7. El ticket: &quot;la línea de Internet va saturada todas las mañanas a las nueve&quot;</h2>
+<p>Dirección se queja de que todo va lento a primera hora. La línea de Madrid es de <strong>500 Mb/s</strong> simétricos. En la gráfica diaria de <code>WAN-Fibra-Madrid</code> se ve un pico cada mañana, y alguien ya habla de ampliar la línea. Antes de pedir presupuesto, tres preguntas a la gráfica.</p>
+<p><strong>¿Qué mide cada punto?</strong> Con sondeo de 5 minutos, cada punto es la <strong>media</strong> de esos 5 minutos. Una media de 380 Mb/s puede esconder 2 minutos a 500 Mb/s (saturado) y 3 a 300. En la vista semanal o mensual, cada punto es la media de 30 minutos o de 2 horas y el pico se aplana aún más. Para la hora punta, mira la gráfica diaria o amplía arrastrando sobre la zona; la leyenda muestra <em>Current</em>, <em>Average</em> y <em>Maximum</em>.</p>
+<p><strong>¿Es real o es un contador que da la vuelta?</strong> Señales de que la gráfica miente:</p>
+<ul><li>Picos por encima de la velocidad de la interfaz (900 Mb/s en una línea de 500 o en un puerto de 1 Gb/s con poco uso), o huecos justo después.</li><li>La gráfica es de 32 bits (<code>In/Out Bits</code> sin <em>64-bit</em>). Compruébalo en la plantilla de la gráfica y, si es así, créala de nuevo con 64 bits: la antigua no se arregla.</li><li>Spine tardó más de 300 segundos esa mañana (<em>View Cacti Log</em>): un ciclo perdido deja dos muestras juntas y un salto.</li></ul>
+<p>Cacti descarta valores por encima del máximo de la fuente de datos (la velocidad de la interfaz), por eso un contador que da la vuelta suele verse como un hueco más que como un pico imposible.</p>
+<p><strong>¿Cuánto tiempo pasa saturada?</strong> Ahí sirve el <strong>percentil 95</strong>: se ordenan todas las muestras del mes y se descarta el 5% más alto. En un mes de 30 días, el 5% son unas 36 horas.</p>
+<ul><li>Si la línea va al límite de 9:00 a 9:30 cada día laborable, son unas 10 horas al mes: quedan por debajo del 5% descartado y el percentil 95 sale bajo (por ejemplo, 210 Mb/s). Es un <strong>pico concentrado</strong>, no una línea pequeña.</li><li>Si el percentil 95 está cerca de los 500 Mb/s, la línea va justa buena parte del tiempo y ampliar tiene sentido.</li></ul>
+<p>La gráfica <em>Interface - Traffic (bits/sec, 95th Percentile)</em> (otra plantilla de la misma consulta SNMP) dibuja la línea del percentil sobre el tráfico.</p>
+<p>En el caso de Madrid: tráfico real (64 bits, sin huecos), plano a 495 Mb/s de 8:55 a 9:25 y percentil 95 de 210 Mb/s. La causa, a esa hora, suele ser algo que arranca con los equipos: actualizaciones de Windows u Office descargadas por cada puesto, la sincronización de OneDrive tras el fin de semana, copias de seguridad que se solapan. En el firewall o en la gráfica de cada uplink de planta se ve qué equipos y destinos. La solución suele ser escalonar o cachear esas descargas (Delivery Optimization, una ventana de mantenimiento, QoS para las llamadas), no ampliar la línea.</p>
+<p>En el ticket: la gráfica con el pico ampliado, el percentil 95 del mes, la causa y la recomendación.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <a href="grafana-origen-de-datos-primer-panel-y-alerta-al-canal.html">Grafana</a> para paneles de dirección con estos y otros datos.</li><li>La de <a href="zabbix-servidor-agente-2-plantillas-macros-dependencias-avisos-y-un-agente-no-disponible.html">Zabbix</a> si además del tráfico necesitas vigilar servidores, servicios y dependencias.</li><li>La de <a href="cisco-primeros-comandos-copia-de-configuracion-y-un-puerto-err-disabled.html">Cisco: primeros comandos</a> para poner <code>description</code> en los puertos y que las gráficas tengan nombres útiles.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span></p>
+      <p class="repo-name"><span class="es">Nivel 2</span> · <span class="es">Cacti: gráficas de tráfico por SNMP</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
+      <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/08-edge-health-slo-monitor.html"><span class="label muted"><span class="es">Blog · 08</span></span><span class="related-t"><span class="es">SLO y alertas por burn rate para el edge, en Python sin dependencias</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="cisco-wap-y-cbw-ssid-por-vlan-wpa2-wpa3-radius-portal-de-invitados-y-clientes-sin-ip.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Cisco WAP y Cisco Business Wireless: puesta en marcha, SSID por VLAN, WPA2/WPA3 con RADIUS, portal de invitados, SNMP, firmware y clientes de invitados sin IP</span></span></a>
+    <a class="post-nav-link next" href="powershell-altas-masivas-en-active-directory-desde-csv-y-bajas-con-revision.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">PowerShell: altas masivas en Active Directory desde un CSV y bajas con revisión previa</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>AD time sync: PDC, NTP and clock skew · Iñigo González</title>
+<meta name="description" content="Active Directory time sync: PDC emulator with external NTP, a GPO for the PDC only, virtual DCs, w32tm checks and fixing a KRB_AP_ERR_SKEW clock skew.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/active-directory-la-hora-del-dominio-emulador-de-pdc-ntp-dc-virtuales-y-un-equipo-con-seis-minutos-de-desfase.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/active-directory-la-hora-del-dominio-emulador-de-pdc-ntp-dc-virtuales-y-un-equipo-con-seis-minutos-de-desfase.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/active-directory-la-hora-del-dominio-emulador-de-pdc-ntp-dc-virtuales-y-un-equipo-con-seis-minutos-de-desfase.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/active-directory-la-hora-del-dominio-emulador-de-pdc-ntp-dc-virtuales-y-un-equipo-con-seis-minutos-de-desfase.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AD time sync: PDC, NTP and clock skew · Iñigo González">
+<meta property="og:description" content="Active Directory time sync: PDC emulator with external NTP, a GPO for the PDC only, virtual DCs, w32tm checks and fixing a KRB_AP_ERR_SKEW clock skew.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/active-directory-la-hora-del-dominio-emulador-de-pdc-ntp-dc-virtuales-y-un-equipo-con-seis-minutos-de-desfase.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-nivel-2.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AD time sync: PDC, NTP and clock skew · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Active Directory: domain time, the PDC emulator with external NTP, the GPO only where needed, virtual DCs and a computer six minutes off","alternativeHeadline":"Active Directory: la hora del dominio, el emulador de PDC con NTP externo, la GPO solo donde hace falta, DC virtuales y un equipo con seis minutos de desfase","description":"A domain's time hierarchy (PDC emulator, domain controllers, members), the PDC against external NTP with w32tm, a GPO with a WMI filter for the PDC only, virtual DCs and host time sync, w32tm /query /status, /monitor and /stripchart, and the Kerberos KRB_AP_ERR_SKEW error from a computer six minutes off.","datePublished":"2026-11-06","dateModified":"2026-11-06","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/active-directory-la-hora-del-dominio-emulador-de-pdc-ntp-dc-virtuales-y-un-equipo-con-seis-minutos-de-desfase.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/active-directory-la-hora-del-dominio-emulador-de-pdc-ntp-dc-virtuales-y-un-equipo-con-seis-minutos-de-desfase.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Active Directory: delegation and auditing"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 2","item":"https://inigogonzalezgarcia.github.io/guias/nivel-2.html"},{"@type":"ListItem","position":4,"name":"Active Directory: domain time, the PDC emulator with external NTP, the GPO only where needed, virtual DCs and a computer six minutes off","item":"https://inigogonzalezgarcia.github.io/guias/active-directory-la-hora-del-dominio-emulador-de-pdc-ntp-dc-virtuales-y-un-equipo-con-seis-minutos-de-desfase.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/"><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../es/guias/active-directory-la-hora-del-dominio-emulador-de-pdc-ntp-dc-virtuales-y-un-equipo-con-seis-minutos-de-desfase.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="en">Guides</span></a> · <a href="nivel-2.html"><span class="en">Level 2</span></a></p>
+    <h1><span class="en">Active Directory: domain time, the PDC emulator with external NTP, the GPO only where needed, virtual DCs and a computer six minutes off</span></h1>
+    <p class="lede"><span class="en">A domain&#x27;s time hierarchy (PDC emulator, domain controllers, members), the PDC against external NTP with w32tm, a GPO with a WMI filter for the PDC only, virtual DCs and host time sync, w32tm /query /status, /monitor and /stripchart, and the Kerberos KRB_AP_ERR_SKEW error from a computer six minutes off.</span></p><p class="label post-meta"><span class="en">Level 2</span> · <span class="en">Active Directory: delegation and auditing</span> · <span class="en">8 min read</span> · <span class="en">Updated</span> <span class="en">6 Nov 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>Every computer in the domain with the same time, taken from a reliable source along a single path: the PDC emulator against external NTP, the other domain controllers against it and the members against the domain controllers. And knowing how to solve the ticket that arrives when a computer drifts more than five minutes: Kerberos stops working and the user cannot sign in or open anything.</p>
+<h2>Before you start</h2>
+<ul><li>Domain admin, or permission to edit GPOs linked to the <em>Domain Controllers</em> OU.</li><li>Knowing which domain controller holds the <strong>PDC emulator</strong> role: <code>(Get-ADDomain).PDCEmulator</code> or <code>netdom query fsmo</code>.</li><li>Outbound <strong>UDP 123</strong> from the PDC, and only from the PDC, to the chosen NTP servers (or an internal NTP source on the network, if there is one).</li><li>If the domain controllers are virtual machines, access to the VM settings in Hyper-V or vCenter.</li></ul>
+<h2>1. The time hierarchy</h2>
+<div class="g-table"><table><thead><tr><th>Computer</th><th>Where it takes the time from</th><th>Type (<code>w32tm /query /configuration</code>)</th></tr></thead><tbody><tr><td>PDC emulator of the forest root domain</td><td>External NTP servers or an internal NTP</td><td><code>NTP</code></td></tr><tr><td>Other domain controllers in the domain</td><td>The PDC emulator (or another DC in its hierarchy)</td><td><code>NT5DS</code></td></tr><tr><td>Member servers and workstations</td><td>The domain controller that authenticates them</td><td><code>NT5DS</code></td></tr></tbody></table></div>
+<ul><li><strong>NT5DS</strong> means &quot;follow the domain hierarchy&quot; and is what every domain-joined computer has by default. Nothing needs configuring on them.</li><li>The one piece you do configure is the <strong>PDC</strong>. Without an external source it uses its own clock, and the error spreads to the whole domain. The time service warns about it with <em>Time-Service</em> event <strong>12</strong> in the PDC&#x27;s <strong>System</strong> log.</li><li>Kerberos tolerates <strong>5 minutes</strong> of difference between client and domain controller by default (<em>Kerberos Policy › Maximum tolerance for computer clock synchronization</em>). You do not raise it: you fix the time.</li></ul>
+<h2>2. The PDC against external NTP</h2>
+<p>On the PDC emulator, in an elevated command prompt:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Command Prompt (administrator) · DC01 (PDC emulator)</span><button class="t-copy" type="button" data-copy="w32tm /query /source&#10;w32tm /config /manualpeerlist:&quot;0.es.pool.ntp.org,0x8 1.es.pool.ntp.org,0x8 2.es.pool.ntp.org,0x8&quot; /syncfromflags:manual /reliable:yes /update&#10;net stop w32time &amp;&amp; net start w32time&#10;w32tm /resync /rediscover&#10;w32tm /query /source" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>w32tm /query /source</span><span class="t-out">Local CMOS Clock</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>w32tm /config /manualpeerlist:&quot;0.es.pool.ntp.org,0x8 1.es.pool.ntp.org,0x8 2.es.pool.ntp.org,0x8&quot; /syncfromflags:manual /reliable:yes /update</span><span class="t-out">The command completed successfully.</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>net stop w32time &amp;&amp; net start w32time</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>w32tm /resync /rediscover</span><span class="t-out">Sending resync command to local computer...</span><span class="t-out">The command completed successfully.</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>w32tm /query /source</span><span class="t-out">0.es.pool.ntp.org,0x8</span></code></pre></figure>
+<ul><li><code>0x8</code> requests normal NTP client mode; several servers separated by spaces, in quotes.</li><li><code>/reliable:yes</code> advertises the PDC as a reliable time source to the rest of the domain.</li><li><strong>Local CMOS Clock</strong> or <strong>Free-running System Clock</strong> as the source on a PDC is exactly what needs fixing.</li></ul>
+<p class="g-warn">If the PDC role moves to another domain controller (maintenance, replacement), the configuration does not travel with it. On the old one: <code>w32tm /config /syncfromflags:domhier /reliable:no /update</code> and restart the service; on the new one, the commands above. The GPO in section 3 does this by itself.</p>
+<h2>3. A GPO for the PDC only</h2>
+<p>With a GPO, the configuration follows the role even when it changes server. The key is that <strong>only the PDC receives it</strong>: a WMI filter that keeps the domain controller whose <code>DomainRole</code> is 5.</p>
+<ol><li>In GPMC, <strong>WMI Filters › New</strong>: name <code>DC-Emulador-PDC</code>, namespace <code>root\CIMv2</code>, query <code>Select * from Win32_ComputerSystem where DomainRole = 5</code>.</li><li>A new GPO <code>DC-Hora-PDC</code>, linked to the <strong>Domain Controllers</strong> OU, with the WMI filter above.</li><li>In the GPO:</li></ol>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">GPO editor · DC-Hora-PDC</span></figcaption><div class="ui-body"><div class="ui-path"><span>Computer Configuration</span><span class="ui-sep" aria-hidden="true">›</span><span>Policies</span><span class="ui-sep" aria-hidden="true">›</span><span>Administrative Templates</span><span class="ui-sep" aria-hidden="true">›</span><span>System</span><span class="ui-sep" aria-hidden="true">›</span><span>Windows Time Service</span><span class="ui-sep" aria-hidden="true">›</span><span>Time Providers</span></div><div class="ui-field"><span class="ui-k">Configure Windows NTP Client</span><span class="ui-v">Enabled</span></div><div class="ui-field"><span class="ui-k">NtpServer</span><span class="ui-v">0.es.pool.ntp.org,0x8 1.es.pool.ntp.org,0x8 2.es.pool.ntp.org,0x8</span></div><div class="ui-field"><span class="ui-k">Type</span><span class="ui-v">NTP</span></div><div class="ui-field"><span class="ui-k">Enable Windows NTP Client</span><span class="ui-v">Enabled</span></div><div class="ui-path"><span>Computer Configuration</span><span class="ui-sep" aria-hidden="true">›</span><span>Policies</span><span class="ui-sep" aria-hidden="true">›</span><span>Administrative Templates</span><span class="ui-sep" aria-hidden="true">›</span><span>System</span><span class="ui-sep" aria-hidden="true">›</span><span>Windows Time Service</span></div><div class="ui-field"><span class="ui-k">Global Configuration Settings · AnnounceFlags</span><span class="ui-v">5</span></div><div class="ui-btn">OK</div></div></figure>
+<p><code>AnnounceFlags</code> 5 means &quot;time server and reliable source&quot;, the same as <code>/reliable:yes</code>.</p>
+<p>What you <strong>do not</strong> do: an NTP client GPO linked to the whole domain. It sends every workstation to ask the internet, breaks the hierarchy and causes a lot of drift. If an old one exists, <code>gpresult /scope computer /h report.html</code> on a workstation shows it under <em>Windows Time Service</em>. Computers outside the domain (joined only to Entra ID, for example) use <code>time.windows.com</code> by default and need nothing.</p>
+<h2>4. Virtual domain controllers and host time</h2>
+<p>A virtual DC has two possible sources: the domain hierarchy and the <strong>hypervisor</strong>. If both correct the clock at once, the time jumps, and if the host is wrong, the DC follows it.</p>
+<ul><li><strong>Hyper-V</strong>: Microsoft&#x27;s recommendation is to leave the <em>Time Synchronization</em> integration service on (it corrects the clock when the VM starts or is restored) and turn off, inside the DC, the provider that syncs continuously:</li></ul>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Command Prompt (administrator) · each virtual DC on Hyper-V</span><button class="t-copy" type="button" data-copy="reg add HKLM\SYSTEM\CurrentControlSet\Services\W32Time\TimeProviders\VMICTimeProvider /v Enabled /t REG_DWORD /d 0 /f&#10;net stop w32time &amp;&amp; net start w32time&#10;w32tm /query /source" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>reg add HKLM\SYSTEM\CurrentControlSet\Services\W32Time\TimeProviders\VMICTimeProvider /v Enabled /t REG_DWORD /d 0 /f</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>net stop w32time &amp;&amp; net start w32time</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>w32tm /query /source</span><span class="t-out">DC01.contoso.local</span></code></pre></figure>
+<p>On the PDC the source must be the NTP from section 2, and on the others another DC; if it shows <strong>VM IC Time Synchronization Provider</strong>, the change has not taken effect.</p>
+<ul><li><strong>VMware</strong>: on the VM, <strong>Edit Settings › VM Options › VMware Tools</strong>, untick <strong>Synchronize time with host</strong>. Even so, VMware Tools corrects the time on some events (Tools startup, resume, snapshot restore, vMotion). To stop it completely, the VM advanced parameters documented by VMware, such as <code>time.synchronize.tools.startup</code>, <code>time.synchronize.resume.disk</code> and <code>time.synchronize.restore</code> set to <code>0</code>.</li><li>In both cases the host must have NTP configured correctly: for ESXi, see the guide on <a href="esxi-8-instalar-un-host-red-de-gestion-ntp-alta-en-vcenter-y-un-host-not-responding.html">installing an ESXi 8 host</a>.</li></ul>
+<p class="g-warn">Do not restore a DC from an old snapshot to &quot;fix&quot; something: besides the time, it can break replication. The AD Recycle Bin is there for that.</p>
+<h2>5. Checking: status, monitor and stripchart</h2>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Command Prompt · PC-0219</span><button class="t-copy" type="button" data-copy="w32tm /query /status&#10;w32tm /stripchart /computer:DC02.contoso.local /samples:3 /dataonly" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>w32tm /query /status</span><span class="t-out">Leap Indicator: 0(no warning)</span><span class="t-out">Stratum: 4 (secondary reference - syncd by (S)NTP)</span><span class="t-out">Precision: -23 (119.209ns per tick)</span><span class="t-out">Root Delay: 0.0390625s</span><span class="t-out">Root Dispersion: 0.1210438s</span><span class="t-out">ReferenceId: 0x0A000A0B (source IP:  10.0.10.11)</span><span class="t-out">Last Successful Sync Time: 06/11/2026 9:12:04</span><span class="t-out">Source: DC02.contoso.local</span><span class="t-out">Poll Interval: 10 (1024s)</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>w32tm /stripchart /computer:DC02.contoso.local /samples:3 /dataonly</span><span class="t-out">Tracking DC02.contoso.local [10.0.10.11:123].</span><span class="t-out">Collecting 3 samples.</span><span class="t-out">The current time is 06/11/2026 9:15:02.</span><span class="t-out">09:15:02, -00.0021345s</span><span class="t-out">09:15:04, -00.0019872s</span><span class="t-out">09:15:06, -00.0020110s</span></code></pre></figure>
+<ul><li><strong>Source</strong>: a DC on a member, another DC or the NTP on a DC, the external NTP on the PDC. If a member shows <em>Local CMOS Clock</em> or <code>time.windows.com</code>, someone has configured it by hand.</li><li><strong>Last Successful Sync Time</strong>: if it is days old, the computer cannot reach its source (UDP 123 blocked between sites, for example).</li><li><code>/stripchart</code> measures the difference with another computer right now: the column is how far ahead (+) or behind (−) the other one is compared to you.</li></ul>
+<p>To see every domain controller at once, <code>w32tm /monitor /domain:contoso.local</code>: each DC with its source and its offset from the PDC. The warning events, in the <strong>System</strong> log, source <em>Time-Service</em>: <strong>12</strong> (the PDC has no reliable source), <strong>36</strong> (not synchronized for 24 hours), <strong>37</strong> (receiving valid time from its source) and <strong>47</strong> (a configured NTP server does not respond).</p>
+<h2>6. The ticket: &quot;I can&#x27;t open the drive or the intranet, and at sign-in it says something about the time&quot;</h2>
+<p>Thursday, 9:20. An Accounting workstation, <code>PC-0219</code>. The user says it worked yesterday. This morning, signing in with the network connected, Windows says <em>There is a time and/or date difference between the client and server</em>. In a session that was already open, the network drives give access denied.</p>
+<ol><li><strong>The offset</strong>: the taskbar clock says 9:26; yours, 9:20. From your computer, <code>w32tm /stripchart /computer:PC-0219 /samples:3 /dataonly</code> gives about <strong>+360 seconds</strong>: six minutes, more than the five Kerberos tolerates.</li><li><strong>The error on the DC</strong>: in the domain controllers&#x27; <strong>Security</strong> log, events <strong>4771</strong> for that account with failure code <strong>0x25</strong>, which is <code>KRB_AP_ERR_SKEW</code>: the client&#x27;s timestamp is outside the window.</li><li><strong>Why it drifted</strong>. On the device, as local administrator (the LAPS account if the domain will not let you in):</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Command Prompt (administrator) · PC-0219</span><button class="t-copy" type="button" data-copy="w32tm /query /source&#10;w32tm /query /configuration | findstr /i &quot;Type NtpServer&quot;" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>w32tm /query /source</span><span class="t-out">time.windows.com,0x9</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>w32tm /query /configuration | findstr /i &quot;Type NtpServer&quot;</span><span class="t-out">Type: NTP (Local)</span><span class="t-out">NtpServer: time.windows.com,0x9 (Local)</span></code></pre></figure>
+<p><code>(Local)</code> means someone changed it on the computer itself (a vendor tool, a technician, an image prepared outside the domain). Outbound UDP 123 is closed for workstations, so it has not synced for weeks and the clock has drifted. If it said <em>(Policy)</em> instead, a GPO would be to blame.</p>
+<ol><li><strong>The fix</strong>: back to the hierarchy, sync and renew the tickets.</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Command Prompt (administrator) · PC-0219</span><button class="t-copy" type="button" data-copy="w32tm /config /syncfromflags:domhier /update&#10;net stop w32time &amp;&amp; net start w32time&#10;w32tm /resync /rediscover&#10;w32tm /query /source&#10;klist purge" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>w32tm /config /syncfromflags:domhier /update</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>net stop w32time &amp;&amp; net start w32time</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>w32tm /resync /rediscover</span><span class="t-out">The command completed successfully.</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>w32tm /query /source</span><span class="t-out">DC02.contoso.local</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>klist purge</span></code></pre></figure>
+<p>If the offset is so large the computer cannot sync, set the time by hand (<code>Set-Date</code>) and repeat the <code>/resync</code>.</p>
+<ol><li><strong>Making sure it does not happen again</strong>: if more computers show the same problem, <code>w32tm /monitor</code> against the DCs rules out the whole domain; if the PDC is wrong, everything is wrong at once and section 2 is the fix. For a single computer, the model or image record: remove the manual NTP configuration before deploying it.</li></ol>
+<p>In the ticket: measured offset, event 4771 with 0x25, source found (<code>time.windows.com</code> configured locally), the commands and the check: source is a DC and the user opens the drive.</p>
+<h2>Next steps</h2>
+<ul><li>The guide on <a href="active-directory-delegar-permisos-papelera-y-quien-ha-cambiado-este-usuario.html">delegation, the recycle bin and who changed this user</a> is the first in this topic and uses the same DC Security log.</li><li>The <a href="gpo-unidades-de-red-e-impresoras-con-preferencias-filtrado-y-una-unidad-que-no-aparece.html">GPO network drives and printers</a> guide explains the WMI filters and gpresult used here.</li><li>If your DCs are Hyper-V VMs, the <a href="hyper-v-crear-vm-conmutador-virtual-puntos-de-control-y-exportar.html">Hyper-V</a> guide covers integration services.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="en">Level 2</span> · <span class="en">Active Directory: delegation and auditing</span></p>
+      <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-2.html"><span class="en">All Level 2 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/19-ad-infra-health-check.html"><span class="label muted"><span class="en">Blog · 19</span></span><span class="related-t"><span class="en">A Monday-morning health check for Active Directory</span></span></a><a class="related-link" href="../blog/37-iam-access-review.html"><span class="label muted"><span class="en">Blog · 37</span></span><span class="related-t"><span class="en">He left three weeks ago and is still in Domain Admins: the monthly access review</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="active-directory-delegar-permisos-papelera-y-quien-ha-cambiado-este-usuario.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">Active Directory day to day: delegating permissions on an OU, the Recycle Bin and who changed this user</span></span></a>
+    <a class="post-nav-link next" href="cisco-gestion-segura-aaa-con-radius-ssh-snmpv3-syslog-ntp-y-bloqueo-tras-aaa-new-model.html"><span class="label muted"><span class="en">Next</span></span><span><span class="en">Cisco: secure management with AAA and RADIUS, SSH only, SNMPv3, syslog, authenticated NTP and nobody can log in after aaa new-model</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

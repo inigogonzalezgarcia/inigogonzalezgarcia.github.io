@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>PowerChute: apagado en VMware y Windows · Iñigo González</title>
+<meta name="description" content="PowerChute Network Shutdown con vCenter: desplegar el dispositivo virtual, emparejarlo con la Network Management Card, el orden de apagado de máquinas…">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/sai-powerchute-network-shutdown-en-vmware-y-windows-secuencia-de-apagado-prueba-y-hosts-que-se-apagan-antes.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/sai-powerchute-network-shutdown-en-vmware-y-windows-secuencia-de-apagado-prueba-y-hosts-que-se-apagan-antes.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/sai-powerchute-network-shutdown-en-vmware-y-windows-secuencia-de-apagado-prueba-y-hosts-que-se-apagan-antes.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/sai-powerchute-network-shutdown-en-vmware-y-windows-secuencia-de-apagado-prueba-y-hosts-que-se-apagan-antes.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PowerChute: apagado en VMware y Windows · Iñigo González">
+<meta property="og:description" content="PowerChute Network Shutdown con vCenter: desplegar el dispositivo virtual, emparejarlo con la Network Management Card, el orden de apagado de máquinas…">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/sai-powerchute-network-shutdown-en-vmware-y-windows-secuencia-de-apagado-prueba-y-hosts-que-se-apagan-antes.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-sector-5.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PowerChute: apagado en VMware y Windows · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"PowerChute Network Shutdown en VMware y Windows: el dispositivo virtual, el emparejamiento con la tarjeta del SAI, la secuencia de apagado, retardos y umbrales, una prueba controlada y unos hosts que se apagan antes que las máquinas virtuales","alternativeHeadline":"PowerChute Network Shutdown on VMware and Windows: the virtual appliance, pairing with the UPS card, the shutdown sequence, delays and thresholds, a controlled test and hosts that shut down before the VMs","description":"PowerChute Network Shutdown con vCenter: desplegar el dispositivo virtual, emparejarlo con la Network Management Card, el orden de apagado de máquinas virtuales, vCenter, hosts y almacenamiento, las cuentas de tiempo con la autonomía y el Low Battery Duration, PowerChute en un servidor Windows físico, una prueba con corte real y el caso de los hosts que se apagaron con las máquinas virtuales encendidas.","datePublished":"2026-11-06","dateModified":"2026-11-06","inLanguage":"es","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/es/guias/sai-powerchute-network-shutdown-en-vmware-y-windows-secuencia-de-apagado-prueba-y-hosts-que-se-apagan-antes.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/guias/sai-powerchute-network-shutdown-en-vmware-y-windows-secuencia-de-apagado-prueba-y-hosts-que-se-apagan-antes.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"SAI - Alimentación de la sala de comunicaciones"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://inigogonzalezgarcia.github.io/es/guias.html"},{"@type":"ListItem","position":3,"name":"Sector 5","item":"https://inigogonzalezgarcia.github.io/es/guias/sector-5.html"},{"@type":"ListItem","position":4,"name":"PowerChute Network Shutdown en VMware y Windows: el dispositivo virtual, el emparejamiento con la tarjeta del SAI, la secuencia de apagado, retardos y umbrales, una prueba controlada y unos hosts que se apagan antes que las máquinas virtuales","item":"https://inigogonzalezgarcia.github.io/es/guias/sai-powerchute-network-shutdown-en-vmware-y-windows-secuencia-de-apagado-prueba-y-hosts-que-se-apagan-antes.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/"><span class="es">Blog</span></a><a href="../guias.html" aria-current="page"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../guias/sai-powerchute-network-shutdown-en-vmware-y-windows-secuencia-de-apagado-prueba-y-hosts-que-se-apagan-antes.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="es">Guías</span></a> · <a href="sector-5.html"><span class="es">Sector 5</span></a></p>
+    <h1><span class="es">PowerChute Network Shutdown en VMware y Windows: el dispositivo virtual, el emparejamiento con la tarjeta del SAI, la secuencia de apagado, retardos y umbrales, una prueba controlada y unos hosts que se apagan antes que las máquinas virtuales</span></h1>
+    <p class="lede"><span class="es">PowerChute Network Shutdown con vCenter: desplegar el dispositivo virtual, emparejarlo con la Network Management Card, el orden de apagado de máquinas virtuales, vCenter, hosts y almacenamiento, las cuentas de tiempo con la autonomía y el Low Battery Duration, PowerChute en un servidor Windows físico, una prueba con corte real y el caso de los hosts que se apagaron con las máquinas virtuales encendidas.</span></p><p class="label post-meta"><span class="es">Sector 5</span> · <span class="es">SAI - Alimentación de la sala de comunicaciones</span> · <span class="es">10 min</span> · <span class="es">Actualizado</span> <span class="es">6 nov 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      <div class="es" lang="es">
+<h2>Qué vas a conseguir</h2>
+<p>Que, si el corte dura más que la batería, el clúster de vSphere y los servidores físicos se apaguen solos y en orden: primero las máquinas virtuales con su apagado limpio, después el vCenter, luego los hosts y al final lo demás, todo antes de que el SAI se quede sin carga. Y comprobarlo con una prueba de verdad, no con la fe en una pantalla de configuración. La guía de la <a href="sai-apc-tarjeta-de-red-avisos-autotest-baterias-apagado-con-powerchute-y-un-corte-sin-aviso.html">tarjeta de red del SAI APC</a> deja la tarjeta lista y presenta PowerChute; esta baja al detalle de la secuencia.</p>
+<h2>Antes de empezar</h2>
+<ul><li>La <strong>Network Management Card 3</strong> del SAI configurada: IP fija, hora por NTP, avisos y la <strong>frase de autenticación</strong> de PowerChute (<em>UPS › Configuration › PowerChute</em>).</li><li>La <strong>autonomía medida</strong> con la carga real (la de la última prueba anual, como en la guía de <a href="sai-de-la-sala-de-comunicaciones-dimensionado-pruebas-apagado-ordenado-y-un-corte-antes-de-la-apertura.html">SAI de la sala de comunicaciones</a>), no la del catálogo.</li><li>En vCenter, una cuenta para PowerChute con rol de administrador (<code>svc-pcns@vsphere.local</code> o una de AD) y la lista de máquinas virtuales con su prioridad, acordada con los dueños de las aplicaciones.</li><li><strong>VMware Tools</strong> en ejecución en todas las máquinas virtuales: sin él, PowerChute no puede pedir un apagado limpio y la apaga de golpe.</li><li>Abiertos entre PowerChute y la tarjeta: <strong>TCP 80 o 443, 3052 y 6547</strong> y <strong>UDP 3052</strong>.</li></ul>
+<h2>1. El dispositivo virtual de PowerChute</h2>
+<p>En vSphere, PowerChute Network Shutdown (versión 5.x) se instala como <strong>dispositivo virtual</strong>: un fichero OVA que se despliega con <em>Deploy OVF Template</em>.</p>
+<ul><li>Una IP fija en la <strong>red de gestión</strong>, la misma desde la que se llega a la tarjeta y al vCenter, con su nombre en DNS (<code>pcns01.mgmt.contoso.local</code>).</li><li>Dónde ponerlo: en un host del clúster, sin vMotion automático que lo mueva sin control (regla de DRS que lo ate a un host, o DRS en manual para esa VM). PowerChute se apaga a sí mismo de los últimos, con el vCenter, y tiene que saber en qué host está.</li><li>La consola web está en <code>https://pcns01.mgmt.contoso.local:6547</code>. El asistente de la primera configuración pide, por orden: el tipo de entorno (vCenter), el vCenter y su cuenta, los hosts que protege, si el <strong>vCenter es una máquina virtual</strong> dentro de esos hosts y la tarjeta del SAI.</li></ul>
+<p>Si el vCenter corre dentro del clúster protegido, márcalo en el asistente (<em>vCenter Server Running on a VM</em>): PowerChute lo deja para el final y, con él apagado, habla directamente con los hosts para terminar.</p>
+<h2>2. El emparejamiento con la tarjeta</h2>
+<p>En el asistente, en <em>Network Management Card Connection</em>:</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerChute Network Shutdown · Setup › UPS Details</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Configuration</span><span class="ui-v">Single UPS</span></div><div class="ui-field"><span class="ui-k">Protocol</span><span class="ui-v">HTTPS · Port: 443</span></div><div class="ui-field"><span class="ui-k">NMC IP Address</span><span class="ui-v">10.10.90.41</span></div><div class="ui-field"><span class="ui-k">User Name</span><span class="ui-v">apc</span></div><div class="ui-field"><span class="ui-k">Authentication Phrase</span><span class="ui-v">****************</span></div><div class="ui-btn">Next</div><div class="ui-field"><span class="ui-k">Registered with NMC 10.10.90.41</span><span class="ui-v">Smart-UPS SRT 10000 (sai-cr1-a)</span></div></div></figure>
+<ul><li><strong>Single</strong>, <strong>Redundant</strong> o <strong>Parallel UPS</strong>: con dos SAI que alimentan las fuentes A y B de cada host, <em>Redundant</em>. PowerChute solo apaga si los dos están en batería: perder uno no es motivo para parar el clúster.</li><li>El usuario y la frase tienen que ser los de la tarjeta. Si no coinciden, PowerChute no se registra y no recibirá eventos.</li><li>En la tarjeta, la lista de clientes de PowerChute muestra la IP del dispositivo virtual. Si no aparece, no hay emparejamiento, diga lo que diga la pantalla de PowerChute.</li></ul>
+<h2>3. La secuencia de apagado</h2>
+<p>Lo que hace PowerChute con vCenter, en orden, con los ajustes de <em>Virtualization Settings</em>:</p>
+<div class="g-table"><table><thead><tr><th>Paso</th><th>Qué ocurre</th><th>Ajuste</th></tr></thead><tbody><tr><td>1</td><td>Desactiva vSphere HA en el clúster</td><td><em>Disable HA on Shutdown</em>: sin esto, HA puede encender en otro host las máquinas virtuales que se apagan</td></tr><tr><td>2</td><td>Migración de VM (opcional)</td><td>Normalmente desactivada: con todos los hosts en el mismo SAI, migrar no salva nada</td></tr><tr><td>3</td><td>Apagado de las VM por grupos de prioridad</td><td><em>VM Prioritization</em>: primero las no priorizadas, después baja, media y alta, cada grupo con su duración</td></tr><tr><td>4</td><td>Apagado del vCenter (si es una VM)</td><td>Duración propia, 240 segundos por defecto</td></tr><tr><td>5</td><td>Desactiva vCLS y pone los hosts en mantenimiento</td><td>Con duraciones propias</td></tr><tr><td>6</td><td>Apaga los hosts</td><td><em>Host Protection</em>: qué hosts y en qué orden</td></tr><tr><td>7</td><td>Apaga el dispositivo de PowerChute y, si se configuró, el SAI</td><td><em>Shutdown Settings › Turn off the UPS</em></td></tr></tbody></table></div>
+<p>Las prioridades, con criterio de dependencias, igual que el orden por capas de la guía del SAI de la sala:</p>
+<ul><li><strong>Sin prioridad</strong> (se apagan primero): pruebas, servidores de impresión, salto de usuarios.</li><li><strong>Baja</strong>: aplicaciones web y servidores de aplicación.</li><li><strong>Media</strong>: bases de datos, que tardan más en pararse limpias.</li><li><strong>Alta</strong>: controladores de dominio, DNS y lo que los demás necesitan hasta el final.</li></ul>
+<p><strong>La duración de cada grupo</strong> es lo que PowerChute espera antes de pasar al siguiente, se hayan apagado o no. Fíjala con lo que tarda de verdad la VM más lenta del grupo, más margen. Si una VM sigue encendida cuando se acaba el tiempo del último paso, el host se apaga con ella dentro.</p>
+<p><strong>El almacenamiento compartido</strong> va después de los hosts. Si la cabina admite apagado por comando o SSH, PowerChute puede lanzarlo con un fichero de comandos o una acción SSH al final; si no, queda encendida hasta que el SAI corta la salida. Confirma con el fabricante de la cabina cuál de las dos es la buena para ella.</p>
+<h2>4. Retardos y umbrales: las cuentas</h2>
+<p>Tres números deciden si la secuencia termina antes de que se acabe la batería:</p>
+<ul><li>**Retardo del evento *UPS On Battery*** (en <em>Configure Events</em>): cuánto se espera en batería antes de empezar, por si vuelve la luz o arranca el grupo electrógeno.</li><li><strong>Tiempo total de apagado</strong>: la suma de los pasos del apartado 3, más dos minutos que PowerChute reserva para el propio sistema operativo.</li><li><strong>Low Battery Duration</strong> (en la tarjeta, <em>UPS › Configuration › Shutdown</em>): los minutos que quedan cuando el SAI declara batería baja. Al llegar ahí, PowerChute empieza aunque el retardo no haya terminado.</li></ul>
+<p>Con un ejemplo de la sala:</p>
+<div class="g-table"><table><thead><tr><th>Dato</th><th>Valor</th></tr></thead><tbody><tr><td>Autonomía medida con la carga actual</td><td>22 min</td></tr><tr><td>Duraciones: sin prioridad 2 min, baja 3, media 6, alta 3</td><td>14 min</td></tr><tr><td>vCenter, vCLS y mantenimiento</td><td>6 min</td></tr><tr><td>Margen del sistema</td><td>2 min</td></tr><tr><td><strong>Tiempo total de apagado</strong></td><td><strong>22 min</strong></td></tr></tbody></table></div>
+<p>No cabe: con cualquier retardo en batería, la secuencia no termina. PowerChute lo avisa con el evento <strong>Available runtime has been exceeded</strong>, y lo hace con razón. Las salidas son reducir duraciones (medidas, no a ojo), quitar carga del SAI o empezar antes. Aquí, tras medir, el grupo bajo quedó en 2 minutos y el medio en 4, el vCenter en su duración real (3 minutos, uno menos que el valor por defecto) y el retardo <em>On Battery</em> en 1 minuto: 1 + 18 = 19 minutos sobre 22.</p>
+<ul><li><strong>Runtime Remaining Below Threshold</strong>: además del retardo, un evento que lanza el apagado cuando la autonomía restante baja de un umbral, sin importar cuánto lleve en batería. Útil si la carga cambia mucho a lo largo del día.</li><li>El <strong>Low Battery Duration</strong> de la tarjeta tiene que ser mayor que el tiempo total de apagado, con margen. Si es menor, el SAI corta la salida con la secuencia a medias.</li></ul>
+<h2>5. PowerChute en un servidor Windows físico</h2>
+<p>Para los servidores que no son hosts (el servidor de copias físico, por ejemplo), PowerChute se instala en el propio Windows con el instalador del fabricante y se configura igual, en <code>https://srv-bkp-01:6547</code>.</p>
+<ul><li>Mismo asistente: SAI, protocolo, IP de la tarjeta, usuario y frase.</li><li>En <em>Configure Events</em>, <em>UPS On Battery</em> con <em>Shut Down System</em> y su retardo, coordinado con el clúster: un servidor de copias puede apagarse antes que nadie.</li><li>Si antes de apagar hay que parar algo con cuidado (el servicio de copias, una base de datos), un <strong>fichero de comandos</strong> en <em>Shutdown Settings</em>, con su duración. PowerChute solo ejecuta ficheros de la carpeta <code>user_files</code> de su instalación.</li><li>El cortafuegos de Windows: TCP 6547 y TCP/UDP 3052 desde la IP de la tarjeta.</li></ul>
+<h2>6. Una prueba controlada</h2>
+<p>Una configuración sin probar es una hipótesis. Una vez al año, y después de cada cambio grande en el clúster:</p>
+<ol><li><strong>Antes</strong>: ventana acordada con los dueños de las aplicaciones y con el mantenedor del SAI presente, copia de seguridad reciente, y la lista de VM sin VMware Tools en ejecución:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">PowerCLI · vcenter01.contoso.local</span><button class="t-copy" type="button" data-copy="Get-VM | Where-Object { $_.PowerState -eq &#x27;PoweredOn&#x27; -and $_.ExtensionData.Guest.ToolsRunningStatus -ne &#x27;guestToolsRunning&#x27; } | Select-Object Name, @{n=&#x27;Tools&#x27;;e={$_.ExtensionData.Guest.ToolsRunningStatus}}" data-copied="Comandos copiados">Copiar comandos</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>Get-VM | Where-Object { $_.PowerState -eq &#x27;PoweredOn&#x27; -and $_.ExtensionData.Guest.ToolsRunningStatus -ne &#x27;guestToolsRunning&#x27; } | Select-Object Name, @{n=&#x27;Tools&#x27;;e={$_.ExtensionData.Guest.ToolsRunningStatus}}</span><span class="t-out">Name          Tools</span><span class="t-out">----          -----</span><span class="t-out">srv-lic-01    guestToolsNotRunning</span><span class="t-out">app-legacy-02 guestToolsNotRunning</span></code></pre></figure>
+<ol><li><strong>El corte</strong>: el mantenedor abre la entrada del SAI (no se tira de un cable de un host). Alguien apunta la hora de cada paso desde la consola de vCenter y el registro de eventos de PowerChute.</li><li><strong>Durante</strong>: comprobar que cada grupo se apaga en su turno, que el vCenter cae después de todas las VM y que los hosts se apagan con todas las VM ya apagadas.</li><li><strong>La vuelta</strong>: se cierra la entrada, el SAI recarga y se encienden hosts, almacenamiento y VM en orden inverso (PowerChute puede arrancar las VM al volver la luz si se configura). Las aplicaciones las comprueban sus dueños.</li><li><strong>Después</strong>: comparar los tiempos reales con las duraciones configuradas y ajustar.</li></ol>
+<h2>7. El caso: &quot;en la prueba, los hosts se apagaron antes que las máquinas virtuales&quot;</h2>
+<p>Sábado, 22:00, prueba anual. A los 9 minutos los tres hosts están apagados; al volver, la base de datos <code>srv-sql-02</code> arranca con recuperación y el servidor de licencias tiene el sistema de ficheros marcado como sucio.</p>
+<ol><li><strong>El registro de PowerChute</strong> cuenta qué pasó: el grupo medio tenía la duración por defecto de 120 segundos y PowerChute pasó al siguiente paso con <code>srv-sql-02</code> todavía apagándose. En vCenter, la tarea <em>Initiate guest OS shutdown</em> de <code>srv-sql-02</code> empezó a las 22:04:10 y la máquina seguía encendida a las 22:08, cuando empezó el apagado de los hosts.</li><li><strong>Las VM sin Tools</strong>: <code>srv-lic-01</code> y <code>app-legacy-02</code> estaban en la lista del paso 1 de la prueba. Sin VMware Tools no hay apagado limpio: se apagaron de golpe al principio.</li><li><strong>HA</strong>: <em>Disable HA on Shutdown</em> estaba desmarcado. Al apagarse el primer host, HA reinició dos VM en los otros dos, que cayeron de nuevo dos minutos después con su host.</li><li><strong>La tarjeta</strong>: el <em>Low Battery Duration</em> estaba en 2 minutos, el valor de fábrica en muchos modelos. No llegó a influir porque la prueba se cortó antes, pero en un corte largo el SAI habría cortado la salida con la secuencia a medias.</li></ol>
+<p>Lo que se cambió:</p>
+<ul><li>Duraciones <strong>medidas</strong>: la de cada grupo, la del apagado más lento de sus VM (<code>srv-sql-02</code> tarda 4 minutos y 20 segundos) más un minuto.</li><li>VMware Tools instalado en las dos máquinas, y el informe de VM sin Tools en la revisión mensual.</li><li><em>Disable HA on Shutdown</em> activado.</li><li><em>Low Battery Duration</em> subido para que cubra el tiempo total de apagado, y recalculadas las cuentas del apartado 4 sin el evento <em>Available runtime has been exceeded</em>.</li><li>Una segunda prueba en la siguiente ventana: hosts apagados a los 17 minutos con todas las VM apagadas antes y ningún arranque con recuperación.</li></ul>
+<p>En el informe: la cronología de la prueba, lo que falló, los cambios y la segunda prueba que lo confirma.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>La guía de <a href="vmware-mantenimiento-de-hosts-y-maquinas-virtuales-en-varias-plantas.html">mantenimiento de hosts y máquinas virtuales en VMware</a> cubre el encendido ordenado del clúster después de un corte.</li><li>La guía de <a href="sai-de-la-sala-de-comunicaciones-dimensionado-pruebas-apagado-ordenado-y-un-corte-antes-de-la-apertura.html">SAI de la sala de comunicaciones</a> explica cómo medir la autonomía en la prueba anual con el mantenedor.</li><li>El repositorio <strong>36-major-incident-command-kit</strong> de mi GitHub sirve para llevar la cronología de la prueba como si fuera un incidente real.</li></ul>
+<p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">Esta guía</span></p>
+      <p class="repo-name"><span class="es">Sector 5</span> · <span class="es">SAI - Alimentación de la sala de comunicaciones</span></p>
+      <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
+      <a class="arrow-link" href="sector-5.html"><span class="es">Todas las guías del Sector 5</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/36-major-incident-command-kit.html"><span class="label muted"><span class="es">Blog · 36</span></span><span class="related-t"><span class="es">Los usuarios nos avisaron 40 minutos antes que la monitorización: un kit para dirigir y revisar incidentes mayores</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="sai-de-la-sala-de-comunicaciones-dimensionado-pruebas-apagado-ordenado-y-un-corte-antes-de-la-apertura.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">SAI de la sala de comunicaciones: dimensionado, alimentación A/B, baterías, pruebas, apagado ordenado y un corte de luz antes de la apertura</span></span></a>
+    <a class="post-nav-link next" href="consejo-de-administracion-soporte-tecnico-a-la-reunion-sala-consejeros-remotos-y-plan-b.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">Consejo de administración: soporte técnico a la reunión, de la preparación con secretaría a un consejero que no oye la sala</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=es" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=es" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>pfSense: OpenVPN, WireGuard and CARP HA · Iñigo González</title>
+<meta name="description" content="pfSense remote access and HA: OpenVPN with LDAP/RADIUS, WireGuard site-to-site, CARP with pfsync and XMLRPC, backups, upgrades and failover.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/pfsense-openvpn-con-ldap-o-radius-wireguard-entre-sedes-alta-disponibilidad-con-carp-y-una-vpn-que-cae-tras-la-conmutacion.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/pfsense-openvpn-con-ldap-o-radius-wireguard-entre-sedes-alta-disponibilidad-con-carp-y-una-vpn-que-cae-tras-la-conmutacion.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/pfsense-openvpn-con-ldap-o-radius-wireguard-entre-sedes-alta-disponibilidad-con-carp-y-una-vpn-que-cae-tras-la-conmutacion.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/pfsense-openvpn-con-ldap-o-radius-wireguard-entre-sedes-alta-disponibilidad-con-carp-y-una-vpn-que-cae-tras-la-conmutacion.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pfSense: OpenVPN, WireGuard and CARP HA · Iñigo González">
+<meta property="og:description" content="pfSense remote access and HA: OpenVPN with LDAP/RADIUS, WireGuard site-to-site, CARP with pfsync and XMLRPC, backups, upgrades and failover.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/pfsense-openvpn-con-ldap-o-radius-wireguard-entre-sedes-alta-disponibilidad-con-carp-y-una-vpn-que-cae-tras-la-conmutacion.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-nivel-3.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="pfSense: OpenVPN, WireGuard and CARP HA · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"pfSense: OpenVPN for users with LDAP or RADIUS, WireGuard between sites, high availability with CARP, backups and upgrades, and a VPN that drops after failover","alternativeHeadline":"pfSense: OpenVPN para usuarios con LDAP o RADIUS, WireGuard entre sedes, alta disponibilidad con CARP, copias y actualización, y una VPN que cae tras la conmutación","description":"Remote access and resilience for an office pfSense: OpenVPN with Active Directory users over LDAP or RADIUS with MFA, WireGuard to another site, two firewalls in high availability with CARP, pfsync and XMLRPC sync, backups and upgrades without an outage, and the VPN that drops after failover with both nodes MASTER.","datePublished":"2026-11-06","dateModified":"2026-11-06","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/pfsense-openvpn-con-ldap-o-radius-wireguard-entre-sedes-alta-disponibilidad-con-carp-y-una-vpn-que-cae-tras-la-conmutacion.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/pfsense-openvpn-con-ldap-o-radius-wireguard-entre-sedes-alta-disponibilidad-con-carp-y-una-vpn-que-cae-tras-la-conmutacion.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"pfSense: office firewall"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 3","item":"https://inigogonzalezgarcia.github.io/guias/nivel-3.html"},{"@type":"ListItem","position":4,"name":"pfSense: OpenVPN for users with LDAP or RADIUS, WireGuard between sites, high availability with CARP, backups and upgrades, and a VPN that drops after failover","item":"https://inigogonzalezgarcia.github.io/guias/pfsense-openvpn-con-ldap-o-radius-wireguard-entre-sedes-alta-disponibilidad-con-carp-y-una-vpn-que-cae-tras-la-conmutacion.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/"><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../es/guias/pfsense-openvpn-con-ldap-o-radius-wireguard-entre-sedes-alta-disponibilidad-con-carp-y-una-vpn-que-cae-tras-la-conmutacion.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="en">Guides</span></a> · <a href="nivel-3.html"><span class="en">Level 3</span></a></p>
+    <h1><span class="en">pfSense: OpenVPN for users with LDAP or RADIUS, WireGuard between sites, high availability with CARP, backups and upgrades, and a VPN that drops after failover</span></h1>
+    <p class="lede"><span class="en">Remote access and resilience for an office pfSense: OpenVPN with Active Directory users over LDAP or RADIUS with MFA, WireGuard to another site, two firewalls in high availability with CARP, pfsync and XMLRPC sync, backups and upgrades without an outage, and the VPN that drops after failover with both nodes MASTER.</span></p><p class="label post-meta"><span class="en">Level 3</span> · <span class="en">pfSense: office firewall</span> · <span class="en">7 min read</span> · <span class="en">Updated</span> <span class="en">6 Nov 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>People working from outside with their domain account, the other site reaching the servers through a tunnel, and the office keeping its internet even if a firewall fails or reboots for an upgrade. And knowing what to look at when, after a failover, the VPN does not come back.</p>
+<h2>Before you start</h2>
+<ul><li>The pfSense from the <a href="pfsense-firewall-de-oficina-interfaces-vlan-alias-reglas-nat-dns-y-un-servicio-publicado-que-no-se-ve.html">pfSense as the office firewall</a> guide, with its VLANs, aliases and rules.</li><li>For high availability, <strong>two identical boxes</strong> (same hardware, same interface names, same version) and a <strong>third network card</strong> for synchronisation. On the WAN, <strong>three public IPs</strong>: one per node and a shared one (a /29 from the ISP).</li><li>In Active Directory: a <code>VPN-Usuarios</code> group, a service account to query LDAP and the company CA (for LDAPS). For MFA, an NPS server with the Entra MFA extension.</li><li>A public name for the VPN: <code>vpn.contoso.example</code>.</li></ul>
+<h2>1. Domain users: LDAP or RADIUS</h2>
+<p>First, the company CA under <strong>System › Certificates › Authorities › Add</strong> (import the root CA certificate). Then the authentication server:</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">pfSense · System › User Manager › Authentication Servers › Add</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Type</span><span class="ui-v">LDAP</span></div><div class="ui-field"><span class="ui-k">Hostname or IP address</span><span class="ui-v">dc01.contoso.local</span></div><div class="ui-field"><span class="ui-k">Port value</span><span class="ui-v">636 · Transport: SSL/TLS Encrypted</span></div><div class="ui-field"><span class="ui-k">Peer Certificate Authority</span><span class="ui-v">Contoso Root CA</span></div><div class="ui-field"><span class="ui-k">Search scope</span><span class="ui-v">Entire Subtree · Base DN: DC=contoso,DC=local</span></div><div class="ui-field"><span class="ui-k">Authentication containers</span><span class="ui-v">OU=Usuarios,DC=contoso,DC=local</span></div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Extended query: memberOf=CN=VPN-Usuarios,OU=Grupos,DC=contoso,DC=local</div><div class="ui-field"><span class="ui-k">Bind credentials</span><span class="ui-v">CN=svc-pfsense-ldap,OU=Servicio,DC=contoso,DC=local</span></div><div class="ui-field"><span class="ui-k">Initial Template</span><span class="ui-v">Microsoft AD</span></div><div class="ui-btn">Save</div></div></figure>
+<ul><li>The <strong>extended query</strong> lets in only members of <code>VPN-Usuarios</code>: disabling the account in AD or removing it from the group cuts the VPN.</li><li>Test it in <strong>Diagnostics › Authentication</strong> with one user inside the group and one outside before building the VPN.</li><li>With <strong>RADIUS</strong> (for MFA): type RADIUS, the NPS IP, the shared secret, port 1812 and an <strong>Authentication Timeout</strong> of 60 seconds. With the default (5 seconds) the connection fails while the user is still approving the push on their phone.</li></ul>
+<h2>2. OpenVPN for users</h2>
+<p><strong>VPN › OpenVPN › Wizards</strong>, with the authentication server from step 1. The values that matter:</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">pfSense · OpenVPN Remote Access Server Setup</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Type of Server</span><span class="ui-v">LDAP (or RADIUS)</span></div><div class="ui-field"><span class="ui-k">Certificate Authority</span><span class="ui-v">create &quot;OpenVPN CA&quot; · Server Certificate: &quot;vpn.contoso.example&quot;</span></div><div class="ui-field"><span class="ui-k">Interface</span><span class="ui-v">WAN · Protocol: UDP on IPv4 only · Local Port: 1194</span></div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>TLS Authentication</div><div class="ui-field"><span class="ui-k">Data Encryption Algorithms</span><span class="ui-v">AES-256-GCM, CHACHA20-POLY1305</span></div><div class="ui-field"><span class="ui-k">Tunnel Network</span><span class="ui-v">10.20.200.0/24</span></div><div class="ui-field"><span class="ui-k">Local Network</span><span class="ui-v">10.20.10.0/24</span></div><div class="ui-field"><span class="ui-k">DNS Default Domain</span><span class="ui-v">contoso.local · DNS Server 1: 10.20.10.10</span></div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Firewall Rule · [x] OpenVPN rule</div><div class="ui-btn">Finish</div></div></figure>
+<ul><li>A <strong>Local Network</strong> with only the networks people should reach is <strong>split tunnelling</strong>: the rest of the laptop&#x27;s traffic uses its own connection. To force everything through the office, <em>Redirect IPv4 Gateway</em>.</li><li>The wizard&#x27;s rule on the <strong>OpenVPN</strong> tab lets everything through: replace it with alias-based rules, as on the VLANs.</li><li>The clients: the <strong>openvpn-client-export</strong> package and <strong>VPN › OpenVPN › Client Export</strong>. Under <strong>Host Name Resolution</strong>, <em>Other</em> with <code>vpn.contoso.example</code>: that way the file does not carry the IP of a specific node (it matters in step 6).</li></ul>
+<h2>3. WireGuard between sites</h2>
+<p>The <strong>WireGuard</strong> package (Package Manager) and, under <strong>VPN › WireGuard</strong>:</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">pfSense · VPN › WireGuard › Tunnels › Add</span></figcaption><div class="ui-body"><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Enable</div><div class="ui-field"><span class="ui-k">Description</span><span class="ui-v">Bilbao site</span></div><div class="ui-field"><span class="ui-k">Listen Port</span><span class="ui-v">51820</span></div><div class="ui-field"><span class="ui-k">Interface Keys</span><span class="ui-v">[Generate]</span></div><div class="ui-btn">Save Tunnel</div><div class="ui-path"><span>Peers</span><span class="ui-sep" aria-hidden="true">›</span><span>Add</span></div><div class="ui-field"><span class="ui-k">Tunnel</span><span class="ui-v">tun_wg0</span></div><div class="ui-field"><span class="ui-k">Endpoint</span><span class="ui-v">198.51.100.20 · Port: 51820</span></div><div class="ui-field"><span class="ui-k">Keep Alive</span><span class="ui-v">25</span></div><div class="ui-field"><span class="ui-k">Public Key</span><span class="ui-v">(the other site&#x27;s)</span></div><div class="ui-field"><span class="ui-k">Allowed IPs</span><span class="ui-v">10.30.0.0/16, 10.99.1.2/32</span></div><div class="ui-btn">Save Peer</div></div></figure>
+<ol><li>In <strong>Interfaces › Assignments</strong>, assign <code>tun_wg0</code> as an interface (<code>WG_BILBAO</code>), with static IP <code>10.99.1.1/30</code>.</li><li>In <strong>System › Routing › Gateways</strong>, a gateway <code>10.99.1.2</code> on that interface and, under <strong>Static Routes</strong>, <code>10.30.0.0/16</code> through it.</li><li>Rules: on <strong>WAN</strong>, allow UDP 51820 only from <code>198.51.100.20</code>; on the <strong>WG_BILBAO</strong> tab, whatever the other site may use, with aliases.</li></ol>
+<p><code>Allowed IPs</code> works both as a route list and as a filter: a packet from a network not in the list is simply dropped.</p>
+<h2>4. High availability: CARP, pfsync and XMLRPC</h2>
+<p>Two nodes, <code>fw-a</code> (primary) and <code>fw-b</code> (secondary), with a <code>SYNC</code> interface cabled between them (<code>10.20.98.1</code> and <code>10.20.98.2</code>). On each network, each node has its own IP and they share a <strong>CARP virtual IP</strong>, which is the one devices use as their gateway:</p>
+<div class="g-table"><table><thead><tr><th>Network</th><th>fw-a</th><th>fw-b</th><th>CARP (VIP)</th></tr></thead><tbody><tr><td>WAN</td><td>203.0.113.11</td><td>203.0.113.12</td><td>203.0.113.10</td></tr><tr><td>USUARIOS</td><td>10.20.20.2</td><td>10.20.20.3</td><td>10.20.20.1</td></tr><tr><td>SERVIDORES</td><td>10.20.10.2</td><td>10.20.10.3</td><td>10.20.10.1</td></tr></tbody></table></div>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">pfSense (fw-a) · Firewall › Virtual IPs › Add</span></figcaption><div class="ui-body"><div class="ui-field"><span class="ui-k">Type</span><span class="ui-v">CARP</span></div><div class="ui-field"><span class="ui-k">Interface</span><span class="ui-v">USUARIOS</span></div><div class="ui-field"><span class="ui-k">Address</span><span class="ui-v">10.20.20.1 / 24</span></div><div class="ui-field"><span class="ui-k">Virtual IP Password</span><span class="ui-v">************</span></div><div class="ui-field"><span class="ui-k">VHID Group</span><span class="ui-v">20</span></div><div class="ui-field"><span class="ui-k">Advertising frequency</span><span class="ui-v">Base 1 · Skew 0</span></div><div class="ui-btn">Save</div></div></figure>
+<p>Then, on <code>fw-a</code> only, <strong>System › High Availability</strong>:</p>
+<ul><li><strong>State Synchronization (pfsync)</strong>: <em>Synchronize states</em> ticked, <em>Synchronize Interface</em> <code>SYNC</code>, <em>pfsync Synchronize Peer IP</em> <code>10.20.98.2</code>. Open connections move to the other node without being cut.</li><li><strong>Configuration Synchronization (XMLRPC)</strong>: <em>Synchronize Config to IP</em> <code>10.20.98.2</code>, an administrator account on the secondary, and what to sync (rules, NAT, aliases, virtual IPs, OpenVPN, certificates, users, authentication servers, DHCP). When it syncs, <code>fw-b</code> receives the virtual IPs with <em>Skew</em> 100 and stays as the backup.</li><li>On <code>SYNC</code>, a rule allowing everything between the two nodes.</li><li><strong>Outbound NAT</strong> in hybrid mode, translating to the WAN VIP (<code>203.0.113.10</code>), not to each node&#x27;s IP; and in DHCP, gateway and DNS = the VIP.</li></ul>
+<p><strong>Status › CARP</strong> shows MASTER on <code>fw-a</code> and BACKUP on <code>fw-b</code>. To test, <strong>Enter Persistent CARP Maintenance Mode</strong> on <code>fw-a</code>: everything moves to <code>fw-b</code> without breaking a download in progress.</p>
+<h2>5. Backups and version upgrades</h2>
+<ul><li><strong>Diagnostics › Backup &amp; Restore</strong>: <em>Download configuration as XML</em>, with <strong>Encrypt this configuration file</strong> ticked (it holds keys and certificates). The <strong>Config History</strong> on the same page keeps earlier versions and lets you compare and roll back.</li><li><strong>Services › Auto Config Backup</strong>: an automatic encrypted copy to Netgate&#x27;s service after every change. The encryption key goes in the password manager: without it the backup is useless.</li><li><strong>Upgrading</strong>: <strong>System › Update</strong>, reading the release notes first and checking that the installed packages have a compatible version. With high availability, <code>fw-b</code> first; once it is fine, maintenance mode on <code>fw-a</code>, upgrade it and leave maintenance mode.</li></ul>
+<h2>6. The ticket: &quot;after the firewall upgrade, the VPN does not come back&quot;</h2>
+<p>Thursday, 22:30, upgrade window. <code>fw-b</code> is upgraded, then <code>fw-a</code> with maintenance mode. From then on, remote workers cannot connect and in the office the network works on and off.</p>
+<p><strong>First symptom: both nodes MASTER.</strong> <strong>Status › CARP</strong> on <code>fw-b</code> says MASTER, and on <code>fw-a</code>, now out of maintenance, too. Both boxes answer for <code>10.20.20.1</code> and devices flip between them: hence the &quot;on and off&quot; network.</p>
+<ol><li>Each node thinks it is alone because it <strong>does not receive the other&#x27;s CARP advertisements</strong> (IP protocol 112 to <code>224.0.0.18</code>). In <strong>Diagnostics › Packet Capture</strong> on <code>USUARIOS</code>, protocol CARP: only the node&#x27;s own advertisements show up.</li><li>Usual causes: the VLAN is missing from the switch trunk of one of the nodes; the switch filters multicast; the virtual IPs on <code>fw-a</code> and <code>fw-b</code> have a different password or VHID (<strong>Status › System Logs › System</strong> shows CARP messages about an incorrect hash); or, on virtual machines, the virtual switch does not allow MAC changes or <em>forged transmits</em>.</li><li>Here it was the switch: the afternoon&#x27;s change had left VLAN 20 off <code>fw-b</code>&#x27;s trunk. Once fixed, <code>fw-b</code> goes back to BACKUP.</li></ol>
+<p><strong>Second symptom: the VPN.</strong> The OpenVPN server had been created with <strong>Interface: WAN</strong>, <code>fw-a</code>&#x27;s own IP (<code>203.0.113.11</code>), and the exported files pointed to that IP. With <code>fw-a</code> in maintenance, clients were calling a node that was not serving them.</p>
+<ul><li>On the OpenVPN server, <strong>Interface</strong>: the WAN VIP (<code>203.0.113.10</code>). With XMLRPC, the configuration goes to <code>fw-b</code>; the service only answers on the node holding the VIP.</li><li><code>vpn.contoso.example</code> resolves to <code>203.0.113.10</code> and the clients are exported again with that name. Those that already had the name reconnect on their own through the <em>keepalive</em>.</li><li><strong>WireGuard</strong> does not bind to an IP: after leaving maintenance mode, the other site may keep talking to the node that is no longer MASTER. A node reboot does not cause it; maintenance mode does. After each maintenance, check the <em>handshake</em> in <strong>Status › WireGuard</strong> and restart the service if needed.</li></ul>
+<p>In the ticket: each node&#x27;s CARP state before and after, the cause (switch trunk), the OpenVPN interface change and the test: maintenance mode on <code>fw-a</code> with a VPN session open and a continuous ping to the other site.</p>
+<h2>Next steps</h2>
+<ul><li>The base of this firewall (VLANs, aliases, NAT and DNS) is in the <a href="pfsense-firewall-de-oficina-interfaces-vlan-alias-reglas-nat-dns-y-un-servicio-publicado-que-no-se-ve.html">pfSense as the office firewall</a> guide.</li><li>If the other site is a MikroTik, the <a href="mikrotik-routeros-7-router-de-sucursal-doble-wan-wireguard-a-la-central-y-una-fibra-que-no-vuelve.html">MikroTik as a branch router</a> guide has the other end of the tunnel.</li><li>For remote access MFA with Entra, the <a href="entra-conditional-access-politicas-base-y-usuario-bloqueado.html">conditional access</a> guide.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="en">Level 3</span> · <span class="en">pfSense: office firewall</span></p>
+      <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-3.html"><span class="en">All Level 3 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/45-network-config-compliance.html"><span class="label muted"><span class="en">Blog · 45</span></span><span class="related-t"><span class="en">Telnet on a branch switch and a night change nobody saved: the weekly network compliance review</span></span></a><a class="related-link" href="../blog/26-ot-segmentation-lab.html"><span class="label muted"><span class="en">Blog · 26</span></span><span class="related-t"><span class="en">Which paths into the plant network should not exist? A Purdue and IEC 62443 segmentation lab</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="pfsense-firewall-de-oficina-interfaces-vlan-alias-reglas-nat-dns-y-un-servicio-publicado-que-no-se-ve.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">pfSense as the office firewall: installation, interfaces and VLANs, aliases and least-privilege rules, NAT, DHCP and DNS, and a published service that cannot be reached from outside</span></span></a>
+    <a class="post-nav-link next" href="opnsense-reglas-alias-grupos-suricata-ids-e-ips-y-una-alerta-que-bloquea-trafico-legitimo.html"><span class="label muted"><span class="en">Next</span></span><span><span class="en">OPNsense: installation, rules, aliases and groups, Suricata in IDS and then IPS mode, updates and backups, and an alert that blocks legitimate traffic</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
