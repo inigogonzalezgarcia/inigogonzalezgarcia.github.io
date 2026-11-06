@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Cisco WAP/CBW: SSIDs, VLANs and guest WiFi · Iñigo González</title>
+<meta name="description" content="Cisco WAP and CBW access points: model support status, SSID-to-VLAN on a trunk, WPA2/WPA3 with RADIUS, guest captive portal, and guests with no IP.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/guias/cisco-wap-y-cbw-ssid-por-vlan-wpa2-wpa3-radius-portal-de-invitados-y-clientes-sin-ip.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/guias/cisco-wap-y-cbw-ssid-por-vlan-wpa2-wpa3-radius-portal-de-invitados-y-clientes-sin-ip.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/guias/cisco-wap-y-cbw-ssid-por-vlan-wpa2-wpa3-radius-portal-de-invitados-y-clientes-sin-ip.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/guias/cisco-wap-y-cbw-ssid-por-vlan-wpa2-wpa3-radius-portal-de-invitados-y-clientes-sin-ip.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cisco WAP/CBW: SSIDs, VLANs and guest WiFi · Iñigo González">
+<meta property="og:description" content="Cisco WAP and CBW access points: model support status, SSID-to-VLAN on a trunk, WPA2/WPA3 with RADIUS, guest captive portal, and guests with no IP.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/guias/cisco-wap-y-cbw-ssid-por-vlan-wpa2-wpa3-radius-portal-de-invitados-y-clientes-sin-ip.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-nivel-2.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cisco WAP/CBW: SSIDs, VLANs and guest WiFi · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Cisco WAP and Cisco Business Wireless: setup, SSID per VLAN, WPA2/WPA3 with RADIUS, guest portal, SNMP, firmware and guest clients with no IP","alternativeHeadline":"Cisco WAP y Cisco Business Wireless: puesta en marcha, SSID por VLAN, WPA2/WPA3 con RADIUS, portal de invitados, SNMP, firmware y clientes de invitados sin IP","description":"Which Cisco small-office models are still supported, setting up a CBW primary AP, each SSID in its VLAN over a trunk port, WPA2/WPA3 Personal versus Enterprise with RADIUS, the guest captive portal, SNMP and firmware, and guests who connect but get no IP.","datePublished":"2026-11-06","dateModified":"2026-11-06","inLanguage":"en","proficiencyLevel":"Expert","url":"https://inigogonzalezgarcia.github.io/guias/cisco-wap-y-cbw-ssid-por-vlan-wpa2-wpa3-radius-portal-de-invitados-y-clientes-sin-ip.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/guias/cisco-wap-y-cbw-ssid-por-vlan-wpa2-wpa3-radius-portal-de-invitados-y-clientes-sin-ip.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"articleSection":"Cisco WAP: small-office access points"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://inigogonzalezgarcia.github.io/guias.html"},{"@type":"ListItem","position":3,"name":"Level 2","item":"https://inigogonzalezgarcia.github.io/guias/nivel-2.html"},{"@type":"ListItem","position":4,"name":"Cisco WAP and Cisco Business Wireless: setup, SSID per VLAN, WPA2/WPA3 with RADIUS, guest portal, SNMP, firmware and guest clients with no IP","item":"https://inigogonzalezgarcia.github.io/guias/cisco-wap-y-cbw-ssid-por-vlan-wpa2-wpa3-radius-portal-de-invitados-y-clientes-sin-ip.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/"><span class="en">Blog</span></a><a href="../guias.html" aria-current="page"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../es/guias/cisco-wap-y-cbw-ssid-por-vlan-wpa2-wpa3-radius-portal-de-invitados-y-clientes-sin-ip.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="../guias.html"><span class="en">Guides</span></a> · <a href="nivel-2.html"><span class="en">Level 2</span></a></p>
+    <h1><span class="en">Cisco WAP and Cisco Business Wireless: setup, SSID per VLAN, WPA2/WPA3 with RADIUS, guest portal, SNMP, firmware and guest clients with no IP</span></h1>
+    <p class="lede"><span class="en">Which Cisco small-office models are still supported, setting up a CBW primary AP, each SSID in its VLAN over a trunk port, WPA2/WPA3 Personal versus Enterprise with RADIUS, the guest captive portal, SNMP and firmware, and guests who connect but get no IP.</span></p><p class="label post-meta"><span class="en">Level 2</span> · <span class="en">Cisco WAP: small-office access points</span> · <span class="en">8 min read</span> · <span class="en">Updated</span> <span class="en">6 Nov 2026</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose guide">
+      
+      <div class="en" lang="en">
+<h2>What you&#x27;ll get</h2>
+<p>Setting up or inheriting the WiFi of a small office with Cisco access points from the small-business range: knowing whether the model in front of you is still supported, bringing up a Cisco Business Wireless <strong>primary AP</strong>, putting each SSID on its own VLAN, choosing between a shared key and RADIUS, giving visitors a network with a <strong>captive portal</strong> kept apart from the corporate one, monitoring them over SNMP and updating them. And solving the Monday ticket: guests connect to the WiFi but have no Internet because they get no IP.</p>
+<h2>Before you start</h2>
+<p>First, which model it is and where it is in its life:</p>
+<div class="g-table"><table><thead><tr><th>Family</th><th>Models</th><th>Status (November 2026)</th></tr></thead><tbody><tr><td>Old WAP 300 series</td><td>WAP321, WAP371</td><td>Retired years ago, no support or firmware</td></tr><tr><td>WAP</td><td>WAP125, WAP150, WAP361, WAP571, WAP581</td><td>End of sale in 2021; <strong>last date of support 31 August 2026</strong></td></tr><tr><td>Cisco Business Wireless AC</td><td>CBW140AC, CBW145AC, CBW240AC (and mesh extenders)</td><td><strong>End of sale 19 August 2026</strong>, no replacement announced; support until 31 August 2031</td></tr><tr><td>Cisco Business Wireless AX</td><td>CBW150AX, CBW151AXM (extender)</td><td>Wi-Fi 6 and WPA3; cannot share a network with CBW AC models</td></tr></tbody></table></div>
+<ul><li>A WAP125 or WAP371 in production is a device without security patches: record it as a risk and plan its replacement. This guide uses the <strong>CBW</strong> interface, the one still supported; standalone WAPs have equivalent per-device menus (<em>Wireless › Networks</em> for SSIDs, <em>Access Control › Guest Access</em> for the portal).</li><li>In CBW, one AP acts as the <strong>Primary AP</strong> (the built-in controller) and manages the others. There can only be <strong>one CBW deployment per LAN</strong>, and CBW150AX units do not coexist with CBW140AC/240AC on the same network.</li><li>A DHCP server for the APs&#x27; management VLAN and for each SSID VLAN; RADIUS (NPS or FreeRADIUS) if you will use WPA2/WPA3-Enterprise.</li><li>The office VLANs: 10 management, 20 users, 40 guests.</li></ul>
+<h2>1. Setting up the primary AP</h2>
+<p>When it boots from factory defaults (8-10 minutes until the LED blinks green), the AP broadcasts the <strong>CiscoBusiness-Setup</strong> network with the key <code>cisco123</code>:</p>
+<ol><li>Connect to that network with a laptop and open <code>http://ciscobusiness.cisco</code>. Click <strong>Start</strong>.</li><li>Create the administrator account (username and password cannot contain &quot;cisco&quot;).</li><li>Primary AP name, country, date, time and time zone. Mesh stays off unless you will use it.</li><li>The first WiFi network and its key. It can be changed later.</li><li><strong>Apply</strong>: the AP reboots in 5-6 minutes. Then log in at <code>https://ciscobusiness.cisco</code> or <code>https://&lt;AP IP&gt;</code>.</li></ol>
+<p>The switch port for the primary AP is a <strong>trunk</strong> with the management VLAN untagged (native) and the SSID VLANs tagged. On a Catalyst:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">SW-P1-01 · an AP port</span><button class="t-copy" type="button" data-copy="configure terminal&#10;interface GigabitEthernet1/0/5&#10; description AP-P1-01 CBW240AC&#10; switchport mode trunk&#10; switchport trunk native vlan 10&#10; switchport trunk allowed vlan 10,20,40&#10; spanning-tree portfast trunk&#10;end" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>configure terminal</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>interface GigabitEthernet1/0/5</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span> description AP-P1-01 CBW240AC</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span> switchport mode trunk</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span> switchport trunk native vlan 10</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span> switchport trunk allowed vlan 10,20,40</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span> spanning-tree portfast trunk</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>end</span></code></pre></figure>
+<ul><li>The AP gets its management IP by DHCP on the native VLAN. Pin it with a <strong>reservation</strong> on the DHCP server: that is the address you will register in RADIUS and in monitoring.</li><li><strong>Every</strong> AP gets the same port configuration. An AP on a different port broadcasts the SSID but cannot deliver that VLAN&#x27;s traffic.</li><li>If the AP was first set up on an access port, when you turn the port into a trunk keep the VLAN it booted in as native, or you will lose contact with it.</li></ul>
+<h2>2. Each SSID on its own VLAN</h2>
+<p>In the top-right corner, the <strong>Expert View</strong> icon shows all menus.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Cisco Business Wireless · Wireless Settings › WLANs › Add new WLAN/RLAN</span></figcaption><div class="ui-body"><div class="ui-path"><span>Wireless Settings</span><span class="ui-sep" aria-hidden="true">›</span><span>WLANs</span><span class="ui-sep" aria-hidden="true">›</span><span>Add new WLAN/RLAN</span></div><div class="ui-field"><span class="ui-k">General · Profile Name</span><span class="ui-v">CONTOSO-CORP</span></div><div class="ui-field"><span class="ui-k">General · SSID</span><span class="ui-v">CONTOSO-CORP</span></div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Enable</div><div class="ui-field"><span class="ui-k">General · Radio Policy</span><span class="ui-v">ALL</span></div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Broadcast SSID</div><div class="ui-field"><span class="ui-k">VLAN &amp; Firewall · Use VLAN Tagging</span><span class="ui-v">Yes</span></div><div class="ui-field"><span class="ui-k">VLAN &amp; Firewall · VLAN ID</span><span class="ui-v">20</span></div><div class="ui-btn">Apply</div></div></figure>
+<ul><li><strong>Use VLAN Tagging: Yes</strong> with VLAN 20 makes the AP tag that SSID&#x27;s traffic as it leaves over the trunk. With <strong>No</strong>, the SSID uses the native VLAN, the management one: user devices would end up on the APs&#x27; network.</li><li>After each change, the <strong>save</strong> icon at the top right. Without it, the next reboot undoes your work.</li><li>Three or four SSIDs at most. Each one adds beacons in the air and takes capacity from all of them.</li></ul>
+<h2>3. Security: Personal versus Enterprise</h2>
+<div class="g-table"><table><thead><tr><th>Mode</th><th>How the user gets in</th><th>When</th></tr></thead><tbody><tr><td><strong>WPA2-Personal</strong></td><td>One shared key for everyone</td><td>Devices without a user (printers, POS); changing the key means touching them all</td></tr><tr><td><strong>WPA3-Personal</strong></td><td>Shared key with SAE, resistant to dictionary attacks</td><td>The same, if every client supports it (CBW150AX)</td></tr><tr><td><strong>WPA2/WPA3-Enterprise</strong></td><td>Each person&#x27;s user or certificate against RADIUS</td><td>Corporate network: a leaver stops getting in when their account is disabled</td></tr></tbody></table></div>
+<p>For <strong>Enterprise</strong>, in the SSID&#x27;s <em>WLAN Security</em> tab choose Enterprise security and point it at the RADIUS server (10.10.0.20, port <strong>1812</strong>, and its shared secret). On the server:</p>
+<ul><li>The <strong>primary AP</strong>&#x27;s management IP as a RADIUS client, with the same secret: it is the one sending the requests.</li><li>In NPS, a network policy for the <code>GG-WiFi-Corp</code> group with PEAP-MSCHAPv2 (domain username and password) or, better, EAP-TLS with a computer certificate. The server needs a certificate the laptops trust.</li><li>If the model and clients support it, WPA2/WPA3 mixed mode lets old and new laptops share the same SSID.</li></ul>
+<h2>4. Guests with a captive portal</h2>
+<p>Visitors go on their own SSID, in their own VLAN, and only get out to the Internet.</p>
+<figure class="ui"><figcaption class="ui-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Cisco Business Wireless · guest SSID</span></figcaption><div class="ui-body"><div class="ui-path"><span>Wireless Settings</span><span class="ui-sep" aria-hidden="true">›</span><span>WLANs</span><span class="ui-sep" aria-hidden="true">›</span><span>Add new WLAN/RLAN</span></div><div class="ui-field"><span class="ui-k">General · Profile Name</span><span class="ui-v">CONTOSO-INVITADOS</span></div><div class="ui-field"><span class="ui-k">WLAN Security · Guest Network</span><span class="ui-v">On</span></div><div class="ui-opt on"><span class="ui-box" aria-hidden="true">✓</span>Captive Network Assistant</div><div class="ui-field"><span class="ui-k">WLAN Security · Captive Portal</span><span class="ui-v">Internal Splash Page</span></div><div class="ui-field"><span class="ui-k">WLAN Security · Access Type</span><span class="ui-v">Web Consent</span></div><div class="ui-field"><span class="ui-k">VLAN &amp; Firewall · Use VLAN Tagging</span><span class="ui-v">Yes</span></div><div class="ui-field"><span class="ui-k">VLAN &amp; Firewall · VLAN ID</span><span class="ui-v">40</span></div><div class="ui-btn">Apply</div></div></figure>
+<ul><li><strong>Access Type</strong>: <em>Web Consent</em> (accept the terms), <em>Email Address</em> (leave an email), <em>Local User Account</em> (users created under <em>Wireless Settings › WLAN Users</em>), <em>RADIUS</em> or <em>Social Login</em>. For an office, <em>Web Consent</em> or temporary users handed out by reception.</li><li>The page text is changed under <em>Wireless Settings › Guest WLANs</em> (<em>Page Headline</em> and <em>Page Message</em>), with <strong>Preview</strong> to see it.</li><li>The real separation is done by the network, not the AP: VLAN 40 ends at the firewall with a rule that only allows Internet access and denies 10.0.0.0/8. Without that rule, the guest is inside the office.</li><li>On the DHCP server, the guest scope with short leases (2-4 hours): visitors come and go and a scope with 8-day leases runs out.</li></ul>
+<h2>5. SNMP and firmware</h2>
+<ul><li><strong>SNMP</strong>: in Expert View, <em>Advanced › SNMP</em>. If v3 is offered, a user with authentication and encryption; if only v2c, a community of your own (never <code>public</code>) and access only from the monitoring IP. Monitoring watches the primary AP&#x27;s IP and, through it, the state of the others.</li><li><strong>Firmware</strong>: <em>Management › Software Update</em>. The primary AP downloads the image (from Cisco.com, from the PC over HTTP, or over TFTP/SFTP) and pushes it to every AP, which reboot: WiFi drops across the whole office for a few minutes. In a change window, with the release notes read and a configuration export taken beforehand.</li></ul>
+<h2>6. The ticket: &quot;guests connect to the WiFi but have no Internet&quot;</h2>
+<p>Monday, 10:00. Reception reports that visitors connect to <code>CONTOSO-INVITADOS</code>, their phone says <em>No Internet connection</em> and the portal never appears. A test laptop shows a <strong>169.254.x.x</strong> address: it got no IP.</p>
+<p>Under <em>Monitoring › Network Summary › Clients</em>, the client shows as associated to the SSID but with no IP address. Associating with the AP works; what fails is behind VLAN 40. Walk the path in order:</p>
+<ol><li><strong>Does VLAN 40 reach every AP?</strong> Check which AP the client is on (same list) and that AP&#x27;s switch port:</li></ol>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">SW-P2-01 · the floor 2 AP&#x27;s port</span><button class="t-copy" type="button" data-copy="show interfaces Gi1/0/9 trunk" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>show interfaces Gi1/0/9 trunk</span><span class="t-out">Port        Mode         Encapsulation  Status        Native vlan</span><span class="t-out">Gi1/0/9     on           802.1q         trunking      10</span><span class="t-out">Port        Vlans allowed on trunk</span><span class="t-out">Gi1/0/9     10,20</span></code></pre></figure>
+<p>There it is: the floor 2 AP was added with a trunk that only allows 10 and 20. Guests on floor 1 get an IP; those on floor 2 do not. Add the VLAN without replacing the list:</p>
+<figure class="term"><figcaption class="t-bar"><span class="t-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">SW-P2-01 · add the guest VLAN</span><button class="t-copy" type="button" data-copy="configure terminal&#10;interface Gi1/0/9&#10; switchport trunk allowed vlan add 40&#10;end&#10;copy running-config startup-config" data-copied="Commands copied">Copy commands</button></figcaption><pre class="t-body"><code><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>configure terminal</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>interface Gi1/0/9</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span> switchport trunk allowed vlan add 40</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>end</span><span class="t-cmd"><span class="t-ps" aria-hidden="true">›</span>copy running-config startup-config</span></code></pre></figure>
+<ol><li><strong>If the VLAN reaches every AP</strong>: check it exists on the trunk between floors and the core (<code>show interfaces trunk</code>) and that the firewall or core has its interface on VLAN 40 with DHCP (or the relay to the server).</li><li><strong>The scope</strong>: on the DHCP server, the guest scope full of active leases. With 250 addresses and 8-day leases, it runs out after a few weeks of visitors. Short leases and clearing expired ones.</li><li><strong>The SSID settings</strong>: <em>Use VLAN Tagging: Yes</em> and the right VLAN number. A 41 instead of 40 gives exactly the same symptom.</li></ol>
+<p>Check: the test laptop gets a 10.40.0.x address, the portal appears, and after accepting it browses but cannot reach any internal IP (try the file server&#x27;s).</p>
+<p>In the ticket: affected AP and port, the VLAN list before and after, the check from a client and, if it was the scope, the change to the lease duration.</p>
+<h2>Next steps</h2>
+<ul><li>The <a href="wifi-de-huespedes-en-mikrotik-hotspot-portal-cautivo-vales-y-limites.html">guest WiFi with MikroTik Hotspot</a> guide covers a captive portal with vouchers and limits when the APs&#x27; own portal falls short.</li><li>The <a href="cisco-vlans-troncales-router-de-la-sede-y-un-puerto-que-no-da-red.html">Cisco: VLANs, trunks and a port with no network</a> guide explains why it is always <code>add</code> on a trunk.</li><li>The <a href="dns-y-dhcp-en-windows-server-zonas-ambitos-conmutacion-y-un-equipo-sin-ip.html">DNS and DHCP on Windows Server</a> guide covers scopes and the device stuck with a 169.254 address.</li></ul>
+<p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="en">This guide</span></p>
+      <p class="repo-name"><span class="en">Level 2</span> · <span class="en">Cisco WAP: small-office access points</span></p>
+      <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
+      <a class="arrow-link" href="nivel-2.html"><span class="en">All Level 2 guides</span> →</a>
+      
+      <p class="share-msg small muted" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="../blog/45-network-config-compliance.html"><span class="label muted"><span class="en">Blog · 45</span></span><span class="related-t"><span class="en">Telnet on a branch switch and a night change nobody saved: the weekly network compliance review</span></span></a><a class="related-link" href="../blog/34-venue-service-readiness.html"><span class="label muted"><span class="en">Blog · 34</span></span><span class="related-t"><span class="en">The only kitchen printer had been down since yesterday: a morning check for a hospitality venue</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="cisco-primeros-comandos-copia-de-configuracion-y-un-puerto-err-disabled.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">Cisco: first commands on a switch, backing up the config and a port in err-disabled</span></span></a>
+    <a class="post-nav-link next" href="cacti-switches-y-routers-por-snmp-graficas-de-trafico-umbrales-y-un-enlace-saturado-a-las-nueve.html"><span class="label muted"><span class="en">Next</span></span><span><span class="en">Cacti: switches and routers over SNMP, traffic graphs with 64-bit counters, trees, thresholds with thold, spine, and the line that looks saturated at 9:00</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about?lang=en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq?lang=en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
