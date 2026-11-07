@@ -461,6 +461,8 @@ GUIDES_FOR_POST = {}
 for _g in sorted(_GR, key=lambda q: (_TORDER.index(q["topic"]), q["slug"])):
     for _r in RELATED.get(_g["topic"], []):
         GUIDES_FOR_POST.setdefault(_r, []).append(_g)
+# guides shown first in a post's related block (search intent matches the post)
+GUIDE_PIN = {"19-ad-infra-health-check": [q for q in _GR if q["slug"] == "active-directory-comprobar-la-salud-dcdiag-repadmin-dns-sysvol-y-un-dc-que-no-replica"]}
 def related_html(items):
     """items: (href, kicker_es, kicker_en, title_es, title_en)"""
     if not items: return ""
@@ -525,7 +527,7 @@ def related_for_post(repo):
     for r in POST_RELATED.get(repo, []):
         q = _POST_BY_REPO[r]
         out.append((f'{r}.html', f'Blog · {q["n"]}', f'Blog · {q["n"]}', q["title_es"], q["title_en"]))
-    for g in GUIDES_FOR_POST.get(repo, [])[:4]:
+    for g in (GUIDE_PIN.get(repo, []) + [x for x in GUIDES_FOR_POST.get(repo, []) if x not in GUIDE_PIN.get(repo, [])])[:4]:
         L = _LR[_TOPIC_R[g["topic"]][0]]
         out.append((f'../guias/{g["slug"]}.html', f'Guía · {L["n_es"]}', f'Guide · {L["n_en"]}', g["title_es"], g["title_en"]))
     return related_html(out)

@@ -54767,3 +54767,633 @@ In the ticket: symptom, process and connection, way in (Redis exposed without a 
 - The [Zabbix with agent 2](zabbix-servidor-agente-2-plantillas-macros-dependencias-avisos-y-un-agente-no-disponible.html) guide sets up the sustained-CPU alert that opens this ticket.
 - The [Azure Cost Management](azure-cost-management-ambitos-presupuestos-etiquetas-reservas-focus-y-la-factura-que-se-dispara.html) guide helps find the GPU machines nobody asked for.
 """)
+
+
+g(slug="active-directory-comprobar-la-salud-dcdiag-repadmin-dns-sysvol-y-un-dc-que-no-replica", topic="ad-delegacion", date="2026-11-07",
+  title_es="Comandos de salud de Active Directory: dcdiag, repadmin, DNS, SYSVOL y un DC que no replica",
+  title_en="Active Directory health check commands: dcdiag, repadmin, DNS, SYSVOL and a DC not replicating",
+  seo_title_en="Active Directory health check commands · Iñigo González",
+  seo_title_es="Salud de Active Directory: dcdiag y repadmin · Iñigo González",
+  dek_es="La lista de comandos para revisar un dominio y cómo leer cada salida: dcdiag, repadmin /replsummary, /showrepl y /queue, las pruebas DNS, el estado de SYSVOL con DFSR, la hora y los roles FSMO, un script programado que deja un resumen, y qué significan los errores 8524, 1722, 8453 y 8606 y el evento 2213 cuando un DC deja de replicar.",
+  dek_en="The command checklist for reviewing a domain and how to read each output: dcdiag, repadmin /replsummary, /showrepl and /queue, the DNS tests, SYSVOL state with DFSR, time and FSMO roles, a scheduled script that writes a summary, and what errors 8524, 1722, 8453 and 8606 and event 2213 mean when a DC stops replicating.",
+  seo_desc="Active Directory health check commands: dcdiag, repadmin, DNS tests, DFSR SYSVOL, FSMO, a scheduled summary and errors 8524, 1722, 8453, 8606 and event 2213.",
+  es="""
+## Qué vas a conseguir
+
+Una lista corta de comandos para saber, en cinco minutos, si el dominio está sano: controladores que responden, replicación al día, DNS correcto, SYSVOL compartido y replicando, hora y roles en su sitio. Para cada uno, qué aspecto tiene una salida buena y qué significa una línea de error. Y el ticket que llega cuando un controlador deja de replicar: los usuarios nuevos "no existen" en una sede y las GPO cambiadas no llegan.
+
+## Antes de empezar
+
+- Una cuenta de **Admins. del dominio** (o con permisos de lectura de replicación) y una consola en un controlador de dominio o en un equipo con **RSAT**: `dcdiag` y `repadmin` vienen con las herramientas de AD DS; `dfsrdiag` y el módulo **DFSR**, con las herramientas de administración de DFS.
+- Saber cuántos controladores hay y en qué sitios: `Get-ADDomainController -Filter * | Select-Object Name, Site, IPv4Address, IsGlobalCatalog`.
+- Los ejemplos usan `contoso.local` con tres controladores: **DC01** y **DC02** en el sitio *Madrid* y **DC03** en *Barcelona*.
+- Abre la consola **como administrador**: varias pruebas de `dcdiag` fallan con acceso denegado si no, y parecen problemas del dominio.
+
+## 1. dcdiag: el chequeo general
+
+`dcdiag` lanza una batería de pruebas contra uno o todos los controladores. Para el día a día, la versión silenciosa contra toda la empresa:
+
+:::term Símbolo del sistema (administrador) · DC01
+$ dcdiag /e /q
+# Sin salida = ninguna prueba ha fallado en ningún DC del bosque
+$ dcdiag /s:DC03 /test:replications /test:advertising /test:sysvolcheck /test:netlogons
+Diagnóstico del servidor de directorio
+...
+   Iniciando prueba: Advertising
+      ......................... DC03 superó la prueba Advertising
+   Iniciando prueba: NetLogons
+      ......................... DC03 superó la prueba NetLogons
+   Iniciando prueba: Replications
+      ......................... DC03 superó la prueba Replications
+   Iniciando prueba: SysVolCheck
+      ......................... DC03 superó la prueba SysVolCheck
+:::
+
+| Opción | Para qué |
+|---|---|
+| `/e` | Todos los controladores de la empresa (bosque). `/a`, solo los del sitio actual |
+| `/q` | Solo errores. Lo que quieres en una revisión diaria |
+| `/v` | Detalle de cada prueba, también de las que pasan. Para cuando ya hay un error |
+| `/c` | Completo: todas las pruebas, incluidas las que no se ejecutan por defecto (Topology, CutoffServers, OutboundSecureChannels) |
+| `/test:<nombre>` | Solo esa prueba (se pueden encadenar varias). `/skip:<nombre>` con `/c` para quitar una |
+| `/f:<fichero>` | Guarda la salida en un fichero |
+
+Cómo leerlo:
+
+- Cada prueba termina en `superó la prueba` o `no superó la prueba`. Busca las segundas y lee las líneas **justo encima**: ahí está el motivo.
+- **Connectivity** falla primero cuando un DC no resuelve por DNS o no responde por LDAP/RPC; si falla, el resto de pruebas de ese DC no se ejecutan.
+- **Advertising** falla si **Netlogon** está parado o pausado: el DC no se anuncia y los clientes no lo encuentran.
+- **Replications** incluye el código de error de la replicación (8524, 1722…), el mismo que da `repadmin` y que el apartado 7 explica.
+- **SystemLog** marca errores recientes del registro Sistema. Un error suelto de hace horas no siempre es un problema: compruébalo en el Visor de eventos antes de abrir un incidente.
+
+> Lanza `dcdiag` en un DC recién reiniciado y saldrán errores de servicios que aún arrancan. Espera unos minutos y repite antes de sacar conclusiones.
+
+## 2. repadmin: la replicación de AD
+
+Tres comandos, de lo general a lo concreto.
+
+:::term Símbolo del sistema (administrador) · DC01
+$ repadmin /replsummary
+Hora de inicio de resumen de replicación: 2026-11-07 08:40:12
+Comenzando recopilación de datos para el resumen de replicación; esto puede tardar:
+  .....
+
+DSA de origen     delta mayor    errores/total %%   error
+ DC01                 14m:32s    0 /   10    0
+ DC02                 14m:40s    0 /   10    0
+ DC03                 12m:05s    0 /   10    0
+
+DSA de destino    delta mayor    errores/total %%   error
+ DC01                 12m:05s    0 /   10    0
+ DC02                 14m:32s    0 /   10    0
+ DC03                 14m:40s    0 /   10    0
+:::
+
+- **delta mayor**: el tiempo desde la última replicación correcta del vínculo más atrasado. Dentro de un sitio, minutos; entre sitios, depende del intervalo del vínculo de sitio (180 minutos por defecto). Horas o días en un DC es la señal.
+- **errores/total**: vínculos con error sobre el total. `0 / 10` es lo bueno; `5 / 5 100 (1722)` significa que todos sus vínculos fallan con ese código.
+- La tabla de **origen** dice quién no consigue entregar cambios; la de **destino**, quién no los recibe.
+
+Para ver cada partición y cada vecino de un DC:
+
+:::term Símbolo del sistema (administrador) · DC01
+$ repadmin /showrepl DC03
+Barcelona\\DC03
+Opciones de DSA: IS_GC
+Opciones de sitio: (none)
+GUID del objeto DSA: 3f2b9c1e-...
+==== VECINOS DE ENTRADA ======================================
+
+DC=contoso,DC=local
+    Madrid\\DC01 a través de RPC
+        GUID del objeto DSA: 8a7baee5-...
+        Último intento @ 2026-11-07 08:31:44 se realizó correctamente.
+...
+$ repadmin /showrepl * /csv > C:\\Informes\\showrepl.csv
+$ repadmin /queue DC03
+La cola contiene 0 elementos.
+:::
+
+- En `/showrepl`, cada partición (dominio, `Configuration`, `Schema`, `DomainDnsZones`, `ForestDnsZones`) con cada vecino de entrada. Lo bueno: **se realizó correctamente**. Lo malo: `falló, resultado 1722 (0x6ba)` seguido de `N errores consecutivos` y la fecha del último éxito.
+- `/showrepl * /csv` saca todos los DC en un CSV que se abre en Excel o se filtra en PowerShell: columna **Number of Failures** distinta de 0. Es la forma más simple de revisar un bosque con muchos controladores.
+- `/queue` muestra las peticiones de replicación pendientes en ese DC. Cero o pocas es lo normal; cientos que no bajan indican un DC lento (disco, CPU) o un vecino que no responde.
+
+Forzar la replicación después de arreglar algo:
+
+:::term Símbolo del sistema (administrador) · DC01
+$ repadmin /syncall DC01 /AdeP
+# /A todas las particiones · /d nombres por DN · /e todos los sitios · /P empuja desde DC01 a sus vecinos
+SyncAll terminado sin errores.
+:::
+
+! `/syncall /AdeP` genera tráfico de replicación hacia todos los sitios a la vez. Úsalo para comprobar un arreglo, no en un script que se ejecute cada hora. Si da error, el código es el mismo del apartado 7: no lo repitas en bucle, arregla la causa.
+
+## 3. DNS: lo que necesita AD
+
+Casi todos los problemas de replicación empiezan en DNS. La prueba de `dcdiag` revisa cada DC como cliente DNS y como servidor:
+
+:::term Símbolo del sistema (administrador) · DC01
+$ dcdiag /test:dns /e /v /f:C:\\Informes\\dcdiag-dns.txt
+$ dcdiag /test:dns /s:DC03 /DnsBasic
+$ dcdiag /test:dns /s:DC03 /DnsRecordRegistration
+:::
+
+| Opción | Qué comprueba |
+|---|---|
+| `/DnsBasic` | Conectividad, configuración del cliente DNS de la tarjeta, servicio DNS y que exista la zona |
+| `/DnsForwarders` | Lo básico más los reenviadores |
+| `/DnsDelegation` | Lo básico más las delegaciones |
+| `/DnsDynamicUpdate` | Que la zona de AD acepte actualizaciones dinámicas (seguras) |
+| `/DnsRecordRegistration` | Que estén registrados el A del DC, el CNAME `<GUID>._msdcs` y los SRV de LDAP, GC y PDC |
+| sin opción | `/DnsAll`: todo menos la resolución de nombres externos |
+
+Al final de la salida hay una **tabla resumen** con una columna por prueba (`Auth`, `Basc`, `Forw`, `Del`, `Dyn`, `RReg`, `Ext`) y una fila por DC: `PASS`, `WARN` o `FAIL`. Busca la fila con `FAIL` y luego la sección `DC: DC03` del fichero para el detalle.
+
+Lo que suele salir:
+
+- **Un DC que apunta a un DNS público** (o al router) en la tarjeta: falla `Basc`. Los controladores usan como DNS otro DC y a sí mismos, nunca un DNS externo; lo externo va en los **reenviadores**.
+- **El CNAME `<GUID>._msdcs.contoso.local` no existe**: es el nombre con el que los demás DC buscan a este para replicar. `net stop netlogon && net start netlogon` en ese DC vuelve a registrar los SRV y el CNAME, e `ipconfig /registerdns` el registro A.
+- **AAAA en `WARN`** con IPv6 desactivado: es esperable y no es un problema.
+
+La configuración de zonas, reenviadores y limpieza está en la guía de [DNS y DHCP en Windows Server](dns-y-dhcp-en-windows-server-zonas-ambitos-conmutacion-y-un-equipo-sin-ip.html); aquí solo se comprueba.
+
+## 4. SYSVOL y NETLOGON con DFSR
+
+SYSVOL guarda las GPO y los scripts. Si un DC no lo comparte o no lo replica, las directivas no se aplican o se aplican viejas en su sede.
+
+:::term Símbolo del sistema (administrador) · DC01
+$ dfsrmig /getmigrationstate
+Todos los controladores de dominio migraron correctamente al estado global (Eliminado).
+La migración alcanzó un estado coherente en todos los controladores de dominio.
+Correcto.
+$ net share
+Nombre compartido  Recurso                                     Descripción
+-------------------------------------------------------------------------------
+NETLOGON     C:\\Windows\\SYSVOL\\sysvol\\contoso.local\\SCRIPTS  Recurso compartido del servidor de inicio de sesión
+SYSVOL       C:\\Windows\\SYSVOL\\sysvol                       Recurso compartido del servidor de inicio de sesión
+:::
+
+- `dfsrmig /getmigrationstate` tiene que decir **Eliminado**: SYSVOL replica con DFSR y FRS ya no existe. Cualquier otro estado es un dominio a medio migrar, y Windows Server 2019 y posteriores no se pueden promover a DC en un dominio que aún usa FRS.
+- `net share` en **cada** DC: si faltan SYSVOL y NETLOGON, el controlador no ha terminado la sincronización inicial o DFSR está detenido.
+
+El estado de DFSR en todos los controladores de una vez, con PowerShell:
+
+:::term PowerShell (administrador) · DC01
+$ Get-ADDomainController -Filter * | ForEach-Object { Get-CimInstance -ComputerName $_.HostName -Namespace root\\microsoftdfs -ClassName DfsrReplicatedFolderInfo -Filter \"ReplicatedFolderName='SYSVOL Share'\" } | Select-Object PSComputerName, ReplicatedFolderName, State
+PSComputerName      ReplicatedFolderName State
+--------------      -------------------- -----
+DC01.contoso.local  SYSVOL Share             4
+DC02.contoso.local  SYSVOL Share             4
+DC03.contoso.local  SYSVOL Share             4
+$ Get-DfsrState -ComputerName DC03
+$ dfsrdiag replicationstate /member:DC03
+:::
+
+| `State` | Significado |
+|---|---|
+| 0 | Sin inicializar |
+| 1 | Inicializado |
+| 2 | Sincronización inicial |
+| 3 | Recuperación automática |
+| 4 | **Normal** |
+| 5 | **Con error** |
+
+- `Get-DfsrState` lista los ficheros que se están replicando o están en cola en ese miembro. Vacío o pocos ficheros que desaparecen es lo normal; los mismos ficheros horas después, un atasco.
+- Los eventos están en **Registros de aplicaciones y servicios › Replicación DFS**: **4602** (SYSVOL inicializado como primario), **4614** y **4604** (sincronización inicial pendiente y completada), **2213** (replicación detenida tras un apagado incorrecto), **4012** (replicación detenida porque el miembro lleva más días desconectado que `MaxOfflineTimeInDays`, 60 por defecto).
+
+## 5. Hora y roles FSMO
+
+:::term Símbolo del sistema (administrador) · DC01
+$ w32tm /monitor /domain:contoso.local
+$ netdom query fsmo
+Maestro de esquema             DC01.contoso.local
+Maestro de nombres de dominio  DC01.contoso.local
+PDC                            DC01.contoso.local
+Administrador de grupo RID     DC01.contoso.local
+Maestro de infraestructura     DC01.contoso.local
+El comando se completó correctamente.
+:::
+
+- `w32tm /monitor` da el desfase de cada DC respecto al emulador de PDC. Por encima de unos segundos, revisa la guía de [la hora del dominio](active-directory-la-hora-del-dominio-emulador-de-pdc-ntp-dc-virtuales-y-un-equipo-con-seis-minutos-de-desfase.html): allí está cómo se configura y cómo se corrige.
+- `netdom query fsmo` tiene que devolver **nombres de DC que existen y responden**. Si sale un DC retirado, el rol hay que transferirlo (o tomarlo, si el DC ya no existe) antes de que se note: sin RID master no se crean objetos nuevos cuando se agota el bloque de RID, y sin PDC los bloqueos y cambios de contraseña se comportan raro.
+- En PowerShell, los roles de dominio con `Get-ADDomain | Select-Object PDCEmulator, RIDMaster, InfrastructureMaster` y los de bosque con `Get-ADForest | Select-Object SchemaMaster, DomainNamingMaster`.
+
+## 6. Un resumen programado y la rutina
+
+No hace falta una herramienta de monitorización para empezar: un script que se ejecuta cada mañana en un servidor de administración y deja un fichero de texto con lo que falla.
+
+:::term PowerShell · C:\\Scripts\\AD-Salud.ps1
+$ $dir  = 'C:\\Informes\\AD-Salud'
+$ $hoy  = Get-Date -Format 'yyyyMMdd'
+$ $out  = Join-Path $dir \"AD-Salud-$hoy.txt\"
+$ New-Item -ItemType Directory -Path $dir -Force | Out-Null
+$ $dcdiag = dcdiag /e /q 2>&1
+$ $repl = repadmin /showrepl * /csv | ConvertFrom-Csv | Where-Object { [int]$_.'Number of Failures' -gt 0 }
+$ $dfsr = Get-ADDomainController -Filter * | ForEach-Object { Get-CimInstance -ComputerName $_.HostName -Namespace root\\microsoftdfs -ClassName DfsrReplicatedFolderInfo -Filter \"ReplicatedFolderName='SYSVOL Share'\" -ErrorAction SilentlyContinue } | Where-Object State -ne 4
+$ \"== dcdiag /e /q ==\", ($dcdiag | Out-String), \"== Vínculos con error ==\", ($repl | Select-Object 'Destination DSA','Source DSA','Naming Context','Number of Failures','Last Failure Status' | Format-Table -AutoSize | Out-String), \"== SYSVOL fuera de estado 4 ==\", ($dfsr | Select-Object PSComputerName, State | Out-String) | Set-Content $out
+$ Get-ChildItem $dir -Filter 'AD-Salud-*.txt' | Where-Object LastWriteTime -lt (Get-Date).AddDays(-30) | Remove-Item
+:::
+
+Se programa con el Programador de tareas (`Register-ScheduledTask`) a las 7:30 con una cuenta de servicio con permisos de lectura, igual que el informe de la guía de [informe semanal de AD con PowerShell](powershell-informe-semanal-de-active-directory-inactivos-contrasenas-y-cuentas-deshabilitadas.html), que explica también cómo enviarlo por correo. Un fichero con las tres secciones vacías es un buen día.
+
+| Cuándo | Qué | Comando |
+|---|---|---|
+| Cada día | Pruebas generales sin ruido | `dcdiag /e /q` |
+| Cada día | Replicación de todos los DC | `repadmin /replsummary` |
+| Cada día | SYSVOL en estado 4 en todos | consulta CIM del apartado 4 |
+| Cada semana | DNS completo de todos los DC | `dcdiag /test:dns /e /v /f:...` |
+| Cada semana | Hora de los DC | `w32tm /monitor` |
+| Cada semana | Roles FSMO en DC vivos | `netdom query fsmo` |
+| Cada semana | Colas de replicación | `repadmin /queue` en cada DC |
+| Tras un cambio | Forzar y verificar | `repadmin /syncall /AdeP` y `/showrepl` |
+
+## 7. El ticket: "un DC no replica"
+
+Lunes, 9:10. Dos avisos de la sede de Barcelona: un usuario dado de alta el viernes en Madrid no puede iniciar sesión allí (*el nombre de usuario o la contraseña no son correctos*), y la nueva GPO de fondo de pantalla no aparece en los equipos de la sede. En Madrid todo funciona.
+
+1. **Quién está mal**: `repadmin /replsummary` desde DC01.
+
+:::term Símbolo del sistema (administrador) · DC01
+$ repadmin /replsummary
+DSA de origen     delta mayor    errores/total %%   error
+ DC01             02d.17h:22m:10s   5 /   10   50  (1722) El servidor RPC no está disponible.
+ DC02             02d.17h:20m:41s   5 /   10   50  (1722) El servidor RPC no está disponible.
+ DC03             02d.17h:24m:03s   5 /    5  100  (1722) El servidor RPC no está disponible.
+:::
+
+DC03 no recibe ni entrega nada desde el viernes por la tarde. El usuario nuevo existe en DC01 y DC02, pero no en DC03, que es el que atiende Barcelona.
+
+2. **Leer el código**. El error de replicación dice dónde mirar:
+
+| Error | Texto | Qué suele haber detrás |
+|---|---|---|
+| **8524** | La operación DSA no puede continuar debido a un error de búsqueda DNS | El DC de destino no resuelve el CNAME `<GUID>._msdcs` ni el nombre del origen: DNS mal configurado en la tarjeta, registro que falta o zona `_msdcs` que no replica. Apartado 3 |
+| **1722** | El servidor RPC no está disponible | Resuelve el nombre pero no llega por red: firewall entre sedes cortando **TCP 135** o los puertos dinámicos **49152-65535**, servidor apagado, o un registro DNS con una IP antigua |
+| **8453** | Se denegó el acceso a la replicación | Permisos de replicación modificados en la raíz de la partición, o la cuenta de equipo del DC dañada. `dcdiag /test:NCSecDesc` y `/test:MachineAccount` lo concretan |
+| **8606** | No se proporcionaron suficientes atributos para crear un objeto | **Objetos persistentes** (*lingering objects*): un DC que no ha replicado durante más días que la vida útil de desecho (*tombstone lifetime*) intenta devolver objetos que los demás ya han borrado. Va con el evento **1988** |
+| **8456 / 8457** | El servidor de origen o destino rechaza solicitudes de replicación | El DC se ha puesto en cuarentena solo: reversión de USN, disco lleno o vector dañado. Ver el punto 6 |
+
+3. **Comprobar la red**. Aquí el código es 1722, así que desde DC01 hacia DC03:
+
+:::term PowerShell · DC01
+$ Resolve-DnsName DC03.contoso.local
+Name                 Type   TTL   Section    IPAddress
+----                 ----   ---   -------    ---------
+DC03.contoso.local   A      1200  Answer     10.20.0.11
+$ Test-NetConnection DC03.contoso.local -Port 135
+TcpTestSucceeded : True
+$ Test-NetConnection DC03.contoso.local -Port 49668
+TcpTestSucceeded : False
+:::
+
+El nombre resuelve a la IP correcta y el 135 responde, pero un puerto dinámico no. El viernes se cambió la regla del firewall entre sedes y solo quedaron abiertos los puertos "conocidos" (53, 88, 135, 389, 445, 636, 3268). La replicación de AD usa el 135 para preguntar y luego un **puerto dinámico RPC**. Se pide a redes que vuelva a abrir el rango 49152-65535 entre las subredes de los controladores.
+
+4. **Forzar y verificar**. Con el firewall corregido:
+
+:::term Símbolo del sistema (administrador) · DC01
+$ repadmin /syncall DC03 /AdeP
+SyncAll terminado sin errores.
+$ repadmin /replsummary
+ DC03                 01m:12s    0 /    5    0
+$ repadmin /showrepl DC03 | findstr /i \"correctamente falló\"
+:::
+
+5. **¿Y la GPO?** La replicación de AD ya va, pero la GPO sigue sin aplicarse en Barcelona. En DC03, el estado de SYSVOL es **5** y en el registro **Replicación DFS** está el evento **2213**: el fin de semana hubo un corte de luz en la sede, DFSR detectó un apagado incorrecto de su base de datos y detuvo la replicación del volumen hasta que un administrador la reanude. El propio evento trae el comando con el GUID del volumen. Antes, copia `C:\\Windows\\SYSVOL\\domain` a otra ruta por seguridad. Después:
+
+:::term Símbolo del sistema (administrador) · DC03
+$ wmic /namespace:\\\\root\\microsoftdfs path dfsrVolumeConfig where volumeGuid=\"6C1A39E2-5B4F-11EF-9A21-00155D0A1E03\" call ResumeReplication
+Method execution successful.
+Out Parameters:
+instance of __PARAMETERS
+{
+        ReturnValue = 0;
+};
+:::
+
+En servidores donde WMIC ya no está instalado, lo mismo con CIM: `Get-CimInstance -Namespace root\\microsoftdfs -ClassName DfsrVolumeConfig -Filter \"VolumeGuid='6C1A39E2-5B4F-11EF-9A21-00155D0A1E03'\" | Invoke-CimMethod -MethodName ResumeReplication`. Aparecen los eventos **2212** y **2214** (recuperación terminada), el estado vuelve a **4** y `gpupdate /force` en un equipo de Barcelona aplica la GPO.
+
+! No borres la base de datos de DFSR ni marques un DC como autoritativo para "arreglar" SYSVOL: si el evento es el 2213, el camino documentado es reanudar. La sincronización autoritativa es para cuando **todos** los controladores están en error.
+
+6. **Las dos situaciones que no se arreglan con firewall ni DNS**:
+
+- **Objetos persistentes y tombstone lifetime**. Si un DC lleva sin replicar más días que la vida útil de desecho, ya no debe volver a replicar tal cual. El valor se consulta con `(Get-ADObject \"CN=Directory Service,CN=Windows NT,CN=Services,CN=Configuration,DC=contoso,DC=local\" -Properties tombstoneLifetime).tombstoneLifetime` (180 días en los bosques actuales; si está vacío, 60). Para detectarlos sin borrar nada, `repadmin /removelingeringobjects DC03.contoso.local <GUID de DSA de DC01> DC=contoso,DC=local /advisory_mode` y revisar los eventos **1946** del registro Servicio de directorio. Un DC que no ha replicado en la mitad de ese plazo debe ser prioridad; si se acerca al plazo completo, se degrada a la fuerza y se vuelve a promover.
+- **Reversión de USN**. Pasa al restaurar un DC desde una copia del disco o una instantánea fuera de lo soportado. Señales: evento **2095** (o **2103**) en el registro Servicio de directorio, **Netlogon en pausa**, replicación de entrada y salida desactivada y el valor `Dsa Not Writable` = `4` en `HKLM\\System\\CurrentControlSet\\Services\\NTDS\\Parameters`. No se toca ese valor: el DC se aísla de la red, se degrada y se vuelve a promover.
+
+En el ticket: salida de `/replsummary` antes y después, código 1722 y el puerto dinámico bloqueado, el cambio de firewall que lo causó, el evento 2213 de DC03 con el comando de reanudación, y la comprobación final: el usuario inicia sesión en Barcelona y la GPO aparece en `gpresult /r`.
+
+## Siguientes pasos
+
+- La guía de [la hora del dominio](active-directory-la-hora-del-dominio-emulador-de-pdc-ntp-dc-virtuales-y-un-equipo-con-seis-minutos-de-desfase.html) explica qué hacer cuando `w32tm /monitor` marca desfases, y por qué no se restauran DC desde instantáneas.
+- La de [DNS y DHCP en Windows Server](dns-y-dhcp-en-windows-server-zonas-ambitos-conmutacion-y-un-equipo-sin-ip.html) cubre zonas integradas en AD, reenviadores y limpieza, la causa del error 8524.
+- Con la replicación sana, la guía de [delegación, papelera y quién ha cambiado este usuario](active-directory-delegar-permisos-papelera-y-quien-ha-cambiado-este-usuario.html) usa `repadmin /showobjmeta` para seguir un cambio hasta su DC de origen.
+- Si los usuarios de una sede se bloquean o no cogen la contraseña nueva, la guía de [directiva de contraseñas y bloqueos](active-directory-directiva-de-contrasenas-pso-bloqueos-y-la-cuenta-que-se-bloquea-cada-manana.html) explica el papel del emulador de PDC.
+""",
+  en="""
+## What you'll get
+
+A short list of commands to know, in five minutes, whether the domain is healthy: domain controllers that respond, replication up to date, DNS correct, SYSVOL shared and replicating, time and roles where they should be. For each one, what good output looks like and what an error line means. And the ticket that arrives when a domain controller stops replicating: new users "don't exist" at one site and changed GPOs never arrive.
+
+## Before you start
+
+- A **Domain Admins** account (or one with replication read permissions) and a console on a domain controller or on a computer with **RSAT**: `dcdiag` and `repadmin` come with the AD DS tools; `dfsrdiag` and the **DFSR** module, with the DFS management tools.
+- Knowing how many domain controllers there are and in which sites: `Get-ADDomainController -Filter * | Select-Object Name, Site, IPv4Address, IsGlobalCatalog`.
+- The examples use `contoso.local` with three domain controllers: **DC01** and **DC02** in the *Madrid* site and **DC03** in *Barcelona*.
+- Open the console **as administrator**: otherwise several `dcdiag` tests fail with access denied and look like domain problems.
+
+## 1. dcdiag: the general check
+
+`dcdiag` runs a battery of tests against one or every domain controller. For daily use, the quiet version against the whole enterprise:
+
+:::term Command Prompt (administrator) · DC01
+$ dcdiag /e /q
+# No output = no test failed on any DC in the forest
+$ dcdiag /s:DC03 /test:replications /test:advertising /test:sysvolcheck /test:netlogons
+Directory Server Diagnosis
+...
+   Starting test: Advertising
+      ......................... DC03 passed test Advertising
+   Starting test: NetLogons
+      ......................... DC03 passed test NetLogons
+   Starting test: Replications
+      ......................... DC03 passed test Replications
+   Starting test: SysVolCheck
+      ......................... DC03 passed test SysVolCheck
+:::
+
+| Option | What for |
+|---|---|
+| `/e` | Every domain controller in the enterprise (forest). `/a`, only those in the current site |
+| `/q` | Errors only. What you want for a daily review |
+| `/v` | Detail of every test, including the ones that pass. For when there is already an error |
+| `/c` | Comprehensive: every test, including those not run by default (Topology, CutoffServers, OutboundSecureChannels) |
+| `/test:<name>` | That test only (several can be chained). `/skip:<name>` with `/c` to leave one out |
+| `/f:<file>` | Saves the output to a file |
+
+How to read it:
+
+- Each test ends in `passed test` or `failed test`. Look for the latter and read the lines **just above**: that is where the reason is.
+- **Connectivity** fails first when a DC does not resolve in DNS or does not answer over LDAP/RPC; if it fails, the other tests for that DC do not run.
+- **Advertising** fails if **Netlogon** is stopped or paused: the DC does not advertise itself and clients cannot find it.
+- **Replications** includes the replication error code (8524, 1722…), the same one `repadmin` gives and that section 7 explains.
+- **SystemLog** flags recent errors in the System log. A single error from hours ago is not always a problem: check it in Event Viewer before opening an incident.
+
+> Run `dcdiag` on a freshly restarted DC and you will see errors from services still starting. Wait a few minutes and repeat before drawing conclusions.
+
+## 2. repadmin: AD replication
+
+Three commands, from general to specific.
+
+:::term Command Prompt (administrator) · DC01
+$ repadmin /replsummary
+Replication Summary Start Time: 2026-11-07 08:40:12
+Beginning data collection for replication summary, this may take awhile:
+  .....
+
+Source DSA          largest delta    fails/total %%   error
+ DC01                     14m:32s    0 /  10    0
+ DC02                     14m:40s    0 /  10    0
+ DC03                     12m:05s    0 /  10    0
+
+Destination DSA     largest delta    fails/total %%   error
+ DC01                     12m:05s    0 /  10    0
+ DC02                     14m:32s    0 /  10    0
+ DC03                     14m:40s    0 /  10    0
+:::
+
+- **largest delta**: the time since the last successful replication on the most out-of-date link. Within a site, minutes; between sites, it depends on the site link interval (180 minutes by default). Hours or days on a DC is the signal.
+- **fails/total**: failing links over the total. `0 / 10` is good; `5 / 5 100 (1722)` means every link fails with that code.
+- The **source** table tells you who cannot deliver changes; the **destination** table, who is not receiving them.
+
+To see each partition and each neighbour of a DC:
+
+:::term Command Prompt (administrator) · DC01
+$ repadmin /showrepl DC03
+Barcelona\\DC03
+DSA Options: IS_GC
+Site Options: (none)
+DSA object GUID: 3f2b9c1e-...
+==== INBOUND NEIGHBORS ======================================
+
+DC=contoso,DC=local
+    Madrid\\DC01 via RPC
+        DSA object GUID: 8a7baee5-...
+        Last attempt @ 2026-11-07 08:31:44 was successful.
+...
+$ repadmin /showrepl * /csv > C:\\Reports\\showrepl.csv
+$ repadmin /queue DC03
+Queue contains 0 items.
+:::
+
+- In `/showrepl`, each partition (domain, `Configuration`, `Schema`, `DomainDnsZones`, `ForestDnsZones`) with each inbound neighbour. Good: **was successful**. Bad: `failed, result 1722 (0x6ba)` followed by `N consecutive failure(s)` and the date of the last success.
+- `/showrepl * /csv` puts every DC into a CSV you can open in Excel or filter in PowerShell: the **Number of Failures** column other than 0. It is the simplest way to review a forest with many domain controllers.
+- `/queue` shows the pending replication requests on that DC. Zero or a few is normal; hundreds that don't go down point to a slow DC (disk, CPU) or a neighbour that does not respond.
+
+Forcing replication after fixing something:
+
+:::term Command Prompt (administrator) · DC01
+$ repadmin /syncall DC01 /AdeP
+# /A all partitions · /d names by DN · /e all sites · /P push from DC01 to its neighbours
+SyncAll terminated with no errors.
+:::
+
+! `/syncall /AdeP` generates replication traffic to every site at once. Use it to check a fix, not in a script that runs every hour. If it errors, the code is the same as in section 7: don't repeat it in a loop, fix the cause.
+
+## 3. DNS: what AD needs
+
+Almost every replication problem starts in DNS. The `dcdiag` test checks each DC as a DNS client and as a server:
+
+:::term Command Prompt (administrator) · DC01
+$ dcdiag /test:dns /e /v /f:C:\\Reports\\dcdiag-dns.txt
+$ dcdiag /test:dns /s:DC03 /DnsBasic
+$ dcdiag /test:dns /s:DC03 /DnsRecordRegistration
+:::
+
+| Option | What it checks |
+|---|---|
+| `/DnsBasic` | Connectivity, the adapter's DNS client configuration, the DNS service and that the zone exists |
+| `/DnsForwarders` | The basics plus forwarders |
+| `/DnsDelegation` | The basics plus delegations |
+| `/DnsDynamicUpdate` | That the AD zone accepts (secure) dynamic updates |
+| `/DnsRecordRegistration` | That the DC's A record, the `<GUID>._msdcs` CNAME and the LDAP, GC and PDC SRV records are registered |
+| no option | `/DnsAll`: everything except external name resolution |
+
+At the end of the output there is a **summary table** with one column per test (`Auth`, `Basc`, `Forw`, `Del`, `Dyn`, `RReg`, `Ext`) and one row per DC: `PASS`, `WARN` or `FAIL`. Find the row with `FAIL` and then the `DC: DC03` section of the file for the detail.
+
+What usually shows up:
+
+- **A DC pointing at a public DNS** (or the router) on its adapter: `Basc` fails. Domain controllers use another DC and themselves as DNS, never an external DNS; external goes in the **forwarders**.
+- **The `<GUID>._msdcs.contoso.local` CNAME does not exist**: it is the name the other DCs use to find this one for replication. `net stop netlogon && net start netlogon` on that DC re-registers the SRV records and the CNAME, and `ipconfig /registerdns` the A record.
+- **AAAA as `WARN`** with IPv6 disabled: expected, and not a problem.
+
+Configuring zones, forwarders and scavenging is in the [DNS and DHCP on Windows Server](dns-y-dhcp-en-windows-server-zonas-ambitos-conmutacion-y-un-equipo-sin-ip.html) guide; here you only check.
+
+## 4. SYSVOL and NETLOGON with DFSR
+
+SYSVOL holds the GPOs and scripts. If a DC does not share it or does not replicate it, policies are not applied, or are applied stale, at its site.
+
+:::term Command Prompt (administrator) · DC01
+$ dfsrmig /getmigrationstate
+All domain controllers have migrated successfully to the Global state ('Eliminated').
+Migration has reached a consistent state on all domain controllers.
+Succeeded.
+$ net share
+Share name   Resource                                      Remark
+-------------------------------------------------------------------------------
+NETLOGON     C:\\Windows\\SYSVOL\\sysvol\\contoso.local\\SCRIPTS  Logon server share
+SYSVOL       C:\\Windows\\SYSVOL\\sysvol                       Logon server share
+:::
+
+- `dfsrmig /getmigrationstate` must say **Eliminated**: SYSVOL replicates with DFSR and FRS no longer exists. Any other state is a half-migrated domain, and Windows Server 2019 and later cannot be promoted to DC in a domain still using FRS.
+- `net share` on **each** DC: if SYSVOL and NETLOGON are missing, the domain controller has not finished initial sync or DFSR is stopped.
+
+DFSR state on every domain controller at once, with PowerShell:
+
+:::term PowerShell (administrator) · DC01
+$ Get-ADDomainController -Filter * | ForEach-Object { Get-CimInstance -ComputerName $_.HostName -Namespace root\\microsoftdfs -ClassName DfsrReplicatedFolderInfo -Filter \"ReplicatedFolderName='SYSVOL Share'\" } | Select-Object PSComputerName, ReplicatedFolderName, State
+PSComputerName      ReplicatedFolderName State
+--------------      -------------------- -----
+DC01.contoso.local  SYSVOL Share             4
+DC02.contoso.local  SYSVOL Share             4
+DC03.contoso.local  SYSVOL Share             4
+$ Get-DfsrState -ComputerName DC03
+$ dfsrdiag replicationstate /member:DC03
+:::
+
+| `State` | Meaning |
+|---|---|
+| 0 | Uninitialized |
+| 1 | Initialized |
+| 2 | Initial sync |
+| 3 | Auto recovery |
+| 4 | **Normal** |
+| 5 | **In error** |
+
+- `Get-DfsrState` lists the files replicating or queued on that member. Empty, or a few files that disappear, is normal; the same files hours later is a blockage.
+- The events are in **Applications and Services Logs › DFS Replication**: **4602** (SYSVOL initialized as primary), **4614** and **4604** (initial sync pending and completed), **2213** (replication stopped after a dirty shutdown), **4012** (replication stopped because the member has been disconnected for longer than `MaxOfflineTimeInDays`, 60 by default).
+
+## 5. Time and FSMO roles
+
+:::term Command Prompt (administrator) · DC01
+$ w32tm /monitor /domain:contoso.local
+$ netdom query fsmo
+Schema master               DC01.contoso.local
+Domain naming master        DC01.contoso.local
+PDC                         DC01.contoso.local
+RID pool manager            DC01.contoso.local
+Infrastructure master       DC01.contoso.local
+The command completed successfully.
+:::
+
+- `w32tm /monitor` gives each DC's offset from the PDC emulator. Above a few seconds, see the [domain time](active-directory-la-hora-del-dominio-emulador-de-pdc-ntp-dc-virtuales-y-un-equipo-con-seis-minutos-de-desfase.html) guide: it covers how to configure and correct it.
+- `netdom query fsmo` must return **names of domain controllers that exist and respond**. If a retired DC shows up, the role must be transferred (or seized, if the DC no longer exists) before anyone notices: without the RID master no new objects can be created once the RID pool runs out, and without the PDC lockouts and password changes behave oddly.
+- In PowerShell, the domain roles with `Get-ADDomain | Select-Object PDCEmulator, RIDMaster, InfrastructureMaster` and the forest roles with `Get-ADForest | Select-Object SchemaMaster, DomainNamingMaster`.
+
+## 6. A scheduled summary and the routine
+
+You do not need a monitoring tool to start: a script that runs every morning on a management server and leaves a text file with whatever is failing.
+
+:::term PowerShell · C:\\Scripts\\AD-Health.ps1
+$ $dir  = 'C:\\Reports\\AD-Health'
+$ $today = Get-Date -Format 'yyyyMMdd'
+$ $out  = Join-Path $dir \"AD-Health-$today.txt\"
+$ New-Item -ItemType Directory -Path $dir -Force | Out-Null
+$ $dcdiag = dcdiag /e /q 2>&1
+$ $repl = repadmin /showrepl * /csv | ConvertFrom-Csv | Where-Object { [int]$_.'Number of Failures' -gt 0 }
+$ $dfsr = Get-ADDomainController -Filter * | ForEach-Object { Get-CimInstance -ComputerName $_.HostName -Namespace root\\microsoftdfs -ClassName DfsrReplicatedFolderInfo -Filter \"ReplicatedFolderName='SYSVOL Share'\" -ErrorAction SilentlyContinue } | Where-Object State -ne 4
+$ \"== dcdiag /e /q ==\", ($dcdiag | Out-String), \"== Failing links ==\", ($repl | Select-Object 'Destination DSA','Source DSA','Naming Context','Number of Failures','Last Failure Status' | Format-Table -AutoSize | Out-String), \"== SYSVOL not in state 4 ==\", ($dfsr | Select-Object PSComputerName, State | Out-String) | Set-Content $out
+$ Get-ChildItem $dir -Filter 'AD-Health-*.txt' | Where-Object LastWriteTime -lt (Get-Date).AddDays(-30) | Remove-Item
+:::
+
+Schedule it with Task Scheduler (`Register-ScheduledTask`) at 7:30 under a service account with read permissions, just like the report in the [weekly AD report with PowerShell](powershell-informe-semanal-de-active-directory-inactivos-contrasenas-y-cuentas-deshabilitadas.html) guide, which also explains how to email it. A file with all three sections empty is a good day.
+
+| When | What | Command |
+|---|---|---|
+| Daily | General tests without noise | `dcdiag /e /q` |
+| Daily | Replication of every DC | `repadmin /replsummary` |
+| Daily | SYSVOL in state 4 everywhere | the CIM query in section 4 |
+| Weekly | Full DNS for every DC | `dcdiag /test:dns /e /v /f:...` |
+| Weekly | DC time | `w32tm /monitor` |
+| Weekly | FSMO roles on live DCs | `netdom query fsmo` |
+| Weekly | Replication queues | `repadmin /queue` on each DC |
+| After a change | Force and verify | `repadmin /syncall /AdeP` and `/showrepl` |
+
+## 7. The ticket: "a DC is not replicating"
+
+Monday, 9:10. Two reports from the Barcelona site: a user created on Friday in Madrid cannot sign in there (*the user name or password is incorrect*), and the new wallpaper GPO does not show up on the site's computers. In Madrid everything works.
+
+1. **Who is wrong**: `repadmin /replsummary` from DC01.
+
+:::term Command Prompt (administrator) · DC01
+$ repadmin /replsummary
+Source DSA          largest delta    fails/total %%   error
+ DC01                 02d.17h:22m:10s   5 /  10   50  (1722) The RPC server is unavailable.
+ DC02                 02d.17h:20m:41s   5 /  10   50  (1722) The RPC server is unavailable.
+ DC03                 02d.17h:24m:03s   5 /   5  100  (1722) The RPC server is unavailable.
+:::
+
+DC03 has received and delivered nothing since Friday afternoon. The new user exists on DC01 and DC02, but not on DC03, which serves Barcelona.
+
+2. **Read the code**. The replication error tells you where to look:
+
+| Error | Text | What is usually behind it |
+|---|---|---|
+| **8524** | The DSA operation is unable to proceed because of a DNS lookup failure | The destination DC cannot resolve the `<GUID>._msdcs` CNAME or the source's name: wrong DNS on the adapter, missing record or an `_msdcs` zone that does not replicate. Section 3 |
+| **1722** | The RPC server is unavailable | It resolves the name but cannot reach it over the network: a firewall between sites cutting **TCP 135** or the dynamic ports **49152-65535**, a server that is down, or a DNS record with an old IP |
+| **8453** | Replication access was denied | Replication permissions changed on the partition head, or the DC's computer account damaged. `dcdiag /test:NCSecDesc` and `/test:MachineAccount` narrow it down |
+| **8606** | Insufficient attributes were given to create an object | **Lingering objects**: a DC that has not replicated for longer than the tombstone lifetime tries to send back objects the others have already deleted. Comes with event **1988** |
+| **8456 / 8457** | The source or destination server is currently rejecting replication requests | The DC has quarantined itself: USN rollback, full disk or a corrupt vector. See point 6 |
+
+3. **Check the network**. Here the code is 1722, so from DC01 to DC03:
+
+:::term PowerShell · DC01
+$ Resolve-DnsName DC03.contoso.local
+Name                 Type   TTL   Section    IPAddress
+----                 ----   ---   -------    ---------
+DC03.contoso.local   A      1200  Answer     10.20.0.11
+$ Test-NetConnection DC03.contoso.local -Port 135
+TcpTestSucceeded : True
+$ Test-NetConnection DC03.contoso.local -Port 49668
+TcpTestSucceeded : False
+:::
+
+The name resolves to the right IP and 135 answers, but a dynamic port does not. On Friday the firewall rule between sites was changed and only the "well-known" ports were left open (53, 88, 135, 389, 445, 636, 3268). AD replication uses 135 to ask and then a **dynamic RPC port**. Ask the network team to reopen the 49152-65535 range between the domain controller subnets.
+
+4. **Force and verify**. With the firewall fixed:
+
+:::term Command Prompt (administrator) · DC01
+$ repadmin /syncall DC03 /AdeP
+SyncAll terminated with no errors.
+$ repadmin /replsummary
+ DC03                     01m:12s    0 /   5    0
+$ repadmin /showrepl DC03 | findstr /i \"successful failed\"
+:::
+
+5. **And the GPO?** AD replication now works, but the GPO still does not apply in Barcelona. On DC03, the SYSVOL state is **5** and the **DFS Replication** log has event **2213**: over the weekend there was a power cut at the site, DFSR detected a dirty shutdown of its database and stopped replication on the volume until an administrator resumes it. The event itself includes the command with the volume GUID. First, copy `C:\\Windows\\SYSVOL\\domain` somewhere else to be safe. Then:
+
+:::term Command Prompt (administrator) · DC03
+$ wmic /namespace:\\\\root\\microsoftdfs path dfsrVolumeConfig where volumeGuid=\"6C1A39E2-5B4F-11EF-9A21-00155D0A1E03\" call ResumeReplication
+Method execution successful.
+Out Parameters:
+instance of __PARAMETERS
+{
+        ReturnValue = 0;
+};
+:::
+
+On servers where WMIC is no longer installed, the same with CIM: `Get-CimInstance -Namespace root\\microsoftdfs -ClassName DfsrVolumeConfig -Filter \"VolumeGuid='6C1A39E2-5B4F-11EF-9A21-00155D0A1E03'\" | Invoke-CimMethod -MethodName ResumeReplication`. Events **2212** and **2214** (recovery complete) appear, the state goes back to **4** and `gpupdate /force` on a Barcelona computer applies the GPO.
+
+! Do not delete the DFSR database or mark a DC as authoritative to "fix" SYSVOL: if the event is 2213, the documented path is to resume. An authoritative sync is for when **every** domain controller is in error.
+
+6. **The two situations that firewall and DNS fixes won't solve**:
+
+- **Lingering objects and tombstone lifetime**. If a DC has not replicated for longer than the tombstone lifetime, it must not simply start replicating again. Query the value with `(Get-ADObject \"CN=Directory Service,CN=Windows NT,CN=Services,CN=Configuration,DC=contoso,DC=local\" -Properties tombstoneLifetime).tombstoneLifetime` (180 days in current forests; if empty, 60). To detect them without deleting anything, `repadmin /removelingeringobjects DC03.contoso.local <DC01 DSA GUID> DC=contoso,DC=local /advisory_mode` and review events **1946** in the Directory Service log. A DC that has not replicated in half that period should be a priority; if it gets close to the full period, force-demote it and promote it again.
+- **USN rollback**. It happens when a DC is restored from a disk copy or a snapshot in an unsupported way. Signs: event **2095** (or **2103**) in the Directory Service log, **Netlogon paused**, inbound and outbound replication disabled and the `Dsa Not Writable` value = `4` in `HKLM\\System\\CurrentControlSet\\Services\\NTDS\\Parameters`. You do not touch that value: isolate the DC from the network, demote it and promote it again.
+
+In the ticket: `/replsummary` output before and after, code 1722 and the blocked dynamic port, the firewall change that caused it, DC03's event 2213 with the resume command, and the final check: the user signs in at Barcelona and the GPO shows in `gpresult /r`.
+
+## Next steps
+
+- The [domain time](active-directory-la-hora-del-dominio-emulador-de-pdc-ntp-dc-virtuales-y-un-equipo-con-seis-minutos-de-desfase.html) guide explains what to do when `w32tm /monitor` shows offsets, and why DCs are not restored from snapshots.
+- The [DNS and DHCP on Windows Server](dns-y-dhcp-en-windows-server-zonas-ambitos-conmutacion-y-un-equipo-sin-ip.html) guide covers AD-integrated zones, forwarders and scavenging, the cause of error 8524.
+- With replication healthy, the [delegation, recycle bin and who changed this user](active-directory-delegar-permisos-papelera-y-quien-ha-cambiado-este-usuario.html) guide uses `repadmin /showobjmeta` to trace a change back to its originating DC.
+- If users at one site get locked out or do not pick up a new password, the [password and lockout policy](active-directory-directiva-de-contrasenas-pso-bloqueos-y-la-cuenta-que-se-bloquea-cada-manana.html) guide explains the PDC emulator's role.
+""")
