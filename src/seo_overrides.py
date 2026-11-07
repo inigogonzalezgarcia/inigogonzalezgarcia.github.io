@@ -29,6 +29,7 @@ POSTS_SEO = {
         "es": "Auditoría SSO de Entra ID: certificados SAML y secretos a punto de caducar, propietarios, cobertura de MFA, permisos de riesgo y SCIM.",
     },
     "22-dex-experience-score": {
+        "en": "DEX score lab: a 0-10 experience score per laptop, site and department from endpoint telemetry, the cause behind each low score and the fixes that raise it.",
         "es": "Puntuación DEX: convierte la telemetría de los equipos en una nota de 0 a 10 por dispositivo, sede y departamento y ordena los arreglos que más la suben.",
     },
 }
