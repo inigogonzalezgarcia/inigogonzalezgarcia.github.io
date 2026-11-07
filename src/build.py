@@ -534,10 +534,10 @@ def sim_more(p, lang):
     if not p.get("app"): return ""
     u = p["app"]
     if lang == "es":
-        return (f'\n<p>Más sobre el simulador: <a href="{u}about?lang=es">qué es SysAdmin Desks</a>, <a href="{u}help?lang=es">cómo se resuelve un ticket paso a paso</a>, '
-                f'<a href="{u}faq?lang=es">preguntas frecuentes</a> y <a href="{u}tickets/?lang=es">los 24 tickets para practicar</a>.</p>')
-    return (f'\n<p>More about the simulator: <a href="{u}about?lang=en">what SysAdmin Desks is</a>, <a href="{u}help?lang=en">how a ticket is solved step by step</a>, '
-            f'<a href="{u}faq?lang=en">frequently asked questions</a> and <a href="{u}tickets/?lang=en">the 24 tickets to practise</a>.</p>')
+        return (f'\n<p>Más sobre el simulador: <a href="{u}about">qué es SysAdmin Desks</a>, <a href="{u}help">cómo se resuelve un ticket paso a paso</a>, '
+                f'<a href="{u}faq">preguntas frecuentes</a> y <a href="{u}tickets/">los 24 tickets para practicar</a>.</p>')
+    return (f'\n<p>More about the simulator: <a href="{u}about#en">what SysAdmin Desks is</a>, <a href="{u}help#en">how a ticket is solved step by step</a>, '
+            f'<a href="{u}faq#en">frequently asked questions</a> and <a href="{u}tickets/#en">the 24 tickets to practise</a>.</p>')
 
 def aside_cta(p):
     if p.get("app"):
@@ -1341,8 +1341,9 @@ def _desk_url(d, lang):
     return f"{SIM_URL}?lang={lang}#/desk/{d}"
 def _pm(lang, a, b, c, lead):
     t = 'target="_blank" rel="noopener noreferrer"'
-    return (f'{lead} <a href="{SIM_URL}help?lang={lang}" {t}>{a}</a> · <a href="{SIM_URL}faq?lang={lang}" {t}>{b}</a> · '
-            f'<a href="{SIM_URL}tickets/?lang={lang}" {t}>{c}</a>')
+    h = "" if lang == "es" else "#en"  # clean, canonical URLs; the fragment only picks the language in doc.js
+    return (f'{lead} <a href="{SIM_URL}help{h}" {t}>{a}</a> · <a href="{SIM_URL}faq{h}" {t}>{b}</a> · '
+            f'<a href="{SIM_URL}tickets/{h}" {t}>{c}</a>')
 _PRACTICE_MORE = ('<p class="practice-t practice-more">'
     + bi(_pm("es", "cómo funciona", "preguntas frecuentes", "todos los tickets", "Más sobre el simulador:"),
          _pm("en", "how it works", "FAQ", "all the tickets", "More about the simulator:")) + '</p>')
@@ -1367,7 +1368,7 @@ def practice_end(slug, lang):
     desks = PRACTICE.get(slug, [])
     if not desks: return ""
     i = 0 if lang == "es" else 1
-    q = "" if lang == "es" else "?lang=en"
+    q = "" if lang == "es" else "#en"  # canonical URL; the fragment picks English in doc.js
     a = [f'<a href="{SIM_URL}tickets/{d}{q}">{"«" if lang == "es" else "“"}{html.escape(_DESK[d][i])}{"»" if lang == "es" else "”"}</a>' for d in desks]
     y = " y " if lang == "es" else " and "
     lst = a[0] if len(a) == 1 else ", ".join(a[:-1]) + y + a[-1]
