@@ -601,7 +601,7 @@ for p in order:
         desc=p.get("seo_desc") or p["dek_en"], desc_es=p.get("seo_desc_es") or desc_cut(p["dek_es"]), body=body, og_type="article", og_image=OG[p["repo"]],
         ld=lambda l, p=p, c=c: [{"@type": "BlogPosting", "headline": pick(l, p["title_es"], p["title_en"]), "alternativeHeadline": pick(l, p["title_en"], p["title_es"]),
              "description": pick(l, p["dek_es"], p["dek_en"]),
-             "datePublished": p["date"], "dateModified": p["date"], "inLanguage": l, "image": SITE_URL + OG[p["repo"]],
+             "datePublished": p["date"], "dateModified": p.get("updated") or p["date"], "inLanguage": l, "image": SITE_URL + OG[p["repo"]],
              "url": lurl(f'blog/{p["repo"]}.html', l), "mainEntityOfPage": lurl(f'blog/{p["repo"]}.html', l),
              "author": PERSON_REF, "publisher": PERSON_REF, "isPartOf": {"@id": lurl("blog/", l) + "#blog"},
              "articleSection": pick(l, c[0], c[1])},
@@ -1445,7 +1445,7 @@ for i, q in enumerate(G_ORDER):
         desc=q.get("seo_desc") or q["dek_en"], desc_es=q.get("seo_desc_es") or desc_cut(q["dek_es"]), body=body, og_type="article", og_image=OG_G[L["key"]],
         ld=lambda l, q=q, t=t, L=L: [{"@type": "TechArticle", "headline": pick(l, q["title_es"], q["title_en"]), "alternativeHeadline": pick(l, q["title_en"], q["title_es"]),
              "description": pick(l, q["dek_es"], q["dek_en"]),
-             "datePublished": q["date"], "dateModified": q["date"], "inLanguage": l, "proficiencyLevel": "Beginner" if t[0] == "nivel-1" else "Expert",
+             "datePublished": q["date"], "dateModified": q.get("updated") or q["date"], "inLanguage": l, "proficiencyLevel": "Beginner" if t[0] == "nivel-1" else "Expert",
              "url": lurl(f'guias/{q["slug"]}.html', l), "mainEntityOfPage": lurl(f'guias/{q["slug"]}.html', l),
              "author": PERSON_REF, "publisher": PERSON_REF, "articleSection": pick(l, t[2], t[3])},
             crumbs((HOME, ""), (("Guías", "Guides"), "guias.html"), ((L["n_es"], L["n_en"]), f'guias/{L["key"]}.html'),
@@ -1521,8 +1521,10 @@ sizes["404.html"] = write("404.html", layout(R="/", path="404.html", active="", 
 NOINDEX = {"404.html", "asesoria.html", "privacidad.html"} | set(legal.PAGES)
 NOINDEX |= {lpath(r, "es") for r in NOINDEX}
 newest = max(q["date"] for q in POSTS)
-post_date = {f'blog/{q["repo"]}.html': q["date"] for q in POSTS}
-post_date.update({f'guias/{q["slug"]}.html': q["date"] for q in GUIDES})
+# optional "updated" (YYYY-MM-DD) on a post or guide: set it when its description, related links or text change, so lastmod moves
+post_date = {f'blog/{q["repo"]}.html': q.get("updated") or q["date"] for q in POSTS}
+post_date.update({f'guias/{q["slug"]}.html': q.get("updated") or q["date"] for q in GUIDES})
+assert all(re.fullmatch(r"\d{4}-\d{2}-\d{2}", q["updated"]) and q["updated"] >= q["date"] for q in POSTS + GUIDES if q.get("updated")), "bad updated date"
 post_date["guias.html"] = max(q["date"] for q in GUIDES)
 for _k in LEVELS: post_date[f"guias/{_k}.html"] = max((q["date"] for q in GUIDES if LVL_OF[q["slug"]] == _k), default=post_date["guias.html"])
 # every page is listed in both languages, each <url> with its hreflang alternates (en, es, x-default = en)

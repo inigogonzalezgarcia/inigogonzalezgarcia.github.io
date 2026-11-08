@@ -10,7 +10,7 @@ POSTS_SEO = {
         "es": "Informe de cumplimiento de Intune con Microsoft Graph: PowerShell saca los dispositivos y Python genera un informe para dirección y una lista de acciones.",
     },
     "05-it-ops-console": {
-        "en": "On-site IT operations console in Flask and PowerShell: assets, warranties, room checklists, joiners and leavers, shifts and service health in one app.",
+        "en": "Flask or PowerShell for an IT ops console? Both: a Flask and SQLite web app, PowerShell over CIM/WinRM for remote queries. Assets, warranties and shifts.",
         "es": "Consola de operaciones IT de sede en Flask y PowerShell: activos, garantías, checklists de salas, altas y bajas, turnos y salud de servicios en una app.",
     },
     "09-gpu-node-remediation": {
