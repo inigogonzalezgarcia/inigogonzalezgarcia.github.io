@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Revisión de gestión de problemas · Iñigo González</title>
+<meta name="description" content="Revisión mensual de problemas con exportaciones de ITSM: incidencias repetidas sin problema, incidentes graves sin RCA, errores conocidos y soluciones.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/blog/46-problem-management-review.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/46-problem-management-review.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/46-problem-management-review.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/46-problem-management-review.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revisión de gestión de problemas · Iñigo González">
+<meta property="og:description" content="Revisión mensual de problemas con exportaciones de ITSM: incidencias repetidas sin problema, incidentes graves sin RCA, errores conocidos y soluciones.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/blog/46-problem-management-review.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/46-problem-management-review.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Revisión de gestión de problemas · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Cuarenta y seis tickets de VPN y ningún problema abierto: la revisión mensual de problemas","alternativeHeadline":"Forty-six VPN tickets and no problem record: the monthly problem management review","description":"A partir de las incidencias y los problemas exportados de Jira Service Management, HaloITSM o EasyVista, los cambios vinculados y la CMDB: qué incidencias repetidas deberían convertirse en problemas, qué incidentes graves siguen sin causa raíz, qué problemas abiertos están atascados o sin responsable, qué errores conocidos llevan meses viviendo de una solución temporal, qué soluciones no han parado las incidencias, y el paquete para la revisión mensual de problemas y el próximo CAB.","datePublished":"2026-11-08","dateModified":"2026-11-08","inLanguage":"es","image":"https://inigogonzalezgarcia.github.io/assets/og/46-problem-management-review.png","url":"https://inigogonzalezgarcia.github.io/es/blog/46-problem-management-review.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/blog/46-problem-management-review.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/es/blog/#blog"},"articleSection":"Herramientas de IT Ops"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/es/blog/"},{"@type":"ListItem","position":3,"name":"Cuarenta y seis tickets de VPN y ningún problema abierto: la revisión mensual de problemas","item":"https://inigogonzalezgarcia.github.io/es/blog/46-problem-management-review.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span></a><a href="../guias.html"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../blog/46-problem-management-review.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 46</p>
+    <h1><span class="es">Cuarenta y seis tickets de VPN y ningún problema abierto: la revisión mensual de problemas</span></h1>
+    <p class="lede"><span class="es">A partir de las incidencias y los problemas exportados de Jira Service Management, HaloITSM o EasyVista, los cambios vinculados y la CMDB: qué incidencias repetidas deberían convertirse en problemas, qué incidentes graves siguen sin causa raíz, qué problemas abiertos están atascados o sin responsable, qué errores conocidos llevan meses viviendo de una solución temporal, qué soluciones no han parado las incidencias, y el paquete para la revisión mensual de problemas y el próximo CAB.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span> · <span class="es">8 nov 2026</span> · <span class="es">5 min</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>El problema</h2>
+<p>La gestión de problemas es la parte de ITSM en la que todo el mundo está de acuerdo y para la que nadie tiene tiempo. El service desk resuelve una y otra vez la misma incidencia con la misma solución temporal, cada ticket se cierra dentro de su SLA y el cuadro de mando parece estar bien. En un mes normal se han cerrado una a una cuarenta y seis incidencias por un error de certificado de la VPN desde finales de agosto y nadie ha abierto un problema; diecisiete incidencias de un driver de impresora en una sede parecen diecisiete tickets distintos; el sistema de almacén se cayó cuatro horas hace tres semanas y sigue sin registro de problema, y la caída del sistema de transporte de la semana anterior tiene uno, en investigación y sin causa raíz; un error conocido de los lectores del almacén lleva 120 días con solución temporal y nadie ha pedido el cambio que lo arregle; un cambio cerró en septiembre el problema de la carpeta compartida y desde entonces han llegado once incidencias más del mismo tipo, casi todas sin vincular; tres problemas abiertos no tienen responsable y dos son el mismo problema; y casi un tercio de las causas raíz dicen Desconocida u Otra. Todo está en la herramienta de ITSM, ticket a ticket. El kit de incidentes graves que publiqué antes en la serie cubre el incidente y su revisión, y la revisión del calendario de cambios cubre lo que va al CAB; esta herramienta es el circuito entre ambos, desde la incidencia que vuelve una y otra vez hasta el cambio que debería pararla.</p>
+<h2>Qué he hecho</h2>
+<ul><li>Tendencias: grupos de incidencias parecidas en el mismo CI y la misma categoría sin registro de problema, los problemas candidatos, ordenados por cuántas son, su prioridad y la criticidad del CI en la CMDB.</li><li>Incidentes graves: sin registro de problema, o con un problema sin causa raíz, cinco días laborables después del incidente, sin contar fines de semana ni festivos.</li><li>Problemas atascados: sin actualizar en un mes, con la fecha objetivo vencida, más de 60 días en investigación, sin responsable, o en manos de un equipo distinto del que es dueño del CI.</li><li>Errores conocidos y soluciones: soluciones temporales de más de 90 días sin cambio para la solución definitiva, soluciones temporales que el service desk no tiene, problemas arreglados con un cambio mientras siguen llegando incidencias iguales, problemas cerrados con un cambio que se deshizo, incidencias reabiertas; y la calidad de los registros: causas raíz desconocidas u otras, problemas cerrados sin causa raíz y duplicados.</li><li>Un estado por área, <code>report.html</code>, <code>problem-review-pack.md</code> con un orden del día de 60 minutos, una columna de decisión y la lista para el próximo CAB, CSV de problemas candidatos, estado de los problemas, errores conocidos, eficacia de las soluciones y acciones, y un exportador de solo lectura en PowerShell para la API REST de Jira Service Management Cloud.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python solo con la librería estándar. La agrupación de incidencias es simple a propósito y se puede explicar: las incidencias se agrupan por CI y categoría, cada resumen se convierte en un conjunto de palabras sin las vacías, y dos resúmenes se parecen cuando comparten al menos dos palabras y la mitad de las palabras del más corto; cada incidencia entra, por orden de creación, en el grupo con cuyas palabras comunes coincide, así que el resultado es siempre el mismo y las palabras comunes explican por qué se agruparon. Cada candidato se puntúa con el peso de la prioridad de sus incidencias por la criticidad del CI. Si una solución funcionó se comprueba igual: las palabras que tenían en común las incidencias del problema antes del cambio, en el mismo CI, después de la fecha de implantación. El exportador solo envía peticiones GET al endpoint de búsqueda con JQL y paginación por token, con un token de API que se pide al ejecutarlo y nunca se guarda, y también acepta los nombres de columna de las exportaciones de HaloITSM y EasyVista. La demo es una empresa de logística inventada con tres sedes, seis meses y 1.572 incidencias, 35 problemas y 20 cambios, revisada el 8 de noviembre con los problemas puestos a propósito: en riesgo, dos problemas candidatos, dos incidentes graves sin causa raíz a tiempo, seis problemas atascados y una solución que no funcionó. 14 tests, un runbook con quién asiste, la cadencia, cuándo abrir un problema, las técnicas de análisis de causa raíz y cómo un problema se convierte en un cambio, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.</p>
+<h2>Qué aprendí</h2>
+<p>De ser responsable formal de los procesos de gestión de incidencias y peticiones, cambios y problemas, de la CMDB y la gestión de la configuración, con cuadros de mando de los procesos y respuestas a auditorías; de dirigir la respuesta técnica en incidentes graves y los post-mortem y análisis de causa raíz posteriores; de seguir el backlog, la calidad y la antigüedad de los tickets y las escalaciones con equipos offshore, y de definir SLA y OLA; de administrar Jira Service Management y Confluence, y de trabajar con EasyVista, HaloITSM y GLPI; de automatizar con PowerShell y Python; y de escribir runbooks y formar a otros en los procesos. Las lecciones que hay detrás de la herramienta son que una solución temporal que funciona es lo más caro del service desk, porque esconde el problema; que una incidencia resuelta dentro de su SLA no dice nada de si va a volver; que cada incidente grave necesita su problema el mismo día, porque una semana después nadie recuerda la cronología; que un problema sin responsable es una lista, no un problema; que un error conocido que se acepta para siempre necesita un motivo y una fecha de revisión, o simplemente se olvida; que cerrar un problema cuando se implanta el cambio es demasiado pronto, y la prueba de verdad son las incidencias de las semanas siguientes; y que Desconocida es una causa raíz válida mientras se investiga, nunca para cerrar.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Ejecutar la exportación cada lunes y la revisión antes de cada revisión mensual de problemas.</li><li>Guardar los candidatos del mes anterior para ver cuáles se convirtieron en problemas y cuáles siguen creciendo.</li><li>Leer los CI desde Assets, añadir exportadores para HaloITSM y EasyVista por sus API, y seguir mes a mes el porcentaje de incidencias vinculadas a un problema.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span></p>
+      <p class="repo-name">46-problem-management-review</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/46-problem-management-review" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="es">Compartir</span></p>
+        <div class="share-row es" lang="es"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F46-problem-management-review.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F46-problem-management-review.html&amp;text=Cuarenta%20y%20seis%20tickets%20de%20VPN%20y%20ning%C3%BAn%20problema%20abierto%3A%20la%20revisi%C3%B3n%20mensual%20de%20problemas%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">X</a><a class="share-btn" href="https://wa.me/?text=Cuarenta%20y%20seis%20tickets%20de%20VPN%20y%20ning%C3%BAn%20problema%20abierto%3A%20la%20revisi%C3%B3n%20mensual%20de%20problemas%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F46-problem-management-review.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=Cuarenta%20y%20seis%20tickets%20de%20VPN%20y%20ning%C3%BAn%20problema%20abierto%3A%20la%20revisi%C3%B3n%20mensual%20de%20problemas%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F46-problem-management-review.html" aria-label="Compartir en Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/es/blog/46-problem-management-review.html" data-copied="Enlace copiado">Copiar enlace</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/es/blog/46-problem-management-review.html" data-title="Cuarenta y seis tickets de VPN y ningún problema abierto: la revisión mensual de problemas" hidden>Más…</button></div>
+        
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="36-major-incident-command-kit.html"><span class="label muted"><span class="es">Blog · 36</span></span><span class="related-t"><span class="es">Los usuarios nos avisaron 40 minutos antes que la monitorización: un kit para dirigir y revisar incidentes mayores</span></span></a><a class="related-link" href="40-change-calendar-risk-review.html"><span class="label muted"><span class="es">Blog · 40</span></span><span class="related-t"><span class="es">Dos cambios la misma noche y un parche en pleno cierre de mes: el calendario de cambios antes del CAB</span></span></a><a class="related-link" href="../guias/jira-service-management-un-ticket-bien-hecho.html"><span class="label muted"><span class="es">Guía · Nivel 1</span></span><span class="related-t"><span class="es">Jira Service Management: un ticket bien hecho, de principio a fin</span></span></a><a class="related-link" href="../guias/confluence-espacio-de-it-y-runbooks-que-se-usan.html"><span class="label muted"><span class="es">Guía · Nivel 2</span></span><span class="related-t"><span class="es">Confluence: montar el espacio de IT y escribir runbooks que el equipo use</span></span></a><a class="related-link" href="../guias/glpi-inventario-con-glpi-agent-tickets-sla-y-un-equipo-que-deja-de-reportar.html"><span class="label muted"><span class="es">Guía · Nivel 2</span></span><span class="related-t"><span class="es">GLPI: inventario con GLPI Agent, tickets con SLA y un equipo que deja de reportar</span></span></a><a class="related-link" href="../guias/cmdb-clases-de-ci-relaciones-reconciliacion-calidad-del-dato-y-auditorias.html"><span class="label muted"><span class="es">Guía · Nivel 3</span></span><span class="related-t"><span class="es">CMDB: clases de CI, relaciones, fuentes y reconciliación, calidad del dato y una CMDB que aguanta una auditoría</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="45-network-config-compliance.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Telnet en un switch de sede y un cambio nocturno sin guardar: la revisión semanal de la red</span></span></a>
+    <a class="post-nav-link next" href="47-multi-site-it-scorecard.html"><span class="label muted"><span class="es">Siguiente</span></span><span><span class="es">Un circuito de respaldo caído dos veces y una oficina sin técnico: el cuadro de mando IT multisede</span></span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

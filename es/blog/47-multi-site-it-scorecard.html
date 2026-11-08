@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Cuadro de mando de IT multisede · Iñigo González</title>
+<meta name="description" content="Cuadro de mando mensual de IT por oficina: SLA, FCR, backlog, CSAT, disponibilidad, cumplimiento en Intune y pruebas de DR, con RAG, tendencia y motivos.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/blog/47-multi-site-it-scorecard.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/47-multi-site-it-scorecard.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/47-multi-site-it-scorecard.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/47-multi-site-it-scorecard.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cuadro de mando de IT multisede · Iñigo González">
+<meta property="og:description" content="Cuadro de mando mensual de IT por oficina: SLA, FCR, backlog, CSAT, disponibilidad, cumplimiento en Intune y pruebas de DR, con RAG, tendencia y motivos.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/blog/47-multi-site-it-scorecard.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/47-multi-site-it-scorecard.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cuadro de mando de IT multisede · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Un circuito de respaldo caído dos veces y una oficina sin técnico: el cuadro de mando IT multisede","alternativeHeadline":"A backup circuit down twice and an office without its engineer: the monthly multi-site scorecard","description":"A partir de las sedes, los tickets del ITSM, las caídas registradas por la monitorización, las fotos mensuales de los equipos en Intune, las acciones abiertas y las pruebas de DR: un estado RAG por indicador y oficina frente a su objetivo, n/a cuando hay demasiados pocos tickets para valorar, la tendencia frente al mes anterior, el motivo que hay en los datos detrás de cada rojo, una puntuación ponderada por sede, un mapa de calor regional y el dosier para la revisión regional de cada mes.","datePublished":"2026-11-08","dateModified":"2026-11-08","inLanguage":"es","image":"https://inigogonzalezgarcia.github.io/assets/og/47-multi-site-it-scorecard.png","url":"https://inigogonzalezgarcia.github.io/es/blog/47-multi-site-it-scorecard.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/blog/47-multi-site-it-scorecard.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/es/blog/#blog"},"articleSection":"Herramientas de IT Ops"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/es/blog/"},{"@type":"ListItem","position":3,"name":"Un circuito de respaldo caído dos veces y una oficina sin técnico: el cuadro de mando IT multisede","item":"https://inigogonzalezgarcia.github.io/es/blog/47-multi-site-it-scorecard.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span></a><a href="../guias.html"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../blog/47-multi-site-it-scorecard.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 47</p>
+    <h1><span class="es">Un circuito de respaldo caído dos veces y una oficina sin técnico: el cuadro de mando IT multisede</span></h1>
+    <p class="lede"><span class="es">A partir de las sedes, los tickets del ITSM, las caídas registradas por la monitorización, las fotos mensuales de los equipos en Intune, las acciones abiertas y las pruebas de DR: un estado RAG por indicador y oficina frente a su objetivo, n/a cuando hay demasiados pocos tickets para valorar, la tendencia frente al mes anterior, el motivo que hay en los datos detrás de cada rojo, una puntuación ponderada por sede, un mapa de calor regional y el dosier para la revisión regional de cada mes.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span> · <span class="es">8 nov 2026</span> · <span class="es">6 min</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>El problema</h2>
+<p>Un responsable de IT regional con ocho oficinas recibe cada mes la misma pregunta: cómo va IT en cada oficina, cuál se está quedando atrás y por qué. Los datos están en cinco sitios y, por separado, rara vez cuentan la historia. En un mes normal el circuito de respaldo de una oficina se cae dos veces durante casi nueve horas y nadie se entera, porque el principal sigue arriba; una quinta parte de los portátiles de otra oficina deja de cumplir la semana en que les llega una nueva versión de Windows 11; la oficina más pequeña tiene ocho tickets, y un porcentaje de SLA sobre ocho tickets sale verde o rojo por azar; una oficina se queda sin su único técnico local y al mes siguiente la resolución en el primer contacto baja del 79% al 56%, los escalados al equipo central pasan del 14% al 39% y la satisfacción de 4,5 a 3,4; una oficina lleva diecisiete meses sin probar su plan de DR; y la oficina con más actividad tiene 91 tickets abiertos, 35 de ellos con más de 30 días. Los indicadores del service desk que publiqué al principio de la serie miran un solo service desk; esto es la misma idea con las oficinas una al lado de otra, y con la disponibilidad, los equipos, las acciones y el DR junto a los tickets.</p>
+<h2>Qué he hecho</h2>
+<ul><li>Service desk por oficina: cumplimiento de SLA por prioridad, resolución en el primer contacto, tasas de reapertura y de escalado, backlog por cada 100 usuarios y su antigüedad, y satisfacción.</li><li>Disponibilidad por servicio (WAN principal y de respaldo, wifi, impresión, salas de reuniones, ficheros e impresión), contando contra el objetivo solo los minutos no planificados; equipos: cumplimiento en Intune, equipos que no se sincronizan y equipos con más de cuatro años; acciones vencidas y cuánto hace que cada oficina probó su plan de DR.</li><li>Para cada indicador, un estado RAG frente a su objetivo y su umbral rojo, n/a cuando el volumen no llega a un mínimo, la tendencia frente al mes anterior y, en cada rojo, el motivo que hay en los datos: los tickets del proveedor de las caídas, la versión del sistema detrás de los portátiles que no cumplen, los tickets más antiguos, las acciones vencidas, una oficina sin personal de IT local.</li><li>Una puntuación ponderada y un estado por oficina, una fila regional que nunca diluye la caída de una oficina en la media, <code>report.html</code> con un mapa de calor de oficinas por indicador, y <code>regional-review-pack.md</code> con una sección por oficina y una columna de decisión.</li><li>CSV con el cuadro de mando, el detalle por indicador, la tendencia, los hallazgos y las acciones, y un exportador de solo lectura en PowerShell para Intune a través de Microsoft Graph y para Jira Service Management a través de su API REST.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python solo con la librería estándar. Cada indicador se calcula por oficina y mes a partir de las exportaciones en bruto, igual para el mes del informe que para el anterior, así que la tendencia no es un número que alguien ha tecleado. Por debajo de su volumen mínimo un indicador no se valora, y lo que no se valora nunca aparece en verde: una oficina pequeña se puntúa por lo que tiene, su backlog, la disponibilidad, los equipos y la prueba de DR, y sus pocos tickets se leen uno a uno. La puntuación de la sede es la parte ponderada de puntos sobre los indicadores valorados, una sede con un rojo nunca está en verde, y la fila regional junta los tickets y los equipos pero toma la peor oficina en disponibilidad, acciones y pruebas de DR. La disponibilidad sale de los eventos de caída de la herramienta de monitorización, minutos no planificados sobre los minutos del mes, frente a un objetivo por servicio, porque un circuito de respaldo y una impresora no merecen el mismo. Los indicadores de equipos usan la última foto de Intune de cada mes. La demo es una empresa inventada con 2.500 personas en ocho oficinas europeas, que informa de octubre frente a septiembre con los problemas puestos a propósito: la región en ámbar, dos oficinas en rojo, nueve indicadores en rojo y seis sin valorar. 14 tests, un runbook para el ciclo mensual con el orden del día de la revisión, qué hacer con cada rojo, cómo fijar los objetivos y cómo evitar que se maquillen los indicadores, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura. Cuando el servicio lo presta un proveedor, la revisión del proveedor de EUC que publiqué antes en la serie es la mirada mensual a sus SLA y OLA.</p>
+<h2>Qué aprendí</h2>
+<p>De dirigir la IT de una oficina con dos técnicos en una empresa de servicios financieros con varias sedes, dando soporte a unos 2.500 usuarios en oficinas europeas, en una oficina que pasó de unas 15 a más de 120 personas; de definir y seguir SLA y OLA, de llevar la gestión de la disponibilidad y la capacidad como una práctica formal con métricas, tendencias y planes, de montar cuadros de mando de procesos y de seguir el backlog, la calidad y la antigüedad de los tickets y los escalados con equipos offshore; de gestionar proveedores de conectividad, hardware y servicios y supervisar pruebas de DR y BCP; de Intune, el empaquetado con MECM y una migración a Windows 11; y de Zabbix, SolarWinds, Grafana, ELK, PowerShell, Python y Jira Service Management. Las lecciones que hay detrás de la herramienta son que un porcentaje sobre ocho tickets es ruido y tiene que decirlo; que un circuito de respaldo que falla mientras el principal funciona es la caída que nadie reporta y la que importa el día que cae el principal; que el motivo tiene que estar al lado del rojo, o la revisión se pasa el rato buscándolo; que un rojo que no es nuevo merece otra conversación que uno nuevo; que los mismos objetivos para todas las oficinas mantienen la discusión en los motivos y no en los umbrales; que una oficina sin técnico local lo enseña primero en los escalados y en la satisfacción; y que un cuadro de mando sirve para decidir dónde ayudar, no para clasificar a las personas.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Ejecutarlo el primer día laborable de cada mes y guardar un año de tendencia por oficina.</li><li>Leer las caídas directamente de la API de Zabbix y añadir el OLA del equipo central junto a los SLA de las oficinas.</li><li>Añadir la disponibilidad en horario laboral por zona horaria y la capacidad por oficina desde Grafana.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span></p>
+      <p class="repo-name">47-multi-site-it-scorecard</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/47-multi-site-it-scorecard" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="es">Compartir</span></p>
+        <div class="share-row es" lang="es"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F47-multi-site-it-scorecard.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F47-multi-site-it-scorecard.html&amp;text=Un%20circuito%20de%20respaldo%20ca%C3%ADdo%20dos%20veces%20y%20una%20oficina%20sin%20t%C3%A9cnico%3A%20el%20cuadro%20de%20mando%20IT%20multisede%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">X</a><a class="share-btn" href="https://wa.me/?text=Un%20circuito%20de%20respaldo%20ca%C3%ADdo%20dos%20veces%20y%20una%20oficina%20sin%20t%C3%A9cnico%3A%20el%20cuadro%20de%20mando%20IT%20multisede%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F47-multi-site-it-scorecard.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=Un%20circuito%20de%20respaldo%20ca%C3%ADdo%20dos%20veces%20y%20una%20oficina%20sin%20t%C3%A9cnico%3A%20el%20cuadro%20de%20mando%20IT%20multisede%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F47-multi-site-it-scorecard.html" aria-label="Compartir en Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/es/blog/47-multi-site-it-scorecard.html" data-copied="Enlace copiado">Copiar enlace</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/es/blog/47-multi-site-it-scorecard.html" data-title="Un circuito de respaldo caído dos veces y una oficina sin técnico: el cuadro de mando IT multisede" hidden>Más…</button></div>
+        
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="04-itsm-kpi-dashboard.html"><span class="label muted"><span class="es">Blog · 04</span></span><span class="related-t"><span class="es">KPIs de service desk a partir de una exportación de tickets</span></span></a><a class="related-link" href="28-euc-provider-service-review.html"><span class="label muted"><span class="es">Blog · 28</span></span><span class="related-t"><span class="es">El proveedor dice 96% y los usuarios dicen que va lento: una revisión mensual del servicio EUC desde los tickets</span></span></a><a class="related-link" href="../guias/intune-perfiles-y-cumplimiento-en-windows-macos-ios-android-y-dispositivo-que-no-cumple.html"><span class="label muted"><span class="es">Guía · Nivel 3</span></span><span class="related-t"><span class="es">Intune en Windows, macOS, iOS y Android: perfiles de configuración, cumplimiento y un dispositivo que no cumple</span></span></a><a class="related-link" href="../guias/presupuesto-de-it-preparar-y-seguir-el-presupuesto-anual-en-una-empresa-multisede.html"><span class="label muted"><span class="es">Guía · Sector 4</span></span><span class="related-t"><span class="es">Presupuesto de IT: preparar y seguir el presupuesto anual de una empresa con sedes en varios países</span></span></a><a class="related-link" href="../guias/dr-bcp-preparar-y-supervisar-una-prueba-de-recuperacion-en-una-sede-financiera.html"><span class="label muted"><span class="es">Guía · Sector 5</span></span><span class="related-t"><span class="es">DR/BCP: preparar y supervisar una prueba de recuperación en una sede financiera</span></span></a><a class="related-link" href="../guias/proveedores-de-conectividad-inventario-de-circuitos-averias-y-sla.html"><span class="label muted"><span class="es">Guía · Sector 5</span></span><span class="related-t"><span class="es">Proveedores de conectividad: el inventario de circuitos, las averías con el operador y el SLA de cada mes</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="46-problem-management-review.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Cuarenta y seis tickets de VPN y ningún problema abierto: la revisión mensual de problemas</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>
