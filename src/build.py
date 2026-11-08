@@ -1318,6 +1318,7 @@ PRACTICE = {
     "monitorizacion-desplegar-alarmas-y-responder-en-plataformas-24x7": ["net-psu-rma"],
     "powershell-altas-masivas-en-active-directory-desde-csv-y-bajas-con-revision": ["leaver-return"],
     "active-directory-alta-usuario-grupos": ["ad-lockout"],
+    "active-directory-directiva-de-contrasenas-pso-bloqueos-y-la-cuenta-que-se-bloquea-cada-manana": ["ad-lockout"],
     "windows-diagnostico-basico-equipo-lento-o-con-errores": ["dns-intranet", "disk-full"],
     "impresoras-instalar-impresora-de-red-y-cola-atascada": ["print-queue"],
     "outlook-exchange-online-buzon-compartido-permisos-autorespuesta": ["shared-mailbox"],

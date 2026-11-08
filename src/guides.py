@@ -48227,7 +48227,7 @@ In the ticket: the blocking policy, the source GPO, the change made and the test
 """)
 
 
-g(slug="active-directory-directiva-de-contrasenas-pso-bloqueos-y-la-cuenta-que-se-bloquea-cada-manana", topic="active-directory", date="2026-11-06",
+g(slug="active-directory-directiva-de-contrasenas-pso-bloqueos-y-la-cuenta-que-se-bloquea-cada-manana", topic="active-directory", date="2026-11-06", updated="2026-11-08",
   title_es="Active Directory: directiva de contraseñas y de bloqueo, PSO para administradores y cuentas de servicio, y la cuenta que se bloquea cada mañana",
   title_en="Active Directory: password and lockout policy, PSOs for admins and service accounts, and the account that locks itself every morning",
   seo_title_en="AD: password policy, PSOs and lockouts · Iñigo González",
