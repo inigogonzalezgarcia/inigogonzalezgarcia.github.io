@@ -203,7 +203,7 @@ La mediana cuenta otra historia que la media: unos pocos tickets muy largos muev
 - Fijar tus objetivos de SLA por prioridad con `--sla`.
 - Usar el mismo informe cada mes para que las cifras se puedan comparar."""),
 
-dict(n="05", repo="05-it-ops-console", date="2026-09-30", cat="tools",
+dict(n="05", repo="05-it-ops-console", date="2026-09-30", updated="2026-11-08", cat="tools",
  title_en="Rebuilding an on-site IT operations console from scratch", title_es="Rehacer desde cero una consola de operaciones IT de sede",
  seo_title_en="On-site IT ops console: Flask + PowerShell · Iñigo González",
  seo_title_es="Consola de operaciones IT: Flask + PowerShell · Iñigo González",
@@ -873,7 +873,7 @@ De la migración a Windows 11 que lideré: casi todo el esfuerzo no está en la 
 - Escribir tus workloads, olas y gates en `plan.json`.
 - Llevar `gates.md` a cada comité de cambios antes de mover el slider."""),
 
-dict(n="19", repo="19-ad-infra-health-check", date="2026-10-16", cat="tools",
+dict(n="19", repo="19-ad-infra-health-check", date="2026-10-16", updated="2026-11-07", cat="tools",
  title_en="A Monday-morning health check for Active Directory", title_es="Un chequeo de los lunes para Active Directory",
  seo_title_en="Active Directory health check with PowerShell · Iñigo González",
  seo_title_es="Chequeo de salud de Active Directory con PowerShell · Iñigo González",
@@ -1017,7 +1017,7 @@ De gestionar MacBooks, iPhones e iPads con Jamf Pro y dar soporte a usuarios VIP
 - Ejecutar la exportación y añadir la caducidad de APNs desde Settings > Global > Push certificates.
 - Añadir tu lista de VIP y llevar `review.md` a la reunión semanal."""),
 
-dict(n="22", repo="22-dex-experience-score", date="2026-10-17", cat="tools",
+dict(n="22", repo="22-dex-experience-score", date="2026-10-17", updated="2026-11-07", cat="tools",
  title_en="A 0-10 experience score for every laptop", title_es="Una nota de 0 a 10 para la experiencia de cada portátil",
  seo_title_en="DEX score: a 0-10 experience per laptop · Iñigo González",
  seo_title_es="Puntuación DEX de 0 a 10 por portátil · Iñigo González",
