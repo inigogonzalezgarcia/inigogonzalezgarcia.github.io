@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Altas: listos para el primer día · Iñigo González</title>
+<meta name="description" content="Preparación del primer día de cada alta: cuenta, licencia, grupos, accesos, portátil, móvil y MFA, con responsables, fechas y cuenta atrás.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/blog/48-new-starter-day-one-readiness.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/48-new-starter-day-one-readiness.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/48-new-starter-day-one-readiness.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/48-new-starter-day-one-readiness.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Altas: listos para el primer día · Iñigo González">
+<meta property="og:description" content="Preparación del primer día de cada alta: cuenta, licencia, grupos, accesos, portátil, móvil y MFA, con responsables, fechas y cuenta atrás.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/blog/48-new-starter-day-one-readiness.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/48-new-starter-day-one-readiness.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Altas: listos para el primer día · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Una petición el viernes para el martes y un grupo de admin heredado: el control del primer día","alternativeHeadline":"A request on Friday for Tuesday and an admin group from a model user: the day-one readiness check","description":"A partir de la lista de altas de RR. HH., los perfiles por puesto, las cuentas de Entra ID, los equipos de Intune o Jamf, las licencias, el stock de cada sede y las peticiones de acceso: para todos los que empiezan en los próximos diez días laborables, si tendrán cuenta, licencia, grupos, accesos, portátil y móvil el primer día, qué falta, de quién depende y para cuándo, con una cuenta atrás en días laborables y el dosier para la reunión semanal de altas.","datePublished":"2026-11-09","dateModified":"2026-11-09","inLanguage":"es","image":"https://inigogonzalezgarcia.github.io/assets/og/48-new-starter-day-one-readiness.png","url":"https://inigogonzalezgarcia.github.io/es/blog/48-new-starter-day-one-readiness.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/blog/48-new-starter-day-one-readiness.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/es/blog/#blog"},"articleSection":"Herramientas de IT Ops"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/es/blog/"},{"@type":"ListItem","position":3,"name":"Una petición el viernes para el martes y un grupo de admin heredado: el control del primer día","item":"https://inigogonzalezgarcia.github.io/es/blog/48-new-starter-day-one-readiness.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span></a><a href="../guias.html"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../blog/48-new-starter-day-one-readiness.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 48</p>
+    <h1><span class="es">Una petición el viernes para el martes y un grupo de admin heredado: el control del primer día</span></h1>
+    <p class="lede"><span class="es">A partir de la lista de altas de RR. HH., los perfiles por puesto, las cuentas de Entra ID, los equipos de Intune o Jamf, las licencias, el stock de cada sede y las peticiones de acceso: para todos los que empiezan en los próximos diez días laborables, si tendrán cuenta, licencia, grupos, accesos, portátil y móvil el primer día, qué falta, de quién depende y para cuándo, con una cuenta atrás en días laborables y el dosier para la reunión semanal de altas.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span> · <span class="es">9 nov 2026</span> · <span class="es">6 min</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>El problema</h2>
+<p>El primer día es la primera impresión que IT da a una persona nueva, y se decide en las dos semanas anteriores. La información está repartida: RR. HH. sabe las fechas de incorporación, Entra ID sabe las cuentas, Intune sabe los portátiles, el inventario sabe el stock y la herramienta de ITSM sabe las peticiones de acceso, y nadie lo mira todo junto hasta que la persona está sentada en su puesto. En una quincena normal con veinticinco altas, la petición de un operario de almacén llega el viernes para el martes y el lunes todavía le faltan el grupo de su puesto y el acceso al sistema de almacén; el portátil de alguien que empieza mañana está inscrito pero no cumple porque BitLocker sigue pendiente; se pidió un MacBook en una oficina sin ninguno en stock y un pedido tarda más que los días que quedan; una cuenta creada copiando a un compañero que antes trabajaba en IT llega con un grupo de administradores de Exchange; otra cuenta no tiene ubicación de uso, así que la licencia nunca se asignó; la cuenta antigua de una recontratación está deshabilitada y alguien creó una segunda con el mismo número de empleado; un trader que empieza el lunes que viene todavía no tiene aprobado el terminal de datos de mercado; y en la bolsa de licencias quedan dos libres para cinco altas. La revisión mensual de accesos que publiqué antes en la serie encuentra el grupo de administradores tres meses después; este control está pensado para pararlo el primer día.</p>
+<h2>Qué he hecho</h2>
+<ul><li>Petición y cuenta: peticiones que llegan tarde para el plazo; cuentas que faltan o están deshabilitadas; una recontratación cuya cuenta antigua habría que reutilizar, o un duplicado creado al lado; sin número de empleado, con un departamento o un responsable distintos de los de RR. HH., sin ubicación de uso, o una cuenta solo en la nube en un directorio híbrido.</li><li>Licencia, grupos y accesos: la licencia del puesto que falta, es otra o sobra, y la bolsa de licencias frente a todos los que faltan por licenciar, por orden de incorporación; grupos del puesto y listas de distribución que faltan; grupos privilegiados que el puesto no debería tener; aplicaciones y buzones compartidos sin pedir, pendientes de aprobación, aprobados pero sin dar de alta, o rechazados.</li><li>Equipo, móvil y MFA: sin portátil asignado, sin stock del modelo pedido en la sede, la plataforma equivocada, inscrito pero sin cumplir; un puesto que necesita móvil sin ninguno pedido; y cómo registrará la persona el MFA, con un pase de acceso temporal para el primer inicio de sesión.</li><li>Cada hueco con su responsable, los días laborables que necesita su solución y una fecha límite; cada alta LISTA, EN RIESGO o BLOQUEADA, con una cuenta atrás en días laborables, por sede y en total.</li><li><code>report.html</code> con la lista de lo que hay que arreglar primero y un tablero con la cuenta atrás, <code>day-one-pack.md</code> para la reunión semanal de altas con columnas de responsable, fecha y hecho, CSV con el estado de cada alta, los huecos, la previsión de licencias y de equipos, las acciones y los hallazgos, y un exportador de solo lectura en PowerShell para Microsoft Graph.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python solo con la librería estándar. Cada alta se cruza con una cuenta por número de empleado, después por el UPN previsto y después por el nombre, y se compara con el perfil de su puesto: un JSON con los grupos, la licencia, las aplicaciones, los buzones compartidos, las listas y si el puesto necesita móvil, con la sede como variable en los nombres de los grupos. Cada solución tiene los días laborables que necesita, desde uno para un grupo hasta cinco para pedir un equipo, y un hueco que impide el primer día pasa a bloqueo cuando su solución ya no cabe antes de la incorporación o cuando la persona empieza en tres días laborables o menos; si no, es un riesgo con fecha límite. La bolsa de licencias y el stock de equipos se reparten por orden de incorporación, así que la previsión dice a quién le va a faltar, no solo cuántos faltan. Un grupo privilegiado que el puesto no incluye es un bloqueo, quede el tiempo que quede. El exportador lee las cuentas con el número de empleado, la ubicación de uso y las licencias, el responsable, la pertenencia a grupos, los métodos de autenticación, las licencias contratadas y los equipos de Intune, con permisos de solo lectura e inicio de sesión interactivo, y acepta exportaciones del inventario de Jamf Pro con las mismas columnas; los registros de Windows Autopilot también se pueden leer como datos. La demo es una empresa inventada de distribución y trading con cuatro sedes y 25 altas en las próximas dos semanas, revisada el lunes 9 de noviembre con los problemas puestos a propósito: bloqueado en total, 13 altas listas, 8 en riesgo y 4 bloqueadas. 15 tests, un runbook para la reunión semanal de altas con quién asiste, la cadencia, qué significa estar listo, los usuarios modelo, las recontrataciones y las peticiones tardías, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura. Cuando la persona ya está dentro, la auditoría de higiene de Entra ID del principio de la serie cubre los huecos de MFA y las cuentas olvidadas.</p>
+<h2>Qué aprendí</h2>
+<p>De llevar las altas de usuarios en tiendas y oficina central, con la red, el correo, las aplicaciones de negocio y las cuentas de sistemas heredados, y de asignar licencias de Office 365 con el service desk; de Active Directory y Azure AD Connect, Entra ID con acceso condicional y PIM, Exchange Online y los buzones compartidos y SharePoint; de Intune para Windows, macOS, iOS y Android, Jamf Pro para los Mac, iPhone, iPad y MacBook gestionados, y BitLocker; de automatizar con PowerShell, también con Microsoft Graph, y con Python, y de trabajar con Jira Service Management; y de ser el responsable de IT de una oficina que pasó de unas 15 a más de 120 personas, dando soporte a unos 2.500 usuarios en oficinas europeas. Las lecciones que hay detrás de la herramienta son que la fecha de incorporación es el único plazo que no se mueve, así que cada solución hay que contarla hacia atrás desde ella en días laborables; que copiar a un usuario modelo es rápido y trae consigo la historia del compañero, así que la referencia tiene que ser el perfil del puesto; que una recontratación es una cuenta que se reutiliza, no una que se crea; que una bolsa de licencias o un recuento de stock solo dicen algo frente a todos los que empiezan, y en orden; que una petición tardía es una conversación con RR. HH., no un fin de semana heroico; que el primer inicio de sesión necesita un plan tanto como el portátil; y que estar listo tiene que significar lo mismo para todas las altas, y estar escrito.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Ejecutarlo cada lunes antes de la reunión de altas, y a diario para las altas dentro de la ventana urgente.</li><li>Leer las altas del sistema de RR. HH. o de las peticiones de alta del ITSM, y las aprobaciones de acceso de Jira Service Management.</li><li>Guardar los huecos de cada semana para ver qué puestos y qué pasos fallan una y otra vez, y llevarlo a los perfiles de cada puesto.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span></p>
+      <p class="repo-name">48-new-starter-day-one-readiness</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/48-new-starter-day-one-readiness" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="es">Compartir</span></p>
+        <div class="share-row es" lang="es"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F48-new-starter-day-one-readiness.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F48-new-starter-day-one-readiness.html&amp;text=Una%20petici%C3%B3n%20el%20viernes%20para%20el%20martes%20y%20un%20grupo%20de%20admin%20heredado%3A%20el%20control%20del%20primer%20d%C3%ADa%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">X</a><a class="share-btn" href="https://wa.me/?text=Una%20petici%C3%B3n%20el%20viernes%20para%20el%20martes%20y%20un%20grupo%20de%20admin%20heredado%3A%20el%20control%20del%20primer%20d%C3%ADa%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F48-new-starter-day-one-readiness.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=Una%20petici%C3%B3n%20el%20viernes%20para%20el%20martes%20y%20un%20grupo%20de%20admin%20heredado%3A%20el%20control%20del%20primer%20d%C3%ADa%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F48-new-starter-day-one-readiness.html" aria-label="Compartir en Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/es/blog/48-new-starter-day-one-readiness.html" data-copied="Enlace copiado">Copiar enlace</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/es/blog/48-new-starter-day-one-readiness.html" data-title="Una petición el viernes para el martes y un grupo de admin heredado: el control del primer día" hidden>Más…</button></div>
+        
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="37-iam-access-review.html"><span class="label muted"><span class="es">Blog · 37</span></span><span class="related-t"><span class="es">Se fue hace tres semanas y sigue en Domain Admins: la revisión mensual de accesos</span></span></a><a class="related-link" href="03-entra-id-hygiene-audit.html"><span class="label muted"><span class="es">Blog · 03</span></span><span class="related-t"><span class="es">Auditar la higiene de Entra ID: huecos de MFA y cuentas olvidadas</span></span></a><a class="related-link" href="../guias/active-directory-alta-usuario-grupos.html"><span class="label muted"><span class="es">Guía · Nivel 1</span></span><span class="related-t"><span class="es">Alta de un usuario en Active Directory y sus grupos</span></span></a><a class="related-link" href="../guias/active-directory-directiva-de-contrasenas-pso-bloqueos-y-la-cuenta-que-se-bloquea-cada-manana.html"><span class="label muted"><span class="es">Guía · Nivel 1</span></span><span class="related-t"><span class="es">Active Directory: directiva de contraseñas y de bloqueo, PSO para administradores y cuentas de servicio, y la cuenta que se bloquea cada mañana</span></span></a><a class="related-link" href="../guias/android-perfil-de-trabajo-intune.html"><span class="label muted"><span class="es">Guía · Nivel 1</span></span><span class="related-t"><span class="es">Enrolar un Android con perfil de trabajo en Intune</span></span></a><a class="related-link" href="../guias/microsoft-365-asignar-y-retirar-licencias.html"><span class="label muted"><span class="es">Guía · Nivel 1</span></span><span class="related-t"><span class="es">Microsoft 365: asignar y retirar licencias, y saber qué incluye cada una</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="47-multi-site-it-scorecard.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Un circuito de respaldo caído dos veces y una oficina sin técnico: el cuadro de mando IT multisede</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>
