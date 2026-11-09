@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>New starter day-one readiness check · Iñigo González</title>
+<meta name="description" content="Day-one readiness for new starters: account, licence, groups, access, laptop, phone and MFA per joiner, with owners, due dates and a countdown.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/48-new-starter-day-one-readiness.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/48-new-starter-day-one-readiness.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/48-new-starter-day-one-readiness.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/48-new-starter-day-one-readiness.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="New starter day-one readiness check · Iñigo González">
+<meta property="og:description" content="Day-one readiness for new starters: account, licence, groups, access, laptop, phone and MFA per joiner, with owners, due dates and a countdown.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/48-new-starter-day-one-readiness.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/48-new-starter-day-one-readiness.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="New starter day-one readiness check · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"A request on Friday for Tuesday and an admin group from a model user: the day-one readiness check","alternativeHeadline":"Una petición el viernes para el martes y un grupo de admin heredado: el control del primer día","description":"From the HR joiner list, the role profiles, the Entra ID accounts, the Intune or Jamf devices, the licences, the stock per site and the access requests: for everyone starting in the next ten working days, whether they will have a working account, licence, groups, access, laptop and phone on day one, what is missing, who owns it and by when, with a countdown in working days and the pack for the weekly joiners call.","datePublished":"2026-11-09","dateModified":"2026-11-09","inLanguage":"en","image":"https://inigogonzalezgarcia.github.io/assets/og/48-new-starter-day-one-readiness.png","url":"https://inigogonzalezgarcia.github.io/blog/48-new-starter-day-one-readiness.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/blog/48-new-starter-day-one-readiness.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/blog/#blog"},"articleSection":"IT Ops tools"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/blog/"},{"@type":"ListItem","position":3,"name":"A request on Friday for Tuesday and an admin group from a model user: the day-one readiness check","item":"https://inigogonzalezgarcia.github.io/blog/48-new-starter-day-one-readiness.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/" aria-current="page"><span class="en">Blog</span></a><a href="../guias.html"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../es/blog/48-new-starter-day-one-readiness.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 48</p>
+    <h1><span class="en">A request on Friday for Tuesday and an admin group from a model user: the day-one readiness check</span></h1>
+    <p class="lede"><span class="en">From the HR joiner list, the role profiles, the Entra ID accounts, the Intune or Jamf devices, the licences, the stock per site and the access requests: for everyone starting in the next ten working days, whether they will have a working account, licence, groups, access, laptop and phone on day one, what is missing, who owns it and by when, with a countdown in working days and the pack for the weekly joiners call.</span></p><p class="label post-meta"><span class="en">IT Ops tools</span> · <span class="en">9 Nov 2026</span> · <span class="en">5 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      
+      <div class="en" lang="en">
+<h2>The problem</h2>
+<p>Day one is the first impression IT makes on a new starter, and it is decided in the two weeks before. The information is spread out: HR knows the start dates, Entra ID knows the accounts, Intune knows the laptops, the asset register knows the stock and the ITSM tool knows the access requests, and nobody looks at all of them together until the joiner is at the desk. In a normal fortnight with twenty-five joiners, a warehouse operative&#x27;s request arrives on Friday for Tuesday and on Monday his role group and his access to the warehouse system are still missing; the laptop of someone starting tomorrow is enrolled but not compliant because BitLocker is still pending; a MacBook was requested in an office with none in stock and an order takes longer than the days left; an account created by copying a colleague who used to work in IT comes with an Exchange administrators group; another account has no usage location, so the licence was never assigned; a rehire&#x27;s old account is disabled and someone created a second one with the same employee ID; a trader starting next Monday has no approval yet for the market data terminal; and the licence pool has two free units for five joiners. The monthly access review I published earlier in the series finds the admin group three months later; this check is meant to stop it on day one.</p>
+<h2>What I built</h2>
+<ul><li>Request and account: requests raised too late for the lead time; accounts missing or disabled; a rehire whose old account should be reused, or a duplicate created next to it; no employee ID, department or manager different from HR, no usage location, a cloud-only account in a hybrid directory.</li><li>Licence, groups and access: the licence of the role missing, wrong or extra, and the pool against everyone still to licence in start date order; role groups and distribution lists missing; privileged groups the role should not have; apps and shared mailboxes not requested, waiting for approval, approved and not provisioned, or rejected.</li><li>Device, phone and MFA: no laptop assigned, no stock of the requested model at the site, the wrong platform, enrolled but not compliant; a role that needs a phone with none requested; and how the joiner will register MFA, with a Temporary Access Pass for the first sign-in.</li><li>Every gap with an owner, the working days its fix needs and a due date; each joiner READY, AT RISK or BLOCKED with a countdown in working days, per site and overall.</li><li><code>report.html</code> with the fix-first list and a countdown board, <code>day-one-pack.md</code> for the weekly joiners call with owner, due date and done columns, CSVs for joiner status, gaps, licence and device forecasts, actions and findings, and a read-only PowerShell exporter for Microsoft Graph.</li></ul>
+<h2>How it is built</h2>
+<p>Python with the standard library only. Each joiner is matched to an account by employee ID, then by the planned UPN, then by name, and compared with the profile of their role: a JSON file with the groups, licence, apps, shared mailboxes, lists and whether the role needs a phone, with the site as a placeholder in the group names. Every fix has the working days it needs, from one for a group to five for a device order, and a gap that stops day one becomes a blocker when its fix no longer fits before the start or the start is within three working days; otherwise it is a risk with a due date. The licence pool and the device stock are shared out in start date order, so the forecast says who will be short, not only by how many. A privileged group that the role does not list is a blocker at any distance from the start. The exporter reads the accounts with employeeId, usage location and licences, the manager, the group memberships, the authentication methods, the subscribed licences and the Intune devices with read-only scopes and an interactive sign-in, and Jamf Pro inventory exports with the same columns are accepted; Windows Autopilot registrations can be read as data too. The demo is a made-up trading and distribution company with four sites and 25 joiners in the next two weeks, checked on Monday 9 November with the problems placed on purpose: blocked overall, 13 ready, 8 at risk and 4 blocked. 15 tests, a runbook for the weekly joiners call with who attends, the cadence, what ready means, model users, rehires and late requests, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot. When the joiner is already in, the Entra ID hygiene audit from the start of the series covers MFA gaps and forgotten accounts.</p>
+<h2>What I learned</h2>
+<p>From running user onboarding for retail stores and head office, with network, e-mail, business applications and legacy system accounts, and assigning Office 365 licences with the service desk; from Active Directory and Azure AD Connect, Entra ID with Conditional Access and PIM, Exchange Online and shared mailboxes and SharePoint; from Intune for Windows, macOS, iOS and Android, Jamf Pro for Macs, managed iPhones, iPads and MacBooks, and BitLocker; from automating with PowerShell, including Microsoft Graph, and Python, and working with Jira Service Management; and from being the IT site leader of an office that grew from about 15 to over 120 people, supporting around 2,500 users across European offices. The lessons behind the tool are that the start date is the only deadline that cannot move, so every fix has to be counted backwards from it in working days; that copying a model user is fast and brings the colleague&#x27;s history with it, so the role profile has to be the reference; that a rehire is an account to reuse, not to create; that a licence pool or a stock count only means something against everyone starting, in order; that a late request is a conversation with HR, not a heroic weekend; that the first sign-in needs a plan as much as the laptop does; and that ready has to mean the same thing for every joiner, written down.</p>
+<h2>Next steps</h2>
+<ul><li>Run it every Monday before the joiners call, and daily for the joiners in the urgent window.</li><li>Read the joiners from the HR system or the ITSM joiner requests, and the access approvals from Jira Service Management.</li><li>Keep the gaps of every week to see which roles and steps keep failing and feed them back into the role profiles.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="en">The repository</span></p>
+      <p class="repo-name">48-new-starter-day-one-readiness</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/48-new-starter-day-one-readiness" target="_blank" rel="noopener noreferrer"><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="en">Share</span></p>
+        
+        <div class="share-row en" lang="en"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F48-new-starter-day-one-readiness.html" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F48-new-starter-day-one-readiness.html&amp;text=A%20request%20on%20Friday%20for%20Tuesday%20and%20an%20admin%20group%20from%20a%20model%20user%3A%20the%20day-one%20readiness%20check%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Share on X">X</a><a class="share-btn" href="https://wa.me/?text=A%20request%20on%20Friday%20for%20Tuesday%20and%20an%20admin%20group%20from%20a%20model%20user%3A%20the%20day-one%20readiness%20check%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F48-new-starter-day-one-readiness.html" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=A%20request%20on%20Friday%20for%20Tuesday%20and%20an%20admin%20group%20from%20a%20model%20user%3A%20the%20day-one%20readiness%20check%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F48-new-starter-day-one-readiness.html" aria-label="Share on Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/48-new-starter-day-one-readiness.html" data-copied="Link copied">Copy link</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/48-new-starter-day-one-readiness.html" data-title="A request on Friday for Tuesday and an admin group from a model user: the day-one readiness check" hidden>More…</button></div>
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="37-iam-access-review.html"><span class="label muted"><span class="en">Blog · 37</span></span><span class="related-t"><span class="en">He left three weeks ago and is still in Domain Admins: the monthly access review</span></span></a><a class="related-link" href="03-entra-id-hygiene-audit.html"><span class="label muted"><span class="en">Blog · 03</span></span><span class="related-t"><span class="en">Auditing Entra ID hygiene: MFA gaps and forgotten accounts</span></span></a><a class="related-link" href="../guias/active-directory-alta-usuario-grupos.html"><span class="label muted"><span class="en">Guide · Level 1</span></span><span class="related-t"><span class="en">Creating a user in Active Directory and adding them to groups</span></span></a><a class="related-link" href="../guias/active-directory-directiva-de-contrasenas-pso-bloqueos-y-la-cuenta-que-se-bloquea-cada-manana.html"><span class="label muted"><span class="en">Guide · Level 1</span></span><span class="related-t"><span class="en">Active Directory: password and lockout policy, PSOs for admins and service accounts, and the account that locks itself every morning</span></span></a><a class="related-link" href="../guias/android-perfil-de-trabajo-intune.html"><span class="label muted"><span class="en">Guide · Level 1</span></span><span class="related-t"><span class="en">Enrolling an Android phone with a work profile in Intune</span></span></a><a class="related-link" href="../guias/microsoft-365-asignar-y-retirar-licencias.html"><span class="label muted"><span class="en">Guide · Level 1</span></span><span class="related-t"><span class="en">Microsoft 365: assigning and removing licences, and knowing what each one includes</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="47-multi-site-it-scorecard.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">A backup circuit down twice and an office without its engineer: the monthly multi-site scorecard</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about#en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
