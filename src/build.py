@@ -1312,6 +1312,18 @@ _DESK = {
     "sso-saml": ("Nadie puede entrar en Gastos con SSO", "Nobody can sign in to Expenses with SSO"),
     "linux-sssd": ("El servidor SFTP de nóminas rechaza las cuentas del dominio", "The payroll SFTP server rejects AD accounts"),
     "sql-log-full": ("El ERP no puede guardar: registro de transacciones lleno", "The ERP cannot save: transaction log full"),
+    "new-laptops-intake": ("Llegan 12 portátiles: etiquetarlos y darlos de alta en el inventario", "Twelve new laptops: tag them and check them into the register"),
+    "starter-desk-ready": ("Lunes: el puesto de la nueva incorporación no está listo", "Monday: the new starter's account is not ready"),
+    "teams-no-audio": ("Teams: en las reuniones no me oyen", "Teams: in meetings nobody can hear me"),
+    "room-no-display": ("La sala de reuniones no proyecta", "The meeting room screen stays black"),
+    "win-temp-profile": ("Al iniciar sesión, el escritorio aparece vacío", "I signed in and my desktop is empty"),
+    "gpo-drive-missing": ("La unidad P: de Proyectos no aparece", "The Projects drive P: is missing"),
+    "epm-elevation": ("Necesito ser administradora para instalar el programa de planos", "I need to be an administrator to install the plans viewer"),
+    "ad-deleted-user": ("Ha desaparecido la cuenta de un comercial", "A sales rep's account has disappeared"),
+    "dhcp-scope-full": ("Planta 3: los portátiles nuevos no cogen IP", "Floor 3: the new laptops get no IP address"),
+    "ntfs-access-denied": ("Acceso denegado a la carpeta de Contabilidad", "Access denied to the Accounting folder"),
+    "ups-no-alert": ("Corte de luz: el SAI no avisó y un servidor se apagó de golpe", "Power cut: the UPS warned nobody and a server went down hard"),
+
 }
 PRACTICE = {
     "cisco-primeros-comandos-copia-de-configuracion-y-un-puerto-err-disabled": ["net-err-disabled"],
@@ -1320,7 +1332,7 @@ PRACTICE = {
     "fortigate-politicas-con-minimo-privilegio-vpn-con-entra-id-tuneles-entre-sedes-y-un-usuario-que-no-llega": ["net-fortigate-branch"],
     "monitorizacion-desplegar-alarmas-y-responder-en-plataformas-24x7": ["net-psu-rma"],
     "powershell-altas-masivas-en-active-directory-desde-csv-y-bajas-con-revision": ["leaver-return"],
-    "active-directory-alta-usuario-grupos": ["ad-lockout"],
+    "active-directory-alta-usuario-grupos": ["ad-lockout", "starter-desk-ready"],
     "active-directory-directiva-de-contrasenas-pso-bloqueos-y-la-cuenta-que-se-bloquea-cada-manana": ["ad-lockout"],
     "windows-diagnostico-basico-equipo-lento-o-con-errores": ["dns-intranet", "disk-full"],
     "impresoras-instalar-impresora-de-red-y-cola-atascada": ["print-queue"],
@@ -1342,6 +1354,16 @@ PRACTICE = {
     "entra-sso-saml-dar-de-alta-una-aplicacion-y-login-que-falla": ["sso-saml"],
     "linux-unir-un-servidor-a-active-directory-con-sssd": ["linux-sssd"],
     "postgresql-mysql-sql-server-tareas-de-operaciones-copia-restauracion-espacio-y-consulta-lenta": ["sql-log-full"],
+    "glpi-inventario-con-glpi-agent-tickets-sla-y-un-equipo-que-deja-de-reportar": ["new-laptops-intake"],
+    "teams-los-problemas-mas-comunes": ["teams-no-audio"],
+    "teams-rooms-poner-en-marcha-una-sala": ["room-no-display"],
+    "windows-11-perfil-temporal-o-danado-diagnostico-reparacion-y-datos-del-usuario": ["win-temp-profile"],
+    "gpo-unidades-de-red-e-impresoras-con-preferencias-filtrado-y-una-unidad-que-no-aparece": ["gpo-drive-missing"],
+    "intune-epm-quitar-administrador-local-y-elevar-solo-lo-necesario": ["epm-elevation"],
+    "active-directory-delegar-permisos-papelera-y-quien-ha-cambiado-este-usuario": ["ad-deleted-user"],
+    "dns-y-dhcp-en-windows-server-zonas-ambitos-conmutacion-y-un-equipo-sin-ip": ["dhcp-scope-full"],
+    "windows-server-recursos-compartidos-y-permisos-ntfs-con-powershell-agdlp-informe-y-un-acceso-denegado": ["ntfs-access-denied"],
+    "sai-apc-tarjeta-de-red-avisos-autotest-baterias-apagado-con-powerchute-y-un-corte-sin-aviso": ["ups-no-alert"],
 }
 def _desk_url(d, lang):
     return f"{SIM_URL}?lang={lang}#/desk/{d}"
