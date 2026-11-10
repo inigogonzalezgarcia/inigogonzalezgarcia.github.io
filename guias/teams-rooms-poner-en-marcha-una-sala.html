@@ -83,6 +83,7 @@
     <article class="prose guide">
       
       <div class="en" lang="en">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/room-no-display" target="_blank" rel="noopener noreferrer"><b>Rather practise it?</b><span>Solve the simulated ticket "The meeting room screen stays black" in SysAdmin Desks ↗</span></a>
 <h2>What you&#x27;ll get</h2>
 <p>A meeting room with Microsoft Teams Rooms (MTR) that shows up in the calendar, joins meetings with one tap and is monitored from the portal without walking to the room. Plus a short method for &quot;the room doesn&#x27;t work&quot;.</p>
 <h2>Before you start</h2>
@@ -106,6 +107,7 @@
 <ol><li><strong>Is the console on, with the right time?</strong> A room with the wrong time can&#x27;t sign in (certificates). Restart from the portal, or a physical 30-second power-off.</li><li><strong>Does the calendar appear?</strong> If not, it is the account (steps 1 and 2): password, licence, Conditional Access. Try signing in with the room account at <code>outlook.office.com</code> from a laptop: if it asks for MFA or is blocked, there is your answer.</li><li><strong>The meeting has no Join button?</strong> <code>Set-CalendarProcessing</code> with <code>DeleteComments</code> at <code>$true</code>, or the meeting isn&#x27;t a Teams one (invitation with no link). Third-party meetings (Zoom, Webex) need <strong>direct guest join</strong> enabled in the room settings.</li><li><strong>No audio, video or screen sharing?</strong> Peripherals (step 3): cable, hub, or the device chosen in settings isn&#x27;t the one plugged in. A device restart re-detects the peripherals.</li><li><strong>All fine but remote people can&#x27;t hear?</strong> Network quality: the room on Wi-Fi or on a VLAN with misconfigured QoS. The portal shows each meeting&#x27;s quality; if it is the network, it goes to networks with the time and the room.</li></ol>
 <h2>Next steps</h2>
 <ul><li>Put the room account in a group with <strong>group-based licensing</strong> and its own Conditional Access policy: every new room then becomes creating a mailbox and adding it to the group.</li><li>Enable <strong>automatic updates</strong> in the portal on a test ring with one room before the rest.</li><li>In Level 4 you&#x27;ll see board and executive support: when a boardroom fails, there is no second attempt.</li></ul>
+<p class="practica">Want to practise it? Solve the ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/room-no-display#en">“The meeting room screen stays black”</a> in SysAdmin Desks, free and in your browser.</p>
 <p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
       </div>
       <div class="news-box">
@@ -119,7 +121,7 @@
       <p class="repo-name"><span class="en">Level 2</span> · <span class="en">Microsoft Teams Rooms</span></p>
       <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
       <a class="arrow-link" href="nivel-2.html"><span class="en">All Level 2 guides</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="en">Practise it</span></p><p class="practice-h"><span class="en">Solve this ticket in a simulated console</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="en">Investigate, fix the cause and write the work note: it is scored when you close the ticket. Free, with your own account.</span></p><a class="practice-desk en" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/room-no-display" target="_blank" rel="noopener noreferrer"><span>The meeting room screen stays black</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="en">More about the simulator: <a href="https://sysadmindesksbyigg.pages.dev/help#en" target="_blank" rel="noopener noreferrer">how it works</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/#en" target="_blank" rel="noopener noreferrer">all the tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

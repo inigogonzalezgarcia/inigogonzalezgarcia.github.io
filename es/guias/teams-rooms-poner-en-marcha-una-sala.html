@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/room-no-display" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «La sala de reuniones no proyecta» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Una sala de reuniones con Microsoft Teams Rooms (MTR) que aparece en el calendario, se une a las reuniones con un toque y se supervisa desde el portal sin ir a la sala. Y un método corto para &quot;la sala no funciona&quot;.</p>
 <h2>Antes de empezar</h2>
@@ -105,6 +106,7 @@
 <ol><li><strong>¿La consola está encendida y con la hora correcta?</strong> Una sala con la hora mal no inicia sesión (certificados). Reinicio desde el portal o apagado físico 30 segundos.</li><li><strong>¿Aparece el calendario?</strong> Si no, es la cuenta (paso 1 y 2): contraseña, licencia, Conditional Access. Prueba a iniciar sesión con la cuenta de la sala en <code>outlook.office.com</code> desde un portátil: si pide MFA o está bloqueada, ahí está.</li><li><strong>¿La reunión no tiene botón Unirse?</strong> <code>Set-CalendarProcessing</code> con <code>DeleteComments</code> a <code>$true</code>, o la reunión no es de Teams (invitación sin enlace). Las reuniones de terceros (Zoom, Webex) necesitan la <strong>unión directa a invitados</strong> activada en la configuración de la sala.</li><li><strong>¿No hay audio, vídeo o pantalla compartida?</strong> Periféricos (paso 3): cable, hub, o el dispositivo elegido en la configuración no es el que está conectado. Un reinicio del dispositivo reconoce los periféricos de nuevo.</li><li><strong>¿Todo bien pero los remotos no oyen?</strong> Calidad de red: la sala por Wi-Fi o en una VLAN con QoS mal configurada. El portal muestra la calidad de cada reunión; si es la red, va a redes con la hora y la sala.</li></ol>
 <h2>Siguientes pasos</h2>
 <ul><li>Pon la cuenta de la sala en un grupo con <strong>licencias por grupo</strong> y una política de Conditional Access propia: así cada sala nueva es dar de alta un buzón y meterlo en el grupo.</li><li>Activa en el portal las <strong>actualizaciones automáticas</strong> en un anillo de prueba con una sala antes del resto.</li><li>En el Nivel 4 verás el soporte a comités y dirección: cuando una sala de consejo falla, no hay segundo intento.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/room-no-display">«La sala de reuniones no proyecta»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -119,7 +121,7 @@
       <p class="repo-name"><span class="es">Nivel 2</span> · <span class="es">Microsoft Teams Rooms</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/room-no-display" target="_blank" rel="noopener noreferrer"><span>La sala de reuniones no proyecta</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

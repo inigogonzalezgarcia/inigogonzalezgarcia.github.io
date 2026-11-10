@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/epm-elevation" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «Necesito ser administradora para instalar el programa de planos» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Que los usuarios dejen de ser administradores locales de su equipo sin que IT reciba una avalancha de tickets: Endpoint Privilege Management (EPM) eleva solo la aplicación concreta (el instalador de un driver, la herramienta de un proveedor) con una regla, con o sin aprobación, y deja registro de todo. Al terminar tendrás la política base, tres reglas y el informe para la reunión.</p>
 <h2>Antes de empezar</h2>
@@ -107,6 +108,7 @@
 <ul><li>Solicitudes de <strong>aprobación</strong> pendientes de más de un día: el proceso está fallando, no la herramienta.</li><li>Reglas por <strong>hash</strong> que han dejado de elevar: el instalador se actualizó; cambia a certificado si puedes.</li><li>Equipos del grupo donde <code>Administradores</code> sigue teniendo al usuario (informe de <strong>Pertenencia a grupos locales</strong> o la consulta de Graph de la guía siguiente).</li><li>Nuevos grupos al despliegue: de 30 a 150 a toda la empresa, un mes por paso, y la fecha de retirada en el calendario.</li></ul>
 <h2>Siguientes pasos</h2>
 <ul><li><strong>Windows LAPS</strong> para la cuenta de administrador local que queda: contraseña distinta por equipo, rotada y visible en Intune (<code>Dispositivos → el equipo → Contraseña de administrador local</code>).</li><li>Las elevaciones aprobadas llegan como eventos al registro <code>Microsoft-Windows-EPMAgent/Operational</code>; con el agente de Sentinel (Nivel 4) tienes la alerta de &quot;elevación fuera de horario&quot;.</li><li>Lo mismo en macOS no existe en EPM: allí el camino es no dar administrador en el enrolamiento con Jamf y usar su <strong>Self Service</strong> para lo que requiera privilegios.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/epm-elevation">«Necesito ser administradora para instalar el programa de planos»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -121,7 +123,7 @@
       <p class="repo-name"><span class="es">Nivel 3</span> · <span class="es">Intune EPM</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/epm-elevation" target="_blank" rel="noopener noreferrer"><span>Necesito ser administradora para instalar el programa de planos</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>
