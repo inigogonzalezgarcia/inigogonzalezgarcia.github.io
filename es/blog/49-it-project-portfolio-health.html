@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Salud de la cartera de proyectos IT · Iñigo González</title>
+<meta name="description" content="Salud de la cartera de IT antes del comité: RAG calculado por proyecto y su motivo, proyectos sandía, CPI y SPI, personas, congelaciones y decisiones.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/blog/49-it-project-portfolio-health.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/49-it-project-portfolio-health.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/49-it-project-portfolio-health.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/49-it-project-portfolio-health.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Salud de la cartera de proyectos IT · Iñigo González">
+<meta property="og:description" content="Salud de la cartera de IT antes del comité: RAG calculado por proyecto y su motivo, proyectos sandía, CPI y SPI, personas, congelaciones y decisiones.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/blog/49-it-project-portfolio-health.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/49-it-project-portfolio-health.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Salud de la cartera de proyectos IT · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"En verde con un CPI de 0,78 y un arquitecto al 180 %: la salud de la cartera antes del comité","alternativeHeadline":"GREEN at a CPI of 0.78 and an architect at 180 %: the portfolio health check before the SteerCo","description":"A partir de la lista de proyectos de la herramienta de PPM, los hitos, el registro RAID, el plan de recursos, las entregas y el histórico de sprints de Jira o Azure DevOps: qué proyectos van bien, cuáles se están desviando y cuáles necesitan una decisión en el próximo comité de seguimiento, con un VERDE, ÁMBAR o ROJO calculado y su motivo al lado del que puso el jefe de proyecto, por programa y en total, la previsión de la cartera frente al presupuesto aprobado, y un dosier de una página con las decisiones, sus opciones y su impacto.","datePublished":"2026-11-10","dateModified":"2026-11-10","inLanguage":"es","image":"https://inigogonzalezgarcia.github.io/assets/og/49-it-project-portfolio-health.png","url":"https://inigogonzalezgarcia.github.io/es/blog/49-it-project-portfolio-health.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/blog/49-it-project-portfolio-health.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/es/blog/#blog"},"articleSection":"Herramientas de IT Ops"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/es/blog/"},{"@type":"ListItem","position":3,"name":"En verde con un CPI de 0,78 y un arquitecto al 180 %: la salud de la cartera antes del comité","item":"https://inigogonzalezgarcia.github.io/es/blog/49-it-project-portfolio-health.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span></a><a href="../guias.html"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../blog/49-it-project-portfolio-health.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 49</p>
+    <h1><span class="es">En verde con un CPI de 0,78 y un arquitecto al 180 %: la salud de la cartera antes del comité</span></h1>
+    <p class="lede"><span class="es">A partir de la lista de proyectos de la herramienta de PPM, los hitos, el registro RAID, el plan de recursos, las entregas y el histórico de sprints de Jira o Azure DevOps: qué proyectos van bien, cuáles se están desviando y cuáles necesitan una decisión en el próximo comité de seguimiento, con un VERDE, ÁMBAR o ROJO calculado y su motivo al lado del que puso el jefe de proyecto, por programa y en total, la previsión de la cartera frente al presupuesto aprobado, y un dosier de una página con las decisiones, sus opciones y su impacto.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span> · <span class="es">10 nov 2026</span> · <span class="es">7 min</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>El problema</h2>
+<p>El dosier mensual del comité de seguimiento suele ser un puñado de diapositivas en las que cada jefe de proyecto pone su propio semáforo, y el comité se pasa la hora con el estado en lugar de con las decisiones. Los datos que contarían otra historia existen, repartidos entre la herramienta de PPM, los registros RAID, el plan de recursos, los cambios y Jira o Azure DevOps, y nadie los junta antes de la reunión. En un mes normal con dieciocho proyectos, un proyecto de captura de documentos se reporta en verde mientras cada euro gastado compra 78 céntimos del trabajo previsto y su hito de construcción va seis semanas tarde; el despliegue de Windows 11 lleva cinco semanas sin actualizar su estado; un corte de red está planificado en plena congelación de cambios de fin de año; la puesta en producción de otro proyecto es el viernes y su cambio sigue esperando al CAB; el arquitecto empresarial está planificado al 180 % entre tres proyectos críticos, así que los tres se retrasarán a la vez; un proyecto de automatización cuenta con un beneficio anual que nadie del negocio tiene a su cargo; el rediseño de la intranet, de prioridad baja, va tres meses tarde y un cuarto por encima del presupuesto y nadie ha preguntado si debe seguir; un portal ágil no deja de añadir alcance mientras su velocidad cae; tres elementos del RAID están vencidos y sin responsable; y la suma de las previsiones supera en un 6 % el presupuesto aprobado. La revisión del calendario de cambios que publiqué antes en la serie mira las puestas en producción desde operaciones; este control las mira desde la cartera.</p>
+<h2>Qué he hecho</h2>
+<ul><li>Plazo y coste: la fecha de fin prevista frente al plan, hitos que van tarde o sin previsión, puertas de fase superadas sin una aprobación registrada; una versión sencilla del valor ganado, con CPI y SPI a partir del % completado y el presupuesto, la previsión al cierre por encima del presupuesto, una previsión declarada por debajo de lo que indica el CPI, y un gasto que va más rápido que el tiempo.</li><li>Higiene del estado: estados sin actualizar desde hace semanas, proyectos &quot;sandía&quot;, verdes por fuera y rojos por dentro, y elementos del RAID vencidos o sin responsable.</li><li>Ágil, personas y entregas: una velocidad que cae sprint tras sprint y un alcance que crece más rápido de lo que se entrega; personas por encima del 100 % entre varios proyectos, una persona clave en varios proyectos críticos y puestos sin cubrir; entregas dentro de una congelación de cambios y cambios sin aprobar a pocos días de la puesta en producción.</li><li>Valor y cartera: un beneficio sin responsable, proyectos en rojo y de prioridad baja como candidatos a pausar o parar, y la previsión de la cartera frente al presupuesto aprobado.</li><li>Un semáforo calculado por proyecto con su motivo, al lado del que puso el jefe de proyecto, por programa y en total, y las decisiones que tiene que tomar el comité, cada una con sus opciones (seguir, replanificar, pausar o parar), una propuesta, el impacto y un responsable.</li><li><code>report.html</code> con un mapa de calor de la cartera, una ficha por proyecto, el gráfico de coste y plazo y la carga de recursos; <code>steerco-pack.md</code>, una página para el comité; CSV con la salud de cada proyecto, los hallazgos, la carga de recursos, las decisiones y las acciones; y un exportador de solo lectura del histórico de sprints de Jira Cloud y Azure DevOps.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python solo con la librería estándar. Cada control tiene sus umbrales en un fichero de configuración pactado con el comité, y cada hallazgo tiene una gravedad, un responsable y una fecha. El valor ganado se mantiene sencillo a propósito: el trabajo hecho vale el presupuesto por el % completado, o los puntos de historia hechos sobre el total en los proyectos ágiles; el trabajo previsto a día de hoy es el presupuesto por la parte del plazo previsto que ya ha pasado, en línea recta. El CPI y el SPI salen de esos dos números, y el presupuesto dividido por el CPI dice dónde acaba el coste si lo que queda cuesta lo mismo que lo hecho. El semáforo del proyecto es el peor hallazgo por dimensión, salvo que una persona sobreasignada cuenta como ámbar para cada proyecto, porque es un problema de la cartera; un programa está en rojo cuando lo está un proyecto crítico o un tercio de sus proyectos. Las decisiones salen de los hallazgos: primero la diferencia con el presupuesto aprobado, después los candidatos a pausar o parar, los proyectos sandía, el resto de proyectos en rojo, las personas clave, las entregas dentro de una congelación y los beneficios sin responsable. El exportador lee los sprints cerrados de un tablero de Jira y sus incidencias con la búsqueda de incidencias actual, o las iteraciones pasadas de un equipo de Azure DevOps y sus elementos de trabajo con una consulta WIQL, con un token que se queda en memoria, y escribe los puntos comprometidos, completados y añadidos en cada sprint. La demo es una aseguradora inventada con tres programas y dieciocho proyectos en cascada, ágiles y SAFe, revisada el 10 de noviembre, una semana antes del comité, con los problemas puestos a propósito: rojo en total, 5 proyectos en rojo, 6 en ámbar y 7 en verde, un proyecto sandía y 8 decisiones. 14 tests, un runbook para el comité mensual con qué enviar antes, el orden del día, cómo plantear las decisiones, cómo tratar los proyectos sandía sin buscar culpables y cómo seguir las acciones, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura. La revisión de gestión de problemas de antes en la serie es donde empiezan muchos de los próximos proyectos.</p>
+<h2>Qué aprendí</h2>
+<p>De gestionar una cartera de iniciativas; de trabajar con Agile y Scrum, como Scrum Master y como Product Owner, con SAFe y el PI Planning, y con Kanban y la gestión visual; de evaluar la viabilidad técnica de peticiones y proyectos, estimar costes, recursos y plazos, y redactar casos de negocio con ROI y beneficios medibles; de los talleres con el negocio, los requisitos funcionales, las historias de usuario y los criterios de aceptación; de la gestión de entregas, el comité de cambios y las revisiones de puesta en producción y aceptación del servicio; de preparar y seguir el presupuesto de IT y negociar contratos con proveedores; de los cuadros de mando y los KPI de proceso como responsable de los procesos de incidencias, cambios y problemas; y de Jira, Confluence, Jira Service Management, Azure DevOps, Python y PowerShell. Las lecciones que hay detrás de la herramienta son que el semáforo que alguien escribe y el que sale de los números hay que enseñarlos siempre juntos, porque la diferencia es la conversación; que un proyecto sandía suele ser optimismo o miedo al rojo más que falta de honestidad, así que el cambio a rojo tiene que llegar sin buscar culpables; que el tiempo del comité es para decidir, y una decisión necesita las opciones y su coste por escrito antes de la reunión; que parar un proyecto en rojo y de prioridad baja es un buen resultado, no un fracaso; que una persona al 180 % son tres proyectos que llegan tarde; que un beneficio sin responsable es un beneficio que nadie va a cobrar; y que los umbrales tienen que ser los mismos de un mes a otro, o la tendencia no significa nada.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Ejecutarlo una semana antes de cada comité de seguimiento, y cada semana para los proyectos en rojo.</li><li>Leer los proyectos y los hitos directamente de la API de la herramienta de PPM, y guardar el semáforo calculado de cada mes para ver con cuánta antelación se veía cada rojo.</li><li>Añadir los objetivos de PI de cada Agile Release Train, el valor de negocio previsto frente al conseguido, como un control ágil más.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span></p>
+      <p class="repo-name">49-it-project-portfolio-health</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/49-it-project-portfolio-health" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="es">Compartir</span></p>
+        <div class="share-row es" lang="es"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F49-it-project-portfolio-health.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F49-it-project-portfolio-health.html&amp;text=En%20verde%20con%20un%20CPI%20de%200%2C78%20y%20un%20arquitecto%20al%20180%20%25%3A%20la%20salud%20de%20la%20cartera%20antes%20del%20comit%C3%A9%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">X</a><a class="share-btn" href="https://wa.me/?text=En%20verde%20con%20un%20CPI%20de%200%2C78%20y%20un%20arquitecto%20al%20180%20%25%3A%20la%20salud%20de%20la%20cartera%20antes%20del%20comit%C3%A9%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F49-it-project-portfolio-health.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=En%20verde%20con%20un%20CPI%20de%200%2C78%20y%20un%20arquitecto%20al%20180%20%25%3A%20la%20salud%20de%20la%20cartera%20antes%20del%20comit%C3%A9%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F49-it-project-portfolio-health.html" aria-label="Compartir en Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/es/blog/49-it-project-portfolio-health.html" data-copied="Enlace copiado">Copiar enlace</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/es/blog/49-it-project-portfolio-health.html" data-title="En verde con un CPI de 0,78 y un arquitecto al 180 %: la salud de la cartera antes del comité" hidden>Más…</button></div>
+        
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="40-change-calendar-risk-review.html"><span class="label muted"><span class="es">Blog · 40</span></span><span class="related-t"><span class="es">Dos cambios la misma noche y un parche en pleno cierre de mes: el calendario de cambios antes del CAB</span></span></a><a class="related-link" href="46-problem-management-review.html"><span class="label muted"><span class="es">Blog · 46</span></span><span class="related-t"><span class="es">Cuarenta y seis tickets de VPN y ningún problema abierto: la revisión mensual de problemas</span></span></a><a class="related-link" href="../guias/jira-service-management-un-ticket-bien-hecho.html"><span class="label muted"><span class="es">Guía · Nivel 1</span></span><span class="related-t"><span class="es">Jira Service Management: un ticket bien hecho, de principio a fin</span></span></a><a class="related-link" href="../guias/confluence-espacio-de-it-y-runbooks-que-se-usan.html"><span class="label muted"><span class="es">Guía · Nivel 2</span></span><span class="related-t"><span class="es">Confluence: montar el espacio de IT y escribir runbooks que el equipo use</span></span></a><a class="related-link" href="../guias/dr-bcp-rpo-y-rto-por-servicio-plan-de-recuperacion-y-prueba-completa.html"><span class="label muted"><span class="es">Guía · Nivel 4</span></span><span class="related-t"><span class="es">DR/BCP: RPO y RTO por servicio, el plan de recuperación y una prueba completa</span></span></a><a class="related-link" href="../guias/migracion-de-tenant-microsoft-365-inventario-identidades-buzones-onedrive-y-dia-del-corte.html"><span class="label muted"><span class="es">Guía · Nivel 4</span></span><span class="related-t"><span class="es">Migraciones de tenant de Microsoft 365: inventario, identidades, buzones, OneDrive y el día del corte</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="48-new-starter-day-one-readiness.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Una petición el viernes para el martes y un grupo de admin heredado: el control del primer día</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>
