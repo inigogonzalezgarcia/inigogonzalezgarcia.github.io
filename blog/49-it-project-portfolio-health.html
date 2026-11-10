@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>IT project portfolio health check · Iñigo González</title>
+<meta name="description" content="IT portfolio health before the SteerCo: computed RAG per project with the reason, watermelon projects, CPI and SPI, people, freezes and decisions needed.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/49-it-project-portfolio-health.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/49-it-project-portfolio-health.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/49-it-project-portfolio-health.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/49-it-project-portfolio-health.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IT project portfolio health check · Iñigo González">
+<meta property="og:description" content="IT portfolio health before the SteerCo: computed RAG per project with the reason, watermelon projects, CPI and SPI, people, freezes and decisions needed.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/49-it-project-portfolio-health.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/49-it-project-portfolio-health.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="IT project portfolio health check · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"GREEN at a CPI of 0.78 and an architect at 180 %: the portfolio health check before the SteerCo","alternativeHeadline":"En verde con un CPI de 0,78 y un arquitecto al 180 %: la salud de la cartera antes del comité","description":"From the project list of the PPM tool, the milestones, the RAID log, the resource plan, the releases and the sprint history from Jira or Azure DevOps: which projects are healthy, which are drifting and which need a decision at the next steering committee, with a computed GREEN, AMBER or RED and the reason next to the RAG the PM reported, per programme and overall, the portfolio forecast against the approved envelope, and a one-page pack with the decisions, their options and their impact.","datePublished":"2026-11-10","dateModified":"2026-11-10","inLanguage":"en","image":"https://inigogonzalezgarcia.github.io/assets/og/49-it-project-portfolio-health.png","url":"https://inigogonzalezgarcia.github.io/blog/49-it-project-portfolio-health.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/blog/49-it-project-portfolio-health.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/blog/#blog"},"articleSection":"IT Ops tools"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/blog/"},{"@type":"ListItem","position":3,"name":"GREEN at a CPI of 0.78 and an architect at 180 %: the portfolio health check before the SteerCo","item":"https://inigogonzalezgarcia.github.io/blog/49-it-project-portfolio-health.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/" aria-current="page"><span class="en">Blog</span></a><a href="../guias.html"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../es/blog/49-it-project-portfolio-health.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 49</p>
+    <h1><span class="en">GREEN at a CPI of 0.78 and an architect at 180 %: the portfolio health check before the SteerCo</span></h1>
+    <p class="lede"><span class="en">From the project list of the PPM tool, the milestones, the RAID log, the resource plan, the releases and the sprint history from Jira or Azure DevOps: which projects are healthy, which are drifting and which need a decision at the next steering committee, with a computed GREEN, AMBER or RED and the reason next to the RAG the PM reported, per programme and overall, the portfolio forecast against the approved envelope, and a one-page pack with the decisions, their options and their impact.</span></p><p class="label post-meta"><span class="en">IT Ops tools</span> · <span class="en">10 Nov 2026</span> · <span class="en">6 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      
+      <div class="en" lang="en">
+<h2>The problem</h2>
+<p>The monthly steering committee pack is usually a set of slides where each project manager fills in their own RAG, and the committee spends the hour on status instead of decisions. The data that would tell a different story exists, spread across the PPM tool, the RAID logs, the resource plan, the change records and Jira or Azure DevOps, and nobody puts it together before the meeting. In a normal month with eighteen projects, a document capture project is reported GREEN while each euro spent buys 78 cents of the planned work and its build milestone is six weeks late; the Windows 11 rollout has not updated its status in five weeks; a network cutover is planned in the middle of the year-end change freeze; the go-live of another project is on Friday with its change still waiting for the CAB; the enterprise architect is planned at 180 % across three critical projects, so the three will slip together; an automation project counts a yearly benefit nobody in the business owns; a low-priority intranet redesign is three months late and a quarter over budget and nobody has asked whether it should go on; an agile portal keeps adding scope while its velocity falls; three RAID items are past their date with no owner; and the sum of the forecasts is 6 % over the envelope that was approved. The change calendar review I published earlier in the series looks at the go-lives from the operations side; this check looks at them from the portfolio.</p>
+<h2>What I built</h2>
+<ul><li>Schedule and cost: the forecast end against the plan, milestones late or with no forecast, gates passed without approval; a simple version of earned value, with CPI and SPI from the % complete and the budget, the forecast at completion over budget, a reported forecast below what the CPI points to, and spending faster than time.</li><li>Status hygiene: status not updated for weeks, &quot;watermelon&quot; projects that are GREEN outside and RED inside, and RAID items overdue or with no owner.</li><li>Agile, people and delivery: velocity falling sprint after sprint and scope growing faster than it is delivered; people over 100 % across projects, one key person on several critical projects and roles nobody fills; releases inside a change freeze and changes not approved a few days before the go-live.</li><li>Value and the portfolio: a benefit with no owner, low-priority RED projects as candidates to pause or stop, and the portfolio forecast against the approved envelope.</li><li>A computed RAG per project with the reason, next to the one the PM reported, per programme and overall, and the decisions the committee has to take, each with options (continue, re-plan, pause or stop), a proposal, the impact and an owner.</li><li><code>report.html</code> with a heat map of the portfolio, a card per project, the cost and schedule scatter and the resource load; <code>steerco-pack.md</code>, one page for the committee; CSVs for project health, findings, resource load, decisions and actions; and a read-only exporter for the sprint history in Jira Cloud and Azure DevOps.</li></ul>
+<h2>How it is built</h2>
+<p>Python with the standard library only. Each check has its thresholds in a settings file agreed with the committee, and every finding has a severity, an owner and a due date. The earned value is kept simple on purpose: the work done is worth the budget times the % complete, or story points done over total for agile projects; the work planned by today is the budget times the share of the planned time elapsed, on a straight line. CPI and SPI come from those two numbers, and the budget divided by the CPI says where the cost lands if the rest of the work costs what the work so far did. The project RAG is the worst finding per dimension, except that an over-allocated person counts as amber for each project, because it is a portfolio problem; a programme is red when a critical project is red or a third of its projects are. The decisions are built from the findings: the gap to the envelope first, then the pause and stop candidates, the watermelons, the other red projects, the key people, the releases in a freeze and the benefits with no owner. The exporter reads the closed sprints of a Jira board and their issues through the current issue search, or the past iterations of an Azure DevOps team and their work items through a WIQL query, with a token that stays in memory, and writes points committed, completed and added per sprint. The demo is a made-up insurer with three programmes and eighteen waterfall, agile and SAFe projects, checked on 10 November a week before the committee, with the problems placed on purpose: red overall, 5 projects red, 6 amber and 7 green, one watermelon and 8 decisions. 14 tests, a runbook for the monthly committee with what to send before it, the agenda, how to frame the decisions, how to handle watermelon projects without blame and how to follow up the actions, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot. The problem management review from earlier in the series is where many of the next projects start.</p>
+<h2>What I learned</h2>
+<p>From managing a portfolio of initiatives; from working with Agile and Scrum, acting as Scrum Master and Product Owner, with SAFe and PI Planning, and with Kanban and visual management; from assessing the technical feasibility of requests and projects, estimating cost, resources and timelines, and writing business cases with ROI and measurable benefits; from workshops with the business, functional requirements, user stories and acceptance criteria; from release management, the change advisory board and go-live and service acceptance reviews; from preparing and tracking the IT budget and negotiating vendor contracts; from process dashboards and KPIs as process owner for incident, change and problem; and from Jira, Confluence, Jira Service Management, Azure DevOps, Python and PowerShell. The lessons behind the tool are that a RAG someone types in and a RAG computed from the numbers should always be shown side by side, because the difference is the conversation; that a watermelon project is usually optimism or fear of red rather than dishonesty, so the reset has to come without blame; that the committee&#x27;s time belongs to decisions, and a decision needs options and their cost written down before the meeting; that stopping a low-priority project that is red is a good outcome, not a failure; that one person at 180 % is three late projects; that a benefit without an owner is a benefit nobody will collect; and that the thresholds have to stay the same from month to month, or the trend means nothing.</p>
+<h2>Next steps</h2>
+<ul><li>Run it a week before every steering committee, and weekly for the red projects.</li><li>Read the projects and milestones straight from the PPM tool&#x27;s API, and keep the computed RAG of every month to see how early each red was visible.</li><li>Add the PI objectives of each Agile Release Train, planned against achieved business value, as one more agile check.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="en">The repository</span></p>
+      <p class="repo-name">49-it-project-portfolio-health</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/49-it-project-portfolio-health" target="_blank" rel="noopener noreferrer"><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="en">Share</span></p>
+        
+        <div class="share-row en" lang="en"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F49-it-project-portfolio-health.html" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F49-it-project-portfolio-health.html&amp;text=GREEN%20at%20a%20CPI%20of%200.78%20and%20an%20architect%20at%20180%20%25%3A%20the%20portfolio%20health%20check%20before%20the%20SteerCo%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Share on X">X</a><a class="share-btn" href="https://wa.me/?text=GREEN%20at%20a%20CPI%20of%200.78%20and%20an%20architect%20at%20180%20%25%3A%20the%20portfolio%20health%20check%20before%20the%20SteerCo%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F49-it-project-portfolio-health.html" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=GREEN%20at%20a%20CPI%20of%200.78%20and%20an%20architect%20at%20180%20%25%3A%20the%20portfolio%20health%20check%20before%20the%20SteerCo%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F49-it-project-portfolio-health.html" aria-label="Share on Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/49-it-project-portfolio-health.html" data-copied="Link copied">Copy link</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/49-it-project-portfolio-health.html" data-title="GREEN at a CPI of 0.78 and an architect at 180 %: the portfolio health check before the SteerCo" hidden>More…</button></div>
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="40-change-calendar-risk-review.html"><span class="label muted"><span class="en">Blog · 40</span></span><span class="related-t"><span class="en">Two changes on the same night and a patch inside the month-end freeze: the change calendar before the CAB</span></span></a><a class="related-link" href="46-problem-management-review.html"><span class="label muted"><span class="en">Blog · 46</span></span><span class="related-t"><span class="en">Forty-six VPN tickets and no problem record: the monthly problem management review</span></span></a><a class="related-link" href="../guias/jira-service-management-un-ticket-bien-hecho.html"><span class="label muted"><span class="en">Guide · Level 1</span></span><span class="related-t"><span class="en">Jira Service Management: a well-made ticket, from start to finish</span></span></a><a class="related-link" href="../guias/confluence-espacio-de-it-y-runbooks-que-se-usan.html"><span class="label muted"><span class="en">Guide · Level 2</span></span><span class="related-t"><span class="en">Confluence: setting up the IT space and writing runbooks the team actually uses</span></span></a><a class="related-link" href="../guias/dr-bcp-rpo-y-rto-por-servicio-plan-de-recuperacion-y-prueba-completa.html"><span class="label muted"><span class="en">Guide · Level 4</span></span><span class="related-t"><span class="en">DR/BCP: RPO and RTO per service, the recovery plan and a full test</span></span></a><a class="related-link" href="../guias/migracion-de-tenant-microsoft-365-inventario-identidades-buzones-onedrive-y-dia-del-corte.html"><span class="label muted"><span class="en">Guide · Level 4</span></span><span class="related-t"><span class="en">Microsoft 365 tenant migrations: inventory, identities, mailboxes, OneDrive and cutover day</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="48-new-starter-day-one-readiness.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">A request on Friday for Tuesday and an admin group from a model user: the day-one readiness check</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about#en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
