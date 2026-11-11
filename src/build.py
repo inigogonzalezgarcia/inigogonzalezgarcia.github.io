@@ -478,7 +478,7 @@ POST_RELATED = {
     "49-it-project-portfolio-health": ["40-change-calendar-risk-review", "46-problem-management-review"],
     "48-new-starter-day-one-readiness": ["37-iam-access-review", "03-entra-id-hygiene-audit"],
     "47-multi-site-it-scorecard": ["04-itsm-kpi-dashboard", "28-euc-provider-service-review"],
-    "46-problem-management-review": ["36-major-incident-command-kit", "40-change-calendar-risk-review"],
+    "46-problem-management-review": ["36-major-incident-command-kit", "40-change-calendar-risk-review", "49-it-project-portfolio-health"],
     "45-network-config-compliance": ["38-it-asset-lifecycle-planner", "26-ot-segmentation-lab"],
     "44-m365-copilot-readiness": ["27-m365-tenant-governance-review", "25-security-controls-evidence"],
     "02-intune-compliance-report": ["18-mecm-intune-comanagement-tracker", "41-windows-update-ring-tracker"],
@@ -522,7 +522,7 @@ POST_RELATED = {
     "19-ad-infra-health-check": ["20-entra-sso-app-audit", "03-entra-id-hygiene-audit"],
     "41-windows-update-ring-tracker": ["18-mecm-intune-comanagement-tracker", "02-intune-compliance-report"],
     "42-retail-store-it-health": ["31-dealer-systems-health", "34-venue-service-readiness"],
-    "40-change-calendar-risk-review": ["36-major-incident-command-kit", "04-itsm-kpi-dashboard"],
+    "40-change-calendar-risk-review": ["36-major-incident-command-kit", "04-itsm-kpi-dashboard", "49-it-project-portfolio-health"],
     "39-vulnerability-remediation-sla": ["25-security-controls-evidence", "37-iam-access-review"],
     "22-dex-experience-score": ["21-apple-fleet-audit", "28-euc-provider-service-review"],
 }
