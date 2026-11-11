@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>SaaS and licence spend review · Iñigo González</title>
+<meta name="description" content="SaaS and licence spend review: unused and leaver licences, E5 to E3, shelfware, notice deadlines, uplifts, overlap, shadow IT and savings per action.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/50-saas-licence-spend-review.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/50-saas-licence-spend-review.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/50-saas-licence-spend-review.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/50-saas-licence-spend-review.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SaaS and licence spend review · Iñigo González">
+<meta property="og:description" content="SaaS and licence spend review: unused and leaver licences, E5 to E3, shelfware, notice deadlines, uplifts, overlap, shadow IT and savings per action.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/50-saas-licence-spend-review.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/50-saas-licence-spend-review.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SaaS and licence spend review · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"180 E5 licences used as E3 and a notice deadline in 9 days: the SaaS and licence spend review","alternativeHeadline":"180 licencias E5 que se usan como E3 y un preaviso en 9 días: la revisión del gasto en SaaS","description":"From the licence and SaaS register, the licence assignments with each user's last activity, the HR or Entra ID user list and the card expenses: what the company pays for, what is actually used, what renews soon and how much can be saved before each notice deadline, with the saving of every action (reclaim, downgrade, right-size, negotiate, consolidate or cancel), the renewal calendar, showback per department and a one-page pack for the IT manager and finance.","datePublished":"2026-11-11","dateModified":"2026-11-11","inLanguage":"en","image":"https://inigogonzalezgarcia.github.io/assets/og/50-saas-licence-spend-review.png","url":"https://inigogonzalezgarcia.github.io/blog/50-saas-licence-spend-review.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/blog/50-saas-licence-spend-review.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/blog/#blog"},"articleSection":"IT Ops tools"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/blog/"},{"@type":"ListItem","position":3,"name":"180 E5 licences used as E3 and a notice deadline in 9 days: the SaaS and licence spend review","item":"https://inigogonzalezgarcia.github.io/blog/50-saas-licence-spend-review.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/" aria-current="page"><span class="en">Blog</span></a><a href="../guias.html"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../es/blog/50-saas-licence-spend-review.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 50</p>
+    <h1><span class="en">180 E5 licences used as E3 and a notice deadline in 9 days: the SaaS and licence spend review</span></h1>
+    <p class="lede"><span class="en">From the licence and SaaS register, the licence assignments with each user&#x27;s last activity, the HR or Entra ID user list and the card expenses: what the company pays for, what is actually used, what renews soon and how much can be saved before each notice deadline, with the saving of every action (reclaim, downgrade, right-size, negotiate, consolidate or cancel), the renewal calendar, showback per department and a one-page pack for the IT manager and finance.</span></p><p class="label post-meta"><span class="en">IT Ops tools</span> · <span class="en">11 Nov 2026</span> · <span class="en">6 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      
+      <div class="en" lang="en">
+<h2>The problem</h2>
+<p>Software and SaaS spend grows one reasonable request at a time, and licences are almost never taken back. The data to see where the money goes exists, in the register, the admin consoles, Entra ID, HR and the expense tool, but nobody reads it together until a renewal arrives, and by then the notice deadline has often passed. In a normal month in a company of 1,400 people, 180 people have Microsoft 365 E5 and use nothing E3 does not already give them; 46 licences are still assigned to people who left months ago, which is a cost and an open door; a third of the Adobe Creative Cloud licences have not been opened for three months; the company pays for Zoom and Webex while everyone has Teams, and for Dropbox and Box next to OneDrive; the e-signature contract renews automatically with a third of its seats unassigned and nine days left to give notice; the CRM comes back with a 9 % uplift against a 5 % cap; the whiteboard tool has more people than seats, and the true-up will come at list price; nobody owns one contract that holds confidential data without single sign-on; and people pay for Canva, Notion, ChatGPT Plus, Calendly and Grammarly on their cards. The vendor contract tracker I published earlier in the series keeps every IT contract and its notice deadline, and the Azure cost review does this job for the cloud bill; this review does it for licences and SaaS, from the usage.</p>
+<h2>What I built</h2>
+<ul><li>Usage: licences unused for 60 days or never used, licences still assigned to leavers, licences of people on long leave or of accounts HR does not know, and premium tiers for people who do not use the premium features, with the price difference as the saving.</li><li>Seats: shelfware, seats bought and not assigned, and over-assignment, more people than seats, as a true-up risk.</li><li>Renewals: auto-renewing contracts whose notice deadline is close or has passed, uplifts above the agreed cap, contracts with no owner, and a renewal calendar for the next twelve months.</li><li>Portfolio and shadow IT: several apps for the same capability, or a capability the suite already covers, as consolidation candidates; apps without SSO that hold confidential data; SaaS bought on expenses that is not in the register, and card purchases of an app that is already under a central contract.</li><li>Cost allocation: showback per department and cost centre, contracts with no or an unknown cost centre, and spend against budget.</li><li>Every saving tied to an action, reclaim, downgrade, right-size, negotiate, consolidate or cancel, with the users behind it, an owner and a due date; <code>report.html</code> with utilisation bars per app, the calendar and the showback; <code>review-pack.md</code>, one page with the decisions before the renewals; CSVs for utilisation, the reclaim list, the calendar, showback, findings and actions; and a read-only exporter for the Microsoft 365 licences through Microsoft Graph.</li></ul>
+<h2>How it is built</h2>
+<p>Python with the standard library only. The thresholds are in a settings file agreed with finance, and each finding has a severity, an owner and a due date. Every euro is counted once: the savings are applied per app in a fixed order, reclaim, downgrade, right-size, negotiate, cancel duplicates and then consolidate, and capped at what the app costs, so exiting a video tool only counts what is left of its cost after its inactive licences and empty seats. The notice deadline is the renewal date minus the notice period, and an auto-renewing contract with a past renewal date rolls forward a year at a time. The showback charges each per-user licence to the department of the person who holds it and leaves the empty seats and the flat contracts with IT, so the rows add up to the total. The exporter reads the SKUs the tenant has bought with their seats and the users with their licences and their last successful sign-in from Microsoft Graph, with an app registration and a secret that stays in memory; the last sign-in shows that the account is in use, not that a particular app is, so the reclaim list goes to the app owner before anything is removed. The demo is a made-up distribution company with 1,370 employees in four countries and 24 apps, reviewed on 11 November, with the problems placed on purpose: red overall, EUR 1.45M a year, and EUR 223.7k of savings identified, 15.4 %, split into reclaim, consolidate, downgrade, right-size, negotiate and cancel. 15 tests, a runbook for the monthly reclaim cycle and the steps 120, 90 and 60 days before a renewal, how to negotiate with usage data and how to handle shadow IT without blocking people, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.</p>
+<h2>What I learned</h2>
+<p>From software asset management and licence and SaaS cost control with Apptio and Flexera, TBM and FOCUS; from showback and chargeback and unit cost metrics, and applying the FinOps Framework; from administering Microsoft 365 as Global Administrator and managing Office 365 licences with a central service desk, and Adobe licences; from Entra ID, Conditional Access, PIM and SAML single sign-on for enterprise applications, and Microsoft Graph; from the relationship with vendors such as Microsoft, Dell and Atlassian, negotiating vendor contracts, preparing and tracking the IT budget and writing business cases with ROI; and from Python and PowerShell automation. The lessons behind the tool are that the date that matters is the notice deadline, not the renewal date; that the seats you negotiate on should be the ones in use after the clean-up, not the ones assigned; that a licence on a leaver is a security problem before it is a cost; that a premium tier is assigned by habit and kept by fear, so the list of people to downgrade has to be checked with the business before the renewal; that the same euro must not appear in two savings, or finance stops believing the total; that shadow IT is usually a need IT did not meet, and talking to the people who buy it works better than blocking the card; and that showing each department what its people hold reclaims more licences than any reminder.</p>
+<h2>Next steps</h2>
+<ul><li>Run it on the first working day of every month, and again 120 days before each large renewal.</li><li>Read the other apps&#x27; assignments from their admin APIs, and use the Microsoft 365 usage reports per workload for the E5 to E3 question.</li><li>Keep each month&#x27;s utilisation to show the trend per app at the renewal meeting, and feed the savings actually realised back into the budget tracking.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="en">The repository</span></p>
+      <p class="repo-name">50-saas-licence-spend-review</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/50-saas-licence-spend-review" target="_blank" rel="noopener noreferrer"><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="en">Share</span></p>
+        
+        <div class="share-row en" lang="en"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F50-saas-licence-spend-review.html" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F50-saas-licence-spend-review.html&amp;text=180%20E5%20licences%20used%20as%20E3%20and%20a%20notice%20deadline%20in%209%20days%3A%20the%20SaaS%20and%20licence%20spend%20review%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Share on X">X</a><a class="share-btn" href="https://wa.me/?text=180%20E5%20licences%20used%20as%20E3%20and%20a%20notice%20deadline%20in%209%20days%3A%20the%20SaaS%20and%20licence%20spend%20review%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F50-saas-licence-spend-review.html" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=180%20E5%20licences%20used%20as%20E3%20and%20a%20notice%20deadline%20in%209%20days%3A%20the%20SaaS%20and%20licence%20spend%20review%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F50-saas-licence-spend-review.html" aria-label="Share on Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/50-saas-licence-spend-review.html" data-copied="Link copied">Copy link</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/50-saas-licence-spend-review.html" data-title="180 E5 licences used as E3 and a notice deadline in 9 days: the SaaS and licence spend review" hidden>More…</button></div>
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="43-azure-cost-rightsizing.html"><span class="label muted"><span class="en">Blog · 43</span></span><span class="related-t"><span class="en">A reservation at 55% about to auto-renew and VMs billed while stopped: the Azure cost review</span></span></a><a class="related-link" href="23-it-vendor-contract-tracker.html"><span class="label muted"><span class="en">Blog · 23</span></span><span class="related-t"><span class="en">Every IT contract renewal, notice deadline and saving in one monthly review</span></span></a><a class="related-link" href="../guias/microsoft-365-asignar-y-retirar-licencias.html"><span class="label muted"><span class="en">Guide · Level 1</span></span><span class="related-t"><span class="en">Microsoft 365: assigning and removing licences, and knowing what each one includes</span></span></a><a class="related-link" href="../guias/python-para-it-entorno-virtual-csv-api-informe-programado-y-un-script-que-falla.html"><span class="label muted"><span class="en">Guide · Level 2</span></span><span class="related-t"><span class="en">Python for IT: virtual environment, a CSV, an API with a token, a scheduled report and the script that fails on the server</span></span></a><a class="related-link" href="../guias/python-y-microsoft-graph-informe-de-usuarios-y-dispositivos-paginacion-429-y-un-403.html"><span class="label muted"><span class="en">Guide · Level 2</span></span><span class="related-t"><span class="en">Python and Microsoft Graph: a users and devices report with MSAL, paging, 429 throttling and a 403 Authorization_RequestDenied</span></span></a><a class="related-link" href="../guias/entra-sso-saml-dar-de-alta-una-aplicacion-y-login-que-falla.html"><span class="label muted"><span class="en">Guide · Level 3</span></span><span class="related-t"><span class="en">Entra ID SSO with SAML: onboarding an application, assigning users and fixing a sign-in that fails</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="49-it-project-portfolio-health.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">GREEN at a CPI of 0.78 and an architect at 180 %: the portfolio health check before the SteerCo</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about#en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
