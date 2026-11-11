@@ -1290,6 +1290,20 @@ def gmd(text, lang):
 # SysAdmin Desks (simulated tickets on Cloudflare Pages): the desk that practises each guide
 SIM_URL = "https://sysadmindesksbyigg.pages.dev/"
 _DESK = {
+    "confluence-runbook-stale": ("El runbook de Confluence lleva a un servidor que ya no existe", "The runbook in Confluence sends us to a server that no longer exists"),
+    "jamf-policy-not-running": ("La política de Jamf no llega al MacBook nuevo", "The Jamf policy never reaches the new MacBook"),
+    "pdq-deploy-fails": ("El despliegue de PDQ falla en 12 equipos", "The PDQ deployment fails on twelve PCs"),
+    "sharepoint-shared-everyone": ("Un cliente puede ver la carpeta de Ventas", "A customer can see the Sales folder"),
+    "pos-kitchen-printer": ("El TPV no saca las comandas en cocina", "The POS does not print the orders in the kitchen"),
+    "cashdro-close-mismatch": ("El arqueo del CashDro no cuadra", "The CashDro cash count does not balance"),
+    "as400-user-disabled": ("Un usuario del AS400 dice «perfil deshabilitado»", "An AS400 user gets 'profile disabled'"),
+    "sap-printer-sap": ("SAP no imprime los albaranes", "SAP does not print the delivery notes"),
+    "crestron-room-teams": ("La sala Crestron no se une a la reunión de Teams", "The Crestron room will not join the Teams meeting"),
+    "store-4g-failover": ("La tienda se queda sin internet dos horas antes de abrir", "The store loses internet two hours before opening"),
+    "win-update-rollback": ("Las actualizaciones de Windows se deshacen al reiniciar", "Windows updates are undone at every restart"),
+    "tplink-dhcp-clash": ("Los portátiles del restaurante pierden la red", "The restaurant's laptops keep losing the network"),
+    "squid-blocked-site": ("El proxy bloquea la web de un proveedor", "The proxy blocks a supplier's website"),
+    "usb-blocked-camera": ("Recursos Humanos no puede descargar las fotos de la cámara por USB", "HR cannot download the camera's photos over USB"),
     "android-work-profile": ("El Android nuevo no ve las apps de empresa", "The new Android does not get the work apps"),
     "iphone-no-policies": ("El iPhone de la directora no recibe el correo de empresa", "The director's iPhone gets no work mail"),
     "retail-new-starter": ("Nueva dependienta sin acceso a la app de la tienda", "The new sales assistant cannot open the store app"),
@@ -1335,6 +1349,20 @@ _DESK = {
 
 }
 PRACTICE = {
+    "confluence-espacio-de-it-y-runbooks-que-se-usan": ["confluence-runbook-stale"],
+    "jamf-pro-enrolar-un-mac-y-desplegar-una-politica": ["jamf-policy-not-running"],
+    "pdq-y-mdt-desplegar-software-en-lote-e-instalar-windows": ["pdq-deploy-fails"],
+    "sharepoint-sitio-de-equipo-permisos-y-uso-compartido": ["sharepoint-shared-everyone"],
+    "icg-y-hiopos-puesta-en-marcha-de-un-tpv-red-impresoras-de-cocina-y-cierre": ["pos-kitchen-printer"],
+    "cashdro-integracion-con-el-tpv-red-cobro-en-efectivo-y-arqueo": ["cashdro-close-mismatch"],
+    "as400-alta-y-gestion-de-usuarios-en-ibm-i": ["as400-user-disabled"],
+    "sap-soporte-a-usuarios-desde-it-sin-ser-consultor-sap": ["sap-printer-sap"],
+    "microsoft-teams-rooms-salas-sobre-crestron-en-una-sede-financiera": ["crestron-room-teams"],
+    "router-4g-la-conexion-de-la-tienda-cae-dos-horas-antes-de-abrir": ["store-4g-failover"],
+    "windows-11-actualizaciones-que-fallan-o-se-deshacen-historial-registros-dism-sfc-y-reinicio-de-componentes": ["win-update-rollback"],
+    "tp-link-archer-y-eap-sin-controlador-red-de-un-restaurante-o-tienda-y-un-datafono-que-se-desconecta": ["tplink-dhcp-clash"],
+    "squid-proxy-de-oficina-acls-listas-por-categoria-kerberos-pac-y-una-web-que-no-carga": ["squid-blocked-site"],
+    "usb-y-bitlocker-to-go-por-gpo-bloquear-almacenamiento-extraible-permitir-solo-cifrados-y-un-usb-que-no-deja-escribir": ["usb-blocked-camera"],
     "android-perfil-de-trabajo-intune": ["android-work-profile"],
     "iphone-ipad-enrolar-en-intune": ["iphone-no-policies"],
     "alta-de-usuario-en-retail-red-correo-y-aplicaciones-de-negocio": ["retail-new-starter"],
