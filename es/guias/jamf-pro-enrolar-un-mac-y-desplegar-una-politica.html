@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/jamf-policy-not-running" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «La política de Jamf no llega al MacBook nuevo» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Un Mac gestionado en Jamf Pro desde el primer encendido, y una política que instala una aplicación solo en los equipos que la necesitan, elegidos por un <strong>grupo inteligente</strong> en lugar de a mano. Es la base de todo lo que harás después en Jamf.</p>
 <h2>Antes de empezar</h2>
@@ -107,6 +108,7 @@
 <ul><li><strong>Registros de la política</strong> (Políticas → la política → Registros): si el Mac aparece con &quot;Pendiente&quot;, no ha hecho check-in; si aparece &quot;Fallida&quot;, el log dice por qué (paquete que no existe en el punto de distribución, disco lleno, <code>pkg</code> que exige reinicio).</li><li>En el Mac: <code>sudo jamf checkJSSConnection</code> comprueba que llega al servidor; <code>tail -f /var/log/jamf.log</code> muestra la ejecución en vivo.</li><li>Una política con frecuencia &quot;Una vez por equipo&quot; que falló no se reintenta sola: <strong>Limpiar registros</strong> para esos equipos y vuelve a ejecutarse.</li><li>El Mac no aparece en el grupo: criterio mal escrito (el nombre de la app es el del bundle, <code>CRM Desktop.app</code>, con <code>.app</code>) o inventario sin actualizar.</li></ul>
 <h2>Siguientes pasos</h2>
 <ul><li>Empaqueta las aplicaciones con <strong>Jamf Composer</strong> o usa el <strong>Jamf App Catalog</strong> para que se actualicen solas.</li><li>Mira <strong>Autoservicio</strong> para lo que el usuario puede instalar cuando quiera: baja tickets y les da autonomía.</li><li>En el Nivel 3 verás la gestión de Mac desde Intune y cuándo tiene sentido Jamf, Intune o los dos.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/jamf-policy-not-running">«La política de Jamf no llega al MacBook nuevo»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -121,7 +123,7 @@
       <p class="repo-name"><span class="es">Nivel 2</span> · <span class="es">Jamf Pro</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/jamf-policy-not-running" target="_blank" rel="noopener noreferrer"><span>La política de Jamf no llega al MacBook nuevo</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>
