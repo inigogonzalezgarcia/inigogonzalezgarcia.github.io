@@ -248,7 +248,7 @@ Flask y SQLite, con PowerShell por CIM/WinRM para las consultas remotas. ARCHITE
 - Activar PowerShell remoto (WinRM) para las consultas en vivo a los equipos.
 - Cargar tu inventario de activos y tus planos, y adaptar los checklists de salas a tu oficina."""),
 
-dict(n="06", repo="06-kubernetes-ingress-lab", date="2026-10-01", cat="cloud",
+dict(n="06", repo="06-kubernetes-ingress-lab", date="2026-10-01", updated="2026-11-11", cat="cloud",
  title_en="A Kubernetes ingress lab built from zero in every CI run", title_es="Un laboratorio de ingress en Kubernetes que la CI construye desde cero",
  seo_title_en="Kubernetes ingress lab: Cilium and Envoy · Iñigo González",
  seo_title_es="Laboratorio de ingress en Kubernetes: Cilium y Envoy · Iñigo González",
@@ -1987,7 +1987,7 @@ De llevar la IT de una sede, donde uso Qualys y Tanium para la gestión de vulne
 - Abrir un ticket por equipo responsable con sus detecciones vencidas y los arreglos que las cierran, y cerrarlo cuando el nuevo análisis lo confirme.
 - Comparar cada mes con el anterior: nuevas, cerradas y aún vencidas, y el porcentaje dentro del plazo por equipo."""),
 
-dict(n="40", repo="40-change-calendar-risk-review", date="2026-11-02", cat="tools",
+dict(n="40", repo="40-change-calendar-risk-review", date="2026-11-02", updated="2026-11-11", cat="tools",
  title_en="Two changes on the same night and a patch inside the month-end freeze: the change calendar before the CAB",
  title_es="Dos cambios la misma noche y un parche en pleno cierre de mes: el calendario de cambios antes del CAB",
  seo_title_en="Change calendar and CAB risk review · Iñigo González",
@@ -2145,12 +2145,13 @@ De dar soporte a las boutiques y puntos de venta de marcas de lujo, con sus impr
 - Ejecutar las exportaciones y la revisión cada lunes por la noche y enviar a cada técnico de campo su parte de la lista.
 - Leer los tickets desde la Table API de ServiceNow en lugar de una exportación de lista.
 - Guardar el histórico semanal de cada tienda para ver su tendencia en un trimestre."""),
-dict(n="43", repo="43-azure-cost-rightsizing", date="2026-11-04", cat="tools",
+dict(n="43", repo="43-azure-cost-rightsizing", date="2026-11-04", updated="2026-11-11", cat="tools",
  title_en="A reservation at 55% about to auto-renew and VMs billed while stopped: the Azure cost review",
  title_es="Una reserva al 55% que se renueva sola y VMs paradas que se pagan: la revisión de costes de Azure",
  seo_title_en="Monthly Azure cost review and right-sizing · Iñigo González",
  seo_title_es="Revisión de costes de Azure y redimensionado · Iñigo González",
  seo_desc="Monthly Azure cost review from the FOCUS export: right-sizing, waste, reservations and savings plans, showback by cost centre, budgets and unit cost.",
+ seo_desc_es="Revisión mensual de costes de Azure: redimensionado, desperdicio, reservas y planes de ahorro, showback por centro de coste, presupuestos y coste unitario.",
  dek_en="From the Azure Cost Management FOCUS export, the virtual machines with 30 days of Azure Monitor metrics, the disks, the public IPs, the reservations and savings plans and the budgets: which VMs go one size down, what is paid for and not used, which commitments to renew, exchange or let expire, the spend of each cost centre against its budget and forecast, and the monthly savings identified with how each one was worked out.",
  dek_es="A partir de la exportación FOCUS de Azure Cost Management, las máquinas virtuales con 30 días de métricas de Azure Monitor, los discos, las IP públicas, las reservas y los planes de ahorro y los presupuestos: qué VMs bajan un tamaño, qué se paga sin usarse, qué compromisos renovar, cambiar o dejar caducar, el gasto de cada centro de coste frente a su presupuesto y su previsión, y el ahorro mensual identificado con cómo se ha calculado cada partida.",
  en="""
@@ -2302,7 +2303,7 @@ De operar switches y routers Cisco, salas de comunicaciones y racks en varias se
 - Ejecutar la recolección cada noche y la revisión cada viernes antes del comité de cambios.
 - Comparar con los resultados de la semana anterior para ver qué se ha corregido, qué es nuevo y qué vuelve una y otra vez.
 - Añadir parsers para ArubaOS-CX y NX-OS, y leer el inventario y los cambios desde las API de Device42 y de la herramienta de ITSM."""),
-dict(n="46", repo="46-problem-management-review", date="2026-11-08", cat="tools",
+dict(n="46", repo="46-problem-management-review", date="2026-11-08", updated="2026-11-11", cat="tools",
  title_en="Forty-six VPN tickets and no problem record: the monthly problem management review",
  title_es="Cuarenta y seis tickets de VPN y ningún problema abierto: la revisión mensual de problemas",
  seo_title_en="Problem management review · Iñigo González",

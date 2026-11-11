@@ -13,6 +13,9 @@ POSTS_SEO = {
         "en": "Flask or PowerShell for an IT ops console? Both: a Flask and SQLite web app, PowerShell over CIM/WinRM for remote queries. Assets, warranties and shifts.",
         "es": "Consola de operaciones IT de sede en Flask y PowerShell: activos, garantías, checklists de salas, altas y bajas, turnos y salud de servicios en una app.",
     },
+    "06-kubernetes-ingress-lab": {
+        "en": "Cilium or Envoy for Kubernetes ingress? Both, on kind: Cilium eBPF with no kube-proxy, Envoy Gateway with Gateway API, cert-manager, external-dns, 9 e2e tests.",
+    },
     "09-gpu-node-remediation": {
         "en": "Kubernetes controller for GPU nodes: XID errors, ECC and temperature move each node through a state machine to drain, repair or quarantine it.",
         "es": "Controlador de Kubernetes para nodos GPU: los XID, el ECC y la temperatura llevan cada nodo por una máquina de estados para drenarlo, repararlo o aislarlo.",
