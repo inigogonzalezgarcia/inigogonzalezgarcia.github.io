@@ -1290,6 +1290,13 @@ def gmd(text, lang):
 # SysAdmin Desks (simulated tickets on Cloudflare Pages): the desk that practises each guide
 SIM_URL = "https://sysadmindesksbyigg.pages.dev/"
 _DESK = {
+    "android-work-profile": ("El Android nuevo no ve las apps de empresa", "The new Android does not get the work apps"),
+    "iphone-no-policies": ("El iPhone de la directora no recibe el correo de empresa", "The director's iPhone gets no work mail"),
+    "retail-new-starter": ("Nueva dependienta sin acceso a la app de la tienda", "The new sales assistant cannot open the store app"),
+    "anyconnect-hotel": ("AnyConnect no conecta desde el hotel", "AnyConnect will not connect from the hotel"),
+    "store-label-printer": ("La impresora de etiquetas de la tienda saca símbolos raros", "The store's label printer prints strange symbols"),
+    "poly-room-no-camera": ("Sala Poly: se oye pero no se ve", "Poly room: they can hear us but not see us"),
+    "mdm-lost-phone": ("He perdido el móvil de empresa en la planta", "I've lost my company phone at the plant"),
     "net-err-disabled": ("El puerto del puesto que se apagó solo", "The desk port that switched itself off"),
     "net-wrong-vlan": ("La impresora de Ventas cambió de sitio y nadie puede imprimir", "The Sales printer moved and nobody can print"),
     "net-fortigate-branch": ("Valencia no llega al ERP desde el cambio de anoche", "Valencia cannot reach the ERP since last night's change"),
@@ -1328,6 +1335,13 @@ _DESK = {
 
 }
 PRACTICE = {
+    "android-perfil-de-trabajo-intune": ["android-work-profile"],
+    "iphone-ipad-enrolar-en-intune": ["iphone-no-policies"],
+    "alta-de-usuario-en-retail-red-correo-y-aplicaciones-de-negocio": ["retail-new-starter"],
+    "cisco-anyconnect-resolver-problemas-de-conexion-vpn-en-tiendas-y-viajes": ["anyconnect-hotel"],
+    "impresoras-de-tienda-etiquetas-tickets-y-multifuncion-sin-it-en-sitio": ["store-label-printer"],
+    "salas-de-videoconferencia-poly-en-la-oficina-central-aprovisionamiento-y-soporte": ["poly-room-no-camera"],
+    "mdm-gestion-de-moviles-corporativos-en-plantas-y-sedes-de-varios-paises": ["mdm-lost-phone"],
     "cisco-primeros-comandos-copia-de-configuracion-y-un-puerto-err-disabled": ["net-err-disabled"],
     "cisco-vlans-troncales-router-de-la-sede-y-un-puerto-que-no-da-red": ["net-err-disabled", "net-wrong-vlan"],
     "switches-hp-aruba-vlans-copia-de-configuracion-firmware-y-puerto-a-100-mb": ["net-wrong-vlan"],
