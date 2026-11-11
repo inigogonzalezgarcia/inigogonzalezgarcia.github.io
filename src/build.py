@@ -1336,6 +1336,7 @@ PRACTICE = {
     "active-directory-alta-usuario-grupos": ["ad-lockout", "starter-desk-ready"],
     "active-directory-directiva-de-contrasenas-pso-bloqueos-y-la-cuenta-que-se-bloquea-cada-manana": ["ad-lockout"],
     "windows-diagnostico-basico-equipo-lento-o-con-errores": ["dns-intranet", "disk-full"],
+    "windows-11-diagnostico-de-red-ipconfig-test-netconnection-dns-puertos-proxy-wifi-e-internet-si-intranet-no": ["dns-intranet"],
     "impresoras-instalar-impresora-de-red-y-cola-atascada": ["print-queue"],
     "outlook-exchange-online-buzon-compartido-permisos-autorespuesta": ["shared-mailbox"],
     "outlook-exchange-online-buzon-lleno-cuotas-archivo-en-linea-y-ndr-5-2-2": ["mailbox-full"],
