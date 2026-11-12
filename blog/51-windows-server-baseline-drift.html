@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Windows Server baseline drift review · Iñigo González</title>
+<meta name="description" content="Windows Server security baseline review: compliance per server and tier, high-risk deviations, drift since last month, GPOs not applied and exceptions.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/51-windows-server-baseline-drift.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/51-windows-server-baseline-drift.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/51-windows-server-baseline-drift.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/51-windows-server-baseline-drift.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows Server baseline drift review · Iñigo González">
+<meta property="og:description" content="Windows Server security baseline review: compliance per server and tier, high-risk deviations, drift since last month, GPOs not applied and exceptions.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/51-windows-server-baseline-drift.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/51-windows-server-baseline-drift.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Windows Server baseline drift review · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"SMBv1 back on two file servers and a GPO that stopped applying: the Windows Server baseline review","alternativeHeadline":"SMBv1 activo de nuevo y una GPO que no se aplica: la revisión de la línea base de Windows Server","description":"From the approved security baseline, the server inventory, the settings collected from every server with a read-only PowerShell collector, last month's collection, the exceptions register and the Group Policy results: which Windows servers are still configured as the baseline says, which have drifted since the last review and why (a GPO not applying, a local change, an exception that expired), with the high-risk deviations first, a decision for each one (fix, accept as an exception or change the baseline) and a one-page pack with the evidence for ISO 27001 and NIS2 audits.","datePublished":"2026-11-12","dateModified":"2026-11-12","inLanguage":"en","image":"https://inigogonzalezgarcia.github.io/assets/og/51-windows-server-baseline-drift.png","url":"https://inigogonzalezgarcia.github.io/blog/51-windows-server-baseline-drift.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/blog/51-windows-server-baseline-drift.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/blog/#blog"},"articleSection":"IT Ops tools"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/blog/"},{"@type":"ListItem","position":3,"name":"SMBv1 back on two file servers and a GPO that stopped applying: the Windows Server baseline review","item":"https://inigogonzalezgarcia.github.io/blog/51-windows-server-baseline-drift.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/" aria-current="page"><span class="en">Blog</span></a><a href="../guias.html"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../es/blog/51-windows-server-baseline-drift.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 51</p>
+    <h1><span class="en">SMBv1 back on two file servers and a GPO that stopped applying: the Windows Server baseline review</span></h1>
+    <p class="lede"><span class="en">From the approved security baseline, the server inventory, the settings collected from every server with a read-only PowerShell collector, last month&#x27;s collection, the exceptions register and the Group Policy results: which Windows servers are still configured as the baseline says, which have drifted since the last review and why (a GPO not applying, a local change, an exception that expired), with the high-risk deviations first, a decision for each one (fix, accept as an exception or change the baseline) and a one-page pack with the evidence for ISO 27001 and NIS2 audits.</span></p><p class="label post-meta"><span class="en">IT Ops tools</span> · <span class="en">12 Nov 2026</span> · <span class="en">5 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      
+      <div class="en" lang="en">
+<h2>The problem</h2>
+<p>A security baseline for Windows servers is approved once and then drifts one reasonable change at a time. A scanner integration needs SMBv1 and someone turns it back on locally on the file servers; a few servers move to a new OU for a project and the baseline GPO is not linked there, so LLMNR, NTLM, TLS 1.0 and RDP fall back to the defaults without anyone noticing; the new servers are not in the LAPS group; a test GPO turns LLMNR back on &quot;so the tests work&quot;; the Print Spooler ends up on automatic on a domain controller after an incident; an ASR pilot leaves two rules in audit for months; an exception for TLS 1.0 expires and the old application is still there; some servers stop reporting and nobody knows; and a GPO link disabled during troubleshooting switches off PowerShell logging for a whole site. The data to see all of this exists, on the servers and in Group Policy, but it is rarely read against the baseline, last month&#x27;s state and the exceptions at the same time. The Active Directory and infrastructure health check I published earlier in the series looks after the directory these servers depend on, and the vulnerability remediation review follows what a patch fixes; this review follows the configuration that a patch does not.</p>
+<h2>What I built</h2>
+<ul><li>Compliance: every applicable baseline setting on every server, by tier and role, with the compliance per server, area, tier, site and environment against a target per tier, and the servers below it.</li><li>High-risk deviations first: SMBv1, LM and NTLMv1, LLMNR, RDP without NLA, LAPS, Defender real-time protection and ASR rules in audit where block is expected, logon and lockout auditing, PowerShell script block logging, the Print Spooler on domain controllers, TLS 1.0 and 1.1, and firewall profiles.</li><li>Drift: settings that were compliant at the last review and are not now, grouped by their cause, and local changes that override the GPO.</li><li>Root cause: GPOs not applied and why (not linked, link disabled, security filtering, WMI filter), servers in an OU that is not their tier&#x27;s, settings won by another GPO, and exceptions that expired, are about to expire or have no approver or ticket.</li><li>Hygiene: servers not reporting, long uptime, old patches, and the inventory against the collection.</li><li><code>report.html</code> with a heat map of servers by area, the top deviations and the trend; <code>review-pack.md</code>, one page for the monthly security and infrastructure review with the decisions (fix, exception or baseline change), the high-risk items with owner and date and the audit evidence; CSVs per server, deviation, drift, exception, finding and action; and a read-only PowerShell collector.</li></ul>
+<h2>How it is built</h2>
+<p>Python with the standard library only. The baseline is a CSV with one row per setting: what to read (a registry value, an audit subcategory, a service, a firewall profile, the SMB server configuration, Defender, an ASR rule, a user right or the LAPS attribute in AD), the expected value and how to compare it, the severity, the tiers it applies to, the GPO that should set it and its reference to ISO 27001. An approved and valid exception counts as compliant; one without approver, ticket or expiry does not. Each deviation gets the first cause that applies, from the GPO results, the exceptions and the source of the value, and last month&#x27;s collection is evaluated with the same rules to find what is new. The collector opens one remoting session per server and only reads: Get-ItemProperty, auditpol, Get-Service, Get-NetFirewallProfile, Get-SmbServerConfiguration, Get-MpComputerStatus and Get-MpPreference, secedit to a temporary file, the LAPS expiry time in AD, and the Resultant Set of Policy with Get-GPResultantSetOfPolicy; credentials come from the session and stay in memory. The demo is a made-up aerospace manufacturer with two sites, 56 servers and a 45-setting baseline, reviewed on 12 November with the problems placed on purpose: red, 92.4 % compliance against 98.8 % a month earlier, 79 high-risk deviations on 41 servers, and 138 settings drifted since the last review, 112 of them from one GPO that is not linked to the new OU. 14 tests, a runbook for the monthly cycle, piloting a baseline change in audit mode first, the exception rules and the audit evidence, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.</p>
+<h2>What I learned</h2>
+<p>From administering Windows Server, including DNS and DHCP, Active Directory and Group Policy since early in my career; from patching Windows servers without cutting the service and automating with PowerShell; from applied work with ISO 27001, GDPR and NIS2, NIST CSF and NIST SP 800-53, cybersecurity risk management with its treatment plans and remediation follow-up, and security policies, metrics and KPIs; from Microsoft Defender, Intune EPM, CyberArk, Tanium and Qualys and Conditional Access; and from answering audits, keeping the CMDB and owning the incident, change and problem processes. The lessons behind the tool are that one GPO that stops applying explains more deviations than all the local changes together, so the cause comes before the list of settings; that a server that does not report is not compliant but unknown, and the report has to say so; that a pilot needs an end date, or the pilot GPO wins over the baseline for months; that an exception without an approver and an expiry is just a deviation with a ticket number; that test servers should follow the production baseline, or the problems appear on the day of the release; that tightening a setting goes through audit mode and a pilot ring before the whole estate; and that an auditor trusts a report more when it shows its own gaps.</p>
+<h2>Next steps</h2>
+<ul><li>Run it on the first working day of every month and after every change to a baseline GPO.</li><li>Keep the compliance per area of each month to show the trend over the year at the security committee.</li><li>Read the values from the configuration assessment the company already has as another source, and open the red actions as tickets with their owner and date.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="en">The repository</span></p>
+      <p class="repo-name">51-windows-server-baseline-drift</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/51-windows-server-baseline-drift" target="_blank" rel="noopener noreferrer"><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="en">Share</span></p>
+        
+        <div class="share-row en" lang="en"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F51-windows-server-baseline-drift.html" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F51-windows-server-baseline-drift.html&amp;text=SMBv1%20back%20on%20two%20file%20servers%20and%20a%20GPO%20that%20stopped%20applying%3A%20the%20Windows%20Server%20baseline%20review%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Share on X">X</a><a class="share-btn" href="https://wa.me/?text=SMBv1%20back%20on%20two%20file%20servers%20and%20a%20GPO%20that%20stopped%20applying%3A%20the%20Windows%20Server%20baseline%20review%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F51-windows-server-baseline-drift.html" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=SMBv1%20back%20on%20two%20file%20servers%20and%20a%20GPO%20that%20stopped%20applying%3A%20the%20Windows%20Server%20baseline%20review%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F51-windows-server-baseline-drift.html" aria-label="Share on Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/51-windows-server-baseline-drift.html" data-copied="Link copied">Copy link</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/51-windows-server-baseline-drift.html" data-title="SMBv1 back on two file servers and a GPO that stopped applying: the Windows Server baseline review" hidden>More…</button></div>
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="19-ad-infra-health-check.html"><span class="label muted"><span class="en">Blog · 19</span></span><span class="related-t"><span class="en">A Monday-morning health check for Active Directory</span></span></a><a class="related-link" href="39-vulnerability-remediation-sla.html"><span class="label muted"><span class="en">Blog · 39</span></span><span class="related-t"><span class="en">A VPN with a known exploit and thirty servers waiting for a reboot: vulnerability remediation against the SLA</span></span></a><a class="related-link" href="../guias/firewall-de-windows-por-gpo-perfiles-reglas-registro-y-una-aplicacion-que-deja-de-funcionar.html"><span class="label muted"><span class="en">Guide · Level 2</span></span><span class="related-t"><span class="en">Windows Defender Firewall by GPO: profiles, inbound rules by program, port and scope, no local rules, dropped-packet logging, management rules, and the application that stops working</span></span></a><a class="related-link" href="../guias/gpo-google-chrome-y-firefox-plantillas-extensiones-proxy-pac-navegador-predeterminado-y-una-directiva-con-error.html"><span class="label muted"><span class="en">Guide · Level 2</span></span><span class="related-t"><span class="en">GPO: Google Chrome and Mozilla Firefox, templates, home page, extensions, password manager, PAC proxy, default browser and chrome://policy showing an error</span></span></a><a class="related-link" href="../guias/gpo-plantillas-admx-almacen-central-edge-office-instalacion-de-msi-y-directivas-que-tardan-en-aplicarse.html"><span class="label muted"><span class="en">Guide · Level 2</span></span><span class="related-t"><span class="en">GPO: the ADMX central store, Microsoft Edge and Microsoft 365 Apps, assigning an MSI with Software Installation, and the policy that only applies after two restarts</span></span></a><a class="related-link" href="../guias/gpo-unidades-de-red-e-impresoras-con-preferencias-filtrado-y-una-unidad-que-no-aparece.html"><span class="label muted"><span class="en">Guide · Level 2</span></span><span class="related-t"><span class="en">GPO: network drives and printers with preferences, group filtering, gpresult and a drive that does not appear</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="50-saas-licence-spend-review.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">180 E5 licences used as E3 and a notice deadline in 9 days: the SaaS and licence spend review</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about#en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
