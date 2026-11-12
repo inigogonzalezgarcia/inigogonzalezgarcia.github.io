@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/db-restore-test" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «La copia lógica de la BD no se puede restaurar» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Las bases de datos de las aplicaciones internas (el CRM en MariaDB, el ERP en PostgreSQL) con cuentas separadas y permisos mínimos, una copia lógica cada noche que falla de forma visible si algo va mal, una restauración probada en otra base de datos con su tiempo apuntado, el retraso de la réplica a la vista y la rutina para el ticket que nadie quiere: <strong>la copia lleva una semana generando ficheros de 0 bytes</strong>.</p>
 <h2>Antes de empezar</h2>
@@ -129,6 +130,7 @@
 <p>En el ticket: desde qué fecha no hay copia válida (una semana sin copia lógica del ERP: avisa a su responsable), la causa, el cambio, la copia nueva con su prueba de restauración y la mejora para detectarlo.</p>
 <h2>Siguientes pasos</h2>
 <ul><li>La guía de <a href="postgresql-mysql-sql-server-tareas-de-operaciones-copia-restauracion-espacio-y-consulta-lenta.html">PostgreSQL, MySQL y SQL Server</a> cubre la consulta que bloquea, el espacio y el crecimiento.</li><li>La de <a href="veeam-crear-un-job-comprobar-copias-y-restaurar.html">Veeam</a> explica cómo el sistema de copias recoge <code>/backup</code> y lo guarda fuera del servidor.</li><li>Con bases de datos grandes o un RPO de minutos, la copia lógica se queda corta: copias físicas con archivado de WAL (pgBackRest) o binlogs (MariaDB Backup, Percona XtraBackup).</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/db-restore-test">«La copia lógica de la BD no se puede restaurar»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -143,7 +145,7 @@
       <p class="repo-name"><span class="es">Nivel 3</span> · <span class="es">PostgreSQL, MySQL y SQL Server</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/db-restore-test" target="_blank" rel="noopener noreferrer"><span>La copia lógica de la BD no se puede restaurar</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

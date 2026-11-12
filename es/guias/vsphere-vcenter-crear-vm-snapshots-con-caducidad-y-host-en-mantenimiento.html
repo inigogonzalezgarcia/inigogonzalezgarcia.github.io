@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/vcenter-snapshot-aged" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «El datastore de vCenter al 97 %» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Operar un clúster de vSphere en el día a día sin pasar por el asistente cada vez: una VM nueva desde plantilla en dos minutos, snapshots que no se olvidan, y la rutina para sacar un host del clúster, parchearlo y devolverlo con las máquinas moviéndose solas. Y los tres sitios donde mirar cuando &quot;todo va lento&quot;.</p>
 <h2>Antes de empezar</h2>
@@ -106,6 +107,7 @@
 <ul><li>Snapshots con más de 3 días y VMs apagadas con más de 30 (<code>Get-VM | Where PowerState -eq PoweredOff | Select Name, @{n=&quot;Days&quot;;e={((Get-Date)-($_ | Get-VIEvent -MaxSamples 1).CreatedTime).Days}}</code>).</li><li>Datastores por debajo del 15 % libre y el crecimiento mensual.</li><li>Hosts con builds distintos en el mismo clúster (<code>Get-VMHost | Group-Object Build</code>): el que no se parcheó.</li><li><strong>Skyline Health</strong> / <code>Monitor → Health</code> del clúster y las alarmas de vCenter no reconocidas.</li><li>Que vCenter tiene su propia copia (<code>File-Based Backup</code> en la VAMI, puerto 5480) y que se probó una restauración este trimestre.</li></ul>
 <h2>Siguientes pasos</h2>
 <ul><li><strong>VCF / NSX</strong> cuando el clúster crezca a varios y la red pase a definirse por software; la operación diaria es la misma, con más capas.</li><li><strong>vSphere Replication</strong> o <strong>SRM</strong> para el DR del Nivel 4: la VM replicada en el otro CPD y el plan de recuperación probado dos veces al año.</li><li>Para quien venga de Hyper-V (guía anterior) o vaya a <strong>Nutanix</strong> (Nivel 4): snapshots cortos, host en mantenimiento, datastore con margen y notas en la VM son las mismas reglas con otros nombres.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/vcenter-snapshot-aged">«El datastore de vCenter al 97 %»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -120,7 +122,7 @@
       <p class="repo-name"><span class="es">Nivel 3</span> · <span class="es">VMware vSphere y vCenter</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/vcenter-snapshot-aged" target="_blank" rel="noopener noreferrer"><span>El datastore de vCenter al 97 %</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

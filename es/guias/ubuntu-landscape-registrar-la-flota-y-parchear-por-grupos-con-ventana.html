@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/landscape-patch-window" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «Los Ubuntu del almacén se reinician en horario» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Ver los servidores (y los escritorios) Ubuntu en una consola: qué versión tienen, qué parches les faltan, cuáles necesitan reinicio, y que las actualizaciones de seguridad se apliquen solas por grupos, en la ventana de cada grupo, con un informe para el ticket mensual. Es lo que Ansible hace por línea de comandos (guía de Ansible), con la vista de flota que el negocio quiere ver.</p>
 <h2>Antes de empezar</h2>
@@ -107,6 +108,7 @@
 <ul><li>Equipos <strong>sin contacto</strong> más de 7 días: apagados, migrados o con el cliente roto (<code>sudo systemctl status landscape-client</code>).</li><li>Actividades <strong>fallidas</strong> (<code>Activities → Failed</code>): normalmente un <code>apt</code> bloqueado por un <code>dpkg</code> interrumpido; <code>sudo dpkg --configure -a</code> lo arregla.</li><li>Equipos en prod con <strong>todas</strong> las actualizaciones pendientes desde hace un mes: la ventana mensual no se está ejecutando.</li><li>Versiones de Ubuntu: lo que ya está en <strong>ESM</strong> (<code>esm-infra</code>) va a la lista de migraciones; Landscape te lo marca por equipo.</li></ul>
 <h2>Siguientes pasos</h2>
 <ul><li><strong>Perfiles de paquetes</strong> y <strong>de repositorio</strong>: que todos los prod tengan el agente de monitorización y usen el mirror interno; Landscape los instala y avisa de la desviación.</li><li><strong>Scripts remotos</strong> (<code>Scripts → Run</code>): el mismo check de la guía de Bash lanzado a los 23 de prod con la salida en la consola.</li><li>Si la flota incluye Windows y RHEL, Landscape solo cubre Ubuntu: el inventario único lo hace Ansible, y Landscape queda como la consola de parches y CVE de la parte Ubuntu.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/landscape-patch-window">«Los Ubuntu del almacén se reinician en horario»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -121,7 +123,7 @@
       <p class="repo-name"><span class="es">Nivel 3</span> · <span class="es">Ubuntu Landscape</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/landscape-patch-window" target="_blank" rel="noopener noreferrer"><span>Los Ubuntu del almacén se reinician en horario</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

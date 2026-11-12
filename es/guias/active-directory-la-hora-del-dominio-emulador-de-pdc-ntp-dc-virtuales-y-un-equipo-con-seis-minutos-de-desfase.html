@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/ad-time-skew" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «Kerberos falla: la hora del dominio va 7 minutos tarde» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Que todos los equipos del dominio tengan la misma hora, sacada de una fuente fiable y por un único camino: el emulador de PDC contra NTP externo, el resto de controladores contra él y los miembros contra los controladores. Y saber resolver el ticket que llega cuando un equipo se desvía más de cinco minutos: Kerberos deja de funcionar y el usuario no puede entrar ni abrir nada.</p>
 <h2>Antes de empezar</h2>
@@ -123,6 +124,7 @@
 <p>En el ticket: desfase medido, evento 4771 con 0x25, origen encontrado (<code>time.windows.com</code> configurado en local), los comandos y la comprobación: origen un DC y el usuario abre la unidad.</p>
 <h2>Siguientes pasos</h2>
 <ul><li>La guía de <a href="active-directory-delegar-permisos-papelera-y-quien-ha-cambiado-este-usuario.html">delegación, papelera y quién ha cambiado este usuario</a> es la primera de este tema y usa el mismo registro de Seguridad de los DC.</li><li>La de <a href="gpo-unidades-de-red-e-impresoras-con-preferencias-filtrado-y-una-unidad-que-no-aparece.html">GPO de unidades de red e impresoras</a> explica los filtros WMI y gpresult que has usado aquí.</li><li>Si los DC son VM de Hyper-V, la guía de <a href="hyper-v-crear-vm-conmutador-virtual-puntos-de-control-y-exportar.html">Hyper-V</a> cubre los servicios de integración.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/ad-time-skew">«Kerberos falla: la hora del dominio va 7 minutos tarde»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -137,7 +139,7 @@
       <p class="repo-name"><span class="es">Nivel 2</span> · <span class="es">Active Directory: delegación y auditoría</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/ad-time-skew" target="_blank" rel="noopener noreferrer"><span>Kerberos falla: la hora del dominio va 7 minutos tarde</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

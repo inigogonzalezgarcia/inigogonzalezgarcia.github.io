@@ -83,6 +83,7 @@
     <article class="prose guide">
       
       <div class="en" lang="en">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/dc-no-replication" target="_blank" rel="noopener noreferrer"><b>Rather practise it?</b><span>Solve the simulated ticket "A domain controller does not replicate" in SysAdmin Desks ↗</span></a>
 <h2>What you&#x27;ll get</h2>
 <p>A short list of commands to know, in five minutes, whether the domain is healthy: domain controllers that respond, replication up to date, DNS correct, SYSVOL shared and replicating, time and roles where they should be. For each one, what good output looks like and what an error line means. And the ticket that arrives when a domain controller stops replicating: new users &quot;don&#x27;t exist&quot; at one site and changed GPOs never arrive.</p>
 <h2>Before you start</h2>
@@ -149,6 +150,7 @@
 <p>In the ticket: <code>/replsummary</code> output before and after, code 1722 and the blocked dynamic port, the firewall change that caused it, DC03&#x27;s event 2213 with the resume command, and the final check: the user signs in at Barcelona and the GPO shows in <code>gpresult /r</code>.</p>
 <h2>Next steps</h2>
 <ul><li>The <a href="active-directory-la-hora-del-dominio-emulador-de-pdc-ntp-dc-virtuales-y-un-equipo-con-seis-minutos-de-desfase.html">domain time</a> guide explains what to do when <code>w32tm /monitor</code> shows offsets, and why DCs are not restored from snapshots.</li><li>The <a href="dns-y-dhcp-en-windows-server-zonas-ambitos-conmutacion-y-un-equipo-sin-ip.html">DNS and DHCP on Windows Server</a> guide covers AD-integrated zones, forwarders and scavenging, the cause of error 8524.</li><li>With replication healthy, the <a href="active-directory-delegar-permisos-papelera-y-quien-ha-cambiado-este-usuario.html">delegation, recycle bin and who changed this user</a> guide uses <code>repadmin /showobjmeta</code> to trace a change back to its originating DC.</li><li>If users at one site get locked out or do not pick up a new password, the <a href="active-directory-directiva-de-contrasenas-pso-bloqueos-y-la-cuenta-que-se-bloquea-cada-manana.html">password and lockout policy</a> guide explains the PDC emulator&#x27;s role.</li></ul>
+<p class="practica">Want to practise it? Solve the ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/dc-no-replication#en">“A domain controller does not replicate”</a> in SysAdmin Desks, free and in your browser.</p>
 <p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
       </div>
       <div class="news-box">
@@ -162,7 +164,7 @@
       <p class="repo-name"><span class="en">Level 2</span> · <span class="en">Active Directory: delegation and auditing</span></p>
       <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
       <a class="arrow-link" href="nivel-2.html"><span class="en">All Level 2 guides</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="en">Practise it</span></p><p class="practice-h"><span class="en">Solve this ticket in a simulated console</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="en">Investigate, fix the cause and write the work note: it is scored when you close the ticket. Free, with your own account.</span></p><a class="practice-desk en" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/dc-no-replication" target="_blank" rel="noopener noreferrer"><span>A domain controller does not replicate</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="en">More about the simulator: <a href="https://sysadmindesksbyigg.pages.dev/help#en" target="_blank" rel="noopener noreferrer">how it works</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/#en" target="_blank" rel="noopener noreferrer">all the tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

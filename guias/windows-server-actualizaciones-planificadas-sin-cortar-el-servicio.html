@@ -83,6 +83,7 @@
     <article class="prose guide">
       
       <div class="en" lang="en">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/winserver-patch-cluster" target="_blank" rel="noopener noreferrer"><b>Rather practise it?</b><span>Solve the simulated ticket "Patch the servers without cutting the service" in SysAdmin Desks ↗</span></a>
 <h2>What you&#x27;ll get</h2>
 <p>Applying each month&#x27;s security updates to the hospital&#x27;s Windows servers without A&amp;E, the laboratory or radiology losing service. The idea is simple: nothing critical reboots on its own, anything with redundancy is patched one node at a time, and anything without it is patched in a window agreed with the people who use it, with the downtime procedure ready.</p>
 <h2>Before you start</h2>
@@ -110,6 +111,7 @@
 <p><strong>Uninstalling the patch.</strong> Only if the patch is the problem. Recent cumulative updates are bundled with the servicing stack update and can&#x27;t be removed with <code>wusa /uninstall</code>: find the package with <code>DISM /Online /Get-Packages</code> and remove it with <code>DISM /Online /Remove-Package /PackageName:...</code>.</p>
 <h2>Next steps</h2>
 <ul><li>The Level 2 <strong>Windows Server</strong> guide covers basic server administration.</li><li>The <strong>MECM / SCCM</strong> guide details deployments and maintenance windows.</li><li>The <strong>Hyper-V</strong> guide explains the clusters CAU runs on.</li><li>The <strong>Azure Monitor and Log Analytics</strong> guide helps you alert on stopped services after the window.</li></ul>
+<p class="practica">Want to practise it? Solve the ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/winserver-patch-cluster#en">“Patch the servers without cutting the service”</a> in SysAdmin Desks, free and in your browser.</p>
 <p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
       </div>
       <div class="news-box">
@@ -123,7 +125,7 @@
       <p class="repo-name"><span class="en">Sector 3</span> · <span class="en">Windows Server - Planned updates without service downtime</span></p>
       <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
       <a class="arrow-link" href="sector-3.html"><span class="en">All Sector 3 guides</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="en">Practise it</span></p><p class="practice-h"><span class="en">Solve this ticket in a simulated console</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="en">Investigate, fix the cause and write the work note: it is scored when you close the ticket. Free, with your own account.</span></p><a class="practice-desk en" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/winserver-patch-cluster" target="_blank" rel="noopener noreferrer"><span>Patch the servers without cutting the service</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="en">More about the simulator: <a href="https://sysadmindesksbyigg.pages.dev/help#en" target="_blank" rel="noopener noreferrer">how it works</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/#en" target="_blank" rel="noopener noreferrer">all the tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

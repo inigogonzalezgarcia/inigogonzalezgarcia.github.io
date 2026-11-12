@@ -83,6 +83,7 @@
     <article class="prose guide">
       
       <div class="en" lang="en">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/o365-wrong-licence" target="_blank" rel="noopener noreferrer"><b>Rather practise it?</b><span>Solve the simulated ticket "The store has E3 licences where F3 was enough" in SysAdmin Desks ↗</span></a>
 <h2>What you&#x27;ll get</h2>
 <p>Everyone having the licence their job needs, getting it automatically when they join and handing it back when they leave. In a chain with hundreds of sales assistants, high turnover and seasonal staff, assigning licences by hand person by person ends in two problems: people with no email on day one and licences paid for people who left months ago.</p>
 <h2>Before you start</h2>
@@ -114,6 +115,7 @@
 <ul><li><strong>Plan disabled</strong> on the group: Teams or Exchange at <code>Disabled</code>. Fix it on the group, for everyone.</li><li><strong>Usage location</strong> empty or wrong: direct assignment refuses it; by group the tenant&#x27;s is used, which may not be the user&#x27;s country. Fix it on the user or at the source.</li><li><strong>Conflicting plans</strong> (<code>MutuallyExclusiveViolation</code>): F3 by group and an old direct E3. Remove the direct one.</li><li><strong>Suite with no Teams</strong>: the office user has E3 (no Teams) and is missing the Teams Enterprise licence.</li><li><strong>Synchronised from AD</strong> without the right department: not in the dynamic group. Fix it in AD, not in Entra ID.</li></ul>
 <h2>Next steps</h2>
 <ul><li>The Level 1 <strong>Microsoft 365 y licencias</strong> (Microsoft 365 and licences) guide explains the products and service plans.</li><li>The <strong>Microsoft Graph</strong> guide covers connecting and the permissions needed to automate these reports.</li><li>The <strong>Azure AD Connect</strong> guide helps when the attribute that decides the licence comes from Active Directory.</li><li>The <strong>Outlook y Exchange Online</strong> guide picks up where this one ends: the mailbox exists and something doesn&#x27;t work.</li></ul>
+<p class="practica">Want to practise it? Solve the ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/o365-wrong-licence#en">“The store has E3 licences where F3 was enough”</a> in SysAdmin Desks, free and in your browser.</p>
 <p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
       </div>
       <div class="news-box">
@@ -127,7 +129,7 @@
       <p class="repo-name"><span class="en">Sector 2</span> · <span class="en">Office 365 - Assigning licences with the service desk</span></p>
       <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
       <a class="arrow-link" href="sector-2.html"><span class="en">All Sector 2 guides</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="en">Practise it</span></p><p class="practice-h"><span class="en">Solve this ticket in a simulated console</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="en">Investigate, fix the cause and write the work note: it is scored when you close the ticket. Free, with your own account.</span></p><a class="practice-desk en" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/o365-wrong-licence" target="_blank" rel="noopener noreferrer"><span>The store has E3 licences where F3 was enough</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="en">More about the simulator: <a href="https://sysadmindesksbyigg.pages.dev/help#en" target="_blank" rel="noopener noreferrer">how it works</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/#en" target="_blank" rel="noopener noreferrer">all the tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

@@ -83,6 +83,7 @@
     <article class="prose guide">
       
       <div class="en" lang="en">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/audit-4740-missing" target="_blank" rel="noopener noreferrer"><b>Rather practise it?</b><span>Solve the simulated ticket "There are no lockout events on the DC" in SysAdmin Desks ↗</span></a>
 <h2>What you&#x27;ll get</h2>
 <p>Every computer and server in the domain recording what an investigation asks (who signed in and from where, which account was locked, who added someone to a group, which process ran and with which parameters), those events not overwritten within hours, and all of it reaching a central server the SIEM collects from. And knowing what to check when the event you need is not there.</p>
 <h2>Before you start</h2>
@@ -127,6 +128,7 @@
 <p class="g-warn">When an advanced audit setting is removed from a GPO, the device keeps the configuration it had. To leave a subcategory unaudited you configure it explicitly as <em>No Auditing</em>, or clean up with <code>auditpol /clear</code> on the device and apply the GPO again.</p>
 <h2>Next steps</h2>
 <ul><li>To read account management events (who deleted or changed a user), the <a href="active-directory-delegar-permisos-papelera-y-quien-ha-cambiado-este-usuario.html">Active Directory delegation and auditing</a> guide.</li><li>What reaches the collector becomes alerts in the SIEM: <a href="microsoft-sentinel-conectores-una-regla-en-kql-y-un-incidente-de-principio-a-fin.html">Microsoft Sentinel, connectors and a KQL rule</a>.</li><li>Auditing firewall connections (events 5156 and 5157) complements the <a href="firewall-de-windows-por-gpo-perfiles-reglas-registro-y-una-aplicacion-que-deja-de-funcionar.html">Windows Firewall by GPO</a> guide.</li></ul>
+<p class="practica">Want to practise it? Solve the ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/audit-4740-missing#en">“There are no lockout events on the DC”</a> in SysAdmin Desks, free and in your browser.</p>
 <p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
       </div>
       <div class="news-box">
@@ -140,7 +142,7 @@
       <p class="repo-name"><span class="en">Level 3</span> · <span class="en">Security GPOs</span></p>
       <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
       <a class="arrow-link" href="nivel-3.html"><span class="en">All Level 3 guides</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="en">Practise it</span></p><p class="practice-h"><span class="en">Solve this ticket in a simulated console</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="en">Investigate, fix the cause and write the work note: it is scored when you close the ticket. Free, with your own account.</span></p><a class="practice-desk en" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/audit-4740-missing" target="_blank" rel="noopener noreferrer"><span>There are no lockout events on the DC</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="en">More about the simulator: <a href="https://sysadmindesksbyigg.pages.dev/help#en" target="_blank" rel="noopener noreferrer">how it works</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/#en" target="_blank" rel="noopener noreferrer">all the tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

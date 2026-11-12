@@ -83,6 +83,7 @@
     <article class="prose guide">
       
       <div class="en" lang="en">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/wordpress-plugin-down" target="_blank" rel="noopener noreferrer"><b>Rather practise it?</b><span>Solve the simulated ticket "A plugin takes the corporate website down" in SysAdmin Desks ↗</span></a>
 <h2>What you&#x27;ll get</h2>
 <p>The corporate WordPress site running in containers on a Linux server: WordPress and its database defined in one file, data in volumes, passwords kept out of the repository, HTTPS in front, a daily backup you know how to restore because you have tried it, and the routine for when an update leaves the site blank.</p>
 <h2>Before you start</h2>
@@ -121,6 +122,7 @@
 <ol><li><strong>Deactivate it</strong>. <code>--skip-plugins</code> stops WP-CLI loading plugins, because the broken one would take it down too. Without WP-CLI, renaming the folder works: <code>docker compose exec wordpress mv wp-content/plugins/galeria-pro wp-content/plugins/galeria-pro.off</code>.</li><li><strong>Go back to the previous version</strong> if the feature is needed: <code>wp plugin install galeria-pro --version=3.4.1 --force --skip-plugins</code> and activate it.</li><li>If the update <strong>changed the database</strong>, the old version may not understand it: then you restore the pre-update backup from section 5.</li><li><strong>Afterwards</strong>: tell the plugin vendor, take the plugin out of automatic updates until they fix it, and keep the rule that updates go through test.</li></ol>
 <h2>Next steps</h2>
 <ul><li>The <strong>Docker</strong> guide covers the basics: volumes, logs and what to do when a container keeps restarting.</li><li>The <strong>PostgreSQL/MySQL/SQL Server</strong> guide goes deeper into database backups and restores.</li><li>To keep a record of each restore test (what was restored, when, how long it took and whether it worked), the <strong>32-backup-restore-test-tracker</strong> repository on my GitHub follows that same idea.</li></ul>
+<p class="practica">Want to practise it? Solve the ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/wordpress-plugin-down#en">“A plugin takes the corporate website down”</a> in SysAdmin Desks, free and in your browser.</p>
 <p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
       </div>
       <div class="news-box">
@@ -134,7 +136,7 @@
       <p class="repo-name"><span class="en">Level 3</span> · <span class="en">WordPress on Docker: a corporate site in containers</span></p>
       <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
       <a class="arrow-link" href="nivel-3.html"><span class="en">All Level 3 guides</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="en">Practise it</span></p><p class="practice-h"><span class="en">Solve this ticket in a simulated console</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="en">Investigate, fix the cause and write the work note: it is scored when you close the ticket. Free, with your own account.</span></p><a class="practice-desk en" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/wordpress-plugin-down" target="_blank" rel="noopener noreferrer"><span>A plugin takes the corporate website down</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="en">More about the simulator: <a href="https://sysadmindesksbyigg.pages.dev/help#en" target="_blank" rel="noopener noreferrer">how it works</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/#en" target="_blank" rel="noopener noreferrer">all the tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

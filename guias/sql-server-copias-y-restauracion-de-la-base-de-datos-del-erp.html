@@ -83,6 +83,7 @@
     <article class="prose guide">
       
       <div class="en" lang="en">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/sql-restore-pit" target="_blank" rel="noopener noreferrer"><b>Rather practise it?</b><span>Solve the simulated ticket "Someone deleted ERP rows this morning" in SysAdmin Desks ↗</span></a>
 <h2>What you&#x27;ll get</h2>
 <p>An ERP database you can take back to any minute of the last few days, and proof that you have done it before you need it. In a manufacturer with plants in several countries the ERP never rests: when it is night at one site, another is closing orders, releasing work orders or running the month-end close. There is no quiet window for long backups and no room to discover, on the day of the problem, that a log is missing.</p>
 <h2>Before you start</h2>
@@ -110,6 +111,7 @@
 <ol><li><strong>Which &quot;10:40&quot;</strong>: the plant&#x27;s, not the server&#x27;s. If the plant is an hour behind, for the server it was 11:40. Confirm with the user and with the ERP&#x27;s audit log if it has one.</li><li><strong>Production is not restored</strong>: rolling the whole ERP back would wipe the work of every other plant since then. You restore a separate copy and recover only those rows.</li><li><strong>Secure the log</strong>: take a log backup now (without <code>NORECOVERY</code>, production stays open) so the period of the deletion is in a backup and doesn&#x27;t depend on the next scheduled one.</li><li><strong>Restore on <code>srv-sql-test01</code></strong> the chain up to one minute before the deletion (section 4), under another database name.</li><li><strong>Compare</strong>: the rows that are in the copy and not in production, by the table&#x27;s key, in a query with the ERP consultant alongside.</li><li><strong>Put them back the ERP&#x27;s way</strong>: with its import tool, with a script reviewed by the partner (watch out for <code>IDENTITY</code> columns, triggers and related tables) or by re-entering them if there are few. What you don&#x27;t do is a direct <code>INSERT</code> that nobody on the ERP side has validated.</li><li><strong>Close with a cause</strong>: who deleted them, from which user and why they could. Often it is an excess permission in an ERP profile, not a technical fault.</li></ol>
 <h2>Next steps</h2>
 <ul><li>The Level 3 <strong>PostgreSQL/MySQL/SQL Server</strong> guide covers day-to-day database administration.</li><li>The <strong>Veeam Backup</strong> guide explains how the SQL server backup fits with the virtual machine backups.</li><li>The Level 4 <strong>Backup and DR/BCP</strong> guide places the ERP within the continuity plan.</li></ul>
+<p class="practica">Want to practise it? Solve the ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/sql-restore-pit#en">“Someone deleted ERP rows this morning”</a> in SysAdmin Desks, free and in your browser.</p>
 <p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
       </div>
       <div class="news-box">
@@ -123,7 +125,7 @@
       <p class="repo-name"><span class="en">Sector 4</span> · <span class="en">SQL Server - Backup and restore</span></p>
       <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
       <a class="arrow-link" href="sector-4.html"><span class="en">All Sector 4 guides</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="en">Practise it</span></p><p class="practice-h"><span class="en">Solve this ticket in a simulated console</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="en">Investigate, fix the cause and write the work note: it is scored when you close the ticket. Free, with your own account.</span></p><a class="practice-desk en" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/sql-restore-pit" target="_blank" rel="noopener noreferrer"><span>Someone deleted ERP rows this morning</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="en">More about the simulator: <a href="https://sysadmindesksbyigg.pages.dev/help#en" target="_blank" rel="noopener noreferrer">how it works</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/#en" target="_blank" rel="noopener noreferrer">all the tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>
