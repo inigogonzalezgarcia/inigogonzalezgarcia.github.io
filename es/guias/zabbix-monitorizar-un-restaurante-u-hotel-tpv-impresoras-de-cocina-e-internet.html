@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/zabbix-pos-down" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «Zabbix no avisó de que el TPV de la sala estaba caído» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Que el móvil de la guardia suene antes que el teléfono del encargado: Zabbix vigilando internet, el servidor del TPV y su base de datos, las impresoras de cocina, los terminales, la red y el SAI del local. Con avisos que llegan solo cuando importan, y silencio mientras el local está cerrado.</p>
 <h2>Antes de empezar</h2>
@@ -115,6 +116,7 @@
 <ol><li><strong>El primero de la lista</strong>: en <strong>Monitoring › Problems</strong>, filtrado por el local y ordenado por hora, el primero es <code>SW-BRISA-01: Unavailable by ICMP ping</code> a las 13:04:40. Lo demás es consecuencia: un problema real y 46 copias.</li><li><strong>Confirmar en el local</strong>: el switch está apagado; alguien ha desenchufado la regleta de la barra para una cafetera. A las 13:08 todo responde.</li><li><strong>Reconocer el problema</strong> con lo ocurrido: se para la escalada.</li><li><strong>Dependencias de triggers</strong>: cada trigger de TPV, impresora y pantalla del local depende del ping de <code>SW-BRISA-01</code>, y el switch depende de <em>Proxy del local sin contacto</em>. En los triggers que vienen de plantilla, la dependencia se añade en el host, en la pestaña <strong>Dependencies</strong>. Con eso, la próxima vez llega un único aviso: el del switch.</li><li><strong>El ruido de los comanderos</strong>: se apagan al cargarse cada noche y algunos se duermen a media tarde. Severidad <em>Warning</em>, sin aviso, y un trigger con recuperación separada: problema con <code>max(/CMD-01/icmpping,#5)=0</code> y recuperación con <code>min(/CMD-01/icmpping,#3)=1</code>, para que no abra y cierre cada minuto.</li><li><strong>El cierre</strong>: causa (regleta compartida), acción (switch al SAI) y mejora (dependencias en los demás locales).</li></ol>
 <h2>Siguientes pasos</h2>
 <ul><li>La guía de <strong>ICG y HIOPOS</strong> tiene el inventario de terminales e impresoras que alimenta a Zabbix.</li><li>La red que vigilas aquí, con sus VLAN y el 4G de respaldo, está en la guía de <strong>MikroTik y TP-Link: red y WiFi de un restaurante u hotel</strong>.</li><li>La revisión de cada mañana antes del servicio (terminales, comanderos, impresoras de cocina y la línea de respaldo) es la idea del repositorio <strong>34-venue-service-readiness</strong> de mi GitHub.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/zabbix-pos-down">«Zabbix no avisó de que el TPV de la sala estaba caído»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -129,7 +131,7 @@
       <p class="repo-name"><span class="es">Sector 1</span> · <span class="es">Zabbix - Monitorizar un restaurante o un hotel</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="sector-1.html"><span class="es">Todas las guías del Sector 1</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/zabbix-pos-down" target="_blank" rel="noopener noreferrer"><span>Zabbix no avisó de que el TPV de la sala estaba caído</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

@@ -83,6 +83,7 @@
     <article class="prose guide">
       
       <div class="en" lang="en">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/ps-ad-weekly-report" target="_blank" rel="noopener noreferrer"><b>Rather practise it?</b><span>Solve the simulated ticket "The weekly AD report lists no inactive accounts" in SysAdmin Desks ↗</span></a>
 <h2>What you&#x27;ll get</h2>
 <p>Every Monday at 6:30, with nobody launching it, a folder with three CSV lists and an HTML page you can read in two minutes: users and computers with no activity in 90 days, passwords expiring in the next 14 days, and disabled accounts still in groups. It is run by a managed service account that can only read the directory and write to that folder.</p>
 <h2>Before you start</h2>
@@ -115,6 +116,7 @@
 <p>The fix: <code>Install-WindowsFeature RSAT-AD-PowerShell</code> on <code>srv-mgmt02</code>, the version of the script with <code>#Requires</code>, <code>Stop</code> and the count check, and <code>Start-ScheduledTask</code> to confirm. From now on, if something fails, <code>LastTaskResult</code> will be 1 and the monitoring tool will see it.</p>
 <h2>Next steps</h2>
 <ul><li><a href="powershell-altas-masivas-en-active-directory-desde-csv-y-bajas-con-revision.html">AD starters and leavers from a CSV</a> closes the loop: the report says who should go and that script handles the leaver with a review step.</li><li>Keep the script in the team&#x27;s repository and put every change through review.</li><li>To warn each user on the password list, send the email through Microsoft Graph rather than <code>Send-MailMessage</code>, which Microsoft marks as obsolete.</li></ul>
+<p class="practica">Want to practise it? Solve the ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/ps-ad-weekly-report#en">“The weekly AD report lists no inactive accounts”</a> in SysAdmin Desks, free and in your browser.</p>
 <p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
       </div>
       <div class="news-box">
@@ -128,7 +130,7 @@
       <p class="repo-name"><span class="en">Level 2</span> · <span class="en">PowerShell</span></p>
       <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
       <a class="arrow-link" href="nivel-2.html"><span class="en">All Level 2 guides</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="en">Practise it</span></p><p class="practice-h"><span class="en">Solve this ticket in a simulated console</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="en">Investigate, fix the cause and write the work note: it is scored when you close the ticket. Free, with your own account.</span></p><a class="practice-desk en" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/ps-ad-weekly-report" target="_blank" rel="noopener noreferrer"><span>The weekly AD report lists no inactive accounts</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="en">More about the simulator: <a href="https://sysadmindesksbyigg.pages.dev/help#en" target="_blank" rel="noopener noreferrer">how it works</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/#en" target="_blank" rel="noopener noreferrer">all the tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

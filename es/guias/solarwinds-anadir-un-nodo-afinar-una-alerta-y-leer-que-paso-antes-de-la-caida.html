@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/solarwinds-alert-storm" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «SolarWinds avisa 200 veces al día del mismo switch» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Que un servidor nuevo esté monitorizado el mismo día que entra en producción, que las alertas que llegan al equipo sean las que hay que atender (y no las 40 de cada noche que todos ignoran), y poder reconstruir en cinco minutos qué pasó en un servidor antes de que cayera.</p>
 <h2>Antes de empezar</h2>
@@ -106,6 +107,7 @@
 <ul><li>Nodos en estado <strong>Unknown</strong> o <strong>Unmanaged</strong> desde hace más de una semana: <code>Manage Nodes → filtro por estado</code>. Unmanaged es para mantenimientos; con un mes, se olvidó.</li><li>Nodos <strong>sin propiedades</strong> (<code>Owner_Team</code> vacío): la consulta SWQL <code>SELECT Caption FROM Orion.Nodes WHERE CustomProperties.Owner_Team IS NULL</code>.</li><li>Alertas disparadas frente a reconocidas; las tres alertas más ruidosas y qué se hizo con ellas.</li><li>Capacidad del propio servidor de sondeo (<code>Settings → Polling Engines</code>): porcentaje de elementos sondeados frente al límite de la licencia.</li></ul>
 <h2>Siguientes pasos</h2>
 <ul><li><strong>Dependencias</strong> (<code>Settings → Manage Dependencies</code>): si el switch de la sede cae, una alerta, no cuarenta de los servidores detrás.</li><li><strong>NetFlow (NTA)</strong> en el router de la sede para la pregunta &quot;¿quién está saturando el enlace?&quot;, y <strong>NCM</strong> para guardar la configuración de los Cisco (Nivel 4) y avisar de cambios.</li><li>Exporta las alertas a Teams con el runbook y, si el equipo tiene herramienta de guardia, por su webhook: el teléfono suena solo para <code>Critical</code> en <code>Production</code>.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/solarwinds-alert-storm">«SolarWinds avisa 200 veces al día del mismo switch»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -120,7 +122,7 @@
       <p class="repo-name"><span class="es">Nivel 3</span> · <span class="es">SolarWinds</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/solarwinds-alert-storm" target="_blank" rel="noopener noreferrer"><span>SolarWinds avisa 200 veces al día del mismo switch</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

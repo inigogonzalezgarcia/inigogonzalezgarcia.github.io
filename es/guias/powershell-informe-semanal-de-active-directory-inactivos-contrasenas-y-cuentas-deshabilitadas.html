@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/ps-ad-weekly-report" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «El informe semanal de AD no lista las cuentas inactivas» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Cada lunes a las 6:30, sin que nadie lo lance, una carpeta con tres listas en CSV y un HTML para leer en dos minutos: usuarios y equipos sin actividad en 90 días, contraseñas que caducan en los próximos 14 días y cuentas deshabilitadas que siguen en grupos. Lo ejecuta una cuenta de servicio administrada que solo puede leer el directorio y escribir en esa carpeta.</p>
 <h2>Antes de empezar</h2>
@@ -114,6 +115,7 @@
 <p>El arreglo: <code>Install-WindowsFeature RSAT-AD-PowerShell</code> en <code>srv-gestion02</code>, la versión del script con <code>#Requires</code>, <code>Stop</code> y la comprobación de recuento, y <code>Start-ScheduledTask</code> para comprobar. A partir de ahora, si algo falla, <code>LastTaskResult</code> será 1 y la herramienta de monitorización lo verá.</p>
 <h2>Siguientes pasos</h2>
 <ul><li><a href="powershell-altas-masivas-en-active-directory-desde-csv-y-bajas-con-revision.html">Altas y bajas en Active Directory desde CSV</a> cierra el círculo: el informe dice quién sobra y ese script lo da de baja con revisión.</li><li>Guarda el script en el repositorio del equipo y que cada cambio pase por revisión.</li><li>Para avisar a cada usuario de la lista de contraseñas, envía el correo con Microsoft Graph y no con <code>Send-MailMessage</code>, que Microsoft marca como obsoleto.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/ps-ad-weekly-report">«El informe semanal de AD no lista las cuentas inactivas»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -128,7 +130,7 @@
       <p class="repo-name"><span class="es">Nivel 2</span> · <span class="es">PowerShell</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/ps-ad-weekly-report" target="_blank" rel="noopener noreferrer"><span>El informe semanal de AD no lista las cuentas inactivas</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>
