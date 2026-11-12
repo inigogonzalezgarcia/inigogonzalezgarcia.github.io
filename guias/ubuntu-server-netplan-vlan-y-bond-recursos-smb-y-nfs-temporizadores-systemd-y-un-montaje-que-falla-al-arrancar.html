@@ -83,6 +83,7 @@
     <article class="prose guide">
       
       <div class="en" lang="en">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/ubuntu-nfs-mount" target="_blank" rel="noopener noreferrer"><b>Rather practise it?</b><span>Solve the simulated ticket "The Ubuntu server boots without its NFS share" in SysAdmin Desks ↗</span></a>
 <h2>What you&#x27;ll get</h2>
 <p>An Ubuntu server with its networking written in a file that makes sense, network shares mounted so that a NAS being down doesn&#x27;t block the boot, and scheduled jobs on systemd timers that leave a log and don&#x27;t write to the local disk when the share isn&#x27;t there. And the diagnosis of the typical case after a change window: the server takes two minutes to boot and the NAS folder appears empty.</p>
 <h2>Before you start</h2>
@@ -129,6 +130,7 @@
 <p>In the ticket: the cause (adapter disconnected during the port group change), the 38 GB recovered and the three configuration changes. And a line for the vSphere network change procedure: check <code>networkctl</code> on the affected VMs after the change.</p>
 <h2>Next steps</h2>
 <ul><li>The <a href="ubuntu-server-disco-lleno-journald-logrotate-y-un-servicio-que-no-arranca.html">full disk, journald and logrotate</a> guide covers what happens when the warning comes late and a copy has filled <code>/</code>.</li><li>With <a href="ansible-primer-playbook-parchear-servidores-linux.html">Ansible</a>, the netplan file, the <code>fstab</code> lines and the timers are deployed identically on every server.</li><li>Add a monitoring check with <code>findmnt</code> on every mount point that matters: an unmounted share should be an alert, not a discovery.</li></ul>
+<p class="practica">Want to practise it? Solve the ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/ubuntu-nfs-mount#en">“The Ubuntu server boots without its NFS share”</a> in SysAdmin Desks, free and in your browser.</p>
 <p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
       </div>
       <div class="news-box">
@@ -142,7 +144,7 @@
       <p class="repo-name"><span class="en">Level 2</span> · <span class="en">Ubuntu</span></p>
       <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
       <a class="arrow-link" href="nivel-2.html"><span class="en">All Level 2 guides</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="en">Practise it</span></p><p class="practice-h"><span class="en">Solve this ticket in a simulated console</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="en">Investigate, fix the cause and write the work note: it is scored when you close the ticket. Free, with your own account.</span></p><a class="practice-desk en" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/ubuntu-nfs-mount" target="_blank" rel="noopener noreferrer"><span>The Ubuntu server boots without its NFS share</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="en">More about the simulator: <a href="https://sysadmindesksbyigg.pages.dev/help#en" target="_blank" rel="noopener noreferrer">how it works</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/#en" target="_blank" rel="noopener noreferrer">all the tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

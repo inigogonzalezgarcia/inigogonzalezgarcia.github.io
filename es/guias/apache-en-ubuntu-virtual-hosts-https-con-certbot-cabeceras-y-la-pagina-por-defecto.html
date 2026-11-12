@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/apache-default-page" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «La web nueva enseña la página por defecto de Apache» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Un servidor Apache en Ubuntu que sirve varios sitios propios (no como proxy, sino con sus ficheros), cada uno con su nombre, su certificado de Let&#x27;s Encrypt renovado solo, la redirección a HTTPS, las cabeceras de seguridad y un log que dice cuánto tarda cada petición. Y, cuando alguien abre su web y ve <strong>Apache2 Default Page: It works!</strong> o la web de otro departamento, saber leer <code>apache2ctl -S</code> y encontrar el motivo.</p>
 <h2>Antes de empezar</h2>
@@ -119,6 +120,7 @@
 <p>En el ticket: la salida de <code>apache2ctl -S</code> antes y después, qué faltaba (alias, sitio del 443, <code>a2ensite</code>) y la comprobación con <code>curl</code>.</p>
 <h2>Siguientes pasos</h2>
 <ul><li>La primera guía de este tema, <a href="nginx-y-apache-proxy-inverso-tls-cabeceras-timeouts-y-un-502-bad-gateway.html">Nginx y Apache como proxy inverso</a>, publica una aplicación interna con TLS corporativo y resuelve el 502.</li><li>La guía de <a href="ubuntu-server-usuarios-ssh-firewall-y-actualizaciones.html">Ubuntu Server: los primeros 30 minutos</a> deja el servidor con SSH, ufw y parches antes de instalar Apache.</li><li>Si el sitio es un WordPress, la guía de <a href="wordpress-en-docker-compose-copias-bastionado-y-un-plugin-que-tumba-la-web.html">WordPress en Docker</a> cubre copias y bastionado.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/apache-default-page">«La web nueva enseña la página por defecto de Apache»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -133,7 +135,7 @@
       <p class="repo-name"><span class="es">Nivel 3</span> · <span class="es">Nginx y Apache</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/apache-default-page" target="_blank" rel="noopener noreferrer"><span>La web nueva enseña la página por defecto de Apache</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

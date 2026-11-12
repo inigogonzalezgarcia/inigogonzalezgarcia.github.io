@@ -83,6 +83,7 @@
     <article class="prose guide">
       
       <div class="en" lang="en">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/bash-disk-check" target="_blank" rel="noopener noreferrer"><b>Rather practise it?</b><span>Solve the simulated ticket "The check script warns too late about a full disk" in SysAdmin Desks ↗</span></a>
 <h2>What you&#x27;ll get</h2>
 <p>A Bash script you can drop on any Linux server which, every morning, tells you whether the disk is filling up, a service has died or the load is through the roof. And, along the way, the writing rules that separate a script that helps from one that deletes something one day.</p>
 <h2>Before you start</h2>
@@ -100,6 +101,7 @@
 <p>Cron has neither your <code>PATH</code> nor your aliases: use full paths and test the script with <code>env -i bash -c /usr/local/bin/check-server</code> to see how it behaves without your environment. To get an email, put <code>MAILTO=it@contoso.com</code> at the top of the crontab (if the server has mail configured), or better, have it write to the log your monitoring already collects.</p>
 <h2>Next steps</h2>
 <ul><li>Add an <code>--apply</code> that does something useful and safe: rotate a log, restart the dead service with <code>systemctl restart</code>.</li><li>Put the script in the team repository (see the Git guide) so it changes through review, not by hand over SSH.</li><li>In Level 3 you&#x27;ll see Ansible: when the same script has to run on 40 servers, that is its job.</li></ul>
+<p class="practica">Want to practise it? Solve the ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/bash-disk-check#en">“The check script warns too late about a full disk”</a> in SysAdmin Desks, free and in your browser.</p>
 <p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
       </div>
       <div class="news-box">
@@ -113,7 +115,7 @@
       <p class="repo-name"><span class="en">Level 2</span> · <span class="en">Bash</span></p>
       <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
       <a class="arrow-link" href="nivel-2.html"><span class="en">All Level 2 guides</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="en">Practise it</span></p><p class="practice-h"><span class="en">Solve this ticket in a simulated console</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="en">Investigate, fix the cause and write the work note: it is scored when you close the ticket. Free, with your own account.</span></p><a class="practice-desk en" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/bash-disk-check" target="_blank" rel="noopener noreferrer"><span>The check script warns too late about a full disk</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="en">More about the simulator: <a href="https://sysadmindesksbyigg.pages.dev/help#en" target="_blank" rel="noopener noreferrer">how it works</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/#en" target="_blank" rel="noopener noreferrer">all the tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

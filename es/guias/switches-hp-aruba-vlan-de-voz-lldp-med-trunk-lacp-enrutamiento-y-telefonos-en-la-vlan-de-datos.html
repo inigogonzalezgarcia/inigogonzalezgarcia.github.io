@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/aruba-voice-vlan" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «Los teléfonos IP no cogen la VLAN de voz» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Dejar una planta con switches ArubaOS-Switch lista para teléfonos IP y con su propio enrutamiento: la VLAN de voz que el teléfono descubre solo por <strong>LLDP-MED</strong>, el enlace al núcleo con dos cables agregados por <strong>LACP</strong>, un 2930F que hace de puerta de enlace de las VLANs de la sede y reenvía el DHCP al servidor, y la gestión con SNMPv3, syslog y NTP. Y resolver el ticket clásico de una migración de telefonía: los teléfonos arrancan, cogen IP de la red de usuarios y no registran. Las guías de <a href="switches-hp-aruba-vlans-copia-de-configuracion-firmware-y-puerto-a-100-mb.html">VLANs, copia y firmware</a> y de <a href="switches-hp-aruba-localizar-equipos-por-lldp-bucles-con-loop-protect-y-port-security.html">LLDP, bucles y port-security</a> cubren lo básico; esta parte de ahí.</p>
 <h2>Antes de empezar</h2>
@@ -117,6 +118,7 @@
 <p>En el ticket: puertos afectados, qué anunciaba el switch y qué faltaba, el cambio en la plantilla, cómo se reiniciaron los teléfonos y la IP de voz de uno de ellos como prueba.</p>
 <h2>Siguientes pasos</h2>
 <ul><li>La guía de <a href="cisco-etherchannel-lacp-hsrp-relay-dhcp-y-un-miembro-del-port-channel-suspendido.html">Cisco: EtherChannel, HSRP y relay DHCP</a> es el mismo trabajo con IOS, y el otro extremo cuando el núcleo es Cisco.</li><li>La de <a href="dns-y-dhcp-en-windows-server-zonas-ambitos-conmutacion-y-un-equipo-sin-ip.html">DNS y DHCP en Windows Server</a> explica los ámbitos y opciones que reciben las VLANs de usuarios y voz.</li><li>La de <a href="zabbix-servidor-agente-2-plantillas-macros-dependencias-avisos-y-un-agente-no-disponible.html">Zabbix</a> usa el usuario SNMPv3 para vigilar puertos, el trunk y los errores.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/aruba-voice-vlan">«Los teléfonos IP no cogen la VLAN de voz»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -131,7 +133,7 @@
       <p class="repo-name"><span class="es">Nivel 2</span> · <span class="es">Switches HP: vLANs, configuración y firmware</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/aruba-voice-vlan" target="_blank" rel="noopener noreferrer"><span>Los teléfonos IP no cogen la VLAN de voz</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

@@ -83,6 +83,7 @@
     <article class="prose guide">
       
       <div class="en" lang="en">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/veeam-restore-test" target="_blank" rel="noopener noreferrer"><b>Rather practise it?</b><span>Solve the simulated ticket "The file server&#x27;s restore test fails" in SysAdmin Desks ↗</span></a>
 <h2>What you&#x27;ll get</h2>
 <p>When a plant asks for something back, you already know which restore to use, how long it will take and that it works, because you tested it last quarter. In a manufacturer with several sites, each plant has its own file server, its MES or labelling servers and often a local proxy and repository, with a link to head office that won&#x27;t always move terabytes in a morning. The backup is already done; this guide is about the way back.</p>
 <h2>Before you start</h2>
@@ -110,6 +111,7 @@
 <ol><li><strong>Restore to the isolated segment</strong>: Entire VM restore under another name (<code>srv-p2-fs01-r</code>) with the network connected only to the isolated segment, using <strong>Secure Restore</strong> so the antivirus scans the disks before it boots.</li><li><strong>Check with the plant</strong> that the data is there and is what they expect, and that there is no trace of the encryption.</li><li><strong>Return to production</strong> when security approves: credentials changed, the entry vector identified, the restored VM connected to its network.</li><li><strong>Communicate the data loss</strong>: everything created after the chosen point is lost. Say it with date and time, so the plant knows what it has to redo.</li></ol>
 <h2>Next steps</h2>
 <ul><li>The Level 2 <strong>Veeam Backup</strong> guide covers jobs, repositories and the day-to-day running of backups.</li><li>The Level 4 <strong>Backup and DR/BCP</strong> guide fits these tests into each plant&#x27;s continuity plan.</li><li>The <strong>VMware vSphere and vCenter</strong> guide helps prepare the isolated segment and the migration after an Instant Recovery.</li></ul>
+<p class="practica">Want to practise it? Solve the ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/veeam-restore-test#en">“The file server&#x27;s restore test fails”</a> in SysAdmin Desks, free and in your browser.</p>
 <p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
       </div>
       <div class="news-box">
@@ -123,7 +125,7 @@
       <p class="repo-name"><span class="en">Sector 4</span> · <span class="en">Veeam - Planning and testing restores</span></p>
       <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
       <a class="arrow-link" href="sector-4.html"><span class="en">All Sector 4 guides</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="en">Practise it</span></p><p class="practice-h"><span class="en">Solve this ticket in a simulated console</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="en">Investigate, fix the cause and write the work note: it is scored when you close the ticket. Free, with your own account.</span></p><a class="practice-desk en" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/veeam-restore-test" target="_blank" rel="noopener noreferrer"><span>The file server&#x27;s restore test fails</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="en">More about the simulator: <a href="https://sysadmindesksbyigg.pages.dev/help#en" target="_blank" rel="noopener noreferrer">how it works</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/#en" target="_blank" rel="noopener noreferrer">all the tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>
