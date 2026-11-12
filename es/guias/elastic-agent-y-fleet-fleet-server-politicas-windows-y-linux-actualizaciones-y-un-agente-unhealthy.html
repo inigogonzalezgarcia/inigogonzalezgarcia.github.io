@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/fleet-agent-offline" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «Elastic Agent: 15 equipos fuera de línea en Fleet» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Que los logs y las métricas de todos los servidores lleguen a Elasticsearch con <strong>un único agente por máquina</strong> cuya configuración se cambia desde Kibana, sin entrar en cada servidor a editar un YAML. Un Fleet Server, una política para los Windows y otra para los Linux, el alta de un servidor nuevo con un comando, las actualizaciones de cientos de agentes por tandas, y cómo se diagnostica un agente que sale <strong>Unhealthy</strong> o un servidor del que no llega nada.</p>
 <h2>Antes de empezar</h2>
@@ -134,6 +135,7 @@
 <p>En el ticket: agente, estado, componente que fallaba y mensaje exacto, causa (el cambio de política o la regla del cortafuegos), arreglo y la comprobación en Discover de que vuelven a llegar eventos.</p>
 <h2>Siguientes pasos</h2>
 <ul><li>Una regla de alerta en Kibana para agentes que pasan a Unhealthy u Offline más de 15 minutos, y otra para servidores sin eventos en la última hora.</li><li><strong>Elastic Defend</strong> se añade a la misma política como una integración más: protección y detección en el puesto con el agente que ya está instalado.</li><li>Revisar la retención de los data streams nuevos en la guía de <a href="kibana-paneles-alertas-ilm-data-streams-y-elasticsearch-en-solo-lectura-por-disco-lleno.html">Kibana e ILM</a>: los registros Security y Sysmon llenan disco deprisa.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/fleet-agent-offline">«Elastic Agent: 15 equipos fuera de línea en Fleet»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -148,7 +150,7 @@
       <p class="repo-name"><span class="es">Nivel 3</span> · <span class="es">Elasticsearch, Logstash y Kibana</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/fleet-agent-offline" target="_blank" rel="noopener noreferrer"><span>Elastic Agent: 15 equipos fuera de línea en Fleet</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

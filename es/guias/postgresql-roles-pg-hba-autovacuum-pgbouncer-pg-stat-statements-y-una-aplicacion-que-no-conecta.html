@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/postgres-bloat" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «PostgreSQL: una tabla que no deja de crecer» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Operar un servidor PostgreSQL en Linux con criterio: saber qué cambio se aplica con una recarga y cuál necesita reiniciar, dar permisos que no se rompen en el siguiente despliegue, abrir el acceso en <code>pg_hba.conf</code> solo a quien toca, ver si autovacuum llega a tiempo, entender cuándo faltan conexiones y cuándo sobran, encontrar las consultas que más pesan y resolver el ticket <strong>&quot;la aplicación no conecta&quot;</strong> leyendo cuál de los tres errores típicos es.</p>
 <h2>Antes de empezar</h2>
@@ -138,6 +139,7 @@
 <p>En el ticket: qué FATAL era (con el recuento del log), la línea añadida a <code>pg_hba.conf</code> o las conexiones cerradas y de qué origen, si fue recarga o reinicio, y la alerta nueva: <strong>conexiones &gt; 80 % de <code>max_connections</code></strong> con <code>postgres_exporter</code>.</p>
 <h2>Siguientes pasos</h2>
 <ul><li>Monitoriza conexiones por estado, tuplas muertas por tabla, la edad de la transacción más antigua y <code>cl_waiting</code> de PgBouncer con <code>postgres_exporter</code> y la guía de <a href="grafana-origen-de-datos-primer-panel-y-alerta-al-canal.html">Grafana</a>.</li><li>Para alta disponibilidad con conmutación automática, Patroni sobre la réplica en streaming; para copias físicas con recuperación a un momento concreto, pgBackRest.</li><li>La guía de <a href="mysql-y-mariadb-configuracion-buffer-pool-consultas-lentas-indices-replica-y-too-many-connections.html">MySQL y MariaDB</a> resuelve el mismo problema de conexiones agotadas en el otro motor.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/postgres-bloat">«PostgreSQL: una tabla que no deja de crecer»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -152,7 +154,7 @@
       <p class="repo-name"><span class="es">Nivel 3</span> · <span class="es">PostgreSQL</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/postgres-bloat" target="_blank" rel="noopener noreferrer"><span>PostgreSQL: una tabla que no deja de crecer</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>
