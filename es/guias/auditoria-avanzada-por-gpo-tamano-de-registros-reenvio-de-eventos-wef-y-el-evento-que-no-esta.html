@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/audit-4740-missing" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «No hay eventos de bloqueo en el DC» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Que cada equipo y servidor del dominio registre lo que se pregunta en una investigación (quién inició sesión, desde dónde, qué cuenta se bloqueó, quién añadió a alguien a un grupo, qué proceso se lanzó y con qué parámetros), que esos eventos no se sobrescriban en unas horas y que lleguen a un servidor central del que los recoge el SIEM. Y saber qué mirar cuando el evento que necesitas no está.</p>
 <h2>Antes de empezar</h2>
@@ -126,6 +127,7 @@
 <p class="g-warn">Al quitar una directiva de auditoría avanzada de una GPO, el equipo conserva la configuración que tenía. Para dejar una subcategoría sin auditar hay que configurarla explícitamente como <em>No auditar</em>, o limpiar con <code>auditpol /clear</code> en el equipo y volver a aplicar la GPO.</p>
 <h2>Siguientes pasos</h2>
 <ul><li>Para leer los eventos de gestión de cuentas (quién borró o cambió un usuario), la guía de <a href="active-directory-delegar-permisos-papelera-y-quien-ha-cambiado-este-usuario.html">delegación y auditoría de Active Directory</a>.</li><li>Lo que llega al colector se convierte en alertas en el SIEM: <a href="microsoft-sentinel-conectores-una-regla-en-kql-y-un-incidente-de-principio-a-fin.html">Microsoft Sentinel, conectores y una regla en KQL</a>.</li><li>La auditoría de la conexión del firewall (eventos 5156 y 5157) completa la de la guía de <a href="firewall-de-windows-por-gpo-perfiles-reglas-registro-y-una-aplicacion-que-deja-de-funcionar.html">Firewall de Windows por GPO</a>.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/audit-4740-missing">«No hay eventos de bloqueo en el DC»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -140,7 +142,7 @@
       <p class="repo-name"><span class="es">Nivel 3</span> · <span class="es">GPO de seguridad</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/audit-4740-missing" target="_blank" rel="noopener noreferrer"><span>No hay eventos de bloqueo en el DC</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/nginx-502" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «El portal interno da 502 Bad Gateway» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Publicar una aplicación interna (la de fichajes, en <code>127.0.0.1:8080</code>) detrás de Nginx o Apache: con su nombre, HTTPS, las cabeceras que la aplicación necesita, timeouts pensados y logs que dicen cuánto tardó el backend. Y, cuando aparezca el <strong>502 Bad Gateway</strong>, saber en cinco minutos si es la aplicación, SELinux o un timeout.</p>
 <h2>Antes de empezar</h2>
@@ -116,6 +117,7 @@
 <p class="g-tip">Antes de tocar el proxy, <code>curl -I http://127.0.0.1:8080/</code> desde el propio servidor. Si el backend no responde ahí, el proxy no tiene nada que arreglar.</p>
 <h2>Siguientes pasos</h2>
 <ul><li>La guía de <strong>Red Hat Enterprise Linux</strong> del Nivel 2 explica los servicios, el cortafuegos y SELinux que aparecen en el ticket.</li><li>La de <strong>Docker</strong> cubre las aplicaciones en contenedores que suelen estar detrás de este proxy.</li><li>La de <strong>IIS</strong> es la versión Windows de todo esto: sitios, enlaces, certificados y el 503.</li><li>Vigilar desde fuera que el certificado no caduca y que el sitio responde es lo que hacen las sondas TLS y HTTP del repositorio <strong>08-edge-health-slo-monitor</strong> de mi GitHub.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/nginx-502">«El portal interno da 502 Bad Gateway»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -130,7 +132,7 @@
       <p class="repo-name"><span class="es">Nivel 3</span> · <span class="es">Nginx y Apache</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/nginx-502" target="_blank" rel="noopener noreferrer"><span>El portal interno da 502 Bad Gateway</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

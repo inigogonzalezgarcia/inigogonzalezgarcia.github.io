@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/sql-restore-pit" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «Han borrado filas del ERP esta mañana» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Que la base de datos del ERP se pueda devolver a cualquier minuto de los últimos días, y que lo hayas comprobado antes de necesitarlo. En una empresa industrial con plantas en varios países el ERP no descansa: cuando en una sede es de noche, en otra se están cerrando pedidos, lanzando órdenes de fabricación o haciendo el cierre de mes. No hay ventana tranquila para copias largas ni margen para descubrir el día del problema que falta un log.</p>
 <h2>Antes de empezar</h2>
@@ -109,6 +110,7 @@
 <ol><li><strong>Qué hora es &quot;las 10:40&quot;</strong>: la de la planta, no la del servidor. Si la planta va una hora por detrás, para el servidor son las 11:40. Confírmalo con el usuario y con el log de auditoría del ERP si lo tiene.</li><li><strong>No se restaura producción</strong>: volver todo el ERP atrás borraría el trabajo del resto de plantas desde entonces. Se restaura una copia aparte y se recuperan solo esas filas.</li><li><strong>Asegura el log</strong>: lanza una copia de log ya (sin <code>NORECOVERY</code>, producción sigue abierta) para que el periodo del borrado esté en una copia y no dependa de la siguiente programada.</li><li><strong>Restaura en <code>srv-sql-test01</code></strong> la cadena hasta un minuto antes del borrado (sección 4), con otro nombre de base.</li><li><strong>Compara</strong>: las filas que están en la copia y no en producción, por la clave de la tabla, en una consulta con el consultor del ERP delante.</li><li><strong>Devuélvelas como diga el ERP</strong>: con su herramienta de importación, con un script revisado por el partner (cuidado con columnas <code>IDENTITY</code>, triggers y tablas relacionadas) o volviéndolas a introducir si son pocas. Lo que no se hace es un <code>INSERT</code> directo sin que nadie del ERP lo valide.</li><li><strong>Cierra con causa</strong>: quién borró, desde qué usuario y por qué pudo hacerlo. Muchas veces es un permiso de más en un perfil del ERP, no un fallo técnico.</li></ol>
 <h2>Siguientes pasos</h2>
 <ul><li>La guía de <strong>PostgreSQL/MySQL/SQL Server</strong> del Nivel 3 cubre la administración diaria de las bases de datos.</li><li>La de <strong>Veeam Backup</strong> explica cómo encaja la copia del servidor SQL con la de las máquinas virtuales.</li><li>La de <strong>Backup y DR/BCP</strong> del Nivel 4 sitúa el ERP dentro del plan de continuidad.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/sql-restore-pit">«Han borrado filas del ERP esta mañana»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -123,7 +125,7 @@
       <p class="repo-name"><span class="es">Sector 4</span> · <span class="es">SQL Server - Copias de seguridad y restauración</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="sector-4.html"><span class="es">Todas las guías del Sector 4</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/sql-restore-pit" target="_blank" rel="noopener noreferrer"><span>Han borrado filas del ERP esta mañana</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

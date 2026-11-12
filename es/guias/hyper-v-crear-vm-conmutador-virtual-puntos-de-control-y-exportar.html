@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/hyperv-checkpoint-disk" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «La VM de Hyper-V se pausa sola» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Un servidor Windows con Hyper-V donde crear máquinas virtuales de pruebas y de producción pequeña con PowerShell en lugar de a golpe de asistente, con puntos de control antes de cada cambio y una exportación semanal a otro disco.</p>
 <h2>Antes de empezar</h2>
@@ -106,6 +107,7 @@
 <ul><li><code>Get-VM | Get-VMSnapshot</code>: puntos de control con más de una semana.</li><li><code>Get-VM | Where State -eq Running | Get-VMIntegrationService | Where Enabled -and -not PrimaryStatusDescription -eq &#x27;OK&#x27;</code>: servicios de integración que no responden (normalmente, invitado sin actualizar).</li><li>Espacio en <code>D:\VMs</code> frente a la suma de los VHDX dinámicos: pueden crecer hasta su tamaño máximo sin avisar.</li><li>Visor de eventos <code>Microsoft-Windows-Hyper-V-VMMS/Admin</code>: errores de puntos de control o de exportación.</li></ul>
 <h2>Siguientes pasos</h2>
 <ul><li><strong>Hyper-V Replica</strong> hacia un segundo host: una copia de la VM a cinco minutos, con conmutación planificada; es el DR pequeño antes de un clúster.</li><li>Un <strong>clúster de conmutación por error</strong> con almacenamiento compartido o S2D cuando las VMs sean de producción.</li><li>La guía de vSphere hace lo mismo del otro lado; las ideas (snapshots cortos, exportación, host en mantenimiento) son las mismas con otros nombres.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/hyperv-checkpoint-disk">«La VM de Hyper-V se pausa sola»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -120,7 +122,7 @@
       <p class="repo-name"><span class="es">Nivel 3</span> · <span class="es">Hyper-V</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/hyperv-checkpoint-disk" target="_blank" rel="noopener noreferrer"><span>La VM de Hyper-V se pausa sola</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

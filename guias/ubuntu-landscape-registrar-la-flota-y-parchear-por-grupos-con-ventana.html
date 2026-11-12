@@ -83,6 +83,7 @@
     <article class="prose guide">
       
       <div class="en" lang="en">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/landscape-patch-window" target="_blank" rel="noopener noreferrer"><b>Rather practise it?</b><span>Solve the simulated ticket "The warehouse Ubuntu PCs reboot during the shift" in SysAdmin Desks ↗</span></a>
 <h2>What you&#x27;ll get</h2>
 <p>See the Ubuntu servers (and desktops) in one console: which version they run, which patches they are missing, which ones need a reboot, and have security updates apply on their own by group, in each group&#x27;s window, with a report for the monthly ticket. It is what Ansible does from the command line (Ansible guide), with the fleet view the business wants to see.</p>
 <h2>Before you start</h2>
@@ -108,6 +109,7 @@
 <ul><li>Computers <strong>not seen</strong> for more than 7 days: off, migrated or with a broken client (<code>sudo systemctl status landscape-client</code>).</li><li><strong>Failed</strong> activities (<code>Activities → Failed</code>): usually <code>apt</code> blocked by an interrupted <code>dpkg</code>; <code>sudo dpkg --configure -a</code> fixes it.</li><li>Prod machines with <strong>all</strong> updates pending for a month: the monthly window is not running.</li><li>Ubuntu versions: whatever is already in <strong>ESM</strong> (<code>esm-infra</code>) goes on the migration list; Landscape flags it per machine.</li></ul>
 <h2>Next steps</h2>
 <ul><li><strong>Package profiles</strong> and <strong>repository profiles</strong>: every prod machine has the monitoring agent and uses the internal mirror; Landscape installs them and flags drift.</li><li><strong>Remote scripts</strong> (<code>Scripts → Run</code>): the same check from the Bash guide launched on the 23 prod machines with the output in the console.</li><li>If the fleet includes Windows and RHEL, Landscape only covers Ubuntu: the single inventory is Ansible&#x27;s job, and Landscape remains the patch and CVE console for the Ubuntu part.</li></ul>
+<p class="practica">Want to practise it? Solve the ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/landscape-patch-window#en">“The warehouse Ubuntu PCs reboot during the shift”</a> in SysAdmin Desks, free and in your browser.</p>
 <p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
       </div>
       <div class="news-box">
@@ -121,7 +123,7 @@
       <p class="repo-name"><span class="en">Level 3</span> · <span class="en">Ubuntu Landscape</span></p>
       <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
       <a class="arrow-link" href="nivel-3.html"><span class="en">All Level 3 guides</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="en">Practise it</span></p><p class="practice-h"><span class="en">Solve this ticket in a simulated console</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="en">Investigate, fix the cause and write the work note: it is scored when you close the ticket. Free, with your own account.</span></p><a class="practice-desk en" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/landscape-patch-window" target="_blank" rel="noopener noreferrer"><span>The warehouse Ubuntu PCs reboot during the shift</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="en">More about the simulator: <a href="https://sysadmindesksbyigg.pages.dev/help#en" target="_blank" rel="noopener noreferrer">how it works</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/#en" target="_blank" rel="noopener noreferrer">all the tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

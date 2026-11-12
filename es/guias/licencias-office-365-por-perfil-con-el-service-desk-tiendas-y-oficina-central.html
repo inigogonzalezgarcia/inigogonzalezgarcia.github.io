@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/o365-wrong-licence" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «La tienda tiene licencias E3 donde bastaba F3» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Que cada persona tenga la licencia que necesita su puesto, que llegue sola al darla de alta y que vuelva al bolsillo cuando se va. En una cadena con cientos de dependientes, rotación alta y campañas con personal temporal, asignar licencias a mano persona a persona acaba en dos problemas: gente sin correo el primer día y licencias pagadas de quien se fue hace meses.</p>
 <h2>Antes de empezar</h2>
@@ -113,6 +114,7 @@
 <ul><li><strong>Plan desactivado</strong> en el grupo: Teams o Exchange en <code>Disabled</code>. Se corrige en el grupo, para todos.</li><li><strong>Ubicación de uso</strong> vacía o equivocada: en asignación directa no deja asignar; por grupo se usa la del tenant, que puede no ser el país del usuario. Se corrige en el usuario o en el origen.</li><li><strong>Planes en conflicto</strong> (<code>MutuallyExclusiveViolation</code>): tiene F3 por grupo y una E3 directa antigua. Se quita la directa.</li><li><strong>Suite sin Teams</strong>: el usuario de oficina tiene E3 (no Teams) y le falta la licencia de Teams Enterprise.</li><li><strong>Sincronizado desde AD</strong> sin el departamento correcto: no entra en el grupo dinámico. Se corrige en AD, no en Entra ID.</li></ul>
 <h2>Siguientes pasos</h2>
 <ul><li>La guía de <strong>Microsoft 365 y licencias</strong> del Nivel 1 explica los productos y los planes de servicio.</li><li>La guía de <strong>Microsoft Graph</strong> cubre la conexión y los permisos para automatizar estos informes.</li><li>La guía de <strong>Azure AD Connect</strong> ayuda cuando el atributo que decide la licencia viene de Active Directory.</li><li>La guía de <strong>Outlook y Exchange Online</strong> sigue donde termina esta: el buzón ya existe y algo no funciona.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/o365-wrong-licence">«La tienda tiene licencias E3 donde bastaba F3»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -127,7 +129,7 @@
       <p class="repo-name"><span class="es">Sector 2</span> · <span class="es">Office 365 - Asignación de licencias con el service desk</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="sector-2.html"><span class="es">Todas las guías del Sector 2</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/o365-wrong-licence" target="_blank" rel="noopener noreferrer"><span>La tienda tiene licencias E3 donde bastaba F3</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

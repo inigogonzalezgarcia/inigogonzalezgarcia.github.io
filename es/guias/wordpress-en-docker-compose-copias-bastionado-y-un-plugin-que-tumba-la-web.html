@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/wordpress-plugin-down" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «Un plugin tumba la web corporativa» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>La web corporativa en WordPress corriendo en contenedores en un servidor Linux: WordPress y su base de datos definidos en un fichero, los datos en volúmenes, las contraseñas fuera del repositorio, HTTPS delante, una copia diaria que sabes restaurar porque lo has probado y la rutina para cuando una actualización deja la web en blanco.</p>
 <h2>Antes de empezar</h2>
@@ -120,6 +121,7 @@
 <ol><li><strong>Desactívalo</strong>. <code>--skip-plugins</code> hace que WP-CLI no cargue los plugins, porque el roto también lo tumbaría. Sin WP-CLI vale renombrar la carpeta: <code>docker compose exec wordpress mv wp-content/plugins/galeria-pro wp-content/plugins/galeria-pro.off</code>.</li><li><strong>Vuelve a la versión anterior</strong> si hace falta la funcionalidad: <code>wp plugin install galeria-pro --version=3.4.1 --force --skip-plugins</code> y actívalo.</li><li>Si la actualización <strong>cambió la base de datos</strong>, la versión anterior puede no entenderla: entonces se restaura la copia de antes de la actualización, la del apartado 5.</li><li><strong>Después</strong>: aviso al proveedor del plugin, el plugin fuera de las actualizaciones automáticas hasta que lo corrijan, y la regla de que las actualizaciones pasan por pruebas.</li></ol>
 <h2>Siguientes pasos</h2>
 <ul><li>La guía de <strong>Docker</strong> cubre la base: volúmenes, registros y qué hacer cuando un contenedor se reinicia solo.</li><li>La guía de <strong>PostgreSQL/MySQL/SQL Server</strong> profundiza en copias y restauraciones de bases de datos.</li><li>Para llevar el registro de cada prueba de restauración (qué se restauró, cuándo, cuánto tardó y si funcionó), el repositorio <strong>32-backup-restore-test-tracker</strong> de mi GitHub sigue esa misma idea.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/wordpress-plugin-down">«Un plugin tumba la web corporativa»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -134,7 +136,7 @@
       <p class="repo-name"><span class="es">Nivel 3</span> · <span class="es">WordPress en Docker: web corporativa en contenedores</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/wordpress-plugin-down" target="_blank" rel="noopener noreferrer"><span>Un plugin tumba la web corporativa</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

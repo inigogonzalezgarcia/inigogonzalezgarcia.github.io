@@ -83,6 +83,7 @@
     <article class="prose guide">
       
       <div class="en" lang="en">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/trading-switch-loop" target="_blank" rel="noopener noreferrer"><b>Rather practise it?</b><span>Solve the simulated ticket "The trading floor loses the network for a minute every hour" in SysAdmin Desks ↗</span></a>
 <h2>What you&#x27;ll get</h2>
 <p>A comms room where the failure of a power supply, a switch or a circuit leaves nobody without network, and where any technician on the team knows what is there, where each cable goes and how to reach a device even with the network down. On a site with a trading floor the network cannot stop during market hours: every minute a desk is offline is a position nobody can manage. This guide does not repeat VLANs or trunks (they are in the Level 4 Cisco guide); it focuses on how the room is designed and run so that requirement is met.</p>
 <h2>Before you start</h2>
@@ -111,6 +112,7 @@
 <ul><li>Supplies and PDUs: that every device has two supplies in a good state (<code>show environment power</code>) and each on a different PDU.</li><li>The UPS status and runtime, with facilities.</li><li>That last night&#x27;s central configuration copy exists for every device and there are no differences without an approved change.</li><li>The console server: that you reach every device and its uplink works.</li><li>The port sheet against reality on a sample of sockets.</li><li>Support and end-of-life dates of the devices in the room.</li></ul>
 <h2>Next steps</h2>
 <ul><li>The Level 4 <strong>Cisco: switches and routers</strong> guide covers VLANs, trunks, the router with a backup circuit and remote changes with a safety net.</li><li>The <strong>Fortinet FortiGate</strong> guide covers the firewall usually found in the same room.</li><li>The <strong>SolarWinds</strong> guide helps watch supplies, stacks and circuits and keep the configurations.</li><li>The <strong>Backup and DR/BCP</strong> guide places the room in the site&#x27;s continuity plan.</li></ul>
+<p class="practica">Want to practise it? Solve the ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/trading-switch-loop#en">“The trading floor loses the network for a minute every hour”</a> in SysAdmin Desks, free and in your browser.</p>
 <p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
       </div>
       <div class="news-box">
@@ -124,7 +126,7 @@
       <p class="repo-name"><span class="en">Sector 5</span> · <span class="en">Cisco - Switches, routers and comms rooms on a site</span></p>
       <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
       <a class="arrow-link" href="sector-5.html"><span class="en">All Sector 5 guides</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="en">Practise it</span></p><p class="practice-h"><span class="en">Solve this ticket in a simulated console</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="en">Investigate, fix the cause and write the work note: it is scored when you close the ticket. Free, with your own account.</span></p><a class="practice-desk en" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/trading-switch-loop" target="_blank" rel="noopener noreferrer"><span>The trading floor loses the network for a minute every hour</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="en">More about the simulator: <a href="https://sysadmindesksbyigg.pages.dev/help#en" target="_blank" rel="noopener noreferrer">how it works</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/#en" target="_blank" rel="noopener noreferrer">all the tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

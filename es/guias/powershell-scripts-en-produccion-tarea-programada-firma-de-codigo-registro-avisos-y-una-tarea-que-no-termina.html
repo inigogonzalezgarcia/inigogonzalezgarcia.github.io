@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/ps-unsigned-script" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «El script programado ya no se ejecuta» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Que los scripts que corren de noche en los servidores sean de fiar: solo se ejecuta lo que el equipo ha revisado y firmado, cada ejecución deja un registro, un fallo llega al canal del equipo antes de que alguien lo descubra a las 9:00 y la tarea programada nunca se queda colgada tres días. El ejemplo es una copia nocturna de las GPO, pero la plantilla vale para cualquier script.</p>
 <h2>Antes de empezar</h2>
@@ -120,6 +121,7 @@
 <p>En el Visor de eventos, <em>Microsoft › Windows › TaskScheduler › Operational</em>: 100 (iniciada), 129 (proceso creado, con su PID), 201 (acción terminada, con el código) y 102 (tarea completada). Un 129 sin 201 es un proceso que sigue vivo.</p>
 <h2>Siguientes pasos</h2>
 <ul><li>La guía de <a href="powershell-remoto-winrm-invoke-command-en-lote-segundo-salto-jea-y-acceso-denegado.html">PowerShell remoto con WinRM</a> cubre los scripts que, desde aquí, actúan sobre otros servidores.</li><li>El <a href="powershell-informe-semanal-de-active-directory-inactivos-contrasenas-y-cuentas-deshabilitadas.html">informe semanal de Active Directory</a> se puede pasar a esta plantilla: firma, aviso al fallar y ajustes de tarea.</li><li>Añade a la monitorización una comprobación de <code>LastTaskResult</code> distinto de 0 y de <code>LastRunTime</code> de más de 26 horas en las tareas de <code>\Contoso\</code>: cubre también la tarea que ni siquiera arranca.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/ps-unsigned-script">«El script programado ya no se ejecuta»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -134,7 +136,7 @@
       <p class="repo-name"><span class="es">Nivel 2</span> · <span class="es">PowerShell</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-2.html"><span class="es">Todas las guías del Nivel 2</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/ps-unsigned-script" target="_blank" rel="noopener noreferrer"><span>El script programado ya no se ejecuta</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

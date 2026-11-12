@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/ndes-wifi-cert" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «Los portátiles nuevos no entran en la WiFi corporativa» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Que los portátiles y móviles gestionados se conecten a la Wi-Fi corporativa (y a la VPN) con un <strong>certificado</strong> en lugar de la contraseña del usuario: sin ventanas de credenciales, sin contraseñas de Wi-Fi guardadas en el móvil personal y con revocación al retirar el dispositivo. Dos caminos para emitirlos; eliges uno.</p>
 <h2>Antes de empezar</h2>
@@ -109,6 +110,7 @@
 <ul><li>Perfil SCEP: dispositivos en <strong>Error</strong> frente a <strong>Correcto</strong> (<code>Estado del dispositivo</code>), y la tendencia tras cada cambio de red.</li><li>Caducidad de la <strong>CA emisora</strong> y del certificado del <strong>RADIUS</strong>: ambos en el calendario con un año de antelación.</li><li>Dispositivos retirados en Intune cuyo certificado sigue válido: con Cloud PKI, <code>Cloud PKI → la CA → Certificados emitidos → Revocar</code>; con NDES, la revocación en la CA y la CRL publicada.</li><li>(Camino A) <code>Get-Service -Name W3SVC, &quot;Intune Connector Service&quot;</code> en el NDES y la cuenta de servicio en la lista de contraseñas que caducan.</li></ul>
 <h2>Siguientes pasos</h2>
 <ul><li>El mismo certificado de usuario para la <strong>VPN</strong> (perfil VPN con EAP-TLS) y, con Entra ID, la <strong>autenticación basada en certificados</strong> (CBA) para quien no puede usar la app Authenticator.</li><li><strong>PKCS</strong> en lugar de SCEP cuando el certificado tiene que incluir la clave privada generada por la CA (S/MIME); mismo conector, otro perfil.</li><li>Documenta en Confluence (Nivel 2) la cadena completa: raíz, emisora, URL de SCEP, RADIUS y a quién llamar. Es el runbook que se abre el día que caduque algo.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/ndes-wifi-cert">«Los portátiles nuevos no entran en la WiFi corporativa»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -123,7 +125,7 @@
       <p class="repo-name"><span class="es">Nivel 3</span> · <span class="es">NDES y Cloud PKI</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/ndes-wifi-cert" target="_blank" rel="noopener noreferrer"><span>Los portátiles nuevos no entran en la WiFi corporativa</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

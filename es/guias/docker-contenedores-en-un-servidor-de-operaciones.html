@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/docker-container-restarting" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «El contenedor del portal de RR. HH. se reinicia sin parar» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Un servidor Linux con Docker donde las herramientas internas (un panel, un Grafana, un runner de Jenkins) corren como contenedores: se arrancan con un fichero, se actualizan cambiando una versión y sus datos sobreviven a los reinicios. Y la rutina de diagnóstico cuando uno falla.</p>
 <h2>Antes de empezar</h2>
@@ -105,6 +106,7 @@
 <p class="g-warn">Nunca ejecutes <code>docker volume prune</code> en un servidor sin revisar antes <code>docker volume ls</code>: borra los volúmenes que ningún contenedor usa en ese momento, incluidos los de un servicio parado a propósito.</p>
 <h2>Siguientes pasos</h2>
 <ul><li>Pon un proxy inverso (Traefik o Caddy) delante de los contenedores para que todos salgan por 443 con certificado y sin abrir un puerto por herramienta.</li><li>Mete <code>docker compose pull &amp;&amp; up -d</code> en el playbook de Ansible: la actualización de las herramientas pasa a ser una tarea más del parcheo.</li><li>Con más de un servidor o con alta disponibilidad, el salto es Kubernetes (Nivel 4); hasta entonces, Compose en un servidor bien respaldado es suficiente para las herramientas internas.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/docker-container-restarting">«El contenedor del portal de RR. HH. se reinicia sin parar»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -119,7 +121,7 @@
       <p class="repo-name"><span class="es">Nivel 3</span> · <span class="es">Docker</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/docker-container-restarting" target="_blank" rel="noopener noreferrer"><span>El contenedor del portal de RR. HH. se reinicia sin parar</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/elk-no-logs" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «Kibana no enseña los logs del servidor de nóminas» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Que los logs de todos los servidores Linux (y los de Windows, con el mismo agente) lleguen a un único sitio donde buscar &quot;permission denied&quot; o un ID de correlación en segundos, con gráficos de cuántos errores hubo y cuándo. Al terminar tendrás la pila mínima en Docker y dos servidores enviando.</p>
 <h2>Antes de empezar</h2>
@@ -104,6 +105,7 @@
 <p>Con un solo nodo, <code>number_of_replicas: 0</code> evita que el clúster esté siempre en amarillo. Unos 200 MB al día por veinte servidores es el orden de magnitud; mira <code>_cat/indices</code> al mes para ajustar la retención al disco que tienes.</p>
 <h2>Siguientes pasos</h2>
 <ul><li>Windows: el agente es <strong>Winlogbeat</strong> con el mismo <code>output.logstash</code>; los eventos de seguridad (4625, 4740) llegan ya con campos.</li><li>Una alerta en Kibana (<code>Alerts and Insights → Rules</code>) sobre <code>tags: security</code> con más de 20 eventos en 5 minutos, enviada al canal del equipo.</li><li>Si el volumen crece, la opción es <strong>Elastic Agent + Fleet</strong> en lugar de Beats sueltos, o pasar los dashboards a Grafana (siguiente guía) con Elasticsearch como origen de datos.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/elk-no-logs">«Kibana no enseña los logs del servidor de nóminas»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -118,7 +120,7 @@
       <p class="repo-name"><span class="es">Nivel 3</span> · <span class="es">Elasticsearch, Logstash y Kibana</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/elk-no-logs" target="_blank" rel="noopener noreferrer"><span>Kibana no enseña los logs del servidor de nóminas</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>
