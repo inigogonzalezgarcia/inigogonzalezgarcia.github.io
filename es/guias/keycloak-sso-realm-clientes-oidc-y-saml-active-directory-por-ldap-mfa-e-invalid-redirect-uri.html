@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/keycloak-ldap-login" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «Nadie del dominio entra en la app con Keycloak» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Un Keycloak que da inicio de sesión único a las aplicaciones internas con las cuentas de Active Directory: instalado en modo producción detrás del proxy inverso, con un realm para la empresa, una aplicación por OIDC y otra por SAML, los grupos del directorio convertidos en roles, un segundo factor obligatorio y el método para el error más repetido al conectar una aplicación nueva: <strong>Invalid parameter: redirect_uri</strong>.</p>
 <h2>Antes de empezar</h2>
@@ -120,6 +121,7 @@
 <p class="g-tip"><strong>La hora de los servidores</strong>: TOTP depende del reloj. Si el servidor de Keycloak se desvía más de lo que cubre <em>Look around window</em>, los códigos correctos se rechazan. Y si el reloj del servidor de la aplicación va adelantado o atrasado, rechaza tokens recién emitidos (<code>iat</code> en el futuro, <code>exp</code> ya pasado) o aserciones SAML fuera de <code>NotBefore</code>/<code>NotOnOrAfter</code>. Antes de tocar márgenes de tolerancia en la aplicación, <code>chronyc tracking</code> o <code>w32tm /query /status</code> en los dos lados.</p>
 <h2>Siguientes pasos</h2>
 <ul><li>La guía de <a href="entra-sso-saml-dar-de-alta-una-aplicacion-y-login-que-falla.html">Entra ID SSO con SAML</a> hace lo mismo para aplicaciones SaaS con identidades en la nube; las dos conviven.</li><li>El proxy inverso, las cabeceras <code>X-Forwarded-*</code> y los certificados están en la de <a href="nginx-y-apache-proxy-inverso-tls-cabeceras-timeouts-y-un-502-bad-gateway.html">Nginx y Apache</a>.</li><li>Copia de la base de datos PostgreSQL de Keycloak y exportación del realm (<code>kc.sh export</code>) antes de cada actualización de versión.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/keycloak-ldap-login">«Nadie del dominio entra en la app con Keycloak»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -134,7 +136,7 @@
       <p class="repo-name"><span class="es">Nivel 3</span> · <span class="es">Keycloak: SSO para aplicaciones internas</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="nivel-3.html"><span class="es">Todas las guías del Nivel 3</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/keycloak-ldap-login" target="_blank" rel="noopener noreferrer"><span>Nadie del dominio entra en la app con Keycloak</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>

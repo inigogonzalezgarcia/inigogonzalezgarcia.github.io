@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose guide">
       <div class="es" lang="es">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/rabbitmq-queue-growing" target="_blank" rel="noopener noreferrer"><b>¿Prefieres practicarlo?</b><span>Resuelve el ticket simulado «Las órdenes clínicas no llegan: la cola crece» en SysAdmin Desks ↗</span></a>
 <h2>Qué vas a conseguir</h2>
 <p>Entender lo bastante la capa de mensajería de una plataforma clínica para vigilarla y para actuar cuando algo se atasca. Entre el sistema de laboratorio, el de admisiones y la historia clínica electrónica viajan mensajes (normalmente HL7) que pasan por un motor de integración y por RabbitMQ. Si una cola deja de vaciarse, en planta no se ven resultados. La guía cubre cómo se monta, qué se mira, qué alarmas poner y cómo recuperar un consumidor parado sin perder ni duplicar un solo mensaje.</p>
 <h2>Antes de empezar</h2>
@@ -115,6 +116,7 @@
 <ul><li><strong>Qué está afectado</strong>: &quot;los resultados de laboratorio validados desde las 10:02 no se están volcando en la historia clínica&quot;. Qué <strong>no</strong> lo está: imagen, prescripción, admisiones.</li><li><strong>Que no se han perdido</strong>: están guardados y llegarán con su hora original de validación.</li><li><strong>Qué hacer mientras tanto</strong>: consultar el visor del laboratorio y seguir el procedimiento de contingencia para los valores críticos, que el laboratorio comunica por teléfono.</li><li><strong>Cuándo es la próxima actualización</strong>, aunque no haya novedades. No prometas una hora de solución que no controlas.</li><li><strong>Al cerrar</strong>: &quot;todos los resultados están ya en la historia clínica; los validados entre las 10:02 y las 11:10 llegaron con retraso&quot;. Si algún servicio debe revisar resultados de esa franja, que lo sepa ahora.</li></ul>
 <h2>Siguientes pasos</h2>
 <ul><li>La guía de <strong>Monitorización</strong> de este sector cubre cómo desplegar alarmas que lleguen a alguien y cómo responder a ellas.</li><li>La guía de <strong>Windows Server: actualizaciones planificadas sin cortar el servicio</strong> encaja con la causa del ticket: qué comprobar después de reiniciar un servidor que da servicio a otros.</li><li>Para coordinar un incidente con impacto clínico (roles, cronología, comunicaciones y revisión posterior), el repositorio <strong>36-major-incident-command-kit</strong> de mi GitHub sigue esa idea.</li></ul>
+<p class="practica">¿Quieres practicarlo? Resuelve el ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/rabbitmq-queue-growing">«Las órdenes clínicas no llegan: la cola crece»</a> en SysAdmin Desks, gratis y en el navegador.</p>
 <p>¿Falta algo o en tu entorno es distinto? <a href="../about.html#contacto">Escríbeme</a> y lo corrijo.</p>
       </div>
       
@@ -129,7 +131,7 @@
       <p class="repo-name"><span class="es">Sector 3</span> · <span class="es">RabbitMQ - Colas de la capa de integración clínica</span></p>
       <p class="muted small"><span class="es">Los ejemplos (dominios, usuarios, nombres) son ficticios. Las ventanas y terminales están simuladas para la guía.</span></p>
       <a class="arrow-link" href="sector-3.html"><span class="es">Todas las guías del Sector 3</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="es">Practícalo</span></p><p class="practice-h"><span class="es">Resuelve este ticket en una consola simulada</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="es">Investiga, arregla la causa y escribe la nota de trabajo: te puntúa al cerrar. Gratis, con tu propia cuenta.</span></p><a class="practice-desk es" href="https://sysadmindesksbyigg.pages.dev/?lang=es#/desk/rabbitmq-queue-growing" target="_blank" rel="noopener noreferrer"><span>Las órdenes clínicas no llegan: la cola crece</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="es">Más sobre el simulador: <a href="https://sysadmindesksbyigg.pages.dev/help" target="_blank" rel="noopener noreferrer">cómo funciona</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/" target="_blank" rel="noopener noreferrer">todos los tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>
