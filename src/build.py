@@ -1293,6 +1293,12 @@ def gmd(text, lang):
 # SysAdmin Desks (simulated tickets on Cloudflare Pages): the desk that practises each guide
 SIM_URL = "https://sysadmindesksbyigg.pages.dev/"
 _DESK = {
+    "budget-cut-15": ("Recorte del 15 % en el presupuesto de IT", "A 15 % cut in the IT budget"),
+    "iso27001-six-weeks": ("Auditoría ISO 27001 en seis semanas", "An ISO 27001 audit in six weeks"),
+    "critical-vulns-overdue": ("Vulnerabilidades críticas fuera de plazo", "Critical vulnerabilities past their deadline"),
+    "three-projects-two-budgets": ("Tres proyectos y presupuesto para dos", "Three projects and a budget for two"),
+    "worst-two-sites": ("Dos sedes con los peores indicadores", "Two sites with the worst indicators"),
+    "global-admins-governance": ("Gobierno del tenant: quién es administrador global", "Tenant governance: who is a Global Administrator"),
     "euc-provider-sla": ("El proveedor de EUC incumple el SLA tres meses seguidos", "The EUC provider misses its SLA three months running"),
     "firewall-contract-renewal": ("El contrato del firewall vence en 30 días", "The firewall contract expires in 30 days"),
     "major-incident-mail": ("Cae el correo: lideras el incidente grave", "Mail is down: you lead the major incident"),
@@ -1478,8 +1484,12 @@ _DESK = {
 
 }
 PRACTICE = {
+    "iso-27001-nis2-y-rgpd-en-it-controles-evidencias-plazos-y-un-portatil-perdido": ["iso27001-six-weeks"],
+    "qualys-agentes-etiquetas-priorizacion-y-la-vulnerabilidad-que-sigue-tras-parchear": ["critical-vulns-overdue"],
+    "business-case-de-it-opciones-costes-beneficios-medibles-y-la-decision-del-comite": ["three-projects-two-budgets"],
+    "microsoft-365-roles-de-administracion-pim-y-cuentas-de-emergencia": ["global-admins-governance"],
     "proveedores-de-conectividad-inventario-de-circuitos-averias-y-sla": ["euc-provider-sla"],
-    "presupuesto-de-it-preparar-y-seguir-el-presupuesto-anual-en-una-empresa-multisede": ["firewall-contract-renewal"],
+    "presupuesto-de-it-preparar-y-seguir-el-presupuesto-anual-en-una-empresa-multisede": ["firewall-contract-renewal", "budget-cut-15"],
     "entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas": ["risky-change-close"],
     "jira-service-management-un-ticket-bien-hecho": ["servicedesk-backlog"],
     "cmdb-clases-de-ci-relaciones-reconciliacion-calidad-del-dato-y-auditorias": ["cmdb-audit"],
@@ -1513,7 +1523,7 @@ PRACTICE = {
     "idrac-e-ilo-automatizar-con-redfish-racadm-e-ilorest-iso-remota-directorio-y-un-401": ["redfish-firmware"],
     "sai-powerchute-network-shutdown-en-vmware-y-windows-secuencia-de-apagado-prueba-y-hosts-que-se-apagan-antes": ["powerchute-shutdown"],
     "nginx-balanceo-de-carga-upstream-least-conn-keepalive-limit-req-pagina-de-mantenimiento-y-502-intermitentes": ["nginx-balancer-sticky"],
-    "grafana-zabbix-y-elasticsearch-panel-por-sede-variables-aprovisionamiento-como-codigo-ldap-carpetas-y-no-data": ["grafana-site-panel"],
+    "grafana-zabbix-y-elasticsearch-panel-por-sede-variables-aprovisionamiento-como-codigo-ldap-carpetas-y-no-data": ["grafana-site-panel", "worst-two-sites"],
     "elastic-agent-y-fleet-fleet-server-politicas-windows-y-linux-actualizaciones-y-un-agente-unhealthy": ["fleet-agent-offline"],
     "splunk-forwarders-indices-busquedas-spl-panel-alerta-licencia-y-una-fuente-que-deja-de-llegar": ["splunk-source-missing"],
     "azure-cost-management-ambitos-presupuestos-etiquetas-reservas-focus-y-la-factura-que-se-dispara": ["azure-bill-spike", "cloud-placement", "finops-commitments"],
