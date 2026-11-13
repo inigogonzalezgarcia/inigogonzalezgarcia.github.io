@@ -29087,7 +29087,7 @@ $ & "C:\\Program Files\\GLPI-Agent\\glpi-agent.bat" --force --debug
 """)
 
 # ---------------------------------------------------------------- 1.x · Windows: user profiles
-g(slug="windows-11-perfil-temporal-o-danado-diagnostico-reparacion-y-datos-del-usuario", topic="windows", date="2026-11-03",
+g(slug="windows-11-perfil-temporal-o-danado-diagnostico-reparacion-y-datos-del-usuario", topic="windows", date="2026-11-03", updated="2026-11-13",
   title_es="Windows 11: perfil temporal o dañado, diagnóstico, reparación segura y los datos del usuario",
   title_en="Windows 11: temporary or corrupted user profile, diagnosis, a safe fix and the user's data",
   seo_title_en="Windows 11: fix a temporary user profile · Iñigo González",

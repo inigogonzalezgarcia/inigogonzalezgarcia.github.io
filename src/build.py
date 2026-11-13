@@ -504,7 +504,7 @@ POST_RELATED = {
     "18-mecm-intune-comanagement-tracker": ["41-windows-update-ring-tracker", "29-tenant-separation-cutover-planner"],
     "20-entra-sso-app-audit": ["37-iam-access-review", "27-m365-tenant-governance-review"],
     "21-apple-fleet-audit": ["02-intune-compliance-report", "38-it-asset-lifecycle-planner"],
-    "23-it-vendor-contract-tracker": ["28-euc-provider-service-review", "43-azure-cost-rightsizing"],
+    "23-it-vendor-contract-tracker": ["28-euc-provider-service-review", "43-azure-cost-rightsizing", "50-saas-licence-spend-review"],
     "24-hospitality-it-preopening": ["34-venue-service-readiness", "42-retail-store-it-health"],
     "25-security-controls-evidence": ["39-vulnerability-remediation-sla", "37-iam-access-review"],
     "26-ot-segmentation-lab": ["25-security-controls-evidence", "39-vulnerability-remediation-sla"],
@@ -522,12 +522,12 @@ POST_RELATED = {
     "38-it-asset-lifecycle-planner": ["45-network-config-compliance", "21-apple-fleet-audit"],
     "sysadmindesksbyigg": ["19-ad-infra-health-check", "02-intune-compliance-report"],
     "01-finops-cloud-cost-dashboard": ["43-azure-cost-rightsizing", "35-private-cloud-capacity-review"],
-    "43-azure-cost-rightsizing": ["01-finops-cloud-cost-dashboard", "23-it-vendor-contract-tracker"],
-    "19-ad-infra-health-check": ["20-entra-sso-app-audit", "03-entra-id-hygiene-audit"],
+    "43-azure-cost-rightsizing": ["01-finops-cloud-cost-dashboard", "23-it-vendor-contract-tracker", "50-saas-licence-spend-review"],
+    "19-ad-infra-health-check": ["20-entra-sso-app-audit", "03-entra-id-hygiene-audit", "51-windows-server-baseline-drift"],
     "41-windows-update-ring-tracker": ["18-mecm-intune-comanagement-tracker", "02-intune-compliance-report"],
     "42-retail-store-it-health": ["31-dealer-systems-health", "34-venue-service-readiness"],
     "40-change-calendar-risk-review": ["36-major-incident-command-kit", "04-itsm-kpi-dashboard", "49-it-project-portfolio-health"],
-    "39-vulnerability-remediation-sla": ["25-security-controls-evidence", "37-iam-access-review"],
+    "39-vulnerability-remediation-sla": ["25-security-controls-evidence", "37-iam-access-review", "51-windows-server-baseline-drift"],
     "22-dex-experience-score": ["21-apple-fleet-audit", "28-euc-provider-service-review"],
 }
 def related_for_post(repo):
@@ -1828,7 +1828,17 @@ for rel in sorted((r for r in sizes if not r.startswith("es/")), key=lambda r: (
         urls.append(f"  <url><loc>{lurl(pg, l)}</loc><lastmod>{post_date.get(rel, newest)}</lastmod>{alts}</url>")
 (SITE / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
                                   + "\n".join(urls) + "\n</urlset>\n")
-(SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}sitemap.xml\n")
+# the same URLs split by language, under a sitemap index (a second way in for Google; sitemap.xml stays for Bing and IndexNow)
+_head = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
+_es = [u for u in urls if u.startswith(f"  <url><loc>{SITE_URL}es/")]
+_en = [u for u in urls if u not in _es]
+assert len(_en) == len(_es) and _en and len(_en) + len(_es) == len(urls), "sitemap split by language"
+(SITE / "sitemap-en.xml").write_text(_head + "\n".join(_en) + "\n</urlset>\n")
+(SITE / "sitemap-es.xml").write_text(_head + "\n".join(_es) + "\n</urlset>\n")
+(SITE / "sitemap_index.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+                                        + "".join(f"  <sitemap><loc>{SITE_URL}{n}</loc></sitemap>\n" for n in ("sitemap-en.xml", "sitemap-es.xml"))
+                                        + "</sitemapindex>\n")
+(SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}sitemap.xml\nSitemap: {SITE_URL}sitemap_index.xml\n")
 
 data = {"cities": {c["id"]: c for c in CITIES}, "hero": CONF["hero_photos"], "about": CONF.get("about_photo"),
         "formspree": bool(CONF.get("formspree_id")), "ga4": CONF.get("ga4_id", "")}

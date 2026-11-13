@@ -873,7 +873,7 @@ De la migración a Windows 11 que lideré: casi todo el esfuerzo no está en la 
 - Escribir tus workloads, olas y gates en `plan.json`.
 - Llevar `gates.md` a cada comité de cambios antes de mover el slider."""),
 
-dict(n="19", repo="19-ad-infra-health-check", date="2026-10-16", updated="2026-11-07", cat="tools",
+dict(n="19", repo="19-ad-infra-health-check", date="2026-10-16", updated="2026-11-13", cat="tools",
  title_en="A Monday-morning health check for Active Directory", title_es="Un chequeo de los lunes para Active Directory",
  seo_title_en="Active Directory health check with PowerShell · Iñigo González",
  seo_title_es="Chequeo de salud de Active Directory con PowerShell · Iñigo González",
@@ -1070,7 +1070,7 @@ Explicar la nota importa más que el número: cada punto perdido tiene que lleva
 - Desplegar el recolector con un script de corrección de Intune o tu herramienta RMM.
 - Ajustar los umbrales tras unas semanas de datos reales.
 - Hablar antes con tu delegado de protección de datos e informar por sede y departamento."""),
-dict(n="23", repo="23-it-vendor-contract-tracker", date="2026-10-18", cat="tools",
+dict(n="23", repo="23-it-vendor-contract-tracker", date="2026-10-18", updated="2026-11-13", cat="tools",
  title_en="Every IT contract renewal, notice deadline and saving in one monthly review", title_es="Cada renovación, preaviso y ahorro de los contratos de IT en una revisión mensual",
  seo_title_en="IT vendor contract and renewal tracker · Iñigo González",
  seo_title_es="Contratos y renovaciones de IT en una revisión · Iñigo González",
@@ -1932,7 +1932,7 @@ De llevar la IT de una sede, donde uso Device42 para el inventario de las salas 
 - Ejecutarlo con las exportaciones reales de una sede y ajustar la política de renovación, los costes unitarios y la política de equipos por persona con los responsables de la sede y de finanzas.
 - Leer las compras y las garantías desde la API del fabricante por número de serie en lugar de un CSV.
 - Volcar los equipos de usuario en Device42 por número de serie, para que sea el inventario único de toda la oficina y este informe lo compruebe en lugar de construirlo."""),
-dict(n="39", repo="39-vulnerability-remediation-sla", date="2026-10-31", cat="tools",
+dict(n="39", repo="39-vulnerability-remediation-sla", date="2026-10-31", updated="2026-11-13", cat="tools",
  title_en="A VPN with a known exploit and thirty servers waiting for a reboot: vulnerability remediation against the SLA",
  title_es="Una VPN con un exploit conocido y treinta servidores sin reiniciar: la corrección de vulnerabilidades frente al SLA",
  seo_title_en="Vulnerability remediation SLA review · Iñigo González",
@@ -2145,7 +2145,7 @@ De dar soporte a las boutiques y puntos de venta de marcas de lujo, con sus impr
 - Ejecutar las exportaciones y la revisión cada lunes por la noche y enviar a cada técnico de campo su parte de la lista.
 - Leer los tickets desde la Table API de ServiceNow en lugar de una exportación de lista.
 - Guardar el histórico semanal de cada tienda para ver su tendencia en un trimestre."""),
-dict(n="43", repo="43-azure-cost-rightsizing", date="2026-11-04", updated="2026-11-11", cat="tools",
+dict(n="43", repo="43-azure-cost-rightsizing", date="2026-11-04", updated="2026-11-13", cat="tools",
  title_en="A reservation at 55% about to auto-renew and VMs billed while stopped: the Azure cost review",
  title_es="Una reserva al 55% que se renueva sola y VMs paradas que se pagan: la revisión de costes de Azure",
  seo_title_en="Monthly Azure cost review and right-sizing · Iñigo González",
