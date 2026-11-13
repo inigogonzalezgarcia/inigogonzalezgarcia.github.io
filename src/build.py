@@ -411,8 +411,8 @@ def share_html(p):
 
 # ---------- "Related": each guide topic points to the posts (repos) that use it, and each post back to its guides
 RELATED = {
-    "defender-asr": ["51-windows-server-baseline-drift"],
-    "active-directory": ["19-ad-infra-health-check", "sysadmindesksbyigg", "48-new-starter-day-one-readiness"], "android": ["02-intune-compliance-report", "48-new-starter-day-one-readiness"], "bitlocker": ["02-intune-compliance-report"],
+    "defender-asr": ["51-windows-server-baseline-drift", "52-endpoint-security-coverage"], "intune-epm": ["52-endpoint-security-coverage"],
+    "active-directory": ["19-ad-infra-health-check", "sysadmindesksbyigg", "48-new-starter-day-one-readiness"], "android": ["02-intune-compliance-report", "48-new-starter-day-one-readiness"], "bitlocker": ["02-intune-compliance-report", "52-endpoint-security-coverage"],
     "ios": ["21-apple-fleet-audit"], "jira": ["30-jira-confluence-admin-kit", "04-itsm-kpi-dashboard", "40-change-calendar-risk-review", "46-problem-management-review", "49-it-project-portfolio-health"], "m365": ["27-m365-tenant-governance-review", "44-m365-copilot-readiness", "48-new-starter-day-one-readiness", "50-saas-licence-spend-review"],
     "teams": ["22-dex-experience-score"], "outlook": ["27-m365-tenant-governance-review", "sysadmindesksbyigg"],
     "windows": ["22-dex-experience-score", "18-mecm-intune-comanagement-tracker", "sysadmindesksbyigg", "41-windows-update-ring-tracker"],
@@ -423,7 +423,7 @@ RELATED = {
     "docker": ["10-gpu-fleet-observability", "14-slurm-gpu-ops"], "elk": ["08-edge-health-slo-monitor"],
     "conditional-access": ["27-m365-tenant-governance-review", "03-entra-id-hygiene-audit", "44-m365-copilot-readiness"], "entra-sso": ["20-entra-sso-app-audit", "50-saas-licence-spend-review"],
     "grafana": ["10-gpu-fleet-observability", "36-major-incident-command-kit"], "hyper-v": ["35-private-cloud-capacity-review"],
-    "intune": ["02-intune-compliance-report", "18-mecm-intune-comanagement-tracker", "29-tenant-separation-cutover-planner", "41-windows-update-ring-tracker", "47-multi-site-it-scorecard", "48-new-starter-day-one-readiness"],
+    "intune": ["02-intune-compliance-report", "18-mecm-intune-comanagement-tracker", "29-tenant-separation-cutover-planner", "41-windows-update-ring-tracker", "47-multi-site-it-scorecard", "48-new-starter-day-one-readiness", "52-endpoint-security-coverage"],
     "graph": ["17-teams-rooms-fleet-health", "20-entra-sso-app-audit", "44-m365-copilot-readiness"], "databases": ["32-backup-restore-test-tracker"],
     "solarwinds": ["36-major-incident-command-kit"], "vsphere": ["35-private-cloud-capacity-review"],
     "aws": ["07-aws-private-connectivity", "01-finops-cloud-cost-dashboard"], "azure-monitor": ["36-major-incident-command-kit", "43-azure-cost-rightsizing"],
@@ -476,6 +476,7 @@ def related_for_guide(topic):
                           _POST_BY_REPO[r]["title_es"], _POST_BY_REPO[r]["title_en"]) for r in RELATED.get(topic, [])])
 # posts that link to each other in "Related" (shown before the guides)
 POST_RELATED = {
+    "52-endpoint-security-coverage": ["02-intune-compliance-report", "51-windows-server-baseline-drift"],
     "51-windows-server-baseline-drift": ["19-ad-infra-health-check", "39-vulnerability-remediation-sla"],
     "50-saas-licence-spend-review": ["43-azure-cost-rightsizing", "23-it-vendor-contract-tracker"],
     "49-it-project-portfolio-health": ["40-change-calendar-risk-review", "46-problem-management-review"],
