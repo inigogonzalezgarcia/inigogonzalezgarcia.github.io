@@ -1293,6 +1293,11 @@ def gmd(text, lang):
 # SysAdmin Desks (simulated tickets on Cloudflare Pages): the desk that practises each guide
 SIM_URL = "https://sysadmindesksbyigg.pages.dev/"
 _DESK = {
+    "erp-renew-or-saas": ("Renovar el ERP o migrar a SaaS: business case al comité", "Renew the ERP or move to SaaS: the business case for the committee"),
+    "copilot-group-wide": ("Copilot para toda la empresa: ¿sí o no?", "Copilot for the whole company: yes or no?"),
+    "divestiture-tenant-split": ("Se vende una división: separar el tenant", "A division is sold: separating the tenant"),
+    "three-year-board-plan": ("Plan de IT a tres años para el consejo", "A three-year IT plan for the Board"),
+    "ransomware-board": ("Ransomware en una sede: decisión y comunicación al consejo", "Ransomware at a site: the decision and what the Board is told"),
     "budget-cut-15": ("Recorte del 15 % en el presupuesto de IT", "A 15 % cut in the IT budget"),
     "iso27001-six-weeks": ("Auditoría ISO 27001 en seis semanas", "An ISO 27001 audit in six weeks"),
     "critical-vulns-overdue": ("Vulnerabilidades críticas fuera de plazo", "Critical vulnerabilities past their deadline"),
@@ -1484,16 +1489,19 @@ _DESK = {
 
 }
 PRACTICE = {
+    "microsoft-365-copilot-sobreexposicion-piloto-agentes-y-un-documento-que-no-deberia-ver": ["copilot-group-wide"],
+    "migracion-de-tenant-microsoft-365-inventario-identidades-buzones-onedrive-y-dia-del-corte": ["divestiture-tenant-split"],
+    "consejo-de-administracion-soporte-tecnico-a-la-reunion-sala-consejeros-remotos-y-plan-b": ["three-year-board-plan"],
     "iso-27001-nis2-y-rgpd-en-it-controles-evidencias-plazos-y-un-portatil-perdido": ["iso27001-six-weeks"],
     "qualys-agentes-etiquetas-priorizacion-y-la-vulnerabilidad-que-sigue-tras-parchear": ["critical-vulns-overdue"],
-    "business-case-de-it-opciones-costes-beneficios-medibles-y-la-decision-del-comite": ["three-projects-two-budgets"],
+    "business-case-de-it-opciones-costes-beneficios-medibles-y-la-decision-del-comite": ["three-projects-two-budgets", "erp-renew-or-saas"],
     "microsoft-365-roles-de-administracion-pim-y-cuentas-de-emergencia": ["global-admins-governance"],
     "proveedores-de-conectividad-inventario-de-circuitos-averias-y-sla": ["euc-provider-sla"],
     "presupuesto-de-it-preparar-y-seguir-el-presupuesto-anual-en-una-empresa-multisede": ["firewall-contract-renewal", "budget-cut-15"],
     "entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas": ["risky-change-close"],
     "jira-service-management-un-ticket-bien-hecho": ["servicedesk-backlog"],
     "cmdb-clases-de-ci-relaciones-reconciliacion-calidad-del-dato-y-auditorias": ["cmdb-audit"],
-    "dr-bcp-rpo-y-rto-por-servicio-plan-de-recuperacion-y-prueba-completa": ["dr-erp-rto"],
+    "dr-bcp-rpo-y-rto-por-servicio-plan-de-recuperacion-y-prueba-completa": ["dr-erp-rto", "ransomware-board"],
     "oficina-que-crece-de-15-a-120-personas-con-sala-de-trading": ["new-site-network"],
     "replicacion-mysql-gtid-y-postgresql-streaming-conmutacion-planificada-failover-cadena-de-conexion-y-replica-con-horas-de-retraso": ["erp-ha"],
     "it-ot-integrar-la-red-de-planta-con-la-corporativa-inventario-zonas-dmz-industrial-y-una-linea-parada": ["ot-integration"],
