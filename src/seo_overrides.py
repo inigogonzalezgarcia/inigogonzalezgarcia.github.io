@@ -60,6 +60,9 @@ GUIDES_SEO = {
         "en": "Microsoft Teams Rooms setup: resource account, licence, device sign-in, peripherals, the Pro Management Portal and typical Monday-morning room failures.",
         "es": "Microsoft Teams Rooms: cuenta de recurso, licencia, inicio de sesión del dispositivo, periféricos, Pro Management Portal y los fallos típicos de una sala.",
     },
+    "windows-11-perfil-temporal-o-danado-diagnostico-reparacion-y-datos-del-usuario": {
+        "es": "Perfil temporal o dañado en Windows 11: eventos del servicio de perfiles, claves .bak de ProfileList, reparación segura, recuperar datos y copia de OneDrive.",
+    },
 }
 
 KEYS = {"en": "seo_desc", "es": "seo_desc_es"}
