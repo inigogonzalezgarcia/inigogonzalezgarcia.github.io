@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://inigogonzalezgarcia.github.io/sitemap.xml
+Sitemap: https://inigogonzalezgarcia.github.io/sitemap_index.xml
