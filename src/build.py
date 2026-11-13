@@ -1293,6 +1293,17 @@ def gmd(text, lang):
 # SysAdmin Desks (simulated tickets on Cloudflare Pages): the desk that practises each guide
 SIM_URL = "https://sysadmindesksbyigg.pages.dev/"
 _DESK = {
+    "dr-erp-rto": ("ERP con RTO 4 h y RPO 15 min: diseña la recuperación", "ERP with a 4 h RTO and a 15 min RPO: design the recovery"),
+    "cloud-placement": ("La nueva app: ¿on-prem, Azure o AWS?", "The new app: on-premises, Azure or AWS?"),
+    "new-site-network": ("Nueva sede de 120 personas: topología de red", "A new office for 120 people: the network design"),
+    "erp-ha": ("El ERP cayó con el host: alta disponibilidad", "The ERP went down with its host: high availability"),
+    "ot-integration": ("Integrar la red de planta con la corporativa", "Connecting the plant's network with the corporate one"),
+    "finops-commitments": ("Reservas, savings plans o apagar: optimizar el gasto", "Reservations, savings plans or switching off: optimising the spend"),
+    "hotel-preopening": ("Hotel: faltan 10 días para abrir y el checklist de IT", "Hotel: ten days to opening and the IT checklist"),
+    "oracle-hw-change": ("Cambiar el servidor de Oracle sin parar el hospital", "Changing the Oracle server without stopping the hospital"),
+    "win11-trading-hours": ("Migrar a Windows 11 las mesas de trading sin tocar el horario", "Windows 11 on the trading desks without touching market hours"),
+    "corner-preopening": ("Corner en un gran almacén: abre el sábado", "A corner in a department store: it opens on Saturday"),
+    "clinical-maintenance": ("Ventana de mantenimiento en un sistema clínico 24x7", "A maintenance window on a 24x7 clinical system"),
     "k8s-crashloop": ("Pod en CrashLoopBackOff tras el despliegue", "The pod is in CrashLoopBackOff after the release"),
     "terraform-drift": ("Alguien cambió el firewall a mano: el plan quiere deshacerlo", "Someone changed the firewall by hand: the plan wants to undo it"),
     "ansible-patch-fails": ("El playbook de parches falla en 3 servidores", "The patching playbook fails on three servers"),
@@ -1460,6 +1471,15 @@ _DESK = {
 
 }
 PRACTICE = {
+    "dr-bcp-rpo-y-rto-por-servicio-plan-de-recuperacion-y-prueba-completa": ["dr-erp-rto"],
+    "oficina-que-crece-de-15-a-120-personas-con-sala-de-trading": ["new-site-network"],
+    "replicacion-mysql-gtid-y-postgresql-streaming-conmutacion-planificada-failover-cadena-de-conexion-y-replica-con-horas-de-retraso": ["erp-ha"],
+    "it-ot-integrar-la-red-de-planta-con-la-corporativa-inventario-zonas-dmz-industrial-y-una-linea-parada": ["ot-integration"],
+    "hotel-en-pre-apertura-checklist-de-it-hasta-el-dia-de-apertura": ["hotel-preopening"],
+    "oracle-cambiar-hardware-y-sistema-operativo-del-servidor-de-base-de-datos": ["oracle-hw-change"],
+    "windows-11-migrar-los-equipos-de-una-sede-con-sala-de-trading": ["win11-trading-hours"],
+    "corner-de-marca-en-gran-almacen-checklist-de-it-de-la-pre-apertura": ["corner-preopening"],
+    "ventana-de-mantenimiento-de-un-sistema-clinico-24x7-contingencia-vuelta-atras-y-validacion": ["clinical-maintenance"],
     "kubernetes-de-docker-compose-a-un-cluster-gestionado-despliegue-y-un-pod-en-crashloopbackoff": ["k8s-crashloop", "gpu-xid-errors"],
     "terraform-modulo-estado-remoto-plan-en-el-pipeline-deriva-e-importacion": ["terraform-drift"],
     "ansible-primer-playbook-parchear-servidores-linux": ["ansible-patch-fails"],
@@ -1484,7 +1504,7 @@ PRACTICE = {
     "grafana-zabbix-y-elasticsearch-panel-por-sede-variables-aprovisionamiento-como-codigo-ldap-carpetas-y-no-data": ["grafana-site-panel"],
     "elastic-agent-y-fleet-fleet-server-politicas-windows-y-linux-actualizaciones-y-un-agente-unhealthy": ["fleet-agent-offline"],
     "splunk-forwarders-indices-busquedas-spl-panel-alerta-licencia-y-una-fuente-que-deja-de-llegar": ["splunk-source-missing"],
-    "azure-cost-management-ambitos-presupuestos-etiquetas-reservas-focus-y-la-factura-que-se-dispara": ["azure-bill-spike"],
+    "azure-cost-management-ambitos-presupuestos-etiquetas-reservas-focus-y-la-factura-que-se-dispara": ["azure-bill-spike", "cloud-placement", "finops-commitments"],
     "amazon-aws-cuentas-iam-vpc-con-vpn-a-la-oficina-y-un-servidor-que-no-llega-al-recurso-compartido": ["aws-no-share"],
     "python-y-microsoft-graph-informe-de-usuarios-y-dispositivos-paginacion-429-y-un-403": ["graph-429-report"],
     "azure-virtual-desktop-y-windows-365-host-pool-cloud-pc-y-conexion-que-falla": ["cloudpc-no-connect"],
