@@ -83,6 +83,7 @@
     <article class="prose guide">
       
       <div class="en" lang="en">
+<a class="practice-strip" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/divestiture-tenant-split" target="_blank" rel="noopener noreferrer"><b>Rather practise it?</b><span>Solve the simulated ticket "A division is sold: separating the tenant" in SysAdmin Desks ↗</span></a>
 <h2>What you&#x27;ll get</h2>
 <p>Moving a company&#x27;s users, mail and files from one Microsoft 365 tenant to another with a single cutover weekend and a quiet Monday. Knowing from the start what is migrated with tools, what has to be rebuilt by hand and what cannot be moved, so nobody finds out on Monday.</p>
 <h2>Before you start</h2>
@@ -111,6 +112,7 @@
 <ul><li><strong>Bounces</strong>: message trace in the target looking for <code>550 5.1.1</code> and <code>IMCEAEX</code>; each one is usually a missing x500.</li><li><strong>MFA and first sign-in</strong>: Monday&#x27;s call peak. Temporary Access Pass and a one-page guide with screenshots shorten the queue.</li><li><strong>Outlook</strong>: profiles that need recreating and shared mailboxes that don&#x27;t appear (permissions are re-applied in the target from the inventory).</li><li>A <strong>daily report</strong> to management: incidents open, closed and those that need a decision.</li><li>When the TSA ends: remove licences and close the source tenant (or the relevant part) with a copy of whatever must be kept for compliance.</li></ul>
 <h2>Next steps</h2>
 <ul><li>If the tenants will live side by side, <strong>cross-tenant synchronisation</strong> and Microsoft 365&#x27;s <strong>multitenant organization</strong>: users see each other in the directory and in Teams without migrating anything.</li><li><strong>B2B access</strong> during the TSA: users already migrated sign in as guests to whatever still lives in the source.</li><li>The Level 2 Azure AD Connect guide: in a hybrid migration it is the piece taken apart in the source and rebuilt in the target.</li></ul>
+<p class="practica">Want to practise it? Solve the ticket <a href="https://sysadmindesksbyigg.pages.dev/tickets/divestiture-tenant-split#en">“A division is sold: separating the tenant”</a> in SysAdmin Desks, free and in your browser.</p>
 <p>Is something missing, or different in your environment? <a href="../about.html#contacto">Get in touch</a> and I'll fix it.</p>
       </div>
       <div class="news-box">
@@ -124,7 +126,7 @@
       <p class="repo-name"><span class="en">Level 4</span> · <span class="en">Microsoft 365 tenant migrations</span></p>
       <p class="muted small"><span class="en">The examples (domains, users, names) are fictional. The windows and terminals are simulated for the guide.</span></p>
       <a class="arrow-link" href="nivel-4.html"><span class="en">All Level 4 guides</span> →</a>
-      
+      <div class="practice"><div class="practice-bar" aria-hidden="true"><i></i><i></i><i></i><b>sysadmin-desks</b></div><div class="practice-body"><p class="practice-kicker"><span class="en">Practise it</span></p><p class="practice-h"><span class="en">Solve this ticket in a simulated console</span></p><p class="practice-cmd" aria-hidden="true">PS C:\&gt; </p><p class="practice-t"><span class="en">Investigate, fix the cause and write the work note: it is scored when you close the ticket. Free, with your own account.</span></p><a class="practice-desk en" href="https://sysadmindesksbyigg.pages.dev/?lang=en#/desk/divestiture-tenant-split" target="_blank" rel="noopener noreferrer"><span>A division is sold: separating the tenant</span><span aria-hidden="true">↗</span></a><p class="practice-t practice-more"><span class="en">More about the simulator: <a href="https://sysadmindesksbyigg.pages.dev/help#en" target="_blank" rel="noopener noreferrer">how it works</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a> · <a href="https://sysadmindesksbyigg.pages.dev/tickets/#en" target="_blank" rel="noopener noreferrer">all the tickets</a></span></p></div></div>
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>
