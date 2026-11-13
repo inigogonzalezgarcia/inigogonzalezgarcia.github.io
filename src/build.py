@@ -1292,6 +1292,13 @@ def gmd(text, lang):
 # SysAdmin Desks (simulated tickets on Cloudflare Pages): the desk that practises each guide
 SIM_URL = "https://sysadmindesksbyigg.pages.dev/"
 _DESK = {
+    "k8s-crashloop": ("Pod en CrashLoopBackOff tras el despliegue", "The pod is in CrashLoopBackOff after the release"),
+    "terraform-drift": ("Alguien cambió el firewall a mano: el plan quiere deshacerlo", "Someone changed the firewall by hand: the plan wants to undo it"),
+    "ansible-patch-fails": ("El playbook de parches falla en 3 servidores", "The patching playbook fails on three servers"),
+    "jenkins-pipeline-red": ("El pipeline de los scripts está en rojo desde ayer", "The scripts' pipeline has been red since yesterday"),
+    "grafana-slo-budget": ("Presupuesto de errores agotado en el portal", "The portal's error budget is spent"),
+    "gpu-xid-errors": ("Nodo GPU con errores Xid y trabajos que fallan", "A GPU node with Xid errors and failing jobs"),
+    "crypto-mining": ("CPU al 100 % de noche en tres equipos", "CPU at 100% at night on three PCs"),
     "sentinel-impossible-travel": ("Sentinel: inicio de sesión desde dos países en 10 minutos", "Sentinel: a sign-in from two countries in 10 minutes"),
     "azmon-agent-silent": ("Un servidor dejó de enviar datos a Log Analytics", "A server stopped sending data to Log Analytics"),
     "cyberark-cpm-fails": ("CyberArk no rota la contraseña de la cuenta de servicio", "CyberArk does not rotate the service account's password"),
@@ -1452,6 +1459,12 @@ _DESK = {
 
 }
 PRACTICE = {
+    "kubernetes-de-docker-compose-a-un-cluster-gestionado-despliegue-y-un-pod-en-crashloopbackoff": ["k8s-crashloop", "gpu-xid-errors"],
+    "terraform-modulo-estado-remoto-plan-en-el-pipeline-deriva-e-importacion": ["terraform-drift"],
+    "ansible-primer-playbook-parchear-servidores-linux": ["ansible-patch-fails"],
+    "jenkins-pipeline-que-prueba-los-scripts-del-equipo-en-cada-cambio": ["jenkins-pipeline-red"],
+    "grafana-origen-de-datos-primer-panel-y-alerta-al-canal": ["grafana-slo-budget"],
+    "criptomonedas-en-la-empresa-mineria-no-autorizada-bloqueo-politica-custodia-nodos-y-un-servidor-al-100-de-cpu": ["crypto-mining"],
     "microsoft-sentinel-conectores-una-regla-en-kql-y-un-incidente-de-principio-a-fin": ["sentinel-impossible-travel"],
     "azure-monitor-y-log-analytics-area-de-trabajo-reglas-de-recopilacion-alertas-y-un-servidor-que-deja-de-enviar-datos": ["azmon-agent-silent"],
     "cyberark-safes-rotacion-automatica-sesiones-grabadas-y-una-cuenta-que-el-cpm-no-cambia": ["cyberark-cpm-fails"],
