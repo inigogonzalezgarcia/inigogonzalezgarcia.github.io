@@ -1293,6 +1293,13 @@ def gmd(text, lang):
 # SysAdmin Desks (simulated tickets on Cloudflare Pages): the desk that practises each guide
 SIM_URL = "https://sysadmindesksbyigg.pages.dev/"
 _DESK = {
+    "euc-provider-sla": ("El proveedor de EUC incumple el SLA tres meses seguidos", "The EUC provider misses its SLA three months running"),
+    "firewall-contract-renewal": ("El contrato del firewall vence en 30 días", "The firewall contract expires in 30 days"),
+    "major-incident-mail": ("Cae el correo: lideras el incidente grave", "Mail is down: you lead the major incident"),
+    "monday-problem": ("El mismo incidente cada lunes", "The same incident every Monday"),
+    "risky-change-close": ("Un cambio de riesgo en semana de cierre", "A risky change in closing week"),
+    "servicedesk-backlog": ("El backlog del service desk no para de crecer", "The service desk backlog keeps growing"),
+    "cmdb-audit": ("La auditoría encuentra un 30 % de CI sin dueño", "The audit finds 30 % of CIs without an owner"),
     "dr-erp-rto": ("ERP con RTO 4 h y RPO 15 min: diseña la recuperación", "ERP with a 4 h RTO and a 15 min RPO: design the recovery"),
     "cloud-placement": ("La nueva app: ¿on-prem, Azure o AWS?", "The new app: on-premises, Azure or AWS?"),
     "new-site-network": ("Nueva sede de 120 personas: topología de red", "A new office for 120 people: the network design"),
@@ -1471,6 +1478,11 @@ _DESK = {
 
 }
 PRACTICE = {
+    "proveedores-de-conectividad-inventario-de-circuitos-averias-y-sla": ["euc-provider-sla"],
+    "presupuesto-de-it-preparar-y-seguir-el-presupuesto-anual-en-una-empresa-multisede": ["firewall-contract-renewal"],
+    "entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas": ["risky-change-close"],
+    "jira-service-management-un-ticket-bien-hecho": ["servicedesk-backlog"],
+    "cmdb-clases-de-ci-relaciones-reconciliacion-calidad-del-dato-y-auditorias": ["cmdb-audit"],
     "dr-bcp-rpo-y-rto-por-servicio-plan-de-recuperacion-y-prueba-completa": ["dr-erp-rto"],
     "oficina-que-crece-de-15-a-120-personas-con-sala-de-trading": ["new-site-network"],
     "replicacion-mysql-gtid-y-postgresql-streaming-conmutacion-planificada-failover-cadena-de-conexion-y-replica-con-horas-de-retraso": ["erp-ha"],
@@ -1520,7 +1532,7 @@ PRACTICE = {
     "licencias-office-365-por-perfil-con-el-service-desk-tiendas-y-oficina-central": ["o365-wrong-licence"],
     "citrix-publicar-aplicacion-clinica-y-dar-soporte-en-planta": ["citrix-clinical-app"],
     "red-hat-ajuste-de-rendimiento-de-un-servidor-critico": ["rhel-slow-io"],
-    "windows-server-actualizaciones-planificadas-sin-cortar-el-servicio": ["winserver-patch-cluster"],
+    "windows-server-actualizaciones-planificadas-sin-cortar-el-servicio": ["winserver-patch-cluster", "monday-problem"],
     "lan-wan-y-wifi-conectar-plantas-y-sedes-de-varios-paises": ["wan-site-slow"],
     "sql-server-copias-y-restauracion-de-la-base-de-datos-del-erp": ["sql-restore-pit"],
     "vmware-mantenimiento-de-hosts-y-maquinas-virtuales-en-varias-plantas": ["vmware-host-maint"],
@@ -1612,7 +1624,7 @@ PRACTICE = {
     "cisco-vlans-troncales-router-de-la-sede-y-un-puerto-que-no-da-red": ["net-err-disabled", "net-wrong-vlan"],
     "switches-hp-aruba-vlans-copia-de-configuracion-firmware-y-puerto-a-100-mb": ["net-wrong-vlan"],
     "fortigate-politicas-con-minimo-privilegio-vpn-con-entra-id-tuneles-entre-sedes-y-un-usuario-que-no-llega": ["net-fortigate-branch"],
-    "monitorizacion-desplegar-alarmas-y-responder-en-plataformas-24x7": ["net-psu-rma"],
+    "monitorizacion-desplegar-alarmas-y-responder-en-plataformas-24x7": ["net-psu-rma", "major-incident-mail"],
     "powershell-altas-masivas-en-active-directory-desde-csv-y-bajas-con-revision": ["leaver-return"],
     "active-directory-alta-usuario-grupos": ["ad-lockout", "starter-desk-ready"],
     "active-directory-directiva-de-contrasenas-pso-bloqueos-y-la-cuenta-que-se-bloquea-cada-manana": ["ad-lockout"],
