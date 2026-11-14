@@ -54,7 +54,7 @@ Python, pandas, Plotly y Streamlit. `data_generator.py` crea 90 días de factura
 - Añadir una línea base estadística por servicio, para comparar cada servicio con su propio histórico.
 - Fijar umbrales de presupuesto por departamento."""),
 
-dict(n="02", repo="02-intune-compliance-report", date="2026-09-30", cat="tools",
+dict(n="02", repo="02-intune-compliance-report", date="2026-09-30", updated="2026-11-14", cat="tools",
  title_en="An Intune compliance report you can hand to a manager", title_es="Un informe de cumplimiento de Intune que se puede enseñar a dirección",
  seo_title_en="Intune compliance report with Microsoft Graph · Iñigo González",
  seo_title_es="Informe de cumplimiento de Intune con Graph · Iñigo González",
@@ -970,7 +970,7 @@ De integrar aplicaciones SaaS en Entra ID: lo difícil no es configurar el SSO, 
 - Asignar un propietario a cada aplicación del calendario de renovaciones.
 - Ampliar las comprobaciones de aprovisionamiento SCIM y de OIDC, que son las siguientes que estoy desarrollando."""),
 
-dict(n="21", repo="21-apple-fleet-audit", date="2026-10-17", cat="tools",
+dict(n="21", repo="21-apple-fleet-audit", date="2026-10-17", updated="2026-11-14", cat="tools",
  title_en="A weekly review for a Jamf Pro Apple fleet", title_es="Una revisión semanal para una flota Apple en Jamf Pro",
  seo_title_en="Jamf Pro weekly audit for an Apple fleet · Iñigo González",
  seo_title_es="Auditoría semanal de Jamf Pro (flota Apple) · Iñigo González",
