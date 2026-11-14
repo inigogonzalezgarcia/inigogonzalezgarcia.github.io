@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>DNS, DHCP e IPAM en Windows Server: revisión · Iñigo González</title>
+<meta name="description" content="Revisión mensual de DNS y DHCP en Windows Server: ámbitos que se llenan, conmutación, registros antiguos, DHCP no autorizado, zonas inseguras y el plan IP.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/blog/53-dns-dhcp-ipam-review.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/53-dns-dhcp-ipam-review.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/53-dns-dhcp-ipam-review.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/53-dns-dhcp-ipam-review.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DNS, DHCP e IPAM en Windows Server: revisión · Iñigo González">
+<meta property="og:description" content="Revisión mensual de DNS y DHCP en Windows Server: ámbitos que se llenan, conmutación, registros antiguos, DHCP no autorizado, zonas inseguras y el plan IP.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/blog/53-dns-dhcp-ipam-review.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/53-dns-dhcp-ipam-review.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DNS, DHCP e IPAM en Windows Server: revisión · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Una wifi de invitados llena a mitad de mes y un controlador de dominio retirado en septiembre: la revisión de DNS, DHCP e IPAM","alternativeHeadline":"A guest Wi-Fi full by the second week and a domain controller retired in September: the DNS, DHCP and IPAM review","description":"A partir de los ámbitos, opciones, reservas, concesiones y relaciones de conmutación de DHCP, los servidores, zonas y registros de DNS, el plan de direccionamiento IP y el registro de excepciones: qué ámbitos se están llenando y cuándo se llenarán, si la conmutación funciona, qué clientes apuntan a un servidor DNS que ya no existe, quién puede sobrescribir un nombre, qué registros están obsoletos o dentro de un pool de DHCP, y dónde no coinciden el plan IP y la configuración, con una decisión para cada elección y un dosier de una página con las evidencias para las auditorías de ISO 27001 y NIS2.","datePublished":"2026-11-14","dateModified":"2026-11-14","inLanguage":"es","image":"https://inigogonzalezgarcia.github.io/assets/og/53-dns-dhcp-ipam-review.png","url":"https://inigogonzalezgarcia.github.io/es/blog/53-dns-dhcp-ipam-review.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/blog/53-dns-dhcp-ipam-review.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/es/blog/#blog"},"articleSection":"Herramientas de IT Ops"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/es/blog/"},{"@type":"ListItem","position":3,"name":"Una wifi de invitados llena a mitad de mes y un controlador de dominio retirado en septiembre: la revisión de DNS, DHCP e IPAM","item":"https://inigogonzalezgarcia.github.io/es/blog/53-dns-dhcp-ipam-review.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span></a><a href="../guias.html"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../blog/53-dns-dhcp-ipam-review.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 53</p>
+    <h1><span class="es">Una wifi de invitados llena a mitad de mes y un controlador de dominio retirado en septiembre: la revisión de DNS, DHCP e IPAM</span></h1>
+    <p class="lede"><span class="es">A partir de los ámbitos, opciones, reservas, concesiones y relaciones de conmutación de DHCP, los servidores, zonas y registros de DNS, el plan de direccionamiento IP y el registro de excepciones: qué ámbitos se están llenando y cuándo se llenarán, si la conmutación funciona, qué clientes apuntan a un servidor DNS que ya no existe, quién puede sobrescribir un nombre, qué registros están obsoletos o dentro de un pool de DHCP, y dónde no coinciden el plan IP y la configuración, con una decisión para cada elección y un dosier de una página con las evidencias para las auditorías de ISO 27001 y NIS2.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span> · <span class="es">14 nov 2026</span> · <span class="es">5 min</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>El problema</h2>
+<p>DHCP y DNS funcionan hasta el día en que dejan de hacerlo, y los motivos se acumulan sin hacer ruido durante meses. La wifi de invitados se queda con la concesión de ocho días que viene por defecto, así que a mitad de un mes con mucho movimiento las visitas no se pueden conectar. Llega un lote de terminales de escaneo nuevos para la campaña y su ámbito se llenará antes de Navidad. Se retira un controlador de dominio, pero varios ámbitos siguen dándolo como servidor DNS y sus registros SRV siguen ahí; además era el único servidor que hacía la limpieza. El enlace con una sede se cae después de un cambio en el cortafuegos y los servidores en conmutación dejan de replicar las concesiones. Un ámbito creado durante una caída sigue activo en otro servidor. Alguien conecta un router doméstico en el showroom para un evento. Un proveedor deja una zona aceptando actualizaciones no seguras, un técnico pone a unas impresoras una dirección fija en mitad de un pool, y el plan de direccionamiento IP dice una cosa mientras los ámbitos dicen otra. Cada consola enseña su parte. La comprobación de salud de Active Directory que publiqué antes en la serie mira los controladores de dominio semana a semana, y la revisión de la línea base de Windows Server su configuración; esta revisión pregunta si cada equipo va a obtener una dirección y a encontrar los servidores que necesita.</p>
+<h2>Qué he hecho</h2>
+<ul><li>DHCP: cómo de lleno está cada ámbito y cuándo se llenará al ritmo de este mes; las relaciones de conmutación y los ámbitos que se quedan fuera; los servidores DNS y la puerta de enlace que entrega cada ámbito; la duración de las concesiones frente al estándar para invitados, wifi y usuarios; reservas duplicadas y sin equipo detrás; la misma subred servida por dos servidores; y servidores DHCP no autorizados en Active Directory.</li><li>DNS: zonas que aceptan actualizaciones no seguras, envejecimiento y limpieza, registros dinámicos obsoletos y duplicados, registros estáticos dentro de un pool de DHCP, registros que siguen apuntando a un controlador de dominio retirado, registros inversos que faltan, reenviadores y alias que no apuntan a nada.</li><li>El plan de direccionamiento IP frente a los dos: ámbitos que no están en el plan, subredes planificadas sin ámbito, subredes que se solapan, subredes sin responsable y subredes sin zona de búsqueda inversa.</li><li>Excepciones: las válidas se aceptan; las caducadas, a punto de caducar o incompletas vuelven como hallazgos.</li><li><code>report.html</code> con cada ámbito, su crecimiento y los días que le quedan, las zonas y el plan cruzado; <code>review-pack.md</code>, una página para la revisión mensual de infraestructura con las decisiones, las acciones con responsable y fecha y las evidencias para auditoría; CSV por ámbito, reserva, zona, registro obsoleto, subred, excepción, hallazgo y acción; y una exportación de PowerShell de solo lectura de los servidores DHCP y DNS.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python solo con la librería estándar. Los ámbitos, opciones, reservas y concesiones se leen por servidor, y un ámbito en una relación de conmutación se exporta una sola vez, para no contar dos veces sus estadísticas. El crecimiento desde la revisión anterior da los días que faltan para que se llene cada pool, así que un ámbito al 79 % que ha crecido en 120 equipos en un mes sale antes que uno al 81 % que apenas se mueve. La opción 006 se comprueba contra los servidores DNS vivos, así que un controlador de dominio retirado aparece allí donde todavía se entrega, y ese mismo servidor se busca en los registros A, NS, SRV y PTR. Un registro estático solo es un problema cuando su dirección está dentro de un pool activo y no es una reserva. Cada hallazgo tiene gravedad, responsable y fecha; las excepciones válidas quitan el elemento y las caducadas o incompletas no; y las elecciones (una concesión más corta o una subred más grande, actualizaciones seguras en una zona, la limpieza, la conmutación para una sede) se convierten en decisiones. La exportación solo lee, con los cmdlets estándar de DhcpServer y DnsServer. La demo es una juguetera inventada con una sede central, un centro de distribución y dos oficinas, 19 ámbitos y 3.487 registros, revisada el 14 de noviembre con los problemas puestos a propósito: rojo, la wifi de invitados al 94 %, los terminales de escaneo llenos en unos 26 días, una relación de conmutación rota, un controlador de dominio retirado que sigue en cinco ámbitos y seis registros, un router no autorizado, 735 registros obsoletos y cinco decisiones. 13 pruebas, un runbook para el ciclo mensual y para cambiar concesiones, ámbitos, actualizaciones seguras y limpieza sin sorpresas, y un flujo de GitHub Actions que ejecuta las pruebas y regenera los datos de la demo y la captura.</p>
+<h2>Qué he aprendido</h2>
+<p>De administrar Windows Server, incluidos DNS y DHCP, Active Directory y las directivas de grupo desde el principio de mi carrera; de llevar switches y routers Cisco, cortafuegos FortiGate, salas de comunicaciones y redes de varias sedes; de la automatización con PowerShell y la monitorización; y del trabajo aplicado con ISO 27001 y NIS2, responder auditorías y ser responsable de los procesos de incidencias, cambios y problemas. Las lecciones que hay detrás de la herramienta son que el porcentaje de un ámbito importa menos que su ritmo, porque el que se llena es el que crece; que una concesión es una política, y en una red de invitados ocho días es una decisión que nadie tomó; que retirar un controlador de dominio no termina hasta que DHCP y DNS dejan de apuntar a él; que el envejecimiento y la limpieza solo funcionan si alguien los activa y alguien revisa antes la lista; que una dirección fija dentro de un pool es un conflicto esperando al siguiente equipo; que el plan IP solo sirve si coincide con la configuración; y que una excepción es una decisión con fecha de fin, no un estado.</p>
+<h2>Siguientes pasos</h2>
+<ul><li>Ejecutarlo el primer día laborable de cada mes, y antes y después de cada cambio de red en una sede.</li><li>Guardar los ámbitos de cada mes para enseñar el crecimiento por sede a lo largo del año cuando se planifique el presupuesto de red.</li><li>Leer el plan IP directamente del rol IPAM de Windows Server o de otra herramienta de IPAM, y añadir los ámbitos y zonas de IPv6.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span></p>
+      <p class="repo-name">53-dns-dhcp-ipam-review</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/53-dns-dhcp-ipam-review" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="es">Compartir</span></p>
+        <div class="share-row es" lang="es"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F53-dns-dhcp-ipam-review.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F53-dns-dhcp-ipam-review.html&amp;text=Una%20wifi%20de%20invitados%20llena%20a%20mitad%20de%20mes%20y%20un%20controlador%20de%20dominio%20retirado%20en%20septiembre%3A%20la%20revisi%C3%B3n%20de%20DNS%2C%20DHCP%20e%20IPAM%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">X</a><a class="share-btn" href="https://wa.me/?text=Una%20wifi%20de%20invitados%20llena%20a%20mitad%20de%20mes%20y%20un%20controlador%20de%20dominio%20retirado%20en%20septiembre%3A%20la%20revisi%C3%B3n%20de%20DNS%2C%20DHCP%20e%20IPAM%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F53-dns-dhcp-ipam-review.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=Una%20wifi%20de%20invitados%20llena%20a%20mitad%20de%20mes%20y%20un%20controlador%20de%20dominio%20retirado%20en%20septiembre%3A%20la%20revisi%C3%B3n%20de%20DNS%2C%20DHCP%20e%20IPAM%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F53-dns-dhcp-ipam-review.html" aria-label="Compartir en Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/es/blog/53-dns-dhcp-ipam-review.html" data-copied="Enlace copiado">Copiar enlace</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/es/blog/53-dns-dhcp-ipam-review.html" data-title="Una wifi de invitados llena a mitad de mes y un controlador de dominio retirado en septiembre: la revisión de DNS, DHCP e IPAM" hidden>Más…</button></div>
+        
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="19-ad-infra-health-check.html"><span class="label muted"><span class="es">Blog · 19</span></span><span class="related-t"><span class="es">Un chequeo de los lunes para Active Directory</span></span></a><a class="related-link" href="45-network-config-compliance.html"><span class="label muted"><span class="es">Blog · 45</span></span><span class="related-t"><span class="es">Telnet en un switch de sede y un cambio nocturno sin guardar: la revisión semanal de la red</span></span></a><a class="related-link" href="../guias/windows-server-cuentas-de-servicio-gmsa-tareas-programadas-y-un-servicio-que-no-arranca.html"><span class="label muted"><span class="es">Guía · Nivel 2</span></span><span class="related-t"><span class="es">Windows Server: servicios y tareas programadas con cuentas de servicio administradas (gMSA) y un servicio que no arranca tras un cambio de contraseña</span></span></a><a class="related-link" href="../guias/windows-server-instalar-rol-parchear-y-leer-eventos.html"><span class="label muted"><span class="es">Guía · Nivel 2</span></span><span class="related-t"><span class="es">Windows Server: instalar un rol, parchear sin cortar el servicio y leer los eventos que importan</span></span></a><a class="related-link" href="../guias/windows-server-recursos-compartidos-y-permisos-ntfs-con-powershell-agdlp-informe-y-un-acceso-denegado.html"><span class="label muted"><span class="es">Guía · Nivel 2</span></span><span class="related-t"><span class="es">Windows Server: recursos compartidos y permisos NTFS con PowerShell, grupos AGDLP, un informe para auditoría y un acceso denegado con el usuario ya en el grupo</span></span></a><a class="related-link" href="../guias/dns-y-dhcp-en-windows-server-zonas-ambitos-conmutacion-y-un-equipo-sin-ip.html"><span class="label muted"><span class="es">Guía · Nivel 2</span></span><span class="related-t"><span class="es">DNS y DHCP en Windows Server: zonas, registros, ámbitos, conmutación por error y un equipo sin IP</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="52-endpoint-security-coverage.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Nueve portátiles fuera de todas las herramientas y un instalador aprobado 37 veces: la revisión de cobertura de seguridad de los equipos</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>
