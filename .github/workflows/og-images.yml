@@ -23,7 +23,7 @@ jobs:
         run: |
           git add assets/og assets/apple-touch-icon.png
           if git diff --cached --quiet; then echo "no changes"; exit 0; fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898099+github-actions[bot]@users.noreply.github.com"
+          git config user.name "Iñigo"
+          git config user.email "inigogonzalezgarcia@yahoo.es"
           git commit -m "OG images: regenerate social preview cards"
           git push

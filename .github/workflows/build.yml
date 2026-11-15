@@ -41,8 +41,8 @@ jobs:
           git add -A
           git restore --staged src/__pycache__ 2>/dev/null || true
           if git diff --cached --quiet; then echo "no changes"; exit 0; fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898099+github-actions[bot]@users.noreply.github.com"
+          git config user.name "Iñigo"
+          git config user.email "inigogonzalezgarcia@yahoo.es"
           git commit -m "Build: regenerate pages from src/"
           git pull --rebase
           git push
