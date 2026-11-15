@@ -471,9 +471,19 @@ def related_html(items):
                     f'<span class="related-t">{bi(html.escape(te), html.escape(ten))}</span></a>' for h, ke, ken, te, ten in items)
     return (f'\n  <div class="wrap related">\n    <h2 class="label kicker related-h">{bi("Relacionado", "Related")}</h2>\n'
             f'    <div class="related-grid">{links}</div>\n  </div>')
-def related_for_guide(topic):
-    return related_html([(f'../blog/{r}.html', f'Blog · {_POST_BY_REPO[r].get("label", _POST_BY_REPO[r]["n"])}', f'Blog · {_POST_BY_REPO[r].get("label", _POST_BY_REPO[r]["n"])}',
-                          _POST_BY_REPO[r]["title_es"], _POST_BY_REPO[r]["title_en"]) for r in RELATED.get(topic, [])])
+# guides shown in a guide's "Related" block after its posts (other guides on the same job, by slug)
+GUIDE_RELATED = {
+    "keycloak-sso-realm-clientes-oidc-y-saml-active-directory-por-ldap-mfa-e-invalid-redirect-uri": [
+        "entra-sso-saml-dar-de-alta-una-aplicacion-y-login-que-falla",
+        "nginx-y-apache-proxy-inverso-tls-cabeceras-timeouts-y-un-502-bad-gateway"],
+}
+_GUIDE_BY_SLUG = {q["slug"]: q for q in _GR}
+assert all(k in _GUIDE_BY_SLUG and all(x in _GUIDE_BY_SLUG for x in v) for k, v in GUIDE_RELATED.items()), "GUIDE_RELATED: unknown guide slug"
+def related_for_guide(topic, slug=None):
+    items = [(f'../blog/{r}.html', f'Blog · {_POST_BY_REPO[r].get("label", _POST_BY_REPO[r]["n"])}', f'Blog · {_POST_BY_REPO[r].get("label", _POST_BY_REPO[r]["n"])}',
+              _POST_BY_REPO[r]["title_es"], _POST_BY_REPO[r]["title_en"]) for r in RELATED.get(topic, [])]
+    items += [(f'{x}.html', "Guía", "Guide", _GUIDE_BY_SLUG[x]["title_es"], _GUIDE_BY_SLUG[x]["title_en"]) for x in GUIDE_RELATED.get(slug, [])]
+    return related_html(items)
 # posts that link to each other in "Related" (shown before the guides)
 POST_RELATED = {
     "53-dns-dhcp-ipam-review": ["19-ad-infra-health-check", "45-network-config-compliance"],
@@ -1773,7 +1783,7 @@ for i, q in enumerate(G_ORDER):
       <p class="share-msg small muted" role="status" aria-live="polite"></p>
     </aside>
   </div>
-  {related_for_guide(q["topic"])}
+  {related_for_guide(q["topic"], q["slug"])}
   <div class="wrap post-nav">
     {gnav(prev, "Anterior", "Previous", "prev")}
     {gnav(nxt, "Siguiente", "Next", "next")}
