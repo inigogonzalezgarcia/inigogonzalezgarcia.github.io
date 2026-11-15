@@ -511,3 +511,26 @@ a.practice-desk:hover{background:var(--accent)}
 .is-scrolly>.stage.reveal.in.on{opacity:1}
 .practice-more{margin-top:14px}
 .hero h1 .h1-name{display:block;font-size:.3em;line-height:1.1;letter-spacing:-.01em;margin-bottom:.35em;color:inherit;opacity:.9}
+
+/* frosted glass (v1): small elements floating over a photo or the map; solid as before without backdrop-filter
+   or with reduced transparency, less blur on phones */
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .stage-visual .photo-place { padding: 6px 11px; border-radius: 999px; opacity: 1;
+    background: linear-gradient(160deg, rgba(14, 26, 36, .42), rgba(14, 26, 36, .55)); border: 1px solid rgba(242, 238, 230, .2);
+    -webkit-backdrop-filter: blur(10px) saturate(140%); backdrop-filter: blur(10px) saturate(140%);
+    box-shadow: 0 6px 18px rgba(14, 26, 36, .25), inset 0 1px 0 rgba(255, 255, 255, .14); }
+  .map-ctl button { background: rgba(242, 238, 230, .62); border-color: rgba(14, 26, 36, .14);
+    -webkit-backdrop-filter: blur(12px) saturate(140%); backdrop-filter: blur(12px) saturate(140%);
+    box-shadow: 0 6px 16px rgba(14, 26, 36, .12), inset 0 1px 0 rgba(255, 255, 255, .5); }
+  .map-hint { padding: 6px 10px; border-radius: 999px; color: var(--ink); background: rgba(242, 238, 230, .6);
+    -webkit-backdrop-filter: blur(12px) saturate(140%); backdrop-filter: blur(12px) saturate(140%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5); }
+  @media (max-width: 639px) {
+    .stage-visual .photo-place, .map-ctl button { -webkit-backdrop-filter: blur(8px) saturate(130%); backdrop-filter: blur(8px) saturate(130%); }
+    .stage-visual .photo-place { background: rgba(14, 26, 36, .6); }
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .stage-visual .photo-place { background: rgb(14, 26, 36); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .map-ctl button, .map-hint { background: var(--paper); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
