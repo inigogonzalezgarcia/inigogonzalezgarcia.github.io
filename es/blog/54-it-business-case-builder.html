@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Business case de IT: VAN, payback y revisión · Iñigo González</title>
+<meta name="description" content="Business case de IT: opciones frente a no hacer nada, VAN, TIR y payback, la revisión de finanzas, rangos, sensibilidad y el documento para el comité.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/blog/54-it-business-case-builder.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/54-it-business-case-builder.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/54-it-business-case-builder.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/54-it-business-case-builder.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Business case de IT: VAN, payback y revisión · Iñigo González">
+<meta property="og:description" content="Business case de IT: opciones frente a no hacer nada, VAN, TIR y payback, la revisión de finanzas, rangos, sensibilidad y el documento para el comité.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/blog/54-it-business-case-builder.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/54-it-business-case-builder.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Business case de IT: VAN, payback y revisión · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Un ahorro contado dos veces y beneficios antes de la puesta en marcha: el constructor de business cases de IT","alternativeHeadline":"A saving counted twice and benefits before go-live: the IT business case builder","description":"A partir de las opciones, sus costes año a año, los beneficios, los riesgos, las hipótesis y los criterios no financieros: cada opción frente al coste de no hacer nada, con VAN, TIR, payback, ROI y VAN ajustado al riesgo; las comprobaciones que hace un controller de finanzas antes del comité (ahorros contados dos veces, beneficios antes de la puesta en marcha o sin responsable, tiempo ahorrado contado como dinero, hipótesis sin validar, costes que faltan, contingencia), las cifras tal como se presentaron y tras la revisión, los escenarios pesimista y optimista y la sensibilidad, una recomendación, las decisiones y un registro de beneficios con responsables y fechas de revisión.","datePublished":"2026-11-15","dateModified":"2026-11-15","inLanguage":"es","image":"https://inigogonzalezgarcia.github.io/assets/og/54-it-business-case-builder.png","url":"https://inigogonzalezgarcia.github.io/es/blog/54-it-business-case-builder.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/blog/54-it-business-case-builder.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/es/blog/#blog"},"articleSection":"Herramientas de IT Ops"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/es/blog/"},{"@type":"ListItem","position":3,"name":"Un ahorro contado dos veces y beneficios antes de la puesta en marcha: el constructor de business cases de IT","item":"https://inigogonzalezgarcia.github.io/es/blog/54-it-business-case-builder.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span></a><a href="../guias.html"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../blog/54-it-business-case-builder.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 54</p>
+    <h1><span class="es">Un ahorro contado dos veces y beneficios antes de la puesta en marcha: el constructor de business cases de IT</span></h1>
+    <p class="lede"><span class="es">A partir de las opciones, sus costes año a año, los beneficios, los riesgos, las hipótesis y los criterios no financieros: cada opción frente al coste de no hacer nada, con VAN, TIR, payback, ROI y VAN ajustado al riesgo; las comprobaciones que hace un controller de finanzas antes del comité (ahorros contados dos veces, beneficios antes de la puesta en marcha o sin responsable, tiempo ahorrado contado como dinero, hipótesis sin validar, costes que faltan, contingencia), las cifras tal como se presentaron y tras la revisión, los escenarios pesimista y optimista y la sensibilidad, una recomendación, las decisiones y un registro de beneficios con responsables y fechas de revisión.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span> · <span class="es">15 nov 2026</span> · <span class="es">5 min</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>El problema</h2>
+<p>La mayoría de los business cases de IT se deciden por una cifra, y esa cifra suele fallar siempre de las mismas maneras. Un ahorro que ya está en la comparación con la plataforma actual se suma otra vez como beneficio. Los beneficios empiezan en el primer año cuando el sistema nuevo arranca en el mes quince. Las horas ahorradas se convierten en dinero aunque ningún presupuesto baje. El descuento del proveedor o la salida de un contratista se dan por hechos en lugar de confirmarse. Nadie ha presupuestado la migración de datos, la retirada de la plataforma antigua ni la formación, y la contingencia falta o es el mismo porcentaje pequeño para todo, sea cual sea la calidad de la estimación. Luego el caso base se presenta solo, sin lo que pasa si los costes suben una quinta parte o la puesta en marcha se retrasa seis meses. El comité aprueba la opción que parece mejor y, un año después, los beneficios no aparecen. La revisión de la cartera de proyectos que publiqué antes en la serie sigue los proyectos una vez aprobados; esta herramienta trabaja en el paso anterior, cuando se decide el dinero.</p>
+<h2>Qué he construido</h2>
+<ul><li>Cada opción frente al coste de no hacer nada en el horizonte: VAN, TIR, payback, ROI, la inversión inicial, el coste total de propiedad y el VAN descontando el coste esperado de los riesgos.</li><li>Las comprobaciones de un controller de finanzas: ahorros contados dos veces, beneficios antes de la puesta en marcha, beneficios tangibles sin responsable, productividad contada como dinero, beneficios sin KPI, hipótesis sin validar que sostienen el caso, costes de migración, retirada, formación y personal interno que faltan, años sin coste de operación, contingencia por debajo de lo que piden las estimaciones y riesgos sin mitigación. Las cifras se muestran tal como se presentaron y tras la revisión.</li><li>El rango: escenarios pesimista y optimista según la confianza de cada coste y la evidencia de cada beneficio, y la sensibilidad del VAN a los costes, los beneficios, un retraso en la puesta en marcha y la tasa de descuento.</li><li>Una recomendación entre las opciones cuyas cifras son fiables, las decisiones para el comité y un registro de beneficios con KPI, responsable y revisiones a los seis y doce meses de la puesta en marcha.</li><li><code>report.html</code> con el flujo de caja acumulado y el gráfico de sensibilidad; <code>business-case.md</code>, el documento para el comité; CSV de opciones, flujos de caja, sensibilidad, beneficios, hipótesis, hallazgos y acciones; y un comando de plantilla para empezar desde una hoja de cálculo.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python solo con la biblioteca estándar. El flujo de caja neto de cada opción es el coste de no hacer nada menos el coste de la opción más los beneficios tangibles, año a año desde el año cero. Un ahorro está contado dos veces cuando nombra un coste que paga la situación actual y que la opción ya no tiene, porque ese ahorro ya está en la diferencia. Los beneficios anteriores al año de puesta en marcha se quitan para esos años, los beneficios tangibles sin responsable pasan a intangibles y se añade la contingencia que necesitan las estimaciones (más para una estimación aproximada que para un presupuesto firmado) donde falta. Los costes se mueven según su confianza y los beneficios según su evidencia para dar los escenarios pesimista y optimista. Una opción con un hallazgo rojo en sus costes o beneficios no está lista y no se recomienda, tenga el VAN que tenga; entre las demás gana el mayor VAN ajustado al riesgo que recupera la inversión a tiempo, y los criterios ponderados deshacen empates. La demo es una empresa de leasing inventada que decide qué hacer con su ERP antes de que acabe el soporte: quedarse, actualizar en local, un SaaS de golpe o un SaaS en dos fases. El cambio de golpe parece el mejor tal como se presenta, con 1,89 millones, y baja a 1,10 millones y queda como no listo al quitar 825.000 de beneficios; se recomienda la opción en dos fases, con un VAN de 563.000 y un payback de tres años y medio, con una puerta antes de la segunda fase porque pierde dinero en el escenario pesimista. 16 tests, un runbook desde el primer borrador hasta el comité y un flujo de GitHub Actions que ejecuta los tests en Python 3.10 y 3.12.</p>
+<h2>Qué he aprendido</h2>
+<p>De preparar business cases con ROI y beneficios medibles, estimar costes, recursos y plazos, gestionar presupuestos de IT, usar FinOps y la gestión económica de la tecnología (TBM, Apptio) para dar transparencia a los costes, negociar contratos y renovaciones con proveedores y dar soporte a un ERP (SAP) para el negocio. Las lecciones detrás de la herramienta son que la comparación siempre es con no hacer nada, que nunca sale gratis; que el error más común es contar el mismo ahorro dos veces; que un beneficio sin responsable es un deseo, no una cifra; que las horas ahorradas solo son dinero si baja una partida del presupuesto; que la contingencia debe seguir la calidad de la estimación; que un comité confía en un caso que enseña lo que se ha quitado y cuál es el riesgo a la baja; y que la decisión no es el final, porque los beneficios solo existen si alguien los mide después de la puesta en marcha.</p>
+<h2>Próximos pasos</h2>
+<ul><li>Conservar el registro de beneficios tras la decisión y compararlo con los datos reales a los seis y doce meses, junto con la revisión de la cartera.</li><li>Leer los costes de operación directamente de los registros de licencias y contratos de proyectos anteriores de la serie.</li><li>Añadir un rango Monte Carlo junto a los escenarios pesimista y optimista.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span></p>
+      <p class="repo-name">54-it-business-case-builder</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/54-it-business-case-builder" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="es">Compartir</span></p>
+        <div class="share-row es" lang="es"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F54-it-business-case-builder.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F54-it-business-case-builder.html&amp;text=Un%20ahorro%20contado%20dos%20veces%20y%20beneficios%20antes%20de%20la%20puesta%20en%20marcha%3A%20el%20constructor%20de%20business%20cases%20de%20IT%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">X</a><a class="share-btn" href="https://wa.me/?text=Un%20ahorro%20contado%20dos%20veces%20y%20beneficios%20antes%20de%20la%20puesta%20en%20marcha%3A%20el%20constructor%20de%20business%20cases%20de%20IT%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F54-it-business-case-builder.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=Un%20ahorro%20contado%20dos%20veces%20y%20beneficios%20antes%20de%20la%20puesta%20en%20marcha%3A%20el%20constructor%20de%20business%20cases%20de%20IT%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F54-it-business-case-builder.html" aria-label="Compartir en Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/es/blog/54-it-business-case-builder.html" data-copied="Enlace copiado">Copiar enlace</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/es/blog/54-it-business-case-builder.html" data-title="Un ahorro contado dos veces y beneficios antes de la puesta en marcha: el constructor de business cases de IT" hidden>Más…</button></div>
+        
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="49-it-project-portfolio-health.html"><span class="label muted"><span class="es">Blog · 49</span></span><span class="related-t"><span class="es">En verde con un CPI de 0,78 y un arquitecto al 180 %: la salud de la cartera antes del comité</span></span></a><a class="related-link" href="50-saas-licence-spend-review.html"><span class="label muted"><span class="es">Blog · 50</span></span><span class="related-t"><span class="es">180 licencias E5 que se usan como E3 y un preaviso en 9 días: la revisión del gasto en SaaS</span></span></a><a class="related-link" href="23-it-vendor-contract-tracker.html"><span class="label muted"><span class="es">Blog · 23</span></span><span class="related-t"><span class="es">Cada renovación, preaviso y ahorro de los contratos de IT en una revisión mensual</span></span></a><a class="related-link" href="../guias/business-case-de-it-opciones-costes-beneficios-medibles-y-la-decision-del-comite.html"><span class="label muted"><span class="es">Guía · Nivel 4</span></span><span class="related-t"><span class="es">Business case de IT: opciones, costes, beneficios medibles, TCO a cinco años y la decisión que pides al comité</span></span></a><a class="related-link" href="../guias/presupuesto-de-it-preparar-y-seguir-el-presupuesto-anual-en-una-empresa-multisede.html"><span class="label muted"><span class="es">Guía · Sector 4</span></span><span class="related-t"><span class="es">Presupuesto de IT: preparar y seguir el presupuesto anual de una empresa con sedes en varios países</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="53-dns-dhcp-ipam-review.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Una wifi de invitados llena a mitad de mes y un controlador de dominio retirado en septiembre: la revisión de DNS, DHCP e IPAM</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

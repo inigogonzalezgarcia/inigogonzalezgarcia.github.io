@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>IT business case: NPV, payback and checks · Iñigo González</title>
+<meta name="description" content="IT business case builder: options against doing nothing, NPV, IRR and payback, the checks finance makes, ranges, sensitivity and the paper for the committee.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/54-it-business-case-builder.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/54-it-business-case-builder.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/54-it-business-case-builder.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/54-it-business-case-builder.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IT business case: NPV, payback and checks · Iñigo González">
+<meta property="og:description" content="IT business case builder: options against doing nothing, NPV, IRR and payback, the checks finance makes, ranges, sensitivity and the paper for the committee.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/54-it-business-case-builder.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/54-it-business-case-builder.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="IT business case: NPV, payback and checks · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"A saving counted twice and benefits before go-live: the IT business case builder","alternativeHeadline":"Un ahorro contado dos veces y beneficios antes de la puesta en marcha: el constructor de business cases de IT","description":"From the options, their costs year by year, the benefits, the risks, the assumptions and the non-financial criteria: every option against the cost of doing nothing, with NPV, IRR, payback, ROI and the risk-adjusted NPV; the checks a finance partner makes before the committee (savings counted twice, benefits before go-live or with no owner, time saved counted as cash, unvalidated assumptions, missing cost lines, contingency), the figures as submitted and after the checks, the pessimistic and optimistic cases and the sensitivity, a recommendation, the decisions and a benefits register with owners and review dates.","datePublished":"2026-11-15","dateModified":"2026-11-15","inLanguage":"en","image":"https://inigogonzalezgarcia.github.io/assets/og/54-it-business-case-builder.png","url":"https://inigogonzalezgarcia.github.io/blog/54-it-business-case-builder.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/blog/54-it-business-case-builder.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/blog/#blog"},"articleSection":"IT Ops tools"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/blog/"},{"@type":"ListItem","position":3,"name":"A saving counted twice and benefits before go-live: the IT business case builder","item":"https://inigogonzalezgarcia.github.io/blog/54-it-business-case-builder.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/" aria-current="page"><span class="en">Blog</span></a><a href="../guias.html"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../es/blog/54-it-business-case-builder.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 54</p>
+    <h1><span class="en">A saving counted twice and benefits before go-live: the IT business case builder</span></h1>
+    <p class="lede"><span class="en">From the options, their costs year by year, the benefits, the risks, the assumptions and the non-financial criteria: every option against the cost of doing nothing, with NPV, IRR, payback, ROI and the risk-adjusted NPV; the checks a finance partner makes before the committee (savings counted twice, benefits before go-live or with no owner, time saved counted as cash, unvalidated assumptions, missing cost lines, contingency), the figures as submitted and after the checks, the pessimistic and optimistic cases and the sensitivity, a recommendation, the decisions and a benefits register with owners and review dates.</span></p><p class="label post-meta"><span class="en">IT Ops tools</span> · <span class="en">15 Nov 2026</span> · <span class="en">4 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      
+      <div class="en" lang="en">
+<h2>The problem</h2>
+<p>Most IT business cases are decided on one number, and that number is often wrong in the same few ways. A saving that is already in the comparison with the current platform is added again as a benefit. Benefits start in year one when the new system goes live in month fifteen. Hours saved become cash although no budget goes down. A vendor&#x27;s discount or the release of a contractor is assumed rather than confirmed. Nobody costed migrating the data, retiring the old platform or training anyone, and the contingency is either missing or the same small percentage on everything, whatever the quality of the estimate. Then the base case is shown alone, without what happens if costs go up a fifth or go-live slips six months. The committee approves the option that looks best, and a year later the benefits are not there. The project portfolio review I published earlier in the series follows projects once they are approved; this tool works on the step before, when the money is decided.</p>
+<h2>What I built</h2>
+<ul><li>Every option against the cost of doing nothing over the horizon: NPV, IRR, payback, ROI, the one-off cost, the total cost of ownership and the NPV after the expected cost of the risks.</li><li>The checks a finance partner makes: savings counted twice, benefits before go-live, hard benefits with no owner, productivity counted as cash, benefits with no KPI, unvalidated assumptions that carry the case, missing migration, decommission, training and internal staff costs, years with no running cost, contingency below what the estimates need and risks with no mitigation. The figures are shown as submitted and after the checks.</li><li>The range: pessimistic and optimistic cases from the confidence of each cost and the evidence behind each benefit, and the sensitivity of the NPV to costs, benefits, a late go-live and the discount rate.</li><li>A recommendation among the options whose figures can be trusted, the decisions for the committee, and a benefits register with KPI, owner and reviews six and twelve months after go-live.</li><li><code>report.html</code> with the cumulative cash flow and the sensitivity chart; <code>business-case.md</code>, the paper for the committee; CSVs for the options, cash flows, sensitivity, benefits, assumptions, findings and actions; and a template command to start from a spreadsheet.</li></ul>
+<h2>How it is built</h2>
+<p>Python with the standard library only. The net cash flow of each option is the cost of doing nothing minus the cost of the option plus the hard benefits, year by year from year zero. A saving is counted twice when it names a cost the baseline pays and the option no longer has, because that saving is already in the difference. Benefits before the go-live year are removed for those years, hard benefits with no owner move to soft, and the contingency the estimates need (more for a rough estimate than for a quote) is added where it is missing. Costs move by their confidence and benefits by their evidence to give the pessimistic and optimistic cases. An option with a red finding on its costs or benefits is not ready and is not recommended, whatever its NPV; among the rest, the highest risk-adjusted NPV that pays back in time wins, and the weighted criteria break ties. The demo is a made-up leasing company choosing what to do with its ERP before support ends: staying, upgrading on premises, a SaaS big bang or SaaS in two phases. The big bang looks best as submitted, at 1.89 million, and falls to 1.10 million and not ready once 825,000 of benefits are removed; the two-phase option is recommended at an NPV of 563,000 and a payback of three and a half years, with a gate before phase two because it loses money in the pessimistic case. 16 tests, a runbook from first draft to the committee, and a GitHub Actions workflow that runs the tests on Python 3.10 and 3.12.</p>
+<h2>What I learned</h2>
+<p>From preparing business cases with ROI and measurable benefits, estimating costs, resources and timelines, managing IT budgets, using FinOps and technology business management (TBM, Apptio) for cost transparency, negotiating vendor contracts and renewals, and supporting an ERP (SAP) for the business. The lessons behind the tool are that the comparison is always with doing nothing, which is never free; that the most common mistake is counting the same saving twice; that a benefit without an owner is a hope, not a number; that hours saved are only cash if a budget line goes down; that the contingency should follow the quality of the estimate; that a committee trusts a case that shows what was removed and what the downside is; and that the decision is not the end, because the benefits only exist if someone measures them after go-live.</p>
+<h2>Next steps</h2>
+<ul><li>Keep the benefits register after the decision and compare it with actuals at six and twelve months, alongside the portfolio review.</li><li>Read the running costs straight from the licence and contract registers of earlier projects in the series.</li><li>Add a Monte Carlo range next to the pessimistic and optimistic cases.</li></ul>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="en">The repository</span></p>
+      <p class="repo-name">54-it-business-case-builder</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/54-it-business-case-builder" target="_blank" rel="noopener noreferrer"><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="en">Share</span></p>
+        
+        <div class="share-row en" lang="en"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F54-it-business-case-builder.html" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F54-it-business-case-builder.html&amp;text=A%20saving%20counted%20twice%20and%20benefits%20before%20go-live%3A%20the%20IT%20business%20case%20builder%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Share on X">X</a><a class="share-btn" href="https://wa.me/?text=A%20saving%20counted%20twice%20and%20benefits%20before%20go-live%3A%20the%20IT%20business%20case%20builder%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F54-it-business-case-builder.html" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=A%20saving%20counted%20twice%20and%20benefits%20before%20go-live%3A%20the%20IT%20business%20case%20builder%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F54-it-business-case-builder.html" aria-label="Share on Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/54-it-business-case-builder.html" data-copied="Link copied">Copy link</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/54-it-business-case-builder.html" data-title="A saving counted twice and benefits before go-live: the IT business case builder" hidden>More…</button></div>
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="49-it-project-portfolio-health.html"><span class="label muted"><span class="en">Blog · 49</span></span><span class="related-t"><span class="en">GREEN at a CPI of 0.78 and an architect at 180 %: the portfolio health check before the SteerCo</span></span></a><a class="related-link" href="50-saas-licence-spend-review.html"><span class="label muted"><span class="en">Blog · 50</span></span><span class="related-t"><span class="en">180 E5 licences used as E3 and a notice deadline in 9 days: the SaaS and licence spend review</span></span></a><a class="related-link" href="23-it-vendor-contract-tracker.html"><span class="label muted"><span class="en">Blog · 23</span></span><span class="related-t"><span class="en">Every IT contract renewal, notice deadline and saving in one monthly review</span></span></a><a class="related-link" href="../guias/business-case-de-it-opciones-costes-beneficios-medibles-y-la-decision-del-comite.html"><span class="label muted"><span class="en">Guide · Level 4</span></span><span class="related-t"><span class="en">IT business case: options, costs, measurable benefits, five-year TCO and the decision you ask the committee for</span></span></a><a class="related-link" href="../guias/presupuesto-de-it-preparar-y-seguir-el-presupuesto-anual-en-una-empresa-multisede.html"><span class="label muted"><span class="en">Guide · Sector 4</span></span><span class="related-t"><span class="en">IT budget: preparing and tracking the annual budget of a company with sites in several countries</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="53-dns-dhcp-ipam-review.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">A guest Wi-Fi full by the second week and a domain controller retired in September: the DNS, DHCP and IPAM review</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about#en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
