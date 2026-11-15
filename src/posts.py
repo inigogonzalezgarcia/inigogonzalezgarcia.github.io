@@ -873,7 +873,7 @@ De la migración a Windows 11 que lideré: casi todo el esfuerzo no está en la 
 - Escribir tus workloads, olas y gates en `plan.json`.
 - Llevar `gates.md` a cada comité de cambios antes de mover el slider."""),
 
-dict(n="19", repo="19-ad-infra-health-check", date="2026-10-16", updated="2026-11-13", cat="tools",
+dict(n="19", repo="19-ad-infra-health-check", date="2026-10-16", updated="2026-11-15", cat="tools",
  title_en="A Monday-morning health check for Active Directory", title_es="Un chequeo de los lunes para Active Directory",
  seo_title_en="Active Directory health check with PowerShell · Iñigo González",
  seo_title_es="Chequeo de salud de Active Directory con PowerShell · Iñigo González",
@@ -1603,7 +1603,7 @@ De dar soporte a consejos y comités de dirección: Teams Rooms sobre Crestron c
 - Ejecutarlo con los consejos y comités del próximo mes, con la oficina de presidencia rellenando las pruebas técnicas y los técnicos asignados.
 - Acordar la ventana de congelación y las versiones mínimas de sistema operativo y app del consejo con el proveedor audiovisual y el equipo de soporte VIP.
 - Enviar el pack de preparación al equipo de secretaría del consejo el día antes de cada consejo."""),
-dict(n="34", repo="34-venue-service-readiness", date="2026-10-26", cat="tools",
+dict(n="34", repo="34-venue-service-readiness", date="2026-10-26", updated="2026-11-15", cat="tools",
  title_en="The only kitchen printer had been down since yesterday: a morning check for a hospitality venue",
  title_es="La única impresora de cocina llevaba caída desde ayer: la revisión de cada mañana en hostelería",
  seo_title_en="Hospitality IT opening check: POS and Wi-Fi · Iñigo González",
