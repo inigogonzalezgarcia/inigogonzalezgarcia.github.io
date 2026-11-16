@@ -516,7 +516,7 @@ POST_RELATED = {
     "18-mecm-intune-comanagement-tracker": ["41-windows-update-ring-tracker", "29-tenant-separation-cutover-planner"],
     "20-entra-sso-app-audit": ["37-iam-access-review", "27-m365-tenant-governance-review"],
     "21-apple-fleet-audit": ["02-intune-compliance-report", "38-it-asset-lifecycle-planner", "52-endpoint-security-coverage"],
-    "23-it-vendor-contract-tracker": ["28-euc-provider-service-review", "43-azure-cost-rightsizing", "50-saas-licence-spend-review"],
+    "23-it-vendor-contract-tracker": ["28-euc-provider-service-review", "43-azure-cost-rightsizing", "50-saas-licence-spend-review", "54-it-business-case-builder"],
     "24-hospitality-it-preopening": ["34-venue-service-readiness", "42-retail-store-it-health"],
     "25-security-controls-evidence": ["39-vulnerability-remediation-sla", "37-iam-access-review"],
     "26-ot-segmentation-lab": ["25-security-controls-evidence", "39-vulnerability-remediation-sla"],

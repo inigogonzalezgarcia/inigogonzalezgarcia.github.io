@@ -35,6 +35,9 @@ POSTS_SEO = {
         "en": "DEX score lab: a 0-10 experience score per laptop, site and department from endpoint telemetry, the cause behind each low score and the fixes that raise it.",
         "es": "Puntuación DEX: convierte la telemetría de los equipos en una nota de 0 a 10 por dispositivo, sede y departamento y ordena los arreglos que más la suben.",
     },
+    "44-m365-copilot-readiness": {
+        "es": "Preparación para Microsoft 365 Copilot por oleadas: licencias a recuperar, formación, MFA, SharePoint sobrecompartido, etiquetas, DLP y agentes sin dueño.",
+    },
     "45-network-config-compliance": {
         "en": "Network configuration compliance report for Cisco, Aruba and FortiGate: backups, unsaved changes, telnet and SNMP, VLANs, firewall policies and end of support.",
         "es": "Informe de cumplimiento de la configuración de red en Cisco, Aruba y FortiGate: copias, cambios sin guardar, telnet y SNMP, VLAN, políticas y fin de soporte.",
