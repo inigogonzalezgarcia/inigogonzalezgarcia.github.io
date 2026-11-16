@@ -10,1812 +10,1803 @@ CATS = {
 
 POSTS = [
 dict(n="01", repo="01-finops-cloud-cost-dashboard", date="2026-09-03", cat="tools",
- title_en="Catching cloud cost drift before the invoice does", title_es="Ver la deriva del gasto cloud antes que la factura",
+ title_en="A cloud cost dashboard flags a last-week spike in development EC2 spend in 90 days of synthetic billing",
+ title_es="Un panel detecta un pico de gasto en EC2 de desarrollo en la última semana de 90 días de facturación ficticia",
  seo_title_en="Cloud cost anomalies in AWS and Azure · Iñigo González",
  seo_title_es="Desvíos de coste cloud en AWS y Azure · Iñigo González",
- dek_en="A small Streamlit dashboard for AWS and Azure spend that flags the week that looks wrong.",
- dek_es="Un panel pequeño en Streamlit para el gasto de AWS y Azure que señala la semana que no cuadra.",
+ seo_desc="A small Streamlit dashboard for AWS and Azure spend that flags the week that looks wrong.",
+ seo_desc_es="Un panel pequeño en Streamlit para el gasto de AWS y Azure que señala la semana que no cuadra.",
+ dek_en="The Streamlit dashboard, published with synthetic billing data, puts AWS and Azure spend in one view, compares each week with the one before and flags the week that looks wrong.",
+ dek_es="El panel en Streamlit, publicado con datos de facturación ficticios, reúne el gasto de AWS y Azure en una vista, compara cada semana con la anterior y señala la que no cuadra.",
  en="""
+In the last week of a 90-day billing history, spend on EC2 in the development environment spikes, and the dashboard flags it with a probable cause and a suggested action: automatic shutdown of idle development instances. That is what the cloud cost dashboard published with this post finds. The billing data is synthetic, and the spike is injected on purpose so the detection has something to find.
 
-## The problem
 Cloud costs rarely explode overnight. They drift: a test environment left running over a weekend, a service scaled up and never scaled down. By the time the monthly invoice arrives, the money is already spent.
 
-I wanted a view that answers three questions fast: how much are we spending and where, is this week different from last week, and is anything clearly out of line.
+## The last 7 days against the previous 7
 
-## What I built
-- A consolidated view of daily spend across AWS and Azure, with filters by provider, environment and department.
-- A weekly KPI: the last 7 days against the previous 7.
-- An anomaly alert with a probable cause and a suggested action, such as auto-shutdown for idle development instances.
+The dashboard consolidates daily spend across AWS and Azure, with filters by provider, environment and department. Its weekly indicator compares the last 7 days with the previous 7. The demo covers 10 services, 4 departments and 3 environments, built with Python, pandas, Plotly and Streamlit.
 
-## How it is built
-Python, pandas, Plotly and Streamlit. `data_generator.py` creates 90 days of synthetic billing for 10 services, 4 departments and 3 environments, and injects a spike into EC2 / Development in the last week so the detection has something to find.
+## How to use it with real data
 
-## Next steps
-- Import the CSV exports from AWS Cost Explorer and Azure Cost Management instead of the synthetic data.
-- Add a statistical baseline per service, so each service is compared with its own history.
-- Set budget thresholds per department.""",
+The next step is to import the CSV exports from AWS Cost Explorer and Azure Cost Management instead of the synthetic data, add a statistical baseline so each service is compared with its own history, and set budget thresholds per department.
+
+## Where it comes from
+
+I wanted a view that answers three questions fast: how much we spend and where, whether this week is different from last week, and whether anything is clearly out of line.""",
  es="""
+En la última semana de un histórico de 90 días de facturación, el gasto en EC2 del entorno de desarrollo se dispara, y el panel lo señala con una causa probable y una acción sugerida: el apagado automático de las instancias de desarrollo ociosas. Así lo detecta el panel de costes cloud que acompaña a este post. Los datos de facturación son ficticios, y el pico se inyecta a propósito para que la detección tenga algo que encontrar.
 
-## El problema
-El gasto cloud casi nunca se dispara de un día para otro. Se desvía poco a poco: un entorno de pruebas encendido todo el fin de semana, un servicio que se escala y nunca se vuelve a bajar. Cuando llega la factura, el dinero ya se ha gastado.
+El gasto cloud casi nunca se dispara de un día para otro. Se desvía poco a poco: un entorno de pruebas encendido todo el fin de semana, un servicio que se escala y nunca se vuelve a bajar. Cuando llega la factura mensual, el dinero ya se ha gastado.
 
-Quería una vista que respondiera rápido a tres preguntas: cuánto gastamos y dónde, si esta semana es distinta de la anterior y si hay algo claramente fuera de lugar.
+## Los últimos 7 días frente a los 7 anteriores
 
-## Qué he hecho
-- Una vista única del gasto diario en AWS y Azure, con filtros por proveedor, entorno y departamento.
-- Un KPI semanal: los últimos 7 días frente a los 7 anteriores.
-- Una alerta de anomalía con causa probable y acción sugerida, como el apagado automático de instancias de desarrollo ociosas.
+El panel reúne el gasto diario en AWS y Azure, con filtros por proveedor, entorno y departamento. Su indicador semanal compara los últimos 7 días con los 7 anteriores. La demo cubre 10 servicios, 4 departamentos y 3 entornos, y está hecha con Python, pandas, Plotly y Streamlit.
 
-## Cómo está hecho
-Python, pandas, Plotly y Streamlit. `data_generator.py` crea 90 días de facturación ficticia para 10 servicios, 4 departamentos y 3 entornos, e inyecta un pico en EC2 / Development la última semana para que la detección tenga algo que encontrar.
+## Cómo usarlo con datos reales
 
-## Siguientes pasos
-- Importar las exportaciones CSV de AWS Cost Explorer y Azure Cost Management en lugar de los datos ficticios.
-- Añadir una línea base estadística por servicio, para comparar cada servicio con su propio histórico.
-- Fijar umbrales de presupuesto por departamento."""),
+El siguiente paso es importar las exportaciones CSV de AWS Cost Explorer y Azure Cost Management en lugar de los datos ficticios, añadir una línea base estadística para comparar cada servicio con su propio histórico y fijar umbrales de presupuesto por departamento.
+
+## De dónde sale
+
+Quería una vista que respondiera rápido a tres preguntas: cuánto gastamos y dónde, si esta semana es distinta de la anterior y si hay algo claramente fuera de lugar."""),
 
 dict(n="02", repo="02-intune-compliance-report", date="2026-09-30", updated="2026-11-14", cat="tools",
- title_en="An Intune compliance report you can hand to a manager", title_es="Un informe de cumplimiento de Intune que se puede enseñar a dirección",
+ title_en="An Intune report turns non-compliant devices into a one-page summary and a list of machines to fix",
+ title_es="Un informe de Intune resume en una página los equipos que no cumplen y lista los que hay que arreglar",
  seo_title_en="Intune compliance report with Microsoft Graph · Iñigo González",
  seo_title_es="Informe de cumplimiento de Intune con Graph · Iñigo González",
- dek_en="PowerShell pulls the devices from Microsoft Graph, Python turns them into a report and an action list.",
- dek_es="PowerShell saca los dispositivos de Microsoft Graph y Python los convierte en un informe y una lista de acciones.",
+ seo_desc="PowerShell pulls the devices from Microsoft Graph, Python turns them into a report and an action list.",
+ seo_desc_es="PowerShell saca los dispositivos de Microsoft Graph y Python los convierte en un informe y una lista de acciones.",
+ dek_en="PowerShell exports the managed devices from Microsoft Graph with read-only access and Python builds the report; the repo ships with a fictional fleet so it runs without a tenant.",
+ dek_es="PowerShell exporta los dispositivos gestionados de Microsoft Graph con acceso de solo lectura y Python genera el informe; el repo trae una flota ficticia para funcionar sin tenant.",
  en="""
+The Intune portal says a device is non-compliant, but it does not answer in one page how the fleet is doing by operating system and which machines need chasing this week. The compliance report published with this post does: it produces KPIs, compliance by OS, devices to review and OS versions, plus a list of the devices someone actually has to go and fix. The repository runs on a fictional fleet created by a sample-data script, so it works without a tenant, the organisation's own Microsoft cloud environment.
 
-## The problem
-The Intune portal tells you a device is non-compliant. It doesn't give you a one-page answer to "how are we doing, by OS, and which machines do I chase this week?".
+## A read-only export and a separate analysis
 
-## What I built
-- `scripts/Export-IntuneDevices.ps1` exports managed devices through Microsoft Graph with a read-only permission.
-- A Python report (standard library only) that produces `report.html`: KPIs, compliance by operating system, devices to review and OS versions.
-- `action_list.csv`, the list of devices someone actually has to go and fix.
+A PowerShell script, `Export-IntuneDevices.ps1`, exports the managed devices through Microsoft Graph, Microsoft's programming interface for its cloud services, with a read-only permission. A Python report using only the standard library turns that export into `report.html` and `action_list.csv`. Seven tests cover the logic.
 
-## How it is built
-Python with no third-party packages plus PowerShell, which is the split I use for anything Microsoft. `generate_sample_data.py` creates a fictional fleet so the repo runs without a tenant. Seven tests cover the logic.
+## How to use it with real data
 
-## What I learned
-Keeping the export and the analysis apart pays off: the PowerShell side only needs read access, and the Python side can be tested with fake data.
+The steps are to create an app registration with read-only Intune permissions in Microsoft Graph, run the export script, point the report at the result, schedule it weekly and send the action list to the team that chases devices.
 
-## Next steps
-- Create an app registration with read-only Intune permissions in Microsoft Graph.
-- Run `Export-IntuneDevices.ps1` and point the report at the export.
-- Schedule it weekly and send the action list to the team that chases devices.""",
+## Where it comes from
+
+Python plus PowerShell is the split I use for anything Microsoft. Keeping export and analysis apart pays off: the PowerShell side only needs read access, and the Python side can be tested with fake data.""",
  es="""
+El portal de Intune dice que un equipo no cumple, pero no responde en una página cómo va la flota por sistema operativo ni a qué equipos hay que perseguir esta semana. El informe de cumplimiento que acompaña a este post sí lo hace: genera KPIs, cumplimiento por sistema operativo, dispositivos a revisar y versiones de SO, además de la lista de equipos que alguien tiene que ir a arreglar. El repositorio funciona con una flota ficticia creada por un script de datos de ejemplo, así que no necesita tenant, el entorno de nube de Microsoft de la organización.
 
-## El problema
-El portal de Intune te dice que un equipo no cumple. No te da en una página la respuesta a "cómo vamos, por sistema operativo, y a qué equipos hay que perseguir esta semana".
+## Una exportación de solo lectura y un análisis aparte
 
-## Qué he hecho
-- `scripts/Export-IntuneDevices.ps1` exporta los dispositivos gestionados por Microsoft Graph con un permiso de solo lectura.
-- Un informe en Python (solo librería estándar) que genera `report.html`: KPIs, cumplimiento por sistema operativo, dispositivos a revisar y versiones de SO.
-- `action_list.csv`, la lista de equipos que alguien tiene que ir a arreglar.
+Un script de PowerShell, `Export-IntuneDevices.ps1`, exporta los dispositivos gestionados por Microsoft Graph, la interfaz de programación de los servicios en la nube de Microsoft, con un permiso de solo lectura. Un informe en Python, solo con la librería estándar, convierte esa exportación en `report.html` y `action_list.csv`. Siete tests cubren la lógica.
 
-## Cómo está hecho
-Python sin paquetes de terceros y PowerShell, el reparto que uso para todo lo de Microsoft. `generate_sample_data.py` crea una flota ficticia para que el repo funcione sin tenant. Siete tests cubren la lógica.
+## Cómo usarlo con datos reales
 
-## Qué aprendí
-Separar la exportación del análisis compensa: la parte de PowerShell solo necesita permisos de lectura y la de Python se prueba con datos falsos.
+Los pasos son crear un registro de aplicación con permisos de solo lectura de Intune en Microsoft Graph, ejecutar el script de exportación, generar el informe a partir del resultado, programarlo cada semana y enviar la lista de acciones al equipo que persigue los equipos.
 
-## Siguientes pasos
-- Crear un registro de aplicación con permisos de solo lectura de Intune en Microsoft Graph.
-- Ejecutar `Export-IntuneDevices.ps1` y generar el informe a partir de la exportación.
-- Programarlo cada semana y enviar la lista de acciones al equipo que persigue los equipos."""),
+## De dónde sale
+
+Python y PowerShell es el reparto que uso para todo lo de Microsoft. Separar la exportación del análisis compensa: la parte de PowerShell solo necesita permisos de lectura y la de Python se prueba con datos falsos."""),
 
 dict(n="03", repo="03-entra-id-hygiene-audit", date="2026-09-30", cat="tools",
- title_en="Auditing Entra ID hygiene: MFA gaps and forgotten accounts", title_es="Auditar la higiene de Entra ID: huecos de MFA y cuentas olvidadas",
+ title_en="An Entra ID audit finds admins without MFA, accounts idle for over 90 days and forgotten guests in one pass",
+ title_es="Una auditoría de Entra ID encuentra administradores sin MFA, cuentas inactivas más de 90 días e invitados olvidados",
  seo_title_en="Entra ID audit: MFA gaps and stale accounts · Iñigo González",
  seo_title_es="Auditoría de Entra ID: MFA y cuentas olvidadas · Iñigo González",
- dek_en="Admins without MFA, inactive members and stale guests, found in one pass.",
- dek_es="Administradores sin MFA, miembros inactivos e invitados obsoletos, en una sola pasada.",
+ seo_desc="Admins without MFA, inactive members and stale guests, found in one pass.",
+ seo_desc_es="Administradores sin MFA, miembros inactivos e invitados obsoletos, en una sola pasada.",
+ dek_en="The audit reads users, sign-in activity and MFA registration through Microsoft Graph with read-only permissions and flags four kinds of identity debt.",
+ dek_es="La auditoría lee los usuarios, su actividad de inicio de sesión y el registro de MFA por Microsoft Graph con permisos de solo lectura, y señala cuatro tipos de deuda de identidad.",
  en="""
+Identity debt builds up quietly: an admin who never registered MFA, the second sign-in step, a leaver whose account is still enabled, guests invited for a project that ended a year ago. The Entra ID audit published with this post finds four of these in one pass: admins without MFA, members without MFA, members inactive for more than 90 days and stale guest accounts.
 
-## The problem
-Identity debt builds up quietly: an admin who never registered MFA, a leaver whose account is still enabled, guests invited for a project that ended a year ago.
+## Two read-only permissions and a P1 or P2 licence
 
-## What I built
-An audit that flags four things:
-- Admins without MFA.
-- Members without MFA.
-- Members inactive for more than 90 days.
-- Stale guest accounts.
+A PowerShell script, `Export-EntraUsers.ps1`, reads the users, their `signInActivity` and the MFA registration report through Microsoft Graph, using `User.Read.All` and `AuditLog.Read.All`. Sign-in activity needs Entra ID P1 or P2, and the README says so. Python does the analysis and the report, with seven tests.
 
-## How it is built
-`scripts/Export-EntraUsers.ps1` reads users, their `signInActivity` and the MFA registration report through Microsoft Graph, with `User.Read.All` and `AuditLog.Read.All`. Sign-in activity needs Entra ID P1 or P2, and the README says so. Python does the analysis and the report. Seven tests.
+## How to use it with real data
 
-## What I learned
-Most of the work is deciding what "inactive" and "stale" mean and writing it down, so the report can be defended when someone asks why their account is on it.
+It needs those two read-only Graph permissions on a tenant with Entra ID P1 or P2. Security should then agree what "inactive" and "stale" mean in the organisation and set the thresholds. Run monthly, each report can be kept as evidence for access reviews.
 
-## Next steps
-- Grant read-only Graph permissions (`User.Read.All`, `AuditLog.Read.All`) on a tenant with Entra ID P1 or P2.
-- Agree with security what "inactive" and "stale" mean in your organisation and set those thresholds.
-- Run it monthly and keep each report as evidence for access reviews.""",
+## Where it comes from
+
+Most of the work was deciding what "inactive" and "stale" mean and writing it down, so the report can be defended when someone asks why their account is on it.""",
  es="""
+La deuda de identidad crece sin hacer ruido: un administrador que nunca registró MFA, el segundo paso del inicio de sesión, una baja cuya cuenta sigue activa, invitados de un proyecto que acabó hace un año. La auditoría de Entra ID que acompaña a este post encuentra cuatro de estos casos en una sola pasada: administradores sin MFA, miembros sin MFA, miembros sin actividad en más de 90 días y cuentas de invitado obsoletas.
 
-## El problema
-La deuda de identidad crece sin hacer ruido: un administrador que nunca registró MFA, una baja cuya cuenta sigue activa, invitados de un proyecto que acabó hace un año.
+## Dos permisos de lectura y una licencia P1 o P2
 
-## Qué he hecho
-Una auditoría que señala cuatro cosas:
-- Administradores sin MFA.
-- Miembros sin MFA.
-- Miembros sin actividad en más de 90 días.
-- Cuentas de invitado obsoletas.
+Un script de PowerShell, `Export-EntraUsers.ps1`, lee los usuarios, su `signInActivity` y el informe de registro de MFA por Microsoft Graph, con `User.Read.All` y `AuditLog.Read.All`. La actividad de inicio de sesión requiere Entra ID P1 o P2, y el README lo dice. Python hace el análisis y el informe, con siete tests.
 
-## Cómo está hecho
-`scripts/Export-EntraUsers.ps1` lee los usuarios, su `signInActivity` y el informe de registro de MFA por Microsoft Graph, con `User.Read.All` y `AuditLog.Read.All`. La actividad de inicio de sesión requiere Entra ID P1 o P2, y el README lo dice. Python hace el análisis y el informe. Siete tests.
+## Cómo usarlo con datos reales
 
-## Qué aprendí
-Casi todo el trabajo está en decidir qué significa "inactivo" y "obsoleto" y dejarlo escrito, para poder defender el informe cuando alguien pregunte por qué sale su cuenta.
+Necesita esos dos permisos de solo lectura en Graph en un tenant con Entra ID P1 o P2. Después, seguridad debe acordar qué significan «inactivo» y «obsoleto» en la organización y fijar los umbrales. Ejecutada cada mes, cada informe puede guardarse como evidencia para las revisiones de acceso.
 
-## Siguientes pasos
-- Dar permisos de solo lectura en Graph (`User.Read.All`, `AuditLog.Read.All`) en un tenant con Entra ID P1 o P2.
-- Acordar con seguridad qué significan "inactivo" y "obsoleto" en tu organización y fijar esos umbrales.
-- Ejecutarlo cada mes y guardar cada informe como evidencia para las revisiones de acceso."""),
+## De dónde sale
+
+Casi todo el trabajo estuvo en decidir qué significan «inactivo» y «obsoleto» y dejarlo escrito, para poder defender el informe cuando alguien pregunte por qué sale su cuenta."""),
 
 dict(n="04", repo="04-itsm-kpi-dashboard", date="2026-09-30", cat="tools",
- title_en="Service desk KPIs from a plain ticket export", title_es="KPIs de service desk a partir de una exportación de tickets",
+ title_en="A service desk report pulls SLA by priority and the open tickets already out of SLA from a CSV export",
+ title_es="Un informe de service desk saca el SLA por prioridad y los tickets abiertos ya fuera de SLA de una exportación CSV",
  seo_title_en="Service desk KPIs: SLA, MTTR and backlog · Iñigo González",
  seo_title_es="KPIs del service desk: SLA, MTTR y backlog · Iñigo González",
- dek_en="SLA by priority and team, time to resolve, weekly trend and the open tickets already out of SLA.",
- dek_es="SLA por prioridad y por equipo, tiempo de resolución, tendencia semanal y los tickets abiertos ya fuera de SLA.",
+ seo_desc="SLA by priority and team, time to resolve, weekly trend and the open tickets already out of SLA.",
+ seo_desc_es="SLA por prioridad y por equipo, tiempo de resolución, tendencia semanal y los tickets abiertos ya fuera de SLA.",
+ dek_en="The report reads a ServiceNow-style ticket export and produces the same monthly numbers every time: SLA by priority and team, time to resolve, weekly trend and breaches.",
+ dek_es="El informe lee una exportación de tickets tipo ServiceNow y genera cada mes las mismas cifras: SLA por prioridad y por equipo, tiempo de resolución, tendencia semanal e incumplimientos.",
  en="""
+Every service desk tool has dashboards, but the monthly review usually starts from a CSV export and a spreadsheet. The KPI report published with this post starts from that same export and produces the same numbers every time: SLA compliance by priority and by team, median and mean time to resolve, the weekly trend, and the open tickets already out of SLA, the agreed time to resolve, which it also writes to `sla_breaches.csv`.
 
-## The problem
-Every service desk tool has dashboards, but the monthly review usually starts from a CSV export and a spreadsheet. I wanted the same numbers, every time, from that export.
+## Four hours for a P1, 72 for a P4
 
-## What I built
-A report that reads a ServiceNow-style CSV (number, opened, resolved, priority, category, assignment group, state) and produces:
-- SLA compliance by priority and by team.
-- Median and mean time to resolve.
-- The weekly trend.
-- Open tickets already out of SLA, plus `sla_breaches.csv`.
+The report reads a ServiceNow-style CSV with number, opened, resolved, priority, category, assignment group and state. The default SLA targets are P1 4 h, P2 8 h, P3 24 h and P4 72 h, and the `--sla` option changes them. It runs on Python with the standard library only, and six tests cover it.
 
-## How it is built
-Python, standard library only. The default SLA targets are P1 4 h, P2 8 h, P3 24 h and P4 72 h, and `--sla` changes them. Six tests.
+## How to use it with real data
 
-## What I learned
-The median tells a different story from the mean: a few very long tickets move the mean a lot, and the median shows what most users actually live with.
+Tickets can be exported to CSV from ServiceNow or any other tool, with the columns mapped to the report. Each team sets its own targets per priority with `--sla`, and using the same report every month keeps the numbers comparable.
 
-## Next steps
-- Export your tickets to CSV from ServiceNow or any other tool and map the columns.
-- Set your own SLA targets per priority with `--sla`.
-- Use the same report every month so the numbers are comparable.""",
+## Where it comes from
+
+Building it showed me that the median tells a different story from the mean: a few very long tickets move the mean a lot, and the median shows what most users actually live with.""",
  es="""
+Todas las herramientas de service desk tienen paneles, pero la revisión mensual suele empezar con una exportación CSV y una hoja de cálculo. El informe de KPIs que acompaña a este post parte de esa misma exportación y genera siempre las mismas cifras: cumplimiento de SLA por prioridad y por equipo, tiempo de resolución mediano y medio, la tendencia semanal y los tickets abiertos que ya superan el SLA, el plazo acordado para resolverlos, que además escribe en `sla_breaches.csv`.
 
-## El problema
-Todas las herramientas de service desk tienen paneles, pero la revisión mensual suele empezar con una exportación CSV y una hoja de cálculo. Quería los mismos números, siempre igual, desde esa exportación.
+## Cuatro horas para un P1, 72 para un P4
 
-## Qué he hecho
-Un informe que lee un CSV tipo ServiceNow (número, apertura, resolución, prioridad, categoría, grupo asignado, estado) y genera:
-- Cumplimiento de SLA por prioridad y por equipo.
-- Tiempo de resolución mediano y medio.
-- La tendencia semanal.
-- Los tickets abiertos ya fuera de SLA, más `sla_breaches.csv`.
+El informe lee un CSV tipo ServiceNow con número, apertura, resolución, prioridad, categoría, grupo asignado y estado. Los objetivos de SLA por defecto son P1 4 h, P2 8 h, P3 24 h y P4 72 h, y la opción `--sla` los cambia. Funciona con Python, solo con la librería estándar, y seis tests lo cubren.
 
-## Cómo está hecho
-Python, solo librería estándar. Los objetivos por defecto son P1 4 h, P2 8 h, P3 24 h y P4 72 h, y `--sla` los cambia. Seis tests.
+## Cómo usarlo con datos reales
 
-## Qué aprendí
-La mediana cuenta otra historia que la media: unos pocos tickets muy largos mueven mucho la media, y la mediana enseña lo que vive la mayoría de usuarios.
+Los tickets se pueden exportar a CSV desde ServiceNow o cualquier otra herramienta, mapeando las columnas al informe. Cada equipo fija sus objetivos por prioridad con `--sla`, y usar el mismo informe cada mes permite comparar las cifras.
 
-## Siguientes pasos
-- Exportar tus tickets a CSV desde ServiceNow o cualquier otra herramienta y mapear las columnas.
-- Fijar tus objetivos de SLA por prioridad con `--sla`.
-- Usar el mismo informe cada mes para que las cifras se puedan comparar."""),
+## De dónde sale
+
+Al hacerlo comprobé que la mediana cuenta otra historia que la media: unos pocos tickets muy largos mueven mucho la media, y la mediana enseña lo que vive la mayoría de usuarios."""),
 
 dict(n="05", repo="05-it-ops-console", date="2026-09-30", updated="2026-11-08", cat="tools",
- title_en="Rebuilding an on-site IT operations console from scratch", title_es="Rehacer desde cero una consola de operaciones IT de sede",
+ title_en="An on-site IT console brings offline machines, expiring warranties, room checks and joiners into one app",
+ title_es="Una consola de IT de sede reúne equipos offline, garantías que caducan, revisión de salas y altas en una sola app",
  seo_title_en="On-site IT ops console: Flask + PowerShell · Iñigo González",
  seo_title_es="Consola de operaciones IT: Flask + PowerShell · Iñigo González",
- dek_en="Assets, warranties, room checklists, joiners and leavers, shifts and service health in one Flask app.",
- dek_es="Activos, garantías, checklists de salas, altas y bajas, turnos y salud de servicios en una app Flask.",
+ seo_desc="Assets, warranties, room checklists, joiners and leavers, shifts and service health in one Flask app.",
+ seo_desc_es="Activos, garantías, checklists de salas, altas y bajas, turnos y salud de servicios en una app Flask.",
+ dek_en="The Flask app, built from scratch and anonymised, covers assets, warranties, room checklists, joiners and leavers, shifts and service health, with invite-only access and TOTP.",
+ dek_es="La app en Flask, hecha desde cero y anonimizada, cubre activos, garantías, checklists de salas, altas y bajas, turnos y salud de servicios, con acceso por invitación y TOTP.",
  en="""
+Running a site means keeping a lot of small things in mind at once: which machines are offline, which warranties expire, which rooms were checked this morning, who starts on Monday. The IT operations console published with this post puts all of it in one place. It was built from scratch and anonymised.
 
-## The problem
-Running a site means keeping a lot of small things in your head: which machines are offline, which warranties expire, which rooms were checked this morning, who starts on Monday. I wanted all of it in one place, built from scratch and anonymised.
+## Assets, rooms, people and shifts in one app
 
-## What I built
-- Dashboard, assets (offline, non-compliant, duplicate serials, remote queries), warranties and software.
-- People, floor maps, meeting-room checklists, joiners and leavers, visitors and shifts.
-- Service health, role-based admin and an audit log.
+The console covers a dashboard, assets (offline, non-compliant, duplicate serials, remote queries), warranties and software. It adds people, floor maps, meeting-room checklists, joiners and leavers, visitors and shifts, plus service health, role-based admin and an audit log.
 
-Access is invite-only: the first admin is created with `bootstrap-admin`, accounts are activated with a 6-character code sent by email, and every sign-in after that needs an authenticator app (TOTP).
+## A 6-character code and an authenticator app
 
-## How it is built
-Flask and SQLite, with PowerShell over CIM/WinRM for remote queries. ARCHITECTURE.md, docs/decisions.md (PowerShell and WMI lessons) and docs/security.md explain the choices. Sixteen tests.
+Access is invite-only. The first admin is created with `bootstrap-admin`, accounts are activated with a 6-character code sent by email, and every sign-in after that needs an authenticator app (TOTP, a one-time code that changes over time). It runs on Flask and SQLite, with PowerShell over CIM/WinRM, Windows remote management, for remote queries. Sixteen tests cover it.
 
-## Next steps
-- Connect LDAP for sign-in and SMTP for the activation emails.
-- Enable remote PowerShell (WinRM) for the live device queries.
-- Load your asset inventory and floor plans, and adapt the room checklists to your site.""",
+## How to use it with real data
+
+A site needs to connect LDAP for sign-in and SMTP for activation emails, enable WinRM for live device queries, load its asset inventory and floor plans, and adapt the room checklists.
+
+## Where it comes from
+
+I wanted all of a site's small tasks in one place. ARCHITECTURE.md, docs/decisions.md, with my PowerShell and WMI lessons, and docs/security.md explain the choices.""",
  es="""
+Llevar una sede es tener muchas cosas pequeñas en la cabeza a la vez: qué equipos están offline, qué garantías caducan, qué salas se han revisado esta mañana, quién empieza el lunes. La consola de operaciones IT que acompaña a este post lo reúne todo en un sitio. Está hecha desde cero y anonimizada.
 
-## El problema
-Llevar una sede es tener muchas cosas pequeñas en la cabeza: qué equipos están offline, qué garantías caducan, qué salas se han revisado esta mañana, quién empieza el lunes. Lo quería todo en un sitio, hecho desde cero y anonimizado.
+## Activos, salas, personas y turnos en una sola app
 
-## Qué he hecho
-- Panel, activos (offline, no conformes, seriales duplicados, consultas remotas), garantías y software.
-- Personas, planos de planta, checklists de salas, altas y bajas, visitas y turnos.
-- Salud de servicios, administración por roles y log de auditoría.
+La consola incluye panel, activos (offline, no conformes, seriales duplicados, consultas remotas), garantías y software. Suma personas, planos de planta, checklists de salas, altas y bajas, visitas y turnos, además de salud de servicios, administración por roles y log de auditoría.
 
-El acceso es solo por invitación: el primer administrador se crea con `bootstrap-admin`, las cuentas se activan con un código de 6 caracteres por email y desde entonces cada inicio de sesión pide app autenticadora (TOTP).
+## Un código de 6 caracteres y una app autenticadora
 
-## Cómo está hecho
-Flask y SQLite, con PowerShell por CIM/WinRM para las consultas remotas. ARCHITECTURE.md, docs/decisions.md (lecciones de PowerShell y WMI) y docs/security.md explican las decisiones. Dieciséis tests.
+El acceso es solo por invitación. El primer administrador se crea con `bootstrap-admin`, las cuentas se activan con un código de 6 caracteres por email y desde entonces cada inicio de sesión pide app autenticadora (TOTP, un código de un solo uso que cambia con el tiempo). Funciona con Flask y SQLite, con PowerShell por CIM/WinRM, la administración remota de Windows, para las consultas remotas. Dieciséis tests la cubren.
 
-## Siguientes pasos
-- Conectar LDAP para el inicio de sesión y SMTP para los emails de activación.
-- Activar PowerShell remoto (WinRM) para las consultas en vivo a los equipos.
-- Cargar tu inventario de activos y tus planos, y adaptar los checklists de salas a tu oficina."""),
+## Cómo usarlo con datos reales
+
+Una sede necesita conectar LDAP para el inicio de sesión y SMTP para los emails de activación, activar WinRM para las consultas en vivo, cargar su inventario de activos y sus planos, y adaptar los checklists de salas.
+
+## De dónde sale
+
+Quería todas las tareas pequeñas de una sede en un solo sitio. ARCHITECTURE.md, docs/decisions.md, con mis lecciones de PowerShell y WMI, y docs/security.md explican las decisiones."""),
 
 dict(n="06", repo="06-kubernetes-ingress-lab", date="2026-10-01", updated="2026-11-11", cat="cloud",
- title_en="A Kubernetes ingress lab built from zero in every CI run", title_es="Un laboratorio de ingress en Kubernetes que la CI construye desde cero",
+ title_en="A Kubernetes ingress lab is rebuilt from zero in every CI run and passes nine end-to-end tests",
+ title_es="Un laboratorio de ingress en Kubernetes se reconstruye desde cero en cada ejecución de CI y pasa nueve pruebas",
  seo_title_en="Kubernetes ingress lab: Cilium and Envoy · Iñigo González",
  seo_title_es="Laboratorio de ingress en Kubernetes: Cilium y Envoy · Iñigo González",
- dek_en="Cilium, Envoy Gateway, cert-manager and external-dns on kind, with nine end-to-end checks.",
- dek_es="Cilium, Envoy Gateway, cert-manager y external-dns sobre kind, con nueve pruebas de punta a punta.",
+ seo_desc="Cilium, Envoy Gateway, cert-manager and external-dns on kind, with nine end-to-end checks.",
+ seo_desc_es="Cilium, Envoy Gateway, cert-manager y external-dns sobre kind, con nueve pruebas de punta a punta.",
+ dek_en="The lab runs Cilium, Envoy Gateway, cert-manager and external-dns on kind to show how traffic gets into a cluster today, and GitHub Actions rebuilds and tests it on every run.",
+ dek_es="El laboratorio monta Cilium, Envoy Gateway, cert-manager y external-dns sobre kind para mostrar cómo entra hoy el tráfico en un clúster, y GitHub Actions lo reconstruye y prueba en cada ejecución.",
  en="""
+A GitHub Actions workflow builds the cluster from scratch and runs nine end-to-end tests, and it has been green in the last four runs. That is the result of the Kubernetes ingress lab published with this post, a lab on how traffic gets into a cluster today: Gateway API instead of the classic Ingress, networking based on eBPF, which runs inside the Linux kernel, and certificates and DNS handled by controllers.
 
-## Why this lab
-Comes from working with container platforms such as Red Hat OpenShift and Kubernetes on premises. In this lab I go deeper into how traffic gets into a cluster today: Gateway API instead of the classic Ingress, eBPF networking, and certificates and DNS handled by controllers.
+## Cilium replaces kube-proxy and Envoy Gateway takes the traffic
 
-## What I built
-- kind with no CNI and no kube-proxy, replaced by Cilium (LB IPAM, L2 announcements, an L7 policy and Hubble).
-- Envoy Gateway with Gateway API: redirect, TLS and rate limiting.
-- cert-manager with a lab CA and a wildcard certificate.
-- external-dns writing to BIND over RFC 2136 with TSIG, using TXT ownership records.
-- Default deny in the apps namespace and an L7 allow-list (`/env` returns 403), with no way around the gateway.
+The lab runs on kind with no CNI, the cluster's network plugin, and no kube-proxy; Cilium replaces both, with LB IPAM, L2 announcements, an L7 policy and Hubble. Envoy Gateway handles redirect, TLS and rate limiting through Gateway API.
 
-## How it is tested
-A GitHub Actions workflow builds the cluster from scratch and runs nine end-to-end tests. It has been green in the last four runs.
+## A 403 on /env and no way around the gateway
 
-## Next steps
-- Replace kind with your own cluster and BIND with your DNS provider in external-dns.
-- Swap the lab CA for ACME or your internal PKI in cert-manager.
-- Contribute back: docs or a good first issue in one of these projects is the next step on my side.""",
+cert-manager issues a wildcard certificate from a lab CA, and external-dns writes to BIND over RFC 2136 with TSIG, using TXT ownership records. The apps namespace denies by default, and an L7 allow-list makes `/env` return 403, with no way around the gateway.
+
+## How to use it with real data
+
+Kind can be replaced with a real cluster, BIND with the DNS provider in external-dns, and the lab CA with ACME or an internal PKI in cert-manager.
+
+## Where it comes from
+
+The lab comes from working with container platforms such as Red Hat OpenShift and Kubernetes on premises. My next step is contributing back: docs or a good first issue in one of these projects.""",
  es="""
+Un workflow de GitHub Actions construye el clúster desde cero y pasa nueve pruebas de punta a punta, y ha salido en verde en las cuatro últimas ejecuciones. Es el resultado del laboratorio de ingress en Kubernetes que acompaña a este post, un laboratorio sobre cómo entra hoy el tráfico en un clúster: Gateway API en lugar del Ingress clásico, red con eBPF, que funciona dentro del núcleo de Linux, y certificados y DNS gestionados por controladores.
 
-## Por qué este laboratorio
-Viene de trabajar con plataformas de contenedores como Red Hat OpenShift y Kubernetes en local. En este laboratorio profundizo en cómo entra hoy el tráfico en un clúster: Gateway API en lugar del Ingress clásico, red con eBPF, y certificados y DNS gestionados por controladores.
+## Cilium sustituye a kube-proxy y Envoy Gateway recibe el tráfico
 
-## Qué he hecho
-- kind sin CNI ni kube-proxy, sustituidos por Cilium (LB IPAM, anuncios L2, una política L7 y Hubble).
-- Envoy Gateway con Gateway API: redirección, TLS y limitación de peticiones.
-- cert-manager con una CA del laboratorio y un certificado wildcard.
-- external-dns escribiendo en BIND por RFC 2136 con TSIG y registros TXT de propiedad.
-- Denegación por defecto en el namespace de las apps y lista blanca L7 (`/env` devuelve 403), sin forma de saltarse el gateway.
+El laboratorio corre sobre kind sin CNI, el plugin de red del clúster, y sin kube-proxy; Cilium sustituye a ambos, con LB IPAM, anuncios L2, una política L7 y Hubble. Envoy Gateway se encarga de la redirección, TLS y la limitación de peticiones mediante Gateway API.
 
-## Cómo se prueba
-Un workflow de GitHub Actions construye el clúster desde cero y pasa nueve pruebas de punta a punta. Ha salido en verde en las cuatro últimas ejecuciones.
+## Un 403 en /env y ninguna forma de saltarse el gateway
 
-## Siguientes pasos
-- Cambiar kind por tu clúster y BIND por tu proveedor de DNS en external-dns.
-- Cambiar la CA del laboratorio por ACME o tu PKI interna en cert-manager.
-- Contribuir de vuelta: documentación o una good first issue en alguno de estos proyectos es mi siguiente paso."""),
+cert-manager emite un certificado wildcard desde una CA del laboratorio, y external-dns escribe en BIND por RFC 2136 con TSIG y registros TXT de propiedad. El namespace de las apps deniega por defecto, y una lista blanca L7 hace que `/env` devuelva 403, sin forma de saltarse el gateway.
+
+## Cómo usarlo con datos reales
+
+Se puede cambiar kind por un clúster real, BIND por el proveedor de DNS en external-dns, y la CA del laboratorio por ACME o una PKI interna en cert-manager.
+
+## De dónde sale
+
+El laboratorio viene de trabajar con plataformas de contenedores como Red Hat OpenShift y Kubernetes en local. Mi siguiente paso es contribuir de vuelta: documentación o una good first issue en alguno de estos proyectos."""),
 
 dict(n="07", repo="07-aws-private-connectivity", date="2026-10-01", cat="cloud",
- title_en="Private connectivity on AWS with Terraform, and the bug CI caught", title_es="Conectividad privada en AWS con Terraform, y el fallo que pilló la CI",
+ title_en="The pipeline of a private AWS connectivity lab caught a Terraform bug that OpenTofu did not flag",
+ title_es="La CI de un laboratorio de conectividad privada en AWS pilló un fallo de Terraform que OpenTofu no marcó",
  seo_title_en="AWS PrivateLink and private DNS with Terraform · Iñigo González",
  seo_title_es="AWS PrivateLink y DNS privado con Terraform · Iñigo González",
- dek_en="PrivateLink, private DNS and SSM endpoints in five modules, tested without an AWS account.",
- dek_es="PrivateLink, DNS privado y endpoints de SSM en cinco módulos, probados sin cuenta de AWS.",
+ seo_desc="PrivateLink, private DNS and SSM endpoints in five modules, tested without an AWS account.",
+ seo_desc_es="PrivateLink, DNS privado y endpoints de SSM en cinco módulos, probados sin cuenta de AWS.",
+ dek_en="A lab, tested without an AWS account, builds private access to a service with PrivateLink, private DNS and SSM endpoints in five Terraform modules, and runs them through format, validation, test and security checks.",
+ dek_es="Un laboratorio, probado sin cuenta de AWS, monta el acceso privado a un servicio con PrivateLink, DNS privado y endpoints de SSM en cinco módulos de Terraform, y los pasa por comprobaciones de formato, validación, tests y seguridad.",
  en="""
+Running the pipeline with Terraform caught a real bug that OpenTofu had not flagged: a `for_each`, the loop that creates one resource per item, over IDs that are still unknown when the plan is calculated. That is what happened in the private connectivity lab for AWS published with this post, a set of five Terraform modules tested without an AWS account. It is a lab, not a production deployment, and the fix is written up in docs/decisions.md.
 
-## Why this lab
-Comes from operating a hybrid AWS and Azure environment, where a common need is reaching a service privately, with no internet gateway and no NAT. This lab builds that pattern end to end with Terraform.
+The pattern the lab builds end to end is a common one: reaching a service privately, with no internet gateway and no NAT, the address translation that lets private machines go out to the internet. The first module creates a private VPC with flow logs, the records of the traffic that crosses it. The second puts an internal NLB, a network load balancer, behind an endpoint service that requires acceptance and explicit principals, so only the listed accounts can connect and each connection has to be approved.
 
-## What I built
-Five Terraform modules:
-- A private VPC with flow logs.
-- An internal NLB with an endpoint service that requires acceptance and explicit principals.
-- An interface endpoint with a narrow security group.
-- A private Route 53 zone with an alias and query logs.
-- SSM and S3 endpoints, plus a lab with two test instances (IMDSv2, no public IP, Session Manager).
+## Five modules, from the endpoint to private DNS
 
-## How it is tested
-`terraform test` with a mocked AWS provider (5 tests) and a GitHub Actions pipeline with fmt, validate, test and tfsec, all green. The estimated cost of running the lab is about $0.11 an hour.
+The third module adds an interface endpoint with a narrow security group, the firewall rules attached to it. The fourth creates a private Route 53 zone with an alias and query logs, so the service is reached by name inside the network. The fifth adds SSM and S3 endpoints, plus a lab with two test instances that use IMDSv2, have no public IP and are reached through Session Manager.
 
-## What I learned
-Running CI with Terraform caught a real bug that OpenTofu didn't flag: a `for_each` over IDs that are unknown at plan time. It is fixed and written up in docs/decisions.md.
+## Five tests with a mocked provider and a cost of $0.11 an hour
 
-## Next steps
-- Run `terraform apply` in a sandbox AWS account (the lab costs around $0.11 per hour).
-- Plug in your own VPCs, allowed principals and private DNS zone.
-- Keep the CI checks (fmt, validate, test, tfsec) in your pipeline.""",
+The modules are tested with `terraform test` against a mocked AWS provider, 5 tests that need no account. A GitHub Actions pipeline runs fmt, validate, test and tfsec, a security scanner for Terraform code, and all of them are green. The estimated cost of running the lab is about $0.11 an hour.
+
+## How to use it with real data
+
+The next step is `terraform apply` in a sandbox AWS account, plugging in your own VPCs, allowed principals and private DNS zone. The CI checks, fmt, validate, test and tfsec, are meant to stay in the pipeline.
+
+## Where it comes from
+
+I built the lab from operating a hybrid AWS and Azure environment, where reaching a service privately, with no internet gateway and no NAT, is a common need.""",
  es="""
+La CI con Terraform encontró un fallo real que OpenTofu no había marcado: un `for_each`, el bucle que crea un recurso por cada elemento, sobre IDs que todavía no se conocen cuando se calcula el plan. Es lo que pasó en el laboratorio de conectividad privada en AWS que acompaña a este post, un conjunto de cinco módulos de Terraform probados sin cuenta de AWS. Es un laboratorio, no un despliegue en producción, y la corrección está explicada en docs/decisions.md.
 
-## Por qué este laboratorio
-Viene de operar un entorno híbrido con AWS y Azure, donde una necesidad habitual es llegar a un servicio de forma privada, sin internet gateway y sin NAT. Este laboratorio construye ese patrón de principio a fin con Terraform.
+El patrón que monta el laboratorio de principio a fin es habitual: llegar a un servicio de forma privada, sin internet gateway y sin NAT, la traducción de direcciones que deja salir a internet a las máquinas privadas. El primer módulo crea una VPC privada con flow logs, los registros del tráfico que la cruza. El segundo coloca un NLB interno, un balanceador de red, detrás de un endpoint service que exige aceptación y principals explícitos, de modo que solo se conectan las cuentas de la lista y cada conexión hay que aprobarla.
 
-## Qué he hecho
-Cinco módulos de Terraform:
-- Una VPC privada con flow logs.
-- Un NLB interno con un endpoint service que exige aceptación y principals explícitos.
-- Un interface endpoint con un security group estrecho.
-- Una zona privada de Route 53 con alias y logs de consultas.
-- Endpoints de SSM y S3, más un laboratorio con dos instancias de prueba (IMDSv2, sin IP pública, Session Manager).
+## Cinco módulos, del endpoint al DNS privado
 
-## Cómo se prueba
-`terraform test` con el proveedor de AWS simulado (5 tests) y un pipeline de GitHub Actions con fmt, validate, test y tfsec, todo en verde. Tener el laboratorio encendido cuesta unos 0,11 $ la hora.
+El tercer módulo añade un interface endpoint con un security group estrecho, las reglas de cortafuegos asociadas. El cuarto crea una zona privada de Route 53 con alias y logs de consultas, para llegar al servicio por nombre dentro de la red. El quinto añade endpoints de SSM y S3, más un laboratorio con dos instancias de prueba que usan IMDSv2, no tienen IP pública y se manejan con Session Manager.
 
-## Qué aprendí
-La CI con Terraform encontró un fallo real que OpenTofu no marcó: un `for_each` sobre IDs que no se conocen en el plan. Está corregido y explicado en docs/decisions.md.
+## Cinco tests con el proveedor simulado y un coste de 0,11 $ la hora
 
-## Siguientes pasos
-- Ejecutar `terraform apply` en una cuenta de AWS de pruebas (el laboratorio cuesta unos 0,11 $ por hora).
-- Conectar tus VPC, los principals permitidos y tu zona DNS privada.
-- Mantener las comprobaciones de CI (fmt, validate, test, tfsec) en tu pipeline."""),
+Los módulos se prueban con `terraform test` sobre el proveedor de AWS simulado, 5 tests que no necesitan cuenta. Un pipeline de GitHub Actions pasa fmt, validate, test y tfsec, un analizador de seguridad para código de Terraform, y todo está en verde. Tener el laboratorio encendido cuesta unos 0,11 $ la hora.
+
+## Cómo usarlo con datos reales
+
+El siguiente paso es ejecutar `terraform apply` en una cuenta de AWS de pruebas y conectar tus VPC, los principals permitidos y tu zona DNS privada. Las comprobaciones de CI, fmt, validate, test y tfsec, están pensadas para quedarse en el pipeline.
+
+## De dónde sale
+
+Monté el laboratorio a partir de operar un entorno híbrido con AWS y Azure, donde llegar a un servicio de forma privada, sin internet gateway y sin NAT, es una necesidad habitual."""),
 
 dict(n="08", repo="08-edge-health-slo-monitor", date="2026-10-01", cat="cloud",
- title_en="SLOs and burn-rate alerts for the edge, in plain Python", title_es="SLO y alertas por burn rate para el edge, en Python sin dependencias",
+ title_en="An edge monitoring lab wakes someone only when the error budget burns too fast, not on every failed check",
+ title_es="Un laboratorio de monitorización del edge solo despierta a alguien cuando el presupuesto de error se quema rápido",
  seo_title_en="SLOs and burn-rate alerts in Python · Iñigo González",
  seo_title_es="SLO y alertas por burn rate en Python · Iñigo González",
- dek_en="DNS, TLS, HTTP and TCP probes, an error budget and a fictional postmortem.",
- dek_es="Sondas DNS, TLS, HTTP y TCP, un presupuesto de error y un postmortem ficticio.",
+ seo_desc="DNS, TLS, HTTP and TCP probes, an error budget and a fictional postmortem.",
+ seo_desc_es="Sondas DNS, TLS, HTTP y TCP, un presupuesto de error y un postmortem ficticio.",
+ dek_en="A lab in plain Python probes DNS, TLS, HTTP and TCP, tracks an SLO with an error budget and alerts on burn rate; it comes with a fictional postmortem of a DNS record lost in a zone migration.",
+ dek_es="Un laboratorio en Python sin dependencias lanza sondas DNS, TLS, HTTP y TCP, sigue un SLO con presupuesto de error y avisa por burn rate; incluye un postmortem ficticio de un registro DNS perdido en una migración de zona.",
  en="""
+A failed check at the edge, the part of a service closest to its users, does not have to wake anyone up. The edge health monitor published with this post only alerts when the error budget, the amount of failure an SLO (service level objective) allows, is being spent too fast. It is a lab written in Python, and its example incident is fictional: a DNS record lost during a zone migration, written up as a postmortem.
 
-## Why this lab
-Comes from years of monitoring and alert response with tools such as Grafana, SolarWinds and the Elastic stack. This lab applies the SRE approach to the edge: wake someone up when the error budget is burning too fast, not on every failed check.
+The approach is the one SRE teams use, applied to the edge. The tool runs DNS, TLS, HTTP and TCP probes and measures them against an SLO with an error budget. The alerts look at the burn rate, the speed at which that budget is consumed, over several time windows at once, and they wait for a minimum number of bad probes before firing.
 
-## What I built
-- DNS, TLS, HTTP and TCP probes.
-- An SLO with an error budget and multi-window burn-rate alerts, with a minimum number of bad probes before firing.
-- Export to Elasticsearch (ECS) and Prometheus, a signed webhook and an HTML report.
-- A postmortem template and a fictional postmortem: a DNS record lost during a zone migration.
+## Results to Elasticsearch, Prometheus and a signed webhook
 
-## How it is built
-Python 3.11, standard library only, 14 tests.
+The results go out in several formats. The tool exports them to Elasticsearch in ECS, the Elastic Common Schema, and to Prometheus, sends a signed webhook so the receiver can check where it comes from, and builds an HTML report. The repository also includes a postmortem template next to the fictional one about the lost DNS record.
 
-## Next steps
-- Send the results to your Elasticsearch or Prometheus.
-- Install the systemd units on a small VM close to your users.
-- Connect the signed webhook to n8n, Teams or Slack, and agree the SLOs with the service owners.""",
+## Python 3.11, no dependencies and 14 tests
+
+The lab runs on Python 3.11 with the standard library only, so there is nothing else to install. It has 14 tests.
+
+## How to use it with real data
+
+The results can be sent to an existing Elasticsearch or Prometheus. The systemd units are meant to be installed on a small VM close to the users, and the signed webhook can be connected to n8n, Teams or Slack. The SLOs have to be agreed with the service owners.
+
+## Where it comes from
+
+The lab comes from my years of monitoring and alert response with tools such as Grafana, SolarWinds and the Elastic stack.""",
  es="""
+Una comprobación fallida en el edge, la parte de un servicio más cercana a sus usuarios, no tiene por qué despertar a nadie. El monitor de salud del edge que acompaña a este post solo avisa cuando el presupuesto de error, la cantidad de fallo que permite un SLO (objetivo de nivel de servicio), se está consumiendo demasiado rápido. Es un laboratorio escrito en Python, y su incidente de ejemplo es ficticio: un registro DNS perdido en una migración de zona, contado como postmortem.
 
-## Por qué este laboratorio
-Viene de años de monitorización y respuesta a alertas con herramientas como Grafana, SolarWinds y el stack de Elastic. Este laboratorio aplica el enfoque SRE al edge: despertar a alguien cuando el presupuesto de error se consume demasiado rápido, no en cada comprobación fallida.
+El enfoque es el de los equipos SRE, aplicado al edge. La herramienta lanza sondas DNS, TLS, HTTP y TCP y las mide frente a un SLO con presupuesto de error. Las alertas miran el burn rate, la velocidad a la que se gasta ese presupuesto, en varias ventanas de tiempo a la vez, y esperan a un mínimo de sondas malas antes de avisar.
 
-## Qué he hecho
-- Sondas DNS, TLS, HTTP y TCP.
-- Un SLO con presupuesto de error y alertas multiventana por burn rate, con un mínimo de sondas malas antes de avisar.
-- Exportación a Elasticsearch (ECS) y Prometheus, un webhook firmado y un informe HTML.
-- Una plantilla de postmortem y un postmortem ficticio: un registro DNS perdido en una migración de zona.
+## Resultados a Elasticsearch, Prometheus y un webhook firmado
 
-## Cómo está hecho
-Python 3.11, solo librería estándar, 14 tests.
+Los resultados salen en varios formatos. La herramienta los exporta a Elasticsearch en ECS, el esquema común de Elastic, y a Prometheus, envía un webhook firmado para que quien lo recibe pueda comprobar su origen y genera un informe HTML. El repositorio incluye además una plantilla de postmortem junto al ficticio del registro DNS perdido.
 
-## Siguientes pasos
-- Enviar los resultados a tu Elasticsearch o Prometheus.
-- Instalar las units de systemd en una VM pequeña cerca de tus usuarios.
-- Conectar el webhook firmado a n8n, Teams o Slack, y acordar los SLO con los responsables del servicio."""),
+## Python 3.11, sin dependencias y 14 tests
+
+El laboratorio funciona con Python 3.11 y solo la librería estándar, así que no hay nada más que instalar. Tiene 14 tests.
+
+## Cómo usarlo con datos reales
+
+Los resultados pueden enviarse a un Elasticsearch o un Prometheus existentes. Las units de systemd están pensadas para instalarse en una VM pequeña cerca de los usuarios, y el webhook firmado se puede conectar a n8n, Teams o Slack. Los SLO hay que acordarlos con los responsables del servicio.
+
+## De dónde sale
+
+El laboratorio viene de mis años de monitorización y respuesta a alertas con herramientas como Grafana, SolarWinds y el stack de Elastic."""),
 
 dict(n="09", repo="09-gpu-node-remediation", date="2026-10-01", cat="gpu",
- title_en="Teaching a Kubernetes controller to drain, repair or quarantine GPU nodes", title_es="Un controlador de Kubernetes que drena, repara o pone en cuarentena nodos GPU",
+ title_en="A Kubernetes lab drains, repairs or quarantines GPU nodes on their own, and passed 28 checks first time",
+ title_es="Un laboratorio de Kubernetes drena, repara o aísla nodos GPU por sí solo y pasa 28 pruebas a la primera",
  seo_title_en="Kubernetes GPU node remediation controller · Iñigo González",
  seo_title_es="Controlador de remediación de nodos GPU · Iñigo González",
- dek_en="First GPU lab: XID errors, ECC and temperature drive each node through a state machine.",
- dek_es="Primer laboratorio de GPU: los XID, el ECC y la temperatura llevan cada nodo por una máquina de estados.",
+ seo_desc="First GPU lab: XID errors, ECC and temperature drive each node through a state machine.",
+ seo_desc_es="Primer laboratorio de GPU: los XID, el ECC y la temperatura llevan cada nodo por una máquina de estados.",
+ dek_en="The first of a series of GPU labs, run on simulated GPUs: a Kubernetes controller reads XID errors, ECC and temperature and moves each node through a state machine, from draining to repair, validation or quarantine.",
+ dek_es="Primero de una serie de laboratorios de GPU, con GPU simuladas: un controlador de Kubernetes lee los errores XID, el ECC y la temperatura y lleva cada nodo por una máquina de estados, del drenado a la reparación, la validación o la cuarentena.",
  en="""
+A Kubernetes controller that decides on its own whether a GPU node should be drained, repaired, cordoned or quarantined passed an end-to-end test of 8 scenarios and 28 checks on its first run. It is the first of a series of GPU labs published with this post, and it runs on simulated GPUs, so anyone can reproduce it on a laptop.
 
-## Why this lab
-Comes from hardware operations: validating and certifying servers, and automating the detection and remediation of hardware failures. This is the first of a series of labs that applies that to GPU fleets. It runs on simulated GPUs, so anyone can reproduce it on a laptop.
+The controller reads DCGM metrics, the health data NVIDIA exposes for its GPUs: XID errors, the error codes the driver reports, double-bit ECC memory errors, row remapping and temperature. With them it moves each node through Healthy, Draining, Repairing, Validating and back to Healthy, or to Cordoned for thermal issues, or to Quarantined. It is written in Go with the standard library only, without client-go, the usual Kubernetes library.
 
-## What I built
-A Kubernetes controller in Go (standard library only, no client-go) that reads DCGM metrics (XID errors, double-bit ECC, row remapping, temperature) and moves each node through Healthy → Draining → Repairing → Validating → Healthy, or to Cordoned for thermal issues, or Quarantined.
-- State is kept in node annotations, with a budget of nodes in remediation (max-unavailable).
-- Evictions respect PodDisruptionBudgets, and validation runs as a Job pinned to the node with all its GPUs.
-- A repeat-offender rule, dry-run mode, events and Prometheus metrics.
-- The XID policy is based on NVIDIA's documentation (docs/xid-policy.md).
+## A budget of nodes in repair and evictions that respect the workloads
 
-## How it is tested
-A `gpu-sim` simulator stands in for dcgm-exporter. CI runs unit tests, shellcheck and an end-to-end test on kind with 8 scenarios (28 checks), green on the first run. There is also a `gpuremediate check` mode that uses nvidia-smi on a real GPU.
+The state is kept in annotations on each node, and a budget, max-unavailable, limits how many nodes can be in remediation at once. Evictions respect PodDisruptionBudgets, the limits that stop too many copies of an application going down together. Validation runs as a Job pinned to the node and using all its GPUs. The controller adds a repeat-offender rule, a dry-run mode, events and Prometheus metrics, and its XID policy is based on NVIDIA's documentation, summarised in docs/xid-policy.md.
 
-## Next steps
-- On a cluster with GPUs, deploy dcgm-exporter instead of the simulator.
-- Start in dry-run mode and set the budget of nodes in remediation (max-unavailable).
-- `gpuremediate check` runs on any machine with `nvidia-smi`, including a Windows workstation.""",
+## A simulator in place of the real GPUs
+
+A simulator called `gpu-sim` stands in for dcgm-exporter, the component that publishes the GPU metrics. The CI runs unit tests, shellcheck and the end-to-end test on kind, a Kubernetes cluster that runs in containers. A `gpuremediate check` mode uses nvidia-smi on a real GPU.
+
+## How to use it with real data
+
+On a cluster with GPUs, dcgm-exporter replaces the simulator. The recommended start is dry-run mode with the max-unavailable budget set. `gpuremediate check` runs on any machine with `nvidia-smi`, including a Windows workstation.
+
+## Where it comes from
+
+The lab comes from my work in hardware operations: validating and certifying servers, and automating the detection and remediation of hardware failures. This series applies that to GPU fleets.""",
  es="""
+Un controlador de Kubernetes que decide por sí solo si un nodo GPU hay que drenarlo, repararlo, acordonarlo o ponerlo en cuarentena pasó a la primera una prueba de punta a punta con 8 escenarios y 28 comprobaciones. Es el primero de una serie de laboratorios de GPU que acompaña a este post, y funciona con GPU simuladas, así que cualquiera puede reproducirlo en un portátil.
 
-## Por qué este laboratorio
-Viene de la operación de hardware: validar y certificar servidores, y automatizar la detección y la reparación de fallos de hardware. Es el primero de una serie de laboratorios que lleva eso a las flotas de GPU. Funciona con GPU simuladas, así que cualquiera puede reproducirlo en un portátil.
+El controlador lee las métricas DCGM, los datos de salud que NVIDIA expone de sus GPU: los errores XID, los códigos de error que comunica el driver, los errores ECC de doble bit en memoria, el row remapping y la temperatura. Con ellos lleva cada nodo por Healthy, Draining, Repairing, Validating y de vuelta a Healthy, o a Cordoned por temperatura, o a Quarantined. Está escrito en Go solo con la librería estándar, sin client-go, la librería habitual de Kubernetes.
 
-## Qué he hecho
-Un controlador de Kubernetes en Go (solo librería estándar, sin client-go) que lee métricas DCGM (errores XID, ECC de doble bit, row remapping, temperatura) y lleva cada nodo por Healthy → Draining → Repairing → Validating → Healthy, o a Cordoned por temperatura, o a Quarantined.
-- El estado vive en anotaciones del nodo, con un presupuesto de nodos en remediación (max-unavailable).
-- Las evicciones respetan los PodDisruptionBudget y la validación es un Job fijado al nodo con todas sus GPU.
-- Regla de reincidencia, modo dry-run, eventos y métricas de Prometheus.
-- La política de XID se basa en la documentación de NVIDIA (docs/xid-policy.md).
+## Un presupuesto de nodos en reparación y evicciones que respetan las cargas
 
-## Cómo se prueba
-Un simulador `gpu-sim` hace de dcgm-exporter. La CI pasa tests unitarios, shellcheck y una prueba de punta a punta en kind con 8 escenarios (28 comprobaciones), en verde a la primera. Hay además un modo `gpuremediate check` que usa nvidia-smi en una GPU real.
+El estado vive en anotaciones de cada nodo, y un presupuesto, max-unavailable, limita cuántos nodos pueden estar en remediación a la vez. Las evicciones respetan los PodDisruptionBudget, los límites que impiden que caigan a la vez demasiadas copias de una aplicación. La validación es un Job fijado al nodo que usa todas sus GPU. El controlador añade una regla de reincidencia, un modo dry-run, eventos y métricas de Prometheus, y su política de XID se basa en la documentación de NVIDIA, resumida en docs/xid-policy.md.
 
-## Siguientes pasos
-- En un clúster con GPU, desplegar dcgm-exporter en lugar del simulador.
-- Empezar en modo dry-run y fijar el presupuesto de nodos en reparación (max-unavailable).
-- `gpuremediate check` funciona en cualquier máquina con `nvidia-smi`, también en un puesto Windows."""),
+## Un simulador en lugar de las GPU reales
+
+Un simulador llamado `gpu-sim` hace de dcgm-exporter, el componente que publica las métricas de las GPU. La CI pasa tests unitarios, shellcheck y la prueba de punta a punta en kind, un clúster de Kubernetes que corre en contenedores. Un modo `gpuremediate check` usa nvidia-smi en una GPU real.
+
+## Cómo usarlo con datos reales
+
+En un clúster con GPU, dcgm-exporter sustituye al simulador. Lo recomendable es empezar en modo dry-run y con el presupuesto max-unavailable fijado. `gpuremediate check` funciona en cualquier máquina con `nvidia-smi`, también en un puesto Windows.
+
+## De dónde sale
+
+El laboratorio viene de mi trabajo en operación de hardware: validar y certificar servidores, y automatizar la detección y la reparación de fallos de hardware. Esta serie lo lleva a las flotas de GPU."""),
 
 dict(n="10", repo="10-gpu-fleet-observability", date="2026-10-01", cat="gpu",
- title_en="Observability for a GPU fleet: alerts that say what to do", title_es="Observabilidad de una flota de GPU: alertas que dicen qué hacer",
+ title_en="A GPU fleet monitoring lab gives each of its 10 alerts a runbook and an action: drain, quarantine or cordon",
+ title_es="Un laboratorio de monitorización de GPU da a cada una de sus 10 alertas un runbook y una acción a seguir",
  seo_title_en="GPU fleet observability with dcgm-exporter · Iñigo González",
  seo_title_es="Observabilidad de una flota GPU con dcgm-exporter · Iñigo González",
- dek_en="Recording rules, alerts with runbooks, Alertmanager routing and a Grafana dashboard on DCGM metrics.",
- dek_es="Recording rules, alertas con runbook, rutas de Alertmanager y un dashboard de Grafana sobre métricas DCGM.",
+ seo_desc="Recording rules, alerts with runbooks, Alertmanager routing and a Grafana dashboard on DCGM metrics.",
+ seo_desc_es="Recording rules, alertas con runbook, rutas de Alertmanager y un dashboard de Grafana sobre métricas DCGM.",
+ dek_en="A lab on a simulated fleet of 4 nodes with 8 GPUs each turns DCGM metrics into recording rules, alerts with runbooks, Alertmanager routes and a Grafana dashboard, and passed 32 checks on its first run.",
+ dek_es="Un laboratorio sobre una flota simulada de 4 nodos con 8 GPU cada uno convierte las métricas DCGM en recording rules, alertas con runbook, rutas de Alertmanager y un dashboard de Grafana, y pasó 32 comprobaciones a la primera.",
  en="""
+Each of the 10 alerts in the GPU fleet monitoring lab published with this post says what to do: it comes with a runbook, the written procedure to follow, and an `action` label that reads drain, quarantine or cordon. The lab runs on a simulated fleet, and the question it answers is which NVIDIA DCGM metrics deserve an alert and who should get it.
 
-## Why this lab
-Builds on years of monitoring and Grafana dashboards. Here the metrics come from NVIDIA DCGM, and the question is which ones deserve an alert and who should get it.
+The simulator, written in Go, models 4 nodes with 8 GPUs each. It uses the same metric names and labels as dcgm-exporter, the component that publishes GPU metrics, pod and namespace included, and it can inject faults. On top of those metrics sit 17 recording rules, queries that Prometheus calculates in advance, and the 10 alerts, documented in docs/alerts.md.
 
-## What I built
-- A Go simulator with 4 nodes × 8 GPUs that uses dcgm-exporter's metric names and labels, pod and namespace included, plus fault injection.
-- 17 recording rules and 10 alerts, each with a runbook (docs/alerts.md) and an `action` label: drain, quarantine or cordon.
-- Alertmanager with pager, ticket and team routes, and inhibitions so a broken GPU doesn't also alert the team about an "idle GPU".
-- A Grafana dashboard generated by a script, and `fleetreport` with GPU-hours and idle GPU-hours per namespace.
+## A broken GPU does not also report itself as idle
 
-## How it is tested
-7 `promtool test rules` cases, Go tests, config checks, shellcheck and an end-to-end run with Docker Compose (Prometheus, Alertmanager, Grafana): 32 checks, green on the first run.
+Alertmanager sends each alert down one of three routes: the pager, a ticket or the team. Inhibitions, rules that silence one alert when another is firing, stop a broken GPU from also telling the team it is an idle GPU. A script generates the Grafana dashboard, and a tool called `fleetreport` adds up GPU-hours and idle GPU-hours per namespace.
 
-## What I learned
-The energy-versus-power check gave false failures with a single sample because of scrape jitter. It now uses 1 minute of rate over 2 minutes of data.
+## 32 checks green on the first run
 
-## Next steps
-- Replace the simulator with dcgm-exporter on your nodes.
-- Import the Grafana dashboard and the recording rules.
-- Route the alerts in Alertmanager to your on-call and ticketing tools.""",
+The tests combine 7 `promtool test rules` cases, Go tests, configuration checks, shellcheck and an end-to-end run with Docker Compose that brings up Prometheus, Alertmanager and Grafana: 32 checks, green on the first run. One check needed a fix: comparing energy with power gave false failures with a single sample because of scrape jitter, the small variation in when metrics are collected. It now uses 1 minute of rate over 2 minutes of data.
+
+## How to use it with real data
+
+The simulator is replaced by dcgm-exporter on real nodes. The Grafana dashboard and the recording rules can be imported, and the Alertmanager alerts routed to the on-call and ticketing tools already in use.
+
+## Where it comes from
+
+The lab builds on my years of monitoring and building Grafana dashboards.""",
  es="""
+Cada una de las 10 alertas del laboratorio de monitorización de una flota de GPU que acompaña a este post dice qué hacer: lleva un runbook, el procedimiento escrito que hay que seguir, y una etiqueta `action` que indica drain, quarantine o cordon. El laboratorio funciona sobre una flota simulada, y la pregunta que responde es qué métricas de NVIDIA DCGM merecen una alerta y quién debe recibirla.
 
-## Por qué este laboratorio
-Se apoya en años de monitorización y cuadros de Grafana. Aquí las métricas vienen de NVIDIA DCGM, y la pregunta es cuáles merecen una alerta y quién debe recibirla.
+El simulador, escrito en Go, reproduce 4 nodos con 8 GPU cada uno. Usa los mismos nombres y etiquetas de métricas que dcgm-exporter, el componente que publica las métricas de las GPU, pod y namespace incluidos, y permite inyectar fallos. Sobre esas métricas hay 17 recording rules, consultas que Prometheus calcula por adelantado, y las 10 alertas, documentadas en docs/alerts.md.
 
-## Qué he hecho
-- Un simulador en Go de 4 nodos × 8 GPU que usa los nombres y etiquetas de métricas de dcgm-exporter, pod y namespace incluidos, con inyección de fallos.
-- 17 recording rules y 10 alertas, cada una con su runbook (docs/alerts.md) y una etiqueta `action`: drain, quarantine o cordon.
-- Alertmanager con rutas a guardia, ticket y equipo, e inhibiciones para que una GPU rota no avise además de "GPU ociosa" al equipo.
-- Un dashboard de Grafana generado por script y `fleetreport` con GPU-horas y GPU-horas ociosas por namespace.
+## Una GPU rota no avisa además de que está ociosa
 
-## Cómo se prueba
-7 casos de `promtool test rules`, tests en Go, comprobaciones de configuración, shellcheck y una prueba de punta a punta con Docker Compose (Prometheus, Alertmanager, Grafana): 32 comprobaciones, en verde a la primera.
+Alertmanager manda cada alerta por una de tres rutas: la guardia, un ticket o el equipo. Las inhibiciones, reglas que silencian una alerta cuando salta otra, evitan que una GPU rota avise además al equipo de «GPU ociosa». Un script genera el dashboard de Grafana, y una herramienta llamada `fleetreport` suma las GPU-horas y las GPU-horas ociosas por namespace.
 
-## Qué aprendí
-La comprobación de energía frente a potencia daba falsos fallos con una sola muestra por el jitter del scrape. Ahora usa 1 minuto sobre 2 minutos de datos.
+## 32 comprobaciones en verde a la primera
 
-## Siguientes pasos
-- Cambiar el simulador por dcgm-exporter en tus nodos.
-- Importar el cuadro de Grafana y las recording rules.
-- Enrutar las alertas de Alertmanager a tus herramientas de guardia y de tickets."""),
+Las pruebas combinan 7 casos de `promtool test rules`, tests en Go, comprobaciones de configuración, shellcheck y una prueba de punta a punta con Docker Compose que levanta Prometheus, Alertmanager y Grafana: 32 comprobaciones, en verde a la primera. Una comprobación necesitó un arreglo: comparar energía con potencia daba falsos fallos con una sola muestra por el jitter del scrape, la pequeña variación en el momento en que se recogen las métricas. Ahora usa 1 minuto sobre 2 minutos de datos.
+
+## Cómo usarlo con datos reales
+
+El simulador se sustituye por dcgm-exporter en los nodos reales. El dashboard de Grafana y las recording rules se pueden importar, y las alertas de Alertmanager se enrutan a las herramientas de guardia y de tickets que ya se usen.
+
+## De dónde sale
+
+El laboratorio se apoya en mis años de monitorización y de cuadros de Grafana."""),
 
 dict(n="11", repo="11-gpu-fleet-lifecycle", date="2026-10-02", cat="gpu",
- title_en="Rolling a GPU driver across a fleet: canary, approval, rollback", title_es="Desplegar un driver de GPU por la flota: canary, aprobación y rollback",
+ title_en="A driver rollout lab for GPU fleets stops a bad driver at the canary and rolls back on its own after an XID",
+ title_es="Un laboratorio de despliegue de drivers de GPU frena un driver malo en el canary y da marcha atrás solo",
  seo_title_en="GPU driver rollout: canary and rollback · Iñigo González",
  seo_title_es="Despliegue de drivers GPU: canary y rollback · Iñigo González",
- dek_en="A Go controller that upgrades nodes in batches and backs out on its own when something breaks.",
- dek_es="Un controlador en Go que actualiza nodos por lotes y da marcha atrás solo cuando algo falla.",
+ seo_desc="A Go controller that upgrades nodes in batches and backs out on its own when something breaks.",
+ seo_desc_es="Un controlador en Go que actualiza nodos por lotes y da marcha atrás solo cuando algo falla.",
+ dek_en="A lab with a Go controller that upgrades the GPU driver across a fleet in batches, with a canary, human approval and a failure budget, and rolls back or quarantines a node when something breaks.",
+ dek_es="Un laboratorio con un controlador en Go que actualiza el driver de GPU de la flota por lotes, con canary, aprobación humana y presupuesto de fallos, y vuelve atrás o aísla el nodo cuando algo falla.",
  en="""
+A bad GPU driver stopped at the canary, the first small group of nodes to get a new version, and a hardware XID error during the soak that ended in an automatic rollback: both are among the 26 checks the driver rollout lab published with this post passed on its first run. It is a lab. In production the GPU Operator's own upgrade controller does this job; the lab shows what that controller has to get right.
 
-## Why this lab
-Builds on release management: planning, testing, rollback and validation after each release, applied to rolling a GPU driver across a fleet. In production the GPU Operator's own upgrade controller does this job; the lab shows what it has to get right.
+The controller, written in Go with the standard library only, rolls a driver version across the fleet. Each node goes through Draining, Installing, Validating, Soaking and Done. During the soak, the period of watching the node after the upgrade, a hardware XID error or an ECC memory error counts as a failure. The node then goes back to the previous version, and if that also fails, it is quarantined with the label from lab 09.
 
-## What I built
-A Go controller (standard library only) that rolls a driver version across the fleet:
-- Canary, human approval by rollout name, batches, a maintenance window, pause and abort, and a failure budget.
-- maxUnavailable also counts nodes that are out for other reasons, such as the quarantine and remediation from lab 09.
-- Each node goes Draining → Installing → Validating → Soaking → Done. A hardware XID or ECC error during the soak counts as a failure.
-- On failure it rolls back to the previous version, and if that also fails, it quarantines the node with lab 09's label.
+## A canary, human approval and a budget for failures
 
-## How it is tested
-The plan lives in a validated ConfigMap where unknown fields are errors. CI runs 12 controller unit tests, shellcheck and an end-to-end test on kind with 4 workers: 26 checks, green on the first run, including a closed window, a bad driver stopped at the canary and an XID during the soak with rollback.
+The rollout needs human approval, given by rollout name, and advances in batches, inside a maintenance window, with pause and abort and a failure budget. The maxUnavailable limit also counts nodes that are out for other reasons, such as the quarantine and remediation from lab 09.
 
-## Next steps
-- Use the lab to rehearse your rollout policy: canary, approval, batches and rollback.
-- Apply the same policy with the GPU Operator's upgrade controller on your clusters.
-- Reuse the quarantine label from lab 09, so a node that fails twice is taken out of service.""",
+## A plan where unknown fields are errors
+
+The plan lives in a ConfigMap, a Kubernetes configuration object, that is validated before use and where unknown fields are errors. The CI runs 12 controller unit tests, shellcheck and an end-to-end test on kind, a Kubernetes cluster in containers, with 4 workers. Besides the bad driver and the XID with rollback, the 26 checks cover a closed maintenance window.
+
+## How to use it with real data
+
+The lab is a place to rehearse a rollout policy: canary, approval, batches and rollback. The same policy is then applied with the GPU Operator's upgrade controller on real clusters, reusing the quarantine label from lab 09 so a node that fails twice is taken out of service.
+
+## Where it comes from
+
+The lab builds on my experience in release management: planning, testing, rollback and validation after each release.""",
  es="""
+Un driver de GPU defectuoso frenado en el canary, el primer grupo pequeño de nodos que recibe una versión nueva, y un error XID de hardware durante el soak que acabó en una vuelta atrás automática: las dos cosas están entre las 26 comprobaciones que pasó a la primera el laboratorio de despliegue de drivers que acompaña a este post. Es un laboratorio. En producción lo hace el controlador de actualización del propio GPU Operator; el laboratorio enseña lo que ese controlador tiene que hacer bien.
 
-## Por qué este laboratorio
-Se apoya en la gestión de releases: planificación, pruebas, vuelta atrás y validación después de cada despliegue, aplicadas a actualizar el driver de GPU en toda una flota. En producción lo hace el controlador de actualización del propio GPU Operator; el laboratorio enseña lo que tiene que hacer bien.
+El controlador, escrito en Go solo con la librería estándar, despliega una versión de driver por la flota. Cada nodo pasa por Draining, Installing, Validating, Soaking y Done. Durante el soak, el periodo en que se vigila el nodo tras la actualización, un XID de hardware o un error ECC de memoria cuenta como fallo. Entonces el nodo vuelve a la versión anterior y, si eso también falla, queda en cuarentena con la etiqueta del laboratorio 09.
 
-## Qué he hecho
-Un controlador en Go (solo librería estándar) que despliega una versión de driver por la flota:
-- Canary, aprobación humana por nombre de rollout, lotes, ventana de mantenimiento, pausa y aborto, y presupuesto de fallos.
-- maxUnavailable cuenta también los nodos que están fuera por otros motivos, como la cuarentena y la remediación del laboratorio 09.
-- Cada nodo pasa por Draining → Installing → Validating → Soaking → Done. Un XID de hardware o un error ECC durante el soak cuenta como fallo.
-- Si falla, vuelve a la versión anterior y, si eso también falla, pone el nodo en cuarentena con la etiqueta del laboratorio 09.
+## Canary, aprobación humana y un presupuesto de fallos
 
-## Cómo se prueba
-El plan vive en un ConfigMap validado donde los campos desconocidos son error. La CI pasa 12 tests unitarios del controlador, shellcheck y una prueba de punta a punta en kind con 4 workers: 26 comprobaciones, en verde a la primera, con ventana cerrada, un driver malo parado en el canary y un XID en el soak con rollback.
+El despliegue necesita aprobación humana, que se da por nombre de rollout, y avanza por lotes, dentro de una ventana de mantenimiento, con pausa y aborto y un presupuesto de fallos. El límite maxUnavailable cuenta también los nodos que están fuera por otros motivos, como la cuarentena y la remediación del laboratorio 09.
 
-## Siguientes pasos
-- Usar el laboratorio para ensayar tu política de despliegue: canary, aprobación, lotes y vuelta atrás.
-- Aplicar la misma política con el controlador de actualización del GPU Operator en tus clústeres.
-- Reutilizar la etiqueta de cuarentena del laboratorio 09, para que un nodo que falla dos veces salga de servicio."""),
+## Un plan donde los campos desconocidos son error
+
+El plan vive en un ConfigMap, un objeto de configuración de Kubernetes, que se valida antes de usarlo y donde los campos desconocidos son error. La CI pasa 12 tests unitarios del controlador, shellcheck y una prueba de punta a punta en kind, un clúster de Kubernetes en contenedores, con 4 workers. Además del driver malo y del XID con rollback, las 26 comprobaciones cubren una ventana de mantenimiento cerrada.
+
+## Cómo usarlo con datos reales
+
+El laboratorio sirve para ensayar una política de despliegue: canary, aprobación, lotes y vuelta atrás. Esa misma política se aplica luego con el controlador de actualización del GPU Operator en los clústeres reales, reutilizando la etiqueta de cuarentena del laboratorio 09 para que un nodo que falla dos veces salga de servicio.
+
+## De dónde sale
+
+El laboratorio se apoya en mi experiencia en gestión de releases: planificación, pruebas, vuelta atrás y validación después de cada despliegue."""),
 
 dict(n="12", repo="12-gpu-goodput-mtbi", date="2026-10-02", cat="gpu",
- title_en="Where do the GPU-hours go? A goodput simulator", title_es="¿Adónde van las GPU-horas? Un simulador de goodput",
+ title_en="Without spare nodes, a simulated 1,024-GPU training job keeps only 36.1 % of its GPU-hours doing useful work",
+ title_es="Sin nodos de repuesto, un entrenamiento simulado de 1.024 GPU solo aprovecha el 36,1 % de sus GPU-horas",
  seo_title_en="GPU goodput and MTBI simulator · Iñigo González",
  seo_title_es="Simulador de goodput y MTBI en GPU · Iñigo González",
- dek_en="A 1,024-GPU training job, simulated with failures, to see what checkpoints, spares and fast detection are worth.",
- dek_es="Un entrenamiento de 1.024 GPU simulado con fallos, para ver cuánto valen los checkpoints, los spares y la detección rápida.",
+ seo_desc="A 1,024-GPU training job, simulated with failures, to see what checkpoints, spares and fast detection are worth.",
+ seo_desc_es="Un entrenamiento de 1.024 GPU simulado con fallos, para ver cuánto valen los checkpoints, los spares y la detección rápida.",
+ dek_en="A lab simulates a 1,024-GPU training job with failures to measure what checkpoints, spare nodes and fast detection are worth, and splits every GPU-hour by where it goes.",
+ dek_es="Un laboratorio simula un entrenamiento de 1.024 GPU con fallos para medir cuánto valen los checkpoints, los nodos de repuesto y la detección rápida, y reparte cada GPU-hora según adónde va.",
  en="""
+A training job on 1,024 GPUs without spare nodes keeps only 36.1 % goodput, the share of its GPU-hours that goes into useful work, against 79.6 % in the baseline and 94.0 % when every improvement is combined. That is what the goodput simulator published with this post finds. It is a lab: the job and its failures are simulated, with assumptions placed between two public references, Llama 3's interruption count and Meta's paper on cluster reliability.
 
-## Why this lab
-Builds on availability and capacity management and on post-incident reviews. In a large training job failures are normal; what matters is how much useful work survives them, and this lab puts numbers on it.
+In a large training job failures are normal; what matters is how much useful work survives them. The simulator is discrete-event, meaning it jumps from one event to the next, and models a job of 1,024 GPUs on 128 nodes with spares, failure causes that each have their own detection time, and repairs.
 
-## What I built
-- A discrete-event simulator of a 1,024-GPU job (128 nodes) with spares, failure causes with their own detection time, and repairs.
-- An analyser that reads a JSONL event log and splits every GPU-hour into productive, checkpoint, lost work, detection, waiting for nodes and restart, charging the cost to each cause.
-- MTBI and per-node MTBF, the Young and Daly formulas for checkpoint intervals, a goodput SLO with an error budget and an HTML report with SVG charts.
+## Seven scenarios, 20 seeds each
 
-## What the numbers say
-Seven scenarios, 20 seeds each: baseline 79.6 %, Daly's interval 85.1 %, asynchronous checkpoints 91.7 %, no spares 36.1 %, a firmware regression 73.5 %, and everything combined 94.0 %. The assumptions sit between two public references, Llama 3's interruption count and Meta's paper on cluster reliability.
+Each scenario runs with 20 seeds, different random starting points. The baseline reaches 79.6 %. Checkpointing at Daly's interval raises it to 85.1 %, and asynchronous checkpoints, saved without stopping the job, to 91.7 %. A firmware regression drops it to 73.5 %, removing the spares sinks it to 36.1 %, and everything combined reaches 94.0 %.
 
-## How it is tested
-34 unit tests on Python 3.11 to 3.13, and a CI job that regenerates docs/results.md and fails if it changes.
+## Every GPU-hour, charged to a cause
 
-## Next steps
-- Export your own job events in the documented JSONL format to see where your GPU-hours go.
-- Use the Young and Daly formulas to tune the checkpoint interval.
-- Track goodput as an SLO with an error budget.""",
+An analyser reads a JSONL event log and splits every GPU-hour into productive time, checkpoints, lost work, detection, waiting for nodes and restart, charging the cost to each failure cause. It also calculates MTBI, the mean time between interruptions, and MTBF per node, applies the Young and Daly formulas for the checkpoint interval, tracks a goodput SLO with an error budget and produces an HTML report with SVG charts. It has 34 unit tests on Python 3.11 to 3.13, and a CI job regenerates docs/results.md and fails if it changes.
+
+## How to use it with real data
+
+Job events exported in the documented JSONL format show where the GPU-hours of a real job go. The Young and Daly formulas help tune the checkpoint interval, and goodput can be tracked as an SLO with an error budget.
+
+## Where it comes from
+
+The lab builds on my work in availability and capacity management and on post-incident reviews.""",
  es="""
+Un entrenamiento con 1.024 GPU y sin nodos de repuesto se queda en un 36,1 % de goodput, la parte de sus GPU-horas que se dedica a trabajo útil, frente al 79,6 % del escenario base y el 94,0 % cuando se combinan todas las mejoras. Así lo calcula el simulador de goodput que acompaña a este post. Es un laboratorio: el trabajo y sus fallos son simulados, con supuestos situados entre dos referencias públicas, las interrupciones de Llama 3 y el paper de Meta sobre fiabilidad de clústeres.
 
-## Por qué este laboratorio
-Se apoya en la gestión de disponibilidad y capacidad y en las revisiones post-incidente. En un entrenamiento grande los fallos son normales; lo que importa es cuánto trabajo útil sobrevive a ellos, y este laboratorio le pone números.
+En un entrenamiento grande los fallos son normales; lo que importa es cuánto trabajo útil sobrevive a ellos. El simulador es de eventos discretos, es decir, salta de un suceso al siguiente, y reproduce un trabajo de 1.024 GPU en 128 nodos con spares, causas de fallo con su propio tiempo de detección y reparaciones.
 
-## Qué he hecho
-- Un simulador de eventos discretos de un trabajo de 1.024 GPU (128 nodos) con spares, causas de fallo con su propio tiempo de detección y reparaciones.
-- Un analizador que lee un log de eventos JSONL y reparte cada GPU-hora en productivo, checkpoint, trabajo perdido, detección, espera de nodos y reinicio, cargando el coste a cada causa.
-- MTBI y MTBF por nodo, las fórmulas de Young y Daly para el intervalo de checkpoint, un SLO de goodput con presupuesto de error y un informe HTML con gráficos SVG.
+## Siete escenarios con 20 semillas cada uno
 
-## Lo que dicen los números
-Siete escenarios con 20 semillas cada uno: base 79,6 %, intervalo de Daly 85,1 %, checkpoints asíncronos 91,7 %, sin spares 36,1 %, regresión de firmware 73,5 % y todo combinado 94,0 %. Los supuestos están entre dos referencias públicas: las interrupciones de Llama 3 y el paper de Meta sobre fiabilidad de clústeres.
+Cada escenario se ejecuta con 20 semillas, puntos de partida aleatorios distintos. El escenario base llega al 79,6 %. Hacer checkpoints con el intervalo de Daly lo sube al 85,1 %, y los checkpoints asíncronos, guardados sin parar el trabajo, al 91,7 %. Una regresión de firmware lo baja al 73,5 %, quitar los spares lo hunde al 36,1 % y todo combinado llega al 94,0 %.
 
-## Cómo se prueba
-34 tests unitarios en Python 3.11 a 3.13 y un job de CI que regenera docs/results.md y falla si cambia.
+## Cada GPU-hora, cargada a una causa
 
-## Siguientes pasos
-- Exportar los eventos de tus trabajos en el formato JSONL documentado para ver adónde van tus GPU-horas.
-- Usar las fórmulas de Young y Daly para ajustar el intervalo de checkpoints.
-- Seguir el goodput como un SLO con presupuesto de error."""),
+Un analizador lee un log de eventos JSONL y reparte cada GPU-hora en tiempo productivo, checkpoint, trabajo perdido, detección, espera de nodos y reinicio, y carga el coste a cada causa de fallo. Calcula además el MTBI, el tiempo medio entre interrupciones, y el MTBF por nodo, aplica las fórmulas de Young y Daly para el intervalo de checkpoint, sigue un SLO de goodput con presupuesto de error y genera un informe HTML con gráficos SVG. Tiene 34 tests unitarios en Python 3.11 a 3.13, y un job de CI regenera docs/results.md y falla si cambia.
+
+## Cómo usarlo con datos reales
+
+Los eventos de un trabajo exportados en el formato JSONL documentado muestran adónde van sus GPU-horas reales. Las fórmulas de Young y Daly ayudan a ajustar el intervalo de checkpoints, y el goodput se puede seguir como un SLO con presupuesto de error.
+
+## De dónde sale
+
+El laboratorio se apoya en mi trabajo en gestión de disponibilidad y capacidad y en las revisiones post-incidente."""),
 
 dict(n="13", repo="13-cluster-acceptance-burnin", date="2026-10-04", cat="gpu",
- title_en="From handover to sign-off: accepting a new GPU cluster", title_es="Del handover a la firma: aceptar un clúster de GPU nuevo",
+ title_en="A fictional GPU cluster fails acceptance with 144 of 256 GPUs and passes with 248 after a second round",
+ title_es="Un clúster de GPU ficticio no supera la aceptación con 144 de 256 GPU y la pasa con 248 en una segunda ronda",
  seo_title_en="GPU cluster acceptance and burn-in tests · Iñigo González",
  seo_title_es="Aceptación y burn-in de un clúster GPU · Iñigo González",
- dek_en="Inventory, diagnostics, NCCL tests and a 72-hour burn-in, ending in a report a customer can sign.",
- dek_es="Inventario, diagnósticos, pruebas NCCL y un burn-in de 72 horas, con un informe que el cliente puede firmar.",
+ seo_desc="Inventory, diagnostics, NCCL tests and a 72-hour burn-in, ending in a report a customer can sign.",
+ seo_desc_es="Inventario, diagnósticos, pruebas NCCL y un burn-in de 72 horas, con un informe que el cliente puede firmar.",
+ dek_en="A lab that takes a new GPU cluster from handover to sign-off: inventory, diagnostics, NCCL tests and a 72-hour burn-in, run on a fictional cluster and ending in a report the customer can sign.",
+ dek_es="Un laboratorio que lleva un clúster de GPU nuevo de la entrega a la firma: inventario, diagnósticos, pruebas NCCL y un burn-in de 72 horas, ejecutado sobre un clúster ficticio y con un informe que el cliente puede firmar.",
  en="""
+A new 256-GPU cluster fails its first acceptance round with only 144 GPUs ready and passes the second with 248, with one node still waiting on an RMA, the return of a faulty part to the manufacturer. That is the result of the acceptance lab published with this post. It runs on a fictional cluster of 4 racks, 8 nodes per rack and 8 GPUs per node, with 8 defects.
 
-## Why this lab
-Accepting new hardware and running go-live and service-acceptance reviews are part of my IT operations work. This lab applies the same discipline to a GPU cluster, from handover to the customer's signature.
+The pipeline checks each node in order: an inventory of GPUs, driver, VBIOS (the GPU firmware) and InfiniBand ports, the network that links the nodes; the `dcgmi diag -r 3` diagnostic; nccl-tests, which measure communication between GPUs, per node and then per rack; a 72-hour burn-in, a sustained load test; and a burn-in job across the whole cluster, scored with the rules of lab 12.
 
-## What I built
-A pipeline that runs inventory (GPU, driver, VBIOS, InfiniBand ports) → `dcgmi diag -r 3` → nccl-tests per node → per rack → a 72-hour burn-in → a whole-cluster burn-in job scored with lab 12's rules.
-- A node stops at its first failure, and every failure gets a disposition (RMA, firmware, fabric, facility, investigate, collect evidence), an owner and a next step.
-- Criteria live in criteria.toml, and unknown keys are errors.
-- A second round replaces the evidence of the first.
-- Outputs: report.md and report.html for the customer (verdict, rack × node grid, punch list, criteria and a signature table), punch-list.csv and result.json.
+## Every failure gets a disposition, an owner and a next step
 
-## The example
-A fictional cluster with 4 racks × 8 nodes × 8 GPUs and 8 defects. Round 1 ends NOT READY with 144 of 256 GPUs. After round 2 it is READY with 248, and one node is still waiting on an RMA.
+A node stops at its first failure. Each failure is classed as RMA, firmware, fabric, facility, investigate or collect evidence, and gets an owner and a next step. The criteria live in criteria.toml, where any unknown key is an error, and a second round replaces the evidence of the first.
 
-## How it is tested
-25 tests, and a CI job that runs both rounds and requires NOT READY and then READY.
+## A report with a signature table
 
-## Next steps
-- Write your acceptance criteria in `criteria.toml`.
-- Collect the real `dcgmi diag` and nccl-tests output with the commands that `accept plan` prints.
-- Hand the HTML report and the punch list to the customer for sign-off.""",
+The customer gets report.md and report.html with the verdict, a rack-by-node grid, the punch list of pending items, the criteria and a signature table, plus punch-list.csv and result.json. The lab has 25 tests and a CI job that runs both rounds and requires NOT READY first and READY after.
+
+## How to use it with real data
+
+Write the acceptance criteria in `criteria.toml`, collect the real `dcgmi diag` and nccl-tests output with the commands that `accept plan` prints, and hand the HTML report and the punch list to the customer for sign-off.
+
+## Where it comes from
+
+Accepting new hardware and running go-live and service-acceptance reviews are part of my IT operations work. This lab applies the same discipline to a GPU cluster, from handover to the customer's signature.""",
  es="""
+Un clúster nuevo de 256 GPU no supera la primera ronda de aceptación, con solo 144 GPU listas, y pasa la segunda con 248, con un nodo aún pendiente de un RMA, la devolución de una pieza defectuosa al fabricante. Es el resultado del laboratorio de aceptación que acompaña a este post. Se ejecuta sobre un clúster ficticio de 4 racks, 8 nodos por rack y 8 GPU por nodo, con 8 defectos.
 
-## Por qué este laboratorio
-Aceptar hardware nuevo y llevar revisiones de puesta en producción y aceptación del servicio forman parte de mi trabajo en operaciones IT. Este laboratorio aplica la misma disciplina a un clúster de GPU, de la entrega a la firma del cliente.
+El proceso revisa cada nodo por orden: un inventario de GPU, driver, VBIOS (el firmware de la GPU) y puertos InfiniBand, la red que une los nodos; el diagnóstico `dcgmi diag -r 3`; nccl-tests, que miden la comunicación entre GPU, primero por nodo y después por rack; un burn-in de 72 horas, una prueba de carga sostenida; y un trabajo de burn-in de todo el clúster, medido con las reglas del laboratorio 12.
 
-## Qué he hecho
-Un proceso que pasa por inventario (GPU, driver, VBIOS, puertos InfiniBand) → `dcgmi diag -r 3` → nccl-tests por nodo → por rack → burn-in de 72 horas → un trabajo de burn-in de todo el clúster medido con las reglas del laboratorio 12.
-- Un nodo se para en su primer fallo, y cada fallo tiene disposición (RMA, firmware, fabric, instalaciones, investigar, recoger evidencia), responsable y siguiente paso.
-- Los criterios están en criteria.toml, y las claves desconocidas son error.
-- Una segunda ronda sustituye la evidencia de la primera.
-- Salidas: report.md y report.html para el cliente (veredicto, rejilla rack × nodo, lista de pendientes, criterios y tabla de firmas), punch-list.csv y result.json.
+## Cada fallo tiene disposición, responsable y siguiente paso
 
-## El ejemplo
-Un clúster ficticio de 4 racks × 8 nodos × 8 GPU con 8 defectos. La ronda 1 acaba NO LISTO con 144 de 256 GPU. Tras la ronda 2 queda LISTO con 248, y un nodo sigue esperando un RMA.
+Un nodo se para en su primer fallo. Cada fallo se clasifica como RMA, firmware, fabric, instalaciones, investigar o recoger evidencia, y recibe un responsable y un siguiente paso. Los criterios están en criteria.toml, donde cualquier clave desconocida es un error, y una segunda ronda sustituye la evidencia de la primera.
 
-## Cómo se prueba
-25 tests y un job de CI que corre las dos rondas y exige NO LISTO y después LISTO.
+## Un informe con tabla de firmas
 
-## Siguientes pasos
-- Escribir tus criterios de aceptación en `criteria.toml`.
-- Recoger la salida real de `dcgmi diag` y nccl-tests con los comandos que imprime `accept plan`.
-- Entregar al cliente el informe HTML y la punch list para la firma."""),
+El cliente recibe report.md y report.html con el veredicto, una rejilla rack × nodo, la lista de pendientes, los criterios y una tabla de firmas, además de punch-list.csv y result.json. El laboratorio tiene 25 tests y un job de CI que corre las dos rondas y exige primero NO LISTO y después LISTO.
+
+## Cómo usarlo con datos reales
+
+Hay que escribir los criterios de aceptación en `criteria.toml`, recoger la salida real de `dcgmi diag` y de nccl-tests con los comandos que imprime `accept plan`, y entregar al cliente el informe HTML y la lista de pendientes para la firma.
+
+## De dónde sale
+
+Aceptar hardware nuevo y llevar revisiones de puesta en producción y de aceptación del servicio forman parte de mi trabajo en operaciones IT. Este laboratorio aplica la misma disciplina a un clúster de GPU, de la entrega a la firma del cliente."""),
 
 dict(n="14", repo="14-slurm-gpu-ops", date="2026-10-04", cat="gpu",
- title_en="A real Slurm cluster in Docker Compose, with GPU health checks", title_es="Un clúster Slurm real en Docker Compose, con health checks de GPU",
+ title_en="In a Slurm lab, a GPU hardware error drains the node in 2 seconds and the requeued job still finishes",
+ title_es="En un laboratorio de Slurm, un error de hardware de GPU drena el nodo en 2 segundos y el trabajo reencolado termina",
  seo_title_en="Slurm GPU cluster in Docker with health checks · Iñigo González",
  seo_title_es="Clúster Slurm con GPU en Docker y health checks · Iñigo González",
- dek_en="Drain, requeue and validate, and four CI iterations to get cgroups v2 working.",
- dek_es="Drain, requeue y validate, y cuatro iteraciones de CI para que funcionen los cgroups v2.",
+ seo_desc="Drain, requeue and validate, and four CI iterations to get cgroups v2 working.",
+ seo_desc_es="Drain, requeue y validate, y cuatro iteraciones de CI para que funcionen los cgroups v2.",
+ dek_en="A lab that runs a real Slurm 23.11 cluster in Docker Compose with simulated GPUs, where a health check drains faulty nodes, requeues their jobs and validates them before they return.",
+ dek_es="Un laboratorio que monta un clúster Slurm 23.11 real en Docker Compose con GPU simuladas, donde un chequeo de salud drena los nodos con fallos, reencola sus trabajos y los valida antes de que vuelvan.",
  en="""
+When a simulated GPU reports XID 79, an error code for a hardware fault, the node is drained in 2 seconds and the training job on it is requeued and completes its 150 steps. That is what the Slurm lab published with this post shows in CI, where sacct, Slurm's accounting tool, records the job as REQUEUED, REQUEUED, COMPLETED. The cluster is real Slurm 23.11 from Ubuntu 24.04 packages, but it runs in Docker Compose and its GPUs are simulated.
 
-## Why this lab
-Builds on running Linux (Red Hat) servers. Many GPU clusters run Slurm rather than Kubernetes, so this lab brings the XID policy from lab 09 to a real Slurm cluster.
+Many GPU clusters run Slurm rather than Kubernetes, so the lab brings lab 09's XID policy to Slurm. The setup has MariaDB, slurmdbd, slurmctld and 4 nodes with 4 simulated GPUs each.
 
-## What I built
-- Slurm 23.11 from Ubuntu 24.04 packages in Docker Compose: MariaDB, slurmdbd, slurmctld and 4 nodes with 4 simulated GPUs each.
-- `gpuops health` as the HealthCheckProgram every 10 seconds: cordon (drain and let jobs finish), drain (drain and requeue) or quarantine. It never resumes a node and respects a drain reason set by a human.
-- `gpuops validate`: a maintenance reservation, resume, a burn-in on every GPU, then release or drain again.
-- A two-node training job with checkpoints on shared storage that hangs, rather than fails, on a hardware XID.
-- `gpuops events` joins sacct, the job log and the health-check log into lab 12's event format.
+## A health check every 10 seconds that never brings a node back
 
-## How it is tested
-CI: 36 checks in about 7 minutes. XID 79 drains the node in 2 seconds and requeues the job; the job finishes its 150 steps; sacct shows REQUEUED, REQUEUED, COMPLETED. The real files from that run are kept as fixtures.
+`gpuops health` runs as the HealthCheckProgram every 10 seconds and chooses cordon, which drains the node and lets jobs finish, drain, which also requeues them, or quarantine. It never resumes a node and respects a drain reason set by a person. Returning a node is the job of `gpuops validate`: a maintenance reservation, resume, a burn-in on every GPU, then release or drain again.
 
-## What I learned
-It took four CI iterations to get cgroups v2 working without systemd, and the requeue delay was 60 to 80 seconds. Both are written up in docs/design.md.
+The test job trains on two nodes with checkpoints on shared storage, and on a hardware XID it hangs rather than fails. `gpuops events` joins sacct, the job log and the health-check log into lab 12's event format.
 
-## Next steps
-- On real nodes, switch the health source to `nvidia-smi` and the kernel log.
-- Enable cgroup isolation for the GPUs.
-- Run NHC (Node Health Check) alongside the GPU health check.""",
+## 36 checks in seven minutes, after four CI iterations
+
+CI runs 36 checks in about 7 minutes, and the real files from that run are kept as test fixtures. Getting cgroups v2, the Linux mechanism that limits each job's resources, to work without systemd took four CI iterations, and the requeue delay was 60 to 80 seconds; both are written up in docs/design.md.
+
+## How to use it with real data
+
+On real nodes, the health source should switch to `nvidia-smi` and the kernel log, cgroup isolation should be enabled for the GPUs, and NHC (Node Health Check) should run alongside the GPU health check.
+
+## Where it comes from
+
+This lab builds on my experience running Linux (Red Hat) servers.""",
  es="""
+Cuando una GPU simulada informa del XID 79, un código de error de fallo de hardware, el nodo se drena en 2 segundos y el entrenamiento que corría en él se reencola y completa sus 150 pasos. Así lo muestra en la CI el laboratorio de Slurm que acompaña a este post, donde sacct, la herramienta de contabilidad de Slurm, registra el trabajo como REQUEUED, REQUEUED, COMPLETED. El clúster es un Slurm 23.11 real con paquetes de Ubuntu 24.04, pero corre en Docker Compose y sus GPU son simuladas.
 
-## Por qué este laboratorio
-Se apoya en la administración de servidores Linux (Red Hat). Muchos clústeres de GPU usan Slurm en lugar de Kubernetes, así que este laboratorio lleva la política XID del laboratorio 09 a un Slurm real.
+Muchos clústeres de GPU usan Slurm en lugar de Kubernetes, así que el laboratorio lleva a Slurm la política XID del laboratorio 09. El montaje tiene MariaDB, slurmdbd, slurmctld y 4 nodos con 4 GPU simuladas cada uno.
 
-## Qué he hecho
-- Slurm 23.11 con paquetes de Ubuntu 24.04 en Docker Compose: MariaDB, slurmdbd, slurmctld y 4 nodos con 4 GPU simuladas cada uno.
-- `gpuops health` como HealthCheckProgram cada 10 segundos: cordon (drenar y dejar que acaben los trabajos), drain (drenar y reencolar) o cuarentena. Nunca reactiva un nodo y respeta el motivo de un drain puesto por una persona.
-- `gpuops validate`: reserva de mantenimiento, resume, burn-in en todas las GPU y después libera o vuelve a drenar.
-- Un entrenamiento de dos nodos con checkpoints en almacenamiento compartido que se cuelga, en lugar de fallar, ante un XID de hardware.
-- `gpuops events` une sacct, el log del trabajo y el del health check en el formato de eventos del laboratorio 12.
+## Un chequeo cada 10 segundos que nunca reactiva un nodo
 
-## Cómo se prueba
-CI: 36 comprobaciones en unos 7 minutos. El XID 79 drena el nodo en 2 segundos y reencola el trabajo; el trabajo termina sus 150 pasos; sacct muestra REQUEUED, REQUEUED, COMPLETED. Los ficheros reales de esa ejecución se guardan como fixtures.
+`gpuops health` funciona como HealthCheckProgram cada 10 segundos y elige entre cordon, que drena el nodo y deja que acaben los trabajos, drain, que además los reencola, o cuarentena. Nunca reactiva un nodo y respeta el motivo de un drain puesto por una persona. Devolverlo al servicio es tarea de `gpuops validate`: reserva de mantenimiento, resume, burn-in en todas las GPU y después libera o vuelve a drenar.
 
-## Qué aprendí
-Hicieron falta cuatro iteraciones de CI para que funcionaran los cgroups v2 sin systemd, y el reencolado tardaba entre 60 y 80 segundos. Las dos cosas están en docs/design.md.
+El trabajo de prueba entrena en dos nodos con checkpoints en almacenamiento compartido y, ante un XID de hardware, se cuelga en lugar de fallar. `gpuops events` une sacct, el log del trabajo y el del chequeo de salud en el formato de eventos del laboratorio 12.
 
-## Siguientes pasos
-- En nodos reales, cambiar la fuente de salud a `nvidia-smi` y el log del kernel.
-- Activar el aislamiento por cgroups de las GPU.
-- Ejecutar NHC (Node Health Check) junto al chequeo de salud de GPU."""),
+## 36 comprobaciones en siete minutos, tras cuatro iteraciones de CI
+
+La CI ejecuta 36 comprobaciones en unos 7 minutos, y los ficheros reales de esa ejecución se guardan como fixtures de los tests. Hicieron falta cuatro iteraciones para que los cgroups v2, el mecanismo de Linux que limita los recursos de cada trabajo, funcionaran sin systemd, y el reencolado tardaba entre 60 y 80 segundos; las dos cosas están en docs/design.md.
+
+## Cómo usarlo con datos reales
+
+En nodos reales, la fuente de salud debe pasar a `nvidia-smi` y al log del kernel, hay que activar el aislamiento por cgroups de las GPU y conviene ejecutar NHC (Node Health Check) junto al chequeo de salud de GPU.
+
+## De dónde sale
+
+Este laboratorio se apoya en mi experiencia administrando servidores Linux (Red Hat)."""),
 
 dict(n="15", repo="15-multi-tenant-gpu-scheduling", date="2026-10-05", cat="gpu",
- title_en="Sharing GPUs between teams with Kueue and KAI Scheduler", title_es="Repartir GPU entre equipos con Kueue y KAI Scheduler",
+ title_en="A lab turns one GPU quota agreement between three teams into Kueue and KAI rules, and CI fails if they drift",
+ title_es="Un laboratorio traduce el reparto de GPU entre tres equipos a reglas de Kueue y KAI, y la CI falla si se desvían",
  seo_title_en="Multi-tenant GPU scheduling: Kueue and KAI · Iñigo González",
  seo_title_es="GPU compartidas entre equipos: Kueue y KAI · Iñigo González",
- dek_en="One quota agreement in a TOML file, rendered into both schedulers and tested on kind.",
- dek_es="Un acuerdo de cuotas en un fichero TOML, traducido a los dos planificadores y probado en kind.",
+ seo_desc="One quota agreement in a TOML file, rendered into both schedulers and tested on kind.",
+ seo_desc_es="Un acuerdo de cuotas en un fichero TOML, traducido a los dos planificadores y probado en kind.",
+ dek_en="A lab that writes who gets which GPUs in one TOML file, renders it into both schedulers and tests borrowing, reclaim and GPU sharing on a kind cluster with simulated GPUs.",
+ dek_es="Un laboratorio que escribe en un fichero TOML quién tiene qué GPU, lo traduce a los dos planificadores y prueba el préstamo, la recuperación y el uso compartido en un clúster kind con GPU simuladas.",
  en="""
+The inference team keeps its 8 guaranteed GPUs and never lends them, while training and research each have GPUs that can be borrowed, and the owner can take capacity back when it needs it. That agreement, written in one file, tenancy.toml, is the starting point of the multi-tenant GPU lab published with this post. It runs on a kind cluster, Kubernetes inside Docker, with 4 workers and 8 GPUs each simulated by Run:ai's fake-gpu-operator, plus KubeVirt.
 
-## Why this lab
-Builds on capacity management and on SLA and OLA agreements between teams that share the same infrastructure. When several teams share a GPU cluster, the key is the agreement: who is guaranteed what, who can borrow, and what happens when the owner wants it back.
+Training has 16 guaranteed GPUs and 8 that can be borrowed; research has 8 guaranteed and 8 more that can be borrowed. `python -m tenancy render` turns the file into Kueue ClusterQueues grouped in a cohort, a set of queues that lend to each other, and into KAI Scheduler Queues. CI fails if the manifests drift from the file.
 
-## What I built
-- `tenancy.toml` with three teams: training (16 guaranteed, 8 can be borrowed), research (8 + 8) and inference (8, never lent).
-- `python -m tenancy render` turns it into Kueue ClusterQueues in a cohort and KAI Scheduler Queues. CI fails if the manifests drift from the file.
-- A kind cluster with 4 workers × 8 GPUs simulated by Run:ai's fake-gpu-operator, plus KubeVirt.
+## Two pods share one GPU at 0.5 each
 
-## How it is tested
-Kueue, 22 checks: borrowing, reclaim, priority within a team and all-or-nothing admission. KAI, 19 checks: two pods sharing one GPU at 0.5 each, over-quota, reclaim and gang scheduling. KubeVirt, 5 checks: a VM boots with QEMU emulation and the team's ResourceQuota rejects a second one.
+Kueue gets 22 checks: borrowing, reclaim, priority within a team and all-or-nothing admission, which starts a job only if all of it fits. KAI Scheduler gets 19: two pods sharing one GPU at 0.5 each, over-quota, reclaim and gang scheduling, which launches a group of pods together or not at all. KubeVirt, which runs virtual machines on Kubernetes, gets 5: a VM boots with QEMU emulation and the team's ResourceQuota rejects a second one.
 
-## What I learned
-Three rounds of fixes after the first CI run, written up in docs/decisions.md: queue usage is reported with a delay, the preemption reason is in a condition, and fractional GPUs are passed as text.
+## Three rounds of fixes after the first CI run
 
-## Next steps
-- Describe your teams and quotas in `tenancy.toml` and render the manifests for Kueue or KAI Scheduler.
-- Add fair sharing and topology-aware scheduling as the cluster grows.
-- Review the agreement with the teams every quarter.""",
+docs/decisions.md records why: queue usage is reported with a delay, the preemption reason, why a job was evicted, is in a condition, and fractional GPUs are passed as text.
+
+## How to use it with real data
+
+Teams and quotas go in `tenancy.toml`, from which the manifests for Kueue or KAI Scheduler are rendered. As the cluster grows, fair sharing and topology-aware scheduling can be added, and the agreement should be reviewed with the teams every quarter.
+
+## Where it comes from
+
+This lab builds on capacity management and on SLA and OLA agreements between teams that share the same infrastructure. When several teams share a GPU cluster, the key is the agreement: who is guaranteed what, who can borrow and what happens when the owner wants it back.""",
  es="""
+El equipo de inferencia conserva sus 8 GPU garantizadas y nunca las presta, mientras que entrenamiento e investigación tienen GPU prestables, y el dueño puede recuperar la capacidad cuando la necesita. Ese acuerdo, escrito en un solo fichero, tenancy.toml, es el punto de partida del laboratorio de GPU compartidas que acompaña a este post. Se ejecuta en un clúster kind, Kubernetes dentro de Docker, con 4 workers y 8 GPU cada uno simuladas por el fake-gpu-operator de Run:ai, más KubeVirt.
 
-## Por qué este laboratorio
-Se apoya en la gestión de capacidad y en los acuerdos de SLA y OLA entre equipos que comparten la misma infraestructura. Cuando varios equipos comparten un clúster de GPU, la clave es el acuerdo: quién tiene qué garantizado, quién puede pedir prestado y qué pasa cuando el dueño lo quiere de vuelta.
+Training tiene 16 GPU garantizadas y 8 prestables; research tiene 8 garantizadas y otras 8 prestables. `python -m tenancy render` convierte el fichero en ClusterQueues de Kueue agrupadas en una cohort, un conjunto de colas que se prestan capacidad, y en Queues de KAI Scheduler. La CI falla si los manifiestos no coinciden con el fichero.
 
-## Qué he hecho
-- `tenancy.toml` con tres equipos: training (16 garantizadas, 8 prestables), research (8 + 8) e inference (8 que nunca presta).
-- `python -m tenancy render` lo convierte en ClusterQueues de Kueue dentro de una cohort y en Queues de KAI Scheduler. La CI falla si los manifiestos no coinciden con el fichero.
-- Un clúster kind con 4 workers × 8 GPU simuladas por el fake-gpu-operator de Run:ai, más KubeVirt.
+## Dos pods comparten una GPU a 0,5 cada uno
 
-## Cómo se prueba
-Kueue, 22 comprobaciones: préstamo, recuperación, prioridad dentro del equipo y admisión todo o nada. KAI, 19: dos pods compartiendo una GPU a 0,5 cada uno, exceso de cuota, recuperación y gang scheduling. KubeVirt, 5: una VM arranca con emulación QEMU y la ResourceQuota del equipo rechaza una segunda.
+Kueue pasa por 22 comprobaciones: préstamo, recuperación, prioridad dentro del equipo y admisión todo o nada, que solo arranca un trabajo si cabe entero. KAI Scheduler, por 19: dos pods compartiendo una GPU a 0,5 cada uno, exceso de cuota, recuperación y gang scheduling, que lanza un grupo de pods a la vez o ninguno. KubeVirt, que ejecuta máquinas virtuales en Kubernetes, por 5: una VM arranca con emulación QEMU y la ResourceQuota del equipo rechaza una segunda.
 
-## Qué aprendí
-Tres rondas de arreglos tras la primera CI, explicadas en docs/decisions.md: el uso de las colas se informa con retraso, el motivo de la preemption está en una condición y las GPU fraccionarias se pasan como texto.
+## Tres rondas de arreglos tras la primera CI
 
-## Siguientes pasos
-- Describir tus equipos y cuotas en `tenancy.toml` y generar los manifiestos para Kueue o KAI Scheduler.
-- Añadir fair sharing y planificación según topología a medida que crece el clúster.
-- Revisar el acuerdo con los equipos cada trimestre."""),
+docs/decisions.md explica por qué: el uso de las colas se informa con retraso, el motivo de la preemption, por qué se expulsó un trabajo, está en una condición, y las GPU fraccionarias se pasan como texto.
+
+## Cómo usarlo con datos reales
+
+Los equipos y sus cuotas se describen en `tenancy.toml`, desde donde se generan los manifiestos para Kueue o KAI Scheduler. A medida que crece el clúster se pueden añadir fair sharing y planificación según topología, y conviene revisar el acuerdo con los equipos cada trimestre.
+
+## De dónde sale
+
+Este laboratorio se apoya en la gestión de capacidad y en los acuerdos de SLA y OLA entre equipos que comparten la misma infraestructura. Cuando varios equipos comparten un clúster de GPU, la clave es el acuerdo: quién tiene qué garantizado, quién puede pedir prestado y qué pasa cuando el dueño lo quiere de vuelta."""),
 
 dict(n="16", repo="16-gitops-gpu-fleet", date="2026-10-09", cat="gpu",
- title_en="Promoting GPU Operator releases from staging to prod with Flux", title_es="Promocionar versiones del GPU Operator de staging a prod con Flux",
+ title_en="A GPU fleet lab stops a bad GPU Operator release in staging before it reaches the production clusters",
+ title_es="Un laboratorio de flota GPU para en staging una versión mala del GPU Operator antes de que llegue a producción",
  seo_title_en="GitOps GPU fleet: GPU Operator with Flux · Iñigo González",
  seo_title_es="Flota GPU con GitOps: GPU Operator y Flux · Iñigo González",
- dek_en="One file defines releases and clusters; Git and Flux do the rest, with a gate before production.",
- dek_es="Un fichero define versiones y clústeres; Git y Flux hacen el resto, con una puerta antes de producción.",
+ seo_desc="One file defines releases and clusters; Git and Flux do the rest, with a gate before production.",
+ seo_desc_es="Un fichero define versiones y clústeres; Git y Flux hacen el resto, con una puerta antes de producción.",
+ dek_en="A lab that upgrades the GPU software stack across a fleet of clusters from Git with Flux, in waves from staging to production with a gate before prod, tested on two kind clusters.",
+ dek_es="Un laboratorio que actualiza el software de GPU de una flota de clústeres desde Git con Flux, en olas de staging a producción y con una puerta antes de prod, probado en dos clústeres kind.",
  en="""
+A release built to fail on purpose is stopped in staging and never reaches production. That is one of the 29 checks in the 20-minute end-to-end test of the GPU fleet lab published with this post, which runs Gitea, a self-hosted Git server, and two kind clusters, Kubernetes inside Docker. The same test shows Flux, the tool that applies what is in Git to each cluster, correcting drift.
 
-## Why this lab
-Builds on Git, CI/CD pipelines and release management, and ties several earlier labs together: how to upgrade the GPU software stack across a fleet of clusters from Git, with a gate before production.
+Everything starts in one file, fleet.toml. It defines releases, each with GPU Operator, Network Operator and driver versions, and clusters with their GPU pools. Waves go from staging to prod H100 and then prod A100, with a pause after the canary, the first group to get the change.
 
-## What I built
-- `fleet.toml` defines releases (GPU Operator, Network Operator and driver versions, plus one release that fails on purpose) and clusters with GPU pools.
-- Waves go staging → prod H100 → prod A100, with a pause after the canary.
-- `python -m fleet render` writes each cluster's folder, and Flux applies it in three steps: operators → config → lifecycle. The lifecycle step is lab 11's controller, with its rollout plan generated from the same file.
-- `fleet start / promote / approve` each edit one line, `fleet gate` checks the live clusters before promoting, and approving prod is a commit.
+## Approving production is a commit
 
-## How it is tested
-CI: 21 unit tests; a validate step that renders the real NGC Helm charts at every version and checks them against the CRD schemas of that exact version (it catches a misspelt `nodeSelecter`); and a 20-minute end-to-end run with Gitea and two kind clusters, 29 checks, including drift corrected by Flux and a bad release stopped in staging.
+`python -m fleet render` writes each cluster's folder, and Flux applies it in three steps: operators, config and lifecycle. The lifecycle step is lab 11's controller, with its rollout plan generated from the same file. `fleet start`, `fleet promote` and `fleet approve` each edit one line, and `fleet gate` checks the live clusters before promoting.
 
-## What I learned
-One CI iteration: the rollout plan was applied before the NVIDIADriver objects, so lifecycle now depends on config. I also found a difference in the NVIDIADriver CRD between two GPU Operator versions.
+## A validate step catches a misspelt nodeSelecter
 
-## Next steps
-- Describe your clusters and releases in `fleet.toml`.
-- Bootstrap Flux on each cluster (or use Argo CD, the same structure works).
-- Keep the gate before production as a required check in your repository.""",
+Besides 21 unit tests, CI renders the real NGC Helm charts at every version and checks them against the CRD schemas, the definitions of custom Kubernetes objects, of that exact version; it catches a misspelt `nodeSelecter`. One CI iteration was needed: the rollout plan was applied before the NVIDIADriver objects, so lifecycle now depends on config. The lab also found a difference in the NVIDIADriver CRD between two GPU Operator versions.
+
+## How to use it with real data
+
+Clusters and releases go in `fleet.toml`. Flux is bootstrapped on each cluster, or Argo CD, since the same structure works, and the gate before production stays as a required check in the repository.
+
+## Where it comes from
+
+This lab builds on Git, CI/CD pipelines and release management, and ties several of my earlier labs together.""",
  es="""
+Una versión hecha para fallar a propósito se queda parada en staging y nunca llega a producción. Es una de las 29 comprobaciones de la prueba de punta a punta de 20 minutos del laboratorio de flota GPU que acompaña a este post, que usa Gitea, un servidor Git propio, y dos clústeres kind, Kubernetes dentro de Docker. La misma prueba muestra a Flux, la herramienta que aplica en cada clúster lo que hay en Git, corrigiendo la deriva.
 
-## Por qué este laboratorio
-Se apoya en Git, pipelines de CI/CD y gestión de releases, y une varios laboratorios anteriores: cómo actualizar el software de GPU en una flota de clústeres desde Git, con una puerta antes de producción.
+Todo parte de un fichero, fleet.toml. Define versiones, cada una con su GPU Operator, Network Operator y driver, y clústeres con sus pools de GPU. Las olas van de staging a prod H100 y después a prod A100, con una pausa tras el canary, el primer grupo que recibe el cambio.
 
-## Qué he hecho
-- `fleet.toml` define versiones (GPU Operator, Network Operator y driver, más una versión que falla a propósito) y clústeres con pools de GPU.
-- Las olas van staging → prod H100 → prod A100, con una pausa tras el canary.
-- `python -m fleet render` escribe la carpeta de cada clúster y Flux la aplica en tres pasos: operators → config → lifecycle. El paso lifecycle es el controlador del laboratorio 11, con su plan generado desde el mismo fichero.
-- `fleet start / promote / approve` editan una línea cada uno, `fleet gate` revisa los clústeres vivos antes de promocionar y aprobar producción es un commit.
+## Aprobar producción es un commit
 
-## Cómo se prueba
-CI: 21 tests unitarios; un paso de validación que renderiza los charts de Helm reales de NGC en cada versión y los comprueba contra los esquemas de CRD de esa versión exacta (detecta un `nodeSelecter` mal escrito); y una prueba de punta a punta de 20 minutos con Gitea y dos clústeres kind, 29 comprobaciones, incluida la deriva corregida por Flux y una versión mala parada en staging.
+`python -m fleet render` escribe la carpeta de cada clúster y Flux la aplica en tres pasos: operators, config y lifecycle. El paso lifecycle es el controlador del laboratorio 11, con su plan generado desde el mismo fichero. `fleet start`, `fleet promote` y `fleet approve` editan una línea cada uno, y `fleet gate` revisa los clústeres vivos antes de promocionar.
 
-## Qué aprendí
-Una iteración de CI: el plan de rollout se aplicaba antes que los objetos NVIDIADriver, así que lifecycle ahora depende de config. También encontré una diferencia en el CRD NVIDIADriver entre dos versiones del GPU Operator.
+## La validación detecta un nodeSelecter mal escrito
 
-## Siguientes pasos
-- Describir tus clústeres y releases en `fleet.toml`.
-- Instalar Flux en cada clúster (o usar Argo CD, la misma estructura sirve).
-- Mantener la puerta antes de producción como comprobación obligatoria en tu repositorio."""),
+Además de 21 tests unitarios, la CI renderiza los charts de Helm reales de NGC en cada versión y los comprueba contra los esquemas de CRD, las definiciones de objetos propios de Kubernetes, de esa versión exacta; detecta un `nodeSelecter` mal escrito. Hizo falta una iteración de CI: el plan de rollout se aplicaba antes que los objetos NVIDIADriver, así que lifecycle ahora depende de config. El laboratorio también encontró una diferencia en el CRD NVIDIADriver entre dos versiones del GPU Operator.
+
+## Cómo usarlo con datos reales
+
+Los clústeres y las versiones se describen en `fleet.toml`. Flux se instala en cada clúster, o Argo CD, porque la misma estructura sirve, y la puerta antes de producción se mantiene como comprobación obligatoria del repositorio.
+
+## De dónde sale
+
+Este laboratorio se apoya en Git, pipelines de CI/CD y gestión de releases, y une varios de mis laboratorios anteriores."""),
 
 dict(n="17", repo="17-teams-rooms-fleet-health", date="2026-10-15", cat="tools",
- title_en="Which meeting rooms will fail today, and in what order to fix them", title_es="Qué salas de reuniones van a fallar hoy y en qué orden arreglarlas",
+ title_en="A morning check ranks 25 Teams Rooms devices so the boardroom with the next meeting is fixed first",
+ title_es="Una revisión matinal ordena 25 dispositivos de Teams Rooms para arreglar antes la sala con la próxima reunión",
  seo_title_en="Teams Rooms health check with Microsoft Graph · Iñigo González",
  seo_title_es="Salud de Teams Rooms con Microsoft Graph · Iñigo González",
- dek_en="Teams Rooms health from Microsoft Graph, a room register and today's bookings, turned into a morning walk-round.",
- dek_es="La salud de Teams Rooms desde Microsoft Graph, un registro de salas y las reservas del día, convertidos en la ronda de primera hora.",
+ seo_desc="Teams Rooms health from Microsoft Graph, a room register and today's bookings, turned into a morning walk-round.",
+ seo_desc_es="La salud de Teams Rooms desde Microsoft Graph, un registro de salas y las reservas del día, convertidos en la ronda de primera hora.",
+ dek_en="The tool, published with a made-up company with 25 devices in three offices, combines Teams Rooms health from Microsoft Graph, a room register and today's bookings into a morning walk-round list.",
+ dek_es="La herramienta, publicada con una empresa inventada con 25 dispositivos en tres oficinas, cruza la salud de Teams Rooms desde Microsoft Graph, un registro de salas y las reservas del día en la lista de la ronda de primera hora.",
  en="""
+The boardroom with a meeting in 30 minutes goes to the top of the list, the small room that is free all day goes to the bottom, and each problem comes with the first thing to try. That is the order the Teams Rooms morning check published with this post gives the on-site engineer at 08:00. Its demo is a made-up company with 25 devices in three offices and faults placed on purpose.
 
-## The problem
-The Teams admin center shows the health of every room, one device at a time. What the engineer on site needs at 08:00 is a short list: the boardroom with a meeting in 30 minutes first, the small room that is free all day last, and the first thing to try for each problem.
+The Teams admin center shows the health of every room, one device at a time. The tool instead reads all devices and their health from Microsoft Graph, Microsoft's API for its cloud services, with a read-only PowerShell script that queries `/teamwork/devices`.
 
-## What I built
-- `scripts/Export-TeamsRoomsHealth.ps1` reads devices and their health from Microsoft Graph (`/teamwork/devices`, read-only).
-- A readiness state per room: Not ready (offline, Teams sign-in failed, camera, microphone, speaker or main display down), At risk (no calendar on the console, stale heartbeat, outdated software, second display or HDMI ingest down) or Ready.
-- `morning_check.md`, ordered by readiness, priority room and next meeting, with a first step for each issue. Also `report.html`, `actions.csv` with serial numbers for the ticket, and a daily trend.
-- A housekeeping list: firmware that drifted from the rest of the model and devices nobody added to the room register.
+## Three states: not ready, at risk or ready
 
-## How it is built
-Python with the standard library only, plus PowerShell for the Graph exports. The demo is a made-up company with 25 devices in three offices and faults placed on purpose. 14 tests. A short runbook explains the morning routine.
+A room is Not ready when it is offline, Teams sign-in has failed, or the camera, microphone, speaker or main display is down. It is At risk with no calendar on the console, a stale heartbeat, outdated software, or a second display or HDMI ingest down. Otherwise it is Ready.
 
-## What I learned
-Most of the value is in the order of the list, not in the detection. And an offline console should show one issue, not five: everything else about it is noise until it is back.
+## Firmware drift and devices missing from the register
 
-## Next steps
-- Run the PowerShell export against your tenant (the `/teamwork/devices` API is in Graph beta).
-- Fill in the room register with your rooms and their priority.
-- Run it every morning before the first meetings.""",
+morning_check.md sorts rooms by state, priority and next meeting. The tool also writes report.html, actions.csv with serial numbers for the ticket, a daily trend, and a housekeeping list of firmware that drifted from the rest of the model and devices nobody added to the room register. It runs on Python's standard library, with 14 tests and a short runbook.
+
+## How to use it with real data
+
+Run the PowerShell export against the tenant (the `/teamwork/devices` API is in Graph beta), fill in the room register with the rooms and their priority, and run it every morning before the first meetings.
+
+## Where it comes from
+
+What I learned building it: most of the value is in the order of the list, not in the detection. And an offline console should show one issue, not five, because everything else about it is noise until it is back.""",
  es="""
+La sala de Consejo con una reunión en 30 minutos va arriba de la lista, la sala pequeña que está libre todo el día va al final, y cada problema llega con lo primero que hay que probar. Ese es el orden que da al técnico a las 8:00 la revisión de primera hora de Teams Rooms que acompaña a este post. Su demo es una empresa inventada con 25 dispositivos en tres oficinas y fallos puestos a propósito.
 
-## El problema
-El Teams admin center enseña la salud de cada sala, de dispositivo en dispositivo. Lo que necesita el técnico a las 8:00 es una lista corta: primero la sala de Consejo con reunión en 30 minutos, al final la sala pequeña que está libre todo el día, y lo primero que hay que probar en cada problema.
+El Teams admin center enseña la salud de cada sala, de dispositivo en dispositivo. La herramienta, en cambio, lee todos los dispositivos y su salud desde Microsoft Graph, la API de Microsoft para sus servicios en la nube, con un script de PowerShell de solo lectura que consulta `/teamwork/devices`.
 
-## Qué he hecho
-- `scripts/Export-TeamsRoomsHealth.ps1` lee los dispositivos y su salud desde Microsoft Graph (`/teamwork/devices`, solo lectura).
-- Un estado por sala: No lista (sin conexión, fallo de inicio de sesión en Teams, cámara, micrófono, altavoz o pantalla principal caídos), En riesgo (sin calendario en la consola, sin latido reciente, software desactualizado, segunda pantalla o entrada HDMI caídas) o Lista.
-- `morning_check.md`, ordenado por estado, sala prioritaria y próxima reunión, con un primer paso para cada problema. Además `report.html`, `actions.csv` con números de serie para el ticket y una tendencia diaria.
-- Una lista de mantenimiento: firmware que se ha quedado distinto al resto del modelo y dispositivos que nadie dio de alta en el registro de salas.
+## Tres estados: no lista, en riesgo o lista
 
-## Cómo está hecho
-Python solo con la librería estándar y PowerShell para las exportaciones de Graph. La demo es una empresa inventada con 25 dispositivos en tres oficinas y fallos puestos a propósito. 14 tests. Un runbook corto explica la rutina de primera hora.
+Una sala está No lista si no tiene conexión, ha fallado el inicio de sesión en Teams o la cámara, el micrófono, el altavoz o la pantalla principal están caídos. Está En riesgo si la consola no tiene calendario, no hay latido reciente, el software está desactualizado o fallan la segunda pantalla o la entrada HDMI. Si no, está Lista.
 
-## Qué aprendí
-Casi todo el valor está en el orden de la lista, no en la detección. Y una consola sin conexión debe mostrar un problema, no cinco: lo demás es ruido hasta que vuelva.
+## Firmware desalineado y equipos fuera del registro
 
-## Siguientes pasos
-- Ejecutar la exportación de PowerShell contra tu tenant (la API `/teamwork/devices` está en la beta de Graph).
-- Completar el registro de salas con tus salas y su prioridad.
-- Ejecutarlo cada mañana antes de las primeras reuniones."""),
+morning_check.md ordena las salas por estado, prioridad y próxima reunión. La herramienta genera además report.html, actions.csv con números de serie para el ticket, una tendencia diaria y una lista de mantenimiento con el firmware que se ha quedado distinto al resto del modelo y los dispositivos que nadie dio de alta en el registro de salas. Funciona con la librería estándar de Python, con 14 tests y un runbook corto.
+
+## Cómo usarlo con datos reales
+
+Hay que ejecutar la exportación de PowerShell contra el tenant (la API `/teamwork/devices` está en la beta de Graph), completar el registro con las salas y su prioridad, y lanzarlo cada mañana antes de las primeras reuniones.
+
+## De dónde sale
+
+Lo que aprendí al construirla: casi todo el valor está en el orden de la lista, no en la detección. Y una consola sin conexión debe mostrar un problema, no cinco, porque lo demás es ruido hasta que vuelva."""),
 
 dict(n="18", repo="18-mecm-intune-comanagement-tracker", date="2026-10-15", cat="tools",
- title_en="A go/no-go for the next co-management slider move", title_es="Un go/no-go para el siguiente paso del slider de co-management",
+ title_en="A co-management review says NO-GO to the next workload move: only 91.9% of 260 devices are co-managed",
+ title_es="Una revisión de co-management dice NO-GO al siguiente workload: solo el 91,9 % de 260 equipos está co-gestionado",
  seo_title_en="MECM + Intune co-management tracker · Iñigo González",
  seo_title_es="Seguimiento de co-management MECM + Intune · Iñigo González",
- dek_en="MECM and Intune joined in one report: real co-management state, workload authority against the plan and Windows 11 waves.",
- dek_es="MECM e Intune en un solo informe: estado real de co-management, autoridad por workload frente al plan y olas de Windows 11.",
+ seo_desc="MECM and Intune joined in one report: real co-management state, workload authority against the plan and Windows 11 waves.",
+ seo_desc_es="MECM e Intune en un solo informe: estado real de co-management, autoridad por workload frente al plan y olas de Windows 11.",
+ dek_en="The tracker, published with a made-up company with 260 devices halfway through a Windows 11 migration, joins MECM and Intune to show real co-management state, workload authority against the plan and progress per wave.",
+ dek_es="El seguimiento, publicado con una empresa inventada con 260 equipos a mitad de una migración a Windows 11, cruza MECM e Intune para mostrar el estado real de co-management, la autoridad por workload frente al plan y el avance por ola.",
  en="""
+The next move of the co-management slider, the setting that hands each workload from MECM to Intune, gets a NO-GO: only 91.9% of devices are co-managed and one pilot device has not picked up the change. That is what the tracker published with this post finds in its demo, a made-up company with 260 devices halfway through its migration.
 
-## The problem
-In a co-management and Windows 11 migration, every status meeting asks the same things: how many devices are really co-managed, what breaks if we move a workload to Intune for everyone, and will the next wave finish on time. The answers sit in two consoles that do not share a report.
+In a co-management and Windows 11 migration, every status meeting asks how many devices are really co-managed, what breaks if a workload moves to Intune for everyone, and whether the next wave will finish on time. The answers sit in two consoles that do not share a report.
 
-## What I built
-- A read-only SQL query for the MECM side (reporting views: client health, OS build, collections) and a PowerShell export for Intune (`managedDevices` with `configurationManagerClientEnabledFeatures`).
-- A join by device name with five states: co-managed, MECM only (not enrolled), enrolled outside co-management, in MECM without client, Intune only.
-- For each co-managed device, the workload authority the plan expects against what Intune reports.
-- Progress per Windows 11 wave and hardware that blocks the upgrade.
-- `gates.md`: for every workload on Pilot, GO or NO-GO against limits agreed in `plan.json`, ready to paste into the change request.
+## Five states for every device
 
-## How it is built
-Python with the standard library only. The demo is a made-up company with 260 devices halfway through the migration; the gates say NO-GO because only 91.9 % of devices are co-managed and one pilot device has not picked up the change. 14 tests and a playbook for running it alongside a change board.
+A read-only SQL query reads the MECM reporting views for client health, OS build and collections, and a PowerShell export pulls `managedDevices` with `configurationManagerClientEnabledFeatures` from Intune. The tool joins them by device name into five states: co-managed, MECM only (not enrolled), enrolled outside co-management, in MECM without client, and Intune only. For each co-managed device it compares the workload authority the plan expects with what Intune reports, and it tracks each Windows 11 wave and the hardware that blocks the upgrade.
 
-## What I learned
-From the Windows 11 migration I led: most of the effort is not the upgrade, it is finding the devices that are not where the plan says they are. Agreeing the gates before the CAB, not during it, saves the longest discussions.
+## A go/no-go ready for the change request
 
-## Next steps
-- Run the read-only SQL query against your MECM site database and the Intune export from Graph.
-- Write your workloads, waves and gates in `plan.json`.
-- Bring `gates.md` to each change advisory board before moving the slider.""",
+gates.md gives GO or NO-GO for every workload on Pilot against limits agreed in `plan.json`, ready to paste into the change request. It runs on Python's standard library, with 14 tests and a playbook for using it alongside a change board.
+
+## How to use it with real data
+
+Run the SQL query against the MECM site database and the Intune export from Graph, write the workloads, waves and gates in `plan.json`, and bring `gates.md` to each change advisory board (CAB) before moving the slider.
+
+## Where it comes from
+
+It comes from the Windows 11 migration I led: most of the effort is not the upgrade, it is finding the devices that are not where the plan says they are. Agreeing the gates before the CAB, not during it, saves the longest discussions.""",
  es="""
+El siguiente paso del slider de co-management, el ajuste que pasa cada workload de MECM a Intune, recibe un NO-GO: solo el 91,9 % de los equipos está co-gestionado y un equipo del piloto no ha recogido el cambio. Así lo detecta en su demo el seguimiento que acompaña a este post, con una empresa inventada de 260 equipos a mitad de migración.
 
-## El problema
-En una migración a co-management y Windows 11, cada reunión de seguimiento pregunta lo mismo: cuántos equipos están de verdad co-gestionados, qué se rompe si pasamos un workload a Intune para todos y si la siguiente ola va a acabar a tiempo. Las respuestas están en dos consolas que no comparten informe.
+En una migración a co-management y Windows 11, cada reunión de seguimiento pregunta cuántos equipos están de verdad co-gestionados, qué se rompe si un workload pasa a Intune para todos y si la siguiente ola acabará a tiempo. Las respuestas están en dos consolas que no comparten informe.
 
-## Qué he hecho
-- Una consulta SQL de solo lectura para MECM (vistas de informes: salud del cliente, build del SO, colecciones) y una exportación en PowerShell para Intune (`managedDevices` con `configurationManagerClientEnabledFeatures`).
-- Un cruce por nombre de equipo con cinco estados: co-gestionado, solo MECM (sin inscribir), inscrito fuera de co-management, en MECM sin cliente y solo Intune.
-- Para cada equipo co-gestionado, la autoridad por workload que espera el plan frente a la que informa Intune.
-- El avance de cada ola de Windows 11 y el hardware que impide la actualización.
-- `gates.md`: para cada workload en Pilot, GO o NO-GO frente a límites acordados en `plan.json`, listo para pegar en la petición de cambio.
+## Cinco estados para cada equipo
 
-## Cómo está hecho
-Python solo con la librería estándar. La demo es una empresa inventada con 260 equipos a mitad de migración; los gates dicen NO-GO porque solo el 91,9 % de los equipos está co-gestionado y un equipo del piloto no ha recogido el cambio. 14 tests y un playbook para usarlo junto al comité de cambios.
+Una consulta SQL de solo lectura lee las vistas de informes de MECM sobre salud del cliente, build del SO y colecciones, y una exportación en PowerShell saca de Intune `managedDevices` con `configurationManagerClientEnabledFeatures`. La herramienta los cruza por nombre de equipo en cinco estados: co-gestionado, solo MECM (sin inscribir), inscrito fuera de co-management, en MECM sin cliente y solo Intune. Para cada equipo co-gestionado compara la autoridad por workload que espera el plan con la que informa Intune, y sigue cada ola de Windows 11 y el hardware que impide la actualización.
 
-## Qué aprendí
-De la migración a Windows 11 que lideré: casi todo el esfuerzo no está en la actualización, sino en encontrar los equipos que no están donde dice el plan. Acordar los gates antes del CAB, y no durante, ahorra las discusiones más largas.
+## Un go/no-go listo para la petición de cambio
 
-## Siguientes pasos
-- Ejecutar la consulta SQL de solo lectura contra la base de datos de tu sitio MECM y la exportación de Intune desde Graph.
-- Escribir tus workloads, olas y gates en `plan.json`.
-- Llevar `gates.md` a cada comité de cambios antes de mover el slider."""),
+gates.md da GO o NO-GO para cada workload en Pilot frente a límites acordados en `plan.json`, listo para pegar en la petición de cambio. Funciona con la librería estándar de Python, con 14 tests y un playbook para usarlo junto al comité de cambios.
+
+## Cómo usarlo con datos reales
+
+Hay que ejecutar la consulta SQL contra la base de datos del sitio MECM y la exportación de Intune desde Graph, escribir los workloads, olas y gates en `plan.json`, y llevar `gates.md` a cada comité de cambios (CAB) antes de mover el slider.
+
+## De dónde sale
+
+Nace de la migración a Windows 11 que lideré: casi todo el esfuerzo no está en la actualización, sino en encontrar los equipos que no están donde dice el plan. Acordar los gates antes del CAB, y no durante, ahorra las discusiones más largas."""),
 
 dict(n="19", repo="19-ad-infra-health-check", date="2026-10-16", updated="2026-11-15", cat="tools",
- title_en="A Monday-morning health check for Active Directory", title_es="Un chequeo de los lunes para Active Directory",
+ title_en="A read-only Active Directory check puts on one Monday page what has to be fixed before 09:00",
+ title_es="Un chequeo de Active Directory reúne en una página del lunes lo que hay que arreglar antes de las 9:00",
  seo_title_en="Active Directory health check with PowerShell · Iñigo González",
  seo_title_es="Chequeo de salud de Active Directory con PowerShell · Iñigo González",
- dek_en="Domain controllers, replication, DHCP, Group Policy and admin accounts from one read-only export, ordered by what to fix today.",
- dek_es="Controladores de dominio, replicación, DHCP, directivas de grupo y cuentas de administrador desde una exportación de solo lectura, ordenados por lo que hay que arreglar hoy.",
+ seo_desc_es="Controladores de dominio, replicación, DHCP, directivas de grupo y cuentas de administrador desde una exportación de solo lectura, ordenados por lo que hay…",
+ dek_en="The weekly health check, published with a made-up domain of six domain controllers in four sites and faults placed on purpose, reviews controllers, replication, DHCP, Group Policy and admin accounts from one read-only export.",
+ dek_es="El chequeo semanal, publicado con un dominio inventado de seis controladores en cuatro sedes y fallos puestos a propósito, revisa controladores, replicación, DHCP, directivas de grupo y cuentas de administrador desde una exportación de solo lectura.",
  seo_desc="Active Directory health check with PowerShell: one read-only export for domain controllers, replication, DHCP, Group Policy and admin accounts, by priority.",
  en="""
+Most Active Directory problems warn first: a clock drifting, DFSR stopped after patching, a replication link failing quietly for weeks, a DHCP scope full the week new joiners arrive. The health check published with this post gathers those signals into one page with what to fix today. Its demo runs on a made-up domain with six domain controllers in four sites and faults placed on purpose.
 
-## The problem
-`dcdiag` and `repadmin` tell you everything, one domain controller at a time. Most Active Directory problems give a warning first: a clock drifting, DFSR stopped after patching, a replication link failing quietly for weeks, a DHCP scope full the week new joiners arrive, an admin account nobody has used since spring. On Monday morning you want one page with what to fix today.
+`dcdiag` and `repadmin` already tell everything, but one domain controller at a time. The check starts instead from one read-only export, `Export-ADHealth.ps1`, built on the standard RSAT modules, the remote server administration tools.
 
-## What I built
-- `scripts/Export-ADHealth.ps1`: one read-only export with the standard RSAT modules (domain and forest, every DC, replication metadata, DHCP scopes and failover, GPO links, privileged groups, inactive accounts, NO_CLIENT_SITE lines). If one section fails, the rest is still exported.
-- Six areas of checks: domain controllers, replication (with the tombstone risk), DHCP, Group Policy, privileged access (including the krbtgt password age) and directory hygiene.
-- `health_check.md` with Fix today / Plan this week / Housekeeping, `findings.csv` with the first step for each finding and `report.html`.
-- Comparison with last week's run: what is new and what was resolved.
+## Six areas, from replication to the krbtgt password
 
-## How it is built
-Python with the standard library only, plus PowerShell. The demo is a made-up domain with six DCs in four sites and faults placed on purpose. 15 tests. A short runbook for the weekly check.
+The checks cover domain controllers, replication, DHCP, Group Policy, privileged access and directory hygiene. Replication includes the tombstone risk, the point after which a controller that stopped replicating cannot rejoin safely. Privileged access includes the age of the krbtgt password, the account behind the domain's Kerberos tickets.
 
-## What I learned
-An unreachable DC should give one finding, not ten. And most of the value is in the order of the list: what has to be fixed before 09:00 and what can go to a change.
+Results go into `health_check.md` under Fix today, Plan this week and Housekeeping, plus `findings.csv` with the first step for each finding. Each run is compared with last week's to show what is new and what was resolved.
 
-## Next steps
-- Run `Export-ADHealth.ps1` with RSAT from an admin workstation joined to the domain.
-- On servers in other languages, adapt the parsing of the `w32tm` output.
-- Schedule it for Monday morning and keep last week's run for the comparison.""",
+## How to use it with real data
+
+The export runs with RSAT from an admin workstation joined to the domain. It is meant to be scheduled for Monday morning, keeping last week's run.
+
+## Where it comes from
+
+Two lessons shaped it: an unreachable domain controller should give one finding, not ten, and most of the value is in the order of the list, what must be fixed before 09:00 and what can go to a change.""",
  es="""
+La mayoría de problemas de Active Directory avisan antes: un reloj que se desvía, DFSR parado después de parchear, un enlace de replicación fallando en silencio durante semanas, un ámbito de DHCP lleno la semana que llegan las incorporaciones. El chequeo que acompaña a este post reúne esas señales en una página con lo que hay que arreglar hoy. Su demo usa un dominio inventado de seis controladores en cuatro sedes con fallos puestos a propósito.
 
-## El problema
-`dcdiag` y `repadmin` te lo cuentan todo, de controlador en controlador. La mayoría de problemas de Active Directory avisan antes: un reloj que se desvía, DFSR parado después de parchear, un enlace de replicación fallando en silencio durante semanas, un ámbito de DHCP lleno la semana que llegan las incorporaciones, una cuenta de administrador que nadie usa desde la primavera. El lunes a primera hora quieres una página con lo que hay que arreglar hoy.
+`dcdiag` y `repadmin` ya lo cuentan todo, pero de controlador en controlador. El chequeo parte en cambio de una sola exportación de solo lectura, `Export-ADHealth.ps1`, con los módulos estándar de RSAT, las herramientas de administración remota de servidores.
 
-## Qué he hecho
-- `scripts/Export-ADHealth.ps1`: una exportación de solo lectura con los módulos estándar de RSAT (dominio y bosque, cada DC, metadatos de replicación, ámbitos y conmutación de DHCP, vínculos de GPO, grupos privilegiados, cuentas inactivas, líneas NO_CLIENT_SITE). Si una sección falla, el resto se exporta igual.
-- Seis áreas de comprobaciones: controladores de dominio, replicación (con el riesgo de tombstone), DHCP, directivas de grupo, acceso privilegiado (incluida la antigüedad de la contraseña de krbtgt) e higiene del directorio.
-- `health_check.md` con Arreglar hoy / Planificar esta semana / Limpieza, `findings.csv` con el primer paso de cada hallazgo y `report.html`.
-- Comparación con la ejecución de la semana anterior: qué es nuevo y qué se ha resuelto.
+## Seis áreas, de la replicación a la contraseña de krbtgt
 
-## Cómo está hecho
-Python solo con la librería estándar y PowerShell. La demo es un dominio inventado con seis DC en cuatro sedes y fallos puestos a propósito. 15 tests. Un runbook corto para el chequeo semanal.
+Las comprobaciones cubren controladores, replicación, DHCP, directivas de grupo, acceso privilegiado e higiene del directorio. La replicación incluye el riesgo de tombstone, el límite tras el cual un controlador que dejó de replicar no puede volver sin riesgo. El acceso privilegiado incluye la antigüedad de la contraseña de krbtgt, la cuenta que respalda los tickets Kerberos.
 
-## Qué aprendí
-Un DC que no responde debe dar un hallazgo, no diez. Y casi todo el valor está en el orden de la lista: qué hay que arreglar antes de las 9:00 y qué puede ir a un cambio.
+Los resultados van a `health_check.md` en Arreglar hoy, Planificar esta semana y Limpieza, más `findings.csv` con el primer paso de cada hallazgo. Cada ejecución se compara con la de la semana anterior para mostrar qué es nuevo y qué se ha resuelto.
 
-## Siguientes pasos
-- Ejecutar `Export-ADHealth.ps1` con RSAT desde un puesto de administración unido al dominio.
-- En servidores en otros idiomas, adaptar la lectura de la salida de `w32tm`.
-- Programarlo para el lunes a primera hora y guardar la ejecución anterior para la comparación."""),
+## Cómo usarlo con datos reales
+
+La exportación se ejecuta con RSAT desde un puesto de administración unido al dominio. Está pensado para programarse el lunes a primera hora, guardando la ejecución anterior.
+
+## De dónde sale
+
+Dos lecciones le dieron forma: un controlador que no responde debe dar un hallazgo, no diez, y casi todo el valor está en el orden de la lista, qué hay que arreglar antes de las 9:00 y qué puede ir a un cambio."""),
 
 dict(n="20", repo="20-entra-sso-app-audit", date="2026-10-16", cat="tools",
- title_en="Which SSO app will break next, and which one nobody is watching", title_es="Qué app con SSO va a fallar la próxima y cuál no vigila nadie",
+ title_en="An Entra ID audit flags the SAML certificates and secrets that expire before a SaaS app stops at 09:00",
+ title_es="Una auditoría de Entra ID detecta los certificados SAML que caducan antes de que una app SaaS se pare a las 9:00",
  seo_title_en="Entra ID SSO audit: SAML certificate expiry · Iñigo González",
  seo_title_es="Auditoría SSO de Entra ID: caducidad de certificados SAML · Iñigo González",
- dek_en="Enterprise apps and app registrations in Entra ID: certificates and secrets about to expire, owners, MFA coverage, risky permissions and SCIM.",
- dek_es="Aplicaciones empresariales y registros de aplicaciones en Entra ID: certificados y secretos a punto de caducar, propietarios, cobertura de MFA, permisos de riesgo y SCIM.",
+ seo_desc="Enterprise apps and app registrations in Entra ID: certificates and secrets about to expire, owners, MFA coverage, risky permissions and SCIM.",
+ seo_desc_es="Aplicaciones empresariales y registros de aplicaciones en Entra ID: certificados y secretos a punto de caducar, propietarios, cobertura de MFA, permisos…",
+ dek_en="The audit, published with a made-up tenant of 21 enterprise apps and faults placed on purpose, reviews certificates and secrets, owners, MFA coverage, risky permissions and SCIM provisioning from a read-only export.",
+ dek_es="La auditoría, publicada con un tenant inventado de 21 aplicaciones empresariales y fallos puestos a propósito, revisa certificados y secretos, propietarios, cobertura de MFA, permisos de riesgo y aprovisionamiento SCIM desde una exportación de solo lectura.",
  en="""
+When the SAML signing certificate of a SaaS app expires, the app stops accepting logons at 09:00; when a client secret expires, a nightly job fails. The single sign-on audit published with this post looks for those dates before they arrive. Its demo runs on a made-up tenant with 21 enterprise apps and faults placed on purpose.
 
-## The problem
-Single sign-on puts access in one place, but the details are spread over hundreds of enterprise apps. The same problems come back: a SAML signing certificate expires and a SaaS app stops accepting logons at 09:00, a client secret expires and a nightly job fails, an app has no owner, every user can open it, it was excluded from the MFA policy "for now", a daemon can write to the whole directory, or provisioning is in quarantine and leavers keep their account in the app.
+The audit starts from `Export-EntraAppInventory.ps1`, a read-only Microsoft Graph export of service principals, app registrations and Conditional Access policies. For secrets and certificates it reads only the dates, never the values.
 
-## What I built
-- `scripts/Export-EntraAppInventory.ps1`: a read-only Microsoft Graph export of service principals, app registrations (only the dates of secrets and certificates, never the values) and Conditional Access policies.
-- Checks in six areas: credentials, ownership, access (assignment required and MFA coverage), permissions (application permissions, tenant-wide consent, unverified publishers, redirect URIs), SCIM provisioning and unused apps.
-- `review.md` for the monthly access review, `renewals.csv` as a renewal calendar with owners, `findings.csv` and `report.html`.
+## Six areas, from expired secrets to leavers who keep their account
 
-## How it is built
-Python with the standard library only, plus PowerShell for Graph. The demo is a made-up tenant with 21 enterprise apps and faults placed on purpose. 15 tests. A runbook that includes renewing a SAML certificate without an outage.
+The checks cover credentials, ownership, access, permissions, SCIM provisioning and unused apps. Access covers whether assignment is required and MFA coverage. Permissions cover tenant-wide consent, unverified publishers, redirect URIs and daemons, unattended processes, that can write to the whole directory. SCIM, the standard that creates and removes accounts in the app, is flagged when provisioning is in quarantine and leavers keep their account.
 
-## What I learned
-From integrating SaaS apps in Entra ID: the hard part is not the SSO setup, it is who renews the certificate two years later. A secret expired while the app still signs in is urgent; an expired secret already replaced by a newer one is just clean-up.
+A secret expired while the app still signs in is urgent; one already replaced by a newer secret is clean-up.
 
-## Next steps
-- Run `Export-EntraAppInventory.ps1` with read-only Graph permissions on your tenant.
-- Assign an owner to every app in the renewal calendar.
-- Extend the SCIM provisioning and OIDC checks, which are the next ones I am growing.""",
+## How to use it with real data
+
+The export needs read-only Graph permissions. The output is `review.md` for the monthly access review, `renewals.csv` as a renewal calendar with owners, `findings.csv` and `report.html`; every app in that calendar should get an owner. A runbook explains how to renew a SAML certificate without an outage.
+
+## Where it comes from
+
+It comes from integrating SaaS apps in Entra ID, where the hard part is not the SSO setup but who renews the certificate two years later.""",
  es="""
+Cuando caduca el certificado de firma SAML de una aplicación SaaS, deja de aceptar inicios de sesión a las 9:00; cuando caduca un secreto, falla un proceso nocturno. La auditoría de inicio de sesión único que acompaña a este post busca esas fechas antes de que lleguen. Su demo usa un tenant inventado con 21 aplicaciones empresariales y fallos puestos a propósito.
 
-## El problema
-El inicio de sesión único concentra el acceso en un sitio, pero los detalles están repartidos en cientos de aplicaciones empresariales. Los problemas se repiten: caduca un certificado de firma SAML y una aplicación SaaS deja de aceptar inicios de sesión a las 9:00, caduca un secreto y falla un proceso nocturno, una aplicación no tiene propietario, cualquier usuario puede abrirla, se excluyó de la política de MFA "de momento", un proceso desatendido puede escribir en todo el directorio o el aprovisionamiento está en cuarentena y las bajas siguen teniendo cuenta en la aplicación.
+La auditoría parte de `Export-EntraAppInventory.ps1`, una exportación de solo lectura con Microsoft Graph de entidades de servicio, registros de aplicaciones y políticas de acceso condicional. De secretos y certificados solo lee las fechas, nunca su valor.
 
-## Qué he hecho
-- `scripts/Export-EntraAppInventory.ps1`: una exportación de solo lectura con Microsoft Graph de las entidades de servicio, los registros de aplicaciones (solo las fechas de secretos y certificados, nunca su valor) y las políticas de acceso condicional.
-- Comprobaciones en seis áreas: credenciales, propietarios, acceso (asignación obligatoria y cobertura de MFA), permisos (permisos de aplicación, consentimiento para toda la organización, editores sin verificar, URI de redirección), aprovisionamiento SCIM y aplicaciones sin uso.
-- `review.md` para la revisión mensual de accesos, `renewals.csv` como calendario de renovaciones con propietarios, `findings.csv` y `report.html`.
+## Seis áreas, de los secretos caducados a las bajas que siguen con cuenta
 
-## Cómo está hecho
-Python solo con la librería estándar y PowerShell para Graph. La demo es un tenant inventado con 21 aplicaciones empresariales y fallos puestos a propósito. 15 tests. Un runbook que incluye cómo renovar un certificado SAML sin corte.
+Las comprobaciones cubren credenciales, propietarios, acceso, permisos, aprovisionamiento SCIM y aplicaciones sin uso. El acceso incluye si la asignación es obligatoria y la cobertura de MFA. Los permisos incluyen el consentimiento para toda la organización, editores sin verificar, URI de redirección y procesos desatendidos que pueden escribir en todo el directorio. SCIM, el estándar que crea y elimina cuentas en la aplicación, se marca cuando el aprovisionamiento está en cuarentena y las bajas siguen con cuenta.
 
-## Qué aprendí
-De integrar aplicaciones SaaS en Entra ID: lo difícil no es configurar el SSO, sino quién renueva el certificado dos años después. Un secreto caducado mientras la aplicación sigue iniciando sesión es urgente; uno caducado que ya se sustituyó por otro nuevo es solo limpieza.
+Un secreto caducado mientras la aplicación sigue iniciando sesión es urgente; uno ya sustituido por otro nuevo es limpieza.
 
-## Siguientes pasos
-- Ejecutar `Export-EntraAppInventory.ps1` con permisos de solo lectura de Graph en tu tenant.
-- Asignar un propietario a cada aplicación del calendario de renovaciones.
-- Ampliar las comprobaciones de aprovisionamiento SCIM y de OIDC, que son las siguientes que estoy desarrollando."""),
+## Cómo usarlo con datos reales
+
+La exportación necesita permisos de solo lectura de Graph. El resultado es `review.md` para la revisión mensual de accesos, `renewals.csv` como calendario de renovaciones con propietarios, `findings.csv` y `report.html`; cada aplicación del calendario debe tener propietario. Un runbook explica cómo renovar un certificado SAML sin corte.
+
+## De dónde sale
+
+Nace de integrar aplicaciones SaaS en Entra ID, donde lo difícil no es configurar el SSO, sino quién renueva el certificado dos años después."""),
 
 dict(n="21", repo="21-apple-fleet-audit", date="2026-10-17", updated="2026-11-14", cat="tools",
- title_en="A weekly review for a Jamf Pro Apple fleet", title_es="Una revisión semanal para una flota Apple en Jamf Pro",
+ title_en="A weekly Jamf Pro review puts first the push certificate and tokens that can stop a whole Apple fleet",
+ title_es="Una revisión semanal de Jamf Pro pone primero el certificado y los tokens que pueden parar una flota Apple",
  seo_title_en="Jamf Pro weekly audit for an Apple fleet · Iñigo González",
  seo_title_es="Auditoría semanal de Jamf Pro (flota Apple) · Iñigo González",
- dek_en="Push certificate and tokens, OS currency, FileVault, SIP, bootstrap token, passcodes, stale devices and full disks, with the executives' devices first.",
- dek_es="Certificado push y tokens, versiones de sistema, FileVault, SIP, bootstrap token, códigos de acceso, equipos que no se conectan y discos llenos, con los dispositivos de dirección primero.",
+ seo_desc="Push certificate and tokens, OS currency, FileVault, SIP, bootstrap token, passcodes, stale devices and full disks, with the executives' devices first.",
+ seo_desc_es="Certificado push y tokens, versiones de sistema, FileVault, SIP, bootstrap token, códigos de acceso, equipos que no se conectan y discos llenos…",
+ dek_en="The review, published with a made-up fleet of 40 Macs, iPhones and iPads with three VIP users and faults placed on purpose, checks tokens, OS versions, encryption, passcodes, stale devices and full disks, with executives' devices first.",
+ dek_es="La revisión, publicada con una flota inventada de 40 Mac, iPhone e iPad con tres usuarios VIP y fallos puestos a propósito, comprueba tokens, versiones, cifrado, códigos, equipos sin conectar y discos llenos, con los de dirección primero.",
  en="""
+The most expensive mistakes in an Apple fleet are not on one device but in the certificate or token that stops all of them. If the APNs push certificate expires, no device gets a command; if someone creates a new one instead of renewing it, every device has to re-enroll. The weekly Jamf Pro review published with this post puts those dates first. Its demo runs on a made-up fleet of 40 devices, 18 Macs, 14 iPhones and 8 iPads, with three VIP users and faults placed on purpose.
 
-## The problem
-Jamf Pro shows every detail of every Mac, iPhone and iPad, but the weekly questions are spread over smart groups, settings pages and Apple's portals. The same problems come back: the APNs push certificate expires and no device gets a command (or someone creates a new one instead of renewing it and every device has to re-enroll), the ADE token expires and new laptops come out of the box unmanaged, a Mac has FileVault on but no recovery key in Jamf Pro, an Apple silicon Mac has no bootstrap token and updates never install, an iPhone has no passcode, a laptop has not checked in for two months, and the CEO's iPad has a full disk the evening before the board meeting.
+The review reads Jamf Pro through a read-only API client whose secret comes from an environment variable.
 
-## What I built
-- A read-only Jamf Pro API exporter (an API client with read privileges only; the secret comes from an environment variable).
-- Checks in seven areas: platform tokens (APNs, ADE, Apps and Books), OS currency, Mac security, mobile security, enrollment, hardware (storage and warranty) and VIP devices, whose findings go up one level and get their own section.
-- `review.md` for the weekly meeting with a token calendar, `device_actions.csv` as a work list per device, `findings.csv` and `report.html`.
+## From the ADE token to the CEO's full iPad
 
-## How it is built
-Python with the standard library only. The demo is a made-up fleet of 40 devices (18 Macs, 14 iPhones, 8 iPads) with three VIP users and faults placed on purpose. 17 tests. A runbook for the weekly review and for renewing the APNs certificate and the ADE and VPP tokens without surprises.
+An expired ADE token, the one behind automated enrollment, means new laptops come out of the box unmanaged. On Macs the review looks for FileVault, Apple's disk encryption, with no recovery key in Jamf Pro, and Apple silicon Macs with no bootstrap token, so updates never install. It also flags iPhones with no passcode and laptops silent for two months.
 
-## What I learned
-From managing MacBooks, iPhones and iPads with Jamf Pro and supporting VIP users and board meetings: the expensive mistakes are not on one device, they are the certificate or token that stops the whole fleet. And a value Jamf Pro did not collect should skip the check, not raise a false alarm.
+VIP findings go up one level and get their own section, so the CEO's full iPad shows up well before the evening ahead of the board meeting. A value Jamf Pro did not collect skips the check instead of raising a false alarm.
 
-## Next steps
-- Create a Jamf Pro API role with read privileges only and an API client.
-- Run the export and add the APNs expiry date from Settings > Global > Push certificates.
-- Add your VIP list and bring `review.md` to the weekly meeting.""",
+## How to use it with real data
+
+It needs a Jamf Pro API role with read privileges only and an API client. After the export, the APNs expiry date from Settings > Global > Push certificates and the VIP list are added. The output includes a token calendar and a work list per device.
+
+## Where it comes from
+
+It comes from managing MacBooks, iPhones and iPads with Jamf Pro and supporting VIP users and board meetings.""",
  es="""
+Los errores más caros en una flota Apple no están en un dispositivo, sino en el certificado o el token que los para todos. Si caduca el certificado push de APNs, ningún dispositivo recibe órdenes; si alguien crea uno nuevo en lugar de renovarlo, toca volver a inscribirlos todos. La revisión semanal de Jamf Pro que acompaña a este post pone esas fechas primero. Su demo usa una flota inventada de 40 dispositivos, 18 Mac, 14 iPhone y 8 iPad, con tres usuarios VIP y fallos puestos a propósito.
 
-## El problema
-Jamf Pro muestra cada detalle de cada Mac, iPhone y iPad, pero las preguntas de cada semana están repartidas entre grupos inteligentes, páginas de ajustes y los portales de Apple. Los problemas se repiten: caduca el certificado push de APNs y ningún dispositivo recibe órdenes (o alguien crea uno nuevo en lugar de renovarlo y toca volver a inscribirlos todos), caduca el token de ADE y los portátiles nuevos salen de la caja sin gestionar, un Mac tiene FileVault activado pero sin clave de recuperación en Jamf Pro, un Mac con Apple silicon no tiene bootstrap token y las actualizaciones nunca se instalan, un iPhone no tiene código, un portátil lleva dos meses sin conectarse y el iPad del CEO tiene el disco lleno la tarde antes del consejo.
+La revisión lee Jamf Pro con un cliente de API de solo lectura cuyo secreto se lee de una variable de entorno.
 
-## Qué he hecho
-- Un exportador de solo lectura con la API de Jamf Pro (un cliente de API con permisos solo de lectura; el secreto se lee de una variable de entorno).
-- Comprobaciones en siete áreas: tokens de la plataforma (APNs, ADE, Apps and Books), versiones de sistema, seguridad del Mac, seguridad del móvil, inscripción, hardware (almacenamiento y garantía) y dispositivos VIP, cuyos hallazgos suben un nivel y tienen su propia sección.
-- `review.md` para la reunión semanal con un calendario de tokens, `device_actions.csv` como lista de trabajo por dispositivo, `findings.csv` y `report.html`.
+## Del token de ADE al iPad lleno del CEO
 
-## Cómo está hecho
-Python solo con la librería estándar. La demo es una flota inventada de 40 dispositivos (18 Mac, 14 iPhone, 8 iPad) con tres usuarios VIP y fallos puestos a propósito. 17 tests. Un runbook para la revisión semanal y para renovar el certificado de APNs y los tokens de ADE y VPP sin sustos.
+Un token de ADE caducado, el de la inscripción automática, hace que los portátiles nuevos salgan de la caja sin gestionar. En los Mac busca FileVault, el cifrado de disco de Apple, sin clave de recuperación en Jamf Pro, y equipos Apple silicon sin bootstrap token, con lo que las actualizaciones nunca se instalan. También marca iPhone sin código y portátiles que llevan dos meses sin conectarse.
 
-## Qué aprendí
-De gestionar MacBooks, iPhones e iPads con Jamf Pro y dar soporte a usuarios VIP y reuniones de consejo: los errores caros no están en un dispositivo, sino en el certificado o el token que para toda la flota. Y un dato que Jamf Pro no ha recogido debe saltarse la comprobación, no dar una falsa alarma.
+Los hallazgos VIP suben un nivel y tienen su propia sección, para que el iPad lleno del CEO no aparezca la tarde antes del consejo. Un dato que Jamf Pro no ha recogido se salta la comprobación en lugar de dar una falsa alarma.
 
-## Siguientes pasos
-- Crear en Jamf Pro un rol de API solo con permisos de lectura y un cliente de API.
-- Ejecutar la exportación y añadir la caducidad de APNs desde Settings > Global > Push certificates.
-- Añadir tu lista de VIP y llevar `review.md` a la reunión semanal."""),
+## Cómo usarlo con datos reales
+
+Hace falta un rol de API en Jamf Pro solo de lectura y un cliente de API. Tras la exportación se añaden la caducidad de APNs, desde Settings > Global > Push certificates, y la lista de VIP. El resultado incluye un calendario de tokens y una lista de trabajo por dispositivo.
+
+## De dónde sale
+
+Nace de gestionar MacBooks, iPhones e iPads con Jamf Pro y de dar soporte a usuarios VIP y reuniones de consejo."""),
 
 dict(n="22", repo="22-dex-experience-score", date="2026-10-17", updated="2026-11-07", cat="tools",
- title_en="A 0-10 experience score for every laptop", title_es="Una nota de 0 a 10 para la experiencia de cada portátil",
+ title_en="A lab scores every laptop from 0 to 10 and traces the top problem to blue screens after a driver update",
+ title_es="Un laboratorio pone nota de 0 a 10 a cada portátil y sitúa el primer problema en pantallazos azules tras un driver",
  seo_title_en="DEX score: a 0-10 experience per laptop · Iñigo González",
  seo_title_es="Puntuación DEX de 0 a 10 por portátil · Iñigo González",
- dek_en="A lab that turns endpoint telemetry into a score per device, site and department, and ranks the five fixes that would raise it most.",
- dek_es="Un laboratorio que convierte la telemetría de los equipos en una nota por dispositivo, sede y departamento, y ordena los cinco arreglos que más la subirían.",
+ seo_desc_es="Un laboratorio que convierte la telemetría de los equipos en una nota por dispositivo, sede y departamento, y ordena los cinco arreglos que más la subirían.",
+ dek_en="A lab, run on a made-up company with 120 devices in three cities and six weeks of data, that turns endpoint telemetry into a score per device, site and department and ranks the fixes that would raise it most.",
+ dek_es="Un laboratorio, con una empresa inventada de 120 equipos en tres ciudades y seis semanas de datos, que convierte la telemetría de los equipos en una nota por dispositivo, sede y departamento y ordena los arreglos que más la subirían.",
  seo_desc="DEX score lab: turns endpoint telemetry into a 0-10 digital experience score per device, site and department, and ranks the fixes that raise it most.",
  en="""
+In a made-up company with 120 devices in three cities, the top problem is blue screens on one laptop model after a driver update. It is the first of five problems placed on purpose that the lab published with this post finds in six weeks of fictional data. The lab turns endpoint telemetry, the data each device records about itself, into a 0 to 10 score per device, site and department.
 
-## Why this lab
-Comes from years of supporting Windows users and executives on site. It is inspired by the public descriptions of digital employee experience (DEX) tools such as Nexthink; the model, thresholds and weights are my own and are explained in the repository.
+Tickets show only a fraction of the problems. People live with a slow laptop for weeks and just say "IT is slow". A monthly update adds 40 seconds to every logon or an Outlook add-in crashes on twenty laptops, and telemetry sees it.
 
-## The problem
-Anyone who has supported Windows users on site knows it: tickets show a fraction of the problems. People live with a slow laptop or a crashing app for weeks, stop reporting and just say "IT is slow". A monthly update adds 40 seconds to every logon, an Outlook add-in crashes on twenty laptops, the Wi-Fi on one floor is weak, batteries die in meetings. Endpoint telemetry sees all of it.
+## Five categories, and missing data never counts as zero
 
-## What I built
-- A read-only PowerShell collector: boot and logon times, app crashes and hangs, blue screens, Wi-Fi drops and signal, latency, VPN failures, battery and disk.
-- A score per device from five categories (performance, stability, network and collaboration, hardware, optional survey), with caps for blue screens and very poor categories. Missing data is left out, never scored as zero.
-- Top fixes ranked by how much the fleet score would rise if the problem were gone, a 6-week trend by site, `review.md` for the service owner and `report.html` with inline SVG charts.
+A read-only PowerShell collector gathers boot and logon times, app crashes, blue screens, Wi-Fi, latency, VPN failures, battery and disk. The score combines performance, stability, network and collaboration, hardware and an optional survey. Blue screens and very poor categories cap it, and missing data is left out, never scored as zero.
 
-## How it is built
-Python with the standard library only, plus PowerShell. The demo is a made-up company with 120 devices in three cities and six weeks of data; it finds the five problems placed on purpose, led by blue screens on one laptop model after a driver update. 15 tests.
+The lab ranks fixes by how much the fleet score would rise if each problem were gone and shows a 6-week trend by site. Every point lost has to lead to a cause and a fix.
 
-## What I learned
-Explaining the score matters more than the number: every point lost has to point to a cause and a fix. And telemetry linked to a person is personal data, so report by site and department and talk to the DPO first.
+## How to use it with real data
 
-## Next steps
-- Deploy the collector through an Intune remediation script or your RMM tool.
-- Tune the thresholds after a few weeks of real data.
-- Talk to your data protection officer first, and report by site and department.""",
+The collector can go out through an Intune remediation script or an RMM tool, with thresholds tuned after a few weeks. Telemetry linked to a person is personal data, so the first step is talking to the data protection officer and reporting by site and department.
+
+## Where it comes from
+
+It is a lab built on years of supporting Windows users and executives on site, inspired by public descriptions of digital employee experience (DEX) tools such as Nexthink. The model, thresholds and weights are my own and are explained in the repository.""",
  es="""
+En una empresa inventada con 120 equipos en tres ciudades, el primer problema son los pantallazos azules en un modelo de portátil tras actualizar un driver. Es el primero de los cinco problemas puestos a propósito que encuentra, en seis semanas de datos ficticios, el laboratorio que acompaña a este post. El laboratorio convierte la telemetría, los datos que cada equipo registra sobre sí mismo, en una nota de 0 a 10 por dispositivo, sede y departamento.
 
-## Por qué este laboratorio
-Viene de años dando soporte presencial a usuarios de Windows y a dirección. Se inspira en las descripciones públicas de herramientas de experiencia digital del empleado (DEX) como Nexthink; el modelo, los umbrales y los pesos son míos y están explicados en el repositorio.
+Los tickets solo muestran una parte de los problemas. La gente convive semanas con un portátil lento y solo dice «IT va lento». Una actualización mensual añade 40 segundos a cada inicio de sesión o un complemento de Outlook falla en veinte portátiles, y la telemetría lo ve.
 
-## El problema
-Quien haya dado soporte presencial a usuarios de Windows lo sabe: los tickets muestran una parte de los problemas. La gente convive semanas con un portátil lento o una aplicación que se cierra, deja de avisar y solo dice "IT va lento". Una actualización mensual añade 40 segundos a cada inicio de sesión, un complemento de Outlook falla en veinte portátiles, el wifi de una planta es débil, las baterías mueren en mitad de una reunión. La telemetría de los equipos lo ve todo.
+## Cinco categorías, y los datos que faltan nunca cuentan como cero
 
-## Qué he hecho
-- Un recolector de solo lectura en PowerShell: tiempos de arranque e inicio de sesión, cierres y bloqueos de aplicaciones, pantallazos azules, cortes y señal de wifi, latencia, fallos de VPN, batería y disco.
-- Una nota por dispositivo a partir de cinco categorías (rendimiento, estabilidad, red y colaboración, hardware y una encuesta opcional), con topes para pantallazos azules y categorías muy malas. Los datos que faltan se dejan fuera, nunca cuentan como cero.
-- Los arreglos ordenados por cuánto subiría la nota de la flota si el problema desapareciera, la tendencia de 6 semanas por sede, `review.md` para el responsable del servicio y `report.html` con gráficos SVG.
+Un recolector de solo lectura en PowerShell recoge tiempos de arranque e inicio de sesión, cierres de aplicaciones, pantallazos azules, wifi, latencia, fallos de VPN, batería y disco. La nota combina rendimiento, estabilidad, red y colaboración, hardware y una encuesta opcional. Los pantallazos azules y las categorías muy malas le ponen tope, y los datos que faltan se dejan fuera, nunca cuentan como cero.
 
-## Cómo está hecho
-Python solo con la librería estándar y PowerShell. La demo es una empresa inventada con 120 equipos en tres ciudades y seis semanas de datos; encuentra los cinco problemas puestos a propósito, empezando por pantallazos azules en un modelo de portátil tras actualizar un driver. 15 tests.
+El laboratorio ordena los arreglos por cuánto subiría la nota de la flota si cada problema desapareciera y muestra la tendencia de 6 semanas por sede. Cada punto perdido tiene que llevar a una causa y a un arreglo.
 
-## Qué aprendí
-Explicar la nota importa más que el número: cada punto perdido tiene que llevar a una causa y a un arreglo. Y la telemetría ligada a una persona es un dato personal, así que hay que informar por sede y departamento y hablar antes con el DPO.
+## Cómo usarlo con datos reales
 
-## Siguientes pasos
-- Desplegar el recolector con un script de corrección de Intune o tu herramienta RMM.
-- Ajustar los umbrales tras unas semanas de datos reales.
-- Hablar antes con tu delegado de protección de datos e informar por sede y departamento."""),
+El recolector se puede desplegar con un script de corrección de Intune o una herramienta RMM, ajustando los umbrales tras unas semanas. La telemetría ligada a una persona es un dato personal, así que el primer paso es hablar con el delegado de protección de datos e informar por sede y departamento.
+
+## De dónde sale
+
+Es un laboratorio que parte de años dando soporte presencial a usuarios de Windows y a dirección, inspirado en las descripciones públicas de herramientas de experiencia digital del empleado (DEX) como Nexthink. El modelo, los umbrales y los pesos son míos y están explicados en el repositorio."""),
 dict(n="23", repo="23-it-vendor-contract-tracker", date="2026-10-18", updated="2026-11-13", cat="tools",
- title_en="Every IT contract renewal, notice deadline and saving in one monthly review", title_es="Cada renovación, preaviso y ahorro de los contratos de IT en una revisión mensual",
+ title_en="The costliest date in an IT contract is the notice deadline; a monthly review puts each one in the calendar",
+ title_es="La fecha más cara de un contrato de IT es la del preaviso; una revisión mensual la lleva al calendario",
  seo_title_en="IT vendor contract and renewal tracker · Iñigo González",
  seo_title_es="Contratos y renovaciones de IT en una revisión · Iñigo González",
- dek_en="A tracker that reads the contract register and finds the notice deadlines, unused licences, budget overruns and missed SLAs before they cost money.",
- dek_es="Un tracker que lee el registro de contratos y encuentra los preavisos, licencias sin usar, desviaciones de presupuesto y SLA incumplidos antes de que cuesten dinero.",
+ seo_desc="A tracker that reads the contract register and finds the notice deadlines, unused licences, budget overruns and missed SLAs before they cost money.",
+ seo_desc_es="Un tracker que lee el registro de contratos y encuentra los preavisos, licencias sin usar, desviaciones de presupuesto y SLA incumplidos antes de que cuesten…",
+ dek_en="The tracker, published with a made-up company of 21 contracts from 17 vendors and faults placed on purpose, reads the contract register to find notice deadlines, unused licences, budget overruns and missed SLAs before they cost money.",
+ dek_es="El tracker, publicado con una empresa inventada de 21 contratos de 17 proveedores y fallos puestos a propósito, lee el registro de contratos para encontrar preavisos, licencias sin usar, desviaciones de presupuesto y SLA incumplidos antes de que cuesten dinero.",
  en="""
+A contract with 60 days' notice renews by itself for another year because nobody looked at the date in time. The tracker published with this post reads the register a team already keeps in a spreadsheet and finds those deadlines, including contracts that already renewed by themselves. Its demo runs on a made-up company with 21 contracts from 17 vendors, with faults placed on purpose.
 
-## The problem
-IT contracts rarely fail in a dramatic way. They fail quietly: a contract with 60 days' notice renews by itself for another year because nobody looked at the date in time, the support on a firewall ends and nobody notices until a replacement is needed, an add-on has 60 licences and 34 users while the main suite is 12 seats over what was bought, a budget line is on pace to end 14% over, a vendor misses its SLA two months running and the service credit is never claimed.
+## Licences, budget and service credits nobody claims
 
-## What I built
-- Checks in six areas from the register you already keep in a spreadsheet: renewals and notice deadlines (including contracts that already renewed by themselves), licences, budget forecast, SLA and service credits, supplier risk and data quality.
-- `review.md` for the monthly vendor meeting, `actions.csv` as a work list with owners, dates and the money at stake, and `report.html` with a 12-month renewal calendar.
-- `renewals.ics`: every notice deadline in the team calendar, with a reminder 14 days before.
+Firewall support ends and nobody notices until a replacement is needed. An add-on has 60 licences and 34 users while the main suite is 12 seats over what was bought. A budget line is on pace to end 14% over. A vendor misses its SLA, the service level it signed, two months running, and the service credit is never claimed.
 
-## How it is built
-Python with the standard library only. The demo is a made-up company with 21 contracts from 17 vendors, six budget lines and six months of SLA reports, with faults placed on purpose. 17 tests. A runbook for the monthly review and a checklist for each renewal decision.
+The checks cover renewals and notice deadlines, licences, budget forecast, SLA and service credits, supplier risk and data quality. Usage data turns a renewal into a negotiation.
 
-## What I learned
-From managing IT suppliers, renewals and budgets: the most expensive date in a contract is not the end date, it is the notice deadline. And usage data turns a renewal into a negotiation.
+## A renewal calendar with a 14-day reminder
 
-## Next steps
-- Export your contract register to CSV and map its columns.
-- Add the spend to date from finance and last month's SLA figures before each review.
-- Import `renewals.ics` into the team calendar.""",
+The output is `review.md` for the monthly vendor meeting, `actions.csv` with owners, dates and the money at stake, and `report.html` with a 12-month renewal calendar. `renewals.ics` puts every notice deadline in the team calendar with a reminder 14 days before.
+
+## How to use it with real data
+
+The register is exported to CSV and its columns mapped. Before each review, the spend to date from finance and last month's SLA figures are added.
+
+## Where it comes from
+
+It comes from managing IT suppliers, renewals and budgets, where the most expensive date in a contract is not the end date but the notice deadline.""",
  es="""
+Un contrato con 60 días de preaviso se renueva solo otro año porque nadie miró la fecha a tiempo. El tracker que acompaña a este post lee el registro que el equipo ya tiene en una hoja de cálculo y encuentra esas fechas, también las de los contratos que ya se renovaron solos. Su demo usa una empresa inventada con 21 contratos de 17 proveedores, con fallos puestos a propósito.
 
-## El problema
-Los contratos de IT casi nunca fallan de forma espectacular. Fallan en silencio: un contrato con 60 días de preaviso se renueva solo otro año porque nadie miró la fecha a tiempo, se acaba el soporte de un firewall y nadie se entera hasta que hace falta un repuesto, un complemento tiene 60 licencias y 34 usuarios mientras la suite principal tiene 12 puestos más de los comprados, una partida del presupuesto va camino de acabar un 14% por encima, un proveedor incumple su SLA dos meses seguidos y nadie reclama la penalización.
+## Licencias, presupuesto y penalizaciones que nadie reclama
 
-## Qué he hecho
-- Comprobaciones en seis áreas a partir del registro que ya tienes en una hoja de cálculo: renovaciones y preavisos (también los contratos que ya se han renovado solos), licencias, previsión del presupuesto, SLA y penalizaciones, riesgo de proveedor y calidad de los datos.
-- `review.md` para la reunión mensual de proveedores, `actions.csv` como lista de trabajo con responsable, fecha y el dinero en juego, y `report.html` con un calendario de renovaciones a 12 meses.
-- `renewals.ics`: cada fecha límite de preaviso en el calendario del equipo, con aviso 14 días antes.
+Se acaba el soporte de un firewall y nadie se entera hasta que hace falta un repuesto. Un complemento tiene 60 licencias y 34 usuarios mientras la suite principal tiene 12 puestos más de los comprados. Una partida va camino de acabar un 14% por encima. Un proveedor incumple su SLA, el nivel de servicio que firmó, dos meses seguidos, y nadie reclama la penalización.
 
-## Cómo está hecho
-Python solo con la librería estándar. La demo es una empresa inventada con 21 contratos de 17 proveedores, seis partidas de presupuesto y seis meses de informes de SLA, con fallos puestos a propósito. 17 tests. Un runbook para la revisión mensual y una lista de comprobación para cada decisión de renovación.
+Las comprobaciones cubren renovaciones y preavisos, licencias, previsión del presupuesto, SLA y penalizaciones, riesgo de proveedor y calidad de los datos. Los datos de uso convierten una renovación en una negociación.
 
-## Qué aprendí
-De gestionar proveedores, renovaciones y presupuesto de IT: la fecha más cara de un contrato no es la de fin, es la del preaviso. Y los datos de uso convierten una renovación en una negociación.
+## Un calendario de renovaciones con aviso 14 días antes
 
-## Siguientes pasos
-- Exportar tu registro de contratos a CSV y adaptar sus columnas.
-- Añadir el gasto acumulado de finanzas y las cifras de SLA del mes antes de cada revisión.
-- Importar `renewals.ics` en el calendario del equipo."""),
+El resultado es `review.md` para la reunión mensual de proveedores, `actions.csv` con responsable, fecha y el dinero en juego, y `report.html` con un calendario de renovaciones a 12 meses. `renewals.ics` lleva cada fecha límite de preaviso al calendario del equipo con aviso 14 días antes.
+
+## Cómo usarlo con datos reales
+
+El registro se exporta a CSV y se adaptan sus columnas. Antes de cada revisión se añaden el gasto acumulado de finanzas y las cifras de SLA del mes.
+
+## De dónde sale
+
+Nace de gestionar proveedores, renovaciones y presupuesto de IT, donde la fecha más cara de un contrato no es la de fin, sino la del preaviso."""),
 dict(n="24", repo="24-hospitality-it-preopening", date="2026-10-18", cat="tools",
- title_en="Will IT be ready before the hotel opens? A pre-opening tracker", title_es="¿Estará IT lista antes de que abra el hotel? Un tracker de pre-apertura",
+ title_en="A hotel pre-opening tracker shows which IT delay moves the opening, starting with a 75-day internet line",
+ title_es="Un tracker de pre-apertura de hotel muestra qué retraso de IT mueve la apertura, empezando por la línea de 75 días",
  seo_title_en="Hotel IT pre-opening tracker and checklist · Iñigo González",
  seo_title_es="Pre-apertura de hotel: plan y checklist de IT · Iñigo González",
- dek_en="A plan with lead times and dependencies that calculates the critical path, the gates at risk and the work that must start this week.",
- dek_es="Un plan con plazos de entrega y dependencias que calcula el camino crítico, los hitos en riesgo y lo que tiene que empezar esta semana.",
+ seo_desc="A plan with lead times and dependencies that calculates the critical path, the gates at risk and the work that must start this week.",
+ seo_desc_es="Un plan con plazos de entrega y dependencias que calcula el camino crítico, los hitos en riesgo y lo que tiene que empezar esta semana.",
+ dek_en="The tracker, published with a made-up 120-room resort hotel opening in January, with 30 tasks and delays placed on purpose, calculates the critical path, the gates at risk and the work that must start this week.",
+ dek_es="El tracker, publicado con un hotel vacacional inventado de 120 habitaciones que abre en enero, con 30 tareas y retrasos puestos a propósito, calcula el camino crítico, los hitos en riesgo y lo que tiene que empezar esta semana.",
  en="""
+In a hotel pre-opening the internet circuits have a 75-day lead time, and almost every other IT system waits for them. The tracker published with this post turns the task list into a schedule that shows which delay moves the opening. Its demo runs on a made-up 120-room resort hotel opening in January, with 30 tasks in nine workstreams and delays placed on purpose.
 
-## The problem
-In a hotel pre-opening every system depends on another one, and most of them on the internet line. The circuits have a 75-day lead time; the cloud PMS, the room-charge interface, the call charges and the interface tests slide with them; training can only start when the interfaces are tested; and the dress rehearsal needs everything. A spreadsheet lists the tasks, but it does not say which delay moves the opening.
+The cloud PMS, the hotel management system, slides with the line, as do the room-charge interface, call charges and interface tests. Training starts only when the interfaces are tested, and the dress rehearsal needs everything.
 
-## What I built
-- A schedule from the task list: forecast dates, float and the critical path to the day IT is ready, from durations, dependencies and progress.
-- Gates from T-90 (design frozen) to T-1 (ready to open), with gates already passed with open tasks, tasks forecast late, blocked work, tasks that must start this week and a risk register.
-- `report.html` with a Gantt chart, `review.md` for the weekly meeting, `actions.csv` and a go-live checklist for T-7, T-1, opening day and the first week.
+## Critical path and gates from T-90 to T-1
 
-## How it is built
-Python with the standard library only. The demo is a made-up 120-room resort hotel opening in January, with 30 tasks in nine workstreams and delays placed on purpose. 14 tests, including the same plan reviewed three weeks later without progress, which puts the opening at risk.
+From durations, dependencies and progress, the tool calculates forecast dates, float, the slack a task has before it delays others, and the critical path to the day IT is ready. Gates run from T-90, design frozen, to T-1, ready to open. It flags gates passed with open tasks, tasks forecast late, blocked work, tasks that must start this week and a risk register.
 
-## What I learned
-From years supporting POS, hotel PMS and IPTV at a technology consultancy: integrations and lead times decide the opening, not the installation of each system. The tool makes that visible every week.
+The output is `report.html` with a Gantt chart, `review.md` for the weekly meeting, `actions.csv` and a go-live checklist for T-7, T-1, opening day and the first week.
 
-## Next steps
-- Export your pre-opening plan with real vendor lead times and dependencies.
-- Set your own gates if your brand uses different milestones.
-- Run it before each weekly meeting, daily from T-7, and print the go-live checklist for the dress rehearsal.""",
+## How to use it with real data
+
+The plan is exported with real vendor lead times and dependencies. It runs before each weekly meeting, daily from T-7, with the checklist printed for the dress rehearsal.
+
+## Where it comes from
+
+It comes from years supporting POS, hotel PMS and IPTV at a technology consultancy, where integrations and lead times, not the installation of each system, decide the opening.""",
  es="""
+En la pre-apertura de un hotel los circuitos de internet tardan 75 días en llegar, y casi todos los demás sistemas de IT dependen de ellos. El tracker que acompaña a este post convierte la lista de tareas en un calendario que muestra qué retraso mueve la apertura. Su demo usa un hotel vacacional inventado de 120 habitaciones que abre en enero, con 30 tareas en nueve áreas y retrasos puestos a propósito.
 
-## El problema
-En la pre-apertura de un hotel cada sistema depende de otro, y casi todos de la línea de internet. Los circuitos tardan 75 días en llegar; el PMS en la nube, el interfaz de cargos a habitación, los cargos de llamadas y las pruebas de interfaces se retrasan con ellos; la formación solo puede empezar cuando los interfaces están probados, y el ensayo general lo necesita todo. Una hoja de cálculo lista las tareas, pero no dice qué retraso mueve la apertura.
+El PMS en la nube, el sistema de gestión del hotel, se retrasa con la línea, igual que el interfaz de cargos a habitación, los cargos de llamadas y las pruebas de interfaces. La formación solo empieza cuando los interfaces están probados, y el ensayo general lo necesita todo.
 
-## Qué he hecho
-- Un calendario a partir de la lista de tareas: fechas previstas, holgura y el camino crítico hasta el día en que IT está lista, con duraciones, dependencias y avance.
-- Hitos de T-90 (diseño cerrado) a T-1 (listos para abrir), con hitos ya pasados con tareas abiertas, tareas que llegan tarde, trabajo bloqueado, tareas que tienen que empezar esta semana y un registro de riesgos.
-- `report.html` con un diagrama de Gantt, `review.md` para la reunión semanal, `actions.csv` y una lista de comprobación de puesta en marcha para T-7, T-1, el día de apertura y la primera semana.
+## Camino crítico e hitos de T-90 a T-1
 
-## Cómo está hecho
-Python solo con la librería estándar. La demo es un hotel vacacional inventado de 120 habitaciones que abre en enero, con 30 tareas en nueve áreas y retrasos puestos a propósito. 14 tests, entre ellos el mismo plan revisado tres semanas después sin avances, que pone la apertura en riesgo.
+Con duraciones, dependencias y avance, la herramienta calcula fechas previstas, holgura, el margen de una tarea antes de retrasar a otras, y el camino crítico hasta el día en que IT está lista. Los hitos van de T-90, diseño cerrado, a T-1, listos para abrir. Marca hitos pasados con tareas abiertas, tareas que llegan tarde, trabajo bloqueado, tareas que tienen que empezar esta semana y un registro de riesgos.
 
-## Qué aprendí
-De años dando soporte a TPV, PMS hotelero e IPTV en una consultora tecnológica: lo que decide una apertura son los interfaces y los plazos de entrega, no la instalación de cada sistema. La herramienta lo hace visible cada semana.
+El resultado es `report.html` con un diagrama de Gantt, `review.md` para la reunión semanal, `actions.csv` y una lista de puesta en marcha para T-7, T-1, el día de apertura y la primera semana.
 
-## Siguientes pasos
-- Exportar tu plan de pre-apertura con los plazos reales de los proveedores y las dependencias.
-- Definir tus propios hitos si tu marca usa otros.
-- Ejecutarlo antes de cada reunión semanal, a diario desde T-7, e imprimir la lista de comprobación para el ensayo general."""),
+## Cómo usarlo con datos reales
+
+El plan se exporta con los plazos reales de los proveedores y las dependencias. Se ejecuta antes de cada reunión semanal, a diario desde T-7, con la lista impresa para el ensayo general.
+
+## De dónde sale
+
+Nace de años dando soporte a TPV, PMS hotelero e IPTV en una consultora tecnológica, donde lo que decide una apertura son los interfaces y los plazos de entrega, no la instalación de cada sistema."""),
 dict(n="25", repo="25-security-controls-evidence", date="2026-10-19", cat="tools",
- title_en="What will the auditor ask for that you cannot show yet? One register for ISO 27001, NIS2 and GDPR", title_es="¿Qué te pedirá el auditor que aún no puedes enseñar? Un registro para ISO 27001, NIS2 y RGPD",
+ title_en="A control register for ISO 27001, NIS2 and GDPR finds the evidence an auditor will ask for and nobody kept",
+ title_es="Un registro de controles para ISO 27001, NIS2 y RGPD encuentra las evidencias que pedirá el auditor y nadie guardó",
  seo_title_en="ISO 27001, NIS2 and GDPR evidence tracker · Iñigo González",
  seo_title_es="Evidencias para ISO 27001, NIS2 y RGPD · Iñigo González",
- dek_en="One control register mapped to three frameworks that finds missing, late or failing evidence, expired exceptions and how ready each framework is for the audit date.",
- dek_es="Un registro de controles mapeado a tres marcos que encuentra evidencias que faltan, llegan tarde o fallan, excepciones caducadas y cómo de listo está cada marco para la fecha de auditoría.",
+ seo_desc="One control register mapped to three frameworks that finds missing, late or failing evidence, expired exceptions and how ready each framework is for the audit date.",
+ seo_desc_es="Un registro de controles mapeado a tres marcos que encuentra evidencias que faltan, llegan tarde o fallan, excepciones caducadas y cómo de listo está cada…",
+ dek_en="A register, published with a made-up company five weeks before an ISO 27001 audit, maps 23 controls to three frameworks and finds missing, late or failing evidence and expired exceptions.",
+ dek_es="Un registro, publicado con una empresa inventada a cinco semanas de una auditoría ISO 27001, mapea 23 controles a tres marcos y encuentra evidencias que faltan, llegan tarde o fallan, y excepciones caducadas.",
  en="""
+Most audit findings are not about missing security but about missing proof: a quarterly restore test done in June but not in September, a control marked implemented with nothing behind it, a DLP exception that expired last month. That is the gap the control and evidence register published with this post is built to find. Its demo is a made-up company with 23 controls, 33 evidence items and 3 exceptions against 48 requirements, five weeks before an ISO 27001 surveillance audit, with gaps placed on purpose.
 
-## The problem
-Most audit findings are not about missing security, they are about missing proof. The quarterly restore test was done in June but not in September, and the audit is in five weeks. The immutable backup copy has been failing for a week and nobody linked it to the controls. A control is marked implemented with no evidence behind it. The DLP exception expired last month. And the same restore test answers ISO 27001, NIS2 and GDPR, but it is collected three times by three people, or not at all.
+The register maps each control and its evidence to ISO/IEC 27001:2022, NIS2 and GDPR at once. The same restore test answers all three frameworks, yet it is often collected three times by three people, or not at all. Its checks cover evidence, controls, exceptions, coverage per requirement and data quality.
 
-## What I built
-- One register of controls and evidence mapped to ISO/IEC 27001:2022, NIS2 and GDPR, with checks in five areas: evidence, controls, exceptions, coverage per requirement and data quality.
-- Readiness per framework for the audit date: each requirement is covered, excluded, at risk or a gap, with what stands in its way.
-- `report.html` with a nine-week collection plan, `review.md` for the security review, `actions.csv`, an `audit-pack.csv` index for the auditor, a `soa.csv` in Statement-of-Applicability form and `evidence-calendar.ics` with every due date.
+## Every requirement covered, excluded, at risk or a gap
 
-## How it is built
-Python with the standard library only. The demo is a made-up company with 23 controls, 33 evidence items and 3 exceptions against 48 requirements, five weeks before an ISO 27001 surveillance audit, with gaps placed on purpose. 14 tests.
+For the audit date, each requirement gets one of four states, with what stands in its way. That gives the readiness of each framework. A failing immutable backup copy, unlinked to any control, is the kind of problem the cross-check brings to the surface.
 
-## What I learned
-From applying ISO 27001, NIS2 and GDPR in IT operations, preparing evidence and answering audits: one piece of evidence well kept serves several frameworks, and the calendar of what to collect matters as much as the controls themselves.
+The output is a web report with a nine-week collection plan, a summary for the security review, a list of actions, an `audit-pack.csv` index for the auditor, a `soa.csv` in Statement-of-Applicability form and `evidence-calendar.ics` with every due date.
 
-## Next steps
-- Export your control register and evidence index to CSV and map the columns.
-- Add the requirements you are audited against to the catalogue.
-- Import `evidence-calendar.ics` into the team calendar and run it before each security review.""",
+## How to use it with real data
+
+It runs on Python with the standard library only and comes with 14 tests. The control register and evidence index are exported to CSV with the columns mapped, the requirements of each audit are added to the catalogue, and the calendar file goes into the team calendar before each security review.
+
+## Where it comes from
+
+It comes from applying ISO 27001, NIS2 and GDPR in IT operations, preparing evidence and answering audits. I learned that one piece of evidence well kept serves several frameworks, and that the calendar of what to collect matters as much as the controls themselves.""",
  es="""
+La mayoría de hallazgos de auditoría no son por falta de seguridad, sino por falta de pruebas: una prueba de restauración trimestral hecha en junio pero no en septiembre, un control marcado como implantado sin nada detrás, una excepción de DLP que caducó el mes pasado. Ese es el hueco que busca el registro de controles y evidencias que acompaña a este post. Su demo es una empresa inventada con 23 controles, 33 evidencias y 3 excepciones frente a 48 requisitos, a cinco semanas de una auditoría de seguimiento de ISO 27001, con brechas puestas a propósito.
 
-## El problema
-La mayoría de hallazgos de auditoría no son por falta de seguridad, sino por falta de pruebas. La prueba de restauración trimestral se hizo en junio pero no en septiembre, y la auditoría es en cinco semanas. La copia inmutable del backup lleva una semana fallando y nadie lo ha relacionado con los controles. Un control está marcado como implantado sin ninguna evidencia detrás. La excepción de DLP caducó el mes pasado. Y la misma prueba de restauración responde a ISO 27001, NIS2 y RGPD, pero la recogen tres personas tres veces, o nadie.
+El registro mapea cada control y su evidencia a ISO/IEC 27001:2022, NIS2 y RGPD a la vez. La misma prueba de restauración responde a los tres marcos, pero muchas veces la recogen tres personas tres veces, o nadie. Sus comprobaciones cubren evidencias, controles, excepciones, cobertura por requisito y calidad de los datos.
 
-## Qué he hecho
-- Un único registro de controles y evidencias mapeado a ISO/IEC 27001:2022, NIS2 y RGPD, con comprobaciones en cinco áreas: evidencias, controles, excepciones, cobertura por requisito y calidad de los datos.
-- El grado de preparación de cada marco para la fecha de auditoría: cada requisito queda cubierto, excluido, en riesgo o como brecha, con lo que lo impide.
-- `report.html` con un plan de recogida a nueve semanas, `review.md` para la revisión de seguridad, `actions.csv`, un índice `audit-pack.csv` para el auditor, un `soa.csv` en formato de Declaración de Aplicabilidad y `evidence-calendar.ics` con cada fecha de vencimiento.
+## Cada requisito, cubierto, excluido, en riesgo o como brecha
 
-## Cómo está hecho
-Python solo con la librería estándar. La demo es una empresa inventada con 23 controles, 33 evidencias y 3 excepciones frente a 48 requisitos, cinco semanas antes de una auditoría de seguimiento de ISO 27001, con brechas puestas a propósito. 14 tests.
+Para la fecha de auditoría, cada requisito recibe uno de esos cuatro estados, con lo que lo impide. De ahí sale el grado de preparación de cada marco. Una copia inmutable del backup que falla sin estar relacionada con ningún control es el tipo de problema que el cruce saca a la luz.
 
-## Qué aprendí
-De aplicar ISO 27001, NIS2 y RGPD en operaciones de IT, preparando evidencias y respondiendo auditorías: una evidencia bien guardada sirve para varios marcos, y el calendario de lo que hay que recoger importa tanto como los propios controles.
+La salida es un informe web con un plan de recogida a nueve semanas, un resumen para la revisión de seguridad, una lista de acciones, un índice `audit-pack.csv` para el auditor, un `soa.csv` en formato de Declaración de Aplicabilidad y `evidence-calendar.ics` con cada fecha de vencimiento.
 
-## Siguientes pasos
-- Exportar tu registro de controles y tu índice de evidencias a CSV y adaptar las columnas.
-- Añadir al catálogo los requisitos frente a los que te auditan.
-- Importar `evidence-calendar.ics` en el calendario del equipo y ejecutarlo antes de cada revisión de seguridad."""),
+## Cómo usarlo con datos reales
+
+Funciona con Python y solo la librería estándar, y trae 14 tests. El registro de controles y el índice de evidencias se exportan a CSV adaptando las columnas, los requisitos de cada auditoría se añaden al catálogo y el calendario se importa en el del equipo antes de cada revisión de seguridad.
+
+## De dónde sale
+
+Nace de aplicar ISO 27001, NIS2 y RGPD en operaciones de IT, preparando evidencias y respondiendo auditorías. Aprendí que una evidencia bien guardada sirve para varios marcos, y que el calendario de lo que hay que recoger importa tanto como los propios controles."""),
 dict(n="26", repo="26-ot-segmentation-lab", date="2026-10-20", cat="tools",
- title_en="Which paths into the plant network should not exist? A Purdue and IEC 62443 segmentation lab", title_es="¿Qué caminos hacia la red de planta no deberían existir? Un laboratorio de segmentación Purdue e IEC 62443",
+ title_en="A plant network lab finds old commissioning rules and vendor RDP to an HMI that bypass the segmentation",
+ title_es="Un laboratorio de planta halla reglas antiguas y accesos RDP de proveedor a un HMI que se saltan la segmentación",
  seo_title_en="OT segmentation lab: Purdue and IEC 62443 · Iñigo González",
  seo_title_es="Segmentación OT: Purdue e IEC 62443 · Iñigo González",
- dek_en="Zones, assets, firewall rules and observed traffic side by side: risky paths into OT, remote access that skips the jump host, and a tighter rule set built from what the plant really uses.",
- dek_es="Zonas, activos, reglas de firewall y tráfico observado juntos: caminos de riesgo hacia OT, accesos remotos que se saltan el jump host y un conjunto de reglas más ajustado a partir de lo que la planta usa de verdad.",
+ seo_desc="Zones, assets, firewall rules and observed traffic side by side: risky paths into OT, remote access that skips the jump host, and a tighter rule set built from what the plant really uses.",
+ seo_desc_es="Zonas, activos, reglas de firewall y tráfico observado juntos: caminos de riesgo hacia OT, accesos remotos que se saltan el jump host y un conjunto de reglas…",
+ dek_en="A lab built on a made-up bottling plant puts zones, assets, firewall rules and a week of traffic side by side against the Purdue model and IEC 62443, and proposes a tighter rule set from what the plant really uses.",
+ dek_es="Un laboratorio sobre una planta embotelladora inventada pone juntos zonas, activos, reglas de firewall y una semana de tráfico frente al modelo Purdue e IEC 62443, y propone reglas más ajustadas a lo que la planta usa de verdad.",
  en="""
+On a plant network the risky paths are rarely the ones in the diagram: a commissioning rule that still allows anything from the office to the plant servers years later, a finance PC reading a PLC with Modbus for a report, a vendor connecting with RDP straight to an HMI. That is what the segmentation lab published with this post looks for. It is a lab, not a real site: a made-up bottling plant with 8 zones, 25 assets, 16 conduits and a week of flows, with the problems placed on purpose.
 
-## The problem
-On a plant network the risky paths are rarely the ones in the diagram. A commissioning rule that allows anything from the office to the plant servers is still there years later. A finance PC reads a PLC with Modbus for a report. A vendor connects with RDP straight to an HMI. A temporary rule for an upgrade expired a month ago and still carries traffic. The rule set, the inventory and the real traffic each tell a different story.
+The cause is that the rule set, the inventory and the real traffic each tell a different story; a temporary upgrade rule that expired a month ago can still carry traffic. The lab puts the three side by side and checks them against the Purdue model, which stacks plant systems in levels from the machines up to the office, and the zones and conduits idea of IEC 62443, which groups systems in zones and controls every link between them.
 
-## What I built
-- A check of zones, assets, conduits and observed flows against the Purdue model and the zones and conduits idea of IEC 62443: rules that bypass the DMZ or skip a level, controller protocols from L3 or above, cleartext admin protocols, OT devices talking to the internet, remote access that does not start on the jump host and the safety system reachable from control.
-- Asset and data checks: devices missing from the inventory, assets outside their zone's subnet, end-of-life Windows in OT and zones without an owner.
-- `report.html` with a Purdue diagram coloured by status, `firewall-proposal.csv` with allow, review, re-route via DMZ or block for each observed service, `review.md`, `actions.csv` and a zone-to-zone matrix.
+## Controller protocols from L3 and above and a safety system reachable from control
 
-## How it is built
-Python with the standard library only. The demo is a made-up bottling plant with 8 zones, 25 assets, 16 conduits and a week of flows, with problems placed on purpose. 16 tests and a runbook for the segmentation review.
+The checks flag rules that bypass the DMZ or skip a level, controller protocols coming from L3 or above, cleartext admin protocols, OT devices talking to the internet, remote access that does not start on the jump host (the single entry server for remote sessions) and the safety system reachable from control.
 
-## What I learned
-From years supporting data centre and IT-OT integration work: Cisco switches and routers, comms rooms and racks, FortiGate firewalls, connectivity providers, DR/BCP tests and changes through CAB with a rollback plan. That work showed me that a firewall change in a plant is only safe when you know what traffic really crosses it. Now I am studying IEC 62443 zones and conduits, and this lab is how I practise it.
+Asset and data checks add devices missing from the inventory, assets outside their zone's subnet, end-of-life Windows in OT and zones without an owner. The report draws a Purdue diagram coloured by status, a zone-to-zone matrix and `firewall-proposal.csv`, which says allow, review, re-route via DMZ or block for each observed service.
 
-## Next steps
-- Export your zones, inventory and firewall rules to CSV and a week of flows from your firewall or NetFlow.
-- Review the proposal with the plant before blocking anything, and plan each change through CAB with a rollback.
-- Go deeper into IEC 62443-3-2 risk assessment and security levels per zone.""",
+## How to use it with real data
+
+It runs on Python with the standard library only, with 16 tests and a runbook for the segmentation review. It takes zones, inventory and firewall rules in CSV, plus a week of flows from the firewall or NetFlow. The proposal is reviewed with the plant before blocking anything, and each change goes through CAB with a rollback.
+
+## Where it comes from
+
+It builds on years supporting data centre and IT-OT integration work: Cisco switches and routers, comms rooms and racks, FortiGate firewalls, connectivity providers, DR/BCP tests and CAB changes with a rollback plan. That work taught me a plant firewall change is only safe when you know what traffic really crosses it. I am now studying IEC 62443 zones and conduits, and this lab is how I practise it.""",
  es="""
+En una red de planta los caminos de riesgo casi nunca son los del diagrama: una regla de la puesta en marcha que años después sigue permitiendo todo desde la oficina hacia los servidores de planta, un PC de finanzas que lee un PLC con Modbus para un informe, un proveedor que entra por RDP directamente a un HMI. Eso es lo que busca el laboratorio de segmentación que acompaña a este post. Es un laboratorio, no una instalación real: una planta embotelladora inventada con 8 zonas, 25 activos, 16 conductos y una semana de flujos, con los problemas puestos a propósito.
 
-## El problema
-En una red de planta los caminos de riesgo casi nunca son los del diagrama. Una regla de la puesta en marcha que permite todo desde la oficina hacia los servidores de planta sigue ahí años después. Un PC de finanzas lee un PLC con Modbus para un informe. Un proveedor entra por RDP directamente a un HMI. Una regla temporal de una actualización caducó hace un mes y sigue pasando tráfico. Las reglas, el inventario y el tráfico real cuentan cada uno una historia distinta.
+La causa es que las reglas, el inventario y el tráfico real cuentan cada uno una historia distinta; una regla temporal de una actualización caducada hace un mes puede seguir pasando tráfico. El laboratorio los pone juntos y los compara con el modelo Purdue, que ordena los sistemas de planta en niveles desde las máquinas hasta la oficina, y con la idea de zonas y conductos de IEC 62443, que agrupa los sistemas en zonas y controla cada enlace entre ellas.
 
-## Qué he hecho
-- Una revisión de zonas, activos, conductos y flujos observados frente al modelo Purdue y la idea de zonas y conductos de IEC 62443: reglas que se saltan la DMZ o un nivel, protocolos de controlador desde L3 o superior, protocolos de administración en claro, equipos OT hablando con internet, accesos remotos que no empiezan en el jump host y el sistema de seguridad alcanzable desde control.
-- Comprobaciones de activos y datos: equipos que no están en el inventario, activos fuera de la subred de su zona, Windows sin soporte en OT y zonas sin responsable.
-- `report.html` con un diagrama Purdue coloreado por estado, `firewall-proposal.csv` con permitir, revisar, redirigir por la DMZ o bloquear para cada servicio observado, `review.md`, `actions.csv` y una matriz zona a zona.
+## Protocolos de controlador desde L3 o superior y un sistema de seguridad alcanzable desde control
 
-## Cómo está hecho
-Python solo con la librería estándar. La demo es una planta embotelladora inventada con 8 zonas, 25 activos, 16 conductos y una semana de flujos, con problemas puestos a propósito. 16 tests y un runbook para la revisión de segmentación.
+Las comprobaciones señalan reglas que se saltan la DMZ o un nivel, protocolos de controlador desde L3 o superior, protocolos de administración en claro, equipos OT hablando con internet, accesos remotos que no empiezan en el jump host (el único servidor de entrada para las sesiones remotas) y el sistema de seguridad alcanzable desde control.
 
-## Qué aprendí
-De años dando soporte a centro de datos e integración IT-OT: switches y routers Cisco, salas de comunicaciones y racks, firewalls FortiGate, proveedores de conectividad, pruebas de DR/BCP y cambios por CAB con plan de vuelta atrás. Ese trabajo me enseñó que un cambio de firewall en planta solo es seguro cuando sabes qué tráfico pasa de verdad. Ahora estoy estudiando zonas y conductos de IEC 62443, y este laboratorio es mi forma de practicarlo.
+Las comprobaciones de activos y datos añaden equipos que no están en el inventario, activos fuera de la subred de su zona, Windows sin soporte en OT y zonas sin responsable. El informe dibuja un diagrama Purdue coloreado por estado, una matriz zona a zona y `firewall-proposal.csv`, que dice permitir, revisar, redirigir por la DMZ o bloquear para cada servicio observado.
 
-## Siguientes pasos
-- Exportar tus zonas, inventario y reglas de firewall a CSV, y una semana de flujos del firewall o de NetFlow.
-- Revisar la propuesta con la planta antes de bloquear nada, y planificar cada cambio por CAB con vuelta atrás.
-- Profundizar en la evaluación de riesgos de IEC 62443-3-2 y los niveles de seguridad por zona."""),
+## Cómo usarlo con datos reales
+
+Funciona con Python y solo la librería estándar, con 16 tests y un runbook para la revisión de segmentación. Las zonas, el inventario y las reglas de firewall se exportan a CSV, junto con una semana de flujos del firewall o de NetFlow. La propuesta se revisa con la planta antes de bloquear nada, y cada cambio pasa por CAB con vuelta atrás.
+
+## De dónde sale
+
+Se apoya en años dando soporte a centro de datos e integración IT-OT: switches y routers Cisco, salas de comunicaciones y racks, firewalls FortiGate, proveedores de conectividad, pruebas de DR/BCP y cambios por CAB con plan de vuelta atrás. Ese trabajo me enseñó que un cambio de firewall en planta solo es seguro cuando sabes qué tráfico pasa de verdad. Ahora estudio zonas y conductos de IEC 62443, y este laboratorio es mi forma de practicarlo."""),
 dict(n="27", repo="27-m365-tenant-governance-review", date="2026-10-21", cat="tools",
- title_en="Is the tenant still governed the way we agreed? A monthly Microsoft 365 review", title_es="¿Sigue el tenant gobernado como acordamos? Una revisión mensual de Microsoft 365",
+ title_en="A Global Admin left on for two years and a rejected change made anyway show how a Microsoft 365 tenant drifts",
+ title_es="Un Global Admin activo dos años y un cambio rechazado hecho igualmente: así deriva un tenant de Microsoft 365",
  seo_title_en="Microsoft 365 tenant governance review · Iñigo González",
  seo_title_es="Revisión de gobierno del tenant Microsoft 365 · Iñigo González",
- dek_en="Admin roles and PIM, emergency accounts, Conditional Access basics, settings drift, licences to reclaim, and admin changes matched to change tickets, including the provider's.",
- dek_es="Roles de administración y PIM, cuentas de emergencia, lo básico de Acceso condicional, desviaciones de configuración, licencias a recuperar y cambios de administración cruzados con los tickets de cambio, también los del proveedor.",
+ seo_desc="Admin roles and PIM, emergency accounts, Conditional Access basics, settings drift, licences to reclaim, and admin changes matched to change tickets, including the provider's.",
+ seo_desc_es="Roles de administración y PIM, cuentas de emergencia, lo básico de Acceso condicional, desviaciones de configuración, licencias a recuperar y cambios…",
+ dek_en="A monthly review, published with a made-up retailer of 395 accounts run by a fictional provider, checks admin roles, emergency accounts, Conditional Access, settings drift and licences, and matches admin changes to change tickets.",
+ dek_es="Una revisión mensual, publicada con un comercio inventado de 395 cuentas que opera un proveedor ficticio, comprueba roles de administración, cuentas de emergencia, Acceso condicional, desviaciones y licencias, y cruza los cambios con sus tickets.",
  en="""
+A Microsoft 365 tenant drifts one reasonable change at a time: a Global Administrator given for a migration is still always-on two years later, and a change to allow automatic mail forwarding is rejected by the change board and made anyway. That is the kind of drift the monthly governance review published with this post is built to catch. It runs on a read-only export of a made-up retailer with 395 accounts, operated by a fictional provider, with the problems placed on purpose.
 
-## The problem
-A Microsoft 365 tenant drifts one reasonable change at a time. A Global Administrator given for a migration is still always-on two years later. The provider's engineers hold permanent admin roles with no end date. The change to allow automatic forwarding was rejected at CAB and made anyway. The legacy authentication block has been in report-only since July. When the platform is operated by a provider, the internal team still owns the risk, and it needs a short list for the monthly review.
+When a provider runs the platform, its engineers may hold permanent admin roles with no end date, while the risk stays with the internal team, which needs a short list for its monthly review.
 
-## What I built
-- A review of a read-only export of the tenant in six areas: privileged access, emergency accounts, the four Conditional Access basics, ten tenant settings against a baseline, licences, and sensitive admin changes.
-- Each admin change on roles, Conditional Access, tenant or mail-flow settings is matched to a change ticket by implementer and window: approved, emergency, rejected, no ticket, or made with an emergency account.
-- `report.html`, `review.md` with a section for the service review with the provider, `actions.csv`, `privileged-access.csv` for the quarterly access review, `licence-reclaim.csv` and `admin-changes.csv`.
+## Every admin change matched to a ticket
 
-## How it is built
-Python with the standard library only, and a read-only PowerShell exporter on Microsoft Graph and, optionally, Exchange Online. The demo is a made-up retailer with 395 accounts, operated by a fictional provider, with problems placed on purpose. 16 tests and a runbook for the monthly review.
+The review covers six areas: privileged access, emergency accounts, the four Conditional Access basics, ten tenant settings against a baseline, licences, and sensitive admin changes. Conditional Access is the set of rules that decides who can sign in, from where and how.
 
-## What I learned
-From running Microsoft 365 as Global Administrator: PIM and just-in-time access, Conditional Access, Exchange Online, Purview, tenant-to-tenant migrations and changes through CAB with providers. Governance is not a one-off hardening project; it is a monthly habit, and the change ticket is what keeps the provider and the internal team on the same page.
+Each change to roles, Conditional Access, tenant or mail-flow settings is matched to a change ticket by implementer and window, and comes out as approved, emergency, rejected, no ticket or made with an emergency account. A legacy authentication block left in report-only mode since July is the kind of setting that shows up as drift.
 
-## Next steps
-- Run the exporter with a Global Reader account against your tenant and check the role names and the Conditional Access mapping on the first run.
-- Agree the baseline with security before the first review.
-- Ask the provider to put the change reference in every admin session, so the change matching becomes a formality.""",
+The output is a web report, a summary with a section for the service review with the provider, a list of actions, `privileged-access.csv` for the quarterly access review, `licence-reclaim.csv` and `admin-changes.csv`.
+
+## How to use it with real data
+
+The analysis runs on Python with the standard library only, with 16 tests and a runbook. A read-only PowerShell exporter reads Microsoft Graph and, optionally, Exchange Online, using a Global Reader account. Role names and the Conditional Access mapping are checked on the first run, and the baseline is agreed with security beforehand.
+
+## Where it comes from
+
+It comes from running Microsoft 365 as Global Administrator: PIM and just-in-time access, admin rights granted only for a limited time, Conditional Access, Exchange Online, Purview, tenant-to-tenant migrations and changes through CAB with providers. Governance is not a one-off hardening project but a monthly habit, and the change ticket keeps the provider and the internal team on the same page.""",
  es="""
+Un tenant de Microsoft 365 se desvía cambio razonable a cambio razonable: un Global Administrator dado para una migración sigue activo dos años después, y un cambio para permitir el reenvío automático del correo se rechaza en el comité de cambios y se hace igualmente. Ese es el tipo de desviación que busca la revisión mensual de gobierno que acompaña a este post. Trabaja sobre una exportación de solo lectura de un comercio inventado con 395 cuentas, operado por un proveedor ficticio, con los problemas puestos a propósito.
 
-## El problema
-Un tenant de Microsoft 365 se desvía cambio razonable a cambio razonable. Un Global Administrator dado para una migración sigue activo dos años después. Los ingenieros del proveedor tienen roles de administración permanentes sin fecha de fin. El cambio para permitir el reenvío automático se rechazó en el CAB y se hizo igualmente. El bloqueo de la autenticación heredada lleva en modo solo informe desde julio. Cuando la plataforma la opera un proveedor, el riesgo sigue siendo del equipo interno, que necesita una lista corta para la revisión mensual.
+Cuando la plataforma la opera un proveedor, sus ingenieros pueden tener roles de administración permanentes sin fecha de fin, mientras el riesgo sigue siendo del equipo interno, que necesita una lista corta para su revisión mensual.
 
-## Qué he hecho
-- Una revisión de una exportación de solo lectura del tenant en seis áreas: acceso privilegiado, cuentas de emergencia, lo básico de Acceso condicional, diez ajustes del tenant frente a una línea base, licencias y cambios de administración sensibles.
-- Cada cambio de administración en roles, Acceso condicional, ajustes del tenant o del flujo de correo se cruza con un ticket de cambio por implementador y ventana: aprobado, de emergencia, rechazado, sin ticket o hecho con una cuenta de emergencia.
-- `report.html`, `review.md` con una sección para la revisión de servicio con el proveedor, `actions.csv`, `privileged-access.csv` para la revisión trimestral de accesos, `licence-reclaim.csv` y `admin-changes.csv`.
+## Cada cambio de administración, cruzado con un ticket
 
-## Cómo está hecho
-Python solo con la librería estándar, y un exportador de solo lectura en PowerShell sobre Microsoft Graph y, si se quiere, Exchange Online. La demo es un comercio inventado con 395 cuentas, operado por un proveedor ficticio, con problemas puestos a propósito. 16 tests y un runbook para la revisión mensual.
+La revisión cubre seis áreas: acceso privilegiado, cuentas de emergencia, lo básico de Acceso condicional, diez ajustes del tenant frente a una línea base, licencias y cambios de administración sensibles. El Acceso condicional es el conjunto de reglas que decide quién puede iniciar sesión, desde dónde y cómo.
 
-## Qué aprendí
-De administrar Microsoft 365 como Global Administrator: PIM y acceso just-in-time, Acceso condicional, Exchange Online, Purview, migraciones de tenant a tenant y cambios por CAB con proveedores. El gobierno de un tenant no es un proyecto de bastionado puntual, es un hábito mensual, y el ticket de cambio es lo que mantiene alineados al proveedor y al equipo interno.
+Cada cambio en roles, Acceso condicional, ajustes del tenant o del flujo de correo se cruza con un ticket de cambio por implementador y ventana, y sale como aprobado, de emergencia, rechazado, sin ticket o hecho con una cuenta de emergencia. Un bloqueo de la autenticación heredada que lleva en modo solo informe desde julio es el tipo de ajuste que aparece como desviación.
 
-## Siguientes pasos
-- Ejecutar el exportador con una cuenta Global Reader en tu tenant y revisar en la primera ejecución los nombres de roles y el mapeo de Acceso condicional.
-- Acordar la línea base con seguridad antes de la primera revisión.
-- Pedir al proveedor que ponga la referencia del cambio en cada sesión de administración, para que el cruce con los cambios sea un trámite."""),
+La salida es un informe web, un resumen con una sección para la revisión de servicio con el proveedor, una lista de acciones, `privileged-access.csv` para la revisión trimestral de accesos, `licence-reclaim.csv` y `admin-changes.csv`.
+
+## Cómo usarlo con datos reales
+
+El análisis funciona con Python y solo la librería estándar, con 16 tests y un runbook. Un exportador de solo lectura en PowerShell lee Microsoft Graph y, si se quiere, Exchange Online, con una cuenta Global Reader. En la primera ejecución se revisan los nombres de roles y el mapeo de Acceso condicional, y la línea base se acuerda antes con seguridad.
+
+## De dónde sale
+
+Nace de administrar Microsoft 365 como Global Administrator: PIM y acceso just-in-time, con permisos de administración solo por un tiempo limitado, Acceso condicional, Exchange Online, Purview, migraciones de tenant a tenant y cambios por CAB con proveedores. El gobierno de un tenant no es un proyecto de bastionado puntual sino un hábito mensual, y el ticket de cambio mantiene alineados al proveedor y al equipo interno."""),
 dict(n="28", repo="28-euc-provider-service-review", date="2026-10-22", cat="tools",
- title_en="The provider says 96% and the users say it is slow: a monthly EUC service review from the tickets", title_es="El proveedor dice 96% y los usuarios dicen que va lento: una revisión mensual del servicio EUC desde los tickets",
+ title_en="The provider reports 96% and users say it is slow: both are right, and the raw tickets show why",
+ title_es="El proveedor dice 96% y los usuarios, que va lento: los dos tienen razón y los tickets en bruto explican por qué",
  seo_title_en="EUC provider service review: SLA and OLA · Iñigo González",
  seo_title_es="Revisión del servicio EUC del proveedor: SLA y OLA · Iñigo González",
- dek_en="SLA scorecard with the breach list, backlog and ageing, escalations and the OLAs we owe the provider, out-of-hours coverage, the quality signals a compliance figure hides, and the service credits nobody has claimed.",
- dek_es="Cuadro de SLA con la lista de incumplimientos, backlog y antigüedad, escalados y las OLAs que le debemos al proveedor, cobertura fuera de horario, las señales de calidad que un porcentaje esconde y los créditos de servicio que nadie ha reclamado.",
+ seo_desc="SLA scorecard with the breach list, backlog and ageing, escalations and the OLAs we owe the provider, out-of-hours coverage, the quality signals a compliance figure hides, and the service credits nobody has claimed.",
+ seo_desc_es="Cuadro de SLA con la lista de incumplimientos, backlog y antigüedad, escalados y las OLAs que le debemos al proveedor, cobertura fuera de horario, las señales…",
+ dek_en="A monthly service review, published with 1,454 fictional tickets from a made-up trading company and its fictional provider, recomputes the SLAs from the raw tickets, adds the internal teams' OLAs and works out the service credits nobody claimed.",
+ dek_es="Una revisión mensual del servicio, publicada con 1.454 tickets ficticios de una empresa de trading inventada y su proveedor ficticio, recalcula los SLA desde los tickets en bruto, suma las OLAs de los equipos internos y calcula los créditos que nadie reclamó.",
  en="""
+The provider's monthly pack says 96% and the users say the end-user service is slow, and both are usually right. The P2 figure leaves out tickets that spent a week in "waiting for customer", and a fifth of the compliant tickets were closed in the last 10% of the window. That is the gap the monthly service review published with this post is built to explain. Its demo is a made-up trading company with offices in four cities, run by a fictional provider with an offshore desk and onsite teams, and 1,454 tickets with the problems placed on purpose.
 
-## The problem
-The provider's monthly pack says 96% and the users say the service is slow. Both are usually right. The P2 figure leaves out the tickets that spent a week in "waiting for customer". The out-of-hours P2s wait for the follow-the-sun hand-over, and the average hides them. A fifth of the compliant tickets were closed in the last 10% of the window. The provider escalated 19% of its tickets to the internal teams, and the network team is sitting on twelve of them since July, so that breach is ours. And the contract has service credits nobody has ever claimed, because nobody computed them. A service review needs one set of numbers both sides accept, computed from the raw tickets with the rules written down.
+The cause is in how the figure is computed. Out-of-hours P2s wait for the follow-the-sun hand-over between time zones, and the average hides them. The tool recomputes the SLA, the service levels agreed in the contract, from the raw tickets with the rules written down, so both sides accept one set of numbers.
 
-## What I built
-- A review of a month of tickets in six areas: SLA per type and priority with business-hours or 24x7 clocks and pending time subtracted; backlog and ageing by team; escalations to the internal teams and their OLAs, with the clock starting at the hand-over; coverage in and out of hours; quality (reopens, first-contact resolution, satisfaction, last-minute closes, parked tickets, instant closes); and the contract, with service credits per missed metric and the monthly cap.
-- `report.html`, `service-review.md` as the agenda for the meeting with two sides (what to raise with the provider, what we owe them), `actions.csv` with owners, `scorecard.csv`, `breaches.csv` with a `cause` column for the provider, `ageing.csv` with a `decision` column, `escalations.csv` and `findings.csv`.
-- A read-only PowerShell exporter for Jira Cloud; ServiceNow list exports load as they are.
+## A 19% escalation rate and twelve tickets stuck on the internal side
 
-## How it is built
-Python with the standard library only. The demo is a made-up trading company with offices in four cities whose service is run by a fictional provider, with an offshore desk and onsite teams, and 1,454 tickets with the problems placed on purpose. 16 tests and a runbook for before, during and after the meeting.
+In the scenario, the provider escalated 19% of its tickets to the internal teams, and the network team has been sitting on twelve of them since July, so that breach belongs to the internal side. The tool measures those escalations against OLAs, the targets the internal teams owe the provider, with the clock starting at the hand-over.
 
-## What I learned
-From managing end-user services with providers: SLAs and OLAs defined and followed, provider and contract negotiation, backlog and ageing follow-up, escalations with offshore teams, and process ownership for incidents, requests, changes and problems. The lesson that shaped the tool is that the review goes better when the internal teams' OLAs are on the same page as the provider's SLAs. Half of the "provider problems" turn out to be queues on our side.
+The review covers six areas: SLA per type and priority with business-hours or 24x7 clocks and pending time subtracted; backlog and ageing by team; escalations; coverage in and out of hours; quality, from reopens and first-contact resolution to satisfaction, last-minute closes, parked tickets and instant closes; and the contract. For the contract it computes the service credits per missed metric, up to the monthly cap, which nobody had claimed because nobody had computed them.
 
-## Next steps
-- Run it on last month's export next to the provider's own pack and reconcile the two before the meeting. The difference is the exclusions, and that is the first thing to agree.
-- Put the OLAs in `settings.json` only after the internal team leads have agreed them.
-- Keep each month's output so the third review can show the trend.""",
+## An agenda with two sides
+
+The output includes a web report and `service-review.md`, an agenda with what to raise with the provider and what is owed to it, plus `actions.csv` with owners, a scorecard, `breaches.csv` with a `cause` column for the provider, `ageing.csv` with a `decision` column, escalations and findings.
+
+## How to use it with real data
+
+It runs on Python with the standard library only, with 16 tests and a runbook for before, during and after the meeting. A read-only PowerShell exporter covers Jira Cloud, and ServiceNow list exports load as they are. The first run goes next to the provider's own pack, and the difference between the two, the exclusions, is the first thing to agree.
+
+## Where it comes from
+
+It comes from managing end-user services with providers: SLAs and OLAs, provider and contract negotiation, backlog follow-up, escalations with offshore teams and process ownership for incidents, requests, changes and problems. The review goes better when the internal OLAs sit next to the provider's SLAs; half of the "provider problems" turn out to be queues on our side.""",
  es="""
+El informe mensual del proveedor dice 96% y los usuarios dicen que el servicio de puesto de trabajo va lento, y normalmente los dos tienen razón. El dato de P2 deja fuera los tickets que pasaron una semana en «esperando al usuario», y una quinta parte de los tickets cumplidos se cerraron en el último 10% de la ventana. Ese es el hueco que explica la revisión mensual del servicio que acompaña a este post. Su demo es una empresa de trading inventada con oficinas en cuatro ciudades, operada por un proveedor ficticio con un service desk offshore y equipos presenciales, y 1.454 tickets con los problemas puestos a propósito.
 
-## El problema
-El informe mensual del proveedor dice 96% y los usuarios dicen que el servicio va lento. Normalmente los dos tienen razón. El dato de P2 deja fuera los tickets que pasaron una semana en "esperando al usuario". Los P2 fuera de horario esperan al relevo del follow-the-sun, y la media los esconde. Una quinta parte de los tickets cumplidos se cerraron en el último 10% de la ventana. El proveedor escaló el 19% de sus tickets a los equipos internos, y el equipo de red tiene doce desde julio, así que ese incumplimiento es nuestro. Y el contrato tiene créditos de servicio que nadie ha reclamado, porque nadie los ha calculado. Una revisión de servicio necesita un único conjunto de números que acepten las dos partes, calculado desde los tickets en bruto y con las reglas escritas.
+La causa está en cómo se calcula el dato. Los P2 fuera de horario esperan al relevo del follow-the-sun entre husos horarios, y la media los esconde. La herramienta recalcula el SLA, los niveles de servicio acordados en el contrato, desde los tickets en bruto y con las reglas escritas, para que las dos partes acepten un único conjunto de números.
 
-## Qué he hecho
-- Una revisión de un mes de tickets en seis áreas: SLA por tipo y prioridad con reloj de horario laboral o 24x7 y el tiempo en pendiente descontado; backlog y antigüedad por equipo; escalados a los equipos internos y sus OLAs, con el reloj arrancando en el traspaso; cobertura dentro y fuera de horario; calidad (reaperturas, resolución al primer contacto, satisfacción, cierres de último minuto, tickets aparcados, cierres instantáneos); y el contrato, con créditos de servicio por métrica incumplida y el tope mensual.
-- `report.html`, `service-review.md` como orden del día de la reunión con dos lados (qué plantear al proveedor, qué le debemos), `actions.csv` con responsables, `scorecard.csv`, `breaches.csv` con una columna `cause` para el proveedor, `ageing.csv` con una columna `decision`, `escalations.csv` y `findings.csv`.
-- Un exportador de solo lectura en PowerShell para Jira Cloud; las exportaciones de lista de ServiceNow cargan tal cual.
+## Un 19% de escalados y doce tickets parados en el lado interno
 
-## Cómo está hecho
-Python solo con la librería estándar. La demo es una empresa de trading inventada con oficinas en cuatro ciudades cuyo servicio lo opera un proveedor ficticio, con un service desk offshore y equipos presenciales, y 1.454 tickets con los problemas puestos a propósito. 16 tests y un runbook para antes, durante y después de la reunión.
+En el escenario, el proveedor escaló el 19% de sus tickets a los equipos internos, y el equipo de red tiene doce desde julio, así que ese incumplimiento es del lado interno. La herramienta mide esos escalados frente a las OLAs, los objetivos que los equipos internos le deben al proveedor, con el reloj arrancando en el traspaso.
 
-## Qué aprendí
-De gestionar servicios de puesto de trabajo con proveedores: SLAs y OLAs definidos y seguidos, negociación de proveedores y contratos, seguimiento del backlog y la antigüedad, escalados con equipos offshore, y ser process owner de incidencias, peticiones, cambios y problemas. La lección que da forma a la herramienta es que la revisión va mejor cuando las OLAs de los equipos internos están en la misma página que los SLAs del proveedor. La mitad de los "problemas del proveedor" resultan ser colas de nuestro lado.
+La revisión cubre seis áreas: SLA por tipo y prioridad con reloj de horario laboral o 24x7 y el tiempo en pendiente descontado; backlog y antigüedad por equipo; escalados; cobertura dentro y fuera de horario; calidad, desde reaperturas y resolución al primer contacto hasta satisfacción, cierres de último minuto, tickets aparcados y cierres instantáneos; y el contrato. Para el contrato calcula los créditos de servicio por métrica incumplida, hasta el tope mensual, que nadie había reclamado porque nadie los había calculado.
 
-## Siguientes pasos
-- Ejecutarlo sobre la exportación del mes pasado junto al informe del proveedor y conciliar los dos antes de la reunión. La diferencia son las exclusiones, y eso es lo primero que hay que acordar.
-- Poner las OLAs en `settings.json` solo cuando los responsables de los equipos internos las hayan aceptado.
-- Guardar la salida de cada mes para que la tercera revisión pueda enseñar la tendencia."""),
+## Un orden del día con dos lados
+
+La salida incluye un informe web y `service-review.md`, un orden del día con qué plantear al proveedor y qué se le debe, además de `actions.csv` con responsables, un cuadro de mando, `breaches.csv` con una columna `cause` para el proveedor, `ageing.csv` con una columna `decision`, escalados y hallazgos.
+
+## Cómo usarlo con datos reales
+
+Funciona con Python y solo la librería estándar, con 16 tests y un runbook para antes, durante y después de la reunión. Un exportador de solo lectura en PowerShell cubre Jira Cloud, y las exportaciones de lista de ServiceNow cargan tal cual. La primera ejecución se hace junto al informe del proveedor, y la diferencia entre los dos, las exclusiones, es lo primero que hay que acordar.
+
+## De dónde sale
+
+Nace de gestionar servicios de puesto de trabajo con proveedores: SLAs y OLAs, negociación de proveedores y contratos, seguimiento del backlog, escalados con equipos offshore y ser process owner de incidencias, peticiones, cambios y problemas. La revisión va mejor cuando las OLAs internas están junto a los SLAs del proveedor; la mitad de los «problemas del proveedor» resultan ser colas de nuestro lado."""),
 dict(n="29", repo="29-tenant-separation-cutover-planner", date="2026-10-23", cat="tools",
- title_en="Wave 3 is on the 30th and the inventory says no: readiness for a Microsoft 365 tenant split", title_es="La ola 3 es el día 30 y el inventario dice que no: la separación de un tenant de Microsoft 365",
+ title_en="Wave 3 is on the 30th and the inventory says no: a third of the plant's devices have no TPM",
+ title_es="La ola 3 es el día 30 y el inventario dice que no: un tercio de los equipos de la planta no tiene TPM",
  seo_title_en="Microsoft 365 tenant separation planner · Iñigo González",
  seo_title_es="Separación de tenant Microsoft 365: plan de olas · Iñigo González",
- dek_en="Devices that cannot be reset into the target, users who will fail on day 1, applications without a decision, and a go or no-go per wave with the reason, from the source tenant's own exports.",
- dek_es="Equipos que no se pueden resetear al tenant destino, usuarios que van a fallar el primer día, aplicaciones sin decisión y un go o no-go por ola con su motivo, a partir de las exportaciones del propio tenant origen.",
+ seo_desc="Devices that cannot be reset into the target, users who will fail on day 1, applications without a decision, and a go or no-go per wave with the reason, from the source tenant's own exports.",
+ seo_desc_es="Equipos que no se pueden resetear al tenant destino, usuarios que van a fallar el primer día, aplicaciones sin decisión y un go o no-go por ola con su motivo…",
+ dek_en="A readiness planner for splitting a Microsoft 365 tenant, published with a made-up carve-out of 1,208 devices and 1,182 users, reads the source tenant's own exports and gives each wave a go or no-go with the reason.",
+ dek_es="Un planificador de preparación para separar un tenant de Microsoft 365, publicado con una segregación inventada de 1.208 equipos y 1.182 usuarios, lee las exportaciones del propio tenant origen y da a cada ola un go o no-go con su motivo.",
  en="""
+The programme plan says "wave 3, the plant, 30 November", but the inventory says a third of the plant's devices have no TPM, the security chip Windows 11 needs, fourteen kiosks have no primary user and ninety devices run an HMI application nobody has catalogued. On top of that, the wave has two more devices than the technicians can reset in four days. That is the scenario the tenant separation planner published with this post is built around. Its demo is a made-up carve-out of an automotive dealer group from its parent, with four sites and six waves.
 
-## The problem
-A tenant separation is a thousand small resets that all have to work on the same weekend. The programme plan says "wave 3, the plant, 30 November". The inventory says a third of the plant's devices have no TPM, fourteen kiosks have no primary user, ninety devices run an HMI application nobody has catalogued, and the wave has two more devices than the technicians can reset in four days. None of that shows in the project tracker, and all of it is in the Intune, Entra and Exchange exports. The readiness review should start from those exports, not from the plan.
+None of that shows in the project tracker, and all of it is in the Intune, Entra and Exchange exports. A tenant separation is a thousand small resets that all have to work on the same weekend, so the planner starts the readiness review from those exports, not from the plan.
 
-## What I built
-- Device readiness with four blockers that stop a wave: no Autopilot hardware hash in the target, BitLocker key not escrowed, hardware not Windows 11 capable, and devices not seen for weeks. Plus the actions for the day itself: OS below the baseline, low disk, domain-only joins, non-compliant devices, local admins the reset will remove, kiosks and applications without a decision.
-- User readiness: no MFA method (Conditional Access in the target stops them on day 1), mailboxes too big for the window, licences with no SKU bought in the target, shared mailboxes split across waves, dormant users and leavers.
-- A go, go with actions or no-go per wave, with the reason: capacity (technicians, devices per day, days), blocked share, mailbox hours against the migration window, freeze windows, and a pilot that waits for the target tenant to be finished.
-- `report.html`, `cutover-plan.md` for the change board with the prerequisites checklist and the order of the cutover day, `blockers.csv` with owner and cleared columns, and the CSVs per wave, device, user and application.
-- A read-only PowerShell exporter for Microsoft Graph and Exchange Online.
+## Four blockers that stop a wave
 
-## How it is built
-Python with the standard library only. The demo is a made-up carve-out of an automotive dealer group from its parent: four sites, 1,208 devices, 1,182 users and six waves, with the problems placed on purpose so each wave fails for a different reason. 22 tests and a runbook with the weekly cadence, how to read the verdicts and the usual fix per finding.
+On devices, four findings block a wave: no Autopilot hardware hash in the target, the fingerprint that lets a reset device join the new tenant; a BitLocker key not escrowed; hardware not Windows 11 capable; and devices not seen for weeks. Other findings become actions for the day itself, such as an OS below the baseline, low disk, domain-only joins, non-compliant devices, local admins the reset will remove, and kiosks and applications without a decision.
 
-## What I learned
-From tenant-to-tenant migrations and the Microsoft 365 administration behind them, Windows Autopilot and Intune with ConfigMgr co-management, a Windows 11 migration across sites, and changes taken through the CAB with freeze windows. The lesson that shaped the tool is that a wave rarely fails on the day. It fails weeks before, when nobody counts the devices without a hardware hash or the users without MFA, and the date stays on the plan anyway.
+On users, the planner flags those with no MFA method, whom Conditional Access in the target will stop on day 1, mailboxes too big for the window, licences with no SKU bought in the target, shared mailboxes split across waves, dormant users and leavers.
 
-## Next steps
-- Join the Windows 11 hardware readiness report to the Graph export, so the hardware check uses real TPM and Secure Boot data.
-- Re-run it every week of the programme and keep the dated outputs, so the review shows the blockers going down.
-- Agree the wave rules and the freeze calendar with the change board before the first run, not after.""",
+## Six waves, each failing for a different reason
+
+Each wave gets a go, a go with actions or a no-go, with the reason: technician capacity in devices per day, the blocked share, mailbox hours against the migration window, freeze windows, or a pilot that waits for the target tenant to be finished. In the demo, with 1,208 devices and 1,182 users, the problems are placed so each wave fails for a different reason.
+
+The output is a web report, `cutover-plan.md` for the change board with the prerequisites checklist and the order of the cutover day, `blockers.csv` with owner and cleared columns, and CSVs per wave, device, user and application.
+
+## How to use it with real data
+
+It runs on Python with the standard library only, with 22 tests and a runbook with the weekly cadence, how to read the verdicts and the usual fix per finding. A read-only PowerShell exporter covers Microsoft Graph and Exchange Online. It is meant to run every week of the programme, after the wave rules and freeze calendar are agreed with the change board.
+
+## Where it comes from
+
+It comes from tenant-to-tenant migrations and the Microsoft 365 administration behind them, Windows Autopilot and Intune with ConfigMgr co-management, a Windows 11 migration across sites, and CAB changes with freeze windows. A wave rarely fails on the day; it fails weeks before, when nobody counts the devices without a hardware hash or the users without MFA.""",
  es="""
+El plan del programa dice «ola 3, la planta, 30 de noviembre», pero el inventario dice que un tercio de los equipos de la planta no tiene TPM, el chip de seguridad que exige Windows 11, que catorce kioscos no tienen usuario principal y que noventa equipos llevan una aplicación HMI que nadie ha catalogado. Además, la ola tiene dos equipos más de los que los técnicos pueden resetear en cuatro días. Ese es el escenario sobre el que se construye el planificador de separación de tenant que acompaña a este post. Su demo es una segregación inventada de un grupo de concesionarios de automoción respecto a su matriz, con cuatro sedes y seis olas.
 
-## El problema
-Una separación de tenant son mil reseteos pequeños que tienen que salir bien el mismo fin de semana. El plan del programa dice "ola 3, la planta, 30 de noviembre". El inventario dice que un tercio de los equipos de la planta no tienen TPM, que catorce kioscos no tienen usuario principal, que noventa equipos llevan una aplicación HMI que nadie ha catalogado, y que la ola tiene dos equipos más de los que los técnicos pueden resetear en cuatro días. Nada de eso aparece en el seguimiento del proyecto, y todo está en las exportaciones de Intune, Entra y Exchange. La revisión de preparación debería empezar por esas exportaciones, no por el plan.
+Nada de eso aparece en el seguimiento del proyecto, y todo está en las exportaciones de Intune, Entra y Exchange. Una separación de tenant son mil reseteos pequeños que tienen que salir bien el mismo fin de semana, así que el planificador empieza la revisión de preparación por esas exportaciones, no por el plan.
 
-## Qué he hecho
-- Preparación de equipos con cuatro bloqueos que paran una ola: sin hardware hash de Autopilot en el destino, clave de BitLocker sin custodiar, hardware no apto para Windows 11 y equipos que no se conectan desde hace semanas. Además, las acciones para el propio día: sistema por debajo de la línea base, poco disco, equipos solo unidos al dominio, equipos no conformes, administradores locales que el reseteo va a quitar, kioscos y aplicaciones sin decisión.
-- Preparación de usuarios: sin método de MFA (el acceso condicional del destino los para el primer día), buzones demasiado grandes para la ventana, licencias sin SKU comprado en el destino, buzones compartidos repartidos entre olas, usuarios inactivos y bajas.
-- Un go, go con acciones o no-go por ola, con su motivo: capacidad (técnicos, equipos por día, días), porcentaje de bloqueados, horas de migración de buzones frente a la ventana, periodos de congelación y un piloto que espera a que el tenant destino esté terminado.
-- `report.html`, `cutover-plan.md` para el comité de cambios con el checklist de prerrequisitos y el orden del día del corte, `blockers.csv` con columnas de responsable y resuelto, y los CSV por ola, equipo, usuario y aplicación.
-- Un exportador de solo lectura en PowerShell para Microsoft Graph y Exchange Online.
+## Cuatro bloqueos que paran una ola
 
-## Cómo está hecho
-Python solo con la librería estándar. La demo es una segregación inventada de un grupo de concesionarios de automoción respecto a su matriz: cuatro sedes, 1.208 equipos, 1.182 usuarios y seis olas, con los problemas puestos a propósito para que cada ola falle por un motivo distinto. 22 tests y un runbook con la cadencia semanal, cómo leer los veredictos y la corrección habitual de cada hallazgo.
+En los equipos, cuatro hallazgos bloquean una ola: no tener el hardware hash de Autopilot en el destino, la huella que permite que un equipo reseteado entre en el nuevo tenant; una clave de BitLocker sin custodiar; hardware no apto para Windows 11, y equipos que no se conectan desde hace semanas. Otros hallazgos pasan a ser acciones para el propio día, como un sistema por debajo de la línea base, poco disco, equipos solo unidos al dominio, equipos no conformes, administradores locales que el reseteo va a quitar, y kioscos y aplicaciones sin decisión.
 
-## Qué aprendí
-De migraciones tenant a tenant y la administración de Microsoft 365 que hay detrás, de Windows Autopilot e Intune con co-gestión de ConfigMgr, de una migración a Windows 11 en varias sedes, y de cambios pasados por el CAB con periodos de congelación. La lección que da forma a la herramienta es que una ola rara vez falla el día del corte. Falla semanas antes, cuando nadie cuenta los equipos sin hardware hash o los usuarios sin MFA, y la fecha sigue en el plan igualmente.
+En los usuarios, el planificador señala a los que no tienen método de MFA, a quienes el acceso condicional del destino parará el primer día, buzones demasiado grandes para la ventana, licencias sin SKU comprado en el destino, buzones compartidos repartidos entre olas, usuarios inactivos y bajas.
 
-## Siguientes pasos
-- Unir el informe de preparación de hardware para Windows 11 con la exportación de Graph, para que la comprobación de hardware use datos reales de TPM y Secure Boot.
-- Ejecutarlo cada semana del programa y guardar las salidas con fecha, para que la revisión enseñe cómo bajan los bloqueos.
-- Acordar las reglas de las olas y el calendario de congelación con el comité de cambios antes de la primera ejecución, no después."""),
+## Seis olas, cada una falla por un motivo distinto
+
+Cada ola recibe un go, un go con acciones o un no-go, con su motivo: la capacidad de los técnicos en equipos por día, el porcentaje de bloqueados, las horas de migración de buzones frente a la ventana, los periodos de congelación o un piloto que espera a que el tenant destino esté terminado. En la demo, con 1.208 equipos y 1.182 usuarios, los problemas están puestos para que cada ola falle por un motivo distinto.
+
+La salida es un informe web, `cutover-plan.md` para el comité de cambios con el checklist de prerrequisitos y el orden del día del corte, `blockers.csv` con columnas de responsable y resuelto, y los CSV por ola, equipo, usuario y aplicación.
+
+## Cómo usarlo con datos reales
+
+Funciona con Python y solo la librería estándar, con 22 tests y un runbook con la cadencia semanal, cómo leer los veredictos y la corrección habitual de cada hallazgo. Un exportador de solo lectura en PowerShell cubre Microsoft Graph y Exchange Online. Está pensado para ejecutarse cada semana del programa, después de acordar con el comité de cambios las reglas de las olas y el calendario de congelación.
+
+## De dónde sale
+
+Nace de migraciones tenant a tenant y de la administración de Microsoft 365 que hay detrás, de Windows Autopilot e Intune con co-gestión de ConfigMgr, de una migración a Windows 11 en varias sedes y de cambios por el CAB con periodos de congelación. Una ola rara vez falla el día del corte; falla semanas antes, cuando nadie cuenta los equipos sin hardware hash o los usuarios sin MFA."""),
 dict(n="30", repo="30-jira-confluence-admin-kit", date="2026-10-24", cat="tools",
- title_en="128 unused licences and a sprint nine days late: a monthly Jira and Confluence review", title_es="128 licencias sin uso y un sprint abierto nueve días tarde: revisión mensual de Jira y Confluence",
+ title_en="A monthly Jira and Confluence review finds 128 unused licences and a sprint still open nine days late",
+ title_es="Una revisión mensual de Jira y Confluence halla 128 licencias sin uso y un sprint abierto nueve días tarde",
  seo_title_en="Jira and Confluence admin review · Iñigo González",
  seo_title_es="Revisión de admin de Jira y Confluence · Iñigo González",
- dek_en="Licences to reclaim with the saving, admins who should not be admins, external users and service accounts without an owner, projects, spaces and custom fields to clean up, and the agile health of every Scrum board, from the site's own exports.",
- dek_es="Licencias a recuperar con el ahorro, administradores que no deberían serlo, usuarios externos y cuentas de servicio sin responsable, proyectos, espacios y campos personalizados que limpiar, y la salud ágil de cada tablero Scrum, a partir de las exportaciones del propio sitio.",
+ seo_desc="Licences to reclaim with the saving, admins who should not be admins, external users and service accounts without an owner, projects, spaces and custom fields to clean up, and the agile health of every Scrum board, from the site's own exports.",
+ seo_desc_es="Licencias a recuperar con el ahorro, administradores que no deberían serlo, usuarios externos y cuentas de servicio sin responsable, proyectos, espacios…",
+ dek_en="A monthly admin review, published with a made-up warehouse-robotics company on Atlassian Cloud, finds licences to reclaim, admins who should not be admins, clutter to clean up and the agile health of every Scrum board, including a sprint nine days late.",
+ dek_es="Una revisión mensual de administración, publicada con una empresa inventada de robótica de almacenes en Atlassian Cloud, encuentra licencias a recuperar, administradores que sobran, restos que limpiar y la salud ágil de cada tablero Scrum, con un sprint nueve días tarde.",
  en="""
+The monthly Jira and Confluence review published with this post finds 128 unused licences in its demo. One of the causes it flags is the default group: everybody who joins gets Jira through it, whether they will use it or not. The same run finds a sprint still open nine days past its end date. The demo is a made-up warehouse-robotics company on Jira, Jira Service Management and Confluence Cloud, with 437 user accounts, 61 projects, 77 spaces, 460 custom fields and 12 Scrum boards, and the problems placed on purpose.
 
-## The problem
-An Atlassian site grows by itself. Everybody who joins gets Jira through a default group, whether they will use it or not. Contractors keep access after the project ends. Somebody added a colleague to `jira-admins` "for a day" two years ago. A demo project still lets Anyone browse it. There are 460 custom fields, and a third of them have not been used in a year. And two Scrum boards carry over a third of every sprint, which nobody notices because the board still looks busy. None of this is hard to fix. It is hard to see. The licence renewal, the access review and the retrospective all need the same thing: a list, the rule that put each item on it, and a column for the decision.
+An Atlassian site grows by itself. Contractors keep access after the project ends, a demo project still lets Anyone browse it, and a third of the 460 custom fields have not been used in a year. None of this is hard to fix; it is hard to see.
 
-## What I built
-- Licences: product access not used for 90 days, never used after the grace period (the default-group problem), or kept by suspended accounts, with the cost per year and the seats against what was bought.
-- Access: more admins than the target, admins who are deactivated or idle, admins on personal domains, external users by domain, and service accounts without a named owner.
-- Jira and Confluence hygiene: projects open to Anyone, projects without a lead or with a lead who has left, idle projects and spaces to archive, one-off permission and workflow schemes, spaces with anonymous access or no active admin, personal spaces of leavers, and custom fields to remove.
-- Agile health per Scrum board over the last six sprints: sprints still open past their end date, carry-over, scope added after the start, say/do, and idle boards.
-- `report.html`, `admin-review.md` as the agenda with the decisions as a checklist, `licences.csv` with `manager_ok` and `removed` columns, `access-review.csv` with a `decision` column, and the CSVs per project, space, field and board.
-- A read-only PowerShell exporter for the Jira, Agile and Confluence Cloud REST APIs; the user export from admin.atlassian.com loads as it is.
+## Licences, admins and the accounts nobody owns
 
-## How it is built
-Python with the standard library only. The demo is a made-up warehouse-robotics company on Jira, Jira Service Management and Confluence Cloud: 437 user accounts, 61 projects, 77 spaces, 460 custom fields and 12 Scrum boards, with the problems placed on purpose. 17 tests and a 45-minute runbook with how to read the agile numbers.
+The licence check flags product access not used for 90 days, never used after the grace period or kept by suspended accounts, with the cost per year and the seats against what was bought. The access check looks for more admins than the target, admins who are deactivated or idle or use personal domains, external users by domain and service accounts without a named owner. A colleague added to `jira-admins` "for a day" two years ago is the kind of case it surfaces.
 
-## What I learned
-From administering Jira and Confluence and managing the relationship with Atlassian, working as Scrum Master and Product Owner with Kanban and portfolio views, running release management with changes through the CAB, and managing licences and vendors. The lesson that shaped the tool is that the licence saving pays for the review, but the agile numbers are what the teams come for. They are conversation starters for the retrospective, not targets, and one team's trend against itself is the only comparison that means anything.
+The hygiene check covers projects open to Anyone, projects without a lead or with a lead who has left, idle projects and spaces to archive, one-off permission and workflow schemes, spaces with anonymous access or no active admin, personal spaces of leavers, and custom fields to remove.
 
-## Next steps
-- Run it before the next renewal and give managers a week to object before any licence is removed.
-- Agree the admin target and the service-account owners with security before the first review.
-- Keep each month's output, so the next review opens with what changed since the last one.""",
+## Two boards carrying a third of every sprint
+
+For each Scrum board, the review reads the last six sprints: sprints still open past their end date, carry-over, scope added after the start, say/do, the share of planned work actually delivered, and idle boards. Two boards carry over a third of every sprint, which nobody notices because the board still looks busy.
+
+The output is a web report, `admin-review.md` as the agenda with the decisions as a checklist, `licences.csv` with `manager_ok` and `removed` columns, `access-review.csv` with a `decision` column, and CSVs per project, space, field and board. The licence renewal, the access review and the retrospective all get the same thing: a list, the rule behind each item and a column for the decision.
+
+## How to use it with real data
+
+It runs on Python with the standard library only, with 17 tests and a 45-minute runbook that explains how to read the agile numbers. A read-only PowerShell exporter covers the Jira, Agile and Confluence Cloud REST APIs, and the user export from admin.atlassian.com loads as it is. Managers get a week to object before any licence is removed.
+
+## Where it comes from
+
+It comes from administering Jira and Confluence and managing the relationship with Atlassian, working as Scrum Master and Product Owner, running release management through the CAB, and managing licences and vendors. The licence saving pays for the review, but the agile numbers are what teams come for: conversation starters for the retrospective, not targets.""",
  es="""
+La revisión mensual de Jira y Confluence que acompaña a este post encuentra 128 licencias sin uso en su demo. Una de las causas que señala es el grupo por defecto: todo el que entra recibe Jira por él, lo vaya a usar o no. La misma ejecución detecta un sprint abierto nueve días después de su fecha de fin. La demo es una empresa inventada de robótica de almacenes con Jira, Jira Service Management y Confluence Cloud, con 437 cuentas de usuario, 61 proyectos, 77 espacios, 460 campos personalizados y 12 tableros Scrum, y los problemas puestos a propósito.
 
-## El problema
-Un sitio de Atlassian crece solo. Todo el que entra recibe Jira por un grupo por defecto, lo vaya a usar o no. Los externos siguen con acceso cuando termina el proyecto. Alguien metió a un compañero en `jira-admins` "por un día" hace dos años. Un proyecto de demo sigue abierto a Anyone. Hay 460 campos personalizados y un tercio no se ha usado en un año. Y dos tableros Scrum arrastran un tercio de cada sprint al siguiente, cosa que nadie nota porque el tablero sigue pareciendo activo. Nada de esto es difícil de arreglar. Es difícil de ver. La renovación de licencias, la revisión de accesos y la retrospectiva necesitan lo mismo: una lista, la regla que puso cada elemento en ella y una columna para la decisión.
+Un sitio de Atlassian crece solo. Los externos siguen con acceso cuando termina el proyecto, un proyecto de demo sigue abierto a Anyone y un tercio de los 460 campos personalizados no se ha usado en un año. Nada de esto es difícil de arreglar; es difícil de ver.
 
-## Qué he hecho
-- Licencias: acceso a producto sin usar en 90 días, nunca usado pasado el periodo de gracia (el problema del grupo por defecto) o en manos de cuentas suspendidas, con el coste anual y las licencias frente a las compradas.
-- Accesos: más administradores que el objetivo, administradores desactivados o inactivos, administradores con dominios personales, usuarios externos por dominio y cuentas de servicio sin responsable con nombre.
-- Higiene de Jira y Confluence: proyectos abiertos a Anyone, proyectos sin responsable o con un responsable que ya no está, proyectos y espacios inactivos para archivar, esquemas de permisos y de flujo usados por un solo proyecto, espacios con acceso anónimo o sin administrador activo, espacios personales de bajas y campos personalizados que eliminar.
-- Salud ágil por tablero Scrum en los últimos seis sprints: sprints abiertos después de su fecha de fin, trabajo arrastrado, alcance añadido después del inicio, say/do y tableros parados.
-- `report.html`, `admin-review.md` como orden del día con las decisiones en forma de checklist, `licences.csv` con columnas `manager_ok` y `removed`, `access-review.csv` con una columna `decision`, y los CSV por proyecto, espacio, campo y tablero.
-- Un exportador de solo lectura en PowerShell para las API REST de Jira, Agile y Confluence Cloud; la exportación de usuarios de admin.atlassian.com carga tal cual.
+## Licencias, administradores y cuentas sin dueño
 
-## Cómo está hecho
-Python solo con la librería estándar. La demo es una empresa inventada de robótica de almacenes con Jira, Jira Service Management y Confluence Cloud: 437 cuentas de usuario, 61 proyectos, 77 espacios, 460 campos personalizados y 12 tableros Scrum, con los problemas puestos a propósito. 17 tests y un runbook de 45 minutos con cómo leer los números ágiles.
+La comprobación de licencias señala el acceso a producto sin usar en 90 días, nunca usado pasado el periodo de gracia o en manos de cuentas suspendidas, con el coste anual y las licencias frente a las compradas. La de accesos busca más administradores que el objetivo, administradores desactivados, inactivos o con dominios personales, usuarios externos por dominio y cuentas de servicio sin responsable con nombre. Un compañero metido en `jira-admins` «por un día» hace dos años es el tipo de caso que saca a la luz.
 
-## Qué aprendí
-De administrar Jira y Confluence y llevar la relación con Atlassian, de trabajar como Scrum Master y Product Owner con Kanban y vistas de portfolio, de llevar la gestión de releases con los cambios por el CAB, y de gestionar licencias y proveedores. La lección que da forma a la herramienta es que el ahorro en licencias paga la revisión, pero los números ágiles son lo que interesa a los equipos. Sirven para abrir la conversación en la retrospectiva, no son objetivos, y la única comparación que tiene sentido es la de un equipo consigo mismo en el tiempo.
+La comprobación de higiene cubre proyectos abiertos a Anyone, proyectos sin responsable o con un responsable que ya no está, proyectos y espacios inactivos para archivar, esquemas de permisos y de flujo usados por un solo proyecto, espacios con acceso anónimo o sin administrador activo, espacios personales de bajas y campos personalizados que eliminar.
 
-## Siguientes pasos
-- Ejecutarlo antes de la próxima renovación y dar a los responsables una semana para objetar antes de quitar ninguna licencia.
-- Acordar con seguridad el objetivo de administradores y los responsables de las cuentas de servicio antes de la primera revisión.
-- Guardar la salida de cada mes, para que la siguiente revisión empiece por lo que ha cambiado desde la anterior."""),
+## Dos tableros que arrastran un tercio de cada sprint
+
+Para cada tablero Scrum, la revisión lee los últimos seis sprints: sprints abiertos después de su fecha de fin, trabajo arrastrado, alcance añadido después del inicio, say/do, la parte del trabajo comprometido que de verdad se entrega, y tableros parados. Dos tableros arrastran un tercio de cada sprint al siguiente, cosa que nadie nota porque el tablero sigue pareciendo activo.
+
+La salida es un informe web, `admin-review.md` como orden del día con las decisiones en forma de checklist, `licences.csv` con columnas `manager_ok` y `removed`, `access-review.csv` con una columna `decision`, y los CSV por proyecto, espacio, campo y tablero. La renovación de licencias, la revisión de accesos y la retrospectiva reciben lo mismo: una lista, la regla detrás de cada elemento y una columna para la decisión.
+
+## Cómo usarlo con datos reales
+
+Funciona con Python y solo la librería estándar, con 17 tests y un runbook de 45 minutos que explica cómo leer los números ágiles. Un exportador de solo lectura en PowerShell cubre las API REST de Jira, Agile y Confluence Cloud, y la exportación de usuarios de admin.atlassian.com carga tal cual. Los responsables tienen una semana para objetar antes de quitar ninguna licencia.
+
+## De dónde sale
+
+Nace de administrar Jira y Confluence y llevar la relación con Atlassian, de trabajar como Scrum Master y Product Owner, de llevar la gestión de releases por el CAB y de gestionar licencias y proveedores. El ahorro en licencias paga la revisión, pero los números ágiles son lo que interesa a los equipos: sirven para abrir la conversación en la retrospectiva, no son objetivos."""),
 dict(n="31", repo="31-dealer-systems-health", date="2026-10-25", cat="tools",
- title_en="The warranty feed stopped on Thursday and the dealer found out on Tuesday: a dealer network review", title_es="El feed de garantías paró el jueves y el concesionario lo supo el martes: la red de concesionarios",
+ title_en="A warranty feed that stops on Thursday night goes unseen until the dealer asks on Tuesday",
+ title_es="Un feed de garantías parado el jueves por la noche no se detecta hasta que el concesionario pregunta el martes",
  seo_title_en="Dealer network systems: weekly health review · Iñigo González",
  seo_title_es="Sistemas de una red de concesionarios: revisión semanal · Iñigo González",
  seo_desc="Weekly review of a dealer network: stopped DMS feeds, warranty claims near the deadline, parts and price files per dealer, in red, amber or green.",
- dek_en="DMS feeds that stopped or send nothing, warranty claims about to miss the deadline and why they are rejected, the parts catalogue and price file each dealer really uses, and the dealers opening or leaving, per dealer and in red, amber or green.",
- dek_es="Feeds del DMS parados o vacíos, garantías a punto de caducar y por qué se rechazan, el catálogo de recambios y la tarifa que usa de verdad cada concesionario, y los concesionarios que abren o se van, por concesionario y en rojo, ámbar o verde.",
+ seo_desc_es="Feeds del DMS parados o vacíos, garantías a punto de caducar y por qué se rechazan, el catálogo de recambios y la tarifa que usa de verdad cada concesionario…",
+ dek_en="The weekly review, published with fictional data from an importer with 53 dealers in Spain and Portugal, puts DMS feeds, warranty claims, parts catalogues and price files side by side per dealer, in red, amber or green.",
+ dek_es="La revisión semanal, publicada con datos ficticios de un importador con 53 concesionarios en España y Portugal, pone juntos por concesionario los feeds del DMS, las garantías, los catálogos de recambios y las tarifas, en rojo, ámbar o verde.",
  en="""
+A dealer's warranty feed that stops on a Thursday night goes unnoticed until the dealer asks on Tuesday why its claims have no answer, and a DMS job that finishes as a success with zero records alerts nobody. Those are the failures the weekly dealer network review published with this post is built to catch. It is an open-source tool that runs on demo data from a made-up importer with 53 dealers in Spain and Portugal, two weeks of interface runs and about 4,600 warranty claims, with the problems placed on purpose.
 
-## The problem
-A car brand's aftersales runs on systems that live at the dealers. When a dealer's warranty feed stops on a Thursday night, nobody notices until the dealer asks on Tuesday why its claims have no answer. A DMS job that "succeeds" with zero records alerts nobody at all. A dealer still on last month's parts catalogue sends labour operations the warranty system no longer accepts, its rejection rate climbs, and the conversation turns to bad claims instead of an old catalogue. A price file that did not apply means a week of parts sold at the wrong price. And the dealer that closed in September still has working interface credentials. Each of these lives in a different system; the weekly review needs them side by side, per dealer, with the team that owns each fix.
+The DMS, the dealer management system each dealer runs, sends repair orders and warranty claims to the brand through feeds. The review flags feeds without a successful run within their limit, and for those two one failed night is already red.
 
-## What I built
-- Interfaces: feeds with no successful run within the limit (one failed night is already red for repair orders and warranty claims), feeds rejecting records, and feeds that succeed with nothing in them.
-- Warranty: drafts past or close to the submission limit, claims waiting for the brand's own decision, information requests nobody answered, rejection rate per dealer with the main reasons, possible duplicates (same VIN and labour operation), and accepted claims that were never paid.
-- Parts: the catalogue version and price file each dealer has actually applied, against the current ones and their grace periods.
-- Network: DMS versions not certified for the brand interfaces, dealers opening with checklist items still open, and terminated dealers still sending data.
-- `report.html` with the network as a red/amber/green grid, `dealer-review.md` as the agenda for the weekly call, `dealers.csv`, `interfaces.csv`, `claims-at-risk.csv` with who each claim is waiting on, `rejections.csv` and `catalogue.csv`.
-- A read-only PowerShell exporter with example SQL queries that refuses anything but a single SELECT.
+## An old parts catalogue behind a rising rejection rate
 
-## How it is built
-Python with the standard library only. The demo is a made-up importer with 53 dealers in Spain and Portugal, two weeks of interface runs and about 4,600 warranty claims, with the problems placed on purpose. 15 tests, a runbook for the weekly review, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+A dealer still on last month's parts catalogue sends labour operations the warranty system no longer accepts, so its rejection rate climbs and the talk turns to bad claims. The review sets the catalogue and price file each dealer has actually applied against the current ones and their grace periods; a price file that did not apply means a week of parts sold at the wrong price.
 
-## What I learned
-From working with dealer management systems and dealer networks, warranty claim management and aftersales parts catalogues, together with integrations, vendors, SLAs and OLAs. The lesson that shaped the tool is that most "dealer problems" have a systems cause one step upstream: a rejection rate that is really an old catalogue, a late claim that is really a feed that stopped, a backlog that is really the brand's own queue. Putting the four sources on one page per dealer is what makes that visible.
+On warranty, it lists drafts near or past the submission limit, claims waiting for the brand's own decision, possible duplicates with the same VIN, the vehicle identification number, and labour operation, and accepted claims never paid.
 
-## Next steps
-- Run it on one region's real exports first and agree the limits with the warranty team before showing it to the dealers.
-- Adapt the three SQL queries to the integration log and the warranty system once, and schedule the export for Monday morning.
-- Send each red dealer's line to its area manager before the call, so the meeting is about fixes and not about discovering the problems.""",
+## A closed dealer with working credentials
+
+The tool also flags DMS versions not certified for the brand interfaces, dealers opening with checklist items still open and terminated dealers still sending data: a dealer that closed in September can still have working interface credentials. The output is a red, amber and green grid of the network, an agenda for the weekly call and CSV files per topic.
+
+## How to use it with real data
+
+A read-only PowerShell exporter with example SQL queries refuses anything but a single SELECT. The tool runs on Python with the standard library only, with 15 tests and a runbook. The suggested start is one region's real exports, with each red dealer's line sent to its area manager before the call.
+
+## Where it comes from
+
+The tool comes from working with dealer management systems and dealer networks, warranty claim management and aftersales parts catalogues, together with integrations, vendors, SLAs and OLAs. The lesson behind it is that most dealer problems have a systems cause one step upstream: a rejection rate that is really an old catalogue.""",
  es="""
+El feed de garantías de un concesionario que se para un jueves por la noche pasa inadvertido hasta que el concesionario pregunta el martes por qué sus reclamaciones no tienen respuesta, y un trabajo del DMS que termina bien con cero registros no avisa a nadie. Esos son los fallos que busca la revisión semanal de la red de concesionarios que acompaña a este post, una herramienta de código abierto que se ejecuta con datos de ejemplo de un importador inventado con 53 concesionarios en España y Portugal, dos semanas de ejecuciones de interfaces y unas 4.600 reclamaciones de garantía, con los problemas puestos a propósito.
 
-## El problema
-La posventa de una marca de coches funciona con sistemas que están en los concesionarios. Cuando el feed de garantías de un concesionario se para un jueves por la noche, nadie se entera hasta que el concesionario pregunta el martes por qué sus reclamaciones no tienen respuesta. Un trabajo del DMS que "termina bien" con cero registros no avisa a nadie. Un concesionario que sigue con el catálogo de recambios del mes pasado envía operaciones de mano de obra que el sistema de garantías ya no acepta, su tasa de rechazo sube y la conversación acaba en reclamaciones mal hechas en vez de en un catálogo viejo. Una tarifa que no se aplicó significa una semana de recambios vendidos al precio equivocado. Y el concesionario que cerró en septiembre sigue teniendo credenciales de interfaz que funcionan. Cada cosa vive en un sistema distinto; la revisión semanal necesita verlas juntas, por concesionario, con el equipo responsable de cada corrección.
+El DMS, el sistema de gestión que usa cada concesionario, envía a la marca las órdenes de reparación y las garantías mediante feeds. La revisión marca los feeds sin una ejecución correcta dentro de su límite, y en esos dos una sola noche fallida ya es rojo.
 
-## Qué he hecho
-- Interfaces: feeds sin una ejecución correcta dentro del límite (una noche fallida ya es rojo para órdenes de reparación y garantías), feeds que rechazan registros y feeds que terminan bien sin traer nada.
-- Garantías: borradores pasados o cerca del límite de envío, reclamaciones esperando la decisión de la propia marca, peticiones de información sin contestar, tasa de rechazo por concesionario con los motivos principales, posibles duplicados (mismo VIN y misma operación) y reclamaciones aceptadas que nunca se pagaron.
-- Recambios: la versión de catálogo y la tarifa que cada concesionario ha aplicado de verdad, frente a las vigentes y sus periodos de gracia.
-- Red: versiones de DMS no certificadas para las interfaces de la marca, concesionarios que abren con tareas del checklist sin cerrar y concesionarios dados de baja que siguen enviando datos.
-- `report.html` con la red en una cuadrícula roja, ámbar y verde, `dealer-review.md` como orden del día de la reunión semanal, `dealers.csv`, `interfaces.csv`, `claims-at-risk.csv` con a quién está esperando cada reclamación, `rejections.csv` y `catalogue.csv`.
-- Un exportador de solo lectura en PowerShell con consultas SQL de ejemplo que rechaza cualquier cosa que no sea un único SELECT.
+## Un catálogo de recambios viejo detrás de una tasa de rechazo que sube
 
-## Cómo está hecho
-Python solo con la librería estándar. La demo es un importador inventado con 53 concesionarios en España y Portugal, dos semanas de ejecuciones de interfaces y unas 4.600 reclamaciones de garantía, con los problemas puestos a propósito. 15 tests, un runbook para la revisión semanal y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+Un concesionario que sigue con el catálogo del mes pasado envía operaciones de mano de obra que el sistema de garantías ya no acepta, así que su tasa de rechazo sube y se acaba hablando de reclamaciones mal hechas. La revisión compara el catálogo y la tarifa que cada concesionario ha aplicado de verdad con los vigentes y sus periodos de gracia; una tarifa que no se aplicó significa una semana de recambios vendidos al precio equivocado.
 
-## Qué aprendí
-De trabajar con sistemas de gestión de concesionarios (DMS) y redes de concesionarios, gestión de garantías y catálogos de recambios de posventa, junto con integraciones, proveedores, SLAs y OLAs. La lección que da forma a la herramienta es que la mayoría de los "problemas del concesionario" tienen una causa de sistemas un paso antes: una tasa de rechazo que en realidad es un catálogo viejo, una reclamación tardía que en realidad es un feed parado, un atasco que en realidad es la cola de la propia marca. Poner las cuatro fuentes en una sola página por concesionario es lo que lo hace visible.
+En garantías, lista los borradores cerca o fuera del límite de envío, las reclamaciones que esperan la decisión de la propia marca, los posibles duplicados con el mismo VIN, el número de bastidor, y la misma operación, y las reclamaciones aceptadas nunca pagadas.
 
-## Siguientes pasos
-- Ejecutarlo primero con las exportaciones reales de una región y acordar los límites con el equipo de garantías antes de enseñárselo a los concesionarios.
-- Adaptar una vez las tres consultas SQL al log de integraciones y al sistema de garantías, y programar la exportación para el lunes por la mañana.
-- Enviar la línea de cada concesionario en rojo a su jefe de zona antes de la reunión, para que la reunión vaya de soluciones y no de descubrir los problemas."""),
+## Un concesionario cerrado con credenciales que funcionan
+
+La herramienta señala además versiones de DMS no certificadas para las interfaces de la marca, concesionarios que abren con tareas del checklist sin cerrar y concesionarios dados de baja que siguen enviando datos: uno que cerró en septiembre puede seguir teniendo credenciales de interfaz que funcionan. El resultado es una cuadrícula roja, ámbar y verde de la red, un orden del día para la reunión semanal y ficheros CSV por tema.
+
+## Cómo usarlo con datos reales
+
+Un exportador de solo lectura en PowerShell con consultas SQL de ejemplo rechaza cualquier cosa que no sea un único SELECT. La herramienta funciona con Python y solo la librería estándar, con 15 tests y un runbook. Lo propuesto es empezar con las exportaciones reales de una región y enviar la línea de cada concesionario en rojo a su jefe de zona antes de la reunión.
+
+## De dónde sale
+
+La herramienta nace de trabajar con sistemas de gestión de concesionarios y redes de concesionarios, gestión de garantías y catálogos de recambios de posventa, junto con integraciones, proveedores, SLAs y OLAs. La lección que hay detrás es que la mayoría de los problemas del concesionario tienen una causa de sistemas un paso antes: una tasa de rechazo que en realidad es un catálogo viejo."""),
 dict(n="32", repo="32-backup-restore-test-tracker", date="2026-10-25", cat="tools",
- title_en="The backup ran every night, but would it bring the system back? Backups, restores and DR monthly",
- title_es="El backup corrió cada noche, pero ¿devolvería el sistema? Backups, restauraciones y DR cada mes",
+ title_en="A nightly backup that fails three nights in a row leaves a system three days outside its RPO",
+ title_es="Un backup nocturno que falla tres noches seguidas deja un sistema tres días fuera de su RPO",
  seo_title_en="Backup restore tests and DR review · Iñigo González",
  seo_title_es="Pruebas de restauración de backups y DR · Iñigo González",
- dek_en="The last good backup of each system against its RPO, offsite and immutable copies that actually ran, restore tests against the plan and the RTO, and the DR exercises and their actions, per system and tier, in red, amber or green.",
- dek_es="El último backup bueno de cada sistema frente a su RPO, las copias offsite e inmutables que de verdad se hicieron, las pruebas de restauración frente al plan y al RTO, y los ejercicios de DR y sus acciones, por sistema y nivel, en rojo, ámbar o verde.",
+ seo_desc="The last good backup of each system against its RPO, offsite and immutable copies that actually ran, restore tests against the plan and the RTO, and the DR exercises and their actions, per system and tier, in red, amber or green.",
+ seo_desc_es="El último backup bueno de cada sistema frente a su RPO, las copias offsite e inmutables que de verdad se hicieron, las pruebas de restauración frente al plan…",
+ dek_en="The monthly review, published with fictional data from a manufacturer with 76 systems, cross-checks backup jobs, offsite copies, restore tests and DR exercises to show which systems have proven they can be brought back, and with what evidence.",
+ dek_es="La revisión mensual, publicada con datos ficticios de un fabricante con 76 sistemas, cruza los trabajos de backup, las copias offsite, las pruebas de restauración y los ejercicios de DR para mostrar qué sistemas han demostrado que se pueden recuperar, y con qué evidencia.",
  en="""
+A green backup dashboard says the jobs ran, not that a system can be brought back in the time promised to the business. A nightly job that failed three nights in a row is three days outside a 24-hour RPO, the recovery point objective, or how much data the business accepts losing. That is the gap the monthly backup and restore review published with this post is built to expose. It is an open-source tool that runs on demo data from a made-up manufacturer with 76 systems in three tiers, a year of restore tests and its DR exercises, with the problems placed on purpose.
 
-## The problem
-A green backup dashboard says the jobs ran. It does not say the system can be brought back within the time the business was promised. A job scheduled every night that failed three nights in a row is three days outside a 24-hour RPO. A copy job that exists but has failed for a week leaves the system with one copy, in one place. Restoring a file proves the backup is readable, not that the ERP comes back in four hours. A test where "the database came back but the application could not log in" is exactly what a real recovery would hit. And an auditor counts the evidence, not the tests. The answers live in the backup console, a spreadsheet of tests, the change tickets and the continuity plan; the monthly review needs them side by side.
+The review measures the RPO from each system's last good backup and counts failure streaks. It also lists systems with no backup job and missing offsite or immutable copies. A copy job that has failed for a week leaves a system with one copy, in one place.
 
-## What I built
-- Backups: systems in scope with no backup job, the last good backup against each system's RPO, failure streaks, the offsite and immutable copies each tier requires, and jobs still running for retired or unknown systems.
-- Restore tests: systems never restored, last tests that failed or half worked, tests overdue against the plan for their tier, restores slower than the RTO (measured only on full restores), systems only tested with file or item restores, and tests with no evidence.
-- DR exercises: the last exercise, exercises planned and not done, and actions past their due date.
-- `report.html` with tier 1 at a glance and a 12-month calendar of tests due, `restore-review.md` as the agenda, `tests-due.csv` with booked and done columns, `failing-backups.csv` and `evidence-pack.csv` for the auditor.
-- A read-only PowerShell exporter for Veeam job sessions; other tools' job reports work as CSV.
+## Restoring a file does not prove the ERP comes back in four hours
 
-## How it is built
-Python with the standard library only. The demo is a made-up manufacturer with 76 systems in three tiers, two weeks of job runs, a year of restore tests and its DR exercises, with the problems placed on purpose. 13 tests, a runbook for the monthly review, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+On restore tests, the tool lists systems never restored, last tests that failed or half worked, and tests overdue for their tier. It compares restore times with the RTO, the recovery time objective, only on full restores: restoring a file proves the backup is readable, not that the ERP comes back in four hours.
 
-## What I learned
-From my work with Veeam Backup and Commvault, and tape backups earlier on, designing and testing backup and DR plans, and supervising DR and business continuity tests aligned with ISO 22301. The lesson that shaped the tool is that the question is never "did the job run?" but "when did we last prove we can get this system back, how long did it take, and where is the evidence?". Measuring the RPO from the last good backup and the RTO only from full restores is what turns a green dashboard into an honest one.
+## An auditor counts the evidence, not the tests
 
-## Next steps
-- Run it first on the tier 1 systems with one month of real exports, and agree the test frequency per tier with the service owners.
-- Schedule the Veeam export for the first Monday of the month and keep each month's output folder.
-- Use `tests-due.csv` to book the next month's restore tests in the change calendar, tier 1 first.""",
+Tests with no evidence are flagged too. For DR exercises, the review shows the last one, those planned and not done, and overdue actions. The output is a web report with tier 1 at a glance and a 12-month calendar of tests due, an agenda for the meeting, and CSV files with tests due, failing backups and an evidence pack for the auditor.
+
+## How to use it with real data
+
+A read-only PowerShell exporter reads Veeam job sessions; other tools' job reports work as CSV. It runs on Python with the standard library only, with 13 tests and a runbook. The suggested start is the tier 1 systems with one month of real exports and next month's restore tests booked in the change calendar.
+
+## Where it comes from
+
+The tool comes from my work with Veeam Backup and Commvault, and tape backups earlier on, designing and testing backup and DR plans, and supervising DR and business continuity tests aligned with ISO 22301. The question that shaped it is not whether the job ran, but when we last proved a system can come back, how long it took and where the evidence is.""",
  es="""
+Un panel de backups en verde dice que los trabajos se ejecutaron, no que un sistema se pueda recuperar en el tiempo prometido al negocio. Un trabajo nocturno que ha fallado tres noches seguidas está tres días fuera de un RPO de 24 horas, el objetivo de punto de recuperación, es decir, cuántos datos acepta perder el negocio. Ese es el hueco que saca a la luz la revisión mensual de backups y restauraciones que acompaña a este post, una herramienta de código abierto que se ejecuta con datos de ejemplo de un fabricante inventado con 76 sistemas en tres niveles, un año de pruebas de restauración y sus ejercicios de DR, con los problemas puestos a propósito.
 
-## El problema
-Un panel de backups en verde dice que los trabajos se ejecutaron. No dice que el sistema se pueda recuperar en el tiempo que se prometió al negocio. Un trabajo programado cada noche que ha fallado tres noches seguidas está tres días fuera de un RPO de 24 horas. Una copia que existe pero lleva una semana fallando deja el sistema con una sola copia, en un solo sitio. Restaurar un fichero demuestra que el backup se puede leer, no que el ERP vuelva en cuatro horas. Una prueba en la que "la base de datos volvió pero la aplicación no podía iniciar sesión" es justo lo que pasaría en una recuperación real. Y un auditor cuenta las evidencias, no las pruebas. Las respuestas están en la consola de backup, una hoja de pruebas, los tickets de cambio y el plan de continuidad; la revisión mensual necesita verlas juntas.
+La revisión mide el RPO desde el último backup bueno de cada sistema y cuenta las rachas de fallos. También lista los sistemas sin trabajo de backup y las copias offsite o inmutables que faltan. Una copia que lleva una semana fallando deja el sistema con una sola copia, en un solo sitio.
 
-## Qué he hecho
-- Backups: sistemas en alcance sin trabajo de backup, el último backup bueno frente al RPO de cada sistema, rachas de fallos, las copias offsite e inmutables que exige cada nivel y trabajos que siguen corriendo para sistemas retirados o desconocidos.
-- Pruebas de restauración: sistemas nunca restaurados, últimas pruebas fallidas o a medias, pruebas vencidas frente al plan de su nivel, restauraciones más lentas que el RTO (medido solo con restauraciones completas), sistemas probados solo con ficheros o elementos y pruebas sin evidencia.
-- Ejercicios de DR: el último ejercicio, ejercicios planificados y no hechos, y acciones pasadas de fecha.
-- `report.html` con el nivel 1 de un vistazo y un calendario de 12 meses de pruebas pendientes, `restore-review.md` como orden del día, `tests-due.csv` con columnas de reservado y hecho, `failing-backups.csv` y `evidence-pack.csv` para el auditor.
-- Un exportador de solo lectura en PowerShell para las sesiones de Veeam; los informes de otras herramientas sirven en CSV.
+## Restaurar un fichero no demuestra que el ERP vuelva en cuatro horas
 
-## Cómo está hecho
-Python solo con la librería estándar. La demo es un fabricante inventado con 76 sistemas en tres niveles, dos semanas de trabajos, un año de pruebas de restauración y sus ejercicios de DR, con los problemas puestos a propósito. 13 tests, un runbook para la revisión mensual y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+En las pruebas de restauración, la herramienta lista los sistemas nunca restaurados, las últimas pruebas fallidas o a medias y las vencidas para su nivel. Compara los tiempos con el RTO, el objetivo de tiempo de recuperación, solo en restauraciones completas: restaurar un fichero demuestra que el backup se puede leer, no que el ERP vuelva en cuatro horas.
 
-## Qué aprendí
-De mi trabajo con Veeam Backup y Commvault, y antes con backups en cinta, diseñando y probando planes de backup y DR, y supervisando pruebas de DR y continuidad de negocio alineadas con ISO 22301. La lección que da forma a la herramienta es que la pregunta nunca es "¿se ejecutó el trabajo?", sino "¿cuándo demostramos por última vez que podemos recuperar este sistema, cuánto tardó y dónde está la evidencia?". Medir el RPO desde el último backup bueno y el RTO solo con restauraciones completas es lo que convierte un panel en verde en uno honesto.
+## Un auditor cuenta las evidencias, no las pruebas
 
-## Siguientes pasos
-- Ejecutarlo primero con los sistemas de nivel 1 y un mes de exportaciones reales, y acordar la frecuencia de pruebas por nivel con los responsables de servicio.
-- Programar la exportación de Veeam para el primer lunes de cada mes y guardar la carpeta de resultados de cada mes.
-- Usar `tests-due.csv` para reservar las pruebas del mes siguiente en el calendario de cambios, empezando por el nivel 1."""),
+Las pruebas sin evidencia también se señalan. En los ejercicios de DR, la revisión muestra el último, los planificados y no hechos, y las acciones vencidas. El resultado es un informe web con el nivel 1 de un vistazo y un calendario de 12 meses de pruebas pendientes, un orden del día para la reunión y ficheros CSV con las pruebas pendientes, los backups que fallan y un paquete de evidencias para el auditor.
+
+## Cómo usarlo con datos reales
+
+Un exportador de solo lectura en PowerShell lee las sesiones de Veeam; los informes de otras herramientas sirven en CSV. Funciona con Python y solo la librería estándar, con 13 tests y un runbook. Lo propuesto es empezar con los sistemas de nivel 1 y un mes de exportaciones reales y reservar las pruebas del mes siguiente en el calendario de cambios.
+
+## De dónde sale
+
+La herramienta nace de mi trabajo con Veeam Backup y Commvault, y antes con backups en cinta, diseñando y probando planes de backup y DR, y supervisando pruebas de DR y continuidad de negocio alineadas con ISO 22301. La pregunta que le da forma no es si se ejecutó el trabajo, sino cuándo demostramos por última vez que un sistema se puede recuperar, cuánto tardó y dónde está la evidencia."""),
 dict(n="33", repo="33-executive-meeting-readiness", date="2026-10-25", cat="tools",
- title_en="The chair's iPad had not synced for twelve days: a readiness check for board and executive meetings",
- title_es="El iPad del presidente llevaba doce días sin sincronizar: una revisión de preparación para consejos y comités",
+ title_en="Board meeting failures show days ahead, like a chair's iPad that had not checked in for twelve days",
+ title_es="Los fallos de un consejo se ven días antes, como el iPad del presidente que llevaba doce días sin conectar",
  seo_title_en="Board meeting IT readiness: Teams Rooms, VIP · Iñigo González",
  seo_title_es="Preparación IT de consejos: Teams Rooms y VIP · Iñigo González",
- dek_en="For every board, committee and executive meeting in the next two weeks: the tech check, the Teams Room and its peripherals, updates inside the freeze, the VIP devices and the support engineer, with a verdict per meeting.",
- dek_es="Para cada consejo, comité y reunión de dirección de las próximas dos semanas: la prueba técnica, la sala Teams Rooms y sus periféricos, actualizaciones dentro de la congelación, los dispositivos VIP y el técnico de soporte, con un veredicto por reunión.",
+ seo_desc="For every board, committee and executive meeting in the next two weeks: the tech check, the Teams Room and its peripherals, updates inside the freeze, the VIP devices and the support engineer, with a verdict per meeting.",
+ seo_desc_es="Para cada consejo, comité y reunión de dirección de las próximas dos semanas: la prueba técnica, la sala Teams Rooms y sus periféricos, actualizaciones dentro…",
+ dek_en="The readiness check, published with fictional data from an insurer with eleven meeting rooms, joins Teams Rooms health, device management, room calendars and the service desk to give each board and executive meeting of the next two weeks a verdict.",
+ dek_es="La revisión de preparación, publicada con datos ficticios de una aseguradora con once salas, junta la salud de Teams Rooms, la gestión de dispositivos, los calendarios de las salas y la herramienta de soporte para dar un veredicto a cada consejo y comité de las próximas dos semanas.",
  en="""
+When a board meeting goes wrong, the causes were usually visible days earlier: the microphone array showed as disconnected in the Teams Rooms health, the chair's iPad had not checked in to the MDM, the mobile device management system, for twelve days, a room update was scheduled for the night before, and last week's rehearsal never happened. That is what the meeting readiness check published with this post is built to catch. It is an open-source tool that runs on demo data from a made-up insurer with eleven rooms in three offices, 13 meetings in the next two weeks, 20 VIP devices and 90 days of room incidents, with the problems placed on purpose.
 
-## The problem
-When a board meeting starts, nobody remembers the dashboard was green. They remember the remote director who could not hear the room, the chair's iPad that had not synced the pack, or the update that rebooted the room at 08:55. Each of those was visible days before: the microphone array showed as disconnected in the Teams Rooms health, the iPad had not checked in to the MDM for twelve days, the update was scheduled for the night before, and the rehearsal planned for last week never happened. The signals live in the Teams admin center, Intune or Jamf, the room calendars and the service desk; the check that matters joins them per meeting.
+The signals live in the Teams admin center, Intune or Jamf, the room calendars and the service desk. The check joins them per meeting and gives each a verdict: ready, attention or at risk. Readiness belongs to the meeting, not the room: the same degraded display is a note for a workshop and a decision for the board.
 
-## What I built
-- Meetings: board, committee and investor meetings without a tech check in the last week, rooms that do not fit (too small, or hybrid in a room with no Teams Room), overlapping bookings or no setup time, and meetings with no support engineer.
-- Rooms: Teams Rooms offline or not reporting, faulty camera, microphone, speaker or display (critical when audio or video is down in a hybrid meeting), updates inside the freeze before the meeting, and rooms with repeated incidents.
-- VIP devices: not compliant or not checked in, OS or board app below the minimum, worn batteries, attendees with no registered device, and warranties ending.
-- A verdict per meeting (ready, attention or at risk), `report.html` day by day, `readiness-pack.md` with a checklist per meeting and attendee, and CSVs for meetings, rooms, VIP devices and incidents.
-- A read-only PowerShell exporter for Microsoft Graph: Teams Rooms health, room calendars and Intune devices.
+## Meetings without a tech check and rooms that do not fit
 
-## How it is built
-Python with the standard library only. The demo is a made-up insurer with eleven rooms in three offices (Crestron, Logitech and Poly systems), 13 meetings in the next two weeks, 20 VIP devices and 90 days of room incidents, with the problems placed on purpose. 13 tests, a runbook for the weekly check, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+For board, committee and investor meetings, the tool flags those without a tech check in the last week, rooms that are too small or have no Teams Room for a hybrid meeting, overlapping bookings or no setup time, and no support engineer. In the rooms, it flags Teams Rooms offline, faulty peripherals, updates inside the freeze and repeated incidents.
 
-## What I learned
-From supporting board and executive committee meetings: Teams Rooms on Crestron with Logitech and Poly systems, iPads, MacBooks and iPhones managed with Jamf Pro and Intune, and VIP support for executives and board members. The lesson that shaped the tool is that readiness belongs to the meeting, not to the room: the same degraded display is a note for an internal workshop and a decision for the board. It complements the fleet view of repo 17, which looks at every room every morning.
+## VIP devices below the minimum version
 
-## Next steps
-- Run it on the next month of board and committee meetings, with the executive office filling in the tech checks and the support engineers.
-- Agree the freeze window and the minimum OS and board app versions with the AV provider and the VIP support team.
-- Send the readiness pack to the company secretary's team the day before each board meeting.""",
+For the attendees, the check lists devices not compliant or not checked in, the OS or board app below the minimum, worn batteries and attendees with no registered device. The output is a day-by-day web report, a readiness pack with a checklist per meeting and attendee, and CSV files.
+
+## How to use it with real data
+
+A read-only PowerShell exporter for Microsoft Graph reads Teams Rooms health, room calendars and Intune devices. It runs on Python with the standard library only, with 13 tests and a runbook. The suggested start is next month's board and committee meetings with the pack sent to the company secretary's team the day before each board meeting.
+
+## Where it comes from
+
+The tool comes from supporting board and executive committee meetings: Teams Rooms on Crestron with Logitech and Poly systems, iPads, MacBooks and iPhones managed with Jamf Pro and Intune, and VIP support for executives and board members.""",
  es="""
+Cuando un consejo sale mal, las causas solían verse días antes: el array de micrófonos aparecía desconectado en la salud de Teams Rooms, el iPad del presidente llevaba doce días sin conectar con el MDM, el sistema de gestión de dispositivos móviles, había una actualización de la sala programada para la noche anterior y la prueba técnica de la semana pasada nunca se hizo. Eso es lo que busca la revisión de preparación de reuniones que acompaña a este post, una herramienta de código abierto que se ejecuta con datos de ejemplo de una aseguradora inventada con once salas en tres oficinas, 13 reuniones en las próximas dos semanas, 20 dispositivos VIP y 90 días de incidencias de salas, con los problemas puestos a propósito.
 
-## El problema
-Cuando empieza un consejo, nadie se acuerda de que el panel estaba en verde. Se acuerdan del consejero en remoto que no oía la sala, del iPad del presidente que no había sincronizado la documentación o de la actualización que reinició la sala a las 08:55. Todo eso se veía días antes: el array de micrófonos aparecía desconectado en la salud de Teams Rooms, el iPad llevaba doce días sin conectar con el MDM, la actualización estaba programada para la noche anterior y la prueba técnica prevista la semana pasada nunca se hizo. Las señales están en el centro de administración de Teams, Intune o Jamf, los calendarios de las salas y la herramienta de soporte; la revisión que importa las junta por reunión.
+Las señales están en el centro de administración de Teams, Intune o Jamf, los calendarios de las salas y la herramienta de soporte. La revisión las junta por reunión y da a cada una un veredicto: lista, atención o en riesgo. La preparación es de la reunión, no de la sala: la misma pantalla degradada es una nota para un taller y una decisión para el consejo.
 
-## Qué he hecho
-- Reuniones: consejos, comités y reuniones con inversores sin prueba técnica en la última semana, salas que no encajan (pequeñas, o reunión híbrida en una sala sin Teams Rooms), reservas solapadas o sin tiempo de preparación, y reuniones sin técnico asignado.
-- Salas: Teams Rooms desconectadas o sin reportar, cámara, micrófono, altavoz o pantalla con fallos (crítico si el audio o el vídeo caen en una reunión híbrida), actualizaciones dentro de la congelación previa y salas con incidencias repetidas.
-- Dispositivos VIP: sin cumplir la política o sin conectar, sistema operativo o app del consejo por debajo del mínimo, baterías gastadas, asistentes sin dispositivo registrado y garantías que vencen.
-- Un veredicto por reunión (lista, atención o en riesgo), `report.html` día a día, `readiness-pack.md` con una lista de comprobación por reunión y asistente, y CSVs de reuniones, salas, dispositivos VIP e incidencias.
-- Un exportador de solo lectura en PowerShell para Microsoft Graph: salud de Teams Rooms, calendarios de salas y dispositivos de Intune.
+## Reuniones sin prueba técnica y salas que no encajan
 
-## Cómo está hecho
-Python solo con la librería estándar. La demo es una aseguradora inventada con once salas en tres oficinas (sistemas Crestron, Logitech y Poly), 13 reuniones en las próximas dos semanas, 20 dispositivos VIP y 90 días de incidencias de salas, con los problemas puestos a propósito. 13 tests, un runbook para la revisión semanal y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+En consejos, comités y reuniones con inversores, la herramienta señala los que no tienen prueba técnica en la última semana, las salas pequeñas o sin Teams Rooms para una reunión híbrida, las reservas solapadas o sin tiempo de preparación y la falta de técnico asignado. En las salas, marca las Teams Rooms desconectadas, los periféricos con fallos, las actualizaciones dentro de la congelación y las incidencias repetidas.
 
-## Qué aprendí
-De dar soporte a consejos y comités de dirección: Teams Rooms sobre Crestron con sistemas Logitech y Poly, iPads, MacBooks e iPhones gestionados con Jamf Pro e Intune, y soporte VIP a directivos y consejeros. La lección que da forma a la herramienta es que la preparación es de la reunión, no de la sala: la misma pantalla degradada es una nota para un taller interno y una decisión para el consejo. Complementa la vista de flota del repo 17, que revisa todas las salas cada mañana.
+## Dispositivos VIP por debajo de la versión mínima
 
-## Siguientes pasos
-- Ejecutarlo con los consejos y comités del próximo mes, con la oficina de presidencia rellenando las pruebas técnicas y los técnicos asignados.
-- Acordar la ventana de congelación y las versiones mínimas de sistema operativo y app del consejo con el proveedor audiovisual y el equipo de soporte VIP.
-- Enviar el pack de preparación al equipo de secretaría del consejo el día antes de cada consejo."""),
+En los asistentes, la revisión lista los dispositivos que no cumplen la política o no se han conectado, el sistema operativo o la app del consejo por debajo del mínimo, las baterías gastadas y los asistentes sin dispositivo registrado. El resultado es un informe web día a día, un pack de preparación con una lista de comprobación por reunión y asistente, y ficheros CSV.
+
+## Cómo usarlo con datos reales
+
+Un exportador de solo lectura en PowerShell para Microsoft Graph lee la salud de Teams Rooms, los calendarios de las salas y los dispositivos de Intune. Funciona con Python y solo la librería estándar, con 13 tests y un runbook. Lo propuesto es empezar con los consejos y comités del próximo mes y enviar el pack a la secretaría del consejo el día antes de cada consejo.
+
+## De dónde sale
+
+La herramienta nace de dar soporte a consejos y comités de dirección: Teams Rooms sobre Crestron con sistemas Logitech y Poly, iPads, MacBooks e iPhones gestionados con Jamf Pro e Intune, y soporte VIP a directivos y consejeros."""),
 dict(n="34", repo="34-venue-service-readiness", date="2026-10-26", updated="2026-11-15", cat="tools",
- title_en="The only kitchen printer had been down since yesterday: a morning check for a hospitality venue",
- title_es="La única impresora de cocina llevaba caída desde ayer: la revisión de cada mañana en hostelería",
+ title_en="A beach kitchen printer in error since the afternoon before was visible hours before the pool club filled up",
+ title_es="La impresora de la cocina de playa, en error desde la tarde anterior, se veía horas antes de llenarse el pool club",
  seo_title_en="Hospitality IT opening check: POS and Wi-Fi · Iñigo González",
  seo_title_es="Revisión IT de apertura en hostelería: TPV y Wi-Fi · Iñigo González",
- dek_en="For every service in the next week, in a restaurant, a pool club, a bar and a hotel: the opening check, enough working tills and handhelds, kitchen printers, card terminals and cash machines, the network and the failover, the PMS and IPTV, and the vendor who would fix each of them, with a verdict per service.",
- dek_es="Para cada servicio de la próxima semana, en un restaurante, un pool club, un bar y un hotel: la prueba de apertura, suficientes TPV y comanderos funcionando, impresoras de cocina, datáfonos y cajones de efectivo, la red y su respaldo, el PMS y la IPTV, y el proveedor que arreglaría cada cosa, con un veredicto por servicio.",
+ seo_desc="For every service in the next week, in a restaurant, a pool club, a bar and a hotel: the opening check, enough working tills and handhelds, kitchen printers, card terminals and cash machines, the network and the failover, the PMS and IPTV, and the vendor who would fix each of them, with a verdict per service.",
+ seo_desc_es="Para cada servicio de la próxima semana, en un restaurante, un pool club, un bar y un hotel: la prueba de apertura, suficientes TPV y comanderos funcionando…",
+ dek_en="The morning check, published with fictional data from a beach club and boutique hotel, joins the POS, the network, the cash machines, the PMS and the vendors' portals to give every service of the next week a verdict.",
+ dek_es="La revisión de cada mañana, publicada con datos ficticios de un beach club con hotel boutique, junta el TPV, la red, los cajones de efectivo, el PMS y los portales de los proveedores para dar un veredicto a cada servicio de la próxima semana.",
  en="""
+When a pool club fills up at one o'clock, the failures that hurt are orders that never reach the kitchen, a queue at the only working card terminal and room charges that never reach the guest's bill. In the example the post starts from, all of it was visible that morning: the beach kitchen printer had been in error since the afternoon before, two of the four handhelds were dead or in a drawer, the backup internet line had been down for five days and the PMS interface had 37 charges waiting. That is what the morning service check published with this post is built to catch. It is an open-source tool that runs on demo data from a made-up beach club and boutique hotel with a restaurant, a pool club, a sunset bar and 24 rooms, with the problems placed on purpose.
 
-## The problem
-When the pool club fills up at one o'clock, nobody remembers that the monitoring was green at nine. They remember the orders that never reached the kitchen, the queue at the only card terminal that worked, or the room charges that never reached the guest's bill. Each of those was visible that morning: the beach kitchen printer had been in error since the afternoon before, two of the four handhelds were dead or in a drawer, the backup internet line had been down for five days, and the PMS interface had 37 charges waiting. The POS vendor answers until seven in the evening; the bar closes at one. The signals live in the POS back office, the network controller, the cash machine and PMS consoles and the vendors' portals; the check that matters joins them per service.
+The demo covers 16 services in a week, including a 900-guest Halloween night, 74 devices and five vendors. The PMS is the hotel's property management system, where room charges land. The check joins the POS, network, cash machine, PMS and vendor data per service, because a service is only as ready as its weakest device.
 
-## What I built
-- Services: no opening check close to opening, big services and events with nobody from IT on duty, and device updates scheduled inside the freeze before a service.
-- POS and payments: fewer working tills and handhelds than the guests need, kitchen printers or KDS down where there is food, card terminals down, and cash machines in error, short of change or with a full stacker.
-- Network and guest systems: primary or backup internet line down, Wi-Fi access points, switches and firewall, the PMS interface for room charges, IPTV in the rooms and the key card encoders.
-- Vendors: open tickets past each vendor's SLA, contracts ended or ending, and services that open or close outside the vendor's support hours.
-- `report.html` with the services day by day and devices by outlet, `opening-pack.md` as the checklist for the outlet managers, and CSVs for services, devices, vendor cover and incidents.
-- A read-only PowerShell probe that pings every device on the venue network and keeps the last time each one answered.
+## Fewer working tills and handhelds than the guests need
 
-## How it is built
-Python with the standard library only. The demo is a made-up beach club and boutique hotel with a restaurant, a pool club, a sunset bar and 24 rooms, 16 services in a week including a 900-guest Halloween night, 74 devices and five vendors, with the problems placed on purpose. 15 tests, a runbook for the morning check, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+The tool flags services with fewer working tills and handhelds than the guests need, kitchen printers or the KDS, the kitchen display screens, down where food is served, card terminals down and cash machines in error or short of change. It also checks both internet lines, Wi-Fi, the PMS interface, IPTV and the key card encoders, and flags big events with nobody from IT on duty.
 
-## What I learned
-From my first years in IT supporting hospitality clients, with POS systems such as ICG and HIOPOS, CashDro cash machines, hotel PMS and IPTV, and later from around 200 pre-openings of luxury brand corners in department stores. At one of them the connection failed two hours before opening; I solved it with a temporary USB router while I checked the line and the floor's comms room with the store's technicians. The lesson that shaped the tool is that a service is only as ready as its weakest device and the vendor who would fix it at that hour, so the verdict is per service, and the backup line, the spare handheld and the vendor's hours are part of the plan.
+## A vendor who answers until seven for a bar that closes at one
 
-## Next steps
-- Run it every morning for two weeks with the real device register and service plan, and tune the guests per till and the opening check with the outlet managers.
-- Read the device states from the POS back office and the network controller instead of the probe.
-- Send each outlet manager their service's checklist before opening, and write the minutes lost back after closing for the vendors' monthly reviews.""",
+In the same example, the POS vendor answers until seven in the evening and the bar closes at one. The review flags open tickets past each vendor's SLA, contracts ending and services outside the vendor's support hours. The output is a day-by-day web report, an opening checklist for the outlet managers and CSV files.
+
+## How to use it with real data
+
+A read-only PowerShell probe pings every device on the venue network and keeps the last time each one answered. It runs on Python with the standard library only, with 15 tests and a runbook. The suggested start is two weeks of mornings with the real device register and service plan, tuning the guests per till with the outlet managers.
+
+## Where it comes from
+
+The tool comes from my first years in IT supporting hospitality clients, with POS systems such as ICG and HIOPOS, CashDro cash machines, hotel PMS and IPTV, and later from around 200 pre-openings of luxury brand corners in department stores. At one of them the connection failed two hours before opening; I solved it with a temporary USB router while I checked the line and the floor's comms room with the store's technicians.""",
  es="""
+Cuando el pool club se llena a la una, los fallos que duelen son las comandas que nunca llegan a cocina, la cola en el único datáfono que funciona y los cargos a habitación que no llegan a la factura del cliente. En el ejemplo del que parte el post, todo se veía esa misma mañana: la impresora de la cocina de playa llevaba en error desde la tarde anterior, dos de los cuatro comanderos estaban sin batería o en un cajón, la línea de internet de respaldo llevaba cinco días caída y el interfaz del PMS tenía 37 cargos pendientes. Eso es lo que busca la revisión de servicio de cada mañana que acompaña a este post, una herramienta de código abierto que se ejecuta con datos de ejemplo de un beach club con hotel boutique inventado, con restaurante, pool club, bar de atardecer y 24 habitaciones, con los problemas puestos a propósito.
 
-## El problema
-Cuando el pool club se llena a la una, nadie se acuerda de que la monitorización estaba en verde a las nueve. Se acuerdan de las comandas que nunca llegaron a cocina, de la cola en el único datáfono que funcionaba o de los cargos a habitación que nunca llegaron a la factura del cliente. Todo eso se veía esa misma mañana: la impresora de la cocina de playa llevaba en error desde la tarde anterior, dos de los cuatro comanderos estaban sin batería o en un cajón, la línea de internet de respaldo llevaba cinco días caída y el interfaz del PMS tenía 37 cargos pendientes. El proveedor del TPV atiende hasta las siete de la tarde; el bar cierra a la una. Las señales están en el back office del TPV, el controlador de red, las consolas de los cajones de efectivo y del PMS y los portales de los proveedores; la revisión que importa las junta por servicio.
+La demo cubre 16 servicios en una semana, con una noche de Halloween para 900 personas, 74 equipos y cinco proveedores. El PMS es el sistema de gestión del hotel, donde llegan los cargos a habitación. La revisión junta por servicio los datos del TPV, la red, los cajones, el PMS y los proveedores, porque un servicio está tan preparado como su equipo más débil.
 
-## Qué he hecho
-- Servicios: sin prueba de apertura cerca de abrir, servicios grandes y eventos sin nadie de IT de guardia, y actualizaciones de equipos programadas dentro de la congelación antes de un servicio.
-- TPV y pagos: menos TPV y comanderos funcionando de los que necesitan los clientes, impresoras de cocina o KDS caídas donde hay comida, datáfonos caídos, y cajones de efectivo en error, sin cambio o con el depósito lleno.
-- Red y sistemas del cliente: línea de internet principal o de respaldo caída, puntos de acceso Wi-Fi, switches y firewall, el interfaz del PMS para los cargos a habitación, la IPTV de las habitaciones y los codificadores de tarjetas.
-- Proveedores: tickets abiertos fuera del SLA de cada proveedor, contratos vencidos o a punto de vencer, y servicios que abren o cierran fuera del horario de soporte del proveedor.
-- `report.html` con los servicios día a día y los equipos por zona, `opening-pack.md` como checklist para los responsables de cada zona, y CSV de servicios, equipos, cobertura de proveedores e incidencias.
-- Una prueba de solo lectura en PowerShell que hace ping a cada equipo de la red del local y guarda la última vez que respondió.
+## Menos TPV y comanderos funcionando de los que necesitan los clientes
 
-## Cómo está hecho
-Python solo con la librería estándar. La demo es un beach club con hotel boutique inventado, con restaurante, pool club, bar de atardecer y 24 habitaciones, 16 servicios en una semana con una noche de Halloween para 900 personas, 74 equipos y cinco proveedores, con los problemas puestos a propósito. 15 tests, un runbook para la revisión de cada mañana y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+La herramienta señala los servicios con menos TPV y comanderos funcionando de los que necesitan los clientes, las impresoras de cocina o el KDS, las pantallas de cocina, caídos donde hay comida, los datáfonos caídos y los cajones de efectivo en error o sin cambio. También revisa las dos líneas de internet, el Wi-Fi, el interfaz del PMS, la IPTV y los codificadores de tarjetas, y marca los eventos grandes sin nadie de IT de guardia.
 
-## Qué aprendí
-De mis primeros años en IT dando soporte a clientes de hostelería, con TPV como ICG y HIOPOS, cajones CashDro, PMS hotelero e IPTV, y después de unas 200 preaperturas de corners de marcas de lujo en grandes almacenes. En una de ellas la conexión falló a dos horas de abrir; lo resolví con un router USB temporal mientras revisaba la línea y la sala de comunicaciones de la planta con los técnicos de los grandes almacenes. La lección que da forma a la herramienta es que un servicio está tan preparado como su equipo más débil y el proveedor que lo arreglaría a esa hora, así que el veredicto es por servicio, y la línea de respaldo, el comandero de repuesto y el horario del proveedor forman parte del plan.
+## Un proveedor que atiende hasta las siete para un bar que cierra a la una
 
-## Siguientes pasos
-- Ejecutarlo cada mañana durante dos semanas con el inventario real de equipos y el plan de servicios, y ajustar los clientes por TPV y la prueba de apertura con los responsables de cada zona.
-- Leer el estado de los equipos del back office del TPV y del controlador de red en lugar de la prueba de ping.
-- Enviar a cada responsable el checklist de su servicio antes de abrir, y registrar los minutos perdidos al cerrar para las revisiones mensuales con los proveedores."""),
+En el mismo ejemplo, el proveedor del TPV atiende hasta las siete de la tarde y el bar cierra a la una. La revisión señala los tickets fuera del SLA de cada proveedor, los contratos que vencen y los servicios fuera del horario de soporte. El resultado es un informe web día a día, un checklist de apertura para los responsables de cada zona y ficheros CSV.
+
+## Cómo usarlo con datos reales
+
+Una prueba de solo lectura en PowerShell hace ping a cada equipo de la red del local y guarda la última vez que respondió. Funciona con Python y solo la librería estándar, con 15 tests y un runbook. Lo propuesto es empezar con dos semanas de mañanas con el inventario real y el plan de servicios y ajustar los clientes por TPV con los responsables de cada zona.
+
+## De dónde sale
+
+La herramienta nace de mis primeros años en IT dando soporte a clientes de hostelería, con TPV como ICG y HIOPOS, cajones CashDro, PMS hotelero e IPTV, y después de unas 200 preaperturas de corners de marcas de lujo en grandes almacenes. En una de ellas la conexión falló a dos horas de abrir; lo resolví con un router USB temporal mientras revisaba la línea y la sala de comunicaciones de la planta con los técnicos de los grandes almacenes."""),
 dict(n="35", repo="35-private-cloud-capacity-review", date="2026-10-27", cat="tools",
- title_en="The cluster looked fine at 74%: a monthly capacity and availability review of a private cloud",
- title_es="El clúster parecía ir bien al 74%: una revisión mensual de capacidad y disponibilidad de una nube privada",
+ title_en="A private cloud cluster at 74% of its RAM crosses its N+1 limit in January once projects are counted",
+ title_es="Un clúster de nube privada al 74% de su RAM cruza su límite N+1 en enero al contar los proyectos aprobados",
  seo_title_en="Private cloud capacity: vSphere and Nutanix · Iñigo González",
  seo_title_es="Capacidad de nube privada: vSphere y Nutanix · Iñigo González",
- dek_en="For every vSphere and Nutanix cluster: the CPU and RAM left after a host failure, the vCPU ratio, a 12-month trend with the approved projects and the reclaim list, the month it crosses its N+1 limit against the purchase lead time, datastores, and the month's availability.",
- dek_es="Para cada clúster vSphere y Nutanix: la CPU y la RAM que quedan tras caer un host, el ratio de vCPU, una tendencia de 12 meses con los proyectos aprobados y la lista de recuperación, el mes en que cruza su límite N+1 frente al plazo de compra, los datastores y la disponibilidad del mes.",
+ seo_desc="For every vSphere and Nutanix cluster: the CPU and RAM left after a host failure, the vCPU ratio, a 12-month trend with the approved projects and the reclaim list, the month it crosses its N+1 limit against the purchase lead time, datastores, and the month's availability.",
+ seo_desc_es="Para cada clúster vSphere y Nutanix: la CPU y la RAM que quedan tras caer un host, el ratio de vCPU, una tendencia de 12 meses con los proyectos aprobados…",
+ dek_en="The monthly capacity review, published with fictional data from an engineering company's private cloud, turns vSphere and Nutanix utilisation, approved projects and the reclaim list into the month each cluster runs out of room and the date to order hosts.",
+ dek_es="La revisión mensual de capacidad, publicada con datos ficticios de la nube privada de una empresa de ingeniería, convierte el uso de vSphere y Nutanix, los proyectos aprobados y la lista de recuperación en el mes en que cada clúster se queda sin margen y la fecha para pedir hosts.",
  en="""
+A cluster at 74% of its RAM looks healthy on the dashboard, but without the host that HA, the high-availability feature, keeps as a spare it is at 85% of what is left. It grows half a point a month and two approved projects land in January and March, so it crosses its N+1 limit, the level at which it can still lose a host, in January. New hosts take four months to order, deliver and add, so the decision was due in September. That is the reasoning behind the monthly capacity review published with this post, an open-source tool that runs on demo data from a made-up engineering company with a private cloud in Madrid and Guadalajara.
 
-## The problem
-Capacity is a date, not a percentage. A cluster at 74% of its RAM looks healthy on the dashboard. Take away the host that HA needs as a spare, though, and it is at 85% of what is left. It grows half a point a month, and two approved projects land in January and March. Put the three facts together and the cluster crosses its N+1 limit in January. New hosts take four months to order, deliver and add to the cluster, so the decision was due in September. The facts live in different places: capacity and utilisation in vCenter and Prism Central, projects in the portfolio, powered-off VMs and forgotten snapshots in the inventory, outages in the incident records. The monthly capacity review is where they meet.
+In the demo, with the problems placed on purpose, the Madrid production cluster crosses its N+1 limit in January once the approved projects are counted. The reclaim list moves that date to March, enough to order the hosts in November. The demo has two vSphere production clusters, a Nutanix AHV cluster, a management cluster, 23 hosts and 458 VMs.
 
-## What I built
-- Headroom after a host failure: the CPU and RAM left when the largest host fails, the vCPU:pCPU ratio against the policy, vRAM overcommit, and hosts in maintenance.
-- Runway: the latest p95 plus a linear trend over 12 months, with the approved projects added at their go-live month and the reclaim list taken away. The result is the month each cluster crosses its limit, the month to order by and the hosts to add.
-- Reclaim: VMs powered off for 30 or 90 days, idle VMs, VMs oversized against their p95 with the recommended size, old snapshots, and VMs without an owner, with the RAM and storage each one gives back.
-- Storage and availability: datastores below the free space threshold, thin provisioning, cluster outages against the availability target, host failures and HA restarts, and hosts out of vendor support.
-- `report.html` with a card and a runway chart per cluster, `capacity-review.md` with the decisions table for the meeting, and CSVs for clusters, forecast, reclaim, datastores and demand.
-- A read-only PowerShell exporter for vCenter with PowerCLI and for Nutanix Prism Central through its REST API.
+## Capacity measured as a date, not a percentage
 
-## How it is built
-Python with the standard library only. The demo is a made-up engineering company with a private cloud in Madrid and Guadalajara: two vSphere production clusters, a Nutanix AHV cluster, a management cluster, 23 hosts, 458 VMs, 13 months of utilisation and seven demand items. The problems are placed on purpose. The Madrid production cluster crosses its N+1 limit in January once the approved projects are counted, and the reclaim list moves that date to March, enough to order the hosts in November. 15 tests, a runbook for the monthly meeting, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+For each cluster, the review calculates the CPU and RAM left when the largest host fails, the vCPU:pCPU ratio against the policy and hosts in maintenance. The runway takes the latest p95, the level usage stays under 95% of the time, adds a 12-month linear trend and the approved projects at their go-live month, and takes away the reclaim list. The result is the month each cluster crosses its limit, the month to order by and the hosts to add.
 
-## What I learned
-From running private cloud infrastructure on vCenter and vSphere, VMware VCF with vSAN and NSX-T, Nutanix, OpenShift and HPE GreenLake, on Dell, HP and Supermicro servers with SAN, NAS and NetApp storage, and from formal capacity and availability management with metrics, trends and availability plans. Right-sizing and reservations in Azure taught me the same lesson on the cost side. The lesson that shaped the tool: the capacity meeting should end with dates and owners, not percentages. The runway is set against the purchase lead time, and the reclaim list only counts when it moves the date.
+## Powered-off VMs and old snapshots that move the date
 
-## Next steps
-- Run it with the last 12 months of vCenter and Prism Central data, and check the N+1 limits and the vCPU policy with the platform team before the first meeting.
-- Put the project portfolio into the demand file every month, and send each service owner their reclaim rows a week before the meeting.
-- Keep each month's output, so the next review compares the forecast with what actually happened.""",
+The reclaim list covers VMs powered off for 30 or 90 days, idle or oversized VMs, old snapshots and VMs without an owner, with the RAM and storage each gives back. It only counts when it moves the date. The review also flags datastores low on free space, cluster outages against the availability target and hosts out of vendor support. The output is a web report with a runway chart per cluster, a decisions table for the meeting and CSV files.
+
+## How to use it with real data
+
+A read-only PowerShell exporter reads vCenter through PowerCLI and Nutanix Prism Central through its REST API. It runs on Python with the standard library only, with 15 tests and a runbook. The suggested start is the last 12 months of data and keeping each month's output so the next review compares the forecast with what happened.
+
+## Where it comes from
+
+The tool comes from running private cloud infrastructure on vCenter and vSphere, VMware VCF with vSAN and NSX-T, Nutanix, OpenShift and HPE GreenLake, on Dell, HP and Supermicro servers with SAN, NAS and NetApp storage, and from formal capacity and availability management. The lesson behind it is that the capacity meeting should end with dates and owners, not percentages.""",
  es="""
+Un clúster al 74% de su RAM parece sano en el panel, pero sin el host que HA, la función de alta disponibilidad, guarda de reserva está al 85% de lo que queda. Crece medio punto al mes y hay dos proyectos aprobados que llegan en enero y en marzo, así que cruza su límite N+1, el nivel en el que aún puede perder un host, en enero. Pedir, recibir y añadir hosts nuevos lleva cuatro meses, de modo que la decisión había que tomarla en septiembre. Ese es el razonamiento de la revisión mensual de capacidad que acompaña a este post, una herramienta de código abierto que se ejecuta con datos de ejemplo de una empresa de ingeniería inventada con una nube privada en Madrid y Guadalajara.
 
-## El problema
-La capacidad es una fecha, no un porcentaje. Un clúster al 74% de su RAM parece sano en el panel. Pero si quitas el host que HA necesita de reserva, está al 85% de lo que queda. Crece medio punto al mes, y hay dos proyectos aprobados que llegan en enero y en marzo. Juntando las tres cosas, el clúster cruza su límite N+1 en enero. Pedir, recibir y añadir hosts nuevos al clúster lleva cuatro meses, así que la decisión había que tomarla en septiembre. Los datos están en sitios distintos: capacidad y uso en vCenter y Prism Central, proyectos en la cartera, máquinas apagadas y snapshots olvidados en el inventario, caídas en los registros de incidencias. La revisión mensual de capacidad es donde se juntan.
+En la demo, con los problemas puestos a propósito, el clúster de producción de Madrid cruza su límite N+1 en enero al contar los proyectos aprobados. La lista de recuperación mueve esa fecha a marzo, lo justo para pedir los hosts en noviembre. La demo tiene dos clústeres vSphere de producción, un clúster Nutanix AHV, un clúster de gestión, 23 hosts y 458 máquinas virtuales.
 
-## Qué he hecho
-- Margen tras caer un host: la CPU y la RAM que quedan si cae el host más grande, el ratio vCPU:pCPU frente a la política, la sobreasignación de vRAM y los hosts en mantenimiento.
-- Autonomía: el último p95 más una tendencia lineal de 12 meses, sumando los proyectos aprobados en su mes de puesta en marcha y restando la lista de recuperación. El resultado es el mes en que cada clúster cruza su límite, el mes límite para pedir y los hosts a añadir.
-- Recuperación: máquinas apagadas desde hace 30 o 90 días, máquinas ociosas, máquinas sobredimensionadas según su p95 con el tamaño recomendado, snapshots antiguos y máquinas sin responsable, con la RAM y el almacenamiento que devuelve cada una.
-- Almacenamiento y disponibilidad: datastores por debajo del umbral de espacio libre, thin provisioning, caídas de clúster frente al objetivo de disponibilidad, fallos de host y reinicios de HA, y hosts sin soporte del fabricante.
-- `report.html` con una tarjeta y una gráfica de autonomía por clúster, `capacity-review.md` con la tabla de decisiones para la reunión, y CSV de clústeres, previsión, recuperación, datastores y demanda.
-- Un exportador de solo lectura en PowerShell para vCenter con PowerCLI y para Nutanix Prism Central con su API REST.
+## La capacidad medida como una fecha, no como un porcentaje
 
-## Cómo está hecho
-Python solo con la librería estándar. La demo es una empresa de ingeniería inventada con una nube privada en Madrid y Guadalajara: dos clústeres vSphere de producción, un clúster Nutanix AHV, un clúster de gestión, 23 hosts, 458 máquinas virtuales, 13 meses de uso y siete peticiones de demanda. Los problemas están puestos a propósito. El clúster de producción de Madrid cruza su límite N+1 en enero al contar los proyectos aprobados, y la lista de recuperación mueve esa fecha a marzo, lo justo para pedir los hosts en noviembre. 15 tests, un runbook para la reunión mensual y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+Para cada clúster, la revisión calcula la CPU y la RAM que quedan si cae el host más grande, el ratio vCPU:pCPU frente a la política y los hosts en mantenimiento. La autonomía parte del último p95, el nivel por debajo del cual está el uso el 95% del tiempo, le suma una tendencia lineal de 12 meses y los proyectos aprobados en su mes de puesta en marcha, y resta la lista de recuperación. El resultado es el mes en que cada clúster cruza su límite, el mes límite para pedir y los hosts a añadir.
 
-## Qué aprendí
-De gestionar infraestructura de nube privada con vCenter y vSphere, VMware VCF con vSAN y NSX-T, Nutanix, OpenShift y HPE GreenLake, sobre servidores Dell, HP y Supermicro con almacenamiento SAN, NAS y NetApp, y de la gestión formal de capacidad y disponibilidad con métricas, tendencias y planes de disponibilidad. El ajuste de tamaños y las reservas en Azure me enseñaron lo mismo desde el lado del coste. La lección que da forma a la herramienta: la reunión de capacidad tiene que acabar con fechas y responsables, no con porcentajes. La autonomía se compara con el plazo de compra, y la lista de recuperación solo cuenta si mueve la fecha.
+## Máquinas apagadas y snapshots antiguos que mueven la fecha
 
-## Siguientes pasos
-- Ejecutarlo con los últimos 12 meses de datos de vCenter y Prism Central, y revisar los límites N+1 y la política de vCPU con el equipo de plataforma antes de la primera reunión.
-- Pasar cada mes la cartera de proyectos al fichero de demanda, y enviar a cada responsable de servicio sus filas de recuperación una semana antes de la reunión.
-- Guardar la salida de cada mes, para que la siguiente revisión compare la previsión con lo que pasó de verdad."""),
+La lista de recuperación incluye máquinas apagadas desde hace 30 o 90 días, máquinas ociosas o sobredimensionadas, snapshots antiguos y máquinas sin responsable, con la RAM y el almacenamiento que devuelve cada una. Solo cuenta si mueve la fecha. La revisión también señala datastores con poco espacio libre, caídas de clúster frente al objetivo de disponibilidad y hosts sin soporte del fabricante. El resultado es un informe web con una gráfica de autonomía por clúster, una tabla de decisiones para la reunión y ficheros CSV.
+
+## Cómo usarlo con datos reales
+
+Un exportador de solo lectura en PowerShell lee vCenter con PowerCLI y Nutanix Prism Central con su API REST. Funciona con Python y solo la librería estándar, con 15 tests y un runbook. Lo propuesto es empezar con los últimos 12 meses de datos y guardar la salida de cada mes para que la siguiente revisión compare la previsión con lo que pasó.
+
+## De dónde sale
+
+La herramienta nace de gestionar infraestructura de nube privada con vCenter y vSphere, VMware VCF con vSAN y NSX-T, Nutanix, OpenShift y HPE GreenLake, sobre servidores Dell, HP y Supermicro con almacenamiento SAN, NAS y NetApp, y de la gestión formal de capacidad y disponibilidad. La lección que hay detrás es que la reunión de capacidad tiene que acabar con fechas y responsables, no con porcentajes."""),
 dict(n="36", repo="36-major-incident-command-kit", date="2026-10-28", cat="tools",
- title_en="Users told us 40 minutes before monitoring did: a kit to run and review major incidents",
- title_es="Los usuarios nos avisaron 40 minutos antes que la monitorización: un kit para dirigir y revisar incidentes mayores",
+ title_en="Users reported an outage 40 minutes before monitoring did, the kind of gap a major incident kit measures",
+ title_es="Los usuarios avisaron 40 minutos antes que la monitorización: el hueco que mide un kit de incidentes mayores",
  seo_title_en="Major incident review kit: MTTA, MTTR, PIR · Iñigo González",
  seo_title_es="Kit de incidentes graves: MTTA, MTTR y revisión · Iñigo González",
- dek_en="For every P1 and P2 of the quarter: the first alert against the first user report, time to acknowledge, mitigate and resolve against target, who ran it, the gaps in stakeholder updates, the change the night before, the review, the root cause and the overdue actions, with a timeline and a draft post-incident review per incident.",
- dek_es="Para cada P1 y P2 del trimestre: la primera alerta frente al primer aviso de los usuarios, el tiempo de respuesta, mitigación y resolución frente al objetivo, quién lo dirigió, los huecos en las comunicaciones, el cambio de la noche anterior, la revisión, la causa raíz y las acciones vencidas, con una línea de tiempo y un borrador de revisión post-incidente por incidente.",
+ seo_desc="For every P1 and P2 of the quarter: the first alert against the first user report, time to acknowledge, mitigate and resolve against target, who ran it, the gaps in stakeholder updates, the change the night before, the review, the root cause and the overdue actions, with a timeline and a draft post-incident review per incident.",
+ seo_desc_es="Para cada P1 y P2 del trimestre: la primera alerta frente al primer aviso de los usuarios, el tiempo de respuesta, mitigación y resolución frente al objetivo…",
+ dek_en="The kit, published with fictional data from a bank's IT operations team over one quarter, measures each P1 and P2 from the first signal to resolution, checks updates and recent changes, and drafts a post-incident review with a timeline per incident.",
+ dek_es="El kit, publicado con datos ficticios del equipo de operaciones IT de un banco durante un trimestre, mide cada P1 y P2 desde la primera señal hasta la resolución, revisa las comunicaciones y los cambios previos, y redacta un borrador de revisión post-incidente con su línea de tiempo.",
  en="""
+In the example the post starts from, the service desk had dozens of calls about logins before anyone in IT knew, and no alert fired until well after detection. An alert on the payments queue fired at ten past two and nobody acted until three. Those are the gaps the major incident kit published with this post is built to measure. It is an open-source tool that runs on demo data from the IT operations team of a made-up bank over one quarter: 54 incidents, six of them major, on card payments, online banking, trader voice, the mobile API, the payments hub and market data, with the problems placed on purpose.
 
-## The problem
-The post-incident review is usually written a week later, from memory, by the person who was busiest on the bridge. By then the timeline is a guess, and the questions that would change something next time are not asked. The service desk had dozens of calls about logins before anyone in IT knew, and no alert fired until well after detection. An alert on the payments queue fired at ten past two and nobody acted until three. The trading desk went an hour and a half without an update and never got the resolution notice. The change the night before was the cause, and the ticket does not say so. The action that would have caught the login outage is a month overdue. The facts are in the ITSM tool, the monitoring consoles, the bridge chat and the sent folder; the review that matters joins them per incident and measures them against the policy the team signed up to.
+The post-incident review is usually written a week later, from memory, by the person busiest on the bridge, and by then the timeline is a guess. The kit rebuilds it from the ITSM tool, the monitoring consoles, the bridge chat and the sent folder. It compares the first alert on the service or CI, the configuration item affected, with the first user report and the ticket, and marks blind spots and alerts nobody acted on.
 
-## What I built
-- Detection: the first alert on the service or CI against the first user report and the ticket, with blind spots (users first, no alert) and alerts nobody acted on.
-- Response: time to acknowledge, mitigate and resolve against the targets of each priority, and whether an incident commander, a comms lead and a tech lead were recorded.
-- Communications: a stakeholder update every N minutes as the policy says, the first one late, the gaps, and the missing resolution notice.
-- Before and after: changes on the service in the 72 hours before the impact, the post-incident review within N business days, the root cause in the problem record, overdue actions, and incidents that came back on the same CI within 30 days.
-- `report.html` with a timeline per incident as inline SVG, one draft post-incident review per major incident with the parts only people can write clearly marked, and CSVs for the incidents, MTTD/MTTA/MTTM/MTTR by month and priority, comms gaps, overdue actions and repeats.
-- A `start` command that prints the role card, the first-fifteen-minutes checklist and the first stakeholder update for a new incident, and a read-only PowerShell exporter for ServiceNow and Jira Service Management.
+## An hour and a half without an update for the trading desk
 
-## How it is built
-Python with the standard library only. The demo is the IT operations team of a made-up bank over one quarter: 54 incidents, six of them major, on card payments, online banking, trader voice, the mobile API, the payments hub and market data, with alerts from five monitoring tools, changes, bridge timelines, stakeholder updates, problems and actions, and the problems placed on purpose. 15 tests, a runbook for the first fifteen minutes and the weekly review, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+In the same example, the trading desk went an hour and a half without an update and never got the resolution notice. The kit checks for an update every N minutes as the policy says, and flags a late first update, the gaps and a missing resolution notice. It also measures time to acknowledge, mitigate and resolve against each priority's targets.
 
-## What I learned
-From leading the technical response in major incidents and the post-mortems that followed, and from owning the incident, change and problem processes. One of them was the outage of a voice line used by a trading desk at a financial services firm: the fix was technical, but what the desk remembered was how often they heard from us. The lessons that shaped the tool are that detection starts at the first signal, not at the ticket; that an update with nothing new is still an update; that a change in the days before is a suspect until the review rules it out; and that a review without an owner and a date for each action is a meeting, not a review.
+## The change the night before, missing from the ticket
 
-## Next steps
-- Run it on last quarter's real exports and tune the targets, the update interval and the review days with the major incident managers.
-- Read the alerts from the monitoring APIs and the updates from the communication plan instead of two CSVs.
-- Write the draft review into the problem record, and bring the blind spots and overdue actions to the monthly service review.""",
+The change the night before was the cause, and the ticket does not say so. The kit lists changes on the service in the 72 hours before the impact, late reviews, the root cause in the problem record, overdue actions and incidents back on the same CI within 30 days. The action that would have caught the login outage is a month overdue.
+
+The output is a web report with a timeline per incident, a draft review per major incident with the parts only people can write clearly marked, and CSV files with MTTD, MTTA, MTTM and MTTR, the mean times to detect, acknowledge, mitigate and resolve. A `start` command prints the role card and the first-fifteen-minutes checklist.
+
+## How to use it with real data
+
+A read-only PowerShell exporter reads ServiceNow and Jira Service Management. It runs on Python with the standard library only, with 15 tests and a runbook. The suggested start is last quarter's real exports, tuning the targets with the major incident managers.
+
+## Where it comes from
+
+The tool comes from leading the technical response in major incidents and the post-mortems that followed, and from owning the incident, change and problem processes. One was the outage of a voice line used by a trading desk at a financial services firm: the fix was technical, but what the desk remembered was how often they heard from us. An update with nothing new is still an update.""",
  es="""
+En el ejemplo del que parte el post, el service desk había recibido decenas de llamadas por el login antes de que nadie en IT lo supiera, y ninguna alerta saltó hasta mucho después de la detección. Una alerta de la cola de pagos saltó a las dos y diez y nadie actuó hasta las tres. Esos son los huecos que mide el kit de incidentes mayores que acompaña a este post, una herramienta de código abierto que se ejecuta con datos de ejemplo del equipo de operaciones IT de un banco inventado durante un trimestre: 54 incidentes, seis de ellos mayores, en pagos con tarjeta, banca online, voz de trading, la API móvil, el hub de pagos y datos de mercado, con los problemas puestos a propósito.
 
-## El problema
-La revisión post-incidente se suele escribir una semana después, de memoria, por la persona que más trabajo tuvo en el puente. Para entonces la línea de tiempo es una suposición, y las preguntas que cambiarían algo la próxima vez no se hacen. El service desk había recibido decenas de llamadas por el login antes de que nadie en IT lo supiera, y ninguna alerta saltó hasta mucho después de la detección. Una alerta de la cola de pagos saltó a las dos y diez y nadie actuó hasta las tres. La mesa de trading pasó hora y media sin una actualización y nunca recibió el aviso de resolución. El cambio de la noche anterior fue la causa, y el ticket no lo dice. La acción que habría detectado la caída del login lleva un mes vencida. Los datos están en la herramienta ITSM, las consolas de monitorización, el chat del puente y la bandeja de enviados; la revisión que importa los junta por incidente y los mide contra la política que el equipo se comprometió a cumplir.
+La revisión post-incidente se suele escribir una semana después, de memoria, por quien más trabajo tuvo en el puente, y para entonces la línea de tiempo es una suposición. El kit la reconstruye a partir de la herramienta ITSM, las consolas de monitorización, el chat del puente y la bandeja de enviados. Compara la primera alerta sobre el servicio o el CI, el elemento de configuración afectado, con el primer aviso de los usuarios y el ticket, y marca los puntos ciegos y las alertas que nadie atendió.
 
-## Qué he hecho
-- Detección: la primera alerta sobre el servicio o el CI frente al primer aviso de los usuarios y el ticket, con los puntos ciegos (avisan los usuarios, sin alerta) y las alertas que nadie atendió.
-- Respuesta: el tiempo hasta la asignación, la mitigación y la resolución frente a los objetivos de cada prioridad, y si constan un incident commander, un responsable de comunicaciones y un responsable técnico.
-- Comunicaciones: una actualización a los interesados cada N minutos según la política, la primera tarde, los huecos y el aviso de resolución que falta.
-- Antes y después: cambios en el servicio en las 72 horas previas al impacto, la revisión post-incidente en N días laborables, la causa raíz en el registro de problema, las acciones vencidas y los incidentes que vuelven en el mismo CI en 30 días.
-- `report.html` con una línea de tiempo por incidente en SVG, un borrador de revisión post-incidente por cada incidente mayor con las partes que solo pueden escribir las personas bien marcadas, y CSV de incidentes, MTTD/MTTA/MTTM/MTTR por mes y prioridad, huecos de comunicación, acciones vencidas y repeticiones.
-- Un comando `start` que imprime la tarjeta de roles, el checklist de los primeros quince minutos y la primera comunicación para un incidente nuevo, y un exportador de solo lectura en PowerShell para ServiceNow y Jira Service Management.
+## Hora y media sin noticias para la mesa de trading
 
-## Cómo está hecho
-Python solo con la librería estándar. La demo es el equipo de operaciones IT de un banco inventado durante un trimestre: 54 incidentes, seis de ellos mayores, en pagos con tarjeta, banca online, voz de trading, la API móvil, el hub de pagos y datos de mercado, con alertas de cinco herramientas de monitorización, cambios, líneas de tiempo del puente, comunicaciones, problemas y acciones, y los problemas puestos a propósito. 15 tests, un runbook para los primeros quince minutos y la revisión semanal, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+En el mismo ejemplo, la mesa de trading pasó hora y media sin una actualización y nunca recibió el aviso de resolución. El kit comprueba que haya una comunicación cada N minutos según la política, y señala una primera comunicación tardía, los huecos y el aviso de resolución que falta. También mide el tiempo hasta la asignación, la mitigación y la resolución frente a los objetivos de cada prioridad.
 
-## Qué aprendí
-De liderar la respuesta técnica en incidentes mayores y los post-mortems que vinieron después, y de ser responsable de los procesos de incidencias, cambios y problemas. Uno de ellos fue la caída de una línea de voz que usaba una mesa de trading en una empresa de servicios financieros: la solución fue técnica, pero lo que la mesa recordaba era cada cuánto tenía noticias nuestras. Las lecciones que dan forma a la herramienta son que la detección empieza con la primera señal, no con el ticket; que una actualización sin novedades sigue siendo una actualización; que un cambio en los días previos es sospechoso hasta que la revisión lo descarta; y que una revisión sin responsable y fecha para cada acción es una reunión, no una revisión.
+## El cambio de la noche anterior, ausente del ticket
 
-## Siguientes pasos
-- Ejecutarlo con las exportaciones reales del último trimestre y ajustar los objetivos, el intervalo de comunicaciones y los días para la revisión con los responsables de incidentes mayores.
-- Leer las alertas de las APIs de monitorización y las comunicaciones del plan de comunicación en lugar de dos CSV.
-- Escribir el borrador de revisión en el registro de problema, y llevar los puntos ciegos y las acciones vencidas a la revisión mensual de servicio."""),
+El cambio de la noche anterior fue la causa, y el ticket no lo dice. El kit lista los cambios en el servicio en las 72 horas previas al impacto, las revisiones tardías, la causa raíz en el registro de problema, las acciones vencidas y los incidentes que vuelven en el mismo CI en 30 días. La acción que habría detectado la caída del login lleva un mes vencida.
+
+El resultado es un informe web con una línea de tiempo por incidente, un borrador de revisión por cada incidente mayor con las partes que solo pueden escribir las personas bien marcadas, y ficheros CSV con MTTD, MTTA, MTTM y MTTR, los tiempos medios de detección, asignación, mitigación y resolución. Un comando `start` imprime la tarjeta de roles y el checklist de los primeros quince minutos.
+
+## Cómo usarlo con datos reales
+
+Un exportador de solo lectura en PowerShell lee ServiceNow y Jira Service Management. Funciona con Python y solo la librería estándar, con 15 tests y un runbook. Lo propuesto es empezar con las exportaciones reales del último trimestre y ajustar los objetivos con los responsables de incidentes mayores.
+
+## De dónde sale
+
+La herramienta nace de liderar la respuesta técnica en incidentes mayores y los post-mortems que vinieron después, y de ser responsable de los procesos de incidencias, cambios y problemas. Uno de ellos fue la caída de una línea de voz que usaba una mesa de trading en una empresa de servicios financieros: la solución fue técnica, pero lo que la mesa recordaba era cada cuánto tenía noticias nuestras. Una actualización sin novedades sigue siendo una actualización."""),
 dict(n="37", repo="37-iam-access-review", date="2026-10-29", cat="tools",
- title_en="He left three weeks ago and is still in Domain Admins: the monthly access review",
- title_es="Se fue hace tres semanas y sigue en Domain Admins: la revisión mensual de accesos",
+ title_en="An administrator who left three weeks ago is still in Domain Admins and a trader signed in after his last day",
+ title_es="Un administrador que se fue hace tres semanas sigue en Domain Admins y un trader entró después de su último día",
  seo_title_en="IAM access review: joiners, movers, leavers · Iñigo González",
  seo_title_es="Revisión de accesos IAM: altas, cambios y bajas · Iñigo González",
  seo_desc="Monthly IAM review from HR, AD and Entra ID exports: leavers still enabled, movers keeping access, orphan accounts, standing admin roles and recertification.",
- dek_en="From the HR roster and the Active Directory, Entra ID, PAM and recertification exports: leavers still enabled, movers who kept their old access, accounts nobody owns, standing roles outside PIM, passwords the vault never rotated, service accounts whose owner left, and reviewers who approved everything in minutes, with a status per area and a pack the auditor can test.",
- dek_es="A partir de la plantilla de RR. HH. y de las exportaciones de Active Directory, Entra ID, la bóveda PAM y la recertificación: bajas todavía habilitadas, cambios de puesto que conservan el acceso anterior, cuentas sin dueño, roles permanentes fuera de PIM, contraseñas que la bóveda no ha rotado, cuentas de servicio cuyo responsable se fue y revisores que lo aprueban todo en minutos, con un estado por área y un informe que el auditor puede comprobar.",
+ seo_desc_es="A partir de la plantilla de RR. HH. y de las exportaciones de Active Directory, Entra ID, la bóveda PAM y la recertificación: bajas todavía habilitadas…",
+ dek_en="The monthly access review, published with fictional data from a clearing house of 600 people, joins the HR roster with the Active Directory, Entra ID, PAM vault and recertification exports to find leavers still enabled, movers who kept their access and approvals nobody really made.",
+ dek_es="La revisión mensual de accesos, publicada con datos ficticios de una cámara de compensación de 600 personas, cruza la plantilla de RR. HH. con Active Directory, Entra ID, la bóveda PAM y la recertificación para encontrar bajas habilitadas, cambios de puesto con acceso antiguo y aprobaciones que nadie revisó.",
  en="""
+A systems administrator who left three weeks ago still has his admin account enabled and in Domain Admins, the group with full control of the Windows domain. That is what the monthly access review published with this post finds. It is an open-source tool that runs on demo data from a made-up clearing house of 600 people, reviewed over one month, with the problems placed on purpose.
 
-## The problem
-Access reviews are usually a spreadsheet sent to managers once a quarter and a box ticked for the auditor. Meanwhile the things that would turn into an incident are in plain sight in the exports. A systems administrator left three weeks ago and his admin account is still enabled and in Domain Admins. A trader signed in four days after his last day. Someone moved from trading to finance in August and kept the trading platform, and the platform owner approved it in the campaign. A Global Administrator was assigned permanently, outside PIM. A service account password in the vault has not changed in 200 days, and the batch account belongs to someone who left and is still used interactively. One reviewer approved 140 items in three minutes, and three revokes were never actioned. HR knows who left and who moved, the directories know who can still sign in, the vault knows what was rotated and the campaign knows who said what; the review that matters joins them per person and per account, every month.
+The account survives because nobody joins the sources. HR knows who left and who moved, the directories know who can still sign in, the vault knows which passwords were rotated and the recertification campaign knows who approved what. The tool joins those exports per person and per account, every month.
 
-## What I built
-- Leavers: accounts still enabled after the end date and its grace, sign-ins after leaving, and the groups, admin accounts and directory roles they still hold.
-- Movers and joiners: access of the previous department kept beyond the grace, access before the start date, joiners without a manager.
-- Accounts: enabled accounts with no HR record, duplicate employee IDs, accounts unused for 90 days and human passwords that never expire.
-- Privileged access: standing Entra ID roles outside PIM, privileged users without MFA or unused, Tier 0 members beyond the approved list, vaulted passwords not rotated and admin accounts not vaulted; service accounts without an owner in employment or signing in interactively, and guests without a sponsor or inactive.
-- Recertification: items not reviewed on time, revokes not actioned, rubber-stamping, and entitlements overdue for review by sensitivity tier.
-- `report.html` with a status per area and an overall status, `access-review.md` as the pack for the monthly IAM service review with 13 controls written the way an auditor tests them, CSVs for leavers, movers, orphans, privileged access, service accounts and the campaign, and a read-only PowerShell exporter for Active Directory and Microsoft Graph.
+## A trader signed in four days after his last day
 
-## How it is built
-Python with the standard library only. The demo is a made-up clearing house of 600 people reviewed for one month: Active Directory and Entra ID accounts, group memberships over a catalogue of entitlements by tier, Entra ID roles active and eligible, the PAM vault, the service account register and a recertification campaign of 446 items, with the problems placed on purpose. 18 tests, a runbook for the day of the review and the monthly service review, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+The same review finds a trader who signed in four days after leaving, and lists every account still enabled past the end date and its grace period. It also follows movers: someone who moved from trading to finance in August kept the trading platform, and the platform owner approved it in the campaign.
 
-## What I learned
-From administering Active Directory and Entra ID, with PIM and just-in-time access for the admin roles, managing privileged accounts in CyberArk and ManageEngine Password Manager Pro, owning the joiner process, and answering audits under ISO 27001. The lessons that shaped the tool are that a leaver's account is a finding even if nobody used it; that admin accounts must leave with their owner, which only works if they carry the owner's employee ID; that a move is the moment access goes wrong, not the next campaign; that standing should be the exception and eligible the rule; and that an approval in seconds is not a review, so the pack measures how the campaign was done, not only whether it was finished.
+## A permanent Global Administrator and a password unchanged for 200 days
 
-## Next steps
-- Run it on last month's real exports and tune the grace periods, the thresholds, the PIM roles and the approved Tier 0 list with the IAM and infrastructure leads.
-- Read the HR roster and the vault from their APIs instead of two CSVs, and compare each month with the previous one in the pack.
-- Generate the next campaign from the catalogue, with the last sign-in and the department next to each item so reviewers see what they approve.""",
+In privileged access, a Global Administrator role was assigned permanently, outside PIM, the Entra ID feature that grants admin roles only when they are needed. A service account password kept in the vault has not changed in 200 days, and a batch account belongs to someone who left and is still used interactively, by a person signing in rather than by a process. The review also checks members of Tier 0, the most sensitive admin level, beyond the approved list.
+
+## One reviewer approved 140 items in three minutes
+
+The recertification campaign, in which owners confirm or remove each access, has 446 items. One reviewer approved 140 of them in three minutes, and three revokes were never actioned. The tool measures how the campaign was done, not only whether it was finished: items not reviewed on time, revokes pending, rubber-stamping and entitlements overdue for review by sensitivity tier.
+
+The outputs are a web report with a status per area and an overall status, a pack for the monthly IAM service review with 13 controls written the way an auditor tests them, and CSV files for leavers, movers, orphan accounts, privileged access, service accounts and the campaign.
+
+## How to use it with real data
+
+The repository includes a read-only PowerShell exporter for Active Directory and Microsoft Graph. The tool runs on Python with only the standard library and comes with 18 tests and a runbook. The planned next step is to run it on last month's real exports and tune the grace periods, the thresholds, the PIM roles and the approved Tier 0 list with the IAM and infrastructure leads. The company, people and accounts of the demo are fictional.
+
+## Where it comes from
+
+The tool comes from administering Active Directory and Entra ID with PIM and just-in-time access, managing privileged accounts in CyberArk and ManageEngine Password Manager Pro, owning the joiner process and answering audits under ISO 27001. Two lessons shaped it: a leaver's account is a finding even if nobody used it, and a move is the moment access goes wrong, not the next campaign.""",
  es="""
+Un administrador de sistemas que se fue hace tres semanas sigue teniendo su cuenta de administración habilitada y en Domain Admins, el grupo con control total del dominio de Windows. Así lo detecta la revisión mensual de accesos que acompaña a este post, una herramienta de código abierto que se ejecuta con datos de ejemplo de una cámara de compensación inventada de 600 personas, revisada durante un mes y con los problemas puestos a propósito.
 
-## El problema
-Las revisiones de accesos suelen ser una hoja de cálculo que se manda a los responsables una vez al trimestre y una casilla marcada para el auditor. Mientras tanto, lo que acabaría siendo un incidente está a la vista en las exportaciones. Un administrador de sistemas se fue hace tres semanas y su cuenta de administración sigue habilitada y en Domain Admins. Un trader inició sesión cuatro días después de su último día. Alguien pasó de trading a finanzas en agosto y conservó la plataforma de trading, y el responsable de la plataforma lo aprobó en la campaña. Un Global Administrator se asignó de forma permanente, fuera de PIM. La contraseña de una cuenta de servicio en la bóveda lleva 200 días sin cambiar, y la cuenta del batch es de alguien que se fue y se sigue usando de forma interactiva. Un revisor aprobó 140 elementos en tres minutos y tres revocaciones no se llegaron a ejecutar. RR. HH. sabe quién se fue y quién cambió de puesto, los directorios saben quién puede seguir entrando, la bóveda sabe qué se rotó y la campaña sabe quién dijo qué; la revisión que importa los junta por persona y por cuenta, todos los meses.
+La cuenta sobrevive porque nadie junta las fuentes. RR. HH. sabe quién se fue y quién cambió de puesto, los directorios saben quién puede seguir entrando, la bóveda sabe qué contraseñas se rotaron y la campaña de recertificación sabe quién aprobó qué. La herramienta cruza esas exportaciones por persona y por cuenta, todos los meses.
 
-## Qué he hecho
-- Bajas: cuentas todavía habilitadas pasada la fecha de baja y su margen, inicios de sesión después de irse, y los grupos, cuentas de administración y roles de directorio que conservan.
-- Cambios de puesto y altas: acceso del departamento anterior mantenido más allá del margen, accesos antes de la fecha de incorporación y altas sin responsable.
-- Cuentas: cuentas habilitadas sin registro en RR. HH., IDs de empleado duplicados, cuentas sin uso en 90 días y contraseñas de personas que nunca caducan.
-- Accesos privilegiados: roles permanentes de Entra ID fuera de PIM, usuarios privilegiados sin MFA o sin uso, miembros de Tier 0 fuera de la lista aprobada, contraseñas en bóveda sin rotar y cuentas de administración fuera de la bóveda; cuentas de servicio sin un responsable en plantilla o con inicio de sesión interactivo, e invitados sin patrocinador o inactivos.
-- Recertificación: elementos sin revisar a tiempo, revocaciones sin ejecutar, aprobaciones en bloque y derechos con la revisión vencida según su nivel de sensibilidad.
-- `report.html` con un estado por área y un estado global, `access-review.md` como informe para la revisión mensual del servicio de IAM con 13 controles redactados como los prueba un auditor, CSV de bajas, cambios de puesto, cuentas huérfanas, accesos privilegiados, cuentas de servicio y la campaña, y un exportador de solo lectura en PowerShell para Active Directory y Microsoft Graph.
+## Un trader entró cuatro días después de su último día
 
-## Cómo está hecho
-Python solo con la librería estándar. La demo es una cámara de compensación inventada de 600 personas revisada durante un mes: cuentas de Active Directory y Entra ID, pertenencias a grupos sobre un catálogo de derechos por nivel, roles de Entra ID activos y elegibles, la bóveda PAM, el registro de cuentas de servicio y una campaña de recertificación de 446 elementos, con los problemas puestos a propósito. 18 tests, un runbook para el día de la revisión y la revisión mensual del servicio, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+La misma revisión encuentra a un trader que inició sesión cuatro días después de irse, y enumera cada cuenta todavía habilitada pasada la fecha de baja y su margen. También sigue los cambios de puesto: alguien que pasó de trading a finanzas en agosto conservó la plataforma de trading, y el responsable de la plataforma lo aprobó en la campaña.
 
-## Qué aprendí
-De administrar Active Directory y Entra ID, con PIM y acceso just-in-time para los roles de administración, gestionando cuentas privilegiadas en CyberArk y ManageEngine Password Manager Pro, siendo responsable del proceso de altas y respondiendo a auditorías bajo ISO 27001. Las lecciones que dan forma a la herramienta son que la cuenta de una baja es un hallazgo aunque nadie la haya usado; que las cuentas de administración tienen que irse con su dueño, y eso solo funciona si llevan su ID de empleado; que el cambio de puesto es el momento en que el acceso se tuerce, no la siguiente campaña; que lo permanente debe ser la excepción y lo elegible la norma; y que una aprobación en segundos no es una revisión, así que el informe mide cómo se hizo la campaña, no solo si se terminó.
+## Un Global Administrator permanente y una contraseña sin cambiar en 200 días
 
-## Siguientes pasos
-- Ejecutarlo con las exportaciones reales del último mes y ajustar los márgenes, los umbrales, los roles de PIM y la lista aprobada de Tier 0 con los responsables de IAM e infraestructura.
-- Leer la plantilla de RR. HH. y la bóveda desde sus APIs en lugar de dos CSV, y comparar cada mes con el anterior en el informe.
-- Generar la siguiente campaña desde el catálogo, con el último inicio de sesión y el departamento junto a cada elemento para que los revisores vean lo que aprueban."""),
+En accesos privilegiados, un rol de Global Administrator se asignó de forma permanente, fuera de PIM, la función de Entra ID que concede los roles de administración solo cuando hacen falta. La contraseña de una cuenta de servicio guardada en la bóveda lleva 200 días sin cambiar, y una cuenta del batch es de alguien que se fue y se sigue usando de forma interactiva, con una persona iniciando sesión en lugar de un proceso. La revisión comprueba además los miembros de Tier 0, el nivel de administración más sensible, fuera de la lista aprobada.
+
+## Un revisor aprobó 140 elementos en tres minutos
+
+La campaña de recertificación, en la que los responsables confirman o retiran cada acceso, tiene 446 elementos. Un revisor aprobó 140 de ellos en tres minutos y tres revocaciones no se llegaron a ejecutar. La herramienta mide cómo se hizo la campaña, no solo si se terminó: elementos sin revisar a tiempo, revocaciones pendientes, aprobaciones en bloque y derechos con la revisión vencida según su nivel de sensibilidad.
+
+El resultado es un informe web con un estado por área y un estado global, un informe para la revisión mensual del servicio de IAM con 13 controles redactados como los prueba un auditor, y ficheros CSV de bajas, cambios de puesto, cuentas huérfanas, accesos privilegiados, cuentas de servicio y la campaña.
+
+## Cómo usarlo con datos reales
+
+El repositorio incluye un exportador de solo lectura en PowerShell para Active Directory y Microsoft Graph. La herramienta funciona con Python y solo la librería estándar, e incluye 18 tests y un runbook. El siguiente paso previsto es ejecutarla con las exportaciones reales del último mes y ajustar los márgenes, los umbrales, los roles de PIM y la lista aprobada de Tier 0 con los responsables de IAM e infraestructura. La empresa, las personas y las cuentas de la demo son ficticias.
+
+## De dónde sale
+
+La herramienta nace de administrar Active Directory y Entra ID con PIM y acceso just-in-time, de gestionar cuentas privilegiadas en CyberArk y ManageEngine Password Manager Pro, de ser responsable del proceso de altas y de responder a auditorías bajo ISO 27001. Dos lecciones le dan forma: la cuenta de una baja es un hallazgo aunque nadie la haya usado, y el cambio de puesto es el momento en que el acceso se tuerce, no la siguiente campaña."""),
 dict(n="37b", label="SD", repo="sysadmindesksbyigg", app="https://sysadmindesksbyigg.pages.dev/", date="2026-10-29", cat="sim",
  title_en="The fix that looks right and does not close the ticket: SysAdmin Desks, a free simulator to practise IT support",
  title_es="El arreglo que parece bueno y no cierra el ticket: SysAdmin Desks, un simulador gratuito para practicar soporte IT",
@@ -1879,913 +1870,1053 @@ De trabajar tickets y enseñar a otros a trabajarlos: la nota de trabajo es part
 - Que la sala de red, los envíos de un ticket y los laboratorios se conserven al recargar la página.
 """),
 dict(n="38", repo="38-it-asset-lifecycle-planner", date="2026-10-30", cat="tools",
- title_en="Nine unregistered laptops and half the budget in one quarter: one inventory and a refresh plan for the office",
- title_es="Nueve portátiles sin registrar y medio presupuesto en un trimestre: inventario y plan de renovación de la oficina",
+ title_en="An office inventory finds nine laptops nobody registered and half the budget due in one quarter",
+ title_es="Un inventario de oficina encuentra nueve portátiles sin registrar y medio presupuesto en un solo trimestre",
  seo_title_en="IT asset inventory and refresh forecast · Iñigo González",
  seo_title_es="Inventario de hardware y plan de renovación · Iñigo González",
  seo_desc="Monthly IT asset review from Device42, Intune, Jamf and purchases: one inventory by serial, leavers' devices, stock and a refresh forecast by quarter.",
- dek_en="From the Device42 export of the comms rooms, Intune and Jamf Pro, the vendor's purchases, the office register, HR and the stock: devices nobody registered, laptops not seen for weeks, switches past end of support, leavers who kept their laptop, stock below the minimum, and the replacements by quarter with their cost, ready for the budget.",
- dek_es="A partir de la exportación de Device42 de las salas de comunicaciones, Intune y Jamf Pro, las compras al fabricante, el registro de la oficina, RR. HH. y el almacén: equipos que nadie registró, portátiles que no se ven desde hace semanas, switches sin soporte del fabricante, bajas que se quedaron el portátil, almacén por debajo del mínimo y las renovaciones por trimestre con su coste, listas para el presupuesto.",
+ seo_desc_es="A partir de la exportación de Device42 de las salas de comunicaciones, Intune y Jamf Pro, las compras al fabricante, el registro de la oficina, RR. HH.…",
+ dek_en="The monthly asset review, published with fictional data from a broker with three offices, joins Device42, Intune, Jamf Pro, the purchases, the office register, HR and the stock by serial number to find unregistered devices, leavers' laptops and the replacements due each quarter.",
+ dek_es="La revisión mensual de equipos, publicada con datos ficticios de un bróker con tres oficinas, cruza por número de serie Device42, Intune, Jamf Pro, las compras, el registro de la oficina, RR. HH. y el almacén para encontrar equipos sin registrar, portátiles de bajas y las renovaciones de cada trimestre.",
  en="""
+Nine laptops that appear in Intune have no record in the office inventory, because they were bought outside the usual channel, and the laptops of a large refresh fall due in the same quarter as the trading floor desktops, half the budget at once. That is what the monthly IT asset review published with this post finds. It is an open-source tool that runs on demo data from a made-up broker with offices in Madrid, Paris and Amsterdam and two comms rooms, with the problems placed on purpose.
 
-## The problem
-In many offices the inventory is split by who looks after it. The comms rooms are in Device42, the laptops and phones in Intune and Jamf, the monitors and docks in a spreadsheet, and the warranties in the vendor's portal. Each list looks complete on its own. Put together, the gaps show: laptops in Intune that nobody registered because they were bought outside the usual channel, a laptop that has not synced for months, a leaver's laptop still checking in weeks after the last day, access switches past end of support and the core switch's warranty ending in six weeks. And when the budget comes, the question "what do we have to buy next year" is answered from memory, until someone notices that the laptops of a big refresh and the trading floor desktops all fall due in the same quarter.
+The gaps exist because the inventory is split by who looks after it. The comms rooms are in Device42, the laptops and phones in Intune and Jamf, the device management tools that control them remotely, the monitors and docks in a spreadsheet and the warranties in the vendor's portal. Each list looks complete on its own. The tool joins them by serial number, the only key every system shares, into one inventory.
 
-## What I built
-- Coverage: one inventory joined by serial number from Device42, the purchases, the office register and MDM; devices in Intune or Jamf with no inventory record, devices not seen for 30 days, duplicate and mismatched serials, and items without owner or site.
-- Comms rooms: devices past end of support or out of warranty, warranties ending in the next 90 days, devices without rack position or owner, and firmware not recorded.
-- Lifecycle: one state for every item (in stock, deployed, in repair, to be retired, retired) and one replacement date from the refresh policy, with what is overdue and what is due in the next two quarters.
-- People and stock: devices assigned to leavers and not returned after 14 days, more devices than the policy allows, people without a computer, and stock per site against the minimum and against next quarter's replacements.
-- Forecast: replacements for the next four quarters by category and site, with units and cost, and the overdue backlog apart.
-- `report.html` with a status per area and an overall verdict, `asset-review.md` as the pack for the monthly review with the forecast ready for the budget, CSVs for every area, and a read-only PowerShell exporter for Device42, Intune (Microsoft Graph) and Jamf Pro.
+## A leaver's laptop still checking in weeks after the last day
 
-## How it is built
-Python with the standard library only. The demo is a made-up broker with offices in Madrid, Paris and Amsterdam and two comms rooms: 51 devices in Device42, about 300 devices in Intune and Jamf, 740 purchase lines and 457 register lines, 198 people and the stock of the three sites, with the problems placed on purpose. 14 tests, a runbook for the monthly review, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+Put together, the lists show a laptop that has not synced for months, and a leaver's laptop still checking in weeks after the last day. The review flags devices not seen for 30 days, duplicate or mismatched serials, items without owner or site, and devices assigned to leavers and not returned after 14 days. It also checks the stock of each site against a minimum.
 
-## What I learned
-From running an office IT site, where I use Device42 for the inventory of the comms rooms (racks, network equipment and servers) and an operations console with PowerShell for inventory and asset control; from managing macOS, iOS, Android and Windows with Intune and Jamf Pro; from the relationship with Dell for hardware and renewals; and from preparing and tracking the annual IT budget in a multi-site company. The lessons that shaped the tool are that the serial number is the only key every system shares; that a device MDM sees and nobody bought is still yours, with no warranty and no replacement date; that a laptop not seen for weeks is an answer waiting for a question; that for the comms rooms end of support beats age; and that a budget built from purchase dates shows the waves before they arrive.
+## Access switches past end of support and a core switch warranty ending in six weeks
 
-## Next steps
-- Run it on the real exports of one site and tune the refresh policy, the unit costs and the device policy with the site and finance leads.
-- Read purchases and warranties from the vendor's API by service tag instead of a CSV.
-- Write the end-user devices back to Device42 by serial, so that it becomes the one inventory for the whole office and this report checks it instead of building it.""",
+In the comms rooms, access switches are past end of support from the manufacturer and the core switch's warranty ends in six weeks. The review lists devices out of support or warranty, warranties ending in the next 90 days, devices without rack position or owner, and firmware not recorded.
+
+Every item gets one state, in stock, deployed, in repair, to be retired or retired, and one replacement date from the refresh policy. From those dates the tool builds the forecast for the next four quarters by category and site, with units and cost, and keeps the overdue backlog apart.
+
+## How to use it with real data
+
+The repository includes a read-only PowerShell exporter for Device42, Intune through Microsoft Graph, and Jamf Pro. It runs on Python with only the standard library and produces a web report with a status per area, a pack for the monthly review with the forecast ready for the budget, and CSV files for every area. The demo has 51 devices in Device42, about 300 in Intune and Jamf, 740 purchase lines, 457 register lines and 198 people, all fictional. The next step planned is to write user devices back to Device42 so it becomes the single inventory.
+
+## Where it comes from
+
+The tool comes from running an office IT site with Device42 for the comms rooms and a PowerShell operations console for asset control, managing macOS, iOS, Android and Windows with Intune and Jamf Pro, working with Dell on hardware and renewals, and preparing the annual IT budget of a multi-site company. The lesson behind it: a budget built from purchase dates shows the waves before they arrive.""",
  es="""
+Nueve portátiles que aparecen en Intune no tienen registro en el inventario de la oficina, porque se compraron fuera del canal habitual, y los portátiles de una renovación grande vencen en el mismo trimestre que los equipos de sobremesa de la sala de trading, medio presupuesto de golpe. Así lo detecta la revisión mensual de equipos que acompaña a este post, una herramienta de código abierto que se ejecuta con datos de ejemplo de un bróker inventado con oficinas en Madrid, París y Ámsterdam y dos salas de comunicaciones, con los problemas puestos a propósito.
 
-## El problema
-En muchas oficinas el inventario está repartido según quién lo cuida. Las salas de comunicaciones están en Device42, los portátiles y los móviles en Intune y Jamf, los monitores y las bases en una hoja de cálculo y las garantías en el portal del fabricante. Cada lista parece completa por separado. Juntas, aparecen los huecos: portátiles en Intune que nadie registró porque se compraron fuera del canal habitual, un portátil que no sincroniza desde hace meses, el portátil de una baja que sigue conectándose semanas después de su último día, switches de acceso sin soporte del fabricante y la garantía del switch de núcleo a seis semanas de vencer. Y cuando llega el presupuesto, la pregunta «qué tenemos que comprar el año que viene» se responde de memoria, hasta que alguien se da cuenta de que los portátiles de una renovación grande y los equipos de sobremesa de la sala de trading vencen todos en el mismo trimestre.
+Los huecos existen porque el inventario está repartido según quién lo cuida. Las salas de comunicaciones están en Device42, los portátiles y los móviles en Intune y Jamf, las herramientas que los gestionan en remoto, los monitores y las bases en una hoja de cálculo y las garantías en el portal del fabricante. Cada lista parece completa por separado. La herramienta las une por número de serie, la única clave que comparten todos los sistemas, en un solo inventario.
 
-## Qué he hecho
-- Cobertura: un inventario único cruzado por número de serie entre Device42, las compras, el registro de la oficina y el MDM; equipos en Intune o Jamf sin registro en el inventario, equipos que no se ven desde hace 30 días, números de serie duplicados o que no cuadran y equipos sin responsable o sin sede.
-- Salas de comunicaciones: equipos sin soporte del fabricante o fuera de garantía, garantías que vencen en los próximos 90 días, equipos sin posición en el rack o sin responsable, y firmware sin registrar.
-- Ciclo de vida: un estado para cada equipo (en almacén, desplegado, en reparación, para retirar, retirado) y una fecha de renovación según la política, con lo que está vencido y lo que vence en los dos próximos trimestres.
-- Personas y almacén: equipos asignados a bajas y no devueltos a los 14 días, más equipos de los que permite la política, personas sin ordenador, y el almacén de cada sede frente al mínimo y frente a las renovaciones del próximo trimestre.
-- Previsión: las renovaciones de los cuatro próximos trimestres por categoría y sede, con unidades y coste, y lo atrasado aparte.
-- `report.html` con un estado por área y un veredicto global, `asset-review.md` como informe para la revisión mensual con la previsión lista para el presupuesto, CSV de cada área y un exportador de solo lectura en PowerShell para Device42, Intune (Microsoft Graph) y Jamf Pro.
+## El portátil de una baja sigue conectándose semanas después de su último día
 
-## Cómo está hecho
-Python solo con la librería estándar. La demo es un bróker inventado con oficinas en Madrid, París y Ámsterdam y dos salas de comunicaciones: 51 equipos en Device42, unos 300 equipos en Intune y Jamf, 740 líneas de compra y 457 del registro, 198 personas y el almacén de las tres sedes, con los problemas puestos a propósito. 14 tests, un runbook para la revisión mensual y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+Juntas, las listas enseñan un portátil que no sincroniza desde hace meses y el portátil de una baja que sigue conectándose semanas después de su último día. La revisión señala los equipos que no se ven desde hace 30 días, los números de serie duplicados o que no cuadran, los equipos sin responsable o sin sede y los asignados a bajas y no devueltos a los 14 días. También compara el almacén de cada sede con un mínimo.
 
-## Qué aprendí
-De llevar la IT de una sede, donde uso Device42 para el inventario de las salas de comunicaciones (racks, equipos de red y servidores) y una consola de operaciones con PowerShell para el inventario y el control de activos; de gestionar macOS, iOS, Android y Windows con Intune y Jamf Pro; de la relación con Dell para el hardware y las renovaciones; y de preparar y seguir el presupuesto anual de IT en una empresa con varias sedes. Las lecciones que dan forma a la herramienta son que el número de serie es la única clave que comparten todos los sistemas; que un equipo que el MDM ve y nadie compró sigue siendo tuyo, sin garantía y sin fecha de renovación; que un portátil que no se ve desde hace semanas es una respuesta esperando una pregunta; que en las salas de comunicaciones el fin de soporte manda sobre la antigüedad; y que un presupuesto hecho con las fechas de compra enseña las olas antes de que lleguen.
+## Switches sin soporte y la garantía del switch de núcleo a seis semanas de vencer
 
-## Siguientes pasos
-- Ejecutarlo con las exportaciones reales de una sede y ajustar la política de renovación, los costes unitarios y la política de equipos por persona con los responsables de la sede y de finanzas.
-- Leer las compras y las garantías desde la API del fabricante por número de serie en lugar de un CSV.
-- Volcar los equipos de usuario en Device42 por número de serie, para que sea el inventario único de toda la oficina y este informe lo compruebe en lugar de construirlo."""),
+En las salas de comunicaciones, los switches de acceso ya no tienen soporte del fabricante y la garantía del switch de núcleo vence en seis semanas. La revisión lista los equipos sin soporte o fuera de garantía, las garantías que vencen en los próximos 90 días, los equipos sin posición en el rack o sin responsable y el firmware sin registrar.
+
+Cada equipo recibe un estado, en almacén, desplegado, en reparación, para retirar o retirado, y una fecha de renovación según la política. Con esas fechas la herramienta construye la previsión de los cuatro próximos trimestres por categoría y sede, con unidades y coste, y deja aparte lo atrasado.
+
+## Cómo usarlo con datos reales
+
+El repositorio incluye un exportador de solo lectura en PowerShell para Device42, Intune a través de Microsoft Graph y Jamf Pro. Funciona con Python y solo la librería estándar, y genera un informe web con un estado por área, un informe para la revisión mensual con la previsión lista para el presupuesto y ficheros CSV de cada área. La demo tiene 51 equipos en Device42, unos 300 en Intune y Jamf, 740 líneas de compra, 457 del registro y 198 personas, todos ficticios. El siguiente paso previsto es volcar los equipos de usuario en Device42 para que sea el inventario único.
+
+## De dónde sale
+
+La herramienta nace de llevar la IT de una sede con Device42 para las salas de comunicaciones y una consola de operaciones en PowerShell para el control de activos, de gestionar macOS, iOS, Android y Windows con Intune y Jamf Pro, de trabajar con Dell en el hardware y las renovaciones y de preparar el presupuesto anual de IT de una empresa con varias sedes. La lección que hay detrás: un presupuesto hecho con las fechas de compra enseña las olas antes de que lleguen."""),
 dict(n="39", repo="39-vulnerability-remediation-sla", date="2026-10-31", updated="2026-11-13", cat="tools",
- title_en="A VPN with a known exploit and thirty servers waiting for a reboot: vulnerability remediation against the SLA",
- title_es="Una VPN con un exploit conocido y treinta servidores sin reiniciar: la corrección de vulnerabilidades frente al SLA",
+ title_en="A VPN back on old firmware with a known exploit and thirty servers still vulnerable while they wait for a reboot",
+ title_es="Una VPN con firmware antiguo y un exploit conocido, y treinta servidores vulnerables a la espera de un reinicio",
  seo_title_en="Vulnerability remediation SLA review · Iñigo González",
  seo_title_es="Revisión del SLA de vulnerabilidades · Iñigo González",
  seo_desc="Weekly and monthly vulnerability SLA review from Qualys, CISA KEV, EPSS, the asset register and Tanium or Intune: what is late, why it is stuck, what to fix.",
- dek_en="From the Qualys detections, the CISA KEV catalog, EPSS, the asset register, the patch status and the exceptions register: every open vulnerability against its deadline, known exploited ones past the CISA date, internet-facing hosts, patches waiting for a reboot, detections back after an old image, servers that cannot be patched, expired exceptions, the teams behind, and the fixes that close most risk.",
- dek_es="A partir de las detecciones de Qualys, el catálogo KEV de CISA, EPSS, el inventario de activos, el estado de parcheo y el registro de excepciones: cada vulnerabilidad abierta frente a su plazo, las explotadas conocidas pasada la fecha de CISA, los equipos expuestos a internet, parches que esperan un reinicio, detecciones que vuelven tras una imagen antigua, servidores que ya no se pueden parchear, excepciones caducadas, los equipos que van con retraso y los arreglos que cierran más riesgo.",
+ seo_desc_es="A partir de las detecciones de Qualys, el catálogo KEV de CISA, EPSS, el inventario de activos, el estado de parcheo y el registro de excepciones: cada…",
+ dek_en="The vulnerability review, published with fictional data from a broker with about 400 servers and 1,200 endpoints, checks every open Qualys detection against its deadline and cross-checks CISA KEV, EPSS, the asset register, the patch status and the exceptions to show what is late and why.",
+ dek_es="La revisión de vulnerabilidades, publicada con datos ficticios de un bróker con unos 400 servidores y 1.200 equipos, mide cada detección abierta de Qualys frente a su plazo y la cruza con el catálogo KEV de CISA, EPSS, el inventario, el parcheo y las excepciones para mostrar qué va tarde y por qué.",
  en="""
+A VPN appliance came back from a warranty swap on old firmware with a vulnerability that has been exploited for two years, and thirty servers that installed their patch a week ago are still vulnerable because nobody agreed the reboot. That is what the vulnerability remediation review published with this post finds. It is an open-source tool that runs on demo data from a made-up broker with about 400 servers and 1,200 Windows 11 endpoints owned by six teams, with the problems placed on purpose.
 
-## The problem
-The scanner says how many vulnerabilities there are; it does not say whether we are keeping the promise we made, the remediation deadlines by severity. Those deadlines are usually tracked in a spreadsheet updated by hand, and the numbers hide the reasons: a VPN appliance back from an RMA swap on old firmware with a vulnerability that has been exploited for two years; servers with the patch installed a week ago that are still vulnerable because nobody agreed the reboot; trading desktops vulnerable again after being rebuilt from an old golden image; servers on an operating system that can no longer be patched, covered by an exception that expired a month ago; one team closing half of its fixes on time while the rest are above 90%; and a browser update, held back by a pinned version, that is 40% of all the critical and high findings on the laptops.
+The scanner says how many vulnerabilities there are, but not whether the remediation deadlines promised by severity are being kept. Those deadlines are usually tracked in a spreadsheet updated by hand, and the totals hide the reasons. The tool gives every open Qualys detection its deadline: 15, 30, 90 or 180 days by severity, and 7 days if it is in the CISA KEV catalog of vulnerabilities known to be exploited, has a high EPSS score, an estimate of how likely it is to be exploited, or is critical on an internet-facing host.
 
-## What I built
-- SLA: every open Qualys detection with its deadline (15, 30, 90 or 180 days by severity, 7 days for CISA KEV, a high EPSS score or a critical on an internet-facing host) and its status: on time, due in 7 days, overdue, or overdue more than twice the SLA.
-- KEV and exposure: known exploited vulnerabilities still open past the CISA due date, internet-facing hosts with critical or high findings, and overdue detections with a high EPSS.
-- Why fixes do not close: patch installed and reboot pending, detections re-opened after a fix, and operating systems past end of support.
-- Coverage and exceptions: hosts that Qualys does not scan or has not scanned for two weeks, hosts nobody owns, patch agents failing, and exceptions expired, without a compensating control or too broad.
-- Top fixes and trend: the ten updates or packages that remove most risk, the share closed inside the SLA in each of the last three months, the mean time to remediate by severity, and the owner teams behind.
-- `report.html` with a status per area and an overall verdict, `sla-review.md` with the weekly critical list and the monthly pack, CSVs for every area, and a read-only PowerShell exporter for the Qualys API, the CISA KEV feed, the EPSS API and Intune.
+## Trading desktops vulnerable again after an old image
 
-## How it is built
-Python with the standard library only. The demo is a made-up broker with about 400 servers and 1,200 Windows 11 endpoints owned by six teams: almost 7,000 Qualys detections (open and recently fixed), the asset register, the patch status from Tanium and Intune, seven exceptions, EPSS scores and a small KEV snapshot, with the problems placed on purpose. 15 tests, a runbook for the weekly and monthly reviews and for raising or renewing an exception, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+Each detection is then marked on time, due in 7 days, overdue, or overdue by more than twice the deadline. The review explains why fixes do not close. Trading desktops are vulnerable again after being rebuilt from an old golden image, the master copy used to install them. Servers on an operating system that can no longer be patched are covered by an exception that expired a month ago.
 
-## What I learned
-From running an office IT site, where I use Qualys and Tanium for vulnerability and patch management, Microsoft Defender (which I have used since a previous role), and Intune and MECM in co-management, including the Windows 11 migration of an office with a trading floor; from cybersecurity risk management, treatment plans and remediation tracking with security metrics and KPIs; from applying ISO 27001, NIS2 and NIST CSF, and from audits; and from the CAB as process owner for changes. The lessons that shaped the tool are that the clock starts when the scanner finds the vulnerability, so coverage is part of the SLA; that a known exploit beats a severity score; that installed is not fixed until the host reboots; that many hosts re-opened in the same week point to an image, not to bad luck; that an exception is a time-boxed decision with a control, not a way to make the report green; and that one well deployed update can close half of the list.
+The review also checks coverage, because the clock starts when the scanner finds the vulnerability: hosts Qualys does not scan or has not scanned for two weeks, hosts nobody owns and patch agents failing.
 
-## Next steps
-- Read Qualys and Tanium through their APIs on a schedule, so the weekly critical list is ready on Monday morning without exports.
-- Open one ticket per owner team with its overdue detections and the fixes that close them, closed when the rescan confirms it.
-- Compare each month with the previous one: new, closed and still overdue, and the share inside the SLA by team.""",
+## One browser update is 40% of the critical and high findings on laptops
+
+One browser update, held back by a pinned version, accounts for 40% of all critical and high findings on the laptops. The tool ranks the ten updates or packages that remove most risk. By team, one closes half of its fixes on time while the rest are above 90%.
+
+The trend shows the share closed inside the deadline in each of the last three months and the mean time to remediate by severity.
+
+## How to use it with real data
+
+The repository includes a read-only PowerShell exporter for the Qualys API, the CISA KEV feed, the EPSS API and Intune. It runs on Python with only the standard library and produces a web report with a status per area, a weekly critical list, a monthly pack and CSV files for every area. The demo has almost 7,000 Qualys detections, the asset register, patch status from Tanium and Intune and seven exceptions, all fictional, plus 15 tests and a runbook.
+
+## Where it comes from
+
+The tool comes from using Qualys and Tanium for vulnerability and patch management at an office IT site, Microsoft Defender, and Intune and MECM in co-management, including the Windows 11 migration of an office with a trading floor; from cybersecurity risk management and remediation tracking; from ISO 27001, NIS2 and NIST CSF and their audits; and from the CAB as change process owner. The lesson behind it: installed is not fixed until the host reboots, and an exception is a time-boxed decision, not a way to turn the report green.""",
  es="""
+Un equipo de VPN volvió de un cambio por garantía con un firmware antiguo y una vulnerabilidad explotada desde hace dos años, y treinta servidores que instalaron su parche hace una semana siguen siendo vulnerables porque nadie acordó el reinicio. Así lo detecta la revisión de corrección de vulnerabilidades que acompaña a este post, una herramienta de código abierto que se ejecuta con datos de ejemplo de un bróker inventado con unos 400 servidores y 1.200 equipos con Windows 11 repartidos entre seis equipos responsables, con los problemas puestos a propósito.
 
-## El problema
-El escáner dice cuántas vulnerabilidades hay; no dice si estamos cumpliendo lo que prometimos, los plazos de corrección por severidad. Esos plazos se suelen seguir en una hoja de cálculo actualizada a mano, y las cifras esconden los motivos: un equipo de VPN que vuelve de un cambio por garantía con un firmware antiguo y una vulnerabilidad explotada desde hace dos años; servidores con el parche instalado hace una semana que siguen siendo vulnerables porque nadie acordó el reinicio; equipos de la sala de trading vulnerables otra vez tras reinstalarse desde una imagen maestra antigua; servidores con un sistema operativo que ya no se puede parchear, cubiertos por una excepción que caducó hace un mes; un equipo que cierra la mitad de sus correcciones a tiempo mientras el resto supera el 90 %; y una actualización del navegador, retenida por una versión fijada, que supone el 40 % de todas las vulnerabilidades críticas y altas de los portátiles.
+El escáner dice cuántas vulnerabilidades hay, pero no si se cumplen los plazos de corrección prometidos por severidad. Esos plazos se suelen seguir en una hoja de cálculo actualizada a mano, y las cifras esconden los motivos. La herramienta da a cada detección abierta de Qualys su plazo: 15, 30, 90 o 180 días según la severidad, y 7 días si está en el catálogo KEV de CISA de vulnerabilidades que se sabe que se explotan, tiene un EPSS alto, una estimación de la probabilidad de que se explote, o es crítica en un equipo expuesto a internet.
 
-## Qué he hecho
-- SLA: cada detección abierta de Qualys con su plazo (15, 30, 90 o 180 días según la severidad; 7 días si está en el catálogo KEV de CISA, tiene un EPSS alto o es crítica en un equipo expuesto a internet) y su estado: en plazo, vence en 7 días, vencida o vencida más del doble del plazo.
-- KEV y exposición: vulnerabilidades explotadas conocidas abiertas después de la fecha límite de CISA, equipos expuestos a internet con vulnerabilidades críticas o altas, y detecciones vencidas con un EPSS alto.
-- Por qué no se cierran: parche instalado con el reinicio pendiente, detecciones que vuelven a abrirse tras corregirse y sistemas operativos sin soporte del fabricante.
-- Cobertura y excepciones: equipos que Qualys no analiza o no analiza desde hace dos semanas, equipos sin responsable, agentes de parcheo que fallan, y excepciones caducadas, sin control compensatorio o demasiado amplias.
-- Arreglos y tendencia: las diez actualizaciones o paquetes que más riesgo eliminan, el porcentaje cerrado dentro del plazo en cada uno de los tres últimos meses, el tiempo medio de corrección por severidad y los equipos responsables que van con retraso.
-- `report.html` con un estado por área y un veredicto global, `sla-review.md` con la lista semanal de críticas y el informe mensual, CSV de cada área y un exportador de solo lectura en PowerShell para la API de Qualys, el catálogo KEV de CISA, la API de EPSS e Intune.
+## Puestos de trading vulnerables otra vez por una imagen antigua
 
-## Cómo está hecho
-Python solo con la librería estándar. La demo es un bróker inventado con unos 400 servidores y 1.200 equipos con Windows 11 repartidos entre seis equipos responsables: casi 7.000 detecciones de Qualys (abiertas y corregidas recientemente), el inventario de activos, el estado de parcheo de Tanium e Intune, siete excepciones, puntuaciones EPSS y una pequeña muestra del catálogo KEV, con los problemas puestos a propósito. 15 tests, un runbook para las revisiones semanal y mensual y para pedir o renovar una excepción, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+Después, cada detección queda en plazo, a punto de vencer en 7 días, vencida o vencida más del doble del plazo. La revisión explica por qué no se cierran las correcciones. Los equipos de la sala de trading vuelven a ser vulnerables tras reinstalarse desde una imagen maestra antigua, la copia base con la que se instalan. Unos servidores con un sistema operativo que ya no se puede parchear están cubiertos por una excepción que caducó hace un mes.
 
-## Qué aprendí
-De llevar la IT de una sede, donde uso Qualys y Tanium para la gestión de vulnerabilidades y parches, Microsoft Defender (que uso desde un puesto anterior) e Intune y MECM en cogestión, incluida la migración a Windows 11 de una oficina con sala de trading; de la gestión de riesgos de ciberseguridad, los planes de tratamiento y el seguimiento de la corrección con métricas e indicadores de seguridad; de aplicar ISO 27001, NIS2 y NIST CSF, y de las auditorías; y del CAB como responsable del proceso de cambios. Las lecciones que dan forma a la herramienta son que el reloj empieza cuando el escáner encuentra la vulnerabilidad, así que la cobertura forma parte del SLA; que un exploit conocido manda sobre la puntuación de severidad; que instalado no es corregido hasta que el equipo se reinicia; que muchos equipos que vuelven a abrirse la misma semana apuntan a una imagen, no a la mala suerte; que una excepción es una decisión con fecha de caducidad y un control, no una forma de poner el informe en verde; y que una sola actualización bien desplegada puede cerrar la mitad de la lista.
+La revisión comprueba también la cobertura, porque el reloj empieza cuando el escáner encuentra la vulnerabilidad: equipos que Qualys no analiza o no analiza desde hace dos semanas, equipos sin responsable y agentes de parcheo que fallan.
 
-## Siguientes pasos
-- Leer Qualys y Tanium desde sus API de forma programada, para que la lista semanal de críticas esté lista el lunes por la mañana sin exportaciones.
-- Abrir un ticket por equipo responsable con sus detecciones vencidas y los arreglos que las cierran, y cerrarlo cuando el nuevo análisis lo confirme.
-- Comparar cada mes con el anterior: nuevas, cerradas y aún vencidas, y el porcentaje dentro del plazo por equipo."""),
+## Una actualización del navegador es el 40 % de las vulnerabilidades críticas y altas de los portátiles
+
+Una actualización del navegador, retenida por una versión fijada, supone el 40 % de todas las vulnerabilidades críticas y altas de los portátiles. La herramienta ordena las diez actualizaciones o paquetes que más riesgo eliminan. Por equipos, uno cierra la mitad de sus correcciones a tiempo mientras el resto supera el 90 %.
+
+La tendencia muestra el porcentaje cerrado dentro del plazo en cada uno de los tres últimos meses y el tiempo medio de corrección por severidad.
+
+## Cómo usarlo con datos reales
+
+El repositorio incluye un exportador de solo lectura en PowerShell para la API de Qualys, el catálogo KEV de CISA, la API de EPSS e Intune. Funciona con Python y solo la librería estándar, y genera un informe web con un estado por área, una lista semanal de críticas, un informe mensual y ficheros CSV de cada área. La demo tiene casi 7.000 detecciones de Qualys, el inventario de activos, el estado de parcheo de Tanium e Intune y siete excepciones, todo ficticio, además de 15 tests y un runbook.
+
+## De dónde sale
+
+La herramienta nace de usar Qualys y Tanium para la gestión de vulnerabilidades y parches en una sede, Microsoft Defender, e Intune y MECM en cogestión, incluida la migración a Windows 11 de una oficina con sala de trading; de la gestión de riesgos de ciberseguridad y el seguimiento de la corrección; de ISO 27001, NIS2 y NIST CSF y sus auditorías; y del CAB como responsable del proceso de cambios. La lección que hay detrás: instalado no es corregido hasta que el equipo se reinicia, y una excepción es una decisión con fecha de caducidad, no una forma de poner el informe en verde."""),
 
 dict(n="40", repo="40-change-calendar-risk-review", date="2026-11-02", updated="2026-11-11", cat="tools",
- title_en="Two changes on the same night and a patch inside the month-end freeze: the change calendar before the CAB",
- title_es="Dos cambios la misma noche y un parche en pleno cierre de mes: el calendario de cambios antes del CAB",
+ title_en="Two teams booked changes on the trading platform's path the same night and a patch inside the month-end freeze",
+ title_es="Dos equipos programan cambios en la ruta de la plataforma de trading la misma noche y un parche en el cierre de mes",
  seo_title_en="Change calendar and CAB risk review · Iñigo González",
  seo_title_es="Calendario de cambios y revisión del CAB · Iñigo González",
  seo_desc="Weekly CAB pack from ServiceNow changes, the service map, freezes and incidents: what is not ready, what collides, and how last month's changes went.",
- dek_en="From the change requests, the business service map, the freeze register, the incidents and the approvals: the next two weeks by day and service, the changes not ready for the CAB, the ones that collide on the same night or through the dependencies, the ones inside a freeze, standard changes used for risky work, rising emergencies, and last month's success rate, incidents after changes, unauthorised work and overdue reviews.",
- dek_es="A partir de las peticiones de cambio, el mapa de servicios, el registro de congelaciones, los incidentes y las aprobaciones: las dos próximas semanas por día y servicio, los cambios que no están listos para el CAB, los que coinciden la misma noche o a través de las dependencias, los que caen dentro de una congelación, cambios estándar usados para trabajos con riesgo, emergencias en aumento, y la tasa de éxito del mes pasado, los incidentes tras un cambio, los trabajos sin autorizar y las revisiones pendientes.",
+ seo_desc_es="A partir de las peticiones de cambio, el mapa de servicios, el registro de congelaciones, los incidentes y las aprobaciones: las dos próximas semanas por día…",
+ dek_en="The weekly change review, published with fictional data from a bank with a trading floor, cross-checks the change requests with the service map, the freezes, the incidents and the approvals to show what is not ready for the CAB, what collides and how last month's changes went.",
+ dek_es="La revisión semanal de cambios, publicada con datos ficticios de un banco con sala de trading, cruza las peticiones de cambio con el mapa de servicios, las congelaciones, los incidentes y las aprobaciones para mostrar qué no está listo para el CAB, qué coincide y cómo fueron los cambios del mes pasado.",
  en="""
+The data centre firewalls and the core switches are due to be upgraded the same night by two different teams, both in the path of the trading platform, and a database patch on that platform is booked inside the month-end close freeze. That is what the change calendar review published with this post finds. It is an open-source tool that runs on demo data from a made-up bank with a trading floor, reviewed on a Monday morning before the CAB, the change advisory board that approves changes, with the problems placed on purpose.
 
-## The problem
-The change calendar in the ITSM tool is a list, and the CAB approves each change on its own merits. What the list does not show is how the changes relate to each other and to the rest of the month: the data centre firewalls and the core switches upgraded the same night by two different teams, both in the path of the trading platform; a database patch on the trading platform booked inside the month-end close freeze; a high-risk change raised two days before its window with no backout plan; a firmware upgrade on the storage of critical services booked as a standard change, so it never reaches the CAB; one team raising more emergencies every month for the same reasons; and a change closed as successful two hours before a P1 at the market open, with no post-implementation review booked. The other half of the job is the review afterwards, which links with the major incident kit I published a few days ago: the incident that follows a change is where the change review should start.
+The change calendar in the ITSM tool is a list, and the CAB approves each change on its own merits. The list does not show how the changes relate to each other or to the rest of the month. The tool works out the impact of each change through the dependency map of 16 business services in three tiers, so a change on the core network collides with anything on the services that depend on it.
 
-## What I built
-- Readiness for the CAB: changes without a backout, test or implementation plan, with the risk not assessed or below what the impact and the tier of the service suggest, raised inside the lead time, not approved when they start before the CAB, without an owner, or outside the maintenance window of their tier.
-- Collisions: overlapping changes on the same CI or service, changes that affect the same critical services through the dependencies, too many changes for one team on one night, and changes inside a freeze or blackout window without an approved exception.
-- Emergency and standard changes: the emergency share by month and its reasons, standard changes used for risky work, and emergency changes never approved afterwards.
-- Outcomes and teams: last month's success rate and the trend, unsuccessful changes, incidents linked to a change or opened on the same service within hours of one, overruns, unauthorised work, overdue post-implementation reviews, and the teams with a low success rate or rising emergencies.
-- `report.html` with a two-week calendar by day and service where collisions, freezes and gaps stand out, a status per area and an overall verdict; `cab-pack.md` with the CAB agenda and the monthly review; CSVs for every area; and a read-only PowerShell exporter for the ServiceNow Table API (changes, incidents, approvals and the service map).
+## A high-risk change with no backout plan, raised two days before its window
 
-## How it is built
-Python with the standard library only. The demo is a made-up bank with a trading floor, reviewed on a Monday morning before the CAB: 16 business services in three tiers with their dependencies, 263 change requests from nine teams (three months of history and the next two weeks), the approvals, the incidents and a freeze register with the month-end close and an index rebalance, with the problems placed on purpose. The impact of each change is worked out through the dependency map, so a change on the core network collides with anything on the services that depend on it. 15 tests, a runbook for the weekly CAB and the monthly change review, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+The readiness checks find a high-risk change raised two days before its window with no backout plan, the steps to undo it if it goes wrong. The review flags changes without a backout, test or implementation plan, with the risk not assessed or below what the impact and the tier of the service suggest, raised inside the lead time, not approved when they start before the CAB, without an owner or outside the maintenance window of their tier.
 
-## What I learned
-From being process owner for incidents, changes and problems and taking part in CABs and in go-live and service acceptance reviews; from release management, with its planning, testing, rollback and validation after the release; from writing procedures and runbooks for these processes and training others to use them; from leading the technical response in major incidents and the post-mortems afterwards; and from ServiceNow, EasyVista and HaloITSM, Jira and Confluence. The lessons that shaped the tool are that two changes on the same path the same night mean two backout plans for one symptom; that the impact of a change runs through the dependencies, not through the name of the service in the form; that lead time is the time other people have to look; that a standard change is pre-approved because it is boring, and a firmware upgrade on critical storage is not; that repeated emergencies are a problem record waiting to be opened; and that a change followed by a P1 is not a success, however it was closed.
+A firmware upgrade on the storage of critical services is booked as a standard change, the pre-approved kind meant for routine work, so it never reaches the CAB. One team raises more emergency changes every month for the same reasons, and the tool shows the emergency share by month, its reasons and emergencies never approved afterwards.
 
-## Next steps
-- Read the change calendar through the API on a schedule, so the pack is ready on Monday morning without exports.
-- Read the freezes from the blackout schedules of the ITSM tool instead of a CSV.
-- Compare each week with the previous one: changes moved, collisions resolved, reviews closed.""",
+## A change closed as successful two hours before a P1 at the market open
+
+The other half of the review looks back. One change was closed as successful two hours before a P1, a top-priority incident, at the market open, and no post-implementation review was booked. The tool measures last month's success rate and trend, unsuccessful changes, incidents linked to a change or opened on the same service within hours of one, overruns, unauthorised work, overdue reviews and the teams with a low success rate or rising emergencies.
+
+## How to use it with real data
+
+The repository includes a read-only PowerShell exporter for the ServiceNow Table API, covering changes, incidents, approvals and the service map. It runs on Python with only the standard library and produces a web report with a two-week calendar by day and service where collisions, freezes and gaps stand out, a CAB agenda with the monthly review, and CSV files for every area. The demo holds 263 change requests from nine teams, three months of history and the next two weeks, and a freeze register with the month-end close and an index rebalance, all fictional. It comes with 15 tests and a runbook.
+
+## Where it comes from
+
+The tool comes from being process owner for incidents, changes and problems, taking part in CABs and go-live reviews, release management, writing runbooks and training others, leading the technical response in major incidents, and working with ServiceNow, EasyVista, HaloITSM, Jira and Confluence. The lesson behind it: two changes on the same path the same night mean two backout plans for one symptom, and a change followed by a P1 is not a success, however it was closed.""",
  es="""
+Los cortafuegos del centro de datos y los switches del núcleo se van a actualizar la misma noche por dos equipos distintos, ambos en el camino de la plataforma de trading, y un parche de base de datos de esa plataforma está programado dentro de la congelación del cierre de mes. Así lo detecta la revisión del calendario de cambios que acompaña a este post, una herramienta de código abierto que se ejecuta con datos de ejemplo de un banco inventado con sala de trading, revisado un lunes por la mañana antes del CAB, el comité que aprueba los cambios, con los problemas puestos a propósito.
 
-## El problema
-El calendario de cambios de la herramienta de ITSM es una lista, y el CAB aprueba cada cambio por separado. Lo que la lista no enseña es cómo se relacionan los cambios entre sí y con el resto del mes: los cortafuegos del centro de datos y los switches del núcleo actualizados la misma noche por dos equipos distintos, ambos en el camino de la plataforma de trading; un parche de base de datos de la plataforma de trading programado dentro de la congelación del cierre de mes; un cambio de riesgo alto dado de alta dos días antes de su ventana y sin plan de marcha atrás; una actualización de firmware del almacenamiento de servicios críticos registrada como cambio estándar, así que nunca llega al CAB; un equipo que cada mes abre más emergencias por los mismos motivos; y un cambio cerrado con éxito dos horas antes de un P1 en la apertura del mercado, sin revisión posterior programada. La otra mitad del trabajo es la revisión de después, que enlaza con el kit de incidentes mayores que publiqué hace unos días: el incidente que sigue a un cambio es donde debería empezar la revisión del cambio.
+El calendario de cambios de la herramienta de ITSM es una lista, y el CAB aprueba cada cambio por separado. La lista no enseña cómo se relacionan los cambios entre sí ni con el resto del mes. La herramienta calcula el impacto de cada cambio a través del mapa de dependencias de 16 servicios de negocio en tres niveles, así que un cambio en la red troncal coincide con cualquier otro en los servicios que dependen de ella.
 
-## Qué he hecho
-- Preparación para el CAB: cambios sin plan de marcha atrás, de pruebas o de implementación, con el riesgo sin evaluar o por debajo de lo que indican el impacto y el nivel del servicio, dados de alta dentro del plazo mínimo, sin aprobar cuando empiezan antes del CAB, sin responsable o fuera de la ventana de mantenimiento de su nivel.
-- Coincidencias: cambios que se solapan en el mismo elemento de configuración o servicio, cambios que afectan a los mismos servicios críticos a través de las dependencias, demasiados cambios de un equipo en una noche y cambios dentro de una congelación o un periodo de bloqueo sin una excepción aprobada.
-- Cambios de emergencia y estándar: el porcentaje de emergencias por mes y sus motivos, cambios estándar usados para trabajos con riesgo y emergencias que nunca se aprobaron después.
-- Resultados y equipos: la tasa de éxito del mes pasado y su evolución, cambios fallidos, incidentes vinculados a un cambio o abiertos en el mismo servicio pocas horas después, cambios que se pasaron de su ventana, trabajos sin autorizar, revisiones posteriores pendientes, y los equipos con poca tasa de éxito o con emergencias en aumento.
-- `report.html` con un calendario de dos semanas por día y servicio donde destacan las coincidencias, las congelaciones y los huecos, un estado por área y un veredicto global; `cab-pack.md` con el orden del día del CAB y la revisión mensual; CSV de cada área; y un exportador de solo lectura en PowerShell para la Table API de ServiceNow (cambios, incidentes, aprobaciones y el mapa de servicios).
+## Un cambio de riesgo alto sin plan de marcha atrás, dado de alta dos días antes
 
-## Cómo está hecho
-Python solo con la librería estándar. La demo es un banco inventado con sala de trading, revisado un lunes por la mañana antes del CAB: 16 servicios de negocio en tres niveles con sus dependencias, 263 peticiones de cambio de nueve equipos (tres meses de histórico y las dos próximas semanas), las aprobaciones, los incidentes y un registro de congelaciones con el cierre de mes y un rebalanceo de índices, con los problemas puestos a propósito. El impacto de cada cambio se calcula a través del mapa de dependencias, así que un cambio en la red troncal coincide con cualquier otro en los servicios que dependen de ella. 15 tests, un runbook para el CAB semanal y la revisión mensual de cambios, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+Las comprobaciones de preparación encuentran un cambio de riesgo alto dado de alta dos días antes de su ventana y sin plan de marcha atrás, los pasos para deshacerlo si sale mal. La revisión señala los cambios sin plan de marcha atrás, de pruebas o de implementación, con el riesgo sin evaluar o por debajo de lo que indican el impacto y el nivel del servicio, dados de alta dentro del plazo mínimo, sin aprobar cuando empiezan antes del CAB, sin responsable o fuera de la ventana de mantenimiento de su nivel.
 
-## Qué aprendí
-De ser responsable de los procesos de incidentes, cambios y problemas y de participar en CAB y en revisiones de puesta en producción y aceptación del servicio; de la gestión de versiones, con su planificación, pruebas, marcha atrás y validación después de cada versión; de escribir procedimientos y runbooks de estos procesos y formar a otros para usarlos; de dirigir la respuesta técnica en incidentes mayores y los análisis posteriores; y de ServiceNow, EasyVista y HaloITSM, Jira y Confluence. Las lecciones que dan forma a la herramienta son que dos cambios en el mismo camino la misma noche suponen dos planes de marcha atrás para un solo síntoma; que el impacto de un cambio va por las dependencias, no por el nombre del servicio que pone el formulario; que el plazo mínimo es el tiempo que tienen otros para revisarlo; que un cambio estándar está preaprobado porque es rutinario, y una actualización de firmware del almacenamiento crítico no lo es; que las emergencias repetidas son un problema esperando a que alguien lo registre; y que un cambio seguido de un P1 no es un éxito, se cierre como se cierre.
+Una actualización de firmware del almacenamiento de servicios críticos está registrada como cambio estándar, el tipo preaprobado pensado para trabajos rutinarios, así que nunca llega al CAB. Un equipo abre cada mes más cambios de emergencia por los mismos motivos, y la herramienta muestra el porcentaje de emergencias por mes, sus motivos y las que nunca se aprobaron después.
 
-## Siguientes pasos
-- Leer el calendario de cambios desde la API de forma programada, para que el informe del CAB esté listo el lunes por la mañana sin exportaciones.
-- Leer las congelaciones desde los calendarios de bloqueo de la herramienta de ITSM en lugar de un CSV.
-- Comparar cada semana con la anterior: cambios movidos, coincidencias resueltas y revisiones cerradas."""),
+## Un cambio cerrado con éxito dos horas antes de un P1 en la apertura del mercado
+
+La otra mitad de la revisión mira hacia atrás. Un cambio se cerró con éxito dos horas antes de un P1, un incidente de máxima prioridad, en la apertura del mercado, y no tenía revisión posterior programada. La herramienta mide la tasa de éxito del mes pasado y su evolución, los cambios fallidos, los incidentes vinculados a un cambio o abiertos en el mismo servicio pocas horas después, los cambios que se pasaron de su ventana, los trabajos sin autorizar, las revisiones pendientes y los equipos con poca tasa de éxito o con emergencias en aumento.
+
+## Cómo usarlo con datos reales
+
+El repositorio incluye un exportador de solo lectura en PowerShell para la Table API de ServiceNow, con cambios, incidentes, aprobaciones y el mapa de servicios. Funciona con Python y solo la librería estándar, y genera un informe web con un calendario de dos semanas por día y servicio donde destacan las coincidencias, las congelaciones y los huecos, el orden del día del CAB con la revisión mensual y ficheros CSV de cada área. La demo tiene 263 peticiones de cambio de nueve equipos, tres meses de histórico y las dos próximas semanas, y un registro de congelaciones con el cierre de mes y un rebalanceo de índices, todo ficticio. Incluye 15 tests y un runbook.
+
+## De dónde sale
+
+La herramienta nace de ser responsable de los procesos de incidentes, cambios y problemas, de participar en CAB y en revisiones de puesta en producción, de la gestión de versiones, de escribir runbooks y formar a otros, de dirigir la respuesta técnica en incidentes mayores y de trabajar con ServiceNow, EasyVista, HaloITSM, Jira y Confluence. La lección que hay detrás: dos cambios en el mismo camino la misma noche suponen dos planes de marcha atrás para un solo síntoma, y un cambio seguido de un P1 no es un éxito, se cierre como se cierre."""),
 
 dict(n="41", repo="41-windows-update-ring-tracker", date="2026-11-02", cat="tools",
- title_en="A paused ring nobody remembered and a pilot of IT staff: the Windows update rollout, ring by ring",
- title_es="Un anillo pausado y olvidado y un piloto solo de informáticos: Windows Update, anillo a anillo",
+ title_en="A paused and forgotten update ring left the trading floor two months behind on Windows updates",
+ title_es="Un anillo de actualización pausado y olvidado dejó a la sala de trading dos meses por detrás en Windows Update",
  seo_title_en="Windows update rings: gates and go/no-go · Iñigo González",
  seo_title_es="Anillos de Windows Update y go/no-go · Iñigo González",
  seo_desc="Patch Tuesday through the Intune update rings: each ring against its deadline, the go/no-go gates, devices behind and why, failures by model and the trend.",
- dek_en="From the Intune devices and update rings, the Configuration Manager deployments of co-managed devices, the Windows Update for Business reports and Windows release health: each ring against its deferral and deadline, the gate before the next promotion, devices behind and why, failure codes by model, whether the pilot looks like the rest of the fleet, and the share on the build at day 7, 14 and 21 for the last three months.",
- dek_es="A partir de los dispositivos y los anillos de actualización de Intune, los despliegues de Configuration Manager de los equipos en cogestión, los informes de Windows Update for Business y el estado de versiones de Windows: cada anillo frente a su aplazamiento y su fecha límite, la puerta antes de la siguiente promoción, los equipos que van con retraso y por qué, los códigos de error por modelo, si el piloto se parece al resto del parque y el porcentaje con la compilación al día 7, 14 y 21 de los tres últimos meses.",
+ seo_desc_es="A partir de los dispositivos y los anillos de actualización de Intune, los despliegues de Configuration Manager de los equipos en cogestión, los informes…",
+ dek_en="The update ring review, published with fictional data from a firm with 1,500 Windows 11 devices, follows each month's update through the Intune and Configuration Manager rings against their deadlines and gates, and shows devices behind and why, failures by model and the trend.",
+ dek_es="La revisión de anillos, publicada con datos ficticios de una empresa con 1.500 equipos con Windows 11, sigue la actualización de cada mes por los anillos de Intune y Configuration Manager frente a sus plazos y puertas, y muestra los equipos con retraso y por qué, los fallos por modelo y la tendencia.",
  en="""
+The late update ring for the trading floor was paused after a bad update and nobody remembered it, so five weeks later it is two months behind and the pause expires with nobody having decided what happens next. That is what the Windows update rollout review published with this post finds. It is an open-source tool that runs on demo data from a made-up firm with a trading floor and 1,500 Windows 11 devices in four European cities, reviewed twenty days after the October Patch Tuesday, with the problems placed on purpose.
 
-## The problem
-Update rings are timers. The broad ring is offered the update ten days after Patch Tuesday whether the pilot went well or not, and the report that counts installs does not say whether the rollout is under control. In a typical month the broad ring starts with the pilot still at 77%; the late ring for the trading floor was paused after a bad update and forgotten, so five weeks later it is two months behind and the pause expires with nobody deciding what happens next; sixty trading desktops sit in the broad ring and lose their headset audio at the market open; one laptop model fails the update with the same error code on a third of its devices; ninety devices have been waiting for a restart since before the deadline; a whole office stops checking in on the same day because of the VPN; the pilot is nine IT engineers out of ten; and the share of devices on the build two weeks after Patch Tuesday falls three months in a row. This is not the co-management tracker I published a while ago, which follows the state of each workload, nor the vulnerability SLA review of a few days ago: it follows one monthly update through the rings, and it pairs with the change calendar I published today, because a ring promotion is a change and should get a decision like any other.
+Update rings are groups of devices that receive the monthly update after a set delay, and they work as timers. The broad ring is offered the update ten days after Patch Tuesday whether the pilot went well or not, and in this demo it starts with the pilot still at 77%. A report that counts installs does not say whether the rollout is under control. The tool adds a gate between rings, built on the previous ring's share on the build, its failure rate, the days since it was offered, open P1 or P2 incidents about the update and known issues, and gives a go or no-go for the next promotion.
 
-## What I built
-- Rings and gates: each ring against its offer date, deadline and grace; the gate between rings (the previous ring's share on the build, its failure rate, the days since it was offered, open P1 or P2 incidents on the update, known issues that block the next ring); rings promoted without a met gate; the go/no-go for the next promotion; paused rings; and policies that drift from the ring standard.
-- Devices behind: past the deadline and grace without the update, with a restart pending, not checked in (by site), in no ring or in two, on a Windows 11 version close to its end of servicing, or under a feature update safeguard hold.
-- Failures and composition: error codes by model, devices failing month after month, incidents tagged to the update, trading desktops outside the late ring, a pilot that misses the departments, models and sites of the broad ring, and rings off their target size.
-- Trend: the share on each month's update by day 7, 14 and 21 after Patch Tuesday, the median days to install by ring, and the devices behind every month.
-- `report.html` with a timeline of the month showing each ring's offer, deadline, grace, pause and gates; `rollout-pack.md` for the monthly patch meeting or the CAB, with the go/no-go and a decision line; CSVs for every area; and a read-only PowerShell exporter for Microsoft Graph, the Windows Update for Business reports in Log Analytics and Configuration Manager.
+## Sixty trading desktops in the wrong ring and a pilot of IT engineers
 
-## How it is built
-Python with the standard library only. A device is on the build when the revision in its OS version is the month's Patch Tuesday revision or later; its ring comes from the groups or collections its policies are assigned to, with co-managed devices following the Configuration Manager deployment when the Windows Update workload has not moved to Intune; and each device is judged against its own deadline and grace, so a device that is still inside its window is not counted as behind. The demo is a made-up firm with a trading floor and 1,500 Windows 11 devices in four European cities, reviewed twenty days after the October Patch Tuesday, with the real builds, KB numbers, end of servicing dates and known issues from Windows release health and the problems placed on purpose. 13 tests, a runbook for the monthly cycle and the patch meeting, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+Sixty trading desktops sit in the broad ring instead of the late one, and lose their headset audio at the market open. The pilot, meant to catch problems first, is nine IT engineers out of ten. The review checks whether the pilot misses the departments, models and sites of the broad ring, and flags rings off their target size and policies that drift from the ring standard.
 
-## What I learned
-From leading the Windows 11 migration of an office with a trading floor; from running Intune and MECM in co-management, with application packaging in SCCM, PDQ and MDT, Endpoint Privilege Management, BitLocker and Microsoft Defender; from years of automation with PowerShell and Microsoft Graph; and from release management, with its planning, testing, rollback and validation after each release, and the CAB as change process owner, supporting about 2,500 users across European offices. The lessons behind the tool are that a deferral says when a ring can get the update and only a gate says whether it should; that a pause is a clock that runs out on its own; that the late ring only protects the devices that are actually in it; that a pilot of IT staff tests IT's applications; that a whole site going quiet is the network, not the users; that one error code on one model is a baseline to fix once, not devices to repair one by one; that an installed update waiting for a restart protects nothing; and that the real measure is the share on the build at day 14 and 21, month after month.
+## One laptop model fails the update on a third of its devices
 
-## Next steps
-- Run the export and the review on a schedule after Patch Tuesday and before each promotion, and post the gate to the patch channel.
-- Read the builds and known issues from the Windows Updates API in Microsoft Graph instead of copying them.
-- Add driver and firmware updates by model as a category of their own.""",
+One laptop model fails with the same error code on a third of its devices, a sign of one fix to make once rather than devices to repair one by one. Ninety devices have been waiting for a restart since before the deadline, and a whole office stops checking in on the same day because of the VPN. The review also lists devices in no ring or in two, on a Windows 11 version near its end of servicing, or held back by a safeguard hold.
+
+Over time, the share of devices on the build two weeks after Patch Tuesday has fallen three months in a row. The tool tracks that share at day 7, 14 and 21 and the median days to install by ring.
+
+## How to use it with real data
+
+A device counts as up to date when its OS revision is the month's Patch Tuesday revision or later. Its ring comes from the groups or collections its policies are assigned to, with co-managed devices following Configuration Manager while the Windows Update workload has not moved to Intune. Each device is judged against its own deadline and grace, so one still inside its window is not counted as behind. The repository includes a read-only PowerShell exporter for Microsoft Graph, the Windows Update for Business reports in Log Analytics and Configuration Manager, and produces a web report with a timeline of the month and a pack for the patch meeting or the CAB with a decision line. It runs on Python with only the standard library and comes with 13 tests and a runbook. The demo uses the real builds, KB numbers and known issues from Windows release health; the firm and its devices are fictional. Since a ring promotion is a change, the review pairs with the change calendar published the same day.
+
+## Where it comes from
+
+The tool comes from leading the Windows 11 migration of an office with a trading floor, running Intune and MECM in co-management, years of automation with PowerShell and Microsoft Graph, and release management and the CAB as change process owner, supporting about 2,500 users across European offices. The lesson behind it: a deferral says when a ring can get the update, and only a gate says whether it should.""",
  es="""
+El anillo tardío de la sala de trading se pausó tras una actualización problemática y nadie se acordó de él, así que cinco semanas después lleva dos meses de retraso y la pausa caduca sin que nadie haya decidido qué pasa después. Así lo detecta la revisión del despliegue de Windows Update que acompaña a este post, una herramienta de código abierto que se ejecuta con datos de ejemplo de una empresa inventada con sala de trading y 1.500 equipos con Windows 11 en cuatro ciudades europeas, revisada veinte días después del Patch Tuesday de octubre, con los problemas puestos a propósito.
 
-## El problema
-Los anillos de actualización son temporizadores. El anillo general recibe la actualización diez días después del Patch Tuesday haya ido bien el piloto o no, y el informe que cuenta instalaciones no dice si el despliegue está bajo control. En un mes normal el anillo general arranca con el piloto todavía al 77%; el anillo tardío de la sala de trading se pausó tras una actualización problemática y nadie se acordó de él, así que cinco semanas después lleva dos meses de retraso y la pausa caduca sin que nadie haya decidido qué pasa después; sesenta puestos de trading están en el anillo general y se quedan sin audio en los cascos a la apertura del mercado; un modelo de portátil falla la actualización con el mismo código de error en un tercio de sus equipos; noventa equipos llevan esperando un reinicio desde antes de la fecha límite; una oficina entera deja de sincronizar el mismo día por la VPN; el piloto son nueve informáticos de cada diez; y el porcentaje de equipos con la compilación al día dos semanas después del Patch Tuesday baja tres meses seguidos. No es el seguimiento de cogestión que publiqué hace tiempo, que sigue el estado de cada carga de trabajo, ni la revisión del SLA de vulnerabilidades de hace unos días: sigue una actualización mensual a través de los anillos, y encaja con el calendario de cambios que he publicado hoy, porque promocionar un anillo es un cambio y merece una decisión como cualquier otro.
+Los anillos de actualización son grupos de equipos que reciben la actualización mensual con un retraso fijado, y funcionan como temporizadores. El anillo general recibe la actualización diez días después del Patch Tuesday haya ido bien el piloto o no, y en esta demo arranca con el piloto todavía al 77%. Un informe que cuenta instalaciones no dice si el despliegue está bajo control. La herramienta añade una puerta entre anillos, basada en el porcentaje del anillo anterior con la compilación, su tasa de fallos, los días desde que se le ofreció, los incidentes P1 o P2 abiertos por la actualización y los problemas conocidos, y da un go/no-go para la siguiente promoción.
 
-## Qué he hecho
-- Anillos y puertas: cada anillo frente a su fecha de oferta, su fecha límite y su periodo de gracia; la puerta entre anillos (el porcentaje del anillo anterior con la compilación, su tasa de fallos, los días desde que se le ofreció, incidentes P1 o P2 abiertos por la actualización y problemas conocidos que bloquean el siguiente anillo); anillos promocionados sin cumplir la puerta; el go/no-go de la siguiente promoción; anillos en pausa; y directivas que se apartan del estándar del anillo.
-- Equipos con retraso: sin la actualización pasada la fecha límite y la gracia, con un reinicio pendiente, sin sincronizar (por sede), sin anillo o en dos, en una versión de Windows 11 cerca del fin de servicio, o retenidos por una safeguard hold de la actualización de características.
-- Fallos y composición: códigos de error por modelo, equipos que fallan mes tras mes, incidentes asociados a la actualización, puestos de trading fuera del anillo tardío, un piloto al que le faltan los departamentos, modelos y sedes del anillo general, y anillos que no tienen el tamaño previsto.
-- Tendencia: el porcentaje con la actualización de cada mes al día 7, 14 y 21 del Patch Tuesday, la mediana de días hasta instalar por anillo y los equipos que van con retraso todos los meses.
-- `report.html` con una línea temporal del mes que muestra la oferta, la fecha límite, la gracia, la pausa y las puertas de cada anillo; `rollout-pack.md` para la reunión mensual de parches o el CAB, con el go/no-go y una línea para la decisión; CSV de cada área; y un exportador de solo lectura en PowerShell para Microsoft Graph, los informes de Windows Update for Business en Log Analytics y Configuration Manager.
+## Sesenta puestos de trading en el anillo equivocado y un piloto de informáticos
 
-## Cómo está hecho
-Python solo con la librería estándar. Un equipo tiene la compilación al día cuando la revisión de su versión del sistema es la del Patch Tuesday del mes o posterior; su anillo sale de los grupos o colecciones a los que están asignadas sus directivas, y los equipos en cogestión siguen el despliegue de Configuration Manager cuando la carga de trabajo de Windows Update no ha pasado a Intune; y cada equipo se mide con su propia fecha límite y su gracia, así que uno que aún está dentro de su plazo no cuenta como retrasado. La demo es una empresa inventada con sala de trading y 1.500 equipos con Windows 11 en cuatro ciudades europeas, revisada veinte días después del Patch Tuesday de octubre, con las compilaciones, los KB, las fechas de fin de servicio y los problemas conocidos reales del estado de versiones de Windows, y los problemas puestos a propósito. 13 tests, un runbook para el ciclo mensual y la reunión de parches, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+Sesenta puestos de trading están en el anillo general en lugar del tardío, y se quedan sin audio en los cascos a la apertura del mercado. El piloto, que debería detectar los problemas primero, son nueve informáticos de cada diez. La revisión comprueba si al piloto le faltan los departamentos, modelos y sedes del anillo general, y señala los que no tienen el tamaño previsto y las directivas que se apartan del estándar.
 
-## Qué aprendí
-De dirigir la migración a Windows 11 de una oficina con sala de trading; de gestionar Intune y MECM en cogestión, con empaquetado de aplicaciones en SCCM, PDQ y MDT, Endpoint Privilege Management, BitLocker y Microsoft Defender; de años automatizando con PowerShell y Microsoft Graph; y de la gestión de versiones, con su planificación, pruebas, marcha atrás y validación después de cada versión, y del CAB como responsable del proceso de cambios, dando soporte a unos 2.500 usuarios en oficinas europeas. Las lecciones que hay detrás de la herramienta son que el aplazamiento dice cuándo puede recibir un anillo la actualización y solo una puerta dice si debe; que una pausa es un reloj que se acaba solo; que el anillo tardío solo protege a los equipos que de verdad están en él; que un piloto de informáticos prueba las aplicaciones de informática; que una sede entera sin sincronizar es la red, no los usuarios; que un código de error en un modelo es una configuración base que se arregla una vez, no equipos que se reparan uno a uno; que una actualización instalada que espera un reinicio no protege nada; y que la medida de verdad es el porcentaje con la compilación al día 14 y 21, mes tras mes.
+## Un modelo de portátil falla la actualización en un tercio de sus equipos
 
-## Siguientes pasos
-- Ejecutar la exportación y la revisión de forma programada después del Patch Tuesday y antes de cada promoción, y publicar la puerta en el canal de parches.
-- Leer las compilaciones y los problemas conocidos desde la API de Windows Updates de Microsoft Graph en lugar de copiarlos.
-- Añadir las actualizaciones de controladores y firmware por modelo como una categoría propia."""),
+Un modelo de portátil falla con el mismo código de error en un tercio de sus equipos, señal de un arreglo que se hace una vez y no de equipos que se reparan uno a uno. Noventa equipos llevan esperando un reinicio desde antes de la fecha límite, y una oficina entera deja de sincronizar el mismo día por la VPN. La revisión lista además los equipos sin anillo o en dos, en una versión de Windows 11 cerca del fin de servicio o retenidos por una safeguard hold.
+
+En el tiempo, el porcentaje de equipos con la compilación al día dos semanas después del Patch Tuesday ha bajado tres meses seguidos. La herramienta sigue ese porcentaje al día 7, 14 y 21 y la mediana de días hasta instalar por anillo.
+
+## Cómo usarlo con datos reales
+
+Un equipo cuenta como actualizado cuando la revisión de su versión del sistema es la del Patch Tuesday del mes o posterior. Su anillo sale de los grupos o colecciones a los que están asignadas sus directivas, y los equipos en cogestión siguen a Configuration Manager mientras la carga de trabajo de Windows Update no haya pasado a Intune. Cada equipo se mide con su propia fecha límite y su gracia, así que uno que aún está en plazo no cuenta como retrasado. El repositorio incluye un exportador de solo lectura en PowerShell para Microsoft Graph, los informes de Windows Update for Business en Log Analytics y Configuration Manager, y genera un informe web con una línea temporal del mes y un informe para la reunión de parches o el CAB con una línea para la decisión. Funciona con Python y solo la librería estándar, e incluye 13 tests y un runbook. La demo usa las compilaciones, los KB y los problemas conocidos reales del estado de versiones de Windows; la empresa y sus equipos son ficticios. Como promocionar un anillo es un cambio, la revisión encaja con el calendario de cambios publicado el mismo día.
+
+## De dónde sale
+
+La herramienta nace de dirigir la migración a Windows 11 de una oficina con sala de trading, de gestionar Intune y MECM en cogestión, de años automatizando con PowerShell y Microsoft Graph, y de la gestión de versiones y el CAB como responsable del proceso de cambios, dando soporte a unos 2.500 usuarios en oficinas europeas. La lección que hay detrás: el aplazamiento dice cuándo puede recibir un anillo la actualización, y solo una puerta dice si debe."""),
 
 dict(n="42", repo="42-retail-store-it-health", date="2026-11-03", cat="tools",
- title_en="A store failing over to 4G nine times a week and a corner without a line: IT for a retail chain",
- title_es="Una tienda que salta al 4G nueve veces en una semana y un córner sin línea: el IT de una cadena de tiendas",
+ title_en="A store failed over to 4G nine times in a week and nobody saw its backup SIM at 93% of its data cap",
+ title_es="Una tienda saltó al 4G nueve veces en una semana y nadie vio que su SIM de respaldo iba por el 93% de sus datos",
  seo_title_en="Store IT health review for a retail chain · Iñigo González",
  seo_title_es="Revisión semanal del IT de cada tienda · Iñigo González",
  seo_desc="Weekly store IT review for a retail chain: lines and 4G backup, tunnels, devices, printers, tickets, openings and users, with a visit and ship list.",
- dek_en="From the store list, the daily connectivity per store, the Intune and Active Directory devices, the printer status, the store tickets, the opening checklists and the joiners and leavers: whether each store can sell and operate tomorrow, a red, amber or green status with its reasons, which stores need a visit, a shipment or a vendor call, by region and field technician, and the pack for the weekly retail operations meeting.",
- dek_es="A partir de la lista de tiendas, la conectividad diaria de cada una, los equipos de Intune y Active Directory, el estado de las impresoras, los tickets de tienda, las checklists de apertura y las altas y bajas: si cada tienda puede vender y trabajar mañana, un estado rojo, ámbar o verde con sus motivos, qué tiendas necesitan una visita, un envío o una llamada al proveedor, por región y técnico de campo, y el pack para la reunión semanal de operaciones de tienda.",
+ seo_desc_es="A partir de la lista de tiendas, la conectividad diaria de cada una, los equipos de Intune y Active Directory, el estado de las impresoras, los tickets…",
+ dek_en="The weekly store review, published with fictional data from an eyewear chain with 122 stores, cross-checks connectivity, devices, printers, tickets, opening checklists and joiners and leavers to give each store a red, amber or green status and a list of visits, shipments and vendor calls.",
+ dek_es="La revisión semanal de tiendas, publicada con datos ficticios de una cadena de ópticas con 122 tiendas, cruza la conectividad, los equipos, las impresoras, los tickets, las aperturas y las altas y bajas para dar a cada una un estado rojo, ámbar o verde y una lista de visitas, envíos y llamadas.",
  en="""
+A shopping centre store failed over to its 4G backup router nine times in one week and kept selling, and nobody noticed that its backup SIM was at 93% of its data cap until the router was throttled on a Saturday afternoon. That is what the weekly store IT review published with this post finds. It is an open-source tool that runs on demo data from a made-up eyewear chain with 122 stores in Spain and Portugal, street stores, shopping centres and corners inside a department store, reviewed on a Tuesday morning with the problems placed on purpose.
 
-## The problem
-A retail chain's central IT sees a hundred stores through a monitoring console, a device list and a ticket queue, and none of the stores has anyone from IT inside. In a typical week a shopping centre store fails over to its 4G router nine times, keeps selling, and nobody notices that the SIM is at 93% of its data cap until the router is throttled on a Saturday afternoon; fourteen backup routers have never been tested; every store in one region loses its tunnel to head office around eight in the evening, and the service desk logs seventeen separate problems; a corner inside a department store opens in ten days and its line is still not installed, because the carrier cannot get past the department store's comms room; three stores with the same receipt printer model log jam after jam; one store raises four times the median number of tickets, nearly all about the handhelds losing Wi-Fi in the stockroom; two stores closed weeks ago with their laptops and terminals still inside; and two people start tomorrow without an account. This is not the venue readiness check I published last week, which looks at a hospitality venue's systems before service, nor the hotel pre-opening tracker: it is central IT looking after a whole estate of stores, week after week, and deciding who goes where.
+A chain's central IT sees its stores through a monitoring console, a device list and a ticket queue, and none of the stores has anyone from IT inside. The tool ties every issue to a store and says what it needs: a visit from the field technician, a shipment, a vendor call or remote work. That way the list for each technician comes out of the checks instead of being written by hand, ranked by region.
 
-## What I built
-- Connectivity: primary line availability over the week, failovers to the backup router and time on backup, backup routers never tested, backup SIMs near their data cap, stores with no backup line, the site-to-site tunnel by store and by region, and failed AnyConnect connections.
-- Devices: store and back-office computers not checked in or on Windows out of support, printers offline or low on toner, receipt printers that jam again and again and the model behind them, card terminals not reporting, handhelds offline and UPS that failed their self-test.
-- Tickets: tickets per store against the estate median, repeat incidents, past SLA, field visits pending and vendor tickets open.
-- Openings and changes: the pre-opening checklist of every store opening in the next four weeks, closed stores with devices not recovered, closings and refurbishments; and the users side kept light: joiners without an account, leavers still enabled and shared accounts of closed stores (the access review I published last week goes deeper).
-- A red, amber or green status per store with its reasons, a store grid by region, the visit and ship list ranked by region and field technician, the vendor calls, `report.html`, `store-review.md` for the weekly retail operations meeting with the trend against last week, CSVs for every area, and a read-only PowerShell exporter for Microsoft Graph, Active Directory and Entra ID.
+## Fourteen untested backup routers and a region that loses its tunnel at eight
 
-## How it is built
-Python with the standard library only. Every issue belongs to a store and says what it needs: a visit from the field technician, a shipment, a vendor call or remote work, so the list for each technician falls out of the checks instead of being written by hand. Connectivity uses the last seven days and compares them with the week before; tickets use the last thirty days and the estate median, and a ticket on hold with a vendor does not count against the SLA. Stores in refurbishment are not checked until they reopen, and a closed store is only checked for its devices and accounts. The connectivity and printer data are the exports of the monitoring tool, and the printer status and toner are the standard SNMP printer objects. The demo is a made-up eyewear chain with 122 stores in Spain and Portugal, street stores, shopping centres and corners inside a department store, reviewed on a Tuesday morning with the problems placed on purpose. 14 tests, a runbook with the weekly cycle and the meeting agenda, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+Fourteen backup routers have never been tested. Every store in one region loses its tunnel to head office, the permanent connection between the store and central systems, at around eight in the evening, and the service desk logs it as seventeen separate problems when it is one cause. A corner inside a department store opens in ten days and its line is still not installed, because the carrier cannot get past the department store's comms room.
 
-## What I learned
-From supporting the boutiques and points of sale of luxury retail brands, with their printers, the Cisco AnyConnect VPN and the onboarding of every new person (network, email, AS400 and business applications); from about 200 pre-openings of brand corners inside department stores; from Intune and Microsoft Graph; from owning the incident and change processes; and from supporting about 2,500 users across European offices. At one of those openings the connectivity failed two hours before the doors opened: I brought the corner back online with a temporary USB 4G router while I checked the store's connection and the floor's comms room with the department store's technicians. The lessons behind the tool are that a store on its backup is one failure away from not selling; that an untested backup is a hope; that a whole region going wrong at the same hour is one cause, not seventeen tickets; that the line of a corner depends on the host's comms room, so the joint visit has to be booked early and a 4G router has to be ready for opening day; that one printer model jamming in three cities is a vendor call; that a store with four times the median usually has one problem; and that tomorrow's starters need their accounts this morning.
+The connectivity checks cover primary line availability over the week compared with the week before, time on backup, stores with no backup line, backup SIMs near their cap and failed AnyConnect VPN connections.
 
-## Next steps
-- Run the exports and the review every Monday night and send each field technician their part of the list.
-- Read the tickets from the ServiceNow Table API instead of a list export.
-- Keep the weekly history of every store to show its trend over a quarter.""",
+## A receipt printer model that jams in three stores
+
+Three stores with the same receipt printer model log jam after jam, which makes it a vendor call rather than three repairs. One store raises four times the median number of tickets across the estate, nearly all about handhelds losing Wi-Fi in the stockroom. Two stores closed weeks ago with their laptops and card terminals still inside, and two people start tomorrow without an account.
+
+The review also checks computers not checked in or on an unsupported Windows, printers offline or low on toner, terminals not reporting and UPS units that failed their self-test. Tickets cover the last thirty days, and a ticket on hold with a vendor does not count against the SLA. Stores in refurbishment are skipped until they reopen.
+
+## How to use it with real data
+
+The connectivity and printer data are exports of the monitoring tool, with printer status and toner read from standard SNMP printer objects. The repository includes a read-only PowerShell exporter for Microsoft Graph, Active Directory and Entra ID, and runs on Python with only the standard library. It produces a status per store with its reasons, a store grid by region, a visit and ship list by field technician, a pack for the weekly retail operations meeting with the trend against last week, and CSV files. It comes with 14 tests and a runbook. The chain and its stores are fictional. The tool is not the venue readiness check or the hotel pre-opening tracker published earlier: it covers a whole estate of stores, week after week.
+
+## Where it comes from
+
+The tool comes from supporting the boutiques and points of sale of luxury retail brands, about 200 pre-openings of brand corners inside department stores, Intune and Microsoft Graph, and owning the incident and change processes. At one of those openings the connectivity failed two hours before the doors opened, and I brought the corner back online with a temporary USB 4G router while checking the floor's comms room with the department store's technicians. The lesson: a store on its backup is one failure away from not selling, and an untested backup is only a hope.""",
  es="""
+Una tienda de centro comercial saltó a su router 4G de respaldo nueve veces en una semana y siguió vendiendo, y nadie se dio cuenta de que su SIM de respaldo iba por el 93% de su límite de datos hasta que el router se quedó sin velocidad un sábado por la tarde. Así lo detecta la revisión semanal del IT de tiendas que acompaña a este post, una herramienta de código abierto que se ejecuta con datos de ejemplo de una cadena de ópticas inventada con 122 tiendas en España y Portugal, entre tiendas de calle, centros comerciales y córners dentro de unos grandes almacenes, revisada un martes por la mañana con los problemas puestos a propósito.
 
-## El problema
-El IT central de una cadena de tiendas ve cien tiendas a través de una consola de monitorización, un listado de equipos y una cola de tickets, y en ninguna de ellas hay nadie de informática. En una semana normal, una tienda de centro comercial salta al router 4G nueve veces, sigue vendiendo y nadie se da cuenta de que la SIM va por el 93% de su límite de datos hasta que el router se queda sin velocidad un sábado por la tarde; catorce routers de respaldo no se han probado nunca; todas las tiendas de una región pierden el túnel con la central hacia las ocho de la tarde y el service desk lo registra como diecisiete problemas distintos; un córner dentro de unos grandes almacenes abre en diez días y su línea sigue sin instalar, porque el operador no puede pasar del cuarto de comunicaciones de los grandes almacenes; tres tiendas con el mismo modelo de impresora de tickets acumulan atasco tras atasco; una tienda abre cuatro veces la mediana de tickets, casi todos porque las PDA pierden el Wi-Fi en el almacén; dos tiendas cerraron hace semanas con los portátiles y los datáfonos todavía dentro; y dos personas empiezan mañana sin cuenta. No es la comprobación de preparación de un local que publiqué la semana pasada, que mira los sistemas de un local de hostelería antes del servicio, ni el seguimiento de la preapertura de un hotel: es el IT central cuidando de toda una red de tiendas, semana tras semana, y decidiendo quién va a dónde.
+El IT central de una cadena ve sus tiendas a través de una consola de monitorización, un listado de equipos y una cola de tickets, y en ninguna de ellas hay nadie de informática. La herramienta asigna cada problema a una tienda y dice lo que necesita: una visita del técnico de campo, un envío, una llamada al proveedor o trabajo en remoto. Así la lista de cada técnico sale de las comprobaciones en lugar de escribirse a mano, ordenada por región.
 
-## Qué he hecho
-- Conectividad: disponibilidad de la línea principal en la semana, saltos al router de respaldo y tiempo en respaldo, routers de respaldo sin probar nunca, SIM de respaldo cerca de su límite de datos, tiendas sin línea de respaldo, el túnel con la central por tienda y por región, y conexiones de AnyConnect fallidas.
-- Equipos: PC de tienda y de trastienda sin sincronizar o con una versión de Windows sin soporte, impresoras desconectadas o con poco tóner, impresoras de tickets que se atascan una y otra vez y el modelo que hay detrás, datáfonos que no reportan, PDA desconectadas y SAI que han fallado su autotest.
-- Tickets: tickets por tienda frente a la mediana de la red, incidencias repetidas, fuera de SLA, visitas pendientes y tickets abiertos con proveedores.
-- Aperturas y cambios: la checklist de cada tienda que abre en las próximas cuatro semanas, tiendas cerradas con equipos sin recuperar, cierres y reformas; y la parte de usuarios, ligera a propósito: altas sin cuenta, bajas todavía activas y cuentas compartidas de tiendas cerradas (la revisión de accesos que publiqué la semana pasada va más a fondo).
-- Un estado rojo, ámbar o verde por tienda con sus motivos, una cuadrícula de tiendas por región, la lista de visitas y envíos ordenada por región y técnico de campo, las llamadas a proveedores, `report.html`, `store-review.md` para la reunión semanal de operaciones de tienda con la tendencia frente a la semana anterior, CSV de cada área y un exportador de solo lectura en PowerShell para Microsoft Graph, Active Directory y Entra ID.
+## Catorce routers de respaldo sin probar y una región que pierde el túnel a las ocho
 
-## Cómo está hecho
-Python solo con la librería estándar. Cada problema pertenece a una tienda y dice lo que necesita: una visita del técnico de campo, un envío, una llamada al proveedor o trabajo en remoto, así que la lista de cada técnico sale de las comprobaciones en lugar de escribirse a mano. La conectividad usa los últimos siete días y los compara con la semana anterior; los tickets usan los últimos treinta días y la mediana de la red, y un ticket en espera del proveedor no cuenta para el SLA. Las tiendas en reforma no se revisan hasta que reabren, y de una tienda cerrada solo se miran sus equipos y sus cuentas. Los datos de conectividad e impresoras son las exportaciones de la herramienta de monitorización, y el estado y el tóner de las impresoras son los objetos SNMP estándar de impresora. La demo es una cadena de ópticas inventada con 122 tiendas en España y Portugal, entre tiendas de calle, centros comerciales y córners dentro de unos grandes almacenes, revisada un martes por la mañana con los problemas puestos a propósito. 14 tests, un runbook con el ciclo semanal y el orden del día de la reunión, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+Catorce routers de respaldo no se han probado nunca. Todas las tiendas de una región pierden el túnel con la central, la conexión permanente entre la tienda y los sistemas centrales, hacia las ocho de la tarde, y el service desk lo registra como diecisiete problemas distintos cuando es una sola causa. Un córner dentro de unos grandes almacenes abre en diez días y su línea sigue sin instalar, porque el operador no puede pasar del cuarto de comunicaciones de los grandes almacenes.
 
-## Qué aprendí
-De dar soporte a las boutiques y puntos de venta de marcas de lujo, con sus impresoras, la VPN de Cisco AnyConnect y el alta de cada persona nueva (red, correo, AS400 y aplicaciones de negocio); de unas 200 preaperturas de córners de marca dentro de grandes almacenes; de Intune y Microsoft Graph; de ser responsable de los procesos de incidencias y cambios; y de dar soporte a unos 2.500 usuarios en oficinas europeas. En una de esas aperturas la conectividad se cayó dos horas antes de abrir: volví a dar servicio al córner con un router USB 4G provisional mientras revisaba la conexión de la tienda y el cuarto de comunicaciones de la planta con los técnicos de los grandes almacenes. Las lecciones que hay detrás de la herramienta son que una tienda en respaldo está a un fallo de no poder vender; que un respaldo sin probar es una esperanza; que una región entera fallando a la misma hora es una sola causa, no diecisiete tickets; que la línea de un córner depende del cuarto de comunicaciones del anfitrión, así que hay que reservar pronto la visita conjunta y tener un router 4G listo para el día de la apertura; que un modelo de impresora que se atasca en tres ciudades es una llamada al proveedor; que una tienda con cuatro veces la mediana suele tener un único problema; y que quien empieza mañana necesita su cuenta esta mañana.
+Las comprobaciones de conectividad incluyen la disponibilidad de la línea principal en la semana frente a la anterior, el tiempo en respaldo, las tiendas sin línea de respaldo, las SIM cerca de su límite y las conexiones fallidas de la VPN AnyConnect.
 
-## Siguientes pasos
-- Ejecutar las exportaciones y la revisión cada lunes por la noche y enviar a cada técnico de campo su parte de la lista.
-- Leer los tickets desde la Table API de ServiceNow en lugar de una exportación de lista.
-- Guardar el histórico semanal de cada tienda para ver su tendencia en un trimestre."""),
+## Un modelo de impresora de tickets que se atasca en tres tiendas
+
+Tres tiendas con el mismo modelo de impresora de tickets acumulan atasco tras atasco, lo que lo convierte en una llamada al proveedor y no en tres reparaciones. Una tienda abre cuatro veces la mediana de tickets de la red, casi todos porque las PDA pierden el Wi-Fi en el almacén. Dos tiendas cerraron hace semanas con los portátiles y los datáfonos todavía dentro, y dos personas empiezan mañana sin cuenta.
+
+La revisión comprueba también los PC sin sincronizar o con un Windows sin soporte, las impresoras desconectadas o con poco tóner, los datáfonos que no reportan y los SAI que han fallado su autotest. Los tickets cubren los últimos treinta días, y uno en espera del proveedor no cuenta para el SLA. Las tiendas en reforma no se revisan hasta que reabren.
+
+## Cómo usarlo con datos reales
+
+Los datos de conectividad e impresoras son exportaciones de la herramienta de monitorización, y el estado y el tóner de las impresoras salen de los objetos SNMP estándar de impresora. El repositorio incluye un exportador de solo lectura en PowerShell para Microsoft Graph, Active Directory y Entra ID, y funciona con Python y solo la librería estándar. Genera un estado por tienda con sus motivos, una cuadrícula de tiendas por región, una lista de visitas y envíos por técnico de campo, un informe para la reunión semanal de operaciones de tienda con la tendencia frente a la semana anterior y ficheros CSV. Incluye 14 tests y un runbook. La cadena y sus tiendas son ficticias. La herramienta no es la comprobación de preparación de un local ni el seguimiento de la preapertura de un hotel publicados antes: cubre toda una red de tiendas, semana tras semana.
+
+## De dónde sale
+
+La herramienta nace de dar soporte a las boutiques y puntos de venta de marcas de lujo, de unas 200 preaperturas de córners de marca dentro de grandes almacenes, de Intune y Microsoft Graph y de ser responsable de los procesos de incidencias y cambios. En una de esas aperturas la conectividad se cayó dos horas antes de abrir, y volví a dar servicio al córner con un router USB 4G provisional mientras revisaba el cuarto de comunicaciones de la planta con los técnicos de los grandes almacenes. La lección: una tienda en respaldo está a un fallo de no poder vender, y un respaldo sin probar es solo una esperanza."""),
 dict(n="43", repo="43-azure-cost-rightsizing", date="2026-11-04", updated="2026-11-13", cat="tools",
- title_en="A reservation at 55% about to auto-renew and VMs billed while stopped: the Azure cost review",
- title_es="Una reserva al 55% que se renueva sola y VMs paradas que se pagan: la revisión de costes de Azure",
+ title_en="Azure review finds 11,101 euros a month of savings and a reservation at 55% that was set to renew itself",
+ title_es="Una revisión de Azure halla 11.101 euros al mes de ahorro y una reserva al 55% que iba a renovarse sola",
  seo_title_en="Monthly Azure cost review and right-sizing · Iñigo González",
  seo_title_es="Revisión de costes de Azure y redimensionado · Iñigo González",
  seo_desc="Monthly Azure cost review from the FOCUS export: right-sizing, waste, reservations and savings plans, showback by cost centre, budgets and unit cost.",
  seo_desc_es="Revisión mensual de costes de Azure: redimensionado, desperdicio, reservas y planes de ahorro, showback por centro de coste, presupuestos y coste unitario.",
- dek_en="From the Azure Cost Management FOCUS export, the virtual machines with 30 days of Azure Monitor metrics, the disks, the public IPs, the reservations and savings plans and the budgets: which VMs go one size down, what is paid for and not used, which commitments to renew, exchange or let expire, the spend of each cost centre against its budget and forecast, and the monthly savings identified with how each one was worked out.",
- dek_es="A partir de la exportación FOCUS de Azure Cost Management, las máquinas virtuales con 30 días de métricas de Azure Monitor, los discos, las IP públicas, las reservas y los planes de ahorro y los presupuestos: qué VMs bajan un tamaño, qué se paga sin usarse, qué compromisos renovar, cambiar o dejar caducar, el gasto de cada centro de coste frente a su presupuesto y su previsión, y el ahorro mensual identificado con cómo se ha calculado cada partida.",
+ dek_en="The monthly Azure cost review, published with fictional data from an insurance group with five subscriptions and 133 VMs, cross-checks the cost export, 30 days of VM metrics, disks, public IPs, commitments and budgets to decide what to resize, delete, schedule and commit, and who pays for each line.",
+ dek_es="La revisión mensual de costes de Azure, publicada con datos ficticios de un grupo asegurador con cinco suscripciones y 133 VMs, cruza la exportación de costes, 30 días de métricas, discos, IP públicas, compromisos y presupuestos para decidir qué redimensionar, borrar, programar y comprometer, y quién paga cada línea.",
  en="""
+A reservation for ten batch servers has been running at 55% since half of the batch moved elsewhere, it expires in six weeks and it is set to renew itself. It is one of the findings of a 94,403 euro month in which the review identifies 11,101 euros a month of savings. That is what the monthly Azure cost review published with this post finds. It is a tool that runs on demo data from a made-up insurance group with five subscriptions and 133 virtual machines, reviewed on 4 November for October, with round fictional prices and the problems placed on purpose.
 
-## The problem
-The Azure bill tells you how much, not what to do. In a typical month three SQL Server VMs on E16s_v5 peak at 15% CPU and use a third of their memory, because they were sized for a migration two years ago; a reporting VM was shut down from inside Windows three weeks ago and is still billed as if it were running, because nobody deallocated it; fourteen development and test VMs run every night and every weekend; the disks and public IPs of a migration project that finished in August are still there, unattached and untagged; a reservation for ten batch servers runs at 55% since half the batch moved elsewhere, expires in six weeks and is set to renew itself; forty production VMs run all month on pay-as-you-go while only a quarter of the VM spend is covered by a commitment; 11% of the bill has no cost centre, so nobody is asked about it; one cost centre ends the month 14% over budget and is on course to do it again; and the cost per active user of the digital channels goes up 15% because the users fell and the cost did not. This is not the cost dashboard I published at the start of the series, which looks for the week that goes wrong across AWS and Azure while it happens: it is the monthly review that comes after, and decides what to resize, delete, schedule and commit, and who pays for each line.
+A reservation is a commitment to pay for capacity in advance in exchange for a lower price, and the tool treats one under 80% of use as money paid for nothing. For every reservation and savings plan under its target it shows the unused cost of the month, and for the ones expiring in the next 90 days it asks for a decision: renew or exchange. When a commitment would renew itself at low use, the finding is critical.
 
-## What I built
-- Right-sizing: VMs whose CPU p95 and peak memory over 30 days fit in one size down within the same family, with the projected use after the resize and the monthly saving, and idle VMs; VMs covered by a reservation are flagged, because resizing them saves nothing until the freed capacity is used or exchanged.
-- Waste: VMs stopped but not deallocated, non-production VMs on around the clock with no schedule tag, managed disks unattached for weeks and public IPs associated with nothing.
-- Commitments: reservations and savings plans under their utilisation target with the unused cost of the month, the ones expiring in the next 90 days with the renew or exchange decision (critical when they would renew themselves at a low utilisation), and the VM coverage with the steady pay-as-you-go VMs a commitment would cover.
-- Showback: the month by cost centre against its budget, the forecast for the current month, the cost with no cost centre tag and where it sits, the unit cost per cost centre and the VMs missing the tags showback needs.
-- `report.html` with a verdict for the month, `savings-pack.md` for the monthly FinOps review with a decision column for every resize and commitment, CSVs for right-sizing, waste, commitments, showback and actions, and a read-only PowerShell exporter for the Az modules and the reservations and savings plans APIs.
+## Three SQL Server machines that never pass 15% CPU
 
-## How it is built
-Python with the standard library only. The cost side is the FOCUS export as Cost Management writes it: effective cost for the amortised spend, billed cost next to it, the savings of the commitments as list minus effective cost of the rows they cover, and the unused part from the rows marked as unused. Every saving is an estimate per month at the run rate of the last seven days, and the pack says how it was worked out: half the vCPUs in the same family is half the compute cost, an office-hours schedule is 60 of 168 hours, and a commitment is an upper estimate to be checked against Azure Advisor before buying. Coverage is measured in hours, because a Windows or SQL Server VM covered by a reservation still has pay-as-you-go rows for its licence. The demo is a made-up insurance group with five subscriptions and 133 VMs, reviewed on 4 November for October with round fictional prices and the problems placed on purpose: it identifies 11,101 euros a month of savings on a 94,403 euro month. 15 tests, a runbook for the monthly cycle and the FinOps review, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+Three SQL Server VMs on E16s_v5 peak at 15% CPU and use a third of their memory, because they were sized for a migration two years ago. The tool looks for VMs whose CPU p95, the level the machine stays under 95% of the time, and peak memory over 30 days fit in one size down within the same family. A VM covered by a reservation is flagged, because resizing it saves nothing until the freed capacity is used or exchanged.
 
-## What I learned
-From working with Azure Cost Management and applying the FinOps Framework, with reservations, savings plans and commitments; from optimising Azure costs with right-sizing and reservations; from implementing showback and chargeback and unit cost metrics; from software asset management and licence and SaaS cost control, with Apptio and Flexera, TBM, FOCUS and GreenOps; from business cases with ROI and measurable benefits and from owning an IT budget; and from operating a hybrid AWS and Azure environment with Azure Monitor and Log Analytics. The lessons behind the tool are that the peak decides a resize, not the average; that a stopped VM is not a deallocated one; that an unattached disk is billed in full and nobody misses it; that the waste has to be fixed before buying a commitment, or the reservation locks in today's oversizing for years; that a commitment under 80% is money paid for nothing, and one that renews itself at 55% is the same mistake again; that untagged cost has no owner, so nobody is ever asked about it; and that the unit cost is the number the business reads.
+A reporting VM was shut down from inside Windows three weeks ago and is still billed as if it were running, because nobody deallocated it, that is, nobody released it in Azure. Fourteen development and test VMs run every night and every weekend. The disks and public IPs of a migration project that finished in August are still there, unattached and untagged, and an unattached disk is billed in full.
 
-## Next steps
-- Run the exports and the review on the fourth day of every month and send each owner their lines.
-- Size the commitments from the Cost Management benefit recommendations and price the resizes from the Azure Retail Prices API.
-- Add the PaaS services that right-size the same way, such as App Service plans and Azure SQL Database.""",
+## Forty production VMs on pay-as-you-go and 11% of the bill with no owner
+
+Forty production VMs run all month on pay-as-you-go while only a quarter of the VM spend is covered by a commitment. The review lists the steady pay-as-you-go VMs a commitment would cover, but only after the waste: buying first would lock in today's oversizing for years.
+
+On showback, the practice of showing each area what it spends, 11% of the bill has no cost centre, so nobody is asked about it. One cost centre ends the month 14% over budget and is on course to do it again. The cost per active user of the digital channels goes up 15%, because the users fell and the cost did not.
+
+## How each saving is worked out
+
+Every saving is an estimate per month at the run rate of the last seven days, and the pack explains how it was calculated. Half the vCPUs in the same family is half the compute cost; an office-hours schedule is 60 of 168 hours; a commitment is an upper estimate to be checked against Azure Advisor before buying. Coverage is measured in hours, because a Windows or SQL Server VM covered by a reservation still has pay-as-you-go rows for its licence.
+
+## How to use it with real data
+
+The cost side is the FOCUS export, a standard cost format, as Azure Cost Management writes it: effective cost for the amortised spend, billed cost next to it, and the unused part of commitments from the rows marked as unused. The repository includes a read-only PowerShell exporter for the Az modules and the reservations and savings plans APIs, and runs on Python with only the standard library. It produces a report with a verdict for the month, a savings pack for the monthly FinOps review with a decision column for every resize and commitment, and CSV files for right-sizing, waste, commitments, showback and actions. It comes with 15 tests and a runbook. It is not the cost dashboard published at the start of the series, which watches AWS and Azure week by week: it is the monthly review that comes after. The insurance group and its figures are fictional.
+
+## Where it comes from
+
+The tool comes from working with Azure Cost Management and the FinOps Framework, optimising Azure costs with right-sizing and reservations, implementing showback, chargeback and unit cost metrics, owning an IT budget and operating a hybrid AWS and Azure environment. The lessons I keep from it: the peak decides a resize, not the average, and a stopped VM is not a deallocated one.""",
  es="""
+Una reserva para diez servidores de batch va al 55% desde que la mitad del batch se fue a otra plataforma, caduca en seis semanas y está configurada para renovarse sola. Es uno de los hallazgos de un mes de 94.403 euros en el que la revisión identifica 11.101 euros al mes de ahorro. Así lo detecta la revisión mensual de costes de Azure que acompaña a este post, una herramienta que se ejecuta con datos de ejemplo de un grupo asegurador inventado con cinco suscripciones y 133 máquinas virtuales, revisado el 4 de noviembre sobre octubre, con precios redondos inventados y los problemas puestos a propósito.
 
-## El problema
-La factura de Azure dice cuánto, no qué hacer. En un mes normal tres VMs de SQL Server en E16s_v5 llegan como mucho al 15% de CPU y usan un tercio de su memoria, porque se dimensionaron para una migración hace dos años; una VM de informes se apagó desde dentro de Windows hace tres semanas y se sigue pagando como si estuviera encendida, porque nadie la desasignó; catorce VMs de desarrollo y pruebas funcionan todas las noches y todos los fines de semana; los discos y las IP públicas de un proyecto de migración que terminó en agosto siguen ahí, sin conectar y sin etiquetar; una reserva para diez servidores de batch va al 55% desde que la mitad del batch se fue a otra plataforma, caduca en seis semanas y está configurada para renovarse sola; cuarenta VMs de producción funcionan todo el mes con pago por uso mientras solo una cuarta parte del gasto en VMs está cubierta por un compromiso; el 11% de la factura no tiene centro de coste, así que nadie pregunta por él; un centro de coste cierra el mes un 14% por encima del presupuesto y va camino de repetirlo; y el coste por usuario activo de los canales digitales sube un 15% porque los usuarios han bajado y el coste no. No es el panel de costes que publiqué al principio de la serie, que busca la semana que se tuerce en AWS y Azure mientras pasa: es la revisión mensual que viene después, y decide qué redimensionar, borrar, programar y comprometer, y quién paga cada línea.
+Una reserva es un compromiso de pagar capacidad por adelantado a cambio de un precio menor, y la herramienta considera que una por debajo del 80% de uso es dinero pagado por nada. Para cada reserva y plan de ahorro por debajo de su objetivo muestra el coste sin usar del mes, y para los que caducan en los próximos 90 días pide una decisión: renovar o cambiar. Cuando un compromiso se renovaría solo con un uso bajo, el hallazgo es crítico.
 
-## Qué he hecho
-- Redimensionado: VMs cuyo p95 de CPU y pico de memoria en 30 días caben en un tamaño menos dentro de la misma familia, con el uso previsto después del cambio y el ahorro mensual, y VMs ociosas; las VMs cubiertas por una reserva se marcan, porque redimensionarlas no ahorra nada hasta que la capacidad liberada se usa o se cambia.
-- Desperdicio: VMs paradas pero no desasignadas, VMs que no son de producción encendidas día y noche sin etiqueta de horario, discos administrados sin conectar desde hace semanas e IP públicas que no están asociadas a nada.
-- Compromisos: reservas y planes de ahorro por debajo de su objetivo de uso con el coste sin usar del mes, los que caducan en los próximos 90 días con la decisión de renovar o cambiar (crítico cuando se renovarían solos con un uso bajo), y la cobertura de las VMs con las VMs estables en pago por uso que cubriría un compromiso.
-- Showback: el mes por centro de coste frente a su presupuesto, la previsión del mes en curso, el coste sin etiqueta de centro de coste y dónde está, el coste unitario de cada centro de coste y las VMs a las que les faltan las etiquetas que necesita el showback.
-- `report.html` con un veredicto del mes, `savings-pack.md` para la revisión mensual de FinOps con una columna de decisión para cada redimensionado y cada compromiso, CSV de redimensionado, desperdicio, compromisos, showback y acciones, y un exportador de solo lectura en PowerShell para los módulos Az y las API de reservas y planes de ahorro.
+## Tres máquinas de SQL Server que no pasan del 15% de CPU
 
-## Cómo está hecho
-Python solo con la librería estándar. La parte de costes es la exportación FOCUS tal como la escribe Cost Management: el coste efectivo para el gasto amortizado, el coste facturado al lado, el ahorro de los compromisos como coste de lista menos coste efectivo de las filas que cubren, y la parte sin usar a partir de las filas marcadas como no usadas. Cada ahorro es una estimación mensual al ritmo de los últimos siete días, y el pack explica cómo se ha calculado: la mitad de vCPU en la misma familia es la mitad del coste de cómputo, un horario de oficina son 60 de 168 horas, y un compromiso es una estimación por arriba que hay que contrastar con Azure Advisor antes de comprar. La cobertura se mide en horas, porque una VM de Windows o de SQL Server cubierta por una reserva sigue teniendo filas de pago por uso por su licencia. La demo es un grupo asegurador inventado con cinco suscripciones y 133 VMs, revisado el 4 de noviembre sobre octubre con precios redondos inventados y los problemas puestos a propósito: identifica 11.101 euros al mes de ahorro sobre un mes de 94.403 euros. 15 tests, un runbook para el ciclo mensual y la revisión de FinOps, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+Tres VMs de SQL Server en E16s_v5 llegan como mucho al 15% de CPU y usan un tercio de su memoria, porque se dimensionaron para una migración hace dos años. La herramienta busca VMs cuyo p95 de CPU, el nivel por debajo del que está la máquina el 95% del tiempo, y cuyo pico de memoria en 30 días caben en un tamaño menos dentro de la misma familia. Una VM cubierta por una reserva se marca, porque redimensionarla no ahorra nada hasta que la capacidad liberada se usa o se cambia.
 
-## Qué aprendí
-De trabajar con Azure Cost Management y aplicar el FinOps Framework, con reservas, planes de ahorro y compromisos; de optimizar costes de Azure con redimensionado y reservas; de implantar showback y chargeback y métricas de coste unitario; de la gestión de activos de software y el control del coste de licencias y SaaS, con Apptio y Flexera, TBM, FOCUS y GreenOps; de los casos de negocio con ROI y beneficios medibles y de ser responsable de un presupuesto de IT; y de operar un entorno híbrido de AWS y Azure con Azure Monitor y Log Analytics. Las lecciones que hay detrás de la herramienta son que un redimensionado lo decide el pico, no la media; que una VM parada no es una VM desasignada; que un disco sin conectar se paga entero y nadie lo echa de menos; que el desperdicio hay que arreglarlo antes de comprar un compromiso, o la reserva congela durante años el sobredimensionado de hoy; que un compromiso por debajo del 80% es dinero pagado por nada, y uno que se renueva solo al 55% es el mismo error otra vez; que el coste sin etiquetar no tiene dueño, así que nadie pregunta nunca por él; y que el coste unitario es el número que lee el negocio.
+Una VM de informes se apagó desde dentro de Windows hace tres semanas y se sigue pagando como si estuviera encendida, porque nadie la desasignó, es decir, nadie la liberó en Azure. Catorce VMs de desarrollo y pruebas funcionan todas las noches y todos los fines de semana. Los discos y las IP públicas de un proyecto de migración que terminó en agosto siguen ahí, sin conectar y sin etiquetar, y un disco sin conectar se paga entero.
 
-## Siguientes pasos
-- Ejecutar las exportaciones y la revisión el cuarto día de cada mes y enviar a cada responsable sus líneas.
-- Dimensionar los compromisos con las recomendaciones de Cost Management y poner precio a los redimensionados con la API de precios de Azure.
-- Añadir los servicios PaaS que se redimensionan igual, como los planes de App Service y Azure SQL Database."""),
+## Cuarenta VMs de producción con pago por uso y un 11% de la factura sin dueño
+
+Cuarenta VMs de producción funcionan todo el mes con pago por uso mientras solo una cuarta parte del gasto en VMs está cubierta por un compromiso. La revisión enumera las VMs estables en pago por uso que cubriría un compromiso, pero solo después del desperdicio: comprar antes congelaría durante años el sobredimensionado de hoy.
+
+En el showback, la práctica de enseñar a cada área lo que gasta, el 11% de la factura no tiene centro de coste, así que nadie pregunta por él. Un centro de coste cierra el mes un 14% por encima del presupuesto y va camino de repetirlo. El coste por usuario activo de los canales digitales sube un 15%, porque los usuarios han bajado y el coste no.
+
+## Cómo se calcula cada ahorro
+
+Cada ahorro es una estimación mensual al ritmo de los últimos siete días, y el pack explica cómo se ha calculado. La mitad de vCPU en la misma familia es la mitad del coste de cómputo; un horario de oficina son 60 de 168 horas; un compromiso es una estimación por arriba que hay que contrastar con Azure Advisor antes de comprar. La cobertura se mide en horas, porque una VM de Windows o de SQL Server cubierta por una reserva sigue teniendo filas de pago por uso por su licencia.
+
+## Cómo usarlo con datos reales
+
+La parte de costes es la exportación FOCUS, un formato estándar de costes, tal como la escribe Azure Cost Management: el coste efectivo para el gasto amortizado, el coste facturado al lado y la parte sin usar de los compromisos a partir de las filas marcadas como no usadas. El repositorio incluye un exportador de solo lectura en PowerShell para los módulos Az y las API de reservas y planes de ahorro, y funciona con Python solo con la librería estándar. Genera un informe con un veredicto del mes, un pack de ahorro para la revisión mensual de FinOps con una columna de decisión para cada redimensionado y cada compromiso, y ficheros CSV de redimensionado, desperdicio, compromisos, showback y acciones. Incluye 15 tests y un runbook. No es el panel de costes publicado al principio de la serie, que vigila AWS y Azure semana a semana: es la revisión mensual que viene después. El grupo asegurador y sus cifras son ficticios.
+
+## De dónde sale
+
+La herramienta nace de trabajar con Azure Cost Management y el FinOps Framework, de optimizar costes de Azure con redimensionado y reservas, de implantar showback, chargeback y métricas de coste unitario, de ser responsable de un presupuesto de IT y de operar un entorno híbrido de AWS y Azure. Las lecciones que me quedo: un redimensionado lo decide el pico, no la media, y una VM parada no es una VM desasignada."""),
 dict(n="44", repo="44-m365-copilot-readiness", date="2026-11-05", cat="tools",
- title_en="An HR site open to all and an agent nobody owns: is the tenant ready for the next Copilot wave?",
- title_es="Un sitio de RR. HH. abierto a todos y un agente sin dueño: ¿está listo el tenant para Copilot?",
+ title_en="An HR site open to the whole company could reach 1,650 people through Copilot two weeks before a new wave",
+ title_es="Un sitio de RR. HH. abierto a toda la empresa podría llegar a 1.650 personas por Copilot antes de una oleada",
  seo_title_en="Microsoft 365 Copilot readiness review · Iñigo González",
  seo_title_es="Revisión de preparación para Copilot · Iñigo González",
  seo_desc="Microsoft 365 Copilot readiness before each wave: licences to reclaim, training, MFA, SharePoint oversharing, labels, DLP, agents and adoption.",
- dek_en="From the Entra ID users, the Microsoft 365 Copilot usage report, the SharePoint sites, the label coverage and DLP policies, the Copilot Studio agents and the training records: which licences to reclaim, whether each wave is trained, registered for MFA and on a compliant device, what Copilot could surface that it should not, which agents have no owner or use connectors nobody approved, and a verdict per wave for the steering group.",
- dek_es="A partir de los usuarios de Entra ID, el informe de uso de Microsoft 365 Copilot, los sitios de SharePoint, la cobertura de etiquetas y las directivas de DLP, los agentes de Copilot Studio y los registros de formación: qué licencias recuperar, si cada oleada está formada, registrada en MFA y con un equipo conforme, qué podría mostrar Copilot que no debería, qué agentes no tienen dueño o usan conectores que nadie ha aprobado, y un veredicto por oleada para el comité de dirección.",
+ seo_desc_es="A partir de los usuarios de Entra ID, el informe de uso de Microsoft 365 Copilot, los sitios de SharePoint, la cobertura de etiquetas y las directivas de DLP…",
+ dek_en="The Copilot readiness review, published with fictional data from an energy company with 1,800 people in three waves, cross-checks users, usage, SharePoint sites, labels, DLP, Copilot Studio agents and training to say what Copilot could surface that it should not and whether each wave is ready.",
+ dek_es="La revisión de preparación para Copilot, publicada con datos ficticios de una empresa de energía con 1.800 personas en tres oleadas, cruza usuarios, uso, sitios de SharePoint, etiquetas, DLP, agentes de Copilot Studio y formación para decir qué podría mostrar Copilot que no debería y si cada oleada está lista.",
  en="""
+Two weeks before a Copilot wave of 400 people, the HR employee relations site has been shared with Everyone except external users since a migration, and 1,650 people could get its content back in an answer. That is what the Microsoft 365 Copilot readiness review published with this post finds. It is a tool that runs on demo data from a made-up energy company with 1,800 people in three waves, reviewed on 5 November, two weeks before the second wave, with the problems placed on purpose. Its verdict: four critical sites, and no wave ready until they are fixed.
 
-## The problem
-Copilot answers from everything a person can already open, so a rollout that went well in the pilot can go wrong in the next wave for reasons no single console shows. Two weeks before a wave of 400 people, the HR employee relations site has been shared with Everyone except external users since a migration, and 1,650 people could get it back in an answer; the recruitment site has Anyone links and no label; a closed litigation site has no owner and is still searchable; a quarter of Finance's files carry a sensitivity label and the DLP policy for Copilot is still in simulation; an agent published to the whole company was built by someone who has left and reads from a Dropbox connector nobody approved; an HR agent helps screen candidates and is not in the AI register; 34 licences have not been used in a month while the next wave is 14 licences short; and the wave itself is 70% trained, with 14 people not registered for MFA and 31 without a compliant device. This is not the tenant governance review I published a couple of weeks ago, which looks at admin roles, Conditional Access and tenant settings: it is the review before each Copilot wave and every month after it, about what Copilot can reach and who is using it.
+Copilot answers from everything a person can already open. It does not create new access, but it makes old oversharing easy to find, so a rollout that went well in the pilot can go wrong in the next wave for reasons no single console shows. The tool says which waves every issue reaches: the waves with people in its department, or every wave when it is critical oversharing or an agent open to the whole company. A wave is not ready when a critical issue reaches it.
 
-## What I built
-- Licences: licensed users with no Copilot activity in 30 days or never, licences on disabled accounts, their monthly cost, and whether the pool covers the next wave once they are reclaimed.
-- Waves: training, MFA registration, a compliant device and a licence for every person of a wave before its go-live, and a champion in each department.
-- Oversharing: SharePoint sites shared with Everyone except external users or with Anyone links, sites with no owner or only one, no sensitivity label, and inactive sites Copilot can still search, with Restricted Content Discovery as the stopgap while they are fixed.
-- Labels and DLP: label coverage per department and whether a DLP policy is enforced on the Microsoft 365 Copilot location; agents with no owner, published to everyone, using connectors not on the allowed list or unused, and agents that support decisions about people with no entry in the AI register; and adoption by department and app with its trend and the survey.
-- A verdict per wave (ready, attention or not ready), `report.html`, `readiness-pack.md` for the Copilot steering group with a decision column per wave, CSVs for licences to reclaim, oversharing, agents, adoption, waves and actions, and a read-only PowerShell exporter for Microsoft Graph and SharePoint Online.
+## A recruitment site with open links and a litigation site with no owner
 
-## How it is built
-Python with the standard library only. Every issue says which waves it reaches: the waves with people in its department, or every wave when it is critical oversharing or an agent open to the whole company, because any Copilot user who can open the content can get it back in an answer. A wave is not ready when a critical issue reaches it. The usage report is the Microsoft Graph report per user with the last activity date overall and per app; the site columns are the Get-SPOSite properties plus the counts of the SharePoint data access governance report; the agents come from the Power Platform inventory. Licence costs are estimates at a price set in the settings, and the AI register column is a record, not a legal assessment. The demo is a made-up energy company with 1,800 people in three waves, reviewed on 5 November two weeks before wave 2, with the problems placed on purpose: 37 licences to reclaim, 1,110 euros a month, four critical sites and every wave not ready until they are fixed. 14 tests, a runbook with the steering group agenda, go or no go per wave and the ADKAR steps, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot. The findings can go as evidence into the controls register I published earlier in the series.
+The HR site is not alone. The recruitment site has Anyone links, which open without signing in, and no label. A closed litigation site has no owner and is still searchable. The review checks SharePoint sites shared with Everyone except external users or with Anyone links, sites with no owner or only one, sites without a sensitivity label and inactive sites Copilot can still search. While they are fixed, it proposes Restricted Content Discovery, a setting that keeps a site out of Copilot answers; it buys time but changes no permission.
 
-## What I learned
-From deploying Microsoft 365 Copilot and AI tools and driving their adoption, and administering Microsoft 365 agents and Copilot Studio; from being Global Administrator of Microsoft 365, with PIM, Conditional Access and app integration; from Microsoft Purview, with DLP and sensitivity labels, from SharePoint for many years and from Power Platform; from change management with Prosci, ADKAR and Kotter; from the EU AI Act and responsible AI; and from business cases with measurable benefits. The lessons behind the tool are that Copilot does not create new access, it makes the old oversharing easy to find, so the permissions have to be fixed before the wave and not after; that Restricted Content Discovery buys time but changes no permission; that a label coverage of a quarter leaves DLP with little to act on; that an agent without an owner is nobody's problem until it answers the wrong question; that an agent that helps decide about people needs its entry in the register before it is used, not after; that a licence nobody uses is the cheapest licence for the next wave; and that training and champions decide the adoption more than the licence does.
+A quarter of Finance's files carry a sensitivity label, the tag that marks how confidential a document is, and the DLP policy for Copilot, the rule meant to stop sensitive data leaving, is still in simulation.
 
-## Next steps
-- Run the review three weeks and one week before each wave, and every month after.
-- Read the agents from the Power Platform inventory API and the label coverage from the Purview content explorer export.
-- Add the agents usage report and keep a year of adoption to set it next to the time people say they save.""",
+## An agent built by someone who has left, reading from an unapproved Dropbox
+
+An agent published to the whole company was built by someone who has left and reads from a Dropbox connector nobody approved. An HR agent helps screen candidates and is not in the AI register. The tool flags agents with no owner, published to everyone, using connectors not on the allowed list or unused, and agents that support decisions about people with no entry in the register. That column is a record, not a legal assessment.
+
+## Thirty-seven licences to reclaim and a wave 70% trained
+
+Thirty-four licences have not been used in a month, while the next wave is 14 licences short. In all, the review finds 37 licences to reclaim, worth 1,110 euros a month at the price set in the settings, and checks whether the pool covers the next wave once they are back. The wave itself is 70% trained, with 14 people not registered for MFA and 31 without a compliant device. For every wave the tool checks training, MFA, a compliant device, a licence and a champion in each department, and it tracks adoption by department and app with its trend and the survey.
+
+## How to use it with real data
+
+The usage data is the Microsoft Graph Copilot report per user, the site data comes from Get-SPOSite and the SharePoint data access governance report, and the agents come from the Power Platform inventory. The repository includes a read-only PowerShell exporter for Microsoft Graph and SharePoint Online, and runs on Python with only the standard library. It produces a verdict per wave (ready, attention or not ready), a web report, a pack for the Copilot steering group with a decision column per wave, and CSV files for licences, oversharing, agents, adoption, waves and actions. It comes with 14 tests and a runbook with the steering group agenda, go or no go per wave and the ADKAR steps. It is not the tenant governance review published earlier, which looks at admin roles and Conditional Access: it is the review before each wave and every month after. The energy company is fictional.
+
+## Where it comes from
+
+The tool comes from deploying Microsoft 365 Copilot and driving its adoption, administering Copilot Studio agents, being Global Administrator of Microsoft 365, working with Purview, DLP and sensitivity labels, and change management with Prosci, ADKAR and Kotter. The lesson I keep: the permissions have to be fixed before the wave, not after.""",
  es="""
+Dos semanas antes de una oleada de Copilot de 400 personas, el sitio de relaciones laborales de RR. HH. está compartido con Todos excepto los usuarios externos desde una migración, y 1.650 personas podrían recibir su contenido en una respuesta. Así lo detecta la revisión de preparación para Microsoft 365 Copilot que acompaña a este post, una herramienta que se ejecuta con datos de ejemplo de una empresa de energía inventada con 1.800 personas en tres oleadas, revisada el 5 de noviembre, a dos semanas de la segunda, con los problemas puestos a propósito. Su veredicto: cuatro sitios críticos y ninguna oleada lista hasta que se arreglen.
 
-## El problema
-Copilot responde a partir de todo lo que una persona ya puede abrir, así que un despliegue que fue bien en el piloto puede torcerse en la siguiente oleada por motivos que ninguna consola enseña por sí sola. Dos semanas antes de una oleada de 400 personas, el sitio de relaciones laborales de RR. HH. está compartido con Todos excepto los usuarios externos desde una migración, y 1.650 personas podrían recibirlo en una respuesta; el sitio de selección tiene vínculos de cualquier persona y ninguna etiqueta; un sitio de un litigio cerrado no tiene propietario y sigue siendo buscable; una cuarta parte de los archivos de Finanzas lleva etiqueta de confidencialidad y la directiva de DLP para Copilot sigue en simulación; un agente publicado para toda la empresa lo creó alguien que ya se ha ido y lee de un conector de Dropbox que nadie aprobó; un agente de RR. HH. ayuda a cribar candidatos y no está en el registro de IA; 34 licencias llevan un mes sin usarse mientras a la siguiente oleada le faltan 14; y la propia oleada está formada al 70%, con 14 personas sin registrar en MFA y 31 sin un equipo conforme. No es la revisión de gobierno del tenant que publiqué hace un par de semanas, que mira roles de administración, Acceso condicional y configuración: es la revisión antes de cada oleada de Copilot y cada mes después, sobre lo que Copilot puede alcanzar y quién lo está usando.
+Copilot responde a partir de todo lo que una persona ya puede abrir. No crea accesos nuevos, pero hace fácil encontrar la sobreexposición de siempre, así que un despliegue que fue bien en el piloto puede torcerse en la siguiente oleada por motivos que ninguna consola enseña por sí sola. La herramienta dice a qué oleadas alcanza cada problema: a las que tienen personas de su departamento, o a todas cuando es una sobreexposición crítica o un agente abierto a toda la empresa. Una oleada no está lista cuando le alcanza un problema crítico.
 
-## Qué he hecho
-- Licencias: usuarios con licencia sin actividad en Copilot en 30 días o nunca, licencias en cuentas deshabilitadas, su coste mensual, y si el remanente cubre la siguiente oleada una vez recuperadas.
-- Oleadas: formación, registro en MFA, un equipo conforme y una licencia para cada persona de una oleada antes de su arranque, y un champion en cada departamento.
-- Sobreexposición: sitios de SharePoint compartidos con Todos excepto los usuarios externos o con vínculos de cualquier persona, sitios sin propietario o con uno solo, sin etiqueta de confidencialidad, y sitios inactivos que Copilot todavía puede buscar, con Restricted Content Discovery como medida provisional mientras se arreglan.
-- Etiquetas y DLP: cobertura de etiquetas por departamento y si hay una directiva de DLP aplicada en la ubicación de Microsoft 365 Copilot; agentes sin propietario, publicados para todos, con conectores fuera de la lista permitida o sin uso, y agentes que apoyan decisiones sobre personas sin entrada en el registro de IA; y la adopción por departamento y aplicación con su tendencia y la encuesta.
-- Un veredicto por oleada (lista, atención o no lista), `report.html`, `readiness-pack.md` para el comité de dirección de Copilot con una columna de decisión por oleada, CSV de licencias a recuperar, sobreexposición, agentes, adopción, oleadas y acciones, y un exportador de solo lectura en PowerShell para Microsoft Graph y SharePoint Online.
+## Un sitio de selección con vínculos abiertos y uno de un litigio sin propietario
 
-## Cómo está hecho
-Python solo con la librería estándar. Cada problema dice a qué oleadas alcanza: a las que tienen personas de su departamento, o a todas cuando es una sobreexposición crítica o un agente abierto a toda la empresa, porque cualquier usuario de Copilot que pueda abrir el contenido puede recibirlo en una respuesta. Una oleada no está lista cuando le alcanza un problema crítico. El informe de uso es el informe de Microsoft Graph por usuario, con la fecha de última actividad global y por aplicación; las columnas de los sitios son las propiedades de Get-SPOSite más los recuentos del informe de gobierno de acceso a datos de SharePoint; los agentes salen del inventario de Power Platform. El coste de las licencias es una estimación a un precio que se fija en la configuración, y la columna del registro de IA es un registro, no una valoración jurídica. La demo es una empresa de energía inventada con 1.800 personas en tres oleadas, revisada el 5 de noviembre a dos semanas de la segunda, con los problemas puestos a propósito: 37 licencias a recuperar, 1.110 euros al mes, cuatro sitios críticos y ninguna oleada lista hasta que se arreglen. 14 tests, un runbook con el orden del día del comité, el sí o no de cada oleada y los pasos de ADKAR, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura. Los hallazgos pueden ir como evidencia al registro de controles que publiqué antes en la serie.
+El sitio de RR. HH. no es el único. El de selección tiene vínculos de cualquier persona, que se abren sin iniciar sesión, y ninguna etiqueta. Un sitio de un litigio cerrado no tiene propietario y sigue siendo buscable. La revisión comprueba los sitios de SharePoint compartidos con Todos excepto los usuarios externos o con vínculos de cualquier persona, los sitios sin propietario o con uno solo, los que no tienen etiqueta de confidencialidad y los inactivos que Copilot todavía puede buscar. Mientras se arreglan, propone Restricted Content Discovery, una opción que deja un sitio fuera de las respuestas de Copilot; da tiempo, pero no cambia ningún permiso.
 
-## Qué aprendí
-De desplegar Microsoft 365 Copilot y herramientas de IA e impulsar su adopción, y de administrar los agentes de Microsoft 365 y Copilot Studio; de ser administrador global de Microsoft 365, con PIM, Acceso condicional e integración de aplicaciones; de Microsoft Purview, con DLP y etiquetas de confidencialidad, de muchos años con SharePoint y de Power Platform; de la gestión del cambio con Prosci, ADKAR y Kotter; del Reglamento Europeo de IA y la IA responsable; y de los casos de negocio con beneficios medibles. Las lecciones que hay detrás de la herramienta son que Copilot no crea accesos nuevos, hace fácil encontrar la sobreexposición de siempre, así que los permisos hay que arreglarlos antes de la oleada y no después; que Restricted Content Discovery da tiempo pero no cambia ningún permiso; que con una cuarta parte de los archivos etiquetados la DLP tiene poco sobre lo que actuar; que un agente sin propietario no es problema de nadie hasta que responde lo que no debe; que un agente que ayuda a decidir sobre personas necesita su entrada en el registro antes de usarse, no después; que una licencia que nadie usa es la licencia más barata para la siguiente oleada; y que la formación y los champions deciden la adopción más que la licencia.
+Una cuarta parte de los archivos de Finanzas lleva etiqueta de confidencialidad, la marca que indica lo reservado que es un documento, y la directiva de DLP para Copilot, la regla que debe impedir que salgan datos sensibles, sigue en simulación.
 
-## Siguientes pasos
-- Ejecutar la revisión tres semanas y una semana antes de cada oleada, y cada mes después.
-- Leer los agentes desde la API de inventario de Power Platform y la cobertura de etiquetas desde la exportación del explorador de contenido de Purview.
-- Añadir el informe de uso de agentes y guardar un año de adopción para ponerlo al lado del tiempo que la gente dice ahorrar."""),
+## Un agente creado por alguien que ya se fue y que lee de un Dropbox sin aprobar
+
+Un agente publicado para toda la empresa lo creó alguien que ya se ha ido y lee de un conector de Dropbox que nadie aprobó. Un agente de RR. HH. ayuda a cribar candidatos y no está en el registro de IA. La herramienta marca los agentes sin propietario, publicados para todos, con conectores fuera de la lista permitida o sin uso, y los que apoyan decisiones sobre personas sin entrada en el registro. Esa columna es un registro, no una valoración jurídica.
+
+## Treinta y siete licencias a recuperar y una oleada formada al 70%
+
+Treinta y cuatro licencias llevan un mes sin usarse mientras a la siguiente oleada le faltan 14. En total, la revisión encuentra 37 licencias a recuperar, 1.110 euros al mes al precio fijado en la configuración, y comprueba si el remanente cubre la siguiente oleada una vez recuperadas. La propia oleada está formada al 70%, con 14 personas sin registrar en MFA y 31 sin un equipo conforme. Para cada oleada la herramienta comprueba formación, MFA, equipo conforme, licencia y un champion en cada departamento, y sigue la adopción por departamento y aplicación con su tendencia y la encuesta.
+
+## Cómo usarlo con datos reales
+
+El uso sale del informe de Copilot por usuario de Microsoft Graph, los datos de los sitios de Get-SPOSite y del informe de gobierno de acceso a datos de SharePoint, y los agentes del inventario de Power Platform. El repositorio incluye un exportador de solo lectura en PowerShell para Microsoft Graph y SharePoint Online, y funciona con Python solo con la librería estándar. Genera un veredicto por oleada (lista, atención o no lista), un informe web, un pack para el comité de dirección de Copilot con una columna de decisión por oleada y ficheros CSV de licencias, sobreexposición, agentes, adopción, oleadas y acciones. Incluye 14 tests y un runbook con el orden del día del comité, el sí o no de cada oleada y los pasos de ADKAR. No es la revisión de gobierno del tenant publicada antes, que mira roles de administración y Acceso condicional: es la revisión antes de cada oleada y cada mes después. La empresa de energía es ficticia.
+
+## De dónde sale
+
+La herramienta nace de desplegar Microsoft 365 Copilot e impulsar su adopción, de administrar agentes de Copilot Studio, de ser administrador global de Microsoft 365, de trabajar con Purview, DLP y etiquetas de confidencialidad, y de la gestión del cambio con Prosci, ADKAR y Kotter. La lección que me quedo: los permisos hay que arreglarlos antes de la oleada, no después."""),
 dict(n="45", repo="45-network-config-compliance", date="2026-11-06", cat="tools",
- title_en="Telnet on a branch switch and a night change nobody saved: the weekly network compliance review",
- title_es="Telnet en un switch de sede y un cambio nocturno sin guardar: la revisión semanal de la red",
+ title_en="Weekly network review rates 8 of 34 devices non-compliant and finds telnet still open and a change never saved",
+ title_es="La revisión semanal de la red da por no conformes 8 de 34 equipos y halla telnet abierto y un cambio sin guardar",
  seo_title_en="Network configuration compliance review · Iñigo González",
  seo_title_es="Cumplimiento de configuración de red · Iñigo González",
  seo_desc="Weekly compliance review of Cisco, Aruba and FortiGate configs: backups, unsaved changes, management plane, SNMP, VLANs, policies and end of support.",
  seo_desc_es="Revisión semanal de configuraciones Cisco, Aruba y FortiGate: copias, cambios sin guardar, gestión, SNMP, VLAN, políticas y fin de soporte.",
- dek_en="From the configuration backups of the Cisco, HPE Aruba and FortiGate devices, the comms-room inventory in Device42, a baseline and the approved changes: which devices have no recent backup or unsaved changes, which were changed without a ticket, where telnet, SNMP public or admin access on the WAN are still open, which ports and trunks are out of baseline, what is past end of support, and a status per device and site with the change window for each fix.",
- dek_es="A partir de las copias de configuración de los equipos Cisco, HPE Aruba y FortiGate, el inventario de las salas de comunicaciones en Device42, una línea base y los cambios aprobados: qué equipos no tienen copia reciente o tienen cambios sin guardar, cuáles se cambiaron sin ticket, dónde siguen abiertos telnet, SNMP public o la administración por la WAN, qué puertos y troncales se salen de la línea base, qué está fuera de soporte, y un estado por equipo y por sede con la ventana de cambios de cada corrección.",
+ dek_en="The weekly network compliance review, published with fictional data from a logistics company with three comms rooms and 34 devices, cross-checks Cisco, Aruba and FortiGate configuration backups, the Device42 inventory, a baseline and the approved changes to give each device and site a status.",
+ dek_es="La revisión semanal de cumplimiento de la red, publicada con datos ficticios de una empresa de logística con tres salas de comunicaciones y 34 equipos, cruza las copias de configuración de Cisco, Aruba y FortiGate, el inventario de Device42, una línea base y los cambios aprobados para dar un estado a cada equipo y sede.",
  en="""
+An access switch was changed at two in the morning with no ticket and the change was never saved, so the next power cut will take it away. A branch switch still accepts telnet, the old unencrypted remote login, because it was installed from an old template. Both are among the findings of the weekly network configuration review published with this post, which rates 8 of 34 devices non-compliant. It is a tool that runs on demo data from a made-up logistics company with three comms rooms, reviewed on 6 November with the problems placed on purpose: 9 devices compliant, 17 drifting and 8 non-compliant, with seven critical findings for the next change window.
 
-## The problem
-Network configurations drift one night change at a time, and in a company with several comms rooms nobody reads every running configuration every week. In a normal week a branch switch still accepts telnet because it was installed from an old template; two devices answer SNMP with the community public, one of them because nobody removed the factory default; the switches of one site point NTP to a server that was switched off, so their logs disagree with everyone else's; a FortiGate has HTTPS and SSH admin open on its WAN interface and an accept policy from all to all with service ALL and logging off, left from a cutover two months ago; an access switch was changed at two in the morning with no ticket and the change was never saved, so the next power cut takes it away; two devices have no backup at all and a whole site's backups are ten days old since a firewall rule broke the backup job; six unused ports are up in VLAN 1; a router runs a release that is not on the approved list; and an access switch went out of vendor support five years ago and is still in the rack. Each of these is visible in one place, the backup, the inventory or the change calendar, and nobody joins them. The end-of-support dates come from the same Device42 export that the asset lifecycle planner I published earlier in the series turns into a refresh plan; this review looks at what is configured on the devices.
+Network configurations drift one night change at a time, and in a company with several comms rooms nobody reads every running configuration every week. Each problem is visible in one place, the backup, the inventory or the change calendar, and nobody joins them. The tool reads the backups, compares them with a baseline and with the approved changes, and gives every device, every site and the whole network a status: compliant, drift or non-compliant.
 
-## What I built
-- Backups: devices with no backup, backups older than a week, Cisco running configurations changed after the last save, and changes made outside an approved change ticket.
-- Management plane: SSH v2 only, no telnet, enable secret and password encryption, AAA with TACACS+ or RADIUS and a local fallback, a login banner, an idle timeout and management access restricted to the management network.
-- Logging and time, and switching: NTP servers, syslog hosts, time zone and SNMP v3 only; unused ports shut down in the parking VLAN, PortFast and BPDU guard on user ports, no native VLAN 1 on trunks, no user ports in VLAN 1 and port security where the baseline asks for it.
-- FortiGate and lifecycle: admin access on WAN interfaces, any-any accept policies, policies without logging, disabled policies kept for months and firmware below the baseline; OS versions not approved for the model, end of support, and backups that do not match the inventory.
-- A status per device (compliant, drift or non-compliant), per site and overall, `report.html` with a grid of devices by area, `compliance-pack.md` for the change board with a proposed window and a decision column per finding, CSVs with every rule for every device, backups, lifecycle and actions, and a read-only PowerShell collector with Posh-SSH.
+## A FortiGate open on its WAN and an all-to-all policy left from a cutover
 
-## How it is built
-Python with the standard library only. There is a small parser per platform, kept to what the rules read: the Cisco IOS-XE running configuration with its `Last configuration change` and `NVRAM config last updated` header lines, the ArubaOS-Switch configuration with its VLAN blocks and port ranges, and the FortiOS `config`, `edit`, `set` blocks with the defaults assumed when a plain `show` leaves them out. Every rule gives every device pass, fail or not applicable, so the evidence for an audit is one CSV; a device is non-compliant with a critical failure and a site takes the worst status of its devices. Unused ports are the ones with no description, because the description is the record that a port is in use. The collector only sends `show running-config` or `show full-configuration` and turns paging off for its own session; Oxidized and RANCID backups work as they are. The demo is a made-up logistics company with three comms rooms and 34 devices, reviewed on 6 November with the problems placed on purpose: 9 compliant, 17 drifting and 8 non-compliant, seven critical findings for the next window. 14 tests, a runbook for the weekly cycle with how each finding becomes a change and how to handle exceptions, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot. The FortiGate checks are the weekly hygiene next to the segmentation review of the OT lab I published earlier in the series.
+A FortiGate has HTTPS and SSH administration open on its WAN interface, the side facing the internet, and an accept policy from all to all with service ALL and logging off, left from a cutover two months ago. The review checks admin access on WAN interfaces, any-any accept policies, policies without logging, disabled policies kept for months and firmware below the baseline.
 
-## What I learned
-From operating Cisco switches and routers, comms rooms and racks across several sites, with the connectivity, hardware and service vendors and the DR and BCP tests; from Device42 for the comms-room inventory; from Fortinet FortiGate; from HP switches, MikroTik and TP-Link, and LAN, WAN and Wi-Fi in Spain, Italy and Turkey; from IP/MPLS and QoS, BGP, OSPF and VXLAN; from monitoring with SolarWinds and Zabbix and automating with PowerShell and Python; and from being the process owner of change management and the CMDB, and from audit responses applying ISO 27001 and NIS2. The lessons behind the tool are that a backup nobody checks is not a backup; that a change that was never saved is a problem that waits for the next power cut; that the change calendar and the running configuration have to agree, and when they do not, the conversation is with the engineer, not about the device; that factory defaults like SNMP public outlive every template; that a temporary any-any policy is never temporary unless someone puts a date on it; that a description on every used port is what makes unused ports visible; and that the baseline has to be a document under change control, or every exception becomes the new standard.
+Two devices answer SNMP, the protocol monitoring tools use to read devices, with the community public, one of them because nobody removed the factory default. The switches of one site point NTP, the time service, to a server that was switched off, so their logs disagree with everyone else's. The management checks cover SSH v2 only, no telnet, password encryption, AAA with TACACS+ or RADIUS and a local fallback, a login banner, an idle timeout and management access limited to the management network.
 
-## Next steps
-- Run the collection every night and the review every Friday before the change board.
-- Compare with last week's results to show what was fixed, what is new and what keeps coming back.
-- Add parsers for ArubaOS-CX and NX-OS, and read the inventory and the changes from the Device42 and ITSM APIs.""",
+## Two devices with no backup and a site ten days behind
+
+Two devices have no backup at all, and a whole site's backups are ten days old since a firewall rule broke the backup job. The tool flags devices with no backup, backups older than a week, Cisco configurations changed after the last save and changes made outside an approved ticket.
+
+Six unused ports are up in VLAN 1, the default network segment. A router runs a release that is not on the approved list, and an access switch went out of vendor support five years ago and is still in the rack. On switching, the review checks unused ports shut down in the parking VLAN, PortFast and BPDU guard on user ports, no native VLAN 1 on trunks and port security where the baseline asks for it. Unused ports are the ones with no description, because the description is the record that a port is in use.
+
+## How to use it with real data
+
+There is a small parser per platform: Cisco IOS-XE with its `Last configuration change` and `NVRAM config last updated` lines, ArubaOS-Switch, and FortiOS. Every rule gives every device pass, fail or not applicable, so the audit evidence is one CSV; a critical failure makes a device non-compliant and a site takes the worst status of its devices. The repository includes a read-only PowerShell collector with Posh-SSH that only sends `show running-config` or `show full-configuration`, and Oxidized and RANCID backups work as they are. It runs on Python with only the standard library and produces a web report with a grid of devices, a pack for the change board with a proposed window and a decision column per finding, and CSV files. It comes with 14 tests and a runbook for the weekly cycle. The end-of-support dates come from the same Device42 export used by the asset lifecycle planner published earlier in the series. The company and its devices are fictional.
+
+## Where it comes from
+
+The tool comes from operating Cisco switches and routers, comms rooms and racks across several sites, Device42, Fortinet FortiGate and LAN, WAN and Wi-Fi in Spain, Italy and Turkey, and from being the process owner of change management and the CMDB. The lessons I keep: a backup nobody checks is not a backup, and a temporary any-any policy is never temporary unless someone puts a date on it.""",
  es="""
+Un switch de acceso se cambió a las dos de la madrugada sin ticket y el cambio nunca se guardó, así que el próximo corte de luz se lo llevará. Un switch de una sede sigue aceptando telnet, el acceso remoto antiguo y sin cifrar, porque se instaló con una plantilla antigua. Así lo detecta la revisión semanal de configuración de red que acompaña a este post, que da por no conformes 8 de 34 equipos, una herramienta que se ejecuta con datos de ejemplo de una empresa de logística inventada con tres salas de comunicaciones, revisada el 6 de noviembre con los problemas puestos a propósito: 9 equipos conformes, 17 con desviaciones y 8 no conformes, con siete hallazgos críticos para la próxima ventana de cambios.
 
-## El problema
-Las configuraciones de red se desvían de cambio nocturno en cambio nocturno, y en una empresa con varias salas de comunicaciones nadie lee todas las configuraciones cada semana. En una semana normal un switch de una sede sigue aceptando telnet porque se instaló con una plantilla antigua; dos equipos responden a SNMP con la comunidad public, uno de ellos porque nadie quitó la que trae de fábrica; los switches de una sede apuntan el NTP a un servidor que se apagó, así que sus logs no cuadran con los del resto; un FortiGate tiene la administración por HTTPS y SSH abierta en su interfaz WAN y una política que acepta de all a all con servicio ALL y sin log, que quedó de una migración hace dos meses; un switch de acceso se cambió a las dos de la madrugada sin ticket y el cambio nunca se guardó, así que el próximo corte de luz se lo lleva; dos equipos no tienen ninguna copia y las copias de toda una sede tienen diez días desde que una regla de firewall rompió la tarea de copia; seis puertos sin usar están levantados en la VLAN 1; un router tiene una versión que no está en la lista aprobada; y un switch de acceso lleva cinco años sin soporte del fabricante y sigue en el rack. Cada una de estas cosas se ve en un sitio, la copia, el inventario o el calendario de cambios, y nadie las junta. Las fechas de fin de soporte salen de la misma exportación de Device42 que el planificador del ciclo de vida de equipos que publiqué antes en la serie convierte en un plan de renovación; esta revisión mira lo que está configurado en los equipos.
+Las configuraciones de red se desvían de cambio nocturno en cambio nocturno, y en una empresa con varias salas de comunicaciones nadie lee todas las configuraciones cada semana. Cada problema se ve en un sitio, la copia, el inventario o el calendario de cambios, y nadie los junta. La herramienta lee las copias, las compara con una línea base y con los cambios aprobados, y da a cada equipo, a cada sede y a toda la red un estado: conforme, con desviaciones o no conforme.
 
-## Qué he hecho
-- Copias: equipos sin copia, copias de más de una semana, configuraciones de Cisco cambiadas después del último guardado, y cambios hechos fuera de un ticket de cambio aprobado.
-- Plano de gestión: solo SSH v2, nada de telnet, enable secret y cifrado de contraseñas, AAA con TACACS+ o RADIUS y respaldo local, un banner de acceso, un tiempo de inactividad y el acceso de gestión limitado a la red de gestión.
-- Logs y hora, y switching: servidores NTP, servidores de syslog, zona horaria y solo SNMP v3; puertos sin usar apagados en la VLAN de aparcamiento, PortFast y BPDU guard en los puertos de usuario, nada de VLAN nativa 1 en las troncales, ningún puerto de usuario en la VLAN 1 y port security donde la línea base lo pide.
-- FortiGate y ciclo de vida: administración en interfaces WAN, políticas any-any que aceptan, políticas sin log, políticas desactivadas que se quedan meses y firmware por debajo de la línea base; versiones no aprobadas para el modelo, fin de soporte, y copias que no cuadran con el inventario.
-- Un estado por equipo (conforme, con desviaciones o no conforme), por sede y global, `report.html` con una cuadrícula de equipos por área, `compliance-pack.md` para el comité de cambios con una ventana propuesta y una columna de decisión por hallazgo, CSV con cada regla de cada equipo, copias, ciclo de vida y acciones, y un recolector de solo lectura en PowerShell con Posh-SSH.
+## Un FortiGate abierto por la WAN y una política de todo a todo que quedó de una migración
 
-## Cómo está hecho
-Python solo con la librería estándar. Hay un pequeño parser por plataforma, limitado a lo que leen las reglas: la configuración de Cisco IOS-XE con sus líneas de cabecera `Last configuration change` y `NVRAM config last updated`, la configuración de ArubaOS-Switch con sus bloques de VLAN y rangos de puertos, y los bloques `config`, `edit`, `set` de FortiOS, con los valores por defecto que se dan por supuestos cuando un `show` normal no los muestra. Cada regla da a cada equipo cumple, no cumple o no aplica, así que la evidencia para una auditoría es un CSV; un equipo no es conforme con un fallo crítico y una sede toma el peor estado de sus equipos. Los puertos sin usar son los que no tienen descripción, porque la descripción es el registro de que un puerto está en uso. El recolector solo envía `show running-config` o `show full-configuration` y quita la paginación de su propia sesión; las copias de Oxidized y RANCID sirven tal cual. La demo es una empresa de logística inventada con tres salas de comunicaciones y 34 equipos, revisada el 6 de noviembre con los problemas puestos a propósito: 9 conformes, 17 con desviaciones y 8 no conformes, siete hallazgos críticos para la próxima ventana. 14 tests, un runbook para el ciclo semanal con cómo se convierte cada hallazgo en un cambio y cómo se tratan las excepciones, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura. Las comprobaciones del FortiGate son la higiene semanal que acompaña a la revisión de segmentación del laboratorio OT que publiqué antes en la serie.
+Un FortiGate tiene la administración por HTTPS y SSH abierta en su interfaz WAN, la que da a internet, y una política que acepta de all a all con servicio ALL y sin log, que quedó de una migración hace dos meses. La revisión comprueba la administración en interfaces WAN, las políticas any-any que aceptan, las políticas sin log, las desactivadas que se quedan meses y el firmware por debajo de la línea base.
 
-## Qué aprendí
-De operar switches y routers Cisco, salas de comunicaciones y racks en varias sedes, con los proveedores de conectividad, hardware y servicios y las pruebas de DR y BCP; de Device42 para el inventario de las salas de comunicaciones; de Fortinet FortiGate; de los switches HP, MikroTik y TP-Link, y de redes LAN, WAN y wifi en España, Italia y Turquía; de IP/MPLS y QoS, BGP, OSPF y VXLAN; de monitorizar con SolarWinds y Zabbix y automatizar con PowerShell y Python; y de ser responsable del proceso de gestión de cambios y de la CMDB, y de responder auditorías aplicando ISO 27001 y NIS2. Las lecciones que hay detrás de la herramienta son que una copia que nadie comprueba no es una copia; que un cambio que nunca se guardó es un problema que espera al próximo corte de luz; que el calendario de cambios y la configuración tienen que coincidir, y cuando no coinciden la conversación es con el técnico, no sobre el equipo; que los valores de fábrica como SNMP public sobreviven a todas las plantillas; que una política any-any temporal nunca es temporal si nadie le pone fecha; que una descripción en cada puerto usado es lo que hace visibles los puertos sin usar; y que la línea base tiene que ser un documento bajo control de cambios, o cada excepción acaba siendo el nuevo estándar.
+Dos equipos responden a SNMP, el protocolo con el que la monitorización lee los equipos, con la comunidad public, uno de ellos porque nadie quitó la que trae de fábrica. Los switches de una sede apuntan el NTP, el servicio de hora, a un servidor que se apagó, así que sus logs no cuadran con los del resto. Las comprobaciones de gestión cubren solo SSH v2, nada de telnet, cifrado de contraseñas, AAA con TACACS+ o RADIUS y respaldo local, un banner de acceso, un tiempo de inactividad y el acceso de gestión limitado a la red de gestión.
 
-## Siguientes pasos
-- Ejecutar la recolección cada noche y la revisión cada viernes antes del comité de cambios.
-- Comparar con los resultados de la semana anterior para ver qué se ha corregido, qué es nuevo y qué vuelve una y otra vez.
-- Añadir parsers para ArubaOS-CX y NX-OS, y leer el inventario y los cambios desde las API de Device42 y de la herramienta de ITSM."""),
+## Dos equipos sin copia y una sede con diez días de retraso
+
+Dos equipos no tienen ninguna copia, y las copias de toda una sede tienen diez días desde que una regla de firewall rompió la tarea de copia. La herramienta marca los equipos sin copia, las copias de más de una semana, las configuraciones de Cisco cambiadas después del último guardado y los cambios hechos fuera de un ticket aprobado.
+
+Seis puertos sin usar están levantados en la VLAN 1, el segmento de red por defecto. Un router tiene una versión que no está en la lista aprobada, y un switch de acceso lleva cinco años sin soporte del fabricante y sigue en el rack. En switching, la revisión comprueba que los puertos sin usar estén apagados en la VLAN de aparcamiento, PortFast y BPDU guard en los puertos de usuario, nada de VLAN nativa 1 en las troncales y port security donde la línea base lo pide. Los puertos sin usar son los que no tienen descripción, porque la descripción es el registro de que un puerto está en uso.
+
+## Cómo usarlo con datos reales
+
+Hay un pequeño parser por plataforma: Cisco IOS-XE con sus líneas `Last configuration change` y `NVRAM config last updated`, ArubaOS-Switch y FortiOS. Cada regla da a cada equipo cumple, no cumple o no aplica, así que la evidencia para una auditoría es un CSV; un fallo crítico hace no conforme a un equipo y una sede toma el peor estado de sus equipos. El repositorio incluye un recolector de solo lectura en PowerShell con Posh-SSH que solo envía `show running-config` o `show full-configuration`, y las copias de Oxidized y RANCID sirven tal cual. Funciona con Python solo con la librería estándar y genera un informe web con una cuadrícula de equipos, un pack para el comité de cambios con una ventana propuesta y una columna de decisión por hallazgo, y ficheros CSV. Incluye 14 tests y un runbook para el ciclo semanal. Las fechas de fin de soporte salen de la misma exportación de Device42 que usa el planificador del ciclo de vida de equipos publicado antes en la serie. La empresa y sus equipos son ficticios.
+
+## De dónde sale
+
+La herramienta nace de operar switches y routers Cisco, salas de comunicaciones y racks en varias sedes, de Device42, de Fortinet FortiGate y de redes LAN, WAN y wifi en España, Italia y Turquía, y de ser responsable del proceso de gestión de cambios y de la CMDB. Las lecciones que me quedo: una copia que nadie comprueba no es una copia, y una política any-any temporal nunca es temporal si nadie le pone fecha."""),
 dict(n="46", repo="46-problem-management-review", date="2026-11-08", updated="2026-11-11", cat="tools",
- title_en="Forty-six VPN tickets and no problem record: the monthly problem management review",
- title_es="Cuarenta y seis tickets de VPN y ningún problema abierto: la revisión mensual de problemas",
+ title_en="Forty-six VPN certificate incidents were closed one by one since August and nobody opened a problem record",
+ title_es="Cuarenta y seis incidencias de certificado de la VPN se cerraron una a una desde agosto sin abrir ningún problema",
  seo_title_en="Problem management review · Iñigo González",
  seo_title_es="Revisión de gestión de problemas · Iñigo González",
  seo_desc="Monthly problem review from ITSM exports: recurring incidents with no problem, major incidents without RCA, stuck problems, known errors and fixes.",
  seo_desc_es="Revisión mensual de problemas con exportaciones de ITSM: incidencias repetidas sin problema, incidentes graves sin RCA, errores conocidos y soluciones.",
- dek_en="From the incidents and problems exported from Jira Service Management, HaloITSM or EasyVista, the changes linked to them and the CMDB: which recurring incidents should become problems, which major incidents still have no root cause, which open problems are stuck or have no owner, which known errors have lived on a workaround for months, which fixes did not stop the incidents, and the pack for the monthly problem review and the next CAB.",
- dek_es="A partir de las incidencias y los problemas exportados de Jira Service Management, HaloITSM o EasyVista, los cambios vinculados y la CMDB: qué incidencias repetidas deberían convertirse en problemas, qué incidentes graves siguen sin causa raíz, qué problemas abiertos están atascados o sin responsable, qué errores conocidos llevan meses viviendo de una solución temporal, qué soluciones no han parado las incidencias, y el paquete para la revisión mensual de problemas y el próximo CAB.",
+ dek_en="The monthly problem management review, published with fictional data from a logistics company with 1,572 incidents in six months, cross-checks incidents, problems, linked changes and the CMDB to find repeat incidents with no problem, major incidents with no root cause and fixes that did not work.",
+ dek_es="La revisión mensual de gestión de problemas, publicada con datos ficticios de una empresa de logística con 1.572 incidencias en seis meses, cruza incidencias, problemas, cambios vinculados y la CMDB para encontrar repeticiones sin problema, incidentes graves sin causa raíz y soluciones que no funcionaron.",
  en="""
+Forty-six incidents about a VPN certificate error have been closed one by one since late August and nobody has opened a problem record, the ticket meant to find and remove the cause behind repeat incidents. That is what the monthly problem management review published with this post finds. It is a tool that runs on demo data from a made-up logistics company with three sites, six months of history, 1,572 incidents, 35 problems and 20 changes, reviewed on 8 November with the problems placed on purpose. Its verdict for the month is at risk.
 
-## The problem
-Problem management is the part of ITSM that everyone agrees with and nobody has time for. The service desk resolves the same incident again and again with the same workaround, and each ticket closes inside its SLA, so the dashboard looks fine. In a normal month forty-six incidents about a VPN certificate error have been closed one by one since late August and nobody has opened a problem; seventeen printer driver incidents at one site look like seventeen different tickets; the warehouse system went down for four hours three weeks ago and there is still no problem record, and the transport system outage of the week before has one, under investigation, with no root cause; a known error on the warehouse scanners has had a workaround for 120 days and nobody has raised the change for the fix; a change closed the file share problem in September and eleven more incidents of the same kind have arrived since, most of them not linked to it; three open problems have no owner and two are the same problem; and almost a third of the root causes say Unknown or Other. All of it is in the ITSM tool, one ticket at a time. The major incident kit I published earlier in the series covers the incident itself and its review, and the change calendar review covers what goes to the CAB; this one is the loop between them, from the incident that keeps coming back to the change that should stop it.
+Problem management is the part of ITSM that everyone agrees with and nobody has time for. The service desk resolves the same incident again and again with the same workaround, every ticket closes inside its SLA and the dashboard looks fine. The tool groups similar incidents on the same configuration item, the CI, and category, and ranks the clusters with no problem record by how many incidents they hold, their priority and how critical the CI is in the CMDB. In the demo, seventeen printer driver incidents at one site look like seventeen different tickets until they are grouped.
 
-## What I built
-- Trends: clusters of similar incidents on the same CI and category with no problem record, the candidate problems, ranked by how many there are, their priority and the criticality of the CI in the CMDB.
-- Major incidents: no problem record, or a problem with no root cause, five working days after the incident, with weekends and holidays left out.
-- Stuck problems: no update for a month, past the target date, under investigation for more than 60 days, no owner, or owned by a team other than the one that owns the CI.
-- Known errors and fixes: workarounds older than 90 days with no change for the permanent fix, workarounds the service desk has not got, problems fixed by a change while matching incidents keep arriving, problems closed on a change that was backed out, reopened incidents; and the quality of the records: root causes recorded as unknown or other, problems closed without a root cause, duplicates.
-- A status per area, `report.html`, `problem-review-pack.md` with a 60-minute agenda, a decision column and the list for the next CAB, CSVs for candidate problems, problem status, known errors, fix effectiveness and actions, and a read-only PowerShell exporter for the Jira Service Management Cloud REST API.
+## A warehouse outage with no problem record three weeks later
 
-## How it is built
-Python with the standard library only. The grouping of incidents is deliberately simple and explainable: incidents are grouped by CI and category, each summary becomes a set of words without stop words, and two summaries are similar when they share at least two words and half the words of the shorter one; each incident joins the cluster whose common words it shares, in order of creation, so the result is the same every time and the common words say why the incidents were grouped. A candidate is scored by the priority weights of its incidents times the criticality of the CI. Whether a fix worked is checked the same way: the words the problem's incidents had in common before the change, on the same CI, after the implementation date. The exporter only sends GET requests to the search endpoint with JQL and token pagination, with an API token asked for at run time and never stored, and the column names of HaloITSM and EasyVista exports are accepted too. The demo is a made-up logistics company with three sites, six months and 1,572 incidents, 35 problems and 20 changes, reviewed on 8 November with the problems placed on purpose: at risk, two candidate problems, two major incidents without a root cause in time, six stuck problems and one fix that did not work. 14 tests, a runbook with who attends, the cadence, when to open a problem, the RCA techniques and how a problem becomes a change, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+The warehouse system went down for four hours three weeks ago and there is still no problem record. The transport system outage of the week before has one, under investigation, with no root cause. The review checks every major incident five working days after it happened, leaving weekends and holidays out: it needs a problem record and that problem needs a root cause.
 
-## What I learned
-From being the formal process owner of incident and request, change and problem management, the CMDB and configuration management, with process dashboards and audit responses; from leading the technical response in major incidents and the post-mortems and root cause analysis after them; from tracking the backlog, quality and ageing of tickets and escalations with offshore teams, and defining SLAs and OLAs; from administering Jira Service Management and Confluence, and working with EasyVista, HaloITSM and GLPI; from automating with PowerShell and Python; and from writing runbooks and training others in the processes. The lessons behind the tool are that a workaround that works is the most expensive thing in the service desk, because it hides the problem; that an incident counted as resolved inside its SLA says nothing about whether it will come back; that every major incident needs a problem the same day, because a week later nobody remembers the timeline; that a problem without an owner is a list, not a problem; that a known error accepted for good needs a reason and a review date, or it is just forgotten; that closing a problem when the change is implemented is too early, and the incidents of the following weeks are the real test; and that Unknown is a valid root cause while investigating, never as the way to close.
+Three open problems have no owner and two of them are the same problem. The tool counts six stuck problems in all: no update for a month, past the target date, under investigation for more than 60 days, with no owner, or owned by a team other than the one that owns the CI. Almost a third of the root causes say Unknown or Other, which is valid while investigating but never as the way to close.
 
-## Next steps
-- Run the export every Monday and the review before each monthly problem review.
-- Keep last month's candidates to show which became problems and which keep growing.
-- Read the CIs from Assets, add HaloITSM and EasyVista exporters through their APIs, and track the share of incidents linked to a problem month by month.""",
+## A fix closed in September and eleven more incidents since
+
+A change closed the file share problem in September and eleven more incidents of the same kind have arrived since, most of them not linked to it. The tool checks whether a fix worked by looking for the words the problem's incidents had in common, on the same CI, after the implementation date. It also flags problems closed on a change that was backed out and reopened incidents.
+
+A known error on the warehouse scanners, a problem whose cause is known and has a workaround, has lived on that workaround for 120 days and nobody has raised the change for the permanent fix. The review lists workarounds older than 90 days with no change behind them, and workarounds the service desk has not got.
+
+## Why the grouping is simple on purpose
+
+Each incident summary becomes a set of words without stop words, and two summaries are similar when they share at least two words and half the words of the shorter one. Each incident joins a cluster in order of creation, so the result is the same every time and the common words explain why the incidents were grouped.
+
+## How to use it with real data
+
+The tool reads incidents and problems exported from Jira Service Management, HaloITSM or EasyVista, the linked changes and the CMDB. The repository includes a read-only PowerShell exporter for the Jira Service Management Cloud REST API that only sends GET requests with JQL, with an API token asked for at run time and never stored. It runs on Python with only the standard library and produces a status per area, a web report, a pack with a 60-minute agenda, a decision column and the list for the next CAB, and CSV files. It comes with 14 tests and a runbook. It sits between the major incident kit and the change calendar review published earlier in the series. The company and its tickets are fictional.
+
+## Where it comes from
+
+The tool comes from being the formal process owner of incident, change and problem management and the CMDB, leading the technical response in major incidents and their root cause analysis, and administering Jira Service Management. The lessons I keep: a workaround that works is the most expensive thing in the service desk, because it hides the problem, and closing a problem when the change goes in is too early.""",
  es="""
+Cuarenta y seis incidencias por un error de certificado de la VPN se han cerrado una a una desde finales de agosto y nadie ha abierto un problema, el registro que sirve para encontrar y eliminar la causa de las incidencias que se repiten. Así lo detecta la revisión mensual de gestión de problemas que acompaña a este post, una herramienta que se ejecuta con datos de ejemplo de una empresa de logística inventada con tres sedes, seis meses de historial, 1.572 incidencias, 35 problemas y 20 cambios, revisada el 8 de noviembre con los problemas puestos a propósito. Su veredicto para el mes es en riesgo.
 
-## El problema
-La gestión de problemas es la parte de ITSM en la que todo el mundo está de acuerdo y para la que nadie tiene tiempo. El service desk resuelve una y otra vez la misma incidencia con la misma solución temporal, cada ticket se cierra dentro de su SLA y el cuadro de mando parece estar bien. En un mes normal se han cerrado una a una cuarenta y seis incidencias por un error de certificado de la VPN desde finales de agosto y nadie ha abierto un problema; diecisiete incidencias de un driver de impresora en una sede parecen diecisiete tickets distintos; el sistema de almacén se cayó cuatro horas hace tres semanas y sigue sin registro de problema, y la caída del sistema de transporte de la semana anterior tiene uno, en investigación y sin causa raíz; un error conocido de los lectores del almacén lleva 120 días con solución temporal y nadie ha pedido el cambio que lo arregle; un cambio cerró en septiembre el problema de la carpeta compartida y desde entonces han llegado once incidencias más del mismo tipo, casi todas sin vincular; tres problemas abiertos no tienen responsable y dos son el mismo problema; y casi un tercio de las causas raíz dicen Desconocida u Otra. Todo está en la herramienta de ITSM, ticket a ticket. El kit de incidentes graves que publiqué antes en la serie cubre el incidente y su revisión, y la revisión del calendario de cambios cubre lo que va al CAB; esta herramienta es el circuito entre ambos, desde la incidencia que vuelve una y otra vez hasta el cambio que debería pararla.
+La gestión de problemas es la parte de ITSM en la que todo el mundo está de acuerdo y para la que nadie tiene tiempo. El service desk resuelve una y otra vez la misma incidencia con la misma solución temporal, cada ticket se cierra dentro de su SLA y el cuadro de mando parece estar bien. La herramienta agrupa las incidencias parecidas en el mismo elemento de configuración, el CI, y la misma categoría, y ordena los grupos sin problema por cuántas incidencias tienen, su prioridad y la criticidad del CI en la CMDB. En la demo, diecisiete incidencias de un driver de impresora en una sede parecen diecisiete tickets distintos hasta que se agrupan.
 
-## Qué he hecho
-- Tendencias: grupos de incidencias parecidas en el mismo CI y la misma categoría sin registro de problema, los problemas candidatos, ordenados por cuántas son, su prioridad y la criticidad del CI en la CMDB.
-- Incidentes graves: sin registro de problema, o con un problema sin causa raíz, cinco días laborables después del incidente, sin contar fines de semana ni festivos.
-- Problemas atascados: sin actualizar en un mes, con la fecha objetivo vencida, más de 60 días en investigación, sin responsable, o en manos de un equipo distinto del que es dueño del CI.
-- Errores conocidos y soluciones: soluciones temporales de más de 90 días sin cambio para la solución definitiva, soluciones temporales que el service desk no tiene, problemas arreglados con un cambio mientras siguen llegando incidencias iguales, problemas cerrados con un cambio que se deshizo, incidencias reabiertas; y la calidad de los registros: causas raíz desconocidas u otras, problemas cerrados sin causa raíz y duplicados.
-- Un estado por área, `report.html`, `problem-review-pack.md` con un orden del día de 60 minutos, una columna de decisión y la lista para el próximo CAB, CSV de problemas candidatos, estado de los problemas, errores conocidos, eficacia de las soluciones y acciones, y un exportador de solo lectura en PowerShell para la API REST de Jira Service Management Cloud.
+## Una caída del almacén sin registro de problema tres semanas después
 
-## Cómo está hecho
-Python solo con la librería estándar. La agrupación de incidencias es simple a propósito y se puede explicar: las incidencias se agrupan por CI y categoría, cada resumen se convierte en un conjunto de palabras sin las vacías, y dos resúmenes se parecen cuando comparten al menos dos palabras y la mitad de las palabras del más corto; cada incidencia entra, por orden de creación, en el grupo con cuyas palabras comunes coincide, así que el resultado es siempre el mismo y las palabras comunes explican por qué se agruparon. Cada candidato se puntúa con el peso de la prioridad de sus incidencias por la criticidad del CI. Si una solución funcionó se comprueba igual: las palabras que tenían en común las incidencias del problema antes del cambio, en el mismo CI, después de la fecha de implantación. El exportador solo envía peticiones GET al endpoint de búsqueda con JQL y paginación por token, con un token de API que se pide al ejecutarlo y nunca se guarda, y también acepta los nombres de columna de las exportaciones de HaloITSM y EasyVista. La demo es una empresa de logística inventada con tres sedes, seis meses y 1.572 incidencias, 35 problemas y 20 cambios, revisada el 8 de noviembre con los problemas puestos a propósito: en riesgo, dos problemas candidatos, dos incidentes graves sin causa raíz a tiempo, seis problemas atascados y una solución que no funcionó. 14 tests, un runbook con quién asiste, la cadencia, cuándo abrir un problema, las técnicas de análisis de causa raíz y cómo un problema se convierte en un cambio, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+El sistema de almacén se cayó cuatro horas hace tres semanas y sigue sin registro de problema. La caída del sistema de transporte de la semana anterior tiene uno, en investigación y sin causa raíz. La revisión comprueba cada incidente grave cinco días laborables después, sin contar fines de semana ni festivos: necesita un problema y ese problema necesita una causa raíz.
 
-## Qué aprendí
-De ser responsable formal de los procesos de gestión de incidencias y peticiones, cambios y problemas, de la CMDB y la gestión de la configuración, con cuadros de mando de los procesos y respuestas a auditorías; de dirigir la respuesta técnica en incidentes graves y los post-mortem y análisis de causa raíz posteriores; de seguir el backlog, la calidad y la antigüedad de los tickets y las escalaciones con equipos offshore, y de definir SLA y OLA; de administrar Jira Service Management y Confluence, y de trabajar con EasyVista, HaloITSM y GLPI; de automatizar con PowerShell y Python; y de escribir runbooks y formar a otros en los procesos. Las lecciones que hay detrás de la herramienta son que una solución temporal que funciona es lo más caro del service desk, porque esconde el problema; que una incidencia resuelta dentro de su SLA no dice nada de si va a volver; que cada incidente grave necesita su problema el mismo día, porque una semana después nadie recuerda la cronología; que un problema sin responsable es una lista, no un problema; que un error conocido que se acepta para siempre necesita un motivo y una fecha de revisión, o simplemente se olvida; que cerrar un problema cuando se implanta el cambio es demasiado pronto, y la prueba de verdad son las incidencias de las semanas siguientes; y que Desconocida es una causa raíz válida mientras se investiga, nunca para cerrar.
+Tres problemas abiertos no tienen responsable y dos de ellos son el mismo problema. La herramienta cuenta seis problemas atascados en total: sin actualizar en un mes, con la fecha objetivo vencida, más de 60 días en investigación, sin responsable o en manos de un equipo distinto del que es dueño del CI. Casi un tercio de las causas raíz dicen Desconocida u Otra, algo válido mientras se investiga pero nunca para cerrar.
 
-## Siguientes pasos
-- Ejecutar la exportación cada lunes y la revisión antes de cada revisión mensual de problemas.
-- Guardar los candidatos del mes anterior para ver cuáles se convirtieron en problemas y cuáles siguen creciendo.
-- Leer los CI desde Assets, añadir exportadores para HaloITSM y EasyVista por sus API, y seguir mes a mes el porcentaje de incidencias vinculadas a un problema."""),
+## Una solución cerrada en septiembre y once incidencias más desde entonces
+
+Un cambio cerró en septiembre el problema de la carpeta compartida y desde entonces han llegado once incidencias más del mismo tipo, casi todas sin vincular. La herramienta comprueba si una solución funcionó buscando las palabras que tenían en común las incidencias del problema, en el mismo CI, después de la fecha de implantación. También marca los problemas cerrados con un cambio que se deshizo y las incidencias reabiertas.
+
+Un error conocido de los lectores del almacén, un problema cuya causa se conoce y que tiene solución temporal, lleva 120 días viviendo de esa solución y nadie ha pedido el cambio que lo arregle. La revisión enumera las soluciones temporales de más de 90 días sin cambio detrás y las que el service desk no tiene.
+
+## Por qué la agrupación es simple a propósito
+
+Cada resumen de incidencia se convierte en un conjunto de palabras sin las vacías, y dos resúmenes se parecen cuando comparten al menos dos palabras y la mitad de las palabras del más corto. Cada incidencia entra en un grupo por orden de creación, así que el resultado es siempre el mismo y las palabras comunes explican por qué se agruparon.
+
+## Cómo usarlo con datos reales
+
+La herramienta lee las incidencias y los problemas exportados de Jira Service Management, HaloITSM o EasyVista, los cambios vinculados y la CMDB. El repositorio incluye un exportador de solo lectura en PowerShell para la API REST de Jira Service Management Cloud que solo envía peticiones GET con JQL, con un token de API que se pide al ejecutarlo y nunca se guarda. Funciona con Python solo con la librería estándar y genera un estado por área, un informe web, un pack con un orden del día de 60 minutos, una columna de decisión y la lista para el próximo CAB, y ficheros CSV. Incluye 14 tests y un runbook. Se sitúa entre el kit de incidentes graves y la revisión del calendario de cambios publicados antes en la serie. La empresa y sus tickets son ficticios.
+
+## De dónde sale
+
+La herramienta nace de ser responsable formal de los procesos de gestión de incidencias, cambios y problemas y de la CMDB, de dirigir la respuesta técnica en incidentes graves y su análisis de causa raíz, y de administrar Jira Service Management. Las lecciones que me quedo: una solución temporal que funciona es lo más caro del service desk, porque esconde el problema, y cerrar un problema cuando se implanta el cambio es demasiado pronto."""),
 dict(n="47", repo="47-multi-site-it-scorecard", date="2026-11-08", cat="tools",
- title_en="A backup circuit down twice and an office without its engineer: the monthly multi-site scorecard",
- title_es="Un circuito de respaldo caído dos veces y una oficina sin técnico: el cuadro de mando IT multisede",
+ title_en="An office lost its only local engineer and first-contact resolution fell from 79% to 56% the next month",
+ title_es="Una oficina se quedó sin su único técnico local y la resolución en el primer contacto cayó del 79% al 56%",
  seo_title_en="Multi-site IT scorecard with RAG · Iñigo González",
  seo_title_es="Cuadro de mando de IT multisede · Iñigo González",
  seo_desc="Monthly IT scorecard per office: SLA, FCR, backlog and ageing, CSAT, availability, Intune compliance, DR tests, RAG, trend and the reason behind every red.",
  seo_desc_es="Cuadro de mando mensual de IT por oficina: SLA, FCR, backlog, CSAT, disponibilidad, cumplimiento en Intune y pruebas de DR, con RAG, tendencia y motivos.",
- dek_en="From the sites, the ITSM tickets, the outage events of monitoring, the Intune device snapshots, the open actions and the DR tests: a RAG status per KPI and office against its target, n/a when there are too few tickets to rate, the trend against the previous month, the reason found in the data behind every red, a weighted score per site, a regional heatmap and the pack for the monthly regional review.",
- dek_es="A partir de las sedes, los tickets del ITSM, las caídas registradas por la monitorización, las fotos mensuales de los equipos en Intune, las acciones abiertas y las pruebas de DR: un estado RAG por indicador y oficina frente a su objetivo, n/a cuando hay demasiados pocos tickets para valorar, la tendencia frente al mes anterior, el motivo que hay en los datos detrás de cada rojo, una puntuación ponderada por sede, un mapa de calor regional y el dosier para la revisión regional de cada mes.",
+ dek_en="The monthly multi-site IT scorecard, published with fictional data from a company with 2,500 people in eight European offices, cross-checks tickets, monitoring outages, Intune devices, open actions and DR tests to rate each office red, amber or green with the reason behind every red.",
+ dek_es="El cuadro de mando mensual de IT multisede, publicado con datos ficticios de una empresa con 2.500 personas en ocho oficinas europeas, cruza tickets, caídas de la monitorización, equipos de Intune, acciones abiertas y pruebas de DR para poner a cada oficina en rojo, ámbar o verde con el motivo de cada rojo.",
  en="""
+An office lost its only local engineer and, the next month, first-contact resolution fell from 79% to 56%, escalations to the central team went from 14% to 39% and satisfaction from 4.5 to 3.4. That is what the multi-site IT scorecard published with this post finds. It is a tool that runs on demo data from a made-up company with 2,500 people in eight European offices, reporting October against September with the problems placed on purpose: the region amber, two offices red, nine red KPIs and six not rated.
 
-## The problem
-A regional IT lead with eight offices gets the same question every month: how is IT doing at each office, which one is slipping and why. The numbers live in five places, and on their own they rarely tell the story. In a normal month the backup circuit of one office is down twice for almost nine hours and nobody notices, because the primary stays up; a fifth of another office's laptops fall out of compliance the week a new Windows 11 build reaches them; the smallest office has eight tickets, and an SLA percentage on eight tickets is green or red by chance; an office loses its only local engineer and the next month first-contact resolution falls from 79% to 56%, escalations to the central team go from 14% to 39% and satisfaction from 4.5 to 3.4; one office has not tested its DR plan for seventeen months; and the busiest office has 91 open tickets, 35 of them older than 30 days. The service desk KPIs I published at the start of the series look at one service desk; this is the same idea across offices side by side, with availability, devices, actions and DR next to the tickets.
+A regional IT lead gets the same question every month: how is IT doing at each office, which one is slipping and why. The numbers live in five places and on their own they rarely tell the story. The tool gives every KPI a red, amber or green status against its target, the trend against the previous month and, for every red, the reason found in the data, such as an office with no local IT staff. The reason sits next to the red, so the review does not spend its time looking for it.
 
-## What I built
-- Service desk per office: SLA attainment by priority, first-contact resolution, reopen and escalation rates, backlog per 100 users and its ageing, and satisfaction.
-- Availability per service (WAN primary and backup, Wi-Fi, printing, meeting rooms, file and print), with only the unplanned minutes held against the target; devices: Intune compliance, stale check-ins and hardware older than four years; overdue actions and how long ago each office tested its DR plan.
-- For every KPI a RAG status against its target and red threshold, n/a when the volume is under a minimum, the trend against the previous month and, for every red, the reason found in the data: the provider tickets of the outages, the OS build behind the noncompliant laptops, the oldest tickets, the overdue actions, an office with no local IT staff.
-- A weighted score and a status per office, a regional row that never averages one office's outage away, `report.html` with a heatmap of offices by KPI, and `regional-review-pack.md` with one section per office and a decision column.
-- CSVs with the scorecard, the detail per KPI, the trend, the findings and the actions, and a read-only PowerShell exporter for Intune through Microsoft Graph and for Jira Service Management through its REST API.
+## A backup circuit down for almost nine hours that nobody noticed
 
-## How it is built
-Python with the standard library only. Every KPI is computed per office and month from the raw exports, the same way for the month being reported and for the previous one, so the trend is not a number someone typed. Under its minimum volume a KPI is not rated, and not rated is never shown as green: a small office is scored on what it has, its backlog, availability, devices and DR test, and its few tickets are read one by one. The site score is the weighted share of points over the rated KPIs, a site with a red is never green, and the regional row pools tickets and devices but takes the worst office for availability, actions and DR tests. Availability is computed from the outage events of the monitoring tool, unplanned minutes over the minutes in the month, against a target per service, because a backup circuit and a printer do not deserve the same one. The device KPIs use the last Intune snapshot of each month. The demo is a made-up company with 2,500 people in eight European offices, reporting October against September with the problems placed on purpose: the region amber, two offices red, nine red KPIs and six not rated. 14 tests, a runbook for the monthly cycle with the agenda of the review, what to do with each red, how to set targets and how to keep the KPIs from being gamed, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot. When the service comes from a provider, the EUC provider review I published earlier in the series is the monthly look at their SLAs and OLAs.
+The backup circuit of one office was down twice for almost nine hours in the month and nobody noticed, because the primary stayed up. It is the outage nobody reports and the one that matters on the day the primary fails. Availability is computed from the outage events of the monitoring tool, unplanned minutes over the minutes in the month, against a target per service, because a backup circuit and a printer do not deserve the same one.
 
-## What I learned
-From leading the IT of one office with two engineers at a multi-site financial services company, supporting around 2,500 users across European offices, in an office that grew from about 15 to over 120 people; from defining and tracking SLAs and OLAs, running availability and capacity management as a formal practice with metrics, trends and plans, building process dashboards and following the backlog, quality and ageing of tickets and escalations with offshore teams; from managing connectivity, hardware and service vendors and supervising DR and BCP tests; from Intune, MECM packaging and a Windows 11 migration; and from Zabbix, SolarWinds, Grafana, ELK, PowerShell, Python and Jira Service Management. The lessons behind the tool are that a percentage on eight tickets is noise and has to say so; that a backup circuit that fails while the primary works is the outage nobody reports and the one that matters on the day the primary fails; that the reason belongs next to the red, or the review spends its time finding it; that a red that is not new deserves a different conversation from a new one; that the same targets for every office keep the discussion on the reasons, not on the thresholds; that an office without a local engineer shows it first in escalations and satisfaction; and that a scorecard is for deciding where to help, not for ranking people.
+A fifth of another office's laptops fell out of compliance the week a new Windows 11 build reached them, and the scorecard shows that build as the reason. Device KPIs use the last Intune snapshot of each month: compliance, devices that stopped checking in and hardware older than four years.
 
-## Next steps
-- Run it on the first working day of every month and keep a year of trend per office.
-- Read the outages straight from the Zabbix API and add the OLA of the central team next to the office SLAs.
-- Add availability in business hours per time zone and capacity per office from Grafana.""",
+## Eight tickets are too few to rate
+
+The smallest office has eight tickets, and an SLA percentage on eight tickets is green or red by chance. Under its minimum volume a KPI is not rated, and not rated is never shown as green. A small office is scored on what it has, its backlog, availability, devices and DR test, and its few tickets are read one by one.
+
+One office has not tested its DR plan, the plan for recovering from a disaster, for seventeen months. The busiest office has 91 open tickets, 35 of them older than 30 days. For the service desk the scorecard tracks SLA by priority, first-contact resolution, reopen and escalation rates, backlog per 100 users and its ageing, and satisfaction.
+
+## How the score is built
+
+Every KPI is computed per office and month from the raw exports, the same way for both months, so the trend is not a number someone typed. The site score is the weighted share of points over the rated KPIs, and a site with a red is never green. The regional row pools tickets and devices but takes the worst office for availability, actions and DR tests, so it never averages one office's outage away.
+
+## How to use it with real data
+
+The repository includes a read-only PowerShell exporter for Intune through Microsoft Graph and for Jira Service Management through its REST API, and runs on Python with only the standard library. It produces a web report with a heatmap of offices by KPI, a pack for the regional review with one section per office and a decision column, and CSV files with the scorecard, the detail per KPI, the trend, the findings and the actions. It comes with 14 tests and a runbook covering the review agenda, what to do with each red, how to set targets and how to keep the KPIs from being gamed. The service desk KPIs published at the start of the series look at one desk; this puts the offices side by side. The company and its offices are fictional.
+
+## Where it comes from
+
+The tool comes from leading the IT of one office with two engineers at a multi-site financial services company, supporting around 2,500 users across European offices, in an office that grew from about 15 to over 120 people, and from defining SLAs and OLAs and running availability and capacity management. The lesson I keep: a scorecard is for deciding where to help, not for ranking people.""",
  es="""
+Una oficina se quedó sin su único técnico local y, al mes siguiente, la resolución en el primer contacto bajó del 79% al 56%, los escalados al equipo central pasaron del 14% al 39% y la satisfacción de 4,5 a 3,4. Así lo detecta el cuadro de mando de IT multisede que acompaña a este post, una herramienta que se ejecuta con datos de ejemplo de una empresa inventada con 2.500 personas en ocho oficinas europeas, que informa de octubre frente a septiembre con los problemas puestos a propósito: la región en ámbar, dos oficinas en rojo, nueve indicadores en rojo y seis sin valorar.
 
-## El problema
-Un responsable de IT regional con ocho oficinas recibe cada mes la misma pregunta: cómo va IT en cada oficina, cuál se está quedando atrás y por qué. Los datos están en cinco sitios y, por separado, rara vez cuentan la historia. En un mes normal el circuito de respaldo de una oficina se cae dos veces durante casi nueve horas y nadie se entera, porque el principal sigue arriba; una quinta parte de los portátiles de otra oficina deja de cumplir la semana en que les llega una nueva versión de Windows 11; la oficina más pequeña tiene ocho tickets, y un porcentaje de SLA sobre ocho tickets sale verde o rojo por azar; una oficina se queda sin su único técnico local y al mes siguiente la resolución en el primer contacto baja del 79% al 56%, los escalados al equipo central pasan del 14% al 39% y la satisfacción de 4,5 a 3,4; una oficina lleva diecisiete meses sin probar su plan de DR; y la oficina con más actividad tiene 91 tickets abiertos, 35 de ellos con más de 30 días. Los indicadores del service desk que publiqué al principio de la serie miran un solo service desk; esto es la misma idea con las oficinas una al lado de otra, y con la disponibilidad, los equipos, las acciones y el DR junto a los tickets.
+Un responsable de IT regional recibe cada mes la misma pregunta: cómo va IT en cada oficina, cuál se está quedando atrás y por qué. Los datos están en cinco sitios y, por separado, rara vez cuentan la historia. La herramienta da a cada indicador un estado rojo, ámbar o verde frente a su objetivo, la tendencia frente al mes anterior y, en cada rojo, el motivo que hay en los datos, como una oficina sin personal de IT local. El motivo está al lado del rojo, así que la revisión no se pasa el rato buscándolo.
 
-## Qué he hecho
-- Service desk por oficina: cumplimiento de SLA por prioridad, resolución en el primer contacto, tasas de reapertura y de escalado, backlog por cada 100 usuarios y su antigüedad, y satisfacción.
-- Disponibilidad por servicio (WAN principal y de respaldo, wifi, impresión, salas de reuniones, ficheros e impresión), contando contra el objetivo solo los minutos no planificados; equipos: cumplimiento en Intune, equipos que no se sincronizan y equipos con más de cuatro años; acciones vencidas y cuánto hace que cada oficina probó su plan de DR.
-- Para cada indicador, un estado RAG frente a su objetivo y su umbral rojo, n/a cuando el volumen no llega a un mínimo, la tendencia frente al mes anterior y, en cada rojo, el motivo que hay en los datos: los tickets del proveedor de las caídas, la versión del sistema detrás de los portátiles que no cumplen, los tickets más antiguos, las acciones vencidas, una oficina sin personal de IT local.
-- Una puntuación ponderada y un estado por oficina, una fila regional que nunca diluye la caída de una oficina en la media, `report.html` con un mapa de calor de oficinas por indicador, y `regional-review-pack.md` con una sección por oficina y una columna de decisión.
-- CSV con el cuadro de mando, el detalle por indicador, la tendencia, los hallazgos y las acciones, y un exportador de solo lectura en PowerShell para Intune a través de Microsoft Graph y para Jira Service Management a través de su API REST.
+## Un circuito de respaldo caído casi nueve horas sin que nadie se enterase
 
-## Cómo está hecho
-Python solo con la librería estándar. Cada indicador se calcula por oficina y mes a partir de las exportaciones en bruto, igual para el mes del informe que para el anterior, así que la tendencia no es un número que alguien ha tecleado. Por debajo de su volumen mínimo un indicador no se valora, y lo que no se valora nunca aparece en verde: una oficina pequeña se puntúa por lo que tiene, su backlog, la disponibilidad, los equipos y la prueba de DR, y sus pocos tickets se leen uno a uno. La puntuación de la sede es la parte ponderada de puntos sobre los indicadores valorados, una sede con un rojo nunca está en verde, y la fila regional junta los tickets y los equipos pero toma la peor oficina en disponibilidad, acciones y pruebas de DR. La disponibilidad sale de los eventos de caída de la herramienta de monitorización, minutos no planificados sobre los minutos del mes, frente a un objetivo por servicio, porque un circuito de respaldo y una impresora no merecen el mismo. Los indicadores de equipos usan la última foto de Intune de cada mes. La demo es una empresa inventada con 2.500 personas en ocho oficinas europeas, que informa de octubre frente a septiembre con los problemas puestos a propósito: la región en ámbar, dos oficinas en rojo, nueve indicadores en rojo y seis sin valorar. 14 tests, un runbook para el ciclo mensual con el orden del día de la revisión, qué hacer con cada rojo, cómo fijar los objetivos y cómo evitar que se maquillen los indicadores, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura. Cuando el servicio lo presta un proveedor, la revisión del proveedor de EUC que publiqué antes en la serie es la mirada mensual a sus SLA y OLA.
+El circuito de respaldo de una oficina se cayó dos veces durante casi nueve horas en el mes y nadie se enteró, porque el principal siguió arriba. Es la caída que nadie reporta y la que importa el día que cae el principal. La disponibilidad sale de los eventos de caída de la herramienta de monitorización, minutos no planificados sobre los minutos del mes, frente a un objetivo por servicio, porque un circuito de respaldo y una impresora no merecen el mismo.
 
-## Qué aprendí
-De dirigir la IT de una oficina con dos técnicos en una empresa de servicios financieros con varias sedes, dando soporte a unos 2.500 usuarios en oficinas europeas, en una oficina que pasó de unas 15 a más de 120 personas; de definir y seguir SLA y OLA, de llevar la gestión de la disponibilidad y la capacidad como una práctica formal con métricas, tendencias y planes, de montar cuadros de mando de procesos y de seguir el backlog, la calidad y la antigüedad de los tickets y los escalados con equipos offshore; de gestionar proveedores de conectividad, hardware y servicios y supervisar pruebas de DR y BCP; de Intune, el empaquetado con MECM y una migración a Windows 11; y de Zabbix, SolarWinds, Grafana, ELK, PowerShell, Python y Jira Service Management. Las lecciones que hay detrás de la herramienta son que un porcentaje sobre ocho tickets es ruido y tiene que decirlo; que un circuito de respaldo que falla mientras el principal funciona es la caída que nadie reporta y la que importa el día que cae el principal; que el motivo tiene que estar al lado del rojo, o la revisión se pasa el rato buscándolo; que un rojo que no es nuevo merece otra conversación que uno nuevo; que los mismos objetivos para todas las oficinas mantienen la discusión en los motivos y no en los umbrales; que una oficina sin técnico local lo enseña primero en los escalados y en la satisfacción; y que un cuadro de mando sirve para decidir dónde ayudar, no para clasificar a las personas.
+Una quinta parte de los portátiles de otra oficina dejó de cumplir la semana en que les llegó una nueva versión de Windows 11, y el cuadro de mando muestra esa versión como motivo. Los indicadores de equipos usan la última foto de Intune de cada mes: cumplimiento, equipos que dejaron de sincronizarse y equipos con más de cuatro años.
 
-## Siguientes pasos
-- Ejecutarlo el primer día laborable de cada mes y guardar un año de tendencia por oficina.
-- Leer las caídas directamente de la API de Zabbix y añadir el OLA del equipo central junto a los SLA de las oficinas.
-- Añadir la disponibilidad en horario laboral por zona horaria y la capacidad por oficina desde Grafana."""),
+## Ocho tickets son demasiado pocos para valorar
+
+La oficina más pequeña tiene ocho tickets, y un porcentaje de SLA sobre ocho tickets sale verde o rojo por azar. Por debajo de su volumen mínimo un indicador no se valora, y lo que no se valora nunca aparece en verde. Una oficina pequeña se puntúa por lo que tiene, su backlog, la disponibilidad, los equipos y la prueba de DR, y sus pocos tickets se leen uno a uno.
+
+Una oficina lleva diecisiete meses sin probar su plan de DR, el plan para recuperarse de un desastre. La oficina con más actividad tiene 91 tickets abiertos, 35 de ellos con más de 30 días. Para el service desk, el cuadro de mando sigue el SLA por prioridad, la resolución en el primer contacto, las tasas de reapertura y de escalado, el backlog por cada 100 usuarios y su antigüedad, y la satisfacción.
+
+## Cómo se calcula la puntuación
+
+Cada indicador se calcula por oficina y mes a partir de las exportaciones en bruto, igual para los dos meses, así que la tendencia no es un número que alguien ha tecleado. La puntuación de la sede es la parte ponderada de puntos sobre los indicadores valorados, y una sede con un rojo nunca está en verde. La fila regional junta los tickets y los equipos pero toma la peor oficina en disponibilidad, acciones y pruebas de DR, así que nunca diluye la caída de una oficina en la media.
+
+## Cómo usarlo con datos reales
+
+El repositorio incluye un exportador de solo lectura en PowerShell para Intune a través de Microsoft Graph y para Jira Service Management a través de su API REST, y funciona con Python solo con la librería estándar. Genera un informe web con un mapa de calor de oficinas por indicador, un dosier para la revisión regional con una sección por oficina y una columna de decisión, y ficheros CSV con el cuadro de mando, el detalle por indicador, la tendencia, los hallazgos y las acciones. Incluye 14 tests y un runbook con el orden del día de la revisión, qué hacer con cada rojo, cómo fijar los objetivos y cómo evitar que se maquillen los indicadores. Los indicadores del service desk publicados al principio de la serie miran un solo service desk; esto pone las oficinas una al lado de otra. La empresa y sus oficinas son ficticias.
+
+## De dónde sale
+
+La herramienta nace de dirigir la IT de una oficina con dos técnicos en una empresa de servicios financieros con varias sedes, dando soporte a unos 2.500 usuarios en oficinas europeas, en una oficina que pasó de unas 15 a más de 120 personas, y de definir SLA y OLA y llevar la gestión de la disponibilidad y la capacidad. La lección que me quedo: un cuadro de mando sirve para decidir dónde ayudar, no para clasificar a las personas."""),
 dict(n="48", repo="48-new-starter-day-one-readiness", date="2026-11-09", cat="tools",
- title_en="A request on Friday for Tuesday and an admin group from a model user: the day-one readiness check",
- title_es="Una petición el viernes para el martes y un grupo de admin heredado: el control del primer día",
+ title_en="Four of 25 new starters are blocked before day one, one with an Exchange admin group copied from a colleague",
+ title_es="Cuatro de 25 altas están bloqueadas antes del primer día, una con un grupo de administrador copiado de un compañero",
  seo_title_en="New starter day-one readiness check · Iñigo González",
  seo_title_es="Altas: listos para el primer día · Iñigo González",
  seo_desc="Day-one readiness for new starters: account, licence, groups, access, laptop, phone and MFA per joiner, with owners, due dates and a countdown.",
  seo_desc_es="Preparación del primer día de cada alta: cuenta, licencia, grupos, accesos, portátil, móvil y MFA, con responsables, fechas y cuenta atrás.",
- dek_en="From the HR joiner list, the role profiles, the Entra ID accounts, the Intune or Jamf devices, the licences, the stock per site and the access requests: for everyone starting in the next ten working days, whether they will have a working account, licence, groups, access, laptop and phone on day one, what is missing, who owns it and by when, with a countdown in working days and the pack for the weekly joiners call.",
- dek_es="A partir de la lista de altas de RR. HH., los perfiles por puesto, las cuentas de Entra ID, los equipos de Intune o Jamf, las licencias, el stock de cada sede y las peticiones de acceso: para todos los que empiezan en los próximos diez días laborables, si tendrán cuenta, licencia, grupos, accesos, portátil y móvil el primer día, qué falta, de quién depende y para cuándo, con una cuenta atrás en días laborables y el dosier para la reunión semanal de altas.",
+ dek_en="The day-one readiness check, published with fictional data from a trading and distribution company with four sites and 25 joiners, cross-checks the HR joiner list, role profiles, Entra ID, devices, licences, stock and access requests to say who will have everything working on day one.",
+ dek_es="El control del primer día, publicado con datos ficticios de una empresa de distribución y trading con cuatro sedes y 25 altas, cruza la lista de altas de RR. HH., los perfiles por puesto, Entra ID, los equipos, las licencias, el stock y las peticiones de acceso para decir quién lo tendrá todo funcionando el primer día.",
  en="""
+An account created by copying a colleague who used to work in IT comes with an Exchange administrators group, before its owner has even started. It is one of four joiners blocked out of 25 starting in the next two weeks, according to the day-one readiness check published with this post. It is a tool that runs on demo data from a made-up trading and distribution company with four sites, checked on Monday 9 November with the problems placed on purpose: 13 joiners ready, 8 at risk and 4 blocked, and the whole intake blocked.
 
-## The problem
-Day one is the first impression IT makes on a new starter, and it is decided in the two weeks before. The information is spread out: HR knows the start dates, Entra ID knows the accounts, Intune knows the laptops, the asset register knows the stock and the ITSM tool knows the access requests, and nobody looks at all of them together until the joiner is at the desk. In a normal fortnight with twenty-five joiners, a warehouse operative's request arrives on Friday for Tuesday and on Monday his role group and his access to the warehouse system are still missing; the laptop of someone starting tomorrow is enrolled but not compliant because BitLocker is still pending; a MacBook was requested in an office with none in stock and an order takes longer than the days left; an account created by copying a colleague who used to work in IT comes with an Exchange administrators group; another account has no usage location, so the licence was never assigned; a rehire's old account is disabled and someone created a second one with the same employee ID; a trader starting next Monday has no approval yet for the market data terminal; and the licence pool has two free units for five joiners. The monthly access review I published earlier in the series finds the admin group three months later; this check is meant to stop it on day one.
+Day one is the first impression IT makes on a new starter, and it is decided in the two weeks before. HR knows the start dates, Entra ID knows the accounts, Intune knows the laptops, the asset register knows the stock and the ITSM tool knows the access requests, and nobody looks at them together until the joiner is at the desk. The tool compares each joiner with the profile of their role, a file listing the groups, licence, apps, shared mailboxes and whether the role needs a phone. Copying a model user is fast but brings the colleague's history with it, so a privileged group the role does not list is a blocker at any distance from the start.
 
-## What I built
-- Request and account: requests raised too late for the lead time; accounts missing or disabled; a rehire whose old account should be reused, or a duplicate created next to it; no employee ID, department or manager different from HR, no usage location, a cloud-only account in a hybrid directory.
-- Licence, groups and access: the licence of the role missing, wrong or extra, and the pool against everyone still to licence in start date order; role groups and distribution lists missing; privileged groups the role should not have; apps and shared mailboxes not requested, waiting for approval, approved and not provisioned, or rejected.
-- Device, phone and MFA: no laptop assigned, no stock of the requested model at the site, the wrong platform, enrolled but not compliant; a role that needs a phone with none requested; and how the joiner will register MFA, with a Temporary Access Pass for the first sign-in.
-- Every gap with an owner, the working days its fix needs and a due date; each joiner READY, AT RISK or BLOCKED with a countdown in working days, per site and overall.
-- `report.html` with the fix-first list and a countdown board, `day-one-pack.md` for the weekly joiners call with owner, due date and done columns, CSVs for joiner status, gaps, licence and device forecasts, actions and findings, and a read-only PowerShell exporter for Microsoft Graph.
+## A request on Friday for Tuesday and a MacBook with no stock
 
-## How it is built
-Python with the standard library only. Each joiner is matched to an account by employee ID, then by the planned UPN, then by name, and compared with the profile of their role: a JSON file with the groups, licence, apps, shared mailboxes, lists and whether the role needs a phone, with the site as a placeholder in the group names. Every fix has the working days it needs, from one for a group to five for a device order, and a gap that stops day one becomes a blocker when its fix no longer fits before the start or the start is within three working days; otherwise it is a risk with a due date. The licence pool and the device stock are shared out in start date order, so the forecast says who will be short, not only by how many. A privileged group that the role does not list is a blocker at any distance from the start. The exporter reads the accounts with employeeId, usage location and licences, the manager, the group memberships, the authentication methods, the subscribed licences and the Intune devices with read-only scopes and an interactive sign-in, and Jamf Pro inventory exports with the same columns are accepted; Windows Autopilot registrations can be read as data too. The demo is a made-up trading and distribution company with four sites and 25 joiners in the next two weeks, checked on Monday 9 November with the problems placed on purpose: blocked overall, 13 ready, 8 at risk and 4 blocked. 15 tests, a runbook for the weekly joiners call with who attends, the cadence, what ready means, model users, rehires and late requests, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot. When the joiner is already in, the Entra ID hygiene audit from the start of the series covers MFA gaps and forgotten accounts.
+A warehouse operative's request arrived on Friday for Tuesday, and on Monday his role group and his access to the warehouse system are still missing. A MacBook was requested in an office with none in stock, and an order takes longer than the days left. The laptop of someone starting tomorrow is enrolled but not compliant because BitLocker, the disk encryption, is still pending.
 
-## What I learned
-From running user onboarding for retail stores and head office, with network, e-mail, business applications and legacy system accounts, and assigning Office 365 licences with the service desk; from Active Directory and Azure AD Connect, Entra ID with Conditional Access and PIM, Exchange Online and shared mailboxes and SharePoint; from Intune for Windows, macOS, iOS and Android, Jamf Pro for Macs, managed iPhones, iPads and MacBooks, and BitLocker; from automating with PowerShell, including Microsoft Graph, and Python, and working with Jira Service Management; and from being the IT site leader of an office that grew from about 15 to over 120 people, supporting around 2,500 users across European offices. The lessons behind the tool are that the start date is the only deadline that cannot move, so every fix has to be counted backwards from it in working days; that copying a model user is fast and brings the colleague's history with it, so the role profile has to be the reference; that a rehire is an account to reuse, not to create; that a licence pool or a stock count only means something against everyone starting, in order; that a late request is a conversation with HR, not a heroic weekend; that the first sign-in needs a plan as much as the laptop does; and that ready has to mean the same thing for every joiner, written down.
+Every fix has the working days it needs, from one for a group to five for a device order. A gap becomes a blocker when its fix no longer fits before the start date, or when the start is within three working days; otherwise it is a risk with an owner and a due date. Each joiner gets a countdown in working days, because the start date is the only deadline that cannot move.
 
-## Next steps
-- Run it every Monday before the joiners call, and daily for the joiners in the urgent window.
-- Read the joiners from the HR system or the ITSM joiner requests, and the access approvals from Jira Service Management.
-- Keep the gaps of every week to see which roles and steps keep failing and feed them back into the role profiles.""",
+## Two free licences for five joiners
+
+The licence pool has two free units for five joiners. The licence pool and the device stock are shared out in start date order, so the forecast says who will be short, not only by how many. Another account has no usage location, the country setting Microsoft 365 needs, so its licence was never assigned.
+
+A rehire's old account is disabled and someone created a second one with the same employee ID, when the old one should have been reused. A trader starting next Monday has no approval yet for the market data terminal. The check also covers how each joiner will register MFA, with a Temporary Access Pass, a temporary passcode, for the first sign-in.
+
+## How to use it with real data
+
+Each joiner is matched to an account by employee ID, then by the planned UPN, then by name. The repository includes a read-only PowerShell exporter for Microsoft Graph that reads accounts, managers, groups, authentication methods, licences and Intune devices with an interactive sign-in; Jamf Pro inventory exports with the same columns are accepted. It runs on Python with only the standard library and produces a web report with a fix-first list and a countdown board, a pack for the weekly joiners call with owner, due date and done columns, and CSV files with joiner status, gaps, licence and device forecasts and actions. It comes with 15 tests and a runbook covering the weekly call, what ready means, model users, rehires and late requests. The monthly access review published earlier in the series finds an admin group three months later; this check is meant to stop it on day one. The company and its joiners are fictional.
+
+## Where it comes from
+
+The tool comes from running user onboarding for retail stores and head office, Entra ID, Intune and Jamf Pro, automating with PowerShell and Microsoft Graph, and being the IT site leader of an office that grew from about 15 to over 120 people. The lessons I keep: a late request is a conversation with HR, not a heroic weekend, and ready has to mean the same thing for every joiner, written down.""",
  es="""
+Una cuenta creada copiando a un compañero que antes trabajaba en IT llega con un grupo de administradores de Exchange, antes de que su dueño haya empezado. Es una de las cuatro altas bloqueadas de las 25 que empiezan en las próximas dos semanas, según el control del primer día que acompaña a este post, una herramienta que se ejecuta con datos de ejemplo de una empresa inventada de distribución y trading con cuatro sedes, revisada el lunes 9 de noviembre con los problemas puestos a propósito: 13 altas listas, 8 en riesgo y 4 bloqueadas, y el conjunto bloqueado.
 
-## El problema
-El primer día es la primera impresión que IT da a una persona nueva, y se decide en las dos semanas anteriores. La información está repartida: RR. HH. sabe las fechas de incorporación, Entra ID sabe las cuentas, Intune sabe los portátiles, el inventario sabe el stock y la herramienta de ITSM sabe las peticiones de acceso, y nadie lo mira todo junto hasta que la persona está sentada en su puesto. En una quincena normal con veinticinco altas, la petición de un operario de almacén llega el viernes para el martes y el lunes todavía le faltan el grupo de su puesto y el acceso al sistema de almacén; el portátil de alguien que empieza mañana está inscrito pero no cumple porque BitLocker sigue pendiente; se pidió un MacBook en una oficina sin ninguno en stock y un pedido tarda más que los días que quedan; una cuenta creada copiando a un compañero que antes trabajaba en IT llega con un grupo de administradores de Exchange; otra cuenta no tiene ubicación de uso, así que la licencia nunca se asignó; la cuenta antigua de una recontratación está deshabilitada y alguien creó una segunda con el mismo número de empleado; un trader que empieza el lunes que viene todavía no tiene aprobado el terminal de datos de mercado; y en la bolsa de licencias quedan dos libres para cinco altas. La revisión mensual de accesos que publiqué antes en la serie encuentra el grupo de administradores tres meses después; este control está pensado para pararlo el primer día.
+El primer día es la primera impresión que IT da a una persona nueva, y se decide en las dos semanas anteriores. RR. HH. sabe las fechas de incorporación, Entra ID sabe las cuentas, Intune sabe los portátiles, el inventario sabe el stock y la herramienta de ITSM sabe las peticiones de acceso, y nadie lo mira todo junto hasta que la persona está sentada en su puesto. La herramienta compara cada alta con el perfil de su puesto, un fichero con los grupos, la licencia, las aplicaciones, los buzones compartidos y si el puesto necesita móvil. Copiar a un usuario modelo es rápido pero trae consigo la historia del compañero, así que un grupo privilegiado que el puesto no incluye es un bloqueo, quede el tiempo que quede.
 
-## Qué he hecho
-- Petición y cuenta: peticiones que llegan tarde para el plazo; cuentas que faltan o están deshabilitadas; una recontratación cuya cuenta antigua habría que reutilizar, o un duplicado creado al lado; sin número de empleado, con un departamento o un responsable distintos de los de RR. HH., sin ubicación de uso, o una cuenta solo en la nube en un directorio híbrido.
-- Licencia, grupos y accesos: la licencia del puesto que falta, es otra o sobra, y la bolsa de licencias frente a todos los que faltan por licenciar, por orden de incorporación; grupos del puesto y listas de distribución que faltan; grupos privilegiados que el puesto no debería tener; aplicaciones y buzones compartidos sin pedir, pendientes de aprobación, aprobados pero sin dar de alta, o rechazados.
-- Equipo, móvil y MFA: sin portátil asignado, sin stock del modelo pedido en la sede, la plataforma equivocada, inscrito pero sin cumplir; un puesto que necesita móvil sin ninguno pedido; y cómo registrará la persona el MFA, con un pase de acceso temporal para el primer inicio de sesión.
-- Cada hueco con su responsable, los días laborables que necesita su solución y una fecha límite; cada alta LISTA, EN RIESGO o BLOQUEADA, con una cuenta atrás en días laborables, por sede y en total.
-- `report.html` con la lista de lo que hay que arreglar primero y un tablero con la cuenta atrás, `day-one-pack.md` para la reunión semanal de altas con columnas de responsable, fecha y hecho, CSV con el estado de cada alta, los huecos, la previsión de licencias y de equipos, las acciones y los hallazgos, y un exportador de solo lectura en PowerShell para Microsoft Graph.
+## Una petición el viernes para el martes y un MacBook sin stock
 
-## Cómo está hecho
-Python solo con la librería estándar. Cada alta se cruza con una cuenta por número de empleado, después por el UPN previsto y después por el nombre, y se compara con el perfil de su puesto: un JSON con los grupos, la licencia, las aplicaciones, los buzones compartidos, las listas y si el puesto necesita móvil, con la sede como variable en los nombres de los grupos. Cada solución tiene los días laborables que necesita, desde uno para un grupo hasta cinco para pedir un equipo, y un hueco que impide el primer día pasa a bloqueo cuando su solución ya no cabe antes de la incorporación o cuando la persona empieza en tres días laborables o menos; si no, es un riesgo con fecha límite. La bolsa de licencias y el stock de equipos se reparten por orden de incorporación, así que la previsión dice a quién le va a faltar, no solo cuántos faltan. Un grupo privilegiado que el puesto no incluye es un bloqueo, quede el tiempo que quede. El exportador lee las cuentas con el número de empleado, la ubicación de uso y las licencias, el responsable, la pertenencia a grupos, los métodos de autenticación, las licencias contratadas y los equipos de Intune, con permisos de solo lectura e inicio de sesión interactivo, y acepta exportaciones del inventario de Jamf Pro con las mismas columnas; los registros de Windows Autopilot también se pueden leer como datos. La demo es una empresa inventada de distribución y trading con cuatro sedes y 25 altas en las próximas dos semanas, revisada el lunes 9 de noviembre con los problemas puestos a propósito: bloqueado en total, 13 altas listas, 8 en riesgo y 4 bloqueadas. 15 tests, un runbook para la reunión semanal de altas con quién asiste, la cadencia, qué significa estar listo, los usuarios modelo, las recontrataciones y las peticiones tardías, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura. Cuando la persona ya está dentro, la auditoría de higiene de Entra ID del principio de la serie cubre los huecos de MFA y las cuentas olvidadas.
+La petición de un operario de almacén llegó el viernes para el martes, y el lunes todavía le faltan el grupo de su puesto y el acceso al sistema de almacén. Se pidió un MacBook en una oficina sin ninguno en stock, y un pedido tarda más que los días que quedan. El portátil de alguien que empieza mañana está inscrito pero no cumple porque BitLocker, el cifrado del disco, sigue pendiente.
 
-## Qué aprendí
-De llevar las altas de usuarios en tiendas y oficina central, con la red, el correo, las aplicaciones de negocio y las cuentas de sistemas heredados, y de asignar licencias de Office 365 con el service desk; de Active Directory y Azure AD Connect, Entra ID con acceso condicional y PIM, Exchange Online y los buzones compartidos y SharePoint; de Intune para Windows, macOS, iOS y Android, Jamf Pro para los Mac, iPhone, iPad y MacBook gestionados, y BitLocker; de automatizar con PowerShell, también con Microsoft Graph, y con Python, y de trabajar con Jira Service Management; y de ser el responsable de IT de una oficina que pasó de unas 15 a más de 120 personas, dando soporte a unos 2.500 usuarios en oficinas europeas. Las lecciones que hay detrás de la herramienta son que la fecha de incorporación es el único plazo que no se mueve, así que cada solución hay que contarla hacia atrás desde ella en días laborables; que copiar a un usuario modelo es rápido y trae consigo la historia del compañero, así que la referencia tiene que ser el perfil del puesto; que una recontratación es una cuenta que se reutiliza, no una que se crea; que una bolsa de licencias o un recuento de stock solo dicen algo frente a todos los que empiezan, y en orden; que una petición tardía es una conversación con RR. HH., no un fin de semana heroico; que el primer inicio de sesión necesita un plan tanto como el portátil; y que estar listo tiene que significar lo mismo para todas las altas, y estar escrito.
+Cada solución tiene los días laborables que necesita, desde uno para un grupo hasta cinco para pedir un equipo. Un hueco pasa a bloqueo cuando su solución ya no cabe antes de la incorporación, o cuando la persona empieza en tres días laborables o menos; si no, es un riesgo con responsable y fecha límite. Cada alta tiene una cuenta atrás en días laborables, porque la fecha de incorporación es el único plazo que no se mueve.
 
-## Siguientes pasos
-- Ejecutarlo cada lunes antes de la reunión de altas, y a diario para las altas dentro de la ventana urgente.
-- Leer las altas del sistema de RR. HH. o de las peticiones de alta del ITSM, y las aprobaciones de acceso de Jira Service Management.
-- Guardar los huecos de cada semana para ver qué puestos y qué pasos fallan una y otra vez, y llevarlo a los perfiles de cada puesto."""),
+## Dos licencias libres para cinco altas
+
+En la bolsa de licencias quedan dos libres para cinco altas. La bolsa de licencias y el stock de equipos se reparten por orden de incorporación, así que la previsión dice a quién le va a faltar, no solo cuántos faltan. Otra cuenta no tiene ubicación de uso, el país que Microsoft 365 necesita, así que su licencia nunca se asignó.
+
+La cuenta antigua de una recontratación está deshabilitada y alguien creó una segunda con el mismo número de empleado, cuando había que reutilizar la antigua. Un trader que empieza el lunes que viene todavía no tiene aprobado el terminal de datos de mercado. El control también cubre cómo registrará cada persona el MFA, con un pase de acceso temporal, un código provisional, para el primer inicio de sesión.
+
+## Cómo usarlo con datos reales
+
+Cada alta se cruza con una cuenta por número de empleado, después por el UPN previsto y después por el nombre. El repositorio incluye un exportador de solo lectura en PowerShell para Microsoft Graph que lee las cuentas, los responsables, los grupos, los métodos de autenticación, las licencias y los equipos de Intune con inicio de sesión interactivo, y acepta exportaciones del inventario de Jamf Pro con las mismas columnas. Funciona con Python solo con la librería estándar y genera un informe web con la lista de lo que hay que arreglar primero y un tablero con la cuenta atrás, un dosier para la reunión semanal de altas con columnas de responsable, fecha y hecho, y ficheros CSV con el estado de cada alta, los huecos, la previsión de licencias y equipos y las acciones. Incluye 15 tests y un runbook con la reunión semanal, qué significa estar listo, los usuarios modelo, las recontrataciones y las peticiones tardías. La revisión mensual de accesos publicada antes en la serie encuentra un grupo de administradores tres meses después; este control está pensado para pararlo el primer día. La empresa y sus altas son ficticias.
+
+## De dónde sale
+
+La herramienta nace de llevar las altas de usuarios en tiendas y oficina central, de Entra ID, Intune y Jamf Pro, de automatizar con PowerShell y Microsoft Graph, y de ser el responsable de IT de una oficina que pasó de unas 15 a más de 120 personas. Las lecciones que me quedo: una petición tardía es una conversación con RR. HH., no un fin de semana heroico, y estar listo tiene que significar lo mismo para todas las altas, y estar escrito."""),
 dict(n="49", repo="49-it-project-portfolio-health", date="2026-11-10", cat="tools",
- title_en="GREEN at a CPI of 0.78 and an architect at 180 %: the portfolio health check before the SteerCo",
- title_es="En verde con un CPI de 0,78 y un arquitecto al 180 %: la salud de la cartera antes del comité",
+ title_en="A project reported green buys 78 cents of work per euro spent, in a portfolio 6 % over its approved budget",
+ title_es="Un proyecto en verde obtiene 78 céntimos de trabajo por euro, en una cartera un 6 % por encima de lo aprobado",
  seo_title_en="IT project portfolio health check · Iñigo González",
  seo_title_es="Salud de la cartera de proyectos IT · Iñigo González",
  seo_desc="IT portfolio health before the SteerCo: computed RAG per project with the reason, watermelon projects, CPI and SPI, people, freezes and decisions needed.",
  seo_desc_es="Salud de la cartera de IT antes del comité: RAG calculado por proyecto y su motivo, proyectos sandía, CPI y SPI, personas, congelaciones y decisiones.",
- dek_en="From the project list of the PPM tool, the milestones, the RAID log, the resource plan, the releases and the sprint history from Jira or Azure DevOps: which projects are healthy, which are drifting and which need a decision at the next steering committee, with a computed GREEN, AMBER or RED and the reason next to the RAG the PM reported, per programme and overall, the portfolio forecast against the approved envelope, and a one-page pack with the decisions, their options and their impact.",
- dek_es="A partir de la lista de proyectos de la herramienta de PPM, los hitos, el registro RAID, el plan de recursos, las entregas y el histórico de sprints de Jira o Azure DevOps: qué proyectos van bien, cuáles se están desviando y cuáles necesitan una decisión en el próximo comité de seguimiento, con un VERDE, ÁMBAR o ROJO calculado y su motivo al lado del que puso el jefe de proyecto, por programa y en total, la previsión de la cartera frente al presupuesto aprobado, y un dosier de una página con las decisiones, sus opciones y su impacto.",
+ dek_en="The portfolio health check, published with fictional data from an insurer with eighteen projects, cross-checks the PPM tool, the milestones, the RAID log, the resource plan and the sprint history to compute each project's status and the decisions for the steering committee.",
+ dek_es="La revisión de salud de la cartera, publicada con datos ficticios de una aseguradora con dieciocho proyectos, cruza la herramienta de PPM, los hitos, el registro RAID, el plan de recursos y el histórico de sprints para calcular el estado de cada proyecto y las decisiones del comité.",
  en="""
+A document capture project is reported GREEN by its project manager while each euro it spends buys 78 cents of the planned work and its build milestone is six weeks late. That is what the IT project portfolio health check published with this post finds a week before the steering committee. It is an open-source tool that runs on demo data from a made-up insurer with three programmes and eighteen waterfall, agile and SAFe projects, checked on 10 November with the problems placed on purpose.
 
-## The problem
-The monthly steering committee pack is usually a set of slides where each project manager fills in their own RAG, and the committee spends the hour on status instead of decisions. The data that would tell a different story exists, spread across the PPM tool, the RAID logs, the resource plan, the change records and Jira or Azure DevOps, and nobody puts it together before the meeting. In a normal month with eighteen projects, a document capture project is reported GREEN while each euro spent buys 78 cents of the planned work and its build milestone is six weeks late; the Windows 11 rollout has not updated its status in five weeks; a network cutover is planned in the middle of the year-end change freeze; the go-live of another project is on Friday with its change still waiting for the CAB; the enterprise architect is planned at 180 % across three critical projects, so the three will slip together; an automation project counts a yearly benefit nobody in the business owns; a low-priority intranet redesign is three months late and a quarter over budget and nobody has asked whether it should go on; an agile portal keeps adding scope while its velocity falls; three RAID items are past their date with no owner; and the sum of the forecasts is 6 % over the envelope that was approved. The change calendar review I published earlier in the series looks at the go-lives from the operations side; this check looks at them from the portfolio.
+The 78 cents is the CPI, the cost performance index, and the tool computes it with a deliberately simple version of earned value. The work done is worth the budget times the % complete, or the story points done over the total in agile projects. The work planned by today is the budget times the share of the planned time that has passed, on a straight line. CPI and its schedule twin, the SPI, come from those two numbers, and the budget divided by the CPI says where the cost lands if the rest of the work costs what the work so far did.
 
-## What I built
-- Schedule and cost: the forecast end against the plan, milestones late or with no forecast, gates passed without approval; a simple version of earned value, with CPI and SPI from the % complete and the budget, the forecast at completion over budget, a reported forecast below what the CPI points to, and spending faster than time.
-- Status hygiene: status not updated for weeks, "watermelon" projects that are GREEN outside and RED inside, and RAID items overdue or with no owner.
-- Agile, people and delivery: velocity falling sprint after sprint and scope growing faster than it is delivered; people over 100 % across projects, one key person on several critical projects and roles nobody fills; releases inside a change freeze and changes not approved a few days before the go-live.
-- Value and the portfolio: a benefit with no owner, low-priority RED projects as candidates to pause or stop, and the portfolio forecast against the approved envelope.
-- A computed RAG per project with the reason, next to the one the PM reported, per programme and overall, and the decisions the committee has to take, each with options (continue, re-plan, pause or stop), a proposal, the impact and an owner.
-- `report.html` with a heat map of the portfolio, a card per project, the cost and schedule scatter and the resource load; `steerco-pack.md`, one page for the committee; CSVs for project health, findings, resource load, decisions and actions; and a read-only exporter for the sprint history in Jira Cloud and Azure DevOps.
+## Five projects red and one green only on the outside
 
-## How it is built
-Python with the standard library only. Each check has its thresholds in a settings file agreed with the committee, and every finding has a severity, an owner and a due date. The earned value is kept simple on purpose: the work done is worth the budget times the % complete, or story points done over total for agile projects; the work planned by today is the budget times the share of the planned time elapsed, on a straight line. CPI and SPI come from those two numbers, and the budget divided by the CPI says where the cost lands if the rest of the work costs what the work so far did. The project RAG is the worst finding per dimension, except that an over-allocated person counts as amber for each project, because it is a portfolio problem; a programme is red when a critical project is red or a third of its projects are. The decisions are built from the findings: the gap to the envelope first, then the pause and stop candidates, the watermelons, the other red projects, the key people, the releases in a freeze and the benefits with no owner. The exporter reads the closed sprints of a Jira board and their issues through the current issue search, or the past iterations of an Azure DevOps team and their work items through a WIQL query, with a token that stays in memory, and writes points committed, completed and added per sprint. The demo is a made-up insurer with three programmes and eighteen waterfall, agile and SAFe projects, checked on 10 November a week before the committee, with the problems placed on purpose: red overall, 5 projects red, 6 amber and 7 green, one watermelon and 8 decisions. 14 tests, a runbook for the monthly committee with what to send before it, the agenda, how to frame the decisions, how to handle watermelon projects without blame and how to follow up the actions, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot. The problem management review from earlier in the series is where many of the next projects start.
+Overall, the demo portfolio is red: 5 projects red, 6 amber and 7 green. One of them is what the tool calls a "watermelon", green outside and red inside, and the sum of all the forecasts is 6 % over the envelope that was approved. The review shows its computed GREEN, AMBER or RED with the reason next to the status the project manager reported, per project, per programme and overall.
 
-## What I learned
-From managing a portfolio of initiatives; from working with Agile and Scrum, acting as Scrum Master and Product Owner, with SAFe and PI Planning, and with Kanban and visual management; from assessing the technical feasibility of requests and projects, estimating cost, resources and timelines, and writing business cases with ROI and measurable benefits; from workshops with the business, functional requirements, user stories and acceptance criteria; from release management, the change advisory board and go-live and service acceptance reviews; from preparing and tracking the IT budget and negotiating vendor contracts; from process dashboards and KPIs as process owner for incident, change and problem; and from Jira, Confluence, Jira Service Management, Azure DevOps, Python and PowerShell. The lessons behind the tool are that a RAG someone types in and a RAG computed from the numbers should always be shown side by side, because the difference is the conversation; that a watermelon project is usually optimism or fear of red rather than dishonesty, so the reset has to come without blame; that the committee's time belongs to decisions, and a decision needs options and their cost written down before the meeting; that stopping a low-priority project that is red is a good outcome, not a failure; that one person at 180 % is three late projects; that a benefit without an owner is a benefit nobody will collect; and that the thresholds have to stay the same from month to month, or the trend means nothing.
+A project's status is its worst finding in each dimension, and a programme is red when one of its critical projects is red or a third of its projects are. The thresholds sit in a settings file agreed with the committee, and every finding has a severity, an owner and a due date.
 
-## Next steps
-- Run it a week before every steering committee, and weekly for the red projects.
-- Read the projects and milestones straight from the PPM tool's API, and keep the computed RAG of every month to see how early each red was visible.
-- Add the PI objectives of each Agile Release Train, planned against achieved business value, as one more agile check.""",
+## An architect at 180 % and a go-live inside a change freeze
+
+The enterprise architect is planned at 180 % across three critical projects, so the three will slip together. The tool counts an over-allocated person as amber for each of those projects, because it is a portfolio problem rather than a problem of one project.
+
+The other findings are the kind nobody sees from a slide deck. The Windows 11 rollout has not updated its status in five weeks. A network cutover is planned in the middle of the year-end change freeze, and another project goes live on Friday with its change still waiting for the CAB, the change advisory board. An automation project counts a yearly benefit nobody in the business owns. A low-priority intranet redesign is three months late and a quarter over budget, and nobody has asked whether it should go on. An agile portal keeps adding scope while its velocity falls, and three items in the RAID log, the register of risks and issues, are past their date with no owner.
+
+## Eight decisions for the committee, each with its options
+
+The review turns the findings into 8 decisions for the committee, in a fixed order: the gap to the approved envelope first, then the low-priority red projects that could be paused or stopped, the watermelons, the other red projects, the key people, the releases in a freeze and the benefits with no owner. Each decision carries its options (continue, re-plan, pause or stop), a proposal, the impact and an owner. The aim is that the committee spends its hour deciding rather than going through status.
+
+## How to use it with real data
+
+The inputs are the project list of the PPM tool, the milestones, the RAID log, the resource plan, the releases and the sprint history from Jira or Azure DevOps. A read-only exporter takes the closed sprints of a Jira Cloud board through the current issue search, or the past iterations of an Azure DevOps team through a WIQL query, with a token that stays in memory, and writes the points committed, completed and added per sprint.
+
+The tool runs on Python with the standard library only and produces `report.html`, with a heat map of the portfolio, a card per project, a cost and schedule scatter and the resource load; `steerco-pack.md`, one page for the committee; and CSV files for project health, findings, resource load, decisions and actions. It comes with 14 tests and a runbook for the monthly committee: what to send before it, the agenda, how to frame the decisions, how to handle watermelon projects without blame and how to follow up the actions. The intended rhythm is a week before every committee, and weekly for the red projects.
+
+## Where it comes from
+
+I built it from managing a portfolio of initiatives, working as Scrum Master and Product Owner with SAFe and PI Planning, writing business cases with ROI, and taking part in release management and the change advisory board. Two lessons are behind it: a RAG someone types in and one computed from the numbers should always be shown side by side, because the difference is the conversation; and stopping a low-priority project that is red is a good outcome, not a failure.""",
  es="""
+Un proyecto de captura de documentos figura en verde según su jefe de proyecto mientras cada euro que gasta compra 78 céntimos del trabajo previsto y su hito de construcción va seis semanas tarde. Así lo detecta la revisión de salud de la cartera de proyectos de IT que acompaña a este post, una semana antes del comité de seguimiento. Es un proyecto de código abierto que se ejecuta con datos de ejemplo de una aseguradora inventada, con tres programas y dieciocho proyectos en cascada, ágiles y SAFe, revisada el 10 de noviembre con los problemas puestos a propósito.
 
-## El problema
-El dosier mensual del comité de seguimiento suele ser un puñado de diapositivas en las que cada jefe de proyecto pone su propio semáforo, y el comité se pasa la hora con el estado en lugar de con las decisiones. Los datos que contarían otra historia existen, repartidos entre la herramienta de PPM, los registros RAID, el plan de recursos, los cambios y Jira o Azure DevOps, y nadie los junta antes de la reunión. En un mes normal con dieciocho proyectos, un proyecto de captura de documentos se reporta en verde mientras cada euro gastado compra 78 céntimos del trabajo previsto y su hito de construcción va seis semanas tarde; el despliegue de Windows 11 lleva cinco semanas sin actualizar su estado; un corte de red está planificado en plena congelación de cambios de fin de año; la puesta en producción de otro proyecto es el viernes y su cambio sigue esperando al CAB; el arquitecto empresarial está planificado al 180 % entre tres proyectos críticos, así que los tres se retrasarán a la vez; un proyecto de automatización cuenta con un beneficio anual que nadie del negocio tiene a su cargo; el rediseño de la intranet, de prioridad baja, va tres meses tarde y un cuarto por encima del presupuesto y nadie ha preguntado si debe seguir; un portal ágil no deja de añadir alcance mientras su velocidad cae; tres elementos del RAID están vencidos y sin responsable; y la suma de las previsiones supera en un 6 % el presupuesto aprobado. La revisión del calendario de cambios que publiqué antes en la serie mira las puestas en producción desde operaciones; este control las mira desde la cartera.
+Esos 78 céntimos son el CPI, el índice de rendimiento del coste, y la herramienta lo calcula con una versión del valor ganado sencilla a propósito. El trabajo hecho vale el presupuesto por el % completado, o los puntos de historia hechos sobre el total en los proyectos ágiles. El trabajo previsto a día de hoy es el presupuesto por la parte del plazo que ya ha pasado, en línea recta. El CPI y su equivalente para el plazo, el SPI, salen de esos dos números, y el presupuesto dividido por el CPI dice dónde acaba el coste si lo que queda cuesta lo mismo que lo hecho.
 
-## Qué he hecho
-- Plazo y coste: la fecha de fin prevista frente al plan, hitos que van tarde o sin previsión, puertas de fase superadas sin una aprobación registrada; una versión sencilla del valor ganado, con CPI y SPI a partir del % completado y el presupuesto, la previsión al cierre por encima del presupuesto, una previsión declarada por debajo de lo que indica el CPI, y un gasto que va más rápido que el tiempo.
-- Higiene del estado: estados sin actualizar desde hace semanas, proyectos "sandía", verdes por fuera y rojos por dentro, y elementos del RAID vencidos o sin responsable.
-- Ágil, personas y entregas: una velocidad que cae sprint tras sprint y un alcance que crece más rápido de lo que se entrega; personas por encima del 100 % entre varios proyectos, una persona clave en varios proyectos críticos y puestos sin cubrir; entregas dentro de una congelación de cambios y cambios sin aprobar a pocos días de la puesta en producción.
-- Valor y cartera: un beneficio sin responsable, proyectos en rojo y de prioridad baja como candidatos a pausar o parar, y la previsión de la cartera frente al presupuesto aprobado.
-- Un semáforo calculado por proyecto con su motivo, al lado del que puso el jefe de proyecto, por programa y en total, y las decisiones que tiene que tomar el comité, cada una con sus opciones (seguir, replanificar, pausar o parar), una propuesta, el impacto y un responsable.
-- `report.html` con un mapa de calor de la cartera, una ficha por proyecto, el gráfico de coste y plazo y la carga de recursos; `steerco-pack.md`, una página para el comité; CSV con la salud de cada proyecto, los hallazgos, la carga de recursos, las decisiones y las acciones; y un exportador de solo lectura del histórico de sprints de Jira Cloud y Azure DevOps.
+## Cinco proyectos en rojo y uno que solo es verde por fuera
 
-## Cómo está hecho
-Python solo con la librería estándar. Cada control tiene sus umbrales en un fichero de configuración pactado con el comité, y cada hallazgo tiene una gravedad, un responsable y una fecha. El valor ganado se mantiene sencillo a propósito: el trabajo hecho vale el presupuesto por el % completado, o los puntos de historia hechos sobre el total en los proyectos ágiles; el trabajo previsto a día de hoy es el presupuesto por la parte del plazo previsto que ya ha pasado, en línea recta. El CPI y el SPI salen de esos dos números, y el presupuesto dividido por el CPI dice dónde acaba el coste si lo que queda cuesta lo mismo que lo hecho. El semáforo del proyecto es el peor hallazgo por dimensión, salvo que una persona sobreasignada cuenta como ámbar para cada proyecto, porque es un problema de la cartera; un programa está en rojo cuando lo está un proyecto crítico o un tercio de sus proyectos. Las decisiones salen de los hallazgos: primero la diferencia con el presupuesto aprobado, después los candidatos a pausar o parar, los proyectos sandía, el resto de proyectos en rojo, las personas clave, las entregas dentro de una congelación y los beneficios sin responsable. El exportador lee los sprints cerrados de un tablero de Jira y sus incidencias con la búsqueda de incidencias actual, o las iteraciones pasadas de un equipo de Azure DevOps y sus elementos de trabajo con una consulta WIQL, con un token que se queda en memoria, y escribe los puntos comprometidos, completados y añadidos en cada sprint. La demo es una aseguradora inventada con tres programas y dieciocho proyectos en cascada, ágiles y SAFe, revisada el 10 de noviembre, una semana antes del comité, con los problemas puestos a propósito: rojo en total, 5 proyectos en rojo, 6 en ámbar y 7 en verde, un proyecto sandía y 8 decisiones. 14 tests, un runbook para el comité mensual con qué enviar antes, el orden del día, cómo plantear las decisiones, cómo tratar los proyectos sandía sin buscar culpables y cómo seguir las acciones, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura. La revisión de gestión de problemas de antes en la serie es donde empiezan muchos de los próximos proyectos.
+En conjunto, la cartera de la demo está en rojo: 5 proyectos en rojo, 6 en ámbar y 7 en verde. Uno de ellos es lo que la herramienta llama un proyecto «sandía», verde por fuera y rojo por dentro, y la suma de todas las previsiones supera en un 6 % el presupuesto aprobado. La revisión muestra su VERDE, ÁMBAR o ROJO calculado, con el motivo, al lado del semáforo que puso el jefe de proyecto, por proyecto, por programa y en total.
 
-## Qué aprendí
-De gestionar una cartera de iniciativas; de trabajar con Agile y Scrum, como Scrum Master y como Product Owner, con SAFe y el PI Planning, y con Kanban y la gestión visual; de evaluar la viabilidad técnica de peticiones y proyectos, estimar costes, recursos y plazos, y redactar casos de negocio con ROI y beneficios medibles; de los talleres con el negocio, los requisitos funcionales, las historias de usuario y los criterios de aceptación; de la gestión de entregas, el comité de cambios y las revisiones de puesta en producción y aceptación del servicio; de preparar y seguir el presupuesto de IT y negociar contratos con proveedores; de los cuadros de mando y los KPI de proceso como responsable de los procesos de incidencias, cambios y problemas; y de Jira, Confluence, Jira Service Management, Azure DevOps, Python y PowerShell. Las lecciones que hay detrás de la herramienta son que el semáforo que alguien escribe y el que sale de los números hay que enseñarlos siempre juntos, porque la diferencia es la conversación; que un proyecto sandía suele ser optimismo o miedo al rojo más que falta de honestidad, así que el cambio a rojo tiene que llegar sin buscar culpables; que el tiempo del comité es para decidir, y una decisión necesita las opciones y su coste por escrito antes de la reunión; que parar un proyecto en rojo y de prioridad baja es un buen resultado, no un fracaso; que una persona al 180 % son tres proyectos que llegan tarde; que un beneficio sin responsable es un beneficio que nadie va a cobrar; y que los umbrales tienen que ser los mismos de un mes a otro, o la tendencia no significa nada.
+El semáforo de un proyecto es su peor hallazgo en cada dimensión, y un programa está en rojo cuando lo está uno de sus proyectos críticos o un tercio de sus proyectos. Los umbrales están en un fichero de configuración pactado con el comité, y cada hallazgo tiene una gravedad, un responsable y una fecha.
 
-## Siguientes pasos
-- Ejecutarlo una semana antes de cada comité de seguimiento, y cada semana para los proyectos en rojo.
-- Leer los proyectos y los hitos directamente de la API de la herramienta de PPM, y guardar el semáforo calculado de cada mes para ver con cuánta antelación se veía cada rojo.
-- Añadir los objetivos de PI de cada Agile Release Train, el valor de negocio previsto frente al conseguido, como un control ágil más."""),
+## Un arquitecto al 180 % y una puesta en producción en plena congelación
+
+El arquitecto empresarial está planificado al 180 % entre tres proyectos críticos, así que los tres se retrasarán a la vez. La herramienta cuenta a una persona sobreasignada como ámbar en cada uno de esos proyectos, porque es un problema de la cartera y no de un solo proyecto.
+
+El resto de hallazgos son de los que no se ven en unas diapositivas. El despliegue de Windows 11 lleva cinco semanas sin actualizar su estado. Un corte de red está planificado en plena congelación de cambios de fin de año, y otro proyecto sale a producción el viernes con su cambio todavía esperando al CAB, el comité de cambios. Un proyecto de automatización cuenta con un beneficio anual que nadie del negocio tiene a su cargo. El rediseño de la intranet, de prioridad baja, va tres meses tarde y un cuarto por encima del presupuesto, y nadie ha preguntado si debe seguir. Un portal ágil no deja de añadir alcance mientras su velocidad cae, y tres elementos del registro RAID, donde se apuntan riesgos y problemas, están vencidos y sin responsable.
+
+## Ocho decisiones para el comité, cada una con sus opciones
+
+La revisión convierte los hallazgos en 8 decisiones para el comité, en un orden fijo: primero la diferencia con el presupuesto aprobado, después los proyectos en rojo y de prioridad baja que se podrían pausar o parar, los proyectos sandía, el resto de proyectos en rojo, las personas clave, las entregas dentro de una congelación y los beneficios sin responsable. Cada decisión lleva sus opciones (seguir, replanificar, pausar o parar), una propuesta, el impacto y un responsable. El objetivo es que el comité dedique su hora a decidir y no a repasar estados.
+
+## Cómo usarlo con datos reales
+
+Los datos de entrada son la lista de proyectos de la herramienta de PPM, los hitos, el registro RAID, el plan de recursos, las entregas y el histórico de sprints de Jira o Azure DevOps. Un exportador de solo lectura toma los sprints cerrados de un tablero de Jira Cloud con la búsqueda de incidencias actual, o las iteraciones pasadas de un equipo de Azure DevOps con una consulta WIQL, con un token que se queda en memoria, y escribe los puntos comprometidos, completados y añadidos en cada sprint.
+
+La herramienta funciona con Python y solo la librería estándar, y genera `report.html`, con un mapa de calor de la cartera, una ficha por proyecto, un gráfico de coste y plazo y la carga de recursos; `steerco-pack.md`, una página para el comité; y ficheros CSV con la salud de cada proyecto, los hallazgos, la carga de recursos, las decisiones y las acciones. Incluye 14 tests y un runbook para el comité mensual: qué enviar antes, el orden del día, cómo plantear las decisiones, cómo tratar los proyectos sandía sin buscar culpables y cómo seguir las acciones. La idea es ejecutarla una semana antes de cada comité, y cada semana para los proyectos en rojo.
+
+## De dónde sale
+
+La hice a partir de gestionar una cartera de iniciativas, trabajar como Scrum Master y Product Owner con SAFe y el PI Planning, redactar casos de negocio con ROI y participar en la gestión de entregas y el comité de cambios. Detrás hay dos lecciones: el semáforo que alguien escribe y el que sale de los números hay que enseñarlos siempre juntos, porque la diferencia es la conversación; y parar un proyecto en rojo y de prioridad baja es un buen resultado, no un fracaso."""),
 dict(n="50", repo="50-saas-licence-spend-review", date="2026-11-11", cat="tools",
- title_en="180 E5 licences used as E3 and a notice deadline in 9 days: the SaaS and licence spend review",
- title_es="180 licencias E5 que se usan como E3 y un preaviso en 9 días: la revisión del gasto en SaaS",
+ title_en="A licence review finds EUR 223.7k of savings, starting with 180 people on E5 who use nothing beyond E3",
+ title_es="Una revisión de licencias halla 223.700 euros de ahorro, empezando por 180 personas con E5 que no usan más que E3",
  seo_title_en="SaaS and licence spend review · Iñigo González",
  seo_title_es="Revisión del gasto en SaaS y licencias · Iñigo González",
  seo_desc="SaaS and licence spend review: unused and leaver licences, E5 to E3, shelfware, notice deadlines, uplifts, overlap, shadow IT and savings per action.",
  seo_desc_es="Revisión del gasto en SaaS y licencias: licencias sin uso o de bajas, E5 a E3, asientos sobrantes, preavisos, subidas, solapes, shadow IT y ahorro por acción.",
- dek_en="From the licence and SaaS register, the licence assignments with each user's last activity, the HR or Entra ID user list and the card expenses: what the company pays for, what is actually used, what renews soon and how much can be saved before each notice deadline, with the saving of every action (reclaim, downgrade, right-size, negotiate, consolidate or cancel), the renewal calendar, showback per department and a one-page pack for the IT manager and finance.",
- dek_es="A partir del registro de licencias y SaaS, las licencias asignadas con la última actividad de cada usuario, la lista de usuarios de RR. HH. o de Entra ID y los gastos con tarjeta: qué se paga, qué se usa de verdad, qué se renueva pronto y cuánto se puede ahorrar antes de cada fecha de preaviso, con el ahorro de cada acción (recuperar, bajar de plan, ajustar asientos, negociar, consolidar o cancelar), el calendario de renovaciones, el reparto del coste por departamento y un dosier de una página para el responsable de IT y finanzas.",
+ dek_en="The monthly SaaS and licence review, published with fictional data from a distribution company with 1,370 employees and 24 apps, cross-checks the licence register, each user's last activity, the HR or Entra ID user list and card expenses to price every saving before its notice deadline.",
+ dek_es="La revisión mensual de SaaS y licencias, publicada con datos ficticios de una distribuidora con 1.370 empleados y 24 aplicaciones, cruza el registro de licencias, la última actividad de cada usuario, la lista de RR. HH. o de Entra ID y los gastos con tarjeta para valorar cada ahorro antes de su preaviso.",
  en="""
+180 people have Microsoft 365 E5 and use nothing that E3, the cheaper plan, does not already give them, and the price difference is the first saving on the list. In all, the SaaS and licence spend review published with this post identifies EUR 223.7k of savings, 15.4 % of a bill of EUR 1.45M a year. It is an open-source tool that runs on demo data from a made-up distribution company with 1,370 employees in four countries and 24 apps, reviewed on 11 November with the problems placed on purpose.
 
-## The problem
-Software and SaaS spend grows one reasonable request at a time, and licences are almost never taken back. The data to see where the money goes exists, in the register, the admin consoles, Entra ID, HR and the expense tool, but nobody reads it together until a renewal arrives, and by then the notice deadline has often passed. In a normal month in a company of 1,400 people, 180 people have Microsoft 365 E5 and use nothing E3 does not already give them; 46 licences are still assigned to people who left months ago, which is a cost and an open door; a third of the Adobe Creative Cloud licences have not been opened for three months; the company pays for Zoom and Webex while everyone has Teams, and for Dropbox and Box next to OneDrive; the e-signature contract renews automatically with a third of its seats unassigned and nine days left to give notice; the CRM comes back with a 9 % uplift against a 5 % cap; the whiteboard tool has more people than seats, and the true-up will come at list price; nobody owns one contract that holds confidential data without single sign-on; and people pay for Canva, Notion, ChatGPT Plus, Calendly and Grammarly on their cards. The vendor contract tracker I published earlier in the series keeps every IT contract and its notice deadline, and the Azure cost review does this job for the cloud bill; this review does it for licences and SaaS, from the usage.
+Software and SaaS spend grows one reasonable request at a time, and licences are almost never taken back. The data to see where the money goes exists, in the register, the admin consoles, Entra ID, HR and the expense tool, but it is rarely read together until a renewal arrives. The review reads it every month and ties every saving to one action: reclaim, downgrade, right-size, negotiate, consolidate or cancel, with the users behind it, an owner and a due date.
 
-## What I built
-- Usage: licences unused for 60 days or never used, licences still assigned to leavers, licences of people on long leave or of accounts HR does not know, and premium tiers for people who do not use the premium features, with the price difference as the saving.
-- Seats: shelfware, seats bought and not assigned, and over-assignment, more people than seats, as a true-up risk.
-- Renewals: auto-renewing contracts whose notice deadline is close or has passed, uplifts above the agreed cap, contracts with no owner, and a renewal calendar for the next twelve months.
-- Portfolio and shadow IT: several apps for the same capability, or a capability the suite already covers, as consolidation candidates; apps without SSO that hold confidential data; SaaS bought on expenses that is not in the register, and card purchases of an app that is already under a central contract.
-- Cost allocation: showback per department and cost centre, contracts with no or an unknown cost centre, and spend against budget.
-- Every saving tied to an action, reclaim, downgrade, right-size, negotiate, consolidate or cancel, with the users behind it, an owner and a due date; `report.html` with utilisation bars per app, the calendar and the showback; `review-pack.md`, one page with the decisions before the renewals; CSVs for utilisation, the reclaim list, the calendar, showback, findings and actions; and a read-only exporter for the Microsoft 365 licences through Microsoft Graph.
+## 46 licences on people who left and a deadline in nine days
 
-## How it is built
-Python with the standard library only. The thresholds are in a settings file agreed with finance, and each finding has a severity, an owner and a due date. Every euro is counted once: the savings are applied per app in a fixed order, reclaim, downgrade, right-size, negotiate, cancel duplicates and then consolidate, and capped at what the app costs, so exiting a video tool only counts what is left of its cost after its inactive licences and empty seats. The notice deadline is the renewal date minus the notice period, and an auto-renewing contract with a past renewal date rolls forward a year at a time. The showback charges each per-user licence to the department of the person who holds it and leaves the empty seats and the flat contracts with IT, so the rows add up to the total. The exporter reads the SKUs the tenant has bought with their seats and the users with their licences and their last successful sign-in from Microsoft Graph, with an app registration and a secret that stays in memory; the last sign-in shows that the account is in use, not that a particular app is, so the reclaim list goes to the app owner before anything is removed. The demo is a made-up distribution company with 1,370 employees in four countries and 24 apps, reviewed on 11 November, with the problems placed on purpose: red overall, EUR 1.45M a year, and EUR 223.7k of savings identified, 15.4 %, split into reclaim, consolidate, downgrade, right-size, negotiate and cancel. 15 tests, a runbook for the monthly reclaim cycle and the steps 120, 90 and 60 days before a renewal, how to negotiate with usage data and how to handle shadow IT without blocking people, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+The demo finds 46 licences still assigned to people who left months ago, which is a cost and an open door. A third of the Adobe Creative Cloud licences have not been opened for three months. The e-signature contract renews automatically with a third of its seats unassigned and nine days left to give notice, and the CRM comes back with a 9 % uplift against a 5 % cap.
 
-## What I learned
-From software asset management and licence and SaaS cost control with Apptio and Flexera, TBM and FOCUS; from showback and chargeback and unit cost metrics, and applying the FinOps Framework; from administering Microsoft 365 as Global Administrator and managing Office 365 licences with a central service desk, and Adobe licences; from Entra ID, Conditional Access, PIM and SAML single sign-on for enterprise applications, and Microsoft Graph; from the relationship with vendors such as Microsoft, Dell and Atlassian, negotiating vendor contracts, preparing and tracking the IT budget and writing business cases with ROI; and from Python and PowerShell automation. The lessons behind the tool are that the date that matters is the notice deadline, not the renewal date; that the seats you negotiate on should be the ones in use after the clean-up, not the ones assigned; that a licence on a leaver is a security problem before it is a cost; that a premium tier is assigned by habit and kept by fear, so the list of people to downgrade has to be checked with the business before the renewal; that the same euro must not appear in two savings, or finance stops believing the total; that shadow IT is usually a need IT did not meet, and talking to the people who buy it works better than blocking the card; and that showing each department what its people hold reclaims more licences than any reminder.
+For the tool, the date that matters is the notice deadline, the renewal date minus the notice period, not the renewal itself. An auto-renewing contract whose renewal date has passed rolls forward a year at a time, and the review keeps a renewal calendar for the next twelve months.
 
-## Next steps
-- Run it on the first working day of every month, and again 120 days before each large renewal.
-- Read the other apps' assignments from their admin APIs, and use the Microsoft 365 usage reports per workload for the E5 to E3 question.
-- Keep each month's utilisation to show the trend per app at the renewal meeting, and feed the savings actually realised back into the budget tracking.""",
+## Two video tools next to Teams and five apps paid on cards
+
+The review also looks at the portfolio as a whole. The company pays for Zoom and Webex while everyone has Teams, and for Dropbox and Box next to OneDrive, so they come up as consolidation candidates. The whiteboard tool has more people than seats, and the true-up, the adjustment the vendor bills for the extra users, will come at list price. Nobody owns one contract that holds confidential data without single sign-on, and people pay for Canva, Notion, ChatGPT Plus, Calendly and Grammarly on their cards, which is shadow IT: software bought outside the register.
+
+The cost is also shown per department and cost centre, a practice known as showback. Each per-user licence is charged to the department of the person who holds it, while empty seats and flat contracts stay with IT, so the rows add up to the total.
+
+## Every euro counted once
+
+So that finance can trust the total, the savings are applied per app in a fixed order, reclaim, downgrade, right-size, negotiate, cancel duplicates and then consolidate, and capped at what the app costs. Exiting a video tool therefore only counts what is left of its cost after its inactive licences and empty seats have been removed. The thresholds sit in a settings file agreed with finance, and each finding has a severity, an owner and a due date.
+
+## How to use it with real data
+
+The inputs are the licence and SaaS register, the licence assignments with each user's last activity, the HR or Entra ID user list and the card expenses. A read-only exporter reads from Microsoft Graph the SKUs the tenant has bought with their seats and the users with their licences and their last successful sign-in, with an app registration and a secret that stays in memory. The last sign-in shows that the account is in use, not that a particular app is, so the reclaim list goes to the app owner before anything is removed.
+
+The tool runs on Python with the standard library only and produces `report.html`, with utilisation bars per app, the renewal calendar and the showback; `review-pack.md`, one page with the decisions before the renewals for the IT manager and finance; and CSV files for utilisation, the reclaim list, the calendar, showback, findings and actions. It comes with 15 tests and a runbook for the monthly reclaim cycle, the steps 120, 90 and 60 days before a renewal, how to negotiate with usage data and how to handle shadow IT without blocking people.
+
+## Where it comes from
+
+I built it from software asset management and licence cost control with Apptio and Flexera, administering Microsoft 365 as Global Administrator and managing Office 365 and Adobe licences, and negotiating vendor contracts. Two lessons are behind it: the same euro must not appear in two savings, or finance stops believing the total; and shadow IT is usually a need IT did not meet, so talking to the people who buy it works better than blocking the card.""",
  es="""
+180 personas tienen Microsoft 365 E5 y no usan nada que no les dé ya E3, el plan más barato, y la diferencia de precio es el primer ahorro de la lista. En total, la revisión del gasto en SaaS y licencias que acompaña a este post identifica 223.700 euros de ahorro, un 15,4 % de una factura de 1,45 millones de euros al año. Es un proyecto de código abierto que se ejecuta con datos de ejemplo de una empresa de distribución inventada, con 1.370 empleados en cuatro países y 24 aplicaciones, revisada el 11 de noviembre con los problemas puestos a propósito.
 
-## El problema
-El gasto en software y SaaS crece petición razonable a petición razonable, y las licencias casi nunca se recuperan. Los datos para ver a dónde va el dinero existen, en el registro, las consolas de administración, Entra ID, RR. HH. y la herramienta de gastos, pero nadie los junta hasta que llega una renovación, y para entonces la fecha de preaviso muchas veces ya ha pasado. En un mes normal en una empresa de 1.400 personas, 180 personas tienen Microsoft 365 E5 y no usan nada que no les dé ya E3; 46 licencias siguen asignadas a gente que se fue hace meses, lo que es un coste y una puerta abierta; un tercio de las licencias de Adobe Creative Cloud llevan tres meses sin abrirse; la empresa paga Zoom y Webex cuando todo el mundo tiene Teams, y Dropbox y Box al lado de OneDrive; el contrato de firma electrónica se renueva solo con un tercio de los asientos sin asignar y nueve días para avisar; el CRM vuelve con una subida del 9 % frente a un tope del 5 %; la pizarra colaborativa tiene más personas que asientos, y el ajuste llegará a precio de tarifa; nadie es responsable de un contrato que guarda datos confidenciales sin inicio de sesión único; y hay gente que paga Canva, Notion, ChatGPT Plus, Calendly y Grammarly con su tarjeta. El seguimiento de contratos con proveedores que publiqué antes en la serie guarda cada contrato de IT y su preaviso, y la revisión de costes de Azure hace este trabajo con la factura de la nube; esta revisión lo hace con las licencias y el SaaS, a partir del uso.
+El gasto en software y SaaS crece petición razonable a petición razonable, y las licencias casi nunca se recuperan. Los datos para ver a dónde va el dinero existen, en el registro, las consolas de administración, Entra ID, RR. HH. y la herramienta de gastos, pero pocas veces se leen juntos hasta que llega una renovación. La revisión los lee cada mes y une cada ahorro a una acción: recuperar, bajar de plan, ajustar asientos, negociar, consolidar o cancelar, con los usuarios que hay detrás, un responsable y una fecha.
 
-## Qué he hecho
-- Uso: licencias sin uso desde hace 60 días o que nunca se han usado, licencias que siguen asignadas a bajas, licencias de personas con una baja larga o de cuentas que RR. HH. no conoce, y planes premium para personas que no usan sus funciones, con la diferencia de precio como ahorro.
-- Asientos: licencias compradas y sin asignar, y más personas que asientos, como riesgo de un ajuste con el fabricante.
-- Renovaciones: contratos con renovación automática cuyo plazo de preaviso está cerca o ya ha pasado, subidas por encima del tope pactado, contratos sin responsable, y un calendario de renovaciones de los próximos doce meses.
-- Cartera y shadow IT: varias aplicaciones para la misma función, o una función que ya cubre la suite, como candidatas a consolidar; aplicaciones sin SSO con datos confidenciales; SaaS pagado con gastos que no está en el registro, y compras con tarjeta de una aplicación que ya tiene un contrato central.
-- Reparto del coste: el coste por departamento y centro de coste, contratos sin centro de coste o con uno que no existe, y el gasto frente al presupuesto.
-- Cada ahorro unido a una acción, recuperar, bajar de plan, ajustar asientos, negociar, consolidar o cancelar, con los usuarios que hay detrás, un responsable y una fecha; `report.html` con barras de uso por aplicación, el calendario y el reparto por departamento; `review-pack.md`, una página con las decisiones antes de las renovaciones; CSV con el uso, la lista de licencias a recuperar, el calendario, el reparto, los hallazgos y las acciones; y un exportador de solo lectura de las licencias de Microsoft 365 con Microsoft Graph.
+## 46 licencias de gente que ya no está y un preaviso en nueve días
 
-## Cómo está hecho
-Python solo con la librería estándar. Los umbrales están en un fichero de configuración pactado con finanzas, y cada hallazgo tiene una gravedad, un responsable y una fecha. Cada euro se cuenta una vez: los ahorros se aplican por aplicación en un orden fijo, recuperar, bajar de plan, ajustar asientos, negociar, cancelar duplicados y por último consolidar, con el coste de la aplicación como tope, así que dejar una herramienta de videollamadas solo cuenta lo que queda de su coste después de sus licencias sin uso y sus asientos vacíos. La fecha de preaviso es la fecha de renovación menos el plazo de preaviso, y un contrato con renovación automática y una fecha ya pasada avanza un año cada vez. El reparto carga cada licencia por usuario al departamento de la persona que la tiene y deja los asientos vacíos y los contratos de tarifa plana en IT, así que las filas suman el total. El exportador lee de Microsoft Graph los SKU que ha comprado el tenant con sus asientos y los usuarios con sus licencias y su último inicio de sesión correcto, con un registro de aplicación y un secreto que se queda en memoria; el último inicio de sesión dice que la cuenta se usa, no que se use una aplicación concreta, así que la lista de licencias a recuperar pasa por el responsable de la aplicación antes de quitar nada. La demo es una empresa de distribución inventada con 1.370 empleados en cuatro países y 24 aplicaciones, revisada el 11 de noviembre, con los problemas puestos a propósito: rojo en total, 1,45 millones de euros al año y 223.700 euros de ahorro identificado, un 15,4 %, repartido entre recuperar, consolidar, bajar de plan, ajustar asientos, negociar y cancelar. 15 tests, un runbook para el ciclo mensual de recuperación y los pasos 120, 90 y 60 días antes de una renovación, cómo negociar con los datos de uso y cómo tratar el shadow IT sin bloquear a la gente, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+La demo encuentra 46 licencias que siguen asignadas a personas que se fueron hace meses, lo que es un coste y una puerta abierta. Un tercio de las licencias de Adobe Creative Cloud llevan tres meses sin abrirse. El contrato de firma electrónica se renueva solo con un tercio de los asientos sin asignar y nueve días para avisar, y el CRM vuelve con una subida del 9 % frente a un tope del 5 %.
 
-## Qué aprendí
-De la gestión de activos de software y el control de costes de licencias y SaaS con Apptio y Flexera, TBM y FOCUS; del showback y el chargeback y las métricas de coste unitario, y de aplicar el FinOps Framework; de administrar Microsoft 365 como administrador global y gestionar las licencias de Office 365 con un service desk central, y las licencias de Adobe; de Entra ID, el acceso condicional, PIM y el inicio de sesión único SAML de las aplicaciones empresariales, y de Microsoft Graph; de la relación con fabricantes como Microsoft, Dell y Atlassian, de negociar contratos con proveedores, preparar y seguir el presupuesto de IT y redactar casos de negocio con ROI; y de la automatización con Python y PowerShell. Las lecciones que hay detrás de la herramienta son que la fecha que importa es la del preaviso, no la de la renovación; que los asientos que se negocian tienen que ser los que se usan después de la limpieza, no los asignados; que una licencia en una baja es un problema de seguridad antes que un coste; que un plan premium se asigna por costumbre y se mantiene por miedo, así que la lista de personas que bajan de plan hay que revisarla con el negocio antes de la renovación; que el mismo euro no puede aparecer en dos ahorros, o finanzas deja de creerse el total; que el shadow IT suele ser una necesidad que IT no cubrió, y hablar con quien lo paga funciona mejor que bloquear la tarjeta; y que enseñar a cada departamento lo que tiene su gente recupera más licencias que cualquier recordatorio.
+Para la herramienta, la fecha que importa es la del preaviso, la de renovación menos el plazo de preaviso, no la renovación en sí. Un contrato con renovación automática cuya fecha ya ha pasado avanza un año cada vez, y la revisión mantiene un calendario de renovaciones de los próximos doce meses.
 
-## Siguientes pasos
-- Ejecutarlo el primer día laborable de cada mes, y otra vez 120 días antes de cada renovación grande.
-- Leer las asignaciones del resto de aplicaciones de sus API de administración, y usar los informes de uso de Microsoft 365 por carga de trabajo para la pregunta de E5 a E3.
-- Guardar el uso de cada mes para enseñar la tendencia por aplicación en la reunión de renovación, y llevar los ahorros conseguidos de verdad al seguimiento del presupuesto."""),
+## Dos herramientas de videollamada junto a Teams y cinco aplicaciones pagadas con tarjeta
+
+La revisión también mira la cartera en conjunto. La empresa paga Zoom y Webex cuando todo el mundo tiene Teams, y Dropbox y Box al lado de OneDrive, así que aparecen como candidatas a consolidar. La pizarra colaborativa tiene más personas que asientos, y el ajuste, lo que el fabricante cobra por los usuarios de más, llegará a precio de tarifa. Nadie es responsable de un contrato que guarda datos confidenciales sin inicio de sesión único, y hay gente que paga Canva, Notion, ChatGPT Plus, Calendly y Grammarly con su tarjeta: es el shadow IT, el software que se compra fuera del registro.
+
+El coste se reparte además por departamento y centro de coste, lo que se conoce como showback. Cada licencia por usuario se carga al departamento de la persona que la tiene, y los asientos vacíos y los contratos de tarifa plana se quedan en IT, así que las filas suman el total.
+
+## Cada euro se cuenta una sola vez
+
+Para que finanzas pueda fiarse del total, los ahorros se aplican por aplicación en un orden fijo, recuperar, bajar de plan, ajustar asientos, negociar, cancelar duplicados y por último consolidar, con el coste de la aplicación como tope. Dejar una herramienta de videollamadas solo cuenta, por tanto, lo que queda de su coste después de quitar sus licencias sin uso y sus asientos vacíos. Los umbrales están en un fichero de configuración pactado con finanzas, y cada hallazgo tiene una gravedad, un responsable y una fecha.
+
+## Cómo usarlo con datos reales
+
+Los datos de entrada son el registro de licencias y SaaS, las licencias asignadas con la última actividad de cada usuario, la lista de usuarios de RR. HH. o de Entra ID y los gastos con tarjeta. Un exportador de solo lectura lee de Microsoft Graph los SKU que ha comprado el tenant con sus asientos y los usuarios con sus licencias y su último inicio de sesión correcto, con un registro de aplicación y un secreto que se queda en memoria. El último inicio de sesión dice que la cuenta se usa, no que se use una aplicación concreta, así que la lista de licencias a recuperar pasa por el responsable de la aplicación antes de quitar nada.
+
+La herramienta funciona con Python y solo la librería estándar, y genera `report.html`, con barras de uso por aplicación, el calendario de renovaciones y el reparto por departamento; `review-pack.md`, una página con las decisiones antes de las renovaciones para el responsable de IT y finanzas; y ficheros CSV con el uso, la lista de licencias a recuperar, el calendario, el reparto, los hallazgos y las acciones. Incluye 15 tests y un runbook para el ciclo mensual de recuperación, los pasos 120, 90 y 60 días antes de una renovación, cómo negociar con los datos de uso y cómo tratar el shadow IT sin bloquear a la gente.
+
+## De dónde sale
+
+La hice a partir de la gestión de activos de software y el control de costes de licencias con Apptio y Flexera, de administrar Microsoft 365 como administrador global y gestionar las licencias de Office 365 y de Adobe, y de negociar contratos con proveedores. Detrás hay dos lecciones: el mismo euro no puede aparecer en dos ahorros, o finanzas deja de creerse el total; y el shadow IT suele ser una necesidad que IT no cubrió, así que hablar con quien lo paga funciona mejor que bloquear la tarjeta."""),
 dict(n="51", repo="51-windows-server-baseline-drift", date="2026-11-12", cat="tools",
- title_en="SMBv1 back on two file servers and a GPO that stopped applying: the Windows Server baseline review",
- title_es="SMBv1 activo de nuevo y una GPO que no se aplica: la revisión de la línea base de Windows Server",
+ title_en="One GPO not linked to a new OU explains 112 of the 138 settings that drifted on Windows servers in a month",
+ title_es="Una GPO sin vincular a una OU nueva explica 112 de los 138 ajustes desviados en los servidores Windows en un mes",
  seo_title_en="Windows Server baseline drift review · Iñigo González",
  seo_title_es="Deriva de la línea base de Windows Server · Iñigo González",
  seo_desc="Windows Server security baseline review: compliance per server and tier, high-risk deviations, drift since last month, GPOs not applied and exceptions.",
  seo_desc_es="Revisión de la línea base de seguridad de Windows Server: cumplimiento por servidor, desviaciones de alto riesgo, deriva, GPO que no se aplican y excepciones.",
- dek_en="From the approved security baseline, the server inventory, the settings collected from every server with a read-only PowerShell collector, last month's collection, the exceptions register and the Group Policy results: which Windows servers are still configured as the baseline says, which have drifted since the last review and why (a GPO not applying, a local change, an exception that expired), with the high-risk deviations first, a decision for each one (fix, accept as an exception or change the baseline) and a one-page pack with the evidence for ISO 27001 and NIS2 audits.",
- dek_es="A partir de la línea base de seguridad aprobada, el inventario de servidores, la configuración recogida de cada servidor con un recolector de PowerShell de solo lectura, la recogida del mes anterior, el registro de excepciones y los resultados de las directivas de grupo: qué servidores Windows siguen configurados como dice la línea base, cuáles se han desviado desde la última revisión y por qué (una GPO que no se aplica, un cambio local, una excepción caducada), con las desviaciones de alto riesgo primero, una decisión para cada una (corregir, aceptar como excepción o cambiar la línea base) y un dosier de una página con las evidencias para las auditorías de ISO 27001 y NIS2.",
+ dek_en="The monthly baseline review, published with fictional data from an aerospace manufacturer with 56 servers, compares each server's settings with the approved security baseline, last month's state, the exceptions and the Group Policy results to explain why it drifted.",
+ dek_es="La revisión mensual de la línea base, publicada con datos ficticios de un fabricante aeroespacial con 56 servidores, compara la configuración de cada servidor con la línea base de seguridad aprobada, el mes anterior, las excepciones y las directivas de grupo para explicar por qué se ha desviado.",
  en="""
+Of the 138 security settings that drifted on a company's Windows servers in one month, 112 have a single cause: a group of servers moved to a new OU for a project, and the GPO that applies the baseline was never linked there. That is what the Windows Server baseline review published with this post finds. It is an open-source tool that runs on demo data from a made-up aerospace manufacturer with two sites, 56 servers and a 45-setting baseline, reviewed on 12 November with the problems placed on purpose.
 
-## The problem
-A security baseline for Windows servers is approved once and then drifts one reasonable change at a time. A scanner integration needs SMBv1 and someone turns it back on locally on the file servers; a few servers move to a new OU for a project and the baseline GPO is not linked there, so LLMNR, NTLM, TLS 1.0 and RDP fall back to the defaults without anyone noticing; the new servers are not in the LAPS group; a test GPO turns LLMNR back on "so the tests work"; the Print Spooler ends up on automatic on a domain controller after an incident; an ASR pilot leaves two rules in audit for months; an exception for TLS 1.0 expires and the old application is still there; some servers stop reporting and nobody knows; and a GPO link disabled during troubleshooting switches off PowerShell logging for a whole site. The data to see all of this exists, on the servers and in Group Policy, but it is rarely read against the baseline, last month's state and the exceptions at the same time. The Active Directory and infrastructure health check I published earlier in the series looks after the directory these servers depend on, and the vulnerability remediation review follows what a patch fixes; this review follows the configuration that a patch does not.
+A security baseline is the approved list of how every server should be configured, and a GPO, a Group Policy Object, is how Active Directory pushes those settings to the servers in an OU, an organisational unit. On the servers that lost the GPO, LLMNR, NTLM, TLS 1.0 and RDP fell back to their defaults without anyone noticing. The review gives each deviation the first cause that applies, from the Group Policy results, the exceptions and where the value came from, so the GPO comes first in the report rather than 112 separate lines.
 
-## What I built
-- Compliance: every applicable baseline setting on every server, by tier and role, with the compliance per server, area, tier, site and environment against a target per tier, and the servers below it.
-- High-risk deviations first: SMBv1, LM and NTLMv1, LLMNR, RDP without NLA, LAPS, Defender real-time protection and ASR rules in audit where block is expected, logon and lockout auditing, PowerShell script block logging, the Print Spooler on domain controllers, TLS 1.0 and 1.1, and firewall profiles.
-- Drift: settings that were compliant at the last review and are not now, grouped by their cause, and local changes that override the GPO.
-- Root cause: GPOs not applied and why (not linked, link disabled, security filtering, WMI filter), servers in an OU that is not their tier's, settings won by another GPO, and exceptions that expired, are about to expire or have no approver or ticket.
-- Hygiene: servers not reporting, long uptime, old patches, and the inventory against the collection.
-- `report.html` with a heat map of servers by area, the top deviations and the trend; `review-pack.md`, one page for the monthly security and infrastructure review with the decisions (fix, exception or baseline change), the high-risk items with owner and date and the audit evidence; CSVs per server, deviation, drift, exception, finding and action; and a read-only PowerShell collector.
+## Compliance falls from 98.8 % to 92.4 %
 
-## How it is built
-Python with the standard library only. The baseline is a CSV with one row per setting: what to read (a registry value, an audit subcategory, a service, a firewall profile, the SMB server configuration, Defender, an ASR rule, a user right or the LAPS attribute in AD), the expected value and how to compare it, the severity, the tiers it applies to, the GPO that should set it and its reference to ISO 27001. An approved and valid exception counts as compliant; one without approver, ticket or expiry does not. Each deviation gets the first cause that applies, from the GPO results, the exceptions and the source of the value, and last month's collection is evaluated with the same rules to find what is new. The collector opens one remoting session per server and only reads: Get-ItemProperty, auditpol, Get-Service, Get-NetFirewallProfile, Get-SmbServerConfiguration, Get-MpComputerStatus and Get-MpPreference, secedit to a temporary file, the LAPS expiry time in AD, and the Resultant Set of Policy with Get-GPResultantSetOfPolicy; credentials come from the session and stay in memory. The demo is a made-up aerospace manufacturer with two sites, 56 servers and a 45-setting baseline, reviewed on 12 November with the problems placed on purpose: red, 92.4 % compliance against 98.8 % a month earlier, 79 high-risk deviations on 41 servers, and 138 settings drifted since the last review, 112 of them from one GPO that is not linked to the new OU. 14 tests, a runbook for the monthly cycle, piloting a baseline change in audit mode first, the exception rules and the audit evidence, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+The demo estate is red: 92.4 % compliance against 98.8 % a month earlier, and 79 high-risk deviations on 41 servers. Compliance is measured on every applicable setting of every server, by tier and role, and shown per server, area, tier, site and environment against a target per tier. Last month's collection is evaluated with the same rules, which is how the tool tells what is new.
 
-## What I learned
-From administering Windows Server, including DNS and DHCP, Active Directory and Group Policy since early in my career; from patching Windows servers without cutting the service and automating with PowerShell; from applied work with ISO 27001, GDPR and NIS2, NIST CSF and NIST SP 800-53, cybersecurity risk management with its treatment plans and remediation follow-up, and security policies, metrics and KPIs; from Microsoft Defender, Intune EPM, CyberArk, Tanium and Qualys and Conditional Access; and from answering audits, keeping the CMDB and owning the incident, change and problem processes. The lessons behind the tool are that one GPO that stops applying explains more deviations than all the local changes together, so the cause comes before the list of settings; that a server that does not report is not compliant but unknown, and the report has to say so; that a pilot needs an end date, or the pilot GPO wins over the baseline for months; that an exception without an approver and an expiry is just a deviation with a ticket number; that test servers should follow the production baseline, or the problems appear on the day of the release; that tightening a setting goes through audit mode and a pilot ring before the whole estate; and that an auditor trusts a report more when it shows its own gaps.
+High-risk deviations come first in the list: SMBv1, LM and NTLMv1, LLMNR, RDP without NLA, LAPS, Defender real-time protection, ASR rules left in audit where block is expected, logon and lockout auditing, PowerShell script block logging, the Print Spooler on domain controllers, TLS 1.0 and 1.1, and firewall profiles.
 
-## Next steps
-- Run it on the first working day of every month and after every change to a baseline GPO.
-- Keep the compliance per area of each month to show the trend over the year at the security committee.
-- Read the values from the configuration assessment the company already has as another source, and open the red actions as tickets with their owner and date.""",
+## SMBv1 back on the file servers and a pilot that never ended
+
+The other causes are the ones a baseline drifts through, one reasonable change at a time. A scanner integration needed SMBv1, the old file-sharing protocol, and someone turned it back on locally on the file servers. The new servers are not in the LAPS group, the tool that rotates the local administrator password. A test GPO turns LLMNR back on so the tests work, and the Print Spooler ended up on automatic on a domain controller after an incident.
+
+An ASR pilot has left two rules in audit for months. An exception for TLS 1.0 has expired while the old application is still there, and a GPO link disabled during troubleshooting switches off PowerShell logging for a whole site. Some servers have also stopped reporting, and the review lists them as unknown rather than compliant.
+
+## A decision for each deviation
+
+An approved and valid exception counts as compliant; one without an approver, a ticket or an expiry does not, and expired or expiring ones come back as findings. Each high-risk item gets an owner and a date, and every deviation needs one of three decisions: fix it, accept it as an exception or change the baseline. The one-page pack for the monthly security and infrastructure review carries those decisions and the evidence for ISO 27001 and NIS2 audits.
+
+## How to use it with real data
+
+The baseline is a CSV with one row per setting: what to read (a registry value, an audit subcategory, a service, a firewall profile, the SMB configuration, Defender, an ASR rule, a user right or the LAPS attribute in AD), the expected value, the severity, the tiers it applies to, the GPO that should set it and its ISO 27001 reference. A PowerShell collector opens one remoting session per server and only reads, with commands such as Get-ItemProperty, auditpol, Get-SmbServerConfiguration, Get-MpPreference and Get-GPResultantSetOfPolicy; credentials come from the session and stay in memory.
+
+The analysis runs on Python with the standard library only and produces `report.html`, with a heat map of servers by area, the top deviations and the trend; `review-pack.md`; and CSV files per server, deviation, drift, exception, finding and action. It comes with 14 tests and a runbook for the monthly cycle, which includes piloting a baseline change in audit mode first. The intended rhythm is the first working day of every month and after every change to a baseline GPO.
+
+## Where it comes from
+
+I built it from administering Windows Server, Active Directory and Group Policy since early in my career, patching servers without cutting the service, and applied work with ISO 27001 and NIS2. Two lessons are behind it: one GPO that stops applying explains more deviations than all the local changes together, so the cause comes before the list of settings; and an auditor trusts a report more when it shows its own gaps.""",
  es="""
+De los 138 ajustes de seguridad que se desviaron en un mes en los servidores Windows de una empresa, 112 tienen una sola causa: un grupo de servidores pasó a una OU nueva por un proyecto y la GPO que aplica la línea base nunca se vinculó allí. Así lo detecta la revisión de la línea base de Windows Server que acompaña a este post, un proyecto de código abierto que se ejecuta con datos de ejemplo de un fabricante aeroespacial inventado, con dos sedes, 56 servidores y una línea base de 45 ajustes, revisado el 12 de noviembre con los problemas puestos a propósito.
 
-## El problema
-Una línea base de seguridad para servidores Windows se aprueba una vez y luego se desvía cambio razonable a cambio razonable. Una integración con un escáner necesita SMBv1 y alguien lo vuelve a activar a mano en los servidores de ficheros; unos cuantos servidores pasan a una OU nueva por un proyecto y la GPO de la línea base no está vinculada allí, así que LLMNR, NTLM, TLS 1.0 y RDP vuelven a los valores por defecto sin que nadie se dé cuenta; los servidores nuevos no están en el grupo de LAPS; una GPO de pruebas vuelve a activar LLMNR "para que funcionen las pruebas"; la cola de impresión acaba en automático en un controlador de dominio después de una incidencia; un piloto de ASR deja dos reglas en auditoría durante meses; caduca una excepción para TLS 1.0 y la aplicación antigua sigue ahí; algunos servidores dejan de reportar y nadie lo sabe; y un vínculo de GPO desactivado mientras se investigaba un problema apaga el registro de PowerShell en toda una sede. Los datos para verlo existen, en los servidores y en las directivas de grupo, pero pocas veces se leen a la vez frente a la línea base, el estado del mes anterior y las excepciones. La revisión de salud de Active Directory y la infraestructura que publiqué antes en la serie cuida el directorio del que dependen estos servidores, y la revisión de la corrección de vulnerabilidades sigue lo que arregla un parche; esta revisión sigue la configuración, que un parche no arregla.
+Una línea base de seguridad es la lista aprobada de cómo debe estar configurado cada servidor, y una GPO, un objeto de directiva de grupo, es la forma en que Active Directory lleva esos ajustes a los servidores de una OU, una unidad organizativa. En los servidores que se quedaron sin la GPO, LLMNR, NTLM, TLS 1.0 y RDP volvieron a sus valores por defecto sin que nadie se diera cuenta. La revisión asigna a cada desviación la primera causa que encaja, a partir de los resultados de las directivas, las excepciones y el origen del valor, así que la GPO aparece primero en el informe en lugar de 112 líneas sueltas.
 
-## Qué he hecho
-- Cumplimiento: cada ajuste de la línea base que aplica en cada servidor, por nivel y rol, con el porcentaje de cumplimiento por servidor, área, nivel, sede y entorno frente a un objetivo por nivel, y los servidores que no llegan.
-- Primero las desviaciones de alto riesgo: SMBv1, LM y NTLMv1, LLMNR, RDP sin NLA, LAPS, la protección en tiempo real de Defender y las reglas ASR en auditoría donde deberían bloquear, la auditoría de inicios de sesión y bloqueos de cuenta, el registro de bloques de script de PowerShell, la cola de impresión en los controladores de dominio, TLS 1.0 y 1.1, y los perfiles del firewall.
-- Deriva: ajustes que cumplían en la revisión anterior y ahora no, agrupados por su causa, y cambios locales que pasan por encima de la GPO.
-- Causa probable: GPO que no se aplican y por qué (sin vincular, vínculo desactivado, filtrado de seguridad, filtro WMI), servidores en una OU que no es la de su nivel, ajustes que gana otra GPO, y excepciones caducadas, a punto de caducar o sin aprobador ni ticket.
-- Higiene: servidores que no reportan, demasiado tiempo sin reiniciar, parches antiguos, y el inventario frente a lo recogido.
-- `report.html` con un mapa de calor de servidores por área, las desviaciones principales y la tendencia; `review-pack.md`, una página para la revisión mensual de seguridad e infraestructura con las decisiones (corregir, excepción o cambio de la línea base), los puntos de alto riesgo con responsable y fecha y las evidencias para auditoría; CSV por servidor, desviación, deriva, excepción, hallazgo y acción; y un recolector de PowerShell de solo lectura.
+## El cumplimiento cae del 98,8 % al 92,4 %
 
-## Cómo está hecho
-Python solo con la librería estándar. La línea base es un CSV con una fila por ajuste: qué leer (un valor del registro, una subcategoría de auditoría, un servicio, un perfil del firewall, la configuración del servidor SMB, Defender, una regla ASR, un derecho de usuario o el atributo de LAPS en AD), el valor esperado y cómo compararlo, la gravedad, los niveles a los que aplica, la GPO que debería fijarlo y su referencia a ISO 27001. Una excepción aprobada y en vigor cuenta como cumplimiento; una sin aprobador, ticket o fecha de caducidad, no. Cada desviación recibe la primera causa que encaja, a partir de los resultados de las GPO, las excepciones y el origen del valor, y la recogida del mes anterior se evalúa con las mismas reglas para ver qué es nuevo. El recolector abre una sesión remota por servidor y solo lee: Get-ItemProperty, auditpol, Get-Service, Get-NetFirewallProfile, Get-SmbServerConfiguration, Get-MpComputerStatus y Get-MpPreference, secedit a un fichero temporal, la fecha de caducidad de LAPS en AD, y el conjunto resultante de directivas con Get-GPResultantSetOfPolicy; las credenciales salen de la sesión y se quedan en memoria. La demo es un fabricante aeroespacial inventado con dos sedes, 56 servidores y una línea base de 45 ajustes, revisado el 12 de noviembre con los problemas puestos a propósito: rojo, un 92,4 % de cumplimiento frente al 98,8 % de hace un mes, 79 desviaciones de alto riesgo en 41 servidores y 138 ajustes desviados desde la última revisión, 112 de ellos por una sola GPO que no está vinculada a la OU nueva. 14 tests, un runbook para el ciclo mensual, cómo pilotar un cambio de la línea base empezando en modo auditoría, las reglas de las excepciones y las evidencias para auditoría, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+El parque de la demo está en rojo: un 92,4 % de cumplimiento frente al 98,8 % de hace un mes, y 79 desviaciones de alto riesgo en 41 servidores. El cumplimiento se mide sobre cada ajuste que aplica en cada servidor, por nivel y rol, y se enseña por servidor, área, nivel, sede y entorno frente a un objetivo por nivel. La recogida del mes anterior se evalúa con las mismas reglas, y así la herramienta distingue lo que es nuevo.
 
-## Qué aprendí
-De administrar Windows Server, incluidos DNS y DHCP, Active Directory y las directivas de grupo desde el principio de mi carrera; de parchear servidores Windows sin cortar el servicio y automatizar con PowerShell; del trabajo aplicado con ISO 27001, el RGPD y NIS2, NIST CSF y NIST SP 800-53, la gestión de riesgos de ciberseguridad con sus planes de tratamiento y el seguimiento de la corrección, y las políticas, métricas y KPI de seguridad; de Microsoft Defender, Intune EPM, CyberArk, Tanium y Qualys y el acceso condicional; y de responder auditorías, mantener la CMDB y ser responsable de los procesos de incidencias, cambios y problemas. Las lecciones que hay detrás de la herramienta son que una GPO que deja de aplicarse explica más desviaciones que todos los cambios locales juntos, así que la causa va antes que la lista de ajustes; que un servidor que no reporta no cumple ni incumple, es desconocido, y el informe tiene que decirlo; que un piloto necesita fecha de fin, o la GPO del piloto le gana a la línea base durante meses; que una excepción sin aprobador ni caducidad es solo una desviación con número de ticket; que los servidores de pruebas deberían seguir la línea base de producción, o los problemas aparecen el día de la subida; que endurecer un ajuste pasa por el modo auditoría y un grupo piloto antes de todo el parque; y que un auditor se fía más de un informe que enseña sus propias lagunas.
+Las desviaciones de alto riesgo van primero: SMBv1, LM y NTLMv1, LLMNR, RDP sin NLA, LAPS, la protección en tiempo real de Defender, reglas ASR en auditoría donde deberían bloquear, la auditoría de inicios de sesión y bloqueos, el registro de bloques de script de PowerShell, la cola de impresión en los controladores de dominio, TLS 1.0 y 1.1, y los perfiles del firewall.
 
-## Siguientes pasos
-- Ejecutarlo el primer día laborable de cada mes y después de cada cambio en una GPO de la línea base.
-- Guardar el cumplimiento por área de cada mes para enseñar la tendencia del año en el comité de seguridad.
-- Leer los valores también de la herramienta de evaluación de configuración que ya tenga la empresa, y abrir las acciones en rojo como tickets con su responsable y su fecha."""),
+## SMBv1 activo otra vez en los servidores de ficheros y un piloto que nunca terminó
+
+El resto de causas son las de siempre, cambio razonable a cambio razonable. Una integración con un escáner necesitaba SMBv1, el antiguo protocolo para compartir ficheros, y alguien lo volvió a activar a mano en los servidores de ficheros. Los servidores nuevos no están en el grupo de LAPS, la herramienta que rota la contraseña del administrador local. Una GPO de pruebas vuelve a activar LLMNR «para que funcionen las pruebas», y la cola de impresión acabó en automático en un controlador de dominio después de una incidencia.
+
+Un piloto de ASR ha dejado dos reglas en auditoría durante meses. Una excepción para TLS 1.0 ha caducado y la aplicación antigua sigue ahí, y un vínculo de GPO desactivado mientras se investigaba un problema apaga el registro de PowerShell en toda una sede. Además, algunos servidores han dejado de reportar, y la revisión los marca como desconocidos, no como conformes.
+
+## Una decisión para cada desviación
+
+Una excepción aprobada y en vigor cuenta como cumplimiento; una sin aprobador, ticket o fecha de caducidad no, y las caducadas o a punto de caducar vuelven como hallazgos. Cada punto de alto riesgo tiene responsable y fecha, y cada desviación necesita una de tres decisiones: corregirla, aceptarla como excepción o cambiar la línea base. El dosier de una página para la revisión mensual de seguridad e infraestructura recoge esas decisiones y las evidencias para las auditorías de ISO 27001 y NIS2.
+
+## Cómo usarlo con datos reales
+
+La línea base es un CSV con una fila por ajuste: qué leer (un valor del registro, una subcategoría de auditoría, un servicio, un perfil del firewall, la configuración SMB, Defender, una regla ASR, un derecho de usuario o el atributo de LAPS en AD), el valor esperado, la gravedad, los niveles a los que aplica, la GPO que debería fijarlo y su referencia a ISO 27001. Un recolector de PowerShell abre una sesión remota por servidor y solo lee, con comandos como Get-ItemProperty, auditpol, Get-SmbServerConfiguration, Get-MpPreference y Get-GPResultantSetOfPolicy; las credenciales salen de la sesión y se quedan en memoria.
+
+El análisis funciona con Python y solo la librería estándar, y genera `report.html`, con un mapa de calor de servidores por área, las desviaciones principales y la tendencia; `review-pack.md`; y ficheros CSV por servidor, desviación, deriva, excepción, hallazgo y acción. Incluye 14 tests y un runbook para el ciclo mensual, que contempla pilotar cada cambio de la línea base empezando en modo auditoría. La idea es ejecutarlo el primer día laborable de cada mes y después de cada cambio en una GPO de la línea base.
+
+## De dónde sale
+
+La hice a partir de administrar Windows Server, Active Directory y las directivas de grupo desde el principio de mi carrera, parchear servidores sin cortar el servicio y el trabajo aplicado con ISO 27001 y NIS2. Detrás hay dos lecciones: una GPO que deja de aplicarse explica más desviaciones que todos los cambios locales juntos, así que la causa va antes que la lista de ajustes; y un auditor se fía más de un informe que enseña sus propias lagunas."""),
 dict(n="52", repo="52-endpoint-security-coverage", date="2026-11-13", cat="tools",
- title_en="Nine laptops in no tool and an installer approved 37 times: the endpoint security coverage review",
- title_es="Nueve portátiles fuera de todas las herramientas y un instalador aprobado 37 veces: la revisión de cobertura de seguridad de los equipos",
+ title_en="Only 76.9 % of laptops and desktops are fully protected, and the gaps sit between Intune, Defender and the CMDB",
+ title_es="Solo el 76,9 % de los equipos está protegido del todo, y los huecos están entre Intune, Defender y la CMDB",
  seo_title_en="Endpoint security coverage review: Intune, Defender, BitLocker · Iñigo González",
  seo_title_es="Cobertura de seguridad de los equipos: Intune, Defender y BitLocker · Iñigo González",
  seo_desc="Monthly endpoint security review: inventory, Intune and Defender reconciled, BitLocker keys, EDR health, local admins, EPM elevations and unsupported OS.",
  seo_desc_es="Revisión mensual de seguridad de los equipos: inventario, Intune y Defender cruzados, claves de BitLocker, EDR, administradores locales, EPM y sistemas sin soporte.",
- dek_en="From the asset inventory, the Intune devices, the Defender for Endpoint device inventory, the BitLocker recovery keys in Entra ID, the local administrators, the Endpoint Privilege Management elevations and the exceptions register: whether every laptop and desktop in use is managed, encrypted with its key where the service desk can find it, reporting to Defender, free of standing admin rights and on a supported operating system, with the gaps per device and their cause, a decision for each one that needs a choice and a one-page pack with the evidence for ISO 27001 and NIS2 audits.",
- dek_es="A partir del inventario de activos, los dispositivos de Intune, el inventario de Defender for Endpoint, las claves de recuperación de BitLocker en Entra ID, los administradores locales, las elevaciones de Endpoint Privilege Management y el registro de excepciones: si cada portátil y sobremesa en uso está gestionado, cifrado con su clave donde el service desk la puede encontrar, reportando a Defender, sin derechos de administrador permanentes y con un sistema operativo con soporte, con los huecos por equipo y su causa, una decisión para cada uno que la necesite y un dosier de una página con las evidencias para las auditorías de ISO 27001 y NIS2.",
+ dek_en="The monthly endpoint review, published with fictional data from a drone and avionics parts maker with 368 devices, matches the asset inventory, Intune and Defender device by device and checks encryption keys, local admins, elevations and operating systems.",
+ dek_es="La revisión mensual de los equipos, publicada con datos ficticios de un fabricante de piezas para drones y aviónica con 368 dispositivos, cruza equipo a equipo el inventario, Intune y Defender y revisa las claves de cifrado, los administradores locales, las elevaciones y los sistemas.",
  en="""
+Only 76.9 % of a company's laptops and desktops are fully protected, against 93.2 % a month earlier, and the gaps sit between the tools rather than inside any of them. That is what the endpoint security coverage review published with this post finds. It is an open-source tool that runs on demo data from a made-up maker of drone and avionics parts with two sites and 368 devices in use, reviewed on 13 November with the problems placed on purpose.
 
-## The problem
-Every security tool on the endpoints shows its own view, and each view looks fine on its own. Intune shows compliance for the devices it manages, Defender shows sensor health for the devices that are onboarded, the CMDB shows what was bought, and the gaps sit between them. A field team builds a few laptops locally to save time and they never reach Intune or Defender; new workstations are enrolled, but their group is not in the onboarding policy; a firmware update suspends BitLocker and nobody resumes it; laptops imaged by an old process are encrypted, but their recovery key is not in Entra ID, so the service desk cannot unlock them; a vendor asks to turn off the antivirus on two CAD workstations and it stays off; a software rollout adds engineers to the local Administrators group "for a week"; the service desk approves the same installer dozens of times a month; an unsigned lab tool is elevated on a test bench; Windows 10 lingers on the production floor after its end of support; and retired laptops still check in. The Intune compliance report I published early in the series looks at compliance policy by policy, and the Windows Server baseline review looks after the servers; this review asks the question for the whole fleet of laptops and desktops at once.
+Every security tool shows its own view, and each looks fine on its own. Intune shows compliance for the devices it manages, Defender shows sensor health for the devices that are onboarded, and the CMDB, the asset database, shows what was bought. The review starts from the inventory and matches Intune records to it by serial number and then name, and Defender records by Entra device ID and then name, so one physical device is one row whatever each tool calls it.
 
-## What I built
-- One list from three sources: every device in the inventory, Intune and Defender matched by serial number, name and Entra device ID, with what each tool is missing: devices in use that no tool manages, devices the inventory does not have, and retired devices that are still active.
-- Coverage by control on every device: managed, compliant, checking in, encrypted, recovery key escrowed, EDR onboarded and healthy, antivirus healthy (real-time protection, signatures and tamper protection), no standing local administrators and a supported operating system, per site, department and platform, against a target per control and last month.
-- Privilege: standing members of the local Administrators group, the files that many users elevate with approval, which are candidates for an automatic EPM rule, and unsigned files elevated.
-- Exceptions: valid ones count as covered; expired, expiring and incomplete ones come back as findings.
-- `report.html` with the coverage per control, a heat map of departments by control and the three sources reconciled; `review-pack.md`, one page for the monthly endpoint security review with the decisions, the actions with owner and date and the audit evidence; CSVs per device, gap, source, elevation, exception, finding and action; a read-only PowerShell collector and an Intune Remediations detection script for the local administrators.
+## 11 devices no tool manages and 25 without a working sensor
 
-## How it is built
-Python with the standard library only. The inventory comes first, Intune records are matched to it by serial number and then name, and Defender records to those by Entra device ID and then name, so one physical device is one row whatever each tool calls it. Each control gives pass, fail, exception or unknown on each device: a device missing from the local admin report is unknown, not covered, and the report says how many. Valid exceptions, with an approver, a ticket and an expiry, count as covered; incomplete or expired ones do not. Findings are grouped by cause, so six workstations missing from Defender appear as one problem with one owner, and the gaps that need a choice (an unsupported OS, standing admin rights, an automatic elevation rule, unmanaged devices, an expired exception) become decisions. The collector only reads: the Intune managed devices and the antivirus state of each Windows device through Microsoft Graph, and the BitLocker recovery key metadata in Entra ID, never the key itself; Defender comes from the portal's device export, and the local administrators from a detection script that changes nothing. The demo is a made-up maker of drone and avionics parts with two sites and 368 devices in use, reviewed on 13 November with the problems placed on purpose: red, 76.9 % fully protected against 93.2 % a month earlier, 11 devices not managed, 25 without a working EDR sensor, 14 with standing admins, 11 on an unsupported OS, and five decisions. 15 tests, a runbook for the monthly cycle, how to read the result and roll out policy changes without breaking users, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+The demo is red. 11 devices are not managed, 25 have no working EDR sensor, the endpoint detection and response agent that watches for attacks, 14 have standing local administrators and 11 run an unsupported operating system. A field team built a few laptops locally to save time and they never reached Intune or Defender, and new workstations were enrolled but their group is not in the onboarding policy.
 
-## What I learned
-From managing Windows, macOS, iOS and Android devices with Intune, BitLocker encryption and compliance, and leading a migration to Windows 11; from Intune Endpoint Privilege Management, Microsoft Defender, Conditional Access and Entra ID; from Microsoft Graph and PowerShell automation; from applied work with ISO 27001, GDPR and NIS2, NIST CSF, and security policies, metrics and KPIs; and from asset management, the CMDB, answering audits and owning the incident, change and problem processes. The lessons behind the tool are that the most dangerous device is the one no tool knows about, so the reconciliation comes before any percentage; that gaps cluster by department, site, model or build process, and fixing the cause fixes the devices; that an encrypted laptop without its recovery key in the directory is a support incident waiting to happen; that "temporary" admin rights need an end date, and EPM rules make removing them painless; that the installer approved by hand dozens of times a month is a rule nobody has written yet; that a device with no data is unknown, not compliant; and that an exception is a decision with an end date, not a status.
+Findings are grouped by cause, so six workstations missing from Defender appear as one problem with one owner. The same reconciliation also shows devices the inventory does not have and retired laptops that still check in.
 
-## Next steps
-- Run it on the first working day of every month and after every change to the onboarding, encryption or account protection policies.
-- Keep the coverage per control of each month to show the trend over the year at the security committee.
-- Read the Defender machines API directly instead of the portal export, and add the iOS and Android devices with their own controls.""",
+## Encrypted laptops whose key the service desk cannot find
+
+Every device is checked control by control: managed, compliant, checking in, encrypted, recovery key escrowed, EDR onboarded and healthy, antivirus healthy, no standing local administrators and a supported operating system. A firmware update suspended BitLocker and nobody resumed it. Laptops imaged by an old process are encrypted, but their recovery key is not in Entra ID, so the service desk cannot unlock them.
+
+A vendor asked to turn off the antivirus on two CAD workstations and it stayed off. Windows 10 lingers on the production floor after its end of support. Each control gives pass, fail, exception or unknown, and a device missing from the local admin report counts as unknown, not covered, with the report saying how many.
+
+## An installer approved 37 times and admin rights "for a week"
+
+On privilege, a software rollout added engineers to the local Administrators group for a week. The service desk approves the same installer dozens of times a month through Endpoint Privilege Management, the Intune feature that lets users run one file with admin rights after approval, and the review flags such files as candidates for an automatic rule. An unsigned lab tool is elevated on a test bench.
+
+The gaps that need a choice, an unsupported OS, standing admin rights, an automatic elevation rule, unmanaged devices or an expired exception, become decisions; the demo has five. Valid exceptions, with an approver, a ticket and an expiry, count as covered, and the one-page pack carries the evidence for ISO 27001 and NIS2 audits.
+
+## How to use it with real data
+
+A read-only PowerShell collector reads the Intune managed devices and the antivirus state of each Windows device through Microsoft Graph, and the BitLocker recovery key metadata in Entra ID, never the key itself. Defender data comes from the portal's device export, and the local administrators from an Intune Remediations detection script that changes nothing.
+
+The analysis runs on Python with the standard library only and produces `report.html`, with coverage per control, a heat map of departments by control and the three sources reconciled; `review-pack.md`, one page for the monthly endpoint security review; and CSV files per device, gap, source, elevation, exception, finding and action. It comes with 15 tests and a runbook for the monthly cycle and for rolling out policy changes without breaking users. The intended rhythm is the first working day of every month and after every change to the onboarding, encryption or account protection policies.
+
+## Where it comes from
+
+I built it from managing Windows, macOS, iOS and Android devices with Intune, BitLocker encryption and compliance, leading a migration to Windows 11, and working with Endpoint Privilege Management, Defender and Entra ID. Two lessons are behind it: the most dangerous device is the one no tool knows about, so the reconciliation comes before any percentage; and an installer approved by hand dozens of times a month is a rule nobody has written yet.""",
  es="""
+Solo el 76,9 % de los portátiles y sobremesas de una empresa está protegido del todo, frente al 93,2 % de hace un mes, y los huecos están entre las herramientas y no dentro de ninguna. Así lo detecta la revisión de cobertura de seguridad de los equipos que acompaña a este post, un proyecto de código abierto que se ejecuta con datos de ejemplo de un fabricante inventado de piezas para drones y aviónica, con dos sedes y 368 dispositivos en uso, revisado el 13 de noviembre con los problemas puestos a propósito.
 
-## El problema
-Cada herramienta de seguridad de los equipos enseña su propia vista, y cada vista por separado parece estar bien. Intune enseña el cumplimiento de los equipos que gestiona, Defender la salud del sensor de los equipos incorporados, la CMDB lo que se compró, y los huecos están entre medias. Un equipo de campo monta unos portátiles por su cuenta para ganar tiempo y nunca llegan a Intune ni a Defender; se inscriben estaciones de trabajo nuevas, pero su grupo no está en la directiva de incorporación; una actualización de firmware suspende BitLocker y nadie lo reanuda; unos portátiles instalados con un proceso antiguo están cifrados, pero su clave de recuperación no está en Entra ID, así que el service desk no los puede desbloquear; un proveedor pide desactivar el antivirus en dos estaciones de CAD y se queda desactivado; un despliegue de software mete a unos ingenieros en el grupo local de Administradores "durante una semana"; el service desk aprueba el mismo instalador decenas de veces al mes; se eleva una herramienta de laboratorio sin firmar en un banco de pruebas; Windows 10 sigue en la planta de producción después del fin de su soporte; y portátiles dados de baja siguen conectándose. El informe de cumplimiento de Intune que publiqué al principio de la serie mira el cumplimiento directiva a directiva, y la revisión de la línea base de Windows Server cuida los servidores; esta revisión hace la pregunta para todo el parque de portátiles y sobremesas a la vez.
+Cada herramienta de seguridad enseña su propia vista, y cada una parece correcta por separado. Intune enseña el cumplimiento de los equipos que gestiona, Defender la salud del sensor de los equipos incorporados, y la CMDB, la base de datos de activos, lo que se compró. La revisión parte del inventario y le une los registros de Intune por número de serie y luego por nombre, y los de Defender por el identificador de dispositivo de Entra y luego por nombre, así que un equipo físico es una fila se llame como se llame en cada herramienta.
 
-## Qué he hecho
-- Una lista a partir de tres fuentes: cada equipo del inventario, Intune y Defender emparejado por número de serie, nombre e ID de dispositivo de Entra, con lo que le falta a cada herramienta: equipos en uso que ninguna herramienta gestiona, equipos que el inventario no tiene y equipos dados de baja que siguen activos.
-- Cobertura por control en cada equipo: gestionado, cumple, se conecta, cifrado, clave de recuperación guardada, EDR incorporado y sano, antivirus sano (protección en tiempo real, firmas y protección contra alteraciones), sin administradores locales permanentes y con un sistema operativo con soporte, por sede, departamento y plataforma, frente a un objetivo por control y el mes anterior.
-- Privilegios: miembros permanentes del grupo local de Administradores, los ficheros que muchos usuarios elevan con aprobación, candidatos a una regla automática de EPM, y ficheros sin firmar que se elevan.
-- Excepciones: las válidas cuentan como cubiertas; las caducadas, a punto de caducar o incompletas vuelven como hallazgos.
-- `report.html` con la cobertura por control, un mapa de calor de departamentos por control y las tres fuentes cruzadas; `review-pack.md`, una página para la revisión mensual de seguridad de los equipos con las decisiones, las acciones con responsable y fecha y las evidencias para auditoría; CSV por equipo, hueco, fuente, elevación, excepción, hallazgo y acción; un recolector de PowerShell de solo lectura y un script de detección de Intune Remediations para los administradores locales.
+## 11 equipos sin gestionar y 25 sin un sensor que funcione
 
-## Cómo está hecho
-Python solo con la librería estándar. Primero va el inventario; los registros de Intune se emparejan con él por número de serie y después por nombre, y los de Defender con esos por ID de dispositivo de Entra y después por nombre, así que un equipo físico es una fila se llame como se llame en cada herramienta. Cada control da en cada equipo cumple, no cumple, excepción o desconocido: un equipo que falta en el informe de administradores locales es desconocido, no cubierto, y el informe dice cuántos hay. Las excepciones válidas, con aprobador, ticket y caducidad, cuentan como cubiertas; las incompletas o caducadas, no. Los hallazgos se agrupan por causa, así que seis estaciones que faltan en Defender aparecen como un problema con un responsable, y los huecos que necesitan elegir (un sistema sin soporte, derechos de administrador permanentes, una regla de elevación automática, equipos sin gestionar, una excepción caducada) se convierten en decisiones. El recolector solo lee: los dispositivos gestionados de Intune y el estado del antivirus de cada equipo Windows con Microsoft Graph, y los metadatos de las claves de recuperación de BitLocker en Entra ID, nunca la clave; Defender sale de la exportación de dispositivos del portal, y los administradores locales de un script de detección que no cambia nada. La demo es un fabricante inventado de piezas para drones y aviónica con dos sedes y 368 equipos en uso, revisado el 13 de noviembre con los problemas puestos a propósito: rojo, un 76,9 % de equipos totalmente protegidos frente al 93,2 % de hace un mes, 11 equipos sin gestionar, 25 sin un sensor de EDR que funcione, 14 con administradores permanentes, 11 con un sistema sin soporte, y cinco decisiones. 15 tests, un runbook para el ciclo mensual, cómo leer el resultado y desplegar cambios de directivas sin romper nada a los usuarios, y un workflow de GitHub Actions que ejecuta los tests y regenera los datos de la demo y la captura.
+La demo está en rojo. 11 equipos no están gestionados, 25 no tienen un sensor EDR que funcione, el agente de detección y respuesta que vigila los ataques, 14 tienen administradores locales permanentes y 11 usan un sistema operativo sin soporte. Un equipo de campo montó unos cuantos portátiles en local para ganar tiempo y nunca llegaron a Intune ni a Defender, y unas estaciones de trabajo nuevas se inscribieron, pero su grupo no está en la directiva de incorporación.
 
-## Qué aprendí
-De gestionar equipos Windows, macOS, iOS y Android con Intune, el cifrado con BitLocker y el cumplimiento, y de liderar una migración a Windows 11; de Intune Endpoint Privilege Management, Microsoft Defender, el acceso condicional y Entra ID; de Microsoft Graph y la automatización con PowerShell; del trabajo aplicado con ISO 27001, el RGPD y NIS2, NIST CSF, y las políticas, métricas y KPI de seguridad; y de la gestión de activos, la CMDB, responder auditorías y ser responsable de los procesos de incidencias, cambios y problemas. Las lecciones que hay detrás de la herramienta son que el equipo más peligroso es el que ninguna herramienta conoce, así que el cruce de fuentes va antes que cualquier porcentaje; que los huecos se agrupan por departamento, sede, modelo o proceso de instalación, y arreglar la causa arregla los equipos; que un portátil cifrado sin su clave de recuperación en el directorio es una incidencia esperando a pasar; que los derechos de administrador "temporales" necesitan fecha de fin, y las reglas de EPM hacen que quitarlos no duela; que el instalador que se aprueba a mano decenas de veces al mes es una regla que nadie ha escrito todavía; que un equipo sin datos es desconocido, no cumple; y que una excepción es una decisión con fecha de fin, no un estado.
+Los hallazgos se agrupan por causa, así que seis estaciones de trabajo que faltan en Defender aparecen como un solo problema con un solo responsable. El mismo cruce enseña también los equipos que el inventario no tiene y los portátiles retirados que siguen conectándose.
 
-## Siguientes pasos
-- Ejecutarlo el primer día laborable de cada mes y después de cada cambio en las directivas de incorporación, cifrado o protección de cuentas.
-- Guardar la cobertura por control de cada mes para enseñar la tendencia del año en el comité de seguridad.
-- Leer directamente la API de equipos de Defender en lugar de la exportación del portal, y añadir los iPhone y Android con sus propios controles."""),
+## Portátiles cifrados cuya clave el service desk no encuentra
+
+Cada equipo se revisa control a control: gestionado, conforme, reportando, cifrado, clave de recuperación guardada, EDR incorporado y sano, antivirus sano, sin administradores locales permanentes y con un sistema operativo con soporte. Una actualización de firmware suspendió BitLocker y nadie lo reanudó. Los portátiles instalados con un proceso antiguo están cifrados, pero su clave de recuperación no está en Entra ID, así que el service desk no puede desbloquearlos.
+
+Un proveedor pidió desactivar el antivirus en dos estaciones de CAD y se quedó desactivado. Windows 10 sigue en la planta de producción después del fin de su soporte. Cada control da cumple, no cumple, excepción o desconocido, y un equipo que falta en el informe de administradores locales cuenta como desconocido, no como cubierto, y el informe dice cuántos son.
+
+## Un instalador aprobado 37 veces y permisos de administrador «para una semana»
+
+En privilegios, un despliegue de software añadió a varios ingenieros al grupo de administradores locales para una semana. El service desk aprueba el mismo instalador decenas de veces al mes con Endpoint Privilege Management, la función de Intune que deja a un usuario ejecutar un fichero con permisos de administrador tras una aprobación, y la revisión marca esos ficheros como candidatos a una regla automática. Una herramienta de laboratorio sin firmar se eleva en un banco de pruebas.
+
+Los huecos que necesitan una elección, un sistema sin soporte, permisos de administrador permanentes, una regla de elevación automática, equipos sin gestionar o una excepción caducada, se convierten en decisiones; la demo tiene cinco. Las excepciones válidas, con aprobador, ticket y caducidad, cuentan como cubiertas, y el dosier de una página recoge las evidencias para las auditorías de ISO 27001 y NIS2.
+
+## Cómo usarlo con datos reales
+
+Un recolector de PowerShell de solo lectura lee con Microsoft Graph los dispositivos gestionados de Intune y el estado del antivirus de cada equipo Windows, y los metadatos de las claves de recuperación de BitLocker en Entra ID, nunca la clave. Los datos de Defender salen de la exportación de dispositivos del portal, y los administradores locales de un script de detección de Intune Remediations que no cambia nada.
+
+El análisis funciona con Python y solo la librería estándar, y genera `report.html`, con la cobertura por control, un mapa de calor de departamentos por control y las tres fuentes cruzadas; `review-pack.md`, una página para la revisión mensual de seguridad de los equipos; y ficheros CSV por equipo, hueco, fuente, elevación, excepción, hallazgo y acción. Incluye 15 tests y un runbook para el ciclo mensual y para desplegar cambios de directivas sin romper nada a los usuarios. La idea es ejecutarlo el primer día laborable de cada mes y después de cada cambio en las directivas de incorporación, cifrado o protección de cuentas.
+
+## De dónde sale
+
+La hice a partir de gestionar equipos Windows, macOS, iOS y Android con Intune, el cifrado con BitLocker y el cumplimiento, dirigir una migración a Windows 11 y trabajar con Endpoint Privilege Management, Defender y Entra ID. Detrás hay dos lecciones: el equipo más peligroso es el que ninguna herramienta conoce, así que el cruce va antes que cualquier porcentaje; y un instalador que se aprueba a mano decenas de veces al mes es una regla que nadie ha escrito todavía."""),
 dict(n="53", repo="53-dns-dhcp-ipam-review", date="2026-11-14", cat="tools",
- title_en="A guest Wi-Fi full by the second week and a domain controller retired in September: the DNS, DHCP and IPAM review",
- title_es="Una wifi de invitados llena a mitad de mes y un controlador de dominio retirado en septiembre: la revisión de DNS, DHCP e IPAM",
+ title_en="An eight-day lease leaves a guest Wi-Fi at 94 %, and a retired domain controller is still handed out in five scopes",
+ title_es="Una concesión de ocho días deja la wifi de invitados al 94 %, y cinco ámbitos aún reparten un controlador retirado",
  seo_title_en="DNS, DHCP and IPAM review on Windows Server · Iñigo González",
  seo_title_es="DNS, DHCP e IPAM en Windows Server: revisión · Iñigo González",
  seo_desc="Monthly Windows Server DNS and DHCP review: scopes filling up, failover, stale and static records, rogue DHCP, insecure zones and the IP plan.",
  seo_desc_es="Revisión mensual de DNS y DHCP en Windows Server: ámbitos que se llenan, conmutación, registros antiguos, DHCP no autorizado, zonas inseguras y el plan IP.",
- dek_en="From the DHCP scopes, options, reservations, leases and failover relationships, the DNS servers, zones and records, the IP address plan and the exceptions register: which scopes are filling up and when they will be full, whether failover works, which clients are pointed at a DNS server that no longer exists, who can overwrite a name, which records are stale or sit inside a DHCP pool, and where the IP plan and the configuration disagree, with a decision for each choice and a one-page pack with the evidence for ISO 27001 and NIS2 audits.",
- dek_es="A partir de los ámbitos, opciones, reservas, concesiones y relaciones de conmutación de DHCP, los servidores, zonas y registros de DNS, el plan de direccionamiento IP y el registro de excepciones: qué ámbitos se están llenando y cuándo se llenarán, si la conmutación funciona, qué clientes apuntan a un servidor DNS que ya no existe, quién puede sobrescribir un nombre, qué registros están obsoletos o dentro de un pool de DHCP, y dónde no coinciden el plan IP y la configuración, con una decisión para cada elección y un dosier de una página con las evidencias para las auditorías de ISO 27001 y NIS2.",
+ dek_en="The monthly DNS and DHCP review, published with fictional data from a toy retailer with 19 scopes and 3,487 records, cross-checks scopes, leases, failover, zones, records and the IP address plan to see which pools fill up first and what still points to old servers.",
+ dek_es="La revisión mensual de DNS y DHCP, publicada con datos ficticios de una juguetera con 19 ámbitos y 3.487 registros, cruza ámbitos, concesiones, conmutación, zonas, registros y el plan de direccionamiento IP para ver qué pools se llenan antes y qué apunta aún a servidores antiguos.",
  en="""
+The guest Wi-Fi of a retailer is at 94 % of its addresses because it still keeps the default eight-day lease, so by the second week of a busy month visitors cannot connect. That is what the DNS, DHCP and IPAM review published with this post finds. It is an open-source tool that runs on demo data from a made-up toy retailer with a head office, a distribution centre and two offices, 19 scopes and 3,487 records, reviewed on 14 November with the problems placed on purpose.
 
-## The problem
-DHCP and DNS work until the day they do not, and the reasons build up quietly over months. The guest Wi-Fi keeps the default eight-day lease, so by the second week of a busy month visitors cannot connect. A batch of new handheld scanners arrives for the peak season and their scope will be full before Christmas. A domain controller is retired, but several scopes still hand it out as a DNS server and its SRV records are still there; it was also the only server that scavenged. The link to a site drops after a firewall change and the failover partners stop replicating leases. A scope created during an outage is still active on another server. Someone plugs a consumer router into the showroom for a launch event. A vendor sets a zone to accept nonsecure updates, a technician gives printers a static address in the middle of a pool, and the IP address plan says one thing while the scopes say another. Each console shows its own part. The Active Directory health check I published earlier in the series looks at the domain controllers week by week, and the Windows Server baseline review at their configuration; this review asks whether every device will get an address and find the servers it needs.
+A lease is how long a device keeps the address DHCP gives it, and a scope is the pool of addresses for one subnet. On a guest network, each visitor's address stays taken for eight days after they leave. The review checks lease lengths against the standard for guest, Wi-Fi and user subnets, and treats the choice between a shorter lease and a wider subnet as a decision for the infrastructure review.
 
-## What I built
-- DHCP: how full every scope is and when it will be full at this month's pace; failover relationships and the scopes outside them; the DNS servers and gateway each scope hands out; lease lengths against the standard for guest, Wi-Fi and user subnets; duplicate and stale reservations; the same subnet served by two servers; and DHCP servers not authorised in Active Directory.
-- DNS: zones that accept nonsecure updates, aging and scavenging, stale and duplicate dynamic records, static records inside a DHCP pool, records that still point to a retired domain controller, missing reverse records, forwarders and aliases that point to nothing.
-- The IP address plan against both: scopes not in the plan, planned subnets with no scope, overlapping subnets, subnets with no owner and subnets with no reverse lookup zone.
-- Exceptions: valid ones are accepted; expired, expiring and incomplete ones come back as findings.
-- `report.html` with every scope, its growth and its days to full, the zones and the plan reconciled; `review-pack.md`, one page for the monthly infrastructure review with the decisions, the actions with owner and date and the audit evidence; CSVs per scope, reservation, zone, stale record, subnet, exception, finding and action; and a read-only PowerShell export of the DHCP and DNS servers.
+## Handheld scanners will fill their scope in about 26 days
 
-## How it is built
-Python with the standard library only. Scopes, options, reservations and leases are read per server, and a scope in a failover relationship is exported once, so its statistics are not counted twice. The growth since the last review gives the days until each pool is full, so a scope at 79 % that grew by 120 devices in a month comes up before one at 81 % that barely moves. Option 006 is checked against the live DNS servers, so a retired domain controller shows up wherever it is still handed out, and the same retired server is searched for in A, NS, SRV and PTR records. A static record is only a problem when its address is inside an active pool and is not a reservation. Every finding has a severity, an owner and a due date, valid exceptions remove the item and expired or incomplete ones do not, and the choices (a shorter lease or a wider subnet, secure updates for a zone, scavenging, failover for a site) become decisions. The export only reads, with the standard DhcpServer and DnsServer cmdlets. The demo is a made-up toy retailer with a head office, a distribution centre and two offices, 19 scopes and 3,487 records, reviewed on 14 November with the problems placed on purpose: red, the guest Wi-Fi at 94 %, the scanners full in about 26 days, a broken failover relationship, a retired domain controller still in five scopes and six records, a rogue router, 735 stale records and five decisions. 13 tests, a runbook for the monthly cycle and for changing leases, scopes, secure updates and scavenging without surprises, and a GitHub Actions workflow that runs the tests and rebuilds the demo data and the screenshot.
+The tool ranks scopes by pace rather than percentage. The growth since the last review gives the days until each pool is full, so a scope at 79 % that grew by 120 devices in a month comes up before one at 81 % that barely moves. In the demo, a batch of new handheld scanners arrived for the peak season, and their scope will be full in about 26 days, before Christmas.
 
-## What I learned
-From administering Windows Server, including DNS and DHCP, Active Directory and Group Policy since early in my career; from running Cisco switches and routers, FortiGate firewalls, communications rooms and multi-site networks; from PowerShell automation and monitoring; and from applied work with ISO 27001 and NIS2, answering audits and owning the incident, change and problem processes. The lessons behind the tool are that a scope's percentage matters less than its pace, because the one that fills up is the one that is growing; that a lease is a policy, and on a guest network eight days is a decision nobody took; that retiring a domain controller is not finished until DHCP and DNS stop pointing to it; that aging and scavenging only work if someone turns them on and someone checks the list first; that a static address inside a pool is a conflict waiting for the next device; that the IP plan is only useful if it matches the configuration; and that an exception is a decision with an end date, not a status.
+Overall the demo is red, with a broken failover relationship, a rogue router, 735 stale records and five decisions. The link to one site dropped after a firewall change and the failover partners, the two DHCP servers that share a scope, stopped replicating leases. Someone plugged a consumer router into the showroom for a launch event, and the review flags it as a rogue DHCP server.
 
-## Next steps
-- Run it on the first working day of every month, and before and after every network change at a site.
-- Keep each month's scopes to show the growth per site over the year when the network budget is planned.
-- Read the IP plan straight from the Windows Server IPAM role or another IPAM tool, and add the IPv6 scopes and zones.""",
+## A domain controller retired in September is still in five scopes
+
+A domain controller was retired, but five scopes still hand it out as a DNS server and six records still point to it, including its SRV records. It was also the only server that scavenged, the job that deletes stale records. The tool checks option 006, the DNS servers each scope hands out, against the live servers, and looks for the retired server in A, NS, SRV and PTR records.
+
+The DNS checks also find a zone a vendor set to accept nonsecure updates, which lets any device overwrite a name, and printers a technician gave static addresses in the middle of a pool. A static record is only flagged when its address is inside an active pool and is not a reservation. A scope created during an outage is still active on another server, and the IP address plan says one thing while the scopes say another.
+
+## How to use it with real data
+
+The export only reads, with the standard DhcpServer and DnsServer PowerShell cmdlets: scopes, options, reservations and leases per server, and zones and records. A scope in a failover relationship is exported once, so its statistics are not counted twice. The IP plan is compared with both, to find scopes not in the plan, planned subnets with no scope, overlapping subnets and subnets with no owner or reverse lookup zone.
+
+Every finding has a severity, an owner and a due date, and valid exceptions remove the item while expired or incomplete ones do not. The analysis runs on Python with the standard library only and produces `report.html`, with every scope, its growth and its days to full; `review-pack.md`, one page with the decisions and the evidence for ISO 27001 and NIS2 audits; and CSV files per scope, reservation, zone, stale record, subnet, exception, finding and action. It comes with 13 tests and a runbook for changing leases, scopes, secure updates and scavenging without surprises, and is meant to run on the first working day of every month and before and after every network change at a site.
+
+## Where it comes from
+
+I built it from administering Windows Server DNS and DHCP and Active Directory since early in my career, and from running Cisco switches and routers, FortiGate firewalls and multi-site networks. Two lessons are behind it: a scope's percentage matters less than its pace, because the one that fills up is the one that is growing; and retiring a domain controller is not finished until DHCP and DNS stop pointing to it.""",
  es="""
+La wifi de invitados de una cadena de tiendas está al 94 % de sus direcciones porque sigue con la concesión por defecto de ocho días, así que a mitad de un mes con mucho movimiento las visitas no pueden conectarse. Así lo detecta la revisión de DNS, DHCP e IPAM que acompaña a este post, un proyecto de código abierto que se ejecuta con datos de ejemplo de una juguetera inventada con una sede central, un centro de distribución y dos oficinas, 19 ámbitos y 3.487 registros, revisada el 14 de noviembre con los problemas puestos a propósito.
 
-## El problema
-DHCP y DNS funcionan hasta el día en que dejan de hacerlo, y los motivos se acumulan sin hacer ruido durante meses. La wifi de invitados se queda con la concesión de ocho días que viene por defecto, así que a mitad de un mes con mucho movimiento las visitas no se pueden conectar. Llega un lote de terminales de escaneo nuevos para la campaña y su ámbito se llenará antes de Navidad. Se retira un controlador de dominio, pero varios ámbitos siguen dándolo como servidor DNS y sus registros SRV siguen ahí; además era el único servidor que hacía la limpieza. El enlace con una sede se cae después de un cambio en el cortafuegos y los servidores en conmutación dejan de replicar las concesiones. Un ámbito creado durante una caída sigue activo en otro servidor. Alguien conecta un router doméstico en el showroom para un evento. Un proveedor deja una zona aceptando actualizaciones no seguras, un técnico pone a unas impresoras una dirección fija en mitad de un pool, y el plan de direccionamiento IP dice una cosa mientras los ámbitos dicen otra. Cada consola enseña su parte. La comprobación de salud de Active Directory que publiqué antes en la serie mira los controladores de dominio semana a semana, y la revisión de la línea base de Windows Server su configuración; esta revisión pregunta si cada equipo va a obtener una dirección y a encontrar los servidores que necesita.
+Una concesión es el tiempo que un equipo conserva la dirección que le da DHCP, y un ámbito es el conjunto de direcciones de una subred. En una red de invitados, la dirección de cada visita sigue ocupada ocho días después de que se vaya. La revisión compara la duración de las concesiones con el estándar para las subredes de invitados, wifi y usuarios, y deja la elección entre una concesión más corta y una subred más amplia como decisión para la revisión de infraestructura.
 
-## Qué he hecho
-- DHCP: cómo de lleno está cada ámbito y cuándo se llenará al ritmo de este mes; las relaciones de conmutación y los ámbitos que se quedan fuera; los servidores DNS y la puerta de enlace que entrega cada ámbito; la duración de las concesiones frente al estándar para invitados, wifi y usuarios; reservas duplicadas y sin equipo detrás; la misma subred servida por dos servidores; y servidores DHCP no autorizados en Active Directory.
-- DNS: zonas que aceptan actualizaciones no seguras, envejecimiento y limpieza, registros dinámicos obsoletos y duplicados, registros estáticos dentro de un pool de DHCP, registros que siguen apuntando a un controlador de dominio retirado, registros inversos que faltan, reenviadores y alias que no apuntan a nada.
-- El plan de direccionamiento IP frente a los dos: ámbitos que no están en el plan, subredes planificadas sin ámbito, subredes que se solapan, subredes sin responsable y subredes sin zona de búsqueda inversa.
-- Excepciones: las válidas se aceptan; las caducadas, a punto de caducar o incompletas vuelven como hallazgos.
-- `report.html` con cada ámbito, su crecimiento y los días que le quedan, las zonas y el plan cruzado; `review-pack.md`, una página para la revisión mensual de infraestructura con las decisiones, las acciones con responsable y fecha y las evidencias para auditoría; CSV por ámbito, reserva, zona, registro obsoleto, subred, excepción, hallazgo y acción; y una exportación de PowerShell de solo lectura de los servidores DHCP y DNS.
+## Los lectores de mano llenarán su ámbito en unos 26 días
 
-## Cómo está hecho
-Python solo con la librería estándar. Los ámbitos, opciones, reservas y concesiones se leen por servidor, y un ámbito en una relación de conmutación se exporta una sola vez, para no contar dos veces sus estadísticas. El crecimiento desde la revisión anterior da los días que faltan para que se llene cada pool, así que un ámbito al 79 % que ha crecido en 120 equipos en un mes sale antes que uno al 81 % que apenas se mueve. La opción 006 se comprueba contra los servidores DNS vivos, así que un controlador de dominio retirado aparece allí donde todavía se entrega, y ese mismo servidor se busca en los registros A, NS, SRV y PTR. Un registro estático solo es un problema cuando su dirección está dentro de un pool activo y no es una reserva. Cada hallazgo tiene gravedad, responsable y fecha; las excepciones válidas quitan el elemento y las caducadas o incompletas no; y las elecciones (una concesión más corta o una subred más grande, actualizaciones seguras en una zona, la limpieza, la conmutación para una sede) se convierten en decisiones. La exportación solo lee, con los cmdlets estándar de DhcpServer y DnsServer. La demo es una juguetera inventada con una sede central, un centro de distribución y dos oficinas, 19 ámbitos y 3.487 registros, revisada el 14 de noviembre con los problemas puestos a propósito: rojo, la wifi de invitados al 94 %, los terminales de escaneo llenos en unos 26 días, una relación de conmutación rota, un controlador de dominio retirado que sigue en cinco ámbitos y seis registros, un router no autorizado, 735 registros obsoletos y cinco decisiones. 13 pruebas, un runbook para el ciclo mensual y para cambiar concesiones, ámbitos, actualizaciones seguras y limpieza sin sorpresas, y un flujo de GitHub Actions que ejecuta las pruebas y regenera los datos de la demo y la captura.
+La herramienta ordena los ámbitos por ritmo y no por porcentaje. El crecimiento desde la última revisión da los días que faltan para que cada pool se llene, así que un ámbito al 79 % que ha crecido 120 equipos en un mes sale antes que uno al 81 % que apenas se mueve. En la demo llegó un lote de lectores de mano nuevos para la campaña, y su ámbito se llenará en unos 26 días, antes de Navidad.
 
-## Qué he aprendido
-De administrar Windows Server, incluidos DNS y DHCP, Active Directory y las directivas de grupo desde el principio de mi carrera; de llevar switches y routers Cisco, cortafuegos FortiGate, salas de comunicaciones y redes de varias sedes; de la automatización con PowerShell y la monitorización; y del trabajo aplicado con ISO 27001 y NIS2, responder auditorías y ser responsable de los procesos de incidencias, cambios y problemas. Las lecciones que hay detrás de la herramienta son que el porcentaje de un ámbito importa menos que su ritmo, porque el que se llena es el que crece; que una concesión es una política, y en una red de invitados ocho días es una decisión que nadie tomó; que retirar un controlador de dominio no termina hasta que DHCP y DNS dejan de apuntar a él; que el envejecimiento y la limpieza solo funcionan si alguien los activa y alguien revisa antes la lista; que una dirección fija dentro de un pool es un conflicto esperando al siguiente equipo; que el plan IP solo sirve si coincide con la configuración; y que una excepción es una decisión con fecha de fin, no un estado.
+En conjunto la demo está en rojo, con una relación de conmutación rota, un router no autorizado, 735 registros obsoletos y cinco decisiones. El enlace con una sede cayó tras un cambio en el firewall y los dos servidores DHCP que comparten los ámbitos en conmutación dejaron de replicar las concesiones. Alguien conectó un router doméstico en la exposición para un evento de lanzamiento, y la revisión lo marca como un servidor DHCP no autorizado.
 
-## Siguientes pasos
-- Ejecutarlo el primer día laborable de cada mes, y antes y después de cada cambio de red en una sede.
-- Guardar los ámbitos de cada mes para enseñar el crecimiento por sede a lo largo del año cuando se planifique el presupuesto de red.
-- Leer el plan IP directamente del rol IPAM de Windows Server o de otra herramienta de IPAM, y añadir los ámbitos y zonas de IPv6."""),
+## Un controlador de dominio retirado en septiembre sigue en cinco ámbitos
+
+Se retiró un controlador de dominio, pero cinco ámbitos lo siguen dando como servidor DNS y seis registros apuntan todavía a él, entre ellos sus registros SRV. Además era el único servidor que hacía la limpieza, la tarea que borra los registros obsoletos. La herramienta compara la opción 006, los servidores DNS que entrega cada ámbito, con los servidores que siguen en marcha, y busca el servidor retirado en los registros A, NS, SRV y PTR.
+
+Las comprobaciones de DNS encuentran también una zona que un proveedor dejó aceptando actualizaciones no seguras, lo que permite a cualquier equipo sobrescribir un nombre, e impresoras a las que un técnico dio una dirección fija en mitad de un pool. Un registro estático solo se marca cuando su dirección está dentro de un pool activo y no es una reserva. Un ámbito creado durante una caída sigue activo en otro servidor, y el plan de direccionamiento IP dice una cosa mientras los ámbitos dicen otra.
+
+## Cómo usarlo con datos reales
+
+La exportación solo lee, con los cmdlets estándar de PowerShell DhcpServer y DnsServer: ámbitos, opciones, reservas y concesiones por servidor, y zonas y registros. Un ámbito en conmutación se exporta una sola vez, para no contar dos veces sus estadísticas. El plan IP se compara con ambos para encontrar ámbitos que no están en el plan, subredes planificadas sin ámbito, subredes que se solapan y subredes sin responsable o sin zona de búsqueda inversa.
+
+Cada hallazgo tiene una gravedad, un responsable y una fecha, y las excepciones válidas quitan el punto mientras que las caducadas o incompletas no. El análisis funciona con Python y solo la librería estándar, y genera `report.html`, con cada ámbito, su crecimiento y los días que le quedan; `review-pack.md`, una página con las decisiones y las evidencias para las auditorías de ISO 27001 y NIS2; y ficheros CSV por ámbito, reserva, zona, registro obsoleto, subred, excepción, hallazgo y acción. Incluye 13 tests y un runbook para cambiar concesiones, ámbitos, actualizaciones seguras y limpieza sin sorpresas, y está pensado para ejecutarse el primer día laborable de cada mes y antes y después de cada cambio de red en una sede.
+
+## De dónde sale
+
+La hice a partir de administrar DNS, DHCP y Active Directory en Windows Server desde el principio de mi carrera, y de llevar switches y routers Cisco, firewalls FortiGate y redes con varias sedes. Detrás hay dos lecciones: el porcentaje de un ámbito importa menos que su ritmo, porque el que se llena es el que crece; y retirar un controlador de dominio no termina hasta que DHCP y DNS dejan de apuntar a él."""),
 dict(n="54", repo="54-it-business-case-builder", date="2026-11-15", cat="tools",
- title_en="A saving counted twice and benefits before go-live: the IT business case builder",
- title_es="Un ahorro contado dos veces y beneficios antes de la puesta en marcha: el constructor de business cases de IT",
+ title_en="An ERP option that looked best at an NPV of 1.89 million falls to 1.10 million once 825,000 of benefits go",
+ title_es="Una opción de ERP que parecía la mejor con un VAN de 1,89 millones cae a 1,10 al quitar 825.000 de beneficios",
  seo_title_en="IT business case: NPV, payback and checks · Iñigo González",
  seo_title_es="Business case de IT: VAN, payback y revisión · Iñigo González",
  seo_desc="IT business case builder: options against doing nothing, NPV, IRR and payback, the checks finance makes, ranges, sensitivity and the paper for the committee.",
  seo_desc_es="Business case de IT: opciones frente a no hacer nada, VAN, TIR y payback, la revisión de finanzas, rangos, sensibilidad y el documento para el comité.",
- dek_en="From the options, their costs year by year, the benefits, the risks, the assumptions and the non-financial criteria: every option against the cost of doing nothing, with NPV, IRR, payback, ROI and the risk-adjusted NPV; the checks a finance partner makes before the committee (savings counted twice, benefits before go-live or with no owner, time saved counted as cash, unvalidated assumptions, missing cost lines, contingency), the figures as submitted and after the checks, the pessimistic and optimistic cases and the sensitivity, a recommendation, the decisions and a benefits register with owners and review dates.",
- dek_es="A partir de las opciones, sus costes año a año, los beneficios, los riesgos, las hipótesis y los criterios no financieros: cada opción frente al coste de no hacer nada, con VAN, TIR, payback, ROI y VAN ajustado al riesgo; las comprobaciones que hace un controller de finanzas antes del comité (ahorros contados dos veces, beneficios antes de la puesta en marcha o sin responsable, tiempo ahorrado contado como dinero, hipótesis sin validar, costes que faltan, contingencia), las cifras tal como se presentaron y tras la revisión, los escenarios pesimista y optimista y la sensibilidad, una recomendación, las decisiones y un registro de beneficios con responsables y fechas de revisión.",
+ dek_en="The business case builder, published with a fictional leasing company choosing what to do with its ERP, compares every option with doing nothing, runs the checks a finance partner makes before the committee and shows the figures as submitted and after the checks.",
+ dek_es="El constructor de business cases, publicado con una empresa de leasing ficticia que decide qué hacer con su ERP, compara cada opción con no hacer nada, aplica las comprobaciones de un controller de finanzas antes del comité y enseña las cifras tal como se presentaron y tras la revisión.",
  en="""
+Moving an ERP to SaaS in one go looks like the best option as submitted, with a net present value of 1.89 million, but it falls to 1.10 million and is marked not ready once the checks remove 825,000 of benefits. That is what the IT business case builder published with this post finds. It is an open-source tool, and its demo is a made-up leasing company deciding what to do with its ERP before support ends: staying, upgrading on premises, a SaaS big bang or SaaS in two phases.
 
-## The problem
-Most IT business cases are decided on one number, and that number is often wrong in the same few ways. A saving that is already in the comparison with the current platform is added again as a benefit. Benefits start in year one when the new system goes live in month fifteen. Hours saved become cash although no budget goes down. A vendor's discount or the release of a contractor is assumed rather than confirmed. Nobody costed migrating the data, retiring the old platform or training anyone, and the contingency is either missing or the same small percentage on everything, whatever the quality of the estimate. Then the base case is shown alone, without what happens if costs go up a fifth or go-live slips six months. The committee approves the option that looks best, and a year later the benefits are not there. The project portfolio review I published earlier in the series follows projects once they are approved; this tool works on the step before, when the money is decided.
+The net present value, NPV, is the sum of each year's net cash flow discounted to today. For every option, the tool takes the cost of doing nothing minus the cost of the option plus the hard benefits, year by year from year zero, and computes NPV, IRR, payback, ROI, the one-off cost, the total cost of ownership and the NPV after the expected cost of the risks. The comparison is always with doing nothing, which is never free.
 
-## What I built
-- Every option against the cost of doing nothing over the horizon: NPV, IRR, payback, ROI, the one-off cost, the total cost of ownership and the NPV after the expected cost of the risks.
-- The checks a finance partner makes: savings counted twice, benefits before go-live, hard benefits with no owner, productivity counted as cash, benefits with no KPI, unvalidated assumptions that carry the case, missing migration, decommission, training and internal staff costs, years with no running cost, contingency below what the estimates need and risks with no mitigation. The figures are shown as submitted and after the checks.
-- The range: pessimistic and optimistic cases from the confidence of each cost and the evidence behind each benefit, and the sensitivity of the NPV to costs, benefits, a late go-live and the discount rate.
-- A recommendation among the options whose figures can be trusted, the decisions for the committee, and a benefits register with KPI, owner and reviews six and twelve months after go-live.
-- `report.html` with the cumulative cash flow and the sensitivity chart; `business-case.md`, the paper for the committee; CSVs for the options, cash flows, sensitivity, benefits, assumptions, findings and actions; and a template command to start from a spreadsheet.
+## The two-phase option wins, with a gate before phase two
 
-## How it is built
-Python with the standard library only. The net cash flow of each option is the cost of doing nothing minus the cost of the option plus the hard benefits, year by year from year zero. A saving is counted twice when it names a cost the baseline pays and the option no longer has, because that saving is already in the difference. Benefits before the go-live year are removed for those years, hard benefits with no owner move to soft, and the contingency the estimates need (more for a rough estimate than for a quote) is added where it is missing. Costs move by their confidence and benefits by their evidence to give the pessimistic and optimistic cases. An option with a red finding on its costs or benefits is not ready and is not recommended, whatever its NPV; among the rest, the highest risk-adjusted NPV that pays back in time wins, and the weighted criteria break ties. The demo is a made-up leasing company choosing what to do with its ERP before support ends: staying, upgrading on premises, a SaaS big bang or SaaS in two phases. The big bang looks best as submitted, at 1.89 million, and falls to 1.10 million and not ready once 825,000 of benefits are removed; the two-phase option is recommended at an NPV of 563,000 and a payback of three and a half years, with a gate before phase two because it loses money in the pessimistic case. 16 tests, a runbook from first draft to the committee, and a GitHub Actions workflow that runs the tests on Python 3.10 and 3.12.
+The tool recommends SaaS in two phases, at an NPV of 563,000 and a payback of three and a half years. It adds a gate before phase two, because that option loses money in the pessimistic case. An option with a red finding on its costs or benefits is not ready and is not recommended, whatever its NPV; among the rest, the highest risk-adjusted NPV that pays back in time wins, and weighted non-financial criteria break ties.
 
-## What I learned
-From preparing business cases with ROI and measurable benefits, estimating costs, resources and timelines, managing IT budgets, using FinOps and technology business management (TBM, Apptio) for cost transparency, negotiating vendor contracts and renewals, and supporting an ERP (SAP) for the business. The lessons behind the tool are that the comparison is always with doing nothing, which is never free; that the most common mistake is counting the same saving twice; that a benefit without an owner is a hope, not a number; that hours saved are only cash if a budget line goes down; that the contingency should follow the quality of the estimate; that a committee trusts a case that shows what was removed and what the downside is; and that the decision is not the end, because the benefits only exist if someone measures them after go-live.
+## The mistakes a finance partner looks for
 
-## Next steps
-- Keep the benefits register after the decision and compare it with actuals at six and twelve months, alongside the portfolio review.
-- Read the running costs straight from the licence and contract registers of earlier projects in the series.
-- Add a Monte Carlo range next to the pessimistic and optimistic cases.""",
+The checks are the ones a finance partner makes before the committee. A saving is counted twice when it names a cost the current platform pays and the option no longer has, because that saving is already in the difference between the two. Benefits that start before the go-live year are removed for those years, and hard benefits with no owner move to soft. Hours saved counted as cash, benefits with no KPI and unvalidated assumptions that carry the case, such as a vendor discount or the release of a contractor, are flagged too.
+
+On the cost side, the tool looks for missing migration, decommission, training and internal staff costs, years with no running cost and risks with no mitigation. Where contingency is missing, it adds what the estimates need: more for a rough estimate than for a quote.
+
+## Pessimistic and optimistic cases
+
+A base case shown alone hides what happens if costs go up a fifth or go-live slips six months. The tool moves each cost by its confidence and each benefit by its evidence to build a pessimistic and an optimistic case, and measures how sensitive the NPV is to costs, benefits, a late go-live and the discount rate. It also produces the decisions for the committee and a benefits register with a KPI, an owner and reviews six and twelve months after go-live.
+
+## How to use it with real data
+
+A template command starts a case from a spreadsheet with the options, their costs year by year, the benefits, the risks, the assumptions and the non-financial criteria. The tool runs on Python with the standard library only and produces `report.html`, with the cumulative cash flow and the sensitivity chart; `business-case.md`, the paper for the committee; and CSV files for the options, cash flows, sensitivity, benefits, assumptions, findings and actions. It comes with 16 tests and a runbook from first draft to the committee.
+
+## Where it comes from
+
+I built it from preparing business cases with ROI and measurable benefits, estimating costs and timelines, managing IT budgets, using FinOps and TBM for cost transparency, negotiating vendor contracts and supporting an ERP (SAP) for the business. Two lessons are behind it: the most common mistake is counting the same saving twice; and a committee trusts a case that shows what was removed and what the downside is.""",
  es="""
+Llevar un ERP a SaaS de golpe parece la mejor opción tal como se presenta, con un valor actual neto de 1,89 millones, pero baja a 1,10 millones y queda como no lista al quitar 825.000 de beneficios en la revisión. Así lo detecta el constructor de business cases de IT que acompaña a este post, un proyecto de código abierto cuya demo es una empresa de leasing inventada que decide qué hacer con su ERP antes de que acabe el soporte: quedarse, actualizar en local, un SaaS de golpe o un SaaS en dos fases.
 
-## El problema
-La mayoría de los business cases de IT se deciden por una cifra, y esa cifra suele fallar siempre de las mismas maneras. Un ahorro que ya está en la comparación con la plataforma actual se suma otra vez como beneficio. Los beneficios empiezan en el primer año cuando el sistema nuevo arranca en el mes quince. Las horas ahorradas se convierten en dinero aunque ningún presupuesto baje. El descuento del proveedor o la salida de un contratista se dan por hechos en lugar de confirmarse. Nadie ha presupuestado la migración de datos, la retirada de la plataforma antigua ni la formación, y la contingencia falta o es el mismo porcentaje pequeño para todo, sea cual sea la calidad de la estimación. Luego el caso base se presenta solo, sin lo que pasa si los costes suben una quinta parte o la puesta en marcha se retrasa seis meses. El comité aprueba la opción que parece mejor y, un año después, los beneficios no aparecen. La revisión de la cartera de proyectos que publiqué antes en la serie sigue los proyectos una vez aprobados; esta herramienta trabaja en el paso anterior, cuando se decide el dinero.
+El valor actual neto, o VAN, es la suma de los flujos de caja netos de cada año descontados a hoy. Para cada opción, la herramienta toma el coste de no hacer nada menos el coste de la opción más los beneficios tangibles, año a año desde el año cero, y calcula el VAN, la TIR, el payback, el ROI, la inversión inicial, el coste total de propiedad y el VAN descontando el coste esperado de los riesgos. La comparación siempre es con no hacer nada, que nunca sale gratis.
 
-## Qué he construido
-- Cada opción frente al coste de no hacer nada en el horizonte: VAN, TIR, payback, ROI, la inversión inicial, el coste total de propiedad y el VAN descontando el coste esperado de los riesgos.
-- Las comprobaciones de un controller de finanzas: ahorros contados dos veces, beneficios antes de la puesta en marcha, beneficios tangibles sin responsable, productividad contada como dinero, beneficios sin KPI, hipótesis sin validar que sostienen el caso, costes de migración, retirada, formación y personal interno que faltan, años sin coste de operación, contingencia por debajo de lo que piden las estimaciones y riesgos sin mitigación. Las cifras se muestran tal como se presentaron y tras la revisión.
-- El rango: escenarios pesimista y optimista según la confianza de cada coste y la evidencia de cada beneficio, y la sensibilidad del VAN a los costes, los beneficios, un retraso en la puesta en marcha y la tasa de descuento.
-- Una recomendación entre las opciones cuyas cifras son fiables, las decisiones para el comité y un registro de beneficios con KPI, responsable y revisiones a los seis y doce meses de la puesta en marcha.
-- `report.html` con el flujo de caja acumulado y el gráfico de sensibilidad; `business-case.md`, el documento para el comité; CSV de opciones, flujos de caja, sensibilidad, beneficios, hipótesis, hallazgos y acciones; y un comando de plantilla para empezar desde una hoja de cálculo.
+## Gana la opción en dos fases, con una puerta antes de la segunda
 
-## Cómo está hecho
-Python solo con la biblioteca estándar. El flujo de caja neto de cada opción es el coste de no hacer nada menos el coste de la opción más los beneficios tangibles, año a año desde el año cero. Un ahorro está contado dos veces cuando nombra un coste que paga la situación actual y que la opción ya no tiene, porque ese ahorro ya está en la diferencia. Los beneficios anteriores al año de puesta en marcha se quitan para esos años, los beneficios tangibles sin responsable pasan a intangibles y se añade la contingencia que necesitan las estimaciones (más para una estimación aproximada que para un presupuesto firmado) donde falta. Los costes se mueven según su confianza y los beneficios según su evidencia para dar los escenarios pesimista y optimista. Una opción con un hallazgo rojo en sus costes o beneficios no está lista y no se recomienda, tenga el VAN que tenga; entre las demás gana el mayor VAN ajustado al riesgo que recupera la inversión a tiempo, y los criterios ponderados deshacen empates. La demo es una empresa de leasing inventada que decide qué hacer con su ERP antes de que acabe el soporte: quedarse, actualizar en local, un SaaS de golpe o un SaaS en dos fases. El cambio de golpe parece el mejor tal como se presenta, con 1,89 millones, y baja a 1,10 millones y queda como no listo al quitar 825.000 de beneficios; se recomienda la opción en dos fases, con un VAN de 563.000 y un payback de tres años y medio, con una puerta antes de la segunda fase porque pierde dinero en el escenario pesimista. 16 tests, un runbook desde el primer borrador hasta el comité y un flujo de GitHub Actions que ejecuta los tests en Python 3.10 y 3.12.
+La herramienta recomienda el SaaS en dos fases, con un VAN de 563.000 y un payback de tres años y medio. Añade una puerta antes de la segunda fase, porque esa opción pierde dinero en el escenario pesimista. Una opción con un hallazgo rojo en sus costes o beneficios no está lista y no se recomienda, tenga el VAN que tenga; entre las demás gana el mayor VAN ajustado al riesgo que recupera la inversión a tiempo, y los criterios no financieros ponderados deshacen empates.
 
-## Qué he aprendido
-De preparar business cases con ROI y beneficios medibles, estimar costes, recursos y plazos, gestionar presupuestos de IT, usar FinOps y la gestión económica de la tecnología (TBM, Apptio) para dar transparencia a los costes, negociar contratos y renovaciones con proveedores y dar soporte a un ERP (SAP) para el negocio. Las lecciones detrás de la herramienta son que la comparación siempre es con no hacer nada, que nunca sale gratis; que el error más común es contar el mismo ahorro dos veces; que un beneficio sin responsable es un deseo, no una cifra; que las horas ahorradas solo son dinero si baja una partida del presupuesto; que la contingencia debe seguir la calidad de la estimación; que un comité confía en un caso que enseña lo que se ha quitado y cuál es el riesgo a la baja; y que la decisión no es el final, porque los beneficios solo existen si alguien los mide después de la puesta en marcha.
+## Los errores que busca un controller de finanzas
 
-## Próximos pasos
-- Conservar el registro de beneficios tras la decisión y compararlo con los datos reales a los seis y doce meses, junto con la revisión de la cartera.
-- Leer los costes de operación directamente de los registros de licencias y contratos de proyectos anteriores de la serie.
-- Añadir un rango Monte Carlo junto a los escenarios pesimista y optimista."""),
+Las comprobaciones son las que hace un controller de finanzas antes del comité. Un ahorro está contado dos veces cuando nombra un coste que paga la plataforma actual y que la opción ya no tiene, porque ese ahorro ya está en la diferencia entre las dos. Los beneficios anteriores al año de puesta en marcha se quitan para esos años, y los beneficios tangibles sin responsable pasan a intangibles. También se marcan las horas ahorradas contadas como dinero, los beneficios sin KPI y las hipótesis sin validar que sostienen el caso, como el descuento de un proveedor o la salida de un contratista.
+
+En los costes, la herramienta busca la migración, la retirada, la formación y el personal interno que faltan, los años sin coste de operación y los riesgos sin mitigación. Donde falta contingencia, añade la que necesitan las estimaciones: más para una estimación aproximada que para un presupuesto firmado.
+
+## Escenarios pesimista y optimista
+
+Un caso base presentado solo esconde lo que pasa si los costes suben una quinta parte o la puesta en marcha se retrasa seis meses. La herramienta mueve cada coste según su confianza y cada beneficio según su evidencia para construir un escenario pesimista y otro optimista, y mide la sensibilidad del VAN a los costes, los beneficios, un retraso en la puesta en marcha y la tasa de descuento. Genera además las decisiones para el comité y un registro de beneficios con KPI, responsable y revisiones a los seis y doce meses de la puesta en marcha.
+
+## Cómo usarlo con datos reales
+
+Un comando de plantilla permite empezar un caso desde una hoja de cálculo con las opciones, sus costes año a año, los beneficios, los riesgos, las hipótesis y los criterios no financieros. La herramienta funciona con Python y solo la biblioteca estándar, y genera `report.html`, con el flujo de caja acumulado y el gráfico de sensibilidad; `business-case.md`, el documento para el comité; y ficheros CSV de opciones, flujos de caja, sensibilidad, beneficios, hipótesis, hallazgos y acciones. Incluye 16 tests y un runbook desde el primer borrador hasta el comité.
+
+## De dónde sale
+
+La hice a partir de preparar business cases con ROI y beneficios medibles, estimar costes y plazos, gestionar presupuestos de IT, usar FinOps y TBM para dar transparencia a los costes, negociar contratos con proveedores y dar soporte a un ERP (SAP) para el negocio. Detrás hay dos lecciones: el error más común es contar el mismo ahorro dos veces; y un comité confía en un caso que enseña lo que se ha quitado y cuál es el riesgo a la baja."""),
 dict(n="55", repo="55-printer-fleet-health", date="2026-11-16", cat="tools",
  title_en="A store opened four 'printer offline' tickets because a queue was printing to an old address",
  title_es="Una tienda abrió cuatro tickets de «impresora sin conexión» por una cola que imprimía a una dirección antigua",
