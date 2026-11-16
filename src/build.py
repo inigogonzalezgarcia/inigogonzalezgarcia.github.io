@@ -411,6 +411,7 @@ def share_html(p):
 
 # ---------- "Related": each guide topic points to the posts (repos) that use it, and each post back to its guides
 RELATED = {
+    "impresoras": ["55-printer-fleet-health"],
     "defender-asr": ["51-windows-server-baseline-drift", "52-endpoint-security-coverage"], "intune-epm": ["52-endpoint-security-coverage"],
     "active-directory": ["19-ad-infra-health-check", "sysadmindesksbyigg", "48-new-starter-day-one-readiness"], "android": ["02-intune-compliance-report", "48-new-starter-day-one-readiness"], "bitlocker": ["02-intune-compliance-report", "52-endpoint-security-coverage"],
     "ios": ["21-apple-fleet-audit"], "jira": ["30-jira-confluence-admin-kit", "04-itsm-kpi-dashboard", "40-change-calendar-risk-review", "46-problem-management-review", "49-it-project-portfolio-health"], "m365": ["27-m365-tenant-governance-review", "44-m365-copilot-readiness", "48-new-starter-day-one-readiness", "50-saas-licence-spend-review"],
@@ -447,7 +448,7 @@ RELATED = {
     "router-4g": ["42-retail-store-it-health"],
     "cisco-wap": ["45-network-config-compliance", "34-venue-service-readiness"], "cacti": ["08-edge-health-slo-monitor"], "pfsense": ["45-network-config-compliance", "26-ot-segmentation-lab"], "opnsense": ["26-ot-segmentation-lab", "39-vulnerability-remediation-sla"], "nagios": ["08-edge-health-slo-monitor", "36-major-incident-command-kit"], "squid": ["25-security-controls-evidence"], "freeradius": ["37-iam-access-review", "45-network-config-compliance"], "asterisk": ["36-major-incident-command-kit"], "splunk": ["25-security-controls-evidence", "39-vulnerability-remediation-sla"], "cripto": ["25-security-controls-evidence"],
     "cisco-sede": ["45-network-config-compliance"], "cisco-basico": ["45-network-config-compliance"], "switch-hp": ["45-network-config-compliance"],
-    "impresoras-tienda": ["42-retail-store-it-health"],
+    "impresoras-tienda": ["42-retail-store-it-health", "55-printer-fleet-health"],
     "anyconnect-retail": ["42-retail-store-it-health", "46-problem-management-review"],
     "as400": ["42-retail-store-it-health"],
     "lan-wan-wifi": ["42-retail-store-it-health"],
@@ -486,6 +487,7 @@ def related_for_guide(topic, slug=None):
     return related_html(items)
 # posts that link to each other in "Related" (shown before the guides)
 POST_RELATED = {
+    "55-printer-fleet-health": ["42-retail-store-it-health", "38-it-asset-lifecycle-planner", "47-multi-site-it-scorecard"],
     "54-it-business-case-builder": ["49-it-project-portfolio-health", "50-saas-licence-spend-review", "23-it-vendor-contract-tracker"],
     "53-dns-dhcp-ipam-review": ["19-ad-infra-health-check", "45-network-config-compliance"],
     "52-endpoint-security-coverage": ["02-intune-compliance-report", "51-windows-server-baseline-drift"],
@@ -537,7 +539,7 @@ POST_RELATED = {
     "43-azure-cost-rightsizing": ["01-finops-cloud-cost-dashboard", "23-it-vendor-contract-tracker", "50-saas-licence-spend-review"],
     "19-ad-infra-health-check": ["20-entra-sso-app-audit", "03-entra-id-hygiene-audit", "51-windows-server-baseline-drift", "53-dns-dhcp-ipam-review"],
     "41-windows-update-ring-tracker": ["18-mecm-intune-comanagement-tracker", "02-intune-compliance-report"],
-    "42-retail-store-it-health": ["31-dealer-systems-health", "34-venue-service-readiness"],
+    "42-retail-store-it-health": ["31-dealer-systems-health", "34-venue-service-readiness", "55-printer-fleet-health"],
     "40-change-calendar-risk-review": ["36-major-incident-command-kit", "04-itsm-kpi-dashboard", "49-it-project-portfolio-health"],
     "39-vulnerability-remediation-sla": ["25-security-controls-evidence", "37-iam-access-review", "51-windows-server-baseline-drift"],
     "22-dex-experience-score": ["21-apple-fleet-audit", "28-euc-provider-service-review"],
