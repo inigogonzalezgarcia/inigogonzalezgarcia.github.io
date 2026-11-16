@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Revisión de impresoras: colas, tóner y coste · Iñigo González</title>
+<meta name="description" content="Revisión mensual de impresoras: equipos caídos, colas atascadas, tóner a pedir, uso y coste por sede, impresión segura, contraseñas y SLA del proveedor.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/blog/55-printer-fleet-health.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/55-printer-fleet-health.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/55-printer-fleet-health.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/55-printer-fleet-health.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revisión de impresoras: colas, tóner y coste · Iñigo González">
+<meta property="og:description" content="Revisión mensual de impresoras: equipos caídos, colas atascadas, tóner a pedir, uso y coste por sede, impresión segura, contraseñas y SLA del proveedor.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/blog/55-printer-fleet-health.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/55-printer-fleet-health.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Revisión de impresoras: colas, tóner y coste · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Cuatro tickets de «impresora sin conexión» y una cola con una dirección antigua: la revisión de la flota de impresoras","alternativeHeadline":"Four 'printer offline' tickets and a queue on an old address: the printer fleet review","description":"A partir del registro de impresoras, las colas de los servidores de impresión, lo que reportan los propios equipos, los consumibles, los contadores de páginas, los contratos y los tickets: qué impresoras están caídas y por qué, qué colas están atascadas o imprimen a una dirección que la impresora ya no tiene, qué pedir antes de que se acabe, qué impresoras apenas imprimen al lado de una multifunción con capacidad de sobra, dónde esperan documentos confidenciales en una bandeja abierta, qué equipos siguen con la contraseña de fábrica, qué renting vence pronto y cuándo llegó tarde el proveedor, con una decisión para cada elección y un dosier de una página para la revisión mensual.","datePublished":"2026-11-16","dateModified":"2026-11-16","inLanguage":"es","image":"https://inigogonzalezgarcia.github.io/assets/og/55-printer-fleet-health.png","url":"https://inigogonzalezgarcia.github.io/es/blog/55-printer-fleet-health.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/blog/55-printer-fleet-health.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/es/blog/#blog"},"articleSection":"Herramientas de IT Ops"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/es/blog/"},{"@type":"ListItem","position":3,"name":"Cuatro tickets de «impresora sin conexión» y una cola con una dirección antigua: la revisión de la flota de impresoras","item":"https://inigogonzalezgarcia.github.io/es/blog/55-printer-fleet-health.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span></a><a href="../guias.html"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../blog/55-printer-fleet-health.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 55</p>
+    <h1><span class="es">Cuatro tickets de «impresora sin conexión» y una cola con una dirección antigua: la revisión de la flota de impresoras</span></h1>
+    <p class="lede"><span class="es">A partir del registro de impresoras, las colas de los servidores de impresión, lo que reportan los propios equipos, los consumibles, los contadores de páginas, los contratos y los tickets: qué impresoras están caídas y por qué, qué colas están atascadas o imprimen a una dirección que la impresora ya no tiene, qué pedir antes de que se acabe, qué impresoras apenas imprimen al lado de una multifunción con capacidad de sobra, dónde esperan documentos confidenciales en una bandeja abierta, qué equipos siguen con la contraseña de fábrica, qué renting vence pronto y cuándo llegó tarde el proveedor, con una decisión para cada elección y un dosier de una página para la revisión mensual.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span> · <span class="es">16 nov 2026</span> · <span class="es">5 min</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<h2>El problema</h2>
+<p>Las impresoras son el equipo más visible de una oficina o una tienda y el menos cuidado. Una multifunción de tienda coge una dirección nueva por DHCP tras un corte de luz, su cola sigue imprimiendo a la antigua y la tienda abre cuatro tickets de «impresora sin conexión» en tres semanas que se cierran reiniciando la cola. La cola de albaranes del almacén se para detrás de un trabajo y nadie se entera hasta que los camiones están esperando. El tóner amarillo se acaba un viernes porque nadie miró el nivel el lunes. RR. HH. imprime las nóminas en una bandeja del pasillo. Cinco impresoras de sobremesa compradas hace años imprimen cuarenta páginas al mes cada una al lado de una multifunción usada a un cuarto de su capacidad, el servidor de impresión antiguo sigue compartiendo las impresoras de media planta, un renting se renueva solo porque pasó la fecha de preaviso y el proveedor tarda un día en atender una llamada de ocho horas sin que nadie reclame el abono. Cada consola enseña su parte. La revisión de tiendas que publiqué antes en la serie mira las tiendas en conjunto; esta mira las impresoras en todas partes.</p>
+<h2>Qué he construido</h2>
+<ul><li>Flota y colas: impresoras caídas, colas atascadas y en pausa, colas que imprimen a una dirección que la impresora ya no tiene, la misma impresora compartida desde un servidor de impresión antiguo y uno nuevo, y colas o equipos que nadie registró.</li><li>Consumibles: lo que está vacío o se acabará antes de la próxima entrega al ritmo de los últimos 30 días, con la fecha para pedirlo.</li><li>Uso y coste: páginas frente a lo que aguanta cada tipo, impresoras con poco uso al lado de una multifunción con capacidad de sobra, equipos sobrecargados, porcentaje de color y el coste mensual por sede y departamento.</li><li>Seguridad: contraseñas de administrador de fábrica, zonas confidenciales sin impresión segura, Telnet, FTP y HTTP, SNMP v1/v2c, firmware y drivers por debajo de las versiones aprobadas.</li><li>Ciclo de vida y servicio: antigüedad, renting con la fecha de preaviso, tickets repetidos en una impresora y llamadas que el proveedor atendió más tarde de lo que dice el contrato, con los abonos que corresponden.</li><li><code>report.html</code>, <code>review-pack.md</code> para la revisión mensual, CSV por impresora, consumible, cola, uso, candidata a retirar, llamada al proveedor, hallazgo y acción, y una exportación en PowerShell de solo lectura de las colas de los servidores de impresión.</li></ul>
+<h2>Cómo está hecho</h2>
+<p>Python solo con la biblioteca estándar. Cada cola se cruza con el registro por nombre, recurso compartido o dirección, y se compara con la dirección que el equipo reporta ahora, así que una impresora que se ha movido aparece como la causa y no como un ticket más de «sin conexión»; cuando esa impresora tiene tickets repetidos, el hallazgo lo dice. Los días que le quedan a cada consumible salen del nivel de hace 30 días y el de hoy, y la fecha de pedido descuenta el plazo de entrega. Una impresora con poco uso solo es candidata a retirar si una multifunción de la misma planta tiene sitio para sus páginas, y el ahorro cuenta el alquiler, los consumibles y las sustituciones que se evitan en los equipos que ya pasan de su antigüedad. Un renting se marca en rojo cuando la fecha de preaviso cae en las próximas dos semanas, porque después ya no hay elección. Cada hallazgo tiene gravedad, responsable y fecha, y las elecciones (impresión segura, qué impresoras retirar, los renting, el servidor de impresión antiguo, blanco y negro por defecto) se convierten en decisiones. La exportación solo lee, con Get-Printer, Get-PrinterPort, Get-PrinterDriver y Get-PrintJob. La demo es una cadena inventada de artículos para el hogar con una sede central de tres plantas, un centro de distribución y ocho tiendas, 37 impresoras y 41 colas en dos servidores de impresión, revisada el lunes 16 de noviembre con los problemas colocados a propósito: rojo, 34 de 37 impresoras funcionando, una multifunción de tienda con una dirección antigua detrás de cuatro tickets de sin conexión, una cola del almacén atascada con 37 trabajos, tres consumibles vacíos, RR. HH. y Legal sin impresión segura, un renting cuyo preaviso vence este sábado y cinco decisiones. 14 tests, un runbook para el ciclo mensual y para cambiar colas, firmware y servidores de impresión sin sorpresas, y un flujo de GitHub Actions que ejecuta los tests en Python 3.10 y 3.12.</p>
+<h2>Qué he aprendido</h2>
+<p>De dar soporte a las impresoras de tiendas y participar en aperturas, llevar la IT de una sede y dar soporte a usuarios de varias oficinas, gestionar proveedores de hardware, contratos de servicio y sus SLA, automatizar con PowerShell y ser responsable de los procesos de incidencias y problemas. Las lecciones detrás de la herramienta son que los tickets repetidos en un mismo equipo son un problema que resolver, no tickets que cerrar; que la dirección de una impresora va en una reserva, no en la suerte; que los consumibles son una previsión, no una sorpresa; que la impresora más barata es la que se retira; que los documentos confidenciales deben esperar a su dueño en el equipo, no en la bandeja; que una contraseña de fábrica en una multifunción abre su libreta de direcciones y sus escaneos a cualquiera; y que un renting se decide en la fecha de preaviso, no en la de fin.</p>
+<h2>Próximos pasos</h2>
+<ul><li>Ejecutarla el primer día laborable de cada mes y guardar el fichero de impresoras de cada mes para ver la tendencia de páginas y coste por sede.</li><li>Leer los datos de los equipos directamente del portal de impresión gestionada o de un sondeo SNMP en lugar de exportaciones CSV.</li><li>Enviar los pedidos de consumibles al proveedor a partir de la previsión y abrir las acciones en rojo como tickets.</li></ul>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span></p>
+      <p class="repo-name">55-printer-fleet-health</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/55-printer-fleet-health" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="es">Compartir</span></p>
+        <div class="share-row es" lang="es"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F55-printer-fleet-health.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F55-printer-fleet-health.html&amp;text=Cuatro%20tickets%20de%20%C2%ABimpresora%20sin%20conexi%C3%B3n%C2%BB%20y%20una%20cola%20con%20una%20direcci%C3%B3n%20antigua%3A%20la%20revisi%C3%B3n%20de%20la%20flota%20de%20impresoras%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">X</a><a class="share-btn" href="https://wa.me/?text=Cuatro%20tickets%20de%20%C2%ABimpresora%20sin%20conexi%C3%B3n%C2%BB%20y%20una%20cola%20con%20una%20direcci%C3%B3n%20antigua%3A%20la%20revisi%C3%B3n%20de%20la%20flota%20de%20impresoras%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F55-printer-fleet-health.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=Cuatro%20tickets%20de%20%C2%ABimpresora%20sin%20conexi%C3%B3n%C2%BB%20y%20una%20cola%20con%20una%20direcci%C3%B3n%20antigua%3A%20la%20revisi%C3%B3n%20de%20la%20flota%20de%20impresoras%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F55-printer-fleet-health.html" aria-label="Compartir en Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/es/blog/55-printer-fleet-health.html" data-copied="Enlace copiado">Copiar enlace</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/es/blog/55-printer-fleet-health.html" data-title="Cuatro tickets de «impresora sin conexión» y una cola con una dirección antigua: la revisión de la flota de impresoras" hidden>Más…</button></div>
+        
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="42-retail-store-it-health.html"><span class="label muted"><span class="es">Blog · 42</span></span><span class="related-t"><span class="es">Una tienda que salta al 4G nueve veces en una semana y un córner sin línea: el IT de una cadena de tiendas</span></span></a><a class="related-link" href="38-it-asset-lifecycle-planner.html"><span class="label muted"><span class="es">Blog · 38</span></span><span class="related-t"><span class="es">Nueve portátiles sin registrar y medio presupuesto en un trimestre: inventario y plan de renovación de la oficina</span></span></a><a class="related-link" href="47-multi-site-it-scorecard.html"><span class="label muted"><span class="es">Blog · 47</span></span><span class="related-t"><span class="es">Un circuito de respaldo caído dos veces y una oficina sin técnico: el cuadro de mando IT multisede</span></span></a><a class="related-link" href="../guias/impresoras-instalar-impresora-de-red-y-cola-atascada.html"><span class="label muted"><span class="es">Guía · Nivel 1</span></span><span class="related-t"><span class="es">Impresoras: instalar una impresora de red y desatascar la cola</span></span></a><a class="related-link" href="../guias/impresoras-de-tienda-etiquetas-tickets-y-multifuncion-sin-it-en-sitio.html"><span class="label muted"><span class="es">Guía · Sector 2</span></span><span class="related-t"><span class="es">Impresoras de tienda: instalación y mantenimiento de etiquetas, tickets y multifunción sin IT en sitio</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="54-it-business-case-builder.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Un ahorro contado dos veces y beneficios antes de la puesta en marcha: el constructor de business cases de IT</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>
