@@ -181,7 +181,7 @@ Running a site means keeping a lot of small things in mind at once: which machin
 
 The console covers a dashboard, assets (offline, non-compliant, duplicate serials, remote queries), warranties and software. It adds people, floor maps, meeting-room checklists, joiners and leavers, visitors and shifts, plus service health, role-based admin and an audit log.
 
-## A 6-character code and an authenticator app
+## Flask for the app, PowerShell for remote queries and an authenticator app to sign in
 
 Access is invite-only. The first admin is created with `bootstrap-admin`, accounts are activated with a 6-character code sent by email, and every sign-in after that needs an authenticator app (TOTP, a one-time code that changes over time). It runs on Flask and SQLite, with PowerShell over CIM/WinRM, Windows remote management, for remote queries. Sixteen tests cover it.
 
@@ -199,7 +199,7 @@ Llevar una sede es tener muchas cosas pequeñas en la cabeza a la vez: qué equi
 
 La consola incluye panel, activos (offline, no conformes, seriales duplicados, consultas remotas), garantías y software. Suma personas, planos de planta, checklists de salas, altas y bajas, visitas y turnos, además de salud de servicios, administración por roles y log de auditoría.
 
-## Un código de 6 caracteres y una app autenticadora
+## Flask para la app, PowerShell para las consultas remotas y una app autenticadora para entrar
 
 El acceso es solo por invitación. El primer administrador se crea con `bootstrap-admin`, las cuentas se activan con un código de 6 caracteres por email y desde entonces cada inicio de sesión pide app autenticadora (TOTP, un código de un solo uso que cambia con el tiempo). Funciona con Flask y SQLite, con PowerShell por CIM/WinRM, la administración remota de Windows, para las consultas remotas. Dieciséis tests la cubren.
 

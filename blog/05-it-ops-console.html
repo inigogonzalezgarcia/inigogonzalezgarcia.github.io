@@ -86,7 +86,7 @@
 <p>Running a site means keeping a lot of small things in mind at once: which machines are offline, which warranties expire, which rooms were checked this morning, who starts on Monday. The IT operations console published with this post puts all of it in one place. It was built from scratch and anonymised.</p>
 <h2>Assets, rooms, people and shifts in one app</h2>
 <p>The console covers a dashboard, assets (offline, non-compliant, duplicate serials, remote queries), warranties and software. It adds people, floor maps, meeting-room checklists, joiners and leavers, visitors and shifts, plus service health, role-based admin and an audit log.</p>
-<h2>A 6-character code and an authenticator app</h2>
+<h2>Flask for the app, PowerShell for remote queries and an authenticator app to sign in</h2>
 <p>Access is invite-only. The first admin is created with <code>bootstrap-admin</code>, accounts are activated with a 6-character code sent by email, and every sign-in after that needs an authenticator app (TOTP, a one-time code that changes over time). It runs on Flask and SQLite, with PowerShell over CIM/WinRM, Windows remote management, for remote queries. Sixteen tests cover it.</p>
 <h2>How to use it with real data</h2>
 <p>A site needs to connect LDAP for sign-in and SMTP for activation emails, enable WinRM for live device queries, load its asset inventory and floor plans, and adapt the room checklists.</p>

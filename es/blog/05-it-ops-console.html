@@ -85,7 +85,7 @@
 <p>Llevar una sede es tener muchas cosas pequeñas en la cabeza a la vez: qué equipos están offline, qué garantías caducan, qué salas se han revisado esta mañana, quién empieza el lunes. La consola de operaciones IT que acompaña a este post lo reúne todo en un sitio. Está hecha desde cero y anonimizada.</p>
 <h2>Activos, salas, personas y turnos en una sola app</h2>
 <p>La consola incluye panel, activos (offline, no conformes, seriales duplicados, consultas remotas), garantías y software. Suma personas, planos de planta, checklists de salas, altas y bajas, visitas y turnos, además de salud de servicios, administración por roles y log de auditoría.</p>
-<h2>Un código de 6 caracteres y una app autenticadora</h2>
+<h2>Flask para la app, PowerShell para las consultas remotas y una app autenticadora para entrar</h2>
 <p>El acceso es solo por invitación. El primer administrador se crea con <code>bootstrap-admin</code>, las cuentas se activan con un código de 6 caracteres por email y desde entonces cada inicio de sesión pide app autenticadora (TOTP, un código de un solo uso que cambia con el tiempo). Funciona con Flask y SQLite, con PowerShell por CIM/WinRM, la administración remota de Windows, para las consultas remotas. Dieciséis tests la cubren.</p>
 <h2>Cómo usarlo con datos reales</h2>
 <p>Una sede necesita conectar LDAP para el inicio de sesión y SMTP para los emails de activación, activar WinRM para las consultas en vivo, cargar su inventario de activos y sus planos, y adaptar los checklists de salas.</p>
