@@ -2974,4 +2974,61 @@ El repositorio incluye un script de PowerShell que solo lee las colas de los ser
 ## De dónde sale
 
 La herramienta nace de dar soporte a las impresoras de tiendas y participar en sus aperturas, de llevar la IT de una sede con usuarios en varias oficinas, y de gestionar proveedores de hardware, sus contratos y sus SLA."""),
+dict(n="56", repo="56-cmdb-data-quality-review", date="2026-11-17", cat="tools",
+ title_en="A server switched off in the summer was still live in the CMDB, and a reporting database still ran on it",
+ title_es="Un servidor apagado en verano seguía activo en la CMDB, y una base de datos de informes seguía colgando de él",
+ seo_title_en="CMDB data quality review: stale CIs, owners · Iñigo González",
+ seo_title_es="Calidad de la CMDB: CI obsoletos y dueños · Iñigo González",
+ seo_desc="Monthly CMDB review: stale CIs, devices with no CI, records that disagree with discovery, owners who left, broken relationships and incidents with no CI.",
+ seo_desc_es="Revisión mensual de la CMDB: CI que nadie ve, equipos sin CI, fichas que no cuadran con el descubrimiento, dueños que se fueron y relaciones rotas.",
+ dek_en="The monthly review, published with fictional data from a logistics company with 115 records, cross-checks the CMDB with Active Directory, Intune, vCenter, a network scan, the directory and the month's tickets, and gives every CI, class and support group a data quality score.",
+ dek_es="La revisión mensual, publicada con datos ficticios de una empresa de logística con 115 fichas, cruza la CMDB con Active Directory, Intune, vCenter, un escaneo de red, el directorio y los tickets del mes, y da una nota de calidad a cada CI, clase y grupo de soporte.",
+ en="""
+A critical legacy SQL server that no discovery source had seen since early September was still operational in the CMDB, and the reporting database of the finance team still ran on it. That is what the CMDB data quality review published with this post finds. It is an open-source project that runs on sample data from a fictional logistics company with a head office and data room in Madrid, a warehouse in Zaragoza and a sales office in Valencia.
+
+A CMDB, the configuration management database that records every server, application and device and how they depend on each other, is only useful if people trust it. The review compares each live record with what Active Directory, Intune, vCenter and a network scan see. A server nobody has seen lately is flagged as stale; when no ticket, change or live system needs it either, it becomes a candidate to retire. The legacy SQL server is not one, because something still runs on it, so the finding is red and goes to its support group within two days.
+
+## Six devices with no record and a laptop retired in September
+
+The same cross-check finds six devices seen on the network in the last 45 days that have no record: a migration VM, a test server, a switch in Zaragoza and three laptops. A laptop retired in September is still checking in to Intune. Seven records disagree with discovery: three VMs that were re-addressed, three PCs upgraded to Windows 11 whose records still say Windows 10, and a laptop that moved site.
+
+Those three upgrades were done under a change, but the records were last updated in September. The review reads the month's changes and flags each one implemented after the record's last update, so the gap shows up in how changes are closed rather than in the people who did the work.
+
+## Owners who left and a service with nothing mapped
+
+Five records belong to two people who left, one of them the order management API, which makes the finding red. The finance reports application runs on a server retired in June, and a change was implemented on that server last week. The customer returns portal, a critical business service, has no record mapped to it, so an outage could not be traced to it. In Field Services, 31% of the month's incidents were logged with no configuration item.
+
+Every record gets a data quality score: the share of the fields its class needs, whether discovery sees it and agrees with it, and, for applications and databases, whether they have what they run on. The demo scores 94.7%, 1.5 points down on last month, with 7 red and 32 amber findings. It ends with five decisions: retire six records, register or remove six devices, new owners for five records, map the customer returns portal, and make the configuration item mandatory on Field Services incidents.
+
+## How to use it with real data
+
+The repository includes a PowerShell script that only reads the computers Active Directory knows about; the CMDB export, its relationships and the other discovery sources come from the ITSM tool, Intune, vCenter or a network scan in the same columns. It runs on Python with no external dependencies and produces a web report, a one-page pack for the monthly review and CSV files with every record, finding and action. The demo data is fictional: names, serials, addresses and tickets.
+
+## Where it comes from
+
+The tool comes from owning the incident, change and problem processes with their dashboards, running CMDB and configuration management and answering audits, working with ITSM tools such as EasyVista, GLPI and HaloITSM, and keeping the comms rooms inventory in Device42.""",
+ es="""
+Un servidor SQL heredado y crítico que ningún sistema de descubrimiento veía desde principios de septiembre seguía activo en la CMDB, y la base de datos de informes de Finanzas seguía funcionando sobre él. Así lo detecta la revisión de calidad de la CMDB que acompaña a este post, un proyecto de código abierto que se ejecuta con datos de ejemplo de una empresa ficticia de logística, con sede y sala técnica en Madrid, un almacén en Zaragoza y una oficina comercial en Valencia.
+
+Una CMDB, la base de datos de configuración que registra cada servidor, aplicación y equipo y de qué depende cada uno, solo sirve si la gente se fía de ella. La revisión compara cada ficha activa con lo que ven Active Directory, Intune, vCenter y un escaneo de red. Un servidor que nadie ha visto últimamente se marca como obsoleto; si además ningún ticket, cambio ni sistema activo lo necesita, pasa a ser candidato a retirar. El SQL heredado no lo es, porque algo sigue funcionando sobre él, así que el hallazgo es rojo y va a su grupo de soporte con dos días de plazo.
+
+## Seis equipos sin ficha y un portátil retirado en septiembre
+
+El mismo cruce encuentra seis equipos vistos en la red en los últimos 45 días que no tienen ficha: una máquina virtual de una migración, un servidor de pruebas, un switch en Zaragoza y tres portátiles. Un portátil retirado en septiembre sigue conectándose a Intune. Siete fichas no cuadran con el descubrimiento: tres máquinas virtuales a las que se cambió la dirección, tres PC actualizados a Windows 11 cuyas fichas siguen diciendo Windows 10 y un portátil que cambió de sede.
+
+Esas tres actualizaciones se hicieron con un cambio, pero las fichas se tocaron por última vez en septiembre. La revisión lee los cambios del mes y marca cada uno que se implantó después de la última actualización de la ficha, de modo que el hueco aparece en cómo se cierran los cambios y no en las personas que hicieron el trabajo.
+
+## Dueños que se fueron y un servicio sin nada asociado
+
+Cinco fichas pertenecen a dos personas que ya no están, una de ellas la API de gestión de pedidos, lo que convierte el hallazgo en rojo. La aplicación de informes de Finanzas funciona sobre un servidor retirado en junio, y la semana pasada se implantó un cambio en ese servidor. El portal de devoluciones de clientes, un servicio de negocio crítico, no tiene ninguna ficha asociada, así que una caída no se podría relacionar con él. En Field Services, el 31% de las incidencias del mes se registraron sin elemento de configuración.
+
+Cada ficha recibe una nota de calidad: la parte de los campos que necesita su clase, si el descubrimiento la ve y coincide con ella y, en aplicaciones y bases de datos, si tienen sobre qué funcionar. La demo saca un 94,7%, 1,5 puntos menos que el mes anterior, con 7 hallazgos rojos y 32 ámbar. Termina con cinco decisiones: retirar seis fichas, registrar o quitar seis equipos, nuevos dueños para cinco fichas, asociar el portal de devoluciones y hacer obligatorio el elemento de configuración en las incidencias de Field Services.
+
+## Cómo usarlo con datos reales
+
+El repositorio incluye un script de PowerShell que solo lee los equipos que conoce Active Directory; la exportación de la CMDB, sus relaciones y el resto de fuentes de descubrimiento salen de la herramienta ITSM, Intune, vCenter o un escaneo de red con las mismas columnas. Funciona con Python y sin dependencias externas, y genera un informe web, un dosier de una página para la revisión mensual y ficheros CSV con cada ficha, hallazgo y acción. Los datos de la demo son ficticios: nombres, números de serie, direcciones y tickets.
+
+## De dónde sale
+
+La herramienta nace de ser responsable de los procesos de incidencias, cambios y problemas con sus cuadros de mando, de llevar la CMDB y la gestión de la configuración y responder a auditorías, de trabajar con herramientas ITSM como EasyVista, GLPI y HaloITSM, y de llevar en Device42 el inventario de las salas de comunicaciones."""),
 ]

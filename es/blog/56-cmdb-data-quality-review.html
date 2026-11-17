@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Calidad de la CMDB: CI obsoletos y dueños · Iñigo González</title>
+<meta name="description" content="Revisión mensual de la CMDB: CI que nadie ve, equipos sin CI, fichas que no cuadran con el descubrimiento, dueños que se fueron y relaciones rotas.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/blog/56-cmdb-data-quality-review.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/56-cmdb-data-quality-review.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/56-cmdb-data-quality-review.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/56-cmdb-data-quality-review.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Calidad de la CMDB: CI obsoletos y dueños · Iñigo González">
+<meta property="og:description" content="Revisión mensual de la CMDB: CI que nadie ve, equipos sin CI, fichas que no cuadran con el descubrimiento, dueños que se fueron y relaciones rotas.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/blog/56-cmdb-data-quality-review.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/56-cmdb-data-quality-review.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Calidad de la CMDB: CI obsoletos y dueños · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Un servidor apagado en verano seguía activo en la CMDB, y una base de datos de informes seguía colgando de él","alternativeHeadline":"A server switched off in the summer was still live in the CMDB, and a reporting database still ran on it","description":"La revisión mensual, publicada con datos ficticios de una empresa de logística con 115 fichas, cruza la CMDB con Active Directory, Intune, vCenter, un escaneo de red, el directorio y los tickets del mes, y da una nota de calidad a cada CI, clase y grupo de soporte.","datePublished":"2026-11-17","dateModified":"2026-11-17","inLanguage":"es","image":"https://inigogonzalezgarcia.github.io/assets/og/56-cmdb-data-quality-review.png","url":"https://inigogonzalezgarcia.github.io/es/blog/56-cmdb-data-quality-review.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/blog/56-cmdb-data-quality-review.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/es/blog/#blog"},"articleSection":"Herramientas de IT Ops"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/es/blog/"},{"@type":"ListItem","position":3,"name":"Un servidor apagado en verano seguía activo en la CMDB, y una base de datos de informes seguía colgando de él","item":"https://inigogonzalezgarcia.github.io/es/blog/56-cmdb-data-quality-review.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span></a><a href="../guias.html"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../blog/56-cmdb-data-quality-review.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 56</p>
+    <h1><span class="es">Un servidor apagado en verano seguía activo en la CMDB, y una base de datos de informes seguía colgando de él</span></h1>
+    <p class="lede"><span class="es">La revisión mensual, publicada con datos ficticios de una empresa de logística con 115 fichas, cruza la CMDB con Active Directory, Intune, vCenter, un escaneo de red, el directorio y los tickets del mes, y da una nota de calidad a cada CI, clase y grupo de soporte.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span> · <span class="es">17 nov 2026</span> · <span class="es">3 min</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <div class="es" lang="es">
+<p>Un servidor SQL heredado y crítico que ningún sistema de descubrimiento veía desde principios de septiembre seguía activo en la CMDB, y la base de datos de informes de Finanzas seguía funcionando sobre él. Así lo detecta la revisión de calidad de la CMDB que acompaña a este post, un proyecto de código abierto que se ejecuta con datos de ejemplo de una empresa ficticia de logística, con sede y sala técnica en Madrid, un almacén en Zaragoza y una oficina comercial en Valencia.</p>
+<p>Una CMDB, la base de datos de configuración que registra cada servidor, aplicación y equipo y de qué depende cada uno, solo sirve si la gente se fía de ella. La revisión compara cada ficha activa con lo que ven Active Directory, Intune, vCenter y un escaneo de red. Un servidor que nadie ha visto últimamente se marca como obsoleto; si además ningún ticket, cambio ni sistema activo lo necesita, pasa a ser candidato a retirar. El SQL heredado no lo es, porque algo sigue funcionando sobre él, así que el hallazgo es rojo y va a su grupo de soporte con dos días de plazo.</p>
+<h2>Seis equipos sin ficha y un portátil retirado en septiembre</h2>
+<p>El mismo cruce encuentra seis equipos vistos en la red en los últimos 45 días que no tienen ficha: una máquina virtual de una migración, un servidor de pruebas, un switch en Zaragoza y tres portátiles. Un portátil retirado en septiembre sigue conectándose a Intune. Siete fichas no cuadran con el descubrimiento: tres máquinas virtuales a las que se cambió la dirección, tres PC actualizados a Windows 11 cuyas fichas siguen diciendo Windows 10 y un portátil que cambió de sede.</p>
+<p>Esas tres actualizaciones se hicieron con un cambio, pero las fichas se tocaron por última vez en septiembre. La revisión lee los cambios del mes y marca cada uno que se implantó después de la última actualización de la ficha, de modo que el hueco aparece en cómo se cierran los cambios y no en las personas que hicieron el trabajo.</p>
+<h2>Dueños que se fueron y un servicio sin nada asociado</h2>
+<p>Cinco fichas pertenecen a dos personas que ya no están, una de ellas la API de gestión de pedidos, lo que convierte el hallazgo en rojo. La aplicación de informes de Finanzas funciona sobre un servidor retirado en junio, y la semana pasada se implantó un cambio en ese servidor. El portal de devoluciones de clientes, un servicio de negocio crítico, no tiene ninguna ficha asociada, así que una caída no se podría relacionar con él. En Field Services, el 31% de las incidencias del mes se registraron sin elemento de configuración.</p>
+<p>Cada ficha recibe una nota de calidad: la parte de los campos que necesita su clase, si el descubrimiento la ve y coincide con ella y, en aplicaciones y bases de datos, si tienen sobre qué funcionar. La demo saca un 94,7%, 1,5 puntos menos que el mes anterior, con 7 hallazgos rojos y 32 ámbar. Termina con cinco decisiones: retirar seis fichas, registrar o quitar seis equipos, nuevos dueños para cinco fichas, asociar el portal de devoluciones y hacer obligatorio el elemento de configuración en las incidencias de Field Services.</p>
+<h2>Cómo usarlo con datos reales</h2>
+<p>El repositorio incluye un script de PowerShell que solo lee los equipos que conoce Active Directory; la exportación de la CMDB, sus relaciones y el resto de fuentes de descubrimiento salen de la herramienta ITSM, Intune, vCenter o un escaneo de red con las mismas columnas. Funciona con Python y sin dependencias externas, y genera un informe web, un dosier de una página para la revisión mensual y ficheros CSV con cada ficha, hallazgo y acción. Los datos de la demo son ficticios: nombres, números de serie, direcciones y tickets.</p>
+<h2>De dónde sale</h2>
+<p>La herramienta nace de ser responsable de los procesos de incidencias, cambios y problemas con sus cuadros de mando, de llevar la CMDB y la gestión de la configuración y responder a auditorías, de trabajar con herramientas ITSM como EasyVista, GLPI y HaloITSM, y de llevar en Device42 el inventario de las salas de comunicaciones.</p>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span></p>
+      <p class="repo-name">56-cmdb-data-quality-review</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/56-cmdb-data-quality-review" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="es">Compartir</span></p>
+        <div class="share-row es" lang="es"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F56-cmdb-data-quality-review.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F56-cmdb-data-quality-review.html&amp;text=Un%20servidor%20apagado%20en%20verano%20segu%C3%ADa%20activo%20en%20la%20CMDB%2C%20y%20una%20base%20de%20datos%20de%20informes%20segu%C3%ADa%20colgando%20de%20%C3%A9l%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">X</a><a class="share-btn" href="https://wa.me/?text=Un%20servidor%20apagado%20en%20verano%20segu%C3%ADa%20activo%20en%20la%20CMDB%2C%20y%20una%20base%20de%20datos%20de%20informes%20segu%C3%ADa%20colgando%20de%20%C3%A9l%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F56-cmdb-data-quality-review.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=Un%20servidor%20apagado%20en%20verano%20segu%C3%ADa%20activo%20en%20la%20CMDB%2C%20y%20una%20base%20de%20datos%20de%20informes%20segu%C3%ADa%20colgando%20de%20%C3%A9l%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F56-cmdb-data-quality-review.html" aria-label="Compartir en Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/es/blog/56-cmdb-data-quality-review.html" data-copied="Enlace copiado">Copiar enlace</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/es/blog/56-cmdb-data-quality-review.html" data-title="Un servidor apagado en verano seguía activo en la CMDB, y una base de datos de informes seguía colgando de él" hidden>Más…</button></div>
+        
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="38-it-asset-lifecycle-planner.html"><span class="label muted"><span class="es">Blog · 38</span></span><span class="related-t"><span class="es">Un inventario de oficina encuentra nueve portátiles sin registrar y medio presupuesto en un solo trimestre</span></span></a><a class="related-link" href="46-problem-management-review.html"><span class="label muted"><span class="es">Blog · 46</span></span><span class="related-t"><span class="es">Cuarenta y seis incidencias de certificado de la VPN se cerraron una a una desde agosto sin abrir ningún problema</span></span></a><a class="related-link" href="04-itsm-kpi-dashboard.html"><span class="label muted"><span class="es">Blog · 04</span></span><span class="related-t"><span class="es">Un informe de service desk saca el SLA por prioridad y los tickets abiertos ya fuera de SLA de una exportación CSV</span></span></a><a class="related-link" href="../guias/glpi-inventario-con-glpi-agent-tickets-sla-y-un-equipo-que-deja-de-reportar.html"><span class="label muted"><span class="es">Guía · Nivel 2</span></span><span class="related-t"><span class="es">GLPI: inventario con GLPI Agent, tickets con SLA y un equipo que deja de reportar</span></span></a><a class="related-link" href="../guias/cmdb-clases-de-ci-relaciones-reconciliacion-calidad-del-dato-y-auditorias.html"><span class="label muted"><span class="es">Guía · Nivel 3</span></span><span class="related-t"><span class="es">CMDB: clases de CI, relaciones, fuentes y reconciliación, calidad del dato y una CMDB que aguanta una auditoría</span></span></a><a class="related-link" href="../guias/device42-inventario-de-racks-y-equipos-de-la-sala-de-comunicaciones.html"><span class="label muted"><span class="es">Guía · Sector 5</span></span><span class="related-t"><span class="es">Device42: el inventario de racks y equipos de la sala de comunicaciones de una sede con sala de trading</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="55-printer-fleet-health.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Una tienda abrió cuatro tickets de «impresora sin conexión» por una cola que imprimía a una dirección antigua</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>
