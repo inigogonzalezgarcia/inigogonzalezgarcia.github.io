@@ -3031,4 +3031,61 @@ El repositorio incluye un script de PowerShell que solo lee los equipos que cono
 ## De dónde sale
 
 La herramienta nace de ser responsable de los procesos de incidencias, cambios y problemas con sus cuadros de mando, de llevar la CMDB y la gestión de la configuración y responder a auditorías, de trabajar con herramientas ITSM como EasyVista, GLPI y HaloITSM, y de llevar en Device42 el inventario de las salas de comunicaciones."""),
+dict(n="57", repo="57-ai-use-case-register", date="2026-11-18", cat="tools",
+ title_en="A pilot scoring the emotions of contact-centre agents was running, and the company's AI policy does not allow it",
+ title_es="Un piloto que puntuaba las emociones de los agentes del contact center estaba en marcha, y la política de IA de la empresa no lo permite",
+ seo_title_en="AI use case register: shadow AI, risk tiers · Iñigo González",
+ seo_title_es="Registro de casos de uso de IA y riesgo · Iñigo González",
+ seo_desc="Monthly AI use case register review: shadow AI, risk tiers set by the AI policy, controls per tier, sensitive data, vendors and unused licences.",
+ seo_desc_es="Revisión mensual del registro de casos de uso de IA: IA sin registrar, nivel de riesgo según la política, controles, datos sensibles y licencias sin uso.",
+ dek_en="The monthly review, published with fictional data from an insurer with 24 AI use cases, cross-checks the register with what discovery finds in the tenant, the directory and the AI incidents, and checks each use case against the risk tier and the controls the company's AI policy asks for.",
+ dek_es="La revisión mensual, publicada con datos ficticios de una aseguradora con 24 casos de uso de IA, cruza el registro con lo que el descubrimiento encuentra en el tenant, el directorio y los incidentes de IA, y comprueba cada caso de uso contra el nivel de riesgo y los controles que pide la política de IA de la empresa.",
+ en="""
+A pilot that scores how stressed contact-centre agents sound in their call recordings had been running for five weeks, registered as limited risk. The company's AI policy lists emotion recognition at work among the practices it does not allow. That is what the AI use case register review published with this post finds. It is an open-source project that runs on sample data from a fictional insurer with its head office in Madrid and offices in Barcelona and Seville.
+
+The register is the list of every place the company uses AI: what it does, who owns it, which tool it runs on, which data goes into it and how risky it is. The review does not take the declared tier at face value. It works the tier out from the policy: areas the policy prohibits, areas it treats as high risk (hiring, staff evaluation, insurance pricing, claims decisions), use cases that customers talk to or that feed decisions about people, and everything else. The emotion scoring pilot ends up as the first decision of the month: stop it and record why.
+
+## A CV screening assistant registered as limited risk
+
+The same check finds two use cases declared lower than the policy makes them. A CV screening assistant that ranks applicants for contact-centre roles was registered as limited because the form asked who uses it, not what it decides; the policy makes hiring high risk. A health policy pricing pilot is in the same position. The CV assistant is already in production with no DPIA, risk assessment or test evidence, so the finding is red and the controls of the new tier get a date.
+
+Each tier has its controls: human oversight, a data protection impact assessment, a risk assessment, test evidence, logging, the vendor's data processing agreement, a notice for the people it talks to or decides about, and an owner with current AI training. The chatbot on the website has no notice that it is a bot, and a wrong answer it gave about dental cover has been open as an incident for four weeks.
+
+## Six AI tools nobody registered
+
+Discovery in the tenant finds six AI tools in use with no entry in the register: a claims FAQ agent built in Copilot Studio with 142 users, a note-taking app consented by 23 people that records calls with clients, a slides app, a chat app with personal data, a proposal agent and a translation app. The sales team's meeting notes run on a tool that is not approved for confidential data, and its vendor can train its models on the recordings.
+
+The review also looks at value: two pilots past 90 days with no decision, a use case in production with no business case, 41 unused seats of a writing tool and a report drafting assistant that saves a third of the hours it promised. Every use case gets a governance score. The demo scores 85.3%, 2.7 points up on last month, with 13 red and 27 amber findings, and ends with seven decisions for the AI governance committee.
+
+## How to use it with real data
+
+The repository includes a PowerShell script that only reads the enterprise apps in Entra ID that look like AI tools and how many users are assigned to each; the register, the Copilot Studio agents, cloud app discovery, the directory with the training dates and the incidents go in CSV files with the same columns. The tiers and controls are the organisation's own policy in a settings file, and the review does not decide whether a law applies. It runs on Python with no external dependencies and produces a web report, a one-page pack for the committee and CSV files with every use case, gap, review and action. The demo data is fictional: names, tools, vendors, figures and tickets.
+
+## Where it comes from
+
+The tool comes from deploying Microsoft 365 Copilot and AI tools for users and driving their adoption, administering Microsoft 365 agents and Copilot Studio, working with responsible AI and the EU AI Act alongside ISO 27001, GDPR and NIS2, Microsoft Purview, and writing business cases with measurable benefits.""",
+ es="""
+Un piloto que puntúa lo estresados que suenan los agentes del contact center en sus grabaciones llevaba cinco semanas en marcha, registrado como riesgo limitado. La política de IA de la empresa incluye el reconocimiento de emociones en el trabajo entre las prácticas que no permite. Así lo detecta la revisión del registro de casos de uso de IA que acompaña a este post, un proyecto de código abierto que se ejecuta con datos de ejemplo de una aseguradora ficticia con sede en Madrid y oficinas en Barcelona y Sevilla.
+
+El registro es la lista de todos los sitios donde la empresa usa IA: qué hace, quién es el responsable, en qué herramienta funciona, qué datos entran y cuánto riesgo tiene. La revisión no se queda con el nivel declarado. Lo calcula a partir de la política: ámbitos que la política prohíbe, ámbitos que trata como alto riesgo (selección de personal, evaluación de empleados, tarificación de seguros, decisiones sobre siniestros), casos de uso con los que hablan los clientes o que alimentan decisiones sobre personas, y todo lo demás. El piloto de emociones acaba siendo la primera decisión del mes: pararlo y dejar constancia del motivo.
+
+## Un asistente de cribado de CV registrado como riesgo limitado
+
+La misma comprobación encuentra dos casos de uso declarados por debajo de lo que dice la política. Un asistente que ordena las candidaturas para puestos del contact center se registró como limitado porque el formulario preguntaba quién lo usa, no qué decide; la política considera alto riesgo la selección de personal. Un piloto de tarificación de pólizas de salud está en la misma situación. El asistente de CV ya está en producción sin evaluación de impacto, análisis de riesgos ni pruebas documentadas, así que el hallazgo es rojo y los controles del nuevo nivel reciben una fecha.
+
+Cada nivel tiene sus controles: supervisión humana, evaluación de impacto en protección de datos, análisis de riesgos, pruebas documentadas, registro de actividad, el contrato de encargo de tratamiento con el proveedor, un aviso para las personas con las que habla o sobre las que decide y un responsable con la formación en IA al día. El chatbot de la web no avisa de que es un bot, y una respuesta equivocada que dio sobre la cobertura dental lleva cuatro semanas abierta como incidente.
+
+## Seis herramientas de IA que nadie registró
+
+El descubrimiento en el tenant encuentra seis herramientas de IA en uso sin entrada en el registro: un agente de preguntas sobre siniestros hecho en Copilot Studio con 142 usuarios, una aplicación de notas consentida por 23 personas que graba llamadas con clientes, una aplicación de presentaciones, un chat con datos personales, un agente de propuestas y una aplicación de traducción. Las notas de reuniones del equipo comercial funcionan en una herramienta que no está aprobada para datos confidenciales, y su proveedor puede entrenar sus modelos con las grabaciones.
+
+La revisión también mira el valor: dos pilotos con más de 90 días y sin decisión, un caso de uso en producción sin business case, 41 licencias sin usar de una herramienta de redacción y un asistente de informes que ahorra un tercio de las horas que prometía. Cada caso de uso recibe una nota de gobierno. La demo saca un 85,3%, 2,7 puntos más que el mes anterior, con 13 hallazgos rojos y 27 ámbar, y termina con siete decisiones para el comité de gobierno de la IA.
+
+## Cómo usarlo con datos reales
+
+El repositorio incluye un script de PowerShell que solo lee las aplicaciones empresariales de Entra ID que parecen herramientas de IA y cuántos usuarios tiene asignados cada una; el registro, los agentes de Copilot Studio, el descubrimiento de aplicaciones en la nube, el directorio con las fechas de formación y los incidentes van en ficheros CSV con las mismas columnas. Los niveles y los controles son la política de la propia organización en un fichero de configuración, y la revisión no decide si se aplica una ley. Funciona con Python y sin dependencias externas, y genera un informe web, un dosier de una página para el comité y ficheros CSV con cada caso de uso, control pendiente, revisión y acción. Los datos de la demo son ficticios: nombres, herramientas, proveedores, cifras y tickets.
+
+## De dónde sale
+
+La herramienta nace de desplegar Microsoft 365 Copilot y herramientas de IA para los usuarios e impulsar su adopción, de administrar agentes de Microsoft 365 y Copilot Studio, de trabajar con IA responsable y el reglamento europeo de IA junto con ISO 27001, RGPD y NIS2, de Microsoft Purview y de preparar business cases con beneficios medibles."""),
 ]
