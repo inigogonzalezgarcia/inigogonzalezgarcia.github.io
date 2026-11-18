@@ -81,6 +81,7 @@
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose">
+      
       <div class="es" lang="es">
 <p>Un driver de GPU defectuoso frenado en el canary, el primer grupo pequeño de nodos que recibe una versión nueva, y un error XID de hardware durante el soak que acabó en una vuelta atrás automática: las dos cosas están entre las 26 comprobaciones que pasó a la primera el laboratorio de despliegue de drivers que acompaña a este post. Es un laboratorio. En producción lo hace el controlador de actualización del propio GPU Operator; el laboratorio enseña lo que ese controlador tiene que hacer bien.</p>
 <p>El controlador, escrito en Go solo con la librería estándar, despliega una versión de driver por la flota. Cada nodo pasa por Draining, Installing, Validating, Soaking y Done. Durante el soak, el periodo en que se vigila el nodo tras la actualización, un XID de hardware o un error ECC de memoria cuenta como fallo. Entonces el nodo vuelve a la versión anterior y, si eso también falla, queda en cuarentena con la etiqueta del laboratorio 09.</p>

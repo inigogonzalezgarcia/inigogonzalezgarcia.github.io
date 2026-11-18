@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose">
       
+      
       <div class="en" lang="en">
 <p>Running the pipeline with Terraform caught a real bug that OpenTofu had not flagged: a <code>for_each</code>, the loop that creates one resource per item, over IDs that are still unknown when the plan is calculated. That is what happened in the private connectivity lab for AWS published with this post, a set of five Terraform modules tested without an AWS account. It is a lab, not a production deployment, and the fix is written up in docs/decisions.md.</p>
 <p>The pattern the lab builds end to end is a common one: reaching a service privately, with no internet gateway and no NAT, the address translation that lets private machines go out to the internet. The first module creates a private VPC with flow logs, the records of the traffic that crosses it. The second puts an internal NLB, a network load balancer, behind an endpoint service that requires acceptance and explicit principals, so only the listed accounts can connect and each connection has to be approved.</p>

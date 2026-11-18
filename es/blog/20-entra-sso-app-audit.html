@@ -81,6 +81,7 @@
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose">
+      <figure class="post-fig"><a href="https://github.com/inigogonzalezgarcia/20-entra-sso-app-audit" target="_blank" rel="noopener noreferrer"><img src="../../assets/blog/20.webp" alt="Informe de 20-entra-sso-app-audit con los datos ficticios de la demo" width="820" height="672" decoding="async"></a><figcaption class="small muted"><span class="es">Informe que genera el repo con los datos ficticios de la demo.</span></figcaption></figure>
       <div class="es" lang="es">
 <p>Cuando caduca el certificado de firma SAML de una aplicación SaaS, deja de aceptar inicios de sesión a las 9:00; cuando caduca un secreto, falla un proceso nocturno. La auditoría de inicio de sesión único que acompaña a este post busca esas fechas antes de que lleguen. Su demo usa un tenant inventado con 21 aplicaciones empresariales y fallos puestos a propósito.</p>
 <p>La auditoría parte de <code>Export-EntraAppInventory.ps1</code>, una exportación de solo lectura con Microsoft Graph de entidades de servicio, registros de aplicaciones y políticas de acceso condicional. De secretos y certificados solo lee las fechas, nunca su valor.</p>

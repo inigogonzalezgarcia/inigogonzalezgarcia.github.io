@@ -81,6 +81,7 @@
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose">
+      
       <div class="es" lang="es">
 <p>Un clúster nuevo de 256 GPU no supera la primera ronda de aceptación, con solo 144 GPU listas, y pasa la segunda con 248, con un nodo aún pendiente de un RMA, la devolución de una pieza defectuosa al fabricante. Es el resultado del laboratorio de aceptación que acompaña a este post. Se ejecuta sobre un clúster ficticio de 4 racks, 8 nodos por rack y 8 GPU por nodo, con 8 defectos.</p>
 <p>El proceso revisa cada nodo por orden: un inventario de GPU, driver, VBIOS (el firmware de la GPU) y puertos InfiniBand, la red que une los nodos; el diagnóstico <code>dcgmi diag -r 3</code>; nccl-tests, que miden la comunicación entre GPU, primero por nodo y después por rack; un burn-in de 72 horas, una prueba de carga sostenida; y un trabajo de burn-in de todo el clúster, medido con las reglas del laboratorio 12.</p>

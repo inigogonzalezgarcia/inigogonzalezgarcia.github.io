@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose">
       
+      
       <div class="en" lang="en">
 <p>When a simulated GPU reports XID 79, an error code for a hardware fault, the node is drained in 2 seconds and the training job on it is requeued and completes its 150 steps. That is what the Slurm lab published with this post shows in CI, where sacct, Slurm&#x27;s accounting tool, records the job as REQUEUED, REQUEUED, COMPLETED. The cluster is real Slurm 23.11 from Ubuntu 24.04 packages, but it runs in Docker Compose and its GPUs are simulated.</p>
 <p>Many GPU clusters run Slurm rather than Kubernetes, so the lab brings lab 09&#x27;s XID policy to Slurm. The setup has MariaDB, slurmdbd, slurmctld and 4 nodes with 4 simulated GPUs each.</p>

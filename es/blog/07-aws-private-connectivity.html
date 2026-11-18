@@ -81,6 +81,7 @@
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose">
+      
       <div class="es" lang="es">
 <p>La CI con Terraform encontró un fallo real que OpenTofu no había marcado: un <code>for_each</code>, el bucle que crea un recurso por cada elemento, sobre IDs que todavía no se conocen cuando se calcula el plan. Es lo que pasó en el laboratorio de conectividad privada en AWS que acompaña a este post, un conjunto de cinco módulos de Terraform probados sin cuenta de AWS. Es un laboratorio, no un despliegue en producción, y la corrección está explicada en docs/decisions.md.</p>
 <p>El patrón que monta el laboratorio de principio a fin es habitual: llegar a un servicio de forma privada, sin internet gateway y sin NAT, la traducción de direcciones que deja salir a internet a las máquinas privadas. El primer módulo crea una VPC privada con flow logs, los registros del tráfico que la cruza. El segundo coloca un NLB interno, un balanceador de red, detrás de un endpoint service que exige aceptación y principals explícitos, de modo que solo se conectan las cuentas de la lista y cada conexión hay que aprobarla.</p>

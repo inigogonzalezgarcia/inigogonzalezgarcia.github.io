@@ -81,6 +81,7 @@
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose">
+      <figure class="post-fig"><a href="https://github.com/inigogonzalezgarcia/32-backup-restore-test-tracker" target="_blank" rel="noopener noreferrer"><img src="../../assets/blog/32.webp" alt="Informe de 32-backup-restore-test-tracker con los datos ficticios de la demo" width="1000" height="819" decoding="async"></a><figcaption class="small muted"><span class="es">Informe que genera el repo con los datos ficticios de la demo.</span></figcaption></figure>
       <div class="es" lang="es">
 <p>Un panel de backups en verde dice que los trabajos se ejecutaron, no que un sistema se pueda recuperar en el tiempo prometido al negocio. Un trabajo nocturno que ha fallado tres noches seguidas está tres días fuera de un RPO de 24 horas, el objetivo de punto de recuperación, es decir, cuántos datos acepta perder el negocio. Ese es el hueco que saca a la luz la revisión mensual de backups y restauraciones que acompaña a este post, una herramienta de código abierto que se ejecuta con datos de ejemplo de un fabricante inventado con 76 sistemas en tres niveles, un año de pruebas de restauración y sus ejercicios de DR, con los problemas puestos a propósito.</p>
 <p>La revisión mide el RPO desde el último backup bueno de cada sistema y cuenta las rachas de fallos. También lista los sistemas sin trabajo de backup y las copias offsite o inmutables que faltan. Una copia que lleva una semana fallando deja el sistema con una sola copia, en un solo sitio.</p>

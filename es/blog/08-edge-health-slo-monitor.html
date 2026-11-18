@@ -81,6 +81,7 @@
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose">
+      
       <div class="es" lang="es">
 <p>Una comprobación fallida en el edge, la parte de un servicio más cercana a sus usuarios, no tiene por qué despertar a nadie. El monitor de salud del edge que acompaña a este post solo avisa cuando el presupuesto de error, la cantidad de fallo que permite un SLO (objetivo de nivel de servicio), se está consumiendo demasiado rápido. Es un laboratorio escrito en Python, y su incidente de ejemplo es ficticio: un registro DNS perdido en una migración de zona, contado como postmortem.</p>
 <p>El enfoque es el de los equipos SRE, aplicado al edge. La herramienta lanza sondas DNS, TLS, HTTP y TCP y las mide frente a un SLO con presupuesto de error. Las alertas miran el burn rate, la velocidad a la que se gasta ese presupuesto, en varias ventanas de tiempo a la vez, y esperan a un mínimo de sondas malas antes de avisar.</p>

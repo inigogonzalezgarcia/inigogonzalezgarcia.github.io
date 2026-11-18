@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose">
       
+      
       <div class="en" lang="en">
 <p>A failed check at the edge, the part of a service closest to its users, does not have to wake anyone up. The edge health monitor published with this post only alerts when the error budget, the amount of failure an SLO (service level objective) allows, is being spent too fast. It is a lab written in Python, and its example incident is fictional: a DNS record lost during a zone migration, written up as a postmortem.</p>
 <p>The approach is the one SRE teams use, applied to the edge. The tool runs DNS, TLS, HTTP and TCP probes and measures them against an SLO with an error budget. The alerts look at the burn rate, the speed at which that budget is consumed, over several time windows at once, and they wait for a minimum number of bad probes before firing.</p>

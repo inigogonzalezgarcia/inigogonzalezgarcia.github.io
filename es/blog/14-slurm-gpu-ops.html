@@ -81,6 +81,7 @@
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose">
+      
       <div class="es" lang="es">
 <p>Cuando una GPU simulada informa del XID 79, un código de error de fallo de hardware, el nodo se drena en 2 segundos y el entrenamiento que corría en él se reencola y completa sus 150 pasos. Así lo muestra en la CI el laboratorio de Slurm que acompaña a este post, donde sacct, la herramienta de contabilidad de Slurm, registra el trabajo como REQUEUED, REQUEUED, COMPLETED. El clúster es un Slurm 23.11 real con paquetes de Ubuntu 24.04, pero corre en Docker Compose y sus GPU son simuladas.</p>
 <p>Muchos clústeres de GPU usan Slurm en lugar de Kubernetes, así que el laboratorio lleva a Slurm la política XID del laboratorio 09. El montaje tiene MariaDB, slurmdbd, slurmctld y 4 nodos con 4 GPU simuladas cada uno.</p>

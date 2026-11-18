@@ -81,6 +81,7 @@
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose">
+      <figure class="post-fig"><a href="https://github.com/inigogonzalezgarcia/19-ad-infra-health-check" target="_blank" rel="noopener noreferrer"><img src="../../assets/blog/19.webp" alt="Informe de 19-ad-infra-health-check con los datos ficticios de la demo" width="820" height="672" decoding="async"></a><figcaption class="small muted"><span class="es">Informe que genera el repo con los datos ficticios de la demo.</span></figcaption></figure>
       <div class="es" lang="es">
 <p>La mayoría de problemas de Active Directory avisan antes: un reloj que se desvía, DFSR parado después de parchear, un enlace de replicación fallando en silencio durante semanas, un ámbito de DHCP lleno la semana que llegan las incorporaciones. El chequeo que acompaña a este post reúne esas señales en una página con lo que hay que arreglar hoy. Su demo usa un dominio inventado de seis controladores en cuatro sedes con fallos puestos a propósito.</p>
 <p><code>dcdiag</code> y <code>repadmin</code> ya lo cuentan todo, pero de controlador en controlador. El chequeo parte en cambio de una sola exportación de solo lectura, <code>Export-ADHealth.ps1</code>, con los módulos estándar de RSAT, las herramientas de administración remota de servidores.</p>

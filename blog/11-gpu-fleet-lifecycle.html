@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose">
       
+      
       <div class="en" lang="en">
 <p>A bad GPU driver stopped at the canary, the first small group of nodes to get a new version, and a hardware XID error during the soak that ended in an automatic rollback: both are among the 26 checks the driver rollout lab published with this post passed on its first run. It is a lab. In production the GPU Operator&#x27;s own upgrade controller does this job; the lab shows what that controller has to get right.</p>
 <p>The controller, written in Go with the standard library only, rolls a driver version across the fleet. Each node goes through Draining, Installing, Validating, Soaking and Done. During the soak, the period of watching the node after the upgrade, a hardware XID error or an ECC memory error counts as a failure. The node then goes back to the previous version, and if that also fails, it is quarantined with the label from lab 09.</p>

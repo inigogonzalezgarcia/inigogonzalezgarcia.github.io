@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose">
       
+      
       <div class="en" lang="en">
 <p>A release built to fail on purpose is stopped in staging and never reaches production. That is one of the 29 checks in the 20-minute end-to-end test of the GPU fleet lab published with this post, which runs Gitea, a self-hosted Git server, and two kind clusters, Kubernetes inside Docker. The same test shows Flux, the tool that applies what is in Git to each cluster, correcting drift.</p>
 <p>Everything starts in one file, fleet.toml. It defines releases, each with GPU Operator, Network Operator and driver versions, and clusters with their GPU pools. Waves go from staging to prod H100 and then prod A100, with a pause after the canary, the first group to get the change.</p>

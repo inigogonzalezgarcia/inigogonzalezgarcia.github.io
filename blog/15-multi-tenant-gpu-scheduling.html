@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose">
       
+      
       <div class="en" lang="en">
 <p>The inference team keeps its 8 guaranteed GPUs and never lends them, while training and research each have GPUs that can be borrowed, and the owner can take capacity back when it needs it. That agreement, written in one file, tenancy.toml, is the starting point of the multi-tenant GPU lab published with this post. It runs on a kind cluster, Kubernetes inside Docker, with 4 workers and 8 GPUs each simulated by Run:ai&#x27;s fake-gpu-operator, plus KubeVirt.</p>
 <p>Training has 16 guaranteed GPUs and 8 that can be borrowed; research has 8 guaranteed and 8 more that can be borrowed. <code>python -m tenancy render</code> turns the file into Kueue ClusterQueues grouped in a cohort, a set of queues that lend to each other, and into KAI Scheduler Queues. CI fails if the manifests drift from the file.</p>

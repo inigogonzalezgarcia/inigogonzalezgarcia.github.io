@@ -81,6 +81,7 @@
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose">
+      
       <div class="es" lang="es">
 <p>Una versión hecha para fallar a propósito se queda parada en staging y nunca llega a producción. Es una de las 29 comprobaciones de la prueba de punta a punta de 20 minutos del laboratorio de flota GPU que acompaña a este post, que usa Gitea, un servidor Git propio, y dos clústeres kind, Kubernetes dentro de Docker. La misma prueba muestra a Flux, la herramienta que aplica en cada clúster lo que hay en Git, corrigiendo la deriva.</p>
 <p>Todo parte de un fichero, fleet.toml. Define versiones, cada una con su GPU Operator, Network Operator y driver, y clústeres con sus pools de GPU. Las olas van de staging a prod H100 y después a prod A100, con una pausa tras el canary, el primer grupo que recibe el cambio.</p>

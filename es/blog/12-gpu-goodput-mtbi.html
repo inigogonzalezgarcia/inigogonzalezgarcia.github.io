@@ -81,6 +81,7 @@
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose">
+      
       <div class="es" lang="es">
 <p>Un entrenamiento con 1.024 GPU y sin nodos de repuesto se queda en un 36,1 % de goodput, la parte de sus GPU-horas que se dedica a trabajo útil, frente al 79,6 % del escenario base y el 94,0 % cuando se combinan todas las mejoras. Así lo calcula el simulador de goodput que acompaña a este post. Es un laboratorio: el trabajo y sus fallos son simulados, con supuestos situados entre dos referencias públicas, las interrupciones de Llama 3 y el paper de Meta sobre fiabilidad de clústeres.</p>
 <p>En un entrenamiento grande los fallos son normales; lo que importa es cuánto trabajo útil sobrevive a ellos. El simulador es de eventos discretos, es decir, salta de un suceso al siguiente, y reproduce un trabajo de 1.024 GPU en 128 nodos con spares, causas de fallo con su propio tiempo de detección y reparaciones.</p>

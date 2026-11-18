@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose">
       
+      
       <div class="en" lang="en">
 <p>A new 256-GPU cluster fails its first acceptance round with only 144 GPUs ready and passes the second with 248, with one node still waiting on an RMA, the return of a faulty part to the manufacturer. That is the result of the acceptance lab published with this post. It runs on a fictional cluster of 4 racks, 8 nodes per rack and 8 GPUs per node, with 8 defects.</p>
 <p>The pipeline checks each node in order: an inventory of GPUs, driver, VBIOS (the GPU firmware) and InfiniBand ports, the network that links the nodes; the <code>dcgmi diag -r 3</code> diagnostic; nccl-tests, which measure communication between GPUs, per node and then per rack; a 72-hour burn-in, a sustained load test; and a burn-in job across the whole cluster, scored with the rules of lab 12.</p>

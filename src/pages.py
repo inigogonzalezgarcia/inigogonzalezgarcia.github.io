@@ -1,5 +1,5 @@
 """Shared layout and page bodies. Imported by build.py."""
-import html, re, datetime, json
+import html, re, datetime, json, os
 
 SITE_URL = "https://inigogonzalezgarcia.github.io/"
 MAIL = "inigogonzalezgarcia@outlook.es"
@@ -385,15 +385,60 @@ def md(text):
 def minutes(text):
     return max(2, round(len(text.split()) / 200))
 
+# Areas for the blog filter (same groups as the toolbox on the GitHub profile)
+AREAS = [
+    ("workplace", "Modern Workplace", "Modern Workplace", "02 05 17 18 21 22 29 33 38 41 44 48 52 55"),
+    ("security", "Identidad y seguridad", "Identity & security", "03 19 20 25 26 27 37 39 45 51 53 57"),
+    ("itsm", "ITSM y servicio", "ITSM & service", "04 28 30 36 40 46 47 49 56"),
+    ("infra", "Infraestructura", "Infrastructure", "08 32 35"),
+    ("cost", "Costes y valor", "Cost & value", "01 23 43 50 54"),
+    ("sector", "Sectores", "Sector tools", "24 31 34 42"),
+    ("labs", "Labs cloud y GPU", "Cloud & GPU labs", "06 07 09 10 11 12 13 14 15 16"),
+]
+AREA_OF = {n: k for k, _, _, ns in AREAS for n in ns.split()}
+_BLOG_IMG = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets", "blog")
+
+def webp_size(path):
+    """(width, height) of a WebP file, read from its header (VP8, VP8L or VP8X)."""
+    with open(path, "rb") as fh:
+        b = fh.read(40)
+    kind = b[12:16]
+    if kind == b"VP8 ":
+        return int.from_bytes(b[26:28], "little") & 0x3FFF, int.from_bytes(b[28:30], "little") & 0x3FFF
+    if kind == b"VP8L":
+        v = int.from_bytes(b[21:25], "little")
+        return (v & 0x3FFF) + 1, ((v >> 14) & 0x3FFF) + 1
+    return int.from_bytes(b[24:27], "little") + 1, int.from_bytes(b[27:30], "little") + 1
+
+def blog_img(n, kind=""):
+    """Path and size of a post's report image (assets/blog/NN-card.webp or NN.webp), or None."""
+    f = os.path.join(_BLOG_IMG, f"{n}{kind}.webp")
+    return (f"assets/blog/{n}{kind}.webp",) + webp_size(f) if os.path.exists(f) else None
+
 def card(p, cats, R):
     c = cats[p["cat"]]
-    return f'''      <article class="card reveal cat-{p["cat"]}">
-        <a class="card-thumb" href="{R}blog/{p["repo"]}.html" tabindex="-1" aria-hidden="true"><span class="card-n">{p.get("label", p["n"])}</span><span class="card-cat label">{bi(*c)}</span></a>
+    img = blog_img(p["n"], "-card")
+    if img:
+        thumb = (f'<a class="card-thumb has-img" href="{R}blog/{p["repo"]}.html" tabindex="-1" aria-hidden="true">'
+                 f'<img src="{R}{img[0]}" alt="" width="{img[1]}" height="{img[2]}" loading="lazy" decoding="async">'
+                 f'<span class="card-n">{p.get("label", p["n"])}</span></a>')
+    else:
+        thumb = (f'<a class="card-thumb" href="{R}blog/{p["repo"]}.html" tabindex="-1" aria-hidden="true"><span class="card-n">{p.get("label", p["n"])}</span>'
+                 f'<span class="card-cat label">{bi(*c)}</span></a>')
+    return f'''      <article class="card reveal cat-{p["cat"]}" data-area="{AREA_OF.get(p["n"], "")}">
+        {thumb}
         <p class="label card-meta">{bi(*c)} · {fdate(p["date"])}</p>
         <h3><a href="{R}blog/{p["repo"]}.html">{bi(html.escape(p["title_es"]), html.escape(p["title_en"]))}</a></h3>
         <p class="muted">{bi(html.escape(p["dek_es"]), html.escape(p["dek_en"]))}</p>
         <a class="arrow-link" href="{R}blog/{p["repo"]}.html">{bi("Leer el artículo", "Read the story")} →</a>
       </article>'''
+
+def blog_filters(posts):
+    """Area chips for the blog index; hidden until app.js shows them (without JS every card stays visible)."""
+    count = lambda k: sum(1 for p in posts if AREA_OF.get(p["n"]) == k)
+    chips = [f'<button class="chip" type="button" data-filter="" aria-pressed="true">{bi("Todo", "All")} <span>{len(posts)}</span></button>']
+    chips += [f'<button class="chip" type="button" data-filter="{k}" aria-pressed="false">{bi(es, en)} <span>{count(k)}</span></button>' for k, es, en, _ in AREAS]
+    return '<div class="filters" role="group" aria-label="[es]Filtrar por área[en]Filter by area" hidden>' + "".join(chips) + "</div>"
 
 def soon(kicker_es, kicker_en, R):
     return page_hero(bi(kicker_es, kicker_en),

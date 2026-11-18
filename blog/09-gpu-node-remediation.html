@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose">
       
+      
       <div class="en" lang="en">
 <p>A Kubernetes controller that decides on its own whether a GPU node should be drained, repaired, cordoned or quarantined passed an end-to-end test of 8 scenarios and 28 checks on its first run. It is the first of a series of GPU labs published with this post, and it runs on simulated GPUs, so anyone can reproduce it on a laptop.</p>
 <p>The controller reads DCGM metrics, the health data NVIDIA exposes for its GPUs: XID errors, the error codes the driver reports, double-bit ECC memory errors, row remapping and temperature. With them it moves each node through Healthy, Draining, Repairing, Validating and back to Healthy, or to Cordoned for thermal issues, or to Quarantined. It is written in Go with the standard library only, without client-go, the usual Kubernetes library.</p>

@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose">
       
+      
       <div class="en" lang="en">
 <p>A training job on 1,024 GPUs without spare nodes keeps only 36.1 % goodput, the share of its GPU-hours that goes into useful work, against 79.6 % in the baseline and 94.0 % when every improvement is combined. That is what the goodput simulator published with this post finds. It is a lab: the job and its failures are simulated, with assumptions placed between two public references, Llama 3&#x27;s interruption count and Meta&#x27;s paper on cluster reliability.</p>
 <p>In a large training job failures are normal; what matters is how much useful work survives them. The simulator is discrete-event, meaning it jumps from one event to the next, and models a job of 1,024 GPUs on 128 nodes with spares, failure causes that each have their own detection time, and repairs.</p>

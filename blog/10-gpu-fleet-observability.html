@@ -82,6 +82,7 @@
   <div class="wrap post-grid">
     <article class="prose">
       
+      
       <div class="en" lang="en">
 <p>Each of the 10 alerts in the GPU fleet monitoring lab published with this post says what to do: it comes with a runbook, the written procedure to follow, and an <code>action</code> label that reads drain, quarantine or cordon. The lab runs on a simulated fleet, and the question it answers is which NVIDIA DCGM metrics deserve an alert and who should get it.</p>
 <p>The simulator, written in Go, models 4 nodes with 8 GPUs each. It uses the same metric names and labels as dcgm-exporter, the component that publishes GPU metrics, pod and namespace included, and it can inject faults. On top of those metrics sit 17 recording rules, queries that Prometheus calculates in advance, and the 10 alerts, documented in docs/alerts.md.</p>

@@ -369,3 +369,41 @@
 
   finish();
 })();
+
+/* ---------- blog: filter the stories by area (without JS the chips stay hidden and every story is shown) ---------- */
+(function () {
+  var bar = document.querySelector(".filters");
+  if (!bar) return;
+  var chips = [].slice.call(bar.querySelectorAll(".chip")), cards = [].slice.call(document.querySelectorAll(".cards .card"));
+  bar.hidden = false;
+  function apply(area) {
+    chips.forEach(function (c) { c.setAttribute("aria-pressed", String(c.getAttribute("data-filter") === area)); });
+    cards.forEach(function (c) { c.hidden = !!area && c.getAttribute("data-area") !== area; if (!c.hidden) c.classList.add("in"); });
+  }
+  bar.addEventListener("click", function (ev) {
+    var c = ev.target.closest(".chip");
+    if (!c) return;
+    var area = c.getAttribute("data-filter");
+    apply(area);
+    try { history.replaceState(null, "", area ? "#" + area : location.pathname + location.search); } catch (e) {}
+  });
+  var start = (location.hash || "").slice(1);
+  if (start && chips.some(function (c) { return c.getAttribute("data-filter") === start; })) apply(start);
+})();
+
+/* ---------- home: the projects figure counts up once (the real number is in the HTML) ---------- */
+(function () {
+  var els = document.querySelectorAll(".hero-count");
+  if (!els.length || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  [].forEach.call(els, function (el) {
+    var to = +el.textContent, t0 = null, dur = 1000;
+    if (!to) return;
+    function step(t) {
+      if (!t0) t0 = t;
+      var p = Math.min((t - t0) / dur, 1);
+      el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step);
+    }
+    setTimeout(function () { requestAnimationFrame(step); }, 600);
+  });
+})();

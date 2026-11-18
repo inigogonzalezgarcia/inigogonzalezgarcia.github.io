@@ -81,6 +81,7 @@
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose">
+      
       <div class="es" lang="es">
 <p>Un controlador de Kubernetes que decide por sí solo si un nodo GPU hay que drenarlo, repararlo, acordonarlo o ponerlo en cuarentena pasó a la primera una prueba de punta a punta con 8 escenarios y 28 comprobaciones. Es el primero de una serie de laboratorios de GPU que acompaña a este post, y funciona con GPU simuladas, así que cualquiera puede reproducirlo en un portátil.</p>
 <p>El controlador lee las métricas DCGM, los datos de salud que NVIDIA expone de sus GPU: los errores XID, los códigos de error que comunica el driver, los errores ECC de doble bit en memoria, el row remapping y la temperatura. Con ellos lleva cada nodo por Healthy, Draining, Repairing, Validating y de vuelta a Healthy, o a Cordoned por temperatura, o a Quarantined. Está escrito en Go solo con la librería estándar, sin client-go, la librería habitual de Kubernetes.</p>

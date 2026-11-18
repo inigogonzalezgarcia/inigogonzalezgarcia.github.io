@@ -151,7 +151,7 @@ MAP = f'''      <svg id="map" viewBox="0 0 1000 487" role="img" aria-label="[es]
 # ---------------------------------------------------------------- pages
 import sys
 sys.path.insert(0, str(ROOT))
-from pages import PERSON, PERSON_ID, PERSON_REF, WEBSITE, SITE_URL, crumbs, layout, Page, localize, lpath, lurl, pick, desc_cut, bilingual_static, LANGS, page_hero, card, md, minutes, fdate, soon, bi as bi2, MAIL, LINKEDIN, GITHUB, LINKTREE, SEC_HEAD
+from pages import PERSON, PERSON_ID, PERSON_REF, WEBSITE, SITE_URL, crumbs, layout, Page, localize, lpath, lurl, pick, desc_cut, bilingual_static, LANGS, page_hero, card, blog_filters, blog_img, md, minutes, fdate, soon, bi as bi2, MAIL, LINKEDIN, GITHUB, LINKTREE, SEC_HEAD
 from posts import POSTS, CATS
 import make_og
 OG = make_og.build(SITE, POSTS, CATS, only_missing=True)  # social preview cards, one per post (CI makes the real ones)
@@ -207,7 +207,7 @@ HOME = ("Inicio", "Home")
 # home
 latest = "\n".join(card(p, CATS, "") for p in POSTS_SORTED[:3])
 home_body = "\n\n".join([
-    SEC["hero"], SEC["welcome"],
+    re.sub(r'(<span class="hero-count">)\d+(</span>)', lambda m: m.group(1) + str(sum(1 for q in POSTS if str(q["n"]).isdigit())) + m.group(2), SEC["hero"]), SEC["welcome"],
     f'''<section class="section u-paper2" id="historias">
   <div class="wrap">
     <div class="numbers-head reveal">
@@ -378,6 +378,7 @@ blog_body = page_hero("Blog · " + bi("Labs y herramientas", "Labs & tools"),
 <section class="section">
   <div class="wrap">
     <h2 class="sr-only">{bi("Todas las historias", "All stories")}</h2>
+    {blog_filters(POSTS_SORTED)}
     <div class="cards">
 {cards}
     </div>
@@ -588,6 +589,14 @@ def aside_cta(p):
       <a class="btn" href="{GITHUB}/{p["repo"]}" target="_blank" rel="noopener">{bi("Ver en GitHub", "View on GitHub")} ↗</a>
       <p class="muted small">{bi("Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.", "Synthetic data. No employer code, data or systems.")}</p>"""
 
+def post_figure(p):
+    """The report the repo generates from its demo data, at the top of the story."""
+    img = blog_img(p["n"])
+    if not img: return ""
+    return (f'<figure class="post-fig"><a href="{GITHUB}/{p["repo"]}" target="_blank" rel="noopener">'
+            f'<img src="../{img[0]}" alt="[es]Informe de {html.escape(p['repo'])} con los datos ficticios de la demo[en]Report of {html.escape(p['repo'])} from the fictional demo data" width="{img[1]}" height="{img[2]}" decoding="async"></a>'
+            f'<figcaption class="small muted">{bi("Informe que genera el repo con los datos ficticios de la demo.", "Report the repo builds from the fictional demo data.")}</figcaption></figure>')
+
 order = sorted(POSTS, key=lambda p: p["n"])
 # previous / next follow the numbered project stories only; the SysAdmin Desks page (it has "app") sits outside the sequence
 nav_order = [q for q in order if not q.get("app")]
@@ -606,6 +615,7 @@ for p in order:
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose">
+      {post_figure(p)}
       <div class="es" lang="es">
 {md(p["es"])}{sim_more(p, "es")}
 <p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>

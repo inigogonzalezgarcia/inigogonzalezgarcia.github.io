@@ -81,6 +81,7 @@
 <section class="section post">
   <div class="wrap post-grid">
     <article class="prose">
+      
       <div class="es" lang="es">
 <p>El equipo de inferencia conserva sus 8 GPU garantizadas y nunca las presta, mientras que entrenamiento e investigación tienen GPU prestables, y el dueño puede recuperar la capacidad cuando la necesita. Ese acuerdo, escrito en un solo fichero, tenancy.toml, es el punto de partida del laboratorio de GPU compartidas que acompaña a este post. Se ejecuta en un clúster kind, Kubernetes dentro de Docker, con 4 workers y 8 GPU cada uno simuladas por el fake-gpu-operator de Run:ai, más KubeVirt.</p>
 <p>Training tiene 16 GPU garantizadas y 8 prestables; research tiene 8 garantizadas y otras 8 prestables. <code>python -m tenancy render</code> convierte el fichero en ClusterQueues de Kueue agrupadas en una cohort, un conjunto de colas que se prestan capacidad, y en Queues de KAI Scheduler. La CI falla si los manifiestos no coinciden con el fichero.</p>
