@@ -263,6 +263,18 @@ home_body = "\n\n".join([
     f'''<section class="section">
   <div class="wrap welcome reveal">
     <div>
+      <p class="label kicker">EMSS · {bi("estudio de sesiones", "session studio")}</p>
+      <h2 class="h2 sm">{bi("Tu set de música electrónica,<br>mezclado solo.", "Your electronic music set,<br>mixed for you.")}</h2>
+    </div>
+    <div>
+      <p class="lede">{bi("Elige unos temas de màkina, hardcore, hardstyle, hard techno o techno y EMSS completa el set, lo ordena por tempo y tonalidad y elige cada transición según el estilo.", "Pick a few makina, hardcore, hardstyle, hard techno or techno tracks and EMSS completes the set, orders it by tempo and key and picks each transition to suit the style.")}</p>
+      <a class="btn" href="https://emss-studio.pages.dev/" target="_blank" rel="noopener noreferrer">{bi("Abrir EMSS", "Open EMSS")} ↗</a>
+    </div>
+  </div>
+</section>''',
+    f'''<section class="section">
+  <div class="wrap welcome reveal">
+    <div>
       <p class="label kicker">IGG-ICS · IT · Tech Career, Lab &amp; Strategy</p>
       <h2 class="h2 sm">{bi("Estrategia profesional IT.", "IT career strategy.")}</h2>
     </div>
@@ -502,7 +514,7 @@ POST_RELATED = {
     "44-m365-copilot-readiness": ["27-m365-tenant-governance-review", "25-security-controls-evidence"],
     "02-intune-compliance-report": ["18-mecm-intune-comanagement-tracker", "41-windows-update-ring-tracker", "52-endpoint-security-coverage"],
     "03-entra-id-hygiene-audit": ["37-iam-access-review", "20-entra-sso-app-audit"],
-    "04-itsm-kpi-dashboard": ["47-multi-site-it-scorecard", "28-euc-provider-service-review"],
+    "04-itsm-kpi-dashboard": ["47-multi-site-it-scorecard", "28-euc-provider-service-review", "56-cmdb-data-quality-review"],
     "05-it-ops-console": ["38-it-asset-lifecycle-planner", "19-ad-infra-health-check"],
     "06-kubernetes-ingress-lab": ["07-aws-private-connectivity", "08-edge-health-slo-monitor"],
     "07-aws-private-connectivity": ["06-kubernetes-ingress-lab", "01-finops-cloud-cost-dashboard"],
@@ -534,7 +546,7 @@ POST_RELATED = {
     "35-private-cloud-capacity-review": ["32-backup-restore-test-tracker", "43-azure-cost-rightsizing"],
     "36-major-incident-command-kit": ["46-problem-management-review", "40-change-calendar-risk-review"],
     "37-iam-access-review": ["48-new-starter-day-one-readiness", "03-entra-id-hygiene-audit"],
-    "38-it-asset-lifecycle-planner": ["45-network-config-compliance", "21-apple-fleet-audit", "55-printer-fleet-health"],
+    "38-it-asset-lifecycle-planner": ["45-network-config-compliance", "21-apple-fleet-audit", "55-printer-fleet-health", "56-cmdb-data-quality-review"],
     "sysadmindesksbyigg": ["19-ad-infra-health-check", "02-intune-compliance-report"],
     "01-finops-cloud-cost-dashboard": ["43-azure-cost-rightsizing", "35-private-cloud-capacity-review"],
     "43-azure-cost-rightsizing": ["01-finops-cloud-cost-dashboard", "23-it-vendor-contract-tracker", "50-saas-licence-spend-review"],
@@ -998,6 +1010,7 @@ LINK_GROUPS = [
     (bi("Aprende y practica", "Learn and practise"), [
         ("https://sysadmindesksbyigg.pages.dev/", "SysAdmin Desks", bi("Simulador gratuito de soporte IT: tickets, SLA y nota de trabajo.", "Free IT support simulator: tickets, SLA and work notes."), "ext"),
         ("https://fx-trading-lab.pages.dev/", "Lab de Inversión", bi("Laboratorio educativo: aprende a comprobar una idea de inversión con ocho años de datos reales.", "Educational lab: learn to check an investment idea with eight years of real data."), "ext"),
+        ("https://emss-studio.pages.dev/", "EMSS", bi("Estudio de sesiones: completa y mezcla tu set de màkina, hardcore, hardstyle, hard techno o techno.", "Session studio: completes and mixes your makina, hardcore, hardstyle, hard techno or techno set."), "ext"),
         ("guias.html", bi("Guías IT", "IT guides"), bi(f"{len(_GL)} guías paso a paso: {_nlvl} niveles y {_nsec} sectores.", f"{len(_GL)} step-by-step guides: {_nlvl} levels and {_nsec} sectors."), ""),
         ("blog/", "Blog", bi(f"{len(POSTS)} proyectos en GitHub, cada uno con su artículo.", f"{len(POSTS)} projects on GitHub, each with its story."), ""),
     ]),

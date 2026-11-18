@@ -127,7 +127,7 @@ Necesita esos dos permisos de solo lectura en Graph en un tenant con Entra ID P1
 
 Casi todo el trabajo estuvo en decidir qué significan «inactivo» y «obsoleto» y dejarlo escrito, para poder defender el informe cuando alguien pregunte por qué sale su cuenta."""),
 
-dict(n="04", repo="04-itsm-kpi-dashboard", date="2026-09-30", cat="tools",
+dict(n="04", repo="04-itsm-kpi-dashboard", date="2026-09-30", updated="2026-11-18", cat="tools",
  title_en="A service desk report pulls SLA by priority and the open tickets already out of SLA from a CSV export",
  title_es="Un informe de service desk saca el SLA por prioridad y los tickets abiertos ya fuera de SLA de una exportación CSV",
  seo_title_en="Service desk KPIs: SLA, MTTR and backlog · Iñigo González",
@@ -165,7 +165,7 @@ Los tickets se pueden exportar a CSV desde ServiceNow o cualquier otra herramien
 
 Al hacerlo comprobé que la mediana cuenta otra historia que la media: unos pocos tickets muy largos mueven mucho la media, y la mediana enseña lo que vive la mayoría de usuarios."""),
 
-dict(n="05", repo="05-it-ops-console", date="2026-09-30", updated="2026-11-08", cat="tools",
+dict(n="05", repo="05-it-ops-console", date="2026-09-30", updated="2026-11-17", cat="tools",
  title_en="An on-site IT console brings offline machines, expiring warranties, room checks and joiners into one app",
  title_es="Una consola de IT de sede reúne equipos offline, garantías que caducan, revisión de salas y altas en una sola app",
  seo_title_en="On-site IT ops console: Flask + PowerShell · Iñigo González",
@@ -999,7 +999,7 @@ Hace falta un rol de API en Jamf Pro solo de lectura y un cliente de API. Tras l
 
 Nace de gestionar MacBooks, iPhones e iPads con Jamf Pro y de dar soporte a usuarios VIP y reuniones de consejo."""),
 
-dict(n="22", repo="22-dex-experience-score", date="2026-10-17", updated="2026-11-07", cat="tools",
+dict(n="22", repo="22-dex-experience-score", date="2026-10-17", updated="2026-11-18", cat="tools",
  title_en="A lab scores every laptop from 0 to 10 and traces the top problem to blue screens after a driver update",
  title_es="Un laboratorio pone nota de 0 a 10 a cada portátil y sitúa el primer problema en pantallazos azules tras un driver",
  seo_title_en="DEX score: a 0-10 experience per laptop · Iñigo González",
@@ -1013,7 +1013,7 @@ In a made-up company with 120 devices in three cities, the top problem is blue s
 
 Tickets show only a fraction of the problems. People live with a slow laptop for weeks and just say "IT is slow". A monthly update adds 40 seconds to every logon or an Outlook add-in crashes on twenty laptops, and telemetry sees it.
 
-## Five categories, and missing data never counts as zero
+## What lowers a device's DEX score: five categories, blue screens cap it and missing data never counts as zero
 
 A read-only PowerShell collector gathers boot and logon times, app crashes, blue screens, Wi-Fi, latency, VPN failures, battery and disk. The score combines performance, stability, network and collaboration, hardware and an optional survey. Blue screens and very poor categories cap it, and missing data is left out, never scored as zero.
 
@@ -1031,7 +1031,7 @@ En una empresa inventada con 120 equipos en tres ciudades, el primer problema so
 
 Los tickets solo muestran una parte de los problemas. La gente convive semanas con un portátil lento y solo dice «IT va lento». Una actualización mensual añade 40 segundos a cada inicio de sesión o un complemento de Outlook falla en veinte portátiles, y la telemetría lo ve.
 
-## Cinco categorías, y los datos que faltan nunca cuentan como cero
+## Qué baja la puntuación DEX de un equipo: cinco categorías, los pantallazos azules le ponen tope y lo que falta nunca cuenta como cero
 
 Un recolector de solo lectura en PowerShell recoge tiempos de arranque e inicio de sesión, cierres de aplicaciones, pantallazos azules, wifi, latencia, fallos de VPN, batería y disco. La nota combina rendimiento, estabilidad, red y colaboración, hardware y una encuesta opcional. Los pantallazos azules y las categorías muy malas le ponen tope, y los datos que faltan se dejan fuera, nunca cuentan como cero.
 
@@ -1869,7 +1869,7 @@ De trabajar tickets y enseñar a otros a trabajarlos: la nota de trabajo es part
 - Niveles por puntos, objetivos semanales con recompensa e insignias por área en el perfil, y un turno completo de cuatro tickets al final de cada laboratorio.
 - Que la sala de red, los envíos de un ticket y los laboratorios se conserven al recargar la página.
 """),
-dict(n="38", repo="38-it-asset-lifecycle-planner", date="2026-10-30", cat="tools",
+dict(n="38", repo="38-it-asset-lifecycle-planner", date="2026-10-30", updated="2026-11-18", cat="tools",
  title_en="An office inventory finds nine laptops nobody registered and half the budget due in one quarter",
  title_es="Un inventario de oficina encuentra nueve portátiles sin registrar y medio presupuesto en un solo trimestre",
  seo_title_en="IT asset inventory and refresh forecast · Iñigo González",
@@ -2328,7 +2328,7 @@ Hay un pequeño parser por plataforma: Cisco IOS-XE con sus líneas `Last config
 ## De dónde sale
 
 La herramienta nace de operar switches y routers Cisco, salas de comunicaciones y racks en varias sedes, de Device42, de Fortinet FortiGate y de redes LAN, WAN y wifi en España, Italia y Turquía, y de ser responsable del proceso de gestión de cambios y de la CMDB. Las lecciones que me quedo: una copia que nadie comprueba no es una copia, y una política any-any temporal nunca es temporal si nadie le pone fecha."""),
-dict(n="46", repo="46-problem-management-review", date="2026-11-08", updated="2026-11-11", cat="tools",
+dict(n="46", repo="46-problem-management-review", date="2026-11-08", updated="2026-11-17", cat="tools",
  title_en="Forty-six VPN certificate incidents were closed one by one since August and nobody opened a problem record",
  title_es="Cuarenta y seis incidencias de certificado de la VPN se cerraron una a una desde agosto sin abrir ningún problema",
  seo_title_en="Problem management review · Iñigo González",
@@ -2393,7 +2393,7 @@ La herramienta lee las incidencias y los problemas exportados de Jira Service Ma
 ## De dónde sale
 
 La herramienta nace de ser responsable formal de los procesos de gestión de incidencias, cambios y problemas y de la CMDB, de dirigir la respuesta técnica en incidentes graves y su análisis de causa raíz, y de administrar Jira Service Management. Las lecciones que me quedo: una solución temporal que funciona es lo más caro del service desk, porque esconde el problema, y cerrar un problema cuando se implanta el cambio es demasiado pronto."""),
-dict(n="47", repo="47-multi-site-it-scorecard", date="2026-11-08", cat="tools",
+dict(n="47", repo="47-multi-site-it-scorecard", date="2026-11-08", updated="2026-11-17", cat="tools",
  title_en="An office lost its only local engineer and first-contact resolution fell from 79% to 56% the next month",
  title_es="Una oficina se quedó sin su único técnico local y la resolución en el primer contacto cayó del 79% al 56%",
  seo_title_en="Multi-site IT scorecard with RAG · Iñigo González",
