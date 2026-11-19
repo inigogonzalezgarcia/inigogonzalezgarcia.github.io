@@ -269,6 +269,7 @@ home_body = "\n\n".join([
     <div>
       <p class="lede">{bi("Elige unos temas de màkina, hardcore, hardstyle, hard techno o techno y EMSS completa el set, lo ordena por tempo y tonalidad y elige cada transición según el estilo.", "Pick a few makina, hardcore, hardstyle, hard techno or techno tracks and EMSS completes the set, orders it by tempo and key and picks each transition to suit the style.")}</p>
       <a class="btn" href="https://emss-studio.pages.dev/" target="_blank" rel="noopener noreferrer">{bi("Abrir EMSS", "Open EMSS")} ↗</a>
+      <p class="u-mt22">{bi("Por estilo:", "By style:")} <a class="arrow-link" href="https://emss-studio.pages.dev/makina" target="_blank" rel="noopener noreferrer">{bi("Màkina", "Makina")}</a> · <a class="arrow-link" href="https://emss-studio.pages.dev/hardcore" target="_blank" rel="noopener noreferrer">Hardcore</a> · <a class="arrow-link" href="https://emss-studio.pages.dev/hardstyle" target="_blank" rel="noopener noreferrer">Hardstyle</a> · <a class="arrow-link" href="https://emss-studio.pages.dev/hard-techno" target="_blank" rel="noopener noreferrer">Hard techno</a> · <a class="arrow-link" href="https://emss-studio.pages.dev/techno" target="_blank" rel="noopener noreferrer">Techno</a></p>
     </div>
   </div>
 </section>''',
