@@ -953,7 +953,7 @@ La exportación necesita permisos de solo lectura de Graph. El resultado es `rev
 
 Nace de integrar aplicaciones SaaS en Entra ID, donde lo difícil no es configurar el SSO, sino quién renueva el certificado dos años después."""),
 
-dict(n="21", repo="21-apple-fleet-audit", date="2026-10-17", updated="2026-11-14", cat="tools",
+dict(n="21", repo="21-apple-fleet-audit", date="2026-10-17", updated="2026-11-19", cat="tools",
  title_en="A weekly Jamf Pro review puts first the push certificate and tokens that can stop a whole Apple fleet",
  title_es="Una revisión semanal de Jamf Pro pone primero el certificado y los tokens que pueden parar una flota Apple",
  seo_title_en="Jamf Pro weekly audit for an Apple fleet · Iñigo González",
@@ -1138,7 +1138,7 @@ El plan se exporta con los plazos reales de los proveedores y las dependencias. 
 ## De dónde sale
 
 Nace de años dando soporte a TPV, PMS hotelero e IPTV en una consultora tecnológica, donde lo que decide una apertura son los interfaces y los plazos de entrega, no la instalación de cada sistema."""),
-dict(n="25", repo="25-security-controls-evidence", date="2026-10-19", cat="tools",
+dict(n="25", repo="25-security-controls-evidence", date="2026-10-19", updated="2026-11-19", cat="tools",
  title_en="A control register for ISO 27001, NIS2 and GDPR finds the evidence an auditor will ask for and nobody kept",
  title_es="Un registro de controles para ISO 27001, NIS2 y RGPD encuentra las evidencias que pedirá el auditor y nadie guardó",
  seo_title_en="ISO 27001, NIS2 and GDPR evidence tracker · Iñigo González",
@@ -1869,7 +1869,7 @@ De trabajar tickets y enseñar a otros a trabajarlos: la nota de trabajo es part
 - Niveles por puntos, objetivos semanales con recompensa e insignias por área en el perfil, y un turno completo de cuatro tickets al final de cada laboratorio.
 - Que la sala de red, los envíos de un ticket y los laboratorios se conserven al recargar la página.
 """),
-dict(n="38", repo="38-it-asset-lifecycle-planner", date="2026-10-30", updated="2026-11-18", cat="tools",
+dict(n="38", repo="38-it-asset-lifecycle-planner", date="2026-10-30", updated="2026-11-19", cat="tools",
  title_en="An office inventory finds nine laptops nobody registered and half the budget due in one quarter",
  title_es="Un inventario de oficina encuentra nueve portátiles sin registrar y medio presupuesto en un solo trimestre",
  seo_title_en="IT asset inventory and refresh forecast · Iñigo González",
@@ -1980,7 +1980,7 @@ El repositorio incluye un exportador de solo lectura en PowerShell para la API d
 
 La herramienta nace de usar Qualys y Tanium para la gestión de vulnerabilidades y parches en una sede, Microsoft Defender, e Intune y MECM en cogestión, incluida la migración a Windows 11 de una oficina con sala de trading; de la gestión de riesgos de ciberseguridad y el seguimiento de la corrección; de ISO 27001, NIS2 y NIST CSF y sus auditorías; y del CAB como responsable del proceso de cambios. La lección que hay detrás: instalado no es corregido hasta que el equipo se reinicia, y una excepción es una decisión con fecha de caducidad, no una forma de poner el informe en verde."""),
 
-dict(n="40", repo="40-change-calendar-risk-review", date="2026-11-02", updated="2026-11-11", cat="tools",
+dict(n="40", repo="40-change-calendar-risk-review", date="2026-11-02", updated="2026-11-19", cat="tools",
  title_en="Two teams booked changes on the trading platform's path the same night and a patch inside the month-end freeze",
  title_es="Dos equipos programan cambios en la ruta de la plataforma de trading la misma noche y un parche en el cierre de mes",
  seo_title_en="Change calendar and CAB risk review · Iñigo González",
@@ -2210,7 +2210,7 @@ La parte de costes es la exportación FOCUS, un formato estándar de costes, tal
 ## De dónde sale
 
 La herramienta nace de trabajar con Azure Cost Management y el FinOps Framework, de optimizar costes de Azure con redimensionado y reservas, de implantar showback, chargeback y métricas de coste unitario, de ser responsable de un presupuesto de IT y de operar un entorno híbrido de AWS y Azure. Las lecciones que me quedo: un redimensionado lo decide el pico, no la media, y una VM parada no es una VM desasignada."""),
-dict(n="44", repo="44-m365-copilot-readiness", date="2026-11-05", cat="tools",
+dict(n="44", repo="44-m365-copilot-readiness", date="2026-11-05", updated="2026-11-18", cat="tools",
  title_en="An HR site open to the whole company could reach 1,650 people through Copilot two weeks before a new wave",
  title_es="Un sitio de RR. HH. abierto a toda la empresa podría llegar a 1.650 personas por Copilot antes de una oleada",
  seo_title_en="Microsoft 365 Copilot readiness review · Iñigo González",

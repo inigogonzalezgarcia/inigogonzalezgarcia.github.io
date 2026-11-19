@@ -31,6 +31,18 @@ POSTS_SEO = {
         "en": "Entra ID SSO audit: SAML certificates and secrets about to expire, app owners, MFA coverage, risky permissions and SCIM across enterprise apps.",
         "es": "Auditoría SSO de Entra ID: certificados SAML y secretos a punto de caducar, propietarios, cobertura de MFA, permisos de riesgo y SCIM.",
     },
+    "21-apple-fleet-audit": {
+        "es": "Revisión semanal de Jamf Pro: certificado push y tokens, versiones, FileVault, SIP, bootstrap token, equipos sin conectar y discos llenos, dirección primero.",
+    },
+    "25-security-controls-evidence": {
+        "es": "Registro de controles para ISO 27001, NIS2 y RGPD: evidencias que faltan, llegan tarde o fallan, excepciones caducadas y cómo de listo está cada marco.",
+    },
+    "38-it-asset-lifecycle-planner": {
+        "es": "Revisión mensual de los equipos de IT con Device42 (salas de comunicaciones), Intune, Jamf y compras: inventario por serie, equipos de bajas y renovaciones.",
+    },
+    "40-change-calendar-risk-review": {
+        "es": "Revisión semanal del CAB con ServiceNow, mapa de servicios, congelaciones e incidentes: qué cambios no están listos, cuáles coinciden y cómo fue el mes pasado.",
+    },
     "22-dex-experience-score": {
         "en": "DEX score lab: a 0-10 experience score per laptop, site and department from endpoint telemetry, the cause behind each low score and the fixes that raise it.",
         "es": "Puntuación DEX: convierte la telemetría de los equipos en una nota de 0 a 10 por dispositivo, sede y departamento y ordena los arreglos que más la suben.",
