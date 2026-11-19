@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Análisis de impacto (BIA): MTPD, RTO y RPO · Iñigo González</title>
+<meta name="description" content="Revisión del análisis de impacto: MTPD y nivel por proceso, RTO y RPO necesarios frente a lo que pueden IT, proveedores y personas, pruebas de DR y orden.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/blog/58-business-impact-analysis.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/58-business-impact-analysis.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/58-business-impact-analysis.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/58-business-impact-analysis.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Análisis de impacto (BIA): MTPD, RTO y RPO · Iñigo González">
+<meta property="og:description" content="Revisión del análisis de impacto: MTPD y nivel por proceso, RTO y RPO necesarios frente a lo que pueden IT, proveedores y personas, pruebas de DR y orden.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/blog/58-business-impact-analysis.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/58-business-impact-analysis.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Análisis de impacto (BIA): MTPD, RTO y RPO · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"La liquidación podía esperar doce horas, y las carpetas compartidas que lee tardarían un día en volver y nunca se habían probado","alternativeHeadline":"Settlement could wait twelve hours, and the file shares it reads would take a day to come back and had never been tested","description":"La revisión, publicada con datos ficticios de una empresa de servicios financieros con 14 procesos de negocio, calcula cuánto tiempo puede parar cada proceso y cuántos datos puede perder, y comprueba si los servicios de IT, los proveedores y las personas de los que depende pueden cumplirlo.","datePublished":"2026-11-19","dateModified":"2026-11-19","inLanguage":"es","image":"https://inigogonzalezgarcia.github.io/assets/og/58-business-impact-analysis.png","url":"https://inigogonzalezgarcia.github.io/es/blog/58-business-impact-analysis.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/blog/58-business-impact-analysis.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/es/blog/#blog"},"articleSection":"Herramientas de IT Ops"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/es/blog/"},{"@type":"ListItem","position":3,"name":"La liquidación podía esperar doce horas, y las carpetas compartidas que lee tardarían un día en volver y nunca se habían probado","item":"https://inigogonzalezgarcia.github.io/es/blog/58-business-impact-analysis.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span></a><a href="../guias.html"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../blog/58-business-impact-analysis.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 58</p>
+    <h1><span class="es">La liquidación podía esperar doce horas, y las carpetas compartidas que lee tardarían un día en volver y nunca se habían probado</span></h1>
+    <p class="lede"><span class="es">La revisión, publicada con datos ficticios de una empresa de servicios financieros con 14 procesos de negocio, calcula cuánto tiempo puede parar cada proceso y cuántos datos puede perder, y comprueba si los servicios de IT, los proveedores y las personas de los que depende pueden cumplirlo.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span> · <span class="es">19 nov 2026</span> · <span class="es">4 min</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <figure class="post-fig"><a href="https://github.com/inigogonzalezgarcia/58-business-impact-analysis" target="_blank" rel="noopener noreferrer"><img src="../../assets/blog/58.webp" alt="Informe de 58-business-impact-analysis con los datos ficticios de la demo" width="1000" height="820" decoding="async"></a><figcaption class="small muted"><span class="es">Informe que genera el repo con los datos ficticios de la demo.</span></figcaption></figure>
+      <div class="es" lang="es">
+<p>La liquidación y conciliación podía estar parada doce horas antes de que el daño fuera intolerable. Las carpetas compartidas que lee tardarían un día en volver, guardan un punto de restauración al día, se gestionan como servicio de nivel 3 y nunca habían entrado en una prueba de recuperación ante desastres. Así lo detecta la revisión del análisis de impacto en el negocio que acompaña a este post, un proyecto de código abierto que se ejecuta con datos de ejemplo de una empresa ficticia de servicios financieros con sede en Madrid y centro de respaldo en Barcelona.</p>
+<p>Un análisis de impacto en el negocio, o BIA, pregunta a cada responsable qué pasa si su proceso se para cuatro horas, un día, tres días o una semana. La revisión toma esas respuestas y la política de continuidad de la organización y calcula tres cifras por proceso: el periodo máximo de interrupción tolerable, el nivel, y el tiempo de recuperación y la pérdida de datos que puede aceptar. La liquidación llega a un impacto grave al día, así que es de nivel 2 y tiene que estar de vuelta en doce horas.</p>
+<h2>Un proceso es tan rápido como el servicio más lento que tiene debajo</h2>
+<p>Después, la revisión sigue cada proceso hasta todo aquello sobre lo que funciona. La liquidación usa su propia aplicación, que una prueba de DR recuperó en diez horas, y esa aplicación necesita el clúster de SQL y las carpetas compartidas. Las carpetas son el eslabón más lento: 24 horas declaradas y nunca probadas, con copias diarias para un proceso que solo puede perder una hora de datos. El hallazgo es rojo y recae en las carpetas, no en la aplicación que todos miran primero.</p>
+<p>La misma lectura encuentra los pagos, que no pueden perder ningún dato, sobre una base de datos con un punto de restauración cada 15 minutos, y un hub de pagos cuya recuperación en dos horas nunca se ha demostrado en una prueba. Una réplica del motor de riesgos dejó de replicar la noche anterior, así que su punto de restauración real es la copia de cada cuatro horas. El sistema de órdenes lleva un mes de retraso en su prueba semestral y la gestión documental falló la última, en febrero.</p>
+<h2>Fuera de IT</h2>
+<p>No todos los huecos son un servidor. El proveedor que conecta los pagos con la red de pagos promete cuatro horas en su contrato para un proceso que solo puede esperar dos. Una sola persona opera esa conexión y nadie la cubre, y otra es la única que ejecuta los scripts de conciliación. El servicio de atención a clientes no tiene sede alternativa, dos proveedores no tienen evidencias de continuidad al día y tres BIA están caducados o sin firmar.</p>
+<p>Cada proceso recibe una nota de resiliencia. La demo saca un 88,5%, con 12 hallazgos rojos y 17 ámbar, y termina con seis decisiones: cerrar los huecos de recuperación de cuatro servicios, hacer seis pruebas de DR, subir el nivel de tres servicios, revisar tres contratos de proveedores, formar a dos suplentes y revisar tres BIA. La revisión también da el orden en el que recuperar los servicios: primero la red, después el directorio y las bases de datos, y luego las aplicaciones que dependen de ellos, las más urgentes primero.</p>
+<h2>Cómo usarlo con datos reales</h2>
+<p>El repositorio incluye un script de PowerShell que solo lee el estado de Hyper-V Replica de cada host; los procesos, sus dependencias, los servicios con sus pruebas de DR, los proveedores y las personas clave van en ficheros CSV. Los niveles, los factores de recuperación y la frecuencia de pruebas son la política de la propia organización en un fichero de configuración. Funciona con Python y sin dependencias externas, y genera un informe web, un dosier de una página para el comité de continuidad y ficheros CSV con cada proceso, servicio, prueba y acción. Los datos de la demo son ficticios: nombres, servicios, proveedores y fechas.</p>
+<h2>De dónde sale</h2>
+<p>La herramienta nace de supervisar pruebas de recuperación ante desastres y de continuidad de negocio, de diseñar y probar planes de copias y de DR, de aplicar ISO 22301 e ISO 27001, de trabajar con Veeam, Commvault, Hyper-V y vSphere, y de llevar la gestión de disponibilidad y capacidad como práctica formal.</p>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span></p>
+      <p class="repo-name">58-business-impact-analysis</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/58-business-impact-analysis" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="es">Compartir</span></p>
+        <div class="share-row es" lang="es"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F58-business-impact-analysis.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F58-business-impact-analysis.html&amp;text=La%20liquidaci%C3%B3n%20pod%C3%ADa%20esperar%20doce%20horas%2C%20y%20las%20carpetas%20compartidas%20que%20lee%20tardar%C3%ADan%20un%20d%C3%ADa%20en%20volver%20y%20nunca%20se%20hab%C3%ADan%20probado%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">X</a><a class="share-btn" href="https://wa.me/?text=La%20liquidaci%C3%B3n%20pod%C3%ADa%20esperar%20doce%20horas%2C%20y%20las%20carpetas%20compartidas%20que%20lee%20tardar%C3%ADan%20un%20d%C3%ADa%20en%20volver%20y%20nunca%20se%20hab%C3%ADan%20probado%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F58-business-impact-analysis.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=La%20liquidaci%C3%B3n%20pod%C3%ADa%20esperar%20doce%20horas%2C%20y%20las%20carpetas%20compartidas%20que%20lee%20tardar%C3%ADan%20un%20d%C3%ADa%20en%20volver%20y%20nunca%20se%20hab%C3%ADan%20probado%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F58-business-impact-analysis.html" aria-label="Compartir en Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/es/blog/58-business-impact-analysis.html" data-copied="Enlace copiado">Copiar enlace</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/es/blog/58-business-impact-analysis.html" data-title="La liquidación podía esperar doce horas, y las carpetas compartidas que lee tardarían un día en volver y nunca se habían probado" hidden>Más…</button></div>
+        
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="32-backup-restore-test-tracker.html"><span class="label muted"><span class="es">Blog · 32</span></span><span class="related-t"><span class="es">Un backup nocturno que falla tres noches seguidas deja un sistema tres días fuera de su RPO</span></span></a><a class="related-link" href="36-major-incident-command-kit.html"><span class="label muted"><span class="es">Blog · 36</span></span><span class="related-t"><span class="es">Los usuarios avisaron 40 minutos antes que la monitorización: el hueco que mide un kit de incidentes mayores</span></span></a><a class="related-link" href="35-private-cloud-capacity-review.html"><span class="label muted"><span class="es">Blog · 35</span></span><span class="related-t"><span class="es">Un clúster de nube privada al 74% de su RAM cruza su límite N+1 en enero al contar los proyectos aprobados</span></span></a><a class="related-link" href="../guias/dr-bcp-rpo-y-rto-por-servicio-plan-de-recuperacion-y-prueba-completa.html"><span class="label muted"><span class="es">Guía · Nivel 4</span></span><span class="related-t"><span class="es">DR/BCP: RPO y RTO por servicio, el plan de recuperación y una prueba completa</span></span></a><a class="related-link" href="../guias/dr-bcp-preparar-y-supervisar-una-prueba-de-recuperacion-en-una-sede-financiera.html"><span class="label muted"><span class="es">Guía · Sector 5</span></span><span class="related-t"><span class="es">DR/BCP: preparar y supervisar una prueba de recuperación en una sede financiera</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="57-ai-use-case-register.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">Un piloto que puntuaba las emociones de los agentes del contact center estaba en marcha, y la política de IA de la empresa no lo permite</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a> · <a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a> · <a href="../condiciones.html"><span class="es">Condiciones</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></span>
+    <a href="#top"><span class="es">Volver arriba ↑</span></a>
+  </div>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>

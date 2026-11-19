@@ -1497,7 +1497,7 @@ Un exportador de solo lectura en PowerShell con consultas SQL de ejemplo rechaza
 ## De dónde sale
 
 La herramienta nace de trabajar con sistemas de gestión de concesionarios y redes de concesionarios, gestión de garantías y catálogos de recambios de posventa, junto con integraciones, proveedores, SLAs y OLAs. La lección que hay detrás es que la mayoría de los problemas del concesionario tienen una causa de sistemas un paso antes: una tasa de rechazo que en realidad es un catálogo viejo."""),
-dict(n="32", repo="32-backup-restore-test-tracker", date="2026-10-25", cat="tools",
+dict(n="32", repo="32-backup-restore-test-tracker", date="2026-10-25", updated="2026-11-19", cat="tools",
  title_en="A nightly backup that fails three nights in a row leaves a system three days outside its RPO",
  title_es="Un backup nocturno que falla tres noches seguidas deja un sistema tres días fuera de su RPO",
  seo_title_en="Backup restore tests and DR review · Iñigo González",
@@ -3088,4 +3088,61 @@ El repositorio incluye un script de PowerShell que solo lee las aplicaciones emp
 ## De dónde sale
 
 La herramienta nace de desplegar Microsoft 365 Copilot y herramientas de IA para los usuarios e impulsar su adopción, de administrar agentes de Microsoft 365 y Copilot Studio, de trabajar con IA responsable y el reglamento europeo de IA junto con ISO 27001, RGPD y NIS2, de Microsoft Purview y de preparar business cases con beneficios medibles."""),
+dict(n="58", repo="58-business-impact-analysis", date="2026-11-19", cat="tools",
+ title_en="Settlement could wait twelve hours, and the file shares it reads would take a day to come back and had never been tested",
+ title_es="La liquidación podía esperar doce horas, y las carpetas compartidas que lee tardarían un día en volver y nunca se habían probado",
+ seo_title_en="Business impact analysis: MTPD, RTO and RPO · Iñigo González",
+ seo_title_es="Análisis de impacto (BIA): MTPD, RTO y RPO · Iñigo González",
+ seo_desc="Business impact analysis review: MTPD and tier per process, required RTO and RPO against what IT, suppliers and people can do, DR tests and recovery order.",
+ seo_desc_es="Revisión del análisis de impacto: MTPD y nivel por proceso, RTO y RPO necesarios frente a lo que pueden IT, proveedores y personas, pruebas de DR y orden.",
+ dek_en="The review, published with fictional data from a financial services firm with 14 business processes, works out how long each process can be down and how much data it can lose, and checks whether the IT services, suppliers and people it depends on can meet that.",
+ dek_es="La revisión, publicada con datos ficticios de una empresa de servicios financieros con 14 procesos de negocio, calcula cuánto tiempo puede parar cada proceso y cuántos datos puede perder, y comprueba si los servicios de IT, los proveedores y las personas de los que depende pueden cumplirlo.",
+ en="""
+Settlement and reconciliation could be stopped for twelve hours before the damage became intolerable. The file shares it reads would take a day to come back, keep one restore point a day, are run as a tier 3 service and had never been part of a DR test. That is what the business impact analysis review published with this post finds. It is an open-source project that runs on sample data from a fictional financial services firm with its head office in Madrid and a disaster recovery site in Barcelona.
+
+A business impact analysis, or BIA, asks each process owner what happens if the process stops for four hours, a day, three days or a week. The review takes those answers and the organisation's continuity policy and works out three figures for each process: the maximum tolerable period of disruption, the tier, and the recovery time and data loss it can accept. Settlement reaches a major impact after one day, so it is tier 2 and needs to be back within twelve hours.
+
+## A process is as fast as the slowest service under it
+
+The review then follows each process down to everything it runs on. Settlement uses its own application, which a DR test brought back in ten hours, and that application needs the SQL cluster and the file shares. The file shares are the slowest link: a claimed 24 hours, never tested, with daily backups for a process that can lose one hour of data. The finding is red and lands on the file shares, not on the application everyone looks at first.
+
+The same reading finds payments, which cannot lose any data, sitting on a database that keeps a restore point every 15 minutes, and a payments hub whose two-hour recovery has never been shown in a test. One replica of the risk engine stopped replicating the night before, so its real restore point is the four-hour backup. The order management system is a month past its six-monthly test, and document management failed its last one in February.
+
+## Outside IT
+
+Not every gap is a server. The bureau that connects payments to the payment network promises four hours in its contract for a process that can only wait two. One person operates that network connection and nobody covers her, and another is the only one who runs the reconciliation scripts. The client service desk has no alternate site, two suppliers have no current continuity evidence and three BIAs are out of date or unsigned.
+
+Each process gets a resilience score. The demo scores 88.5%, with 12 red and 17 amber findings, and ends with six decisions: close the recovery gaps of four services, run six DR tests, raise the tier of three services, review three supplier contracts, train two deputies and review three BIAs. The review also lists the order in which to bring services back: the network first, then directory and databases, then the applications that need them, the most urgent first.
+
+## How to use it with real data
+
+The repository includes a PowerShell script that only reads the Hyper-V Replica status of each host; the processes, their dependencies, the services with their DR tests, suppliers and key people go in CSV files. Tiers, recovery factors and test frequency are the organisation's own policy in a settings file. It runs on Python with no external dependencies and produces a web report, a one-page pack for the continuity steering committee and CSV files with every process, service, test and action. The demo data is fictional: names, services, suppliers and dates.
+
+## Where it comes from
+
+The tool comes from supervising disaster recovery and business continuity tests, designing and testing backup and DR plans, applying ISO 22301 and ISO 27001, working with Veeam, Commvault, Hyper-V and vSphere, and running availability and capacity management as a formal practice.""",
+ es="""
+La liquidación y conciliación podía estar parada doce horas antes de que el daño fuera intolerable. Las carpetas compartidas que lee tardarían un día en volver, guardan un punto de restauración al día, se gestionan como servicio de nivel 3 y nunca habían entrado en una prueba de recuperación ante desastres. Así lo detecta la revisión del análisis de impacto en el negocio que acompaña a este post, un proyecto de código abierto que se ejecuta con datos de ejemplo de una empresa ficticia de servicios financieros con sede en Madrid y centro de respaldo en Barcelona.
+
+Un análisis de impacto en el negocio, o BIA, pregunta a cada responsable qué pasa si su proceso se para cuatro horas, un día, tres días o una semana. La revisión toma esas respuestas y la política de continuidad de la organización y calcula tres cifras por proceso: el periodo máximo de interrupción tolerable, el nivel, y el tiempo de recuperación y la pérdida de datos que puede aceptar. La liquidación llega a un impacto grave al día, así que es de nivel 2 y tiene que estar de vuelta en doce horas.
+
+## Un proceso es tan rápido como el servicio más lento que tiene debajo
+
+Después, la revisión sigue cada proceso hasta todo aquello sobre lo que funciona. La liquidación usa su propia aplicación, que una prueba de DR recuperó en diez horas, y esa aplicación necesita el clúster de SQL y las carpetas compartidas. Las carpetas son el eslabón más lento: 24 horas declaradas y nunca probadas, con copias diarias para un proceso que solo puede perder una hora de datos. El hallazgo es rojo y recae en las carpetas, no en la aplicación que todos miran primero.
+
+La misma lectura encuentra los pagos, que no pueden perder ningún dato, sobre una base de datos con un punto de restauración cada 15 minutos, y un hub de pagos cuya recuperación en dos horas nunca se ha demostrado en una prueba. Una réplica del motor de riesgos dejó de replicar la noche anterior, así que su punto de restauración real es la copia de cada cuatro horas. El sistema de órdenes lleva un mes de retraso en su prueba semestral y la gestión documental falló la última, en febrero.
+
+## Fuera de IT
+
+No todos los huecos son un servidor. El proveedor que conecta los pagos con la red de pagos promete cuatro horas en su contrato para un proceso que solo puede esperar dos. Una sola persona opera esa conexión y nadie la cubre, y otra es la única que ejecuta los scripts de conciliación. El servicio de atención a clientes no tiene sede alternativa, dos proveedores no tienen evidencias de continuidad al día y tres BIA están caducados o sin firmar.
+
+Cada proceso recibe una nota de resiliencia. La demo saca un 88,5%, con 12 hallazgos rojos y 17 ámbar, y termina con seis decisiones: cerrar los huecos de recuperación de cuatro servicios, hacer seis pruebas de DR, subir el nivel de tres servicios, revisar tres contratos de proveedores, formar a dos suplentes y revisar tres BIA. La revisión también da el orden en el que recuperar los servicios: primero la red, después el directorio y las bases de datos, y luego las aplicaciones que dependen de ellos, las más urgentes primero.
+
+## Cómo usarlo con datos reales
+
+El repositorio incluye un script de PowerShell que solo lee el estado de Hyper-V Replica de cada host; los procesos, sus dependencias, los servicios con sus pruebas de DR, los proveedores y las personas clave van en ficheros CSV. Los niveles, los factores de recuperación y la frecuencia de pruebas son la política de la propia organización en un fichero de configuración. Funciona con Python y sin dependencias externas, y genera un informe web, un dosier de una página para el comité de continuidad y ficheros CSV con cada proceso, servicio, prueba y acción. Los datos de la demo son ficticios: nombres, servicios, proveedores y fechas.
+
+## De dónde sale
+
+La herramienta nace de supervisar pruebas de recuperación ante desastres y de continuidad de negocio, de diseñar y probar planes de copias y de DR, de aplicar ISO 22301 e ISO 27001, de trabajar con Veeam, Commvault, Hyper-V y vSphere, y de llevar la gestión de disponibilidad y capacidad como práctica formal."""),
 ]

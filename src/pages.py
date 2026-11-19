@@ -390,7 +390,7 @@ AREAS = [
     ("workplace", "Modern Workplace", "Modern Workplace", "02 05 17 18 21 22 29 33 38 41 44 48 52 55"),
     ("security", "Identidad y seguridad", "Identity & security", "03 19 20 25 26 27 37 39 45 51 53 57"),
     ("itsm", "ITSM y servicio", "ITSM & service", "04 28 30 36 40 46 47 49 56"),
-    ("infra", "Infraestructura", "Infrastructure", "08 32 35"),
+    ("infra", "Infraestructura", "Infrastructure", "08 32 35 58"),
     ("cost", "Costes y valor", "Cost & value", "01 23 43 50 54"),
     ("sector", "Sectores", "Sector tools", "24 31 34 42"),
     ("labs", "Labs cloud y GPU", "Cloud & GPU labs", "06 07 09 10 11 12 13 14 15 16"),
