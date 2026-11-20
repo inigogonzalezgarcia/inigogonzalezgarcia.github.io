@@ -328,13 +328,7 @@ def _layout(lang, *, R, path, active, title_en, title_es, desc, desc_es, body, h
 {body}
 </main>
 
-<footer>
-  <div class="wrap">
-    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
-    <span><a href="{R}aviso-legal.html">{bi("Aviso legal", "Legal notice")}</a> · <a href="{R}privacidad.html">{bi("Privacidad y cookies", "Privacy and cookies")}</a> · <a href="{R}condiciones.html">{bi("Condiciones", "Terms")}</a> · <a href="{R}recursos.html">Newsletter</a> · {bi('SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a>', 'SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about#en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a>')} · <button class="linkbtn" type="button" data-cookie-settings>{bi("Preferencias de cookies", "Cookie settings")}</button></span>
-    <a href="#top">{bi("Volver arriba ↑", "Back to top ↑")}</a>
-  </div>
-</footer>
+{site_footer(R, lang=lang)}
 
 <script src="{R}assets/data.js"></script>
 <script src="{R}assets/app.js"></script>
@@ -342,6 +336,74 @@ def _layout(lang, *, R, path, active, title_en, title_es, desc, desc_es, body, h
 </body>
 </html>
 '''
+
+SD_URL = "https://sysadmindesksbyigg.pages.dev/"
+LAB_URL = "https://fx-trading-lab.pages.dev/"
+EMSS_URL = "https://emss-studio.pages.dev/"
+
+def site_footer(R="", home_link=False, lang=None):
+    """The footer of every page: who and what in one line with the way to get in touch, four columns (the site, the
+    projects, free resources, legal), the figures that grow on their own, and the name set large as the signature."""
+    from posts import POSTS
+    from guides import GUIDES
+    tools = sum(1 for q in POSTS if str(q["n"]).isdigit())
+    ext = ' target="_blank" rel="noopener noreferrer"'
+    arrow = ' <span aria-hidden="true">↗</span>'
+    def col(title, items):
+        return (f'<div class="foot-col"><p class="foot-h label">{title}</p><ul>'
+                + "".join(f"<li>{x}</li>" for x in items) + "</ul></div>")
+    site = [f'<a href="{R}{h}">{bi(es, en)}</a>' for k, h, es, en in NAV if k != "links"]
+    projects = [f'<a href="{SD_URL}"{ext}>SysAdmin Desks{arrow}</a>',
+                f'<a href="{LAB_URL}"{ext}>Lab de Inversión{arrow}</a>',
+                f'<a href="{EMSS_URL}"{ext}>EMSS{arrow}</a>',
+                f'<a href="{GITHUB}"{ext}>{bi("Herramientas en GitHub", "Tools on GitHub")}{arrow}</a>']
+    free = [f'<a href="{R}guias.html">{bi("Guías IT paso a paso", "Step-by-step IT guides")}</a>',
+            f'<a href="{R}recursos.html">{bi("33 ideas y newsletter", "33 ideas and newsletter")}</a>',
+            bi(f'<a href="{SD_URL}about"{ext}>SysAdmin Desks: qué es{arrow}</a>', f'<a href="{SD_URL}about#en"{ext}>SysAdmin Desks: about{arrow}</a>'),
+            bi(f'<a href="{SD_URL}faq"{ext}>Preguntas frecuentes{arrow}</a>', f'<a href="{SD_URL}faq#en"{ext}>Questions and answers{arrow}</a>')]
+    legal = [f'<a href="{R}aviso-legal.html">{bi("Aviso legal", "Legal notice")}</a>',
+             f'<a href="{R}privacidad.html">{bi("Privacidad y cookies", "Privacy and cookies")}</a>',
+             f'<a href="{R}condiciones.html">{bi("Condiciones", "Terms")}</a>',
+             f'<button class="linkbtn" type="button" data-cookie-settings>{bi("Preferencias de cookies", "Cookie settings")}</button>']
+    if home_link:
+        back = f'<a class="foot-up" href="{R}index.html">{bi("Volver a la web", "Back to the site")} <span aria-hidden="true">→</span></a>'
+    else:
+        back = f'<a class="foot-up" href="#top">{bi("Volver arriba", "Back to top")} <span aria-hidden="true">↑</span></a>'
+    lede = bi("Operaciones IT, Modern Workplace e infraestructura desde Madrid. Herramientas abiertas, guías y un simulador gratis para practicar.",
+              "IT operations, Modern Workplace and infrastructure from Madrid. Open tools, guides and a free simulator to practise.")
+    made = bi("Hecha a mano en HTML, CSS y Python · Analítica solo si la aceptas", "Hand-built in HTML, CSS and Python · Analytics only if you accept")
+    mark = ('<svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" '
+            'stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" '
+            'stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>')
+    stats = "".join(f'<div><dt>{bi(es, en)}</dt><dd>{v}</dd></div>' for es, en, v in
+                    (("Herramientas", "Tools", tools), ("Guías", "Guides", len(GUIDES)), ("En IT desde", "In IT since", 2015)))
+    cols = "\n      ".join([col(bi("La web", "The site"), site), col(bi("Proyectos", "Projects"), projects),
+                            col(bi("Gratis", "Free"), free), col("Legal", legal)])
+    return f'''<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-id">
+        <a class="foot-brand" href="{R}index.html">{mark}<span>Iñigo González García</span></a>
+        <p class="foot-lede">{lede}</p>
+        <div class="foot-cta">
+          <a class="btn foot-btn" href="{R}about.html#contacto">{bi("Escríbeme", "Get in touch")} <span aria-hidden="true">→</span></a>
+          <a class="foot-social" href="{LINKEDIN}" rel="me noopener" target="_blank">LinkedIn{arrow}</a>
+          <a class="foot-social" href="{GITHUB}" rel="me noopener" target="_blank">GitHub{arrow}</a>
+        </div>
+      </div>
+      <dl class="foot-stats">{stats}</dl>
+    </div>
+    <nav class="foot-cols" aria-label="{pick(lang, "Pie de página", "Footer") if lang else "Footer"}">
+      {cols}
+    </nav>
+    <div class="foot-bar label">
+      <span>© <span id="year">2026</span> Iñigo González García · Madrid</span>
+      <span class="foot-made">{made}</span>
+      {back}
+    </div>
+  </div>
+  <p class="foot-word" aria-hidden="true">Iñigo González</p>
+</footer>'''
 
 def page_hero(kicker, h1, lede="", extra=""):
     lede_html = f'<p class="lede">{lede}</p>' if lede else ""

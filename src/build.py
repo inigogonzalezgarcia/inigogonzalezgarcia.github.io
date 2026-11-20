@@ -166,6 +166,7 @@ CAPTCHA = (f'<div class="cf-turnstile" data-sitekey="{TS}" data-theme="light" da
 CAPTCHA_JS = '<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>' if TS else ""
 STAGES_HTML = "\n".join(stage_html(s) for s in STAGES)
 POSTS_SORTED = sorted(POSTS, key=lambda p: (p["date"], p["n"]), reverse=True)
+N_TOOLS = sum(1 for q in POSTS if str(q["n"]).isdigit())   # numbered projects, one public repo each
 DESC = "Iñigo González García, IT Site Leader in Madrid: 11+ years in IT operations, Modern Workplace and infrastructure in finance, healthcare, industry and retail."
 DESC_ES = "Iñigo González García, IT Site Leader en Madrid: más de 11 años en operaciones IT, Modern Workplace e infraestructura en finanzas, sanidad, industria y retail."
 
@@ -254,7 +255,7 @@ home_body = "\n\n".join([
       <h2 class="h2 sm">{bi("Aprende a comprobar<br>una idea de inversión.", "Learn to check<br>an investment idea.")}</h2>
     </div>
     <div>
-      <p class="lede">{bi("Un laboratorio para decidir con datos: backtests sobre ocho años reales de EUR/USD (2019–2026) con el protocolo completo de investigación (Monte Carlo, benchmark aleatorio, sensibilidad y walk-forward), cada operación explicada en su gráfico, lecciones gratis y un simulador guiado de nueve niveles. Próximos módulos: comparar brókers, OPVs, fiscalidad del inversor e inversión indexada. Material educativo.", "A lab to decide with data: backtests over eight real years of EUR/USD (2019–2026) with the full research protocol (Monte Carlo, random benchmark, sensitivity and walk-forward), every trade explained on its chart, free lessons and a nine-level guided simulator. Next modules: comparing brokers, IPOs, investor taxes and index investing. Educational material.")}</p>
+      <p class="lede">{bi("Un laboratorio para decidir con datos: backtests sobre ocho años reales de EUR/USD (2019–2026) con el protocolo completo de investigación (Monte Carlo, benchmark aleatorio, sensibilidad y walk-forward), cada operación explicada en su gráfico, lecciones gratis y un simulador guiado de nueve niveles. También: comparar brókers, seguir las OPV y un curso de fondos indexados; próximo módulo, la fiscalidad del inversor. Material educativo.", "A lab to decide with data: backtests over eight real years of EUR/USD (2019–2026) with the full research protocol (Monte Carlo, random benchmark, sensitivity and walk-forward), every trade explained on its chart, free lessons and a nine-level guided simulator. Also: comparing brokers, following IPOs and an index fund course; next module, investor taxes. Educational material.")}</p>
       <a class="btn" href="https://fx-trading-lab.pages.dev/" target="_blank" rel="noopener noreferrer">{bi("Abrir Lab de Inversión", "Open Lab de Inversión")} ↗</a>
       <p class="u-mt22">{bi('<a class="arrow-link" href="https://fx-trading-lab.pages.dev/lessons" target="_blank" rel="noopener noreferrer">Cómo leer un backtest, paso a paso (lecciones gratis) ↗</a>', '<a class="arrow-link" href="https://fx-trading-lab.pages.dev/en/lessons" target="_blank" rel="noopener noreferrer">How to read a backtest, step by step (free lessons) ↗</a>')}</p>
       <p class="u-mt22"><a class="arrow-link" href="https://fx-trading-lab.pages.dev/method" target="_blank" rel="noopener noreferrer">{bi("Método y aviso", "Method and notice")} ↗</a></p>
@@ -352,7 +353,7 @@ journey_body = page_hero(bi("El viaje · 2015 — 2026", "The journey · 2015 �
     bi("Once años.<br>Cinco etapas.", "Eleven years.<br>Five stages."),
     bi("De una consultora tecnológica a la sede de Madrid de una firma de servicios financieros, con la misma idea: que la tecnología funcione y no se note.",
        "From a technology consultancy to the Madrid site of a financial services firm, with the same idea throughout: technology that works and that people don't have to think about.")) \
-    + "\n\n" + SEC["numbers"].replace(' u-pt0"', '"') + "\n\n" + SEC["stages"].replace("{{STAGES}}", STAGES_HTML) + "\n\n" + TOOLKIT_HTML \
+    + "\n\n" + SEC["numbers"].replace(' u-pt0"', '"').replace('data-count="42">42<', f'data-count="{N_TOOLS}">{N_TOOLS}<') + "\n\n" + SEC["stages"].replace("{{STAGES}}", STAGES_HTML) + "\n\n" + TOOLKIT_HTML \
     + f'''
 
 <section class="credits">
@@ -661,20 +662,25 @@ for p in order:
 # about
 from guides import GUIDES as _GALL
 FEATURED = ["22-dex-experience-score", "19-ad-infra-health-check", "20-entra-sso-app-audit", "39-vulnerability-remediation-sla"]
+_LAST = max(p["date"] for p in POSTS)
+_NOW_ES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"][int(_LAST[5:7]) - 1] + " " + _LAST[:4]
+_NOW_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][int(_LAST[5:7]) - 1] + " " + _LAST[:4]
+
 def _featured():
-    by = {p["repo"]: p for p in POSTS}
-    return " · ".join(f'<a href="blog/{r}.html">{bi(html.escape(by[r]["title_es"]), html.escape(by[r]["title_en"]))}</a>' for r in FEATURED)
+    """The four latest projects, so the list never goes stale."""
+    latest = [p for p in POSTS_SORTED if str(p["n"]).isdigit()][:4]
+    return " · ".join(f'<a href="blog/{p["repo"]}.html">{bi(html.escape(p["title_es"]), html.escape(p["title_en"]))}</a>' for p in latest)
 now = f'''<section class="section">
   <div class="wrap now-grid">
     <div class="reveal">
-      <p class="label kicker">{bi("Ahora · noviembre 2026", "Now · November 2026")}</p>
+      <p class="label kicker">{bi(f"Ahora · {_NOW_ES}", f"Now · {_NOW_EN}")}</p>
       <h2 class="h2 sm">{bi("En qué estoy.", "What I'm up to.")}</h2>
     </div>
     <dl class="spec reveal">
-      <div class="spec-row"><dt class="label">{bi("Trabajo", "Work")}</dt><dd>{bi("Quién soy y en qué estoy ahora.", "Who I am and what I'm working on now.")}</dd></div>
+      <div class="spec-row"><dt class="label">{bi("Trabajo", "Work")}</dt><dd>{bi("Operaciones IT, Modern Workplace e infraestructura en Madrid, en inglés cada día con equipos de varios países.", "IT operations, Modern Workplace and infrastructure in Madrid, in English every day with teams in several countries.")}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Simulador", "Simulator")}</dt><dd><a href="https://sysadmindesksbyigg.pages.dev/" target="_blank" rel="noopener noreferrer">SysAdmin Desks ↗</a>{bi(": práctica gratuita de soporte IT con tickets, SLA y nota de trabajo.", ": free IT support practice with tickets, SLA and work notes.")}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Laboratorio", "Lab")}</dt><dd><a href="https://fx-trading-lab.pages.dev/" target="_blank" rel="noopener noreferrer">Lab de Inversión ↗</a>{bi(": laboratorio educativo para comprobar una idea de inversión con datos reales; lecciones gratis y simulador guiado.", ": educational lab to check an investment idea with real data; free lessons and a guided simulator.")}</dd></div>
-      <div class="spec-row"><dt class="label">{bi("Proyectos", "Projects")}</dt><dd><a href="blog/">{bi(f"{len(POSTS)} repos en GitHub", f"{len(POSTS)} repos on GitHub")}</a>{bi(", cada uno con su artículo.", ", each with its own story.")}</dd></div>
+      <div class="spec-row"><dt class="label">{bi("Proyectos", "Projects")}</dt><dd><a href="blog/">{bi(f"{N_TOOLS} proyectos en GitHub", f"{N_TOOLS} projects on GitHub")}</a>{bi(", cada uno con su artículo.", ", each with its own story.")}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Destacados", "Featured")}</dt><dd>{_featured()}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Guías", "Guides")}</dt><dd><a href="guias.html">{bi(f"{len(_GALL)} guías paso a paso", f"{len(_GALL)} step-by-step guides")}</a>{bi(", por nivel y por sector.", ", by level and by sector.")}</dd></div>
       <div class="spec-row"><dt class="label">Newsletter</dt><dd><a href="recursos.html">Tech Career Lab</a>{bi(": una idea práctica cada dos semanas.", ": one practical idea every two weeks.")}</dd></div>
@@ -968,7 +974,7 @@ news_form = f'''<form class="reveal" id="newsForm" action="{NEWS_ACTION}" method
     </form>'''
 # links from the resources page to the work it talks about (projects, practice, guides)
 res_related = related_html([
-    ("blog/", "Blog", "Blog", f"{len(POSTS)} proyectos en GitHub, cada uno con su artículo", f"{len(POSTS)} projects on GitHub, each with its story"),
+    ("blog/", "Blog", "Blog", f"{N_TOOLS} proyectos en GitHub, cada uno con su artículo", f"{N_TOOLS} projects on GitHub, each with its story"),
     ("blog/sysadmindesksbyigg.html", "Blog · SD", "Blog · SD", "SysAdmin Desks: practica tickets de soporte IT gratis", "SysAdmin Desks: practise IT support tickets for free"),
     ("guias.html", "Guías", "Guides", "Guías IT paso a paso, de primera línea a infraestructura", "Step-by-step IT guides, from first line to infrastructure"),
     ("guias/git-scripts-del-equipo-bajo-control-de-versiones.html", "Guía", "Guide", "Git: poner los scripts del equipo bajo control de versiones", "Git: putting the team's scripts under version control"),
@@ -1028,7 +1034,7 @@ LINK_GROUPS = [
         ("https://fx-trading-lab.pages.dev/", "Lab de Inversión", bi("Laboratorio educativo: aprende a comprobar una idea de inversión con ocho años de datos reales.", "Educational lab: learn to check an investment idea with eight years of real data."), "ext"),
         ("https://emss-studio.pages.dev/", "EMSS", bi("Estudio de sesiones: completa y mezcla tu set de màkina, hardcore, hardstyle, hard techno o techno.", "Session studio: completes and mixes your makina, hardcore, hardstyle, hard techno or techno set."), "ext"),
         ("guias.html", bi("Guías IT", "IT guides"), bi(f"{len(_GL)} guías paso a paso: {_nlvl} niveles y {_nsec} sectores.", f"{len(_GL)} step-by-step guides: {_nlvl} levels and {_nsec} sectors."), ""),
-        ("blog/", "Blog", bi(f"{len(POSTS)} proyectos en GitHub, cada uno con su artículo.", f"{len(POSTS)} projects on GitHub, each with its story."), ""),
+        ("blog/", "Blog", bi(f"{N_TOOLS} proyectos en GitHub, cada uno con su artículo.", f"{N_TOOLS} projects on GitHub, each with its story."), ""),
     ]),
     (bi("Gratis para tu carrera", "Free for your career"), [
         ("recursos.html", bi("33 ideas para que te encuentren en IT", "33 ideas to get found in IT"), bi("LinkedIn, proyectos, networking y procesos de selección.", "LinkedIn, projects, networking and hiring processes."), ""),
@@ -1942,6 +1948,8 @@ data = {"cities": {c["id"]: c for c in CITIES}, "hero": CONF["hero_photos"], "ab
 # with the security <meta> block and new-tab links in sync with the rest of the site
 pt = (ROOT / "privacidad.html").read_text()
 pt = _re.sub(r"(<!-- sec:start[^>]*-->\n).*?(<!-- sec:end -->)", lambda m: m.group(1) + SEC_HEAD + "\n" + m.group(2), pt, count=1, flags=_re.S)
+from pages import site_footer as _site_footer
+pt = _re.sub(r"<footer>.*?</footer>", lambda m: _site_footer("", home_link=True), pt, count=1, flags=_re.S)
 sizes["privacidad.html"] = write("privacidad.html", bilingual_static(pt, "privacidad.html",
     "Política de privacidad y cookies de inigogonzalezgarcia.github.io: qué datos se tratan, para qué, cuánto tiempo y tus derechos.",
     "Privacy and cookie policy for inigogonzalezgarcia.github.io: what data is processed, why, for how long and your rights."))

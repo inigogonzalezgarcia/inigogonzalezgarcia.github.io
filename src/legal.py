@@ -1,6 +1,6 @@
 """Legal pages (legal notice, terms). Same shell as the hand-written privacidad.html. Imported by build.py."""
 import base64
-from pages import MAIL, SEC_HEAD, bilingual_static
+from pages import MAIL, SEC_HEAD, bilingual_static, site_footer
 
 UPDATED_ES = "18 de octubre de 2026"
 UPDATED_EN = "18 October 2026"
@@ -63,13 +63,7 @@ def shell(*, path, title_es, title_en, desc_es, desc_en, es, en):
   </div>
 </main>
 
-<footer>
-  <div class="wrap">
-    <span>© 2026 Iñigo González · Madrid</span>
-    <span><a href="aviso-legal.html"><span class="es">Aviso legal</span><span class="en">Legal notice</span></a> · <a href="privacidad.html"><span class="es">Privacidad y cookies</span><span class="en">Privacy and cookies</span></a> · <a href="condiciones.html"><span class="es">Condiciones</span><span class="en">Terms</span></a> · <a href="recursos.html">Newsletter</a> · <span class="es">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about" target="_blank" rel="noopener noreferrer">qué es</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">preguntas frecuentes</a></span><span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about#en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a></span></span>
-    <a href="./"><span class="es">Volver a la web</span><span class="en">Back to the site</span></a>
-  </div>
-</footer>
+{site_footer("", home_link=True)}
 
 <script src="assets/data.js"></script>
 <script src="assets/legal.js"></script>
