@@ -2145,7 +2145,7 @@ Los datos de conectividad e impresoras son exportaciones de la herramienta de mo
 ## De dónde sale
 
 La herramienta nace de dar soporte a las boutiques y puntos de venta de marcas de lujo, de unas 200 preaperturas de córners de marca dentro de grandes almacenes, de Intune y Microsoft Graph y de ser responsable de los procesos de incidencias y cambios. En una de esas aperturas la conectividad se cayó dos horas antes de abrir, y volví a dar servicio al córner con un router USB 4G provisional mientras revisaba el cuarto de comunicaciones de la planta con los técnicos de los grandes almacenes. La lección: una tienda en respaldo está a un fallo de no poder vender, y un respaldo sin probar es solo una esperanza."""),
-dict(n="43", repo="43-azure-cost-rightsizing", date="2026-11-04", updated="2026-11-13", cat="tools",
+dict(n="43", repo="43-azure-cost-rightsizing", date="2026-11-04", updated="2026-11-20", cat="tools",
  title_en="Azure review finds 11,101 euros a month of savings and a reservation at 55% that was set to renew itself",
  title_es="Una revisión de Azure halla 11.101 euros al mes de ahorro y una reserva al 55% que iba a renovarse sola",
  seo_title_en="Monthly Azure cost review and right-sizing · Iñigo González",

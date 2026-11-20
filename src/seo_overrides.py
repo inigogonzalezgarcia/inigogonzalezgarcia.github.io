@@ -82,6 +82,12 @@ GUIDES_SEO = {
     "windows-11-perfil-temporal-o-danado-diagnostico-reparacion-y-datos-del-usuario": {
         "es": "Perfil temporal o dañado en Windows 11: eventos del servicio de perfiles, claves .bak de ProfileList, reparación segura, recuperar datos y copia de OneDrive.",
     },
+    "gpo-plantillas-admx-almacen-central-edge-office-instalacion-de-msi-y-directivas-que-tardan-en-aplicarse": {
+        "es": "Almacén central de ADMX en SYSVOL, plantillas de Edge y Microsoft 365 Apps, instalar un MSI por GPO y por qué una directiva tarda dos reinicios en aplicarse.",
+    },
+    "powershell-remoto-winrm-invoke-command-en-lote-segundo-salto-jea-y-acceso-denegado": {
+        "es": "PowerShell remoto con WinRM: puertos 5985 y 5986, Invoke-Command contra cientos de equipos, el segundo salto sin CredSSP, JEA, registro y un acceso denegado.",
+    },
 }
 
 KEYS = {"en": "seo_desc", "es": "seo_desc_es"}

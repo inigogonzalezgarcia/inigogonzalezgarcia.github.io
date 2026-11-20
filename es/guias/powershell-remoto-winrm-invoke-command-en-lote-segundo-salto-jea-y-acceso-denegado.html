@@ -12,7 +12,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>PowerShell remoto: WinRM, JEA y errores · Iñigo González</title>
-<meta name="description" content="Lo que hay debajo de WinRM (puertos 5985 y 5986, Kerberos, TrustedHosts solo fuera del dominio), Invoke-Command contra cientos de equipos con -ThrottleLimit…">
+<meta name="description" content="PowerShell remoto con WinRM: puertos 5985 y 5986, Invoke-Command contra cientos de equipos, el segundo salto sin CredSSP, JEA, registro y un acceso denegado.">
 <meta name="author" content="Iñigo González">
 <meta name="theme-color" content="#0e1a24">
 <link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/guias/powershell-remoto-winrm-invoke-command-en-lote-segundo-salto-jea-y-acceso-denegado.html">
@@ -26,7 +26,7 @@
 <meta property="og:locale:alternate" content="en_GB">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PowerShell remoto: WinRM, JEA y errores · Iñigo González">
-<meta property="og:description" content="Lo que hay debajo de WinRM (puertos 5985 y 5986, Kerberos, TrustedHosts solo fuera del dominio), Invoke-Command contra cientos de equipos con -ThrottleLimit…">
+<meta property="og:description" content="PowerShell remoto con WinRM: puertos 5985 y 5986, Invoke-Command contra cientos de equipos, el segundo salto sin CredSSP, JEA, registro y un acceso denegado.">
 <meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/guias/powershell-remoto-winrm-invoke-command-en-lote-segundo-salto-jea-y-acceso-denegado.html">
 <meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/guias-nivel-2.png">
 <meta property="og:image:width" content="1200">

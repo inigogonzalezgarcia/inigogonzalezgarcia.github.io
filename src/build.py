@@ -442,6 +442,7 @@ RELATED = {
     "intune": ["02-intune-compliance-report", "18-mecm-intune-comanagement-tracker", "29-tenant-separation-cutover-planner", "41-windows-update-ring-tracker", "47-multi-site-it-scorecard", "48-new-starter-day-one-readiness", "52-endpoint-security-coverage"],
     "graph": ["17-teams-rooms-fleet-health", "20-entra-sso-app-audit", "44-m365-copilot-readiness"], "databases": ["32-backup-restore-test-tracker"],
     "solarwinds": ["36-major-incident-command-kit"], "vsphere": ["35-private-cloud-capacity-review"],
+    "avd-w365": ["43-azure-cost-rightsizing"],
     "aws": ["07-aws-private-connectivity", "01-finops-cloud-cost-dashboard"], "azure-monitor": ["36-major-incident-command-kit", "43-azure-cost-rightsizing"],
     "dr-bcp": ["58-business-impact-analysis", "32-backup-restore-test-tracker", "49-it-project-portfolio-health"], "cisco": ["26-ot-segmentation-lab", "45-network-config-compliance"], "fortigate": ["26-ot-segmentation-lab", "45-network-config-compliance"],
     "compliance": ["25-security-controls-evidence", "51-windows-server-baseline-drift"], "kubernetes": ["06-kubernetes-ingress-lab", "15-multi-tenant-gpu-scheduling", "09-gpu-node-remediation"],
