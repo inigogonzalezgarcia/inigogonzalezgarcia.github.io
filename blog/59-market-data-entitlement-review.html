@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Market data entitlements: LSEG and Bloomberg · Iñigo González</title>
+<meta name="description" content="Market data entitlement review for LSEG RTDS and Bloomberg B-PIPE: leavers still entitled, unused and duplicate packages, invoice checks, switch-off list.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/59-market-data-entitlement-review.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/59-market-data-entitlement-review.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/59-market-data-entitlement-review.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/59-market-data-entitlement-review.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Market data entitlements: LSEG and Bloomberg · Iñigo González">
+<meta property="og:description" content="Market data entitlement review for LSEG RTDS and Bloomberg B-PIPE: leavers still entitled, unused and duplicate packages, invoice checks, switch-off list.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/59-market-data-entitlement-review.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/59-market-data-entitlement-review.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Market data entitlements: LSEG and Bloomberg · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"A trader who left in October still had four market data packages, and nobody had opened commodity futures since July","alternativeHeadline":"Un trader que se fue en octubre seguía con cuatro paquetes de datos de mercado, y nadie abría los futuros de materias primas desde julio","description":"The review, published with fictional data from a broker with 34 people on its trading floor, checks who can see which market data on LSEG and Bloomberg, what nobody uses and whether the invoice matches, and lists what to switch off before the vendors' cut-off.","datePublished":"2026-11-20","dateModified":"2026-11-20","inLanguage":"en","image":"https://inigogonzalezgarcia.github.io/assets/og/59-market-data-entitlement-review.png","url":"https://inigogonzalezgarcia.github.io/blog/59-market-data-entitlement-review.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/blog/59-market-data-entitlement-review.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/blog/#blog"},"articleSection":"IT Ops tools"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/blog/"},{"@type":"ListItem","position":3,"name":"A trader who left in October still had four market data packages, and nobody had opened commodity futures since July","item":"https://inigogonzalezgarcia.github.io/blog/59-market-data-entitlement-review.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/" aria-current="page"><span class="en">Blog</span></a><a href="../guias.html"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../es/blog/59-market-data-entitlement-review.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 59</p>
+    <h1><span class="en">A trader who left in October still had four market data packages, and nobody had opened commodity futures since July</span></h1>
+    <p class="lede"><span class="en">The review, published with fictional data from a broker with 34 people on its trading floor, checks who can see which market data on LSEG and Bloomberg, what nobody uses and whether the invoice matches, and lists what to switch off before the vendors&#x27; cut-off.</span></p><p class="label post-meta"><span class="en">IT Ops tools</span> · <span class="en">20 Nov 2026</span> · <span class="en">3 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <figure class="post-fig"><a href="https://github.com/inigogonzalezgarcia/59-market-data-entitlement-review" target="_blank" rel="noopener noreferrer"><img src="../assets/blog/59.webp" alt="Report of 59-market-data-entitlement-review from the fictional demo data" width="1000" height="820" decoding="async"></a><figcaption class="small muted"><span class="en">Report the repo builds from the fictional demo data.</span></figcaption></figure>
+      
+      <div class="en" lang="en">
+<p>A rates trader left at the end of October and was still entitled to four market data packages three weeks later. A test account that nobody remembered had swap data on both platforms, and a commodity futures package paid for two people had not been opened since July. That is what the market data entitlement review published with this post finds. It is an open-source project that runs on sample data from a fictional broker with its trading floor in Madrid.</p>
+<p>Market data is charged per person and per package every month, on LSEG and on Bloomberg. Each platform has its own system that says who can see what: DACS for LSEG RTDS and EMRS for Bloomberg B-PIPE. The review joins both exports with the directory, the contract fees, the vendor invoice and the packages each desk may have, five days before the cut-off for the December invoice.</p>
+<h2>Who should not be there at all</h2>
+<p>Three accounts are red: the trader who left, a salesperson whose account is disabled and still has three packages, and the test account, which is not in the directory. Two entitlements fall outside their desk&#x27;s policy, such as credit index data for an equities salesperson, and four have no recorded approval.</p>
+<h2>What nobody uses</h2>
+<p>Five entitlements have not been used for more than 90 days, and one given in July has never been opened. A government bond trader has the same Eurozone bonds data on both platforms and only uses the LSEG one. The review puts all of them, with the leavers, on a switch-off list with what each one costs: 16 entitlements and €1,500 a month, €18,000 a year, before the cut-off.</p>
+<h2>The invoice and the applications</h2>
+<p>The invoice charges for eleven credit index users when nine are entitled, a credit to claim. The other way round is the risky one: six people can see European equities depth and four are declared, the difference an audit would find. A bond pricing engine reads Bloomberg data without a screen and there is no non-display licence for it; another application has no business owner, and a legacy risk feed stopped reading in August.</p>
+<p>The demo scores 78.4% clean entitlements, seven points up on the last review, with five red and 16 amber findings and six decisions: switch off the 16 entitlements, cancel the idle package, correct one declaration, licence or stop the pricing engine, claim the credit and have the desk heads approve or remove what is outside policy.</p>
+<h2>How to use it with real data</h2>
+<p>The repository includes a PowerShell script that only reads Active Directory for the people who hold an entitlement; the DACS and EMRS exports, the packages with their fees, the invoice and the desk policies go in CSV files. The periods, the cut-off date and the fees are the organisation&#x27;s own policy and contracts in a settings file. It runs on Python with no external dependencies and produces a web report, a one-page pack for the desk heads and CSV files with every entitlement, the switch-off list, packages, invoice lines and actions. The demo data is fictional: names, packages, fees and dates, and the fees are not any vendor&#x27;s prices.</p>
+<h2>Where it comes from</h2>
+<p>The tool comes from supporting trading desks and their market data platforms, LSEG RTDS / TREP and Bloomberg B-PIPE, and from software asset management, licence cost control, vendor management and access reviews under ISO 27001.</p>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="en">The repository</span></p>
+      <p class="repo-name">59-market-data-entitlement-review</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/59-market-data-entitlement-review" target="_blank" rel="noopener noreferrer"><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="en">Share</span></p>
+        
+        <div class="share-row en" lang="en"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F59-market-data-entitlement-review.html" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F59-market-data-entitlement-review.html&amp;text=A%20trader%20who%20left%20in%20October%20still%20had%20four%20market%20data%20packages%2C%20and%20nobody%20had%20opened%20commodity%20futures%20since%20July%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Share on X">X</a><a class="share-btn" href="https://wa.me/?text=A%20trader%20who%20left%20in%20October%20still%20had%20four%20market%20data%20packages%2C%20and%20nobody%20had%20opened%20commodity%20futures%20since%20July%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F59-market-data-entitlement-review.html" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=A%20trader%20who%20left%20in%20October%20still%20had%20four%20market%20data%20packages%2C%20and%20nobody%20had%20opened%20commodity%20futures%20since%20July%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F59-market-data-entitlement-review.html" aria-label="Share on Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/59-market-data-entitlement-review.html" data-copied="Link copied">Copy link</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/59-market-data-entitlement-review.html" data-title="A trader who left in October still had four market data packages, and nobody had opened commodity futures since July" hidden>More…</button></div>
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="50-saas-licence-spend-review.html"><span class="label muted"><span class="en">Blog · 50</span></span><span class="related-t"><span class="en">A licence review finds EUR 223.7k of savings, starting with 180 people on E5 who use nothing beyond E3</span></span></a><a class="related-link" href="37-iam-access-review.html"><span class="label muted"><span class="en">Blog · 37</span></span><span class="related-t"><span class="en">An administrator who left three weeks ago is still in Domain Admins and a trader signed in after his last day</span></span></a><a class="related-link" href="23-it-vendor-contract-tracker.html"><span class="label muted"><span class="en">Blog · 23</span></span><span class="related-t"><span class="en">The costliest date in an IT contract is the notice deadline; a monthly review puts each one in the calendar</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="58-business-impact-analysis.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">Settlement could wait twelve hours, and the file shares it reads would take a day to come back and had never been tested</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Iñigo González · Madrid</span>
+    <span><a href="../aviso-legal.html"><span class="en">Legal notice</span></a> · <a href="../privacidad.html"><span class="en">Privacy and cookies</span></a> · <a href="../condiciones.html"><span class="en">Terms</span></a> · <a href="../recursos.html">Newsletter</a> · <span class="en">SysAdmin Desks: <a href="https://sysadmindesksbyigg.pages.dev/about#en" target="_blank" rel="noopener noreferrer">about</a> · <a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">FAQ</a></span> · <button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></span>
+    <a href="#top"><span class="en">Back to top ↑</span></a>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>

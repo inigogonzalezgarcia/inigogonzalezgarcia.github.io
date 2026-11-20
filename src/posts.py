@@ -1746,7 +1746,7 @@ Un exportador de solo lectura en PowerShell lee ServiceNow y Jira Service Manage
 ## De dónde sale
 
 La herramienta nace de liderar la respuesta técnica en incidentes mayores y los post-mortems que vinieron después, y de ser responsable de los procesos de incidencias, cambios y problemas. Uno de ellos fue la caída de una línea de voz que usaba una mesa de trading en una empresa de servicios financieros: la solución fue técnica, pero lo que la mesa recordaba era cada cuánto tenía noticias nuestras. Una actualización sin novedades sigue siendo una actualización."""),
-dict(n="37", repo="37-iam-access-review", date="2026-10-29", cat="tools",
+dict(n="37", repo="37-iam-access-review", date="2026-10-29", updated="2026-11-20", cat="tools",
  title_en="An administrator who left three weeks ago is still in Domain Admins and a trader signed in after his last day",
  title_es="Un administrador que se fue hace tres semanas sigue en Domain Admins y un trader entró después de su último día",
  seo_title_en="IAM access review: joiners, movers, leavers · Iñigo González",
@@ -3145,4 +3145,65 @@ El repositorio incluye un script de PowerShell que solo lee el estado de Hyper-V
 ## De dónde sale
 
 La herramienta nace de supervisar pruebas de recuperación ante desastres y de continuidad de negocio, de diseñar y probar planes de copias y de DR, de aplicar ISO 22301 e ISO 27001, de trabajar con Veeam, Commvault, Hyper-V y vSphere, y de llevar la gestión de disponibilidad y capacidad como práctica formal."""),
+dict(n="59", repo="59-market-data-entitlement-review", date="2026-11-20", cat="tools",
+ title_en="A trader who left in October still had four market data packages, and nobody had opened commodity futures since July",
+ title_es="Un trader que se fue en octubre seguía con cuatro paquetes de datos de mercado, y nadie abría los futuros de materias primas desde julio",
+ seo_title_en="Market data entitlements: LSEG and Bloomberg · Iñigo González",
+ seo_title_es="Datos de mercado: permisos LSEG y Bloomberg · Iñigo González",
+ seo_desc="Market data entitlement review for LSEG RTDS and Bloomberg B-PIPE: leavers still entitled, unused and duplicate packages, invoice checks, switch-off list.",
+ seo_desc_es="Revisión de permisos de datos de mercado en LSEG RTDS y Bloomberg B-PIPE: bajas con acceso, paquetes sin uso o duplicados, factura y lista de cortes.",
+ dek_en="The review, published with fictional data from a broker with 34 people on its trading floor, checks who can see which market data on LSEG and Bloomberg, what nobody uses and whether the invoice matches, and lists what to switch off before the vendors' cut-off.",
+ dek_es="La revisión, publicada con datos ficticios de un bróker con 34 personas en su sala de trading, comprueba quién ve qué datos de mercado en LSEG y Bloomberg, qué no usa nadie y si la factura cuadra, y saca lo que hay que dar de baja antes del cierre de los proveedores.",
+ en="""
+A rates trader left at the end of October and was still entitled to four market data packages three weeks later. A test account that nobody remembered had swap data on both platforms, and a commodity futures package paid for two people had not been opened since July. That is what the market data entitlement review published with this post finds. It is an open-source project that runs on sample data from a fictional broker with its trading floor in Madrid.
+
+Market data is charged per person and per package every month, on LSEG and on Bloomberg. Each platform has its own system that says who can see what: DACS for LSEG RTDS and EMRS for Bloomberg B-PIPE. The review joins both exports with the directory, the contract fees, the vendor invoice and the packages each desk may have, five days before the cut-off for the December invoice.
+
+## Who should not be there at all
+
+Three accounts are red: the trader who left, a salesperson whose account is disabled and still has three packages, and the test account, which is not in the directory. Two entitlements fall outside their desk's policy, such as credit index data for an equities salesperson, and four have no recorded approval.
+
+## What nobody uses
+
+Five entitlements have not been used for more than 90 days, and one given in July has never been opened. A government bond trader has the same Eurozone bonds data on both platforms and only uses the LSEG one. The review puts all of them, with the leavers, on a switch-off list with what each one costs: 16 entitlements and €1,500 a month, €18,000 a year, before the cut-off.
+
+## The invoice and the applications
+
+The invoice charges for eleven credit index users when nine are entitled, a credit to claim. The other way round is the risky one: six people can see European equities depth and four are declared, the difference an audit would find. A bond pricing engine reads Bloomberg data without a screen and there is no non-display licence for it; another application has no business owner, and a legacy risk feed stopped reading in August.
+
+The demo scores 78.4% clean entitlements, seven points up on the last review, with five red and 16 amber findings and six decisions: switch off the 16 entitlements, cancel the idle package, correct one declaration, licence or stop the pricing engine, claim the credit and have the desk heads approve or remove what is outside policy.
+
+## How to use it with real data
+
+The repository includes a PowerShell script that only reads Active Directory for the people who hold an entitlement; the DACS and EMRS exports, the packages with their fees, the invoice and the desk policies go in CSV files. The periods, the cut-off date and the fees are the organisation's own policy and contracts in a settings file. It runs on Python with no external dependencies and produces a web report, a one-page pack for the desk heads and CSV files with every entitlement, the switch-off list, packages, invoice lines and actions. The demo data is fictional: names, packages, fees and dates, and the fees are not any vendor's prices.
+
+## Where it comes from
+
+The tool comes from supporting trading desks and their market data platforms, LSEG RTDS / TREP and Bloomberg B-PIPE, and from software asset management, licence cost control, vendor management and access reviews under ISO 27001.""",
+ es="""
+Un trader de tipos se fue a finales de octubre y tres semanas después seguía con permiso para cuatro paquetes de datos de mercado. Una cuenta de pruebas de la que nadie se acordaba tenía datos de swaps en las dos plataformas, y un paquete de futuros de materias primas que se pagaba para dos personas no se abría desde julio. Así lo detecta la revisión de permisos de datos de mercado que acompaña a este post, un proyecto de código abierto que se ejecuta con datos de ejemplo de un bróker ficticio con su sala de trading en Madrid.
+
+Los datos de mercado se cobran por persona y por paquete cada mes, en LSEG y en Bloomberg. Cada plataforma tiene su propio sistema que dice quién puede ver qué: DACS para LSEG RTDS y EMRS para Bloomberg B-PIPE. La revisión cruza las dos exportaciones con el directorio, las tarifas del contrato, la factura del proveedor y los paquetes que puede tener cada mesa, cinco días antes del cierre de la factura de diciembre.
+
+## Quién no debería estar
+
+Tres cuentas salen en rojo: el trader que se fue, una comercial con la cuenta deshabilitada que mantiene tres paquetes y la cuenta de pruebas, que no está en el directorio. Dos permisos quedan fuera de la política de su mesa, como los índices de crédito de un comercial de renta variable, y cuatro no tienen aprobación registrada.
+
+## Lo que no usa nadie
+
+Cinco permisos llevan más de 90 días sin usarse y uno concedido en julio no se ha abierto nunca. Un trader de deuda pública tiene los mismos datos de bonos de la zona euro en las dos plataformas y solo usa los de LSEG. La revisión los pone todos, junto con las bajas, en una lista de cortes con lo que cuesta cada uno: 16 permisos y 1.500 € al mes, 18.000 € al año, antes del cierre.
+
+## La factura y las aplicaciones
+
+La factura cobra once usuarios de índices de crédito cuando hay nueve con permiso: un abono que reclamar. Al revés es lo arriesgado: seis personas ven la profundidad de renta variable europea y hay cuatro declaradas, la diferencia que encontraría una auditoría. Un motor de precios de bonos lee datos de Bloomberg sin pantalla y no hay licencia non-display para ello; otra aplicación no tiene responsable de negocio, y una antigua alimentación de riesgos dejó de leer en agosto.
+
+La demo saca un 78,4% de permisos limpios, siete puntos más que en la revisión anterior, con cinco hallazgos rojos y 16 ámbar, y seis decisiones: dar de baja los 16 permisos, cancelar el paquete que nadie usa, corregir una declaración, licenciar o parar el motor de precios, reclamar el abono y que los jefes de mesa aprueben o quiten lo que está fuera de política.
+
+## Cómo usarlo con datos reales
+
+El repositorio incluye un script de PowerShell que solo lee Active Directory para las personas que tienen algún permiso; las exportaciones de DACS y EMRS, los paquetes con sus tarifas, la factura y las políticas de cada mesa van en ficheros CSV. Los plazos, la fecha de cierre y las tarifas son la política y los contratos de la propia organización en un fichero de configuración. Funciona con Python y sin dependencias externas, y genera un informe web, un dosier de una página para los jefes de mesa y ficheros CSV con cada permiso, la lista de cortes, los paquetes, las líneas de factura y las acciones. Los datos de la demo son ficticios: nombres, paquetes, tarifas y fechas, y las tarifas no son los precios de ningún proveedor.
+
+## De dónde sale
+
+La herramienta nace de dar soporte a mesas de trading y a sus plataformas de datos de mercado, LSEG RTDS / TREP y Bloomberg B-PIPE, y de la gestión de activos de software, el control de costes de licencias, la gestión de proveedores y las revisiones de accesos con ISO 27001."""),
 ]
