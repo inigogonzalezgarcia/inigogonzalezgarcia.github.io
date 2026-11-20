@@ -36,6 +36,8 @@ jobs:
           git -C /tmp/ne sparse-checkout set --no-cone /geojson/ne_110m_admin_0_countries.geojson
           python src/make_map.py /tmp/ne/geojson/ne_110m_admin_0_countries.geojson
       - run: python src/build.py
+      - name: Short links for LinkedIn (/b/NN, /g/<name>; names kept in src/shortlinks.json)
+        run: python src/shortlinks.py
       - name: Commit generated pages if they changed
         run: |
           git add -A
