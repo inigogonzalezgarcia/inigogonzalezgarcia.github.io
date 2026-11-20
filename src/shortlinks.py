@@ -8,7 +8,9 @@ Writes small redirect pages so a comment can say
 
 Each redirect page copies the target's title, description and og:image, so
 LinkedIn still shows the preview card, is noindex, and forwards with
-utm_source=linkedin so the visit is attributed in Analytics.
+utm_source=linkedin so the visit is attributed in Analytics. It carries the site's CSP and
+referrer policy and forwards with <meta http-equiv="refresh"> only (no inline script), so build.py's security
+check passes on it like on any other page.
 
 The guide short names are kept in src/shortlinks.json and never change once
 assigned (new guides are appended). Run after build.py:  python src/shortlinks.py
@@ -17,6 +19,8 @@ import html
 import json
 import pathlib
 import re
+
+from pages import SEC_HEAD   # the same CSP and referrer policy as every other page
 
 ROOT = pathlib.Path(__file__).parent
 SITE = ROOT.parent
@@ -53,6 +57,7 @@ def redirect_page(target: str, src_html: str, lang: str) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+{SEC_HEAD}
 <title>{esc(t)}</title>
 <meta name="robots" content="noindex,follow">
 <link rel="canonical" href="{esc(target)}">
@@ -62,7 +67,6 @@ def redirect_page(target: str, src_html: str, lang: str) -> str:
 <meta property="og:title" content="{esc(t)}">
 <meta property="og:description" content="{esc(d)}">
 {img_tags}<meta http-equiv="refresh" content="0; url={esc(url)}">
-<script>location.replace({json.dumps(url)});</script>
 </head>
 <body><p><a href="{esc(url)}">{label}: {esc(t)}</a></p></body>
 </html>

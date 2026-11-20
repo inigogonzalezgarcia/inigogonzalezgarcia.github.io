@@ -1959,6 +1959,10 @@ for _d in ("guias", "es/guias", "es/blog"):
     for _f in (SITE / _d).glob("*.html"):
         if f"{_d}/{_f.name}" not in sizes: _f.unlink()
 
+# short-link redirect stubs (/b/NN, /g/<name>) rewritten here, so the checks below see this run's compliant ones
+import shortlinks
+shortlinks.main()
+
 # security checks on everything that is served
 problems = []
 for f in sorted(SITE.rglob("*.html")):

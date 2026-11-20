@@ -12,7 +12,7 @@ from urllib.parse import unquote, urlsplit
 
 SITE_URL = "https://inigogonzalezgarcia.github.io/"
 SINGLE = {"404.html", "asesoria.html"}
-SKIP_DIRS = ("src/", ".git/", ".github/", "node_modules/")
+SKIP_DIRS = ("src/", ".git/", ".github/", "node_modules/", "b/", "g/", "es/b/", "es/g/")  # b/ g/: short-link redirect stubs (shortlinks.py)
 
 ES_W = {"de", "la", "el", "los", "las", "y", "en", "para", "con", "del", "que", "por", "una", "un", "tu", "tus", "sin", "cómo",
         "guías", "guía", "más", "años", "sobre", "qué", "mi", "mis", "lo", "se", "al", "esta", "página", "servicios", "política"}
