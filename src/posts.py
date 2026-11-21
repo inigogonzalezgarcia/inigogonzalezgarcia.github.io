@@ -3145,7 +3145,7 @@ El repositorio incluye un script de PowerShell que solo lee el estado de Hyper-V
 ## De dónde sale
 
 La herramienta nace de supervisar pruebas de recuperación ante desastres y de continuidad de negocio, de diseñar y probar planes de copias y de DR, de aplicar ISO 22301 e ISO 27001, de trabajar con Veeam, Commvault, Hyper-V y vSphere, y de llevar la gestión de disponibilidad y capacidad como práctica formal."""),
-dict(n="59", repo="59-market-data-entitlement-review", date="2026-11-20", cat="tools",
+dict(n="59", repo="59-market-data-entitlement-review", date="2026-11-20", updated="2026-11-21", cat="tools",
  title_en="A trader who left in October still had four market data packages, and nobody had opened commodity futures since July",
  title_es="Un trader que se fue en octubre seguía con cuatro paquetes de datos de mercado, y nadie abría los futuros de materias primas desde julio",
  seo_title_en="Market data entitlements: LSEG and Bloomberg · Iñigo González",
@@ -3206,4 +3206,65 @@ El repositorio incluye un script de PowerShell que solo lee Active Directory par
 ## De dónde sale
 
 La herramienta nace de dar soporte a mesas de trading y a sus plataformas de datos de mercado, LSEG RTDS / TREP y Bloomberg B-PIPE, y de la gestión de activos de software, el control de costes de licencias, la gestión de proveedores y las revisiones de accesos con ISO 27001."""),
+dict(n="60", repo="60-fix-session-health", date="2026-11-21", cat="tools",
+ title_en="A logon refused at ten to ten on Friday night would have left an order session down at Monday's open",
+ title_es="Un logon rechazado a las diez menos diez del viernes habría dejado una sesión de órdenes caída en la apertura del lunes",
+ seo_title_en="FIX session health: drops, gaps and resets · Iñigo González",
+ seo_title_es="Sesiones FIX: caídas, huecos y resets · Iñigo González",
+ seo_desc="FIX session health review: drops, refused logons, sequence gaps and resets, missed heartbeats, rejects, latency and a watchlist before the open.",
+ seo_desc_es="Revisión de sesiones FIX: caídas, logons rechazados, huecos y resets de secuencia, heartbeats perdidos, rechazos, latencia y lista para antes de la apertura.",
+ dek_en="The review, published with fictional data from a broker with 12 FIX sessions, reads a week of session messages from the engine logs and lists the sessions to look at before the market opens.",
+ dek_es="La revisión, publicada con datos ficticios de un bróker con 12 sesiones FIX, lee una semana de mensajes de sesión de los logs del motor y saca las sesiones que hay que mirar antes de que abra el mercado.",
+ en="""
+At 21:58 on Friday, an order session with Adatum Capital tried to log on again after a disconnect and was refused: "MsgSeqNum too low, expecting 4812 but received 1". Nobody would have looked at it until Monday's open. That is what the FIX session health review published with this post puts first on its list. It is an open-source project that runs on sample data from a fictional broker with its electronic trading desk in Madrid.
+
+FIX is the protocol orders, executions and drop copies travel on between a broker and its counterparties. Every session leaves a log, and the review only needs the session-level messages in it: logons and logouts, test requests, resend requests, sequence resets and rejects. A read-only PowerShell script takes them from the engine logs; the review reads a week of them, session by session, against the desk's thresholds.
+
+## What can have been lost
+
+On Wednesday at 14:12, Northwind Clearing's drop copy received a sequence reset without gap fill, from 18322 to 18450. Resend requests that are answered are normal; a reset like this means 128 messages were never resent, so the orders and trades of that window have to be reconciled before Monday. It is the second line of the watchlist.
+
+## What is unstable
+
+Tailspin Bank's order session dropped five times without a logout, four of them in market hours, and needed six resends to recover. On Friday its order round trip went from about 4 ms to 38 ms at the 99th percentile. Litware's market data needed 14 test requests, almost all around the open, because its heartbeats stopped arriving. Relecloud's RFQ session has not logged on since Wednesday, Wingtip Prime rejected 22 allocations for an unknown account and Woodgrove logs on with a 60-second heartbeat when 30 is configured.
+
+## What will break on its own
+
+The TLS certificate of the two Contoso MTF sessions expires on Thursday, and Proseware's failover to the backup gateway has never been tested.
+
+The demo scores 89% session health, 4.8 points up on the last review, with six red and eight amber findings, five sessions on the watchlist before Monday at 08:00 and six decisions: check the watchlist an hour before the open, open cases with two counterparties, reconcile the reset, renew the certificates, book the failover test and fix the static data behind the rejects.
+
+## How to use it with real data
+
+The script reads QuickFIX/J or QuickFIX/n style logs; the session list with its counterparty, purpose, heartbeat, hosts, failover test and certificate goes in a CSV, and the daily latency in another if the monitoring has it. Market hours, thresholds and latency limits are the desk's own policy in a settings file. It runs on Python with no external dependencies and produces a web report, a one-page pack for the desk and CSV files with every session, day, finding and action. The demo data is fictional: names, CompIDs, hosts and times.
+
+## Where it comes from
+
+The tool comes from keeping trading floors connected: FIX and electronic trading connectivity with counterparties, LSEG and Bloomberg market data platforms, monitoring and major incident response, and network operations.""",
+ es="""
+A las 21:58 del viernes, una sesión de órdenes con Adatum Capital intentó volver a conectarse tras una desconexión y fue rechazada: «MsgSeqNum too low, expecting 4812 but received 1». Nadie lo habría mirado hasta la apertura del lunes. Es lo primero de la lista de la revisión de salud de sesiones FIX que acompaña a este post, un proyecto de código abierto que se ejecuta con datos de ejemplo de un bróker ficticio con su mesa de trading electrónico en Madrid.
+
+FIX es el protocolo por el que viajan las órdenes, las ejecuciones y las copias de operaciones entre un bróker y sus contrapartes. Cada sesión deja un log, y a la revisión solo le hacen falta sus mensajes de sesión: logons y logouts, test requests, peticiones de reenvío, resets de secuencia y rechazos. Un script de PowerShell de solo lectura los saca de los logs del motor, y la revisión lee una semana entera, sesión a sesión, frente a los umbrales de la mesa.
+
+## Lo que se puede haber perdido
+
+El miércoles a las 14:12, la copia de operaciones de Northwind Clearing recibió un reset de secuencia sin gap fill, del 18322 al 18450. Que haya peticiones de reenvío atendidas es normal; un reset así significa que 128 mensajes no se reenviaron nunca, así que hay que conciliar las órdenes y operaciones de esa ventana antes del lunes. Es la segunda línea de la lista.
+
+## Lo que está inestable
+
+La sesión de órdenes de Tailspin Bank se cayó cinco veces sin logout, cuatro de ellas en horario de mercado, y necesitó seis reenvíos para recuperarse. El viernes, el tiempo de ida y vuelta de sus órdenes pasó de unos 4 ms a 38 ms en el percentil 99. Los datos de mercado de Litware necesitaron 14 test requests, casi todos alrededor de la apertura, porque dejaban de llegar sus heartbeats. La sesión de RFQ de Relecloud no se conecta desde el miércoles, Wingtip Prime rechazó 22 asignaciones por una cuenta desconocida y Woodgrove se conecta con un heartbeat de 60 segundos cuando el configurado es de 30.
+
+## Lo que se va a romper solo
+
+El certificado TLS de las dos sesiones de Contoso MTF caduca el jueves, y nadie ha probado nunca el paso de Proseware a la pasarela de respaldo.
+
+La demo saca un 89% de salud de sesiones, 4,8 puntos más que en la revisión anterior, con seis hallazgos rojos y ocho ámbar, cinco sesiones en la lista para antes del lunes a las 08:00 y seis decisiones: revisar la lista una hora antes de la apertura, abrir casos con dos contrapartes, conciliar el reset, renovar los certificados, reservar la prueba de failover y corregir los datos maestros que provocan los rechazos.
+
+## Cómo usarlo con datos reales
+
+El script lee logs al estilo de QuickFIX/J o QuickFIX/n; la lista de sesiones con su contraparte, uso, heartbeat, servidores, prueba de failover y certificado va en un CSV, y la latencia diaria en otro si la monitorización la tiene. El horario de mercado, los umbrales y los límites de latencia son la política de la propia mesa en un fichero de configuración. Funciona con Python y sin dependencias externas, y genera un informe web, un dosier de una página para la mesa y ficheros CSV con cada sesión, día, hallazgo y acción. Los datos de la demo son ficticios: nombres, CompIDs, servidores y horas.
+
+## De dónde sale
+
+La herramienta nace de mantener conectadas las salas de trading: FIX y conectividad de trading electrónico con contrapartes, plataformas de datos de mercado de LSEG y Bloomberg, monitorización y respuesta a incidentes graves, y operación de red."""),
 ]

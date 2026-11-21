@@ -454,7 +454,7 @@ AREAS = [
     ("itsm", "ITSM y servicio", "ITSM & service", "04 28 30 36 40 46 47 49 56"),
     ("infra", "Infraestructura", "Infrastructure", "08 32 35 58"),
     ("cost", "Costes y valor", "Cost & value", "01 23 43 50 54"),
-    ("sector", "Sectores", "Sector tools", "24 31 34 42 59"),
+    ("sector", "Sectores", "Sector tools", "24 31 34 42 59 60"),
     ("labs", "Labs cloud y GPU", "Cloud & GPU labs", "06 07 09 10 11 12 13 14 15 16"),
 ]
 AREA_OF = {n: k for k, _, _, ns in AREAS for n in ns.split()}
