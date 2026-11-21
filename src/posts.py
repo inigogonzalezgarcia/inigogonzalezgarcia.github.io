@@ -2722,10 +2722,10 @@ El análisis funciona con Python y solo la librería estándar, y genera `report
 ## De dónde sale
 
 La hice a partir de administrar Windows Server, Active Directory y las directivas de grupo desde el principio de mi carrera, parchear servidores sin cortar el servicio y el trabajo aplicado con ISO 27001 y NIS2. Detrás hay dos lecciones: una GPO que deja de aplicarse explica más desviaciones que todos los cambios locales juntos, así que la causa va antes que la lista de ajustes; y un auditor se fía más de un informe que enseña sus propias lagunas."""),
-dict(n="52", repo="52-endpoint-security-coverage", date="2026-11-13", cat="tools",
+dict(n="52", repo="52-endpoint-security-coverage", date="2026-11-13", updated="2026-11-21", cat="tools",
  title_en="Only 76.9 % of laptops and desktops are fully protected, and the gaps sit between Intune, Defender and the CMDB",
  title_es="Solo el 76,9 % de los equipos está protegido del todo, y los huecos están entre Intune, Defender y la CMDB",
- seo_title_en="Endpoint security coverage review: Intune, Defender, BitLocker · Iñigo González",
+ seo_title_en="Endpoint security: Intune, Defender, BitLocker · Iñigo González",
  seo_title_es="Cobertura de seguridad de los equipos: Intune, Defender y BitLocker · Iñigo González",
  seo_desc="Monthly endpoint security review: inventory, Intune and Defender reconciled, BitLocker keys, EDR health, local admins, EPM elevations and unsupported OS.",
  seo_desc_es="Revisión mensual de seguridad de los equipos: inventario, Intune y Defender cruzados, claves de BitLocker, EDR, administradores locales, EPM y sistemas sin soporte.",
