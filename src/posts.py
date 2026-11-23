@@ -3267,4 +3267,66 @@ El script lee logs al estilo de QuickFIX/J o QuickFIX/n; la lista de sesiones co
 ## De dónde sale
 
 La herramienta nace de mantener conectadas las salas de trading: FIX y conectividad de trading electrónico con contrapartes, plataformas de datos de mercado de LSEG y Bloomberg, monitorización y respuesta a incidentes graves, y operación de red."""),
+dict(n="61", repo="61-change-freeze-oncall-planner", date="2026-11-23", cat="tools",
+ title_en="Three weeks before the freeze, the rota had nobody on call for the network on the weekend after Christmas",
+ title_es="A tres semanas de la congelación, la guardia no tenía a nadie de redes el fin de semana después de Navidad",
+ seo_title_en="Change freeze and on-call rota review · Iñigo González",
+ seo_title_es="Congelación de cambios y guardias · Iñigo González",
+ seo_desc="Year-end change freeze review: on-call rota gaps, leave, load and holidays, emergency approvers, changes inside the freeze, runbooks and vendor cover.",
+ seo_desc_es="Revisión de la congelación de fin de año: huecos en la guardia, vacaciones, carga y festivos, aprobadores de emergencia, cambios dentro, runbooks y proveedores.",
+ dek_en="The review, published with fictional data from a bank with six IT teams, reads the services, the people, their leave, the on-call rota and the changes, and lists what to fix before the freeze starts.",
+ dek_es="La revisión, publicada con datos ficticios de un banco con seis equipos de IT, lee los servicios, las personas, sus vacaciones, la guardia y los cambios, y saca lo que hay que arreglar antes de que empiece la congelación.",
+ en="""
+On Saturday 26 and Sunday 27 December, the network team's rota has a secondary and no primary. Nobody noticed, because the rota is a spreadsheet with one tab per team and nobody reads them all together until the night someone needs them. That is one of the first lines of the change freeze review published with this post. It is an open-source project that runs on sample data from a fictional bank with its IT operations in Madrid.
+
+The freeze in the demo runs from Friday 18 December at 18:00 to Thursday 7 January at 08:00: twenty nights, three of them holidays. The review runs three weeks before, on Monday 30 November, and reads five things together: the services with their tier and support team, the people who can be on call, their leave, the rota and the changes planned around the freeze.
+
+## Who picks up the phone
+
+Every team that runs a service needs a primary every day, and a different secondary if any of its services is critical or high. The report draws it as a calendar, team by team and day by day. Besides the network gap, Marta Gil is on the Identity rota from the 24th to the 28th, exactly the days she is on holiday. Database has no secondary from 30 December to 2 January. Applications has the same person as primary and secondary on 2 January. One name on the network rota is not in the team list at all, and Business Applications, which runs document management, has no rota.
+
+## Whether they can do anything
+
+Jorge Ruiz is primary nine days in a row, Christmas Day and New Year's Day included. Two engineers on call have no phone number on file. Three have not tested remote access from home for months, or ever. The three people who can approve an emergency change are all on leave from 28 December to 1 January, so for five days a fix that needs approval has nobody to approve it.
+
+## What should not be happening
+
+A firewall clean-up was approved for 21 December without anybody calling it an exception. A draft intranet change sits on the 28th. A SQL Server update for 9 December is still waiting for CAB, and the core banking quarterly patch is planned 21 hours before the freeze starts. The payments gateway runbook was last reviewed in March 2025, the network has none, and the core banking vendor answers the phone in business hours only. Two changes are approved freeze exceptions, and the review leaves them alone.
+
+The demo scores 78.3% rota coverage, 13.1 points down on last year's freeze, with five red and seventeen amber findings, twenty-one things to fix before the freeze and six decisions: close the holes in the rota, take four changes to the last CAB, name a deputy emergency approver, rebalance one person's shifts, check phones and remote access, and agree vendor cover.
+
+## How to use it with real data
+
+A read-only PowerShell script takes the changes for the weeks around the freeze from ServiceNow. The services, the people, the leave and the rota go in CSV files, the rota as one row per day or per block of days. Freeze dates, holidays and limits are the organisation's own policy in a settings file. It runs on Python with no external dependencies and produces a web report, a one-page pack for the last CAB before the freeze and CSV files with every team, day, person, change, finding and action. The demo data is fictional: names, services, vendors and changes.
+
+## Where it comes from
+
+The tool comes from running change and release management: process owner for incidents, changes and problems, CAB and go-live reviews, release planning with rollback, runbooks and training, major incident response and DR/BCP tests.""",
+ es="""
+El sábado 26 y el domingo 27 de diciembre, la guardia del equipo de redes tiene secundario y no tiene primario. Nadie lo había visto, porque la guardia es una hoja de cálculo con una pestaña por equipo y nadie las lee todas juntas hasta la noche en que hacen falta. Es una de las primeras líneas de la revisión de la congelación de cambios que acompaña a este post, un proyecto de código abierto que se ejecuta con datos de ejemplo de un banco ficticio con sus operaciones de IT en Madrid.
+
+La congelación de la demo va del viernes 18 de diciembre a las 18:00 al jueves 7 de enero a las 08:00: veinte noches, tres de ellas festivas. La revisión se hace tres semanas antes, el lunes 30 de noviembre, y lee cinco cosas juntas: los servicios con su nivel y su equipo de soporte, las personas que pueden estar de guardia, sus vacaciones, la guardia y los cambios previstos alrededor de la congelación.
+
+## Quién coge el teléfono
+
+Cada equipo que lleva un servicio necesita un primario cada día, y un secundario distinto si alguno de sus servicios es crítico o alto. El informe lo dibuja como un calendario, equipo a equipo y día a día. Además del hueco de redes, Marta Gil está en la guardia de Identidad del 24 al 28, justo los días que tiene de vacaciones. Bases de datos no tiene secundario del 30 de diciembre al 2 de enero. Aplicaciones tiene a la misma persona de primaria y secundaria el 2 de enero. Un nombre de la guardia de redes ni siquiera está en la lista del equipo, y Aplicaciones de Negocio, que lleva la gestión documental, no tiene guardia.
+
+## Si pueden hacer algo
+
+Jorge Ruiz es primario nueve días seguidos, con Navidad y Año Nuevo incluidos. Dos técnicos de guardia no tienen un teléfono registrado. Tres llevan meses sin probar el acceso remoto desde casa, o no lo han probado nunca. Las tres personas que pueden aprobar un cambio de emergencia están de vacaciones del 28 de diciembre al 1 de enero, así que durante cinco días un arreglo que necesite aprobación no tiene quién lo apruebe.
+
+## Lo que no debería estar pasando
+
+Una limpieza de reglas del cortafuegos se aprobó para el 21 de diciembre sin que nadie la tratara como excepción. Un cambio de la intranet en borrador está puesto el 28. Una actualización de SQL Server para el 9 de diciembre sigue esperando al CAB, y el parche trimestral del core bancario está previsto 21 horas antes de que empiece la congelación. El runbook de la pasarela de pagos se revisó por última vez en marzo de 2025, el de redes no existe y el proveedor del core bancario solo atiende en horario de oficina. Hay dos cambios aprobados como excepción, y la revisión no los toca.
+
+La demo saca un 78,3% de cobertura de la guardia, 13,1 puntos menos que en la congelación del año pasado, con cinco hallazgos rojos y diecisiete ámbar, veintiuna cosas que arreglar antes de la congelación y seis decisiones: cerrar los huecos de la guardia, llevar cuatro cambios al último CAB, nombrar un aprobador de emergencia suplente, repartir mejor los turnos de una persona, comprobar teléfonos y acceso remoto y acordar la cobertura de los proveedores.
+
+## Cómo usarlo con datos reales
+
+Un script de PowerShell de solo lectura saca de ServiceNow los cambios de las semanas alrededor de la congelación. Los servicios, las personas, las vacaciones y la guardia van en ficheros CSV, la guardia con una fila por día o por bloque de días. Las fechas de la congelación, los festivos y los límites son la política de la propia organización en un fichero de configuración. Funciona con Python y sin dependencias externas, y genera un informe web, un dosier de una página para el último CAB antes de la congelación y ficheros CSV con cada equipo, día, persona, cambio, hallazgo y acción. Los datos de la demo son ficticios: nombres, servicios, proveedores y cambios.
+
+## De dónde sale
+
+La herramienta nace de llevar la gestión de cambios y releases: responsable de los procesos de incidencias, cambios y problemas, CAB y revisiones de puesta en producción, planificación de releases con marcha atrás, runbooks y formación, respuesta a incidentes graves y pruebas de DR/BCP."""),
+
 ]
