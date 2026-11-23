@@ -80,6 +80,7 @@ GUIDES_SEO = {
         "es": "Microsoft Teams Rooms: cuenta de recurso, licencia, inicio de sesión del dispositivo, periféricos, Pro Management Portal y los fallos típicos de una sala.",
     },
     "windows-11-perfil-temporal-o-danado-diagnostico-reparacion-y-datos-del-usuario": {
+        "en": "How to fix a temporary profile in Windows 11: read the User Profile Service events, repair the ProfileList .bak key safely and keep the user's data.",
         "es": "Perfil temporal o dañado en Windows 11: eventos del servicio de perfiles, claves .bak de ProfileList, reparación segura, recuperar datos y copia de OneDrive.",
     },
     "gpo-plantillas-admx-almacen-central-edge-office-instalacion-de-msi-y-directivas-que-tardan-en-aplicarse": {

@@ -15329,7 +15329,7 @@ g(slug="pms-hotelero-soporte-interfaces-y-cargo-a-habitacion-desde-el-tpv", topi
   es="""
 ## Qué vas a conseguir
 
-Entender el PMS lo bastante para dar soporte a recepción sin ser recepcionista, y resolver el ticket que más se repite entre el restaurante y la recepción: \"no me deja cargar a la habitación\". El ejemplo usa términos de **Oracle OPERA**, el PMS más extendido en cadenas; otros PMS tienen las mismas piezas con otros nombres.
+Entender el PMS lo bastante para dar soporte a recepción sin ser recepcionista, y resolver el ticket que más se repite entre el restaurante y la recepción: \"no me deja cargar a la habitación\". El ejemplo usa términos de **Oracle OPERA**, el PMS más extendido en cadenas; otros PMS tienen las mismas piezas con otros nombres. También he dado soporte en **Acigrup**, **Avalon** y **CQR**, habituales en hoteles españoles: el folio, los códigos de transacción y la interfaz con el TPV funcionan igual.
 
 ## Antes de empezar
 
@@ -15416,7 +15416,7 @@ IPTV                Conectada       Último mensaje: 27/10/2026 14:04:02
   en="""
 ## What you'll get
 
-Understanding the PMS well enough to support the front office without being a receptionist, and solving the most repeated ticket between the restaurant and reception: \"it won't let me charge it to the room\". The example uses **Oracle OPERA** terms, the most widespread PMS in hotel chains; other PMSs have the same pieces under other names.
+Understanding the PMS well enough to support the front office without being a receptionist, and solving the most repeated ticket between the restaurant and reception: \"it won't let me charge it to the room\". The example uses **Oracle OPERA** terms, the most widespread PMS in hotel chains; other PMSs have the same pieces under other names. I have also given support on **Acigrup**, **Avalon** and **CQR**, common in Spanish hotels: the folio, the transaction codes and the interface to the POS work the same way.
 
 ## Before you start
 
