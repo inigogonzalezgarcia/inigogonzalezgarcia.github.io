@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Change freeze and on-call rota review · Iñigo González</title>
+<meta name="description" content="Year-end change freeze review: on-call rota gaps, leave, load and holidays, emergency approvers, changes inside the freeze, runbooks and vendor cover.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/61-change-freeze-oncall-planner.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/61-change-freeze-oncall-planner.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/61-change-freeze-oncall-planner.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/61-change-freeze-oncall-planner.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Change freeze and on-call rota review · Iñigo González">
+<meta property="og:description" content="Year-end change freeze review: on-call rota gaps, leave, load and holidays, emergency approvers, changes inside the freeze, runbooks and vendor cover.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/61-change-freeze-oncall-planner.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/61-change-freeze-oncall-planner.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Change freeze and on-call rota review · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Three weeks before the freeze, the rota had nobody on call for the network on the weekend after Christmas","alternativeHeadline":"A tres semanas de la congelación, la guardia no tenía a nadie de redes el fin de semana después de Navidad","description":"The review, published with fictional data from a bank with six IT teams, reads the services, the people, their leave, the on-call rota and the changes, and lists what to fix before the freeze starts.","datePublished":"2026-11-23","dateModified":"2026-11-23","inLanguage":"en","image":"https://inigogonzalezgarcia.github.io/assets/og/61-change-freeze-oncall-planner.png","url":"https://inigogonzalezgarcia.github.io/blog/61-change-freeze-oncall-planner.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/blog/61-change-freeze-oncall-planner.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/blog/#blog"},"articleSection":"IT Ops tools"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/blog/"},{"@type":"ListItem","position":3,"name":"Three weeks before the freeze, the rota had nobody on call for the network on the weekend after Christmas","item":"https://inigogonzalezgarcia.github.io/blog/61-change-freeze-oncall-planner.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/" aria-current="page"><span class="en">Blog</span></a><a href="../guias.html"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../es/blog/61-change-freeze-oncall-planner.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 61</p>
+    <h1><span class="en">Three weeks before the freeze, the rota had nobody on call for the network on the weekend after Christmas</span></h1>
+    <p class="lede"><span class="en">The review, published with fictional data from a bank with six IT teams, reads the services, the people, their leave, the on-call rota and the changes, and lists what to fix before the freeze starts.</span></p><p class="label post-meta"><span class="en">IT Ops tools</span> · <span class="en">23 Nov 2026</span> · <span class="en">3 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <figure class="post-fig"><a href="https://github.com/inigogonzalezgarcia/61-change-freeze-oncall-planner" target="_blank" rel="noopener noreferrer"><img src="../assets/blog/61.webp" alt="Report of 61-change-freeze-oncall-planner from the fictional demo data" width="1000" height="820" decoding="async"></a><figcaption class="small muted"><span class="en">Report the repo builds from the fictional demo data.</span></figcaption></figure>
+      
+      <div class="en" lang="en">
+<p>On Saturday 26 and Sunday 27 December, the network team&#x27;s rota has a secondary and no primary. Nobody noticed, because the rota is a spreadsheet with one tab per team and nobody reads them all together until the night someone needs them. That is one of the first lines of the change freeze review published with this post. It is an open-source project that runs on sample data from a fictional bank with its IT operations in Madrid.</p>
+<p>The freeze in the demo runs from Friday 18 December at 18:00 to Thursday 7 January at 08:00: twenty nights, three of them holidays. The review runs three weeks before, on Monday 30 November, and reads five things together: the services with their tier and support team, the people who can be on call, their leave, the rota and the changes planned around the freeze.</p>
+<h2>Who picks up the phone</h2>
+<p>Every team that runs a service needs a primary every day, and a different secondary if any of its services is critical or high. The report draws it as a calendar, team by team and day by day. Besides the network gap, Marta Gil is on the Identity rota from the 24th to the 28th, exactly the days she is on holiday. Database has no secondary from 30 December to 2 January. Applications has the same person as primary and secondary on 2 January. One name on the network rota is not in the team list at all, and Business Applications, which runs document management, has no rota.</p>
+<h2>Whether they can do anything</h2>
+<p>Jorge Ruiz is primary nine days in a row, Christmas Day and New Year&#x27;s Day included. Two engineers on call have no phone number on file. Three have not tested remote access from home for months, or ever. The three people who can approve an emergency change are all on leave from 28 December to 1 January, so for five days a fix that needs approval has nobody to approve it.</p>
+<h2>What should not be happening</h2>
+<p>A firewall clean-up was approved for 21 December without anybody calling it an exception. A draft intranet change sits on the 28th. A SQL Server update for 9 December is still waiting for CAB, and the core banking quarterly patch is planned 21 hours before the freeze starts. The payments gateway runbook was last reviewed in March 2025, the network has none, and the core banking vendor answers the phone in business hours only. Two changes are approved freeze exceptions, and the review leaves them alone.</p>
+<p>The demo scores 78.3% rota coverage, 13.1 points down on last year&#x27;s freeze, with five red and seventeen amber findings, twenty-one things to fix before the freeze and six decisions: close the holes in the rota, take four changes to the last CAB, name a deputy emergency approver, rebalance one person&#x27;s shifts, check phones and remote access, and agree vendor cover.</p>
+<h2>How to use it with real data</h2>
+<p>A read-only PowerShell script takes the changes for the weeks around the freeze from ServiceNow. The services, the people, the leave and the rota go in CSV files, the rota as one row per day or per block of days. Freeze dates, holidays and limits are the organisation&#x27;s own policy in a settings file. It runs on Python with no external dependencies and produces a web report, a one-page pack for the last CAB before the freeze and CSV files with every team, day, person, change, finding and action. The demo data is fictional: names, services, vendors and changes.</p>
+<h2>Where it comes from</h2>
+<p>The tool comes from running change and release management: process owner for incidents, changes and problems, CAB and go-live reviews, release planning with rollback, runbooks and training, major incident response and DR/BCP tests.</p>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="en">The repository</span></p>
+      <p class="repo-name">61-change-freeze-oncall-planner</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/61-change-freeze-oncall-planner" target="_blank" rel="noopener noreferrer"><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="en">Share</span></p>
+        
+        <div class="share-row en" lang="en"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F61-change-freeze-oncall-planner.html" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F61-change-freeze-oncall-planner.html&amp;text=Three%20weeks%20before%20the%20freeze%2C%20the%20rota%20had%20nobody%20on%20call%20for%20the%20network%20on%20the%20weekend%20after%20Christmas%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Share on X">X</a><a class="share-btn" href="https://wa.me/?text=Three%20weeks%20before%20the%20freeze%2C%20the%20rota%20had%20nobody%20on%20call%20for%20the%20network%20on%20the%20weekend%20after%20Christmas%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F61-change-freeze-oncall-planner.html" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=Three%20weeks%20before%20the%20freeze%2C%20the%20rota%20had%20nobody%20on%20call%20for%20the%20network%20on%20the%20weekend%20after%20Christmas%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F61-change-freeze-oncall-planner.html" aria-label="Share on Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/61-change-freeze-oncall-planner.html" data-copied="Link copied">Copy link</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/61-change-freeze-oncall-planner.html" data-title="Three weeks before the freeze, the rota had nobody on call for the network on the weekend after Christmas" hidden>More…</button></div>
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="40-change-calendar-risk-review.html"><span class="label muted"><span class="en">Blog · 40</span></span><span class="related-t"><span class="en">Two teams booked changes on the trading platform&#x27;s path the same night and a patch inside the month-end freeze</span></span></a><a class="related-link" href="36-major-incident-command-kit.html"><span class="label muted"><span class="en">Blog · 36</span></span><span class="related-t"><span class="en">Users reported an outage 40 minutes before monitoring did, the kind of gap a major incident kit measures</span></span></a><a class="related-link" href="58-business-impact-analysis.html"><span class="label muted"><span class="en">Blog · 58</span></span><span class="related-t"><span class="en">Settlement could wait twelve hours, and the file shares it reads would take a day to come back and had never been tested</span></span></a><a class="related-link" href="../guias/entorno-de-pruebas-para-validar-cambios-en-plataformas-criticas.html"><span class="label muted"><span class="en">Guide · Sector 3</span></span><span class="related-t"><span class="en">Test environments: preparing a pre-production to validate changes on critical platforms</span></span></a><a class="related-link" href="../guias/windows-server-actualizaciones-planificadas-sin-cortar-el-servicio.html"><span class="label muted"><span class="en">Guide · Sector 3</span></span><span class="related-t"><span class="en">Windows Server: planned updates without interrupting the service</span></span></a><a class="related-link" href="../guias/ventana-de-mantenimiento-de-un-sistema-clinico-24x7-contingencia-vuelta-atras-y-validacion.html"><span class="label muted"><span class="en">Guide · Sector 3</span></span><span class="related-t"><span class="en">Maintenance window on a 24x7 clinical system: agreement with the services, downtime procedures, step plan, rollback and validation</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="60-fix-session-health.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">A logon refused at ten to ten on Friday night would have left an order session down at Monday&#x27;s open</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-id">
+        <a class="foot-brand" href="../index.html"><svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg><span>Iñigo González García</span></a>
+        <p class="foot-lede"><span class="en">IT operations, Modern Workplace and infrastructure from Madrid. Open tools, guides and a free simulator to practise.</span></p>
+        <div class="foot-cta">
+          <a class="btn foot-btn" href="../about.html#contacto"><span class="en">Get in touch</span> <span aria-hidden="true">→</span></a>
+          <a class="foot-social" href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn <span aria-hidden="true">↗</span></a>
+          <a class="foot-social" href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <dl class="foot-stats"><div><dt><span class="en">Tools</span></dt><dd>61</dd></div><div><dt><span class="en">Guides</span></dt><dd>190</dd></div><div><dt><span class="en">In IT since</span></dt><dd>2015</dd></div></dl>
+    </div>
+    <nav class="foot-cols" aria-label="Footer">
+      <div class="foot-col"><p class="foot-h label"><span class="en">The site</span></p><ul><li><a href="../journey.html"><span class="en">Journey</span></a></li><li><a href="../about.html"><span class="en">About</span></a></li><li><a href="../blog/"><span class="en">Blog</span></a></li><li><a href="../guias.html"><span class="en">Guides</span></a></li><li><a href="../store.html"><span class="en">Services</span></a></li><li><a href="../recursos.html"><span class="en">Resources</span></a></li></ul></div>
+      <div class="foot-col"><p class="foot-h label"><span class="en">Projects</span></p><ul><li><a href="https://sysadmindesksbyigg.pages.dev/" target="_blank" rel="noopener noreferrer">SysAdmin Desks <span aria-hidden="true">↗</span></a></li><li><a href="https://fx-trading-lab.pages.dev/" target="_blank" rel="noopener noreferrer">Lab de Inversión <span aria-hidden="true">↗</span></a></li><li><a href="https://emss-studio.pages.dev/" target="_blank" rel="noopener noreferrer">EMSS <span aria-hidden="true">↗</span></a></li><li><a href="https://github.com/inigogonzalezgarcia" target="_blank" rel="noopener noreferrer"><span class="en">Tools on GitHub</span> <span aria-hidden="true">↗</span></a></li></ul></div>
+      <div class="foot-col"><p class="foot-h label"><span class="en">Free</span></p><ul><li><a href="../guias.html"><span class="en">Step-by-step IT guides</span></a></li><li><a href="../recursos.html"><span class="en">33 ideas and newsletter</span></a></li><li><span class="en"><a href="https://sysadmindesksbyigg.pages.dev/about#en" target="_blank" rel="noopener noreferrer">SysAdmin Desks: about <span aria-hidden="true">↗</span></a></span></li><li><span class="en"><a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">Questions and answers <span aria-hidden="true">↗</span></a></span></li></ul></div>
+      <div class="foot-col"><p class="foot-h label">Legal</p><ul><li><a href="../aviso-legal.html"><span class="en">Legal notice</span></a></li><li><a href="../privacidad.html"><span class="en">Privacy and cookies</span></a></li><li><a href="../condiciones.html"><span class="en">Terms</span></a></li><li><button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></li></ul></div>
+    </nav>
+    <div class="foot-bar label">
+      <span>© <span id="year">2026</span> Iñigo González García · Madrid</span>
+      <span class="foot-made"><span class="en">Hand-built in HTML, CSS and Python · Analytics only if you accept</span></span>
+      <a class="foot-up" href="#top"><span class="en">Back to top</span> <span aria-hidden="true">↑</span></a>
+    </div>
+  </div>
+  <p class="foot-word" aria-hidden="true">Iñigo González</p>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
