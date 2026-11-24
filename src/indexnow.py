@@ -1,7 +1,9 @@
 """Tell Bing (and the other IndexNow engines) which pages changed, right after the CI build.
 The key is public by design: it lives in <key>.txt at the site root so the engines can verify it.
 Usage: python src/indexnow.py --all            every URL in sitemap.xml
-       python src/indexnow.py --since <sha>    pages (html) changed since that commit, if they are in the sitemap
+       python src/indexnow.py --since <sha>    pages (html) changed since that commit whose sitemap lastmod is from the last
+                                               two days: a new post changes the footer counter of every page, and sending
+                                               all of them looks like batch mode to Bing
        add --dry-run to print the list without sending."""
 import json, pathlib, re, subprocess, sys, urllib.request
 
@@ -14,8 +16,12 @@ def key():
         if re.fullmatch(r"[0-9a-f]{32}", f.stem) and f.read_text().strip() == f.stem: return f.stem
     sys.exit("no IndexNow key file (<32 hex>.txt) at the site root")
 
+def sitemap_lastmod():
+    text = (ROOT / "sitemap.xml").read_text()
+    return dict(re.findall(r"<loc>([^<]+)</loc>\s*<lastmod>([^<]+)</lastmod>", text))
+
 def sitemap_urls():
-    return set(re.findall(r"<loc>([^<]+)</loc>", (ROOT / "sitemap.xml").read_text()))
+    return set(sitemap_lastmod())
 
 def changed_since(sha):
     out = subprocess.run(["git", "diff", "--name-only", f"{sha}..HEAD"], cwd=ROOT, capture_output=True, text=True, check=True).stdout.split()
@@ -30,7 +36,12 @@ def main(argv):
     dry = "--dry-run" in argv
     sm = sitemap_urls()
     if "--all" in argv: urls = sm
-    elif "--since" in argv: urls = changed_since(argv[argv.index("--since") + 1]) & sm
+    elif "--since" in argv:
+        import datetime
+        lm = sitemap_lastmod()
+        cutoff = (datetime.date.today() - datetime.timedelta(days=2)).isoformat()
+        # only pages whose content changed (sitemap lastmod), not every page whose footer counter moved
+        urls = {u for u in changed_since(argv[argv.index("--since") + 1]) & set(lm) if lm[u][:10] >= cutoff}
     else: sys.exit(__doc__)
     urls = sorted(urls)
     print(f"{len(urls)} URL(s) to submit" + (" (dry run)" if dry else ""))
