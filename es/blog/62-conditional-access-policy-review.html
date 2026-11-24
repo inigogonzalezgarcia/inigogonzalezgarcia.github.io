@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Revisión de acceso condicional · Iñigo González</title>
+<meta name="description" content="Revisión del acceso condicional con los inicios de sesión: base que falta, modo informe, exclusiones, break-glass, ubicaciones y autenticación heredada.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/es/blog/62-conditional-access-policy-review.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/62-conditional-access-policy-review.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/62-conditional-access-policy-review.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/62-conditional-access-policy-review.html">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revisión de acceso condicional · Iñigo González">
+<meta property="og:description" content="Revisión del acceso condicional con los inicios de sesión: base que falta, modo informe, exclusiones, break-glass, ubicaciones y autenticación heredada.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/es/blog/62-conditional-access-policy-review.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/62-conditional-access-policy-review.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Revisión de acceso condicional · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="../../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Un rango /10 en la ubicación de confianza de la oficina dejó pasar 74 accesos sin ninguna política de acceso condicional","alternativeHeadline":"A /10 range in the office trusted location let 74 sign-ins through with no Conditional Access policy at all","description":"La revisión, publicada con datos ficticios de una aseguradora con siete políticas, lee cada política de acceso condicional junto a un mes de inicios de sesión y saca lo que hacen de verdad.","datePublished":"2026-11-24","dateModified":"2026-11-24","inLanguage":"es","image":"https://inigogonzalezgarcia.github.io/assets/og/62-conditional-access-policy-review.png","url":"https://inigogonzalezgarcia.github.io/es/blog/62-conditional-access-policy-review.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/es/blog/62-conditional-access-policy-review.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/es/blog/#blog"},"articleSection":"Herramientas de IT Ops"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://inigogonzalezgarcia.github.io/es/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/es/blog/"},{"@type":"ListItem","position":3,"name":"Un rango /10 en la ubicación de confianza de la oficina dejó pasar 74 accesos sin ninguna política de acceso condicional","item":"https://inigogonzalezgarcia.github.io/es/blog/62-conditional-access-policy-review.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="es">Saltar al contenido</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Principal"><a href="../journey.html"><span class="es">Viaje</span></a><a href="../about.html"><span class="es">Sobre mí</span></a><a href="../blog/" aria-current="page"><span class="es">Blog</span></a><a href="../guias.html"><span class="es">Guías</span></a><a href="../store.html"><span class="es">Servicios</span></a><a href="../recursos.html"><span class="es">Recursos</span></a><a href="../links.html"><span class="es">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="es">Menú</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../../blog/62-conditional-access-policy-review.html" hreflang="en" aria-label="Read this page in English" lang="en"><span data-l="es" class="on">ES</span> · <span data-l="en">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="es">Cerrar ×</span></button>
+  </div>
+  <nav aria-label="Menú"><a href="../journey.html"><span class="label">01</span><span class="es">Viaje</span></a><a href="../about.html"><span class="label">02</span><span class="es">Sobre mí</span></a><a href="../blog/"><span class="label">03</span><span class="es">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="es">Guías</span></a><a href="../store.html"><span class="label">05</span><span class="es">Servicios</span></a><a href="../recursos.html"><span class="label">06</span><span class="es">Recursos</span></a><a href="../links.html"><span class="label">07</span><span class="es">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="es">Contacto</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 62</p>
+    <h1><span class="es">Un rango /10 en la ubicación de confianza de la oficina dejó pasar 74 accesos sin ninguna política de acceso condicional</span></h1>
+    <p class="lede"><span class="es">La revisión, publicada con datos ficticios de una aseguradora con siete políticas, lee cada política de acceso condicional junto a un mes de inicios de sesión y saca lo que hacen de verdad.</span></p><p class="label post-meta"><span class="es">Herramientas de IT Ops</span> · <span class="es">24 nov 2026</span> · <span class="es">3 min</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <figure class="post-fig"><a href="https://github.com/inigogonzalezgarcia/62-conditional-access-policy-review" target="_blank" rel="noopener noreferrer"><img src="../../assets/blog/62.webp" alt="Informe de 62-conditional-access-policy-review con los datos ficticios de la demo" width="1000" height="820" decoding="async"></a><figcaption class="small muted"><span class="es">Informe que genera el repo con los datos ficticios de la demo.</span></figcaption></figure>
+      <div class="es" lang="es">
+<p>La oficina es una ubicación de confianza y la política de MFA la deja fuera. En algún momento la ubicación ganó un rango /10, y en los últimos 30 días 74 inicios de sesión correctos desde ella pasaron sin ninguna política aplicada. Es lo primero que señala la revisión de acceso condicional que acompaña a este post, un proyecto de código abierto que se ejecuta con datos de ejemplo de una aseguradora ficticia.</p>
+<p>El acceso condicional se va desviando con cambios que, uno a uno, tienen sentido, y casi nunca se leen juntas las políticas y el registro de inicios de sesión. La revisión hace justo eso: toma las políticas, las ubicaciones con nombre, los usuarios, los grupos y un mes de inicios de sesión, todo exportado en solo lectura desde Microsoft Graph, y los lee lado a lado.</p>
+<h2>La base</h2>
+<p>Primero, cuatro controles que la organización espera tener activos: MFA para todos los usuarios y aplicaciones, autenticación heredada bloqueada, un método más fuerte para los administradores y MFA para los invitados. En la demo faltan dos. La política que bloquea la autenticación heredada está en modo informe desde agosto, y en el periodo habría parado 62 inicios de sesión de cuatro cuentas: un escáner que envía correo por SMTP AUTH, una sincronización del CRM que lee un buzón por IMAP y dos móviles que siguen con Exchange ActiveSync. Los invitados están excluidos de la política de MFA, y la política que se escribió para ellos está desactivada.</p>
+<h2>Exclusiones y break-glass</h2>
+<p>El grupo excluido de MFA empezó con dos cuentas de servicio y hoy tiene 14 miembros; siete están deshabilitados o llevan tres meses sin iniciar sesión. Una de las dos cuentas break-glass se quedó dentro de la política de MFA, así que el día que falle el MFA también puede quedarse bloqueada, y se usó un sábado por la tarde. Un administrador del service desk está en el grupo de exclusión y entra al portal de Azure solo con contraseña.</p>
+<h2>Lo que dice el registro de inicios de sesión</h2>
+<p>121 inicios de sesión correctos de 33 usuarios no pasaron por ninguna política aplicada: 74 desde la ubicación de confianza, 32 de invitados y 15 de cuentas excluidas. La cobertura se calcula por aplicación, así que los huecos se ven donde están: los portales de gastos y de RR. HH., que la política de dispositivo conforme no cubre.</p>
+<p>La demo saca un 86,8% de inicios de sesión bajo una política aplicada, 2,8 puntos menos que en la revisión anterior, con un 37,4% usando MFA, cinco hallazgos rojos y ocho ámbar y seis decisiones: arreglar hoy la exclusión de la break-glass, mover los clientes heredados y activar el bloqueo, limpiar las exclusiones y la ubicación de confianza, decidir sobre tres políticas que hoy no hacen nada, meter a todos los administradores en la política del método fuerte y cubrir a los invitados.</p>
+<h2>Cómo usarlo con datos reales</h2>
+<p>Un script de PowerShell de solo lectura exporta las políticas con nombres en lugar de identificadores, las ubicaciones con nombre, los inicios de sesión del periodo con el resultado de cada política, los usuarios con sus roles y los miembros de los grupos que usan las políticas. La base, los límites y los responsables son la política de la propia organización en un fichero de configuración. Funciona con Python y sin dependencias externas, y genera un informe web, un dosier de una página para la revisión de identidad y seguridad y ficheros CSV con cada política, exclusión, usuario, aplicación, hallazgo y acción. Los datos de la demo son ficticios: nombres, direcciones, aplicaciones y cifras.</p>
+<h2>De dónde sale</h2>
+<p>La herramienta nace de llevar Microsoft 365 y Entra ID en el día a día: configurar y gestionar el acceso condicional, administración global con PIM y acceso just-in-time, integración de aplicaciones con SAML y SSO, Exchange Online, cumplimiento de dispositivos con Intune y Microsoft Graph con PowerShell.</p>
+<p>¿Quieres llevarlo a tu entorno o adaptarlo a tu caso? <a href="../about.html#contacto">Escríbeme</a> y lo vemos.</p>
+      </div>
+      
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="es">¿Te ha servido? Cada dos semanas envío una idea práctica para perfiles IT: LinkedIn, proyectos, networking y procesos de selección.</span></p>
+        <a class="btn" href="../recursos.html"><span class="es">Apúntate y llévate las 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="es">El repositorio</span></p>
+      <p class="repo-name">62-conditional-access-policy-review</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/62-conditional-access-policy-review" target="_blank" rel="noopener noreferrer"><span class="es">Ver en GitHub</span> ↗</a>
+      <p class="muted small"><span class="es">Datos ficticios. Nada de código, datos ni sistemas de ninguna empresa.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="es">Compartir</span></p>
+        <div class="share-row es" lang="es"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F62-conditional-access-policy-review.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F62-conditional-access-policy-review.html&amp;text=Un%20rango%20%2F10%20en%20la%20ubicaci%C3%B3n%20de%20confianza%20de%20la%20oficina%20dej%C3%B3%20pasar%2074%20accesos%20sin%20ninguna%20pol%C3%ADtica%20de%20acceso%20condicional%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">X</a><a class="share-btn" href="https://wa.me/?text=Un%20rango%20%2F10%20en%20la%20ubicaci%C3%B3n%20de%20confianza%20de%20la%20oficina%20dej%C3%B3%20pasar%2074%20accesos%20sin%20ninguna%20pol%C3%ADtica%20de%20acceso%20condicional%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F62-conditional-access-policy-review.html" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=Un%20rango%20%2F10%20en%20la%20ubicaci%C3%B3n%20de%20confianza%20de%20la%20oficina%20dej%C3%B3%20pasar%2074%20accesos%20sin%20ninguna%20pol%C3%ADtica%20de%20acceso%20condicional%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fes%2Fblog%2F62-conditional-access-policy-review.html" aria-label="Compartir en Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/es/blog/62-conditional-access-policy-review.html" data-copied="Enlace copiado">Copiar enlace</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/es/blog/62-conditional-access-policy-review.html" data-title="Un rango /10 en la ubicación de confianza de la oficina dejó pasar 74 accesos sin ninguna política de acceso condicional" hidden>Más…</button></div>
+        
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="es">Relacionado</span></h2>
+    <div class="related-grid"><a class="related-link" href="27-m365-tenant-governance-review.html"><span class="label muted"><span class="es">Blog · 27</span></span><span class="related-t"><span class="es">Un Global Admin activo dos años y un cambio rechazado hecho igualmente: así deriva un tenant de Microsoft 365</span></span></a><a class="related-link" href="03-entra-id-hygiene-audit.html"><span class="label muted"><span class="es">Blog · 03</span></span><span class="related-t"><span class="es">Una auditoría de Entra ID encuentra administradores sin MFA, cuentas inactivas más de 90 días e invitados olvidados</span></span></a><a class="related-link" href="37-iam-access-review.html"><span class="label muted"><span class="es">Blog · 37</span></span><span class="related-t"><span class="es">Un administrador que se fue hace tres semanas sigue en Domain Admins y un trader entró después de su último día</span></span></a><a class="related-link" href="../guias/entra-conditional-access-politicas-base-y-usuario-bloqueado.html"><span class="label muted"><span class="es">Guía · Nivel 3</span></span><span class="related-t"><span class="es">Entra ID Conditional Access: las políticas base, el modo solo informe y un usuario bloqueado</span></span></a><a class="related-link" href="../guias/microsoft-graph-primeras-consultas-con-powershell-y-un-informe-que-no-existe-en-el-portal.html"><span class="label muted"><span class="es">Guía · Nivel 3</span></span><span class="related-t"><span class="es">Microsoft Graph con PowerShell: las primeras consultas y un informe que no existe en el portal</span></span></a><a class="related-link" href="../guias/conditional-access-politicas-para-una-sede-con-sala-de-trading.html"><span class="label muted"><span class="es">Guía · Sector 5</span></span><span class="related-t"><span class="es">Conditional Access: políticas pensadas para una sede con sala de trading</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="61-change-freeze-oncall-planner.html"><span class="label muted"><span class="es">Anterior</span></span><span><span class="es">A tres semanas de la congelación, la guardia no tenía a nadie de redes el fin de semana después de Navidad</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-id">
+        <a class="foot-brand" href="../index.html"><svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg><span>Iñigo González García</span></a>
+        <p class="foot-lede"><span class="es">Operaciones IT, Modern Workplace e infraestructura desde Madrid. Herramientas abiertas, guías y un simulador gratis para practicar.</span></p>
+        <div class="foot-cta">
+          <a class="btn foot-btn" href="../about.html#contacto"><span class="es">Escríbeme</span> <span aria-hidden="true">→</span></a>
+          <a class="foot-social" href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn <span aria-hidden="true">↗</span></a>
+          <a class="foot-social" href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <dl class="foot-stats"><div><dt><span class="es">Herramientas</span></dt><dd>62</dd></div><div><dt><span class="es">Guías</span></dt><dd>190</dd></div><div><dt><span class="es">En IT desde</span></dt><dd>2015</dd></div></dl>
+    </div>
+    <nav class="foot-cols" aria-label="Pie de página">
+      <div class="foot-col"><p class="foot-h label"><span class="es">La web</span></p><ul><li><a href="../journey.html"><span class="es">Viaje</span></a></li><li><a href="../about.html"><span class="es">Sobre mí</span></a></li><li><a href="../blog/"><span class="es">Blog</span></a></li><li><a href="../guias.html"><span class="es">Guías</span></a></li><li><a href="../store.html"><span class="es">Servicios</span></a></li><li><a href="../recursos.html"><span class="es">Recursos</span></a></li></ul></div>
+      <div class="foot-col"><p class="foot-h label"><span class="es">Proyectos</span></p><ul><li><a href="https://sysadmindesksbyigg.pages.dev/" target="_blank" rel="noopener noreferrer">SysAdmin Desks <span aria-hidden="true">↗</span></a></li><li><a href="https://github.com/inigogonzalezgarcia" target="_blank" rel="noopener noreferrer"><span class="es">Herramientas en GitHub</span> <span aria-hidden="true">↗</span></a></li></ul></div>
+      <div class="foot-col"><p class="foot-h label"><span class="es">Gratis</span></p><ul><li><a href="../guias.html"><span class="es">Guías IT paso a paso</span></a></li><li><a href="../recursos.html"><span class="es">33 ideas y newsletter</span></a></li><li><span class="es"><a href="https://sysadmindesksbyigg.pages.dev/about" target="_blank" rel="noopener noreferrer">SysAdmin Desks: qué es <span aria-hidden="true">↗</span></a></span></li><li><span class="es"><a href="https://sysadmindesksbyigg.pages.dev/faq" target="_blank" rel="noopener noreferrer">Preguntas frecuentes <span aria-hidden="true">↗</span></a></span></li></ul></div>
+      <div class="foot-col"><p class="foot-h label">Legal</p><ul><li><a href="../aviso-legal.html"><span class="es">Aviso legal</span></a></li><li><a href="../privacidad.html"><span class="es">Privacidad y cookies</span></a></li><li><a href="../condiciones.html"><span class="es">Condiciones</span></a></li><li><button class="linkbtn" type="button" data-cookie-settings><span class="es">Preferencias de cookies</span></button></li></ul></div>
+    </nav>
+    <div class="foot-bar label">
+      <span>© <span id="year">2026</span> Iñigo González García · Madrid</span>
+      <span class="foot-made"><span class="es">Hecha a mano en HTML, CSS y Python · Analítica solo si la aceptas</span></span>
+      <a class="foot-up" href="#top"><span class="es">Volver arriba</span> <span aria-hidden="true">↑</span></a>
+    </div>
+  </div>
+  <p class="foot-word" aria-hidden="true">Iñigo González</p>
+</footer>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/app.js"></script>
+<script src="../../assets/consent.js"></script>
+</body>
+</html>
