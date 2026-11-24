@@ -3329,4 +3329,66 @@ Un script de PowerShell de solo lectura saca de ServiceNow los cambios de las se
 
 La herramienta nace de llevar la gestión de cambios y releases: responsable de los procesos de incidencias, cambios y problemas, CAB y revisiones de puesta en producción, planificación de releases con marcha atrás, runbooks y formación, respuesta a incidentes graves y pruebas de DR/BCP."""),
 
+dict(n="62", repo="62-conditional-access-policy-review", date="2026-11-24", cat="tools",
+ title_en="A /10 range in the office trusted location let 74 sign-ins through with no Conditional Access policy at all",
+ title_es="Un rango /10 en la ubicación de confianza de la oficina dejó pasar 74 accesos sin ninguna política de acceso condicional",
+ seo_title_en="Conditional Access policy review · Iñigo González",
+ seo_title_es="Revisión de acceso condicional · Iñigo González",
+ seo_desc="Conditional Access review against the sign-in log: missing baseline, report-only policies, exclusions, break-glass, trusted locations and legacy auth.",
+ seo_desc_es="Revisión del acceso condicional con los inicios de sesión: base que falta, modo informe, exclusiones, break-glass, ubicaciones y autenticación heredada.",
+ dek_en="The review, published with fictional data from an insurer with seven policies, reads every Conditional Access policy next to a month of sign-ins and lists what the policies really do.",
+ dek_es="La revisión, publicada con datos ficticios de una aseguradora con siete políticas, lee cada política de acceso condicional junto a un mes de inicios de sesión y saca lo que hacen de verdad.",
+ en="""
+The office is a trusted location, and the MFA policy skips it. Somewhere along the way the location gained a /10 range, and in the last 30 days 74 successful sign-ins from it went through with no enforced policy at all. That is the first thing the Conditional Access review published with this post points at. It is an open-source project that runs on sample data from a fictional insurer.
+
+Conditional Access drifts one reasonable change at a time, and the policies and the sign-in log are rarely read together. The review does exactly that: it takes the policies, the named locations, the users, the groups and a month of sign-ins, all exported read-only from Microsoft Graph, and reads them side by side.
+
+## The baseline
+
+First, four controls the organisation expects to be enforced: MFA for every user and app, legacy authentication blocked, a stronger method for admins and MFA for guests. In the demo two are missing. The policy that blocks legacy authentication has been in report-only since August, and in the period it would have stopped 62 sign-ins of four accounts: a scanner sending mail over SMTP AUTH, a CRM sync reading a mailbox over IMAP and two phones still on Exchange ActiveSync. Guests are excluded from the MFA policy, and the policy written for them is disabled.
+
+## Exclusions and break-glass
+
+The group excluded from MFA started with two service accounts and now has 14 members; seven of them are disabled or have not signed in for three months. One of the two break-glass accounts was left inside the MFA policy, so the day MFA fails it can be locked out too, and it was used on a Saturday afternoon. A helpdesk admin sits in the exclusion group and signs in to the Azure portal with a password only.
+
+## What the sign-in log says
+
+121 successful sign-ins of 33 users went through no enforced policy: 74 from the trusted location, 32 by guests and 15 by excluded accounts. Coverage is worked out per app, so the gaps show where they are: the expense and HR portals, which the device compliance policy does not cover.
+
+The demo scores 86.8% of sign-ins under an enforced policy, 2.8 points down on the last review, with 37.4% using MFA, five red and eight amber findings and six decisions: fix the break-glass exclusion today, move the legacy clients and switch the block on, clean up the exclusions and the trusted location, decide on three policies that do nothing today, bring every admin under the stronger method and cover guests.
+
+## How to use it with real data
+
+A read-only PowerShell script exports the policies with names instead of ids, the named locations, the sign-ins of the period with the result of each policy, the users with their roles and the members of the groups the policies use. The baseline, the limits and the owners are the organisation's own policy in a settings file. It runs on Python with no external dependencies and produces a web report, a one-page pack for the identity and security review and CSV files with every policy, exclusion, user, app, finding and action. The demo data is fictional: names, addresses, apps and figures.
+
+## Where it comes from
+
+The tool comes from running Microsoft 365 and Entra ID day to day: configuring and managing Conditional Access, Global Admin with PIM and just-in-time access, app integration with SAML and SSO, Exchange Online, Intune device compliance and Microsoft Graph with PowerShell.""",
+ es="""
+La oficina es una ubicación de confianza y la política de MFA la deja fuera. En algún momento la ubicación ganó un rango /10, y en los últimos 30 días 74 inicios de sesión correctos desde ella pasaron sin ninguna política aplicada. Es lo primero que señala la revisión de acceso condicional que acompaña a este post, un proyecto de código abierto que se ejecuta con datos de ejemplo de una aseguradora ficticia.
+
+El acceso condicional se va desviando con cambios que, uno a uno, tienen sentido, y casi nunca se leen juntas las políticas y el registro de inicios de sesión. La revisión hace justo eso: toma las políticas, las ubicaciones con nombre, los usuarios, los grupos y un mes de inicios de sesión, todo exportado en solo lectura desde Microsoft Graph, y los lee lado a lado.
+
+## La base
+
+Primero, cuatro controles que la organización espera tener activos: MFA para todos los usuarios y aplicaciones, autenticación heredada bloqueada, un método más fuerte para los administradores y MFA para los invitados. En la demo faltan dos. La política que bloquea la autenticación heredada está en modo informe desde agosto, y en el periodo habría parado 62 inicios de sesión de cuatro cuentas: un escáner que envía correo por SMTP AUTH, una sincronización del CRM que lee un buzón por IMAP y dos móviles que siguen con Exchange ActiveSync. Los invitados están excluidos de la política de MFA, y la política que se escribió para ellos está desactivada.
+
+## Exclusiones y break-glass
+
+El grupo excluido de MFA empezó con dos cuentas de servicio y hoy tiene 14 miembros; siete están deshabilitados o llevan tres meses sin iniciar sesión. Una de las dos cuentas break-glass se quedó dentro de la política de MFA, así que el día que falle el MFA también puede quedarse bloqueada, y se usó un sábado por la tarde. Un administrador del service desk está en el grupo de exclusión y entra al portal de Azure solo con contraseña.
+
+## Lo que dice el registro de inicios de sesión
+
+121 inicios de sesión correctos de 33 usuarios no pasaron por ninguna política aplicada: 74 desde la ubicación de confianza, 32 de invitados y 15 de cuentas excluidas. La cobertura se calcula por aplicación, así que los huecos se ven donde están: los portales de gastos y de RR. HH., que la política de dispositivo conforme no cubre.
+
+La demo saca un 86,8% de inicios de sesión bajo una política aplicada, 2,8 puntos menos que en la revisión anterior, con un 37,4% usando MFA, cinco hallazgos rojos y ocho ámbar y seis decisiones: arreglar hoy la exclusión de la break-glass, mover los clientes heredados y activar el bloqueo, limpiar las exclusiones y la ubicación de confianza, decidir sobre tres políticas que hoy no hacen nada, meter a todos los administradores en la política del método fuerte y cubrir a los invitados.
+
+## Cómo usarlo con datos reales
+
+Un script de PowerShell de solo lectura exporta las políticas con nombres en lugar de identificadores, las ubicaciones con nombre, los inicios de sesión del periodo con el resultado de cada política, los usuarios con sus roles y los miembros de los grupos que usan las políticas. La base, los límites y los responsables son la política de la propia organización en un fichero de configuración. Funciona con Python y sin dependencias externas, y genera un informe web, un dosier de una página para la revisión de identidad y seguridad y ficheros CSV con cada política, exclusión, usuario, aplicación, hallazgo y acción. Los datos de la demo son ficticios: nombres, direcciones, aplicaciones y cifras.
+
+## De dónde sale
+
+La herramienta nace de llevar Microsoft 365 y Entra ID en el día a día: configurar y gestionar el acceso condicional, administración global con PIM y acceso just-in-time, integración de aplicaciones con SAML y SSO, Exchange Online, cumplimiento de dispositivos con Intune y Microsoft Graph con PowerShell."""),
+
 ]
