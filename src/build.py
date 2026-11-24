@@ -152,6 +152,9 @@ MAP = f'''      <svg id="map" viewBox="0 0 1000 487" role="img" aria-label="[es]
 import sys
 sys.path.insert(0, str(ROOT))
 from pages import PERSON, PERSON_ID, PERSON_REF, WEBSITE, SITE_URL, crumbs, layout, Page, localize, lpath, lurl, pick, desc_cut, bilingual_static, LANGS, page_hero, card, blog_filters, blog_img, md, minutes, fdate, soon, bi as bi2, MAIL, LINKEDIN, GITHUB, LINKTREE, SEC_HEAD
+from pages import SHOW_SIDE_PROJECTS
+_LAB_ROW = (f'''      <div class="spec-row"><dt class="label">{bi("Laboratorio", "Lab")}</dt><dd><a href="https://fx-trading-lab.pages.dev/" target="_blank" rel="noopener noreferrer">Lab de Inversión ↗</a>{bi(": laboratorio educativo para comprobar una idea de inversión con datos reales; lecciones gratis y simulador guiado.", ": educational lab to check an investment idea with real data; free lessons and a guided simulator.")}</dd></div>
+''' if SHOW_SIDE_PROJECTS else "")
 from posts import POSTS, CATS
 import make_og
 OG = make_og.build(SITE, POSTS, CATS, only_missing=True)  # social preview cards, one per post (CI makes the real ones)
@@ -207,7 +210,7 @@ HOME = ("Inicio", "Home")
 
 # home
 latest = "\n".join(card(p, CATS, "") for p in POSTS_SORTED[:3])
-home_body = "\n\n".join([
+home_body = "\n\n".join(x for x in [
     re.sub(r'(<span class="hero-count">)\d+(</span>)', lambda m: m.group(1) + str(sum(1 for q in POSTS if str(q["n"]).isdigit())) + m.group(2), SEC["hero"]), SEC["welcome"],
     f'''<section class="section u-paper2" id="historias">
   <div class="wrap">
@@ -298,7 +301,7 @@ home_body = "\n\n".join([
       <a class="btn" href="about.html#contacto">{bi("Escríbeme", "Get in touch")} →</a>
     </div>
   </div>
-</section>'''])
+</section>'''] if SHOW_SIDE_PROJECTS or not ("fx-trading-lab.pages.dev" in x or "emss-studio.pages.dev" in x))
 sizes["index.html"] = write("index.html", layout(R="", path="", active="", home=True, gsap=("SplitText",),
     title_en="Iñigo González García · IT Site Leader in Madrid", title_es="Iñigo González García · IT Site Leader en Madrid",
     desc=DESC, desc_es=DESC_ES, body=home_body, ld=[PERSON, WEBSITE]))
@@ -681,8 +684,7 @@ now = f'''<section class="section">
     <dl class="spec reveal">
       <div class="spec-row"><dt class="label">{bi("Trabajo", "Work")}</dt><dd>{bi("Operaciones IT, Modern Workplace e infraestructura en Madrid, en inglés cada día con equipos de varios países.", "IT operations, Modern Workplace and infrastructure in Madrid, in English every day with teams in several countries.")}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Simulador", "Simulator")}</dt><dd><a href="https://sysadmindesksbyigg.pages.dev/" target="_blank" rel="noopener noreferrer">SysAdmin Desks ↗</a>{bi(": práctica gratuita de soporte IT con tickets, SLA y nota de trabajo.", ": free IT support practice with tickets, SLA and work notes.")}</dd></div>
-      <div class="spec-row"><dt class="label">{bi("Laboratorio", "Lab")}</dt><dd><a href="https://fx-trading-lab.pages.dev/" target="_blank" rel="noopener noreferrer">Lab de Inversión ↗</a>{bi(": laboratorio educativo para comprobar una idea de inversión con datos reales; lecciones gratis y simulador guiado.", ": educational lab to check an investment idea with real data; free lessons and a guided simulator.")}</dd></div>
-      <div class="spec-row"><dt class="label">{bi("Proyectos", "Projects")}</dt><dd><a href="blog/">{bi(f"{N_TOOLS} proyectos en GitHub", f"{N_TOOLS} projects on GitHub")}</a>{bi(", cada uno con su artículo.", ", each with its own story.")}</dd></div>
+{_LAB_ROW}      <div class="spec-row"><dt class="label">{bi("Proyectos", "Projects")}</dt><dd><a href="blog/">{bi(f"{N_TOOLS} proyectos en GitHub", f"{N_TOOLS} projects on GitHub")}</a>{bi(", cada uno con su artículo.", ", each with its own story.")}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Destacados", "Featured")}</dt><dd>{_featured()}</dd></div>
       <div class="spec-row"><dt class="label">{bi("Guías", "Guides")}</dt><dd><a href="guias.html">{bi(f"{len(_GALL)} guías paso a paso", f"{len(_GALL)} step-by-step guides")}</a>{bi(", por nivel y por sector.", ", by level and by sector.")}</dd></div>
       <div class="spec-row"><dt class="label">Newsletter</dt><dd><a href="recursos.html">Tech Career Lab</a>{bi(": una idea práctica cada dos semanas.", ": one practical idea every two weeks.")}</dd></div>
@@ -1033,8 +1035,8 @@ _nsec = sum(1 for k in _LVL if k.startswith("sector-")); _nlvl = sum(1 for k in 
 LINK_GROUPS = [
     (bi("Aprende y practica", "Learn and practise"), [
         ("https://sysadmindesksbyigg.pages.dev/", "SysAdmin Desks", bi("Simulador gratuito de soporte IT: tickets, SLA y nota de trabajo.", "Free IT support simulator: tickets, SLA and work notes."), "ext"),
-        ("https://fx-trading-lab.pages.dev/", "Lab de Inversión", bi("Laboratorio educativo: aprende a comprobar una idea de inversión con ocho años de datos reales.", "Educational lab: learn to check an investment idea with eight years of real data."), "ext"),
-        ("https://emss-studio.pages.dev/", "EMSS", bi("Estudio de sesiones: completa y mezcla tu set de màkina, hardcore, hardstyle, hard techno o techno.", "Session studio: completes and mixes your makina, hardcore, hardstyle, hard techno or techno set."), "ext"),
+        *([("https://fx-trading-lab.pages.dev/", "Lab de Inversión", bi("Laboratorio educativo: aprende a comprobar una idea de inversión con ocho años de datos reales.", "Educational lab: learn to check an investment idea with eight years of real data."), "ext")] if SHOW_SIDE_PROJECTS else []),
+        *([("https://emss-studio.pages.dev/", "EMSS", bi("Estudio de sesiones: completa y mezcla tu set de màkina, hardcore, hardstyle, hard techno o techno.", "Session studio: completes and mixes your makina, hardcore, hardstyle, hard techno or techno set."), "ext")] if SHOW_SIDE_PROJECTS else []),
         ("guias.html", bi("Guías IT", "IT guides"), bi(f"{len(_GL)} guías paso a paso: {_nlvl} niveles y {_nsec} sectores.", f"{len(_GL)} step-by-step guides: {_nlvl} levels and {_nsec} sectors."), ""),
         ("blog/", "Blog", bi(f"{N_TOOLS} proyectos en GitHub, cada uno con su artículo.", f"{N_TOOLS} projects on GitHub, each with its story."), ""),
     ]),

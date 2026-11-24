@@ -338,6 +338,8 @@ def _layout(lang, *, R, path, active, title_en, title_es, desc, desc_es, body, h
 '''
 
 SD_URL = "https://sysadmindesksbyigg.pages.dev/"
+# Lab de Inversión and EMSS are hidden from the site while a hiring process is open (24-nov-2026); True shows them again
+SHOW_SIDE_PROJECTS = False
 LAB_URL = "https://fx-trading-lab.pages.dev/"
 EMSS_URL = "https://emss-studio.pages.dev/"
 
@@ -353,10 +355,10 @@ def site_footer(R="", home_link=False, lang=None):
         return (f'<div class="foot-col"><p class="foot-h label">{title}</p><ul>'
                 + "".join(f"<li>{x}</li>" for x in items) + "</ul></div>")
     site = [f'<a href="{R}{h}">{bi(es, en)}</a>' for k, h, es, en in NAV if k != "links"]
-    projects = [f'<a href="{SD_URL}"{ext}>SysAdmin Desks{arrow}</a>',
-                f'<a href="{LAB_URL}"{ext}>Lab de Inversión{arrow}</a>',
-                f'<a href="{EMSS_URL}"{ext}>EMSS{arrow}</a>',
-                f'<a href="{GITHUB}"{ext}>{bi("Herramientas en GitHub", "Tools on GitHub")}{arrow}</a>']
+    projects = [f'<a href="{SD_URL}"{ext}>SysAdmin Desks{arrow}</a>']
+    if SHOW_SIDE_PROJECTS:
+        projects += [f'<a href="{LAB_URL}"{ext}>Lab de Inversión{arrow}</a>', f'<a href="{EMSS_URL}"{ext}>EMSS{arrow}</a>']
+    projects += [f'<a href="{GITHUB}"{ext}>{bi("Herramientas en GitHub", "Tools on GitHub")}{arrow}</a>']
     free = [f'<a href="{R}guias.html">{bi("Guías IT paso a paso", "Step-by-step IT guides")}</a>',
             f'<a href="{R}recursos.html">{bi("33 ideas y newsletter", "33 ideas and newsletter")}</a>',
             bi(f'<a href="{SD_URL}about"{ext}>SysAdmin Desks: qué es{arrow}</a>', f'<a href="{SD_URL}about#en"{ext}>SysAdmin Desks: about{arrow}</a>'),
