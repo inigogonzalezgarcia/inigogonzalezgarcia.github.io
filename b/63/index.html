@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Sentinel detection coverage review · Iñigo González</title>
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/63-sentinel-detection-coverage.html">
+<meta name="description" content="Sentinel detection review: priority ATT&amp;CK techniques with no working rule, silent log sources, failing and noisy rules, and slow triage.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/63-sentinel-detection-coverage.html">
+<meta property="og:title" content="Sentinel detection coverage review · Iñigo González">
+<meta property="og:description" content="Sentinel detection review: priority ATT&amp;CK techniques with no working rule, silent log sources, failing and noisy rules, and slow triage.">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/63-sentinel-detection-coverage.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta http-equiv="refresh" content="0; url=https://inigogonzalezgarcia.github.io/blog/63-sentinel-detection-coverage.html?utm_source=linkedin&amp;utm_medium=social&amp;utm_campaign=shortlink">
+</head>
+<body><p><a href="https://inigogonzalezgarcia.github.io/blog/63-sentinel-detection-coverage.html?utm_source=linkedin&amp;utm_medium=social&amp;utm_campaign=shortlink">Go to the page: Sentinel detection coverage review · Iñigo González</a></p></body>
+</html>
