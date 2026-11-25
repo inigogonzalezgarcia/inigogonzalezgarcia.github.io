@@ -3391,4 +3391,70 @@ Un script de PowerShell de solo lectura exporta las políticas con nombres en lu
 
 La herramienta nace de llevar Microsoft 365 y Entra ID en el día a día: configurar y gestionar el acceso condicional, administración global con PIM y acceso just-in-time, integración de aplicaciones con SAML y SSO, Exchange Online, cumplimiento de dispositivos con Intune y Microsoft Graph con PowerShell."""),
 
+dict(n="63", repo="63-sentinel-detection-coverage", date="2026-11-25", cat="tools",
+ title_en="The firewall logs stopped on a Friday afternoon and seven Sentinel rules went quiet with nothing to say why",
+ title_es="Los logs del firewall dejaron de llegar un viernes por la tarde y siete reglas de Sentinel se quedaron calladas sin avisar",
+ seo_title_en="Sentinel detection coverage review · Iñigo González",
+ seo_title_es="Cobertura de detección en Sentinel · Iñigo González",
+ seo_desc="Sentinel detection review: priority ATT&CK techniques with no working rule, silent log sources, failing and noisy rules, and slow triage.",
+ seo_desc_es="Revisión de detección en Sentinel: técnicas ATT&CK sin una regla que funcione, fuentes de logs caídas, reglas que fallan o hacen ruido y triaje lento.",
+ dek_en="The review, published with fictional data from a logistics company with 38 analytics rules, reads the rules next to the techniques that matter, the log sources they depend on and a month of incidents.",
+ dek_es="La revisión, publicada con datos ficticios de una empresa de logística con 38 reglas de análisis, lee las reglas junto a las técnicas que importan, las fuentes de logs de las que dependen y un mes de incidentes.",
+ en="""
+A firmware upgrade on the firewalls on a Friday afternoon, and the log forwarder stops sending. Nothing breaks that anyone can see. In Microsoft Sentinel, the seven analytics rules that read the firewall table are still enabled and still run on time; they just have nothing left to find. Five days later, that is the first thing the detection coverage review published with this post points at. It is an open-source project that runs on sample data from a fictional logistics company.
+
+A rule can look fine in the list of analytics rules while it cannot fire. The review reads four things together: the rules with their MITRE ATT&CK mapping and the tables they read, the log sources the organisation expects, the rule health log and a month of incidents. It measures them against the organisation's own list of priority techniques.
+
+## Log sources
+
+The firewall table has been silent since Friday at 14:12, against a limit of six hours for a critical source. Linux syslog is still arriving, but at 61% less than the weeks before, after a configuration change on half of the servers. AWS CloudTrail is on the list of expected sources and has never arrived, so the two rules written for it have never had anything to read. On the other side, two tables send 14 GB a day that no rule reads: a question for the platform team, not for the SOC.
+
+## Rules and techniques
+
+Five rules read only the firewall table and cannot fire; two more read it next to another table and only see half of what they look for. The Kerberoasting rule has timed out every hour since 14 November. The rule for shadow copy deletion was switched off during a backup migration in September. Four rules have no ATT&CK technique, so they count for nothing in coverage, and three are on an old version of their template.
+
+Of the 22 priority techniques, 14 have at least one rule that works today. Email forwarding rules, a classic start of invoice fraud, have no rule at all. Exfiltration to file-sharing sites had two rules, and both need the firewall table.
+
+## Incidents and noise
+
+One rule, sign-ins from an unfamiliar country, raised 131 of the 422 incidents of the month, and 94% of the ones classified were benign or false. Most High incidents were picked up within the four-hour target, but 35 of 76 were not, and 30 of those arrived at night or at the weekend. Two High incidents have been open for more than a week, and 28% of closed incidents have no classification, so the noise of their rules cannot be measured.
+
+The demo scores 63.6% of priority techniques covered by a working rule, 13.7 points down on the last review, with nine red and 19 amber findings and seven decisions: get the firewall logs back today and run their rules over the gap, connect or drop CloudTrail, close four gaps on high-priority techniques, repair three rules, tune the four noisiest, fix night and weekend triage, and decide on the two tables nobody reads.
+
+## How to use it with real data
+
+A read-only PowerShell script exports the analytics rules and their template versions, finds the tables each rule reads, and queries the workspace for the last record of each table, daily ingestion, the incidents of the period and the rule health log. The expected sources, the priority techniques, the limits and the owners are the organisation's own lists and settings. It runs on Python with no external dependencies and produces a web report, a one-page pack for the security operations review and CSV files with every technique, source, rule, finding and action. The demo data is fictional: names, rules and figures.
+
+## Where it comes from
+
+The tool comes from working with Microsoft Sentinel, Azure Monitor and Log Analytics, and with SIEMs such as Splunk and Google SecOps, alongside Microsoft Defender and Entra ID. It also draws on leading the technical response to major incidents and the post-mortems, and on defining security metrics and KPIs.""",
+ es="""
+Una actualización de firmware en los firewalls un viernes por la tarde, y el reenviador de logs deja de enviar. No se rompe nada que se vea. En Microsoft Sentinel, las siete reglas de análisis que leen la tabla del firewall siguen activadas y siguen ejecutándose a su hora; simplemente ya no tienen nada que encontrar. Cinco días después, es lo primero que señala la revisión de cobertura de detección que acompaña a este post, un proyecto de código abierto que se ejecuta con datos de ejemplo de una empresa de logística ficticia.
+
+Una regla puede parecer correcta en la lista de reglas de análisis y aun así no poder dispararse. La revisión lee cuatro cosas juntas: las reglas con su mapeo a MITRE ATT&CK y las tablas que leen, las fuentes de logs que la organización espera, el registro de salud de las reglas y un mes de incidentes. Y las mide contra la lista de técnicas prioritarias de la propia organización.
+
+## Fuentes de logs
+
+La tabla del firewall lleva sin datos desde el viernes a las 14:12, con un límite de seis horas para una fuente crítica. El syslog de Linux sigue llegando, pero un 61% por debajo de las semanas anteriores, tras un cambio de configuración en la mitad de los servidores. AWS CloudTrail está en la lista de fuentes esperadas y nunca ha llegado, así que las dos reglas escritas para ella nunca han tenido nada que leer. Al otro lado, dos tablas envían 14 GB al día que no lee ninguna regla: una pregunta para el equipo de plataforma, no para el SOC.
+
+## Reglas y técnicas
+
+Cinco reglas leen solo la tabla del firewall y no pueden dispararse; otras dos la leen junto a otra tabla y solo ven la mitad de lo que buscan. La regla de Kerberoasting agota el tiempo cada hora desde el 14 de noviembre. La regla del borrado de instantáneas de volumen (shadow copies) se desactivó durante una migración de backup en septiembre. Cuatro reglas no tienen ninguna técnica de ATT&CK, así que no cuentan para la cobertura, y tres están en una versión antigua de su plantilla.
+
+De las 22 técnicas prioritarias, 14 tienen al menos una regla que funciona hoy. Las reglas de reenvío de correo, un comienzo clásico del fraude de facturas, no tienen ninguna regla. La exfiltración a sitios para compartir archivos tenía dos reglas, y las dos necesitan la tabla del firewall.
+
+## Incidentes y ruido
+
+Una sola regla, la de inicios de sesión desde un país poco habitual, generó 131 de los 422 incidentes del mes, y el 94% de los clasificados fueron benignos o falsos positivos. La mayoría de los incidentes High se atendieron dentro del objetivo de cuatro horas, pero 35 de 76 no, y 30 de esos llegaron de noche o en fin de semana. Dos incidentes High llevan abiertos más de una semana, y el 28% de los incidentes cerrados no tiene clasificación, así que no se puede medir el ruido de sus reglas.
+
+La demo saca un 63,6% de técnicas prioritarias cubiertas por una regla que funciona, 13,7 puntos menos que en la revisión anterior, con nueve hallazgos rojos y 19 ámbar y siete decisiones: recuperar hoy los logs del firewall y pasar sus reglas sobre el hueco, conectar CloudTrail o quitarlo de la lista, cerrar cuatro huecos en técnicas de prioridad alta, reparar tres reglas, ajustar las cuatro más ruidosas, arreglar el triaje de noches y fines de semana, y decidir qué hacer con las dos tablas que nadie lee.
+
+## Cómo usarlo con datos reales
+
+Un script de PowerShell de solo lectura exporta las reglas de análisis y las versiones de sus plantillas, busca las tablas que lee cada regla y consulta en el área de trabajo el último registro de cada tabla, la ingesta diaria, los incidentes del periodo y el registro de salud de las reglas. Las fuentes esperadas, las técnicas prioritarias, los límites y los responsables son listas y ajustes de la propia organización. Funciona con Python y sin dependencias externas, y genera un informe web, un dosier de una página para la revisión de operaciones de seguridad y ficheros CSV con cada técnica, fuente, regla, hallazgo y acción. Los datos de la demo son ficticios: nombres, reglas y cifras.
+
+## De dónde sale
+
+La herramienta nace de trabajar con Microsoft Sentinel, Azure Monitor y Log Analytics, y con SIEM como Splunk y Google SecOps, junto a Microsoft Defender y Entra ID. También se apoya en dirigir la respuesta técnica a incidentes graves y sus post-mortem, y en definir métricas y KPI de seguridad."""),
+
 ]
