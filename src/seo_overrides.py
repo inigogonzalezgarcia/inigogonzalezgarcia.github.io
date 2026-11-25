@@ -89,6 +89,9 @@ GUIDES_SEO = {
     "powershell-remoto-winrm-invoke-command-en-lote-segundo-salto-jea-y-acceso-denegado": {
         "es": "PowerShell remoto con WinRM: puertos 5985 y 5986, Invoke-Command contra cientos de equipos, el segundo salto sin CredSSP, JEA, registro y un acceso denegado.",
     },
+    "zabbix-windows-y-linux-a-fondo-servicios-eventlog-logs-procesos-userparameter-psk-y-un-elemento-no-soportado": {
+        "es": "Zabbix agente 2 a fondo: servicios de Windows y systemd, eventlog[], log[] y logrt[], proc.num, UserParameter, cifrado PSK y un elemento not supported.",
+    },
 }
 
 KEYS = {"en": "seo_desc", "es": "seo_desc_es"}

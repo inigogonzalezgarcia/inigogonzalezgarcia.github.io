@@ -40335,7 +40335,7 @@ In the ticket: the exact error, the `snmpget` test from the same source as Zabbi
 - Per-port traffic graphs on dashboards are built in [Grafana](grafana-origen-de-datos-primer-panel-y-alerta-al-canal.html) with Zabbix as the data source.
 """)
 
-g(slug="zabbix-windows-y-linux-a-fondo-servicios-eventlog-logs-procesos-userparameter-psk-y-un-elemento-no-soportado", topic="zabbix", date="2026-11-06",
+g(slug="zabbix-windows-y-linux-a-fondo-servicios-eventlog-logs-procesos-userparameter-psk-y-un-elemento-no-soportado", topic="zabbix", date="2026-11-06", updated="2026-11-25",
   title_es="Zabbix: Windows y Linux a fondo con el agente 2, con servicios descubiertos, registro de eventos, ficheros de log, procesos, UserParameter, cifrado PSK y un elemento «not supported»",
   title_en="Zabbix: Windows and Linux in depth with agent 2, with discovered services, event log, log files, processes, UserParameter, PSK encryption and a \"not supported\" item",
   seo_title_en="Zabbix: Windows and Linux in depth · Iñigo González",
