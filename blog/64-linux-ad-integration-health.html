@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Linux joined to AD: health review · Iñigo González</title>
+<meta name="description" content="Review of Linux hosts joined to Active Directory: broken trusts, keytab versions, SSSD, clock skew, DNS, open logins and sudo through AD groups.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/64-linux-ad-integration-health.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/64-linux-ad-integration-health.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/64-linux-ad-integration-health.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/64-linux-ad-integration-health.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux joined to AD: health review · Iñigo González">
+<meta property="og:description" content="Review of Linux hosts joined to Active Directory: broken trusts, keytab versions, SSSD, clock skew, DNS, open logins and sudo through AD groups.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/64-linux-ad-integration-health.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/64-linux-ad-integration-health.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Linux joined to AD: health review · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Two Linux servers shared one AD computer account because of the 15-character limit, and took turns losing the trust","alternativeHeadline":"Dos servidores Linux compartían una cuenta de equipo en AD por el límite de 15 caracteres, y se turnaban para perder la confianza","description":"The review, published with fictional data from an engineering company with 89 Linux hosts, reads every server, workstation and laptop from both sides: what the host says and what Active Directory says.","datePublished":"2026-11-26","dateModified":"2026-11-26","inLanguage":"en","image":"https://inigogonzalezgarcia.github.io/assets/og/64-linux-ad-integration-health.png","url":"https://inigogonzalezgarcia.github.io/blog/64-linux-ad-integration-health.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/blog/64-linux-ad-integration-health.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/blog/#blog"},"articleSection":"IT Ops tools"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/blog/"},{"@type":"ListItem","position":3,"name":"Two Linux servers shared one AD computer account because of the 15-character limit, and took turns losing the trust","item":"https://inigogonzalezgarcia.github.io/blog/64-linux-ad-integration-health.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/" aria-current="page"><span class="en">Blog</span></a><a href="../guias.html"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../es/blog/64-linux-ad-integration-health.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 64</p>
+    <h1><span class="en">Two Linux servers shared one AD computer account because of the 15-character limit, and took turns losing the trust</span></h1>
+    <p class="lede"><span class="en">The review, published with fictional data from an engineering company with 89 Linux hosts, reads every server, workstation and laptop from both sides: what the host says and what Active Directory says.</span></p><p class="label post-meta"><span class="en">IT Ops tools</span> · <span class="en">26 Nov 2026</span> · <span class="en">3 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <figure class="post-fig"><a href="https://github.com/inigogonzalezgarcia/64-linux-ad-integration-health" target="_blank" rel="noopener noreferrer"><img src="../assets/blog/64.webp" alt="Report of 64-linux-ad-integration-health from the fictional demo data" width="1000" height="820" decoding="async"></a><figcaption class="small muted"><span class="en">Report the repo builds from the fictional demo data.</span></figcaption></figure>
+      
+      <div class="en" lang="en">
+<p>Two servers are called analytics-worker-01 and analytics-worker-02. When a Linux host joins Active Directory, its computer account gets a name of at most 15 characters, and both names cut down to the same one. So both servers use one account: each time one renews its machine password, the other&#x27;s keytab stops matching and its domain logins start failing. That is the first thing the Linux AD integration review published with this post points at. It is an open-source project that runs on sample data from a fictional engineering company.</p>
+<p>Linux joined to AD tends to work quietly until one morning it does not, and the two halves of the picture live in different places. The review reads them together: what a read-only script finds on each host (the realm, the test join, the keytab, SSSD, the clock, DNS, the login policy and sudo), the inventory from Landscape, and the computer objects, groups and users in Active Directory.</p>
+<h2>Domain trust</h2>
+<p>Besides the two analytics workers, a reporting database server fails its test join: the keytab holds key version 3 and the computer object 5, because someone reset the account from the console. The Git server says it is joined, but its computer object was deleted in an OU clean-up. Three laptops have not renewed their machine password in 77 to 131 days.</p>
+<h2>SSSD, time and DNS</h2>
+<p>The SFTP server in the DMZ takes its time from a public pool and runs 413 seconds ahead of the domain controllers, past the five minutes Kerberos accepts. Two more DMZ servers use time sources outside the agreed list. Five workstations in Bilbao run SSSD but cannot reach the domain, so only people with cached credentials get in, and nine servers in the data centre have no reverse DNS record.</p>
+<h2>Logins and sudo</h2>
+<p>Two build servers and the jump host were joined with a login policy that lets every account in the domain sign in, and the build servers give root to Domain Users. Four members of the group that grants sudo on 29 servers are disabled or have not signed in for months, and six servers still give sudo to named local accounts that no leaver process reaches. On the inventory side, eleven Linux computer objects have no host, two hosts sign in to the domain without being in the inventory, and four stopped reporting.</p>
+<p>The demo scores domain logins working on 70 of 89 hosts (78.7%), 13.1 points down on the last review, with 11 red and 13 amber findings and six decisions: repair the trusts and give the analytics workers their own accounts, point every host at the domain controllers for time, close logins and root to the whole domain, clean up sudo, make the inventory and AD agree, and fix DNS.</p>
+<h2>How to use it with real data</h2>
+<p>A read-only Bash script runs on each host as root, from Landscape, Ansible or SSH, and writes one row with what realm, adcli, klist, SSSD, chrony, DNS and the sudoers files say. A read-only PowerShell script exports the Linux computer objects with their key version and password age, the members of the groups that grant logins and sudo, and those users. The limits, the agreed time sources and the owners are the organisation&#x27;s own settings. It runs on Python with no external dependencies and produces a web report, a one-page pack for the infrastructure review and CSV files with every host, sudo group, orphan object, finding and action. The demo data is fictional: names, addresses and figures.</p>
+<h2>Where it comes from</h2>
+<p>The tool comes from working with Linux joined to Active Directory: Ubuntu desktops managed with Ubuntu Landscape and Red Hat servers, alongside Active Directory, DNS and DHCP on Windows Server, Group Policy and Entra ID, with Bash and PowerShell for day-to-day operations.</p>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="en">The repository</span></p>
+      <p class="repo-name">64-linux-ad-integration-health</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/64-linux-ad-integration-health" target="_blank" rel="noopener noreferrer"><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="en">Share</span></p>
+        
+        <div class="share-row en" lang="en"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F64-linux-ad-integration-health.html" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F64-linux-ad-integration-health.html&amp;text=Two%20Linux%20servers%20shared%20one%20AD%20computer%20account%20because%20of%20the%2015-character%20limit%2C%20and%20took%20turns%20losing%20the%20trust%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Share on X">X</a><a class="share-btn" href="https://wa.me/?text=Two%20Linux%20servers%20shared%20one%20AD%20computer%20account%20because%20of%20the%2015-character%20limit%2C%20and%20took%20turns%20losing%20the%20trust%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F64-linux-ad-integration-health.html" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=Two%20Linux%20servers%20shared%20one%20AD%20computer%20account%20because%20of%20the%2015-character%20limit%2C%20and%20took%20turns%20losing%20the%20trust%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F64-linux-ad-integration-health.html" aria-label="Share on Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/64-linux-ad-integration-health.html" data-copied="Link copied">Copy link</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/64-linux-ad-integration-health.html" data-title="Two Linux servers shared one AD computer account because of the 15-character limit, and took turns losing the trust" hidden>More…</button></div>
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="19-ad-infra-health-check.html"><span class="label muted"><span class="en">Blog · 19</span></span><span class="related-t"><span class="en">A read-only Active Directory check puts on one Monday page what has to be fixed before 09:00</span></span></a><a class="related-link" href="37-iam-access-review.html"><span class="label muted"><span class="en">Blog · 37</span></span><span class="related-t"><span class="en">An administrator who left three weeks ago is still in Domain Admins and a trader signed in after his last day</span></span></a><a class="related-link" href="53-dns-dhcp-ipam-review.html"><span class="label muted"><span class="en">Blog · 53</span></span><span class="related-t"><span class="en">An eight-day lease leaves a guest Wi-Fi at 94 %, and a retired domain controller is still handed out in five scopes</span></span></a><a class="related-link" href="../guias/rhel-registrar-parchear-servicios-firewall-selinux.html"><span class="label muted"><span class="en">Guide · Level 2</span></span><span class="related-t"><span class="en">Red Hat Enterprise Linux: registering, patching, and managing services, the firewall and SELinux</span></span></a><a class="related-link" href="../guias/ubuntu-server-disco-lleno-journald-logrotate-y-un-servicio-que-no-arranca.html"><span class="label muted"><span class="en">Guide · Level 2</span></span><span class="related-t"><span class="en">Ubuntu Server: a full disk, journald, logrotate, old kernels and a service that won&#x27;t start</span></span></a><a class="related-link" href="../guias/ubuntu-server-netplan-vlan-y-bond-recursos-smb-y-nfs-temporizadores-systemd-y-un-montaje-que-falla-al-arrancar.html"><span class="label muted"><span class="en">Guide · Level 2</span></span><span class="related-t"><span class="en">Ubuntu Server: networking with netplan (static IP, VLAN and bond), SMB and NFS shares in fstab with automount, systemd timers and a server that takes two minutes to boot without mounting the share</span></span></a><a class="related-link" href="../guias/ubuntu-server-usuarios-ssh-firewall-y-actualizaciones.html"><span class="label muted"><span class="en">Guide · Level 2</span></span><span class="related-t"><span class="en">Ubuntu Server: the first 30 minutes after installation</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="63-sentinel-detection-coverage.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">The firewall logs stopped on a Friday afternoon and seven Sentinel rules went quiet with nothing to say why</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-id">
+        <a class="foot-brand" href="../index.html"><svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg><span>Iñigo González García</span></a>
+        <p class="foot-lede"><span class="en">IT operations, Modern Workplace and infrastructure from Madrid. Open tools, guides and a free simulator to practise.</span></p>
+        <div class="foot-cta">
+          <a class="btn foot-btn" href="../about.html#contacto"><span class="en">Get in touch</span> <span aria-hidden="true">→</span></a>
+          <a class="foot-social" href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn <span aria-hidden="true">↗</span></a>
+          <a class="foot-social" href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <dl class="foot-stats"><div><dt><span class="en">Tools</span></dt><dd>64</dd></div><div><dt><span class="en">Guides</span></dt><dd>190</dd></div><div><dt><span class="en">In IT since</span></dt><dd>2015</dd></div></dl>
+    </div>
+    <nav class="foot-cols" aria-label="Footer">
+      <div class="foot-col"><p class="foot-h label"><span class="en">The site</span></p><ul><li><a href="../journey.html"><span class="en">Journey</span></a></li><li><a href="../about.html"><span class="en">About</span></a></li><li><a href="../blog/"><span class="en">Blog</span></a></li><li><a href="../guias.html"><span class="en">Guides</span></a></li><li><a href="../store.html"><span class="en">Services</span></a></li><li><a href="../recursos.html"><span class="en">Resources</span></a></li></ul></div>
+      <div class="foot-col"><p class="foot-h label"><span class="en">Projects</span></p><ul><li><a href="https://sysadmindesksbyigg.pages.dev/" target="_blank" rel="noopener noreferrer">SysAdmin Desks <span aria-hidden="true">↗</span></a></li><li><a href="https://github.com/inigogonzalezgarcia" target="_blank" rel="noopener noreferrer"><span class="en">Tools on GitHub</span> <span aria-hidden="true">↗</span></a></li></ul></div>
+      <div class="foot-col"><p class="foot-h label"><span class="en">Free</span></p><ul><li><a href="../guias.html"><span class="en">Step-by-step IT guides</span></a></li><li><a href="../recursos.html"><span class="en">33 ideas and newsletter</span></a></li><li><span class="en"><a href="https://sysadmindesksbyigg.pages.dev/about#en" target="_blank" rel="noopener noreferrer">SysAdmin Desks: about <span aria-hidden="true">↗</span></a></span></li><li><span class="en"><a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">Questions and answers <span aria-hidden="true">↗</span></a></span></li></ul></div>
+      <div class="foot-col"><p class="foot-h label">Legal</p><ul><li><a href="../aviso-legal.html"><span class="en">Legal notice</span></a></li><li><a href="../privacidad.html"><span class="en">Privacy and cookies</span></a></li><li><a href="../condiciones.html"><span class="en">Terms</span></a></li><li><button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></li></ul></div>
+    </nav>
+    <div class="foot-bar label">
+      <span>© <span id="year">2026</span> Iñigo González García · Madrid</span>
+      <span class="foot-made"><span class="en">Hand-built in HTML, CSS and Python · Analytics only if you accept</span></span>
+      <a class="foot-up" href="#top"><span class="en">Back to top</span> <span aria-hidden="true">↑</span></a>
+    </div>
+  </div>
+  <p class="foot-word" aria-hidden="true">Iñigo González</p>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
