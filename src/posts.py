@@ -3457,4 +3457,66 @@ Un script de PowerShell de solo lectura exporta las reglas de análisis y las ve
 
 La herramienta nace de trabajar con Microsoft Sentinel, Azure Monitor y Log Analytics, y con SIEM como Splunk y Google SecOps, junto a Microsoft Defender y Entra ID. También se apoya en dirigir la respuesta técnica a incidentes graves y sus post-mortem, y en definir métricas y KPI de seguridad."""),
 
+dict(n="64", repo="64-linux-ad-integration-health", date="2026-11-26", cat="tools",
+ title_en="Two Linux servers shared one AD computer account because of the 15-character limit, and took turns losing the trust",
+ title_es="Dos servidores Linux compartían una cuenta de equipo en AD por el límite de 15 caracteres, y se turnaban para perder la confianza",
+ seo_title_en="Linux joined to AD: health review · Iñigo González",
+ seo_title_es="Linux unido a AD: revisión de salud · Iñigo González",
+ seo_desc="Review of Linux hosts joined to Active Directory: broken trusts, keytab versions, SSSD, clock skew, DNS, open logins and sudo through AD groups.",
+ seo_desc_es="Revisión de Linux unido a Active Directory: confianza rota, versiones del keytab, SSSD, desfase horario, DNS, inicios de sesión abiertos y sudo.",
+ dek_en="The review, published with fictional data from an engineering company with 89 Linux hosts, reads every server, workstation and laptop from both sides: what the host says and what Active Directory says.",
+ dek_es="La revisión, publicada con datos ficticios de una empresa de ingeniería con 89 equipos Linux, lee cada servidor, estación de trabajo y portátil desde los dos lados: lo que dice el equipo y lo que dice Active Directory.",
+ en="""
+Two servers are called analytics-worker-01 and analytics-worker-02. When a Linux host joins Active Directory, its computer account gets a name of at most 15 characters, and both names cut down to the same one. So both servers use one account: each time one renews its machine password, the other's keytab stops matching and its domain logins start failing. That is the first thing the Linux AD integration review published with this post points at. It is an open-source project that runs on sample data from a fictional engineering company.
+
+Linux joined to AD tends to work quietly until one morning it does not, and the two halves of the picture live in different places. The review reads them together: what a read-only script finds on each host (the realm, the test join, the keytab, SSSD, the clock, DNS, the login policy and sudo), the inventory from Landscape, and the computer objects, groups and users in Active Directory.
+
+## Domain trust
+
+Besides the two analytics workers, a reporting database server fails its test join: the keytab holds key version 3 and the computer object 5, because someone reset the account from the console. The Git server says it is joined, but its computer object was deleted in an OU clean-up. Three laptops have not renewed their machine password in 77 to 131 days.
+
+## SSSD, time and DNS
+
+The SFTP server in the DMZ takes its time from a public pool and runs 413 seconds ahead of the domain controllers, past the five minutes Kerberos accepts. Two more DMZ servers use time sources outside the agreed list. Five workstations in Bilbao run SSSD but cannot reach the domain, so only people with cached credentials get in, and nine servers in the data centre have no reverse DNS record.
+
+## Logins and sudo
+
+Two build servers and the jump host were joined with a login policy that lets every account in the domain sign in, and the build servers give root to Domain Users. Four members of the group that grants sudo on 29 servers are disabled or have not signed in for months, and six servers still give sudo to named local accounts that no leaver process reaches. On the inventory side, eleven Linux computer objects have no host, two hosts sign in to the domain without being in the inventory, and four stopped reporting.
+
+The demo scores domain logins working on 70 of 89 hosts (78.7%), 13.1 points down on the last review, with 11 red and 13 amber findings and six decisions: repair the trusts and give the analytics workers their own accounts, point every host at the domain controllers for time, close logins and root to the whole domain, clean up sudo, make the inventory and AD agree, and fix DNS.
+
+## How to use it with real data
+
+A read-only Bash script runs on each host as root, from Landscape, Ansible or SSH, and writes one row with what realm, adcli, klist, SSSD, chrony, DNS and the sudoers files say. A read-only PowerShell script exports the Linux computer objects with their key version and password age, the members of the groups that grant logins and sudo, and those users. The limits, the agreed time sources and the owners are the organisation's own settings. It runs on Python with no external dependencies and produces a web report, a one-page pack for the infrastructure review and CSV files with every host, sudo group, orphan object, finding and action. The demo data is fictional: names, addresses and figures.
+
+## Where it comes from
+
+The tool comes from working with Linux joined to Active Directory: Ubuntu desktops managed with Ubuntu Landscape and Red Hat servers, alongside Active Directory, DNS and DHCP on Windows Server, Group Policy and Entra ID, with Bash and PowerShell for day-to-day operations.""",
+ es="""
+Dos servidores se llaman analytics-worker-01 y analytics-worker-02. Cuando un equipo Linux se une a Active Directory, su cuenta de equipo recibe un nombre de 15 caracteres como mucho, y los dos nombres se recortan al mismo. Así que los dos servidores usan una sola cuenta: cada vez que uno renueva su contraseña de equipo, el keytab del otro deja de coincidir y sus inicios de sesión del dominio empiezan a fallar. Es lo primero que señala la revisión de Linux unido a AD que acompaña a este post, un proyecto de código abierto que se ejecuta con datos de ejemplo de una empresa de ingeniería ficticia.
+
+Linux unido a AD suele funcionar en silencio hasta que una mañana deja de hacerlo, y las dos mitades del problema viven en sitios distintos. La revisión las lee juntas: lo que encuentra un script de solo lectura en cada equipo (el dominio, la prueba de unión, el keytab, SSSD, la hora, el DNS, la política de inicio de sesión y sudo), el inventario de Landscape, y los objetos de equipo, grupos y usuarios de Active Directory.
+
+## Confianza con el dominio
+
+Además de los dos servidores de analítica, un servidor de bases de datos de informes falla la prueba de unión: el keytab tiene la versión de clave 3 y el objeto de equipo la 5, porque alguien restableció la cuenta desde la consola. El servidor de Git dice que está unido, pero su objeto de equipo se borró en una limpieza de unidades organizativas. Tres portátiles llevan entre 77 y 131 días sin renovar su contraseña de equipo.
+
+## SSSD, hora y DNS
+
+El servidor SFTP de la DMZ toma la hora de un pool público y va 413 segundos adelantado respecto a los controladores de dominio, más de los cinco minutos que admite Kerberos. Otros dos servidores de la DMZ usan fuentes de hora fuera de la lista acordada. Cinco estaciones de trabajo de Bilbao tienen SSSD en marcha pero no llegan al dominio, así que solo entra quien tiene las credenciales en caché, y nueve servidores del centro de datos no tienen registro DNS inverso.
+
+## Inicios de sesión y sudo
+
+Dos servidores de compilación y el servidor de salto se unieron con una política que deja entrar a cualquier cuenta del dominio, y los de compilación dan root a Domain Users. Cuatro miembros del grupo que da sudo en 29 servidores están deshabilitados o llevan meses sin iniciar sesión, y seis servidores siguen dando sudo a cuentas locales con nombre a las que no llega ningún proceso de bajas. En el lado del inventario, once objetos de equipo Linux no tienen equipo, dos equipos inician sesión en el dominio sin estar en el inventario y cuatro han dejado de informar.
+
+La demo saca que los inicios de sesión del dominio funcionan en 70 de 89 equipos (78,7%), 13,1 puntos menos que en la revisión anterior, con 11 hallazgos rojos y 13 ámbar y seis decisiones: reparar las confianzas y dar a los servidores de analítica su propia cuenta, apuntar todos los equipos a los controladores de dominio para la hora, cerrar los inicios de sesión y root a todo el dominio, limpiar sudo, poner de acuerdo el inventario y AD, y arreglar el DNS.
+
+## Cómo usarlo con datos reales
+
+Un script de Bash de solo lectura se ejecuta en cada equipo como root, desde Landscape, Ansible o SSH, y escribe una fila con lo que dicen realm, adcli, klist, SSSD, chrony, el DNS y los ficheros de sudoers. Un script de PowerShell de solo lectura exporta los objetos de equipo Linux con su versión de clave y la antigüedad de su contraseña, los miembros de los grupos que dan inicio de sesión y sudo, y esos usuarios. Los límites, las fuentes de hora acordadas y los responsables son ajustes de la propia organización. Funciona con Python y sin dependencias externas, y genera un informe web, un dosier de una página para la revisión de infraestructura y ficheros CSV con cada equipo, grupo de sudo, objeto huérfano, hallazgo y acción. Los datos de la demo son ficticios: nombres, direcciones y cifras.
+
+## De dónde sale
+
+La herramienta nace de trabajar con Linux unido a Active Directory: escritorios Ubuntu gestionados con Ubuntu Landscape y servidores Red Hat, junto a Active Directory, DNS y DHCP en Windows Server, directivas de grupo y Entra ID, con Bash y PowerShell para la operación diaria."""),
+
 ]
