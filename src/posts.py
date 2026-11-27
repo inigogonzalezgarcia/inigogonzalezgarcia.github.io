@@ -3519,4 +3519,74 @@ Un script de Bash de solo lectura se ejecuta en cada equipo como root, desde Lan
 
 La herramienta nace de trabajar con Linux unido a Active Directory: escritorios Ubuntu gestionados con Ubuntu Landscape y servidores Red Hat, junto a Active Directory, DNS y DHCP en Windows Server, directivas de grupo y Entra ID, con Bash y PowerShell para la operación diaria."""),
 
+dict(n="65", repo="65-application-operations-review", date="2026-11-27", cat="tools",
+ title_en="The sanctions list stopped updating on a Tuesday, nothing failed, and the screening ran against old data for three days",
+ title_es="La lista de sanciones dejó de actualizarse un martes, nada falló, y el filtrado trabajó tres días con datos viejos",
+ seo_title_en="Application operations review · Iñigo González",
+ seo_title_es="Revisión de operación de aplicaciones · Iñigo González",
+ seo_desc="Monthly application operations review: availability in service hours, vendor response, repeat incidents, failing ETL jobs, runbooks, DR and contracts.",
+ seo_desc_es="Revisión mensual de aplicaciones: disponibilidad en su horario, respuesta del proveedor, incidencias repetidas, cargas ETL, runbooks, DR y contratos.",
+ dek_en="The review, published with fictional data from a private wealth manager with 14 business applications, reads a month of incidents, job runs and downtime against what each application is meant to deliver.",
+ dek_es="La revisión, publicada con datos ficticios de una gestora de patrimonios con 14 aplicaciones de negocio, lee un mes de incidencias, ejecuciones de procesos y caídas frente a lo que cada aplicación debe dar.",
+ en="""
+The job that updates the sanctions list runs every morning at five. On Tuesday the scheduler calendar was not rolled over, so on Wednesday the job simply did not start. Nothing failed, no alert went off, and the screening kept running against an old list until someone noticed on Thursday. That is the first thing the application operations review published with this post points at. It is an open-source project that runs on sample data from a fictional private wealth manager.
+
+Business applications rarely fail all at once; they wear down one small thing at a time, and the signs are spread across the service desk, the scheduler, monitoring and the contracts. The review reads them together once a month, against each application's own tier, service hours and targets.
+
+## Service and vendors
+
+Core banking was 99.618% available in the month against a 99.9% target, after three outages on the vendor's side. The contract says the vendor responds to a P1 within an hour; it took 3.3 hours on one and 2.1 on another. The screening vendor has not answered a P2 logged the day before. Availability is measured in each application's own service hours, so an outage on a Sunday does not count against a system that only runs on weekdays.
+
+## Incidents that keep coming back
+
+The order blotter froze after the market opened five times, and the client report pack was late five times. Each was logged and closed as a new incident, and neither has a problem record, so nobody owns the root cause. Two of the core banking P1s have no problem record either.
+
+## Jobs and data loads
+
+The nightly build of the client reports failed this morning, four times in the month, and finished after its 06:30 deadline seven more times, so relationship managers often start the day without their reports. The overnight risk run finished late three times, waiting for the valuation. A job is late when it finishes after the time the business needs the data, not when it runs long.
+
+## Ready for a bad day
+
+The e-banking portal's last DR test was 19 months ago and its runbook three years old. The CRM support contract ends in 34 days, the document management version loses the vendor's support in 65 days and the intranet's already has, and the risk engine has no technical owner since the last one left.
+
+The demo scores 10 of 14 applications (71.4%) with no red finding, 7.2 points down on the last review, with six red and 12 amber findings and six decisions: get the stopped and failing jobs running today, take the outages and late answers to the vendors' service reviews, open problem records, agree data deadlines with the business, renew and upgrade before support runs out, and bring runbooks, DR tests and owners up to date.
+
+## How to use it with real data
+
+The register of applications, with tier, owners, vendor, service hours, targets, contract, version support, runbook and DR test dates, is a CSV file the team keeps. A read-only PowerShell script exports the incidents from ServiceNow through its Table API; the job runs come from the scheduler or the ETL tool, and the downtime from monitoring. It runs on Python with no external dependencies and produces a web report, a one-page pack for the application operations review and CSV files with every application, job, repeat incident, finding and action. The demo data is fictional: the company, the vendors, the names and the figures.
+
+## Where it comes from
+
+The tool comes from running business applications with their vendors: owning applications and working with ETL tools, SLAs and OLAs, availability and capacity management, monitoring with Dynatrace and Datadog, owning the incident, change and problem processes, leading the response to major incidents and the post-mortems, and managing vendors and their contracts.""",
+ es="""
+El proceso que actualiza la lista de sanciones se ejecuta cada mañana a las cinco. El martes no se renovó el calendario del planificador, así que el miércoles el proceso simplemente no arrancó. No falló nada, no saltó ninguna alerta, y el filtrado siguió trabajando con una lista vieja hasta que alguien se dio cuenta el jueves. Es lo primero que señala la revisión de operación de aplicaciones que acompaña a este post, un proyecto de código abierto que se ejecuta con datos de ejemplo de una gestora de patrimonios ficticia.
+
+Las aplicaciones de negocio rara vez fallan de golpe; se desgastan una cosa pequeña cada vez, y las señales están repartidas entre el service desk, el planificador, la monitorización y los contratos. La revisión las lee juntas una vez al mes, frente al nivel, el horario de servicio y los objetivos de cada aplicación.
+
+## Servicio y proveedores
+
+La banca central estuvo disponible un 99,618% del mes frente a un objetivo del 99,9%, tras tres caídas del lado del proveedor. El contrato dice que el proveedor responde a una P1 en una hora; tardó 3,3 horas en una y 2,1 en otra. El proveedor del filtrado aún no ha contestado una P2 abierta el día anterior. La disponibilidad se mide en el horario de servicio de cada aplicación, así que una caída en domingo no cuenta contra un sistema que solo funciona entre semana.
+
+## Incidencias que vuelven
+
+El blotter de órdenes se congeló cinco veces tras la apertura del mercado, y el paquete de informes de clientes llegó tarde cinco veces. Cada vez se abrió y se cerró como una incidencia nueva, y ninguna de las dos tiene un registro de problema, así que nadie es dueño de la causa raíz. Dos de las P1 de la banca central tampoco lo tienen.
+
+## Procesos y cargas de datos
+
+La generación nocturna de los informes de clientes falló esta mañana, cuatro veces en el mes, y terminó después de su hora límite de las 06:30 otras siete, así que los gestores empiezan a menudo el día sin sus informes. El cálculo nocturno de riesgos terminó tarde tres veces, esperando a la valoración. Un proceso va tarde cuando termina después de la hora a la que el negocio necesita los datos, no cuando tarda mucho.
+
+## Preparadas para un mal día
+
+La última prueba de recuperación del portal de banca online fue hace 19 meses y su runbook tiene tres años. El contrato de soporte del CRM termina en 34 días, la versión del gestor documental pierde el soporte del proveedor en 65 días y la de la intranet ya lo ha perdido, y el motor de riesgos no tiene responsable técnico desde que se fue el anterior.
+
+La demo saca 10 de 14 aplicaciones (71,4%) sin hallazgos rojos, 7,2 puntos menos que en la revisión anterior, con seis hallazgos rojos y 12 ámbar y seis decisiones: poner en marcha hoy los procesos parados y los que fallan, llevar las caídas y las respuestas tardías a las revisiones de servicio con los proveedores, abrir registros de problema, acordar con el negocio las horas de los datos, renovar y actualizar antes de que acabe el soporte, y poner al día runbooks, pruebas de recuperación y responsables.
+
+## Cómo usarlo con datos reales
+
+El registro de aplicaciones, con nivel, responsables, proveedor, horario de servicio, objetivos, contrato, soporte de la versión y fechas del runbook y de la prueba de recuperación, es un fichero CSV que mantiene el equipo. Un script de PowerShell de solo lectura exporta las incidencias de ServiceNow con su Table API; las ejecuciones de los procesos salen del planificador o de la herramienta de ETL, y las caídas de la monitorización. Funciona con Python y sin dependencias externas, y genera un informe web, un dosier de una página para la revisión de operación de aplicaciones y ficheros CSV con cada aplicación, proceso, incidencia repetida, hallazgo y acción. Los datos de la demo son ficticios: la empresa, los proveedores, los nombres y las cifras.
+
+## De dónde sale
+
+La herramienta nace de llevar aplicaciones de negocio con sus proveedores: ser responsable de aplicaciones y trabajar con herramientas de ETL, SLA y OLA, gestión de la disponibilidad y la capacidad, monitorización con Dynatrace y Datadog, ser dueño de los procesos de incidencias, cambios y problemas, dirigir la respuesta a incidentes graves y sus post-mortem, y gestionar proveedores y sus contratos."""),
+
 ]
