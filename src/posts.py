@@ -3589,4 +3589,74 @@ El registro de aplicaciones, con nivel, responsables, proveedor, horario de serv
 
 La herramienta nace de llevar aplicaciones de negocio con sus proveedores: ser responsable de aplicaciones y trabajar con herramientas de ETL, SLA y OLA, gestión de la disponibilidad y la capacidad, monitorización con Dynatrace y Datadog, ser dueño de los procesos de incidencias, cambios y problemas, dirigir la respuesta a incidentes graves y sus post-mortem, y gestionar proveedores y sus contratos."""),
 
+dict(n="66", repo="66-grafana-alert-hygiene", date="2026-11-28", cat="tools",
+ title_en="The replication-lag alert showed Normal for nine days because no data was set to OK",
+ title_es="La alerta de retraso de réplica marcó Normal nueve días porque «sin datos» estaba en OK",
+ seo_title_en="Grafana alert hygiene review · Iñigo González",
+ seo_title_es="Revisión de higiene de alertas en Grafana · Iñigo González",
+ seo_desc="Monthly Grafana alerting review: owners and runbooks, critical alerts that page nobody, noisy and blind rules, and the incidents users reported first.",
+ seo_desc_es="Revisión mensual de alertas Grafana: dueños, runbooks, alertas críticas que no avisan a nadie, reglas ruidosas o ciegas e incidencias que vio el usuario.",
+ dek_en="The review, published with fictional data from an online shop with 58 alert rules, reads the rules, the notification policies, a month of state changes and the P1/P2 incidents together.",
+ dek_es="La revisión, publicada con datos ficticios de una tienda online con 58 reglas de alerta, lee juntas las reglas, las políticas de notificación, un mes de cambios de estado y las incidencias P1/P2.",
+ en="""
+On 19 November a metric was renamed and the rule that watches the replication lag of the order database stopped getting data. The rule is set to treat no data as OK, so it went on showing Normal. Nine days later the reporting replica is still behind, customers have already phoned to say their order history only shows yesterday's orders, and no alert has fired. That is the first thing the alert hygiene review published with this post points at. It is an open-source project that runs on sample data from a fictional online shop.
+
+Alerting rarely breaks all at once. It decays one rule at a time: a rule paused during a noisy release and never switched back on, a team policy that catches critical alerts before the paging one does, a rule that fires so often people stop reading the channel. The review reads the rules, the routing, the history and the incidents together once a month.
+
+## The rules
+
+The checkout error-rate rule has been paused since 14 September. Eleven rules have no runbook, three of them critical; five rules in an old folder have no team label, so nobody owns them; and two rules run the same node CPU query, so one problem pages twice. Two critical rules treat no data or errors as OK, which is how a dead data source ends up looking healthy.
+
+## Where the alerts go
+
+Each rule is walked through the notification policies in the order Grafana walks them. The payments team's policy sits above the critical one, so its two critical rules reach an email list and nobody is woken up at night. The refunds rules go to an old on-call contact point with nobody in it, and "Website down" has no team label, so it falls to the default policy and an ops mailbox.
+
+## Noise and blind spots
+
+Pod restarts fired 312 times in 30 days, and the build agent CPU rule 96 times for four minutes at the median: it flaps, because its pending period is zero. The log disk rule was firing 98.9% of the month. The search latency rule has been in Error since 25 November, and the replication-lag rule has shown Normal only because of no data since the 19th; both are due today.
+
+## What users found first
+
+Users reported two checkout incidents, one of them a P1, and two search incidents before any alert fired: checkout's error rule was paused, and search's latency rule was in Error. The warehouse stock sync had a P1 and a P2 and has no alert rule at all.
+
+The demo scores 35 of 58 rules (60.3%) with no finding, 1.8 points down on the last review, with nine red and 11 amber findings and six decisions: bring back the critical rules that watch nothing today, make every critical alert page someone, write the alerts the incidents show were missing, tune the noisiest rules, give every rule an owner, a severity, a runbook and safe no-data handling, and tidy the routing.
+
+## How to use it with real data
+
+A read-only Python script exports the alert rules, the notification policies, the contact points and the state history from Grafana's API with a service account token; contact point secrets come back redacted, so only the type and the number of addresses are kept. The incidents, with how each one was detected, come from the ITSM tool. It runs on Python with no external dependencies and produces a web report, a one-page pack for the monitoring review and CSV files with every rule, contact point, noisy or blind rule, finding and action. The demo data is fictional: the company, the names, the rules and the figures.
+
+## Where it comes from
+
+The tool comes from monitoring and incident response: monitoring with Grafana, SolarWinds, Zabbix, Dynatrace and Datadog and responding to the alarms, on-call rotas and the runbooks behind them, and leading the technical response to major incidents and the post-mortems that follow.""",
+ es="""
+El 19 de noviembre se renombró una métrica y la regla que vigila el retraso de réplica de la base de datos de pedidos dejó de recibir datos. La regla está configurada para tratar la falta de datos como OK, así que siguió marcando Normal. Nueve días después la réplica de informes sigue atrasada, los clientes ya han llamado para decir que su historial solo muestra los pedidos de ayer, y no ha saltado ninguna alerta. Es lo primero que señala la revisión de higiene de alertas que acompaña a este post, un proyecto de código abierto que se ejecuta con datos de ejemplo de una tienda online ficticia.
+
+Las alertas rara vez se rompen de golpe. Se degradan regla a regla: una regla pausada durante un despliegue ruidoso que nadie volvió a activar, una política de equipo que atrapa las alertas críticas antes que la de guardia, una regla que salta tanto que la gente deja de leer el canal. La revisión lee juntas, una vez al mes, las reglas, el enrutado, el historial y las incidencias.
+
+## Las reglas
+
+La regla de tasa de errores del checkout está pausada desde el 14 de septiembre. Once reglas no tienen runbook, tres de ellas críticas; cinco reglas de una carpeta antigua no tienen etiqueta de equipo, así que no son de nadie; y dos reglas lanzan la misma consulta de CPU de nodo, así que un mismo problema avisa dos veces. Dos reglas críticas tratan la falta de datos o los errores como OK, que es como una fuente de datos muerta acaba pareciendo sana.
+
+## Adónde van las alertas
+
+Cada regla se pasa por las políticas de notificación en el mismo orden en que lo hace Grafana. La política del equipo de pagos está por encima de la de críticas, así que sus dos reglas críticas llegan a una lista de correo y nadie se despierta de noche. Las reglas de devoluciones van a un punto de contacto de guardia antiguo sin nadie dentro, y «Website down» no tiene etiqueta de equipo, así que cae en la política por defecto y en un buzón de operaciones.
+
+## Ruido y puntos ciegos
+
+Los reinicios de pods saltaron 312 veces en 30 días, y la regla de CPU de los agentes de compilación 96 veces, cuatro minutos de mediana: oscila, porque su periodo de espera es cero. La regla de disco de logs estuvo disparada el 98,9% del mes. La regla de latencia de búsqueda está en Error desde el 25 de noviembre, y la de retraso de réplica marca Normal solo por falta de datos desde el 19; las dos vencen hoy.
+
+## Lo que vio antes el usuario
+
+Los usuarios avisaron de dos incidencias del checkout, una de ellas P1, y de dos de búsqueda antes de que saltara ninguna alerta: la regla de errores del checkout estaba pausada y la de latencia de búsqueda, en Error. La sincronización de stock con el almacén tuvo una P1 y una P2 y no tiene ninguna regla de alerta.
+
+La demo saca 35 de 58 reglas (60,3%) sin hallazgos, 1,8 puntos menos que en la revisión anterior, con nueve hallazgos rojos y 11 ámbar y seis decisiones: recuperar hoy las reglas críticas que no vigilan nada, hacer que toda alerta crítica avise a alguien de guardia, escribir las alertas que las incidencias demuestran que faltaban, ajustar las reglas más ruidosas, dar a cada regla dueño, severidad, runbook y un tratamiento seguro de la falta de datos, y ordenar el enrutado.
+
+## Cómo usarlo con datos reales
+
+Un script de Python de solo lectura exporta de la API de Grafana, con un token de cuenta de servicio, las reglas de alerta, las políticas de notificación, los puntos de contacto y el historial de estados; Grafana devuelve ocultos los secretos de los puntos de contacto, así que solo se guardan el tipo y el número de destinatarios. Las incidencias, con cómo se detectó cada una, salen de la herramienta de ITSM. Funciona con Python y sin dependencias externas, y genera un informe web, un dosier de una página para la revisión de monitorización y ficheros CSV con cada regla, punto de contacto, regla ruidosa o ciega, hallazgo y acción. Los datos de la demo son ficticios: la empresa, los nombres, las reglas y las cifras.
+
+## De dónde sale
+
+La herramienta nace de la monitorización y la respuesta a incidentes: monitorizar con Grafana, SolarWinds, Zabbix, Dynatrace y Datadog y responder a las alarmas, las guardias y los runbooks que las sostienen, y dirigir la respuesta técnica a incidentes graves y los post-mortem que vienen después."""),
+
 ]
