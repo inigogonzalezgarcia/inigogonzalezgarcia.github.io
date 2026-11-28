@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en" class="no-js inner">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Security: GitHub Pages cannot send custom HTTP headers, so only what works in <meta> is set here (CSP, referrer).
+     Pending until the site moves behind Cloudflare (needs a custom domain), because they only work as real HTTP headers:
+     CSP frame-ancestors / X-Frame-Options (clickjacking), X-Content-Type-Options, Permissions-Policy, HSTS,
+     Cross-Origin-Opener-Policy, Cross-Origin-Embedder-Policy and Cross-Origin-Resource-Policy.
+     No Subresource Integrity on gtag.js and Turnstile api.js: both are unversioned by design and change without notice
+     (Cloudflare says not to pin Turnstile with SRI); the CSP limits them to their exact origins instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://formspree.io https://b6aad168.sibforms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://formspree.io https://b6aad168.sibforms.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Grafana alert hygiene review · Iñigo González</title>
+<meta name="description" content="Monthly Grafana alerting review: owners and runbooks, critical alerts that page nobody, noisy and blind rules, and the incidents users reported first.">
+<meta name="author" content="Iñigo González">
+<meta name="theme-color" content="#0e1a24">
+<link rel="canonical" href="https://inigogonzalezgarcia.github.io/blog/66-grafana-alert-hygiene.html">
+<link rel="alternate" hreflang="en" href="https://inigogonzalezgarcia.github.io/blog/66-grafana-alert-hygiene.html">
+<link rel="alternate" hreflang="es" href="https://inigogonzalezgarcia.github.io/es/blog/66-grafana-alert-hygiene.html">
+<link rel="alternate" hreflang="x-default" href="https://inigogonzalezgarcia.github.io/blog/66-grafana-alert-hygiene.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Iñigo González">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Grafana alert hygiene review · Iñigo González">
+<meta property="og:description" content="Monthly Grafana alerting review: owners and runbooks, critical alerts that page nobody, noisy and blind rules, and the incidents users reported first.">
+<meta property="og:url" content="https://inigogonzalezgarcia.github.io/blog/66-grafana-alert-hygiene.html">
+<meta property="og:image" content="https://inigogonzalezgarcia.github.io/assets/og/66-grafana-alert-hygiene.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Grafana alert hygiene review · Iñigo González">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/InterTight.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/boot.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"The replication-lag alert showed Normal for nine days because no data was set to OK","alternativeHeadline":"La alerta de retraso de réplica marcó Normal nueve días porque «sin datos» estaba en OK","description":"The review, published with fictional data from an online shop with 58 alert rules, reads the rules, the notification policies, a month of state changes and the P1/P2 incidents together.","datePublished":"2026-11-28","dateModified":"2026-11-28","inLanguage":"en","image":"https://inigogonzalezgarcia.github.io/assets/og/66-grafana-alert-hygiene.png","url":"https://inigogonzalezgarcia.github.io/blog/66-grafana-alert-hygiene.html","mainEntityOfPage":"https://inigogonzalezgarcia.github.io/blog/66-grafana-alert-hygiene.html","author":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"publisher":{"@type":"Person","@id":"https://inigogonzalezgarcia.github.io/#person","name":"Iñigo González","url":"https://inigogonzalezgarcia.github.io/"},"isPartOf":{"@id":"https://inigogonzalezgarcia.github.io/blog/#blog"},"articleSection":"IT Ops tools"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inigogonzalezgarcia.github.io/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inigogonzalezgarcia.github.io/blog/"},{"@type":"ListItem","position":3,"name":"The replication-lag alert showed Normal for nine days because no data was set to OK","item":"https://inigogonzalezgarcia.github.io/blog/66-grafana-alert-hygiene.html"}]}]}</script>
+</head>
+<body id="top">
+<a class="skip" href="#main"><span class="en">Skip to content</span></a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Iñigo González">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg>
+      <span class="brand-name">Iñigo González<small>IT Operations · Infra</small></span>
+    </a>
+    <nav class="top-nav label" aria-label="Main"><a href="../journey.html"><span class="en">Journey</span></a><a href="../about.html"><span class="en">About</span></a><a href="../blog/" aria-current="page"><span class="en">Blog</span></a><a href="../guias.html"><span class="en">Guides</span></a><a href="../store.html"><span class="en">Services</span></a><a href="../recursos.html"><span class="en">Resources</span></a><a href="../links.html"><span class="en">Links</span></a></nav>
+    <div class="head-actions">
+      <button class="menu-btn" id="menuOpen" aria-expanded="false" aria-controls="menu"><span class="en">Menu</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="lang-btn" id="langBtn" href="../es/blog/66-grafana-alert-hygiene.html" hreflang="es" aria-label="Leer esta página en español" lang="es"><span data-l="es">ES</span> · <span data-l="en" class="on">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-top">
+    <span class="label">Iñigo González</span>
+    <button class="menu-btn" id="menuClose"><span class="en">Close ×</span></button>
+  </div>
+  <nav aria-label="Menu"><a href="../journey.html"><span class="label">01</span><span class="en">Journey</span></a><a href="../about.html"><span class="label">02</span><span class="en">About</span></a><a href="../blog/"><span class="label">03</span><span class="en">Blog</span></a><a href="../guias.html"><span class="label">04</span><span class="en">Guides</span></a><a href="../store.html"><span class="label">05</span><span class="en">Services</span></a><a href="../recursos.html"><span class="label">06</span><span class="en">Resources</span></a><a href="../links.html"><span class="label">07</span><span class="en">Links</span></a></nav>
+  <div class="menu-foot label">
+    <a href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub ↗</a>
+    <a href="../about.html#contacto"><span class="en">Contact</span> →</a>
+  </div>
+</div>
+
+<main id="main">
+<section class="page-hero post-hero">
+  <div class="wrap">
+    <p class="label kicker"><a href="./">Blog</a> · 66</p>
+    <h1><span class="en">The replication-lag alert showed Normal for nine days because no data was set to OK</span></h1>
+    <p class="lede"><span class="en">The review, published with fictional data from an online shop with 58 alert rules, reads the rules, the notification policies, a month of state changes and the P1/P2 incidents together.</span></p><p class="label post-meta"><span class="en">IT Ops tools</span> · <span class="en">28 Nov 2026</span> · <span class="en">3 min read</span></p>
+  </div>
+</section>
+
+<section class="section post">
+  <div class="wrap post-grid">
+    <article class="prose">
+      <figure class="post-fig"><a href="https://github.com/inigogonzalezgarcia/66-grafana-alert-hygiene" target="_blank" rel="noopener noreferrer"><img src="../assets/blog/66.webp" alt="Report of 66-grafana-alert-hygiene from the fictional demo data" width="1000" height="820" decoding="async"></a><figcaption class="small muted"><span class="en">Report the repo builds from the fictional demo data.</span></figcaption></figure>
+      
+      <div class="en" lang="en">
+<p>On 19 November a metric was renamed and the rule that watches the replication lag of the order database stopped getting data. The rule is set to treat no data as OK, so it went on showing Normal. Nine days later the reporting replica is still behind, customers have already phoned to say their order history only shows yesterday&#x27;s orders, and no alert has fired. That is the first thing the alert hygiene review published with this post points at. It is an open-source project that runs on sample data from a fictional online shop.</p>
+<p>Alerting rarely breaks all at once. It decays one rule at a time: a rule paused during a noisy release and never switched back on, a team policy that catches critical alerts before the paging one does, a rule that fires so often people stop reading the channel. The review reads the rules, the routing, the history and the incidents together once a month.</p>
+<h2>The rules</h2>
+<p>The checkout error-rate rule has been paused since 14 September. Eleven rules have no runbook, three of them critical; five rules in an old folder have no team label, so nobody owns them; and two rules run the same node CPU query, so one problem pages twice. Two critical rules treat no data or errors as OK, which is how a dead data source ends up looking healthy.</p>
+<h2>Where the alerts go</h2>
+<p>Each rule is walked through the notification policies in the order Grafana walks them. The payments team&#x27;s policy sits above the critical one, so its two critical rules reach an email list and nobody is woken up at night. The refunds rules go to an old on-call contact point with nobody in it, and &quot;Website down&quot; has no team label, so it falls to the default policy and an ops mailbox.</p>
+<h2>Noise and blind spots</h2>
+<p>Pod restarts fired 312 times in 30 days, and the build agent CPU rule 96 times for four minutes at the median: it flaps, because its pending period is zero. The log disk rule was firing 98.9% of the month. The search latency rule has been in Error since 25 November, and the replication-lag rule has shown Normal only because of no data since the 19th; both are due today.</p>
+<h2>What users found first</h2>
+<p>Users reported two checkout incidents, one of them a P1, and two search incidents before any alert fired: checkout&#x27;s error rule was paused, and search&#x27;s latency rule was in Error. The warehouse stock sync had a P1 and a P2 and has no alert rule at all.</p>
+<p>The demo scores 35 of 58 rules (60.3%) with no finding, 1.8 points down on the last review, with nine red and 11 amber findings and six decisions: bring back the critical rules that watch nothing today, make every critical alert page someone, write the alerts the incidents show were missing, tune the noisiest rules, give every rule an owner, a severity, a runbook and safe no-data handling, and tidy the routing.</p>
+<h2>How to use it with real data</h2>
+<p>A read-only Python script exports the alert rules, the notification policies, the contact points and the state history from Grafana&#x27;s API with a service account token; contact point secrets come back redacted, so only the type and the number of addresses are kept. The incidents, with how each one was detected, come from the ITSM tool. It runs on Python with no external dependencies and produces a web report, a one-page pack for the monitoring review and CSV files with every rule, contact point, noisy or blind rule, finding and action. The demo data is fictional: the company, the names, the rules and the figures.</p>
+<h2>Where it comes from</h2>
+<p>The tool comes from monitoring and incident response: monitoring with Grafana, SolarWinds, Zabbix, Dynatrace and Datadog and responding to the alarms, on-call rotas and the runbooks behind them, and leading the technical response to major incidents and the post-mortems that follow.</p>
+<p>Want to bring it to your environment or adapt it to your case? <a href="../about.html#contacto">Get in touch</a> and we can look at it together.</p>
+      </div>
+      <div class="news-box">
+        <p class="label kicker">Tech Career Lab · newsletter</p>
+        <p class="news-box-t"><span class="en">Found this useful? Every two weeks I send one practical idea for IT professionals: LinkedIn, projects, networking and hiring processes.</span></p>
+        <a class="btn" href="../recursos.html"><span class="en">Sign up and get the 33 ideas</span> →</a>
+      </div>
+    </article>
+    <aside class="post-aside">
+      <p class="label muted"><span class="en">The repository</span></p>
+      <p class="repo-name">66-grafana-alert-hygiene</p>
+      <a class="btn" href="https://github.com/inigogonzalezgarcia/66-grafana-alert-hygiene" target="_blank" rel="noopener noreferrer"><span class="en">View on GitHub</span> ↗</a>
+      <p class="muted small"><span class="en">Synthetic data. No employer code, data or systems.</span></p>
+      <div class="share">
+        <p class="label muted"><span class="en">Share</span></p>
+        
+        <div class="share-row en" lang="en"><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F66-grafana-alert-hygiene.html" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">LinkedIn</a><a class="share-btn" href="https://x.com/intent/post?url=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F66-grafana-alert-hygiene.html&amp;text=The%20replication-lag%20alert%20showed%20Normal%20for%20nine%20days%20because%20no%20data%20was%20set%20to%20OK%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez" target="_blank" rel="noopener noreferrer" aria-label="Share on X">X</a><a class="share-btn" href="https://wa.me/?text=The%20replication-lag%20alert%20showed%20Normal%20for%20nine%20days%20because%20no%20data%20was%20set%20to%20OK%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez%20https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F66-grafana-alert-hygiene.html" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">WhatsApp</a><a class="share-btn" href="mailto:?subject=The%20replication-lag%20alert%20showed%20Normal%20for%20nine%20days%20because%20no%20data%20was%20set%20to%20OK%20%C2%B7%20I%C3%B1igo%20Gonz%C3%A1lez&amp;body=https%3A%2F%2Finigogonzalezgarcia.github.io%2Fblog%2F66-grafana-alert-hygiene.html" aria-label="Share on Email">Email</a><button class="share-btn" type="button" data-copy="https://inigogonzalezgarcia.github.io/blog/66-grafana-alert-hygiene.html" data-copied="Link copied">Copy link</button><button class="share-btn" type="button" data-share="https://inigogonzalezgarcia.github.io/blog/66-grafana-alert-hygiene.html" data-title="The replication-lag alert showed Normal for nine days because no data was set to OK" hidden>More…</button></div>
+        <p class="share-msg small muted" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="wrap related">
+    <h2 class="label kicker related-h"><span class="en">Related</span></h2>
+    <div class="related-grid"><a class="related-link" href="36-major-incident-command-kit.html"><span class="label muted"><span class="en">Blog · 36</span></span><span class="related-t"><span class="en">Users reported an outage 40 minutes before monitoring did, the kind of gap a major incident kit measures</span></span></a><a class="related-link" href="08-edge-health-slo-monitor.html"><span class="label muted"><span class="en">Blog · 08</span></span><span class="related-t"><span class="en">An edge monitoring lab wakes someone only when the error budget burns too fast, not on every failed check</span></span></a><a class="related-link" href="65-application-operations-review.html"><span class="label muted"><span class="en">Blog · 65</span></span><span class="related-t"><span class="en">The sanctions list stopped updating on a Tuesday, nothing failed, and the screening ran against old data for three days</span></span></a><a class="related-link" href="../guias/grafana-origen-de-datos-primer-panel-y-alerta-al-canal.html"><span class="label muted"><span class="en">Guide · Level 3</span></span><span class="related-t"><span class="en">Grafana: a data source, your first dashboard and an alert that notifies the team channel</span></span></a><a class="related-link" href="../guias/grafana-zabbix-y-elasticsearch-panel-por-sede-variables-aprovisionamiento-como-codigo-ldap-carpetas-y-no-data.html"><span class="label muted"><span class="en">Guide · Level 3</span></span><span class="related-t"><span class="en">Grafana over Zabbix and Elasticsearch: a per-site operations dashboard with variables, data sources and dashboards as code, LDAP with roles by group, folders with permissions and a &quot;No data&quot; for one site</span></span></a><a class="related-link" href="../guias/solarwinds-anadir-un-nodo-afinar-una-alerta-y-leer-que-paso-antes-de-la-caida.html"><span class="label muted"><span class="en">Guide · Level 3</span></span><span class="related-t"><span class="en">SolarWinds: adding a node, tuning an alert that fires too much and reading what happened before the outage</span></span></a><a class="related-link" href="../guias/zabbix-en-operacion-escalados-teams-mantenimientos-por-api-ldap-housekeeping-y-tormenta-de-alertas-tras-caida-wan.html"><span class="label muted"><span class="en">Guide · Level 3</span></span><span class="related-t"><span class="en">Running Zabbix: escalating actions and remote commands, Microsoft Teams, maintenance by tags and by API, user groups with Active Directory, housekeeping and database size, and an alert storm after a WAN outage</span></span></a></div>
+  </div>
+  <div class="wrap post-nav">
+    <a class="post-nav-link prev" href="65-application-operations-review.html"><span class="label muted"><span class="en">Previous</span></span><span><span class="en">The sanctions list stopped updating on a Tuesday, nothing failed, and the screening ran against old data for three days</span></span></a>
+    <span></span>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-id">
+        <a class="foot-brand" href="../index.html"><svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v16M17 9v16M17 9h7M17 17h5M24 17v8h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/><circle cx="10" cy="9" r="2.2" fill="#c4672b"/></svg><span>Iñigo González García</span></a>
+        <p class="foot-lede"><span class="en">IT operations, Modern Workplace and infrastructure from Madrid. Open tools, guides and a free simulator to practise.</span></p>
+        <div class="foot-cta">
+          <a class="btn foot-btn" href="../about.html#contacto"><span class="en">Get in touch</span> <span aria-hidden="true">→</span></a>
+          <a class="foot-social" href="https://www.linkedin.com/in/igonzalez93" rel="me noopener noreferrer" target="_blank">LinkedIn <span aria-hidden="true">↗</span></a>
+          <a class="foot-social" href="https://github.com/inigogonzalezgarcia" rel="me noopener noreferrer" target="_blank">GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <dl class="foot-stats"><div><dt><span class="en">Tools</span></dt><dd>66</dd></div><div><dt><span class="en">Guides</span></dt><dd>190</dd></div><div><dt><span class="en">In IT since</span></dt><dd>2015</dd></div></dl>
+    </div>
+    <nav class="foot-cols" aria-label="Footer">
+      <div class="foot-col"><p class="foot-h label"><span class="en">The site</span></p><ul><li><a href="../journey.html"><span class="en">Journey</span></a></li><li><a href="../about.html"><span class="en">About</span></a></li><li><a href="../blog/"><span class="en">Blog</span></a></li><li><a href="../guias.html"><span class="en">Guides</span></a></li><li><a href="../store.html"><span class="en">Services</span></a></li><li><a href="../recursos.html"><span class="en">Resources</span></a></li></ul></div>
+      <div class="foot-col"><p class="foot-h label"><span class="en">Projects</span></p><ul><li><a href="https://sysadmindesksbyigg.pages.dev/" target="_blank" rel="noopener noreferrer">SysAdmin Desks <span aria-hidden="true">↗</span></a></li><li><a href="https://github.com/inigogonzalezgarcia" target="_blank" rel="noopener noreferrer"><span class="en">Tools on GitHub</span> <span aria-hidden="true">↗</span></a></li></ul></div>
+      <div class="foot-col"><p class="foot-h label"><span class="en">Free</span></p><ul><li><a href="../guias.html"><span class="en">Step-by-step IT guides</span></a></li><li><a href="../recursos.html"><span class="en">33 ideas and newsletter</span></a></li><li><span class="en"><a href="https://sysadmindesksbyigg.pages.dev/about#en" target="_blank" rel="noopener noreferrer">SysAdmin Desks: about <span aria-hidden="true">↗</span></a></span></li><li><span class="en"><a href="https://sysadmindesksbyigg.pages.dev/faq#en" target="_blank" rel="noopener noreferrer">Questions and answers <span aria-hidden="true">↗</span></a></span></li></ul></div>
+      <div class="foot-col"><p class="foot-h label">Legal</p><ul><li><a href="../aviso-legal.html"><span class="en">Legal notice</span></a></li><li><a href="../privacidad.html"><span class="en">Privacy and cookies</span></a></li><li><a href="../condiciones.html"><span class="en">Terms</span></a></li><li><button class="linkbtn" type="button" data-cookie-settings><span class="en">Cookie settings</span></button></li></ul></div>
+    </nav>
+    <div class="foot-bar label">
+      <span>© <span id="year">2026</span> Iñigo González García · Madrid</span>
+      <span class="foot-made"><span class="en">Hand-built in HTML, CSS and Python · Analytics only if you accept</span></span>
+      <a class="foot-up" href="#top"><span class="en">Back to top</span> <span aria-hidden="true">↑</span></a>
+    </div>
+  </div>
+  <p class="foot-word" aria-hidden="true">Iñigo González</p>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script src="../assets/consent.js"></script>
+</body>
+</html>
