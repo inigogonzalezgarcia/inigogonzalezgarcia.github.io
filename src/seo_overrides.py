@@ -54,6 +54,9 @@ POSTS_SEO = {
         "en": "Network configuration compliance report for Cisco, Aruba and FortiGate: backups, unsaved changes, telnet and SNMP, VLANs, firewall policies and end of support.",
         "es": "Informe de cumplimiento de la configuración de red en Cisco, Aruba y FortiGate: copias, cambios sin guardar, telnet y SNMP, VLAN, políticas y fin de soporte.",
     },
+    "51-windows-server-baseline-drift": {
+        "es": "Línea base de seguridad de Windows Server: revisión mensual por servidor, deriva, excepciones y una GPO sin vincular que explica 112 de 138 desvíos.",
+    },
 }
 
 GUIDES_SEO = {
@@ -91,8 +94,12 @@ GUIDES_SEO = {
     },
     "zabbix-windows-y-linux-a-fondo-servicios-eventlog-logs-procesos-userparameter-psk-y-un-elemento-no-soportado": {
         "es": "Zabbix agente 2 a fondo: servicios de Windows y systemd, eventlog[], log[] y logrt[], proc.num, UserParameter, cifrado PSK y un elemento not supported.",
-    },    "active-directory-directiva-de-contrasenas-pso-bloqueos-y-la-cuenta-que-se-bloquea-cada-manana": {
+    },
+    "active-directory-directiva-de-contrasenas-pso-bloqueos-y-la-cuenta-que-se-bloquea-cada-manana": {
         "es": "Directiva de contraseñas y bloqueo en AD: PSO para administradores y cuentas de servicio, el evento 4740 y la cuenta que se bloquea sola cada mañana.",
+    },
+    "active-directory-comprobar-la-salud-dcdiag-repadmin-dns-sysvol-y-un-dc-que-no-replica": {
+        "es": "Salud de Active Directory con dcdiag y repadmin: replicación, DNS, SYSVOL con DFSR, hora y FSMO, y los errores 8524, 1722, 8453 y 8606 cuando un DC no replica.",
     },
 }
 

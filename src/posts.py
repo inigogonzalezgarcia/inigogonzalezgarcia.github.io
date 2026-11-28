@@ -2653,7 +2653,7 @@ La herramienta funciona con Python y solo la librería estándar, y genera `repo
 ## De dónde sale
 
 La hice a partir de la gestión de activos de software y el control de costes de licencias con Apptio y Flexera, de administrar Microsoft 365 como administrador global y gestionar las licencias de Office 365 y de Adobe, y de negociar contratos con proveedores. Detrás hay dos lecciones: el mismo euro no puede aparecer en dos ahorros, o finanzas deja de creerse el total; y el shadow IT suele ser una necesidad que IT no cubrió, así que hablar con quien lo paga funciona mejor que bloquear la tarjeta."""),
-dict(n="51", repo="51-windows-server-baseline-drift", date="2026-11-12", cat="tools",
+dict(n="51", repo="51-windows-server-baseline-drift", date="2026-11-12", updated="2026-11-28", cat="tools",
  title_en="One GPO not linked to a new OU explains 112 of the 138 settings that drifted on Windows servers in a month",
  title_es="Una GPO sin vincular a una OU nueva explica 112 de los 138 ajustes desviados en los servidores Windows en un mes",
  seo_title_en="Windows Server baseline drift review · Iñigo González",

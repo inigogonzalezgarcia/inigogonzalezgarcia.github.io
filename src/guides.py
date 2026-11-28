@@ -54769,7 +54769,7 @@ In the ticket: symptom, process and connection, way in (Redis exposed without a 
 """)
 
 
-g(slug="active-directory-comprobar-la-salud-dcdiag-repadmin-dns-sysvol-y-un-dc-que-no-replica", topic="ad-delegacion", date="2026-11-07",
+g(slug="active-directory-comprobar-la-salud-dcdiag-repadmin-dns-sysvol-y-un-dc-que-no-replica", topic="ad-delegacion", date="2026-11-07", updated="2026-11-28",
   title_es="Comandos de salud de Active Directory: dcdiag, repadmin, DNS, SYSVOL y un DC que no replica",
   title_en="Active Directory health check commands: dcdiag, repadmin, DNS, SYSVOL and a DC not replicating",
   seo_title_en="Active Directory health check commands · Iñigo González",
